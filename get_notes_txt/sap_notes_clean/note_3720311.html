@@ -1,0 +1,70 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You want to uninstall the add-on UIGRRMPC.</p>
+<p>Add-on uninstallation with transaction SAINT or, during an upgrade, with the Software Update Manager (SUM). Here, the process with SAINT is described.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>uninstallation, UIGRRMPC 100, UIGRRMPC 200, SAINT, SAPK-100AGINUIGRRMPC, SAPK-200AGINUIGRRMPC</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>NOTE: <strong><strong>Upgrade Information for upgrade to SAP GRC FOR SAP HANA 1.0</strong></strong></strong></p>
+<ul>
+<li><strong><strong>SAP FIORI FOR PC AND RM 2.0 - UI for PC and RM on FES 2020</strong> </strong>installed on<strong> SAP S/4HANA FOUNDATION</strong><br/><br/></li>
+<ul>
+<li>During the upgrade planning in Maintenance Planner it is required to use the process of uninstallation/installation. Software component <strong>UIGRRMPC</strong> will be replaced by the new software component <strong>UISAPGRC</strong>. Refer to the respective upgrade guide <a href="https://help.sap.com/docs/SAP_GRC_FOR_SAP_HANA" target="_blank">https://help.sap.com/docs/SAP_GRC_FOR_SAP_HANA</a> for additional information.<br/><br/></li>
+</ul>
+<li><strong><strong><strong>SAP FIORI FOR PC AND RM 2.0 - UI for PC and RM on FES 2020</strong> </strong></strong>installed on<strong> SAP S/4HANA<br/><br/></strong></li>
+<ul>
+<li>During the upgrade planning in Maintenance Planner it is required to use the process of uninstallation/installation. Software component <strong>UIGRRMPC</strong> will be replaced by the new software component <strong>UISAPGRC</strong>. Refer to the respective upgrade guide <a href="https://help.sap.com/docs/SAP_GRC_FOR_SAP_HANA" target="_blank">https://help.sap.com/docs/SAP_GRC_FOR_SAP_HANA</a> for additional information.</li>
+</ul>
+</ul>
+<ul>
+<li><strong><strong>General Uninstallation<br/><br/></strong></strong>If you like to remove<strong> <strong>SAP FIORI FOR PC AND RM 2.0</strong><strong><strong><strong> </strong></strong></strong></strong>completely you can plan the uninstallation during a system maintenance in Maintenance Planner. See below in this SAP Note.</li>
+</ul>
+<p>Uninstallation of UIGRRMPC</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This SAP Note is updated regularly. Before starting the uninstallation, make sure that you are using the latest version of this SAP Note.</p>
+<p>Note that the uninstallation of the add-on can result in data loss. Before starting the uninstallation, read this SAP Note carefully and follow all contained instructions. It specifies required steps for the pre-implementation and post-implementation of the uninstallation and provides further information.<br/><br/><strong>Contents</strong><br/> 1. Change history<br/> 2. Prerequisites for uninstalling UIGRRMPC 100, 200<br/> 3. Manual preparation steps before uninstalling<br/> 4. Performing the uninstall using transaction SAINT<br/><br/><br/><strong>1. Change history</strong><br/><em></em></p>
+<p>Date Topic     Short     Description</p>
+<p>25.02.2026   Initial     Initial Description<br/>27.02.2026   Reason   Upgrade Information to SAP GRC FOR SAP HANA 1.0 added<br/><br/><strong>2. Prerequisites for uninstalling <em>UIGRRMPC 100, 200</em></strong></p>
+<ul>
+<li>Obtain the following SAP Notes before you begin the uninstallation:</li>
+<ul>
+<li>Add-ons: Conditions: 70228</li>
+<li>Uninstalling ABAP add-ons: 2011192</li>
+<li>Release strategy note 3311378<br/><br/></li>
+</ul>
+<li>ACPs that you must implement before the uninstallation:<br/>UIGRRMPC==100<br/>UIGRRMPC==200<br/><em><br/></em></li>
+</ul>
+<p><br/><strong>3. Manual preparation steps before uninstalling</strong><br/><br/><em>&lt;n/a&gt;</em></p>
+<p> </p>
+<p><strong>4.</strong> <strong>Performing the uninstall using transaction SAINT</strong></p>
+<p><em> </em></p>
+<p><strong>4.a Planning of uninstallation in maintenance planner</strong></p>
+<ol>
+<li>Start the maintenance planner using <a href="https://apps.support.sap.com/sap/support/mp" target="_blank">https://apps.support.sap.com/sap/support/mp</a>.</li>
+<li>Select the system via "Explore Systems" and then choose "Plan".</li>
+<li>To display the add-on product versions that can be uninstalled, choose "Uninstall Add-Ons".</li>
+<li>Expand the view of the <br/>product version <strong>SAP FIORI FOR PC AND RM 1.0</strong>, select the product instance <strong>UI for PC and RM on UI 4.0</strong> or<br/>product version <strong>SAP FIORI FOR PC AND RM 2.0</strong>, select the product instance <strong>UI for PC and RM on FES 2020</strong><br/>to be deleted, and confirm the selection with "Confirm Selection". <br/>The product instance to be uninstalled is displayed.Choose "Continue". </li>
+<li>Since the maintenance planner expects the planning of another change, choose "Plan a Minimum Software Change" and then choose "Continue".<br/>The target configuration is displayed. All selected product instances are marked for deletion.</li>
+<li>Choose "Next".</li>
+<li>In "Details of OS/DB files", leave all selection options open, choose "Confirm Selection", and confirm the warning dialog with "Continue".</li>
+<li>In "Details of Stack dependent and independent files", remove all selections that can be deselected and then choose "Next".<br/>In "Download Files", you now see all required archives.</li>
+<li>To download these archives, choose "Push to Download Basket" to place them into your download area. Then choose "Download Stack XML" to download the generated stack XML to your computer.</li>
+<li>Complete the planning process with "Next".</li>
+</ol>
+<p><strong>4.b Execution of uninstallation in SAINT with stack XML</strong></p>
+<p>You can use the SAP Add-On Installation Tool to uninstall add-on products. However, the uninstallation is possible only if the following prerequisites are met:</p>
+<ul>
+<li>The ACPs determined by the maintenance planner have been uploaded to the system. The add-on components of the product are thus flagged as deletable and are displayed on the "Uninstallable Components" tab in the SAP Add-On Installation Tool.<br/><strong><br/></strong></li>
+<li>You have imported the latest SPAM/SAINT update (at least SPAM Version 92).</li>
+</ul>
+<p>Procedure:</p>
+<ol>
+<li>Call the SAP Add-On Installation Tool with the transaction code SAINT in client 000.</li>
+<li>Open the "Uninstallable Components" tab.</li>
+<li>Choose "Stack XML file" and, in the file selection dialog, select the stack XML file that you downloaded from the maintenance planner.<br/>The add-on component versions of the add-on product version to be uninstalled are selected.</li>
+<li>To start the uninstallation process, choose "Start".<br/>A confirmation prompt alerts you to possible dangers of the uninstallation and refers to this add-on-specific SAP Note with important information. Be sure to read this SAP Note and follow its instructions.</li>
+<li>Define the start options.</li>
+<li>Once you have read this SAP Note and followed its instructions, choose "Continue" to start the uninstallation with the chosen start options. To cancel the uninstallation, choose "Cancel".<br/>After you start the uninstall process, the Add-On Installation Tool runs a predefined sequence of phases. Should an error occur in any of these phases, the uninstall process is stopped and the error is described to the extent possible. Once you have corrected the problem, you can choose "Continue" to continue the uninstallation.<br/>At first, the Add-On Installation Tool performs preparation steps and check steps. If errors cannot be corrected in these phases, you can choose "Back" to stop and reset the uninstallation. In later phases, if changes and deletions have already been made in the system, a reset is no longer possible, and the system displays a relevant error message. In this case, the errors must be rectified and the uninstallation must be completed.</li>
+<li>Following the successful uninstallation of the add-on, you can choose "Logs" to display the implementation logs.</li>
+<li>To complete the uninstallation, choose "Exit".</li>
+</ol>
+<p>For more information about the uninstallation, see <a href="https://help.sap.com/viewer/b42aad709784479fbab88da834f42765/LATEST/en-US/05ed7fa8d47949a5bab4c1dde73f1777.html" target="_blank">SAP Help Portal</a>.</p></div></div></div></div>

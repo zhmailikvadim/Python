@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3720321&amp;TargetLanguage=EN&amp;Component=XX-CSC-AT-IS-H&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3720321/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3720321/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>If a visit day of an outpatient case falls on an admission or discharge day for an inpatient case  of the patient in the communication procedure P321/ELDA or during scoring, the system does not create an outpatient admission message or scoring package for this outpatient movement date.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>ELDA communication, P321, ELDA, LKF model 2026, SCOX, scoring, outpatient movement, parallel inpatient case</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Prerequisites:</p>
+<ul>
+<li>Country Version Austria (AT)</li>
+<li>Use of the communication procedure ELDA (P321) </li>
+<li>Scoring LKF Model 2025 (Online, EDI Procedure SCOX, Scoring Reports, ) </li>
+<li>Note 3713998</li>
+</ul>
+<p>Reason:</p>
+<p><span style="font-size: 14px;">Development Request</span></p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p id="">Implement the program changes and perform the manual tasks.</p>
+<p>The system now takes into account the Scoring <em>Relevance</em> checkbox delivered with SAP Note 3713998 - IS-H AT: LKFScoring - Scoring Relevance of an Outpatient Movement (see there) for an outpatient movement of an outpatient case when creating an outpatient admission message in the communication procedure P321/ELDA and when scoring outpatient cases.</p>
+<p>P321/ELDA:</p>
+<p style="padding-left: 30px;">The system creates an outpatient admission notification for this movement/day if the movement is before the inpatient admission time or after the discharge time. This also applies to the absence start or end date. Note that for outpatient cases, only the first visit of a patient is reported for each case in the quarter. Also take your setting of the system parameter <em>ELDA_ABEWA</em> (ELDA - Outpatient Movement Exclusion for Parallel Stat. Case) into account.</p>
+<p>LKF Model - Scoring:</p>
+<p style="padding-left: 30px;">The system takes this flagged outpatient movement into account during scoring if the movement is before the inpatient admission time point or after the discharge time. This also applies to the absence start or end date.</p>
+<p>For other visiting days outside of an inpatient stay (incl. Admission/Discharge Day), you do not need to select this checkbox as before.</p>
+<p>Outpatient movements within an inpatient stay (now exact to the time) of a patient are not taken into account during scoring, even though they have been selected.</p>
+<p>Note also that all other exclusion reasons that do not refer purely to parallelism with an inpatient case remain valid.</p></div></div></div></div></div>

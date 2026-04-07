@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>From SAP IQ 15.x onward, tables can be range-partitioned so that data is stored in specified partitions.</li><li>However, range partitioning in SAP IQ has several limitations.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP IQ all version</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Please note that in SAP IQ range partitioning, any additional indexes other than the default Fast Projection (FP) index are created as global indexes.</li><li>Range partitioning is described in the following document; however, I have added some additional explanatory notes in the Resolution section.</li><li>SAP IQ Administration: Database - <a href="https://help.sap.com/docs/SAP_IQ/a8937bea84f21015a80bc776cf758d50/a8721b7584f21015a062c99a1c19e6cb.html?locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank">Range Partitions</a></li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Only a Single Partition Key Is Allowed<br/>Range partitioning supports only one column as the partition key.<br/>You cannot define range partitions using multiple columns (for example, date + region).</li><li>
+<p>Maximum Number of Partitions (Up to 1,024)<br/>The maximum number of range partitions per table is 1,024.</p>
+</li><li>
+<p>Partitions Are Defined by Upper Bounds Only</p>
+<p>Each partition is defined using VALUES &lt;= (upper_bound).<br/>Lower bounds are implicitly determined by the previous partition’s upper bound.</p>
+<p>- Be careful with boundary definitions, especially:</p>
+<p>End-of-month dates<br/>Timestamp columns (inclusive vs. exclusive ranges)</p>
+</li><li>
+<p>No Benefit Without Partition Key Predicates</p>
+<p>If a query does not include a condition on the partition key, all partitions are scanned.</p>
+<p>- Ensure that application SQL and reporting queries always include predicates on the partition key (for example, date filters).</p>
+</li><li>
+<p>Non-FP Indexes Are Global</p>
+<p><strong>Fast Projection (FP) indexes are partition-local.</strong><br/><strong>All non-FP indexes are global and apply to the entire table.</strong></p>
+<p>- Dropping or adding partitions may still incur maintenance overhead for global indexes.</p>
+</li><li>
+<p>Adding Partitions to Existing Tables Requires Care</p>
+<p>Range partitions can be added later using ALTER TABLE.</p>
+<p>- However, consider the impact on:</p>
+<p>Data redistribution<br/>Dbspace utilization<br/>Backup and restore strategies</p>
+</li><li>
+<p>Dbspace Design Can Increase Operational Complexity</p>
+<p>Each range partition can be placed in a separate dbspace.</p>
+<p>- Advantages</p>
+<p>Data tiering (hot vs. cold data)<br/>Partition-level maintenance</p>
+<p>- Disadvantages</p>
+<p>Increased number of dbspaces<br/>Higher operational and storage management complexity</p>
+</li><li>
+<p>Design with ILM (Information Lifecycle Management) in Mind</p>
+<p>Range partitioning is well suited for:</p>
+<p>Faster backup and restore<br/>Dropping or archiving old data</p>
+<p>- Design partitions assuming regular DROP PARTITION operations as part of lifecycle management.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>IQ, SAP IQ, range, partition, global, local, index </p></div></div></div></div>
