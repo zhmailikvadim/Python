@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0" style="list-style-type: disc;"><li>
+<p><span style="font-size: 10pt;">Transfer payments received from lockbox in BAI2 format to FI-CA. </span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Process customer payments received via the BAI2 lockbox format.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Import the file via lockbox transaction FLB2 and then execute transaction FPB7.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Notice that a payment advice and a payment lot is created.</span></p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p style="padding-left: 40px;"><span style="font-size: 10pt;">FI-CA - Contract Accounts Receivable and Payable  </span></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li style="font-size: 10pt;"><span style="font-size: 10pt;">Post the BAI2 file using transaction code FLB2 in FI.</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Execute transaction code FPB7 to clear the contract line items in FI-CA.</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">See the payment lot item and it's advice.</span></li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p style="padding-left: 40px;"><span style="font-size: 10pt;">Lockbox functionality available from S4Core104 and higher</span></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p style="padding-left: 40px;">There is a FI part and a FICA part.</p>
+<p> </p>
+<p style="padding-left: 40px;">1. FI part --&gt;  </p>
+<p style="padding-left: 40px;">Transaction FLB2 will read the BAI2 file, create an advice on the FI side and store EBS data in database FEBEP.</p>
+<p style="padding-left: 40px;"> <img alt="" class="img-responsive" height="372" src="/documents/customerkba/kDYVGKkXx4tDfy_grNFTbBuFRgLim-xMxj2QMVssysY" width="575"/></p>
+<ol><li style="list-style-type: none;">
+<ol style="list-style-type: lower-alpha;"><li>Verify if the FEBEP table is correctly created with the advice number in the AVSID field.</li><li>Check if the data uploaded from FI is correctly configured. For example, ensure that FLB2 uses invoice search type 2 (XBLNR) or 6 (OPBEL) - as type 1 (BELNR) will not work when FPB7 processes the information.</li></ol>
+</li></ol>
+<p style="padding-left: 40px;"><img alt="" class="img-responsive" height="237" src="/documents/customerkba/ZkUlXpHsApCx2GIqJ-vyuH9chJBhaWhEz2CJscMP3Eo" width="665"/></p>
+<p style="padding-left: 40px;">    c. U<span style="font-size: 10pt;">se Report RFAVIS10 to display advice<br/><br/></span></p>
+<p style="padding-left: 40px;"><img alt="" class="img-responsive" height="117" src="/documents/customerkba/QVQsF8AqP8CX1CfqNvMY7bYh1fqVt-C5xFOvYlko6a8" width="780"/></p>
+<p></p>
+<p style="padding-left: 40px;">2. FICA part --&gt;</p>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;">Transaction FPB7 read the EBS data from database FEBEP and advice from FI and process them to FICA data (create a payment advice note and a payment lot)</span></p>
+<ol><li style="list-style-type: none; font-size: 10pt;">
+<ol style="list-style-type: lower-alpha;"><li style="font-size: 10pt;"><span style="font-size: 10pt;">Automatically create advice on FICA side. Advice can be displayed by transaction FPAV.</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">This advice YYY is the one used to append in payment lot item in transaction FP05.</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Lot xxx created with advice YYY.</span></li></ol>
+</li></ol>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;"><img alt="" class="img-responsive" height="152" src="/documents/customerkba/8wcDx5wpH2tXMw5T0kGz4AfjRLsXLN2OsP6mz0AcsS8" width="780"/></span></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul style="list-style-type: disc;"><li style="font-size: 10pt;"><span style="font-size: 10pt;">Review the customizing in table TFK004 for 'AVKEY'.</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Refer to coding in FORM LOCKBOX_CHANGE RFKKKA01.</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">FKK_AVIS_KEY_CREATE_BD</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">FKK_OPEN_ITEM_ADVICE_MATCH</span></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p style="padding-left: 40px;"><span style="font-size: 10pt;">lockbox, FI-CA, FPB7, FLB2, payment advice, AVSID, TFK004, AVKEY</span></p></div></div></div></div>

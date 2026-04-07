@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">A mandate initiation request fails with reject reason code MD12 and the message "Mandate reference not unique, mandate could not be created, reason MD12" (Message 051, Message Class /PE1/MSG_RA_MNDT). This occurs in scenarios where both the creation and reinstatement of the mandate are not possible</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DDMC, DDI, Direct Debit Mandate, Create Mandate, MD12, MD22, /PE1/MSG_RA_MNDT</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The issue occurs when a mandate cannot be created or reinstated because the mandate was already cancelled more than 2 months ago. In this specific case, an irrelevant (misleading) error message and an incorrect rejection reason code are provided.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>A new message has been introduced to be used during the mandate creation process when reinstatement is not possible (Message 059, Message Class /PE1/MSG_RA_MNDT).<br/>Additionally, the correct Rejection Reason Code MD22 ("MandateInitiationCancelled") is now provided for this case, instead of the incorrect MD12 ("NotUniqueMandateReference").</p>
+<p>Please implement provided correction instructions or corresponding Support Package.</p></div></div></div></div>

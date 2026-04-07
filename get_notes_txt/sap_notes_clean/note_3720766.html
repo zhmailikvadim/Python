@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3720766&amp;TargetLanguage=EN&amp;Component=FI-BL-PT-BA&amp;SourceLanguage=DE&amp;Priority=06&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3720766/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3720766/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>You use the electronic bank statement and use a posting rule with clearing. <br/>If the clearing was not successful, a payment advice note is generated.<br/><br/>You want to deactivate the creation of the payment advice note.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p id="">RFEBBU00, AKONTO, AVIS, FEBA, FEBAN, deactivate payment advice notes</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>For SAP_APPL and SAP_FIN 617, the corrections from SAP Note 1910415 must be contained.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>You can use the customizable message "FB211" to set the payment advice note creation:<br/>To <strong>prevent</strong> payment advice note creation, you must perform the following steps:</p>
+<ul>
+<li>Call transaction "SM30".</li>
+</ul>
+<ul>
+<li>In the "Table/View" field, enter V_T100C and choose "Maintain".</li>
+</ul>
+<ul>
+<li>Enter "FB" as the application area.</li>
+</ul>
+<ul>
+<li>Create a new entry:</li>
+</ul>
+<p>           MsgNo: 211<br/>Message text: Suppress payment advice note creation in bank statement<br/>User name: (can be restricted to users, if initial, the entry applies to all users)<br/>Dialog: S<br/>Batch. S</p>
+<ul>
+<li>Click Save.</li>
+</ul></div></div></div></div></div>

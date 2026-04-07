@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When changing the position for an employee in Job Information, system will trigger onChange rule configured in position field to sync position data to Job Information. If the new field value is the same as previous one, the field is cleared.</p>
+<p>This happens when "Configure Latest People Profile&lt;General Settings&lt;Enable the latest Editing and History UI for Employee Central HRIS entities on Full Profile" is enabled.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Employee Central</p>
+<ul><li>Job Information</li><li>Latest Editing UI</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Make sure "Enable the latest Editing and History UI for Employee Central HRIS entities on Full Profile" is enabled in Configure Latest People Profile&lt;General Settings</li><li>Go to Employee Profile</li><li>Change Position in Job Information by clicking pencil icon</li><li>Choose a position which business unit is the same as current value</li><li>After executing onChange rule, the business unit field value is cleared.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><span>This happens when</span></p>
+<ol><li><span>"Configure Latest People Profile&lt;General Settings&lt;Enable the latest Editing and History UI for Employee Central HRIS entities on Full Profile" is enabled</span></li><li><span>Associations are configured in Configure Object Definition</span></li><li><span>Field Criteria are not maintained in Manage Business Configuration</span></li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span>In order to solve the issue, please first run Check tool to find out the fields that are missing field criteria.</span></p>
+<ul><li><span>Check Tool&lt;System Health&lt;Application: Employee Central Core; Area: Association&lt;Necessary field criteria exist.(MissingFieldCriteriaCheck) &lt;Run  </span>
+<div id="__title2-main">
+<div>
+<div id="__title2-content"></div>
+<div id="__title2-mainActions"></div>
+</div>
+<div id="__title2-mainNavigationAreaWrapper">
+<div id="__title2-separator" role="separator"></div>
+</div>
+</div>
+</li></ul>
+<p><span>Maintain Field Criteria settings according to the MissingFieldCriteriaCheck result.</span></p>
+<p></p>
+<p><span>For details about how to configure association and field criteria, please refer to KBA <a target="_blank">2287729 - Employee Central - Object Association Field Criteria FAQ</a></span></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><span><a target="_blank">2287729 - Employee Central - Object Association Field Criteria FAQ</a></span></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>INC20129183, <span>latest Editing and History UI, null, cleared, empty, Job Information,PPX edit, Changing the position from Job info MSS, check tool, MissingFieldCriteriaCheck, association, field criteria</span></p></div></div></div></div>

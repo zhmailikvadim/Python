@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">This KBA applies to SAP Datasphere <strong>ABAP</strong> type connections to ABAP-based On-Premise systems via SAP Cloud Connector.</p>
+<p>The following error occurs for feature data flow and replication flow when validating connection in SAP Datasphere.</p>
+<p>----------------------------------------------------------------------------------------------</p>
+<p>Connection &lt;connection name&gt; couldn’t be established. </p>
+<p>- Data flows can’t be used because of errors in the connection. <br/>- Replication flows can’t be used because of errors in the connection. </p>
+<p>Data Flows: Cause: ABAP connector(Axino) ABAP connection check FAILED: rfc connection broken: rc=1, msg="Message: <strong>An invalid handle 'RFC_CONNECTION_HANDLE' was passed to the API call\nCode: RFC_INVALID_HANDLE</strong>"</p>
+<p>Replication Flows: Cause: ABAP connector(Axino) ABAP connection check FAILED: rfc connection broken: rc=1, msg="Message: <strong>An invalid handle 'RFC_CONNECTION_HANDLE' was passed to the API call\nCode: RFC_INVALID_HANDLE</strong>"</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Datasphere</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Validate the connection.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><strong>Possible Cause 1:</strong></p>
+<p>Misconfiguration of the SAP Cloud Connector mapping for the ABAP system.</p>
+<p><strong>Possible Cause 2:</strong></p>
+<p>Insufficient authorization to execute the function module by the communication user maintained in the SAP Datasphere connection.</p>
+<p><strong>Possible Cause 3:</strong></p>
+<p>Missing required Notes.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>Solution for possible cause 1: </strong>Check the configuration between Datasphere and SAP Cloud Connector. The following resources should be maintained:</p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" id="loiof289920243a34127b0c8b13012a1a4b5__table_vkq_vhy_j5b" rules="all" summary=""><tbody><tr><td>
+<p>Connection Type (Protocol)</p>
+</td><td>
+<p>Accessible Resources Based on Use Case</p>
+</td></tr><tr><td headers="d71410e1046">
+<p>SAP ABAP (RFC)</p>
+</td><td headers="d71410e1049">
+<p>If you are connecting to an ABAP-based system with DMIS add-on installed, limit the accessible resources to the following function modules:</p>
+<ul><li>
+<p>LTAMB_ – Prefix</p>
+</li><li>
+<p>LTAPE_ – Prefix</p>
+</li><li>
+<p>RFC_FUNCTION_SEARCH</p>
+</li></ul>
+<p>For more information, see SAP Note <a href="https://help.sap.com/docs/link-disclaimer?site=https://me.sap.com/notes/2835207" rel="noopener noreferrer nofollow" target="_blank">2835207</a>.</p>
+</td></tr></tbody></table></div>
+<p>Please check if the prefix is missing or if there are any typo mistakes. For more information, please refer to <a href="https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/f289920243a34127b0c8b13012a1a4b5.html" rel="noopener noreferrer nofollow" target="_blank">Configure Cloud Connector | SAP Help Portal</a></p>
+<p><strong>Solution for possible cause 2: </strong>Please follow the below KBA to grant the required profile <strong>based on the container you wish to access</strong>: KBA <a href="https://me.sap.com/notes/0003100673" rel="noopener noreferrer nofollow" target="_blank">3100673</a> <em>- SAP Data Intelligence / SAP Datasphere - ABAP Integration - Security Settings.</em></p>
+<p>You can perform a trace in t-code SU53 to see authorizations missing.</p>
+<p><strong>Solution for possible cause 3: </strong>Please check SAP Note Analyzer and implement all notes (include prerequisite) without the green checkmark. For detailed instructions, please refer to <a href="https://help.sap.com/docs/SUPPORT_CONTENT/datasphere/4457678727.html" rel="noopener noreferrer nofollow" target="_blank">How to check relevant note corrections in On-premise ABAP-based systems for Data Flows and Replication Flows | SAP Help Portal</a> - Part 2, Step 1,2,3.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>KBA <a href="https://me.sap.com/notes/3260800" rel="noopener noreferrer nofollow" target="_blank">3260800</a><em> - ABAP connection validation errors: Invalid endpoint, An invalid handle, Denying request for resource, Could not invoke function - SAP DI - SAP for Me</em></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>connection validation failure, RFC_INVALID_HANDLE, Cloud Connector, RFC_CONNECTION_HANDLE, replication flow, data flow</p></div></div></div></div>

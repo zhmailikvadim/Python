@@ -1,0 +1,107 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When creating a parameterized view using CREATE VIEW statement with CASE JOIN condition in it, it throws error: invalid column name: "[Column Name]"</p>
+<p>But the column is present in the base view or table.</p>
+<ul>
+<li>Create statement example:
+<pre><span class="SNO_DNT" style="float: none;" translate="no"><code class="language-sql">CREATE VIEW VIEW_NAME( IN P_PARAM NVARCHAR(000042) ) AS 
+SELECT
+	 F1.COL1,
+	 F1.COL2,
+	 VIEW_3.COL10,
+	 F1.COL3
+FROM F1( P_PARAM =&gt; :P_PARAM )
+LEFT OUTER MANY TO ONE <strong>CASE JOIN </strong>
+	WHEN F1.PLANCODE = 'A' 
+	THEN RETURN ( 
+		VIEW_1.COL_A,
+		VIEW_1.COL_B,
+		VIEW_1.COL_C,
+		VIEW_1.COL_D
+	) 
+	FROM VIEW_1
+	ON ( F1.KEY1 = VIEW_1.KEY1 
+		AND F1.KEY2 = VIEW_1.KEY2 
+		AND F1.KEY6 = VIEW_1.KEY6 ) 
+	WHEN F1.PLANCODE = 'P' 
+	THEN RETURN ( 
+		VIEW_2.COL_A,
+		VIEW_2.COL_K
+	) 
+	FROM VIEW_2
+	ON ( F1.KEY7 = VIEW_2.KEY7 
+		AND F1.KEY6 = VIEW_2.KEY6 ) 
+END AS CASE_JOIN_RESULT
+LEFT OUTER MANY TO ONE JOIN VIEW_3
+ON ( F1.KEY6 = VIEW_3.KEY6 
+	AND F1.KEY8 = VIEW_3.KEY8 )</code></span></pre>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Invalid column name,  Syntax Error</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 347890</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, creating a parameter view using <span class="SNO_DNT" style="float: none;" translate="no">CREATE VIEW</span> statement with <span class="SNO_DNT" style="float: none;" translate="no">CASE JOIN</span> condition would result in preprocessor rules not properly propagated, resulting in it throws 'invalid column name' error even when the column exists.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">SAP HANA 2:</span></li>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">Revisions of SPS00 - SPS06</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">Revisions &lt;= 079.07 (SPS07)</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">Revisions &lt;= 087.00 (SPS08)</span></li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>View is created using CREATE VIEW statement.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">SAP HANA 2:</span></li>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">Revisions &gt;= 079.08 (SPS07)</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">Revisions &gt;= 088.00 (SPS08)</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">or higher</span></li>
+</ul>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>Until the database is upgraded to a revision containing the fix, please change the <span class="SNO_DNT" style="float: none;" translate="no">CASE JOIN</span> order in the create statement, to place the case join at the last position in the join order.<br/><br/>
+<ul>
+<li>Workaround statement example:
+<pre><span class="SNO_DNT" style="float: none;" translate="no"><code class="language-sql">CREATE VIEW VIEW_NAME( IN P_PARAM NVARCHAR(000042) ) AS 
+SELECT
+	 F1.COL1,
+	 F1.COL2,
+	 VIEW_3.COL10,
+	 F1.COL3
+FROM F1( P_PARAM =&gt; :P_PARAM )
+LEFT OUTER MANY TO ONE JOIN VIEW_3
+ON ( F1.KEY6 = VIEW_3.KEY6 
+	AND F1.KEY8 = VIEW_3.KEY8 )</code></span></pre>
+<pre><span class="SNO_DNT" style="float: none;" translate="no"><code class="language-sql">LEFT OUTER MANY TO ONE <strong>CASE JOIN </strong>
+	WHEN F1.PLANCODE = 'A' 
+	THEN RETURN ( 
+		VIEW_1.COL_A,
+		VIEW_1.COL_B,
+		VIEW_1.COL_C,
+		VIEW_1.COL_D
+	) 
+	FROM VIEW_1
+	ON ( F1.KEY1 = VIEW_1.KEY1 
+		AND F1.KEY2 = VIEW_1.KEY2 
+		AND F1.KEY6 = VIEW_1.KEY6 ) 
+	WHEN F1.PLANCODE = 'P' 
+	THEN RETURN ( 
+		VIEW_2.COL_A,
+		VIEW_2.COL_K
+	) 
+	FROM VIEW_2
+	ON ( F1.KEY7 = VIEW_2.KEY7 
+		AND F1.KEY6 = VIEW_2.KEY6 ) 
+END AS CASE_JOIN_RESULT</code></span></pre>
+</li>
+</ul>
+</li>
+</ul></div></div></div></div>

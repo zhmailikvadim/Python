@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Getting application error when trying to map competency to role.</li><li>Error occurs during manual mapping of competency to role in "Manage Job Profile Content" or via import role competency mappings.</li><li>Application error prevents saving the mappings.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP SuccessFactors Job profile builder</li><li>SAP SuccessFactors Talent Intelligence Hub</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Navigate to "Manage Job Profile Content".</li><li>Attempt to manually map competency to role.</li><li>Alternatively, attempt to import role competency mappings.</li><li>Observe that an application error occurs, and the mappings cannot be saved.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>There are many causes for this error:</p>
+<p>- JDM old to new sync job not completed successfully</p>
+<p>- Respective competency maintained in English debug locale </p>
+<p>- Instance refresh happened</p>
+<p></p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>If it is JPB enabled instance:</strong></p>
+<p>Complete JDM old to new sync job successfully. Job status details should be as "Post migration successful"</p>
+<p><strong>If it is TIH enabled instance:</strong></p>
+<p>1. Complete JDM old to new sync job successfully. Job status details should be as "Post migration successful"</p>
+<p>2. If the job is completed successfully, try to check whether the respective attribute is maintained in English debug locale, if so remove the translation for same and save it.</p>
+<p>3. If above two steps are done already, try to re-save the competency once from TIH screen by opening the translation (without making any changes).</p>
+<p><strong>Other scenarios:</strong></p>
+<p>1. If it is JPB enabled instance without TIH upgrade and the "JDM old to new sync job" shows as "Company was migrated earlier" (check the older job details), then it could be due to Instance Refresh issue where Instance got refreshed from TIH to JPB instance or from JPB to TIH instance.</p>
+<p>In such scenarios, upgrading to TIH would be the right decision to overcome the error. </p>
+<p></p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://me.sap.com/notes/3515667/E" rel="noopener noreferrer nofollow" target="_blank">SAP Note 3515667 - Application error when mapping competency to role in JPB</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>application error, competency mapping, role mapping, job profile builder, manage job profile content, import role competency mappings, error saving mappings, SAP SuccessFactors, TIH, JPB, unable, map, save, role</p></div></div></div></div>

@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">You want to update the patch level of the installed 1.120 SAPUI5 release in an ABAP system.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html0">SAPUI5 version 1.120.43, UI5 version 1.120.43, SAPUI5 version patch 1.120.43, UI5 version patch 1.120.43, SAPUI5 1.120.43, UI5 1.120.43</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error.</p>
+<p>SAP_UI 758 SP01 or higher is installed</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the transport-based correction instruction (TCI) specified in this SAP note. <br/> You can find more information about handling transport-based correction instructions in SAP Note 2187425.</p>
+<p>SAPUI5 resources no longer reside in the MIME Repository, and there may be obsolete content that needs to be deleted. The following steps are optional and can be performed if you need to clean up legacy MIME content:</p>
+<ul>
+<li>Start transaction RZ11.</li>
+<li>Increase the following parameters to 120m:
+<ul>
+<li>rdisp/scheduler/prio_normal/max_runtime</li>
+<li>rdisp/scheduler/prio_high/max_runtime</li>
+</ul>
+</li>
+<li>Start transaction SE38 and run the report /UI5/MIME_CLEANUP.</li>
+<li>Ensure the system is configured with at least 6 dialog work processes before running the report.</li>
+<li>After the report completes, restore the parameters in RZ11 to their defaults:
+<ul>
+<li>rdisp/scheduler/prio_normal/max_runtime = 60m</li>
+<li>rdisp/scheduler/prio_high/max_runtime = 11m</li>
+</ul>
+</li>
+</ul></div></div></div></div>

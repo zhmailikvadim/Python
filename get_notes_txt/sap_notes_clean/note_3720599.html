@@ -1,0 +1,74 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<article>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>During installation of an older SAP HANA 2.0 revision using hdblcm, the installer stops with a Local Secure Store compatibility requirement similar to:
+<p>Selected component SAP HANA Database is not compatible with SAP HANA Local Secure Store version '&lt;current_version&gt;'.<br/>The SAP HANA Database '&lt;revision&gt;' requires SAP HANA Local Secure Store version &lt;required_version&gt;.</p>
+<p>The required LSS version cannot be found in SAP Software Center.</p>
+<p>The installation is being performed in preparation for a system copy, migration, or go-live, and the target system is intended to match the source system revision.</p>
+<p>Customers assume the same SAP HANA patch revision must be installed to restore a database backup from the source system.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP HANA DB Version 2.0</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<article>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<p>Each SAP HANA revision is delivered together with a specific Local Secure Store (LSS) version as part of a delivery stack.<br/>Older SAP HANA revisions may require an LSS version that is no longer included in currently distributed installation media.</p>
+<p>The SAP HANA installer performs a compatibility check between SAP HANA and LSS components and prevents installation of outdated component combinations.</p>
+<p>The behavior is expected and by design. </p>
+<p>The situation typically occurs because it is incorrectly assumed that a database backup can only be restored to a target system running the exact same SAP HANA patch revision as the source system.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><article>
+<p>For SAP HANA recovery scenarios, the target system must run a SAP HANA version that is compatible with the backup according to SAP HANA recovery rules.</p>
+<p>In general, restoring a backup to the same or a higher SAP HANA version is supported, provided the version compatibility requirements are fulfilled.</p>
+<p>Therefore:</p>
+<ol><li>Install a supported SAP HANA revision available in SAP Software Center.</li><li>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div id="code-block-viewer">
+<div>
+<div>Installing the identical SAP HANA patch revision as the source system is not required for database recovery scenarios.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li><li>Proceed with the database recovery on the target system using the backup from the source system.</li></ol>
+<p>The required Local Secure Store version is delivered together with the corresponding SAP HANA installation media and no separate LSS download is necessary.</p>
+</article><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><div>
+<article>
+<div>
+<div>
+<div>
+<ul><li><a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/f93dd05d2d024792a8396cdf4cdb076d.html" rel="noopener noreferrer nofollow" target="_blank">SAP HANA Platform Documentation – Points to Note: SAP HANA Recovery</a><br/><a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/f93dd05d2d024792a8396cdf4cdb076d.html?utm_source=chatgpt.com" rel="noopener noreferrer nofollow" target="_new"></a></li><li><a href="https://me.sap.com/notes/2764368" rel="noopener noreferrer nofollow" target="_blank">SAP Note 2764368 – Release Information for the SAP HANA Local Secure Store</a></li></ul>
+</div>
+</div>
+<div> </div>
+</div>
+</article>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP HANA, Local Secure Store, LSS, system copy, restore, hdblcm</p></div></div></div></div>

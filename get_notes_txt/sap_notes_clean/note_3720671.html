@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Looking for a different approver determination process.</p>
+<ul><li>The approvers needs to be updated based on the leave dates selected on the leave creation screen.</li><li>This change should happen before the leave request is submitted to see and change the approver according to the selected leave dates.</li></ul>
+<p> </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4HANA Cloud Private Edition 2023</li><li>SAP S/4HANA All Versions </li><li>My Leave Requests (Fiori 2.0 / Version 3)</li><li>SAP ERP</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul><li>
+<p>Click on Create Request.</p>
+</li><li>
+<p>Enter a future Start Date for the request.</p>
+</li><li>
+<p>The system displays all approvers based in the system date.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>By standard, The approvers it is updated based the current system date. </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This Behavior can be change Via BADI HCMFAB_B_MYLEAVEREQUESTS . Just set parameter EV_RELOAD_APPROVERS_DATECHANGE of method GET_CONFIGURATION to 'X'</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Leave Request, FIORI, Approver, HCMFAB_B_MYLEAVEREQUESTS </p></div></div></div></div>

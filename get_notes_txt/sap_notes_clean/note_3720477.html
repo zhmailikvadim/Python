@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are using EC-ERP replication using BIB framework and facing issue with the replication of non-effective dated entity to the infotypes.</p>
+<p>This note handles two issues:</p>
+<p>While replicating data from a non-effective dated custom portlet to an infotype, you want to determine the BEGDA of the infotype based on the last modified date in EC. But the C_LASTMODIF rule is not working as expected in the custom portlet .</p>
+<p>While replicating data from a non-effective dated to an infotype, you want to determine the BEGDA of the infotype based on the payroll period start date. During the initial hire replication, infotype is getting replicated based on the payroll period start date and not based on hire date.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Non effective dated custom portlet</p>
+<p>last modified date</p>
+<p>C_LASTMODIF</p>
+<p>C_PAYRDATE</p>
+<p>payroll period start date with hire replication</p>
+<p>Non effective dated entity</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Currently in the logic we are using lastModifiedOn field to determine the last modified date. But for the custom entity, the field will be lastModifiedDate. With this note we have added logic to consider this also.</p>
+<p>Incase of payroll period start date based replication in infotypes during the initial hire replication, hire date should be considered instead of payroll period start date as BEGDA in infotypes.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Please implement the note</p></div></div></div></div>

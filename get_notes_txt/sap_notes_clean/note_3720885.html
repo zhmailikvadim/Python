@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li style="font-size: 10pt;"><span style="font-size: 10pt;">Alerts from FRUN with SAPSA user 'sapsa' failed to interact with the database (delete/insert) error. </span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">SAP Host Agent with trace level 3 shows:</span>
+<ul><li style="font-size: 10pt;">
+<p style="margin: 0in; font-family: Consolas; font-size: 11.0pt;"><span style="font-weight: bold; font-size: 10pt;">[PID xxxxx] executeQuery:  --- End of Query ---</span></p>
+<p style="margin: 0in; font-family: Consolas; font-size: 11.0pt;"><span style="font-weight: bold; font-size: 10pt;">[PID xxxxx] aseDatabaseComponentStatus:  skipAliveCheck NULL</span></p>
+<p style="margin: 0in; font-family: Consolas; font-size: 11.0pt;"><span style="font-weight: bold; font-size: 10pt;">[PID xxxxx] executeQuery:  Isolation level set to 1</span></p>
+<p style="margin: 0in; font-family: Consolas; font-size: 11.0pt;"><span style="font-size: 10pt;">...</span></p>
+<p style="margin: 0in; font-family: Consolas; font-size: 11.0pt;"><span style="font-size: 10pt;">[PID xxxxx] Thu Feb  5 05:36:33 2026</span></p>
+<p style="margin: 0in; font-family: Consolas; font-size: 11.0pt;"><span style="font-size: 10pt;">[PID xxxxx] ERROR AT sybOpenClient.cpp:fetchResults:2757 DESCRIPTION: Server message: Number 225, Severity 16, State 11, Line 2, Server BSP --- Message string: <span style="font-weight: bold;">Cannot run query--referenced object (name NAME NOT RECOVERABLE) dropped during query optimization.</span>  LAST OS-ERROR: (0) : Success</span></p>
+<p style="margin: 0in; font-family: Consolas; font-size: 11.0pt;"><span style="font-size: 10pt;">[PID xxxxx] ERROR AT sybServer.cpp:aseDatabaseComponentStatus:67206 DESCRIPTION: SAPSA user 'sapsa' failed to interact with the database (delete/insert) LAST OS-ERROR: (0) : Success</span></p>
+</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li aria-label="SAP BusinessObjects Business Intelligence platform">
+<div><span style="font-size: 10pt;">SAP BusinessObjects Business Intelligence platform 4.3</span></div>
+</li><li aria-label="SAP BusinessObjects Business Intelligence platform" style="font-size: 10pt;">
+<div>
+<p><span style="font-size: 10pt;">SAP Adaptive Server Enterprise (ASE) 16.0 for Business Suite</span></p>
+</div>
+<div> </div>
+<div>
+<div> </div>
+</div>
+</li></ul>
+<p></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><span style="font-size: 10pt;">Error 225 arises due to concurrent execution leading to table drop/create conflicts, specifically with the <code>sapsa_alive_chk</code> table.</span></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="font-size: 10pt;">Issue is planned to be fixed in Hostagent 7.22 PL71. Update Hostagent according to SAP Note <a href="https://i7p.bss.net.sap/sap/support/notes/1031096" rel="noopener noreferrer nofollow" target="_blank">1031096 </a>- Installing Package SAPHOSTAGENT.</span></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p><span style="font-size: 10pt;">FRUN alerts; </span></p></div></div></div></div>

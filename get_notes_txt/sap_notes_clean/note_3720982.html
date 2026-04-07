@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Customers require clarification regarding:</p>
+<ul><li>Whether a third-party CTI license is mandatory for case creation and attachment upload.</li><li>Supported CTI providers.</li><li>Alternative methods to create cases and upload attachments without CTI integration.</li><li>Available APIs and integration mechanisms for external system integration.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Service Cloud Version 2</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Consulting</li><li>Confusion between:
+<ul><li>CTI channel capabilities (real-time communication integration such as telephony and messaging) and</li><li>Case creation functionality, which can operate independently via APIs or email integration.</li></ul>
+</li><li>Most CTI Providers are designed for communication channel handling and is not inherently required for case management operations; however, this depends on the vendor's capabilities.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li><strong>CTI Licensing Requirement</strong>
+<ul><li>A third-party CTI license is required only if the CTI channel is being used.</li><li>The CTI channel in SAP Service Cloud Version 2:
+<ul><li>Enables telephony integration within Agent Desktop</li><li>Supports real-time communication (calls, chat, SMS, messaging)</li><li>Requires integration with a supported external communication provider</li></ul>
+</li><li>If customers intend to:
+<ul><li>Handle phone calls inside Agent Desktop</li><li>Use softphone capabilities</li><li>Integrate provider-based chat/SMS/WhatsApp channels</li><li>A valid license agreement with the respective CTI provider is mandatory. However:
+<ul><li>Case creation itself does not require a CTI license.</li><li>Attachment upload does not require a CTI license.</li><li>CTI is only required when case creation is triggered through telephony or messaging interactions managed by a CTI provider</li></ul>
+</li></ul>
+</li></ul>
+</li><li><strong>Supported CTI Providers</strong>
+<ul><li>Commonly integrated providers include:
+<ul><li>Sinch</li><li>Genesys</li><li>ComBox</li><li>Amazon Web Services (e.g., Amazon SES, Amazon Connect), and more. Please refer to KBA <a href="https://me.sap.com/notes/3156554" rel="noopener noreferrer nofollow" target="_blank">3156554</a> - CTI Integration Options with SAP Cloud for Customer (Service and Sales)</li></ul>
+</li><li>These providers support telephony and, depending on the vendor:
+<ul><li>Chat</li><li>SMS</li><li>WhatsApp</li><li>Email</li><li>Social channels</li></ul>
+</li><li>Licensing and commercial agreements must be arranged directly with the provider.</li><li>These providers enable interaction handling and channel connectivity.</li></ul>
+</li><li><strong>Case Creation Without CTI Integration</strong>
+<ul><li>Cases can be created without any CTI provider.</li><li>If the requirement includes (CTI integration is not required) :
+<ul><li>Programmatic case creation</li><li>Uploading attachments</li><li>Triggering cases from external systems</li><li>Running test or simulation scenarios</li></ul>
+</li></ul>
+</li><li><strong> Alternative Integration Options</strong>
+<ul><li><strong>Option A </strong>– Email Channel Integration
+<ul><li>Inbound email configuration can automatically create cases.</li><li>Reference: <a href="https://api.sap.com/api/SalesSvcCloudV2_email/overview" rel="noopener noreferrer nofollow" target="_blank">SAP Service Cloud Version 2 – Email API</a></li></ul>
+</li><li><strong>Option B </strong>– Case API Integration
+<ul><li>Cases can be created directly using the Case OData APIs.</li><li>Reference: <a href="https://api.sap.com/api/SalesSvcCloudV2_case/overview" rel="noopener noreferrer nofollow" target="_blank">SAP Service Cloud Version 2 – Case API</a></li></ul>
+</li></ul>
+</li><li><strong>Attachment Handling</strong>
+<ul><li>Attachments can be uploaded:
+<ul><li>During case creation</li><li>After case creation</li></ul>
+</li><li>This requires usage of the <a href="https://api.sap.com/api/SalesSvcCloudV2_documentService/overview" rel="noopener noreferrer nofollow" target="_blank">Document Service API</a> within SAP Service Cloud Version 2.</li><li>Attachments are stored using Document Service and linked to the case object.</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>KBA <a href="https://me.sap.com/notes/3156554" rel="noopener noreferrer nofollow" target="_blank">3156554</a> - CTI Integration Options with SAP Cloud for Customer (Service and Sales)</li><li><a href="https://api.sap.com/api/SalesSvcCloudV2_case/overview" rel="noopener noreferrer nofollow" target="_blank">SAP Service Cloud Version 2 – Case API</a></li><li><a href="https://api.sap.com/api/SalesSvcCloudV2_email/overview" rel="noopener noreferrer nofollow" target="_blank">SAP Service Cloud Version 2 – Email API</a></li><li><a href="https://api.sap.com" rel="noopener noreferrer nofollow" target="_blank">SAP API Business Hub</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Service Cloud Version 2, Service Cloud V2, case creation, case API, email API, CTI, computer telephony integration, telephony integration, agent desktop, attachment upload, document service, document service API, case attachments, external integration, middleware integration, OData API, communication arrangement, OAuth authentication, inbound email integration, case management, channel integration, third-party provider, Sinch, Genesys, ComBox, Amazon Web Services, Amazon SES, Amazon Connect, contact center integration, API integration, simulation, external system trigger, consulting KBA, licensing clarification, CTI provider, cloud CRM, interaction handling, softphone integration</p></div></div></div></div>

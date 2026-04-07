@@ -1,0 +1,89 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0"><span style="font-size: 10pt;">This article covers the required migration steps for SAP Advanced Workflow on Hyperscalers SFTP service. To provide with a more secure and reliable platform, we are moving the service to a new SFTP solution.  </span></p>
+<p><span style="font-size: 10pt;">This upgrade provides specific security enhancements, including:  </span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Enhanced file verification and integrity checks </span></li></ul>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Support for MDC signatures on PGP-encrypted files </span></li></ul>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Expanded compatibility with modern PGP and SSH key formats </span></li></ul>
+<p><span style="font-size: 10pt;">Please note that this transition will require modifications to your current implementation. Detailed instructions are provided in the resolution section of this KB.</span></p>
+<p><span style="color: rgb(224, 62, 45);"><em><span style="font-size: 10pt;">Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</span></em></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li><span style="font-size: 10pt;">SAP Sales Performance Management</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Advanced Workflow on Hyperscalers</span></li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="font-size: 10pt;">This guide provides the required steps to connect to the new SFTP service after your migration is complete. To ensure a smooth transition, this article explain the process into three phases: Planning, Execution, and Verification. </span></p>
+<p><strong><span style="font-size: 10pt;">Phase 1: Pre-Cutover Planning &amp; Inventory</span></strong></p>
+<p><span style="font-size: 10pt;">Before the migration date, it is critical to identify all systems and processes that interact with the current SFTP service. </span></p>
+<p><span style="font-size: 10pt;">     <strong>1. Identify All Connecting Systems: </strong></span></p>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Create an inventory of all applications, scripts, or third-party tools that send files to or retrieve files from the Incentive Management SFTP site. </span></li></ul>
+</li></ul>
+<p><span style="font-size: 10pt;">   <strong>  2. Check for Special Cases (Critical): </strong></span></p>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Workflow Scripts/Custom Parameters: Are there any Workflow scripts or Custom Parameters that reference the SFTP hostname? These will need to be updated.</span></li></ul>
+</li></ul>
+<p><span style="font-size: 10pt;">Integration Folder: Check the SFTP directory for a folder named Integration. This folder is being deprecated, and it is needed to take manual action if it exists. After the migration, the folder and the content will be removed.</span></p>
+<p><span style="font-size: 10pt;">      <strong>3. Perform SFTP Site Housekeeping (Recommended):  </strong></span></p>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">To ensure a faster and smoother migration experience, we highly recommend reviewing the files currently on your SFTP site and performing some light housekeeping.  </span></li></ul>
+</li></ul>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Action: Consider deleting any files that are no longer needed, such as old data load files that have been successfully processed, outdated extracts, or temporary test files. Reducing the number of files to be moved will directly contribute to a more efficient migration.  </span></li></ul>
+</li></ul>
+<p><strong><span style="font-size: 10pt;">Phase 2: Post-Migration Execution </span></strong></p>
+<p><span style="font-size: 10pt;">After the scheduled maintenance window for the environment (SBOX or PROD) is complete, perform the following actions. </span></p>
+<p><span style="font-size: 10pt;"><strong>      4. Update Your System Connection Details: </strong></span></p>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Using the inventory from Phase 1, update each system with the new connection details provided in the migration announcement. </span><br/><br/><span style="font-size: 10pt;">Hostname</span></li></ul>
+</li></ul>
+<p style="padding-left: 80px;"><span style="font-size: 10pt;">XG3</span></p>
+<p style="padding-left: 80px;"><span style="font-size: 10pt;">SBOX: xg3sbox.sftp.commissions.cloud.sap</span></p>
+<p style="padding-left: 80px;"><span style="font-size: 10pt;">PROD: xg3prd.sftp.commissions.cloud.sap</span></p>
+<p style="padding-left: 80px;"><span style="font-size: 10pt;">XGB</span></p>
+<p style="padding-left: 80px;"><span style="font-size: 10pt;">SBOX: xgbsbox.sftp.commissions.cloud.sap</span></p>
+<p style="padding-left: 80px;"><span style="font-size: 10pt;">PROD: xgbprd.sftp.commissions.cloud.sap</span></p>
+<p style="padding-left: 80px;"><span style="font-size: 10pt;">XG7</span></p>
+<p style="padding-left: 80px;"><span style="font-size: 10pt;">SBOX: xg7sbox.sftp.commissions.cloud.sap</span></p>
+<p style="padding-left: 80px;"><span style="font-size: 10pt;">PROD: xg7prd.sftp.commissions.cloud.sap</span></p>
+<p style="padding-left: 80px;"><span style="font-size: 10pt;">Port: 9093</span></p>
+<p><span style="font-size: 10pt;">Username: Customer tenant id/moniker adding the SAP product as a suffix. For example, if your tenant id is “mockTenant” then the username will be “mockTenant_XDL” for XDL, “mockTenant_DSP” for Datasphere, and “mockTenant_WFL” for Workflow. </span></p>
+<p><span style="font-size: 10pt;">SSH Keys (User Authentication): Existing keys will be migrated. For new SSH keys, please contact our global Support Team via the SAP for Me portal to push keys into SFTP. </span><br/><span style="font-size: 10pt;">(The new SFTP solution supports modern key formats like RSA (2048-bit or stronger) and ECDSA. The minimum length for SSH keys is 2028b.)</span></p>
+<p><span style="font-size: 10pt;">NOTE: Your network team may need to update firewall rules or IP allow-lists to permit connections to the new hostname. Be sure to coordinate with them. </span></p>
+<p><strong><span style="font-size: 10pt;">      5. Download Inbound PGP Encryption Key (If Applicable): </span></strong></p>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">This step is mandatory if you send PGP-encrypted files to SAP. The old key will no longer work. </span></li></ul>
+</li></ul>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Action: In the XDL UI, navigate to Configuration &gt; File Transfer Settings. Click Download Public Key. </span></li></ul>
+</li></ul>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Provide this new public key to all internal or external processes that encrypt files before sending them to you.</span></li></ul>
+</li></ul>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Why is this necessary? This ensures that file decryption is handled securely on the new platform. </span></li></ul>
+</li></ul>
+<p><strong><span style="font-size: 10pt;">      6. Manually Relocate Integration Folder Files (If Applicable): </span></strong></p>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">If you have identified an Integration folder in Phase 1, you must manually move the files to their new, dedicated product folders. The Integration folder is no longer supported. </span></li></ul>
+</li></ul>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Workflow has its own connection details on the new platform. Please refer to the screenshot below, which illustrates the folder structure. For further guidance, consult the specific documentation for guidance.  <br/></span><br/><span style="font-size: 10pt;"><img class="img-responsive" height="589" src="/documents/customerkba/0ZfJXMaFAjbw5JIOUqEEBn5dsRZgkCjQwIx1fm6_AGA" title="Picture1.png" width="304"/></span></li></ul>
+</li></ul>
+<p><span style="font-size: 10pt;"> </span></p>
+<p><span style="font-size: 10pt;"> </span><strong><span style="font-size: 10pt;">Phase 3: Verification &amp; Testing </span></strong></p>
+<p><span style="font-size: 10pt;">Once the execution steps are complete, verify that everything is working as expected. </span></p>
+<p><span style="font-size: 10pt;"><strong>      7. Perform a Connection Test:</strong> </span></p>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Please see Help documentation for performing connection tests in Workflow</span><br/><span style="font-size: 10pt;">https://help.sap.com/docs/Advanced_Workflow/b7cb13f8b6a04157a722ad9ddfde4a28/72a847e27c231014a804993ce4041860.html?version=2602</span></li></ul>
+</li></ul>
+<p><strong><span style="font-size: 10pt;">      8. Conduct End-to-End File Transfer Tests: </span></strong></p>
+<ul><li style="list-style-type: none;">
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Using Help documentation on 7, please test transferring files to an from SFTP/Workflow.</span></li></ul>
+</li></ul>
+<p><span style="font-size: 10pt;">Congratulations! Once these tests are successful, the migration for that environment is complete. <br/></span><br/><strong><span style="font-size: 10pt;">What to Do If Encountering an Issue </span></strong></p>
+<p><span style="font-size: 10pt;">In case of any trouble happens during this process, please do not hesitate to contact our global Support Team via the <a href="http://me.sap.com/" rel="noopener noreferrer nofollow" target="_blank">SAP for Me</a> portal. They are fully briefed on this migration and ready to assist you. </span></p>
+<p><strong><span style="font-size: 10pt;">Frequently Asked Questions (FAQ) </span></strong></p>
+<p><strong><span style="font-size: 10pt;">Why is this SFTP migration necessary? </span></strong><br/><span style="font-size: 10pt;">The migration to our new platform is required to provide enhanced security, improved reliability, and support for modern encryption standards. Specific benefits include advanced file verification, MDC signature support for PGP-encrypted files, and compatibility with a wider range of key formats. </span></p>
+<p><strong><span style="font-size: 10pt;">Will there be any downtime during the migration? </span></strong><br/><span style="font-size: 10pt;">Yes. The SFTP service will be unavailable during the scheduled maintenance window for your environment. Please ensure that any automated jobs or scripts are paused during this time to avoid failed transfers. </span></p>
+<p><strong><span style="font-size: 10pt;">What connection details do I need to update? </span></strong><br/><span style="font-size: 10pt;">Update the SFTP hostname, port, and username in all systems and scripts that connect to the SFTP site. The new username is the tenant ID with the suffix "_XDL" (e.g., gxxx_XDL). </span></p>
+<p><strong><span style="font-size: 10pt;">Do I need to update my firewall or network settings? </span></strong><br/><span style="font-size: 10pt;">Yes, this is a common point of failure. If your organization restricts outbound traffic, your network team must update firewall rules to allow connections to the new SFTP hostname on port 9093. </span></p>
+<p><strong><span style="font-size: 10pt;">What happens to the existing SSH keys? </span></strong><br/><span style="font-size: 10pt;">All of the existing SSH keys will be migrated to the new platform. However, as a best practice, test the connection for each user to confirm their key works as expected post-migration. </span></p>
+<p><strong><span style="font-size: 10pt;">Do I need to generate new PGP keys? </span></strong><br/><span style="font-size: 10pt;">Yes, this is mandatory if you send PGP-encrypted files to us (inbound files). After the migration, it is mandatory to generate a new PGP key from the XDL UI and use its public key for all future encrypted uploads. Public PGP keys uploaded through the XDL UI for encrypting outbound files will be moved to the new SFTP site as part of the migration.  </span></p>
+<p><strong><span style="font-size: 10pt;">What should I do if I have a folder named “integration” on my SFTP site? </span></strong><br/><span style="font-size: 10pt;">The "integration" folder is being deprecated and will no longer be supported. You must manually move any files from this folder to the new, appropriate product-specific folders after the migration. </span></p>
+<p><strong><span style="font-size: 10pt;">How can I verify that the migration was successful for me? </span></strong><br/><span style="font-size: 10pt;">After updating the connection details, perform two key tests: first, a basic connection test to confirm the log in, and second, an end-to-end test transferirng sample inbound and outbound files to confirm the processes are working correctly. </span></p>
+<p><strong><span style="font-size: 10pt;">What should I do if I encounter an issue after the migration? </span></strong><br/><span style="font-size: 10pt;">Please contact our global support team immediately via the SAP for Me portal. To help us resolve the issue quickly, please provide specific details about the error and the steps already taken. </span></p>
+<p><strong><span style="font-size: 10pt;">Is there a risk of data loss during this migration? </span></strong><br/><span style="font-size: 10pt;">No files will be deleted by the migration process. All of the data will be moved to the new platform. However, files that reside in the deprecated “Integration” folder will require manual action from you to ensure they are in the correct location for your other processes. </span></p>
+<p><strong><span style="font-size: 10pt;">Is there an automatic rollback option if my testing fails? </span></strong><br/><span style="font-size: 10pt;">No, there is no self-service or automated rollback available to customers. If you encounter a critical issue after migrating, you must contact SAP Support immediately for assistance.</span></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p><span style="font-size: 10pt;">Advanced Workflow, SFTP Migration, GCP, Express Data Loader.</span></p></div></div></div></div>

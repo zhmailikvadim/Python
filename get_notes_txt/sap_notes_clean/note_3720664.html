@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The partition of a table in the BW name space (&lt;bw_prefix&gt; e.g. BIC, BI0 etc.) is reaching the 2 billion records per partition limit.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP HANA Platform</li><li>BW on HANA</li><li>BW4HANA</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>BW tables with the naming convention <br/>   <strong>/&lt;bw_prefix&gt;/F&lt;cube_name&gt;</strong><br/>like<br/>   <strong>/BIC/F&lt;cube_name&gt;</strong><br/>are partitioned as explained by the section <br/>   17. How should tables be partitioned in BW environments?<br/>of the note<br/>   <a href="https://me.sap.com/notes/2044468" rel="noopener noreferrer nofollow" target="_blank">2044468</a> FAQ: SAP HANA Partitioning</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 92.4863%;"><tbody><tr><td style="width: 18.2192%;">Object type</td><td style="width: 3.9726%;">Object detail</td><td style="width: 9.6347%;">Table name</td><td style="width: 6.80365%;">First level partitioning</td><td style="width: 11.4612%;">Second level partitioning</td><td style="width: 3.10502%;">SAP Note</td><td style="width: 46.8037%;">Details</td></tr><tr><td style="width: 18.2192%;">
+<p>flat / in-memory optimized / HANA optimized <strong>F fact tables</strong></p>
+</td><td style="width: 3.9726%;">
+<p>combined</p>
+</td><td style="width: 9.6347%;">
+<p><strong>/&lt;bw_prefix&gt;/F&lt;cube_name&gt;</strong></p>
+</td><td style="width: 6.80365%;">
+<p>ROUNDROBIN</p>
+</td><td style="width: 11.4612%;">
+<p>RANGE KEY_&lt;infocube&gt;P, &lt;dimids&gt;</p>
+</td><td style="width: 3.10502%;">
+<p><a href="https://me.sap.com/notes/1908075" rel="noopener noreferrer nofollow" target="_blank">1908075</a><br/><a href="https://me.sap.com/notes/2334091" rel="noopener noreferrer nofollow" target="_blank">2334091</a></p>
+</td><td style="width: 46.8037%;">
+<p>In each first-level partition four second-level RANGE partitions are defined on the KEY_&lt;infocube&gt;P which refers to different types of fact table data:</p>
+<ul><li>
+<p>1st range partition: Compressed requests (Compressed deltas)</p>
+</li><li>
+<p>2nd range partition: Reference points (Initialization records)</p>
+</li><li>
+<p>3rd range partition: Historic movements (Historic transactions)</p>
+</li><li>
+<p><strong>4th range partition: Uncompressed requests (Uncompressed requests)</strong></p>
+</li></ul>
+<p>See SAP Note <a href="https://me.sap.com/notes/1548125" rel="noopener noreferrer nofollow" target="_blank">1548125</a> -&gt; "HANA Optimized Inventory Cubes" for more details.</p>
+</td></tr></tbody></table></div>
+<p>The <strong>4th second level range partition</strong> of each first level partition contains uncompressed requests.</p>
+<p>To reduce the number of the 4th range partition please start compressing the requests.</p>
+<p>Please ask your functional BW team to compress the requests.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://me.sap.com/notes/2044468" rel="noopener noreferrer nofollow" target="_blank">2044468</a> FAQ: SAP HANA Partitioning</li><li><a href="https://me.sap.com/notes/1908075" rel="noopener noreferrer nofollow" target="_blank">1908075</a> SAP BW on SAP HANA: Table Placement and Landscape Redistribution</li><li><a href="https://me.sap.com/notes/2334091" rel="noopener noreferrer nofollow" target="_blank">2334091</a> SAP BW/4HANA: Table Placement and Landscape Redistribution</li><li><a href="https://me.sap.com/notes/1548125" rel="noopener noreferrer nofollow" target="_blank">1548125</a> Interesting Facts about Non-Cumulatives</li></ul></div></div></div></div>

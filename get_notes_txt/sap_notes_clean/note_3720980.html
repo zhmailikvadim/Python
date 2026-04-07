@@ -1,0 +1,41 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Users working with the SAP Fiori Launchpad in Microsoft Edge experience the following:</p>
+<ul><li>Native Browser Popup: A "Login" or "Authentication Information" (Authentifizierungsinformationen) window appears unexpectedly when a user returns to a previously inactive Fiori tab.</li><li>Navigation Failure: After the popup, the Launchpad fails to load its layout, showing "Resource not found" or errors related to Space IDs and Page IDs (e.g., MyHome or custom Spaces show a loading spinner indefinitely).</li><li>Visual Indicators: The UI may display a "Circle with a Slash" (🚫) / "Do Not Enter" icon on tiles or as a cursor, indicating that background OData requests are being blocked or are unauthorized.</li><li>Empty SU53: If the user checks transaction SU53 in the backend, no authorization failures are recorded.</li><li>Time Variance: The issue occurs even if the system's session_timeout is set to 1 hour, sometimes appearing after only 5-10 minutes of tab inactivity.</li><li>Console Logs: Developer tools show multiple 403 Forbidden or 401 Unauthorized errors for services like /sap/opu/odata4/iwngw/notification_srv.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA 2022 and others.</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Log in to the SAP Fiori Launchpad using Microsoft Edge.</p>
+</li><li>
+<p>Open multiple browser tabs (e.g., a Fiori App, a news site, and an email tab).</p>
+</li><li>
+<p>Stay active in the non-SAP tabs for approximately 5 to 10 minutes.</p>
+</li><li>
+<p>Switch back to the Fiori Launchpad tab.</p>
+</li><li>
+<p>Observe the "Authentication Information" popup and the subsequent failure of the Page/Space layout to refresh.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue is caused by Chromium-based "Sleeping Tabs" or "Efficiency Mode" interacting with the SAP Session state:</p>
+<ul><li>Tab Suspension: To save memory, Edge "suspends" background tabs. This stops the Fiori Launchpad's "Keep Alive" heartbeats.</li><li>Session Handshake Failure: When the tab "wakes up," the UI5 framework attempts to refresh data (like notifications or space layouts). Because the background process was frozen, the security tokens or session cookies may have flickered or been rejected by the Web Dispatcher/ICM, leading to a 401/403 error.</li><li>Timeout Mismatch: As noted in system logs, a conflict where sessionTimeoutReminderInMinutes is not correctly aligned with the interval can prevent the UI from properly prompting the user before the session actually dies.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>To resolve this, apply a combination of browser and configuration settings:
+<ul><li>Option 1: Browser-Level Fix (Recommended)
+<ol><li>Ensure the Fiori Launchpad is never put to "sleep" by the browser:</li><li>Open Edge and go to <a style="font-size: 10pt;" target="_blank">edge://settings/system</a><span style="font-size: 10pt;">.</span></li><li>Locate the section "<a href="https://support.microsoft.com/en-us/topic/learn-about-performance-features-in-microsoft-edge-7b36f363-2119-448a-8de6-375cfd88ab25" rel="noopener noreferrer nofollow" target="_blank">Never put these sites to sleep</a>."</li><li>Add the URL of your Fiori Launchpad to this list.</li></ol>
+</li></ul>
+</li><li>Option 2: Launchpad Configuration
+<ul><li>
+<p>Step 1: Ensure the session reminder is properly configured to "wake" the browser tab before the hard timeout occurs:</p>
+<p></p>
+<ul><li>
+<p>Verify FLP Shell settings to ensure sessionTimeoutReminderInMinutes is higher than the check interval (steps below):</p>
+<ul><li>
+<p>Access transaction <code>/UI2/FLP_CUS_CONF</code> (or <code>/UI2/FLP_SYS_CONF</code>). Ensure the following parameters are synchronized:</p>
+<ul><li>Set <code>sessionTimeoutIntervalInMinutes</code> to match your backend profile parameter <code>rdisp/gui_auto_logout</code> (e.g., 60).</li><li>Set <code>sessionTimeoutReminderInMinutes</code> to a generous lead time (e.g., 5 or 10 minutes). This forces the UI to attempt a "wake-up" refresh before the critical cutoff.</li><li>The Session parameters need to check the interval of communication between framework or application from the front and backend (including Web Dispatcher / Load Balancer). The intent should be to check every few seconds to several minutes. </li><li>Special Note: The above strategy may work for the "Sleeping Tab" issue: By having a frequent "Check Interval," the Fiori Launchpad attempts to communicate with the server more often. If Edge sees the tab is trying to perform background network activity (XHR), it is less likely to put it into a "Deep Sleep," preventing the 401 error.</li></ul>
+</li></ul>
+</li></ul>
+</li><li>
+<p>If users frequently switch tabs, consider forcing critical apps to open in a new window to isolate their session state:</p>
+<ol><li>
+<p>In the Target Mapping for the affected app, add the parameter:</p>
+<ul><li>
+<p>Name: <code>sap-ushell-next-navmode</code></p>
+</li><li>
+<p>Value: <code>explace</code></p>
+</li></ul>
+</li><li>
+<p>Reference KBA <a href="http://me.sap.com/notes/3713752" rel="noopener noreferrer nofollow" target="_blank">3713752 </a>for details on managing "Dirty Sessions" and soft navigation collisions.</p>
+</li></ol>
+</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>KBA <a href="http://me.sap.com/notes/3713752" rel="noopener noreferrer nofollow" target="_blank">3713752</a> - Fiori App showing blank screen when navigating back and re-opening - explains: The issue(blank screen or no entry) is caused by a collision in the browser's memory during "Soft Navigation."</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Fiori Launchpad, Authentication Information popup, Microsoft Edge Sleeping Tabs, Space ID error, Page ID error, Fiori 401 Unauthorized, Circle with slash Fiori, Do not enter icon Fiori, MyHome not loading, Efficiency Mode SAP, Fiori tab switching error, Authentifizierungsinformationen Fiori, CA-FLP-ABA, ServiceNow 261901/2026, Fiori 🚫 icon, sap-ushell-next-navmode explace</p></div></div></div></div>

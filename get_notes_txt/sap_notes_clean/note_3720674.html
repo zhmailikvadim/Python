@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When trying to access SSCUI/Configuration Activity "Assign Warehouse Number to Plant and Storage Location" ID 101109, the following error message is raised: </p>
+<p><em>No authorization to start the UI for transaction S_ALR_87007419</em></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Navigate to the CBC workspace.</li><li>Click on the "Configuration Activities" tab.</li><li>Search for the Configuration Activity ID 101109.</li><li>Click on the entry for the activity.</li><li>Click the "Go to Activity" button.</li><li>Observe the error message: "No Authorization to start the UI for transaction S_ALR_87007419".</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Missing Business Catalog.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul></ul>
+<p>Add the business catalog SAP_CA_BC_IC_LND_LE_DWM0_PC to the BPC_EXPERT business role (or the similar role in use).</p>
+<p>Additionally, to have editing rights, please ensure to grant "Write Access" to "Unrestricted" for the BPC_EXPERT business role (or for the similar role in use).</p>
+<p>The business catalog SAP_CA_BC_IC_LND_LE_DWM0_PC is only available in S/4HANA Cloud if one of the below scope items is activated:</p>
+<ul><li>
+<p>1ZQ</p>
+</li><li>
+<p>2RU</p>
+</li><li>
+<p>3BR</p>
+</li><li>
+<p>3BS</p>
+</li></ul>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP KBA: <a href="https://me.sap.com/notes/3238660" rel="noopener noreferrer nofollow" target="_blank">3238660 - How to find the business catalog to access a SSCUI (Configuration Activity) and avoid authorization errors</a>.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Configuration activity, SSCUI ID, missing authorization, CBC, SAP Central Business Configuration, business catalog, workspace, No authorization to start the UI, SAP_CA_BC_IC_LND_LE_DWM0_PC, BPC_EXPERT role, configuration activity, missing warehouse number.</p></div></div></div></div>

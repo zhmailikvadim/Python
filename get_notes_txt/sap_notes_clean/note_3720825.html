@@ -1,0 +1,54 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>System raises error:</p>
+<p>“Unsuccessful: Modifying infotype 2006 with key xxxx – No entry in table T554Y_REAC.”</p>
+</li><li>
+<p>The issue may occur in multiple reports or transactions in Time Management, for example:</p>
+<ul><li>
+<p>RPTQTA00 – Generate Absence Quotas / Transfer quotas to IT2006</p>
+</li><li>
+<p>RPTIME00 – Time Evaluation</p>
+</li><li>
+<p>Creating or updating time infotypes such as:</p>
+<ul><li>
+<p>IT2001 (Absences)</p>
+</li><li>
+<p>IT2006 (Absence Quotas)</p>
+</li><li>
+<p>Other time-related infotypes</p>
+</li></ul>
+</li></ul>
+<p></p>
+</li><li>
+<p>Table T554Y_REAC is empty or missing required entries.</p>
+</li><li>
+<p>System operations related to quota transfer, time evaluation, or time data maintenance fail.</p>
+</li><li>
+<p>Issue typically occurs after activating business function H4S4_1 or implementing HR Support Packages.</p>
+</li><li>
+<p>Issue does not occur in systems where the business function is not activated.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4HANA </li><li>SAP Human Capital Management (HCM) </li><li>Personnel Time Management (PT)</li><li>Time Data Recording and Management</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Activate business function H4S4_1.</p>
+</li><li>
+<p>Implement latest HR Support Packages.</p>
+</li><li>
+<p>Execute one of the affected reports (for example PC00_M13_CTO3, RPTQTA00, RPTIME00) or create/update time infotypes (e.g. IT2001, IT2006).</p>
+</li><li>
+<p>System raises error indicating missing entry in table T554Y_REAC.</p>
+</li><li>
+<p>Check table T554Y_REAC → table is empty or not maintained.</p>
+</li></ol>
+<p></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>
+<p>Required entries are missing in collision table T554Y_REAC.</p>
+</li><li>
+<p>The table is client-specific and not transportable.</p>
+</li><li>
+<p>After activating business function H4S4_1, system configuration was not converted to the new table structure.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>
+<p>Maintain required entries in customizing view V_T554Y_MOCOL (for example default value “00”, depending on business requirements).</p>
+</li><li>
+<p>Execute report RPU_PT_CONV_T554Y to populate table T554Y_REAC.</p>
+</li><li>
+<p>Run the report separately in each system and client (DEV, QAS, PRD if applicable), since the table is not transportable.</p>
+</li><li>
+<p>Re-test the affected report or infotype processing.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Note 3299479</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>T554Y_REAC, H4S4_1, RPU_PT_CONV_T554Y, PC00_M13_CTO3, RPTQTA00, RPTIME00, IT2001, IT2006, infotype 2006, collision reaction, personnel time management, quota transfer error, termination organizer error.</p></div></div></div></div>
