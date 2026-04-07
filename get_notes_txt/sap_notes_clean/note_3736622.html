@@ -1,0 +1,50 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>After a system refresh or copy, certain Fiori Catalogs or Tiles are missing.</li><li>The administrator needs a quick, precise way to identify which specific Transport Requests (TRs) contain the missing content without importing the entire transport queue.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>S/4HANA 2023 and other versions</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The requirement to manually identify and surgically transport Fiori objects after a system copy or refresh typically stems from three primary architectural factors:</p>
+<ul><li>1. Metadata Fragmentation in the SUI (Software User Interface) Framework<br/>In S/4HANA 2023 and higher, Fiori catalog metadata is no longer stored in a single table. It is fragmented across the SUI (Software User Interface) framework, specifically:
+<ul><li>SUI_TM_MM_CAT (Customizing/Header Data)</li><li>SUI_TM_MM_APP (Workbench/Tile &amp; Descriptor Data)</li><li>Standard client copy profiles (such as SAP_CUST) may successfully move the "Header" (Type C) but skip the "Content" (Type W/A), leading to "empty shell" catalogs in the target system.</li><li>Note: Always query the physical SUI tables in SE16 to avoid stale data from the application cache.</li></ul>
+</li><li>2. Transport Buffer Complexity ("The Shotgun Risk")<br/>Following a Homogeneous System Copy, the target system's transport buffer may contain hundreds of legacy requests. Without a surgical identification workflow, administrators often attempt to "Import All" to resolve missing data. This introduces the risk of <strong>Version Regression</strong>, where older technical settings from the source system overwrite stabilized, newer configurations in the target environment.</li><li>3. Delivery Class Mismatches<br/>Fiori artifacts do not share a uniform <strong>Delivery Class</strong>. While some tables are classified as Customizing, others (like those containing App Descriptors) are treated as Workbench or Local data. Standard Post-Copy Automation (PCA) or SCC1N tools may bypass these "Type W" or "Type L" objects silently, leaving the database inconsistent.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>Disclaimer &amp; Scope of Workflow:</strong> The methods outlined below are provided as strategic guidelines for SAP Basis administrators. Due to the evolving nature of the S/4HANA architecture—specifically the transition to the <strong>SUI (Software User Interface)</strong> metadata framework in version 2023 and beyond—the physical storage layer and object dependencies are subject to change.</p>
+<p>These techniques should be treated as a flexible toolkit. Users must account for their specific landscape versions, client-specific constraints, and the ongoing evolution of SAP metadata persistence. What constitutes a "Standard" table or "Object Type" today may be superseded by future SAP Innovation or Feature Pack Stacks (FPS). Always validate these steps in a non-production test client prior to execution in a Development or Quality environment.<br/><br/></p>
+<p><strong>Method A: The "Object-to-TR" Reverse Lookup (Transaction SE03)</strong></p>
+<p><em>This is the gold standard for mapping metadata to its delivery vehicle.</em></p>
+<ol><li><strong>Execute Transaction:</strong> SE03.</li><li><strong>Navigate to:</strong> <em>Search for Objects in Requests/Tasks</em>.</li><li><strong>Object Selection:</strong>
+<ul><li><strong>PGMID:</strong> R3TR</li><li><strong>Type:</strong> UIAC (Catalogs) or UIAD (App Descriptors/Tiles).</li><li><strong>Object Name: </strong>ZBC* (Wildcards are recommended for broader discovery).</li></ul>
+</li><li><strong>Selection Limits</strong>: Ensure both <strong>"Modifiable"</strong> and<strong> "Released"</strong> are checked to capture the full lifecycle of the object.</li><li><strong>Result:</strong> The system returns all Transport Requests (TRs) containing these specific Fiori artifacts.</li></ol>
+<p><strong>Method B: The Cross-System Table Comparison (Transaction SCMP)</strong></p>
+<p><em>Best used for identifying "Data Gaps" where headers exist but content does not.</em></p>
+<ol><li>E<strong>xecute Transaction:</strong> SCMP in the Target system.</li><li><strong>Target Table:</strong> Use SUI_TM_MM_CAT (<strong>SUI: Software User Interface</strong> - Task Manager Master Metadata for Catalogs) for 2023+ or /UI2/C_CAT (Legacy).</li><li><strong>Remote Comparison:</strong> Enter the RFC Destination for the <strong>Source</strong> system (e.g., Sandbox).</li><li><strong>Interpretation: * Entries marked "L" (Left):</strong> Exist only in the Source system.
+<ul><li><strong>Next Step:</strong> Extract these Catalog IDs and proceed to <strong>Method A</strong> to find the missing Transport.</li></ul>
+</li></ol>
+<p><strong>Method C: Fiori Launchpad Content Manager (Transaction /UI2/FLPCM_CUST)</strong></p>
+<p><em>The "Surgical" UI tool for identifying the parent TR of a specific UI object.</em></p>
+<ol><li><strong>Execute Transaction:</strong> /UI2/FLPCM_CUST.</li><li>L<strong>ocate Catalog:</strong> Search for the missing or "empty shell" catalog ID.</li><li><strong>Audit Transport:</strong> Select the catalog and navigate to the <strong>Transport Research or Object Directory Entry</strong> tab at the bottom.</li><li><strong>Identify: </strong>The tool identifies the last TR used to persist that specific catalog's metadata within the SUI (Software User Interface) framework.</li></ol>
+<p></p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="3" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; border-width: 2px; border-spacing: 3px; margin-left: auto; margin-right: auto;"><thead><tr><td style="border-width: 2px; padding: 5px;">
+<p><strong>Step</strong></p>
+</td><td style="border-width: 2px; padding: 5px;">
+<p><strong>Action</strong></p>
+</td><td style="border-width: 2px; padding: 5px;">
+<p><strong>Outcome</strong></p>
+</td></tr></thead><tbody><tr><td style="border-width: 2px; padding: 5px;">
+<p>1. Identify</p>
+</td><td style="border-width: 2px; padding: 5px;">
+<p>Run SCMP on table SUI_TM_MM_CAT.</p>
+</td><td style="border-width: 2px; padding: 5px;">
+<p>List of missing Catalog IDs.</p>
+</td></tr><tr><td style="border-width: 2px; padding: 5px;">
+<p>2. Locate</p>
+</td><td style="border-width: 2px; padding: 5px;">
+<p>Run SE03 using the IDs from Step 1.</p>
+</td><td style="border-width: 2px; padding: 5px;">
+<p>List of specific TR numbers.</p>
+</td></tr><tr><td style="border-width: 2px; padding: 5px;">
+<p>3. Verify</p>
+</td><td style="border-width: 2px; padding: 5px;">
+<p>Check SE01 for the TR status (Released/Imported).</p>
+</td><td style="border-width: 2px; padding: 5px;">
+<p>Confirmation that the TR is ready for the Target.</p>
+</td></tr><tr><td style="border-width: 2px; padding: 5px;">
+<p>4. Import</p>
+</td><td style="border-width: 2px; padding: 5px;">
+<p>Use STMS to import <em>only</em> those identified TRs.</p>
+</td><td style="border-width: 2px; padding: 5px;">
+<p>Clean, consistent Fiori Landscape.</p>
+</td></tr></tbody></table></div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://me.sap.com/notes/3712073" rel="noopener noreferrer nofollow" target="_blank">3712073</a> - Best Practice: System Copy (Homogeneous) with PCA (Post Copy Automation) Checklist for Missing Fiori Catalog</li><li><a href="https://me.sap.com/notes/3664234" rel="noopener noreferrer nofollow" target="_blank">3664234</a> - SAP Fiori Catalogs missing after Post Copy or Refresh (Homogenous System Copy)</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>"Fiori catalogs missing after system refresh S/4HANA 2023","Empty Fiori tiles after SAP system copy PCA", "How to sync SUI framework tables after homogeneous copy", "Z-catalogs not appearing in Fiori Launchpad post-copy", "SUI_TM_MM_APP table empty after client copy", SUI_TM_MM_CAT, SUI_TM_MM_APP, SAP_FIORI_FOUNDATION_S4, R3TR UIAC / R3TR UIAD, /UI2/FLPCM_CUST, "STC01 SAP_BASIS_COPY_REFRESH", "SCC1N missing Fiori data", "SE03 find Fiori transport objects", "/UI2/FLP_TAB_BROWSER", Missing Fiori Catalogs, SUI Framework, Software User Interface, System Copy, SAP Refresh, PCA, Post Copy Automation, SUI_TM_MM_CAT, SUI_TM_MM_APP, Empty Tiles, ZBC Catalogs, Fiori Foundation, 3712073, 3664234, S/4HANA 2023, S/4HANA 2025, Homogeneous Copy, Client Copy Fiori </p></div></div></div></div>

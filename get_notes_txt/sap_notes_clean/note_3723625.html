@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The PUT Participant API failed to locate the record for Payee when attempting to update participant data.</p>
+<p>The error message stated: "Could not find the participant with the given value of the key(s) (payeeSeq), (4503599623456789)."</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Sales Performance Management<br/>- Incentive Management</p>
+<p></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Attempt to retrieve participant data using GET /mtsvc/tcmp/rest/v2/participants({id})/versions with payeeSeq filter:</li></ol>
+<ul><li>"payeeSeq": "4503599623456789", "payeeId": "50002651913".</li></ul>
+<ol><li>Execute PUT /mtsvc/tcmp/rest/v2/participants with the following payload:</li></ol>
+<p>```json</p>
+<p>[</p>
+<p>{</p>
+<p>"payeeSeq": "4503599623456789",</p>
+<p>"payeeId": "50002651913",</p>
+<p>"effectiveStartDate": "2026-02-01T00:00:00.000+00:00",</p>
+<p>"effectiveEndDate": "2200-01-01T00:00:00.000+00:00",</p>
+<p>"genericAttribute2": "Support_Test"</p>
+<p>}</p>
+<p>]</p>
+<p>```</p>
+<ol><li>Receive the following error response:</li></ol>
+<p>```json</p>
+<p>{</p>
+<p>"participants": [</p>
+<p>{</p>
+<p>"_ERROR_": {</p>
+<p>"message": "Could not find the participant with the given value of the key(s) (payeeSeq), (4503599623456789)."</p>
+<p>}</p>
+<p>}</p>
+<p>]</p>
+<p>}</p>
+<p>```</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The PUT command is designed to update participant data but does not support modifications to effective dates with Time stamps.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li><span style="font-size: 10pt;">This has been reported to our dev team, for more information Refer to the See Also for detailed guidance on using the other API.</span></li><li>A code correction has been created to address this issue, and the fix is scheduled to be included in the 2604 release:</li></ol>
+<ul><li>Non-PRD release date: Saturday, April 11, 2026.</li><li>PRD release date: Saturday, April 18, 2026.</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: a href="https://me.sap.com/notes/0003442956" KBA KB0808301 - API Docs and Authentication for GCP - SAP SuccessFactors Incentive Management /a</li></ul><p></p><p>*** The Updated value: ***</p><ul><li>Refer to: <a href="https://api.sap.com/api/Commissions_k8s_v3_openapi/overview" rel="nofollow">Overview | Incentive Management APIs (Kubernetes) | SAP Business Accelerator Hub</a></li><li>Refer to: <a href="https://i7p.wdf.sap.corp/sap/sapnotes/3442956?sap-language=EN" rel="nofollow">API Docs and Authentication for GCP - SAP SuccessFactors Incentive Management</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>put participant api, participant record not found, payeeSeq error, api failure, hana participant, o2h migration, effective dates, post command, incentive management api, api troubleshooting, api versioning, participant update failure, sap commissions, api error message, api resolution, api documentation.</p></div></div></div></div>

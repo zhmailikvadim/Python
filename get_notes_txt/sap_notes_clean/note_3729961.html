@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Dependent object INT field type of oData Mobile Data Object Configuration cause conversion error, INT cannot be converted to CHAR.</p>
+<p>This configuration fix contains changes to dependent settings of SERVICE ORDER oMDO -&gt; WOOBJECTLIST source entity type for 2410, 2505 and 2511 applications.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SSAM, oData Mobile Data Object Configuration, Dependent Object, Object Key field INT, SERVICE_ORDER, WOOBJECTLIST</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Dependent object INT field conversion to CHAR fails</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Follow the steps to import configuration change to SSAM 2511, SSAM 2505 and SSAM 2410 mobile application:</p>
+<ul>
+<li>Download the attached file - XXXX_SO_DepObjList_INT_Fix.bin</li>
+<li>Go to SAP GUI, execute the program /MFND/CORE_CONFIG_IMPORT_PROG in transaction SE38</li>
+<li>Provide the filepath in the 'Filename' parameter of the Selection Screen (f4 help for file browser)</li>
+<li>You may optionally provide a 'Customizing Request' to capture the changes</li>
+<li>Check the 'Test Run' checkbox and execute the program to ensure no errors occur</li>
+<li>Successful output should contain the rows modified for each table. All changes are rolled back when 'Test Run' is checked</li>
+<li>Return to the Selection Screen</li>
+<li>Uncheck 'Test Run' and then execute</li>
+<li>Successful output should contain the rows modified for each table and the transport in which the changes were saved to, if provided</li>
+<li><strong>Go to Configuration Panel, navigate to SAMXXXX_SERVICE_ORDER oMDO class -&gt; Dependent Object tab -&gt; Select source entity type WOOBJECTLIST and <strong><strong>Dependent oMDO ID SAMXXXX_EQUIPMENT</strong></strong> -&gt; navigate to Origin Object Keys tab -&gt; verify OBKNR - INT4(10) and OBZAE - INT4(10) do not appear in the list. Instead, OBJ_NUM - CHAR(10) and OBJ_COUNTER - CHAR(10) exist.</strong></li>
+</ul></div></div></div></div>

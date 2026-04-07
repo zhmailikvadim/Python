@@ -1,0 +1,66 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During execution of a regular payroll run, the system retroactively recalculates an off-cycle payroll result within the same payroll period.</p>
+<p>Example:</p>
+<ul><li>
+<p>Payroll period: 01/2026</p>
+</li><li>
+<p>Off-cycle bonus paid on: 01.01.2026</p>
+</li><li>
+<p>When running payroll (<code>PC00_MXX_CALC</code>), the off-cycle result is recalculated during the regular payroll run.</p>
+</li></ul>
+<p>Observed behavior:</p>
+<ul><li>
+<p>Retro calculation is triggered unexpectedly.</p>
+</li><li>
+<p>Wage types (e.g., /560) may appear as negative.</p>
+</li><li>
+<p>Even after deleting payroll results, retro is triggered again.</p>
+</li><li>
+<p>Entries are recreated in table T52RIC.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This is standard system behavior in SAP Payroll.</p>
+<ul><li>
+<p>When an off-cycle payment date falls within the same payroll period as a regular payroll run, the payroll driver includes it in the calculation.</p>
+</li><li>
+<p>The system recalculates the off-cycle result to ensure:</p>
+<ul><li>
+<p>Consistency of payroll results</p>
+</li><li>
+<p>Correct cumulations and balances</p>
+</li></ul>
+</li></ul>
+<p>Additional details:</p>
+<ul><li>
+<p>The recalculation does not generate additional payment, but ensures alignment between off-cycle and regular payroll results.</p>
+</li><li>
+<p>If payroll results are deleted, the system recreates retro triggers via table T52RIC, which stores retroactive accounting indicators.</p>
+</li><li>
+<p>Therefore, retro recalculation reoccurs even after deletion.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>No correction is required, as this is expected standard behavior.</p>
+<h3 data-toc-skip="">Key points:</h3>
+<ul><li>
+<p>The recalculation:</p>
+<ul><li>
+<p>Is by design</p>
+</li><li>
+<p>Ensures data consistency</p>
+</li><li>
+<p>Does not result in duplicate payments</p>
+</li></ul>
+</li></ul>
+<h3 data-toc-skip="">If this behavior is not desired:</h3>
+<ul><li>
+<p>Review business process for off-cycle payments:</p>
+<ul><li>
+<p>Avoid dating off-cycle payments within the same payroll period, if recalculation should be avoided.</p>
+</li></ul>
+</li><li>
+<p>Evaluate whether:</p>
+<ul><li>
+<p>Off-cycle payments should be processed in a different period, or</p>
+</li><li>
+<p>Payroll expectations need alignment with SAP standard logic.</p>
+</li></ul>
+</li></ul>
+<h3 data-toc-skip="">Important:</h3>
+<ul><li>
+<p>Preventing this behavior via technical workaround is not recommended, as it may lead to inconsistencies in payroll results.</p>
+</li></ul></div></div></div></div>

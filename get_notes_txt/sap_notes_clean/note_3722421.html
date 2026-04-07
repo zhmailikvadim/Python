@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>You previously relied on transaction codes OA85 and OAYL to define weighting information in the system—for example, when allocating yearly depreciation according to a <strong>4-4-5</strong> pattern.</p>
+<p>However, in <strong>UPA</strong>, these transaction codes no longer function as they did before.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Universal Parallel Accounting, Fiscal Year Variant, 4-4-5</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>In UPA, Asset Accounting is built on a new architecture with redesigned database structures. As a result, those transaction codes that depended on the old database tables are no longer compatible and therefore no longer function as they did before.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div>
+<p>In UPA, it is recommended to maintain weighting information using the view cluster <strong>FINSVC_T009</strong>. Within the view <em>“Period Weighting (Fixed Assets)”</em>, you can enter the exact same weighting details that you previously maintained in OA85.</p>
+<p>However, enabling or disabling weighting at the level of individual depreciation areas is not supported. Instead, this must be controlled at the <strong>ledger</strong> level.</p>
+<p>For example, if you want to apply weighted depreciation only to ledger <strong>2L</strong> (your local GAAP ledger), proceed as follows:</p>
+<ol>
+<li>Create a separate fiscal year variant (FYV), such as <strong>W4</strong>, using transaction <strong>OB29</strong>.</li>
+<li>In transaction <strong>FINSC_LEDGER</strong>, select ledger <strong>2L</strong>, navigate to your company code, and assign FYV <strong>W4</strong>.</li>
+<li>In the view cluster <strong>FINSVC_T009</strong>, maintain the weighting information <em>only</em> for FYV <strong>W4</strong>.</li>
+</ol>
+<p>Once these steps are completed, the system will distribute annual depreciation according to the specified weighting for ledger 2L.</p>
+<p>Please note that changes in <strong>FINSC_LEDGER</strong> are critical configuration activities. You may only perform them when the company code has <strong>no existing postings</strong>.</p>
+</div></div></div></div></div>

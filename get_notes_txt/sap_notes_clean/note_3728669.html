@@ -1,0 +1,242 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li style="font-size: 10pt;"><span style="font-size: 10pt;">Communication between FSM and ECC or S/4 HANA is not functioning as expected.</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">On the FSM side, objects remain blocked/locked for an extended period of time. </span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Additionally, objects that are created or modified in ECC or S/4 HANA are not being synchronized and therefore do not appear in FSM.</span></li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li style="line-height: 115%; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva; font-size: 10pt;">SAP Field Service Management (FSM)</span></li><li style="line-height: 115%; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva; font-size: 10pt;">Proaxia Connector (PACG)</span></li><li style="line-height: 115%; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva; font-size: 10pt;">ECC, S/4 HANA</span></li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><span style="font-family: verdana, geneva;"><strong>Expected Behavior</strong></span><br/><span style="font-family: verdana, geneva;">Communication between FSM and ECC or S/4 HANA operates correctly. Objects created or modified on either system are successfully synchronized and propagated to the other system via the proaxia connector.</span></p>
+<p><span style="font-family: verdana, geneva;"><strong>Actual Behavior</strong></span><br/><span style="font-family: verdana, geneva;">On the FSM side, objects remain blocked/locked for an extended period. Additionally, objects created or modified in ECC or S/4 HANA are not synchronized and therefore do not appear in FSM.</span><strong></strong></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Inbound and/or Outbound IDocs in ECC or S/4 HANA are not being fully processed. As a result, communication between FSM and ECC or S/4 HANA is disrupted.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="font-size: 10pt; font-family: verdana, geneva;">A common initial approach when encountering communication issues between ECC or S/4 HANA and FSM is to restart the Message Broker. However, this action can have significant side effects and should only be performed after careful evaluation.</span></p>
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">In many cases, restarting the Message Broker is neither necessary nor effective in resolving the underlying communication issue. Therefore, it is recommended to first analyze the root cause (e.g., IDoc processing status, queue backlogs, or connector errors) before considering a restart.</span></p>
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">After a restart of the Message Broker, all outbound IDoc queues with the prefix <code>/PACG*</code> are initially locked. At the same time, a dedicated IDoc queue for Resend mode is created.</span></p>
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">Resend mode is designed to reprocess all unconfirmed outbound IDocs from a configurable number of past days, as defined in transaction <code>/PACG/ECM_CPROP</code> (<em> <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/31952515/PACG+ECM_CPROP+-+General+Properties+of+FSM+Cloud+Connector" rel="noopener noreferrer nofollow" target="_blank">/PACG/ECM_CPROP - General Properties of FSM Cloud Connector - FSM Cloud Connector - Confluence</a> </em>).</span></p>
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">The start of Resend mode is indicated by the message type <code>/PACG/ECM_RESENDSTART</code>, which is generated for each company configured in the restarted Message Broker. This message type was introduced in SP12 ( <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/2048622593/PACG+200+SP+12+S4PACG+200+SP+12" rel="noopener noreferrer nofollow" target="_blank">PACG 200 SP 12 / S4PACG 200 SP 12 - FSM Cloud Connector - Confluence</a> ).</span></p>
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">Once all relevant IDocs have been reprocessed, the Message Broker automatically switches back to standard processing mode. At this point:</span></p>
+<ul><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">All <code>/PACG*</code> IDoc queues are unlocked</span></p>
+</li><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">Normal communication between systems resumes</span></p>
+</li></ul>
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">The end of Resend mode is indicated by the message type <code>/PACG/ECM_RESENDEND</code>, which can be monitored in transaction WE02 for each configured FSM company.</span></p>
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">For a correctly executed Message Broker restart, the number of <code>/PACG/ECM_RESENDSTART</code> and <code>/PACG/ECM_RESENDEND</code> messages should be equal for each company.</span></p>
+<p style="margin: 0cm 0cm 8pt; line-height: 115%; font-size: 12pt; font-family: 'aptos' , sans-serif;"></p>
+<p><span style="font-size: 10pt; font-family: verdana, geneva;"><strong>Important Considerations for Message Broker Restart</strong></span></p>
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">Restarting the Message Broker during Resend mode causes the entire resend process to restart from the beginning. Therefore, this activity should not be interrupted unless no alternative solution is available.</span></p>
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">The same behavior applies to the Fullsync process. If a Fullsync is interrupted due to a Message Broker restart, all Fullsync-relevant objects are resent, including those that were already successfully processed.</span></p>
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">For additional details about the Resend process, refer to: <em> <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/2679570466/Resend" rel="noopener noreferrer nofollow" target="_blank">Resend - FSM Cloud Connector - Confluence</a> </em></span></p>
+<hr/>
+<p><strong></strong></p>
+<p><span style="text-decoration: underline; font-family: verdana, geneva;"><span style="font-size: 10pt;"><strong>Connection Verification Between ECC or S/4 HANA and FSM</strong></span></span></p>
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">To verify the connectivity between ECC/S/4 and the Message Broker, perform the following steps:</span></p>
+<ol><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">Execute transaction <code>/PACG/ECM_PING_MB</code>.</span></p>
+</li><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">Default Logical Port configuration:</span></p>
+<ul><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">Leave the selection parameter empty.</span></p>
+</li><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">A successful result should display:</span></p>
+<ul><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;"><em>“The connection between SAP and the Message Broker works properly”</em></span></p>
+</li><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;"><em>“Message Broker engine state 'Started'”</em></span></p>
+</li></ul>
+</li></ul>
+</li><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">If the result is negative:</span></p>
+<ul><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">Run the transaction again, this time specifying the Logical Port.</span></p>
+</li><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">If the result is then positive:</span></p>
+<ul><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">Maintain the Logical Port as the default in transaction <code>SOAMANAGER</code>, as described in:</span><br/><span style="font-size: 10pt; font-family: verdana, geneva;"> <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/6293971/Outgoing+Service+SAP+to+FSM+-+Windows+Linux" rel="noopener noreferrer nofollow" target="_blank">Outgoing Service (SAP to FSM) - Windows/Linux - FSM Cloud Connector - Confluence</a> </span></p>
+</li></ul>
+</li></ul>
+</li><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">Multiple Logical Ports scenario:</span></p>
+<ul><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">Execute the transaction for each Logical Port available in the selection list.</span></p>
+</li></ul>
+</li><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">If the result remains negative in all cases (with and without Logical Port):</span></p>
+<ul><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">This indicates that there is no connection between ECC/S/4 and the Message Broker.</span></p>
+</li><li style="font-size: 10pt; font-family: verdana, geneva;">
+<p><span style="font-size: 10pt; font-family: verdana, geneva;">Further investigation should be performed on the platform hosting the Message Broker (e.g., SAP BTP, Windows server, or Linux server).</span></p>
+</li></ul>
+</li></ol>
+<p style="margin: 0cm 0cm 8pt; line-height: 115%; font-size: 12pt; font-family: 'aptos' , sans-serif;"></p>
+<p style="margin: 0cm 0cm 8pt; line-height: 115%; font-size: 12pt; font-family: 'aptos' , sans-serif;"><strong></strong></p>
+<p style="margin: 0cm 0cm 8pt; line-height: 115%; font-size: 12pt; font-family: 'aptos' , sans-serif;"><span style="text-decoration: underline; font-family: verdana, geneva;"><strong><span style="font-size: 10pt;">Check Outbound (SMQ1) and Inbound (SMQ2) IDoc Queues</span></strong></span></p>
+<p><span style="font-family: verdana, geneva;">If the connection to the Message Broker has been successfully verified but communication between ECC/S/4 and FSM is still not functioning, the issue is likely related to IDoc queue processing.</span></p>
+<p><span style="font-family: verdana, geneva;">In most FSM Cloud Connector implementations, the outbound qRFC queue (SMQ1) is used for both outbound and inbound communication. Therefore, analysis should typically begin with transaction SMQ1.</span></p>
+<p style="margin: 0cm 0cm 8pt; line-height: 115%; font-size: 12pt; font-family: 'aptos' , sans-serif;"></p>
+<h3 data-toc-skip=""><span style="font-family: verdana, geneva;">1. Check for Resend Mode Queues</span></h3>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Look for queues with the pattern <code>/PACG_ECM_RESEND*</code>.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">If such a queue exists, the Message Broker is currently in Resend mode and is processing previously unconfirmed IDocs.</span></p>
+</li></ul>
+<p><span style="font-family: verdana, geneva;">Actions:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Verify the queue status:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">If the queue is locked (STOP) → manually activate it.</span></p>
+</li></ul>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">The <code>/PACG_ECM_RESEND*</code> queue should contain only one LUW.</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">If multiple LUWs are present, implement the solution described in SAP Note 3635258 ( <a href="https://me.sap.com/notes/3635258" rel="noopener noreferrer nofollow" target="_blank">3635258 - No communication between ECC/S4 and FSM after restart of Message Broker - SAP for Me</a> )</span></p>
+</li></ul>
+</li></ul>
+<p style="margin: 0cm 0cm 8pt; line-height: 115%; font-size: 12pt; font-family: 'aptos' , sans-serif;"></p>
+<h3 data-toc-skip=""><span style="font-family: verdana, geneva;">2. Analyze Standard /PACG* Queues</span></h3>
+<p><span style="font-family: verdana, geneva;">If no <code>/PACG_ECM_RESEND*</code> queue is present:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Check all <code>/PACG*</code> queues in SMQ1.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Refresh the queue list multiple times and observe the number of LUWs.</span></p>
+</li></ul>
+<p><span style="font-family: verdana, geneva;">Healthy behavior:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">The number of LUWs decreases over time.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Queues disappear and reappear dynamically.</span></p>
+</li></ul>
+<p><span style="font-family: verdana, geneva;">Problematic behavior (queues stuck):</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Queue status is STOP (locked), or</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">No change in LUWs for an extended period (READY or RUNNING), or</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">LUWs continuously increase</span></p>
+</li></ul>
+<p><span style="font-family: verdana, geneva;">Actions:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Manually activate the queue.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">If activation fails:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Lock and unlock the queue, then activate again.</span></p>
+</li></ul>
+</li></ul>
+<p></p>
+<h3 data-toc-skip=""><span style="font-family: verdana, geneva;">3. Handling Problematic LUWs</span></h3>
+<p><span style="font-family: verdana, geneva;">If queues repeatedly stop or re-lock:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Check the status of the LUWs inside the queue.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">If a LUW has status VBERROR:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Remove the LUW from the queue.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Reactivate the queue.</span></p>
+</li></ul>
+</li></ul>
+<blockquote>
+<p><span style="font-family: verdana, geneva;">Important:</span><br/><span style="font-family: verdana, geneva;">Removing a LUW from the queue does not delete the underlying IDocs.</span></p>
+</blockquote>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">The IDocs can still be found in transaction WE02, typically in status:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">64 (ready for dispatch)</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">63 (ready for processing)</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">03 (data passed to port OK)</span></p>
+</li></ul>
+</li></ul>
+<p><span style="font-family: verdana, geneva;">Reprocessing notes:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">IDocs in status 03 must first be changed to status 30 before reprocessing.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Use transaction BD87 to reprocess IDocs.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">If reprocessing fails, further analysis is required.</span></p>
+</li></ul>
+<p><span style="font-family: verdana, geneva;">Root cause analysis should include:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">SM13 – Update errors</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">ST22 – ABAP dumps</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">SM58 – tRFC errors</span></p>
+</li></ul>
+<p></p>
+<h3 data-toc-skip=""><span style="font-family: verdana, geneva;">4. Inbound Queue Verification (SMQ2)</span></h3>
+<p><span style="font-family: verdana, geneva;">If your system is configured to use both outbound and inbound queues (check transaction <code>/PACG/ECM_CPROP</code>):</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Repeat all the above checks in transaction SMQ2 (inbound queues).</span></p>
+</li></ul>
+<p></p>
+<h3 data-toc-skip=""><span style="font-family: verdana, geneva;">5. Empty Queues Scenario</span></h3>
+<p><span style="font-family: verdana, geneva;">If all <code>/PACG*</code> queues are empty:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">The issue is likely not related to outbound processing.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">The problem most likely lies in inbound processing, such as:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Missing IDoc creation</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Errors in Message Broker delivery</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Issues on the FSM side or connector layer</span></p>
+</li></ul>
+</li></ul>
+<p><span style="font-family: verdana, geneva;">Further investigation should then focus on inbound processing logs and the Message Broker environment.</span></p>
+<p style="margin: 0cm 0cm 8pt; line-height: 115%; font-size: 12pt; font-family: 'aptos' , sans-serif;"></p>
+<p style="margin: 0cm 0cm 8pt; line-height: 115%; font-size: 12pt; font-family: 'aptos' , sans-serif;"><span style="font-size: 10pt; font-family: verdana, geneva;"> </span></p>
+<p><span style="text-decoration: underline; font-family: verdana, geneva;"><strong>No Inbound Communication</strong></span></p>
+<p><span style="font-family: verdana, geneva;">If no data is being received from FSM, the issue is likely related to inbound processing.</span></p>
+<p><span style="font-family: verdana, geneva;"><strong>Check IDoc Reception (WE02)</strong></span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Run transaction WE02 and filter for IDoc types with prefix <code>/PACG*</code>.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Focus on IDocs with the following statuses:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">53 – Successfully processed</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">51 – Application error</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">41 – IDoc ready for application</span></p>
+</li></ul>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Identify the timestamp of the most recent inbound IDoc.</span></p>
+</li></ul>
+<p><span style="font-family: verdana, geneva;">Interpretation:</span></p>
+<ul><li style="list-style-type: none; font-family: verdana, geneva;">
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">If no IDocs with these statuses have been received for an extended period, this indicates that inbound communication from FSM is not reaching ECC/S/4.</span></p>
+</li></ul>
+</li></ul>
+<hr/>
+<p><span style="font-family: verdana, geneva;"><strong>Analyze Message Broker and Transporter Logs</strong></span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Review logs from:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Message Broker</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Transporter service</span></p>
+</li></ul>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Focus on the timeframe starting from when the last inbound IDoc was received.</span></p>
+</li></ul>
+<p><span style="font-family: verdana, geneva;">Typical issues to look for:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Connection failures between FSM and Message Broker</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Errors in message delivery or transformation</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Authentication or authorization issues</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Transporter service interruptions</span></p>
+</li></ul>
+<p><span style="font-family: verdana, geneva;">In most cases, the root cause of the communication failure can be identified in these logs.</span></p>
+<hr/>
+<p><span style="font-family: verdana, geneva;"><strong>Next Steps</strong></span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">After completing the log analysis, evaluate whether a Message Broker restart is necessary.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">A restart should only be considered if:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">The root cause has been identified, and</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Restarting is expected to resolve the issue without causing additional side effects (e.g., triggering Resend mode or Fullsync repetition).</span></p>
+</li></ul>
+</li></ul>
+<blockquote>
+<p><span style="font-family: verdana, geneva;">Recommendation:</span><br/><span style="font-family: verdana, geneva;">Avoid restarting the Message Broker without prior analysis, as it may not resolve the issue and can introduce additional processing overhead.</span></p>
+</blockquote><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to:  <a href="https://me.sap.com/notes/3444543" rel="noopener noreferrer nofollow" target="_blank">3444543 - Root Cause of BLOCKED objects in SAP Field Service Management - SAP for Me</a> </li><li>Refer to:  <a href="https://me.sap.com/notes/0003551527" rel="noopener noreferrer nofollow" target="_blank">3551527 - How to unblock Objects in SAP Field Service Management? - SAP for Me</a> </li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>FSM Cloud Connector, ECC S/4 integration, SAP FSM communication issues, Message Broker troubleshooting, IDoc processing errors, SMQ1 SMQ2 queue analysis, WE02 IDoc monitoring, qRFC queue stuck, PACG IDoc queues, Resend mode FSM, Fullsync FSM connector, SAP IDoc status 51 53 41, SAP queue activation, SAP Message Broker restart, FSM inbound outbound communication, Transporter logs analysis, SAP integration troubleshooting, proaxia connector issues, SAP FSM synchronization problems</p></div></div></div></div>

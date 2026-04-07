@@ -1,0 +1,50 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Calling the workflow REST API to create a case returns HTTP 404 Not Found.</li><li>After obtaining a bearer token and calling the workflow API, the response shows "invalid issuer".</li><li>After adjusting headers/body, GET on cases works, but POST (create case) returns HTTP 400 Bad Request with: {"error_code":"PROPERTY_NULL","error_messages":["Status not specified."]}.</li><li>Difficulty accessing or retrieving the expected response from the cases endpoint.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Sales Performance Management</li><li>Advanced Workflow</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Use a REST client (for example, Postman, Bruno) to call the workflow cases API with basic authentication to list or create cases.</li><li>Observe HTTP 404 Not Found on the cases endpoint.</li><li>Switch to OAuth 2.0 (client credentials), obtain a bearer token, and call the workflow API; observe an "invalid issuer" response.</li><li>After header/body changes, GET requests succeed, but POST to create a case returns HTTP 400 with error_code PROPERTY_NULL and "Status not specified.".</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Workflow OIDC/trust configuration was incomplete or inconsistent, causing tokens to be rejected with "invalid issuer" and leading to API failures.</li><li>The POST request payload to create a case omitted a required property (status), resulting in HTTP 400 Bad Request with error_code PROPERTY_NULL.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<div>
+<p>Creating Client Secret</p>
+</div>
+<ol style="list-style-type: decimal;"><li>Go to Applications &amp; Resources → Applications</li><li>Search for the OIDC Workflow tenant. The name generally follows the convention of wf_oidc_&lt;TENANT_ID&gt; or WF_&lt;TENANT_ID&gt;_OIDC</li><li>Go to the trust tab in the OIDC Workflow tenant </li></ol>
+<ol style="list-style-type: decimal;"><li>
+<div role="presentation">Go to Client authentication → Secrets → Add</div>
+</li><li>
+<div role="presentation">Select all boxes for API Access. You may add any description and expiration date as desired. Click save</div>
+</li><li>The client secret and client ID will appear in the dialog. It's important to save the client secret, as it will not be retrievable in the future. The client ID can be viewed anytime at the secrets page.</li></ol>
+</li></ol>
+<div>Creating API User in Workflow</div>
+<ol style="list-style-type: decimal;"><li>
+<div role="presentation">In the target tenant as an admin, go to Setup → Users → Users</div>
+</li><li>
+<div role="presentation">Create new</div>
+</li><li>
+<div role="presentation">Provide any name and e-mail</div>
+</li><li>
+<div role="presentation">Check the box for administrator</div>
+</li><li>
+<div role="presentation">Department and user type may be any. You can use Workflow Administrator and Workflow Administration</div>
+</li><li>
+<div role="presentation">In IAS client ID, insert the same client ID as the WFL OIDC application retrieved earlier.</div>
+</li></ol>
+<div>API Calls</div>
+<div>Now that the environment is configured, it should be ready to receive authorized API calls. </div>
+<div>Before proceeding to the authentication and calling the API, create a collection and a request in Bruno.</div>
+<div>The target URL will be <a href="https://https" rel="noopener noreferrer nofollow" target="_blank">https://https</a><a href="https://xg3-wf-sbox.workflow.cloud.sap/" id="OWAa041580f-93f9-ae3b-551b-3780b96dfd8d" rel="noopener noreferrer nofollow" target="_blank">://environment/</a>/wpm/api/&lt;api_target&gt;. All possible API calls may be consulted at <a href="https://help.sap.com/docs/Advanced_Workflow/b7cb13f8b6a04157a722ad9ddfde4a28/72b7da677c231014a804993ce4041860.html" id="OWA2b161984-882a-e0d1-7ccd-cd57a483199d" rel="noopener noreferrer nofollow" target="_blank">Workflow API Documentation | SAP Help Portal</a></div>
+<div> </div>
+<div>
+<div>Getting Bearer Token and Authentication</div>
+<ol style="list-style-type: decimal;"><li>
+<div role="presentation">Go to the request in Bruno</div>
+</li><li>
+<div role="presentation">Select the Auth tab</div>
+</li><li>
+<div role="presentation">Select OAuth 2.0 and Client Credentials as authentication method.</div>
+</li><li>
+<div role="presentation">In access token URL insert the OAuth URL for the IAS environment. It should follow the pattern <a href="https://a981gimci.accounts.ondemand.com/oauth2/token" rel="noopener noreferrer nofollow" target="_blank">https://######.accounts.ondemand.com/oauth2/token</a></div>
+</li><li>
+<div role="presentation">In client id insert the same client id retrieved from the WF_OIDC application</div>
+</li><li>
+<div role="presentation">In Client Secret insert the secret created in the first step</div>
+</li><li>
+<div role="presentation">Click Get Access Token</div>
+</li></ol>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Help Portal - <a href="https://help.sap.com/docs/Advanced_Workflow/b7cb13f8b6a04157a722ad9ddfde4a28/72b7da677c231014a804993ce4041860.html" rel="noopener noreferrer nofollow" target="_blank">Workflow API documentation</a></p>
+<p>KBA - <a href="https://me.sap.com/notes/3723907" rel="noopener noreferrer nofollow" target="_blank">3723907 </a>- Workflow API Endpoints</p>
+<p><a href="https://me.sap.com/notes/1239839" rel="noopener noreferrer nofollow" target="_blank"></a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Workflow api, create case, 404 not found, 400 bad request, property_null, status not specified, invalid issuer, oauth2, client credentials, oidc, bearer token, endpoint path, postman, wpm api, advanced workflow.</p></div></div></div></div>

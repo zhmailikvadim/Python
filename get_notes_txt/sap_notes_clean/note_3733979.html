@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">When processing a high volume of inbound CIF queues for the same material simultaneously, the system may experience extended processing times. This performance issue is caused by multiple parallel work processes waiting for the logical lock /ARMSUI/E_MATTSP to be released, which slows down the overall CIF processing.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">SAP Note 3732449 and SAP Note 3734378 must be implemented prior to this note.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">The material timestamp update can now be decoupled from the main CIF inbound process using asynchronous queued Remote Function Calls (qRFC).</p>
+<p id="__html0">The system generates inbound queues with the pattern Z_&lt;MATID&gt; to ensure serialized processing per material.</p>
+<p>This asynchronous processing is active by default. To provide a fallback option, a new configuration parameter SIM16 (Disable Asynchronous Update) has been introduced:<br/>Space - Asynchronous qRFC update is active (Recommended).<br/>X - Revert to the synchronous update.</p></div></div></div></div>

@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Virtual object creation fails with the following error message:</p>
+<p>An execution error occurred: sql syntax error: incorrect syntax near "ROW": line 1 col 12984 (at pos 12984)</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>virtual object, virtual procedure, ROW, XSA, SAP HANA Cloud, ABAP remote source</p>
+<p><strong>Environment:</strong></p>
+<p>SAP HANA Cloud, SAP HANA Database Version 4.00.000.00.1762269801</p>
+<p><strong>Steps to Reproduce:</strong></p>
+<p>Prerequisites: You've created an ABAP remote source</p>
+<ol>
+<li>In the Database Explorer, navigate to Catalog &gt; Remote Sources</li>
+<li>Open the ABAP remote source</li>
+<li>Expand BAPI Procedures</li>
+<li>Select "BAPI_ALM_OPERATION_GET_DETAIL" and click "Create Virtual Object"</li>
+<li>Observe the following error:<br/>An execution error occurred: sql syntax error: incorrect syntax near "ROW": line 1 col 12984 (at pos 12984)</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>SQL generation for CREATE VIRTUAL TABLE/PROCEDURE/FUNCTION does not put quotes around column/parameter names. This can cause an issue in the SQL if the names are also keywords.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The development team is further investigating this known issue.</p></div></div></div></div>

@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During query on a partitioned table error message is reported:</p>
+<ul><li>Database error text: SQL message: [ASE Error SQL2835]The procedure tree is old. Use the sp_remap procedure to remap all the procedures in this database.</li><li>Sql error 2835   performing FET on table</li><li>Msg 14313, Level 11, State 2:<br/>Server 'SID', Line 1:<br/>Partition condition for object 1321231, indid 0, ptncondid 1321546 was not found in database 4.</li></ul>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Adaptive Server Enterprise (ASE) 15.7 for Business Suite</li><li>SAP Adaptive Server Enterprise (ASE) 16.0 for Business Suite</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>During low workload window or no use of the partitioned tables:</p>
+<p>Force recreate the partition conditions for all tables runing with sapsa or for standalone systems with sa user replacing the &lt;SID&gt; for dbname of the error :</p>
+<p>use &lt;SID&gt;</p>
+<p>go</p>
+<p>dbcc traceon(3604)</p>
+<p>go</p>
+<p>dbcc upgrade_object(&lt;SID&gt;,"condition","force") </p>
+<p>go</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>14313,2835 ,ASE Error SQL2835</p></div></div></div></div>

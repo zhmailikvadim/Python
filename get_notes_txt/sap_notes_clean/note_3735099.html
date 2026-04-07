@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When the “Stop At” field in the Workflow Group Scheduling Day Plans is not configured, the Workflow Group will not be able to calculate the next execution time on the day when Daylight Saving Time starts.</p>
+<p>This will be fixed in upcoming versions of MediationZone and Usage Engine Private Edition </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>MediationZone 9.3.3.0 and above,</p>
+<p>MediationZone 9.4.1.0 and above,</p>
+<p>MediationZone 9.5.0.0 and above, PE 5.1.0 and above,</p>
+<p>PE 5.2.0 and above </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><strong></strong></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>As a workaround, modify the Day Plan in the workflow group Scheduling to set values in the “Stop At” and “Repeat Every” fields.</p>
+<h3 data-toc-skip="">For example:</h3>
+<h3 data-toc-skip="">Existing Workflow Group configuration</h3>
+<p>Day: Every Day<br/>Start At: 02:00:00<br/>Stop At: Empty<br/>Repeat Every: Empty</p>
+<h3 data-toc-skip=""><br/>After modification</h3>
+<p>Day: Every Day<br/>Start At: 02:00:01 (add 1 second)<br/>Stop At: 02:01:00 (set it 59 seconds after the Start At)<br/>Repeat Every: 60 seconds</p>
+<h2 data-toc-skip="">Note</h2>
+<p>If the Platform were restarted on the day when Daylight Saving Time starts, and the Workflow Group gets an error message like <code>"No group with key xxxx was found."</code>, remove the Day Plans in the Workflow Group Scheduling and save the Workflow Group Configuration.</p>
+<p>After that, re-add the Day Plans with values in the “Stop At” and “Repeat Every” fields as described above.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://digitalroute.my.site.com/s/article/Workflow-Group-does-not-update-the-next-execution-time-on-the-Daylight-Saving-Time-start-date" rel="noopener noreferrer nofollow" target="_blank">Workaround for Workflow Group does not update the next execution time on the Daylight Saving Time start date</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>CM, DigitalRoute, DR, CC, infozone, WF</p></div></div></div></div>

@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When admins try to create organizations in LMS admin side, an error message displayed:</p>
+<p>"An application error has occurred. Please try again."</p>
+<p>- Technical details provided include: </p>
+<p>- A connection error occurred while searching the knowledge base system.</p>
+<p>- Error message = <br/>- Ticket No = 1325085 - ErrorFingerprint [exceptionRootCauseTag=4cd3cd817fc01b35024255b32959b36c2942bcc1, exceptionStackTraceTag=5ebb7d1db06d9429d48cee500edcaac0a61df919]</p>
+<p>- The issue also occurs in the SF User Connector. </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Learning</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>1. Log in to the system</p>
+<p>2. Navigate to Learning Administration.</p>
+<p>3. Go to People → Organizations.</p>
+<p>4. Click Add New.</p>
+<p>5. Enter an Organization ID, description, and domain.</p>
+<p>6. Click Add. - A technical error message is displayed, and the organization is not created. </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Incorrect configuration in FINANCIAL config file.</p>
+<p>shoppingAccountTypeOrganization=INTERNAL<strong>a</strong></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The reported organization creation is due to incorrect value configured for the <strong>shoppingAccountTypeOrganization</strong> setting in FINANCIAL Configuration in Learning Administration.</p>
+<p>The previously configured value was: shoppingAccountTypeOrganization=INTERNAL<strong>a </strong>, whereas the correct value is: shoppingAccountTypeOrganization=INTERNAL</p>
+<header></header>
+<section id="u_resolution">
+<p>The ShoppingAccountTypes can only be and should be set to the valid values: <strong>INTERNAL </strong>or <strong>EXTERNAL</strong></p>
+</section>
+<p>To fix the issue, the configuration should be corrected to have valid values.</p>
+<ol><li>Navigate to LMS admin side</li><li>Go to System Administration&gt; Configuration &gt; System Configuration &gt;FINANCIAL</li><li>Search for "<strong>shoppingAccountTypeOrganization" </strong>and set the value to correct value</li><li>Save changes</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://me.sap.com/notes/0002816064" rel="noopener noreferrer nofollow" target="_blank">Unable to add new users to LMS</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>cannot create organization in LMS, organization, shoppingAccountTypeOrganization, An application error has occurred. Please try again., Error message = Ticket No ,Error message = SQLException - Could not addShoppingAccount com.plateausystems.elms.framework.financial.impl.ShoppingAccountServiceImpl record!, _SYS_TRIGGER_REF_, foreign key constraint violation</p></div></div></div></div>

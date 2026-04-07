@@ -1,0 +1,193 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Whenever a revenue contract is created—whether from subscription billing, service contracts, customer projects or sales order, <strong>revenue contracts</strong> and <strong>performance obligations (POBs)</strong> as business objects have their own attributes, such as:</p>
+<ul>
+<li>Revenue Contract Description</li>
+<li>POB name</li>
+<li>POB Type</li>
+<li>Fulfil Type: Time‑based or event‑based recognition</li>
+<li>Defer method when fulfill type is time-based.</li>
+<li>Start and end dates</li>
+<li>Standard selling price</li>
+</ul>
+<p>These attributes aren’t hardcoded. Instead, they’re determined through <strong>Decision tables in BRF+ Rules</strong>, giving customers flexibility and transparency</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>BRF+, POB Attributes, URR</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You need to use BRF+ Rules to determine attributes of the POB</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong style="font-size: 14px;">1. Key Configuration Steps</strong></p>
+<p><strong>Accessing the CBRR Setup</strong></p>
+<p>Configuration begins in <strong>Manage Your Solution</strong>, under:</p>
+<p><strong>Finance → Revenue and Cost Accounting → Contract-Based Revenue Recognition</strong></p>
+<p>Here, you maintain the configuration steps: <strong>Contract Attribute Business Rules (ID </strong>105700). For standard URR, you <strong><em>don’t</em> </strong>need to maintain account determination rules—those are only relevant for third‑party integrations.</p>
+<p><strong>Important</strong>: in your browser settings, you must <strong>allow pop-up</strong> as the system will open a new tab from the current screen.</p>
+<p>Once you start the configuration, a BRF+ application ZFARR_AP_INB_PROCESS_TEMPLATE is created.</p>
+<p> <strong>2</strong>. <strong>What You Configure as rules based BRF+</strong></p>
+<p>When you click <em>Configure</em>, SAP opens the <strong>Contract Attribute Rules</strong> in a new browser tab (so pop‑ups must be enabled).</p>
+<p>In URR, only the following rules are relevant.</p>
+<ul>
+<li><strong>Contract Attributes</strong></li>
+<li><strong>POB attributes</strong></li>
+<li><strong>Standalone Selling Price</strong></li>
+</ul>
+<p><strong>Contract Attributes</strong></p>
+<p>It defines description for the revenue contract.  It is currently not possible to define additional contract category.</p>
+<p><strong>POB Attributes</strong></p>
+<p>This is the most important part. SAP delivers a template decision table where you define how POBs behave depending on the integration scenario.</p>
+<p><strong>Standalone Selling Price</strong></p>
+<p>SAP recommends using <strong>pricing procedures</strong> in sales order, service management and subscription billing. If you cannot define the SSP using the pricing condition, you can optionally define a rule for SSP here</p>
+<p><strong>3. Technical Notes </strong></p>
+<p><strong>Important:</strong> System evaluates the rules according to the sequence of the rules in the table. And once a matching rule is found, it will return the result and stop looking for further matching rules.  Therefore please make sure that a more specific rule shall be always placed before a more generic rule. For example, you have 2 lines in the table:</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td valign="top" width="160">
+<p><strong>#</strong></p>
+</td>
+<td valign="top" width="211">
+<p><strong>Company code (as condition)</strong></p>
+</td>
+<td valign="top" width="180">
+<p><strong>POB Name (as output)</strong></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="160">
+<p>1</p>
+</td>
+<td valign="top" width="211">
+<p>Empty</p>
+</td>
+<td valign="top" width="180">
+<p>POB General</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="160">
+<p>2</p>
+</td>
+<td valign="top" width="211">
+<p>1000</p>
+</td>
+<td valign="top" width="180">
+<p>POB 1000</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>If you want to give a POB name as POB 1000 when company code is 1000, as the first line has more generic rule (“company code = empty” means that for any company code, the condition is met), it will always return POB General, therefore you need to change the sequence of the above 2 rules.</p>
+<p>BRF+ rules are <strong>transportable objects</strong>, so they must be included in a transport request.</p>
+<ul>
+<li>You can view and manage these rules in the <strong>Simplified BRF+ Workbench</strong> under Extensibility based on role SAP_BR_EXTENSIBILITY_SPEC.</li>
+<li>You may need specific authorizations to display or edit BRF+ objects. </li>
+</ul>
+<p><strong>4. POB Attribute Rules — The Most Critical Part</strong></p>
+<p>SAP delivers a <strong>template decision table</strong> for POB attributes. In the sample template, you will find the following sample rules, and it can be directly used.</p>
+<ul>
+<li><strong>Subscription Billing</strong></li>
+<ul>
+<li>POB name = Product ID</li>
+<li>Fulfill Type = Always time‑based</li>
+<li>Default defer method = 1</li>
+</ul>
+<li><strong>Service Contracts</strong></li>
+<ul>
+<li>POB name = Product ID</li>
+<li>Fulfill Type = Always time‑based</li>
+<li>Default defer method = 1</li>
+</ul>
+<li><strong>Sales Orders</strong></li>
+<ul>
+<li>POB name = Material number</li>
+<li>Fulfill type</li>
+<ul>
+<li>For Standard Item(TAD):→ event‑based</li>
+<li>For Customer Project with Fixed Price-&gt;Event-based</li>
+<li>For Customer Project with Periodic Service-&gt;Time-based</li>
+</ul>
+</ul>
+</ul>
+<p><strong>Important:</strong> Event types are automatically controlled by the reference key in Universal Journal scenarios, so no manual configuration is needed.</p>
+<p><strong>List of Relevant Fields as output</strong></p>
+<ul>
+<li><strong>POB Name</strong></li>
+</ul>
+<p>This field must be filled. And the template has provided default POB Name as follows:</p>
+<ul>
+<li>Subscription Billing: Product ID</li>
+<li>Service Contract: Product ID</li>
+<li>Sales Order and Customer Project:  Material Number</li>
+</ul>
+<ul>
+<li><strong>POB Type</strong></li>
+</ul>
+<p>You can assign the POB Type which you already define in configuration steps “Define Performance Obligation Types” (103886).</p>
+<ul>
+<li><strong>Fulfill Type</strong></li>
+</ul>
+<p>You must specify the fulfill type either as ‘E(Event-based)’ or T(Time-based)’.  Fulfill type ‘O(PoC-based)’ is not yet supported.</p>
+<p>Depending on the integration scenarios, the following fulfill type are allowed</p>
+<ul>
+<li>Subscription Billing: always time-based</li>
+<li>Service Contract:  always time-based</li>
+<li>Standard Item in Sales Order:  always time-based</li>
+<li>Sales Orders from Project: </li>
+<ul>
+<li>Fixed-price items: always event-based</li>
+<li>Service items: always time-based</li>
+</ul>
+<li><strong>Deferral Method</strong></li>
+</ul>
+<p>This is relevant if the fulfill type is T(Time-based)’. If you don’t define a value in the BRF+ rule, system will default to <strong>method 1</strong>.</p>
+<p>You can override this to methods 2, 3, or 4 depending on your revenue policy.</p>
+<ul>
+<li><strong>Event Type</strong></li>
+</ul>
+<p>For universal revenue recognition, event type is <strong>not configured manually</strong> — it is derived automatically from the Revenue Recognition Key which is defined in Event-Based Revenue Recognition.</p>
+<ul>
+<li><strong>Residual Method</strong></li>
+</ul>
+<p>Determines how residual allocation is handled.  You can set the ‘X’ if the POB uses residual allocation method.</p>
+<ul>
+<li><strong>Exclude from Allocation</strong></li>
+</ul>
+<p>Defines whether the POB participates in price allocation or. You can set an ‘X’.</p>
+<ul>
+<li><strong>Start and End Date Logic</strong></li>
+</ul>
+<p>Usually you don’t need to define the start date or end date, if the value is empty, then it will take the value from the relevant object per default</p>
+<ul>
+<li>Subscription Billing: It is the start date and end date of the billing plan</li>
+<li>Service Contract: It is the start date and end date of the service contract item.</li>
+<li>Periodic Service of Customer Project: It is the start date and end date defined in the Project </li>
+</ul>
+<p>You can optionally define them here in the BRF+ rule with more complex logic using formular feature of the BRF+.</p>
+<ul>
+<li><strong>Start Date type</strong></li>
+</ul>
+<p>The start date type is always fixed to ‘1’ for time-based POB. If you configure other values,</p>
+<ul>
+<li><strong>Invoice Effective Type</strong></li>
+</ul>
+<p>Controls whether how and when invoiced amount and credits change the contractual price.</p>
+<p><strong>Important: </strong> Once the POB is created and the values are derived for the POB, it cannot be changed anymore for this POB!</p>
+<p>This is essential for handling cancellations and credit memos.</p>
+<p><strong>List of Irrelevant Fields</strong></p>
+<p>The following fields are not yet relevant for POBs in URR. Please don’t configure any value for those fields</p>
+<ul>
+<li><strong>Unit Distinct</strong></li>
+<li><strong>Duration</strong></li>
+<li><strong>No Cost Recognition</strong></li>
+<li><strong>Value-Based Fulfillments</strong></li>
+</ul>
+<p><strong>5.Standard Selling Price (SSP) Rules</strong></p>
+<p>If you cannot define the SSP using the pricing condition, you can optionally define a rule for SSP here.</p>
+<p>You <em>can</em> define SSP directly in BRF+, but it is very limited for example</p>
+<ul>
+<li>You cannot define a validity of the SSP. </li>
+<li>You cannot define SSP based on other pricing information. </li>
+<li>You cannot define scaled SSP</li>
+</ul>
+<p>SAP recommends using <strong>pricing procedures</strong> in sales order, service management and subscription billing.</p>
+<p>You may use the SSP definition here for simply use case, for example, if there is no SSP pricing condition define, then the SSP is defined as 0 value here.</p>
+<p id=""><strong>Important</strong>: A POB must have a SSP unless it is defined as ‘Excluded from Allocation’ or ‘Residual Method’!</p></div></div></div></div>

@@ -1,0 +1,75 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__xmlview0--dynamicPageId-contentWrapper">
+<div id="__xmlview0--dynamicPageId-content">
+<div id="__xmlview0--dynamicPageId-contentFitContainer">
+<div id="__vbox15">
+<div id="chatContent">
+<div id="Chats">
+<div id="__vbox14-Chats-23">
+<div id="__data786">
+<div id="__bubble1-Chats-23">
+<div id="__bubble1-Chats-23--ChatContainer">
+<div id="__bubble1-Chats-23--ChatBox">
+<div id="__vbox103">
+<div id="__vbox102-__vbox103-0">
+<div id="__data788">
+<div id="__formatter25-__vbox103-0">
+<p>I noticed that after a new version of the Supplier Registration Questionnaire was created in SLP, some address details, such as House Number, were missing or changed. </p>
+<p>The supplier did not submit any updates or resubmissions. </p>
+<p>Why did this happen?</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="__vbox13-Chats-23"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer id="__xmlview0--dynamicPageId-footerWrapper">
+<div id="__toolbar3">
+<div id="__xmlview0--promptTextArea">
+<div id="__box4">
+<div id="__box1">
+<div id="__data792">
+<div id="__area16">
+<div id="__area16-content">
+<div id="__area16-hidden"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<p id="__html0"></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The Supplier Registration Questionnaire template includes both address mappings <span style="font-family: 'courier new', courier;">network.legal.addressExt.postalAddress </span>and <span style="font-family: 'courier new', courier;">vendor.addressExt.postalAddress.</span></p>
+<p>When <span style="font-family: 'courier new', courier;">network.legal.addressExt.postalAddress</span> is mapped, any update synchronized from the Ariba Network (AN) automatically triggers a new version of the Supplier Registration Questionnaire.</p>
+<p>Because AN does not have a dedicated house number field, its data model does not align one-to-one with SLP.</p>
+<p>As a result, during remapping the house number may be removed or duplicated in the newly generated questionnaire.</p>
+<p>This is expected system behavior due to inherent data model alignment limitations between AN and SLP.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>If you do not require address updates from the Ariba Network (AN), remove the <span style="font-family: 'courier new', courier;">network.legal.addressExt.postalAddress</span> mapping from the Supplier Registration Questionnaire template and republish.</p>
+<p>Note: If you keep this mapping, AN updates will continue to take precedence and overwrite changes during subsequent synchronizations.</p>
+<footer id="__xmlview0--dynamicPageId-footerWrapper">
+<div id="__toolbar3">
+<div id="__xmlview0--promptTextArea">
+<div id="__box4">
+<div id="__box1">
+<div id="__data846">
+<div id="__area19">
+<div id="__area19-content">
+<div id="__area19-hidden"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Address mapping, house number, extended address, data discrepancy, data overwrite, template mapping, supplier registration questionnaire update</p></div></div></div></div>

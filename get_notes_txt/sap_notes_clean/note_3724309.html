@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Line-oriented authorization check is activated for warehouse number in EWM. User try to maintain condition records. The authorization check is missing. The implementation for the warehouse number authority check (data element /SCWM/DE_LGNUM_COND, BadI /SAPCND/ROLLNAME) is not called.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">/SAPCND/IF_EX_ROLLNAME~AUTHORITY_CHECK /SCWM/CL_IM_I_LGNUM_COND</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The value for  'Implementation Type for Maintenance' in customizing 'Create Field Catalog' for the field 'Warehouse number' is set to '2' (Default Attribute Conversion).</p>
+<p>Implementation type = '2': Field processing is partly generic, that is, the field transport (= attribute conversion), an implementation is not required, but is required for the field check, input help and short texts. Therefore, an implementation for the BAdIs /SAPCND/ROLLNAME or /SAPCND/MNT_USG_ROLL for the named methods is necessary in order to avoid runtime errors. The method for the attribute conversion (ATTRIBUTE_CONVERSION) is not called during runtime.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the attached Correction Instruction or apply the corresponding Support Package.</p></div></div></div></div>

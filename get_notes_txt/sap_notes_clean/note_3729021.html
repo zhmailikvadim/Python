@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Transactions may erroneously get ignored and not applied to the secondary ASE server in an HADR environment when the primary ASE server is shutdown unclean and brought online again. <br/>This leads to inconsistent data on the secondary (standby) site.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CR 831866, SAP Adaptive Server Enterprise, SAP ASE , HADR, SAP Replication Server, SAP SRS,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Your database is SAP ASE version :</p>
+<ul>
+<li>SAP ASE 16.0 SP03 (any PL)</li>
+<li>SAP ASE 16.0 SP04 PL00 - PL06 HF1 and PL08</li>
+</ul>
+<p>SAP ASE version 16.0 SP04 PL07, SP04 PL07HF1 and  SAP ASE 16.1 (any PL) are not affected.</p>
+<p>You are using SAP Replication Server (SAP SRS) to replicate transactions to an HADR site (Always on). ASE was brought down unclean either through a power failure , an ASE crash or the command shutdown with nowait. After this unclean shutdown of the primary ASE server no failover to the secondary site is performed. The primary server is restarted again as primary HADR server.</p>
+<p>At reboot after the unclean shutdown the primary ASE server determines the timestamp of the last replicated log record from an internal structure that is preserved to disk. After an unclean shutdown of ASE this timestamp value may be out of sync with the real timestamp value of the last log record replicated.  SAP SRS may then erroneously ignore some transactions that should get replayed.</p>
+<p>The issue does not arise if a failover to site 2 happens after the unclean shutdown.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Install an ASE version with a fix for CR831866. <br/>A fix is planed for SAP ASE 16.0 SP04 PL09 and higher. The issue is also fixed in 16.1 SP00 (any PL)</p>
+<p>Until a fix for CR 831866 has been installed in the system: <br/>Rematerialize the database on the secondary HADR server when the primary ASE server was rebooted after an unclean shutdown. <br/>Do not perform a failover to site 2 before the rematerialization has happend.</p></div></div></div></div>

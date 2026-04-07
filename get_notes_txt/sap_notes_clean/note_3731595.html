@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When executing the "Check" function in the Manage Allocations app (F3338), the system raises an incorrect error message for cycles that use Country/Region (LAND1) groups or hierarchies on the receiver side:</p>
+<p>"The group &amp;1 used in cycle &amp;2 is invalid"</p>
+<p>The cycle can still be saved despite this validation message. The error occurs specifically when the group was created as a Global Hierarchy in the Manage Global Hierarchies app.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>GA752, LAND1, COBL_LAND1_GP, G_SET_TREE_IMPORT, illegal_field_replacement, set_is_damaged, RK_AL_CYCLE_CHECK, Global Hierarchy, Country/Region, Manage Global Hierarchies, F3338</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>During the cycle check, the function module RK_AL_CYCLE_CHECK calls G_SET_GET_INFO to validate the groups used in the cycle. For Universal Allocation, the runtime structure ACDOC_ALLOC is used for DDIC field resolution. In this structure, the Country/Region field LAND1 is defined with data element COBL_LAND1_GP.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the following correction instructions or apply relevant support package. The fix adjusts FORM TEST_SET to bypass the field replacement for the Country/Region field when the data element COBL_LAND1_GP is detected, allowing G_SET_GET_INFO to resolve the set using its own definition.</p></div></div></div></div>

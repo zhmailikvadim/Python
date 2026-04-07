@@ -1,0 +1,77 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Running the <em>OpenRewrite</em> <em>rewriteDryRun</em> recipe with the goal of scoping the run to a single custom extension results in:
+<ul><li>"<em>Too many open files</em>" errors on macOS/Linux, for example:
+<ul><li>"java.nio.file.FileSystemException: <em>.../testsrc/.../XTest.java: Too many open files</em>"</li><li>"<em>Could not update ~/.gradle/caches/.../last-build.bin (Too many open files)</em>"</li></ul>
+</li><li>Despite scoping, the dry run still parses files outside the target module.</li></ul>
+</li><li>On Windows, the same dry run completes successfully with the same <em>init.gradle</em> and recipe.</li><li>Attempts to mitigate with higher file descriptor limits and Gradle flags (e.g., <em>-Dorg.gradle.workers.max=1</em>,<em> -Dorg.gradle.parallel=false</em>,<em> -Dorg.gradle.vfs.watch=false</em>) do not resolve the issue.</li><li>When splitting work into batches and migrating some extensions, the rewritten code replaces <em>javax.* </em>with<em> jakarta.*</em>, causing compilation failures on the older Commerce Suite (JDK 17/Spring 5) due to missing Jakarta dependencies:
+<ul><li>Errors such as "<em>package jakarta.* does not exist</em>" appear during compilation.</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Commerce Cloud</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Prepare the environment</p>
+<ul style="list-style-type: disc;"><li>Use an SAP Commerce Cloud project on macOS or Linux with a large number of custom extensions included in Gradle.</li><li>Ensure <em>OpenRewrite</em> is configured with the provided <em>init.gradle</em> and the JDK 17-based Commerce setup.</li></ul>
+</li><li>
+<p>Attempt a scoped dry run</p>
+<ul style="list-style-type: disc;"><li>From <em>hybris/bin/platform</em>, execute the dry run targeting a single custom extension, for example:
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100.053%;"><colgroup><col style="width: 99.894%;"/></colgroup><tbody><tr><td><em>./gradlew rewriteDryRun --init-script=$PATH_TO_INIT_GRADLE -PcommerceUpdatePaths=&lt;paths_for_target_extension&gt; --no-daemon -Drewrite.activeRecipe=&lt;recipe&gt;</em></td></tr></tbody></table></div>
+</li><li>Optionally add <em>-PcommerceRewriteExclusion</em> using a fully fledged regex pattern (this intentionally simulates the misconfiguration), and use default or lowered parallelism flags:
+<ul style="list-style-type: circle;"><li><em>-PcommerceRewriteExclusion='&lt;regex_not_supported&gt;'<br/></em></li><li><em>-Dorg.gradle.workers.max=1 -Dorg.gradle.parallel=false -Dorg.gradle.vfs.watch=false</em></li></ul>
+</li></ul>
+</li><li>
+<p>Observe that scoping is ineffective due to exclusion pattern misuse</p>
+<ul style="list-style-type: disc;"><li>Review the <em>Gradle</em>/<em>OpenRewrite</em> output and note that non-target subprojects are still being scanned/parsed:
+<ul style="list-style-type: circle;"><li>"<em>Scanning sources in project &lt;PROJECT_NAME&gt;</em>" appears for projects that were expected to be excluded.</li></ul>
+</li><li>Confirm there are no "<em>Skipping project &lt;PROJECT_NAME&gt; because it is excluded</em>" messages for the intended exclusions.</li></ul>
+</li><li>
+<p>Trigger file descriptor pressure</p>
+<ul style="list-style-type: disc;"><li>Ensure the session limit is moderate (for example, default <em>ulimit -n</em> values or even after increasing them).</li><li>Re-run the dry run to process a larger set of subprojects unintentionally included by the incorrect exclusions.</li></ul>
+</li><li>
+<p>Encounter the error</p>
+<ul style="list-style-type: disc;"><li>The build fails with "<em>Too many open files</em>", for example:
+<ul style="list-style-type: circle;"><li><em>"java.nio.file.FileSystemException: .../testsrc/.../XTest.java: Too many open files"</em></li><li>"<em>Could not update ~/.gradle/caches/.../last-build.bin (Too many open files)</em>"</li></ul>
+</li><li>Note that on Windows, running the same command with the same <em>init.gradle</em> may complete successfully.</li></ul>
+</li><li>
+<p>Attempt batching and observe partial migration side effects</p>
+<ul style="list-style-type: disc;"><li>Run the recipe on a subset of extensions so that some are migrated (imports rewritten to <em>jakarta.*</em>) while others remain on <em>javax.*</em>.</li><li>Try to compile the project on the older suite (JDK 17/Spring 5):
+<ul style="list-style-type: circle;"><li>Observe compilation errors such as "<em>package jakarta.* does not exist</em>", confirming that partial Jakarta migration within a JDK 17 build is incompatible and unsupported.</li></ul>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Scope filtering behavior:
+<ul><li>The <em>commerceUpdatePaths</em> parameter filters after the project is parsed. Although there is an "<em>early exclusion</em>" mechanism to skip entire Gradle subprojects (extensions) during <em>Logical Source Tree (LST)</em> building, it does not apply to the compilation phase. As a result, large workspaces with many custom subprojects can still hit OS file descriptor limits even when scoping.</li><li>The <em>-PcommerceRewriteExclusion</em> parameter was used with full regular expressions, which are not supported by OpenRewrite’s exclusion matching. Consequently, targeted subprojects were not excluded and were parsed/compiled, increasing file handle usage.</li></ul>
+</li><li>OS differences:
+<ul><li>Windows typically does not enforce the same strict open-file limits as macOS/Linux; thus the dry run can succeed on Windows under identical inputs.</li></ul>
+</li><li>Partial migration side effects:
+<ul><li>Running the Jakarta-oriented framework update recipes on only a subset of extensions leads to code that imports <em>jakarta.*</em>. The remaining, non-migrated project relies on Java EE <em>(javax.*)</em> and Spring 5. Mixing both in a single codebase causes compilation failures and is unsupported.</li><li>Adding Jakarta dependencies into an older suite to make partially migrated code compile is not supported and can introduce inconsistencies.</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Address both the open-file limit and project scoping, and avoid partial Jakarta migration in a single build. The following approach has proven effective and is aligned with internal framework guidance. For additional background on similar symptoms, see KBA <a href="https://me.sap.com/notes/3618495" rel="noopener noreferrer nofollow" target="_blank">3618495</a> - Using OpenRewrite recipes to support SAP Commerce Cloud JDK21 Framework Update adoption (Troubleshooting: Step 11 references "<em>Too many open files</em>").</p>
+<p>1. Validate and apply proper exclusions</p>
+<ul><li>Do not use full regular expressions with <em>-PcommerceRewriteExclusion</em>; only supported glob-like patterns are applied.</li><li>Verify whether exclusions are effective by checking the <em>OpenRewrite</em> logs:
+<ul><li>Included project: "<em>Scanning sources in project &lt;PROJECT_NAME&gt;</em>"</li><li>Excluded project: "<em>Skipping project &lt;PROJECT_NAME&gt; because it is excluded</em>"</li></ul>
+</li><li>If extensions are outside the package’s <em>custom</em> directory or symlinked, consider relocating them into <em>custom</em> to simplify pattern matching.</li></ul>
+<p>2. Use the built-in exclusion generator for precise patterns</p>
+<ul><li>From <em>hybris/bin/platform</em>, run the helper task to generate exclusion and update-path patterns for a specific subset of extensions:
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 99.7243%; height: 45px;"><colgroup><col style="width: 100%;"/></colgroup><tbody><tr><td><em>./gradlew generatePatterns --init-script=$PATH_TO_INIT_GRADLE -PcommerceExtensionToMigrate=ext1,ext2</em></td></tr></tbody></table></div>
+</li><li>Capture the generated variables:
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100%;"><colgroup><col style="width: 99.9081%;"/></colgroup><tbody><tr><td>
+<p><em>REWRITE_EXCLUSIONS="&lt;generated_list&gt;"<br/></em></p>
+<p><em>COMMERCE_UPDATE_PATHS="&lt;generated_paths&gt;"</em></p>
+</td></tr></tbody></table></div>
+</li><li>Export them into the shell that will execute the recipe, and run the dry run with these parameters, for example:
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 99.6324%; height: 131px;"><colgroup><col style="width: 100%;"/></colgroup><tbody><tr><td>
+<p><em>export REWRITE_EXCLUSIONS="&lt;generated_list&gt;"</em><br/><em>export COMMERCE_UPDATE_PATHS="&lt;generated_paths&gt;"</em></p>
+<p><br/><em>./gradlew rewriteDryRun --init-script=$PATH_TO_INIT_GRADLE -PcommerceUpdatePaths=$COMMERCE_UPDATE_PATHS -PcommerceRewriteExclusion=$REWRITE_EXCLUSIONS --no-daemon -Dorg.gradle.jvmargs=-Xmx16G -Drewrite.activeRecipe=com.sap.cx.rewrite.java.SelectiveCommerceCloudFrameworkUpdate</em></p>
+</td></tr></tbody></table></div>
+</li><li>If greater control is required, construct the <em>REWRITE_EXCLUSIONS</em> list manually by enumerating each extension path to exclude, separating entries with commas and without spaces, for example:
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100%;"><colgroup><col style="width: 99.9081%;"/></colgroup><tbody><tr><td><em>../custom/&lt;ext_name&gt;,../custom/&lt;ext_name&gt;/**</em></td></tr></tbody></table></div>
+</li></ul>
+<p>3. Manage OS file descriptor limits on macOS/Linux</p>
+<ul><li>Increase allowed open files and verify in the same shell that runs Gradle:
+<ul><li>Check system maximum and session limits (macOS examples): <em>sysctl kern.maxfiles</em>,<em> ulimit -n</em></li><li>Raise <em>ulimit -n</em> substantially (e.g., 81920 or higher), ensuring the shell/session that runs Gradle sees the new value.</li></ul>
+</li><li>Disable parallelism and watchers to reduce file handle pressure if needed:
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100%;"><colgroup><col style="width: 99.9081%;"/></colgroup><tbody><tr><td><em>-Dorg.gradle.workers.max=1 -Dorg.gradle.parallel=false -Dorg.gradle.vfs.watch=false</em></td></tr></tbody></table></div>
+</li><li>Consider increasing JVM heap <em>(-Xmx)</em> if memory pressure accompanies the issue.</li></ul>
+<p>4. Avoid mixing migrated and non-migrated code in one JDK 17 build</p>
+<ul><li>Do not add Jakarta libraries to the older suite to force compilation of partially migrated code; this is not supported.</li><li>Instead, use batch execution with isolation between batches to prevent compile-time conflicts:
+<ul><li>Manual copy/restore approach (proven effective in the reported case):
+<ul><li>Build the whole project first and create a copy of the extensions as a clean baseline.</li><li>For a given batch, run the recipe on that batch only. After the batch completes, rename or move the migrated extensions (e.g., append "<em>-jdk21</em>") and restore the original, pre-migration copies into the build so subsequent batches run against the unchanged JDK 17 codebase.</li><li>Repeat until all target extensions are migrated. Once complete, switch the setup to the Commerce Suite compatible with JDK 21/Spring 6 and proceed with post-migration adjustments.</li></ul>
+</li><li>Alternatively, run the entire migration in a single pass on Windows if feasible, where "<em>Too many open files</em>" limits are typically less restrictive.</li></ul>
+</li></ul>
+<p>5. Continue with the standard update process</p>
+<ul><li>After all extensions have been processed without "<em>Too many open files</em>" errors and the Jakarta migration is complete for the intended set, proceed with the regular update process as described in KBA <a href="https://me.sap.com/notes/3618495" rel="noopener noreferrer nofollow" target="_blank">3618495</a> - Using OpenRewrite recipes to support SAP Commerce Cloud JDK21 Framework Update adoption</li></ul>
+<p>Notes</p>
+<ul><li>Exclusions are applied during LST construction; they do not affect the compilation step included in the recipe. Ensure both the exclusion patterns and batch strategy keep the active compilation set within OS limits.</li><li>The size of each batch should be determined empirically. Start with modest groups (for example, 10–25 extensions) and adjust based on resource constraints; increase <em>-Xmx</em> if necessary.</li><li>Always confirm that exclusions are recognized by inspecting "<em>Skipping project … because it is excluded</em>" entries in the logs.</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>KBA <a href="https://me.sap.com/notes/3618495" rel="noopener noreferrer nofollow" target="_blank">3618495</a> - Using OpenRewrite recipes to support SAP Commerce Cloud JDK21 Framework Update adoption</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Commerce Cloud, OpenRewrite, rewriteDryRun, rewriteRun, framework update, framework upgrade, JDK 21 migration, JDK21, Jakarta, javax to jakarta, Spring 6, file descriptor limit, Too many open files, java.nio.file.FileSystemException, FileSystemException, ulimit -n, macOS, Linux, Windows, Gradle, init.gradle, commerceUpdatePaths, commerceRewriteExclusion, generatePatterns, exclusions, Logical Source Tree, LST, batching, extensions, custom directory, compilation failure, missing jakarta packages, glob patterns, Using OpenRewrite recipes to support SAP Commerce Cloud JDK21 Framework Update adoption, 3618495</p></div></div></div></div>

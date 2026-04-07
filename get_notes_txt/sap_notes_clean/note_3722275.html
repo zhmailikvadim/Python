@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Cost center determined through CO substitution is not updated during certain Controlling postings.</p>
+<p>Examples include:</p>
+<ul><li style="list-style-type: none;">
+<ul><li>
+<p>Cost center is expected to be derived via CO substitution and posted as a statistical cost center on internal order postings.</p>
+</li><li>
+<p>Substitution works correctly for several order-related processes such as:</p>
+<ul><li>
+<p>Order confirmation</p>
+</li><li>
+<p>Component consumption</p>
+</li><li>
+<p>Goods receipt for production orders</p>
+</li></ul>
+</li></ul>
+</li></ul>
+<p></p>
+<p>This behavior can be observed during:</p>
+<ul><li>
+<p>Template allocation executed with transaction CPTA or CPTD</p>
+</li><li>
+<p>Revaluation at actual activity prices executed with transaction CON2</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Controlling (CO)</li><li>SAP R/3</li><li>SAP R/3 Enterprise </li><li>SAP ERP Central Component</li><li>SAP ERP</li><li>SAP enhancement package for SAP ERP</li><li>SAP enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA Finance</li><li>SAP S/4HANA</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>In the current SAP system design, CO substitution cannot be used to add additional CO objects for the following processes:</p>
+<ul><li>
+<p>Template allocation (transactions CPTA / CPTD)</p>
+</li><li>
+<p>Order revaluation at actual activity prices (transaction CON2)</p>
+</li></ul>
+<p>These applications do not support adding additional account assignment objects through CO substitution.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Adding additional CO objects via CO substitution for the above processes is not supported in the SAP standard system.</p>
+<p>If this functionality is required, consider submitting an enhancement request through the SAP Customer Influence program ( <a href="https://influence.sap.com/" rel="noopener noreferrer nofollow" target="_blank">https://influence.sap.com/</a> )</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://me.sap.com/notes/0000000011" rel="nofollow">SAP Note 0000000011</a> for information on submitting a development request.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>CO substitution, CPTA, CPTD, CON2, template allocation, order revaluation, statistical cost center, internal order posting, substitution exit, CO object</p></div></div></div></div>

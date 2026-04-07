@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">1. Model contains a calculation that references a date dimension</p>
+<p>2. The calculation no longer returns data after the default hierarchy of the date dimension changes.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Restrict, Lookup, Iterate, Date, Hierarchy, Calculation, Mode, Default, YTD</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Some calculations internally reference the default hierarchy of the models date dimension.</p>
+<p>For example, ITERATE or RESTRICT functions using a date dimension.</p>
+<p>If the default hierarchy of the date dimension is changed this can affect the results of the calculation.<br/>The calculation must be recompiled to correctly reference the new default hierarchy.</p>
+<p>This is a known limitation of Time Hierarchy when working with calculations</p>
+<p>This issue is currently under investigation by development.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The calculation can be rebuilt by making a small change to the formula. For example deleting a character and reentering it.</p>
+<p>This will cause the internal calculation logic to be rebuilt and reference the new default date hierarchy.</p>
+<p>This issue is currently under investigation by development.</p></div></div></div></div>

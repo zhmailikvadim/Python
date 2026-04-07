@@ -1,0 +1,49 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>The tile cannot be found in the App Finder or when searching in the Site Manager.</li><li>
+<p>The standard Task Center (End-User) app is visible and working, but the Admin app is missing.</p>
+</li><li>
+<p>Channel Manager in Work Zone Site Manager shows the status: "Partial content was updated" after a refresh.</p>
+</li><li>User has the<strong> TaskCenterAdmin</strong> role assigned but the <strong>Task Center Administration tile is not visible</strong> in the <strong>SAP Build Work Zone (Standard or Advanced) Launchpad.</strong></li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Build Work Zone, Standard Edition. </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><strong>Cause 1: </strong>Insufficient Role Collections The user has the administrative role but lacks the functional "Operator" role required for the BTP metadata service to expose the HTML5 application to the Launchpad.</p>
+<p><strong>Cause 2:</strong> Metadata Naming Conflict (The "{{flpTitle}}" Bug) Due to a known UI rendering limitation in the "New Experience" view mode, the app is indexed under its technical placeholder <code>{{flpTitle}}</code> instead of its friendly name.</p>
+<p><strong>Cause 3:</strong> Stale Content Mapping / Metadata Desync The internal link between the Work Zone "My Content" and the BTP HTML5 App Repository is broken or cached with "Partial" data, preventing the tile from rendering.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h4 data-toc-skip="">Solution to Cause 1: Authorization Audit</h4>
+<ol><li>
+<p>Log into BTP Cockpit &gt; Security &gt; Users.</p>
+</li><li>
+<p>Ensure the following two Role Collections are assigned to the user:</p>
+<ul><li>
+<p><code>TaskCenterAdmin</code></p>
+</li><li>
+<p><code>TaskCenterTenantOperator</code></p>
+</li></ul>
+</li><li>
+<p>Log out and log back into the Work Zone site to refresh the session.<br/><br/></p>
+</li></ol>
+<p>Note:  For Roles requirements on Task Center, the component is: <strong>LOD-BPM-INB</strong>.</p>
+<h4 data-toc-skip="">Solution to Cause 2: Technical Naming Search</h4>
+<ol><li>
+<p>Open Work Zone Site Manager &gt; Content Manager &gt; Content Explorer.</p>
+</li><li>
+<p>Select the HTML5 Apps tab.</p>
+</li><li>
+<p>Search for "Task Center Administration".</p>
+</li><li>
+<p>If no results appear, search for <strong><code>{{flpTitle}}</code></strong>.</p>
+</li><li>
+<p>If the app appears under either name, select it and click + Add to My Content.</p>
+</li></ol>
+<p>For more information about Search in Work Zone: Check SAP Note/KBA: <a href="https://me.sap.com/notes/3410270" rel="noopener noreferrer nofollow" target="_blank">3410270 - Missing apps when selecting content for tiles widget in Work Zone Spaces and Pages - New Experience View Mode - SAP for Me</a>  (Component: <strong>EP-WZ-FS</strong>)</p>
+<h4 data-toc-skip="">Solution to Cause 3: The "Hard Reset" (Recommended Last Resort)</h4>
+<p>If the app is visible in "My Content" but not on the Site:</p>
+<ol><li>
+<p>In Content Manager, locate the "Task Center Administration" (or <code>{{flpTitle}}</code>) item.</p>
+</li><li>
+<p>Delete the item from your "My Content" list.</p>
+</li><li>
+<p>Go back to Content Explorer &gt; HTML5 Apps and re-add the app fresh.</p>
+</li><li>
+<p>Navigate to Channel Manager and click the Update Content (circular arrows) for the HTML5 Apps provider.</p>
+</li><li>
+<p>Re-assign the app to the appropriate Role, Group, and Space.</p>
+</li></ol>
+<p>Note: For any steps or details about Work Zone use Component: <strong> EP-WZ-PRV<br/><br/>SAP Technical Component Hierarchy: <br/><br/></strong></p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><thead><tr><td>Rank</td><td>Action Item</td><td>Component Responsible</td></tr></thead><tbody><tr><td><span>Step 1</span></td><td><span>Verify Role Collections (BTP Cockpit)</span></td><td><span>LOD-BPM-INB</span></td></tr><tr><td><span>Step 2</span></td><td><span>Search for <code>{{flpTitle}}</code> (Site Manager)</span></td><td><span>EP-WZ-FS</span></td></tr><tr><td><span>Step 3</span></td><td><span>Update Content (Channel Manager)</span></td><td><span>EP-WZ-PRV</span></td></tr><tr><td><span>Final Fix</span></td><td><span>Delete &amp; Re-add from Content Explorer</span></td><td><span>EP-WZ-PRV</span></td></tr></tbody></table></div>
+<p><strong> </strong></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/3410270" rel="noopener noreferrer nofollow" target="_blank">3410270</a> - Missing apps when selecting content for tiles widget in Work Zone Spaces and Pages - New Experience View Mode (<strong>Component: EP-WZ-FS</strong>)</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p> SAP Task Center, Task Center Administration, SAP Build Work Zone, Missing Tile, Not Visible, TaskCenterAdmin, TaskCenterTenantOperator, BTP Launchpad, "Partial content was updated", "403 Forbidden", "401 Unauthorized", "Destinations Request Failed", "Task Center Admin search failed", {{flpTitle}}, Partial content was updated, LOD-BPM-INB, EP-WZ-PRV, EP-WZ-FS, HTML5 Apps missing, Site Manager Content Explorer, SAP BTP Security Roles, Task Center Admin app not loading. </p></div></div></div></div>

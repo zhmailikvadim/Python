@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are using SAP S/4HANA Group Reporting and you intent to post manual journal entry.</p>
+<p>When document to be posted is checked, there is a popup with error message: <em>"Field XYZ is not activated as an additional field in the data model"</em> at screen.</p>
+<p>Some of additional fields is inactive in the data model even it was working before upgrade to OP 2025.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Additional MD, field inactive, PGJE</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>There is a change in processing logic between versions OP 2023 and OP 2025 release.</p>
+<p>As of OP2025, system strictly evaluates flag "Enable Inputs" for additional characteristics.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>1. Go to SPRO transaction, path: Activate additional master data fields (flag "Enable Inputs") when required for operations (SAP Customizing Implementation Guide -&gt; SAP S/4HANA for Group Reporting -&gt; Master Data -&gt; Define Consolidation Master Data Fields).</p>
+<p>2. Clean up cache of gateway model: /n/IWFND/CACHE_CLEANUP</p>
+<p>3. Clean up cache for gateway backend model: /n/IWBEP/CACHE_CLEANUP</p>
+<p>2. Clean + Regenerate metadata after making changes to the model setup (step 1):</p>
+<ul>
+<li>execute /n/IWFND/MAINT_SERVICE, find FINCS_JRNLENTR_POST service (ZFINCS_JRNLENTR_POST_SRV)</li>
+<li>open "SAP Gateway Client", in top menu select Metadata -&gt;Clean up Cache, select Metadata -&gt; Rebuild Cache for all services</li>
+</ul>
+<p>Repeat with FINCS_JRNLENTR_LIST and FINCS_IMPORT_JOURNAL_ENTRY.</p></div></div></div></div>

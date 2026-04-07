@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When accessing capacity allocation transactions (e.g., CM01) and selecting the Standard Overview, the work centers are not displayed in the expected sequence.</p>
+<p><img class="img-responsive" height="830" src="/documents/customerkba/bwedlamcuZEKaUQnOqfhk5XSoK-D5BB-vs4cTtIIYLA" width="661"/></p>
+<p><span style="color: rgb(224, 62, 45);"><em>“Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.”</em></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP ERP Capacity Planning (PP-CRP)</li><li>SAP R/3</li><li>SAP R/3 Enterprise</li><li>SAP ERP Central Component</li><li>SAP ERP</li><li>SAP Enhancement package for SAP ERP</li><li>SAP Enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA, on-premise</li><li>SAP S/4HANA Cloud Private Edition</li></ul>
+<p> </p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Execute transaction <strong>CM01</strong>.</p>
+</li><li>
+<p>Enter the required selection criteria (e.g., Plant and/or Work Centers).</p>
+</li><li>
+<p>Choose Standard Overview.</p>
+</li><li>
+<p>Observe that the work centers are not displayed in alphabetical sequence.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This behavior is standard system design.</p>
+<p>The sorting logic in capacity leveling transactions is based on the internal <strong>Work Center ID </strong>rather than the <strong>Work Center name</strong>.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The sorting logic in capacity leveling transactions such as <strong>CM01</strong> is based on the Work Center internal ID (OBJID) rather than the Work Center name (ARBPL).</p>
+<p>From a technical perspective, the system retrieves and processes the work centers using internal identifiers. As a result, the display order in the Standard Overview does not follow the alphabetical order of the work center names.</p>
+<p>For additional technical reference, the program include <strong>MC65AFL1</strong>, specifically <strong>FORM LIST_KAP_UEBERSICHT</strong>, is responsible for building the overview list displayed on the screen. Within this routine, the system processes the following loop:</p>
+<pre><strong>LOOP AT KUHIECAP.  "&lt;&lt; HERE</strong><br/><br/>  CLEAR KZ_POOLK.<br/>  INDEXHIECAP = SY-TABIX.<br/>* ARBKAPID = KUHIECAP_ART-HKAPID.<br/>  ARBKAPID = KUHIECAP-HKAPID.<br/>* ARBARBID = KUHIECAP_ART-HARBID.<br/>  ARBARBID = KUHIECAP-HARBID.<br/>* KZ_POOLK = KUHIECAP_ART-POOL.</pre>
+<p>The internal table KUHIECAP contains the work centers sorted by ARBID (OBJID). This structure does not contain a field representing the Work Center name (ARBPL).</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>CM01, CM02, CM03, CM04, CM05, CM06, CM07, capacity leveling, sort, sequence</p></div></div></div></div>

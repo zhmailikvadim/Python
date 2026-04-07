@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When displaying results in the <em>Query Preview</em> form, the time <span>in </span><em>Creatn Time - Incl. Secs </em><span>column is displayed in a wrong format.</span></p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<p><strong>Scenario: </strong></p>
+<ol>
+<li>In <em>Administration → System Initialization → General Settings → Display</em> tab, set <em>Time Format</em> as <em>12H</em>.</li>
+<li>In <em>Sales - A/R → Sales Order</em>, create <em>Sales Order No.:</em> 1. The system time when creating this Sales Order is 07:39:59 AM, for example.</li>
+<li>Open Tools <em>→ Queries <em>→ Query Generator </em></em>and execute the following detection query: SELECT CreateTS, * FROM ORDR WHERE DocNum=1 </li>
+</ol>
+<p><span style="font-size: 14px;"><strong>Expected behavior:</strong></span></p>
+<p><span style="font-size: 14px;">The <em>Creatn Time - Incl. Secs </em>of the <em>Sales Order No.:</em><span> 1</span> is displayed as 7:39:59AM.</span></p>
+<p><span style="font-size: 14px;"><strong><strong>Actual behavior:</strong></strong></span></p>
+<p><span style="font-size: 14px;">The <em>Creatn Time - Incl. Secs </em>of the <em>Sales Order No.:</em> 1 is displayed as 27:59PM.</span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""><span>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section </span><strong>References</strong><span> below lists the related feature package or patch once they become available. Be aware that </span><strong>References</strong><span> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</span></p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p id="">ORDR</p></div></div></div></div>

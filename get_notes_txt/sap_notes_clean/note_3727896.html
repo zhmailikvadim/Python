@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When executing the following transactions:</p>
+<ul><li>
+<p>PC00_M99_PA03_END – Exit payroll</p>
+</li><li>
+<p>PC00_M99_PA03_RELEA – Release payroll</p>
+</li></ul>
+<p>the system displays the error message:</p>
+<blockquote>
+<p>"This action is not possible for status Payroll correction of payroll area &lt;ABKRS&gt;"<br/>Message no. PG555</p>
+</blockquote>
+<p>The error occurs even when attempting to execute the action using a different payroll area.</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Trying to execute one of the following transactions:  PC00_M99_PA03_END,  PC00_M99_PA03_CORR,  PC00_M99_PA03_CHECK,  PC00_M99_PA03_RELEA </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The error occurs because the requested payroll control record action is not allowed for the current status of the payroll area stored in table T569V (field STATE).</p>
+<p>The ABAP logic in program H99CPAYMENU checks the control record status before allowing the transaction to proceed. Depending on the transaction code, only specific statuses are permitted.</p>
+<p>Relevant payroll statuses (T569V-STATE):</p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><tbody><tr><th>State</th><th>Meaning</th></tr><tr><td>0</td><td>New</td></tr><tr><td>1</td><td>Released for payroll</td></tr><tr><td>2</td><td>Payroll correction</td></tr><tr><td>3</td><td>Exit payroll</td></tr><tr><td>4</td><td>Check payroll results</td></tr><tr><td>9</td><td>Deleted</td></tr></tbody></table></div>
+<p>The code enforces the following rules:</p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><tbody><tr><td>Transaction</td><td>Purpose</td><td>Allowed Status</td></tr><tr><td>PC00_M99_PA03_RELEA</td><td>Release payroll</td><td>Only if status ≠ 1</td></tr><tr><td>PC00_M99_PA03_CHECK</td><td>Check results</td><td>Only if status = 1</td></tr><tr><td>PC00_M99_PA03_CORR</td><td>Corrections</td><td>Only if status = 1 or 4</td></tr><tr><td>PC00_M99_PA03_END</td><td>Exit payroll</td><td>Only if status = 1 or 4</td></tr></tbody></table></div>
+<p>If the payroll area is currently in Payroll correction (state = 2) or another incompatible state, the program calls the error routine and raises message PG555.</p>
+<p>Therefore, the action fails because the payroll control record is in a status that does not permit the requested operation.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Verify the current payroll control record status for the payroll area in transaction PA03 or in table T569V.</p>
+<p>Ensure that the payroll control record is moved through the correct sequence of statuses before executing the desired transaction.</p>
+<p>Typical payroll status flow:</p>
+<ol><li>
+<p>New (0)</p>
+</li><li>
+<p>Released for payroll (1) → run payroll</p>
+</li><li>
+<p>Check payroll results (4)</p>
+</li><li>
+<p>Corrections (1 or 4) if required</p>
+</li><li>
+<p>Exit payroll (3)</p>
+</li></ol>
+<p>If the payroll area is currently in Payroll correction (2), complete the correction run and move the payroll control record to an appropriate status (for example Check results (4) or Released (1)) before attempting to execute Exit payroll or other actions.</p>
+<p>Once the payroll control record is in a compatible status, the transactions PC00_M99_PA03_RELEA or PC00_M99_PA03_END can be executed successfully.</p></div></div></div></div>

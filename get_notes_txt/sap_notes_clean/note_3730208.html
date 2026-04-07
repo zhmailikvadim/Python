@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">There is a question concerning the extension of the Work Scheduling view within the 'Manage Product Master Data' app in the SAP S/4HANA Cloud Public Edition system.</p>
+<p>In the Public Cloud system, the Work Scheduling view can only be created or extended when at least one field contains a value.</p>
+<p>This behavior differs from the MM01 app, where the Work Scheduling view extension is permitted even when no fields have been filled in.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Open the 'Manage Product Master Data' app.</p>
+</li><li>
+<p>Switch to edit mode.</p>
+</li><li>
+<p>Navigate to the Work Scheduling view.</p>
+</li><li>
+<p>Save without entering any values in the fields.</p>
+</li><li>
+<p>Open the 'Create Production Order' app to create a production order.</p>
+</li><li>
+<p>The following error message is displayed: Work scheduling data of material &amp; is not maintained (Message no. CO 070)</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The app does not support specifying views for product master data.  </p>
+<p>The maintenance status is automatically determined based on the values entered in the maintained fields to ensure consistent processing by the system.  </p>
+<p>Use the MM01 app as a workaround to create the Work Scheduling view without entering any values.  </p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>KBA <a href="https://me.sap.com/notes/3554017" rel="noopener noreferrer nofollow" target="_blank">3554017</a> - Difference between fiori app manage product master (F1602) and classic t-codes MM0X/MM4X</p>
+<ul style="list-style-type: circle;"><li><em>Views and maintenance status.</em><br/><em>It's not possible to specify views in product master app. Since no views can be selected, the maintenance status is automatically determined based on the maintained fields. Note 3377977 contains a detailed explanation on simplified maintenance status in product master app. </em><br/><em><a href="https://me.sap.com/notes/3377977" rel="noopener noreferrer nofollow" target="_blank">3377977</a> - UAPI: Missing views/fields or error message 'The field &amp; is defined as a required field; it does not contain an entry' (MG 144) </em></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Work Scheduling view, Manage Product Master Data app, SAP S/4HANA Cloud Public Edition, create production order, CO 070, MM01, material maintenance, Work Scheduling extension, maintenance status, Work scheduling data, not maintained</p></div></div></div></div>

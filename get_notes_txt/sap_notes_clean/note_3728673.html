@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">There is no option to determine which splitted non-cash flow item belongs to which coinsurance partner ( field COINSS_ID ).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Basis line of business</p>
+<p>Coinsurance</p>
+<p>Distribution plan</p>
+<p>Coinsurer</p>
+<p>Non-cash flow</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">You use a distribution plan.</p>
+<p>Missing functionality.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This Note provides:<br/><br/>A new method /PM0/CL_AB_INT_AC-&gt;MODIFY_COINSDOC_NC. This method will get all relevant data and references, so that you can get all needed information.<br/>The information can then be placed in customer fields of the relevant non-cash flow and you can determine which splitted non-cash flow item belongs to which coinsurance partner.<br/><br/>Adjustments in method SPLIT_NC_DOCS_FOR_COINSURANCE.</p>
+<p>New method SET_DOCNRNC4COINS, which serves as complete method for not splitted and splitted nc documents.<br/><br/>New method SET_PSSTATE4COINS_NC, which serves as complete method for orginal nc documents.</p>
+<p><br/><br/>The following examples are intended to explain the situation in more detail:</p>
+<ul>
+<li>There is option to add information from the distribution plan to non-cash flow coinsurance documents.</li>
+<ul>
+<li>You use a distribution plan with two participants - a direct participation and an indirect participation - but the same coinsurer in both cases.</li>
+<li>You are now able to use the coinsurance key in the non-cash flow coinsurance document to determine which participant formed the basis for the non-cash flow coinsurance document. <br/>As a result, you can determine whether the non-cash flow coinsurance document belongs to a direct participation or an indirect participation, for example.</li>
+</ul>
+</ul>
+<p><span style="font-size: 14px;">For an advance correction, implement the source code corrections.</span></p></div></div></div></div>

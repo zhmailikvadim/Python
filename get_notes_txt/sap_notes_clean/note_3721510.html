@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You plan to use template allocation to assign costs to your standard cost estimate, your production and process orders, your WBS elements and your networks.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FINS_PARALLEL_ACCOUNTING_BF</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Since templates are highly customer-specific, no best practices are delivered for template allocation. To use template allocation, please follow the instructions below.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Template allocation is used to calculate the amount of production activity consumed using functions that determine the activity quantities either from data that can be read directly, such as order lot size or planned scrap, or calculated, such as number of work center changes in a production order. With universal parallel accounting, there is no change to the functions that calculate the activity quantities. The difference is simply that the template allocation is ledger-specific and can hence read activity rates from the underlying ledgers.</p>
+<p>To maintain templates for the purpose of template allocation use transactions CPT1-3. Templates are created within an environment which determines the functions supported.</p>
+<ul>
+<li>Environment 001 (standard cost estimate/production order) and environment 009 (process orders) are supported from release 2025, FPS0.</li>
+<li>Environment 005 (WBS elements) and 004 (networks) are supported from release 2025, FPS1. </li>
+</ul>
+<p>These templates are called at period close when template allocation is run.</p>
+<ul>
+<li>To run template allocation for production and process orders use transactions CPTA and CPTD.</li>
+<li>To run template allocation for WBS elements and networks use transactions CPTK and CPTL.</li>
+<li>Template allocation is also performed during product cost planning (transactions CK11N and CK40N) and when calculating planned costs for the objects above.</li>
+</ul>
+<p>Templates are not entered explicitly in the master data for the orders and projects but rather derived via the combination of costing sheet and overhead key entered in transaction KTPF.</p>
+<ul>
+<li>During transactions CK11N and CK40N (environment 001) the costing sheet is derived from the valuation variant, which is in turn selected through the costing variant. The overhead key is selected via the overhead group that is entered in the master record for the material to be costed.</li>
+<li>When planning costs for production orders (environment 001), process orders (environment 009) or running template allocation (transactions CPTA and CPTD), the costing sheet is again derived through the costing variant. However, for these orders the costing variant is derived from the order type/plant combination. The overhead key is selected via the overhead group that is entered in the master record for the material to be costed. </li>
+<li>When planning costs for WBS elements (environment 005) or networks (environment 004) or running template allocation (transactions CPTK and CPTL), the costing sheet and overhead key for both the WBS elements and the assigned networks are derived from the project profile.</li>
+</ul></div></div></div></div>

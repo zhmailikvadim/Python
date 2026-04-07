@@ -1,0 +1,41 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p><span>When additional nodes are added using the Service Layer Controller, their status initially appears as <em>Init Ok</em>. However, these nodes do not process any incoming requests. After some time, their status may change to <em>Init Err</em>.</span></p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisite:</strong></p>
+<p>SAP Business One 10.0, version for SAP HANA SP2511 or higher installed</p>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Access the <em>Service Layer Controller</em> at https://&lt;SLServer&gt;:40005/ServiceLayerController/.</li>
+<li>Navigate to the <em>Node Management</em> section.</li>
+<li>Click <em>Add.</em></li>
+<li>Specify the <em>Port From</em> and <em>Port Count</em>, then confirm by clicking <em>Yes</em>.</li>
+<li>Send test requests through the Load Balancer or monitor the Service Layer activity.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>New Service Layer nodes are successfully added, their status is <em>Init Ok</em>, corresponding services are created and running on the host, and the nodes are able to process incoming requests.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>When additional nodes are added using the <em>Service Layer Controller</em>, their status initially appears as <em>Init Ok</em>. However, these nodes do not process any incoming requests. After some time, their status may change to <em>Init Err</em>.</p>
+<p>When checking the operating system, only processes related to nodes created during the initial installation are present. Additionally, when verifying the systemd units (for example by running command <em>systemctl list-units</em> or reviewing /etc/systemd/system), no services corresponding to the newly added nodes can be found.</p>
+<p>The Load Balancer reports the following error in the Service Layer error log:</p>
+<ul>
+<li><em>(111)Connection refused: AH00957: http: attempt to connect to 127.0.0.1:50005 (localhost:50005) failed</em></li>
+<li><em>AH00959: ap_proxy_connect_backend disabling worker for (localhost:50005) for 60s</em></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p>
+<p><em><strong><strong>Workaround: </strong></strong></em></p>
+<p>Remove any newly added nodes via the <em>Service Layer Controller</em> and run the <em>Reconfiguration</em> to add new nodes via the installer.</p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p>node, startup, service, missing, port, worker, disabled</p></div></div></div></div>

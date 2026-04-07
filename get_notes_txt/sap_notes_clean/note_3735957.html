@@ -1,0 +1,47 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">After upgrading SAP HANA Cloud, <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access (SDA)</span> remote queries may fail with <span class="SNO_DNT" style="float: none;" translate="no">out‑of‑memory (OOM)</span> errors.</p>
+<p>Typical error messages include:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">[SAP AG][LIBODBCHDB SO][HDBODBC] General error;403 internal error: Error opening the cursor for the remote database &lt;REMOTE_SOURCE&gt; [SAP AG][LIBODBCHDB SO][HDBODBC] General error;4 cannot allocate enough memory:  [9] Memory allocation failed;exception 1000002: Allocation failed ; $failure_type$=STATEMENT_MEMORY_LIMIT_FROM_GLOBAL_CONFIG;</span></p>
+<div class="longtext" style="padding-left: 30px;"></div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Federation; SDA; Optimizer; Semi Join; OOM; HANA Cloud; cannot allocate enough memory;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>With SAP HANA Cloud <span class="SNO_DNT" style="float: none;" translate="no">2025 QRC4</span>, a new remote <span class="SNO_DNT" style="float: none;" translate="no">SEMI‑JOIN</span> pushdown capability was introduced.</p>
+<p>In certain scenarios, this capability may push down an excessive number of join operations to the remote system. This can lead to a suboptimal join order, resulting in significantly increased memory consumption during query execution and ultimately causing <span class="SNO_DNT" style="float: none;" translate="no">OOM</span> errors.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA Cloud:</li>
+<ul>
+<li>Revisions &gt;= 2025.40.10 (2025 QRC4)</li>
+</ul>
+</ul>
+<p><strong>Prerequisite:</strong></p>
+<ul>
+<li>A <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access (SDA)</span> setup where the target system is HANA Cloud and the remote source is either another HANA Cloud system or a HANA 2 system.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The issue is caused by plan volatility in the SQL optimizer. No permanent fix is planned.</p>
+<p>To avoid suboptimal execution plans, apply one of the following workarounds:</p>
+<ul>
+<li>Statement Level<br/><br/>Add the SQL query level hint <br/><br/>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">SELECT * FROM "SCHEMA"."TABLE" WITH HINT (NO_REMOTE_SEMI_JOIN);</span></li>
+</ul>
+<br/>Alternatively add the statement to the corresponding SQL plan and clear the plan cache for this plan.</li>
+</ul>
+<ol><ol>
+<li>
+<p><span class="SNO_DNT" style="float: none;" translate="no">ALTER SYSTEM ADD STATEMENT HINT (NO_REMOTE_SEMI_JOIN) COMMENT 'SNOW Case XXXXXXX' FOR STATEMENT HASH '&lt;STATEMENT_HASH&gt;';</span></p>
+</li>
+<li>
+<p><span class="SNO_DNT" style="float: none;" translate="no">ALTER SYSTEM REMOVE SQL PLAN CACHE WHERE STATEMENT_STRING LIKE '%&lt;STATEMENT_STRING&gt;%';</span></p>
+</li>
+<li>Or <span class="SNO_DNT" style="float: none;" translate="no">ALTER SYSTEM REMOVE SQL PLAN CACHE ENTRY '&lt;plan_id&gt;';</span></li>
+</ol></ol>
+<ul>
+<li>Remote Source Level<br/><br/><span class="SNO_DNT" style="float: none;" translate="no">ALTER REMOTE SOURCE &lt;Remote_Source_Name&gt; SET PROPERTY 'CAP_SEMI_JOIN' = 'FALSE';</span></li>
+</ul>
+<p><strong>Remark:</strong></p>
+<ul>
+<li>Disabling <span class="SNO_DNT" style="float: none;" translate="no">SEMI‑JOIN</span> pushdown at the remote source level affects all remote queries that access this remote source.</li>
+</ul></div></div></div></div>

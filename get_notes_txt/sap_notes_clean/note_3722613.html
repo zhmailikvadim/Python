@@ -1,0 +1,240 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>After activating RITA for Italy, billing documents cannot be released to Accounting for the Domestic scenario. </p>
+</div>
+<div>
+<p>During the release to accounting, the following exception is triggered: FOT_TXA012 - Document xxxxxxxxxxx: Cannot determine tax country/region for document (Company Code/Document Number). </p>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition 2508 </p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><div>
+<ol><li>
+<p>Activate RITA functionality for Italy. </p>
+</li><li>
+<p>Create a Domestic Billing Document. </p>
+</li><li>
+<p>Release billing document to account posting. </p>
+</li><li>
+<p>An exception occurs during release to accounting (FOT_TXA012-Cannot determine tax country/region for document.). </p>
+</li></ol>
+</div>
+<div> </div>
+<div> </div>
+<div> </div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>With activation of <strong>RITA</strong>, the <strong>Tax Departure Country</strong> becomes mandatory for tax determination. If the Tax Departure Country is not maintained in the condition records of the tax condition types triggered in the billing document (for example, LCIT, MWBO, etc.), the system is unable to determine or update the tax country during posting. As a result, the release to accounting fails with the exception: </p>
+</div>
+<div>
+<p><em>FOT_TXA012 - Cannot determine tax country/region for document.</em></p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<div>
+<p>With activation of RITA, Tax Departure country needs to be maintained in the tax condition records for all the tax condition types triggered in the billing document </p>
+</div>
+<div>
+<p>Follow the configuration steps below </p>
+</div>
+<div>
+<p>Configuration Steps – Pricing Condition Tables &amp; Access Sequences </p>
+</div>
+<div>
+<p><strong>1. Create Condition Tables </strong></p>
+</div>
+<div>
+<p>SSCUI: <strong>103119 </strong>– Create Condition Tables for Pricing in Sales </p>
+</div>
+<div>
+<p><strong>a) Condition Table for Tax Exemption – Italy (LCIT) </strong></p>
+</div>
+<div>
+<p>Reference: <br/>Existing table 114 – Tax Exemption: Customer <br/>(Used in Access Sequence LCIT – Tax Exemption – Italy, Condition Type LCIT) </p>
+</div>
+<div>
+<p>Steps: </p>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Create a new condition table by copying table 114 – Tax Exemption: Customer. </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Retain existing fields: </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: circle;"><li>
+<p>Sales Organization (VKORG) </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: circle;"><li>
+<p>Customer (KUNNR) </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Add the following new field: </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: circle;"><li>
+<p>Departure Country (ALAND) </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Save the new table. </p>
+</li></ul>
+</div>
+<div>
+<p><span role="presentation"><img alt="Shape" class="img-responsive" src="/documents/customerkba/i00UiFOpug9bMnaOBz4KoNkf-ZT5A_-MLL0LXyVwjM4" style="height: auto; width: auto;"/></span> </p>
+</div>
+<div>
+<p><strong>b) Condition Table for Sales Organization/Destination Country (MWBO) </strong></p>
+</div>
+<div>
+<p>Reference: <br/>Existing table 110 – Sales Organization/Destination Country <br/>(Used in Access Sequence K110 – Sales Organization/Destination Country, Condition Type MWBO) </p>
+</div>
+<div>
+<p>Steps: </p>
+</div>
+</div>
+<div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Create a new condition table by copying table 110 – Sales Organization/Destination Country. </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Retain existing fields: </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: circle;"><li>
+<p>Sales Organization (VKORG) </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: circle;"><li>
+<p>Destination Country (LLAND) </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Add the following new field: </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: circle;"><li>
+<p>Departure Country (ALAND) </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Save the new table. </p>
+</li></ul>
+</div>
+<div>
+<p><span role="presentation"><img alt="Shape" class="img-responsive" src="/documents/customerkba/U6zUyLz1YgQWrhARNZLWhPJ9VvEiNHkFUgr_NMXNWdg" style="height: auto; width: auto;"/></span> </p>
+</div>
+<div>
+<p><strong>2. Create Access Sequences </strong></p>
+</div>
+<div>
+<p>SSCUI: <strong>103121 </strong>– Set Access Sequences </p>
+</div>
+<div>
+<p><strong>a) Access Sequence for LCIT </strong></p>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Copy access sequence LCIT – Tax Exemption – Italy. </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Create a new Z access sequence (e.g., ZCIT). </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Add the newly created condition table (copied from 114) to ZCIT. </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: circle;"><li>
+<p>Suggested sequence number: 05 </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Ensure the Exclusive Indicator is checked for this new access. </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Save the configuration. </p>
+</li></ul>
+</div>
+<div>
+<p><span role="presentation"><img alt="Shape" class="img-responsive" src="/documents/customerkba/hsPHZVqcXGf05LprM1kJE7fwV2aieo6n3N7rjOGc2CQ" style="height: auto; width: auto;"/></span> </p>
+</div>
+<div>
+<p><strong>b) Access Sequence for MWBO </strong></p>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Copy access sequence K110 – Sales Organization/Destination Country. </p>
+</li></ul>
+</div>
+</div>
+<div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Create a new Z access sequence (e.g., Z110). </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Add the newly created condition table (copied from 110) to Z110. </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: circle;"><li>
+<p>Suggested sequence number: 05 </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Ensure the Exclusive Indicator is checked for this new access. </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Save the configuration. </p>
+</li></ul>
+</div>
+<div>
+<p><span role="presentation"><img alt="Shape" class="img-responsive" src="/documents/customerkba/4JHheusUIkd6tz4c57RbFNOJI32_jGJDAjyJDbFljTg" style="height: auto; width: auto;"/></span> </p>
+</div>
+<div>
+<p><strong>3. Assign New Access Sequences to Condition Types </strong></p>
+</div>
+<div>
+<p>SSCUI: <strong>101120 </strong>– Set Condition Types for Pricing in Sales </p>
+</div>
+<div>
+<p><strong>a) Condition Type LCIT (License – Italy) </strong></p>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Replace the existing access sequence with ZCIT. </p>
+</li></ul>
+</div>
+<div>
+<p><strong>b) Condition Type MWBO (Op Stamp Tax Invoice) </strong></p>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Replace the existing access sequence with Z110. <br/><br/></p>
+</li></ul>
+<p><strong>4. Create Condition records for tax condition types </strong></p>
+<ul><li>Create condition records for the condition types LCIT and MWBO with the combinations of new access sequence created and assigned to condition types. </li></ul>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>FI-LOC-LO-IT, Italy, RITA, LCIT, Departure Country, MWBO, Access Sequence, Condition Types, Condition record ,FOT_TXA012 </p></div></div></div></div>

@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>How is the calculation for MSP fee different for buyer-funded and supplier-funded scenarios?</li><li>What is the difference between discount and markup calculation for MSP fees?</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>1. Calculations Using Rates</strong><br/>These formulas pertain to SOW invoices created from time sheets, events, schedules, and fees do not have rates</p>
+<ul><li>MSP% is utilized for SOW invoice calculations
+<ul><li>For buyer-defined SOWs, the calculation begins with the supplier rate to determine the bill rate</li><li>For supplier-defined SOWs, the calculation starts with the bill rate to determine the supplier rate</li></ul>
+</li></ul>
+<p><strong>For Discount:</strong></p>
+<ul><li>Buyer-Funded SOW:
+<ul><li>Bill Rate = <code>ROUND(Supplier Rate / (1 - MSP% / 100), 2)</code></li></ul>
+</li><li>Supplier-Funded SOW:
+<ul><li>Supplier Rate = <code>ROUND(Bill Rate * (1 - MSP% / 100), 2)</code></li></ul>
+</li></ul>
+<p><strong>For Markup:</strong></p>
+<ul><li>Buyer-Funded SOW:
+<ul><li>Bill Rate = <code>ROUND(Supplier Rate * (1 + MSP% / 100), 2)</code></li></ul>
+</li><li>Supplier-Funded SOW:
+<ul><li>Supplier Rate = <code>ROUND(Bill Rate / (1 + MSP% / 100), 2)</code></li></ul>
+</li></ul>
+<p><strong>2. Calculations Using Amounts</strong><br/>These formulas apply to SOW invoices created from time sheets, events, schedules, and fees</p>
+<ul><li>SOW has an MSP % that is used in calculations for invoices
+<ul><li>For buyer-defined SOWs, the process starts with the supplier amount to derive the buyer amount</li><li>For supplier-defined SOWs, the calculation begins with the buyer amount to find the supplier amount</li></ul>
+</li></ul>
+<p><strong>For Discount:</strong></p>
+<ul><li>Buyer-Funded SOW:
+<ul><li>Buyer Amount = <code>ROUND(Supplier Amount / (1 - ptr.msp_pct / 100), 2)</code></li></ul>
+</li><li>Supplier-Funded SOW:
+<ul><li>Supplier Amount = <code>ROUND(Buyer Amount * (1 - ptr.msp_pct / 100), 2)</code></li></ul>
+</li></ul>
+<p><strong>For Markup:</strong></p>
+<ul><li>Buyer-Funded SOW:
+<ul><li>Buyer Amount = <code>ROUND(Supplier Amount * (1 + MSP % / 100), 2)</code></li></ul>
+</li><li>Supplier-Funded SOW:
+<ul><li>Supplier Amount = <code>ROUND(Buyer Amount / (1 + ptr.msp_pct / 100), 2)</code></li></ul>
+</li></ul>
+<p>These calculations ensure clarity in how MSP fees are determined based on whether the SOW is buyer or supplier-funded, and whether discount or markup approaches are applied</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>msp fee, supplier-funded, buyer-funded, sow invoice, calculate, discount, markup, sow, invoice</p></div></div></div></div>

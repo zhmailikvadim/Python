@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><section id="__html0">
+<div id="container-05ed0bb2c46b40769c139fe7a-top_left_container">
+<section>
+<div id="container-05ed0bb2c46b40769c139fe7a-header_container">
+<section>
+<div id="container-05ed0bb2c46b40769c139fe7a-header_content">
+<section>
+<div id="container-05ed0bb2c46b40769c139fe7a-header_title_row"></div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+<p>Voluntary Self-Identification of Veteran and Voluntary Self-Identification of Disability forms not Initiating for New Onboardees</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Onboarding</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Activate “Voluntary Self-Identification of Veteran” and “Voluntary Self-Identification of Disability” in Compliance Settings.</li><li>Start onboarding for a new hire.</li><li>Observe that these Country Compliance forms do not initiate.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Job Location value is empty.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>Navigate to Data Inspector under:<br/>Table_EMP_JOB_INFO_T → User Sys ID: XXX,<br/>the Job Location field is blank.</li><li>However, in Review New Data, the location appears because the value is coming from an onInit rule.</li><li>Since the Job Location is empty in the backend, the compliance rule does not get triggered.</li><li>Based on your Field Metadata Override, the compliance logic requires that Job Location must have a value for the form to trigger. Since it is blank, the form is skipped.</li></ul>
+<p>To fix this, please update your field mapping [Under Manage data &lt;&lt; FieldMetaOverrideConfiguration] as follows: </p>
+<p>workcountry:</p>
+<p>{<br/>"entityPath": "jobInfoNav",<br/>"field": "countryOfCompany"<br/>} </p>
+<p>Once this is updated, the Country Compliance form will trigger correctly.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>refer to: <a href="https://me.sap.com/notes/3140268" rel="noopener noreferrer nofollow" target="_blank">3140268 - Compliance Tasks Does Not Trigger - Onboarding</a></li><li>refer to: <a href="https://me.sap.com/notes/3549796" rel="noopener noreferrer nofollow" target="_blank">3549796 - [Compliance Form] - Voluntary Self Identification Veteran Status Issues - Onboarding</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>onboarding compliance, country compliance forms, forms not initiating, voluntary self-identification of veteran, voluntary self-identification of disability, workcountry, job location empty, jobInfoNav, countryOfCompany, compliance 2.0, forms skipped, review new data, data inspector, EMP_JOB_INFO_T, mapping configuration</p></div></div></div></div>

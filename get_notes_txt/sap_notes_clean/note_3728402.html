@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">-An error is encountered during IDOC replication from MDG to COMET ECC, and the message "Duplicate found, Object: , Key:" is displayed with IDOC Status 51 and Message Number AM359.</p>
+<p>-The error is triggered when DRFOUT is performed from MDG to ECC.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<ul style="list-style-type: none;"><li aria-label="SAP ERP">
+<div>
+<ul><li>SAP ERP</li></ul>
+</div>
+</li><li aria-label="SAP enhancement package for SAP ERP">
+<div>
+<div>
+<ul><li>SAP enhancement package for SAP ERP</li></ul>
+</div>
+</div>
+</li><li aria-label="SAP enhancement package for SAP ERP, version for SAP HANA">
+<div>
+<div>
+<ul><li>SAP enhancement package for SAP ERP, version for SAP HANA</li></ul>
+</div>
+</div>
+</li><li aria-label="SAP ERP Central Component">
+<div>
+<div>
+<ul><li>SAP ERP Central Component</li></ul>
+</div>
+</div>
+</li><li aria-label="SAP S/4HANA">
+<div>
+<div>
+<ul><li>SAP S/4HANA</li></ul>
+</div>
+</div>
+</li><li aria-label="SAP S/4HANA Cloud Private Edition">
+<div>
+<div>
+<ul><li>SAP S/4HANA Cloud Private Edition</li></ul>
+</div>
+</div>
+</li></ul>
+</div>
+<div> </div>
+<p></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>1. Perform the DRFOUT operation from MDG to ECC.</p>
+<p>2. Observe the IDOC error message: "Duplicate found, Object: , Key:" during replication. </p>
+<p>3. Check the address side for duplicate entries in the name field associated with the person number.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The error message is triggered because the entry in the name field has already been associated with a person number. Consequently, when a new entry is attempted, duplicate checks are performed by the system on the relevant fields, and the error message is generated.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To resolve the issue, either of the following corrections may be applied:</p>
+<ul><li>The duplicate checks may be disabled, provided that the functionality of the system is not impacted.</li><li>Alternatively, a new name may be used instead of "PERSON" to avoid duplication conflicts.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>IDOC fails, Duplicate found, Status 51, AM359</p></div></div></div></div>

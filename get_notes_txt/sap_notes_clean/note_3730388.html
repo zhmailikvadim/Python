@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Your data includes control characters, and you are using the methods CL_ABAP_LIST_UTILITIES=&gt;DISPLAY_TO_STRUCTURE and CL_ABAP_LIST_UTILITIES=&gt;DYNAMIC_OUTPUT_LENGTH. When you display the string, you notice that the visual length is not compatible with what is actually displayed: you see control characters being represented by '#', but they are not counted in the visual length. Additionally, when splitting the string, you may experience unexpected misalignments resulting from this behavior.</p>
+<p><strong>Example of the issue:</strong></p>
+<p>You have a string with a dynamic display length of 10 units that should be split into two substrings, each has display length of 5 units.</p>
+<p>Input text: aあ#a12345</p>
+<p>Whereas # represents a control character.</p>
+<p><strong>Expected result:</strong></p>
+<p>FIELD1   aあ#a<br/>FIELD2   12345</p>
+<p><strong>Actual result:</strong></p>
+<p>FIELD1   aあ#a1<br/>FIELD2   2345</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CL_ABAP_LIST_UTILITIES, Control characters, horizontal_tab, tab, dynamic output length, display length, visual length, string spliting based on visual length</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Control characters are normally non-printable. However, in ABAP List, they are replaced by the displayable '#' character (which should have a visual width of 1). Currently, the kernel module's calculation returns a visual width of 0 for these characters. This leads to incorrect substring splits and misalignment in the structured list output.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Development is in-progress.<br/>Possible release: mid-year 2026.</p></div></div></div></div>

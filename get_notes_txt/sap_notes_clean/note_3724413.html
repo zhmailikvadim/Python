@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are using the SAP S/4HANA migration cockpit with the "Migrate Data Directly from SAP System" approach.</p>
+<p id="__html26">After data selection completes, you are facing one of the following issues:</p>
+<ul>
+<li>The expected migration object instances are not selected</li>
+<li>An error occurs, for example "Migration object XYZ does not exist." </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">S/4HANA Migration Cockpit, Select Data, System Upgrade</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>For each migration object, the system generates runtime objects that are used during data selection. The identifier for these runtime objects is derived as follows:</p>
+<ul>
+<li>The first 20 characters of the migration object’s technical name are taken as the base identifier.</li>
+<li>The system checks whether a runtime object with this identifier already exists.</li>
+<li>If it exists, the last two characters are replaced by a two‑digit counter to ensure uniqueness.</li>
+</ul>
+<p>In certain scenarios, runtime objects can become inconsistent. Example:</p>
+<ul>
+<li>Runtime objects for migration object A are generated and the identifiers are stored locally.</li>
+<li>The system is then upgraded to a higher release, and all runtime objects of your migration projects are cleaned up.</li>
+<li>Later, a new migration object B is added to the migration project, whose first 20 characters are identical to object A.</li>
+<li>During generation, the system derives the first 20 characters of the technical name and checks whether the identifier is used by another runtime object. Due to the cleanup, the runtime object is no longer found, and the same identifier is reused for the new object.</li>
+<li>As a result, two different migration objects end up sharing the same runtime identifier, leading to inconsistent selection behavior or “object does not exist” errors.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="my-2 text-text">
+<p>Implement the correction and perform the following steps:</p>
+<ol>
+<li><span style="font-size: 14px;">Ensure that the program CNV_PE_SUPPORT_CLEANUP_SEL_OBJ attached to this correction is installed in your system.</span></li>
+<li><span style="font-size: 14px;">Start transaction SE38 and execute program CNV_PE_SUPPORT_CLEANUP_SEL_OBJ to clean up inconsistent identifiers for the affected migration objects.</span></li>
+<ul>
+<li>The program also registers new system tasks to force re-generation of the runtime objects in the next step.</li>
+</ul>
+<li><span style="font-size: 14px;">Open the SAP S/4HANA Migration Cockpit and restart the “Select Data” activity using the option “New Selection.”</span></li>
+<ul>
+<li>The registered system tasks are executed implicitly at the beginning of the data selection.</li>
+</ul>
+</ol></div></div></div></div></div>

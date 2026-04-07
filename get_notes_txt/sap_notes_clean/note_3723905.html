@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>When exporting a Story Report to Excel or CSV, one or more column labels display unexpected hyphens (“-”) inside the text.
+<ul><li style="font-style: italic;"><em>Inside SuccessFactors Story Reports, the label appears normal; however, after export, additional hyphens become visible.</em></li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Platform</p>
+<ul><li>Story Reports</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Open the affected Story Report.</li><li>Create a new Story Report or edit an existing one.</li><li>Add a field/column whose label was copied from an external source (e.g., web page, PDF, Word, email, Teams, etc.).</li><li>Paste the label into the data source query builder by renaming.</li><li>Save and run the Story Report.</li><li>Export the results to Excel or CSV.</li><li>Open the exported file and observe that the label contains unexpected hyphens.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>The label contains invisible soft‑hyphen characters (Unicode U+00AD) that were introduced when the text was copied from an external application.</p>
+<p>Soft hyphens are automatically inserted by many applications for line‑breaking or word‑wrapping purposes. They are not visible in the SuccessFactors UI, but when exported to Excel/CSV, these hidden characters are rendered as normal hyphens (“-”).</p>
+<p>Common sources that insert soft hyphens include:</p>
+<ul><li>Web pages</li><li>PDFs</li><li>Microsoft Word documents</li><li>Emails</li><li>Microsoft Teams messages</li><li>Other applications with automatic line‑wrap formatting</li></ul>
+<p>As a result, Story Report labels may appear normal but still contain hidden Unicode characters that only surface during export.</p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li><strong>Clean the Label Text</strong>
+<ul><li>Copy the affected label text and paste it into a Unicode cleaning tools that can be found online.</li><li>This removes hidden soft‑hyphens (U+00AD) and other invisible formatting characters.</li></ul>
+</li><li><strong>Remove the Existing Label</strong>
+<ul><li>In Story Reports, delete the old label from:
+<ul><li>The data source field configuration (query designer)</li></ul>
+</li></ul>
+</li><li><strong>Reapply the Cleaned Label</strong>
+<ul><li>Paste the cleaned text back into the label field.</li><li>Save the Story Report.</li></ul>
+</li><li><strong>Re-export to Confirm</strong>
+<ul><li>Run the Story Report again and export to Excel/CSV.</li><li>The label will now export correctly without unwanted hyphens.</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>story report, export to excel, export to csv, column labels, unexpected hyphens, hyphens, soft hyphen, unicode U+00AD, report formatting, label issue, story designer, data source query builder</p></div></div></div></div>

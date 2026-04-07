@@ -1,0 +1,104 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>Wage types are not displayed in the Payroll Journal report (transaction PC00_M**_CLJN).</p>
+</li><li>
+<p>Results configured in transaction PE51 (HR Forms) are not shown in the totals section.</p>
+</li><li>
+<p>Wage types are visible at employee level, but missing in totals display.</p>
+</li><li>
+<p>Z-forms (copies of standard forms, e.g. MXJS) do not show information during report execution.</p>
+</li><li>
+<p>Wage Types added manually in the form window are not reflected in totals.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue is caused by missing configuration in the payroll journal excerpt form:</p>
+<ul><li>
+<p>The identifiers (wage type elements) used in the totals display are not included in the cumulation identifier.</p>
+</li><li>
+<p>The totals display in Payroll Journal only processes identifiers that are:</p>
+<ul><li>
+<p>Defined in the form, and</p>
+</li><li>
+<p>Included in the cumulation identifier configuration.</p>
+</li></ul>
+</li></ul>
+<p>As per SAP standard documentation:</p>
+<blockquote>
+<p>All identifiers specified for totals must also be included in the cumulation identifier.</p>
+</blockquote>
+<p>If this linkage is missing, the system cannot aggregate and display the wage types in totals.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Maintain the correct configuration in the Payroll Journal form:</p>
+<p><strong>Steps</strong></p>
+<ol><li>
+<p>Go to IMG:</p>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div> </div>
+<div>
+<div>
+<div id="code-block-viewer">
+<div>
+<div>Payroll → Payroll: "Your country" → Forms → Payroll Journal → Create payroll journal form</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div> </div>
+</div>
+</div>
+</div>
+</div>
+</li><li>
+<p>Open your Z-form (e.g. copied from MXJS) in PE51.</p>
+</li><li>
+<p>Navigate to:</p>
+<ul><li>
+<p>Create display of totals</p>
+</li><li>
+<p>Excerpt form configuration</p>
+</li></ul>
+</li><li>
+<p>Ensure that:</p>
+<ul><li>
+<p>All identifiers used in totals are also included in the cumulation identifier<br/>(e.g. include identifier in ZXJD or relevant cumulation group).</p>
+</li></ul>
+</li><li>
+<p>Save and transport the changes.</p>
+</li><li>
+<p>Re-run report:</p>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div> </div>
+<div>
+<div>
+<div id="code-block-viewer">
+<div>
+<div>PC00_MXX_CLJN</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div> </div>
+</div>
+</div>
+</div>
+</div>
+</li><li>
+<p>Verify that wage types now appear correctly in totals.</p>
+</li></ol></div></div></div></div>

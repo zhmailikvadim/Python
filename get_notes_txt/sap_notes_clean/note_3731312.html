@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The Assignment (ZUONR) field in customer line items shows unexpected prefixes such as "X/" or "X/X/" instead of the expected format (e.g., "00" followed by billing document ID). </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<div>
+<section>SAP S/4HANA Cloud Public Edition</section>
+</div>
+</div>
+<div>
+<div> </div>
+</div><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Open Manage Customer Line Items app.</li><li>Add or view the Assignment field in line items.</li><li>Observe that the Assignment field contains prefixes like "X/" or "X/X/".</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Active custom logic implementations are influencing the population of the Assignment (ZUONR) field during journal entry creation.</li><li>Specifically, custom logic under the Journal Entry Substitution (FIN_ACDOC_SUBSTITUTION) business context modifies the standard behavior and introduces additional prefixes.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The behavior is caused by active custom logic and is not part of standard system processing.</p>
+<p>To analyze and adjust the behavior:</p>
+<ol><li>Navigate to the Custom Logic app.</li><li>Check implementations under the business context:
+<ul><li>Journal Entry Substitution (FIN_ACDOC_SUBSTITUTION).</li></ul>
+</li><li>Identify any logic affecting the Assignment (ZUONR) field.</li><li>Modify or deactivate the relevant custom logic as required to achieve the expected format.</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>assignment, zuonr, x/ prefix, x/x/ prefix, manage customer line items, f0711, custom logic, journal entry substitution, fin_acdoc_substitution, substitution, ar, accounts receivable, s/4hana cloud, billing document id, cash allocation</p></div></div></div></div>

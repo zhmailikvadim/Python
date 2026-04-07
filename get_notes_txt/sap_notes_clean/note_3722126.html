@@ -1,0 +1,179 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"></p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><colgroup><col/><col/><col/><col/><col/><col/><col/></colgroup>
+<tbody>
+<tr><th class="confluenceTh">
+<h3 data-toc-skip="">Priority</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">SAP Case ID</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Description</h3>
+</th></tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">1392968/2025</td>
+<td class="confluenceTd">Release check shows old values despite config deletion in BRH</td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">224587/2026</td>
+<td class="confluenceTd">Error: HTTP code: 413, status reason: Request Entity Too Large, Destination: BP_IHLS</td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">213783/2026</td>
+<td class="confluenceTd">Issue with display of additional batch characteristics in BRH against a CFG batch in My PCN Release Decisions</td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">211544/2026</td>
+<td class="confluenceTd">Inspection lot logs not available in monitor data processing tab </td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">188800/2026</td>
+<td class="confluenceTd">Release Decision Report - Custom fields not displayed</td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">220043/2026</td>
+<td class="confluenceTd">Issue with "My Release Decisions" app</td>
+</tr>
+<tr>
+<td class="confluenceTd">High</td>
+<td class="confluenceTd">303372/2026</td>
+<td class="confluenceTd">Issue with records not loading to BRH but sent and logged</td>
+</tr>
+<tr>
+<td class="confluenceTd">High</td>
+<td class="confluenceTd">220107/2026</td>
+<td class="confluenceTd">PCN Technical Release for WL Item created with trigger type as GR </td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">245771/2026</td>
+<td class="confluenceTd">PCN Worklist: Batch Summary does not have radio buttons for selection</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p></p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><colgroup><col/><col/><col/><col/><col/><col/><col/></colgroup>
+<tbody>
+<tr><th class="confluenceTh">
+<h3 data-toc-skip="">Priority</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">SAP Case ID</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Description</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Resolution</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Suggested Testing</h3>
+<p><strong>Disclaimer</strong><br/>Testing suggestions are provided as guidance only. Customers are solely responsible for performing thorough testing in their environment.</p>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Documentation Update</h3>
+<h3 data-toc-skip="">(Y/N)</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Details of Updated Documents</h3>
+</th></tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">1392968/2025</td>
+<td class="confluenceTd">Release check shows old values despite config deletion in BRH</td>
+<td class="confluenceTd">A release check displayed old release check messages, which were deleted from the configuration prior to the creation of the release decision item. To resolve this issue, the filtering logic for release check messages has been enhanced to ensure release checks always show the valid release check messages.</td>
+<td class="confluenceTd">Testing should cover the configuration of release check messages and ensure the business rules return the expected messages for release checks.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">224587/2026</td>
+<td class="confluenceTd">Error: HTTP code: 413, status reason: Request Entity Too Large, Destination: BP_IHLS</td>
+<td class="confluenceTd">
+<p>With the classic (now deprecated) setup of Integration Hub for Life Sciences, larger payloads of up to 1 MB were not supported. This restriction has been changed to allow message payloads up to 1 MB. However, payloads that exceed 1 MB still aren't supported in the classic setup and generate errors. Payloads that exceed 1 MB are only supported with the new simplified setup.</p>
+<p><strong>Note:</strong></p>
+<p>The classic setup of Integration Hub for Life Sciences will be sunset with release 2611 of SAP Batch Release Hub for Life Sciences. If you are still using the classic setup, please migrate to the simplified architecture as soon as possible to avoid any disruption to your batch release processing. For more information, see <a href="https://help.sap.com/docs/BATCH_RELEASE_HUB_LS_CLOUD/5a6fd89b06e54ea5b82bd8da0e38c9a7/6b54e3e142f94d74a22ccd72c407efe6.html" target="_blank">SAP BTP Account and Integration Hub Tenant</a>.</p>
+</td>
+<td class="confluenceTd">Testing should cover the integration between SAP Batch Release Hub for Life Sciences and Integration Hub for Life Sciences.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">213783/2026</td>
+<td class="confluenceTd">Issue with display of additional batch characteristics in BRH against a CFG batch in My PCN Release Decisions</td>
+<td class="confluenceTd">In the <strong>My PCN Release Decisions</strong> app, the <strong>Value </strong>column was missing from the <strong>Additional Batch Characteristics</strong> table, which is displayed on the details page for an assigned batch when additional batch characteristics are available. This issue is now fixed. The <strong>Value </strong>column configuration has been added to the <strong>Additional Batch Characteristics </strong>table in the <strong>My PCN Release Decisions</strong> app. This UI configuration change reuses existing components already used by the <strong>My Release Decisions</strong> app. No backend changes were required.</td>
+<td class="confluenceTd">Testing should cover the integration of additional batch characteristics in the <strong>My PCN Release Decisions</strong> app.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">211544/2026</td>
+<td class="confluenceTd">Inspection lot logs not available in monitor data processing tab </td>
+<td>
+<p>Data sent through SAP Event Mesh didn't fail when activation validation issues occurred. The data was activated despite the validation errors, and no monitoring logs were displayed for the errors. To resolve this issue a manual transaction wrapper has been implemented to wrap staging and activation in a single transaction. This ensures there is an automatic rollback when failures occur.</p>
+</td>
+<td>This issue is relevant for customers using SAP Event Mesh. Testing should cover the integration between SAP Event Mesh and SAP Batch Release Hub for Life Sciences. The issue specifically occurs when there is a data validation issue (for example, a mismatch between the release quantity and the posted quantity).</td>
+<td>N</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">188800/2026</td>
+<td class="confluenceTd">Release Decision Report - Custom fields not displayed</td>
+<td class="confluenceTd">Custom fields were not displayed in release decision reports. This issue has been fixed by adding the missing custom (extension) fields in release check details, including component and batch record review scenarios, by improving the merge and formatting support for batch record review attributes.</td>
+<td class="confluenceTd">Testing should cover the creation of release decision reports.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">220043/2026</td>
+<td class="confluenceTd">Issue with "My Release Decisions" app</td>
+<td class="confluenceTd">In the <strong>My Release Decisions</strong> app, the <strong>Release Type</strong> filter field did not display all existing release types. This issue has been fixed by changing the UI element from a dropdown to an input field with value help. This change ensures that the <strong>Release Type</strong> filter displays all the filter values, even when there are a high number, and it also improves the user experience.</td>
+<td class="confluenceTd">Testing should cover filtering of release types in the <strong>My Release Decisions</strong> app.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">High</td>
+<td class="confluenceTd">303372/2026</td>
+<td class="confluenceTd">Issue with records not loading to BRH but sent and logged</td>
+<td class="confluenceTd">Batch component records did not appear in the <strong>My Release Decisions</strong> app although they were sent to SAP Batch Release Hub for Life Sciences and logged. This issue occurred because the component relations cache cleanup was not triggered when component relations were sent nested inside <em>ComponentsActive</em> and activation happened in a separate <em>$batch</em> atomicity group (via <em>/activate</em>). The fix uses composition-level component activations for the cache cleanup, so that newly added components are visible.</td>
+<td class="confluenceTd">Testing should cover sending batch component data to SAP Batch Release Hub for Life Sciences, and ensuring the components appear as expected in the <strong>My Release Decisions</strong> app.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">High</td>
+<td class="confluenceTd">220107/2026</td>
+<td class="confluenceTd">PCN Technical Release for WL Item created with trigger type as GR </td>
+<td class="confluenceTd">A PCN-related release decision trigger for an existing assigned batch with a different release decision trigger type created another batch release decision item. In the <strong>My PCN Release Decisions</strong> app, this resulted in a PCN release decision item with two entries for the same batch in the <strong>Assigned Batches</strong> table, each with a different release decision trigger type. Two entries for the same assigned batch are not supported and cause several UI consistency issues. To prevent this issue occurring again, the code has been adjusted to reject any secondary PCN-related release decision trigger for an assigned batch that already exists in the PCN item. </td>
+<td class="confluenceTd">Testing should cover the creation of PCN release decision items and their assigned batches.</td>
+<td class="confluenceTd">Y</td>
+<td class="confluenceTd">
+<p>User Guide:</p>
+<p><a href="https://help.sap.com/docs/BATCH_RELEASE_HUB_LS_CLOUD/7511689e3b244b518244dfc33534c99a/616ec7b3e6cb439d8f4e564f9fdec1b6.html" target="_blank">PCN Release Decisions</a></p>
+<p>Updated to explain that a PCN release decision item cannot have two batch-level release decision items for the same batch.</p>
+</td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">245771/2026</td>
+<td class="confluenceTd">PCN Worklist: Batch Summary does not have radio buttons for selection</td>
+<td class="confluenceTd">
+<p>In the <strong>My PCN Release Decisions</strong> app, two entries for the same assigned batch were created. This scenario is not supported and caused several UI consistency issues. The code has been adjusted to prevent this issue occurring again. However, if a release decision trigger with the incorrect type is sent initially, the PCN release decision item cannot be used further. A new end-user procedure has been enabled to resolve this scenario: you must cancel all items created by the PCN release process flow for your trigger. Then, send the PCN release decision trigger again to create a new PCN release decision item, and send the correct release decision triggers for the assigned batches.</p>
+<p>Note this procedure must be performed immediately after the creation of the PCN release decision items. It does not work if one of the items created by the PCN release process flow is not canceled. For example, this procedure does not work if an item related to the PCN release decision trigger is already completed/confirmed or was previously regenerated.</p>
+</td>
+<td class="confluenceTd">Testing should cover the creation of PCN release decision items and their assigned batches.</td>
+<td class="confluenceTd">Y</td>
+<td class="confluenceTd">
+<p>User Guide:</p>
+<p><a href="https://help.sap.com/docs/BATCH_RELEASE_HUB_LS_CLOUD/7511689e3b244b518244dfc33534c99a/616ec7b3e6cb439d8f4e564f9fdec1b6.html" target="_blank">PCN Release Decisions</a></p>
+<p>Updated to explain how to proceed when a release decision trigger for an assigned batch was sent with the incorrect type.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div>

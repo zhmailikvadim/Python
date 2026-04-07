@@ -1,0 +1,40 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During implementing a note which was implemented before, the following dump occurs.</p>
+<p>"</p>
+<p>Category               ABAP programming error</p>
+<p>Runtime Errors         DBSQL_DUPLICATE_KEY_ERROR</p>
+<p>Except.                CX_SY_OPEN_SQL_DB</p>
+<p>ABAP Program           SAPLSCWC</p>
+<p>Application Component  BC-UPG-NA</p>
+<p>Date and Time          &lt;timestamp&gt;</p>
+<p>----------------------------------------------------------------------------------------------------</p>
+<p> </p>
+<p>----------------------------------------------------------------------------------------------------</p>
+<p>|Short Text                                                                                        |</p>
+<p>|    Open SQL array insert produces duplicate records in the database.                             |</p>
+<p>----------------------------------------------------------------------------------------------------</p>
+<p> </p>
+<p>----------------------------------------------------------------------------------------------------</p>
+<p>|What happened?                                                                                    |</p>
+<p>|    Error in the ABAP application program.                                                        |</p>
+<p>|                                                                                                  |</p>
+<p>|    The current ABAP program "SAPLSCWC" had to be terminated because it found a                   |</p>
+<p>|    statement that could not be executed.                                                         |</p>
+<p>----------------------------------------------------------------------------------------------------</p>
+<p> </p>
+<p>----------------------------------------------------------------------------------------------------</p>
+<p>|Error analysis                                                                                    |</p>
+<p>|    An exception has occurred in class "CX_SY_OPEN_SQL_DB". This exception was not                |</p>
+<p>|     caught                                                                                       |</p>
+<p>|    in procedure "SCWB_CINST_UPDATE_SMODI_TABLES" "(FUNCTION)" or propagated by a                 |</p>
+<p>|     RAISING clause.                                                                              |</p>
+<p>|    Since the caller of the procedure could not have anticipated this                             |</p>
+<p>|    exception, the current program was terminated.                                                |</p>
+<p>|    The reason for the exception occurring was:                                                   |</p>
+<p>|    When an Open SQL array insert is performed, trying to insert a record                         |</p>
+<p>|    into the database table "SMODILOG" causes the function to terminate if a                      |</p>
+<p>|    record with the same key already exists.                                                      |</p>
+<p>|                                                                                                  |</p>
+<p>|    (When an Open SQL individual record insert is performed, this situation                       |</p>
+<p>|    does not cause the function to terminate. SY-SUBRC is set to 4 instead.)                      |</p>
+<p>----------------------------------------------------------------------------------------------------</p>
+<p>"</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SNOTE</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Implement a note in SNOTE tool</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The entries of the note have already existed in internal table, which causes the error.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Firstly de-implement the note completely, and then implement the latest version of that note again. The dump will not occur.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SNOTE, obsolete version implemented, internal table, DBSQL_DUPLICATE_KEY_ERROR, CX_SY_OPEN_SQL_DB, SAPLSCWC</p></div></div></div></div>

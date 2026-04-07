@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>After migrating from the Legacy People Profile to the Latest People Profile a section that was previously not visible is now visible.</li><li>The corresponding card displays the message: “There’s nothing to show yet in the card.”</li><li>Administrators report that the section was previously restricted via Role-Based Permissions (RBP) and expect it to remain hidden.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors HCM Suite</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This is expected behavior.</p>
+<p>In the Legacy People Profile, access control for sections was managed through:</p>
+<p><strong>User Permissions &gt; Employee Views &gt; Employee Views Section</strong></p>
+<p>If RBP was not configured for a section, it was not visible to users.</p>
+<p>In the Latest People Profile:</p>
+<ul><li>
+<p>Categories replace legacy sections.</p>
+</li><li>
+<p>Section-level permissions under <strong>Employee Views Section</strong> are no longer supported.</p>
+</li><li>
+<p>Access to categories is controlled via the <strong>Configure Latest People Profile</strong> admin tool.</p>
+</li><li>
+<p>If a category is not explicitly configured with target roles, it becomes visible to all users by default.</p>
+</li></ul>
+<p>Additionally:</p>
+<ul><li>
+<p>Role-Based Permissions settings related to Employee Views Section are <strong>not included in the migration</strong>.</p>
+</li><li>
+<p>Product-specific permissions remain unchanged.</p>
+</li><li>
+<p>Only legacy section-based permissions are discontinued.</p>
+</li></ul>
+<p>As a result, categories that were previously restricted via legacy section permissions may now appear visible after migration, even if no data is available, leading to the message:</p>
+<p><strong>“There’s nothing to show yet in the card.” </strong></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To restrict visibility of the section category in the Latest People Profile define target roles as outlined in <a href="https://help.sap.com/docs/successfactors-platform/managing-sap-successfactors-user-experience/defining-target-roles-for-full-profile-category?locale=en-US&amp;state=PRODUCTION&amp;version=2511" rel="noopener noreferrer nofollow" target="_blank">Defining Target Roles for a Full Profile Category | SAP Help Portal</a>.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://help.sap.com/docs/successfactors-platform/managing-sap-successfactors-user-experience/notable-differences-in-existing-features" rel="noopener noreferrer nofollow" target="_blank">Notable Differences in Existing Features | SAP Help Portal</a></li><li><a href="https://help.sap.com/docs/successfactors-platform/managing-sap-successfactors-user-experience/migration-of-people-profile-configurations" rel="noopener noreferrer nofollow" target="_blank">Key Points About Migration | SAP Help Portal</a></li><li><a href="https://help.sap.com/docs/successfactors-platform/managing-sap-successfactors-user-experience/defining-target-roles-for-full-profile-category?locale=en-US&amp;state=PRODUCTION&amp;version=2511" rel="noopener noreferrer nofollow" target="_blank">Defining Target Roles for a Full Profile Category | SAP Help Portal</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Latest People Profile section visible, Full Profile category visible to all users, Section visible after migration, Empty card message, There’s nothing to show yet in the card, Employee Views Section permission not supported, Legacy section permission removed, RBP not migrated, Access control Full Profile category, Configure Latest People Profile target roles, Category visibility after migration, Latest People Profile access control</p></div></div></div></div>

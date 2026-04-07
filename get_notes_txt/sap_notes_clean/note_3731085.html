@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">You need to maintain or create connection entries in the hdbuserstore for a specific service user (e.g., SAPServiceSID).</p>
+<p>You are logged in with an administrative account and need to modify the store of a different OS user without logging into that user’s desktop session.</p>
+<p>Attempts to run the command result in "Access Denied" if not executed with proper administrative elevation.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP HANA</li><li>hdbuserstore </li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>When using hdbuserstore.exe for a specific domain service account (like SAPService&lt;SID&gt;), the syntax requires careful placement of the -u flag and quotes to handle the backslash.</p>
+<p> </p>
+<p><span style="text-decoration: underline;">The Correct Syntax:</span></p>
+<p>hdbuserstore.exe -u "DOMAIN\SAPServiceSID" SET DEFAULT "host:port" "DB_USER" "PASSWORD"</p>
+<p> </p>
+<p><span style="text-decoration: underline;">Key Components:</span></p>
+<p>-u "DOMAIN\User": This specifies the Operating System user whose store you are modifying. You must run this command with Administrator privileges to access another user's profile.</p>
+<p>SET DEFAULT: This creates the connection key named DEFAULT.</p>
+<p>"host:port": The database server and SQL port (e.g., hdbserver:30015).</p>
+<p>"DB_USER": The Database user (e.g., SYSTEM or SAPABAP1) that should be used to log in to HANA.</p>
+<p>"PASSWORD": The password for that Database user.</p>
+<p> </p>
+<p><span style="text-decoration: underline;">Concrete Example:</span></p>
+<p>If your domain is CORP, your SID is HDB, the host is hanadb01, and the port is 30015:</p>
+<p>hdbuserstore.exe -u "CORP\SAPServiceHDB" SET DEFAULT "hanadb01:30015" "SAPABAP1" "MySecurePassword123"</p>
+<p> </p>
+<p><span style="text-decoration: underline;">Important Tips:</span></p>
+<p>Always wrap the domain user and the host string in double quotes (" ") to prevent the command line from misinterpreting the backslash or colons.</p>
+<p>Verification: After running the command, verify the entry was created successfully for that specific user:</p>
+<p>PowerShell</p>
+<p>hdbuserstore.exe -u "CORP\SAPServiceHDB" LIST</p>
+<p> </p>
+<p><span style="text-decoration: underline;">Permissions:</span></p>
+<p>If you get an "Access Denied" error, ensure your command prompt is running as "Administrator".</p>
+<p>  </p>
+<p><span style="text-decoration: underline;">Using SSO (Kerberos) instead?</span></p>
+<p>If you want to use the domain account to log in without storing a password (Single Sign-On), you need the -zk flag:</p>
+<p> hdbuserstore.exe -u "DOMAIN\SAPServiceSID" -zk SET DEFAULT "host:port"</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><a href="https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/db46cfc4c5db4692aa84b46e357d47b8.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/db46cfc4c5db4692aa84b46e357d47b8.html?locale=en-US</a></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;">2938937 - How to create and access a user key in the hdbuserstore</p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;">3457324 - how to delete an exist key in hdbuserstore</p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;">2750829 - How to change SAPABAP1 schema password In HANA</p></div></div></div></div>

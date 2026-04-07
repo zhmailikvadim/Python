@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Error: org.apache.cxf.binding.soap.SoapFault:java.lang.Exception:java.lang.Exception: Destination URL is not configured for  XX_XXX system with message type <a href="mailto:InvoiceRequest@line" rel="noopener noreferrer nofollow" target="_blank">XXXXXXXXXXX_XX@line</a> 20 in DetermineSender.groovy</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue occurs due to an incorrectly configured endpoint for the inbound interface in CPI, which leads to processing failures.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Sign into your CPI account</li><li>Click Design &gt;<strong>Select the Integrations and APIs</strong> &gt; Select "<strong>SAP S/4HANA Integration with SAP Business Network for Logistics</strong>"</li><li>Click <strong>Artifacts </strong>&gt;Select <strong>SystemName_MessageType to Destination</strong>.</li><li>Click <strong>Edit </strong>&gt;Maintain <strong>Value Mappings</strong> &gt; ValueMap (Target System, Message Type, RecipientBusinessSystemID: DEFAULT &gt;Destination Url = URL.</li><li>Click <strong>Save</strong> &gt;<strong>Deploy</strong></li></ol>
+<p>You must set up the endpoints for the inbound interfaces in CPI as follows:</p>
+<ul style="list-style-type: initial;"><li style="list-style-type: none;">
+<ul style="list-style-type: initial;"><li>TransportationOrderConfirmation_In</li></ul>
+</li></ul>
+<ul style="list-style-type: initial;"><li style="list-style-type: none;">
+<ul style="list-style-type: initial;"><li>TransportationOrderQuotationConfirmation_In</li></ul>
+</li></ul>
+<ul style="list-style-type: initial;"><li style="list-style-type: none;">
+<ul style="list-style-type: initial;"><li>TransportationOrderChargeElementRequest_In</li></ul>
+</li></ul>
+<ul style="list-style-type: initial;"><li style="list-style-type: none;">
+<ul style="list-style-type: initial;"><li>InvoiceRequest_In</li></ul>
+</li></ul>
+<ul style="list-style-type: initial;"><li style="list-style-type: none;">
+<ul style="list-style-type: initial;"><li>TransportationEventBulkNotification_In</li></ul>
+</li></ul>
+<ul style="list-style-type: initial;"><li style="list-style-type: none;">
+<ul style="list-style-type: initial;"><li>TransportationOrderChargeElementRequest_In</li></ul>
+</li></ul>
+<ul style="list-style-type: initial;"><li style="list-style-type: none;">
+<ul style="list-style-type: initial;"><li>AppointmentConfirmation_In</li></ul>
+</li></ul>
+<ul style="list-style-type: initial;"><li style="list-style-type: none;">
+<ul style="list-style-type: initial;"><li>TransportationOrderBookingConfirmation_In</li></ul>
+</li></ul>
+<ul style="list-style-type: initial;"><li style="list-style-type: none;">
+<ul style="list-style-type: initial;"><li>TransportationOrderGenericRequest_In</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>To configure inbound services in SAP TM, please refer to Step 6.3 of the blog &gt;<em><a href="https://community.sap.com/t5/supply-chain-management-blog-posts-by-sap/how-to-setup-direct-connection-from-on-prem-to-sap-logistics-business/ba-p/13470981" rel="noopener noreferrer nofollow" target="_blank">Direct connection (via SOAMANAGER) between SAP Logistics Business Networkand your SAP TM or SAP S/4HANA system</a></em></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>BN4L, carrier invoice, invoice submission, InvoiceRequest_In, InvoiceNotification_In, DetermineSender.groovy, destination URL is not configured, II_EDI_INVOICE_REQUEST_IN, proxy class, SRT_MONI, LBN, freight settlement, TM-FRS, interface configuration, S/4HANA TM embedded</p></div></div></div></div>

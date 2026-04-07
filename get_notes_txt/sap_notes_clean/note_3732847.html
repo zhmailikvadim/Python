@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>You start a table re-distribution via HANA Cockpit with option <span class="SNO_DNT" style="float: none;" translate="no">BALANCED</span>, or using a <span class="SNO_DNT" style="float: none;" translate="no">SQL</span> command with option <span class="SNO_DNT" style="float: none;" translate="no">BALANCE_BY_TABLE_SIZE_HOSTED</span>.</p>
+<p>You observe that the data is not evenly distributed among the worker nodes.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>BW, sap.bw.dso, DSO tables, <span class="SNO_DNT" style="float: none;" translate="no">REORG_GENERATE</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 349423</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, the redistribution algorithm is impacted by large HASH/RANGE partition tables which can lead to uneven distribution results.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS00 - SPS06</li>
+<li>Revisions &lt;= 079.08 (SPS07)</li>
+<li>Revisions &lt;= 089.01 (SPS08)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>You have large HASH/RANGE partitioned tables, for example <span class="SNO_DNT" style="float: none;" translate="no">BW DSO</span> tables with first level HASH and second level RANGE partition.</li>
+<li>Table redistribution is executed via HANA Cockpit (option "<span class="SNO_DNT" style="float: none;" translate="no">BALANCED</span>") or using SQL command with "<span class="SNO_DNT" style="float: none;" translate="no">BALANCE_BY_TABLE_SIZE_HOSTED=&gt;true</span>"</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 079.09 (SPS07)</li>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<p>You may consider disable the problematic feature before generating the redistribution plan.</p>
+<ul>
+<li>steps to be performed as workaround<br/><br/><span class="SNO_DNT" style="float: none;" translate="no">ALTER SYSTEM ALTER CONFIGURATION ('indexserver.ini', 'SYSTEM') SET ('table_redist', 'enable_vote_partitions_by_intersec_kpi') = 'false' WITH RECONFIGURE';</span><br/><br/></li>
+<li>Please revert the workaround once you have upgraded to a revision containing the permanent solution.</li>
+</ul>
+<p><strong>Disclaimer</strong></p>
+<p>The SAP HANA configuration parameter [&lt;<span class="SNO_DNT" style="float: none;" translate="no">table_redist</span>&gt;] &lt;<span class="SNO_DNT" style="float: none;" translate="no">enable_vote_partitions_by_intersec_kpi</span>&gt; is an internal parameter and may only be used in the context of this SAP Note. Using such a parameter requires that the SAP HANA system has the revision specified in the SAP Note. Using internal parameters outside of this given scope is not supported. Please unset this parameter once you have upgraded to a revision containing the permanent solution.</p></div></div></div></div>

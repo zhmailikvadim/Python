@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When executing transaction PPCGO, a material movement fails for instance due to an insufficient stock and it is sent to Reprocessing. When reprocessing this entry, an error /SCWM/ERPINTEGRATION 874 occurs.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>EWM, CORUAFFW, FLG_ORIG, ewm_sync_post_req, PPC_PROFILE, T437S, POST_SYNC_REM_EWM</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Prerequisite:</p>
+<ul>
+<li>In Material Master of the Assembly (MRP 4 view) a PPC profile is assigned, not REM profile.</li>
+<li>You use JIT EWM (Extended Warehouse Management).</li>
+<li>You execute transaction PPCGO to process Backflushes.</li>
+</ul>
+<p>Reason:</p>
+<p>PPCGO uses a "Synchronous Posting to EWM" by default to ensure a real-time EWM stock consumption because it is very much often used together with JIT production supply planning.</p>
+<p>On the other hand COGI reprocessing considers setting of an embedded EWM synchronous posting which is a part of the REM profile. In case the Material master uses PPC profile instead, the Synchronoust posting to EWM is not performed which results into the error /SCWM/ERPINTEGRATION 874.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>COGI records created via transaction PPCGO will always be posted Synchronously to EWM.</p></div></div></div></div>

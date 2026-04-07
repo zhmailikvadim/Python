@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The client Analysis for Microsoft offers the creation of formulas at runtime. Here another type of dynamic object can be used, a dynamic selection. Depending on the type of formula, there is a en error raised on loading a saved workbook with :</p>
+<p><em>BRAIN (209): Formula (2) contains a formal error</em></p>
+<p>The formula definition has to be at top level of a binary operator.</p>
+<p>The displayed data is still correct. The synchronisation of the local formulas is done again after the dynamic selection was successfull, then there is no warning raised from the BW Backend component OLAP.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>BICS, bics.zero, local formula using a dynamic selection, BRAIN (209)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The synchronisation of local formulas is done before the synchronisation the dynamic selection, this causes the BW backend component OLAP to raise the warning BRAIN (209).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>A local formula can use a dynamic selection, therefore the synchronisation to the BW Backend Component OLAP is done before synchronising the local formula to the BW Backend component OLAP.</p>
+<p>Note: BICS is a common library consumed by various client applications. For details of the BICS releases which include this fix, please view the BICS release notes listed in the 'References' section. Client applications which include a specific release of BICS can be determined from Note 2488995 ‘BICS v3 - Delivery Schedule’.</p></div></div></div></div>

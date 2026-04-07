@@ -1,0 +1,112 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">An activity cannot be processed because it is blocked within the FSM system. This may be observed in areas such as the Planning Board or the FSM mobile application, where the activity appears unavailable, restricted, or cannot be updated.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li style="font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">SAP Field Service Management (FSM)</span></li><li style="font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Proaxia Connector (PACG)</span></li><li style="font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">ECC, S/4 HANA</span></li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Actual Behavior</strong></p>
+<ul><li>The activity remains blocked on the FSM side (e.g., Planning Board or FSM mobile application).</li><li>The following error message is displayed:
+<ul><li>“This activity is blocked and cannot be edited until synchronization with the ERP system is completed.”</li></ul>
+</li><li>The activity remains blocked for an extended period and does not become editable as expected, even after synchronization should have been completed.</li></ul>
+<p></p>
+<p><strong>Expected Behavior</strong></p>
+<p>After the change is completed and data is successfully exchanged with ECC or S/4 HANA, the activity is automatically unblocked and becomes editable in FSM.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Inbound IDocs in ECC/S4 are not processed successfully and remain in a pending or error state.</li><li>Outbound IDocs are stuck in the queue and are neither processed nor confirmed.</li><li>As a result, communication between FSM and ECC/S4 is disrupted, preventing successful data synchronization and leaving the activity in a locked state.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h4 data-toc-skip=""><span style="font-family: verdana, geneva;">1. Verify Block Details in FSM</span></h4>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">In FSM, check the details of the blocked object. refer also to <a href="https://me.sap.com/notes/3444543" rel="noopener noreferrer nofollow" target="_blank">3444543 - Root Cause of BLOCKED objects in SAP Field Service Management - SAP for Me</a> </span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Identify:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">The object causing the block</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">The date and time when the block was set</span></p>
+</li></ul>
+</li></ul>
+<p><span style="font-family: verdana, geneva;">This information helps determine whether the issue originates from inbound or outbound communication.</span></p>
+<hr/>
+<h4 data-toc-skip=""> </h4>
+<h4 data-toc-skip=""><span style="font-family: verdana, geneva;">2. Check Incoming Communication (Inbound IDocs)</span></h4>
+<p><span style="font-family: verdana, geneva;">If the blocked object is caused by incoming communication:</span></p>
+<ol><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">In ECC/S4, check inbound IDocs using:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Transaction /PACG/ECM_COCKPIT2</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Transaction WE02</span></p>
+</li></ul>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Filter IDocs from the relevant date with status:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">64 (ready to be processed)</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">51 (error)</span></p>
+</li></ul>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Identify IDocs related to the blocked object and process them.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">If processing fails:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Review the application log in status 51</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Resolve the underlying error</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Reprocess the IDoc</span></p>
+</li></ul>
+</li></ol>
+<p><span style="font-family: verdana, geneva;">Once successfully processed, an outbound message should be generated and the object in FSM should be unblocked.</span></p>
+<hr/>
+<h4 data-toc-skip=""> </h4>
+<h4 data-toc-skip=""><span style="font-family: verdana, geneva;">3. If Inbound Processing Is Successful</span></h4>
+<p><span style="font-family: verdana, geneva;">If all inbound IDocs are processed successfully and the object remains blocked, the issue is likely related to outbound communication.</span></p>
+<hr/>
+<h4 data-toc-skip=""> </h4>
+<h4 data-toc-skip=""><span style="font-family: verdana, geneva;">4. Check Outgoing Communication (Outbound IDocs)</span></h4>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Any FSM object synchronized with ECC/S4 (see supported objects list in  <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/1449558045/PACG+ECM_TRIG_SUPO+-+Supported+object+send" rel="noopener noreferrer nofollow" target="_blank">/PACG/ECM_TRIG_SUPO - Supported object send - FSM Cloud Connector - Confluence</a> ) requires a corresponding outbound IDoc to release the block.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">In most cases, inbound and outbound messages form pairs, for example:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;"><code>/PACG/ECM_SERVICECALLIN</code> ↔ <code>/PACG/ECM_SERVICECALL</code></span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;"><code>/PACG/ECM_ACTIVITYIN</code> ↔ <code>/PACG/ECM_ACTIVITYOUT</code></span></p>
+</li></ul>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Some inbound messages are confirmed via the generic message:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;"><code>/PACG/ECM_GENERIC</code></span></p>
+</li></ul>
+</li></ul>
+<hr/>
+<h4 data-toc-skip=""> </h4>
+<h4 data-toc-skip=""><span style="font-family: verdana, geneva;">5. Validate /PACG/ECM_GENERIC IDoc</span></h4>
+<ol><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">In the application log of a successfully processed IDoc (status 53), locate the reference to the <code>/PACG/ECM_GENERIC</code> IDoc.</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Copy the IDoc number and check its status in WE02.</span></p>
+</li></ol>
+<hr/>
+<h4 data-toc-skip=""> </h4>
+<h4 data-toc-skip=""><span style="font-family: verdana, geneva;">6. Resolve IDoc Status Issues</span></h4>
+<p><span style="font-family: verdana, geneva;">Take action based on the IDoc status:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Status 03 or 18</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Change status to 30 using program RC1_IDOC_SET_STATUS (transaction SE38)</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Reprocess via BD87</span></p>
+</li></ul>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Status 40</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Check the detailed error in:</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">/PACG/ECM_COCKPIT or /PACG/ECM_COCKPIT2 ( <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/6293352/Outbound+idocs+statuses" rel="noopener noreferrer nofollow" target="_blank">Outbound idocs statuses - FSM Cloud Connector - Confluence</a> )</span></p>
+</li></ul>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Attempt to reprocess the IDoc</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">If the issue persists, escalate to the support team</span></p>
+</li></ul>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Status 41</span></p>
+<ul><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Change status to 30 (via SE38 – RC1_IDOC_SET_STATUS)</span></p>
+</li><li style="font-family: verdana, geneva;">
+<p><span style="font-family: verdana, geneva;">Reprocess using BD87</span></p>
+</li></ul>
+</li></ul>
+<hr/>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to:  <a href="https://me.sap.com/notes/3444543" rel="noopener noreferrer nofollow" target="_blank">3444543 - Root Cause of BLOCKED objects in SAP Field Service Management - SAP for Me</a> </li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>FSM, activity blocked, Planning Board, FSM mobile application, IDoc, inbound IDoc, outbound IDoc, ECC, S4HANA, synchronization issue, ERP integration, data synchronization, IDoc status 51, IDoc status 64, IDoc status 03, IDoc status 18, IDoc status 30, IDoc status 40, IDoc status 41, WE02, WE05, BD87, SE38, RC1_IDOC_SET_STATUS, /PACG/ECM_COCKPIT2, /PACG/ECM_COCKPIT, /PACG/ECM_GENERIC, /PACG/ECM_ACTIVITYIN, /PACG/ECM_ACTIVITYOUT, /PACG/ECM_SERVICECALLIN, /PACG/ECM_SERVICECALL, FSM Cloud Connector, communication error, message queue, ERP sync failure</p></div></div></div></div>

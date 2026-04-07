@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">During the third and fourth week of an employee illness, the Belgian national health insurance service (RIZIV/ INAMI) pays a portion of an employee's limited wage; the employer completes the remaining payment based on the employee's normal taxable income.<br/><br/>The constants involved in limited wage calculations change annually, as determined by the RIZIV/ INAMI. Therefore, system changes are required to update the constants involved and ensure that guaranteed wage calculations are accurate.</p>
+<p>The limited wage has been increased as of 01.03.2026.</p>
+<p><span style="font-size: 14px;">The Payroll Parameters SVZ5D and SVZ6D have been updated the last time via SAP Note </span><a href="/notes/3570714" target="_blank">3570714</a><span style="font-size: 14px;"> in 2025. </span></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Illness, guaranteed wage, wage limit</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><a href="https://www.inami.fgov.be/nl/themas/arbeidsongeschiktheid/bedragen/werknemers-werklozen/Paginas/loon-grensbedrag.aspx" target="_blank">https://www.inami.fgov.be/nl/themas/arbeidsongeschiktheid/bedragen/werknemers-werklozen/Paginas/loon-grensbedrag.aspx</a></p>
+<p><a href="https://www.inami.fgov.be/fr/themes/incapacite-travail/montants/salaries-chomeurs/Pages/indemnite-plafond-salarial-salarie.aspx" target="_blank">https://www.inami.fgov.be/fr/themes/incapacite-travail/montants/salaries-chomeurs/Pages/indemnite-plafond-salarial-salarie.aspx</a></p>
+<p>The websites that can be accessed using these hyperlinks are external websites which are not part of SAP's offering.</p>
+<p>By clicking the hyperlinks <strong>you agree</strong> that unless expressly stated otherwise in your agreements with SAP: <br/>(i) the content of the associated website and any other external websites is not content provided by or on behalf of SAP, nor is it otherwise under SAP's control; <br/>(ii) the fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the contents and information provided on such websites; <br/>(iii) SAP does not give any representation regarding the quality, safety, suitability, accuracy or reliability of any external website or any of the information, content, and materials provided thereon; <br/>(iv) you visit those external websites entirely at your own risk. SAP shall not be directly or indirectly responsible or liable for any damage or loss caused or alleged to be caused by or in connection with your use of or reliance on any content, goods or services available on or through any such linked website.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>As a general rule SAP recommends that you implement the Support Package specified for your release.</p>
+<p>However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction.</p>
+<p>You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="nofollow" target="_blank">SAP Note Assistant</a></strong>.</p>
+<p><strong>Note</strong></p>
+<p>In order to calculate an employee's guaranteed wages, various payroll constants are required. The system uses the constants to calculate the employer portion of an employee's guaranteed wages, as follows:</p>
+<ul>
+<li><strong>Daily wage limit</strong><br/>The daily wage limit is a reference value that is compared with the employee's normal daily wage.<br/>The daily wage limits are determined by the Belgian authorities and change annually. The daily limits are controlled by two constants in the <strong>Payroll Parameters</strong> (<strong>V_T511P</strong>) Customizing view, as follows:</li>
+</ul>
+<ul>
+<li>SVZ5D - Wage limit illness (5d regime)</li>
+</ul>
+<ul>
+<li>SVZ6D - Wage limit illness (6d regime)</li>
+</ul>
+<p>                       <strong>Note</strong>: The wage limit constants contain the legal value rounded to two decimal places.</p>
+<ul>
+<li><strong>Difference </strong>between the daily wage limit and the employee's normal daily salary<br/>The difference is multiplied by a percentage value to determine the employer payment. The percentage applied depends on whether the difference is under or over the daily wage limit, and whether the employee is a blue or white collar worker.<br/>The percentage values are defined in four constants in the <strong>Payroll Parameters</strong> (<strong>V_T511K</strong>) Customizing view, as follows:</li>
+</ul>
+<ul>
+<li>SVAOL - %guar. under wage limit (blue)</li>
+</ul>
+<ul>
+<li>SVBOL - %guar. under wage limit (wht)</li>
+</ul>
+<ul>
+<li>SVABL - %guar. over wage limit (blue)</li>
+</ul>
+<ul>
+<li>SVBBL -  %guar. over wage limit (wht)</li>
+</ul>
+<p>The <strong>B014 </strong>personnel calculation rule uses these constants in calculations to determine guaranteed wages.</p></div></div></div></div>

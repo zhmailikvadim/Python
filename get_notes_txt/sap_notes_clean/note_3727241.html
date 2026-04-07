@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<div>
+<div id="step-e01b2916-b000-4e56-856a-72a3b831b719">
+<div role="article">
+<p>When executing the SAML Assertion Validation policy (ValidateSAMLAssertion), the request fails during signature verification with a digital signature validation error. The following messages are observed in the error details/logs:</p>
+<ul><li>ValidateSAMLAssertion[validate-samel]: Digital Signature Validation Failed</li><li>error.cause.cause: Null KeyInfo object!</li><li>error.cause: cannot find validation key</li><li>type: ErrorPoint</li><li>state: PROXY_REQ_FLOW</li><li>error.class: com.apigee.kernel.exceptions.spi.UncheckedException</li></ul>
+<p> </p>
+</div>
+<div role="article"> </div>
+</div>
+</div>
+</div>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Integration Suite</li><li>API Management</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Configure an API proxy (or shared flow) to use the ValidateSAMLAssertion policy</li><li>Configure the policy to validate the SAML assertion signature using a specific TrustStore (certificate expected to be present there).</li><li>The assertion signature includes &lt;dsig:KeyName&gt; within &lt;dsig:KeyInfo&gt;, which is used to identify the signing key.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The keyName element inside KeyInfo is not supported for SAML Assertion Validation in SAP API Management. </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This behavior is documented in <span style="text-decoration: underline;"><em><strong><a href="https://help.sap.com/docs/integration-suite/sap-integration-suite/saml-assertion-policy?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">SAP Help</a></strong></em></span> under the SAML Assertion Policy notes, “Policy Processing” section.</p>
+<p><a href="https://help.sap.com/docs/integration-suite/sap-integration-suite/saml-assertion-policy?locale=en-US" rel="noopener noreferrer nofollow" target="_blank"></a>Recommended resolution: please adjust the SAML assertion/signature so it does not rely on KeyInfo/KeyName for identifying the verification key, and instead uses a supported approach as described in the documentation. </p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://community.sap.com/topics/cloud-platform-integration-suite" rel="noopener noreferrer nofollow" target="_blank">SAP Integration Suite Community<br/></a><a href="https://answers.sap.com/tags/67838200100800006241" rel="noopener noreferrer nofollow" target="_blank">SAP Integration Suite tools Q&amp;A<br/></a><a href="https://help.sap.com/viewer/product/CLOUD_INTEGRATION/Cloud/en-US" rel="noopener noreferrer nofollow" target="_blank">SAP Cloud Integration Help Page</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>validateSAMLAssertion, SAML assertion, Null KeyInfo object, Digital Signature Validation Failed, PROXY_REQ_FLOW, trust store, certificate validation, KeyInfo, KeyName, X509Data, SAML issuer, XPath, API Management, SAP API Management, APIM, SAP Integration Suite, API Proxy, API Provider, Policy, Apigee</p>
+<section>
+<p></p>
+<p></p>
+</section>
+<section></section></div></div></div></div>

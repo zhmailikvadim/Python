@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When executing the PC00_M37_EFD_EE_SUMM transaction, the following groups are not generated for event S-5002:</p>
+<ul style="list-style-position: inside;"><li>infoProcJudRub</li><li>infoRRA</li><li>infoPgtoExt</li><li>infoIRComple</li></ul>
+<p>This KBA explains why this behavior is expected.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>
+<p>HR renewal</p>
+</li><li>
+<p>SAP S/4HANA</p>
+</li><li>
+<p>SAP ERP</p>
+</li><li>
+<p>SAP SuccessFactors Employee Central Payroll</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Run the PC00_M37_EFD_EE_SUMM transaction for the S-5002 event.</li><li>Obtain the XML file returned by eSocial.</li><li>Compare the results of the PC00_M37_EFD_EE_SUMM transaction with the detailed information in the XML file.</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>According to the Regulatory Change Manager tool, some groups are not generated in the report.<br/><br/><a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-4090_7" rel="noopener noreferrer nofollow" target="_blank">Regulatory Change Information: Changes: eSocial layout S-1.2 - standard events/framework </a> </p>
+<ul><li>S-5002 - withheld income tax
+<ul><li>The report <em>eSocial: Visualizador de Eventos Totalizadores de empregado</em> (RPU_PAYBR_EFD_EE_SUMM_EVENTS) will be changed work with this new version except for the groups <em>infoProcJudRub</em>, <em>infoRRA</em>, <em>infoPgtoExt</em> and <em>infoIRComplem.</em></li></ul>
+</li></ul>
+<p>The groups mentioned above are non-standard generated and are already included in event S-1210. Therefore, it is not necessary to include them in event S-5002 as well.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-4090_7" rel="nofollow">Regulatory Change Manager: eSocial layout S-1.2 (S-5002)</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>eSocial, S-5002, withheld income tax, employee totalizers viewer, PC00_M37_EFD_EE_SUMM, RPU_PAYBR_EFD_EE_SUMM_EVENTS, infoIRComplem, alimony, health plan, totals report, XML, beneficiary, dependent, beneficiário, dependente</p></div></div></div></div>

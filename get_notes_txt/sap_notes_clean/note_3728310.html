@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When the function module BC_STAB_FETCH_LOGS is called in a loop for different tables in one session, this behavior causes excessive authorization checks and rapidly generates a large number of Security Audit Log (SAL) events, effectively flooding the SAL.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>BC_STAB_FETCH_LOGS, VIEW_AUTHORITY_CHECK, DBTABLOG, Security Audit Log; SAL; SAL flood; audit log flooding; excessive SAL events; redundant SAL entries;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>On repeated calls for different tables from function module BC_STAB_FETCH_LOGS within the same session, the function re-executes VIEW_AUTHORITY_CHECK for tables already checked in previous calls. Each authorization check triggers multiple SAL events, leading to rapid event growth (e.g., calling for ~30 tables produces ~1,000 SAL events within a minute).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please implement this SAP note.</p></div></div></div></div>

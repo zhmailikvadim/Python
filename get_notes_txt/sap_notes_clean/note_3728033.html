@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In the standard Total Receivables – Today (Customer Ageing Report) app, ageing data cannot be displayed at invoice level with Ship-to Party and Sold-to Party information.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The standard ageing report is based on predefined CDS views and does not include Ship-to Party and Sold-to Party fields at invoice level as part of its delivered functionality.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Create a custom analytical solution to meet the requirement.</p>
+<ol><li>Develop a custom analytical cube:
+<ul><li>Use the standard CDS view `I_ARAgingGridGenLedgerCube` as the primary data source.</li><li>Extend the view (if required) to include below fields:
+<ul><li>Ship-to party </li><li>Sold-to party</li></ul>
+</li></ul>
+</li><li>Build a custom analytical query:
+<ul><li>Create the query on top of the custom analytical cube.</li><li>Add the required dimensions:<br/>
+<ul><li>Ship-to party</li><li>Sold-to party</li></ul>
+</li></ul>
+</li><li>Develop a custom analytical application:
+<ul><li>Create a custom Fiori tile using the custom analytical query.</li><li>Publish the tile to the relevant business role.</li><li>Test the solution to ensure it meets the reporting requirements.</li></ul>
+</li></ol>
+<p>This approach will allow for:</p>
+<ul><li>Displaying invoice-level ageing data.</li><li>Including ship-to party and sold-to party information.</li><li>Maintaining flexibility for future reporting needs.</li></ul>
+<p>Apps to Use</p>
+<ul><li>Custom CDS Views</li><li>Custom Analytical Queries</li><li>Custom Business Roles</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>aged receivables, ship-to party, sold-to party, invoice-level ageing, custom analytical solution, custom analytical cube, custom analytical query, custom fiori tile, s/4hana cloud public edition, I_ARAgingGridGenLedgerCube, receivables management, overdue receivables, customer ageing report.</p></div></div></div></div>

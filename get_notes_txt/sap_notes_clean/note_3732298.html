@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><strong>ShaExecuteOperation</strong> fails when a parameter value contains the delimiter character <strong>:</strong>.</p>
+<p>When passing a URL as a parameter, for example:</p>
+<ul>
+<li><strong>Input parameter: </strong>URL = "http://hostname:port"</li>
+</ul>
+<p>the value is incorrectly truncated at the : character. As a result, only the part before the first : is processed.</p>
+<ul>
+<li><strong>Expected: </strong>URL = "http://hostname:port"</li>
+<li><strong>Actual: </strong>URL = "http" (the remaining part <strong>//hostname:port</strong> is ignored because the value is truncated at the delimiter : after http)</li>
+</ul>
+<p>This behavior can be observed in the agent log similar to:<br/><strong>Log: </strong>com.sap.solman.agent.mai.os.ShaExecuteOperation [executeConfiguredOperation()] Start with CUSTOM_OPERATION_NAME=&lt;Operation_Name&gt;, <strong>PARAMETERS={URL=http}</strong>, RETURNFORMAT=JSON</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>ShaExecuteOperation parses parameter key–value pairs by splitting on the delimiter character <strong>:</strong>; if the parameter value itself contains :, the collector incorrectly stops reading the value at the first occurrence of :, so only the substring before the first : is treated as the value and the remaining part is ignored (for example, for URL=http://hostname:port, only http is interpreted as the value while //hostname:port is truncated)</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Upgrade the SDA to at least the versions listed in “<strong>Support Packages &amp; Patches</strong>”.</p>
+<p>In the corrected implementation, the parameter string is parsed so that the <strong>first occurrence of :</strong> separates key and value. The part before the first : is interpreted as the key, and everything after it is interpreted as the value.</p>
+<p>For example, for the input <strong>"URL":"http://hostname:port"</strong>, the key is <strong>URL</strong> and the value is <strong>http://hostname:port</strong>.</p>
+<p>Additionally, a new option is available to <strong>use custom delimiter</strong> if required. You can override the default delimiter by appending <strong>,delimiter:&lt;delimiter-char&gt;</strong> at the end of the parameter definition. For example:</p>
+<p>"URL"="http://hostname:port"<strong>,delimiter:=</strong></p>
+<p>uses = as the delimiter, and the parameter is resolved as Key = URL and Value = http://hostname:port.</p></div></div></div></div>

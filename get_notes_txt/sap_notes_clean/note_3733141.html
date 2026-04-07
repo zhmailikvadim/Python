@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">While setting the warehouse loading stop to "Loading Completed" from the RF-UI screen in Advanced Shipping and Receiving processes, users encounter the locking error:<br/><strong>"TO XXXXXXXXXX is already locked by another user and cannot be processed" (Message /SCMTMS/BATCH_80 187)</strong></p>
+<p>This error prevents the loading stop from being completed and blocks the goods issue process for outbound deliveries. Users will have to wait for couple of seconds and retry the action to set loading completed to proceed.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<ul>
+<li>Advanced Shipping Receiving Process</li>
+<li>RF-UI</li>
+<li>Loading Completed</li>
+<li>TM-EWM Integration</li>
+<li>Freight Order Locking</li>
+<li>/SCMTMS/E_SYLDEN Lock Object</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>When a handling unit is scanned and set to "loaded" via RF-UI, a bgRFC unit is created to process the status change asynchronously. This bgRFC process acquires an optimistic lock ('O') on lock object /SCMTMS/E_SYLDEN for the transportation order.</p>
+<p>According to the design, when the user triggers "Loading Completed", the system should:</p>
+<ol>
+<li>Acquire an exclusive lock ('E') on /SCMTMS/E_SYLDEN to signal bgRFC units to suspend processing</li>
+<li>Process remaining LINC activities synchronously</li>
+</ol>
+<p>However, the optimistic lock ('O') acquired by the bgRFC process cannot be promoted to an exclusive lock ('E') by the "Loading Completed" process because they operate in different Logical Units of Work (LUWs). This results in a foreign lock error (message /SCMTMS/BATCH_80 187: "TO XXXXXXXXXX is already locked by another user and cannot be processed"), preventing the loading stop from being completed.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Instead of acquiring an optimistic lock ('O') on /SCMTMS/E_SYLDEN in the bgRFC process, only conflict check with exclusive lock ('V') will be performed. The 'V' lock mode for bgRFC process allows the "Loading Completed" process later on to successfully acquire an exclusive lock ('E') on /SCMTMS/E_SYLDEN without encountering foreign lock errors, even when the bgRFC and "Loading Completed" processes operate in different LUWs.</p>
+<p>This change enables the synchronization mechanism to function as designed, allowing the "Loading Completed" process to properly signal bgRFC units to suspend and subsequently process all pending LINC activities synchronously within one LUW.</p>
+<p>Implement this note to correct the lock mode used during bgRFC processing of HU loading status updates.</p></div></div></div></div>

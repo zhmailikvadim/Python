@@ -1,0 +1,51 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>Objects are not getting mapped correctly during change source in BI 2025 when new column is added at the beginning or middle of existing column in updated SQL. </li>
+<li>
+<div>Objects map correctly if a new column is added at the last of existing columns in the updated SQL.</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>fhsql, bi2025, change source, webi, new column, new object, middle, first, FH-SQL</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence 2025 Patch 07</li>
+<li>Web Intelligence</li>
+<li>FH-SQL</li>
+</ul>
+<p><strong>Reproducing the Issue:</strong></p>
+<ol>
+<li>Log in to BI Launchpad.</li>
+<li>Create a new Web Intelligence document using FH-SQL in BI 2025 using efashion connection.</li>
+<ul>
+<li>SELECT</li>
+<li>T.'Mth',</li>
+<li>T.`Sales_revenue`</li>
+<li>FROM</li>
+<li>Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma T</li>
+</ul>
+<li>Perform the Change Source to update the SQL. And add a new column in the beginning of the SQL, here Year column.</li>
+<ul>
+<li>SELECT</li>
+<li><strong>T.'Yr'</strong>,</li>
+<li>T.'Mth',</li>
+<li>T.`Sales_revenue`</li>
+<li>FROM</li>
+<li>Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma T</li>
+</ul>
+<li>Notice in object mapping window the objects are not mapped correctly.</li>
+<li>Cancel the workflow and re-perform the same now instead of adding new column in the beginning of the SQL add the new column after existing column at last.</li>
+<ul>
+<li>SELECT</li>
+<li>T.'Mth',</li>
+<li>T.`Sales_revenue`,</li>
+<li><strong>T.'Yr'</strong></li>
+<li>FROM</li>
+<li>Agg_yr_qt_mt_mn_wk_rg_cy_sn_sr_qt_ma T</li>
+</ul>
+<li>Notice now the objects maps correctly.</li>
+</ol>
+<p><br/><strong>Cause:</strong><br/>The cause is under investigation by development team.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> The solution is under investigation by development team.</p></div></div></div></div>

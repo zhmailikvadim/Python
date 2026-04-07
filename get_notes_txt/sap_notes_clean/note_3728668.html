@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><header id="__html0"></header>
+<section id="u_symptom">
+<p>In Fiori app "Custom Fields and Logic", unable to delete the Custom Field with the error status "Deletion Failed". The messages have "DDIC Mass Activation: Activation failed".</p>
+<p>In SAP GUI, transaction SCFD_LOG, click on the error and it contains the messages.</p>
+<p><strong>"Object name: FINDS_GLPOS_C. The column ZZ1_ABC_COB is unknown"</strong></p>
+<p><strong>"Object name: FINDS_GLPOS_V. The column ZZ1_ABC_COB is unknown"</strong></p>
+</section><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4HANA</li><li>SAP S/4HANA Cloud Private Edition</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Access to "Custom Fields and Logic" app</li><li>Delete a custom field and receive an error message "DDIC Mass Activation: Activation failed"</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><header></header>
+<section id="u_cause">
+<p>The custom field is still used in the CDS-Views FINS_GLPOS_C / FINS_GLPOS_V.</p>
+</section><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Follow the resolution as specified in <a href="https://me.sap.com/notes/3405871" rel="noopener noreferrer nofollow" target="_blank">3405871</a> - Removing the customer-specific fields using FGL_MIG_REGENERATE_CDS_GLPOS.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>FINS_GLPOS_V, FINS_GLPOS_C, delete custom field, DDIC Mass Activation, Activation failed</p></div></div></div></div>

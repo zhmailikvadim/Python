@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">You are using asOfDate as a filter parameter in your query in OData API or Integration Center job, and you are receiving either of the errors below: </p>
+<ul><li>“400 Bad Request” </li><li>"Error Loading Preview Data
+<p>class java.lang. String cannot be cast to class java.util.Date (java.lang.String and java.utiLDate are in module java.base of loader 'bootstrap')</p>
+<p>Code: ServerErrorException</p>
+<p>Status: Internal Server Error</p>
+<p>Status Code: 500""</p>
+<p></p>
+</li></ul>
+<p><span style="color: rgb(224, 62, 45);"><img class="img-responsive" height="122" src="/documents/customerkba/pwZEQBZ8IBG7sbcwTfAbDk0FpR8YVCTCfS5shA9fY-g" width="799"/></span></p>
+<p><span style="color: rgb(224, 62, 45);">Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</span></p>
+<p></p>
+<p> </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP SuccessFactors HCM Suite</li><li>OData API</li><li>Integration Center</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>If using Integration Center</p>
+<ol><li>Go to Integration Center.</li><li>Edit an integration based on a non-effective-dated entity where for a effective-dated entity “asOfDate” is added as a direct filter.</li><li>Navigate to “Configure fields”: an error appears.</li></ol>
+<p>Or, if using OData API, same example above applies, but you have to execute the query to receive the error.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue occurs when combining the asOfDate parameter with a direct $filter on navigation properties that lead to effective-dated entities (for example, userIdNav/empInfo/jobInfoNav/company) from a non-effective-dated root entity like Background_Documents. This usage is not supported.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>For now, there is a workaround that can be used for this. However, a later fix is planned for this. </p>
+<p>In Integration Center, customers should use a Calculated Filter instead of adding the field (e.g., Company from EmpJob) directly as a filter.</p>
+<p>Steps for the workaround in Integration Center:</p>
+<ol style="list-style-type: decimal;"><li>Edit the integration (or create a new one based on Background_Documents)</li><li>Go to the Filters section</li><li>Instead of adding "Company" (or Business Unit, Cost Center, etc. from EmpJob) as a direct filter field, click "Add Calculated Filter"</li><li>Configure the equivalent filtering logic inside the calculated filter</li><li>Save and test the integration</li></ol>
+<p>For customers using the API directly (Postman/Bruno), the workaround is to either remove the <code>asOfDate</code> parameter or remove the navigation-based filter to effective-dated entity fields from <code>$filter</code> — removing either one will allow the request to succeed.</p>
+<p>Example — problematic query:</p>
+<div>
+<div>
+<div>
+<pre><code>GET /odata/v2/Background_Documents?$filter=userIdNav/empInfo/jobInfoNav/company eq '1000'&amp;asOfDate=9999-12-31→ 400 Bad Request</code></pre>
+</div>
+</div>
+</div>
+<p>Example — workaround (remove asOfDate):</p>
+<div>
+<div>
+<div>
+<p><code>GET /odata/v2/Background_Documents?$filter=userIdNav/empInfo/jobInfoNav/company eq '1000'→ 200 OK<br/></code></p>
+<p></p>
+<p><span style="text-decoration: underline; font-size: 11pt;"><em><strong>PS</strong></em></span>: Yes, we plan to fully support this use case in the <strong>2611 release</strong>. After 2611, customers will be able to use asOfDate with $filter navigation from non-effective-dated entities to effective-dated entities without any workaround. The fix has already been merged to our master branch.</p>
+</div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>KBA <a href="https://me.sap.com/notes/0002477558" rel="noopener noreferrer nofollow" target="_blank">2477558 - How to work with SFOdata.Background entities - SuccessFactors OData API</a></li><li>KBA <a href="https://me.sap.com/notes/0002729338" rel="noopener noreferrer nofollow" target="_blank">2729338 - Integration Center: How to filter on Custom &amp; Non-Filterable Fields</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>integration center, background_documents, asofdate, $filter navigation, empjob company, effective-dated, non-effective-dated, configure fields error, odata v2, 400 bad request, calculated filter, background element filter, navigation filter, empjob filter, odata error</p></div></div></div></div>

@@ -1,0 +1,127 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Solr can provide suggestions for searched words. You can use one of the following components to activate this feature:</p>
+<ul><li>
+<p>SpellCheckComponent</p>
+</li><li>
+<p>SuggestComponentt</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Commerce Cloud <br/><br/></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>By default, the Solr server uses SpellCheckComponent. You can change this configuration in the solrconfig.xml file.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>While SpellCheckComponent may work adequately in single-shard setups, it faces limitations in multi-shard configurations. We recommend you to use SuggestComponent instead of SpellecheckComponent for multi-shard configurations. Update the solrconfig.xml to replace SpellcheckComponent with the SuggestComponent. You may need to add or modify field types to optimize suggestion generation.</p>
+<p><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/aa417173fe4a4ba5a473c93eb730a417/8c6009dd86691014b808e77b0fde95f3.html" rel="noopener noreferrer nofollow" target="_blank">SuggestComponentt</a></p>
+<p>To switch to the SuggestComponent component, in the solrconfig.xml file, comment out the following code blocks:</p>
+<pre><code>&lt;requestHandler name="/suggest" class="solr.SearchHandler"&gt;
+		&lt;lst name="defaults"&gt;
+			&lt;str name="spellcheck"&gt;true&lt;/str&gt;
+			&lt;str name="spellcheck.dictionary"&gt;default&lt;/str&gt;
+			&lt;str name="spellcheck.onlyMorePopular"&gt;true&lt;/str&gt;
+			&lt;str name="spellcheck.count"&gt;5&lt;/str&gt;
+			&lt;str name="spellcheck.collate"&gt;true&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;arr name="components"&gt;
+			&lt;str&gt;suggest&lt;/str&gt;
+		&lt;/arr&gt;
+	&lt;/requestHandler&gt;</code><br/><br/><code>&lt;searchComponent name="spellcheck" class="solr.SpellCheckComponent"&gt;
+		&lt;str name="queryAnalyzerFieldType"&gt;text_spell&lt;/str&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;default&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;en&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_en&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;cs&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_cs&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;de&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_de&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;es&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_es&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;es_CO&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_es_co&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;fr&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_fr&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;hi&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_hi&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;hu&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_hu&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;id&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_id&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;it&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_it&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;ja&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_ja&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;ko&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_ko&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;pl&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_pl&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;pt&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_pt&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;ru&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_ru&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;zh&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_zh&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;lst name="spellchecker"&gt;
+			&lt;str name="name"&gt;zh_TW&lt;/str&gt;
+			&lt;str name="classname"&gt;solr.DirectSolrSpellChecker&lt;/str&gt;
+			&lt;str name="field"&gt;spellcheck_zh_tw&lt;/str&gt;
+		&lt;/lst&gt;
+	&lt;/searchComponent&gt;</code><br/><br/><code>Uncomment the following code blocks:</code><br/><br/><code>&lt;!--
+	&lt;requestHandler name="/suggest" class="solr.SearchHandler"&gt;
+		&lt;lst name="defaults"&gt;
+			&lt;str name="suggest"&gt;true&lt;/str&gt;
+			&lt;str name="suggest.dictionary"&gt;default&lt;/str&gt;
+			&lt;str name="suggest.count"&gt;5&lt;/str&gt;
+		&lt;/lst&gt;
+		&lt;arr name="components"&gt;
+			&lt;str&gt;suggest&lt;/str&gt;
+		&lt;/arr&gt;
+	&lt;/requestHandler&gt;
+	--&gt;</code><br/><br/><br/></pre>
+<div id="related-information">Related Information</div>
+<div><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/aa417173fe4a4ba5a473c93eb730a417/8c6035a086691014a42ae443f651eedc.html?locale=en-US&amp;state=PRODUCTION&amp;version=v2211" rel="noopener noreferrer nofollow" target="_blank">Solr Server Installation</a></div>
+<div><a href="https://help.sap.com/docs/link-disclaimer?site=http%3A%2F%2Fwiki.apache.org%2Fsolr%2FSchemaXml" rel="noopener noreferrer nofollow" target="_blank">Schema xml</a></div>
+<div><a href="https://help.sap.com/docs/link-disclaimer?site=http%3A%2F%2Fwiki.apache.org%2Fsolr%2FSolrConfigXml" rel="noopener noreferrer nofollow" target="_blank">Solr Config xml</a></div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>search</p></div></div></div></div>

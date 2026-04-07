@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When doing a sizing, customers also need to forecast the required CPU resources. At SAP, CPU resources are provided in SAPS and in sfsSAPS.</p>
+<p>This SAP note can be used to translate SAPS into sfsSAPS.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CPU, CPU resources, sizing, resource requirements, hardware, benchmarks, Sell-from-Stock, SfS, SAPS, sfsSAPS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>For many years, CPU resources required to run a specific workload were given in SAPS. SAPS are derived from the SAP Sales and Distribution (SD) Benchmark. The SD Benchmark is retired end of 2025.</p>
+<p>To support SAP HANA based workloads, SAP has introduced the Quote-to-Cash Benchmark (Q2C). This mixed load benchmark is based on an SAP S/4HANA Sell-from-Stock scenario (OLTP) and includes an analytical workload contribution (OLAP).</p>
+<p>To support non-HANA supported hardware platforms SAP has introduced the SAP Sell-from-Sock (sfs) Standard Application benchmark. This benchmark is based on an SAP ERP 6.0 EHP8 Sell-from-Stock (OLTP) scenario.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please note, that the underlying SAP SD and SAP sell-from Stock business scenarios are not identical, hence the two benchmarks will deliver different results on identical hardware. Therefore, SAP introduced a new throughput metric to measure the performance of an SAP system. This new unit is called sfsSAPS.</p>
+<p>Please also note that the underlying infrastructure and business scenario between SAP Q2C Standard Application Benchmark and SAP Sell-from-Stock Standard Application Benchmark are not identical and therefore a comparison between both benchmarks is not possible.</p>
+<p><strong>How to translate sfsSAPS into SAPS?</strong></p>
+<p>Based on current Sell-from-Stock benchmark results, the factor is 1.4.</p>
+<p><strong>Example:</strong></p>
+<p>You applied a sizing guideline and based on the T-shirt sizing in the guide, the CPU requirements for the planned business volume are 30,800 SAPS. By applying the factor of 1.4, you can easily calculate that this corresponds to 22,000 sfsSAPS. To get an idea what 22,000 sfsSAPS are, you can have a look at the certified <a href="https://www.sap.com/dmc/exp/2018-benchmark-directory/#/sfs" target="_blank">sfsSAPS benchmark results</a>.</p></div></div></div></div>

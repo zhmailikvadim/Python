@@ -1,0 +1,49 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>When attempting to import data into a New Model (Measure-Based) in SAP Analytics Cloud, the system loads the "Classic Data Import" interface (the legacy grid/sidebar view) instead of the expected "New Data Import" experience (the flow-based wrangling view).</p>
+</li><li>
+<p>The user cannot find the flow-based data preparation tools despite explicitly creating a New Model.</p>
+</li><li>
+<p>Additionally, when the structure of the New Model is modified or updated (e.g., adding or removing measures/dimensions), draft import jobs in the Data Management tab disappear and must be recreated from scratch.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Analytics Cloud 2025.21.11 </li><li>SAP Neo Environment</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Issue 1: Classic UI appearing for New Models</strong></p>
+<ol><li>
+<p>Log in to an SAP Analytics Cloud tenant hosted on the Neo environment.</p>
+</li><li>
+<p>Go to Modeler and create a New Model (Start with Data).</p>
+</li><li>
+<p>Select a data source (e.g., MS SQL Server via SAP Analytics Cloud Agent or OData).</p>
+</li><li>
+<p>Proceed to the Data Preparation/Wrangling stage.</p>
+</li><li>
+<p>Notice that the system displays the Classic Data Import UI rather than the New Data Import flow-based UI.</p>
+</li></ol>
+<p><strong>Issue 2: Import Jobs disappearing</strong></p>
+<ol><li>
+<p>In the New Model, navigate to the Data Management tab.</p>
+</li><li>
+<p>Observe an existing draft import job.</p>
+</li><li>
+<p>Switch to the Model Structure view and make a change (e.g., add a new column or measure).</p>
+</li><li>
+<p>Return to the Data Management tab.</p>
+</li><li>
+<p>Notice that the previously created draft import job is no longer listed.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Both behaviors are Working by Design.</p>
+<p><strong>Cause 1 (Interface Fallback): </strong></p>
+<p>The root cause is a platform architectural constraint. The "New Data Import" experience (flow-based view) was developed exclusively for Cloud Foundry (CF) environments. On the Neo platform, the system is designed to force the Classic Data Import interface, even when interacting with New Models.</p>
+<p><strong>Cause 2 (Disappearing Import Jobs): </strong></p>
+<p>The system is designed to strictly enforce data integrity. When a model's structure is updated or changed, the system automatically invalidates and deletes previous draft mappings. This prevents data corruption or upload failures that would occur if the old mapping tried to push data into a structure that no longer exists.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>For the Interface Behavior:</strong></p>
+<ul><li>
+<p>Because this is a hard platform constraint on Neo, there is no system configuration or workaround to enable the New Data Import experience on a Neo tenant.</p>
+</li><li>
+<p>To utilize the New Data Import experience and flow-based wrangling, the tenant must be hosted on a Cloud Foundry (CF) environment. Customers wishing to use these features should consider migrating their tenant from Neo to Cloud Foundry.</p>
+<ul><li>
+<p>Reference KBA:  <a href="https://me.sap.com/notes/3119338" rel="noopener noreferrer nofollow" target="_blank">3119338</a> - Migrate SAP Analytics Cloud NEO tenant to Cloud Foundry </p>
+</li></ul>
+</li></ul>
+<p><strong>For the Disappearing Import Jobs:</strong></p>
+<ul><li>
+<p>This is expected behavior. To minimize rework, it is highly recommended to finalize the Model Structure completely before setting up and mapping Data Import jobs.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>KBA  <a href="https://me.sap.com/notes/3119338" rel="noopener noreferrer nofollow" target="_blank">3119338</a> - Migrate SAP Analytics Cloud NEO tenant to Cloud Foundry</li><li>KBA <a href="https://me.sap.com/notes/2569847" rel="noopener noreferrer nofollow" target="_blank">2569847</a> - Where can you find SAC user assistance (help) to use, configure, and operate it more effectively?</li><li>KBA <a href="https://me.sap.com/notes/2487011" rel="noopener noreferrer nofollow" target="_blank">2487011</a> - What information do I need to provide when opening a case for SAP Analytics Cloud?</li><li>KBA <a href="https://me.sap.com/notes/2511489" rel="noopener noreferrer nofollow" target="_blank">2511489</a> - Troubleshooting performance issues in SAP Analytics Cloud
+<ul></ul>
+</li><li><a href="https://help.sap.com/viewer/2d7115b0e0aa4f78bfd9c06fdc1fe4f6/latest/en-US" rel="noopener noreferrer nofollow" target="_blank">SAP Analytics Cloud Connection Guide</a></li><li><a href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/837228942b504eeeb75efee930727914.html" rel="noopener noreferrer nofollow" target="_blank">SAP Analytics Cloud Get More Help and SAP Support</a></li><li>Need More Help? <a href="https://support.sap.com/en/contact-us.html" rel="noopener noreferrer nofollow" target="_blank">Contact Support</a> </li></ul>
+<p>Your feedback is important to help us improve our knowledge base.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Analytics Cloud, SAC, Neo, Cloud Foundry, CF, New Model, Classic Model, Data Import, Data Management, Data Preparation, Wrangling, flow-based, fallback, missing, UI, interface, disappear, deleted, rebuild model, import job, draft source, Classic UI, MS SQL Server, mapping. </p></div></div></div></div>

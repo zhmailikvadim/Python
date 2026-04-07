@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>When attempting to create or maintain a work schedule using transaction PT01, the system raises the following error:<br/>Message No. TK430<br/><em>“The system administrator has set your logon client to the 'not modifiable' status. Client-specific objects cannot be changed in this client.”</em></p>
+</li><li>
+<p>The transaction is terminated and no changes can be saved.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4HANA </li><li>SAP Human Capital Management (HCM) </li><li>Personnel Time Management </li><li>Time Data Recording and Management</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Log into the affected system/client.</p>
+</li><li>
+<p>Execute transaction PT01.</p>
+</li><li>
+<p>Attempt to create or modify a work schedule.</p>
+</li><li>
+<p>The system issues error TK430 and stops processing.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>
+<p>The client is configured as “not modifiable” in table T000 (typically a productive client).</p>
+</li><li>
+<p>Customizing changes (including work schedule generation) are not allowed in such clients by design.</p>
+</li><li>
+<p>This is a standard system protection mechanism to prevent direct changes in productive environments.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The error TK430 is expected system behavior when the client is set to “not modifiable” (typically a productive client maintained in table T000).</p>
+<ul><li>
+<p>Customizing activities such as work schedule generation in PT01 cannot be performed in such a client.</p>
+</li><li>
+<p>Maintain and generate the work schedules in a customizing or development client instead.</p>
+</li><li>
+<p>Transport the changes to the productive client using the Change and Transport System (CTS).</p>
+</li></ul>
+<p>This restriction is part of the standard SAP design to protect productive environments. Direct changes in a productive client are not recommended and not supported.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>PT01, TK430, not modifiable client, T000, productive client, work schedule, customizing restriction, CTS, transport, MP51SF00, EXIT, SAP HCM, PT-WS,MP51SF00.</p></div></div></div></div>

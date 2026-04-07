@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>An error occurs in the 'Manage Purchase Order' application when creating a purchase order; the approval section shows an error before saving.</li><li>Error message: "The steps cannot be loaded. Please try again later. If the problem persists, contact support."</li><li>The issue occurs during the draft/simulation phase of purchase order creation.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Open the 'Manage Purchase Order' application.</li><li>Create a new purchase order.</li><li>Before saving, open the Approval Details section and observe the error message.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><section>
+<section id="u_cause">
+<p>The workflow scenario in the Manage Workflows for Purchase Orders app uses custom preconditions.</p>
+</section>
+</section>
+<section><header></header></section><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><section>
+<section id="u_resolution">
+<p>The custom preconditions are checked dynamically as per the logic in the custom implementation of BAdI SWF_WORKFLOW_CONDITION_EVAL. Hence, the approval details are only determined once the PO is saved.</p>
+</section>
+</section>
+<section><header></header></section><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>manage purchase order, approval details, approval tab error, the steps cannot be loaded, draft, simulation, po draft, workflow preview, fiori error banner, purchase order workflow, swf_workflow_condition_eval, badi, workflow condition evaluation, predicted approvers,SWF_WORKFLOW_CONDITION_EVAL </p></div></div></div></div>

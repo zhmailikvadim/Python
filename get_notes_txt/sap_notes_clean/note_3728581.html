@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>The user synchronization to SAP Identity Authentication Service (IAS) fails.</li><li>The following error is observed in the Identity Provisioning Service (IPS) job:</li></ul>
+<p style="padding-left: 40px;">status=400, detail=Cannot construct instance of `com.sap.security.iag.idstore.api.external.scim.model.ScimEmail` (although at least one Creator exists): no String-argument constructor/factory method to deserialize from String value ('XXX@email.domain')</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Identity Provisioning Service (IPS)</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Trigger the synchronization process by running an IPS job.</li><li>
+<p>Observe the error.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue arises due to an incorrect email transformation setup in the IAS target system while using "ias.api.version": "2". </p>
+<p>                {<br/>                    "sourcePath": "$.emails[*].value",<br/>                    "preserveArrayWithSingleElement": true,<br/>                    "targetPath": "$.emails"<br/>                },</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To resolve the synchronization issue, modify the transformation to utilize the Default transformation for SCIM API version 2 as follows:</p>
+<ol><li>
+<p>Edit the IAS target system.</p>
+</li><li>
+<p>Replace the existing transformation with the following configuration:</p>
+<div>
+<div>
+<div>      {<br/>        "sourcePath": "$.emails",<br/>        "preserveArrayWithSingleElement": true,<br/>        "targetPath": "$['urn:ietf:params:scim:schemas:extension:sap:2.0:User']['emails']",<br/>        "scope": "createEntity",<br/>        "functions": [<br/>           {<br/>                 "function": "putIfAbsent",<br/>                 "key": "verified",<br/>                 "defaultValue": true<br/>           }<br/>         ]<br/>      },<br/>      {<br/>        "targetPath": "$['urn:ietf:params:scim:schemas:extension:sap:2.0:User']['emails'][*]['type']",<br/>        "type": "remove"<br/>      },<br/>      {<br/>        "sourcePath": "$.emails[*].['value','display','primary']",<br/>        "preserveArrayWithSingleElement": true,<br/>        "targetPath": "$.emails"<br/>      },</div>
+</div>
+<pre> </pre>
+</div>
+</li><li>
+<p>Save the changes.</p>
+</li><li>
+<p>Run the Read job.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://help.sap.com/docs/cloud-identity-services/cloud-identity-services/target-identity-authentication?version=Cloud" rel="noopener noreferrer nofollow" target="_blank">Identity Authentication</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>scim provisioning error, scimemail deserialization error, user synchronization fails, identity authentication service, ias synchronization issue, IPS, scim api version 2, provisioning job error, user import error, scim email mapping error, scim provisioning failure</p></div></div></div></div>

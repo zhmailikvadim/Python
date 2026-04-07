@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><span style="font-size: 14px;">When you complete a password reset flow, you encounter an error when the system redirects you back to your application (for example, SAP Build Work Zone).</span></p>
+<p><strong>Common scenarios where this occurs:</strong></p>
+<ul>
+<li>You're on a mobile device and open an application like SAP Build Work Zone. During authentication, you trigger the password reset flow. After you reset your password, SAP Cloud Identity Services attempts to redirect you to your application, and you get an error.</li>
+<li><span style="font-size: 14px;">You open the password reset link in a different browser than the one where you initiated the Forgot Password flow.</span></li>
+<li>You open the password reset link in incognito or private browsing mode.</li>
+<li>Your original browser session expires, or you close it before you complete the password reset.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>IAS, Identity Authentication, approuter, password reset, forgot password, HTTP 400, HTTP 401, unauthorized, JSESSIONID, state parameter, Work Zone, Mobile Start, session cookie</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>An application such as SAP Build Work Zone sets a session cookie during initial access. You then trigger a password reset flow. After you reset your password in a different browser context (different browser, incognito mode, mobile device, or after you close the original browser), SAP Cloud Identity Services attempts to redirect you back to your application. However, the system doesn't have access to the session cookie.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Product development is evaluating solutions for this issue. Watch <a href="https://help.sap.com/whats-new/cf0cb2cb149647329b5d02aa96303f56?Component=Cloud%20Identity%20Services&amp;Valid_as_Of=2022-01-01%3A2050-12-31" target="_blank">our release notes</a> for updates.</p>
+<p><strong>Workaround</strong></p>
+<p><strong>For End Users</strong></p>
+<p><strong>Option 1: For Non-Mobile Scenarios, Use the Same Browser Context</strong></p>
+<ul>
+<li>Complete the password reset using the same browser where you originally chose Forgot Password.</li>
+<li>Don't use incognito or private mode if you made the original request in normal mode.</li>
+</ul>
+<p><strong>Option 2: Start Fresh After Password Reset</strong></p>
+<ol>
+<li>After you successfully reset your password using the email link, close the browser tab that shows the error.</li>
+<li>Go directly to your application URL (for example, the Work Zone homepage).</li>
+<li>Log in with your new password.</li>
+</ol>
+<p><strong>For Administrators</strong></p>
+<p><strong>User Communication: </strong>Inform users that after they complete a password reset, they should:</p>
+<ol>
+<li>Close any error pages.</li>
+<li>Go directly to the application URL.</li>
+<li>Log in with their new password.</li>
+</ol>
+<p>The password reset itself is successful even when the error appears. Only the automatic redirect fails.</p></div></div></div></div>

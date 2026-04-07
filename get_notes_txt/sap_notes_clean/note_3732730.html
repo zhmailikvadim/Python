@@ -1,0 +1,84 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">SAP Product Lifecycle Costing 4.0 SP9 Hotfix 2 is released and you want to install it or upgrade from a lower version.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="__html0"><span style="text-decoration: underline;"><strong><strong>Release Notes/Changelog:</strong></strong></span></p>
+<p style="padding-left: 30px;"><strong>Bug Fixes</strong></p>
+<div class="wiki-content" id="main-content">
+<ul>
+<li>
+<p>Corrected an issue where certain calculated fields were not refreshed when caching was used. The calculation logic now consistently populates all required values from <abbr>AFL</abbr> results.</p>
+</li>
+<li>
+<p>Resolved a problem with price‑based filtering where valid items were not returned. Backend price handling was aligned with <abbr>AFL</abbr> values, and existing data is updated via a post‑install step.</p>
+</li>
+<li>
+<p>Addressed an application crash that occurred when updating project dates to a completely new, non‑overlapping year range. Lifecycle period processing now safely handles removed and missing periods.</p>
+</li>
+<li>
+<p>Improved robustness of Custom Field processing to prevent the system from entering an unrecoverable state if Custom Field generation is interrupted during long‑running operations.</p>
+</li>
+<li>
+<p>Enhanced stability and performance of Custom Field creation by correcting locking and cleanup order, properly clearing temporary caches, and reducing the impact of expensive updates on very large datasets.</p>
+</li>
+<li>
+<p>Fixed database connection leaks in the XSJS layer that could lead to connection pool exhaustion. Connections are now reliably closed after use, improving stability under load.</p>
+</li>
+<li>
+<p>Ensured item tracking is consistently enabled during Custom Field updates, preventing scenarios where tracking could remain unintentionally disabled.</p>
+</li>
+<li>
+<p>Prevented duplicate or incorrect item numbering by stabilizing item creation logic and eliminating timing‑related conflicts.</p>
+</li>
+<li>
+<p>Optimized several metadata update operations that previously caused high memory consumption and long runtimes on large tables.</p>
+</li>
+<li>
+<p>Resolved failures during transportation import in <em>replace</em> mode by preventing conflicts between background cleanup tasks and deployment steps, avoiding deadlocks and connection resets.</p>
+</li>
+<li>
+<p>Fixed a crash on the home screen triggered during navigation when opening calculation versions with filters by safely handling missing data.</p>
+</li>
+<li>
+<p>Eliminated a copy/paste crash that could occur when moving items between different calculations by stabilizing UI refresh timing.</p>
+</li>
+</ul>
+</div>
+<p><span style="text-decoration: underline;"><strong>New Installation and Upgrade:</strong></span></p>
+<p id="__html26">Follow these instructions when installing PLC for the first time or upgrading an existing version.</p>
+<p><strong>Note: Whether you’re installing PLC for the first time or upgrading, make</strong><strong> sure that your system </strong><strong>includes package </strong><strong>G</strong><strong>libc</strong><strong>-</strong><strong>2.29</strong><strong> or higher to ensure that the</strong><strong> </strong><strong>PLC AFL Library</strong><strong> loads properly</strong><strong>. The </strong><strong>minimum supported version of </strong><strong>the SUSE Linux Enterprise Server Distribution (</strong><strong>SLES</strong><strong>) </strong><strong>for this package </strong><strong>is SLES 15 SP3.</strong></p>
+<p style="padding-left: 30px;"><strong>New Installation of </strong><strong>PLC</strong></p>
+<p style="padding-left: 30px;">If you’re installing PLC for the first time, you don’t need to install any previous versions. Install 4.0 SP9 Hotfix 2 and follow the instructions in the <em>Administrator's Guide for SAP Product Lifecycle Costing</em><em> </em>under <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/sap-product-lifecycle-costing/administrator-s-guide-for-sap-product-lifecycle-costing/installation-steps-and-checks?version=4.6" target="_blank">Installation Steps and Checks</a>.</p>
+<p style="padding-left: 30px;">Make sure you've installed the following HANA DB and component revisions:</p>
+<p style="padding-left: 60px;"><strong style="font-size: 14px;">Revisions between and including 2.00.79.02 (SPS07)</strong><strong style="font-size: 14px;"> - 2.00.089.1 (SPS08) for HANA DB 2.0 </strong><br/><strong style="font-size: 14px;">HANA Component EPMMDS Rev 79.02 only for HANA 2.0 Rev 79.02 - EPMMDS Rev 89.1 only for HANA 2.0 Rev 89.01</strong><br/><strong style="font-size: 14px;">XS Advanced Runtime for SAP HANA, revisions between and including 1.4.0 - 1.4.7</strong><strong style="font-size: 14px;"> (<strong>SAP EXTENDED APP SERVICES 04</strong>)</strong></p>
+<p style="padding-left: 30px;"><strong>Importing from SAP ERP:</strong> If you plan to import data from an SAP ERP system, apply these SAP Notes:</p>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">SAP Note </span><a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2276456" style="font-size: 14px;" target="_blank">2276456</a><span style="font-size: 14px;"> and SAP Note </span><a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2278609" style="font-size: 14px;" target="_blank">2278609</a><span style="font-size: 14px;"> for BoM &amp; Routing import.</span><br/><span style="font-size: 14px;">SAP Note </span><a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2281004" style="font-size: 14px;" target="_blank">2281004</a><span style="font-size: 14px;"> and SAP Note </span><a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2281007" style="font-size: 14px;" target="_blank">2281007</a><span style="font-size: 14px;"> for document structure import.</span></p>
+<p style="padding-left: 30px;"><strong>Upgrading PLC</strong></p>
+<p style="padding-left: 60px;">Before starting any upgrade activity check the status of the entries in the installation log.</p>
+<p style="padding-left: 60px;">You can access the installation log in the PLC database table &lt;SCHEMA_NAME&gt;.sap.plc.db::basis.t_installation_log.</p>
+<p style="padding-left: 60px;">If the result of the query: <em>select count(*) from "&lt;SCHEMA_NAME&gt;"."sap.plc.db::basis.t_installation_log" where state not in ('running','started','finished') </em>is not 0 <strong>do not start the upgrade and contact PLC support</strong>.</p>
+<p style="padding-left: 60px;">If you’re upgrading from PLC 4.x.x to a newer version, please follow the <em>Administrator’s Guide for SAP Product Lifecycle Costing</em> under <a href="https://help.sap.com/docs/sap-product-lifecycle-costing/administrator-s-guide-for-sap-product-lifecycle-costing/upgrade-existing-installation?version=4.9" target="_blank">Upgrade an Existing Installation</a>.</p>
+<p style="padding-left: 60px;">Consider the following about SAP HANA:</p>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">When upgrading, if you're already using SAP HANA SPS05 (stable) or SAP HANA SPS06 and XSA revision 1.0.155, you can upgrade to SAP HANA SPS07/SPS08 and to XSA revision 1.4.x</span></p>
+<p><span style="text-decoration: underline;"><strong>Upgrading your SAP HANA System</strong></span></p>
+<p>If you need to update your SAP HANA system from SAP HANA 1.0 to SAP HANA 2.0, choose the scenario that works best with your operating system:</p>
+<p><strong>Note</strong>: You can find the complete list of operating systems that support SAP HANA 2.0 in the SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2235581" target="_blank">2235581</a>.</p>
+<ol>
+<li>If your operating system supports SAP HANA 2.0 (e.g. SUSE Enterprise Linux version 12.1 or later), do the following:</li>
+<ul>
+<li>Upgrade your existing SAP HANA installation according to the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/viewer/2c1988d620e04368aa4103bf26f17727/2.0.02/en-US/a428e6802a454f34bd3599782060c116.html" target="_blank">SAP HANA Server Installation and Update Guide</a>.</li>
+<li>Upgrade SAP Product Lifecycle Costing using the information provided in the <em>Administrator's Guide for SAP Product Lifecycle Costing</em> under under <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/sap-product-lifecycle-costing/administrator-s-guide-for-sap-product-lifecycle-costing/upgrade-existing-installation?version=4.6" target="_blank">Upgrade an Existing Installation</a>.</li>
+</ul>
+<li>If your operating system does not support SAP HANA 2.0 (e.g. SUSE Enterprise Linux version 12.0 or earlier), do the following:</li>
+<ul>
+<li>Upgrade your current operating system to a version supported by SAP HANA 2.0. Additional information regarding the update of your current operating system can be found in the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/viewer/eb3777d5495d46c5b2fa773206bbfb46/2.0.00/en-US/b443dafea3254ab0bca813eee20f627d.html" target="_blank">SAP HANA Master Guide (SAP HANA 2.0 SPS00)</a>. You can find the complete list of operating systems that support SAP HANA 2.0 in SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2235581" target="_blank">2235581</a>.</li>
+<li>Upgrade the SAP HANA database and SAP Product Lifecycle Costing as described in the first scenario.</li>
+</ul>
+<li>If upgrading your current operating system is not possible, you can:</li>
+<ul>
+<li>Set up a new system with the corresponding operating system.</li>
+<li>Clone the current SAP HANA installation to the new operating system. For more information see <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/viewer/6b94445c94ae495c83a19646e7c3fd56/2.0.01/en-US/c622d640e47e4c0ebca8cbe74ff9550a.html" target="_blank">Copy or Clone an SAP HANA System</a> in the SAP HANA Administration Guide.</li>
+<li>Upgrade the SAP HANA database and SAP Product Lifecycle Costing as described in the first scenario</li>
+<li></li>
+</ul>
+</ol>
+<p><strong> </strong></p></div></div></div></div>

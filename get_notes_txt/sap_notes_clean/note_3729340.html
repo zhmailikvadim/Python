@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">Having multiple registrations of one ID (TP Name) at one SAP RFC Gateway may sometimes lead to sporadic failures indicated by error message:<br/><br/><strong><em>Function ABC not found</em></strong></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Function not found, Type T destination in SM59, registered server</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Wrong registration setup: different programs are registered under the same program ID (TP Name) at the RFC Gateway</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="__html0">Such multiple registrations can be seen in transaction SMGW under <strong><em>Menu -&gt; Goto -&gt; Logged on Clients</em></strong> in the column <em><strong>TP Name</strong></em>. Usually, it is intended to run multiple instances of an external RFC server application and connect each of them with the same unique registration ID (TP Name) at the Gateway. This is the way to achieve load balancing, i.e. high availability for the external RFC server.<br/><br/>Using an SM59 Type T destination referring to that registration ID will then choose, according to the load balancing rules of the Gateway, one of those registrations for an RFC call.</p>
+<p>However, it is crucial to make sure that such a registration ID is used uniquely. I.e. one unique ID should only be used by the instances of one and the same application. Following figure sketches an optimal scenario:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>SM59 Type T Destination</strong></td>
+<td><strong>SMGW Logged On Clients</strong></td>
+</tr>
+<tr>
+<td>DEST_TO_EXT_SERVER_XYZ</td>
+<td>EXT_SERV_XYZ <strong><em>(ID / TP Name)</em></strong><br/>  Functions:<br/>      FUNC_A<br/>      FUNC_B<br/>      FUNC_C<br/><br/>EXT_SERV_XYZ <strong><em>(ID / TP Name)</em></strong><br/>  Functions:<br/>      FUNC_A<br/>      FUNC_B<br/>      FUNC_C<br/><br/>EXT_SERV_XYZ <strong><em>(ID / TP Name)</em></strong>  <br/>  Functions:<br/>      FUNC_A<br/>      FUNC_B<br/>      FUNC_C<br/><br/></td>
+</tr>
+</tbody>
+</table></div>
+<p><br/><br/><br/>In above example SM59 Type T destination DEST_TO_EXT_SERVER_XYZ refers to an external application/program that should be registered at the Gateway under the ID EXT_SERV_XYZ. Transaction <em>SMGW -&gt; Menu -&gt; Goto -&gt; Logged On Clients</em> would list three occurrences of ID <strong><em>EXT_SERV_XYZ</em></strong>.<br/><br/>Since these are all instances of the same applications, the functions offered are equal.<br/><br/>A broken setup would be if mistakenly different applications are registered under the same ID. This can happen since there is no check in the Gateway that would avoid such registrations.<br/><br/>Next figure illustrates such a situation:<br/><br/><br/></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>SM59 Type T Destination</strong></td>
+<td><strong>SMGW Logged On Clients</strong></td>
+</tr>
+<tr>
+<td>DEST_TO_EXT_SERVER_XYZ</td>
+<td>EXT_SERV_XYZ <strong><em>(ID / TP Name)</em></strong><br/>  Functions:<br/>      FUNC_A<br/>      FUNC_B<br/>      FUNC_C<br/><br/>EXT_SERV_XYZ <strong><em>(ID / TP Name)</em></strong><br/>  Functions:<br/>      FUNC_001<br/>      FUNC_002<br/>      FUNC_003<br/><br/>EXT_SERV_XYZ <strong><em>(ID / TP Name)</em></strong><br/>  Functions:<br/>      FUNC_A<br/>      FUNC_B<br/>      FUNC_C</td>
+</tr>
+</tbody>
+</table></div>
+<p><br/><br/><br/>In above example there is one occurrence of <strong><em>EXT_SERV_XYZ</em></strong> which has a different function list than the two other registrations.<br/><br/>If an ABAP program assumes that destination <strong><em>DEST_TO_EXT_SERVER_XYZ</em></strong> offers function <strong><em>FUNC_A</em></strong> and attempts to call it, it will receive an error, if the load balancer happens to choose the instance offering FUNC_001 ... and not FUNC_A ...:<br/><br/>CALL FUNCTION<strong><em> 'FUNC_A'</em> </strong>DESTINATION <em><strong>'DEST_TO_EXT_SERVER_XYZ'</strong></em><br/><br/>will then return:<br/><br/>Function <strong><em>FUNC_A</em></strong> not found<br/><br/>So it is crucial to ensure a proper and structured concept for registration IDs. One ID can only be used for the instances of one and the same application.<br/><br/></p>
+<p>There are two possible tests with which you can check if you have such a situation.<br/><br/><strong>1. Function List Test in the respective destination in transaction SM59</strong><br/><br/>Open the destination and invoke the function list (Shift+F6) several times in sequence. If you see different lists once in a while it's sure that you have different programs registered with the same ID.<br/><br/>But beware if the external program uses the Java Connector (JCo) or the .NET Connector (NCo). External Java or .NET applications hide their actual function list behind a standard API common to JCo and NCo. So, if you have different Java or .NET programs registered with the same ID, then the function list test may show equal lists, since it's the standard list and the actual list is hidden.<br/><br/>Then you need an additional test, i.e. SE37 test.<br/><br/><strong>2. SE37 function invoke test</strong><br/><br/>Open transaction SE37 and enter the function you know your desired external program offers. Provide the destination name. If necessary, provide proper function parameters, run (F8) the function several times in sequence. If once in a while a system failure is returned, then you are likely to have the problem with different programs behind the same ID.</p></div></div></div></div>

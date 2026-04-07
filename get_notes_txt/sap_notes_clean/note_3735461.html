@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">When you run the transaction SQ02 and perform syntax check, you get syntax error "The data object 'AD01WIP_DTL_RPT' does not have a component called '/CBAD/BILL_WBS'.".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">SQ02, PS_REV_WIP_DETAIL, PS_REV_WIP_REVENUE, PS_REV_WIP_DETAIL_REV</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="__html0">Data consistency issue.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To fix the issue, please follow these steps:</p>
+<ol style="list-style-type: decimal;">
+<li>Start transaction SQ02. Enter InfoSet PS_REV_WIP_DETAIL and press the change button. If a popup 'InfoSet not current' appears, press the 'Yes' button to continue.</li>
+<li>Press the button 'Data Reading Program' and delete or comment the following source code lines 27 and 28:</li>
+</ol>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">27  ranges  /CBAD/BI  for  AD01WIP_DTL_RPT-/CBAD/BILL_WBS.</span></p>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">28  ranges  /CBAD/OR  for  AD01WIP_DTL_RPT-/CBAD/ORIG_OBJNR.</span></p>
+<ol start="3">
+<li>Expand the datafields for structure AD01WIP_DTL_RPT.</li>
+<li>Scroll down and select the data fields  AD01WIP_DTL_RPT-/CBAD/ORIG_OBJNR  and AD01WIP_DTL_RPT-/CBAD/BILL_WBS.</li>
+<li>Delete these two datafields from the field group (right mouse button).</li>
+<li>If you have an error “Text field for field TEXT_AD01WIP_DTL_RPT__CBAD_000 still used in queries” during deletion, navigate back to InfoSet:Initial Screen and run ‘Query Directory’ by clicking ‘Goto-&gt; Query Directory’. Run it, select lines in the list and press Delete Selected Queries. Now repeat steps 3 to 5 and afterwards continue with step 8.</li>
+<li>If, when you try to navigate or try to change anything in SQ02, you get a dump (Runtime Errors CALL_FUNCTION_NOT_FOUND, Except. CX_SY_DYN_CALL_ILLEGAL_FUNC, ABAP Program CL_TEXT_IDENTIFIER============CP), follow the instructions contained in note 2403429. Now repeat steps 3 to 5 and afterwards continue with step 8.</li>
+<li>Press the generate button to generate the InfoSet.</li>
+</ol>
+<p>Please repeat steps for InfoSets PS_REV_WIP_REVENUE and PS_REV_WIP_DETAIL_REV.</p></div></div></div></div>

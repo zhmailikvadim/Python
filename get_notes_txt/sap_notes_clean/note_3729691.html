@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Error message: "PE error 34 023"/"PE error 34.023"/"PE error 34,023" when executing the planning sequence or planning function in HANA/PAK mode, but it works fine in ABAP mode.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP BW/4HANA</li><li>SAP NetWeaver</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Go to transaction RSPLAN.</li><li>Select Planning sequence and execute step-by-step in HANA/PAK mode. The error occurs.</li><li>When executing it in trace mode(ABAP runtime), no error.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ol><li>To get the details of the error, set the user parameter as below in transaction SU3, and then replicate the issue again.<br/><br/>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 99.9996%;"><colgroup><col style="width: 49.9763%;"/><col style="width: 49.9763%;"/></colgroup><tbody><tr><td>
+<div>RSPLS_HDB_SUPPORT</div>
+</td><td>
+<div>HDB_ON</div>
+</td></tr><tr><td>
+<div>
+<div>RS_DEBUGLEVEL</div>
+</div>
+</td><td>
+<div>5</div>
+</td></tr><tr><td>
+<div>RSPLS_HDB_CHECK</div>
+</td><td>
+<div>HDB_IMMEDIATE</div>
+</td></tr><tr><td>
+<div>RSPLS_HDB_PE_TRACE</div>
+</td><td>
+<div>Y</div>
+</td></tr></tbody></table></div>
+<p></p>
+</li><li>After getting the new error, check the HANA alert file in transaction ST04 or DBACOCKPIT. The file is located in under left side of <strong>Diagnostics </strong>-&gt; <strong>Diagnosis Files</strong>. The file name is <em>indexserver_*alert.trc</em>.</li><li>Open this file, and confirm whether you could see the error as below:<br/><em>....IndexID: BWP::SAPBW4:0BW:BIA:<span><strong>INFOOBJECT</strong></span>_F4 (t -1), QueryMediator failed executing query, reason: olap: merging multi value dicts is not implemented, please make sure the following join cardinality is modeled correctly (did you use 1:1 when the data really is 1:N or N:M?);BwPopJoin1Inwards ....</em></li><li>If there is similar as above, it means there is something issue from the <em><span><strong>INFOOBJECT</strong></span></em><span><span>. Most of the issue might be caused by system upgrade.</span></span></li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Run the program RSDDB_LOGINDEX_CREATE for the characteristic <em><span><strong>INFOOBJECT</strong></span></em>. </li><li>Verify the resolution by executing the planning sequence in SAP Hana mode to confirm the error is resolved.</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>hana mode, abap mode, pe error 34 023, 34.023, 34,023 , rsplan , inconsistency, database upgrade, </p></div></div></div></div>

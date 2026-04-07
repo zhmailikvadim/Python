@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Error "CPD X: Valid from DD.MM.YYYY is in the past" when changing Valid To for an active CPD in Revision status.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CPD, change Valid date, CPD revision.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> Incorrect VALID TO/FROM validation during CPD save in method /TMCSL/CL_SRV_V_CYCP_DEFS_C-&gt;CHECK_CYCP_DEF_CONSISTENCY</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> Add Validation for VALID TO/FROM in method /TMCSL/CL_SRV_V_CYCP_DEFS_C-&gt;CHECK_CYCP_DEF_CONSISTENCY</p>
+<p>You are using the IS-OIL movement based netting and you have some MM movements for which to value to be invoiced is 0 or for wich you do not expect any invoice.</p>
+<p>You do not want to have these specific movements reported in the Movement without financial sections of the Netting Proposal but in the Receipt section instead.</p>
+<p>A new BADI: OIA_BADI_ROIAAGAN_PROC_MM_FI is implemented to that purpose.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span style="font-size: 14px;">add-on, IS-Oil, industry solution, Borrow/loan, Zero Fee, ROIAAGAN, ROIAAGAN_FORMS_PROC_AND_COLLEC, PROC_AND_COLLECT_MM_FINANCIALS, OIA_BADI_ROIAAGAN_PROC_MM_FI, lo_badi_proc_mm_fi, fill_oia12i, OILNET_MSEG, </span></p>
+<p><span style="font-size: 14px;">IF_BADI_PROC_MM_FI, O3B7, O3B8, Netting Proposal</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You are creating a BORROW/LOAN exchange for which the meterial cost is posted against the Logical Inventory and that has not any fees or for which fees value is 0 . In that case there might be 0 value invoice created ( without accounting documents) or no invoice is created.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please apply the correction included in that note and create the BADI implementation to fill table OIA12I.</p>
+<p>The Fees (G_OIAFE) table must be read from the memory via the following statment : IMPORT G_OIAFE = G_I_OIAFE FROM MEMORY ID 'GOIAFE'. G_I_OIAFE is defined as : DATA: G_I_OIAFE type OIAFE_TT.</p>
+<p>To have the record saved in the receipt section of the netting proposal the OIA12I,  Item Category should be set to '6' (C_receipt)   I_OIA12I-ITCAT  = C_RECEIPT. Where C_RECEIPT is defined as DATA: C_RECEIPT VALUE '6'.</p>
+<p>I_G_NETTING_ITEM_NO need to be incremented.</p>
+<p>The logic to find which values should be saved into OIA12I can be extrapoled from Form FILL_OIA12I (ROIAAGAN_FORMS_FILL_OIA12I).</p>
+<p>For more information on BADI implementation please check the following documentation : https://help.sap.com/docs/ABAP_PLATFORM_NEW/46a2cfc13d25463b8b9a3d2a3c3ba0d9/44f518d884056c30e10000000a114a6b.html?locale=en-US&amp;q=BADI+implementation+in+SAP+documentation&amp;version=LATEST</p></div></div></div></div>

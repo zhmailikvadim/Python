@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0"><span id="__element39-label-text"><strong>Cloud Connector</strong> is selected for <strong>Data Provisioning Option</strong> under <strong>Remote Tables</strong> section of S/4HANA On-Premise connection to use the ABAP SQL service to federate data with remote tables.</span></p>
+<p><img alt="" class="img-responsive" height="210" src="/documents/customerkba/0dHHJ0uNVyzzzvyWuecaQ6nPcBDvpFYHe2XnMFrtqtI" width="1202"/></p>
+<p>When importing remote tables from SAP S/4HANA On-Premise system, expected schema/tables are not shown.</p>
+<p><em><span style="color: rgb(224, 62, 45);"> "Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."  </span></em></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Datasphere</li><li>SAP S/4HANA On-Premise</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Data Builder -&gt; Import -&gt; Import Remote Tables.</li><li>Select S/4HANA On-Premise connection, click "Next Step".</li><li>Observe that only "Dbc2AbapTest" and "SYS" schemas are shown here.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><strong>Possible cause 1</strong>: Missing configurations of Service Definition and Service Binding in ABAP Development Tools, which are required to expose CDS view entities using the SQL service.  </p>
+<ul><li>Note: In the Remote Table scenario where SCC is used as Data Provisioning Option, Datasphere displays the <strong>SQL schema name</strong> when importing remote tables, <strong>NOT</strong> other schemas (e.g., not database schema).  </li></ul>
+<p><strong>Possible cause 2</strong>: Insufficient authorization to access the SQL service for privileged access to the CDS view entities. </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>Solution for possible cause 1</strong>:</p>
+<p>To expose CDS view entities using the SQL service, an SAP S/4HANA business user has created a service definition and a corresponding service binding of type SQL1 in the <strong>ABAP Development Tools</strong>.</p>
+<ul><li>The service definition lists the set of CDS view entities that shall be exposed</li><li>The service binding of type SQL for that service definition enables their exposure via the ABAP SQL Service.</li></ul>
+<p>For more information, see <a href="https://help.sap.com/docs/ABAP_PLATFORM_NEW/b5670aaaa2364a29935f40b16499972d/c1cf6c9796ad4fecb893672fd91e660d.html" rel="noopener noreferrer nofollow" target="_blank">Creating a Service Definition and an SQL-Typed Service Binding</a> in the <cite>ABAP Platform</cite> documentation for your SAP S/4HANA system.</p>
+<div>
+<p><strong>Solution for possible cause 2</strong><span style="font-size: 10pt;">:</span></p>
+</div>
+<p>To expose the SQL service to get privileged access to the <strong>CDS view entities</strong> with a communication user, a role is required. For more information, see <a href="https://help.sap.com/docs/ABAP_PLATFORM_NEW/b5670aaaa2364a29935f40b16499972d/f3945f142ca24afdb68896584257e428.html" rel="noopener noreferrer nofollow" target="_blank">Creating a Role for Privileged Access</a> in the <cite>ABAP Platform</cite> documentation for your SAP S/4HANA system. </p>
+<ul><li>Authorization Object <strong>S_SQL_VIEW</strong> and <strong>S_START </strong>are required to expose the SQL service to get privileged access to the CDS view entities.<br/><img class="img-responsive" height="175" src="/documents/customerkba/W-QLpYRvq0Lk_KiE7lz7YFqG4jv3zf_VrxhkzpGqyF0" width="1218"/><br/>
+<ul><li>Authorization Object <strong>S_SQL_VIEW</strong>:<br/>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" rules="all" style="font-size: 10pt; width: 100%; height: 204.891px;" summary=""><thead><tr style="height: 17.3125px;"><th id="d15303e165" style="width: 14.7828%; height: 17.3125px;">
+<p>Authorization Field</p>
+</th><th id="d15303e168" style="width: 85.2172%; height: 17.3125px;">
+<p>Values</p>
+</th></tr></thead><tbody><tr style="height: 45.3125px;"><td headers="d15303e165" style="width: 14.7828%; height: 45.3125px;">
+<p>SQL_SCHEMA</p>
+</td><td headers="d15303e168" style="width: 85.2172%; height: 45.3125px;">
+<p><strong>The name of the service binding</strong> (exposed as a schema) that you want to grant access to</p>
+</td></tr><tr style="height: 64.9688px;"><td headers="d15303e165" style="width: 14.7828%; height: 64.9688px;">
+<p>SQL_VIEW</p>
+</td><td headers="d15303e168" style="width: 85.2172%; height: 64.9688px;">
+<p>Comma-separated list of all CDS view entities to which you want to grant access or <samp>*</samp> (if you want to allow access to all CDS view entities in the service definition)</p>
+</td></tr><tr style="height: 77.2969px;"><td headers="d15303e165" style="width: 14.7828%; height: 77.2969px;">
+<p>SQL_VIEWOP</p>
+</td><td headers="d15303e168" style="width: 85.2172%; height: 77.2969px;">
+<p>Choose SELECT <strong>(Datasphere only supports federation in this scenario)</strong>:</p>
+<ul><li>
+<p>SELECT: SELECT grants read access to the specified CDS view entities.</p>
+</li></ul>
+</td></tr></tbody></table></div>
+</li><li>For the authorization object <strong>S_START</strong>, the authorizations are already predefined; there's no need to change anything here.</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/4d7474595a5b41bb986616262ff44a3a.html" rel="noopener noreferrer nofollow" target="_blank">Using ABAP SQL Services for Accessing Data from SAP S/4HANA | SAP Help Portal</a></li><li><a href="https://help.sap.com/docs/SAP_DATASPHERE/be5967d099974c69b77f4549425ca4c0/a49a1e3cc50f4af89711d8306bdd8f26.html" rel="noopener noreferrer nofollow" target="_blank">SAP S/4HANA On-Premise Connections | SAP Help Portal</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>remote tables, S_SQL_VIEW, S_SQL_PROC, SQL_SCHEMA, authorization object, SAP S/4HANA, ABAP SQL service, service definition, service binding, schema access, CDS view entities, privileged access, remote table import issues, unable to access, not shown, invisible, not visible</p></div></div></div></div>

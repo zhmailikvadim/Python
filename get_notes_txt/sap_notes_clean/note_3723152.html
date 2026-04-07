@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">Report /DBE/ORD_ARC_PRE prepares the archiving of VSS orders by setting the deletion flag. The corresponding action ORD_TO_ARCHIVE checks the status ORD_CLOSE - which is not set (cannot be set) when the order is rejected. It should be possible to archive completed as well as rejected orders for the sake of completeness.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">VSS Order, Archiving, /DBE/ORD_ARC_PRE, ORD_TO_ARCHIVE</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="__html0">This is due to wrong OE Action customizing</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Process the steps below to adjust customizing settings for OE Action <strong>ORD_TO_ARCHIVE</strong>:</p>
+<ol>
+<li>Open Vehicle Sales and Service customizing by executing transaction /DBE/SPRO or opening <em>SAP Reference IMG</em> node: Logistic Execution-&gt; Vehicle Sales and Service.</li>
+<li>Go to Order -&gt; Order Control -&gt; Define Action maintenance in change mode.</li>
+<li>Locate ORD_TO_ARCHIVE action and enter the action's details.</li>
+<li>Double-click on the <em>Status</em> subnode in Dialog Structure tree (in the left pane).</li>
+<li>In line with status ID: ORD_CLOSE, ensure that there is only one column marked: <strong>Full</strong> (completely processed).</li>
+<li>Set checkbox in colum <strong>N.Rel.</strong> (not relevant) on (marked), so there are now 2 checkboxes marked in that line.</li>
+<li>Save the changes. Choose transport request when asked.</li>
+</ol></div></div></div></div>

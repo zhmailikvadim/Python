@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>During the onboarding process in SAP SuccessFactors, specifically at the “Review New Hire Data” step, HR users are required to select a Custom Manager for the new hire.</p>
+<p>Within the Job Relationships section, the <em>Custom Manager</em> relationship type currently allows HR to search across the entire user population. This broad search increases the risk of selecting an incorrect individual.</p>
+</div>
+<p> </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Onboarding</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Recruiters attempt to select a custom manager for the new hire</li><li>Access the list of users and notice that entire user population in the system</li><li>This can lead to inconsistent or incorrect selection of custom managers</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p> The system’s current design does not support restricting the candidate list in Job Relationship search fields (including Custom Manager, Matrix Manager, etc.) to a predefined group of users.</p>
+<div>
+<p>Job Relationship picklists pull from the entire active user population, and no configuration option exists to:</p>
+<ul><li style="font-style: italic;"><em>Limit the search to a specific user group</em></li><li style="font-style: italic;"><em>Filter only employees tagged as Custom Managers</em></li><li style="font-style: italic;"><em>Restrict visibility based on permission groups or dynamic roles</em></li></ul>
+</div>
+<p> </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>This requirement cannot be achieved with current configuration capabilities in SuccessFactors. Filtering the Custom Manager search field to display only users designated as Custom Managers is not supported.</p>
+<p>There is no workaround within standard configuration to implement this restriction.</p>
+<h3 data-toc-skip="">Recommended Action</h3>
+<p>If restricting the search field is critical for your business process, SAP recommends submitting an Enhancement Request through the Influence &amp; Adopt portal:</p>
+<ul><li><a href="https://influence.sap.com/" rel="noopener noreferrer nofollow" target="_blank">Influence Portal</a></li></ul>
+<p>This allows SAP Product Management to review and potentially include this feature in a future release.</p>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://influence.sap.com/" rel="noopener noreferrer nofollow" target="_blank">Influence Portal</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>onb, obx, list, users, restrict, cusom, manager, hr, selection, rbp, permission, enhancement</p></div></div></div></div>

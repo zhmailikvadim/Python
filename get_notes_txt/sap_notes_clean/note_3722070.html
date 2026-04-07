@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When testing the connection from SAP Integration Suite to SAP Cloud Connector (SCC), the following error occurs:</p>
+<ul><li><em><strong>Could not connect to cloud connector.</strong></em></li></ul>
+<p>In the SCC trace files, the following exception is logged:</p>
+<ul><li><em><strong>An exception was thrown by com.sap.core.connectivity.tunnel.client.ssl.TunnelClientSSLHandshakeValidator</strong></em></li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Cloud Integration</li><li>SAP Integration Suite</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>SSL handshake failure between SCC and the SAP BTP Connectivity endpoint due to untrusted or missing certificates in the SCC JVM trust store, typically triggered by outdated SCC/JVM versions or recent root certificate changes.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To resolve the issue, perform the following steps:</p>
+<ol><li><strong>Upgrade SAP Cloud Connector</strong>
+<ul><li>Update to the latest supported SCC version.</li></ul>
+</li><li><strong>Update the Java Runtime (JVM)</strong>
+<ul><li>Ensure the SCC is running on a supported and up-to-date SAP JVM or OpenJDK version.</li></ul>
+</li><li><strong>Update Trust Store</strong>
+<ul><li>Import any missing root and intermediate CA certificates into the SCC trust store.</li></ul>
+</li><li><strong>Check Network Security Components</strong>
+<ul><li>Ensure no SSL inspection, reverse proxy, or firewall is intercepting or re-signing traffic.</li></ul>
+</li><li><strong>Refresh Subaccount Configuration</strong>
+<ul><li>Re-download the subaccount authentication data from SAP BTP.</li><li>Remove and re-add the subaccount in SCC.</li></ul>
+</li><li><strong>Verify System Time</strong>
+<ul><li>Ensure correct time synchronization (NTP) on the SCC host.</li></ul>
+</li></ol>
+<p>Upgrading both <strong>Cloud Connector and the JVM to the latest supported versions</strong> resolves most SSL handshake related connectivity failures.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>KBA <a href="https://me.sap.com/notes/3566727" rel="noopener noreferrer nofollow" target="_blank">3566727</a> – Root Certificate Replacement in the SAP BTP, Cloud Foundry Environment</li><li>KBA <a href="https://me.sap.com/notes/3583377" rel="noopener noreferrer nofollow" target="_blank">3583377</a> – Cloud Connector fails to connect to subaccount due to SSL handshake error</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Cloud Connector, SAP Integration Suite, SAP BTP Connectivity service, SSL handshake error, TunnelClientSSLHandshakeValidator, certificate trust issue, root certificate missing, Cloud Foundry region endpoint, SCC trust store, JVM update, SSL inspection, connectivity tunnel failure, Could not connect to cloud connector, handshake, JVM, Java Runtime, OpenJDK</p></div></div></div></div>

@@ -1,0 +1,42 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">SAP Note 3490451 addresses the issue of duplicate reversals that may occur during allocation processes. The user is aware of the potential risks and still wish to enable asynchronous reversal to enhance performance.</p>
+<p>This note introduces a configurable parameter that allows customers to switch to asynchronous reversal mode at their discretion. By adjusting the parameter ALLOC_ASYNC_REV, customers have the flexibility to choose between prioritizing performance and accepting potential risks, or maintaining a safer but potentially less optimal allocation process.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>k_allocations_reverse, 3490451, allocations, KSU5, KSV5, faglga35, faglga15, commit work and wait,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<div class="dasCopyMarkdownButtonDiv"></div>
+<div class="dasMarkdown">
+<p>SAP Note 3490451 introduced synchronous mode in order to prevent duplicate reversals.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the following correction instructions or relevant support package.</p>
+<p>After the note is implemented, please check transaction FIN_FLAGS for the following: Application = CO, Sub. application = Allocation, Parameter = ALLOC_ASYNC_REV.</p>
+<p>In case the above parameter is not available, add the Application, Sub-Application and Parameter manually. For transactions FIN_FLAGS_CUST1, FIN_FLAGS_CUST2 you can follow the same instructions as in SAP note 3361820.</p>
+<p>For transaction FIN_FLAGS_CUST3, please add the following:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Application</td>
+<td>Subapplication</td>
+<td>Parameters</td>
+<td>Data element </td>
+<td>SAP Note Number</td>
+<td>Chk Values</td>
+<td>Medium Field Label</td>
+<td>Long Field Label</td>
+<td>Description</td>
+</tr>
+<tr>
+<td>CO</td>
+<td>Allocation</td>
+<td>ALLOC_ASYNC_REV</td>
+<td>FIN_FLAGS_ON_OFF</td>
+<td>3727719</td>
+<td>X</td>
+<td>Reversal switch</td>
+<td>Switch for async reversal</td>
+<td>Switch for asynchronous reversal.</td>
+</tr>
+</tbody>
+</table></div>
+<p><span style="font-size: 14px;">By setting the parameter value to 'X', processing will revert to asynchronous reversal, mimicking the behavior prior to the introduction of SAP Note 3490451. If the parameter is left initial, processing will default to synchronous mode.</span></p></div></div></div></div>

@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">This article describes the steps on How Background Check Integration Works when configured using a Middleware.</p>
+<p><span style="color: rgb(224, 62, 45);"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Recruiting Management</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>1. Candidates are placed in the Background Check Status and Candidate Application Data are automatically pulled by a middleware application like Boomi or HCI.</p>
+<p><img alt="" class="img-responsive" height="512" src="/documents/customerkba/3xVV1D5OmLkZoV1WbfhJGOC6IMXkZEgeP-YJaHbxn40" width="2223"/></p>
+<p>2. The Middleware application will pull application information from certain statuses. In this sample, the Middleware application is listening for applications under 'Background Check' status and those that are using Job Application template ID 143 (JobApplication$143).</p>
+<p>JobApplication For HireRight - 1 [Execute] Succeed to execute SFAPI Query [queryString=SELECT address,applicationLocale,candidateId,city,contactEmail,country,cust_HireRight_OrderId,cust_HireRight_status,custom_prefLanguage,firstName,<br/>homePhone,id,jobAppLocale,jobReqId,lastName,middleName,state,statusItem,zip FROM <span style="color: rgb(224, 62, 45);">JobApplication$143</span> WHERE (<span style="color: rgb(224, 62, 45);">statusItem = 'Background Check'</span>), queryParameters=[SFParameter [name=maxRows, value=200]]]</p>
+<p></p>
+<p>3. The Application Data pulled by the Middleware application will be sent to the third-party Background Check vendor.</p>
+<p><img alt="" class="img-responsive" height="773" src="/documents/customerkba/KZgngR5sZlrM-WvC3auRMEhr5GEHAjnkdpTQ3TFa_rA" width="1533"/></p>
+<p>Note: This is a sample payload that we sent to HireRight through Boomi. The payload contents may be different for other vendors or will depend on what fields were mapped by your Implementation Partner.</p>
+<p></p>
+<p>4. The Background Check Vendor will respond with the Background Check results and sends it back to the middleware application.</p>
+<p><img alt="" class="img-responsive" src="/documents/customerkba/jmkVnyxUhvbFEsKEYRuy42fb4RFAbLiTx6mMeFgYOXY"/></p>
+<p></p>
+<p>6. The Middleware returns the information to SuccessFactors and SuccessFactors will display it in the Background Check portlet.</p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://me.sap.com/notes/2215682" rel="noopener noreferrer nofollow" target="_blank">2215682</a> - SuccessFactors API URLs and external IPs - SAP for Me</li><li><a href="https://me.sap.com/notes/2845873" rel="noopener noreferrer nofollow" target="_blank">2845873</a> - How Background Check Integration Works (Integration Center) - Recruiting Management - SAP for Me</li><li><a href="https://me.sap.com/notes/2851325" rel="noopener noreferrer nofollow" target="_blank">2851325</a> - How Background Check Integration Works (Intelligent Services) - Recruiting Management - SAP for Me</li><li><a href="https://me.sap.com/notes/2768811" rel="noopener noreferrer nofollow" target="_blank">2768811</a> - Configuring Background Check Integration (Integration Center) - Recruiting Management - SAP for Me</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><section id="__section1" role="region">
+<div>
+<div id="__section1-innerGrid">
+<div id="__section1-innerGrid-wrapperfor-__section0">
+<div id="__section0">
+<div>
+<div id="__section0-innerGrid">
+<div id="__section0-innerGrid-wrapperfor-__layout7">
+<div id="__layout7">
+<div>
+<div id="__vbox44">
+<div id="__data224">
+<p>Background Check, Background Check Integration, Third-party Vendor, Recruiting Management, RCM, Integration, API, Middleware</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></div></div></div></div>

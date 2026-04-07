@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Device Configuration Change (DSO View)" (DE_B_IM_DEV_CONFIG_CHG), step 0030 "Collect Business System Data" raises an unnecessary clarification case for non-IMS cases because no parameterization instance was available. The system determines parameterization instance data for all cases, including non-IMS cases ,where this data isn't available.</p>
+<p>This issue is relevant for the market roles: DSO, SUP.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>IM4G, DE_B_IM_DEV_CONFIG_CHG, BM_UOP_CONF_CHG_REQ, IMS, parameterization instance, clarification case, Collect Business System Data</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error occurred because the system determined the parameterization instance for all cases, including non-IMS cases where this determination isn't necessary.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system determines parameterization instance data only for IMS cases. You can reprocess step 0030 from the clarification case. You can verify the fix by checking that step 0030 in the process DE_B_IM_DEV_CONFIG_CHG is processed without error for non-IMS cases.</p></div></div></div></div>

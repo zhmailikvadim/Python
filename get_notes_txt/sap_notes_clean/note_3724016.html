@@ -1,0 +1,76 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Fiori project can up and running locally, for example in BAS</li><li>After deployed to BTP - HTML5 Applications, the app cannot be loaded, blank or empty page</li><li>Http console log shows:<br/><br/>Log-dbg.js:497 2026-03-05 12:25:00.848500 Connector (LrepConnector) failed call 'loadFlexData': Error<br/>            Application startup continues without data from this storage. -  <br/><br/>Utils-dbg.js:259  GET <a href="https://ab640063trial.launchpad.cfapps.us10.hana.ondemand.com/sap/bc/lrep/flex/settings" rel="noopener noreferrer nofollow" target="_blank">https://ab640063trial.launchpad.cfapps.us10.hana.ondemand.com/sap/bc/lrep/flex/settings</a> 404 (Not Found)<br/><br/>Log-dbg.js:497 2026-03-05 12:25:01.104700 Connector (LrepConnector) failed call 'loadFeatures': Error<br/>            Application startup continues without data from this storage. -  <br/><br/></li><li>In the http request, it shows failed request:<br/><br/>
+<div>
+<div>Request URL</div>
+<div id="request-url"><a href="https://ab640063trial.launchpad.cfapps.us10.hana.ondemand.com/f980bdff-48ce-4c85-8e5d-74217a094afb.james666james666.james666james666-0.0.1/V2/Northwind/Northwind.svc/$metadata?sap-value-list=none&amp;sap-language=EN" rel="noopener noreferrer nofollow" target="_blank">...../OData service name/$metadata?sap-value-list=none&amp;sap-language=EN</a></div>
+</div>
+<div>
+<div>Request Method</div>
+<div id="request-method">GET</div>
+</div>
+<div>
+<div>Status Code</div>
+<div id="status-code">404 Not Found<br/><br/></div>
+<div>
+<div>
+<div>Request URL</div>
+<div id="request-url"><a href="https://ab640063trial.launchpad.cfapps.us10.hana.ondemand.com/sap/bc/lrep/flex/data/james666.james666?sap-language=EN" rel="noopener noreferrer nofollow" target="_blank">https://ab640063trial.launchpad.cfapps.us10.hana.ondemand.com/sap/bc/lrep/flex/data/?sap-language=EN</a></div>
+</div>
+<div>
+<div>Request Method</div>
+<div id="request-method">GET</div>
+</div>
+<div>
+<div>Status Code</div>
+<div id="status-code">404 Not Found<br/><br/>
+<div>
+<div>equest URL</div>
+<div id="request-url"><a href="https://ab640063trial.launchpad.cfapps.us10.hana.ondemand.com/sap/bc/lrep/flex/settings" rel="noopener noreferrer nofollow" target="_blank">https://ab640063trial.launchpad.cfapps.us10.hana.ondemand.com/sap/bc/lrep/flex/settings</a></div>
+</div>
+<div>
+<div>Request Method</div>
+<div id="request-method">GET</div>
+</div>
+<div>
+<div>Status Code</div>
+<div id="status-code">404 Not Found</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAPUI5</li><li>SAP BTP Cloud Foundry</li><li>SAP Build Work Zone</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Deploy project to BTP Cloud Foundry</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Most of the mentioned errors or failed requests (flex, LrepConnector and loadFeatures) are not relevant here. <br/>The root cause error one is the $metadata failed:<br/><br/>Request URL<br/>...../OData service name/<strong>$metadata</strong>?sap-value-list=none&amp;sap-language=EN<br/>Request Method<br/>GET<br/>Status Code<br/><strong>404 Not Found<br/><br/></strong>For external or public OData, we need to set up Destinations to refer it:</p>
+<p><a href="https://services.odata.org/V2/Northwind/Northwind.svc/" rel="noopener noreferrer nofollow" target="_blank">https://services.odata.org/V2/Northwind/Northwind.svc/</a><br/><br/>If we directly refers it - <a href="https://services.odata.org/V2/Northwind/Northwind.svc/" rel="noopener noreferrer nofollow" target="_blank">https://services.odata.org/V2/Northwind/Northwind.svc/</a>, locally or BAS it will be fine, but after deploying to BTP, it will fails.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Create a BTP destination for external or public OData, for example named "btpdestnorthwind" for <a href="https://services.odata.org/" rel="noopener noreferrer nofollow" target="_blank">https://services.odata.org/</a> <br/><br/></li><li>Then in the UI5 project or during creating Fiori Element when inputting OData, use https://btpdestnorthwind.dest/ to access the odata, example:<br/><br/>from<br/><a href="https://services.odata.org/V2/Northwind/Northwind.svc/" rel="noopener noreferrer nofollow" target="_blank">https://services.odata.org/V2/Northwind/Northwind.svc/</a><br/>to<br/><a href="https://services.odata.org/V2/Northwind/Northwind.svc/" rel="noopener noreferrer nofollow" target="_blank">https://btpdestnorthwind.dest/V2/Northwind/Northwind.svc/</a><br/><br/></li><li>npm run deploy-config, gives destination name northwind<br/><br/>? Destination Name <strong>btpdestnorthwind<br/><br/></strong>xs-app.json will add the destination:<br/><br/>
+<div>
+<div>{</div>
+<div>  "welcomeFile": "/index.html",</div>
+<div>  "authenticationMethod": "route",</div>
+<div>  "routes": [</div>
+<div>    {</div>
+<div>      "source": "^/V2/(.*)$",</div>
+<div>      "target": "/V2/$1",</div>
+<div><strong>      "destination": "btpdestnorthwind",</strong></div>
+<div>      "authenticationType": "none",</div>
+<div>      "csrfProtection": false</div>
+<div>    },</div>
+<div>    {</div>
+<div>      "source": "^/resources/(.*)$",</div>
+<div>      "target": "/resources/$1",</div>
+<div>      "authenticationType": "none",</div>
+<div>      "destination": "ui5"</div>
+<div>    },</div>
+<div>    {</div>
+<div>      "source": "^/test-resources/(.*)$",</div>
+<div>      "target": "/test-resources/$1",</div>
+<div>      "authenticationType": "none",</div>
+<div>      "destination": "ui5"</div>
+<div>    },</div>
+<div>    {</div>
+<div>      "source": "^(.*)$",</div>
+<div>      "target": "$1",</div>
+<div>      "service": "html5-apps-repo-rt",</div>
+<div>      "authenticationType": "xsuaa"</div>
+<div>    }</div>
+<div>  ]</div>
+<div>}</div>
+</div>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>xs-app.json, destination, flex, LrepConnector, loadFeatures, 404 Not Found</p></div></div></div></div>

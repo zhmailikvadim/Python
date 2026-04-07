@@ -1,0 +1,49 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Customers require real-time visibility into the JGroups cluster status. Currently, Dynatrace does not provide built-in monitoring capabilities for JGroups. As a workaround, a customized Groovy script can be executed via HAC (Hybris Administration Console) to retrieve and inspect JGroups runtime information.</p>
+<p><strong><span style="color: rgb(224, 62, 45);"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em></span></strong></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Commerce Cloud V2</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>As example, the below Groovy script can be executed across all Backoffice and BackgroundProcessing pods in order to retrieve the relevant runtime information for Jgroups. If you want to execute it for all services pods, please add the related pods information in the below script.</p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100%;"><colgroup><col style="width: 99.9176%;"/></colgroup><tbody><tr><td>
+<p>import org.apache.http.client.entity.UrlEncodedFormEntity<br/>import org.apache.http.client.methods.HttpGet<br/>import org.apache.http.client.methods.HttpPost<br/>import org.apache.http.message.BasicNameValuePair<br/>import org.apache.http.impl.client.HttpClients<br/>import org.apache.http.client.config.RequestConfig<br/>import org.apache.http.impl.client.*<br/>import org.apache.http.conn.ssl.*<br/>import org.apache.http.ssl.SSLContextBuilder<br/>import org.apache.http.impl.cookie.*<br/>import java.net.CookieHandler<br/>import java.net.CookieManager<br/>import javax.net.ssl.*<br/>import groovy.json.*</p>
+<p>// Admin credentials<br/>ADMIN_USER = 'zk001'        //Input the hac's user name and password<br/>ADMIN_PASSWORD = 'Test123!'<br/>PORT = 443<br/>TIMEOUT = 15 // seconds<br/>jessionID = null</p>
+<p>// Define host to pod mapping, please change the domain name and pod ids.<br/>def HOST_TO_PODS = [<br/>    'backoffice.cp96avkh5f-customers1-s10-public.model-t.cc.commerce.ondemand.com': [<br/>        'backoffice-687644bc57-cg22k',<br/>        'backoffice-687644bc57-npvkl'<br/>    ],<br/>    'backgroundprocessing.cp96avkh5f-customers1-s10-public.model-t.cc.commerce.ondemand.com': [<br/>        'backgroundprocessing-54f95f5dc9-g489b',<br/>        'backgroundprocessing-54f95f5dc9-t6l6t'</p>
+<p>    ]<br/>]</p>
+<p>// A below sample script is available for execution and reference. If additional JGroups data or diagnostics are required, please update the script content as needed before running it.</p>
+<p><br/>def Troubleshootingscript = '''<br/>import org.springframework.integration.context.IntegrationContextUtils<br/>import de.hybris.platform.core.Registry</p>
+<p>// Display hybris cluster status<br/>def cId = Registry.getClusterID()<br/>def cGrps = Registry.getClusterGroups()</p>
+<p>println 'CLUSTER STATUS'<br/>println ' - Id:' + cId + ' Groups:' + cGrps</p>
+<p>// Display hybris cluster jgroups thread status</p>
+<p>println '\\nJGroup Thread STATUS'<br/>org.jgroups.tests.Probe.main("jmx=TCP")</p>
+<p>// Display hybris cluster jgroups credit status</p>
+<p>println '\\nJGroup Credit STATUS'<br/>org.jgroups.tests.Probe.main("jmx=MFC")</p>
+<p>return<br/>'''</p>
+<p>// ========== Utility Functions ==========</p>
+<p>def formatHacOutput(string) {<br/>    def jsonSlurper = new JsonSlurper()<br/>    return jsonSlurper.parseText(string)<br/>}</p>
+<p>def buildClient(cookieStore) {<br/>    CookieHandler.setDefault(new CookieManager())<br/>    def sslContext = SSLContextBuilder.create().loadTrustMaterial(new TrustSelfSignedStrategy()).build()<br/>    def connectionFactory = new SSLConnectionSocketFactory(sslContext, new NoopHostnameVerifier())</p>
+<p>    def config = RequestConfig.custom()<br/>        .setConnectTimeout(TIMEOUT * 1000)<br/>        .setConnectionRequestTimeout(TIMEOUT * 1000)<br/>        .setSocketTimeout(TIMEOUT * 1000).build()</p>
+<p>    return HttpClients.custom()<br/>        .setDefaultRequestConfig(config)<br/>        .setSSLSocketFactory(connectionFactory)<br/>        .setDefaultCookieStore(cookieStore)<br/>        .build()<br/>}</p>
+<p>private def basicAuthHeader() {<br/>    def userCredentials = "${ADMIN_USER}:${ADMIN_PASSWORD}"<br/>    return "Basic " + new String(org.apache.commons.codec.binary.Base64.encodeBase64(userCredentials.getBytes()), "US-ASCII")<br/>}</p>
+<p>private def scriptExecute(def host, def csrf, def podId, def scriptToPost) {<br/>    def urlString = "https://${host}:${PORT}/hac/console/scripting/execute"<br/>    def httpPost = new HttpPost(urlString)<br/>    httpPost.setHeader("Authorization", basicAuthHeader())<br/>    httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded")<br/>    httpPost.setHeader("X-CSRF-TOKEN", csrf)</p>
+<p>    def urlParameters = [<br/>        new BasicNameValuePair("scriptType", "groovy"),<br/>        new BasicNameValuePair("script", scriptToPost),<br/>        new BasicNameValuePair("commit", "false")<br/>    ]<br/>    httpPost.setEntity(new UrlEncodedFormEntity(urlParameters))</p>
+<p>    def cookieStore = new BasicCookieStore()<br/>    cookieStore.addCookie(makeRouteCookie(host, podId))<br/>    cookieStore.addCookie(makeSessionCookie(host))</p>
+<p>    def client = buildClient(cookieStore)<br/>    def httpResponse = client.execute(httpPost)</p>
+<p>    if (httpResponse.statusLine.statusCode != 200) {<br/>        throw new Exception("Failed script execution on ${host}/${podId} - ${httpResponse.statusLine.reasonPhrase}")<br/>    }</p>
+<p>    return httpResponse.entity.content.text<br/>}</p>
+<p>private def getScriptHtml(def host, def podId) {<br/>    def url = "https://${host}:${PORT}/hac/console/scripting/"<br/>    def httpGet = new HttpGet(url)<br/>    httpGet.setHeader("Authorization", basicAuthHeader())</p>
+<p>    def cookieStore = new BasicCookieStore()<br/>    cookieStore.addCookie(makeRouteCookie(host, podId))</p>
+<p>    def client = buildClient(cookieStore)<br/>    def response = client.execute(httpGet)</p>
+<p>    for (def c : cookieStore.getCookies()) {<br/>        if (c.getName() == "JSESSIONID") jessionID = c.getValue()<br/>    }</p>
+<p>    return response.entity.content.text<br/>}</p>
+<p>private def getScriptHtml2(def host, def podId) {<br/>    def url = "https://${host}:${PORT}/hac/console/scripting/"<br/>    def httpGet = new HttpGet(url)</p>
+<p>    def cookieStore = new BasicCookieStore()<br/>    cookieStore.addCookie(makeRouteCookie(host, podId))<br/>    cookieStore.addCookie(makeSessionCookie(host))</p>
+<p>    def client = buildClient(cookieStore)<br/>    def response = client.execute(httpGet)</p>
+<p>    return response.entity.content.text<br/>}</p>
+<p>private def getCSRFToken(def host, def podId) {<br/>    getScriptHtml(host, podId)<br/>    def html = getScriptHtml2(host, podId)<br/>    return extractCSRFToken(html)<br/>}</p>
+<p>private def extractCSRFToken(html) {<br/>    def pattern = "&lt;meta name=\"_csrf\" content=\"([A-Za-z0-9_\\-]+)\""<br/>    def matcher = java.util.regex.Pattern.compile(pattern).matcher(html)</p>
+<p>    if (matcher.find()) {<br/>        return matcher.group(1)<br/>    } else {<br/>        throw new Exception("There is no hac expose on this aspect, so there is no result return")<br/>    }<br/>}</p>
+<p>private def makeRouteCookie(def host, def podId) {<br/>    def cookie = new BasicClientCookie("ROUTE", '.' + podId)<br/>    cookie.setPath("/")<br/>    cookie.setDomain(host)<br/>    return cookie<br/>}</p>
+<p>private def makeSessionCookie(def host) {<br/>    def cookie = new BasicClientCookie("JSESSIONID", jessionID)<br/>    cookie.setPath("/hac")<br/>    cookie.setDomain(host)<br/>    return cookie<br/>}</p>
+<p>// ========== Execution Loop ==========</p>
+<p>HOST_TO_PODS.each { host, podIds -&gt;<br/>    podIds.each { podId -&gt;<br/>        try {<br/>            def csrf = getCSRFToken(host, podId)<br/>           // println "CSRF token from ${host}/${podId}: $csrf"   // remove print CSRF token<br/>            println "pod ID: ${podId}"<br/>            println formatHacOutput(scriptExecute(host, csrf, podId, Troubleshootingscript))<br/>        } catch (Exception e) {<br/>            println "Error on ${host}/${podId}: ${e.message}"<br/>        }<br/>    }<br/>}</p>
+<p>return 'done' </p>
+</td></tr></tbody></table></div>
+<p></p>
+<p>Then you will get the below information:<br/><br/><img alt="" class="img-responsive" height="2690" src="/documents/customerkba/zGZX-P0Z_04L-JK2THyOZIE51S7PRHnZLR8aLdLPUzM" width="1212"/></p>
+<p><strong>Note: HAC (Hybris Administration Console) must be enabled for the specific service endpoint where the checks need to be performed. Please verify it in your lower enviornments, please moving to production environment.</strong></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>jgroups, credit, jgroups thread, max credit</p></div></div></div></div>

@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">A simple query against a single table using INDEX RANGE SCAN can block other similar queries against same table with event "read by other session"</p>
+<p>The hanging query does not finish regardless how much data needs to be read. It hangs forever. <br/>It can block other activities like</p>
+<ul>
+<li>Other queries against the same table</li>
+<li>Database shutdown for e.g. doing offline backups</li>
+</ul>
+<p>Symptoms seen in DBACockpit Session monitor</p>
+<ul>
+<li>A couple of sessions doing a select single against the same table are waiting for same block with "read by other session"</li>
+<li>Access path is always an INDEX RANGE SCAN against a multicolumn index</li>
+<li>The second column of the index is missing from the “where” condition leading into a “full index range scan”</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SBP 19.29.0.0.251121 202511, 37653908, AIX, hang, Index range scan</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Important:  This issue was only seen with AIX platform. It was not reproducible on other platforms.</strong></p>
+<p><br/>This issue will be visible after SBP 19.29.0.0.251021 has been applied on AIX platform.<br/>It is caused by 19.29 AIX interim patch for bug 37653908 which is part of SBP 19.29.0.0.251021.</p>
+<p>37653908 is included in DBRU 19.30.0.0.260120 (no longer provided as a single fix as like in SBP 19.29.0.0.251021).<br/>SBP 19.30.0.0.260120 202602 is NOT affected by this issue.<br/>SBP versions before SBP 19.29.0.0.251021 202511 are not affected either as they don't include the AIX interim patch for bug 37653908.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">To fix the issue on Oracle SBP 19.29.0.0.251121 installations, please</p>
+<p><span style="text-decoration: underline;">Rollback 19.29 AIX interim patch for bug 37653908:</span></p>
+<p>1. Stop all database applications, in particular all SAP applications.</p>
+<p>2. Shutdown the database instance(s) (In a RAC env: On all nodes)</p>
+<p>3. (In a RAC env: For each node of the cluster:) <br/>   As Oracle software owner, typically Unix user oracle: Use opatch to rollback the patch from your installation home $IHRDBMS:</p>
+<p>    env ORACLE_HOME=$IHRDBMS $IHRDBMS/OPatch/opatch rollback -id 37653908</p>
+<p>4. Start the database instance(s) (In a RAC env: On all nodes)</p>
+<p>5. Start all database applications, in particular all SAP applications.</p>
+<p><span style="text-decoration: underline;">Alternative</span></p>
+<ul>
+<li>Update your SAP database to SBP 19.30.0.0.260120 202602.</li>
+</ul></div></div></div></div>

@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During scheduling of production orders, operations may be planned within time intervals that do not physically exist due to Daylight Saving Time (DST) transitions (e.g. during the spring forward change where one hour is skipped).</p>
+<p>For example, in regions where DST starts at 02:00 AM, the time interval between 02:00:00 and 02:59:59 is skipped. However, the system may still schedule operations within this non-existent time range.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP ERP Capacity Planning (PP-CRP)</li><li>SAP R/3</li><li>SAP R/3 Enterprise</li><li>SAP ERP Central Component</li><li>SAP ERP</li><li>SAP Enhancement package for SAP ERP</li><li>SAP Enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA, on-premise</li><li>SAP S/4HANA Cloud Private Edition</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Maintain a plant assigned to a time zone that observes Daylight Saving Time (e.g. US time zones).</p>
+</li><li>
+<p>Create or use a routing with operations and standard scheduling parameters.</p>
+</li><li>
+<p>Create a production order with a basic start date corresponding to the DST transition date.</p>
+</li><li>
+<p>Execute scheduling (forward or backward).</p>
+</li><li>
+<p>Check the scheduled start/end times of operations.</p>
+</li></ol>
+<p>Result: Operations may be scheduled within the time interval between 02:00 and 02:59, even though this time does not exist due to the DST shift.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This behavior is caused by standard system design.</p>
+<p>Scheduling in Production Planning (PP) is performed based on continuous time calculations and does not consider Daylight Saving Time transitions. The scheduling logic assumes a uniform timeline without gaps or overlaps caused by time shifts.</p>
+<p>Additionally, there is no timezone-aware scheduling functionality implemented in PP (with the exception of Plant Maintenance orders). As a result, DST changes are not evaluated during scheduling calculations.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The scheduling engine in PP does not account for DST adjustments, and there is no configuration or enhancement available to modify this behavior.</p>
+<p>If scheduling accuracy around DST transitions is critical for business processes, the following alternatives may be considered:</p>
+<ul><li>
+<p>Manually adjust order dates/times after scheduling.</p>
+</li><li>
+<p>Avoid scheduling orders exactly within the DST transition window.</p>
+</li><li>
+<p>Implement custom logic outside of standard scheduling (e.g. user exits or external tools) to correct affected timestamps if required.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>summer, time, daylight, one hour, time change, time update, winter</p></div></div></div></div>

@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>You are unable to create an external Sales Quote from an Opportunity.<br/>When attempting to do so, the following error message is raised:</p>
+<p><em>"Order block Sales Order Block is set for account (“XYZ”) in master data."</em></p>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Integration for SAP Sales/Service Cloud</p>
+<p>Sales Cloud Version 2</p>
+<p></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>In System Administration, configure an Order Block under <em>Customer → Order Block</em> for a specific account’s sales data.</li><li>Navigate to an Opportunity.</li><li>Attempt to create an external Sales Quote by selecting + under <em>Sales Quotes</em>.</li></ol>
+<div> </div>
+<div>The system raises an error message:<em>"Order block Sales Order is set for account in master data."</em></div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>The system prevents the creation of external Sales Quotes from Opportunities when an Order Block is maintained in the account’s Sales Data.</p>
+<p>This behavior results from validation logic that checks the account’s master data (MasterDataBlockingReasons).<br/>If an Order Block is found, the system blocks the creation of follow‑up external documents.</p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>External Sales Quotes cannot be created from Opportunities if the account has an Order Block configured.<br/>This is expected system behavior.</p>
+<p>Additional details:</p>
+<ul><li>
+<p>An Order Block is designed to prevent saving the following transactions:</p>
+<ul><li>Quotes</li><li>Sales Orders</li><li>Service Tickets</li><li>Contracts</li></ul>
+</li><li>
+<p>A Sales Support Block, on the other hand, prevents saving:</p>
+<ul><li>Activities</li><li>Leads</li><li>Opportunities</li></ul>
+</li></ul>
+<p>A Delivery Block alone does not prevent the creation of internal or external quotes by default.</p>
+<p>For external follow‑up document creation (e.g., external Sales Quote in SAP S/4HANA), any Order Block detected in the account master data correctly prevents the outbound call.</p>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://help.sap.com/docs/sap-cloud-for-customer/solution-guide-for-sap-sales-cloud/block-sales-orders-based-on-account-blocks?version=CLOUD" rel="noopener noreferrer nofollow" target="_blank">SAP documentation: Block sales orders based on account blocks</a></p>
+<p>Refer to: <a href="https://me.sap.com/notes/3678603" rel="noopener noreferrer nofollow" target="_blank">SAP Note 3678603: Unable to Submit Sales Quote for Approval Due to Account Order Block</a></p>
+<p>Refer to: <a href="https://me.sap.com/notes/3677652" rel="noopener noreferrer nofollow" target="_blank">SAP Note 3677652: Sales Blocks in Accounts and Their Impact on Transaction Creation</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>order block, sales quote, external sales quote, SAP Sales Cloud, validation logic, account block, transaction creation, opportunity, master data, error message, sales data, Influence Portal, SAP documentation</p></div></div></div></div>

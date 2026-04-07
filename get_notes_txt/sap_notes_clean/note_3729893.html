@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>Prompt Descriptions of the List of Values are not retained in the Prompt window, current value only shows Value in Crystal Reports designer.</li>
+<li>Issue only happens on current value when refresh report again.</li>
+<li>Description would display again if re-select from Picklist or restore default value. </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Variable, SAP BW (DSL), Description, Current Value.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""><strong>Environment</strong></p>
+<ul>
+<li>SAP Crystal Reports 2025 Patch 8</li>
+<li>SAP BW (DSL)</li>
+</ul>
+<p><strong>Steps to Reproduce</strong></p>
+<ol>
+<li>Create a crystal report based on BEx Query with Parameters defined at BW side.</li>
+<li>Refresh the report.</li>
+<li>When prompted select any values for the parameter.</li>
+<li>Observe that both the Values and Descriptions are visible in the Prompt window.</li>
+<li>Refresh the report again with 'Prompt for new parameter values'.</li>
+<li>Observe that the previously entered parameters are only showing up as Values (no Descriptions are visible).</li>
+</ol>
+<p><strong>Cause</strong></p>
+<ul>
+<li>This is a known limitation.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Workaround</strong>:</p>
+<p>This issue is not fixed. User has to reload the description from picklist again if need to check description:</p>
+<p>1. For Single or Multiple values, user could click "OK" direct after picklist dialog prompted.</p>
+<p>2. For Hierarchy node value, user needs to expand the hierarchy to show the selected node and then click "OK".</p>
+<p>3. For Range value, description could not be reloaded. User needs to reselect from Picklist again.</p></div></div></div></div>

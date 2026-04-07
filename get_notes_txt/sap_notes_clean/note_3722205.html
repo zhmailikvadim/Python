@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p><span><span>When you create a draft A/P credit memo with specific withholding tax and try to convert it to a document through Data Interface (DI) API, it fails with error </span><em>"Unbalanced Transactions".</em></span></p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisites:</strong></p>
+<p><span>You are using a company with the India (IN) localization.</span></p>
+<p><span>Set rate for system currency: 88.</span></p>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Go to <em>Administration → Setup → Financials → Tax → Withholding Tax</em>, add an eTDS type withholding tax, for example T01.</li>
+<li>Create a <em>Vendor</em> type <em>Business Partner</em> (BP), go to <em>Accounting tab → Tax tab → WTax Codes Allowed</em> and enable T01.</li>
+<li>Create a <span><em>GST Tax Invoice</em> type</span> A/P invoice, select the BP, quantity 1, unit price 300, Tax code: <em>IGST18</em>.</li>
+<li><span>Open the <em>Withholding Tax Table</em>, select <em>WT Code:</em> T01, set <em>Taxable Amount</em> to 300.</span></li>
+<li><span>Copy the A/P invoice to an A/P credit memo and save it as a draft.</span></li>
+<li>Try to convert the draft A/P credit memo to a document through DI API.</li>
+</ol>
+<p><strong>Sample code:</strong></p>
+<p>oDrafts = (SAPbobsCOM.Documents)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oDrafts);<br/>oDrafts.GetByKey(1);<br/>oDrafts.SaveDraftToDocument();</p>
+<p><strong>Expected behavior:</strong></p>
+<p>The draft <span>A/P credit memo</span><span> is successfully converted to a document.</span></p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p><span><span>The draft </span><span>A/P credit memo</span><span> conversion </span>fails with error <em>"Unbalanced Transactions".</em></span></p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p>
+<p><em><strong><strong>Workaround: </strong></strong></em></p>
+<p>Convert <span>the draft </span><span>A/P credit memo</span><span> to document through SAP Business One application.</span></p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p><span>Unbalance Transaction, A/P invoice, draft A/P credit memo</span></p></div></div></div></div>

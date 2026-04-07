@@ -1,0 +1,40 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">We would like to to send Application Cost data from a table in Apptio to Application factsheets in LeanIX.</p>
+<p><span style="color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></span></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Here is a Step by Step guide to setup and test the integration to Send Application Cost data from Apptio to LeanIX</p>
+<p><strong>Step 1: Initial Setup in Apptio</strong></p>
+<p>This is the part where you need support from your Apptio Admin to perform the following:</p>
+<ol><li>Create a service user in Apptio Frontdoor application with "Data Link Admin" role </li><li>Grant the service user access to your Apptio environment</li><li>Capture the API keyAccess and keySecret during initial user profile creation</li><li>Identify your Apptio environment details:
+<ul><li>loginUrl: <a href="https://frontdoor.apptio.com/service/apikeylogin" rel="noopener noreferrer nofollow" target="_blank">https://frontdoor.apptio.com/service/apikeylogin</a> </li><li>domain name containing the tables to be used</li><li>environmentName</li><li>ulsUrl (Uploader Service URL) based on your region:
+<ul><li>EU: <a href="https://datalink-eu.apptio.com/uls/api/v1" rel="noopener noreferrer nofollow" target="_blank">https://datalink-eu.apptio.com/uls/api/v1</a> </li><li>US: <a href="https://datalink.apptio.com/uls/api/v1" rel="noopener noreferrer nofollow" target="_blank">https://datalink.apptio.com/uls/api/v1</a></li></ul>
+</li></ul>
+</li></ol>
+<p><strong>Step 2: Configure Authentication in SAP LeanIX</strong></p>
+<ol><li>Navigate to the Administration area in SAP LeanIX </li><li>Go to the Integrations section</li><li>Click "Configure" in the Apptio section</li><li>Configure the apptioConnectionConfig section with:
+<ul><li>loginUrl from Step 1 </li><li>keyAccess and keySecret from Step 1</li><li>domain and environmentName from Step 1</li><li>ulsUrl based on your region from Step 1 </li></ul>
+</li></ol>
+<p><strong>Step 3: Data Mapping Configuration</strong></p>
+<p>Configure apptioReadConfigs for the Applications table you would like to read the data from and Save the configuration. Please note that the url needs to be generated in Apptio and the format used is the tsv format or the legacy tsv format from the tables in TBM Studio.</p>
+<p>Please check with your Apptio Admin if you are not sure about the link format.</p>
+<p><strong>Step 4: Testing the Apptio download</strong></p>
+<p>The aim of this step is to test if the integration is able to initially fetch the data from Apptio</p>
+<ol><li>Click on the download button which would download your Apptio table data in a JSON format that is compatible with the integration API input format.</li><li>Save the Json output in a text / Code editor to be used for your later tests in the next step</li></ol>
+<p><strong>Step 5: Integration API Setup</strong></p>
+<p>The integration API Connector setup is the step where you define which Columns from Apptio you would need to send to which factsheet fields in LeanIX.  For this, you need to make sure that your table has at least one ID that is shared between the two systems and that is defined in LeanIX as a field of type externalId. </p>
+<ol><li>Navigate to the Administration area in SAP LeanIX </li><li>Go to the Integration API section</li><li>Create a new Connector with the following details:
+<ol><li>Connector Type: lxApptio</li><li>Connector Id: lxImportFromApptio</li><li>Connector Version: 1.0.0</li><li>Processing Direction: inbound</li><li>Processing Mode: Partial</li></ol>
+</li><li>Once created, you can add your processors as needed.</li><li>In this step, you can use your real input data that you downloaded from Apptio in the Input part of the integration API. We recommend to limit your data object to one application object for the initial test</li></ol>
+<p><strong>For an example of a Connector that you can use for reference to build your own, check the "See Also" section below  </strong></p>
+<p>Once your tests are finalized, you can raise a ticket for the Support team to run the workflow to automatically schedule the integration run for you. </p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Here is an Example of a processor that you can use for reference to build your connector: </p>
+<div>
+<div>
+<div>
+<div>
+<pre>{<br/>    "processors": [<br/>        {<br/>            "processorType": "inboundFactSheet",<br/>            "processorName": "Update Applications",<br/>            "processorDescription": "",<br/>            "type": "Application",<br/>            "filter": {<br/>                "type": "Application Cost",<br/>                "advanced": "${content.data.AppId!=null}"<br/>            },<br/>            "identifier": {<br/>                "external": {<br/>                    "id": {<br/>                        "expr": "${content.data.AppId}"<br/>                    },<br/>                    "type": {<br/>                        "expr": "externalId"<br/>                    }<br/>                }<br/>            },<br/>            "run": 0,<br/>            "updates": [<br/>                {<br/>                    "key": {<br/>                        "expr": "totalCost"<br/>                    },<br/>                    "values": [<br/>                        {<br/>                            "expr": "${data.Cost}"<br/>                        }<br/>                    ]<br/>                },<br/>                {<br/>                    "key": {<br/>                        "expr": "opEx"<br/>                    },<br/>                    "values": [<br/>                        {<br/>                            "expr": "${data.OpEx}"<br/>                        }<br/>                    ]<br/>                },<br/>                {<br/>                    "key": {<br/>                        "expr": "capEx"<br/>                    },<br/>                    "values": [<br/>                        {<br/>                            "expr": "${data.CapEx}"<br/>                        }<br/>                    ]<br/>                }<br/>            ],<br/>            "enabled": true,<br/>            "logLevel": "debug"<br/>        }<br/>        <br/>    ],<br/>    "dataProvider": {<br/>        "url": "${header.customFields.resultUrl}",<br/>        "type": "azureStorage"<br/>    }<br/>}</pre>
+</div>
+</div>
+</div>
+</div>
+<div> </div>
+<div>with an example input that looks like: </div>
+<div> </div>
+<pre>{<br/>    "connectorType": "lxApptio",<br/>    "connectorId": "lxImportFromApptio",<br/>    "connectorVersion": "1.0",<br/>    "lxVersion": "1.0.0",<br/>    "description": "",<br/>    "processingDirection": "inbound",<br/>    "processingMode": "partial",<br/>    "customFields": {},<br/>    "content": [<br/>        {<br/>            "type": "Application Cost",<br/>            "id": "0",<br/>            "data": {<br/>                "Cost": "18771",<br/>                "OpEx": "14078.23",<br/>                "lxId": "faba86a1-67f9-4550-b2bd-2e15041482d0",<br/>                "AppId": "App-1234",<br/>                "CapEx": "3519.56",<br/>                "AppDev": "739.11",<br/>                "AppRun": "2463.69",<br/>                "lxName": "AC Management"<br/>            }<br/>        }<br/>    ]<br/>}</pre>
+<div> </div></div></div></div></div>

@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>The SAP BusinessObjects repository may contain inconsistencies between the CMS database and the File Repository Servers (FRS).<br/>These issues may manifest as:</p>
+<ul><li>Missing objects or orphaned files</li><li>Objects referencing non‑existent FRS content</li><li>CMS metadata issues (ACLs, principals, submitter IDs)</li><li>Runtime errors when users access or schedule BI content</li></ul>
+<p>To diagnose or repair these inconsistencies, SAP provides the Repository Diagnostic Tool (RDT) also known as reposcan.exe.</p>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP BusinessObjects Business Intelligence Platform 4.x</li><li>SAP BusinessObjects Business Intelligence Platform 2025</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<h3 data-toc-skip="">What the Repository Diagnostic Tool Does</h3>
+<p>The Repository Diagnostic Tool (RDT) scans the SAP BusinessObjects repository for inconsistencies.<br/>Depending on the parameters used, the tool can:</p>
+<ol><li>✅ Diagnose and log inconsistencies</li><li>✅ Repair inconsistencies and log the corrective actions taken</li></ol>
+<p>The scan result is stored in:</p>
+<ul><li>Repo_Scan_yyyy_mm_dd_hh_mm_ss.xml<br/>→ Lists all inconsistencies found during the scan.</li></ul>
+<p>If the repair option (<code>-repair</code>) is enabled, the tool also generates:</p>
+<ul><li>Repo_Repair_yyyy_mm_dd_hh_mm_ss.xml<br/>→ Shows all objects repaired and any orphaned FRS files deleted.<br/>→ Lists inconsistencies that could <em>not</em> be repaired.</li></ul>
+<div>
+<h3 data-toc-skip="">HTML Report Rendering</h3>
+<p>An XSL stylesheet is included by default and is automatically associated with the XML output, enabling the scan report to be displayed in a readable HTML format when opened in a browser.</p>
+<p>The XSL file is located in:</p>
+<ul><li>
+<p>Windows</p>
+</li></ul>
+<pre>&lt;INSTALLDIR&gt;\SAP BusinessObjects Enterprise XI 4.0\reposcan</pre>
+<ul><li>UNIX</li></ul>
+<pre>./sap_bobj/enterprise_xi40/reposcan
+</pre>
+<div>
+<h3 data-toc-skip="">Reference: Warning Messages and Recommended Actions</h3>
+<p>For detailed descriptions of all RDT warnings and the corresponding corrective actions:</p>
+<ul><li>Inconsistencies in the CMS metadata</li><li>Inconsistencies between CMS and FRS</li></ul>
+<p>These documents describe the meaning of each inconsistency type and recommended resolution steps.</p>
+</div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/2521284" rel="noopener noreferrer nofollow" target="_blank">Repository Diagnostic Tool (RepoScan) ****LEAD KBA****</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Reposcan, master KBA, master, BI 4.1, BI 4.2, BI 4.0, BI .4.x, BI 3.1, BI 3.0, BI 3.x, problem, general, known issues, best practices, Spawar, BI-BIP-ADM, BI-BIP-DEP</p></div></div></div></div>

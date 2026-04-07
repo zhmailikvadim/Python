@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Rejection reason 01 - Reference Document Item Not Available observed in Intrastat transaction /ecrs/rp_edit when settlement documents are sent via report WLF_INTR_TRANSFER_4</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Rejected, declaration, reference, POI</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Missing functionality</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This note provides these new transfer events to adjust the intrastat date for transfer:</p>
+<p>4A         Intrastat Map Header</p>
+<p>4B         Intrastat Map Item</p>
+<p> </p>
+<p>In standard, credit memos are transferred as negative corrections.</p>
+<p>If the settlement document item has a billing document or other settlement document as direct reference via fields LFTYPV/WBELNV/POSNRV or REF_TYPE/REF_DOC_NR_1/REF_ITEM_NUMBER, this is transferred as reference document. The intrastat declaration then tries to get the correction period from this.</p>
+<p>If there is no reference, or the reference period cannot be determined, the items are shown with a rejection reason in the intrastat report and have to be declared manually if needed. This is correct behavior from standard perspective.</p>
+<p>Implement correction instructions.</p></div></div></div></div>

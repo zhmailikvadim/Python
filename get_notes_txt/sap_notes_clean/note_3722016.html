@@ -1,0 +1,42 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p><span>Incorrect discount is applied on A/P Credit Memo when the document is added in the Web Client.</span></p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisites:</strong></p>
+<p><span>1. Israel localization is used.</span></p>
+<p><span>2. Approval process exists for User A for <span>A/P Credit Memos</span>.</span></p>
+<p>2. The '<em>Enable Updating the Document Generated/Updated by Approval Process</em>' and the '<em>Enable Originator to Update the Document Draft in Pending/Approved Status</em>' parameters are selected (<em>Administration → System Initialization → General Settings <em>→ BP </em></em>tab<em><em>)</em></em>.</p>
+<p> </p>
+<p><strong>Scenario:</strong></p>
+<p><span>1. Create an A/P Invoice with User A. 17% <em>Tax</em> is calculated in the document footer, this is correct.</span></p>
+<p><span>2. Copy the A/P Invoice into <span>A/P Credit Memo</span> and manually change the <em>Tax</em> to 0%. Add the document, the approval is triggered as expected.</span></p>
+<p><span>3. Approve the document with the Authorizer.</span></p>
+<p><span>4. Log in with User A to the Web Client, search for the approved draft in <em>Purchasing → Docs in Approval Process</em>.</span></p>
+<p><span>5. Select the checkbox of the <span>A/P Credit Memo</span> row and click on <em>Add</em>.</span></p>
+<p><span>6. Click <em>OK</em> to the message: <em>The selected drafts will be added as documents. The status of the drafts will become closed.</em></span></p>
+<p> </p>
+<p><strong>Expected behavior:</strong></p>
+<p><span>The final <span>A/P Credit Memo</span> is added with 0% <em>Tax</em> and 0% <em>Discount</em>, same as on the approved draft.</span></p>
+<p> </p>
+<p><strong>Actual behavior<strong>:</strong><br/></strong></p>
+<div class="longtext">
+<p><span>The system creates a new modified Pending <span>A/P Credit Memo</span> draft with the 17% <em>Tax</em> added back to the footer on the document.</span></p>
+<p><span>The tax value is also added as a <em>Discount</em> on the footer with relevant <em>Discount %</em>. </span></p>
+<p><span>The same happens with A/R Credit Memo.</span></p>
+<p> </p>
+<p><strong>Additional Information:</strong></p>
+<p>The <span>A/P Credit Memo</span> can be added with correct values in the standard SAP Business One Client.</p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p>error</p></div></div></div></div>

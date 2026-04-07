@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The processing of XML documents fails within:</p>
+<ul id="__html26">
+<li>The CALL TRANSFORMATION statement with runtime error XSLT_BAD_SOURCE_CONTEXT and short text "XSLT: No valid XML source" and/or exception CX_XSLT_RUNTIME_ERROR with short text "No valid source context supplied" and kernel message "iXML configuration has prohibited the usage of DTDs" in exception attribute S2.</li>
+<li>The method PARSE( ) of class CL_IXML_PARSER/interface IF_IXML_PARSER with return code &lt;&gt; 0 and <span class="SNO_DNT" style="float: none;" translate="no">NUM_ERRORS( ) &gt; 0, GET_ERROR( INDEX = 0 )-&gt;GET_REASON( )</span> returns "iXML configuration has prohibited the usage of DTDs".</li>
+</ul>
+<p><span style="font-size: 14px;">Related error details in SM21 (Syslog): A35 "iXML: DTD parsing attempted but forbidden by configuration"</span></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DTD, Document Type Definition, iXML library, CALL TRANSFORMATION</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The profile parameter ixml/dtd_restriction is set to prohibited, e.g. in SAP Enterprise Cloud Services AS ABAP systems according to SAP Note 3250501.</p>
+<p>The XML document contains a DTD, e.g. &lt;!DOCTYPE foo&gt; or &lt;!DOCTYPE foo SYSTEM_ID "foo.dtd"&gt;.</p>
+<p>Refer to SAP Note 1594475 for details about possible DoS attacks in programs using iXML.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The recommended solution is to allow the usage of DTDs locally in the affected application.</p>
+<p>If the application is custom code: Change your custom code as described <abbr>SAP Note</abbr> 1712860 examples 3, 4, or 5. When using CALL TRANSFORMATION pass the IF_IXML_ISTREAM instance created as described in <abbr>SAP Note</abbr> 1712860 example 3 as XML source.</p>
+<p>If the application is SAP Standard code: Check the application component for available corrections, e.g. SAP Note 3580805 for component CA-WUI-UI.</p>
+<p>If this is not possible or there is no correction available, you might consider to change the setting of profile parameter ixml/dtd_restriction to the kernel default expansion together with ixml/xml_expansion_factor = 10, if permitted by relevant security policies.</p></div></div></div></div>

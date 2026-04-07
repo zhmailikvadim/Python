@@ -1,0 +1,68 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>Cannot implement "Default-Deny Access Control" in Information Design Tool.</li>
+<li>When a user has not been granted or denied to see an object in Business Security Profile, it still can see it even after implementing the “Default-Deny Access Control”.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>idt, restriction,4.3, deny, IDT</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence (BI) Platform 2025 Patch 08</li>
+<li>SAP BusinessObjects Business Intelligence 4.3 Service Pack 05</li>
+<li>Web Intelligence</li>
+</ul>
+<p><strong>Steps to duplicate</strong></p>
+<ol>
+<li><span style="font-size: 14px;">Open IDT</span></li>
+<li><span style="font-size: 14px;">Open Security Editor</span></li>
+<li><span style="font-size: 14px;">Navigate to the desired universe under “Universes/Profiles” (efashion.unx)</span></li>
+<li><span style="font-size: 14px;">In the Universes / Profiles pane,right-click universe name</span></li>
+<li><span style="font-size: 14px;">Select Insert Business Security Profile</span></li>
+<li><span style="font-size: 14px;">Enter the name: Base Access</span></li>
+<li><span style="font-size: 14px;">The profile editor opens with tabs across the top </span></li>
+<li><span style="font-size: 14px;">Click the </span><strong style="font-size: 14px;">Create Query </strong><span style="font-size: 14px;">tab</span></li>
+<li><span style="font-size: 14px;">Locate the </span><strong style="font-size: 14px;">By Object </strong><span style="font-size: 14px;">section (lower portion of the tab)</span></li>
+<li><span style="font-size: 14px;">The universe’s class tree is displayed.</span></li>
+<li><strong style="font-size: 14px;">Grant </strong><span style="font-size: 14px;">all the classes by selecting them and clicking the grant button.</span></li>
+<li><strong style="font-size: 14px;">Leave the Measures class untouched. </strong><span style="font-size: 14px;">Do not grant it. Do not deny it.</span></li>
+<li><span style="font-size: 14px;">Click the </span><strong style="font-size: 14px;">Display Data </strong><span style="font-size: 14px;">tab</span></li>
+<li><span style="font-size: 14px;">Grant the </span><strong style="font-size: 14px;">same seven classes </strong><span style="font-size: 14px;">listed in step 8 above</span></li>
+<li><span style="font-size: 14px;">Again, </span><strong style="font-size: 14px;">leave Measures untouched </strong><span style="font-size: 14px;">– do not grant or deny</span></li>
+<li><span style="font-size: 14px;">Click </span><strong style="font-size: 14px;">OK </strong><span style="font-size: 14px;">to save the Base Access profile</span></li>
+<li><span style="font-size: 14px;">In the </span><strong style="font-size: 14px;">Universes / Profiles </strong><span style="font-size: 14px;">pane, </span><strong style="font-size: 14px;">right-click </strong><span style="font-size: 14px;">the universe name</span></li>
+<li><span style="font-size: 14px;">Select </span><strong style="font-size: 14px;">Insert Business Security Profile</strong></li>
+<li><span style="font-size: 14px;">Enter the name: Measures Access</span></li>
+<li><span style="font-size: 14px;">Click the </span><strong style="font-size: 14px;">Create Query </strong><span style="font-size: 14px;">tab</span></li>
+<li><span style="font-size: 14px;">In the </span><strong style="font-size: 14px;">By Object </strong><span style="font-size: 14px;">section, </span><strong style="font-size: 14px;">grant </strong><span style="font-size: 14px;">only: Measures</span></li>
+<li><span style="font-size: 14px;">Click the </span><strong style="font-size: 14px;">Display Data </strong><span style="font-size: 14px;">tab</span></li>
+<li><span style="font-size: 14px;">Grant only the </span><strong style="font-size: 14px;">Measures </strong><span style="font-size: 14px;">class</span></li>
+<li><span style="font-size: 14px;">Click </span><strong style="font-size: 14px;">OK </strong><span style="font-size: 14px;">to save the Measures Access profile</span></li>
+<li><span style="font-size: 14px;">In the </span><strong style="font-size: 14px;">Universes / Profiles </strong><span style="font-size: 14px;">pane, select the </span><strong style="font-size: 14px;">Base Access </strong><span style="font-size: 14px;">profile under the universe</span></li>
+<li><span style="font-size: 14px;">The right-hand pane displays all available users and groups alongside the </span><strong style="font-size: 14px;">Assigned Users </strong><span style="font-size: 14px;">list</span></li>
+<li><span style="font-size: 14px;">In the available users/groups list, locate the </span><strong style="font-size: 14px;">Everyone </strong><span style="font-size: 14px;">group</span></li>
+<li><span style="font-size: 14px;">Select </span><strong style="font-size: 14px;">Everyone </strong><span style="font-size: 14px;">and click the </span><strong style="font-size: 14px;">left-pointing arrow </strong><span style="font-size: 14px;">to move it into the Assigned Users list</span></li>
+<li><span style="font-size: 14px;">In the </span><strong style="font-size: 14px;">Universes / Profiles </strong><span style="font-size: 14px;">pane, select the </span><strong style="font-size: 14px;">Measures Access </strong><span style="font-size: 14px;">profile</span></li>
+<li><span style="font-size: 14px;">In the available users/groups list, locate </span><strong style="font-size: 14px;">(userA for example)</strong></li>
+<li><span style="font-size: 14px;">In the </span><strong style="font-size: 14px;">Universes / Profiles </strong><span style="font-size: 14px;">pane, right-click the universe name</span></li>
+<li><span style="font-size: 14px;">Select </span><strong style="font-size: 14px;">Change Business Security Profile Priority</strong></li>
+<li><span style="font-size: 14px;">Confirm that both profiles appear in the list:</span></li>
+<li><span style="font-size: 14px;">Base Access</span></li>
+<li><span style="font-size: 14px;">Measures Access</span></li>
+<li><span style="font-size: 14px;">Confirm the aggregation option is set to </span><strong style="font-size: 14px;">Very Restrictive </strong><span style="font-size: 14px;">(the default)</span></li>
+<li><span style="font-size: 14px;">Close the priority dialog</span></li>
+<li><span style="font-size: 14px;">Click the </span><strong style="font-size: 14px;">Save </strong><span style="font-size: 14px;">icon in the Security Editor main toolbar</span></li>
+<li><span style="font-size: 14px;">All profile definitions and group assignments are persisted to the CMS repository</span></li>
+</ol>
+<p><strong>Cause </strong></p>
+<div class="longtext">
+<div class="longtext">
+<ul>
+<li>Cause is currently under investigation by Development Team.</li>
+</ul>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>Solution is currently under investigation by Development Team.</li>
+</ul></div></div></div></div>

@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When reviewing Journal Entries for production order postings, inconsistent behavior is observed regarding the WBS Element field:</p>
+<ol><li>
+<p>For some production orders, the WBS Element is populated as a statistical account assignment in the journal entry.</p>
+</li><li>
+<p>For other production orders, the WBS Element field remains blank in the journal entry.</p>
+</li><li>
+<p>In both cases, a WBS Element is visible in the Assignment tab of the Display Production Order app.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The difference in behavior is determined by the origin of the production order and the stock valuation method:</p>
+<p><strong>Scenario 1: Engineer-to-Order (ETO) with Valuated Project Stock</strong></p>
+<p>The production order is part of a managed ETO process flow:</p>
+<blockquote>
+<p><strong>Sales Order -</strong> <strong>WBS Element</strong> <span>-</span> <strong>Planned Order -</strong> <strong>Production Order</strong></p>
+</blockquote>
+<p>In this scenario, the production is specifically for <strong>Valuated Project Stock</strong>. Because the order is intrinsically linked to the project structure from its inception, the WBS Element is correctly passed to the Journal Entry as a statistical account assignment during postings.</p>
+<p><strong>Scenario 2: Make-to-Stock (MTS) with Manual Assignment</strong></p>
+<p>The production order is a standard order intended for normal (anonymous) plant stock. The WBS Element seen in the <strong>Assignment</strong> tab was manually entered after the production order was created. In this case, the order is not technically considered "Project-related" for stock valuation purposes. Therefore, the assigned WBS Element is not carried over as a statistical account assignment in the financial postings.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To confirm if a production order is intended for <strong>Valuated Project Stock</strong>, you must verify the technical attributes of the order item.</p>
+<p> - Access the <strong>Query Browser</strong> or <strong>Custom CDS Views</strong> app.</p>
+<p> - Open the CDS View: <code>I_ProductionOrderItem</code>.</p>
+<p> - Filter by the <strong>Production Order</strong> number.</p>
+<p> - Check the value in the field <strong><code>InventorySpecialStockType</code></strong> (Special Stock Type).</p>
+<p>If the value is <strong>"Q"</strong>, the order is for <strong>Valuated Project Stock</strong> (ETO Scenario).</p>
+<p>If the field is <strong>blank</strong>, it is a standard <strong>Make-to-Stock</strong> order.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Production Order, WBS Element, Statistical Account Assignment, ETO, Engineer to Order, MTS, Make to Stock, Valuated Project Stock, I_ProductionOrderItem, Special Stock Type, InventorySpecialStockType, Q, Journal Entry</p></div></div></div></div>

@@ -1,0 +1,65 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You have executed the replenishment calculation and notice (e.g. in the Review Order Plan Items app), that the order quantity is not as expected. Additionally, you notice that the service level for every shown candidate is 0. This happens in case of products with very short shelf life that cannot cover the complete demand period. Therefore, the system cannot reach the desired <em>Minimum Service Level Constraints</em> and the resulting order is not as expected.</p>
+<div id="container-50fb20ec5a5f45b5a5527dd9e-top_left_container">
+<div id="container-50fb20ec5a5f45b5a5527dd9e-header_container">
+<div id="container-50fb20ec5a5f45b5a5527dd9e-header_content">
+<div id="container-50fb20ec5a5f45b5a5527dd9e-header_title_row">
+<div class="sn-form-header-tag"></div>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Replenishment Planning, Demand Data Foundation, DDF, SAP Customer Activity Repository, CAR, Order Plan Item, Shelf Life, Minimum Service Level</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Reason:</p>
+<p id="">The minimum service levels cannot be fulfilled if the shelf life ends before the end of the demand period. Therefore, the service levels result in 0.</p>
+<p>Prerequisites:</p>
+<p>The error can occur if you have installed RTLCAB 500 or RTLCAB 600, <a href="https://me.sap.com/notes/3507715" target="_blank">SAP Note 3507715</a> and one of the following AFL revisions in your SAP HANA Platform:</p>
+<p>For SAP HANA Platform 2.0:</p>
+<ul>
+<li>
+<p>SAP XRP AFL 1.0 Revision 79.0007 or lower</p>
+</li>
+<li>
+<p>SAP XRP AFL 1.0 Revision 88.0000 or lower</p>
+</li>
+<li>
+<p>SAP XRP AFL 1.0 Revision 89.0000 or lower</p>
+</li>
+<li>
+<p>SAP XRP AFL 1.0 Revision 89.0100 or lower</p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="font-size: 14px;">Upgrade the SAP XRP AFL to at least the next higher revision (see table below).</span></p>
+<p><span style="font-size: 14px;">CAUTION: Make sure that the revision that you <strong>upgrade to</strong> is compatible with the revision of the SAP HANA AFL component and the revision of the SAP HANA database in your system. If necessary, upgrade the revisions of the two SAP HANA components as well.</span></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Your current revision is...</strong></td>
+<td><strong>Upgrade to at least this revision...</strong></td>
+</tr>
+<tr>
+<td>SAP XRP AFL 1.0 Revision 79.0007 or lower</td>
+<td>SAP XRP AFL 1.0 Revision 79.0008</td>
+</tr>
+<tr>
+<td>SAP XRP AFL 1.0 Revision 87.0000 or lower</td>
+<td>SAP XRP AFL 1.0 Revision 87.0001</td>
+</tr>
+<tr>
+<td>SAP XRP AFL 1.0 Revision 88.0000 or lower</td>
+<td>SAP XRP AFL 1.0 Revision 88.0001</td>
+</tr>
+<tr>
+<td>SAP XRP AFL 1.0 Revision 89.0000 or lower</td>
+<td>SAP XRP AFL 1.0 Revision 89.0001</td>
+</tr>
+<tr>
+<td>SAP XRP AFL 1.0 Revision 89.0100 or lower</td>
+<td>SAP XRP AFL 1.0 Revision 89.0101</td>
+</tr>
+</tbody>
+</table></div>
+<p><span style="font-size: 14px;">NOTE: For upgrade instructions, see chapter "Download and Install SAP XRP AFL (Only for SAP Replenishment Planning)" in the Common Upgrade Guide for SAP Customer Activity Repository applications bundle, for example for release <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/CARAB/5f6a0c50ac324b0395738c1ce0fe14c6/795ba9d5edab43a7b4ed7b874486c8e1.html?locale=en-US" target="_blank">5.0 FPS06</a>.</span></p></div></div></div></div>

@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> In the process "End of Supply for Gas (DSO View)" (DE_B_GELIGAS_EOS_DSO), the rejection checks for the data type definition (DTD) G_0007 need to be updated to align with the current GPKE document requirements. The embedded process "Check Rejection of Deregistration for End of Supply Process" (DE_B_GELIGAS_DSO_EOS_G_0007) at step 1200 requires updated validation logic.<br/><br/>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">G_0007, DE_B_GELIGAS_EOS_DSO, DE_B_GELIGAS_DSO_EOS_G_0007, DTD, GPKE, embedded process, deregistration, rejection codes, Z14, Z08, E14, E17</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">This SAP Note provides a new development change to align the rejection checks for DTD G_0007 with the updated GPKE document requirements.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="__html0">Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system uses the updated embedded process DE_B_GELIGAS_DSO_EOS_G_0007 (version 2604) at step 1200, which includes the revised rejection checks for G_0007 as specified in the GPKE document.</p>
+<p>You can verify the fix by testing scenarios Z14, Z08, E14, and E17, and checking that the rejection codes Z14, Z08, E14, and E17 are sent correctly in the Cloud Pdoc at step 100 (Send EoS Rejection to Old Supplier).</p>
+<p>This SAP Note is related to emergency patch 2000009185 on the Cloud side.</p></div></div></div></div>

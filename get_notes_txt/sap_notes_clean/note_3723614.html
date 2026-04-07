@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>You may notice that Security Audit Log (SAL) files in your ABAP system are only available for a short time—usually about 2 days. After that, you can’t find older logs in SM20 or AL11.</p>
+<h3 data-toc-skip=""> </h3>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Enterprise Cloud Services ( SAP's Private Cloud )</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>You are not able to get events in SM20 or do not find audit files older than certain period in AL11.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>On older systems (installed before September 2025 or running older support packages), the audit logs were saved to the file system instead of the database.<br/>Those systems had an automatic cleanup process that moved/deleted old SAL files from the folder $DIR_AUDIT.</div>
+<div> </div>
+<div>The standard for cloud is to store SAL logs in a database.</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>To ensure audit logs are kept longer, you need to switch the storage method from <em>File System</em> to <em>Database</em>.</p>
+<p>You can do this in transaction RSAU_CONFIG.<br/>For step‑by‑step guidance, see this document:<br/>&lt;<a href="https://d.dam.sap.com/a/t1W2psW/ABAP_SAL_Audit_loggingf_-_Private_Cloud.pdf?rc=10&amp;inline=true&amp;doi=SAP1271700" rel="noopener noreferrer nofollow" target="_blank">https://d.dam.sap.com/a/t1W2psW/ABAP_SAL_Audit_loggingf_-_Private_Cloud.pdf?rc=10&amp;inline=true&amp;doi=SAP1271700</a>&gt;</p>
+<h3 data-toc-skip="">Need Older Files Restored?</h3>
+<p>If you recently switched to database storage, SAP can restore your older audit files one time as an exception.<br/>These restored files will be placed back into $DIR_AUDIT, and you may need extra file system space.</p>
+<h3 data-toc-skip="">How to Use the Restored Logs</h3>
+<p>You have two choices:</p>
+<ol><li>
+<p>Read them directly</p>
+<ul><li>Open them using your usual SAL transactions, or</li><li>Use report RSAU_READ_LOG</li></ul>
+</li><li>
+<p>Load them into the database for long‑term retention</p>
+<ul><li>Use report RSAU_LOAD_FILES</li><li><strong>Important</strong>: Fix known issues first by implementing SAP Notes 3644711, 3650449, 3658972, and 3413125</li></ul>
+</li></ol>
+<div>If you’re unsure or need assistance, simply contact your private cloud representative, who will guide you through the process.</div>
+</div></div></div></div></div>

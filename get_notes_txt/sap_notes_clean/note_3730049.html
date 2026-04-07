@@ -1,0 +1,47 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When creating an outbound delivery from a sales scheduling agreement, the system proposes a delivery quantity that differs from the quantity maintained in the forecast delivery schedule.</p>
+<p>For example:</p>
+<ul><li>
+<p>Forecast Delivery Schedule quantity = 20</p>
+</li><li>
+<p>Outbound Delivery proposal = 100</p>
+</li></ul>
+<p>The user may need to manually adjust the delivery quantity during delivery creation.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p> SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Create a Sales Scheduling Agreement with a material and customer.</p>
+</li><li>
+<p>Maintain Forecast Delivery Schedule lines with specific quantities (e.g., 20 units).</p>
+</li><li>
+<p>Ensure multiple schedule lines or open quantities exist.</p>
+</li><li>
+<p>Create an Outbound Delivery for the scheduling agreement.</p>
+</li><li>
+<p>Observe the proposed delivery quantity in the outbound delivery.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The outbound delivery quantity is determined based on open, delivery-relevant forecast delivery schedule lines.</p>
+<p>During delivery creation, the system may:</p>
+<ul><li>
+<p>Consider multiple open schedule lines</p>
+</li><li>
+<p>Aggregate quantities within the selected delivery horizon or date range</p>
+</li></ul>
+<p>As a result, the proposed delivery quantity may not correspond to a single forecast schedule line, but instead reflects the total open requirement.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This is standard system behavior.</p>
+<p>To manage or adjust the delivery quantity:</p>
+<ul><li>
+<p>Review the open forecast delivery schedule lines and their quantities</p>
+</li><li>
+<p>Verify the delivery creation date or selection criteria</p>
+</li><li>
+<p>Manually adjust the delivery quantity in the outbound delivery if required</p>
+</li></ul>
+<p>If a specific quantity is required per delivery:</p>
+<ul><li>
+<p>Ensure schedule lines are structured accordingly</p>
+</li><li>
+<p>Control delivery creation timing and selection parameters</p>
+</li></ul>
+<h2 data-toc-skip="">Additional Information</h2>
+<ul><li>
+<p>Forecast Delivery Schedule lines represent delivery requirements over time, not necessarily a 1:1 mapping to outbound deliveries.</p>
+</li><li>
+<p>The system is designed to optimize delivery creation by considering open requirements rather than enforcing strict one-to-one correspondence.</p>
+</li><li>
+<p>Manual adjustment during delivery creation is supported and expected where needed.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://me.sap.com/notes/2596286" rel="nofollow">2596286 - Price of vendor consignment during transfer posting to own stock or during consumption</a></li><li><a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/a630d57fc5004c6383e7a81efee7a8bb/f7b3e498c30a4f9aad381062cc9d8b09.html?locale=en-US" rel="nofollow">Sales Scheduling Agreement Help Portal</a></li><li><a href="https://learning.sap.com/learning-journeys/exploring-contract-management-in-sap-s-4hana-sourcing-and-procurement/using-scheduling-agreements-with-release-documentation" rel="nofollow">Using Scheduling Agreements with Release Documentation (Learning Hub)</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Scheduling Agreement, Forecast Delivery Schedule, Outbound Delivery, Delivery Quantity, Aggregation, Schedule Lines, SD, S/4HANA Cloud, Delivery Proposal, Quantity Mismatch,</p></div></div></div></div>

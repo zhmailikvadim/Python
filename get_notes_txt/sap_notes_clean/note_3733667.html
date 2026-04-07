@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>Buyers may receive email notifications stating that SAP Fieldglass will begin enforcing encryption key expiration starting in June 2026.</p>
+<p>Buyers may be unclear about:</p>
+<ul><li>Why they are receiving this notification</li><li>What actions are required</li><li>Where to find more information</li><li>Whether their existing encryption keys meet new security requirements</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Production and Non-production</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Buyers will receive an email notification on this topic. Target audience for change information:</p>
+<ol><li>An organization that is currently using:
+<ul><li>A weak encryption cipher (CAST 128‑bit), or</li><li>An RSA key size below updated SAP Fieldglass standards for PGP keys</li></ul>
+</li><li>Encryption keys used for integrations are approaching expiration under new enforcement rules</li><li>Recipients are listed in the configuration settings managed by the customer’s configuration manager</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>SAP Fieldglass is implementing enhanced security controls by enforcing expiration of encryption keys beginning June 2026.</p>
+<ul><li>These changes were first communicated in the November 2025 release.</li><li>New automatically generated PGP keys will use:
+<ul><li>AES‑256 encryption, and</li><li>2048‑bit RSA wrapping</li></ul>
+</li><li>Customer environments currently using weaker encryption standards will trigger email notifications and in‑application alerts.</li></ul>
+<p>PGP keys that are customer‑generated or SAP‑generated both require manual rotation. SAP Fieldglass does not provide automatic rotation for PGP keys.</p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="font-size: 10pt;">To ensure uninterrupted secure integrations, customers should take the following actions:</span></p>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">1. Review your current encryption key strength</span></h3>
+<p><span style="font-size: 10pt;">Verify whether your organization is using:</span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">CAST 128‑bit encryption (weak and being retired), or</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">An RSA key size below 2048‑bit</span></li></ul>
+<p><span style="font-size: 10pt;">If so, rotation is required before enforcement begins in June 2026.</span></p>
+<div>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">2. Confirm your systems support the new encryption standards</span></h3>
+<p><span style="font-size: 10pt;">Ensure all internal systems and integrations can process PGP keys encrypted with:</span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">AES‑256, and</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">2048‑bit RSA</span></li></ul>
+<div>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">3. If your systems cannot support the new standards</span></h3>
+<p><span style="font-size: 10pt;">You must generate and provide your own PGP key pair that meets the following requirements:</span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Contains an expiration date within 6 months</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Expires before December 31, 2026</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">You are responsible for replacing/rotating these keys upon expiration</span></li></ul>
+<p><span style="font-size: 10pt;">This is considered an interim solution only.</span><br/><span style="font-size: 10pt;">Non‑compliant keys will be permitted only until December 31, 2026.</span></p>
+<div>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">4. Work with your configuration manager</span></h3>
+<p><span style="font-size: 10pt;">Your configuration manager is responsible for maintaining the recipient list for key‑expiration notifications.</span><br/><span style="font-size: 10pt;">If you unexpectedly received the notification, contact your internal configuration manager.</span></p>
+</div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li style="font-style: italic;"><em><a href="https://help.sap.com/docs/SAP_Fieldglass/76e97fe0cccf4d37a5dadc652a375e33/2ed94e20e05843f38ea1991422f22254.html" rel="noopener noreferrer nofollow" target="_blank">Rotation Enforcement for Encryption Keys | SAP Help Portal</a></em></li><li>Weak key information: <em><a aria-label="Link Encryption Keys and Certificates | SAP Help Portal" href="https://help.sap.com/docs/SAP_Fieldglass/b363c9b90a9d4d34bc8ced1065edb922/ece6eb9ca1d34fb8a5eef70fc444349c.html" id="menur1656" rel="noopener noreferrer nofollow" target="_blank">Encryption Keys and Certificates | SAP Help Portal</a></em></li><li style="font-style: italic;"><em><a aria-label="Link Rotate Asset | SAP Help Portal" href="https://help.sap.com/docs/SAP_Fieldglass/b363c9b90a9d4d34bc8ced1065edb922/183e1808c02749eca96efb7ffda8f284.html" id="menur1658" rel="noopener noreferrer nofollow" target="_blank">Rotate Asset | SAP Help Portal</a></em></li><li style="font-style: italic;"><em><a aria-label="Link Getting Started with Configuration Manager | SAP Help Portal" href="https://help.sap.com/docs/SAP_Fieldglass/b363c9b90a9d4d34bc8ced1065edb922/54a8aa7ea6cb4b2f972854c579ce6844.html" id="menur1654" rel="noopener noreferrer nofollow" target="_blank">Getting Started with Configuration Manager | SAP Help Portal</a></em></li></ul>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><div>encryption key expiration; PGP key rotation; CAST 128; AES‑256; RSA 2048; Fieldglass security; integration encryption standards; key enforcement June 2026; customer‑provided PGP key; SAP‑generated PGP key; encryption upgrade</div></div></div></div></div>

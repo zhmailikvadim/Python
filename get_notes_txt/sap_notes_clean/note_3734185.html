@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">When submitting a Non‑PO Invoice to SAP Ariba Buying &amp; Invoicing via cXML, the invoice line item includes:</div>
+<div><em>&lt;Extrinsic name="AccountCategory"&gt;K&lt;/Extrinsic&gt;</em></div>
+<div>
+<div>Although the cXML contains valid accounting information, the Account Category (Account Assignement) does not default in the Ariba UI and the expected accounting determination is not triggered.</div>
+<div> </div>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>SAP Ariba Buying &amp; Invoicing (B&amp;I)</div><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<div>Supplier system sends a Non‑PO Invoice cXML containing correct line‑item accounting fields and an Extrinsic for AccountCategory.</div>
+</li><li>
+<div>The invoice imports into SAP Ariba Buying &amp; Invoicing without technical errors.</div>
+</li><li>
+<div>n the UI, the Account Assignment is not defaulted to the value sent (e.g., <em>“K – Cost Center”</em>) under line-item Accounting Details.</div>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>The issue occurs because the ERPCommodityCodeMap.csv (CEME file) used for accounting defaulting is missing the column value for AccountCategory for the relevant commodity mapping.</p>
+<p>Although SAP Ariba B&amp;I can process AccountCategory when sent as an Extrinsic, the system still requires a matching CEME entry to trigger the accounting defaulting logic.</p>
+<p>If the CEME row has the AccountCategory column empty, Ariba B&amp;I does not select the entry, and therefore the expected accounting defaults are not applied — even if the cXML accounting data is correct.</p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<ol><li>Open the ERPCommodityCodeMap.csv (CEME file) in your realm.</li><li>Locate the entry corresponding to the commodity on the invoice line item.</li><li>Confirm that the AccountCategory column exists and is populated.</li><li>Enter the correct value (e.g., K) for the relevant commodity row.</li><li>Re‑upload the corrected CEME file using the standard Data Import process.</li><li>Reprocess or re‑submit the invoice.</li></ol>
+<p>After updating the CEME file, SAP Ariba B&amp;I can properly trigger the mapping, and the Account Category received in the cXML is correctly recognized by the defaulting logic.</p>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><div>SAP states that the CEME file drives account type and accounting defaulting when processing invoices:<br/>SAP Help Portal – Accounting Defaulting Customization and Configuration Parameters<br/><a href="https://help.sap.com/docs/buying-invoicing/common-data-import-and-administration-for-sap-ariba-procurement-solutions/accounting-defaulting-customization-and-configuration-parameters-6ab4bd7bc1da101492b1d893b769c02f" rel="noopener noreferrer nofollow" target="_blank">https://help.sap.com/docs/buying-invoicing/common-data-import-and-administration-for-sap-ariba-procurement-solutions/accounting-defaulting-customization-and-configuration-parameters-6ab4bd7bc1da101492b1d893b769c02f</a></div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>AccountCategory, CEME, Account Assignment, cXML, non-po invoice, accounting defaulting.</p></div></div></div></div>

@@ -1,0 +1,52 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p>The by-product with the backflush issue method may have incorrect issued quantity due to rounding.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisite:</strong></p>
+<p>In this sample scenario the system is set up with 3 decimals for quantities in the <em>Administration → System Initialization → </em><em>General Settings → Display</em> tab.<br/><br/><strong>Scenario:</strong></p>
+<ol>
+<li>
+<p><span style="font-size: 14px;">Go to <em>Production</em></span><em style="font-size: 14px;"> → Bill of Materials </em><span style="font-size: 14px;">and create a new bill of materials of type </span><em style="font-size: 14px;">Production</em><span style="font-size: 14px;"> with the following inventory items :<br/></span>product item 'Parent', and two component items : 'By-Product' and 'Component'.</p>
+</li>
+<li>
+<p><span style="font-size: 14px;">Go to <em>Production</em></span><em style="font-size: 14px;"> → Production Order </em><span style="font-size: 14px;">to add a new order with the following parameters : </span></p>
+</li>
+</ol>
+<ul>
+<li>
+<p><span style="font-size: 14px;">Planned quantity of 'Parent' is 100,</span></p>
+</li>
+<li>
+<p><em style="font-size: 14px;">Planned Qty</em><span style="font-size: 14px;"> of 'Component' is 1.005; </span><em style="font-size: 14px;">Issue Method : </em><em style="font-size: 14px;">Backflush; Base Qty : 0.01; Base Ratio 201/20000,</em></p>
+</li>
+<li>
+<p><em style="font-size: 14px;"><em>Planned Qty</em><span> of 'By-Product' is -1.005; Issue Method : Backflush; Base Qty : - 0.01; Base Ratio -201/20000.</span></em></p>
+</li>
+</ul>
+<ol start="3">
+<li>
+<p><span style="font-size: 14px;">Release the Production Order and then add two Receipts from Production, each with a quantity 50 of the 'Parent'.<br/></span></p>
+</li>
+<li>
+<p><span style="font-size: 14px;">Verify the Issued quantity of the 'By-Product'.</span></p>
+</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The <em>Issued</em> quantity of the 'By-Product' is -1.005, in line with the <em>Planned Qty</em> and the issued quantity of the 'Component'.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>The Issued quantity of the By-Product is -1.006, which is not line with the Planned Qty -1.005.</p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p>byproduct</p></div></div></div></div>

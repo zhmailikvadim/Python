@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When attempting to initiate onboarding for Concurrent Employment from the Recruiting module, the onboarding process fails and the candidate becomes stuck in a Suite Mapping error.</p>
+<p>The following errors may be observed:</p>
+<ul><li>
+<p>"There is already a recruit record for user XXXX. You cannot create another recruit record if one already exists."</p>
+</li><li>
+<p>"You cannot create a job information record for user XXXX before the effective start date in the recruit record."</p>
+</li></ul>
+<p>Additionally:</p>
+<ul><li>
+<p>The candidate appears with an ONB Suite Mapping Error in the BPE Process Monitor.</p>
+</li><li>
+<p>Check Tool validations may not show configuration errors.</p>
+</li><li>
+<p>The onboarding process does not proceed successfully.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Onboarding</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Configure the Rule to Initiate Onboarding for Concurrent Employment.</p>
+</li><li>
+<p>Maintain the required mappings in Recruit-to-Hire Data Mapping.</p>
+</li><li>
+<p>Initiate onboarding for a candidate from Recruiting for a user who already exists in the system.</p>
+</li><li>
+<p>Attempt to trigger Concurrent Employment onboarding through the recruiting process.</p>
+</li><li>
+<p>Observe that the onboarding process fails and the candidate appears with a Suite Mapping Error in BPE Process Monitor.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Concurrent Employment onboarding cannot be initiated from Recruiting, Manual Onboarding, or other ATS integrations in Onboarding 2.0. </li><li>Concurrent employment must first be created in Employee Central, and onboarding is triggered only after the concurrent employment assignment is created and the rule conditions are satisfied.</li><li>Attempting to initiate the process directly from Recruiting leads to system errors because a recruit record already exists for the user.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol></ol>
+<p>This behavior is expected by design.</p>
+<p>In Onboarding 2.0, concurrent employment onboarding must be initiated through Employee Central, not from Recruiting.</p>
+<p>To correctly trigger onboarding for concurrent employment:</p>
+<ol><li>
+<p>Add the Concurrent Employment assignment in SAP SuccessFactors Employee Central.</p>
+</li><li>
+<p>Ensure the Start Date of the concurrent assignment is set to a future date.</p>
+</li><li>
+<p>Verify that the Rule to Initiate Onboarding for Concurrent Employment is configured correctly.</p>
+</li><li>
+<p>Once the rule conditions are met, the Onboarding process will be triggered automatically.</p>
+</li></ol>
+<p>Recruiting-initiated onboarding for concurrent employment is not supported in Onboarding 2.0.</p>
+<ul></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: <a href="https://help.sap.com/docs/successfactors-onboarding/implementing-onboarding/trigger-onboarding-for-concurrent-employment?locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank">Trigger Onboarding for Concurrent Employment</a>.</li><li>Refer to: <a href="https://help.sap.com/docs/successfactors-onboarding/implementing-onboarding/configuring-rule-to-initiate-onboarding-for-concurrent-employment?q=concurrent+employment&amp;locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank">Configuring the Rule to Initiate Onboarding for Concurrent Employment</a>.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>jobInfo error, recruit record exists, concurrent employment, onboarding process, ONB suite mapping error, event reason, configuration issue, rule validation, SuccessFactors onboarding, concurrent employee.</p></div></div></div></div>

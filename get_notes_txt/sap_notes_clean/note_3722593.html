@@ -1,0 +1,78 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Would like to know which SLT tables are mandatory for standard CAR POS DTA functionality.</li><li>Only utilizing the POS DTA scenario within CARAB.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Customer Activity Repository</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Would only like to use POS DTA within CAR.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>In order to use CAR POS DTA functionality and none of the other CARAB scenarios, there is a list of tables outlined in the CARAB User Guide for this:</p>
+<p><a href="https://help.sap.com/docs/CARAB/e95c8443f589486bbfec99331049704a/6047b252c89a4d27e10000000a441470.html?version=LATEST&amp;locale=en-US" rel="noopener noreferrer nofollow" target="_blank">https://help.sap.com/docs/CARAB/e95c8443f589486bbfec99331049704a/6047b252c89a4d27e10000000a441470.html?version=LATEST&amp;locale=en-US</a></p>
+<div id="horizontal-viewport-0">
+<div>
+<div>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" rules="all" summary=""><thead><tr><th id="d150645e83">
+<p>Master Data Check/Enrichment</p>
+</th><th id="d150645e88">
+<p>Main SAP ERP Tables</p>
+</th></tr></thead><tbody><tr><td headers="d150645e83">
+<p>Article (Material) Number and Description</p>
+</td><td headers="d150645e88">
+<p>MARA, MAKT</p>
+</td></tr><tr><td headers="d150645e83">
+<p>Article EAN/GTIN Numbers</p>
+</td><td headers="d150645e88">
+<p>MEAN</p>
+</td></tr><tr><td headers="d150645e83">
+<p>Article (Material) Store (Plant)</p>
+</td><td headers="d150645e88">
+<p>MARC</p>
+</td></tr><tr><td headers="d150645e83">
+<p>Units of Measure for Article</p>
+</td><td headers="d150645e88">
+<p>MARM, T006, T006A, T006D, T006T</p>
+</td></tr><tr><td headers="d150645e83">
+<p>Store (Plant) Number and Description</p>
+</td><td headers="d150645e88">
+<p>T001W</p>
+</td></tr><tr><td headers="d150645e83">
+<p>Distribution Channel</p>
+</td><td headers="d150645e88">
+<p>TVTW, TVTWT</p>
+</td></tr><tr><td headers="d150645e83">
+<p>Merchandise Categories (Material Groups)</p>
+</td><td headers="d150645e88">
+<p>T023, T023T</p>
+</td></tr><tr><td headers="d150645e83">
+<p>Sales Organizations</p>
+</td><td headers="d150645e88">
+<p>TVKO, TVKOT</p>
+</td></tr><tr><td headers="d150645e83">
+<p>Company Codes</p>
+</td><td headers="d150645e88">
+<p>T001</p>
+</td></tr></tbody></table></div>
+</div>
+</div>
+<div> </div>
+</div>
+<p>Furthermore, a number of PIPE tasks require additional SAP ERP master data:</p>
+<div id="horizontal-viewport-1">
+<div>
+<div>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" rules="all" summary=""><colgroup><col width="30.5%"/><col width="69.5%"/></colgroup><thead><tr><th id="d150645e219">
+<p>Tasks</p>
+</th><th id="d150645e224">
+<p>Main SAP ERP Tables</p>
+</th></tr></thead><tbody><tr><td headers="d150645e219">
+<p>Supply - DMF-Based Applications</p>
+</td><td headers="d150645e224">
+<p>KONBBYH, KONBBYPRQ, KONBBYT, KONDN, WAKH, WAKP, WAKR, WRF_MATGRP_HIER, WRF_MATGRP_HIERT</p>
+</td></tr><tr><td headers="d150645e219">
+<p>Supply WFM</p>
+</td><td headers="d150645e224">
+<p>KLAH, KSSK, SWOR, TCLA</p>
+</td></tr><tr><td headers="d150645e219">
+<p>Distribution</p>
+</td><td headers="d150645e224">
+<p>WLK2</p>
+</td></tr></tbody></table></div>
+</div>
+</div>
+</div>
+<p>If plan to analyze Multichannel Sales data or Inventory data, then additional tables will need to be replicated as well, also outline in the link provided above.</p>
+<p>The data for other tables that are not mentioned in this list will not be required, only the table and table structure will need to be present to ensure that the HANA views are able to be activated successfully.  <br/><br/>Make note - The table/table structure from the following SLT table list still needs to be replicated:</p>
+<p><a href="https://help.sap.com/doc/33074f869a0644579c817d4fe99680a4/6.0.0/en-US" rel="noopener noreferrer nofollow" target="_blank">https://help.sap.com/doc/33074f869a0644579c817d4fe99680a4/6.0.0/en-US</a></p>
+<p>These tables are replicated to either SAP_ECC or SAP_S4H schemas, or the physical schema mapped to either of these.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://help.sap.com/docs/CARAB/e95c8443f589486bbfec99331049704a/6047b252c89a4d27e10000000a441470.html?version=5.0.7&amp;locale=en-US" rel="noopener noreferrer nofollow" target="_blank"></a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>s/4hana, car, replication, mandatory tables, deactivate replication, dependencies, functional limitations, hana views, car pos dta, multichannel sales data, inventory data, sap note 3709764</p></div></div></div></div>

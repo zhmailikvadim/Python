@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When executing report HMXTVAC0 (Vacation Calculation – Mexico), the Vacation Premium is not being calculated/liquidated for an employee.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<ul style="list-style-type: disc;"><li>
+<p><span>HR renewal</span><span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p><span>SAP S/4HANA</span><span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p><span>SAP ERP </span><span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p><span>SAP SuccessFactors Employee Central Payroll</span><span> </span></p>
+</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The system validates that the subtype of IT0416 corresponds to the liquidation quota of infotype 2006. When the quota is already liquidated for the selected employee, it does not display in the report HMXTVAC0.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Review the customizing of tables T503 and T556U to ensure proper quota type configuration.</li><li>Verify that the quota type configured above for the selected employee is not already liquidated in IT2006.</li><li>Redo the tests after reviewing and updating the customizing settings.</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>hmxtvac0, vacation premium, quota type, payroll, Mexico, vacation calculation, inconsistency, liquidation, t503, t556u, it0416, it2006, payroll accuracy, vacation days</p></div></div></div></div>

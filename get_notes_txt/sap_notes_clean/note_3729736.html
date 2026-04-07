@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The IHB G/L transfer program FJEP_IHB_REV_TRANSFR posts the same payment transaction twice in FI.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FI Document Reversal, FJEP_IHB_REVERSE_GL_TRANSFER, FJEP_IHB_REV_TRANSFR.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The symptom only occurs if you have used the program FJEP_IHB_REVERSE_GL_TRANSFER to reverse journal entries in FI that were posted before by the IHB G/L transfer.<br/>The symptom is caused by an error in the CDS view I_IHBLedgerTransferLineItem: This view by mistake did not exclude reversal and reversed line items from being selected.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please apply the attached program correction. Afterwards, no duplicate postings will be created anymore in future.</p></div></div></div></div>

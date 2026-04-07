@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When you update the Branch ID (BPLId) of a Chart of Accounts via DI API or Service Layer, it can be set to an invalid value of "0".</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<p><strong>Prerequisites:</strong></p>
+<p>Multiple Branches is enabled via <em>Administration → Company Details → Basic Initialization → Enable Multiple Branches</em>.</p>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Go to <em>Financials → Chart of Accounts and</em> create a <em>Chart of Accounts</em> as '<strong>TESTACCT</strong>'.</li>
+<li>Log in to Service Layer.</li>
+<li>Use the following HTTP request to update the <em>Chart of Accounts</em> via Service Layer:<br/><strong>PATCH /b1s/v1/ChartOfAccounts('TESTACCT')</strong><br class="atl-forced-newline"/><strong>{</strong><br/><strong>    "BPLId": 0</strong><br/><strong>}</strong></li>
+<li>Go to the SAP Business One client, navigate to <em>Financials → Chart of Accounts</em>, and search for <em>Chart of Accounts</em> 'TESTACCT'.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p><span>The Branch ID (BPLId) should not be updated to 0; an error message should display.</span></p>
+<p><strong>Actual behavior:</strong></p>
+<p>The <span>Branch ID (BPLId) </span>can be updated to 0.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""><span>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section </span><strong>References</strong><span> below lists the related feature package or patch once they become available. Be aware that </span><strong>References</strong><span> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</span></p></div></div></div></div>

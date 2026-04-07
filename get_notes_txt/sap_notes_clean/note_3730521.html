@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">You have checked table T5UTX in your system and noticed a wrong ceiling and/or rate kept for a Tax Type.</p>
+<p>   </p>
+<p><span style="color: rgb(224, 62, 45);"><em>"Images/data in this KBA are from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>HR Renewal</li><li>SAP S/4 Hana</li><li>SAP ERP </li><li>SAP SuccessFactors Employee Central Payroll</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>1)</strong> Open transaction SM30 and access view V_T5UTX.<br/><strong>2)</strong> Check an entry.<br/><strong>3)</strong> The ceiling and/or rate of this entry is incorrect based on your expectations.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Table T5UTX is updated by the Sync Tool (report RPUPAYUS_SYNC_TAX_DATA).</p>
+<p>When this report is run, the BSI data is collected and written on table T5UTX. On this process, no data is expected to be changed by SAP.</p>
+<p>So, the first thing to be checked is the rate and ceiling kept on the BSI Portal.</p>
+<p>For that, kindly access your BSI Portal, then go to "User Data Queries &gt; Wage Limits By Authority And Tax Type" and search for the specific Tax Type.</p>
+<p>  </p>
+<p><u>Example</u>:</p>
+<p><img class="img-responsive" src="/documents/customerkba/bQ2-3TMYcRwC6_kzRck58qI4_Tyb4k4lF5RZnrE9kqo"/></p>
+<p> By checking this information, there are two possibilities:</p>
+<p>   </p>
+<p><span style="text-decoration: underline;"><strong>1)</strong> The rate and/or ceiling is incorrect on the BSI Portal</span></p>
+<p>On this case, the information should be updated on the BSI Portal first. After that, the Sync Tool needs to be re-run and the information should be corrected in table T5UTX.</p>
+<p>If you encounter this situation, kindly open a case to PY-US-BSI component, attaching a screenshot of the above information taken from the BSI Portal. SAP Support Team will engage BSI team to review the information from the BSI Portal.</p>
+<p>  </p>
+<p><span style="text-decoration: underline;"><strong>2)</strong> The rate and/or ceiling is correct on the BSI Portal</span></p>
+<p>On this situation, it can be something with the Sync Tool execution.</p>
+<p>Firstly, please run it in productive mode and check the log, looking for any error raised. If there’s an error, it should be the reason why T5UTX has not been updated and, therefore, has an entry with a wrong rate/ceiling.</p>
+<p>If you find an error and don’t know how to solve it (or don’t see any error raised), please report a case to PY-US-BSI component, attaching a screenshot from the BSI Portal and the error received (if that's the case). SAP Support Team will troubleshoot the scenario.</p>
+<p> </p>
+<p><u>Important</u>: Table T5UTX is updated with date from last year, current year and next year. Entries outside this range will not be updated.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>T5UTX, RPUPAYUS_SYNC_TAX_DATA, Sync Tool, rate, ceiling, BSI, Wage Limits By Authority And Tax Type, Tax Type.</p></div></div></div></div>

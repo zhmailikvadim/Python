@@ -1,0 +1,54 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During payroll processing, wage type /380 (Remuner.normal p/aportes) exceeds the proportional ceiling calculated in wage type /31M(Tope prop. mensual).</p>
+<p>Example:</p>
+<ul><li>/31M (Proportional ceiling): 1,500,000.00</li><li>/380 (final result): 1,875,000.00</li></ul>
+<p>The system appears to increase the base beyond the expected capped value.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<ul style="list-style-type: disc;"><li>
+<p>HR renewal </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP S/4HANA </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP ERP  </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP SuccessFactors Employee Central Payroll </p>
+</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><span style="font-family: verdana, geneva; font-size: 8pt;">This behavior is caused by the configuration of the constant:</span></p>
+<ul><li style="font-family: verdana, geneva; font-size: 8pt;"><span style="font-family: verdana, geneva; font-size: 8pt;">SESAD – Compensación de topes de Seguridad Social = 1</span></li></ul>
+<p><span style="font-family: verdana, geneva; font-size: 8pt;">When this constant is set to 1, the system allows redistribution of unused Social Security ceiling between different base wage types within the same payroll period.</span></p>
+<p><span style="font-family: verdana, geneva; font-size: 8pt;">Information from internal system documentation:</span><br/><br/></p>
+<div style="direction: ltr; border-width: 100%;">
+<div style="direction: ltr; margin-top: 0in; margin-left: 0in; width: 5.1527in;">
+<div style="direction: ltr; margin-top: 0in; margin-left: 0in; width: 5.1527in;">
+<div style="direction: ltr; border-width: 100%;">
+<div style="direction: ltr; margin-top: 0in; margin-left: 0in; width: 7.9583in;">
+<div style="direction: ltr; margin-top: 0in; margin-left: 0in; width: 7.9583in;">
+<div style="direction: ltr; border-width: 100%;">
+<div style="direction: ltr; margin-top: 0in; margin-left: 0in; width: 9.3548in;">
+<div style="direction: ltr; margin-top: 0in; margin-left: 0in; width: 9.3548in;">
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-family: verdana, geneva; font-size: 8pt;">"A payroll constant used to indicate which social insurance base wage types can or cannot exchange the unused parts of the limit with each other.</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-family: verdana, geneva; font-size: 8pt;"> </span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-family: verdana, geneva; font-size: 8pt;">If a calendar month includes different Social Insurance base wage types, you must ensure that the deductions and contributions are calculated using the limit for each base wage type as a maximum.</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-family: verdana, geneva; font-size: 8pt;"> </span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-family: verdana, geneva; font-size: 8pt;">However, you may find that in a particular month a wage type exceeds its limit, while another wage type does fails to reach it. In this case, you may have to transfer the differences between wage types that do not reach their limits to the base wage types that exceed their limit.</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-family: verdana, geneva; font-size: 8pt;"> </span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-family: verdana, geneva; font-size: 8pt;">You can do this by entering the value 1 in the Value field of this constant."</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>If the expected behavior is that each base should remain capped (without redistribution):</p>
+<ul><li>Set SESAD = 0 in table T511K</li></ul>
+<p>Result:</p>
+<p>No redistribution of unused limit and /380 remains at proportional value.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Note <a href="https://me.sap.com/notes/647596" rel="noopener noreferrer nofollow" target="_blank">647596 </a>- PY-AR : Limits for Social Security are to be distributed</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SESAD, /380, Social Security, pv_compensate, T511K, Argentina</p></div></div></div></div>

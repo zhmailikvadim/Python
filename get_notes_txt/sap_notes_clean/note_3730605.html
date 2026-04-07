@@ -1,0 +1,52 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p>When you try to update <span>an electronic</span> credit memo, which was added through Data Interface (DI) API, it fails with error: <em>[Electronic Transactions - Generation Type] [line: 0]: Field cannot be updated (ODBC -1029) [Message 131-183]</em>.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisites:</strong></p>
+<p><span>You are using a company with India (IN) localization.</span></p>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Go to <em>Administration → System Initialization → Document Settings, Electronic Documents</em> <span>tab, </span>enable protocol <em>E-Way Bill</em> (other protocols NOT enabled) and change the <em>Default eDoc Generation Type</em> to '<em>Generate - Later'</em>.</li>
+<li>Create a <em>Customer</em> type <em>Business Partner:</em>C100</li>
+<li>Create a new location: Haryana for GST transactions, fill <span><em>GSTIN</em>, </span>set <em>GST Type:</em> '<em>Regular/TDS/ISD'</em> under <em>Administration → Setup → Inventory → </em><em>Locations - Setup → Accounting Data</em> tab <em>→ GST </em>tab.</li>
+<li>Set <em>Country/Region:</em> India, <span><em>State</em>: Haryana</span> under <em>Locations - Setup → General</em> <span>tab.</span></li>
+<li>Fill <em>PAN No.</em> data under <em>Locations - Setup → Accounting Data</em> <span>tab <em>→</em> </span><em>General</em> tab.</li>
+<li>Go to <em>Administration → System Initialization → Document Numbering</em>, create digital series 'eRIN' for document type <em>'A/R Credit Memo'</em> and document subtype <em>'GST Tax Invoice'.</em></li>
+<li><span>Create a service type <em>A/R Credit Memo</em> with transaction type <em>'GST Tax Invoice' </em>through DI API.</span></li>
+</ol>
+<p><strong>Sample code:</strong></p>
+<p>Dim oRIN As SAPbobsCOM.Documents</p>
+<p>oRIN = oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oCreditNotes)</p>
+<p>oRIN.DocType = BoDocumentTypes.dDocument_Service</p>
+<p>oRIN.DocumentSubType = BoDocumentSubType.bod_GSTTaxInvoice</p>
+<p>oRIN.CardCode = "C100"</p>
+<p>oRIN.Series = 85                   ---digital series 'eRIN'</p>
+<p>oRIN.Lines.ItemDescription = "Added via DI API"</p>
+<p>oRIN.Lines.Price = 100</p>
+<p>oRIN.Lines.TaxCode = "IGST@18"</p>
+<p>oRIN.Lines.AccountCode = "101000"</p>
+<p>oRIN.Lines.LocationCode = "2"     ---code for GST relevant location</p>
+<p>oRIN.Lines.SACEntry = -422</p>
+<p>oRIN.Add()</p>
+<span style="font-size: 14px;"><span style="font-size: 14px;">        8. Open the credit memo in SAP Business One application and try to update the document, for example the <em>Remarks</em> field.<br/></span></span><br/>
+<p><strong>Expected behavior:</strong></p>
+<p>The document is updated successfully.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p><span class="error"><span>The document update fails with error: </span><em>[Electronic Transactions - Generation Type]</em></span><em><span class="error">[line: 0]</span> , 'Field cannot be updated (ODBC -1029)'  <span class="error">[Message 131-183].</span></em></p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p>
+<p><em><strong><strong>Workaround: </strong></strong></em></p>
+<p>Create A/R Credit Memo through <span>SAP Business One application.</span></p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p>SDK</p></div></div></div></div>

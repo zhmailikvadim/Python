@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When an account for which verification was triggered does not exist in the DM/AM system, the VoP service returns an incorrect combination of HTTP status code 500 and comparison result NOAP to the caller.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>VoP, Verification of Payee, Account Verification, Responder scenario</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>If an account does not exist in the DM/AM system, the ISO rejection reason code AC01 – "IncorrectAccountNumber" is assigned to the corresponding Request Agent used for processing the verification request.</p>
+<p>Since rejection reason codes are generally interpreted as errors, AC01 was also treated as an error condition, leading to an HTTP status code 500 being returned.</p>
+<p>However, according to the EPC VoP specification, the “incorrect account” scenario must be handled as a valid case. In this case, the service must return:</p>
+<ul>
+<li>HTTP status code 200</li>
+<li>comparison result NOAP</li>
+</ul>
+<p>For all other rejection reason codes, HTTP status code 500 may still be used along with the appropriate error JSON structure.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Rejection Reason Code AC01 is excluded from the Reason Codes which cause an error. HTTP status code 200 is returning along with comparison result "NOAP".</p>
+<p id="">Please implement provided correction instructions or corresponding Support Package.</p></div></div></div></div>

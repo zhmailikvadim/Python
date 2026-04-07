@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In Language Adaptation → Opportunity Service → Codelist → Sales Phase:</p>
+<ul><li>When updating multiple Sales Phase descriptions at once:
+<ul><li>Only some entries are saved</li><li>Other entries are not persisted after clicking save</li></ul>
+</li><li>No error message is displayed</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Sales Cloud And SAP Service Cloud Version 2</li><li>SAP Sales Cloud Version 2</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>1. Navigate to Language Adaptation.  <br/>2. Go to Opportunity Service.  <br/>3. Open the Codelist tab.  <br/>4. Select Sales Phase.  <br/>5. Modify multiple Sales Phase descriptions (e.g., update multiple entries).  <br/>6. Click Save.  <br/>7. Observe that the data is not saved for all Sales Phase descriptions.  </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>A Sales Cycle and its associated Sales Phases are persisted as a single record</li><li>This means multiple Sales Phases under the same Sales Cycle are saved together as one entity.</li></ul>
+<h3 data-toc-skip=""><span role="text">Example:</span></h3>
+<p>SalesCycleA</p>
+<ul><li>SalesPhase_1</li><li>SalesPhase_2</li><li>SalesPhase_3</li></ul>
+<p>SalesCycleB</p>
+<ul><li>SalesPhase_5</li><li>SalesPhase_6</li><li>SalesPhase_7</li><li>If you update:
+<ul><li>SalesPhase_1 and SalesPhase_2 (same SalesCycleA) →  Only one change is saved</li><li>Because both belong to the same record (SalesCycleA)</li></ul>
+</li><li>If you update:
+<ul><li>SalesPhase_1 (SalesCycleA) and SalesPhase_5 (SalesCycleB) →  Both changes are saved</li><li>Because they belong to different records (different Sales Cycles)</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This is a known system limitation.</p>
+<p>Workaround:</p>
+<ul><li>Update one Sales Phase at a time per Sales Cycle<br/>OR</li><li>Update Sales Phases across different Sales Cycles in a single operation</li></ul>
+<p>Enhancement:</p>
+<ul><li>This limitation has been acknowledged by development and is being considered as an enhancement for future releases</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Sales Phase, Language Adaptation, Opportunity Service, Codelist, Sales Cycle, descriptions, save issue, system limitation, workaround, enhancement, multiple entries, data persistence,  error message.</p></div></div></div></div>

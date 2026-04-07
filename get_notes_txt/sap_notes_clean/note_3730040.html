@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">Your scanning tools report a vulnerability in one or more components of SAP Landscape Management</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="__html0">Customers use 3rd party security scan tools on their SAP NetWeaver Java servers and CVEs are reported for components or open source libraries used in the Software Components deployed</p>
+<p>Please note, that according to SAP Netweaver Java compatibility matrix for JDK versions  https://me.sap.com/notes/0002768400 the latest JDK compatible is 8. That means any open source component used cannot be updated beyond its maximum version, supporting Java 8.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>CVE</td>
+<td>description</td>
+<td>assessment</td>
+<td>fixed in SP (if applicable) </td>
+</tr>
+<tr>
+<td>CVE-2025-48913</td>
+<td>If untrusted users are allowed to configure JMS for Apache CXF, previously they could use RMI or LDAP URLs, potentially leading to code execution capabilities. This interface is now restricted to reject those protocols, removing this possibility. Users are recommended to upgrade to versions 3.6.8, 4.0.9 or 4.1.3, which fix this issue.</td>
+<td>false positive</td>
+<td> </td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>CVE-2025-48913 - If untrusted users are allowed to configure JMS for Apache CXF, previously they could use RMI or LDAP URLs, potentially leading to code execution capabilities. This interface is now restricted to reject those protocols, removing this possibility. Users are recommended to upgrade to versions 3.6.8, 4.0.9 or 4.1.3, which fix this issue.</li>
+<ul>
+<li><span style="font-size: 14px;">affects : cxf-core</span></li>
+<li><span style="font-size: 14px;">assement: <strong>false positive</strong><br/>cxf-core itself does not contain the classes, required for JMS configuration, these are contained in cxf-rt-transports-jms, which is not present in SAP Landscape Management. Therefore this vulnerability is not applicable and not exploitable.<br/></span></li>
+</ul>
+</ul></div></div></div></div>

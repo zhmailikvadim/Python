@@ -1,0 +1,41 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<div>You need to troubleshoot connection issues or errors from a specific client system (e.g., PO system, external interface) connecting to SAP Web Dispatcher, but:</div>
+<ul><li>Setting global trace level to 2 (`wdisp/trace_level = 2`) causes performance degradation or system unresponsiveness</li><li>The production environment cannot tolerate the overhead of global high-level tracing</li><li>You need detailed trace information for only one specific client IP address or URL pattern</li><li>Standard trace level 1 logs do not provide sufficient detail to diagnose the issue</li></ul>
+</div>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP ICM / Web Dispatcher</li><li>Kernel 753+</li><li>ABAP Platform 2023+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<ul><li>No logs visible at trace level 1 during error occurrence</li><li>There is a need for a method to enable detailed tracing &lt;&lt;only for specific client connections&gt;&gt; without affecting overall system performance.</li><li>
+<div>
+<div>SAP Web Dispatcher's global trace level parameter (`wdisp/trace_level`) applies to ALL incoming and outgoing connections. There was historically no built-in mechanism to selectively raise the trace level for specific clients, URLs, or connection criteria.</div>
+</div>
+</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<div>SAP introduced the parameter <strong>icm/conditional_trace_&lt;xx&gt;</strong> starting from ABAP Platform 2023, which enables selective trace elevation based on configurable criteria.</div>
+<div> </div>
+<div>
+<div>
+<div>The <strong>icm/conditional_trace_&lt;xx&gt;</strong> parameter allows you to:</div>
+<ul><li>Raise trace level only for connections matching specific criteria</li><li>Keep global trace level at 1 while tracing specific clients at level 2 or 3</li><li>Configure multiple independent conditional trace rules</li><li>Set automatic expiry for time-limited tracing</li><li>Filter by client IP, URL, host header, port, HTTP method, or system name</li></ul>
+<div> </div>
+<div>Syntax:</div>
+<div>
+<div>
+<div>icm/conditional_trace_&lt;xx&gt; = [LEVEL=&lt;1|2|3|sap-trace|trace_info|ssl_debug_info&gt;]</div>
+<div>                             [, CLIENT_IP=&lt;IP_address&gt;]</div>
+<div>                             [, URL=&lt;path_prefix&gt;]</div>
+<div>                             [, HOST=&lt;host_header&gt;]</div>
+<div>                             [, SERVER_PORT=&lt;port_number&gt;]</div>
+<div>                             [, SERVER_IP=&lt;IP_address&gt;]</div>
+<div>                             [, FORWARDEDFOR_IP=&lt;IP_address&gt;]</div>
+<div>                             [, METHOD=&lt;HTTP_method&gt;]</div>
+<div>                             [, ROLE=&lt;SERVER|CLIENT|INTERNAL&gt;]</div>
+<div>                             [, SYSTEM=&lt;system_name&gt;]</div>
+<div>                             [, VALID_UNTIL=&lt;+seconds|ISO_timestamp&gt;]</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Example:</p>
+<ul><li>icm/conditional_trace_0 = LEVEL=2, URL=/sap/public/ping, CLIENT_IP=10.0.0.1<br/>Every HTTP request to /sap/public/ping that is sent from the IP address 10.0.0.1 is handled with a raised trace level.<br/>If URL, HOST, or FORWARDEDFOR_IP is set, the trace level is not raised until the HTTP request header is completely parsed.<br/><br/></li><li>icm/conditional_trace_0 = LEVEL=2, VALID_UNTIL=+120.<br/>If that parameter is set in the profile and the process is restarted, ICM/Web Dispatcher will run with trace level 2 for the first two minutes after startup. That is, for example, helpful to analyze issues that occur during startup only.<br/><br/></li></ul>
+<p>Note: icm/conditional_trace is a vector parameter that allows you to configure multiple criteria that are independent of each other. </p>
+<p>Reference to : <a href="https://help.sap.com/docs/ABAP_PLATFORM_NEW/683d6a1797a34730a6e005d1e8de6f22/c8a2be592f594159811386161c9be8f2.html?version=202310.003" rel="noopener noreferrer nofollow" target="_blank">icm/conditional_trace_ | SAP Help Portal</a><br/><br/></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://help.sap.com/docs/ABAP_PLATFORM/66906ae3920c4fc684cf588290fb9267/6fdfec7a36944d3baa08c16ac5d1fc3b.html" rel="noopener noreferrer nofollow" target="_blank">New icm/conditional_trace Features | SAP Help Portal</a></li><li><a href="https://help.sap.com/docs/ABAP_PLATFORM_NEW/683d6a1797a34730a6e005d1e8de6f22/48877df50e3f2722e10000000a42189d.html?version=202310.003" rel="noopener noreferrer nofollow" target="_blank">SAP Web Dispatcher: Parameter References | SAP Help Portal</a></li><li><a href="https://help.sap.com/docs/ABAP_PLATFORM_NEW/683d6a1797a34730a6e005d1e8de6f22/c8a2be592f594159811386161c9be8f2.html?version=202310.003" rel="noopener noreferrer nofollow" target="_blank">icm/conditional_trace_ | SAP Help Portal</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>icm/conditional_trace, specific client trace level</p></div></div></div></div>

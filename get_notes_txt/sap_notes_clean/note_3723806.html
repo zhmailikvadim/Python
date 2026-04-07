@@ -1,0 +1,41 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In SAP Document and Reporting Compliance (DRC) the following behavior is observed when Purchase Orders are changed after the initial electronic document is generated or transmitted:</p>
+<ul><li>The system does not handle changes to electronic Purchase Orders (PO) in a flexible manner after the initial eDocument has been generated or sent.</li><li>There is no automatic mechanism to generate and transmit structured Order Change messages when a PO is modified.</li><li>The system does not support automatic regeneration and controlled resending of updated XML documents for modified PO.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<div>
+<div>
+<ul><li>SAP S/4HANA Cloud Public Edition</li><li>SAP Document and Reporting Edition, Cloud Edition</li></ul>
+</div>
+</div>
+</div>
+<div> </div><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Generate an electronic Purchase Order (PO) via SAP Document and Reporting Compliance (DRC).</li><li>Modify the PO after the initial eDocument has been generated or sent.</li><li>Attempt to automatically generate and transmit a structured "Order Change" message for the modified PO.</li><li>Attempt to regenerate and resend an updated XML document in a controlled and compliant manner.</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p> Currently, SAP does not natively support structured handling of Purchase Order changes within SAP Document and Reporting Compliance.</p>
+<ol><li>
+<p><strong>Order Change message support</strong></p>
+<p>SAP DRC does not currently provide end-to-end support for Peppol BIS Order Change (T114) or similar procurement lifecycle messages.</p>
+</li><li>
+<p><strong>Electronic PO lifecycle management</strong></p>
+<p>There is no officially published roadmap item specifically addressing electronic PO lifecycle management (changes, cancellations, resubmissions) within DRC in the SAP public roadmap or SAP Notes.</p>
+</li><li>
+<p><strong>Recommended architecture</strong></p>
+<p>Customers who require full procurement message lifecycle management may consider the following approach:</p>
+<ul><li>
+<p>Use DRC mainly for regulatory electronic documents (for example e-invoices).</p>
+</li><li>
+<p>Handle procurement message exchanges (PO changes, cancellations, acknowledgements) through:</p>
+<ul><li>
+<p>SAP Ariba Network, or</p>
+</li><li>
+<p>Middleware/integration platforms (e.g. SAP Integration Suite), or</p>
+</li><li>
+<p>Custom integration with Peppol access points.</p>
+</li></ul>
+</li></ul>
+</li><li>
+<p><strong>Reference documentation</strong></p>
+<p>For supported scenarios and compliance capabilities, refer to the SAP Help Portal documentation for:</p>
+<ul><li>
+<p><a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/e2d057b7b4df44ba941a040d4dda2956/2645900728c4473a8857b9db37023211.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Submitting Electronic Purchase Orders Using SAP Document and Reporting Compliance, Cloud Edition | SAP Help Portal</a>. </p>
+</li><li>
+<p><a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/3b2c091e13434f9ab2fb53d147ba5e9f/097165e9c1074038847625e5c53e07d2.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Supported Compliance Tasks by Country/Region | SAP Help Portal</a>.</p>
+</li><li>
+<p>Regulatory Change Manager for upcoming regulatory updates - <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#" rel="noopener noreferrer nofollow" target="_blank">Regulatory Change Manager</a>. </p>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>PO, eDocument, EDOC_COCKPIT, Purchase order, DRC, electronic document, xml, order change, lifecycle management, regeneration, resending, procurement scenarios, structured messages, SAP Document and Reporting compliance.</p></div></div></div></div>

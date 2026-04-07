@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Business Partner (BP) with Customer roles is not selectable as Sold-To Party in Sales Order creation.</li><li>BP appears in search help (e.g. <em>Sold-To Party by Sales Area</em>) but cannot be selected.</li><li>
+<p>System throws error:</p>
+<blockquote>
+<p><em>“Ship-to party XXXX is not assigned to a sold-to party” (message VP211)</em></p>
+</blockquote>
+</li><li>Certain partner roles in BP or Sales Order are not editable or deletable.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Create or maintain a Business Partner with roles:
+<ul><li>Customer (Financial Accounting)</li><li>Customer (Sales Area)</li></ul>
+</li><li>Assign:
+<ul><li>Sales Area</li><li>Company Code</li><li>Partner Functions (SP, SH, BP, PY)</li></ul>
+</li><li>Create a Sales Order (e.g. type OR)</li><li>Search for the BP as Sold-To Party</li><li>
+<p>Select BP → system raises error</p>
+<blockquote>
+<p>“Ship-to party XXXX is not assigned to a sold-to party”</p>
+</blockquote>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This issue can occur due to one or both of the following:</p>
+<h3 data-toc-skip="">1. Inconsistent Partner Functions in Business Partner</h3>
+<ul><li>Multiple Sold-To Party (SP) entries maintained</li><li>SP assigned to different Business Partners</li><li>System cannot determine a unique SP ↔ SH relationship</li></ul>
+<h3 data-toc-skip="">2. Incorrect Partner Determination Configuration</h3>
+<ul><li>Partner determination procedure (e.g. S002) contains:
+<ul><li>Duplicate Sold-To Party (SP) entries</li><li>Entries with derivation (e.g. Source = “C”)</li></ul>
+</li><li>Mandatory and system-controlled partner roles prevent manual correction</li><li>System derives inconsistent partner combinations</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h3 data-toc-skip=""><span role="text">Option 1 – Correct Business Partner Master Data</span></h3>
+<ol><li style="list-style-type: none;">
+<ol><li>Open Maintain Business Partner</li><li>Navigate to:<br/>Sales Area → Partner Functions</li><li>Ensure:
+<ul><li>Only one Sold-To Party (SP) exists</li><li>SP, SH, BP, PY are consistently assigned (typically same BP for employee scenarios)</li></ul>
+</li><li>Remove any conflicting or duplicate partner assignments</li><li>Save and re-test</li></ol>
+</li></ol>
+<h3 data-toc-skip=""><span role="text">Option 2 – Correct Partner Determination Configuration</span></h3>
+<ol><li>Open SSCUI:<br/>Set Up Partner Determination for Sales Document Header (101118)</li><li>Select the relevant procedure (e.g. S002)</li><li>Navigate to:<br/>Partner Functions in Procedure</li><li>Identify duplicate Sold-To Party (SP) entries
+<ul><li>Especially entries with Source = “C”</li></ul>
+</li><li>Remove duplicate or conflicting SP entries</li><li>Ensure standard setup:
+<ul><li>One SP, one SH, one BP, one PY</li></ul>
+</li><li>Save and re-test</li></ol>
+<blockquote>
+<p>Note: If standard procedures are not editable, create a custom (Z) procedure and assign it to the Sales Document Type.</p>
+</blockquote><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>refer to: <a href="https://me.sap.com/notes/2503697/E" rel="nofollow">2503697 - Ship-to party is not assigned to a sold-to party (VP211)</a></li><li>refer to: <a href="https://me.sap.com/notes/3665055/E" rel="nofollow">3665055 - Error "Ship-to party cannot be used (log)" when creating a Sales Order in SAP S/4HANA Cloud Public Edition</a></li><li>refer to: <a href="https://me.sap.com/notes/3552557/E" rel="nofollow">3552557 - Issue with Assigning Ship-To Party in SAP S/4HANA Cloud Public Edition</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Business Partner, Sold-To Party, Ship-To Party, Partner Determination, S002, SP, SH, Customer Not Selectable, Sales Order Error, BP Customer Roles, Partner Functions, Public Cloud, SSCUI 101118, OR Sales Order, Duplicate Partner Function</p></div></div></div></div>

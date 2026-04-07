@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>A user is successfully logged into SAP SuccessFactors and has initiated a Proxy session to act on behalf of another user.</p>
+</li><li>
+<p>When the user attempts to navigate to another integrated application (e.g., SAP Analytics Cloud, Employee Central Payroll, CAP Application and others) via Principal Propagation, the proxy context is lost.</p>
+</li><li>
+<p>The target application recognizes the logged-in user (the account holder) instead of the proxy user (the person they are acting as).</p>
+</li><li>Proxy User session is not maintained during Principal Propagation between applications using IAS as IDP</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP SuccessFactors HCM Suite</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Log into SAP SuccessFactors as User A.</p>
+</li><li>
+<p>Use the Proxy Now feature to act as User B.</p>
+</li><li>
+<p>While in the proxy session, click a link or tile to navigate to a secondary application (e.g., SAC) that uses Principal Propagation via IAS.</p>
+</li><li>
+<p>Observe that the secondary application logs the user in as User A, not User B.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This behavior is due to a current architectural limitation within the Identity Authentication Service (IAS).</p>
+<p>When IAS acts as the Identity Provider (IDP), it validates and propagates the identity of the authenticated primary user. Currently, IAS does not support the exchange of "Proxy" or "On-behalf-of" tokens between service providers. While the proxy session is active within the source application (SuccessFactors), that specific session state is not currently transferable through the IAS principal propagation framework.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>Current Status:</strong> The system is working as designed. At this time, Principal Propagation via IAS only supports the identity of the logon user.</p>
+<p><em><strong>Workaround:</strong></em></p>
+<ul><li>
+<p>Users must perform actions in the target application using their own authenticated credentials.</p>
+</li><li>
+<p>If a user needs to perform actions as another person in the target application, they must log into that application directly (if supported) or have the necessary permissions assigned to their own ID.</p>
+</li></ul>
+<p><strong>Future Roadmap:</strong> There is an active enhancement request currently in the early stages of review by the IAS and Analytics development teams to support proxy scenarios. This article will be updated as the roadmap progresses.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: <a href="https://me.sap.com/notes/0002441407" rel="noopener noreferrer nofollow" target="_blank">[SSO] SuccessFactors - Outbound SSO to 3rd Party Guide and Support Scope</a></li><li>Refer to: <a href="https://me.sap.com/notes/0003145229" rel="noopener noreferrer nofollow" target="_blank">Can we use Identity Authentication with user tool?</a></li><li>Refer to: <a href="https://me.sap.com/notes/0003694345" rel="noopener noreferrer nofollow" target="_blank">Error "HTTP Status 400 – Identity provider could not process the message received"</a></li><li>Refer to: <a href="https://me.sap.com/notes/2461862" rel="noopener noreferrer nofollow" target="_blank">Collecting SAML traces with Chrome, Edge or Firefox</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>proxy user propagation, SuccessFactors extension, IAS, principal propagation, CIS, BTP subaccount, full-stack CAP application, HTML5 repository, authentication, user JWT token, OAuth 2.0 destination, enhancement request. CS20250011235381</p></div></div></div></div>

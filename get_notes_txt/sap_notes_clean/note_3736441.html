@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In Fiori app Query Browser, select one query and click "Open for Analysis" button, error message "The navigation target #AnalyticQuery-preview?=Your Query Name of the app could not be resolved" raised.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> F1068,Query Browser,Open for Analysis,AnalyticQuery-preview, F8344</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>From S/4HANA 2025 FPS01 release, the business user preview with multidimensional analysis needed authorization is missing in SAP pre-delivered standard businss role <strong>SAP_BR_EMPLOYEE</strong></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>It is recommended to implement the fix with the next service package FPS02 containing this correction, alternatively, the below attached manual correction instruction can be implemented.</p>
+<p>One customizing PFCG role in your system such as <strong>Z<strong>SAP_BR_EMPLOYEE</strong></strong>,  has to be modified in below way to include <strong>transaction F8344 for business user preview with MDA for analytical query from Fiori app F1068 Query Browser</strong>.</p>
+<p>1: Launch transaction PFCG, input your customizing PFCG role ID, such as "<strong>Z<strong>SAP_BR_EMPLOYEE</strong></strong>"  and change it, select your transport request.</p>
+<p>2: under the Menu tab, click add transaction, select transaction, input transaction code <strong>F8344</strong>,<strong> </strong>continue with button "Assign Transactions", save it.</p>
+<p>3: go to Authorizations tab, click Change Authorization Data button, under object class AAAB, autorization object S_TCODE, transaction code F8344 should be in TCD field value list, click save button.</p>
+<p>4: assign the customizing PFCG role to the users.</p></div></div></div></div>

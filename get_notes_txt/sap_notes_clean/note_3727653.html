@@ -1,0 +1,41 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>I want to route approvals based on how users answer the questions in my wizard, but I cannot find an option to send the wizard itself through an approval group or create approval routing directly from the wizard.</p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>You can route approvals based on the answers in your wizard by linking the wizard to a Decision Form and using scoring to trigger conditional approval rules. </p>
+<p>How wizard answers can control approval routing: </p>
+<div>
+<p>Wizard answers do not route approvals directly.<br/>Instead, each answer contributes a numeric score, and the total score determines which approval path is used.</p>
+<div>
+<p>For example, if you assign scores such as:</p>
+<ul><li>Yes = 1</li><li>No = 2</li></ul>
+<p>And a user answers four wizard questions with: No, Yes, Yes, No, the total score is 6.</p>
+<p>You then create an Approval Rule with a condition such as:</p>
+<ul><li>Wizard Total Score ≥ 5</li></ul>
+<p>After creating the rule, you assign it to a level in the Approval Group that contains the approver you want to receive requests meeting this condition.</p>
+<ul><li>If the score meets the condition, the form routes to that level’s approver.</li><li>If the score does not meet the condition, the system skips that level and moves to the next one (or finishes routing if no levels remain).</li></ul>
+<p>This makes the wizard’s answers drive which approval levels are triggered or skipped.</p>
+</div>
+<p>This example provides context for the configuration steps below.</p>
+</div>
+<p>Create questions for your wizard</p>
+<div>
+<ol><li>Click <strong>Admin Configuration</strong> (gear icon) &gt; <strong>Question</strong></li><li>Click <strong>New </strong>and set <strong>Module </strong>to <strong>Wizard</strong></li><li>Enter a question value</li><li>Set <strong>Answer Type</strong> to <strong>User Defined Pick List</strong></li><li>Add each answer option and assign a numeric <strong>Score </strong>&gt; Click <strong>Add</strong></li><li>Repeat for all questions you want to include</li></ol>
+<p>Build your wizard</p>
+<div>
+<ol><li>Click <strong>Admin Configuration </strong>(gear icon) &gt; <strong>Wizard</strong></li><li>Click <strong>New </strong>&gt; Set <strong>Starting Point</strong> to <strong>Decision Form</strong></li><li>Click <strong>+ Add Questions or Fields</strong> and select the questions you created</li><li>Tick the checkboxes &gt; Click <strong>Add Selected</strong></li><li>Configure each answer’s action depending on your workflow</li></ol>
+<p>Set up approval rules that react to wizard scores</p>
+<div>
+<ol><li>Click <strong>Admin Configuration</strong> (gear icon) &gt;<strong> Rule Engine</strong></li><li>Click <strong>New </strong>&gt; Set Type to <strong>Approval Group</strong></li><li>Set Module to <strong>Decision Form</strong></li><li>Click <strong>+ Add Condition</strong>
+<ul><li>Add <strong>Use Scoring</strong></li><li>Add <strong>Wizard Total Score</strong></li></ul>
+</li><li>Click <strong>Add</strong></li><li>Set <strong>Use Scoring</strong> to <strong>Yes</strong></li><li>Adjust the <strong>Wizard Total Score</strong> condition (Equals, Greater Than, Greater Than or Equal To) to match the routing you need</li><li>Click <strong>Add</strong></li></ol>
+<div>Create the Approval Group</div>
+<div>
+<ol><li>Click <strong>Admin Configuration</strong> (gear icon) &gt; <strong>Approval Group</strong></li><li>Click <strong>New </strong>&gt; Set <strong>Module </strong>to <strong>Decision Form</strong></li><li>Under Configuration, select a <strong>Role </strong>&gt; Assign the correct <strong>Approval Rule</strong></li><li>Click <strong>Add</strong></li><li>Associate appropriate business units</li></ol>
+</div>
+<p>Create the Decision Form template</p>
+<div>
+<ol><li>Click <strong>Admin Configuration</strong> (gear icon) &gt; <strong>Decision Form Template</strong></li><li>Click <strong>New </strong>and enter a name</li><li>In <strong>Types</strong>, tick applicable procurement options</li><li>In <strong>Rules</strong>, tick <strong>Use Scoring</strong></li><li>Click <strong>Add</strong></li></ol>
+<p></p>
+</div>
+</div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>wizard approval routing, approval group configuration, workflow wizard, conditional routing, wizard scoring, approval rules, decision form, requisition wizard, approval group setup, business unit association, scoring functionality, user-defined pick list, wizard module, approval process</p></div></div></div></div>

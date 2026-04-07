@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are using the Instance Secure Store in the File System (<span class="SNO_DNT" style="float: none;" translate="no">Instance SSFS</span>) as <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/b3ee5778bc2e4a089d3299b82ec762a7/555997ccf3e24fb39cf018b1182acae3.html" target="_blank">Server-Side Secure Store</a>. This means that the SQL query returns the result '<span class="SNO_DNT" style="float: none;" translate="no">Instance SSFS is active</span>':</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">select  (case when (select  count(*) from "KEY_MANAGEMENT_CONFIGURATIONS") &gt; 0 then 'LSS is active'  else 'Instance SSFS is active' end) from dummy;</span></p>
+<p>Furthermore SYS.M_FEATURE_USAGE returns result IS_DEPRECATED = TRUE:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT IS_DEPRECATED  FROM SYS.M_FEATURE_USAGE WHERE COMPONENT_NAME = 'SECURITY' AND FEATURE_NAME = 'ROOT KEY MANAGEMENT SSFS';</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>As of SAP HANA 2 SPS09, the SAP HANA Instance Secure Store in the File System (<span class="SNO_DNT" style="float: none;" translate="no">Instance SSFS</span>) as <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/b3ee5778bc2e4a089d3299b82ec762a7/555997ccf3e24fb39cf018b1182acae3.html" target="_blank">Server-Side Secure Store</a> has been deprecated for SAP HANA.</p>
+<p> </p>
+<p>Its successor is the <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/b3ee5778bc2e4a089d3299b82ec762a7/5a43dc48190f4543b0d840952d3dec55.html" target="_blank">Local Secure Store (LSS)</a></p>
+<p><a href="/notes/2764368" target="_blank">2764368</a> - Release Information for the SAP Local Secure Store</p>
+<p>LSS supports the following security features, which Instance SSFS **NOT** supports:</p>
+<ul>
+<li>Use of <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/cf998f5a07af4c58bbb270659d4d0fc7.html" target="_blank">external key management systems</a> for <a href="https://help.sap.com/docs/sap-data-custodian/key-management-service/what-is-key-management-service-page" target="_blank">HYOK and BYOK scenarios</a> <br/><br/></li>
+<li>Encryption algorithm with <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/4fe29514fd584807ac9f2a04f6754767/6e1d243ee5a14c3889e710e4df1435a7.html#syntax-elements" target="_blank">mode CTR</a> for <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/555997ccf3e24fb39cf018b1182acae3.html#secure-store-for-encryption-root-keys-and-internal-application-encryption-service-(instance-ssfs-and-lss)" target="_blank">BACKUP, LOG, PERSISTENCE and APPLICATION root keys</a>.<br/><br/></li>
+<li>SAP HANA backups are self-contained with LSS. No additional root key backups will be required anymore (SAP Note <a href="https://me.sap.com/notes/3539252" target="_blank">3539252</a>)</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>You are using the<span class="SNO_DNT" style="float: none;" translate="no"> Instance Secure Store in the File System</span> (<span class="SNO_DNT" style="float: none;" translate="no">Instance SSFS)</span> as <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/b3ee5778bc2e4a089d3299b82ec762a7/555997ccf3e24fb39cf018b1182acae3.html" target="_blank">Server-Side Secure Store</a>. </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Transition from Instance Secure Store in the File System (<span class="SNO_DNT" style="float: none;" translate="no">Instance SSFS</span>) to <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/b3ee5778bc2e4a089d3299b82ec762a7/5a43dc48190f4543b0d840952d3dec55.html" target="_blank">Local Secure Store (LSS)</a> as SAP HANA <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/b3ee5778bc2e4a089d3299b82ec762a7/555997ccf3e24fb39cf018b1182acae3.html" target="_blank">Server-Side Secure Store</a>.</p>
+<ol>
+<li>Follow the procedure in <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/2c1988d620e04368aa4103bf26f17727/62f4eeb2ffeb47ef9d0a8b19d7e0d08a.html#procedure" target="_blank">Activate the Local Secure Store (LSS)<br/><br/></a></li>
+<li>Verification: The SQL query returns '<span class="SNO_DNT" style="float: none;" translate="no">LSS is active</span>':</li>
+</ol>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">select  (case when (select  count(*) from "KEY_MANAGEMENT_CONFIGURATIONS") &gt; 0 then 'LSS is active'  else 'Instance SSFS is active' end) from dummy;</span></p></div></div></div></div>

@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You have installed SPAM/SAINT version 0093 and you perform an upgrade or an SAP S/4HANA conversion. The phase EHP_INCLUSION aborts with the error "OCS package ... does not match the current software component vector". The log file SPDA_EHP_INCLUSION.LOG contains log messages like the following:</p>
+<ul>
+<li>3 ETN245 The following import prerequisites of OCS Package "SAPK-758AGINUIBAS001" have not been met:<br/>...   </li>
+<li>3 ETN264   In the (alternatively) Requirement set "02":</li>
+<li>3WETN493 Not allowed software component "UIX01CA1" rel."*" is installed<br/>...</li>
+<li>2WETN543 OCS package "SAPK-758AGINUIBAS001" does not match the current software component vector</li>
+</ul>
+<p>Note that the names of the OCS Package, software component, or failing requirement set number might differ.</p>
+<p>The software component mentioned in the log ("UIX01CA1" in the above example) is no longer installed in the system, so the finding "Not allowed software component "..." rel."*" is installed" is not correct.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>EHP_INCLUSION, SPAM/SAINT version 0093, not allowed software component</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The software component mentioned as falsely installed, was installed in the past. The queue calculation functionality for the add-on inclusion in an upgrade/conversion contains an error in SPAM/SAINT version 0093, which incorrectly interprets the information that a software component was installed in the past and treats this software component as still installed.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The problem is solved with SPAM/SAINT version 0094.</p>
+<p>To avoid such queue calculation problems, import SPAM/SAINT version 0094 on the source release before you start the upgrade/conversion.</p>
+<p>If the error already occurred in phase PREP_EXTENSION/EHP_INCLUSION, import SPAM/SAINT version 0094 and repeat the phase in the SUM UI.</p></div></div></div></div>

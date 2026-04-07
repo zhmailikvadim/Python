@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>During schema import, the following warning message is displayed:</p>
+</div>
+<p>"<em>java.sql.SQLWarning: general warning: Variables with the same name as a parameter are not allowed in main block: CURRENCY</em>"</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Business One, version for SAP HANA</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Scenario:</strong></p>
+<ol><li>Export the Schema on the source system and compress the exported files on the Linux server.</li><li>Transfer the compressed file to the target system.</li><li>Extract the exported schema on the target system.</li><li>Attempt to import the schema.</li></ol>
+<p><strong>Expected result:</strong></p>
+<p>The schema import is successful without any warning message.</p>
+<p><strong>Actual result:</strong></p>
+<p>The schema import is successful, but the following warning message is displayed:</p>
+<p>"<em>java.sql.SQLWarning: general warning: Variables with the same name as a parameter are not allowed in main block: CURRENCY</em>"</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The warning occurs when variables declared in the main block have the same names as input or output parameters, causing conflicts during evaluation.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This warning message does not impact the functionality of the system.</p>
+<ul style="list-style-type: none;"></ul>
+<ul style="list-style-type: none;"></ul>
+<ul style="list-style-type: none;"></ul>
+<ul style="list-style-type: none;"></ul>
+<p>The warning appears if one attempts to create a procedure or function, or execute an anonymous block, where one or more variables declared in the main block have the same names as input or output parameters.</p>
+<p>Example:</p>
+<p><em>CREATE PROCEDURE proc1 (IN abc INT) AS</em><br/><em>BEGIN</em><br/><em>  DECLARE abc INT = 1;</em><br/><em>  ...</em><br/><em>END;</em></p>
+<div>
+<p>In this case, the parameter 'abc' cannot be evaluated inside the procedure because it is hidden by the variable 'abc'. Similarly, output parameters or function return values cannot be set from within a function, procedure, or anonymous block if they are hidden by variables.</p>
+<p>Enable debug database tracing as documented in SAP Note <a href="https://me.sap.com/notes/2134959" rel="noopener noreferrer nofollow" target="_blank">2134959</a>, run the import again to identify the object causing this warning, and adjust the procedure accordingly.</p>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>import, warning, Variables, CURRENCY</p></div></div></div></div>

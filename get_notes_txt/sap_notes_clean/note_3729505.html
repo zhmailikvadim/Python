@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>In transaction EDOC_COCKPIT, descriptions and button texts are not displayed correctly when logged in with Polish language (PL).</li><li>Some texts appear blank or missing.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP ERP </li><li>SAP S/4HANA</li><li>SAP Document and Reporting Compliance Service</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Log in to the system using language Polish (PL).</li><li>Execute transaction EDOC_COCKPIT.</li><li>Observe the toolbar and status descriptions.</li><li>Some descriptions or texts are missing or displayed as blank.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue occurs due to missing language-dependent entries (translations) in the system tables.</p>
+<p>Standard translations are delivered via Support Packages or language deliveries.<br/>If these are not available in the current system level, the corresponding entries remain missing.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Maintain the missing language entries manually as a temporary workaround.</p>
+<ol><li>
+<p>Go to transaction SM30.</p>
+</li><li>
+<p>Maintain entries in the following tables for Polish language PL:</p>
+<ul><li>
+<p>EDOFUNCTIONV (eDocument function codes)</p>
+</li><li>
+<p>EDOPROCSTATV (eDocument status texts)</p>
+</li></ul>
+</li><li>
+<p>Ensure required function entries (e.g. GET_DRCC_STATUS, RETRY) are maintained for Polish language.</p>
+</li><li>
+<p>Save and retest in EDOC_COCKPIT.</p>
+</li></ol>
+<p>Translations will be automatically available once delivered via future Support Packages.</p>
+<p>For guidance on maintaining missing translations, refer to:</p>
+<ul><li>
+<p>SAP Note <a href="https://me.sap.com/notes/2731171" rel="noopener noreferrer nofollow" target="_blank">2731171 </a>- eDocument Cockpit button labels are blank due to translations </p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Note <a href="https://me.sap.com/notes/2293306" rel="noopener noreferrer nofollow" target="_blank">2293306</a> - eDocument Cockpit.</p>
+<p>SAP Note <a href="https://me.sap.com/notes/2362125" rel="noopener noreferrer nofollow" target="_blank">2362125</a> - eDocument Cockpit: Prerequisite Objects for Note 2293306.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>edoc_cockpit polish language missing text, edocument cockpit translation issue, edofunctionv missing entries, edoprocstatv missing polish text, edoc cockpit blank descriptions, sap edocument translation missing</p></div></div></div></div>

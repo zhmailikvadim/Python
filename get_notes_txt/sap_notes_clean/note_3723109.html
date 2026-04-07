@@ -1,0 +1,46 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When performing asset retirement using transaction F-92, the system issues the following error message:</p>
+<p>AAPO190<br/><em>“Account assignment object 'Functional Area for Investment' differs from that in the asset master record.”</em></p>
+<p>The same process may work in ECC but fails in SAP S/4HANA.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul style="list-style-position: inside;"><li>FIN Asset Accounting</li><li>SAP S/4HANA</li><li>SAP S/4HANA Finance</li><li>SAP S/4HANA Cloud Private Edition</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><h1 data-toc-skip=""> </h1>
+<ol><li>
+<p>Execute transaction F-92.</p>
+</li><li>
+<p>Enter required header data (Company Code, Posting Date, etc.).</p>
+</li><li>
+<p>Enter customer and clearing line items.</p>
+</li><li>
+<p>Select the Asset Retirement indicator.</p>
+</li><li>
+<p>Enter the asset number and proceed with posting.</p>
+</li><li>
+<p>System issues error AAPO190.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>In SAP S/4HANA, stricter consistency checks are applied for Account Assignment Objects (such as Functional Area – FKBER).</p>
+<p>During posting, the system derives a Functional Area (for example from the Cost Center or Profit Center).</p>
+<p>If the Functional Area field is suppressed in the asset master screen layout, no value is stored in the asset master record.</p>
+<p>During posting, S/4HANA compares:</p>
+<ul><li>
+<p>Derived Functional Area (from account assignment)</p>
+</li><li>
+<p>Functional Area stored in the asset master</p>
+</li></ul>
+<p>If the asset master value is blank and the derived value is populated, the system detects a mismatch and triggers error AAPO190.</p>
+<p>Although customizing may be identical in ECC and S/4HANA, the runtime validation logic in S/4HANA is stricter due to Universal Journal integration.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h1 data-toc-skip=""> </h1>
+<p>Depending on business requirements, one of the following solutions can be applied:</p>
+<h3 data-toc-skip="">Recommended Solution (Best Practice)</h3>
+<ol><li>
+<p>Adjust the screen layout for the asset master:<br/>Asset Accounting → Master Data → Screen Layout → Define Screen Layout for Asset Master Data</p>
+</li><li>
+<p>Make field group 89 – Functional Area visible (Optional).</p>
+</li><li>
+<p>Maintain the Functional Area in the asset master (transaction AS02).</p>
+</li><li>
+<p>Repeat the posting.</p>
+</li></ol>
+<p>This ensures consistency between master data and posting and is the recommended audit-compliant solution.</p>
+<p></p>
+<h3 data-toc-skip="">Alternative Solutions</h3>
+<ul><li>
+<p>Remove the “Agreement Indicator” (Acct Assignment Object Same in Asset Master and Posting) for Functional Area.</p>
+</li><li>
+<p>Change the message control from Error to Warning.</p>
+</li></ul>
+<p>Note: These options reduce system consistency checks and may allow differences between posting and master data.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>AAPO190 Functional Area FKBER Account Assignment Object<br/> </p></div></div></div></div>

@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The Service Organization field remains empty in the Service Confirmation search results (or any other search) , although it has been updated in the document. </p>
+<p><img class="img-responsive" height="524" src="/documents/customerkba/-XT7KwHUw9uNqChFWnyoMr7hj_NinfNWAwOuh6phb_s" width="949"/></p>
+<p>Detail of document</p>
+<p><img class="img-responsive" height="564" src="/documents/customerkba/Gl0mplw4jU7ADFLIs3vZIEpL8mLkzpqKeYCubcVdBPg" width="934"/></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul><li>
+<p>Execute a search for Service documents (Service Order, Service Contract, Service Quotation, Service Confirmation, and Service Request).</p>
+</li><li>
+<p>Some organizational fields are displayed as blank even though they have been updated in the documents.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Wrong fields : depending on your organizational settings system uses different fields. In fact, usually there are two fields called Service Organiztion</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>- First, verify the organizational settings and confirm whether the Enterprise Organization or the Legacy Organization model is being used. </p>
+<p>SAP Customizing Implementation Guide -&gt; Service -&gt; Basic Functions -&gt; Enterprise Organizational Management -&gt; Enable Enterprise Organizational Model</p>
+<p><img class="img-responsive" src="/documents/customerkba/dah_8Yj8grSvT0QOm5-Ae18v1WqBnk8Yw09kiQ_cG6Q"/></p>
+<p>-Click Configure Area and select the highlighted area. </p>
+<p><img class="img-responsive" height="448" src="/documents/customerkba/pgIcykGCmbXuBBFqGYz61d7H2wqO0gy6vbF8m9NtBOk" width="979"/></p>
+<p></p>
+<p>- Check the available fields: two fields named Service Organization are listed. Select Show Technical Details to identify the correct one. </p>
+<p><img class="img-responsive" height="366" src="/documents/customerkba/QZk6tVa1hJDSW6Osupbu6IDSm38ZY1xof-oHGmAp_zk" width="994"/></p>
+<p>The field SERVICE_ORG is used for Legacy organizational data, while Enterprise Service Organization is used for Enterprise organizational data. </p>
+<p><img class="img-responsive" height="188" src="/documents/customerkba/ZapuUgZwtJKZqryMoDId4r_XGensu-vdC4tuA5RTRsc" width="1010"/></p>
+<p></p>
+<p>-Select the appropriate option based on the setting identified in the first step. </p>
+<p><img class="img-responsive" height="592" src="/documents/customerkba/lt9EqkaXiNEOu14t2IhDPB9P4RE86gZ1EVVYa5ncVO4" width="1016"/></p>
+<p></p></div></div></div></div>

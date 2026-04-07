@@ -1,0 +1,107 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Customers report poor payroll performance or inconsistent execution times.<br/>Typical issues include:</p>
+<ul><li>Payroll runs taking significantly longer than expected</li><li>Difficulty distinguishing whether the issue is:
+<ul><li>Application-related (Payroll logic, retroactivity, schema)</li><li>System-related (work processes, system load)</li></ul>
+</li><li>Lack of visibility into:
+<ul><li>Execution time per payroll run</li><li>Impact of retro calculations, PCC usage, or payslip generation</li></ul>
+</li><li>Manual analysis via SM37 and spool logs is time-consuming and inefficient</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The root causes of perceived payroll performance issues are often unclear due to multiple influencing factors:</p>
+<ol><li>No standardized analysis tool
+<ul><li>Performance checks are done manually (SM37 + spool review)</li><li>Time-consuming and error-prone</li></ul>
+</li><li>Multiple factors impacting runtime
+<ul><li>Number of payroll periods (main driver of execution time)</li><li>Retroactivity (Average Retro) multiplying total runtime</li><li>Payroll Control Center (PCC) usage:
+<ul><li>Requires population of declustered tables → higher load</li></ul>
+</li><li>Payslip generation during payroll:
+<ul><li>Adds additional processing overhead</li></ul>
+</li><li>Log (protocol) activation:
+<ul><li>Significantly increases runtime</li></ul>
+</li><li>Test vs Live runs:
+<ul><li>Cluster updates in live runs may consume more resources</li></ul>
+</li><li>Schema used
+<ul><li>Different schemas may have different performance characteristics</li></ul>
+</li></ul>
+</li><li>System-related factors
+<ul><li>Delay (no available work processes):
+<ul><li>Causes longer job duration</li><li>Misinterpreted as poor payroll performance</li></ul>
+</li></ul>
+</li><li>Misleading indicators
+<ul><li>Number of employees is less relevant than:
+<ul><li>Number of periods processed</li></ul>
+</li><li>Jobs with very few periods distort performance metrics due to:
+<ul><li>Fixed startup time of payroll driver</li></ul>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h3 data-toc-skip=""><span role="text">1. Use Program RH_PAYR_PERF_CHECK delivered in note </span><a href="http://me.sap.com/notes/3733753" rel="noopener noreferrer nofollow" target="_blank">http://me.sap.com/notes/3733753</a></h3>
+<ul></ul>
+<h3 data-toc-skip=""><span role="text">2. What the Program Does</span></h3>
+<p>The program:</p>
+<ul><li>Reads all jobs from SM37 for the selected payroll driver</li><li>Extracts data from:
+<ul><li>Job logs</li><li>Spool outputs</li><li>Execution metadata</li></ul>
+</li></ul>
+<p>It automatically analyzes:</p>
+<ul><li>Execution time</li><li>Delay</li><li>Number of employees</li><li>Number of payroll periods</li><li>Seconds per period (key performance metric)</li><li>Average retro</li><li>Execution parameters:
+<ul><li>PCC usage</li><li>Log (protocol)</li><li>Test vs Live</li><li>Payslip generation</li><li>Schema used</li></ul>
+</li></ul>
+<hr/>
+<h3 data-toc-skip=""><span role="text">3. Key Performance Metric</span></h3>
+<p>Performance is calculated as:</p>
+<blockquote>
+<p>Seconds per payroll period</p>
+</blockquote>
+<p>This allows:</p>
+<ul><li>Fair comparison between jobs</li><li>Identification of real performance issues independent of volume</li></ul>
+<hr/>
+<h3 data-toc-skip=""><span role="text">4. Output Interpretation</span></h3>
+<p>The report includes:</p>
+<ul><li>Delay
+<ul><li>Indicates system bottlenecks (no available work processes)</li><li>Not an application performance issue</li></ul>
+</li><li>Seconds
+<ul><li>Total runtime</li></ul>
+</li><li>Periods
+<ul><li>Main driver of execution time</li></ul>
+</li><li>Employees
+<ul><li>Informational only (less relevant than periods)</li></ul>
+</li><li>Average Retro
+<ul><li>Multiplies total runtime</li><li>Example:
+<ul><li>Retro = 6 → runtime ~6x higher</li></ul>
+</li></ul>
+</li><li>PCC Indicator
+<ul><li>Higher load due to declustered tables</li></ul>
+</li><li>Payslip Indicator
+<ul><li>Additional processing overhead</li></ul>
+</li><li>Log Indicator
+<ul><li>Can significantly increase runtime</li></ul>
+</li><li>Test / Live
+<ul><li>Live runs may consume more resources</li></ul>
+</li><li>Schema
+<ul><li>Helps identify schema-related performance differences</li></ul>
+</li></ul>
+<hr/>
+<h3 data-toc-skip=""><span role="text">5. Selection Screen Behavior</span></h3>
+<ul><li>Minimum number of periods
+<ul><li>Filters out small jobs</li><li>Avoids distorted metrics due to fixed startup time</li></ul>
+</li></ul>
+<hr/>
+<h3 data-toc-skip=""><span role="text">6. Benefits</span></h3>
+<ul><li>Eliminates manual analysis (SM37 + spool)</li><li>Provides instant performance diagnostics</li><li>Helps distinguish:
+<ul><li>System issues vs application issues</li></ul>
+</li><li>Enables:
+<ul><li>Faster incident resolution</li><li>Better customer communication</li></ul>
+</li><li>Scalable to large customers running payroll in multiple jobs</li></ul>
+<hr/>
+<h3 data-toc-skip=""><span role="text">7. Additional Notes</span></h3>
+<ul><li>The tool was created based on recurring customer needs and internal analysis practices</li><li>
+<p>It replicates manual troubleshooting steps but:</p>
+<blockquote>
+<p>Runs significantly faster (orders of magnitude improvement)</p>
+</blockquote>
+</li><li>The program is currently focused on payroll driver analysis</li><li>It can be adapted to other programs with measurable output</li></ul>
+<hr/>
+<h3 data-toc-skip=""><span role="text">8. Status</span></h3>
+<ul><li>Latest version includes enhanced layout with:
+<ul><li>PCC, Log, Test/Live, Payslip indicators</li></ul>
+</li><li>Currently being tested in customer systems</li><li>Continuous improvements planned<br/><br/><br/></li></ul>
+<p>Examples:<br/><br/><img class="img-responsive" src="/documents/customerkba/fLI4x9QFgR7DzbeX-pYcPvULmbgytUc6rKKU6bOdFrk"/></p>
+<p></p>
+<p><img class="img-responsive" src="/documents/customerkba/Eddqf8whZGkzI7415HzBDF7lcQOLgpsdj_Z7z3qvToU"/></p>
+<p></p>
+<p><img class="img-responsive" src="/documents/customerkba/uvPpUcldy8OQl6NxdbsA7kfkBIO0Pr7h7H3Qs-_VXlE"/></p>
+<p><img class="img-responsive" src="/documents/customerkba/FbOd3_Q4UOgiYdU0rH59-VPLxajoa3dFdjYEfXO0rF0"/></p>
+<p></p></div></div></div></div>

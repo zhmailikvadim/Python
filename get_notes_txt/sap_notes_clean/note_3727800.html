@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When implementing scope item 1P7 – Cross-Plant Transfer Posting, the Test Script references two plants (for example Plant 6910 and Plant 6920).</p>
+<p>However, during the Organizational Structure step in SAP Central Business Configuration (CBC), only one plant is available and the second plant is not present.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Central Business Configuration</p>
+<p></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Go to the Central Business Configuration (CBC).</li><li>Navigate to the workspace.</li><li>Access the Organizational Structure step.</li><li>Observe that only one Plant is created for Company Code when the scope activation completed.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The Test Script shows two plants only as an example to illustrate the cross-plant business scenario.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>In SAP Central Business Configuration, typically only one plant is initially available in the Organizational Structure. Additional plants required for specific scenarios must be created manually by the user.</p>
+<p>If the scenario requires two plants, create an additional plant in the Organizational Structure step using the Set Up Organizational Structure activity in SAP Central Business Configuration. Follow the documentation <a href="https://help.sap.com/docs/CENTRAL_BUSINESS_CONFIGURATION/55c9333eed324cd284f6c4e5dab8462f/d020ff461d504421bcc55d87cbc0ae57.html" rel="noopener noreferrer nofollow" target="_blank">Using the Set Up Organizational Structure App | SAP Help Portal</a> on how to create a new Org Unit.</p>
+<p>When working in an Evaluation workspace, organizational unit IDs must follow the naming rules:</p>
+<ul><li>
+<p>Distribution Channels and Divisions: Create alphanumeric IDs with at least one alphabetic character.</p>
+</li><li>
+<p>Other Organizational Units (for example Plants): Create alphanumeric IDs where the last two characters must be alphabetic.</p>
+</li></ul>
+<p>Example valid IDs:</p>
+<ul><li>
+<p>10AB</p>
+</li><li>
+<p>XYAB</p>
+</li></ul>
+<p>After creating and confirming the additional plant in the workspace in SAP Central Business Configuration and further deployed via activity Deploy Scope and Organizational Structure, the new Plant should be available in the Starter System.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>KBA <a href="https://me.sap.com/notes/3487303" rel="noopener noreferrer nofollow" target="_blank">3487303</a> - Unable to create organizational unit due to naming requirement in SAP Central Business Configuration</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>missing plant, organizational structure, central business configuration, starter system, cross-plant transfer posting, plant creation, evaluation workspace, naming convention, plant 6910, plant 6920, manual creation, test script scenario, CBC, plant missing, organizational structure, evaluation workspace, starter system, scope item 1P7</p></div></div></div></div>

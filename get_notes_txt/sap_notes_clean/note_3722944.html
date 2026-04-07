@@ -1,0 +1,74 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>SAP Note <a href="https://me.sap.com/notes/3423115" rel="noopener noreferrer nofollow" target="_blank">3423115</a> - 'Singapore Withholding Tax: Addition of new fields - Legal change' has added fields to the ALV output.</li><li>Fields "PAYEE'S BUSINESS STRUCTURE"  is generated without values in the report from the Run Statutory Reports app and it is not clear where to maintain the data.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>• Financial Accounting (FI)</p>
+<p>• SAP S/4HANA Finance</p>
+<p>• SAP S/4HANA</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Access the Fiori app - Run Statutory Reports.</li><li>Choose Report Category - SG_WHT_IR37 and generate a new run.</li><li>Open the output and observe that the field "PAYEE'S BUSINESS STRUCTURE" is empty.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The "PAYEE'S BUSINESS STRUCTURE" field is empty because the recipient type's description is not maintained.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Update the "PAYEE'S BUSINESS STRUCTURE" information in the recipient type's description by maintaining the relevant configuration in the following SPRO path:</p>
+<p><em>Financial Accounting → Financial Accounting Global Settings → Withholding Tax → Extended Withholding Tax → Basic Settings → Check Recipient Types.</em></p>
+<p></p>
+<p>The following table provides an overview of the available Recipient Types and it's descriptions and SAP suggests to maintain the same based on best practice, however different values can be maintained according to specific business requirements:</p>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 483px; height: 485.438px;"><tbody><tr style="height: 45.3125px;"><td nowrap="nowrap" style="width: 111.989px; height: 45.3125px;" valign="bottom">
+<p><strong> Recipient type </strong></p>
+</td><td nowrap="nowrap" style="width: 166.08px; height: 45.3125px;" valign="bottom">
+<p><strong>  Withholding tax type </strong></p>
+</td><td nowrap="nowrap" style="width: 226.506px; height: 45.3125px;" valign="bottom">
+<p><strong> Description</strong></p>
+</td></tr><tr style="height: 45.3125px;"><td nowrap="nowrap" style="width: 111.989px; height: 45.3125px;" valign="bottom">
+<p>11</p>
+</td><td nowrap="nowrap" style="width: 166.08px; height: 45.3125px;" valign="bottom">
+<p>&lt;tax_type&gt;</p>
+</td><td nowrap="nowrap" style="width: 226.506px; height: 45.3125px;">
+<p>INDIVIDUAL</p>
+</td></tr><tr style="height: 45.3125px;"><td nowrap="nowrap" style="width: 111.989px; height: 45.3125px;" valign="bottom">
+<p>12</p>
+</td><td nowrap="nowrap" style="width: 166.08px; height: 45.3125px;" valign="bottom">
+<p>&lt;tax_type&gt;</p>
+</td><td nowrap="nowrap" style="width: 226.506px; height: 45.3125px;">
+<p>PARTNERSHIP</p>
+</td></tr><tr style="height: 45.3125px;"><td nowrap="nowrap" style="width: 111.989px; height: 45.3125px;" valign="bottom">
+<p>13</p>
+</td><td nowrap="nowrap" style="width: 166.08px; height: 45.3125px;" valign="bottom">
+<p>&lt;tax_type&gt;</p>
+</td><td nowrap="nowrap" style="width: 226.506px; height: 45.3125px;">
+<p>CORPORATE COMPANY</p>
+</td></tr><tr style="height: 45.3125px;"><td nowrap="nowrap" style="width: 111.989px; height: 45.3125px;" valign="bottom">
+<p>14</p>
+</td><td nowrap="nowrap" style="width: 166.08px; height: 45.3125px;" valign="bottom">
+<p>&lt;tax_type&gt;</p>
+</td><td nowrap="nowrap" style="width: 226.506px; height: 45.3125px;">
+<p>GOVERNMENT BODY</p>
+</td></tr><tr style="height: 45.3125px;"><td nowrap="nowrap" style="width: 111.989px; height: 45.3125px;" valign="bottom">
+<p>15</p>
+</td><td nowrap="nowrap" style="width: 166.08px; height: 45.3125px;" valign="bottom">
+<p>&lt;tax_type&gt;</p>
+</td><td nowrap="nowrap" style="width: 226.506px; height: 45.3125px;">
+<p>UNIVERSITY</p>
+</td></tr><tr style="height: 45.3125px;"><td nowrap="nowrap" style="width: 111.989px; height: 45.3125px;" valign="bottom">
+<p>16</p>
+</td><td nowrap="nowrap" style="width: 166.08px; height: 45.3125px;" valign="bottom">
+<p>&lt;tax_type&gt;</p>
+</td><td nowrap="nowrap" style="width: 226.506px; height: 45.3125px;">
+<p>CLUB</p>
+</td></tr><tr style="height: 45.3125px;"><td nowrap="nowrap" style="width: 111.989px; height: 45.3125px;" valign="bottom">
+<p>17</p>
+</td><td nowrap="nowrap" style="width: 166.08px; height: 45.3125px;" valign="bottom">
+<p>&lt;tax_type&gt;</p>
+</td><td nowrap="nowrap" style="width: 226.506px; height: 45.3125px;">
+<p>ASSOCIATION</p>
+</td></tr><tr style="height: 45.3125px;"><td nowrap="nowrap" style="width: 111.989px; height: 45.3125px;" valign="bottom">
+<p>18</p>
+</td><td nowrap="nowrap" style="width: 166.08px; height: 45.3125px;" valign="bottom">
+<p>&lt;tax_type&gt;</p>
+</td><td nowrap="nowrap" style="width: 226.506px; height: 45.3125px;">
+<p>SOCIETY</p>
+</td></tr><tr style="height: 45.3125px;"><td nowrap="nowrap" style="width: 111.989px; height: 45.3125px;" valign="bottom">
+<p>19</p>
+</td><td nowrap="nowrap" style="width: 166.08px; height: 45.3125px;" valign="bottom">
+<p>&lt;tax_type&gt;</p>
+</td><td nowrap="nowrap" style="width: 226.506px; height: 45.3125px;">
+<p>OTHERS: PLEASE SPECIFY</p>
+</td></tr><tr style="height: 32.3125px;"><td nowrap="nowrap" style="width: 111.989px; height: 32.3125px;" valign="bottom">
+<p>20</p>
+</td><td nowrap="nowrap" style="width: 166.08px; height: 32.3125px;" valign="bottom">
+<p>&lt;tax_type&gt;</p>
+</td><td nowrap="nowrap" style="width: 226.506px; height: 32.3125px;">
+<p>BANKS/ FINANCIAL INSTITUTION</p>
+</td></tr></tbody></table></div>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://me.sap.com/notes/3423115" rel="noopener noreferrer nofollow" target="_blank">SAP Note 3423115 - Singapore Withholding tax: Addition of new fields - Legal change </a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Singapore, withholding tax, IR37, SG_WHT_IR37, PAYEE'S BUSINESS STRUCTURE,  statutory reports, withholding tax reporting, SAP S/4HANA Cloud Private Edition, SAP Note 3423115, recipient type configuration.</p></div></div></div></div>

@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Report RFKORDES returns the message: "Print report RFKORDES in company code &amp;&amp;&amp;&amp; has not selected any data for SAPE1". </p>
+<p>Message no. :  FB595</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Create a vendor invoice in company code &amp;&amp;&amp; using document type KR or X3.</li><li>Select vendor.</li><li>Enter a taxable base amount and apply tax code &amp;&amp; on the expense line.</li><li>Post the document.</li><li>Open the Application <a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps%28'S_PL0_09000127'%29/S35" rel="noopener noreferrer nofollow" target="_blank">Print Self Invoices (Italy)</a> (AppID: S_PL0_09000127) and execute the selection for company code &amp;&amp;&amp;&amp; and the posting period of the test document.</li><li>Observe that the application returns no results.</li><li>RFKORDES returns the message: "Print report RFKORDES in company code &amp;&amp;&amp;&amp; has not selected any data for SAPE1".</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Incorrect settings</p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>1. Incorrect configuration of the used tax code.</p>
+<p>Input tax Offset "SIO" and Tax self invoice "SIV" have to be maintained.</p>
+<p></p>
+<p>2. Form ID field have to be maintained ( Form ID = 1)  according the product documentation:</p>
+<p>Semple of Selection Parameters for the Print Self Invoices Reports:</p>
+<p><span style="text-decoration: underline;">Selection Parameters                              Value</span></p>
+<p>Company Code                                       The used Company Code</p>
+<p>Fiscal Year                                             The fiscal year</p>
+<p>Non-Date-Based Self Invoices                  selected</p>
+<p>Print Self invoices Using Form                  selected</p>
+<p><strong>Form ID                                                 1</strong></p>
+<p>Output device                                        Printer</p>
+<p>Print immediately                                   selected</p>
+<p>Crate list of Self Invoices                        selected</p>
+<p>Generate Number                                  selected </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>print self invoices, italy, RFKORDES, sio, siv, FB595, self-invoice, IT, Italy, Print report RFKORDES in company code, has not selected any data for </p></div></div></div></div>

@@ -1,0 +1,69 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>During S/4HANA conversion in SUM PREP_EXTENSION/IS_SELECT, add-ons are shown with status UNDECIDED: SRMNXP01, SRM_SERVER.</li><li>SUM offers “Upgrade” or “Delete” via SAINT packages but requires corresponding SAINT/ACP packages to proceed.</li><li>If the selection is Upgrade, the error message is: “The program has not found a SAINT package that fits to add-on SRM_SERVER.”</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SUM 2.0</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Repeat SUM.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The SRM components (SRM_SERVER, SRMNXP01) cannot be deleted via SAINT; they must be planned for deletion in Maintenance Planner so that the stack.xml contains the to-be-deleted flag and SUM removes them during conversion. (refer to SAP Note <a href="https://me.sap.com/notes/2251946" rel="noopener noreferrer nofollow" target="_blank">2251946</a>)</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Check the stack xml file, the SRM product should have the deletion flag as below, if not, then plan the new stack xml file without any manually removing the SRM product, Maintenance Planner will calculate the target action automatically.</p>
+<p>==</p>
+<div>
+<div id="folder973">
+<div>&lt;to-be-deleted&gt;</div>
+<div>
+<div id="folder974">
+<div>&lt;application-system creationclassname="SAP_XXXystem" system-number=""&gt;</div>
+<div>
+<div>...</div>
+</div>
+</div>
+<div id="folder975">
+<div>&lt;initial-state&gt;</div>
+<div>
+<div id="folder976">
+<div>&lt;product&gt;</div>
+<div>
+<div>&lt;caption&gt;SRM 7.0 EHP4 ON ERP 6.0 EHP8&lt;/caption&gt;</div>
+<div>&lt;name&gt;SAP SRM ON ERP&lt;/name&gt;</div>
+<div>&lt;version&gt;704 ON 608&lt;/version&gt;</div>
+<div>&lt;ppms-number&gt;73554900100900000506&lt;/ppms-number&gt;</div>
+<div>&lt;vendor&gt;sap.com&lt;/vendor&gt;</div>
+</div>
+<div>&lt;/product&gt;</div>
+</div>
+<div id="folder977">
+<div>&lt;software-feature selectively-installable="N"&gt;</div>
+<div>
+<div>&lt;caption&gt;SRM 7.0 EHP4 ON ERP 6.0 EHP8: SRM Server&lt;/caption&gt;</div>
+<div>&lt;name&gt;SAP SRM ON ERP&lt;/name&gt;</div>
+<div>&lt;version&gt;704 ON 608&lt;/version&gt;</div>
+<div>&lt;vendor&gt;sap.com&lt;/vendor&gt;</div>
+<div>&lt;ppms-number&gt;735549001009000005061&lt;/ppms-number&gt;</div>
+</div>
+<div>&lt;/software-feature&gt;</div>
+</div>
+<div id="folder978">
+<div>&lt;software-component-entry&gt;</div>
+<div>
+<div>&lt;caption&gt;SRM SERVER 7.14&lt;/caption&gt;</div>
+<div>&lt;name&gt;SRM_SERVER&lt;/name&gt;</div>
+<div>&lt;version&gt;714&lt;/version&gt;</div>
+<div>&lt;vendor&gt;sap.com&lt;/vendor&gt;</div>
+<div>&lt;ppms-number&gt;67838200100200021494&lt;/ppms-number&gt;</div>
+<div>...</div>
+</div>
+</div>
+<div id="folder979">
+<div>&lt;software-component-entry&gt;</div>
+<div>
+<div>&lt;caption&gt;SRMNXP01 150&lt;/caption&gt;</div>
+<div>&lt;name&gt;SRMNXP01&lt;/name&gt;</div>
+<div>&lt;version&gt;150&lt;/version&gt;</div>
+<div>&lt;vendor&gt;sap.com&lt;/vendor&gt;</div>
+<div>&lt;ppms-number&gt;73554900100200002193&lt;/ppms-number&gt;</div>
+</div>
+<div>&lt;/software-component-entry&gt;</div>
+</div>
+</div>
+<div>&lt;/initial-state&gt;</div>
+</div>
+<div>&lt;target-state/&gt;</div>
+</div>
+<div>&lt;/to-be-deleted&gt;</div>
+</div>
+</div>
+<div>&lt;/sp-stacks&gt;</div>
+<div>===</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/2251946" rel="noopener noreferrer nofollow" target="_blank">2251946</a> - Informational note about migration of SRM shopping carts to S/4HANA SSP<a href="https://me.sap.com/notes/0002351064" rel="noopener noreferrer nofollow" target="_blank"></a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>PREP_EXTENSION/IS_SELECT, undecided add-ons, SAINT package not found, SRM_SERVER 714, SRMNXP01 150, delete SRM via SUM, Maintenance Planner, stack.xml to-be-deleted, BBP_SC_S4MIG_SET_SCENARIO, ACP, attribute change package, SAPCCUPD, WMDXF, SUM 2.0 SP25, EPS/in</p></div></div></div></div>

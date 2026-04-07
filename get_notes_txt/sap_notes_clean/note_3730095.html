@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In app Perform Further Valuations (F107) for scope item 2PD (Provision for Doubtful Receivables), the system posts a valuation difference that does not correspond to any individual invoice or sum of open receivables. When analysing customer line items, there is a difference with the open balance, and no postings can be found that directly explain the valuation amount. </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Public Cloud.</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul><li>
+<p>Post a customer invoice in foreign currency.</p>
+</li><li>
+<p>Execute a Foreign Currency Valuation run.</p>
+</li><li>
+<p>Post or simulate valuation results.</p>
+</li><li>
+<p>Execute Perform Further Valuations (F107) for the same customer.</p>
+</li><li>
+<p>Observe that the valuation difference posted in F107 does not match the open receivable amount or any invoice total.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The valuation difference in F107 does not originate from individual invoices or their aggregated values.</p>
+<p>If a Foreign Currency Valuation run has been executed previously, the valuation results are stored at document level in backend table BSBW. These values represent currency valuation differences calculated for the receivable.</p>
+<p>During the F107 run, the system reads the existing valuation data (including values stored in BSBW) and incorporates it into the valuation calculation. As a result, the posted valuation difference may reflect prior foreign currency valuation adjustments rather than the current open receivable balance alone.</p>
+<p>Therefore, the amount displayed in F107 can originate from the Foreign Currency Valuation process and not from invoice-level amounts.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The valuation difference in F107 does not originate from individual invoices or their aggregated values.</p>
+<p>If a Foreign Currency Valuation run has been executed previously, the valuation results are stored at document level in backend table BSBW. These values represent currency valuation differences calculated for the receivable.</p>
+<p>During the F107 run, the system reads the existing valuation data (including values stored in BSBW) and incorporates it into the valuation calculation. As a result, the posted valuation difference may reflect prior foreign currency valuation adjustments rather than the current open receivable balance alone.</p>
+<p>Therefore, the amount displayed in F107 can originate from the Foreign Currency Valuation process and not from invoice-level amounts.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>This is standard system behaviour.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><div>
+<section>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<p>F107, FAGL_FCV, BSBW, 2PD, doubtful receivables, bad debt provision, foreign currency valuation, valuation difference, FI valuation, accounts receivable, S/4HANA Cloud, valuation run, open items, customer line items, exchange rate valuation, AR valuation, valuation adjustment, FI-GL, currency revaluation</p>
+</div>
+</div>
+</div>
+</div>
+<div> </div>
+<div>
+<div> </div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div aria-hidden="true"> </div></div></div></div></div>

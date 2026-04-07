@@ -1,0 +1,945 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripError sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>A new version is in preparation...!</strong> <br/>The content for this document is being improved and a new version is in preparation but not released yet. Please be aware that you are viewing outdated data from the previous version in a restricted mode with limited functionality.  You will be automatically notified once the new version is ready and released. The restrictions are described in <a href="/notes/3453681" style="color:var(--sapLinkColor);" target="_blank">KBA 3453681</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">You are using SAP Digital Manufacturing. You require information on the manual activities you must perform during the upgrade to SAP Digital Manufacturing, release 2605. You are looking for incompatible changes or usage considerations.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">SAP Digital Manufacturing, SAP Digital Manufacturing for edge computing, SAP Digital Manufacturing Cloud, SAP Digital Manufacturing Cloud for edge computing, manual activities, restrictions, deprecations, 2605</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You are running an SAP Digital Manufacturing solution that is upgraded to release 2605</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="text-decoration: underline;"><strong>Version History</strong></span></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Date</td>
+<td>Section</td>
+<td>Item</td>
+</tr>
+<tr>
+<td>02 Apr 2026</td>
+<td>Manual Activities</td>
+<td>Section "Edge – Migrate to NGINX Gateway Fabric" removed from Manual Activities</td>
+</tr>
+<tr>
+<td>01 Apr 2026</td>
+<td>Incompatible Changes</td>
+<td>Limits for Service Loop Calls Triggered by Event Business Rules from the Manage Automatic Triggers app (Service Catalog ID FA0057)</td>
+</tr>
+<tr>
+<td>30 Mar 2026</td>
+<td>Incompatible Changes</td>
+<td>
+<p>Removal of AIN Equipment Creation (Service Catalog ID FA0092, FA0093, and FA0095)</p>
+</td>
+</tr>
+<tr>
+<td>27 Mar 2026</td>
+<td>Manual Activities</td>
+<td>AI-Assisted Production Engineering in the Design Production Processes and the Monitor Production Processes Apps (Service Catalog ID FA0054 and FA0058)</td>
+</tr>
+<tr>
+<td>23 Mar 2026</td>
+<td>Incompatible Changes</td>
+<td>Added Reserved Words for Script Tasks in the Design Production Processes app (Service Catalog ID FA0054)</td>
+</tr>
+<tr>
+<td>16 Mar 2026</td>
+<td> </td>
+<td>Initial Release</td>
+</tr>
+</tbody>
+</table></div>
+<div class="OutlineElement Ltr SCXW263494916 BCX0">
+<p class="Paragraph SCXW263494916 BCX0"><span style="text-decoration: underline;"><strong>Minimum Release Requirements for Integrating with Other SAP Applications</strong></span></p>
+</div>
+<div class="OutlineElement Ltr SCXW263494916 BCX0">
+<p class="Paragraph SCXW263494916 BCX0">You can find information about the minimum version and release requirements for integrated applications in the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_DIGITAL_MANUFACTURING/c86ca4026fae4cb3ba66ed751866175b?locale=en-US&amp;state=PRODUCTION&amp;version=latest" rel="noreferrer noopener" target="_blank">Integration Guide</a> for SAP Digital Manufacturing on the SAP Help Portal. To use certain features of the release, you need to update the respective SAP Cloud Integration package. You can only update the package to the latest version. For more details, check the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/viewer/c86ca4026fae4cb3ba66ed751866175b/latest/en-US/353da323c8b0488eb87c3d4cbf905fa2.html" rel="noreferrer noopener" target="_blank">Upgrade Information</a> section in the Integration Guide.</p>
+<div class="OutlineElement Ltr SCXW111690291 BCX0">
+<p class="Paragraph SCXW111690291 BCX0"><span style="text-decoration: underline;"><strong>Manual Activities</strong></span></p>
+<p><strong>Update UI5 Library</strong></p>
+<ul>
+<li>SAP UI5 version updates from 1.136.9 to 1.136.15 as part of the UI5 patch upgrade within the 1.136 LTS maintenance version.</li>
+<li>You can find UI5 version change logs at the link below. Choosing the desired version shows a list of change logs for that version: <a href="https://ui5.sap.com/versionoverview.html" target="_blank">https://ui5.sap.com/versionoverview.html</a>.</li>
+<li><span style="font-size: 14px;">The selected version 1.136.15 is the latest stable patch in the current LTS line during upgrade planning.</span></li>
+<li>
+<p style="display: inline !important;">Applications using custom themes created on older SAPUI5 base themes need to ensure compatibility after the upgrade. You might need to rebuild themes if the original base theme is deprecated.</p>
+</li>
+<li>Applications with custom CSS overrides should perform regression testing because framework-level styling changes can affect rendering behavior.</li>
+<li>Custom development extensions like POD plugins or customer-owned templates also need validation by the owning development team, as SAP cannot predict UI5 control usage inside custom extensions.</li>
+</ul>
+<p><strong>Configure Network Firewall Rules</strong></p>
+<p>Add the following entries to your firewall to continue accessing the SAP Digital Manufacturing APIs.</p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" dir="ltr">
+<tbody class="SCXW123043412 BCX0">
+<tr class="TableRow TrackedChange SCXW123043412 BCX0">
+<td class="FirstRow FirstCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">Region</p>
+</div>
+</div>
+</td>
+<td class="FirstRow TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">Subscription Type</p>
+</div>
+</div>
+</td>
+<td class="FirstRow TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">Endpoint</p>
+</div>
+</div>
+</td>
+<td class="FirstRow LastCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">Load Balancer IPs</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="TableRow TrackedChange SCXW123043412 BCX0">
+<td class="FirstCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">eu20</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">TEST</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">api.test.eu20.dmc.cloud.sap</p>
+</div>
+</div>
+</td>
+<td class="LastCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">Current IPs:</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.4.151.225</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">20.23.46.228</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">20.23.43.148</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">20.23.44.144</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">40.91.201.22</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.136.225.208</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">104.46.61.93</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">104.40.211.237</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">104.40.220.45</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">137.116.204.58</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">Additional IPs introduced as part of release 2605:</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.93.140.208</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">98.71.198.44</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="TableRow TrackedChange SCXW123043412 BCX0">
+<td class="FirstCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">eu20</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">PROD</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">api.eu20.dmc.cloud.sap</p>
+</div>
+</div>
+</td>
+<td class="LastCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">Current IPs:</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.4.151.225</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">20.23.46.228</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">20.23.43.148</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">20.23.44.144</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">40.91.201.22</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.136.225.208</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">104.46.61.93</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">104.40.211.237</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">104.40.220.45</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">137.116.204.58</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">Additional IPs introduced as part of release 2605:</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.93.140.208</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">98.71.198.44</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="TableRow TrackedChange SCXW123043412 BCX0">
+<td class="FirstCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">us20</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">TEST</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">api.test.us20.dmc.cloud.sap</p>
+</div>
+</div>
+</td>
+<td class="LastCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">Current IPs:</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.236.7.194</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">20.236.2.222</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">20.236.3.98</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">20.236.7.213</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">4.155.79.254</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">4.155.79.206</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">4.155.79.243</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">4.155.79.245</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">4.155.79.244</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">4.155.79.247</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">Additional IPs introduced as part of release 2605:</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.109.156.40</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.109.186.225</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.3.74.184</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.69.98.157</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">4.155.35.225</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">40.65.92.99</div>
+</div>
+</td>
+</tr>
+<tr class="TableRow TrackedChange SCXW123043412 BCX0">
+<td class="FirstCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">us20</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">PROD</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">api.us20.dmc.cloud.sap</p>
+</div>
+</div>
+</td>
+<td class="LastCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">Current IPs:</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.236.7.194</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">20.236.2.222</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">20.236.3.98</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">20.236.7.213</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">4.155.79.254</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">4.155.79.206</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">4.155.79.243</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">4.155.79.245</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">4.155.79.244</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">4.155.79.247</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">Additional IPs introduced as part of release 2605:</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.109.156.40</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.109.186.225</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.3.74.184</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">20.69.98.157</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">4.155.35.225</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">40.65.92.99</div>
+</div>
+</td>
+</tr>
+<tr class="TableRow TrackedChange SCXW123043412 BCX0">
+<td class="FirstCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">eu10</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">TEST</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">api.test.eu10.dmc.cloud.sap</p>
+</div>
+</div>
+</td>
+<td class="LastCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">Current IPs:</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">18.184.66.118</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.125.96.178</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.76.55.68</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.184.101.77</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.196.219.185</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.69.69.190</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.193.62.153</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.70.41.31</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">35.157.217.51</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.193.148.161</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.127.4.99</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.75.37.200</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">63.176.207.1</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.29.193.225</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.153.137.214</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.157.199.231</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.67.115.224</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.68.34.185</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.72.217.155</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.74.100.206</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.76.111.190</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.78.28.213</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">35.159.253.32</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.28.109.230</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.57.106.212</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">63.176.122.246</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">63.176.247.53</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">63.177.15.196</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">63.177.31.225</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">63.177.41.32</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">Additional IPs introduced as part of release 2605:</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">18.196.112.13</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">18.199.23.69</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">3.125.71.129</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">3.74.33.65</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">35.156.157.48</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">63.180.148.8</div>
+</div>
+</td>
+</tr>
+<tr class="TableRow TrackedChange SCXW123043412 BCX0">
+<td class="FirstCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">eu10</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">PROD</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">api.eu10.dmc.cloud.sap</p>
+</div>
+</div>
+</td>
+<td class="LastCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">Current IPs:</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">18.184.66.118</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.125.96.178</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.76.55.68</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.184.101.77</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.196.219.185</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.69.69.190</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.193.62.153</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.70.41.31</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">35.157.217.51</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.193.148.161</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.127.4.99</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.75.37.200</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">63.176.207.1</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.29.193.225</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.153.137.214</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.157.199.231</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.67.115.224</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.68.34.185</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.72.217.155</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.74.100.206</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.76.111.190</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.78.28.213</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">35.159.253.32</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.28.109.230</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.57.106.212</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">63.176.122.246</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">63.176.247.53</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">63.177.15.196</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">63.177.31.225</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">63.177.41.32</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">Additional IPs introduced as part of release 2605:</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">18.196.112.13</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">18.199.23.69</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">3.125.71.129</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">3.74.33.65</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">35.156.157.48</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">63.180.148.8</div>
+</div>
+</td>
+</tr>
+<tr class="TableRow TrackedChange SCXW123043412 BCX0">
+<td class="FirstCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">us10</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">TEST</p>
+</div>
+</div>
+</td>
+<td class="TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">api.test.us10.dmc.cloud.sap</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+</div>
+</td>
+<td class="LastCol TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">Current IPs:</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">23.23.194.0</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">54.174.48.131</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">54.83.132.4</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.221.237.124</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">44.212.185.173</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">54.172.200.20</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.210.191.195</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">44.209.233.213</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.20.72.154</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">107.22.231.143</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">34.233.215.5</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">44.212.136.166</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">107.22.211.10</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.204.236.191</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.205.133.184</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.205.90.139</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.232.255.23</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.224.11.148</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.225.162.24</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">34.192.224.50</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">44.217.170.58</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">44.219.4.109</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.20.12.104</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.21.40.84</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.70.13.244</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">54.198.195.39</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">54.211.168.129</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">54.83.173.167</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">98.83.122.199</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">98.83.15.200</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">Additional IPs introduced as part of release 2605:</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">34.195.186.86</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">35.168.204.66</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">44.209.137.223</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">50.19.7.34</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.55.93.188</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">98.89.81.211</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="TableRow TrackedChange SCXW123043412 BCX0">
+<td class="FirstCol LastRow TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">us10</p>
+</div>
+</div>
+</td>
+<td class="LastRow TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">PROD</p>
+</div>
+</div>
+</td>
+<td class="LastRow TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">api.us10.dmc.cloud.sap</p>
+</div>
+</div>
+</td>
+<td class="LastCol LastRow TrackChangeTableRowInsertion SCXW123043412 BCX0">
+<div class="TableCellContent SCXW123043412 BCX0">
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">Current IPs:</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">23.23.194.0</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">54.174.48.131</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">54.83.132.4</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.221.237.124</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">44.212.185.173</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">54.172.200.20</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.210.191.195</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">44.209.233.213</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.20.72.154</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">107.22.231.143</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">34.233.215.5</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">44.212.136.166</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">107.22.211.10</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.204.236.191</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.205.133.184</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.205.90.139</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">18.232.255.23</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.224.11.148</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">3.225.162.24</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">34.192.224.50</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">44.217.170.58</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">44.219.4.109</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.20.12.104</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.21.40.84</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.70.13.244</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">54.198.195.39</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">54.211.168.129</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">54.83.173.167</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">98.83.122.199</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">98.83.15.200</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">Additional IPs introduced as part of release 2605:</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0"></div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">34.195.186.86</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">35.168.204.66</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">44.209.137.223</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">50.19.7.34</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">52.55.93.188</p>
+</div>
+<div class="OutlineElement Ltr SCXW123043412 BCX0">
+<p class="Paragraph SCXW123043412 BCX0">98.89.81.211</p>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>AI-Assisted Production Engineering in the Design Production Processes and the Monitor Production Processes Apps (Service Catalog ID FA0054 and FA0058)</strong></p>
+<p>With the official launch of AI-assisted production engineering in release 2605, if you’re a new user or beta user, you need the Base_AI_Admin role assigned to you. You also need the Production_Engineer role to use it.</p>
+<p>Additionally, you need to turn on Base AI Features toggle in the <strong>Manage Business Settings</strong> app to enable the feature. Keep in mind that the feature takes effect 10 minutes after you turn on the toggle. If you don’t turn it on, the feature stays hidden.</p>
+<p>Scripts you generated during the beta testing phase aren’t affected.</p>
+<p class="Paragraph SCXW111690291 BCX0"><strong>Edge – Upgrade PostgreSQL</strong></p>
+<p>PostgreSQL 14 goes out of maintenance in November 2026. SAP Digital Manufacturing for edge computing supports PostgreSQL 16 starting with release 2605. We recommend you upgrade to PostgreSQL 16 as soon as you can. Make sure you upgrade PostgreSQL first before upgrade SAP Digital Manufacturing for edge computing.</p>
+<p>For embedded PostgreSQL, perform these migration steps before the database upgrades automatically during your SAP Digital Manufacturing for edge computing application upgrade to 2605:</p>
+<p>1. Update values.yaml:</p>
+<p>a. Set global.database.pg_upgrade.enabled to "true".</p>
+<p>b. Set global.database.pg_upgrade.oldPgVersion to "14" and global.database.pg_upgrade.targetPgVersion to "16".</p>
+<p>2. Upgrade your SAP Digital Manufacturing for edge computing application to 2605.</p>
+<p><strong>Note</strong>:</p>
+<p>a. After you complete the embedded PostgreSQL upgrade, remove global.database.pg_upgrade.enabled and the other values from your values.yaml.</p>
+<p>b. The PostgreSQL upgrade creates the service account pg-upgrade-job-service-account, the role pg-upgrade-job-role, and the role binding pg-upgrade-job-role-binding to facilitate the upgrade. You can delete these resources manually after the upgrade completes when you no longer need them.</p>
+<p class="Paragraph SCXW111690291 BCX0"><span style="text-decoration: underline;"><strong><strong>Deprecations</strong></strong></span></p>
+<p class="Paragraph SCXW111690291 BCX0"><span style="text-decoration: underline;"><strong><strong><strong>Incompatible Changes</strong></strong></strong></span></p>
+<p class="Paragraph SCXW111690291 BCX0"><strong><strong><strong>Reserved Words for Script Tasks in the Design Production Processes app (Service Catalog ID FA0054)</strong></strong></strong></p>
+<p class="Paragraph SCXW111690291 BCX0">To avoid runtime errors or unintended behaviors, you can't save or deploy production processes that contain reserved words in script code content. For details on the reserved words, see <a href="https://me.sap.com/notes/3379404" target="_blank">SAP Note 3379404</a>.</p>
+<p lang="en-US"><strong>AIN Equipment Creation (Service Catalog ID FA0092, FA0093, and FA0095)</strong></p>
+<p lang="en-US">The AIN Equipment Creation scenario has been removed, so the following integration elements aren't available in SAP Digital Manufacturing:</p>
+<ul>
+<li>Collaboration link AIN_COLLABORATION_SFC_DONE and collaboration directive AIN_CREATE_EQUIPMENT_POST</li>
+<li>Integration message AIN Creation</li>
+</ul>
+<p><strong>Limits for Service Loop Calls Triggered by Event Business Rules from the Manage Automatic Triggers app (Service Catalog ID FA0057)</strong></p>
+<p>To avoid recursive loops, we have set limits on how many times event business rules can trigger production processes in a single day. For details on the limitation, see <a href="https://me.sap.com/notes/3379404" target="_blank">SAP Note 3379404.</a></p>
+<p class="Paragraph SCXW111690291 BCX0"><span style="text-decoration: underline;"><strong><strong><strong><strong>Additional Enhancements</strong></strong></strong></strong></span></p>
+<p class="Paragraph SCXW111690291 BCX0"><strong><strong><strong><strong>Inventory API (Service Catalog ID AP0010)</strong></strong></strong></strong></p>
+<ul>
+<li>GET /api/v2/inventory/goodsIssues - Service: Retrieve Goods Issue V2 - The maximum page size allowed in the request payload for this endpoint is increased from 100 records to 500 records. - A new field bomComponentSequence has been introduced in the API response. This field is used to differentiate goods issue postings for line items with the same material and helps identify the corresponding BOM line item when the same material appears in multiple lines. Note: The bomConponentSequence information is available through this API only for material consumption records executed after the 2605 release.</li>
+<li>GET V2/inventory/goodsReceipts - Service: Get Goods Receipts V2 - The maximum page size allowed in the request payload for this endpoint has been increased from 100 records to 500 records.</li>
+</ul>
+<p><span style="text-decoration: underline;"><strong>Recommendations</strong></span></p>
+<p>Subscribe to this SAP Note for updates by adding it to your favorites on the SAP for Me portal.</p>
+<p><span style="text-decoration: underline;"><strong>Disclaimer</strong></span><br/>This document is subject to change without notice. Add it to your favorites, and make sure to check back regularly.</p>
+</div>
+</div></div></div></div></div></div>

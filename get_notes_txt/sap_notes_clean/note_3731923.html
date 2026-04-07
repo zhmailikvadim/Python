@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When starting a Work Order or Operation, then syncing a device, the Work Order/Operation becomes inoperable. No mobile status buttons are present.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<ul>
+<li>No button for Mobile Status</li>
+<li>Work Order</li>
+<li>Operation</li>
+<li>ICMTANGOAMF10-43446</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>BAS/Visual Studio Code with SAM MDK Project</li>
+<li>`patch` command (available on BAS and macOS by default) via terminal or other patching utility</li>
+<li>Read the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://community.sap.com/t5/enterprise-resource-planning-blogs-by-sap/how-to-apply-metadata-patch-in-sap-service-and-asset-manager/ba-p/13801041" rel="nofollow" target="_blank">guidelines</a> on how to apply the patch and read the appendix section if you receive any error</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>Find attached file 3731923.patch</li>
+<li>Save patch file into known location</li>
+<li>Run command in base metadata folder: `patch -p1 &lt; /path/to/3731923.patch`. Validate 3 files changed and no hunk failures.</li>
+<li>Republish application</li>
+</ul>
+<p>The following files are affected by this patch:</p>
+<ul>
+<li>/Actions/ClockInClockOut/WorkOrderClockInOut.action</li>
+<li>/Rules/ClockInClockOut/ClockInClockOutLibrary.js</li>
+<li>/Rules/WorkOrders/MobileStatus/WorkOrderMobileStatusLibrary.js</li>
+</ul></div></div></div></div>

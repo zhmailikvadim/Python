@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Customer would like to Send Application factsheet data from LeanIX to Apptio</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Here is a Step by Step guide to setup and test the integration to Send Application data from LeanIX to Apptio:</p>
+<p><strong>Step 1: Initial Setup in Apptio</strong></p>
+<p>This is the part where you need support from your Apptio Admin to perform the following:</p>
+<ol><li>Create a service user in Apptio Frontdoor application with "Data Link Admin" role </li><li>Grant the service user access to your Apptio environment</li><li>Capture the API keyAccess and keySecret during initial user profile creation</li><li>Identify your Apptio environment details:
+<ul><li>loginUrl: <a href="https://frontdoor.apptio.com/service/apikeylogin" rel="noopener noreferrer nofollow" target="_blank">https://frontdoor.apptio.com/service/apikeylogin</a></li><li>domain name containing the tables to be used</li><li>environmentName</li><li>ulsUrl (Uploader Service URL) based on your region:
+<ul><li>EU: <a href="https://datalink-eu.apptio.com/uls/api/v1" rel="noopener noreferrer nofollow" target="_blank">https://datalink-eu.apptio.com/uls/api/v1</a> </li><li>US: <a href="https://datalink.apptio.com/uls/api/v1" rel="noopener noreferrer nofollow" target="_blank">https://datalink.apptio.com/uls/api/v1</a></li></ul>
+</li></ul>
+</li></ol>
+<p><strong>Step 2: Configure Authentication in SAP LeanIX</strong></p>
+<ol><li>Navigate to the Administration area in SAP LeanIX </li><li>Go to the Integrations section</li><li>Click "Configure" in the Apptio section</li><li>Configure the apptioConnectionConfig section with:
+<ul><li>loginUrl from Step 1 </li><li>keyAccess and keySecret from Step 1</li><li>domain and environmentName from Step 1</li><li>ulsUrl based on your region from Step 1 </li></ul>
+</li></ol>
+<p><strong>Step 3: Data Mapping Configuration</strong></p>
+<ol><li>Configure apptioWriteConfigs for Applications table with the following parameters :
+<ul><li>type: "detailed"</li><li>host: your Apptio host (e.g., "bizdev-r12.apptio.com")</li><li>project: "Cost Transparency"</li><li>tableName: "lxApps"</li><li>period: "current"</li><li>overwrite: true</li></ul>
+</li></ol>
+<p>If you would like to send multiple factsheet types in multiple tables in Apptio, you would need to create multiple apptioWriteConfigs with different table names i.e.: "lxApps". "lxBusinessCapabilities"</p>
+<p><strong>Step 4: Integration Activation</strong></p>
+<ol><li>Set the configuration as active: true in the JSON configuration </li><li>Save the configuration in SAP LeanIX</li></ol>
+<p><strong>Step 5: Integration API Setup</strong></p>
+<p>The integration API Connector setup is the step where you define which factsheet data you would like to send to Apptio. This is like setting a template for your table to define the Columns that you need from LeanIX. </p>
+<ol><li>Navigate to the Administration area in SAP LeanIX </li><li>Go to the Integration API section</li><li>Open the connector with id: lxExportToApptio, then adjust your processors as needed: please note that for each processor , the output content.type value should match the table name that you set in step 3.1</li><li>Once your processor is adjusted, you can save the configuration and click run, once finished, you can scroll all the way down under the output log, you should see a result url that you can then copy</li></ol>
+<p><strong>Step 6: Integration Test</strong></p>
+<ol><li>Go back to the Apptio integration Setup under Integration-&gt; Apptio, and paste the URL from the integration API result into the Data Provider part. </li><li>Click on the Upload Button.</li><li>Upon a Successful run, The LxApps table in this example would be created in your Apptio environment      </li></ol>
+<p>Once your tests are finalized, you can raise a ticket for the Support team to run the workflow to automatically schedule the integration run for you. </p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>How to set up the integration API <a href="https://help.sap.com/docs/leanix/ea/integration-api?locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank">https://help.sap.com/docs/leanix/ea/integration-api?locale=en-US&amp;version=LATEST</a></p>
+<p>Apptio configuration <a href="https://help.sap.com/docs/leanix/ea/apptio-integration?locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank">https://help.sap.com/docs/leanix/ea/apptio-integration?locale=en-US&amp;version=LATEST</a></p></div></div></div></div>

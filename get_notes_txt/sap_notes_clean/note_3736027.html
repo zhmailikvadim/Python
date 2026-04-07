@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">CDI real-time replication stops replicating data for one or more subscriptions without any error message. The affected subscription thread produces no further log activity, while all other subscriptions in the same remote source session continue operating normally. The issue persists indefinitely until the DPAgent is restarted or the affected remote source is suspended and resumed.</p>
+<p>In the DPAgent logs, the last entry for the affected subscription is a subscription lookup URI log line such as:</p>
+<p>URI = https://&lt;host&gt;/api/v1/dataexport/administration/Subscriptions?$filter=ExternalID eq '&lt;subscription_id&gt;'</p>
+<p>No "Response wait time" log follows this line, and no further activity is logged for that subscription.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Replication, CDI, Cloud Data Integration, SDI, hanging, subscription lookup, timeout, SAC</p>
+<p><strong>Environment</strong></p>
+<ul>
+<li>SAP HANA SDI 2.0 SP07</li>
+<li>SAP HANA SDI 2.0 SP08</li>
+</ul>
+<p><strong>Steps to Reproduce</strong></p>
+<ul>
+<li>Start a CDI real-time replication task with multiple subscriptions</li>
+<li>Under transient poor network conditions, a subscription lookup request is sent to the SAC CDI administration service but receives no complete response</li>
+<li>The affected subscription thread silently blocks indefinitely with no timeout, no error, and no retry</li>
+<li>All other subscriptions continue replicating normally</li>
+</ul>
+<p id=""></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The root cause is a gap in the client-side timeout handling for subscription lookup requests during transient poor network conditions. The CDI Adapter was unable to detect and recover from a stalled HTTP request, causing it to wait for the lookup response indefinitely. This is confirmed by the presence of a SocketTimeoutException for another subscription around the same time in the logs, indicating network degradation at that point.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>A subscription lookup timeout has been introduced on the DPAgent CDI Adapter side. Each subscription lookup request is now executed with a total duration limit, enabling the CDI Adapter to<br/>detect and recover from a stalled request and retry to overcome transient network issues. A new DPAgent property has been introduced to control the timeout:</p>
+<p>- Property name: cdi.subscriptionLookupTimeout<br/>- Unit: seconds<br/>- Default value: 60</p>
+<p>If the default is not suitable for a specific deployment, it can be adjusted by adding cdi.subscriptionLookupTimeout=&lt;value&gt; to the DPAgent ini configuration file.</p>
+<p>This correction is delivered in the release(s) listed in the Support Packages and Patches section of this SAP Note.</p></div></div></div></div>

@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>You are attempting to use an <span class="SNO_DNT" style="float: none;" translate="no">SQL on Files</span> adapter — either "<span class="SNO_DNT" style="float: none;" translate="no">File</span>" or "<span class="SNO_DNT" style="float: none;" translate="no">Deltasharing</span>" — in a <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Integration</span> (<span class="SNO_DNT" style="float: none;" translate="no">SDI</span>) replication task (<span class="SNO_DNT" style="float: none;" translate="no">.hdbreptask</span>).</p>
+<p>However, when deploying the <span class="SNO_DNT" style="float: none;" translate="no">.hdbreptask</span> via <span class="SNO_DNT" style="float: none;" translate="no">Business Application Studio</span> (<span class="SNO_DNT" style="float: none;" translate="no">BAS</span>), the process fails with an unspecified generic error.</p>
+<p>Based on the <span class="SNO_DNT" style="float: none;" translate="no">Business Application Studio</span> logs, the following or a similar error message can be observed:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">"text": "{\"error\":{\"errorCode\":\"EXECUTION_ERROR\",\"message\":{\"value\":\"An execution error occurred: internal error: \\\"&lt;HDI_USER&gt;\\\".\\\"(<strong>DO statement</strong>)\\\": line 7 col 9 (at pos 162): <strong>not supported for 'deltasharing' adapter</strong>\",\"lang\":\"en-US\",\"requestId\":\"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\"},\"args\":[\"internal error: \\\"&lt;HDI_USER&gt;\\\".\\\"(DO statement)\\\": line 7 col 9 (at pos 162): not supported for 'deltasharing' adapter\"],\"errorRef\":\"XXXXXXXXXXXXXXXXXXXX\",\"innererror\":{\"code\":403,\"sqlState\":\"HY000\"}}}"</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">SQL on Files</span>; <span class="SNO_DNT" style="float: none;" translate="no">deltasharing</span> adapter; <span class="SNO_DNT" style="float: none;" translate="no">file</span> adapter; SDI; Replication Task; <span class="SNO_DNT" style="float: none;" translate="no">.hdbreptask</span>; SDA; Federation; HANA Cloud; BAS; <span class="SNO_DNT" style="float: none;" translate="no">Business Application Studio</span>; HDI; flowgraph; <span class="SNO_DNT" style="float: none;" translate="no">.hdbflowgraph</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The <span class="SNO_DNT" style="float: none;" translate="no">.hdbreptask</span> artifact is primarily a component of <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Integration</span> (<span class="SNO_DNT" style="float: none;" translate="no">SDI</span>). While certain <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access</span> (<span class="SNO_DNT" style="float: none;" translate="no">SDA</span>) based adapters are supported to some extent — due to partially shared APIs within SAP HANA — <span class="SNO_DNT" style="float: none;" translate="no">SQL on Files</span> is not part of either <span class="SNO_DNT" style="float: none;" translate="no">SDI</span> or <span class="SNO_DNT" style="float: none;" translate="no">SDA</span>. Instead, <span class="SNO_DNT" style="float: none;" translate="no">SQL on Files</span> is documented separately with its own dedicated documentation and is treated as a distinct, independent functionality within SAP HANA.</p>
+<p>Consequently, <span class="SNO_DNT" style="float: none;" translate="no">SQL on Files</span> adapters are neither intended nor designed for use with <span class="SNO_DNT" style="float: none;" translate="no">SDI</span> replication tasks (<span class="SNO_DNT" style="float: none;" translate="no">.hdbreptask</span>) or <span class="SNO_DNT" style="float: none;" translate="no">flowgraphs</span> (<span class="SNO_DNT" style="float: none;" translate="no">.hdbflowgraph</span>) and are therefore not supported in this scenario.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA Cloud Edition:</li>
+<ul>
+<li>Revisions &gt;= 2024.28.0 (2024 QRC3)<strong><br/></strong></li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ol>
+<li>Deploying a replication task (<span class="SNO_DNT" style="float: none;" translate="no">.hdbreptask</span>) or a flowgraph (<span class="SNO_DNT" style="float: none;" translate="no">.hdbflowgraph</span>) and</li>
+<li>using a <span class="SNO_DNT" style="float: none;" translate="no">SQL on Files</span> adapter.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Workaround:</strong></p>
+<p>Instead of using a replication task, we recommend configuring the natively supported <span class="SNO_DNT" style="float: none;" translate="no">Delta Table Replication</span> as detailed in the official documentation and blog post referenced below:</p>
+<ol>
+<li><a href="https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-database-sql-on-files-guide/setting-up-data-replication" target="_blank">Configuring Delta Table Replication</a></li>
+<li><a class="page-link lia-link-navigation lia-custom-event" href="https://community.sap.com/t5/technology-blog-posts-by-sap/accelerating-your-analytics-with-delta-table-replication-into-sap-hana/ba-p/14290281" id="link_7" target="_blank">Accelerating Your Analytics with Delta Table Replication into SAP HANA Cloud</a></li>
+</ol>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li>As this is an unsupported scenario, we recommend submitting an improvement request as outlined in the following SAP Note <a href="/notes/2265872" target="_blank">2265872</a>.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ARUN_BDBS_LOG, ATP, Supply assignment, arun_source, API_ARUN_SUPPLY_ASSIGNMENT_SRV</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p>This issue is because of a program error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="longtext">
+<p id="">The program corrections are contained in the tab correction instruction of this note. You need to implement the corrections in your system.</p>
+</div></div></div></div></div>

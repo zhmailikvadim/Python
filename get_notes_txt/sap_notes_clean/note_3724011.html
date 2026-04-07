@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In SSAM, a priority alert icon appears next to certain notifications depending on the notification priority.</p>
+<p>You may observe the following behavior:</p>
+<ul><li>Multiple priorities are configured in the SAP backend (for example 0, 1, 2, 3, 4).</li><li>However, the priority icon in the SSAM mobile application appears only for some of them.</li><li>For example:
+<ul><li>In a system with priorities 0, 1, 2, 3, 4, the icon appears only for 0, 1, and 2.</li><li>Notifications with priorities 3 and 4 do not display the priority icon.</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Service and Asset Manager</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Open the SSAM mobile application.</li><li>Navigate to the Notifications list.</li><li>Open a notification that has a defined priority value.</li><li>Observe the priority indicator icon displayed in the notification header.</li><li>Compare notifications with different priorities (for example 0, 1, 2, 3, 4).</li><li>Result:<br/>The icon is displayed only for priorities <strong>lower than 3</strong>.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The display of the priority indicator icon is controlled by the metadata rule and not by backend configuration.</p>
+<p>In the SSAM mobile application, the icon is displayed based on a predefined condition implemented in the application code.</p>
+<div>
+<div>
+<div id="code-block-viewer">
+<div>
+<div>
+<p>In SSAM metadata, we have <strong>Rules/Common/Library/CommonLibrary.js</strong>:</p>
+<p>    <em><strong>static shouldDisplayPriorityIcon(context, priority) {</strong></em><br/><em><strong>        if (priority &lt; 3 || priority === '*') {</strong></em><br/><em><strong>            return IsAndroid(context) ? '/SAPAssetManager/Images/high_priority_icon.android.png' : '/SAPAssetManager/Images/high_priority_icon.png';</strong></em><br/><em><strong>        }</strong></em><br/><em><strong>        return '';</strong></em><br/><em><strong>    }</strong></em></p>
+</div>
+<div>
+<p>Because of this logic:</p>
+<ul><li>The icon is displayed only for priorities less than 3.</li><li>Backend priority configuration does not influence this rule.</li></ul>
+</div>
+</div>
+</div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This behavior is <strong>standard application logic</strong> in SAP Service and Asset Manager.</p>
+<p>If different behavior is required, it would require:</p>
+<ul><li><strong>Application customization </strong>(modification of metadata), or</li><li><strong>A feature request</strong> submitted through <a href="https://influence.sap.com/sap/ino/#/" rel="noopener noreferrer nofollow" target="_blank">SAP Customer Influence</a>.</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://me.sap.com/notes/0003033176" rel="noopener noreferrer nofollow" target="_blank">3033176</a> - SAP Asset Manager – How to Submit Improvement Requests and Influence Future Releases</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Service and Asset Manager, SSAM, priority icon, alert icon, notification priority, MDK, mobile UI, metadata</p></div></div></div></div>

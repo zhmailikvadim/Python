@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">After a system upgrade or SPS update, you find that expected entries are missing from table TVARVC.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>upgrade, SPS update, TVARVC, selection variants</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Customer issue, Consulting</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div>
+<p>The table TVARVC stores custom variant variables that can be used in selection variants. SAP updates or upgrades do not modify or delete entries in TVARVC.</p>
+<p>TVARVC is a client-dependent table with delivery class "G" (“Customizing, protected against SAP updates, only INS allowed”). This means that standard SAP upgrade tools such as <strong>SUM</strong> or <strong>SPAM</strong> treat TVARVC like any other table of this delivery class. SAP generally does not deliver variant variables, as both the entries and their values are entirely customer‑defined. Consequently, SAP does not normally insert entries into this table.</p>
+<p>From an SAP Basis perspective, the only program with write access to TVARVC is <strong>transaction STVARV</strong>, which is intended for maintaining customer-specific variant variables. There is <strong>no SAP program or upgrade process </strong>— neither as part of, nor as an extension to update or upgrade procedures — that would modify TVARVC.</p>
+<p>Most changes to TVARVC occur under <strong>customer responsibility</strong>, typically through:</p>
+<ul>
+<li>Custom reports scheduled to periodically update variant variables and their values</li>
+<li>Manual maintenance using transaction <strong>STVARV</strong></li>
+<li>Custom transports imported from other systems</li>
+</ul>
+<p>To determine the cause of missing or changed entries, it is essential to understand how the system or client was created:</p>
+<ul>
+<li>Was the system copied from another system? If so, <strong>when</strong> was the system copy executed?</li>
+<li>Was a <strong>client copy</strong> performed, either local or remote? If so, which <strong>profile parameters</strong> were used?</li>
+<li>Review the <strong>change log</strong> for TVARVC using transaction <strong>SCU3</strong>. Are there log entries showing when the missing entries were created or deleted?</li>
+<li>Compare TVARVC entries with another client or system using <strong>SE16</strong>, especially if the missing entries still exist there: Are there not only missing entries but also newly created or modified ones?</li>
+</ul>
+<p>Depending on the type and purpose of the variant variable, the required corrective action may involve <strong>transporting the missing entries</strong> from another system or <strong>executing custom reports</strong> to recreate or update them.</p>
+</div></div></div></div></div>

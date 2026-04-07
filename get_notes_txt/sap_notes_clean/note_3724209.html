@@ -1,0 +1,87 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><h3 data-toc-skip="" id="__html0"> </h3>
+<p>When creating a Legacy Data Transfer (LDT) segment in transaction <strong>FAA_CMP</strong> or <strong>FAA_CMP_LDT</strong>, the system raises the following error:</p>
+<p><strong>AC187</strong><br/><em>Transfer date &amp; is more than one year after the closed fiscal year.</em></p>
+<p>Additional observations:</p>
+<ul><li>
+<p>The transfer date is within the fiscal year following the last closed fiscal year<br/><em>(e.g. last closed fiscal year = 2025, transfer date = 30.04.2026)</em>.</p>
+</li><li>
+<p>The LDT segment is not created.</p>
+</li><li>
+<p>Field <strong>DATUM</strong> remains empty.</p>
+</li><li>
+<p>Tables <strong>T093B</strong> and <strong>T093C</strong> appear to contain consistent fiscal year information.</p>
+</li></ul>
+<p>In some cases, the issue may also occur together with:</p>
+<ul><li>
+<p>Error <strong>FAA_CMP030</strong></p>
+</li><li>
+<p>Errors during fiscal year closing (<strong>AJAB</strong>)</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul style="list-style-position: inside;"><li>FIN Asset Accounting</li><li>SAP ERP</li><li>SAP ERP Central Component</li><li>SAP enhancement package for SAP ERP</li><li>SAP enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA</li><li>SAP S/4HANA Finance</li><li>SAP S/4HANA Cloud Private Edition</li><li>SAP Fiori for SAP S/4HANA Finance,</li><li>SAP Fiori for SAP S/4HANA,</li><li>SAP Fiori for SAP S/4HANA Cloud Private Edition</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Open transaction <strong>FAA_CMP_LDT</strong> (or <strong>FAA_CMP</strong>)</p>
+</li><li>
+<p>Switch to edit mode</p>
+</li><li>
+<p>Create a new LDT segment</p>
+</li><li>
+<p>Enter a transfer date in the fiscal year following the last closed fiscal year</p>
+</li><li>
+<p>Save</p>
+</li></ol>
+<p><strong>Result:</strong> Error <strong>AC187 i</strong>s raised and the segment is not created.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The validation for error <strong>AC187</strong> during creation of a Legacy Data Transfer segment does not rely solely on the value of <strong>T093B-ABGJA</strong> (last closed fiscal year).</p>
+<p></p>
+<p>Instead, the system evaluates the <strong>overall fiscal year status in Asset Accounting</strong>, including:</p>
+<p></p>
+<ul><li>
+<p>Legacy Data Transfer configuration (FAA_CMP / FAA_CMP_LDT)</p>
+</li><li>
+<p>Fiscal year closing status in Asset Accounting</p>
+</li><li>
+<p>Ledger-specific fiscal year status</p>
+</li><li>
+<p>Migration-related system status</p>
+</li></ul>
+<p>If these elements are not fully aligned, the system may raise error AC187 even though fiscal year data in<strong> T093B and T093C</strong> appears consistent.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h3 data-toc-skip="">Resolution</h3>
+<p>Ensure that the fiscal year status is consistent across all relevant components:</p>
+<ol><li>
+<p><strong>Legacy Data Transfer (FAA_CMP / FAA_CMP_LDT)</strong></p>
+<ul><li>
+<p>Verify the LDT segment status</p>
+</li><li>
+<p>Check the transfer date</p>
+</li><li>
+<p>Ensure no inconsistent or incomplete segments exist</p>
+</li></ul>
+</li><li>
+<p><strong>Table T093B</strong></p>
+<ul><li>
+<p>Field <strong>ABGJA</strong> (last closed fiscal year)</p>
+</li></ul>
+</li><li>
+<p><strong>Table T093C</strong></p>
+<ul><li>
+<p>Field <strong>LGJAHR</strong></p>
+</li></ul>
+</li><li>
+<p><strong>Asset Accounting closing status</strong></p>
+<ul><li>
+<p>Execute/check<strong> AJAB</strong> (fiscal year closing)</p>
+</li><li>
+<p>Ensure depreciation posting (<strong>AFAB</strong>) is completed for all periods</p>
+</li></ul>
+</li></ol>
+<p>If inconsistencies are detected, align the fiscal year status before creating the Legacy Data Transfer segment.</p>
+<hr/>
+<h3 data-toc-skip="">How to Identify the Issue</h3>
+<p>This scenario typically has the following characteristics:</p>
+<ul><li>
+<p>Error <strong>AC187</strong> occurs during LDT segment creation</p>
+</li><li>
+<p>Transfer date appears valid (within next fiscal year)</p>
+</li><li>
+<p>LDT segment is not created and <strong>DATUM</strong> remains empty</p>
+</li><li>
+<p>Fiscal year data in <strong>T093B and T093C </strong>appears correct</p>
+</li></ul>
+<p>=&gt; In such cases, the issue is usually caused by<strong> inconsistent fiscal year status</strong>, not by an invalid transfer date.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><h2 data-toc-skip=""> </h2>
+<p>SAP Note <a href="https://me.sap.com/notes/3078166" rel="noopener noreferrer nofollow" target="_blank">3078166</a> – AJAB: Error FAA_CMP030</p>
+<p>SAP Note <a href="https://me.sap.com/notes/2944593" rel="noopener noreferrer nofollow" target="_blank">2944593</a> – AC187 in OAAQ, FAA_CMP030 in FAA_CMP</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>AC187  FAA_CMP  FAA_CMP_LDT  Legacy Data Transfer  LDT, DATUM <br/>T093B  ABGJA  T093C  LGJAHR  FAA_CMP030  AJAB  AFAB  fiscal year closing <br/>Asset Accounting  FI-AA  inconsistency  migration</p></div></div></div></div>

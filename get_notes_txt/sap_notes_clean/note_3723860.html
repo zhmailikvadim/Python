@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><header id="__html0"></header>
+<section id="u_symptom">
+<div>
+<p>You have received notification email(s) informing you about the change in the Certification Authority (CA) accepted by your web services user.</p>
+<p>Find a sample below about the certificate we are speaking about on this article, it can be found in your SAP Cloud Integration for data services (CI-DS) tenant &gt; Administration &gt; Users &gt; WebServicesUser.</p>
+<p><img class="img-responsive" height="499" src="/documents/customerkba/A7h3tBrE6MetBRN1SKeE01oBYafueM8bf-cw42hX0po" width="1036"/></p>
+<p>The purpose of this article is to clarify the actions required on customer side in relation to this change.</p>
+</div>
+<div>
+<p><span style="color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental. </em></span></p>
+</div>
+</section><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Cloud Integration for data services</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Following an industry-wide initiative led by Google, major certificate authorities (<span translate="no">CAs</span>) will stop issuing client certificates.</p>
+<p>The initial plan was for year 2026 and recently, some CA changed/postponed the plan for year 2027.</p>
+<p>On SAP IBP side, DigiCert was the <span translate="no">CA</span> issuing the <em>Client Default</em> certificate generated in your <span translate="no">SAP IBP. </span>Until now, the <em>Client Default </em>certificate was issued by "<span translate="no">DigiCert Global G2 TLS RSA SHA256 2020 CA1".</span></p>
+<p>Going forward, <span translate="no">DigiCert</span> will stop issuing certificates for use in client authentication with this issuer certificate.</p>
+<p>As a consequence, <span translate="no">SAP</span> has decided to introduce a new issuing authority for client certificates: <em><strong><span translate="no">SAP Cloud Root CA</span></strong>. </em></p>
+<p>From March 2026 onwards, newly issued certificates will be signed by this <span translate="no">CA</span> rather than<em> </em><span translate="no">DigiCert</span>.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>In your SAP IBP tenant, you need to switch the communication users for outbound connection from the old <em>Client Default</em> certificate to the new one.</p>
+<p>The client default certificate of IBP and signed by <em><strong>SAP Cloud Root CA</strong> </em>can be downloaded from the Outbound user of the communication system used for <strong>SAP_COM_0035</strong> and uploaded  inside CI-DS &gt; Administration &gt; Users &gt; WebServicesUser &gt; "Upload Certificate".</p>
+<p><img class="img-responsive" src="/documents/customerkba/nmPndrZmo0i6rSqLF1_D4Du_uVUN970xBhs5KIwzzfU"/></p>
+<p></p>
+<p><img class="img-responsive" height="618" src="/documents/customerkba/yVydcjzkBwMTZw3FD7OTMsZ0XdLSdCsPWtHaIDHCY58" width="1226"/></p>
+<p></p>
+<p>For more details, see:</p>
+<ul><li><a href="https://me.sap.com/notes/3677763" rel="noopener noreferrer nofollow" target="_blank">3677763 - Change of Client Certificate "Client Default" in S/4HANA Cloud Public Edition, SAP IBP, and SAP Marketing Cloud - SAP for Me</a></li><li><a href="https://help.sap.com/docs/SAP_INTEGRATED_BUSINESS_PLANNING/feae3cea3cc549aaa9d9de7d363a83e6/a2d679579ca36a2be10000000a441470.html" rel="noopener noreferrer nofollow" target="_blank">Configuring the Outbound Communication with SAP Cloud Integration for Data Services | SAP Help Portal</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Cloud Integration for data services &gt; Administration &gt; Users &gt; WebServicesUser, CA, trust, Certificate Authority, <em><span translate="no">SAP Cloud Root CA, </span></em><span translate="no">upload certificate, change, IBP, CI-DS, web services user</span></p></div></div></div></div>

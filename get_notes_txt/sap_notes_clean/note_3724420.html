@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>The Output File Repository Server (OFRS) directory is increasing indefinitely in size in BI 2025</li>
+<li>Instances which are cleaned up by instance limits or deleted manually do not have their corresponding FRS entries removed</li>
+<li>In the CMS logs, errors are observed eg:<br/>assert failure: (TombstoneCleaner.cpp:173). (false : CTombstoneCleaner::CleanupTombstone: Missing SI_PATH on Tombstone.)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence (BI) Platform 2025</li>
+<li>Windows</li>
+<li>Linux / Unix </li>
+</ul>
+<p><strong>Steps to Reproduce</strong></p>
+<ol>
+<li>Implement instance limits</li>
+<li>Schedule a report to run every few minutes</li>
+<li>Observe once the report instances reach the instance limit value and start being deleted the corresponding FRS entry is not deleted</li>
+</ol>
+<p><strong>Cause</strong></p>
+<p>The tombstones that get created for the instances as part of the hot backup process during deletion are being created without a path to the FRS entry, meaning the files are not deleted</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The issue has been forwarded to development for further investigation</p>
+<p><strong>Workaround</strong></p>
+<p>To ensure deletions of <strong>future</strong> FRS entries, disable hot backup from CMC -&gt; Settings</p>
+<p>To clean up <strong>existing</strong> FRS entries, use reposcan:<br/><a href="/notes/1689163" target="_blank">1689163</a> - Using the Repository Diagnostic Tool (aka reposcan) in BI 4.x - for WINDOWS [How-To]<br/><a href="/notes/1752397" target="_blank">1752397</a> - How to use the Repository Diagnostic Tool (aka reposcan) in BI 4.x - for Unix / Linux</p></div></div></div></div>

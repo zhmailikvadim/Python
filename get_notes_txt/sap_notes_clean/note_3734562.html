@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">An error occurred in step 1100 of the process "Receipt of Meter Reading Request (MOS MaLo View)" (DE_C_MET_MRR_MALO) on the Cloud side and an exception document has been generated .</p>
+<p>Error Message: Exception EX_CP_RECEIVER_AGENCY_NUMBER_NOT_FILL raised</p>
+<p>This issue is relevant for the market roles: MOS.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Meter Reading Request, Supply scenario, MeLo, MaLo, Class /US4G/CL_PRST_MRR_GET_MRV, DE_B_MET_MRR_RCV_MOSMELO, DE_C_MET_MRR_MALO</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error occurred because the system was unable to obtain complete supply scenario data in step 0500 of the process "Meter Reading Request (MOS MeLo) (DE_B_MET_MRR_RCV_MOSMELO)" on the Back end side, which caused an error in step 1100 of the process "Receipt of Meter Reading Request (MOS MaLo View)" (DE_C_MET_MRR_MALO) on the Cloud side.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system obtains complete supply scenario data and sends it to the Cloud side. The process "Receipt of Meter Reading Request (MOS MaLo View)" (DE_C_MET_MRR_MALO) now works correctly on the Cloud side.</p>
+<p>Note: Existing process documents with this error can't be reprocessed as completed. Select the "Cancel Process" solution for the exception document.</p>
+<p>You can verify the fix by checking the following:<br/>- The process "Meter Reading Request (MOS MeLo)" (DE_B_MET_MRR_RCV_MOSMELO) is completed in the back end, and the UBD of step 0500 (Read Meter Reading Result) is correct.<br/>- The process "Receipt of Meter Reading Request (MOS MaLo View)" (DE_C_MET_MRR_MALO) is completed on the Cloud side, and the status of step 1100 is completed.</p></div></div></div></div>

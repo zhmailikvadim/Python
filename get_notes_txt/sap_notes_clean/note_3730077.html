@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This note deals with such situations, when the response time of a statistic record corresponds to the idle time of the user.</p>
+<p>More specifically it is as follows. Let's assume the user finishes some actions, remains idle and starts new actions again after for example N seconds. When the time interval of one of the resulting statistic records (/nSTAD) corresponds to the idle time and its response time is about N seconds, then this is what is handled in this note.</p>
+<p>There are no problem specific traces or syslogs.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SNC handshake</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Program error related to SNC handshake for a SNC-encrypted GUI communication.</p>
+<p>If the GUI communication is SNC-encrypted, the SNC layer performs a handshake to refresh security information from time to time. An SNC handshake is triggered during the task handler is passing GUI output to the SNC layer for encryption. This leads to additional communication prior to sending the GUI output. Since the current statistic record is already marked as closed, the internal mechanisms of the task handler close and flush it during the early stage of the SNC handshake. Further stages of the SNC handshake are performed with an inconsistent statistic record, which is discarded at the end. When the user remains idle starting from this point of time, its next GUI action creates a new statistic record, whose response time is calculated from the start time of the discarded records, so that the response time is almost the same as the idle time.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>There is no workaround. Apply a new kernel patch.</p>
+<p>The correction is delivered with the kernel archives:</p>
+<ul>
+<li>Kernel patch - dw.sar<strong><br/></strong></li>
+</ul>
+<ul>
+<li>SP stack kernel files SAPEXE.SAR and SAPEXEDB.SAR </li>
+</ul>
+<p>The corrections are contained in all patch levels that are <strong>equal to or greater than</strong> the patch level specified in the "<strong>Support Package Patches</strong>" section for the relevant kernel release.<br/>If there is no entry there, the patch has not yet been delivered. The patch level will be entered automatically once the patch is available for download. You can <strong>subscribe</strong> to this SAP Note to be notified when it is updated.</p>
+<p>Follow <strong>our recommendations</strong> for applying a kernel patch:</p>
+<ol>
+<li>Import the <strong>latest SP stack kernel</strong> if it already contains the correction. For a list of current SP Stack Kernels, see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Apply the <strong>hotfix</strong> only if it is a serious error that is not yet corrected by the latest SP Stack Kernel. </li>
+<li>Check the <strong>regression note</strong> for the desired patch level before applying the kernel patch. For detailed information, see SAP Note <a href="/notes/1802333" target="_blank">1802333</a> (Finding information about regressions in the SAP kernel).</li>
+<li>For instructions on how to download and apply a kernel patch, see SAP Note <a href="/notes/19466" target="_blank">19466</a> (Downloading SAP kernel patches).</li>
+</ol>
+<p>For detailed information about our recommendations, see the strategy document: <a href="https://support.sap.com/deployment-strategies-kernel-abap.pdf" rel="noopener noreferrer" tabindex="-1" target="_blank" title="https://support.sap.com/deployment-strategies-kernel-abap.pdf">Update Strategy for the Kernel of the Application Server ABAP in On Premise Landscapes</a>.</p></div></div></div></div>

@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When activating a CDS Analytical Projection View (i.e. a CDS Projection View with provider contract analytical_query) activation errors or unexpected behavior may occur in the following scenarios:</p>
+<ol>
+<li>A field in the base cube is annotated with @Aggregation.default:null (or @DefaultAggregation:null) to suppress an inherited aggregation annotation. The syntax check of the Analytical Projection View incorrectly classifies such a field as a Measure instead of falling back to the default behavior (treating it as if no aggregation annotation were set). This can cause false activation errors — for example, when the field is used as a dimension in a WHERE condition or a CASE expression.</li>
+<li>
+<p>A CDS parameter of type DATS or DATN is used in a CDS Analytical Projection View. The activation check incorrectly rejects these date types as invalid numeric parameters, causing a false activation error.</p>
+</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CDS Analytical Projection View, Provider Contract Check, Analytical Query, provider analytical_query, CASE expression, @Aggregation.default, @DefaultAggregation, null annotation, DATS, DATN, numeric parameter, field classification, dimension, measure, activation error, CDS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Issue</strong> <strong>1</strong> <strong>—</strong> <strong>Null</strong> <strong>annotation</strong> <strong>not</strong> <strong>handled</strong> <strong>in</strong> <strong>field</strong> <strong>classification:</strong></p>
+<p>The Provider Contract Check classifies cube fields as Dimension or Measure based on the @Aggregation.default or @DefaultAggregation annotation. The classification logic does not handle the special annotation value null, which in CDS semantics means "no annotation" (i.e., the annotation is suppressed). As a result, a field annotated with @Aggregation.default:null in the base cube is treated as a Measure instead of falling back to the default behavior, leading to incorrect check results.</p>
+<p><strong>Issue</strong> <strong>2</strong> <strong>—</strong> <strong>DATS/DATN</strong> <strong>rejected</strong> <strong>as</strong> <strong>numeric</strong> <strong>parameters:</strong></p>
+<p>The activation check for in CDS Analytical Projection View validates whether parameters used in numeric contexts have an appropriate type. The check does not include DATS and DATN in the list of accepted types, even though these date types are valid in this context. This can cause the check to report a false error when such parameters are used in certain situations.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> Implement this note.</p></div></div></div></div>

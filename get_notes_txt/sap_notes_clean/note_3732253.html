@@ -1,0 +1,57 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When configuring the client certificate for communication between SAP S/4HANA Cloud Private Edition and SAP Business Data Cloud (BDC), you need to specify the Distinguished Name (DN) subject string. Previously, the Organizational Unit (OU) GUID in the DN varied depending on the region and hyperscaler where SAP Business Data Cloud was provisioned. You had to look up the correct GUID from a region-specific table.</p>
+<p>With the introduction of the Global Certificate Service, the OU GUID is now a <strong>single fixed value</strong> 3c869ade-ce89-4ee1-a2ff-a6e617e56fdf  that applies to all regions and hyperscalers. The region-specific GUID lookup table is no longer required.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>SAP Business Data Cloud has adopted a Global Certificate Service that centralizes certificate management across all regions and hyperscalers. As a result, the OU field in the DN subject now uses one universal GUID instead of region-specific values.</p>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>An SAP S/4HANA Cloud Private Edition system is provisioned and registered in UCL (Unified Customer Landscape).</li>
+<li>You have access to the SAP S/4HANA Cloud Private Edition system to configure the client certificate.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p> The DN string for the client certificate subject must adhere to the following pattern:</p>
+<div class="code-block-wrapper">
+<pre><code>CN=staging, L=&lt;tenantId&gt;, OU=3c869ade-ce89-4ee1-a2ff-a6e617e56fdf, OU=SAP Cloud Platform Clients, O=SAP SE, C=DE</code></pre>
+</div>
+<p><strong>Parameters:</strong></p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable">
+<thead>
+<tr><th>Parameter</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CN</code></td>
+<td>Must be set to <code>staging</code>.</td>
+</tr>
+<tr>
+<td><code>L</code></td>
+<td>The SAP S/4HANA Cloud Private Edition system ID (<code>&lt;tenantId&gt;</code>) assigned to the tenant by UCL (Unified Customer Landscape).</td>
+</tr>
+<tr>
+<td><code>OU</code> (1st)</td>
+<td>Fixed value: <code>3c869ade-ce89-4ee1-a2ff-a6e617e56fdf</code>. This is the global identifier for the SAP Business Data Cloud certificate service. This value applies to <strong>all regions and all hyperscalers</strong> (AWS, Azure, Google Cloud Platform).</td>
+</tr>
+<tr>
+<td><code>OU</code> (2nd)</td>
+<td><code>SAP Cloud Platform Clients</code> (unchanged).</td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td><code>SAP SE</code> (unchanged).</td>
+</tr>
+<tr>
+<td><code>C</code></td>
+<td><code>DE</code> (unchanged).</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>Note:</strong> In certain cases, the SAP S/4HANA Cloud Private Edition system ID (<code>&lt;tenantId&gt;</code>) might have a <code>$</code> at the beginning (e.g., <code>$0204398045</code>). You must remove the <code>$</code> from the beginning and use only the remaining part.</p>
+</blockquote>
+<p><strong>Example:</strong></p>
+<div class="code-block-wrapper">
+<pre><code>CN=staging, L=850432635, OU=3c869ade-ce89-4ee1-a2ff-a6e617e56fdf, OU=SAP Cloud Platform Clients, O=SAP SE, C=DE</code></pre>
+</div>
+<blockquote>
+<p><strong>Important:</strong> The parameters in the subject must be entered in the exact sequence as shown in the example above.</p>
+</blockquote></div></div></div></div>

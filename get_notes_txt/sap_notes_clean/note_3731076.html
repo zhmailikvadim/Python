@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">After reconfiguration, the following services don't start automatically and require manual intervention:</p>
+<ul>
+<li>sapb1servertools-jobservice.service</li>
+<li>sapb1servertools-license.service</li>
+<li>sapb1servertools-servicelayercontroller.service</li>
+<li>sapb1servertools-analytics.service</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<p><strong>Prerequisites：</strong></p>
+<ul>
+<li>You are using SAP Business One 10.0, version for SAP HANA</li>
+<li>You have installed various server components</li>
+</ul>
+<p><strong>Scenario:</strong></p>
+<ol start="1">
+<li>Reconfigure your server components by running /usr/sap/SAPBusinessOne/setup.</li>
+<li>After the reconfiguration is complete, check the status of a service using the command:<br/><em><br/>systemctl status &lt;service_name&gt;</em></li>
+</ol>
+<p><strong>Expected behavior</strong>:</p>
+<p>The service is active.</p>
+<p><strong>Actual behavior</strong>:</p>
+<p>The service is inactive.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Program Error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p>
+<p><strong>Workaround:</strong></p>
+<p>Start the service by running the following command:<br/><br/><em>systemctl start &lt;service_name&gt;</em></p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p>Reconfiguration; service</p></div></div></div></div>

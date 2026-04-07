@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="./sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZUG_C_GUIDE_HEADER_CDS" xml:lang="ru" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="I_DraftAdministrativeDataType" sap:label="Административные данные для проекта" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false" sap:label="Черновик (тех. ид.)" sap:quickinfo="Черновик (технический ид.)"/>
+                <Property Name="ProcessingStartDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Черновик в обработке с"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:text="InProcessByUserDescription" sap:label="Черновик обрабатывает"/>
+                <Property Name="DraftIsKeptByUser" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Черновик хранится у пользователя"/>
+                <Property Name="EnqueueStartDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Черновик блокирован с"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Созданная мной черновая версия"/>
+                <Property Name="DraftIsLastChangedByMe" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Последний черновик, измененный мною"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Я обрабатываю черновик"/>
+                <Property Name="CreatedByUserDescription" Type="Edm.String" MaxLength="80" sap:label="Автор черновика (описание)"/>
+                <Property Name="LastChangedByUserDescription" Type="Edm.String" MaxLength="80" sap:label="Автор посл. изм. черновика (описание)" sap:quickinfo="Автор последнего изменения черновика (описание)"/>
+                <Property Name="InProcessByUserDescription" Type="Edm.String" MaxLength="80" sap:label="Черновик обрабатывает (описание)"/>
+                <Property Name="DraftEntityType" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Ид. черн. сущности" sap:quickinfo="Ид. черновой сущности"/>
+                <Property Name="PrincipalDraftEntity" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Ид. черн. сущности" sap:quickinfo="Ид. черновой сущности"/>
+                <Property Name="PrincipalDraftKey" Type="Edm.Guid" sap:label="Черновик (тех. ид.)" sap:quickinfo="Черновик (технический ид.)"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Дата создания черновика"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:text="CreatedByUserDescription" sap:label="Черновик создан пользователем"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Дата последнего изменения черновика"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:text="LastChangedByUserDescription" sap:label="Автор последнего изменения черновика"/>
+                <Property Name="DraftAccessType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Тип доступа к черн." sap:quickinfo="Тип доступа к черновой версии"/>
+            </EntityType>
+            <EntityType Name="ZUG_C_GUIDE_HEADERType" sap:label="Guide Header Consumption" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="uuid"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="Activation_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Edit_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Preparation_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Validation_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="uuid" Type="Edm.Guid" Nullable="false" sap:label="Key" sap:quickinfo="UUID serving as key (parent key, root key)"/>
+                <Property Name="created_at_data" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Дата" sap:quickinfo="Поле типа DATS"/>
+                <Property Name="changed_by" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Изменил" sap:quickinfo="Имя пользователя"/>
+                <Property Name="changed_at_data" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Дата изменения" sap:quickinfo="Поле типа DATS"/>
+                <Property Name="created_at_time" Type="Edm.Time" Precision="0" sap:label="Время" sap:quickinfo="Время дня"/>
+                <Property Name="changed_at_time" Type="Edm.Time" Precision="0" sap:label="Время" sap:quickinfo="Время дня"/>
+                <Property Name="changed_at_tmstmp" Type="Edm.DateTimeOffset" Precision="7" sap:label="ПодрФормаМеткиВрем" sap:quickinfo="Метка UTC-времени в ПодрФорме (ГГГГММДДччммсс,ммммкмкмкн)"/>
+                <Property Name="created_at_tmstmp" Type="Edm.DateTimeOffset" Precision="7" sap:label="ПодрФормаМеткиВрем" sap:quickinfo="Метка UTC-времени в ПодрФорме (ГГГГММДДччммсс,ммммкмкмкн)"/>
+                <Property Name="last_changed_at" Type="Edm.DateTimeOffset" Precision="7" sap:label="ПодрФормаМеткиВрем" sap:quickinfo="Метка UTC-времени в ПодрФорме (ГГГГММДДччммсс,ммммкмкмкн)"/>
+                <Property Name="zsystem" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Система" sap:quickinfo="30 знаков"/>
+                <Property Name="zsubsystem" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Подсистема" sap:quickinfo="30 знаков"/>
+                <Property Name="zname" Type="Edm.String" MaxLength="200" sap:label="Название" sap:quickinfo="Текст для перевода"/>
+                <Property Name="zadditional_info" Type="Edm.String" MaxLength="255" sap:label="Дополнительная информация" sap:quickinfo="Текст, 255 знаков"/>
+                <Property Name="url" Type="Edm.String" MaxLength="255" sap:label="Параметры легенды" sap:quickinfo="Параметры легенды для Web-страниц"/>
+                <Property Name="link_guide" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="30 знаков" sap:heading=""/>
+                <Property Name="uuid_char" Type="Edm.String" MaxLength="32" sap:display-format="UpperCase" sap:label="Знаковое поле длины 32" sap:heading=""/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Имя пользователя"/>
+                <Property Name="ActiveUUID" Type="Edm.Guid" sap:label="Key"/>
+                <Property Name="DraftEntityCreationDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Дата создания черновика"/>
+                <Property Name="DraftEntityLastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Дата последнего изменения черновика"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Имеет акт. документ" sap:sortable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Имеет черновик" sap:sortable="false"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" sap:display-format="UpperCase" sap:label="Активно" sap:sortable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="ZUG_C_GUIDE_HEADER_CDS.assoc_930E50B3BB1A81147B07F28BDCE88ADF" FromRole="FromRole_assoc_930E50B3BB1A81147B07F28BDCE88ADF" ToRole="ToRole_assoc_930E50B3BB1A81147B07F28BDCE88ADF"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="ZUG_C_GUIDE_HEADER_CDS.assoc_80D6EC691E7FD0E33F3634A6CA56318D" FromRole="FromRole_assoc_80D6EC691E7FD0E33F3634A6CA56318D" ToRole="ToRole_assoc_80D6EC691E7FD0E33F3634A6CA56318D"/>
+                <NavigationProperty Name="to_ChangedByVH" Relationship="ZUG_C_GUIDE_HEADER_CDS.assoc_58D399A752C2A426BDEAF4624EABCA57" FromRole="FromRole_assoc_58D399A752C2A426BDEAF4624EABCA57" ToRole="ToRole_assoc_58D399A752C2A426BDEAF4624EABCA57"/>
+                <NavigationProperty Name="to_NameVH" Relationship="ZUG_C_GUIDE_HEADER_CDS.assoc_F7F3D5A00EBBEC6E7316AEFCCFDEA3A3" FromRole="FromRole_assoc_F7F3D5A00EBBEC6E7316AEFCCFDEA3A3" ToRole="ToRole_assoc_F7F3D5A00EBBEC6E7316AEFCCFDEA3A3"/>
+                <NavigationProperty Name="to_SubSystemVH" Relationship="ZUG_C_GUIDE_HEADER_CDS.assoc_38D9AF1E2191CAD813F9FD5220AE8530" FromRole="FromRole_assoc_38D9AF1E2191CAD813F9FD5220AE8530" ToRole="ToRole_assoc_38D9AF1E2191CAD813F9FD5220AE8530"/>
+                <NavigationProperty Name="to_SystemVH" Relationship="ZUG_C_GUIDE_HEADER_CDS.assoc_CD419B68F83F553F36A84961AEE8E6B1" FromRole="FromRole_assoc_CD419B68F83F553F36A84961AEE8E6B1" ToRole="ToRole_assoc_CD419B68F83F553F36A84961AEE8E6B1"/>
+            </EntityType>
+            <EntityType Name="ZUG_I_CHANGED_BY_VHType" sap:label="System Value Help" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="changed_by"/>
+                </Key>
+                <Property Name="changed_by" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Название инструкции" sap:quickinfo="Имя пользователя"/>
+            </EntityType>
+            <EntityType Name="ZUG_I_NAME_VHType" sap:label="System Value Help" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="zname"/>
+                </Key>
+                <Property Name="zname" Type="Edm.String" Nullable="false" MaxLength="200" sap:label="Название инструкции" sap:quickinfo="Текст для перевода"/>
+            </EntityType>
+            <EntityType Name="ZUG_I_SUBZSYSTEM_VHType" sap:label="System Value Help" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="zsubsystem"/>
+                </Key>
+                <Property Name="zsubsystem" Type="Edm.String" Nullable="false" MaxLength="30" sap:display-format="UpperCase" sap:label="Подсистема" sap:quickinfo="30 знаков"/>
+            </EntityType>
+            <EntityType Name="ZUG_I_ZSYSTEM_VHType" sap:label="System Value Help" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Zsystem"/>
+                </Key>
+                <Property Name="Zsystem" Type="Edm.String" Nullable="false" MaxLength="30" sap:display-format="UpperCase" sap:label="Система" sap:quickinfo="30 знаков"/>
+            </EntityType>
+            <ComplexType Name="ValidationFunctionResult">
+                <Property Name="IsValid" Type="Edm.Boolean" sap:label="Явл. действ."/>
+            </ComplexType>
+            <Association Name="assoc_80D6EC691E7FD0E33F3634A6CA56318D" sap:content-version="1">
+                <End Type="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" Multiplicity="1" Role="FromRole_assoc_80D6EC691E7FD0E33F3634A6CA56318D"/>
+                <End Type="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" Multiplicity="0..1" Role="ToRole_assoc_80D6EC691E7FD0E33F3634A6CA56318D"/>
+            </Association>
+            <Association Name="assoc_58D399A752C2A426BDEAF4624EABCA57" sap:content-version="1">
+                <End Type="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" Multiplicity="1" Role="FromRole_assoc_58D399A752C2A426BDEAF4624EABCA57"/>
+                <End Type="ZUG_C_GUIDE_HEADER_CDS.ZUG_I_CHANGED_BY_VHType" Multiplicity="0..1" Role="ToRole_assoc_58D399A752C2A426BDEAF4624EABCA57"/>
+            </Association>
+            <Association Name="assoc_F7F3D5A00EBBEC6E7316AEFCCFDEA3A3" sap:content-version="1">
+                <End Type="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" Multiplicity="1" Role="FromRole_assoc_F7F3D5A00EBBEC6E7316AEFCCFDEA3A3"/>
+                <End Type="ZUG_C_GUIDE_HEADER_CDS.ZUG_I_NAME_VHType" Multiplicity="0..1" Role="ToRole_assoc_F7F3D5A00EBBEC6E7316AEFCCFDEA3A3"/>
+            </Association>
+            <Association Name="assoc_38D9AF1E2191CAD813F9FD5220AE8530" sap:content-version="1">
+                <End Type="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" Multiplicity="1" Role="FromRole_assoc_38D9AF1E2191CAD813F9FD5220AE8530"/>
+                <End Type="ZUG_C_GUIDE_HEADER_CDS.ZUG_I_SUBZSYSTEM_VHType" Multiplicity="0..1" Role="ToRole_assoc_38D9AF1E2191CAD813F9FD5220AE8530"/>
+            </Association>
+            <Association Name="assoc_CD419B68F83F553F36A84961AEE8E6B1" sap:content-version="1">
+                <End Type="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" Multiplicity="1" Role="FromRole_assoc_CD419B68F83F553F36A84961AEE8E6B1"/>
+                <End Type="ZUG_C_GUIDE_HEADER_CDS.ZUG_I_ZSYSTEM_VHType" Multiplicity="0..1" Role="ToRole_assoc_CD419B68F83F553F36A84961AEE8E6B1"/>
+            </Association>
+            <Association Name="assoc_930E50B3BB1A81147B07F28BDCE88ADF" sap:content-version="1">
+                <End Type="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" Multiplicity="1" Role="FromRole_assoc_930E50B3BB1A81147B07F28BDCE88ADF"/>
+                <End Type="ZUG_C_GUIDE_HEADER_CDS.I_DraftAdministrativeDataType" Multiplicity="0..1" Role="ToRole_assoc_930E50B3BB1A81147B07F28BDCE88ADF"/>
+            </Association>
+            <EntityContainer Name="ZUG_C_GUIDE_HEADER_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="I_DraftAdministrativeData" EntityType="ZUG_C_GUIDE_HEADER_CDS.I_DraftAdministrativeDataType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZUG_C_GUIDE_HEADER" EntityType="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZUG_I_CHANGED_BY_VH" EntityType="ZUG_C_GUIDE_HEADER_CDS.ZUG_I_CHANGED_BY_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZUG_I_NAME_VH" EntityType="ZUG_C_GUIDE_HEADER_CDS.ZUG_I_NAME_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZUG_I_SUBZSYSTEM_VH" EntityType="ZUG_C_GUIDE_HEADER_CDS.ZUG_I_SUBZSYSTEM_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZUG_I_ZSYSTEM_VH" EntityType="ZUG_C_GUIDE_HEADER_CDS.ZUG_I_ZSYSTEM_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_930E50B3BB1A81147B07F28BDCE88ADF" Association="ZUG_C_GUIDE_HEADER_CDS.assoc_930E50B3BB1A81147B07F28BDCE88ADF" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZUG_C_GUIDE_HEADER" Role="FromRole_assoc_930E50B3BB1A81147B07F28BDCE88ADF"/>
+                    <End EntitySet="I_DraftAdministrativeData" Role="ToRole_assoc_930E50B3BB1A81147B07F28BDCE88ADF"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_80D6EC691E7FD0E33F3634A6CA56318D" Association="ZUG_C_GUIDE_HEADER_CDS.assoc_80D6EC691E7FD0E33F3634A6CA56318D" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZUG_C_GUIDE_HEADER" Role="FromRole_assoc_80D6EC691E7FD0E33F3634A6CA56318D"/>
+                    <End EntitySet="ZUG_C_GUIDE_HEADER" Role="ToRole_assoc_80D6EC691E7FD0E33F3634A6CA56318D"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_38D9AF1E2191CAD813F9FD5220AE8530" Association="ZUG_C_GUIDE_HEADER_CDS.assoc_38D9AF1E2191CAD813F9FD5220AE8530" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZUG_C_GUIDE_HEADER" Role="FromRole_assoc_38D9AF1E2191CAD813F9FD5220AE8530"/>
+                    <End EntitySet="ZUG_I_SUBZSYSTEM_VH" Role="ToRole_assoc_38D9AF1E2191CAD813F9FD5220AE8530"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_F7F3D5A00EBBEC6E7316AEFCCFDEA3A3" Association="ZUG_C_GUIDE_HEADER_CDS.assoc_F7F3D5A00EBBEC6E7316AEFCCFDEA3A3" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZUG_C_GUIDE_HEADER" Role="FromRole_assoc_F7F3D5A00EBBEC6E7316AEFCCFDEA3A3"/>
+                    <End EntitySet="ZUG_I_NAME_VH" Role="ToRole_assoc_F7F3D5A00EBBEC6E7316AEFCCFDEA3A3"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_58D399A752C2A426BDEAF4624EABCA57" Association="ZUG_C_GUIDE_HEADER_CDS.assoc_58D399A752C2A426BDEAF4624EABCA57" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZUG_C_GUIDE_HEADER" Role="FromRole_assoc_58D399A752C2A426BDEAF4624EABCA57"/>
+                    <End EntitySet="ZUG_I_CHANGED_BY_VH" Role="ToRole_assoc_58D399A752C2A426BDEAF4624EABCA57"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_CD419B68F83F553F36A84961AEE8E6B1" Association="ZUG_C_GUIDE_HEADER_CDS.assoc_CD419B68F83F553F36A84961AEE8E6B1" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZUG_C_GUIDE_HEADER" Role="FromRole_assoc_CD419B68F83F553F36A84961AEE8E6B1"/>
+                    <End EntitySet="ZUG_I_ZSYSTEM_VH" Role="ToRole_assoc_CD419B68F83F553F36A84961AEE8E6B1"/>
+                </AssociationSet>
+                <FunctionImport Name="ZUG_C_GUIDE_HEADERActivation" ReturnType="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" EntitySet="ZUG_C_GUIDE_HEADER" m:HttpMethod="POST" sap:action-for="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" sap:applicable-path="Activation_ac">
+                    <Parameter Name="uuid" Type="Edm.Guid" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In"/>
+                </FunctionImport>
+                <FunctionImport Name="ZUG_C_GUIDE_HEADEREdit" ReturnType="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" EntitySet="ZUG_C_GUIDE_HEADER" m:HttpMethod="POST" sap:action-for="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" sap:applicable-path="Edit_ac">
+                    <Parameter Name="uuid" Type="Edm.Guid" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In"/>
+                    <Parameter Name="PreserveChanges" Type="Edm.Boolean" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="ZUG_C_GUIDE_HEADERPreparation" ReturnType="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" EntitySet="ZUG_C_GUIDE_HEADER" m:HttpMethod="POST" sap:action-for="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" sap:applicable-path="Preparation_ac">
+                    <Parameter Name="uuid" Type="Edm.Guid" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="ZUG_C_GUIDE_HEADERValidation" ReturnType="ZUG_C_GUIDE_HEADER_CDS.ValidationFunctionResult" m:HttpMethod="GET" sap:action-for="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" sap:applicable-path="Validation_ac">
+                    <Parameter Name="uuid" Type="Edm.Guid" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+            </EntityContainer>
+            <Annotations Target="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADER_CDS_Entities/ZUG_C_GUIDE_HEADER" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.DraftRoot">
+                    <Record>
+                        <PropertyValue Property="ActivationAction" String="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADER_CDS_Entities/ZUG_C_GUIDE_HEADERActivation"/>
+                        <PropertyValue Property="EditAction" String="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADER_CDS_Entities/ZUG_C_GUIDE_HEADEREdit"/>
+                        <PropertyValue Property="PreparationAction" String="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADER_CDS_Entities/ZUG_C_GUIDE_HEADERPreparation"/>
+                        <PropertyValue Property="ValidationFunction" String="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADER_CDS_Entities/ZUG_C_GUIDE_HEADERValidation"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZUG_C_GUIDE_HEADER_CDS.ZUG_C_GUIDE_HEADERType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>uuid</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="http://SAPBPC-DEV.BELOIL.BY:80/sap/opu/odata/sap/ZUG_C_GUIDE_HEADER_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://SAPBPC-DEV.BELOIL.BY:80/sap/opu/odata/sap/ZUG_C_GUIDE_HEADER_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

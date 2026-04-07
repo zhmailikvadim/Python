@@ -1,0 +1,47 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You update your system to be compliant with Brazilian Instrução Normativa nº 2229, published on October 15, 2024, which changes the CNPJ format from numeric (NUMC) to character (CHAR) in eSocial events.<br/><br/>However, you get syntax and runtime errors, or the generation of unnecessary rectification events along the eSocial framework, related to eSocial BAdI implementations or calls.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">eSocial; CNPJ; Instrução Normativa 2229; BAdI; CL_HRPAYBR_INSC_NUM_NORMALIZER; NUMC; CHAR14; Event rectification</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong style="font-size: 14px;">Reason:</strong></p>
+<div class="longtext">
+<p>After the implementation of the relevant SAP Notes, all CNPJ fields had their types converted from NUMC to CHAR and this change affects BAdI interface method signatures.</p>
+<p>Therefore, you need to check every BAdI implementation and adjust them as described in the Solution section.</p>
+<p><strong>Prerequisites:</strong></p>
+<p>You have implemented SAP Note <a href="https://i7p.bss.net.sap/sap/support/notes/3700999" target="_blank">3700999</a> - eSocial - Alphanumeric CNPJ - Changes in standard events.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This SAP Note provides guidance on how to adapt your BAdI implementations to comply with <strong>Instrução Normativa nº 2229/2024</strong> and avoid unnecessary rectifications due to CNPJ format changes.</p>
+<p><strong>Recommended Actions</strong></p>
+<div class="longtext">
+<p>1. Review all your custom BAdI implementations related to eSocial events.<br/>2. Identify BAdIs that process CNPJ values.<br/>3. Be familiar with the standard method <em>CL_HRPAYBR_INSC_NUM_NORMALIZER=&gt;STANDARDIZE( iv_insc_num ) </em>if any BAdI changes are necessary. Check the attachment <strong>How_to_Format_INSC_NUM_to_SAP_Expected_Format.pdf</strong> for the implementation examples and the BAdIs that may be affected.<br/>4. Test your implementations to ensure proper CNPJ format conversion.</p>
+<p><strong>Log of changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong class="columnName">Version</strong></td>
+<td><strong class="columnName">Date</strong></td>
+<td><strong class="columnName">Description of the change</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>March 27, 2026</td>
+<td>Released for Customer</td>
+</tr>
+</tbody>
+</table></div>
+<div class="OutlineElement Ltr SCXW182381166 BCX0">
+<p class="Paragraph SCXW182381166 BCX0"><strong>Stay connected </strong></p>
+</div>
+<div class="OutlineElement Ltr SCXW182381166 BCX0">
+<div class="SCXW182381166 BCX0">
+<div class="ListContainerWrapper SCXW182381166 BCX0">
+<ul class="BulletListStyle1 SCXW182381166 BCX0">
+<li>To get an e-mail notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
+<li>To stay informed about legal changes, access the <a href="https://launchpad.support.sap.com/#/legalchangenotification" target="_blank">Announcement of Legal Changes</a>.</li>
+<li>For documentation about Payroll Brazil, access the <a href="https://blogs.sap.com/tags/517106488272734260515465412269325/" target="_blank">Community</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></div></div></div>

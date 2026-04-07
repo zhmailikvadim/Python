@@ -1,0 +1,56 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>String Function for "<span class="SNO_DNT" style="float: none;" translate="no"><strong><em>leftstr</em></strong></span>" is not returning expected outputs with ESX engine.</p>
+<p>Example Scenario:</p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">CREATE COLUMN TABLE TESTTAB1 (<strong>COL1 NVARCHAR</strong>(100));</span><br/><span class="SNO_DNT" style="float: none;" translate="no">INSERT INTO TESTTAB1 VALUES ('<strong>가나다라</strong>');</span></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">CREATE CALCULATION SCENARIO "TESTCALC" USING '[</span><br/><span class="SNO_DNT" style="float: none;" translate="no">{</span><br/><span class="SNO_DNT" style="float: none;" translate="no">           "__CalculationNode__":true,"name":"TESTTAB1","operation":{"__TableDSNodeData__":true,"source":{"__IndexName__":true,"schema":"SYSTEM","name":"TESTTAB1"},"dataSourceFlags":0},</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "attributeVec":[</span><span class="SNO_DNT" style="float: none;" translate="no">{"__Attribute__":true,"name":"COL1","role":1,"datatype":{"__DataType__":true,"type":83,"sqlType":37,"sqlLength":100},"attributeType":0}</span><span class="SNO_DNT" style="float: none;" translate="no">]</span><br/><span class="SNO_DNT" style="float: none;" translate="no">},</span><br/><span class="SNO_DNT" style="float: none;" translate="no">{</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "__CalculationNode__":true,"name":"TESTNODE",</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "inputVec":[{"__Input__":true,"name":"TESTTAB1","mappingVec":[{"__Mapping__":true,"type":1,"target":"COL1","source":"COL1","length":0}]}],</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "operation":{"__ProjectionOpNodeData__":true},</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "attributeVec":[{"__Attribute__":true,"name":"COL1","role":1,"datatype":{"__DataType__":true,"type":83,"sqlType":37,"sqlLength":100},"attributeType":0}],</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "filterObject":{"__Filter__":true,"type":0, expression":"<strong>leftstr(\"COL1\",4)=''가나다라''</strong>" ,</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "debugNodeDataInfo":{"__DebugNodeDataInfo__":true,"nodeName":"TESTNODE"}</span><br/><span class="SNO_DNT" style="float: none;" translate="no">},</span><br/><span class="SNO_DNT" style="float: none;" translate="no">{</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "__CalculationNode__":true,"name":"finalAggregation","isDefaultNode":true,</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "inputVec":[{"__Input__":true,"name":"TESTNODE","mappingVec":[{"__Mapping__":true,"type":1,"target":"CALC","source":"COL1","length":0},{"__Mapping__":true,"type":1,"target":"COL1","source":"COL1","length":0}]}],</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "operation":{"__AggregationOpNodeData__":true},</span><br/><span class="SNO_DNT" style="float: none;" translate="no">           "attributeVec":[{"__Attribute__":true,"name":"CALC","role":1,"datatype":{"__DataType__":true,"type":83,"sqlType":37,"sqlLength":100},"description":"COL1","attributeType":0},{"__Attribute__":true,"name":"COL1","role":2,"datatype":{"__DataType__":true,"type":66,"length":18,"sqlType":4},"description":"COL1","kfAggregationType":2,"attributeType":0},{"__Attribute__":true,"name":"row.count","role":2,"datatype":{"__DataType__":true,"type":66,"length":18},"isVisible":false,"kfAggregationType":2,"attributeType":4,"specialAttrType":4}],</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "debugNodeDataInfo":{"__DebugNodeDataInfo__":true,"nodeName":"Aggregation"}</span><br/><span class="SNO_DNT" style="float: none;" translate="no">},</span><br/><span class="SNO_DNT" style="float: none;" translate="no">{</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "__Variable__":true,"name":"$$language$$","typeMask":512,"usage":0,"isGlobal":true</span><br/><span class="SNO_DNT" style="float: none;" translate="no">},</span><br/><span class="SNO_DNT" style="float: none;" translate="no">{</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "__Variable__":true,"name":"$$client$$","typeMask":512,"usage":0,"isGlobal":true</span><br/><span class="SNO_DNT" style="float: none;" translate="no">}</span><br/><span class="SNO_DNT" style="float: none;" translate="no">]';</span></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">CREATE COLUMN VIEW TESTVIEW1 TYPE CALCULATION</span><br/><span class="SNO_DNT" style="float: none;" translate="no">WITH PARAMETERS (</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 'PARENTCALCINDEXSCHEMA'='SYSTEM',</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 'PARENTCALCINDEX'='TESTCALC',</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 'PARENTCALCNODE'='TESTNODE',</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ISMEMORYINDEX = 1</span><br/><span class="SNO_DNT" style="float: none;" translate="no">);</span></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">SELECT COL1 FROM TESTVIEW1 WITH HINT (NO_USE_HEX_PLAN, USE_ESX_PLAN, NO_CS_FILTER);</span></p>
+<p><em>-- <span class="SNO_DNT" style="float: none;" translate="no">가나다라</span> is returned from the execution, which is unexpected as the leftstr checks in byte. (And <span class="SNO_DNT" style="float: none;" translate="no">가나다라</span> is not 4 in byte)</em></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">SELECT COL1 FROM TESTVIEW1 WITH HINT (NO_USE_ESX_PLAN);</span></p>
+<p><em>-- Nothing is returned from the execution, which is expected as the leftstr checks in byte.<em> (And <span class="SNO_DNT" style="float: none;" translate="no">가나다라</span> is not 4 in byte)</em></em></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ESX, leftstr, expression, calculation view</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 350911</p>
+<p><strong>Reason:</strong></p>
+<p>Due to programming error in SAP HANA, the leftstr has not been correctly considered in ESX engine. While the leftstr function should check in bytes, it has checked in characters when running with ESX engine. Hence, even when situations where no rows should be expected, some rows may be returned unexpectedly if it's calculated by leftstr and executed by ESX engine.</p>
+<p>For more information, appropriate functions should be well chosen depending on your requests, and regarding functions, please find the information from <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/e8e6c8142e60469bb401de5fdb6f7c00/f5a9ca3718354a499a98ba61ae3da170.html?locale=en-US&amp;version=LATEST" target="_blank">String Functions</a>.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS00 - SPS08</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>There are <span class="SNO_DNT" style="float: none;" translate="no"><strong>leftstr</strong> </span>string functions used in expressions and calculations.</li>
+</ul>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">AND</span></p>
+<ul>
+<li><span style="font-size: 14px;">Data contains <span class="SNO_DNT" style="float: none;" translate="no"><strong>Unicode</strong> </span>strings.</span></li>
+</ul>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">AND</span></p>
+<ul>
+<li><span style="font-size: 14px;">The logic is executed by <span class="SNO_DNT" style="float: none;" translate="no"><strong>ESX</strong> </span>engine.</span></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>Possible workaround would be to apply <span class="SNO_DNT" style="float: none;" translate="no"><strong>NO_USE_ESX_PLAN</strong> </span>hint.</li>
+</ul>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">From the example scenario:</span></p>
+<p style="padding-left: 60px;"><span style="font-size: 14px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT COL1 FROM TESTVIEW1 WITH HINT (NO_USE_ESX_PLAN);</span> -- returns no rows when not running by ESX engine - which is expected in the scenario. </span></p>
+<p><strong> </strong></p></div></div></div></div>

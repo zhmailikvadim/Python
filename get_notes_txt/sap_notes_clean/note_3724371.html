@@ -1,0 +1,170 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">As previously mentioned in SAP notes <a href="https://i7p.bss.net.sap/sap/support/notes/0002739775" target="_blank">2739775</a>, <a href="https://i7p.bss.net.sap/sap/support/notes/0002957532" target="_blank">2957532</a>, the country-specific screens are not required for infotypes 0009 and 0011, for Polish personnel numbers.</p>
+<p>However, the HR Renewal settings for the infotypes 0009 and 0011 for Poland still select the country-specific screens.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Renewal IT0009, IT0011, V_T588MFPROPS, VC_T77PAOMDCF.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The HR-Renewal customizing settings are outdated and should be updated in the customizing tables.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>In the renewal settings of infotypes 0009 and 0011 for Poland, we are switching from country-specific screens to standard screens.</p>
+<p>1. The following records have been deleted:</p>
+<p>- from maintenance view V_T588UICONVCLAS:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Screen Structure </td>
+<td>IType</td>
+<td>Version</td>
+<td>Conversion Class</td>
+</tr>
+<tr>
+<td>HCMT_BSP_PA_PL_R0009</td>
+<td>0009</td>
+<td>46</td>
+<td>CL_HRPA_UI_CONVERT_0009_PL</td>
+</tr>
+<tr>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>0011</td>
+<td>46</td>
+<td>CL_HRPA_UI_CONVERT_0011_PL</td>
+</tr>
+</tbody>
+</table></div>
+<p> - from view cluster VC_T77PAOMDCF</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Obj. Type</td>
+<td>Config ID</td>
+<td>IT Version</td>
+</tr>
+<tr>
+<td>P</td>
+<td>IT0009</td>
+<td>46</td>
+</tr>
+</tbody>
+</table></div>
+<p>2. In the V_T588MFPROPS maintenance view, 1 record has been updated and 18 records have been deleted.</p>
+<p>Infotype: 0011</p>
+<p>Modified record:</p>
+<p>Unused flag has been set to X.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Version</td>
+<td>Structure</td>
+<td>Field name</td>
+<td>Unused</td>
+</tr>
+<tr>
+<td>46</td>
+<td>P0011</td>
+<td>BKREF</td>
+<td>X</td>
+</tr>
+</tbody>
+</table></div>
+<p>Deleted records:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Version</td>
+<td>Structure</td>
+<td>Field name</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>BEZEI</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>BKORT</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>BKPLZ</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>BKREF</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>IBAN01</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>IBAN02</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>IBAN03</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>IBAN04</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>IBAN05</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>IBAN06</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>IBAN07</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>IBAN08</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>IBAN09</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>PSKTO</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>STATE</td>
+</tr>
+<tr>
+<td>46</td>
+<td>HCMT_BSP_PA_PL_R0011</td>
+<td>SPRAS</td>
+</tr>
+<tr>
+<td>46</td>
+<td>P0011</td>
+<td>BKORT</td>
+</tr>
+<tr>
+<td>46</td>
+<td>P0011</td>
+<td>BKPLZ</td>
+</tr>
+</tbody>
+</table></div>
+<p>The correction is available via Support Packages listed below.</p>
+<p>If you prefer to apply the change manually us transactions SM30 and SM34 to delete or modify the listed records via maintenance views.</p></div></div></div></div>

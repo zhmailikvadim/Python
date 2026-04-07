@@ -1,0 +1,57 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>When attempting to launch a standard Fiori application (e.g., Manage Batches - <strong>F2462</strong>) in a Quality or Production environment, the user encounters the generic error: "Cannot Load Tile."</li><li>A Fiori User works on Dev (EX: TestUser), this same TestUser fails in Quality with the same roles, why?</li></ul>
+<p><strong>Initial troubleshooting by the Support Team or Basis Admin reveals the following contradictions:</strong></p>
+<ul><li>Transaction PFCG for this user TestUser is exactly the same between DEV and QA</li><li>
+<p>Transaction /UI2/FLIA (Intent Analysis): All traffic lights are Green. Semantic Object and Action are correctly mapped.</p>
+</li><li>
+<p>Transaction /UI2/FLC (Fiori Launchpad Check): No missing authorizations or broken Target Mappings are identified for the user.</p>
+</li><li>
+<p>Transaction SE80: The BSP Repository (e.g., <code>LOBM_BATCHS1</code>) is physically present in the system.</p>
+</li><li>
+<p>Browser Console: Shows a <code>404 Not Found</code> or <code>Failed to load UI5 component</code> error when clicking the tile.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>S/4HANA 2023 and others</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Cause:  All the reports shows "Green and Good".  In fact, the reports are providing false positives or false good reports thereby causing a metadata desynchronization within the SAPUI5 Application Index.
+<ul><li>This type of complication wherein all the reports are good made an issue like this non-trivial as there are zero error to look at except what is shown on the console log files 404 not found </li><li>Even when code is transported and roles are assigned, the Fiori Launchpad's "discovery" layer may fail to register the link between the UI5 Component ID (e.g., <code>ui.s2p.lo.bm.objectpage.batch</code>) and the Technical BSP Name (e.g., <code>LOBM_BATCHS1</code>). This frequently occurs after system upgrades or complex transport imports where the automatic post-import indexing fails silently.</li></ul>
+</li></ul>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h4 data-toc-skip="">Step 1: Identify the Correct Technical Name</h4>
+<p>Do not rely on the Component ID or the Title of the app for indexing.</p>
+<ol><li>
+<p>Access the <a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/home" rel="noopener noreferrer nofollow" target="_blank">SAP Fiori Apps Reference Library</a>.</p>
+</li><li>
+<p>Search for the App ID (e.g., F2462).</p>
+</li><li>
+<p>Navigate to the Implementation Information tab &gt; Configuration section.</p>
+</li><li>
+<p>Locate the field: <strong>SAPUI5 Application</strong>.</p>
+<ul><li>
+<p><em>Example:</em> For Manage Batches, the Technical Name is <code>LOBM_BATCHS1</code>.</p>
+</li></ul>
+</li></ol>
+<h4 data-toc-skip="">Step 2: Verify Index Visibility</h4>
+<ol><li>
+<p>Execute Transaction SE38 and run report <code>/UI5/APP_INDEX_CALCULATE</code>.</p>
+</li><li>
+<p>Navigate to the tab: Single SAPUI5 Repository Only.</p>
+</li><li>
+<p>Click the F4 (Search Help) on the "SAPUI5 Repository" field.</p>
+</li><li>
+<p>Enter the Technical Name identified in Step 1 (e.g., <code>LOBM_BATCHS1</code>).</p>
+</li><li>
+<p>If the repository does not appear in the list, the system index is confirmed as broken/outdated.</p>
+</li></ol>
+<h4 data-toc-skip="">Step 3: Execute Manual Re-Indexing</h4>
+<ol><li>
+<p>In report <code>/UI5/APP_INDEX_CALCULATE</code>, manually type the Technical Name into the SAPUI5 Repository field.</p>
+</li><li>
+<p>Ensure the "Force Re-Indexing" or "Full Calculation" options are considered if a simple run fails.</p>
+</li><li>
+<p>Execute (F8).</p>
+</li><li>
+<p>Verify the log output displays: <em>"The corresponding SAPUI5 application index entry was updated."</em></p>
+</li></ol>
+<h4 data-toc-skip="">Step 4: Client-Side Validation</h4>
+<ol><li>
+<p>The user must clear the browser cache or use a fresh private/incognito session (or refresh the browser).</p>
+</li><li>
+<p>Launch the Fiori Launchpad and test the tile.</p>
+</li><li>
+<p>The application should now initialize correctly as the Launchpad can now resolve the path to the physical BSP repository.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Fiori App F2462, LOBM_BATCHS1, Cannot Load Tile, /UI5/APP_INDEX_CALCULATE, ui.s2p.lo.bm.objectpage.batch, Fiori Launchpad error 404, SUI Framework desync, App Indexing S/4HANA 2023, Fiori False Positives</p></div></div></div></div>

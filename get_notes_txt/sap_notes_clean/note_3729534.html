@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><em>When the amount of disposition routings on a site is more than maxRowCount option value calling updateNcCode PAPI can lead to "Routing "...", type "...", version "..." does not exist (Message 14977)" error message in response. </em><em>This happens by the reason that only <em>maxRowCount rows are retrieved during disposition routings validation process.</em></em></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>NcCodeConfigurationService, <em>maxRowCount</em></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Step to reproduce:</strong></p>
+<p>1. Create the amount of Special routings more than maxRowCount option value. (nwa-&gt; Java System Properties -&gt; Additional VM Parameters -&gt; -DmaxRowCount parameter)</p>
+<p>2. Create an NC Code.</p>
+<p>3. Call updateNcCode PAPI with created NC Code and some disposition routers.</p>
+<p><strong>Expected result</strong>: The NC Code is updated with disposition routers from the request.</p>
+<p><strong>Actual result:</strong> Message "Routing "...", type "...", version "..." does not exist (Message 14977)" is received in response.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The solution is provided in a form of a code correction. Disposition routings validation logic for updateNcCode PAPI method was rewritten to retrieve and check only routers from PAPI request, whereas previously all disposition routers from a site were extracted for the validation process.</p>
+<p><strong>Impact</strong></p>
+<p>The code change implemented to address the symptom above is isolated to NcCodeConfigurationService service and updateNcCode PAPI method.</p></div></div></div></div>

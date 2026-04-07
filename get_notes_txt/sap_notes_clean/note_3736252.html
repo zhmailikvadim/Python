@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Delete "Integration with SAP Business Data Cloud" Formation fails; synchronization shows errors and the operation returns :</p>
+<div id="__data914">
+<div id="registeredSystemsFormationStatusPopover--FormationStatusPopoverHeader">
+<p>Errors occurred while synchronizing. Choose Resynchronize to restart the synchronization process. If the problem persists, report a case in the  component and provide the formation ID "" together with the following technical details:</p>
+</div>
+</div>
+<div id="__data915">
+<div id="registeredSystemsFormationStatusPopover--FormationStatusPopoverList">
+<div id="registeredSystemsFormationStatusPopover--FormationStatusPopoverList-before" role="none"></div>
+<ul style="list-style-type: none;"><li>
+<div id="__item151-__clone385-content">
+<div id="__vbox148-__clone385">
+<div id="__data916">
+<div id="__text227-__clone385">• Synchronization between SAP Datasphere System xxxx and SAP Business Data Cloud System xxxx has failed.</div>
+</div>
+<div id="__data917">
+<div id="__text228-__clone385">– SAP Business Data Cloud System xxxx returned a technical error for assignment with ID xxxx :</div>
+</div>
+<div id="__data918"><span id="__text229-__clone385"><span id="__text229-__clone385-inner">"Operation: unassign has failed. Receiver Tenant State: DELETING, Formation Tenant State: DELETING, Application Namespace: sap.bdc-cockpit. Error: {\"code\":\"99999\",\"message\":\"An error has occurred\",\"guid\":\"xxxx \",\"module\":\"catalog\",\"causes\":[{\"code\":\"99999\",\"module\":\"Error\",\"message\":\"<strong>DSP tenant xxxx  is in migration process with status: Migration Failed</strong>\"}],\"statusCode\":<strong>500</strong>}"<br/><br/></span></span></div>
+</div>
+</div>
+</li><li>
+<div id="__item151-__clone386-content">
+<div id="__vbox148-__clone386">
+<div id="__data919">
+<div id="__text227-__clone386">• Synchronization between SAP Business Data Cloud System xxxx and SAP Datasphere System xxxx  has failed.</div>
+</div>
+<div id="__data920">
+<div id="__text228-__clone386">– SAP Datasphere System xxxx  returned a technical error for assignment with ID xxxx :</div>
+</div>
+<div id="__data921"><span id="__text229-__clone386"><span id="__text229-__clone386-inner">"Operation: unassign has failed. Receiver Tenant State: DELETING, Formation Tenant State: DELETING, Application Namespace: sap.datasphere. Error: {\"code\":\"99999\",\"message\":\"An error has occurred\",\"guid\":\"xxxx\",\"module\":\"catalog\",\"causes\":[{\"code\":\"99999\",\"module\":\"Error\",\"message\":\"<strong>DSP tenant xxxx  is in migration process with status: Migration Failed</strong>\"}],\"statusCode\":<strong>500</strong>}"</span></span></div>
+</div>
+</div>
+</li></ul>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Business Data Cloud<br/>SAP Datasphere</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>SAP4ME: Open the Customer Landscape and go to the Formations area.</li><li>Attempt to exclude systems from a formation of type “Integration with SAP Business Data Cloud”.</li><li>Attempt to delete the formation.</li><li>Observe that the actions fail and synchronization errors</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>A catalog migration for the SAP Datasphere catalog was initiated when the Datasphere system was added to the formation and remained pending or failed without being confirmed. The tenant stayed in a migration state (“Migration Failed”), which blocks unassign operations and prevents deleting the formation.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Log in to the relevant SAP Datasphere tenant with a Data Catalog Administrator role.</li><li>Confirm and complete the catalog migration as described in the <a href="https://help.sap.com/docs/SAP_DATASPHERE/aca3ccb4b2f84eb8b6154e8fd2812c0e/b26705d20f4f4ebba77175276127b48f.html" rel="noopener noreferrer nofollow" target="_blank">Migrating Catalog Content | SAP Help Portal</a> .</li><li>After migration completion, return to the Customer Landscape &gt; Formations.</li><li>Exclude the systems from the formation.</li><li>Delete the formation.</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://help.sap.com/docs/business-data-cloud/administering-sap-business-data-cloud/creating-sap-business-data-cloud-formations" rel="noopener noreferrer nofollow" target="_blank">Creating SAP Business Data Cloud Formations | SAP Help Portal</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>formation deletion error, integration with SAP business data cloud, unassign has failed, statuscode 500, migration failed, catalog migration, datasphere catalog, formation synchronization failed, exclude system, delete formation, tenant state deleting, receiver tenant state deleting, unified catalog, cockpit formation, cannot remove formation</p></div></div></div></div>

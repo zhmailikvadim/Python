@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<div>When creating a Fiori Elements application (e.g., List Report) using the project wizard in SAP Business Application Studio (BAS), OData V4 services are not appearing in the service dropdown list.</div>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>- S/4HANA FPS 2023 On-Premise system</div>
+<div>
+<div>- Business Application Studio</div>
+<div> </div>
+</div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<div>The OData V4 services are not visible in BAS because the `/IWFND/CONFIG` service was not published in the target client.</div>
+<br/>
+<div>In multi-client SAP landscapes, publishing a service in one client (e.g., client 100) does not automatically make it available in other clients (e.g., client 250). Each client requires explicit service publication.</div>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Publish the `/IWFND/CONFIG` service in client 250 as well. After publishing the service in the target client (ED3-250), the OData V4 services became visible in BAS.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><div>S/4HANA, On-Premise system ,Business Application Studio, FPS, /IWFND/CONFIG, ED3-250, ODATA, V4</div></div></div></div></div>

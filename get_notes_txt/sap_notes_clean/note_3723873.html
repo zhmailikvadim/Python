@@ -1,0 +1,55 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You want to implement <strong>Electronic Reporting for France via an Approved Platform (Invoice and Payment List)</strong>.</p>
+<p>This SAP Note delivers the BC sets that enable you to configure the following customizing:</p>
+<ol>
+<li>Fiscal Year Variant <strong>FR</strong> comprises a 10-day period for reporting Invoices under the normal monthly VAT scheme</li>
+<li>Report Category IDs: <strong>FR_INVOICE_LIST and FR_PAYMENT_LIST</strong> for Report Entity <strong>FR_RPG_ENT</strong></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">France e-reporting, France eReporting, Invoice Reporting, Payment Reporting, B2BI, B2C, e-Reporting, eReporting, electronic report, electronic reporting, Statutory Reporting, Invoice List, Payment List, SRF, Document and Reporting Compliance, Document Compliance, Approved Platform, PA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason: </strong></p>
+<p>This SAP Note is only relevant for France.</p>
+<p><strong>Prerequisite: </strong></p>
+<p>For a complete list of all corrections, please refer to the SAP Note:</p>
+<p><a href="https://me.sap.com/notes/3713986" target="_blank">3713986 - Electronic Reporting for France via Approved Platform: Implementation Overview</a>.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Versioning</strong></p>
+<div class="table-responsive">
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td valign="top" width="208">
+<p><strong> Version</strong></p>
+</td>
+<td valign="top" width="208">
+<p><strong> Date</strong></p>
+</td>
+<td valign="top" width="208">
+<p><strong> Reason</strong></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="208">  01</td>
+<td valign="top" width="208"> March 06, 2026</td>
+<td valign="top" width="208">
+<p> Release for all Customers</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Download the BC sets attached to this SAP Note (corresponding to your software component).</p>
+<ol>
+<li>Upload the BC sets to your development system using transaction SCPR3.</li>
+<li>Use the function <strong>Compare with Customizing Tables (Ctrl + F9)</strong> in transaction SCPR20 to ensure that no conflict exists. This is important especially for BC set <strong>BC_FIN_LOC_SRF_FYV_FR_EREP.bcs</strong> as it overwrites the Fiscal Year Variant <strong>FR</strong>, if it exists in your System.</li>
+<li>After uploading and validating the BC sets, activate them using transaction SCPR20 and set the <strong>Expert Mode</strong> flag during activation. If you encounter any errors, try activating the BC sets for a second time.</li>
+</ol>
+<p>Activate the BC Sets in the sequence as shown below.</p>
+<ul>
+<li>Software component <strong>S4_CORE</strong></li>
+<ul>
+<li>BCS_FIN_LOC_SRF_FYV_FR_EREP.bcs</li>
+<li>HBCS_FIN_LOC_SRF_FR_RPG_ENT_EREP.bcs</li>
+</ul>
+</ul>
+</div></div></div></div></div>

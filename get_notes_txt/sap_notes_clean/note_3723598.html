@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">Updates of data in the SAP S/4HANA Cloud Private Edition system are no longer reflected in SAP Business Data Cloud.</p>
+<p id="__html0">An upcoming or past expiry of a certificate is visible for the PSE created for SAP Business Data Cloud in transaction Trust Manager / STRUST in the SAP S/4HANA Cloud Private Edition system.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">certificate, expired, renewal, replication</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The certificate used for the integration between SAP Business Data Cloud and SAP S/4HANA Cloud Private Edition has expired.</p>
+<p>To find out if or when a certificate expiry happened, you can check the corresponding PSE in transaction Trust Manager / STRUST in the SAP S/4HANA Cloud Private Edition system:</p>
+<ul>
+<li>Navigate to transaction STRUST.</li>
+<li>In the left-hand list, identify the PSE that you have used to initially configure connectivity to SAP Business Data Cloud. Double-click this PSE.</li>
+<li>In the "Own Certificate" sectiom, double-click the value of the "Subject" field.</li>
+<li>In the "Certificate List" in the middle right-hand side of the screen, check the "Valid From" / "to" fields. The "to" field shows the expiry date of the PSE which is when connectivity between SAP S/4HANA Cloud Private Edition system and SAP Business Data Cloud will fail.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>While there is an enhancement of SAP Business Data Cloud being developed, there is a workaround available that you can use in the interim to prevent certificate expiry or update an expired certificate:</p>
+<ul>
+<li>Create a new certificate signing request from the PSE in transaction Trust Manager / STRUST.</li>
+<li>Create an temporary additional formation of type "Integration with SAP Business Data Cloud" next to the formation you have set up for SAP Business Data Cloud. There is no need to modify the existing formation.</li>
+<li>In the additional formation, include the SAP Business Data Cloud tenant as well as the SAP S/4HANA Cloud Private Edition system in which the certificate is about to expire/has expired.</li>
+<li>During the inclusion process, you will be prompted for the integration values that you were prompted for when setting up the original formation initially (see https://help.sap.com/docs/business-data-cloud/administering-sap-business-data-cloud/adding-sap-4hana-cloud-private-edition-to-formation-of-type-integration-with-sap-business-data-cloud).</li>
+<li>Enter the same values as during the initial setup with the exception of using the new certificate signing request.</li>
+<li>As a result, in this temporary additional formation, you will be able to retrieve the client certificate response as before. You will need to import this client certificate response in STRUST (see https://help.sap.com/docs/business-data-cloud/administering-sap-business-data-cloud/upload-client-certificate-to-sap-s-4hana-cloud-private-edition for the process steps)</li>
+</ul>
+<p><span style="font-size: 14px;">We will update this note once the enhancement has been released and this workaround is no longer required.</span></p></div></div></div></div>

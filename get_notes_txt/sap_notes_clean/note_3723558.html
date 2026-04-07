@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3723560&amp;TargetLanguage=EN&amp;Component=PY-AT&amp;SourceLanguage=DE&amp;Priority=02&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3723560/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3723560/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>The programs</p>
+<ul>
+<li><em>Reserves for Remaining Leave Days</em> (RPCURLA1)</li>
+<li><em>Reserves for anniversary bonus payments</em> (RPCJUBA1)</li>
+<li><em>Fill Reserve Basis from Payroll Simulation</em> (RPISMRA0)</li>
+</ul>
+<p>take ER SI contributions into account as ancillary payroll costs for reserves, but the new bonus for the housing support contribution in Vienna (Z14) is missing.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>0.25%, employer</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Legal change relevant for accruals.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>The correction is provided by HR Support Package (via CLC if necessary). You can implement an advance correction by implementing the correction instructions using SNOTE.</p>
+<p>Version from <strong>3/6/2026</strong>: Released for all customers.</p>
+<p><strong>Details</strong></p>
+<p>This is a correction of the method get_dg_prznt_za_for_provsion from the class cl_hrpayat_t5a1i.<br/>This is used for the calculation of the employer SI contributions by the default implementation of the BAdI method IF_EX_HRPAYAT_SV_PRZNT_RST~GET_DG_PRZNT of the BAdI HRPAYAT_SV_PRZNT_RST.<br/><br/>If you use a different implementation due to your own specific requirements, check it. <br/><br/><br/></p></div></div></div></div></div>

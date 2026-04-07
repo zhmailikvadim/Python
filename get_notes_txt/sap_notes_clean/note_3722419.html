@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">After you upgrade to SAP Intelligent Clinical Supply Management (ISLS) 400 SP02, the SAP Fiori app "Manage Outbound Deliveries" (F0867A) fails to load. The system returns an HTTP 500 internal server error when you attempt to access the OData service metadata.</p>
+<p>The application now calls the OData service `/CTCO/LE_SHP_ODLIST_SRV` instead of the standard service `LE_SHP_OD_LIST_SRV` that was previously used. The metadata call doesn't work, even after you activate the new service in transaction `/IWFND/MAINT_SERVICE`.</p>
+<p>As a result, you can't access the Manage Outbound Deliveries application for both clinical and non-clinical supply chain processes.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ISLS, ISLSUI, Distribution, Intelligent Clinical Supply Management, /CTCO/LE_SHP_ODLIST_SRV, /CTCO/MD_CUSTOMER_MASTER_SRV_01</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> You use SAP Intelligent Clinical Supply Management.</p>
+<p>The metadata cache of the redefined OData service isn't synchronized with the standard service after system updates.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Post-Installation ISLS 400 SP02</strong></p>
+<p>1. Cleanup the metadata cache of both standard service and redefined service (note 2644890) for Manage Outbound Deliveries:</p>
+<ul>
+<li>/sap/opu/odata/CTCO/LE_SHP_ODLIST_SRV</li>
+<li>/sap/opu/odata/sap/LE_SHP_OD_LIST_SRV</li>
+</ul>
+<p>2. Reload metadata cache of the new OData service:</p>
+<ul>
+<li>/sap/opu/odata/CTCO/LE_SHP_ODLIST_SRV/$metadata</li>
+</ul>
+<p><strong>Post-Installation ISLS 500 SP00</strong></p>
+<p>1. Cleanup the metadata cache of both standard service and redefined service (note 2644890) for Manage Customer Master Data:</p>
+<ul>
+<li>
+<p>/sap/opu/odata/CTCO/MD_CUSTOMER_MASTER_SRV_01</p>
+</li>
+<li>/sap/opu/odata/sap/MD_CUSTOMER_MASTER_SRV_01</li>
+</ul>
+<p>2. Reload metadata cache of the new OData service:</p>
+<ul>
+<li>/sap/opu/odata/CTCO/MD_CUSTOMER_MASTER_SRV_01/$metadata</li>
+</ul>
+<p>Repeat the cleanup and reload of the metadata cache if the issue occurs again for the OData services mentioned above.</p></div></div></div></div>

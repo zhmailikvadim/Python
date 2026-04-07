@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>Outstanding quantities are visible in SAP Ariba Planning Collaboration even when delivery dates are in the past.</p>
+</li><li>
+<p>Open quantities do not reduce unless Goods Receipt (GR) is posted.</p>
+</li><li>
+<p>Users expect outstanding quantities to be filtered or calculated based on a date range.</p>
+</li><li>
+<p>Whether Days of Supply (DOS) impacts outstanding quantities.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>
+<p>SAP S/4HANA / SAP ECC</p>
+</li><li>
+<p>SAP Ariba Planning Collaboration</p>
+</li><li>
+<p>SAP Cloud Integration Gateway (CIG)</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>
+<p>Outstanding quantity in SAP is not date-dependent.</p>
+</li><li>
+<p>The system calculates open quantities strictly based on schedule line data and Goods Receipt postings.</p>
+</li><li>
+<p>SAP Ariba does not perform independent calculations; it consumes data from SAP.</p>
+</li><li>
+<p>Days of Supply (DOS) is a separate planning metric and is not linked to outstanding quantity logic.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Outstanding quantity is calculated at the purchase order schedule line level as follows:</p>
+<pre>Outstanding Quantity = Schedule Line Quantity – Goods Receipt (GR) Quantity</pre>
+<ul><li>
+<p>Each schedule line is evaluated individually</p>
+</li><li>
+<p>Delivery date (past, present, or future) has no impact</p>
+</li><li>
+<p>Quantity remains open until fully received</p>
+</li></ul>
+<pre>Days of Supply (DOS) = Available Supply ÷ Average Daily Demand</pre><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://www.relevant-link-in.case.com" rel="noopener noreferrer nofollow" target="_blank">Relevant Link for Additional Information</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Outstanding Quantity, Goods Receipt, Schedule Line, SAP Ariba, Planning Collaboration, CIG, Days of Supply, DOS, Purchase Order</p></div></div></div></div>

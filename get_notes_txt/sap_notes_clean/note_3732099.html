@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In backoffice, the "Switch Search Mode" button overlaps with the "Copy Link" button after disabling auto-search.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>When the "advanced search" widget loads, it misses the relevant socket event sent by the "Collapsible Container", resulting in certain CSS classes not being applied correctly.</p>
+<p><strong>Steps to Reproduce</strong></p>
+<ol start="1">
+<li>To disable auto-search, add connection-operator="AND" disable-auto-search="true" to the following configurations:<br/>component="Csticket", type="advanced-search";<br/>component="Order", type="advanced-search"</li>
+<li>Open Backoffice, Navigate to Customer Support Cockpit</li>
+<li>Go to Orders</li>
+<li>"Switch Search Mode" button will be overlapping with the "Copy Link” button</li>
+<li>Click any button in the search area (e.g. "Lock Section")</li>
+<li>The issue is resolved after the interaction</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Adjust the loading logic of "advanced search" widget to retrieve the button state directly from the parent widget, instead of relying on socket events. This ensures that the required CSS classes are correctly applied .</p>
+<p>The fix will be available in the following patches:</p>
+<p>2211.51</p>
+<p>2211-jdk21.10</p></div></div></div></div>

@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""><span>When migrating a company database from a Microsoft SQL Server to an SAP HANA Server using the migration wizard, test No. </span><span>15 completes with a false positive error when the </span><span>company uses a continuous inventory system (premigration test No. 15 checks for </span><em>Incorrect Price</em><span> in the OINM table, in non-continuous stock; for more information, see SAP Note </span><a href="/notes/1588126" target="_blank">1588126</a><span>). The migration process of that particular company database cannot continue.</span></p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<p id="__html0"><strong>Prerequisite:</strong></p>
+<p>You are using SAP Business One, version for SAP HANA.</p>
+<p><strong>Scenario:</strong></p>
+<div class="longtext"><ol>
+<li>Start the migration wizard.</li>
+<li>Select <em>Test Only</em> and the source <em>MSSQL</em>.</li>
+<li>Select an MSSQL company database which uses a continuous inventory system.</li>
+<li>Run the pre-migration tests.</li>
+</ol></div>
+<p><strong>Expected behavior:</strong></p>
+<p>Pre-migration test No. 15 does not detect any false positive errors. The migration process can continue.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>Pre-migration test No. 15 detects false positive errors detecting transactions created in versions higher than 8.8x. The migration process cannot continue.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""><span>SAP intends to provide a patch or patches to solve the problem described. The section </span><strong>References </strong><span>below will list the relevant patches once they become available, and the </span><strong>Related</strong><span> </span><strong>Info</strong><span> content of relevant patches available in the SAP Support Portal will show this SAP Note. Be aware that these references can only be set at patch release date. SAP delivers patches only for selected releases at its own discretion, based on the business impact and the complexity of the implementation.</span></p>
+<p><strong>Workaround:</strong></p>
+<p>Use the migration wizard from SAP Business One x.x FPxxxx, version for SAP HANA, to migrate your company database to the SAP HANA server. Then, use the upgrade wizard from SAP Business One <span>x.x FPxxyy</span>, version for SAP HANA to upgrade your company database.</p>
+<p>You may contact SAP Support, which can assist in migrating your company database directly with SAP Business One <span>x.x FPxxyy</span>, version for SAP HANA.</p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p id=""><span>Migrate; pre-check; stock; non-continuous; pre-migration</span></p></div></div></div></div>

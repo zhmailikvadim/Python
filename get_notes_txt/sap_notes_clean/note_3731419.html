@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When you send a INVOIC message (business message 31002) for Grid Usage Billing to a receiver in Great Britain (GB), a non-EU country, the system raises error message /US4G/PROC_BILLING 030 "VAT Code of Receiver () is invalid in process" in application log.</p>
+<p>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">GUB, INVOIC, 31002, /US4G/PROC_BILLING 030, REDISND1, /US4G/CL_UBD_INVDOC_UTIL, FILL_RECEIVER_VAT_NUMBER, /US4G/IF_CONSTANTS_BILLING, Great Britain, non-EU Country, VAT Code</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error. Great Britain was not considered as a non-EU country.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system doesn't raise error message /US4G/PROC_BILLING 030 when you send a INVOIC message for Grid Usage Billing to a receiver in Great Britain.<br/>You can verify the fix by sending a GUB INVOIC message to a receiver in Great Britain and checking that the VAT Code of Receiver is filled in the INVOIC UBD data.</p></div></div></div></div>

@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Role /UIMC/ALL is a template role that provides all authorizations for centralized configuration for SAP GRC UIDP Masking, this role will be delivered in SCV SAPGRC 100 SP01.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAPGRC 100, SAP GRC UIDP Masking for S/4HANA, Role for centralized masking configuration</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Role is not delivered in SAPGRC 100 SP00, this note is applicable only for SAPGRC 100 SP00</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div>
+<p>This note does not include automatic correction instructions. The steps to create the required role are outlined below:</p>
+<ol>
+<li>
+<p><strong>Create the role</strong> <code>/UIMC/ALL</code> using transaction <strong>PFCG</strong>.</p>
+</li>
+<li>
+<p><strong>Maintain the following details</strong> in role <code>/UIMC/ALL</code>:</p>
+<ul>
+<li>
+<p><strong>Description:</strong> Master Role with all authorizations for GRC UI data protection masking.</p>
+</li>
+<li>
+<p><strong>Authorization Objects:</strong></p>
+<ul>
+<li>Add authorization object <strong>/UIMC/CONF</strong> and set the <strong>ACTVT</strong> field to <em>Full authorization</em>.</li>
+<li>Add authorization object <strong>S_TABU_DIS</strong>, set <strong>DICBERCLS</strong> to <em>/UIMC/UIM</em>, and set <strong>ACTVT</strong> to <em>Full authorization</em>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Menu:</strong><br/>Add the following transactions to the role:<br/><code>/UIMC/MIGRATION</code>, <code>/UIMC/POLICY_BUILDER</code>, <code>/UIMC/SYNC</code>, and <code>/UIMC/UPD_VALUEHELPS</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Save and generate</strong> the role.</p>
+</li>
+</ol></div></div></div></div></div>

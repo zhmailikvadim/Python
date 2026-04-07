@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the SAP Fiori app "Manage Sales Orders - Version 2", using the "Propose Items" function causes an ASSERTION_FAILED dump in program CL_SD_SLSDOC_BEHAVIOR=========CP.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>F3893, FILL_ENTITY_KEY_FROM_SEMKEY, FILL_FAILED_AND_REPORTED, CL_SD_SDOC_BEHAVIOR_UTIL=&gt;FILL_FAILED_AND_REPORTED, RFC Error: The ASSERT condition was violated, A Remote Function Call (RFC) to backend system terminated with a system failure exception, /IWBEP/CM_V4H_RUN016.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Via the "Propose Items" function in the SAP Fiori app "Manage Sales Orders - Version 2" you can receive product and quantity proposals to ensure a faster selection of products. However, for the functionality to work correctly, the product proposal data must be consistent with the product master data.</p>
+<p>If the product proposal data is inconsistent with the product master data, the system must abort the proposal process. To avoid creating an inconsistent sales order, the abort is reported as an ASSERTION_FAILED dump.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Correct the product proposal data to resolve the ASSERTION_FAILED dump. In particular, ensure that the data used in the product proposal is valid for creating sales order items.</p>
+<p>Possible causes of invalid data include:</p>
+<ul>
+<li>The unit of measure used in the product proposal is not valid for the product.</li>
+<li>The unit of measure used in the product proposal is not valid as a sales unit for the product (for example, the material master has the "Variable Sales Unit Not Allowed" flag set, which allows only one specific sales unit).</li>
+</ul>
+<p>For information on where and how product proposal data is determined and how it can be updated, see the <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/7b24a64d9d0941bda1afa753263d9e39/111db853dcfcb44ce10000000a174cb4.html?locale=en-US&amp;state=PRODUCTION&amp;version=LATEST" target="_blank">Dynamic Product Proposal documentation</a>.</p></div></div></div></div>

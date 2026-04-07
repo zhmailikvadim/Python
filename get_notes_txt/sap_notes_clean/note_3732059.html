@@ -1,0 +1,57 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Program GRCAUD_ACTION_REMINDER does not send reminder emails when the reminder configuration uses a day range (for example, 30–60 days).</li><li>Reminders are sent when a single day value is configured.</li><li>No error message is displayed.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>GRC Audit Management 1.6</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Configure action plan reminder settings using a range of days (for example, 30 to 60 days before the deadline).</li><li>Run or schedule program GRCAUD_ACTION_REMINDER.</li><li>Observe that no reminder emails are sent for action plans with deadlines within the configured range.</li><li>Change the configuration to a single day value and run the program again.</li><li>Observe that reminder emails are sent as expected.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Range values in the reminder configuration are not supported by design for program GRCAUD_ACTION_REMINDER.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Replace any configured day ranges with multiple discrete day values (for example: 30, 7, 1).</li><li>Save the configuration.</li><li>Run or schedule program GRCAUD_ACTION_REMINDER according to the required notification cycle.</li><li>Verify that reminder emails are initiated when action plans approach their deadlines on the specified discrete days.<br/><br/>
+<p>Here is a clean, professional solution write-up based on your notes and the SAP screen:</p>
+<hr/>
+<h3 data-toc-skip="">Solution: Configure Action Plan Reminder Notifications</h3>
+<p>To ensure accurate and timely reminder notifications for action plans, follow the steps below:</p>
+<p>1. Configure Discrete Reminder Days</p>
+<ul><li>
+<p>Navigate to Set Action Plan Reminder in SAP Audit Management.</p>
+</li><li>
+<p>Instead of using day ranges, maintain multiple discrete day values using <em>Multiple Selection</em>.</p>
+</li><li>
+<p>Example values: 30, 7, 1 days before deadline (and optionally overdue days like 5, 10, 30).</p>
+</li></ul>
+<p>2. Save Configuration</p>
+<ul><li>
+<p>Enter the required values in:</p>
+<ul><li>
+<p><em>Remaining Days</em> (before deadline)</p>
+</li><li>
+<p><em>Overdue Days</em> (after deadline)</p>
+</li></ul>
+</li><li>
+<p>Save the configuration as a variant via:<br/><code>Goto → Variants → Save as Variant</code></p>
+</li></ul>
+<p>3. Schedule Reminder Job</p>
+<ul><li>
+<p>Go to transaction SM36.</p>
+</li><li>
+<p>Schedule background job for program:<br/>GRCAUD_ACTION_REMINDER</p>
+</li><li>
+<p>Assign the saved variant.</p>
+</li><li>
+<p>Set frequency (typically daily) based on notification needs.</p>
+</li></ul>
+<p>4. Execute / Monitor Job</p>
+<ul><li>
+<p>Run the job manually once or allow scheduled execution.</p>
+</li><li>
+<p>Monitor via SM37 to ensure successful execution.</p>
+</li></ul>
+<p>5. Validate Email Notifications</p>
+<ul><li>
+<p>Verify that reminder emails are triggered:</p>
+<ul><li>
+<p>On configured discrete days (e.g., 30, 7, 1 days before deadline)</p>
+</li><li>
+<p>On overdue intervals (if maintained)</p>
+</li></ul>
+</li><li>
+<p>Confirm correct email templates are used:</p>
+<ul><li>
+<p><em>Approaching deadline</em></p>
+</li><li>
+<p><em>Overdue action plans</em></p>
+</li></ul>
+</li></ul>
+<hr/></li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>refer to: <a href="https://me.sap.com/notes/0001922545" rel="nofollow">0001922545 - How to create the perfect support case for SAP Product Support</a></li><li>refer to: <a href="https://me.sap.com/notes/0002848890" rel="nofollow">0002848890 - The importance of choosing the right System (and Product) for your case - SAP for Me</a></li><li>refer to: <a href="https://me.sap.com/notes/0003344969" rel="nofollow">0003344969 - The importance of choosing the right Product and Product Function for your case - SAP for Me</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>GRCAUD_ACTION_REMINDER, action plan reminder, day range, range not supported, email notification not sent, grc audit management, s/4hana, deadline reminder, configuration, multiple day values, discrete days, by design, audit actions, reminder configuration, notification frequency</p></div></div></div></div>

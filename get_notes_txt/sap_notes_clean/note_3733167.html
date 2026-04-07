@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li><em>hdbwebdispatcher</em> service shows status RED (Stopped) and does not start.</li><li>While checking the Web Dispatcher traces it is possible to find the following entry<br/><br/><span style="text-decoration: underline;"><strong>webdispatcher_&lt;hostname&gt;.30006.000.trc:</strong></span><br/><br/>[00000]{-1}[-1/-1] 0000-00-00 00:00:00.000000 e webdispatcher    webdispatcherbackendconfig.cpp(00000) : Invalid value in <strong>"public_urls"</strong>: &lt;parameter value&gt;</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP HANA Database</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Start the SAP HANA Database.</li><li>Observe the <em>hdbwebdispatcher</em> service turns RED (Stopped) shortly after startup.</li><li>Check the Web Dispatcher trace and find the reported errors indicating an invalid value in "public_urls".</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><section></section>
+<section>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<p>This situation may occur when a parameter is configured in an incorrect section of the <em>xsengine.ini</em> configuration file.</p>
+<p>In this case, the parameter "root_page" was placed within the "public_urls" section, whereas its correct section is "httpserver", resulting in the Web Dispatcher service failing to start properly.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To properly resolve this issue, it is necessary to remove any incorrectly configured parameters from the affected session.</p>
+<p>If a misconfigured value belongs in a different section of the configuration file, its correct placement can be determined by consulting the parameter configuration reference in the following article:</p>
+<p><strong>SAP Help Portal</strong> <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/009e68bc5f3c440cb31823a3ec4bb95b/6fe519be41f74712b5c432a2de4ad0c1.html" rel="noopener noreferrer nofollow" target="_blank">Configuration Parameters SPS 08</a></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><span style="font-size: 10pt;"><strong>SAP KBA</strong> </span><a href="https://me.sap.com/notes/0002186744" rel="noopener noreferrer nofollow" style="font-size: 10pt;" target="_blank">2186744 - FAQ: SAP HANA Parameters</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>hdbwebdispatcher, web dispatcher, invalid value in public_urls, configuration conflict -34, webdispatcherbackendconfig.cpp webdispatcher.cpp, xsengine.ini, root_page, httpserver section, service fails to start, red stopped, startup failure, xs classic, hana web dispatcher startup, config conflict</p></div></div></div></div>

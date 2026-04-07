@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>Replication of Point of Deliveries (POD) from SAP S/4HANA to SAP Service Cloud Version 2 is not functioning as expected.</p>
+<p>Observed behaviors:</p>
+<ul><li>The integration flow (iFlow) "Replicate Utilities POD Object from S4HANA" is referenced but contains no guidance for initial or delta loads.</li><li>The iFlow does not appear to be invoked or serviced during replication attempts.</li><li>No outgoing messages are triggered from SAP S/4HANA.</li><li>SAP Service Cloud V2 does not provide a dedicated user interface to display POD objects.</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Product: SAP Service Cloud Version 2</li><li>Integration for SAP Sales/Service Cloud</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<div>Configure the Utilities replication scenario from SAP S/4HANA to SAP Service Cloud V2 via SAP Cloud Integration (CPI).</div>
+</li><li>
+<div>Review the iFlow "Replicate Utilities POD Object from S4HANA" and note the absence of instructions for triggering initial or delta loads.</div>
+</li><li>
+<div>Attempt POD replication and observe that no outbound messages are generated in SAP S/4HANA.</div>
+</li><li>
+<div>Check SAP Service Cloud V2 and confirm that there is no dedicated POD UI to view replicated POD data.</div>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>
+<div>SAP Service Cloud Version 2 currently does not provide a dedicated POD user interface. Display capability is planned for future releases.</div>
+</li><li>
+<div>POD data is embedded within Utilities technical objects and premise master data, not replicated through a standalone POD iFlow.</div>
+</li><li>
+<div>Replication relies on event linkage in SAP S/4HANA IS-U rather than a dedicated iFlow trigger.</div>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<h3 data-toc-skip="">1. Manual / Initial Load</h3>
+<p>To initiate a full or manual load of Utilities technical objects—including POD information—run the following report in SAP S/4HANA IS‑U: <code>ISU_C4C_TECH_OBJECTS_REPL
+</code></p>
+<p>This program sends technical object and premise data that contain embedded POD details to SAP Service Cloud V2 via the deployed integration flows.</p>
+<hr/>
+<h3 data-toc-skip="">2. Delta Replication</h3>
+<p>Ensure that event linkage for Utilities objects is active:</p>
+<ol><li>Go to transaction SWE2 in SAP S/4HANA.</li><li>Validate that event linkage for relevant Utilities objects (e.g., technical objects, premise updates) is active.</li><li>When active, delta changes to POD‑relevant data will be automatically replicated.</li></ol>
+<hr/>
+<h3 data-toc-skip="">3. SAP Service Cloud V2 UI Limitation</h3>
+<ul><li>A dedicated UI to display PODs in SAP Service Cloud Version 2 is currently not available.</li><li>This feature is targeted for a future roadmap release.</li><li>Customers can monitor progress in the SAP Road Map Explorer and may submit enhancement requests through the SAP Influence Portal.</li></ul>
+<hr/>
+<h3 data-toc-skip="">4. Integration Setup Notes</h3>
+<p>Refer to the Integration Guide for SAP Sales and Service Cloud to:</p>
+<ul><li>Deploy the required Utilities master data iFlows.</li><li>Maintain necessary outbound service configurations in SAP S/4HANA.</li><li>Validate communication arrangement and endpoint activation for Utilities replication scenarios.</li></ul>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>POD data is replicated only as part of broader technical object and premise replication; a standalone POD request is not currently supported.</li><li>Absence of the POD UI does not prevent POD data from being stored in SAP Service Cloud V2; it affects only the display capabilities.</li></ul>
+<p>SAP Documentation references:</p>
+<ul><li>refer to: <a href="https://help.sap.com/docs/CX_NG_SVC/4d75f7ce63cc4e0a8ddacb060b8f8b54/afe2a6623d164160b7f879d0af6ec57d.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Utilities master data integration guide</a></li><li>refer to: <a href="https://roadmaps.sap.com/board?PRODUCT=73555000100800003823&amp;range=FIRST-LAST#Q2%202023" rel="noopener noreferrer nofollow" target="_blank">Utilities V2 Road Map</a></li><li>refer to: <a href="https://me.sap.com/notes/0003500979" rel="noopener noreferrer nofollow" target="_blank">KBA 3500979</a></li><li>refer to: <a href="https://me.sap.com/notes/0000000005" rel="noopener noreferrer nofollow" target="_blank">SAP Note 5 - Consulting provided to customer</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>pod, point of delivery, utilities, technical objects, premise, replicate utilities pod object, iflow, s/4hana, service cloud v2, initial load, delta load, swe2, isu_c4c_tech_objects_repl, missing ui, integration guide</p></div></div></div></div>

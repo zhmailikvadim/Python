@@ -1,0 +1,49 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>OAuth refresh tokens saved in User Settings are not refreshed on use, and instead expire after 90 days, even if they were used before 90 days expiry.</li>
+<li>The below error may be seen:<br/>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><em>Error Message: Error occurred when requesting an OAuth Access Token from Authorization server (for CUID &lt;NAME&gt;), cause: Error returned from OAuth authorization server. [HTTP ResponseCode - 400]: {"error":"invalid_grant","error_description":"AADSTS700082: The refresh token has expired due to inactivity. The token was issued on 2024-09-05T07:12:56.0151498Z and was inactive for 90.00:00:00}</em></td>
+</tr>
+</tbody>
+</table></div>
+</li>
+</ul>
+<p><span style="font-size: 14px; text-decoration-line: underline;">Important</span><span style="font-size: 14px;">: an incomplete correction was delivered with SAP Note 3595099 which doesn't resolve issue and still leads to errors for end-users. Please consider Support Package and Patches from current SAP Note for official solution.</span></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">STS, BILP</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<div class="longtext" style="font-size: 90%; line-height: 1.2em;">
+<p><strong>Environment</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence Platform 4.3 Support Package 3 and upper versions</li>
+<li>oAuth 2.0</li>
+<li>Google Drive / Microsoft OneDrive</li>
+</ul>
+<p><strong>Steps to duplicate</strong></p>
+<ol>
+<li>Generate a refresh token for a Microsoft OAuth server in the User Settings (SAP BI Launchpad),</li>
+<li>Perform OAuth workflows successfully (e.g. schedule a document with destination to OneDrive),</li>
+<li>After 90 days, the workflow starts failing,</li>
+<li>Generate a new refresh token manually in the User Settings,</li>
+<li>The workflow starts working again.</li>
+</ol>
+<p><strong>Cause</strong></p>
+<p>On Microsoft side, new refresh tokens get created upon every use (<a href="https://learn.microsoft.com/en-us/entra/identity-platform/refresh-tokens#token-lifetime" target="_blank">https://learn.microsoft.com/en-us/entra/identity-platform/refresh-tokens#token-lifetime</a>).<br/>However the new tokens are not stored in the User settings on SAP Business Intelligence side.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="panel conf-macro output-block">
+<div class="panelContent">
+<p>This issue is fixed in the patches listed in the "Support Packages &amp; Patches" section below.</p>
+<p>Due to different internal processes, the "Support Packages &amp; Patches" section of the SAP Note will be populated as below:</p>
+<ul>
+<li>for fixes delivered in "Support Packages": immediately (even if the "Support Package" is planned to be released several months later),</li>
+<li>for fixes delivered in "Patches": <strong>ONLY</strong> once the "Patch" is released <strong>AND</strong> available on SMP (not before).</li>
+</ul>
+<p>For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article 2144559 in References section.</p>
+</div>
+</div>
+<p><strong>Workaround</strong></p>
+<p>End-users should generate a new refresh token in User Settings (within SAP BI Launchpad).</p></div></div></div></div>

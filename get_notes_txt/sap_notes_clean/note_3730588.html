@@ -1,0 +1,44 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>The <span class="SNO_DNT" style="float: none;" translate="no">indexserver</span> crashes due to <span class="SNO_DNT" style="float: none;" translate="no">STACK OVERFLOW</span>:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">[CRASH_EXTINFO] Extended exception info: (0000-00-00 00:00:00 000 Local)<br/>----&gt; Dump of siginfo contents &lt;----<br/> signal: 11(SIGSEGV)<br/> code: <strong>STACK OVERFLOW</strong>: 2(SEGV_ACCERR: invalid permissions for mapped object)</span></p>
+<p>The callstack in the crashdump shows multiple <em><strong><span class="SNO_DNT" style="float: none;" translate="no">sqlopt</span></strong><span class="SNO_DNT" style="float: none;" translate="no">::&lt;predicate&gt;::</span></em><span class="SNO_DNT" style="float: none;" translate="no"><strong><em>clone_subtree_impl</em></strong> </span>calls, causing an overflow of the configured stack size:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)<br/>----&gt; Symbolic stack backtrace &lt;----<br/>x: sqlopt::Func::Func<br/>x: <strong>sqlopt</strong>::Func::<strong>clone_subtree_impl</strong><br/>x: sqlopt::Func::fillFuncMembers<br/>x: <strong>sqlopt</strong>::Func::<strong>clone_subtree_impl</strong><br/>x: sqlopt::Func::fillFuncMembers<br/>[...]<br/>xxxxx: <strong>sqlopt</strong>::Func::<strong>clone_subtree_impl</strong><br/>xxxxx: sqlopt::Func::fillFuncMembers<br/>xxxxx: sqlopt::Func::clone_subtree<br/>[...]</span></p>
+<p style="padding-left: 30px;">or</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)<br/>----&gt; Symbolic stack backtrace &lt;----<br/>x: <strong>sqlopt</strong>::Field::<strong>clone_subtree_impl</strong><br/>x: sqlopt::Func::fillFuncMembers<br/> x: <strong>sqlopt</strong>::Func::<strong>clone_subtree_impl</strong><br/>x: <strong>sqlopt</strong>::Comp::<strong>clone_subtree_impl</strong><br/>x: <strong>sqlopt</strong>::Conj::<strong>clone_subtree_impl</strong><br/>x: <strong>sqlopt</strong>::Disj::<strong>clone_subtree_impl</strong><br/>[...]<br/>xxxxx: <strong>sqlopt</strong>::Disj::<strong>clone_subtree_impl</strong><br/>xxxxx: <strong>sqlopt</strong>::Conj::<strong>clone_subtree_impl</strong><br/>[...]</span></p>
+<p>Please note that the exact crash stack traces may vary depending on the execution context.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">signal 11, SIGSEGV, code 2,</span> <span class="SNO_DNT" style="float: none;" translate="no">SEGV_ACCERR</span>, <span class="SNO_DNT" style="float: none;" translate="no">STACK OVERFLOW</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 331064</p>
+<p><strong>Reason:</strong></p>
+<p>As described in SAP Note <a href="/notes/3649396" target="_blank">3649396</a>, queries that contain a very large number of <span class="SNO_DNT" style="float: none;" translate="no">WHEN ... THEN</span> clauses may not be executable because their execution is exceeding the configured stack size. <br/>Due to a programming error in SAP HANA, the execution of such queries can lead to an <span class="SNO_DNT" style="float: none;" translate="no">indexserver</span> crash instead of a graceful failure.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS00 - SPS06</li>
+<li>Revisions &lt;= 079.06 (SPS07)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>A query containing an excessive number of <span class="SNO_DNT" style="float: none;" translate="no">WHEN ... THEN</span> clauses in its filter condition is executed, exceeding the configured stack size.</li>
+<ul>
+<li>'An excessive number' is relative; it depends on the required and configured stack size rather than solely on the number of <span class="SNO_DNT" style="float: none;" translate="no">WHEN … THEN</span> clauses in the query.</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="font-size: 14px;">The issue occurs due to the complexity of the SQL query. The query requires optimization, regardless of its source. If the query is generated by an application, you may need to consult the application support team to address the query complexity.</span></p>
+<p>As of the following revisions, instead of causing an indexserver crash, the query execution will fail with the error "<span class="SNO_DNT" style="float: none;" translate="no"><em>Check stack size for &lt;number&gt; bytes failed, only &lt;number&gt; bytes left</em></span>":</p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions &gt;= 079.07 (SPS07)</li>
+<li>or higher</li>
+</ul>
+</ul>
+<ul>
+<li>or higher</li>
+</ul></div></div></div></div>

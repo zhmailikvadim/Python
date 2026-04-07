@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<ul><li>A KUT field is created under Product &gt; Sales &gt; Details: Distribution Chain.</li><li>The extension scenario "Product – Sales to Ticket – Item" is enabled, and the field is added to Ticket &gt; Items &gt; General Data.</li><li>However, when a product is added to a ticket item, the KUT field does not auto-populate in the ticket.</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Cloud for Customer</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<div>Create a KUT field in Product &gt; Sales &gt; Details.</div>
+</li><li>
+<div>Enable the extension scenario "Product – Sales to Ticket – Item".</div>
+</li><li>
+<div>Add the KUT field to Ticket &gt; Items &gt; General Data.</div>
+</li><li>
+<div>Maintain a value for the KUT field in the product's sales data.</div>
+</li><li>
+<div>Add the product to a ticket.</div>
+</li><li>
+<div>Observe that the KUT field value is not transferred to the ticket item.</div>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>A product may contain multiple sales items within the Sales tab, each associated with different sales organizations and sales units.</p>
+<p>When a product is added to a ticket item, only the sales item whose sales organization matches the ticket's sales organization is considered for data transfer.</p>
+<p>If no sales item matches the ticket's sales organization, the KUT field value cannot be brought into the ticket item.</p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>Ensure that the sales organization of the ticket matches the sales organization of at least one product sales item.</p>
+<p>Once they match, the KUT field value from the corresponding Product &gt; Sales &gt; Details record will be correctly transferred to Ticket &gt; Items &gt; General Data when adding the product.</p>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>KUT field, Extension field, Product, Sales, Product - Sales to Ticket - Item, Extension Scenarios, Value, Missing</p></div></div></div></div>

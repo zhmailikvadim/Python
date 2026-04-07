@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>In the Manage Budget Documents – Projects (F5342) application, the Budget Item field “Account Number” appears as mandatory during budget creation.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Create an Enterprise Project using the Project Control – Enterprise Projects (F3215) application.</p>
+</li><li>
+<p>Create a budget document for the project using the Manage Budget Documents – Projects (F5342) application.</p>
+</li><li>
+<p>In the Budget Item section, maintain a G/L account in the Account Number field and save the budget document.</p>
+</li><li>
+<p>Release the project using the Project Planning (F3822) application.</p>
+</li><li>
+<p>Create a Purchase Order with Account Assignment Category “P” (Project) referencing the WBS element.</p>
+</li></ol>
+<p>Scenario 1 – Same G/L Account Used</p>
+<ol><li>
+<p>Maintain the same G/L account in the Purchase Order that was used in the budget document.</p>
+</li></ol>
+<p>Result (Standard System Behavior):</p>
+<ul><li>
+<p>The commitment cost is recorded for the WBS element.</p>
+</li><li>
+<p>After Goods Receipt, the actual cost is recorded.</p>
+</li><li>
+<p>The Project Budget Report – Overview (F3377) shows the budget consumption and available budget.</p>
+</li></ul>
+<p>Scenario 2 – Different G/L Account Used</p>
+<ol><li>
+<p>Maintain a different G/L account in the Purchase Order than the one used in the budget document.</p>
+</li></ol>
+<p>Result (Standard System Behavior):</p>
+<ul><li>
+<p>The system does not assign commitment costs to the budget item.</p>
+</li><li>
+<p>The system does not assign actual costs to the budget item.</p>
+</li><li>
+<p>The Project Budget Report – Overview (F3377) shows only the total budget without consumption.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The observed behavior occurs because project budgeting in SAP S/4HANA Cloud Public Edition is controlled based on the combination of WBS Element and Account Number.</li><li>When procurement postings use a different G/L account than the budget account, the system cannot match the commitment or actual cost to the corresponding budget item.</li><li>The Account Number field is mandatory in Manage Budget Documents – Projects (F5342) because it is required for account-based budget control.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The system is working as designed. In project budgeting, the budget is controlled based on the combination of WBS element and Account Number (G/L account). Therefore, when a Purchase Order uses a different G/L account than the one defined in the budget document, the system cannot match the commitment or actual cost to the corresponding budget line.</p>
+<p>As a result, the commitment and actual values are not reflected in the Project Budget Report – Overview (F3377) when the account numbers differ.</p>
+<p>Regarding the request to make the Account Number field optional, this field is mandatory by standard application logic in SAP S/4HANA Cloud Public Edition, and currently there is no available configuration, SSCUI, or released BAdI to change this behavior.</p>
+<p>For the second request related to adding additional selection fields (such as WBS element, Project, or Period) in the Manage Budget Documents – Projects app, the available filters are defined by the standard application design and cannot be extended via key user extensibility.<br/><br/>SAP Help Portal - <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/0f69f8fb28ac4bf48d2b57b9637e81fa/3ccb50e724b045508fea8b2cf1774b2b.html" rel="noopener noreferrer nofollow" target="_blank">Key User Extensibility</a></p>
+<p>If these capabilities are required, we recommend submitting an enhancement request through the <a href="https://influence.sap.com/sap/ino/#/campaign/930" rel="noopener noreferrer nofollow" target="_blank">SAP Customer Influence Portal</a> so that SAP Product Management can evaluate it for future releases.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/0f69f8fb28ac4bf48d2b57b9637e81fa/3ccb50e724b045508fea8b2cf1774b2b.html" rel="nofollow">Key User Extensibility</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>account number, mandatory field, manage budget documents, projects, f5342, project budgeting, wbs element, account-based budget control, purchase order, gl account, budget consumption, project budget report, f3377, sscui, badi, key user extensibility</p></div></div></div></div>

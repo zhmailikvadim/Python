@@ -1,0 +1,151 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>In production or process orders (e.g. created via <strong>CO01</strong> / <strong>COR1</strong>), inconsistencies are observed in:</p>
+<ul><li>
+<p>Basic start and end dates</p>
+</li><li>
+<p>Scheduled dates</p>
+</li><li>
+<p>Operation start and finish dates</p>
+</li></ul>
+</li><li>
+<p>Example symptoms include:</p>
+<ul><li>
+<p>Operation sequence appears inconsistent (e.g. operation 0010 starts after operation 0020)</p>
+</li><li>
+<p>Dates change automatically after pressing <em>Enter</em> during order creation</p>
+</li><li>
+<p>Small changes in order quantity lead to different scheduling results</p>
+</li><li>
+<p>Start/finish dates do not follow the expected routing sequence</p>
+</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP ERP Capacity Planning (PP-CRP)</li><li>SAP R/3</li><li>SAP R/3 Enterprise</li><li>SAP ERP Central Component</li><li>SAP ERP</li><li>SAP Enhancement package for SAP ERP</li><li>SAP Enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA, on-premise</li><li>SAP S/4HANA Cloud Private Edition</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Access transaction <strong>CO01</strong></p>
+</li><li>
+<p>Maintain basic dates (e.g. end date)</p>
+</li><li>
+<p>Press Enter</p>
+</li><li>
+<p>Basic dates, scheduled date or operations dates cannot be explained</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><h3 data-toc-skip=""><span role="text">Cause 1: Inconsistency Between Capacity Intervals and Factory Calendar</span></h3>
+<ul><li>
+<p>Work center capacity intervals (trasnaction <strong>CR02</strong>) extend beyond the validity of the assigned factory calendar</p>
+</li><li>
+<p>This leads to incorrect or unexpected scheduling results</p>
+</li></ul>
+<p>Example:</p>
+<ul><li>
+<p>Work center Interval maintained until 2035</p>
+</li><li>
+<p>Factory calendar valid only until 2030</p>
+</li></ul>
+<p>Scheduling processes inconsistent time definitions</p>
+<h3 data-toc-skip=""><span role="text">Cause 2: “Relevant for Finite Scheduling” Indicator Not Set in Work Center</span></h3>
+<ul><li>
+<p>The indicator “Relevant for finite scheduling” is not activated in one or more work centers used in the order.</p>
+</li></ul>
+<p>In this case:</p>
+<ul><li>
+<p>The system may ignore capacity constraints for these operations</p>
+</li><li>
+<p>Scheduling results can become inconsistent when compared to other operations that are capacity-relevant</p>
+</li></ul>
+<p>This may lead to:</p>
+<ul><li>
+<p>Operations being scheduled in an unexpected sequence</p>
+</li><li>
+<p>Differences in start and finish dates between operations</p>
+</li></ul>
+<h3 data-toc-skip="">Cause 3: Scheduling Type Not Aligned with Alignment Key</h3>
+<p>The scheduling result may be inconsistent if the scheduling type (e.g. backward scheduling) is not aligned with the alignment key configuration.</p>
+<p>According to standard system behavior (see SAP Note <a href="https://me.sap.com/notes/416571/" rel="noopener noreferrer nofollow" target="_blank">416571</a>), the scheduling direction must be consistent with the alignment logic:</p>
+<ul><li>
+<p>Backward scheduling → should be used together with “Alignment with latest dates”</p>
+</li><li>
+<p>Forward scheduling → should be used together with “Alignment with earliest dates”</p>
+</li></ul>
+<p>If this alignment is not respected:</p>
+<ul><li>
+<p>The system may calculate basic and scheduled dates inconsistently</p>
+</li><li>
+<p>Operation dates may appear out of sequence</p>
+</li><li>
+<p>Dates may shift unexpectedly after pressing <em>Enter</em> during order creation</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h3 data-toc-skip=""><span role="text">Cause 1: Inconsistency Between Capacity Intervals and Factory Calendar</span></h3>
+<ul><li>
+<p>Access transaction <strong>CR02</strong></p>
+</li><li>
+<p>Navigate to:</p>
+<ul><li>
+<p>Capacity tab → Capacity Header Data → <em>Intervals and Shifts</em></p>
+</li></ul>
+</li><li>
+<p>Adjust the interval so that:</p>
+<ul><li>
+<p>It does not exceed the validity of the factory calendar</p>
+</li></ul>
+</li></ul>
+<p>Example:</p>
+<ul><li>
+<p>If the factory calendar is valid until 2030, limit the work center interval to 31.12.2030</p>
+</li></ul>
+<h4 data-toc-skip=""><span role="text">Mass Check for Inconsistencies</span></h4>
+<p>To identify all affected work centers:</p>
+<ol><li>
+<p>Go to transaction <strong>SE38</strong></p>
+</li><li>
+<p>Execute report <strong>RCCYCALCHECK</strong></p>
+</li></ol>
+<p>The report lists work centers with inconsistencies between:</p>
+<ul><li>
+<p>Capacity intervals</p>
+</li><li>
+<p>Factory calendar validity</p>
+</li></ul>
+<p>⚠️ Important:</p>
+<ul><li>
+<p>Report <strong>RCCYCALCHECK</strong> is for analysis purposes only</p>
+</li><li>
+<p>It does not correct any inconsistencies automatically</p>
+</li></ul>
+<p>All required corrections must be performed manually, for example, using transaction <strong>CR02 </strong>to adjust capacity intervals accordingly.</p>
+<h3 data-toc-skip=""><span role="text">Cause 2: “Relevant for Finite Scheduling” Indicator Not Set in Work Center</span></h3>
+<ol><li>
+<p>Go to transaction <strong>CR02</strong></p>
+</li><li>
+<p>Access the relevant work center</p>
+</li><li>
+<p>Navigate to the Capacity tab</p>
+</li><li>
+<p>Ensure that the indicator “Relevant for finite scheduling” is activated</p>
+</li></ol>
+<p>After adjusting, re-create or re-schedule the order to validate the behavior</p>
+<h3 data-toc-skip="">Cause 3: Scheduling Type Not Aligned with Alignment Key</h3>
+<ul><li>
+<p>Verify the scheduling type used in the order:</p>
+<ul><li>
+<p>Forward or Backward scheduling</p>
+</li></ul>
+</li><li>
+<p>Check the configuration of Alignment key in the routing (transaction <strong>CA02</strong>) or directly in the order in "Sequences" tab.</p>
+</li><li>
+<p>Ensure that the configuration is consistent:</p>
+<ul><li>
+<p>Backward scheduling → Alignment with latest dates</p>
+</li><li>
+<p>Forward scheduling → Alignment with earliest dates</p>
+</li></ul>
+</li><li>
+<p>If inconsistencies are found:</p>
+<ul><li>
+<p>Adjust the customizing accordingly</p>
+</li><li>
+<p>Recreate or re-schedule the order to validate the behavior</p>
+</li></ul>
+</li></ul>
+<p>For more information, refer to  SAP note <a href="https://me.sap.com/notes/416571/" rel="noopener noreferrer nofollow" target="_blank">416571 - First/last operation not like order start/end</a></p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Note <a href="https://me.sap.com/notes/416571/" rel="noopener noreferrer nofollow" target="_blank">416571 - First/last operation not like order start/end</a></p>
+<p>SAP Note <a href="https://me.sap.com/notes/150007/" rel="noopener noreferrer nofollow" target="_blank">150007 - Consulting: Scheduling of production orders</a></p>
+<p>SAP Note <a href="https://me.sap.com/notes/151503/" rel="noopener noreferrer nofollow" target="_blank">151503 - Consulting: Scheduling of process order</a></p>
+<p>SAP Note <a href="https://me.sap.com/notes/152319/" rel="noopener noreferrer nofollow" target="_blank">152319 - Consulting: Scheduling of planned order for routing</a></p>
+<p>SAP Note <a href="https://me.sap.com/notes/46237/" rel="noopener noreferrer nofollow" target="_blank">46237 - Consulting: determination of the order dates</a></p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>inconsistent date, factory calendar, basic dates, scheduled dates, operation dated, end date, start date, processing, setup, labor, formula</p></div></div></div></div>

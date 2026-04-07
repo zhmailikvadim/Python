@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>When Cost Center master data is replicated from SAP BTP Integration Suite to SAP S/4HANA using the inbound SOAP API, the messages appear as “Delivered” in SRT_MONI, even when the replication fails due to master‑data issues (e.g., Profit Center does not exist).<br/>No error is visible in SRT_MONI or SLG1, yet the Cost Center is not created in KS03.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+</div>
+<p>Cost Center SOAP API, Web Service, SRT_MONI, Application Log, SLG1, Master Data Replication, Profit Center validation.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The inbound SOAP API completes technical processing successfully, so SRT_MONI always shows “Delivered”.<br/>However, the business validation errors (such as missing/invalid Profit Center) are not written to the Application Log, because the API implementation does not pass backend validation errors to BAL logging.<br/>As a result, no error logs are generated, even though the Cost Center creation fails.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Error‑handling was corrected so backend validation failures are now logged properly in SLG1. When replication fails, meaningful error messages are recorded and visible for analysis.</p></div></div></div></div>

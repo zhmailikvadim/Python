@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>A Purchase Requisition (PR) is created with a specific net value.</p>
+</li><li>
+<p>An RFQ is generated from the PR and sent to SAP Ariba Sourcing.</p>
+</li><li>
+<p>The bidding process is completed, and the quotation is awarded to a supplier for a lower or different amount than the original PR.</p>
+</li><li>
+<p>The awarded supplier quotation is successfully transferred back to SAP S/4HANA.</p>
+</li><li>
+<p>However, when the follow-on Purchase Order (PO) is created, it retains the original net price from the Purchase Requisition instead of adopting the awarded quotation price.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Create a Purchase Requisition (e.g., for 100 EUR). Ensure the PO Price field in the PR is maintained as Net Price (Order price adoption indicator).</p>
+</li><li>
+<p>Create an RFQ referencing the PR and publish it to Ariba Sourcing.</p>
+</li><li>
+<p>Award a supplier quotation in Ariba for a different amount (e.g., 90 EUR) and transfer it to S/4HANA.</p>
+</li><li>
+<p>Create the follow-on Purchase Order.</p>
+</li><li>
+<p>Observe that the PO price is 100 EUR (from the PR) instead of the 90 EUR awarded in the quotation.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>In the Purchase Requisition, the PO Price field is maintained as Net Price (or the 'Order price adoption' indicator is set). Due to system hierarchy and design, this setting forces the system to prioritize the PR price. Whenever a PO is created from this PR, the system ensures that the PO net price remains identical to the PR price, overriding the price provided in the linked quotation.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To ensure the Purchase Order adopts the correct quotation price, the "PO Price -&gt; Net Price" setting must not be applied to PRs undergoing the RFQ/Ariba process.</p>
+<p>Option 1: Process Adjustment (Manual) Ensure users do not maintain the PO Price (Net Price) in the default values for PRs that will go through the RFQ -&gt; Quotation process.</p>
+<p>Option 2: Custom Logic via BAdI (Automated Workaround) If your business process requires both direct PR-to-PO conversions (where PR price should be kept) and PR-to-RFQ processes, you can automate this distinction using extensibility.</p>
+<ol><li>
+<p>Implement the BAdI <code>MM_PUR_S4_PR_MODIFY_ITEM</code>.</p>
+</li><li>
+<p>Build custom logic to evaluate the routing of the PR based on specific identifying fields (e.g., Purchasing Group, Material Group, or custom fields).</p>
+</li><li>
+<p>Condition A: If the logic determines the PR is intended for direct PO conversion, the BAdI can maintain the PO Price field as Net Price.</p>
+</li><li>
+<p>Condition B: If the logic determines the PR will follow the RFQ -&gt; Ariba -&gt; Quotation process, the BAdI should ensure the PO Price field remains empty. This avoids the pricing conflict and allows the PO to successfully adopt the quotation price.</p>
+</li></ol>
+<p><em>Note: For Option 2 to function reliably, the system must have clear, consistent parameters to differentiate between the two procurement routes at the time of PR creation.</em></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>purchase requisition price, po price not updated, quotation price not adopted, rfq ariba integration, po uses pr net price, s/4hana cloud public edition, mm_pur_s4_pr_modify_item, rfq to po, supplier quotation transfer, manage purchase order app, operational procurement, net price override, pricing conflict pr vs quotation, purchase order pricing, ariba sourcing quotation</p></div></div></div></div>

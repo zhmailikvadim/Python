@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>The Connection was terminated abnormally when running the command alter user "user_name" identified by encrypted '***', then SAP IQ Abort.</li><li>The error occurs as:<br/>
+<pre>**************************************************
+***   SAP IQ Abort:
+***      From:  stcxtlib/st_server.cxx:2501
+***      PID: 20123
+***      Message: caught signal 11, program abort (pc=0x00007ffff54978c1, sp=0x00007ff450dcbdb8, fp=0x00007ff450dcc180, addr=0x0000000000000000)
+***      Thread: 140687305398016  (TIX: 23)
+**************************************************</pre>
+</li><li>The typical stack trace looks like:<br/>
+<pre>Unparser::put_string
+Unparser::put_create_user_opts
+Unparser::put_stat
+Unparser::put_statement
+Unparser::unparse
+PSpawns
+Unparser::Unparse
+ParseSupport::CommandToString
+UnparseCtrl::ParsedToStream
+UnparseCtrl::ParsedToString
+UnparseCtrl::ParsedToValue
+Prep_to_str_for_logging
+Worker::SetStatementToBeLogged
+DoExecuteStmt
+db__execute</pre>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP IQ 16.1 </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue has been addressed under <strong>SAP CR 831873</strong>. Its description reads, "In rare cases, the server crashes if an ALTER USER statement is interrupted. This has been fixed.".</p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>SAP CR 831873</strong> is scheduled to be addressed in the next PL of IQ 16.1 SP05. Please mark this KBA as a Favorite to be automatically notified when the CR status is changed. </p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>KBA <a href="https://me.sap.com/notes/2171560" rel="noopener noreferrer nofollow" target="_blank">2171560</a> about how to be notified of new or updated SAP Notes or KBAs in the ONE Support Launchpad.</p></div></div></div></div>

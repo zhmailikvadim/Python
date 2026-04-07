@@ -1,0 +1,75 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>You have <span class="SNO_DNT" style="float: none;" translate="no">BW</span> scenarios (<span class="SNO_DNT" style="float: none;" translate="no">ADSO</span>, External HANA View, modeled HANA views based on <span class="SNO_DNT" style="float: none;" translate="no">BW</span> content) which are using <span class="SNO_DNT" style="float: none;" translate="no">SAP HANA</span> database for hot data and <span class="SNO_DNT" style="float: none;" translate="no">Near- Line Storage</span> (<span class="SNO_DNT" style="float: none;" translate="no">NLS</span>) for cold data. In the corresponding <span class="SNO_DNT" style="float: none;" translate="no">HANA Calculation Scenario</span>, <span class="SNO_DNT" style="float: none;" translate="no">HANA</span> and <span class="SNO_DNT" style="float: none;" translate="no">NLS</span> data are combined via <span class="SNO_DNT" style="float: none;" translate="no">Union</span> or <span class="SNO_DNT" style="float: none;" translate="no">MultiProvider</span> node(s). Parts of the <span class="SNO_DNT" style="float: none;" translate="no">HANA</span> data are Unicode-enabled character strings (<span class="SNO_DNT" style="float: none;" translate="no">NVARCHAR(M)</span>). On the top level Union, <span class="SNO_DNT" style="float: none;" translate="no">MultiProvider</span>, Aggregation or Semantic Node for such columns, you see datatype <span class="SNO_DNT" style="float: none;" translate="no">VARCHAR(3*M)</span> instead.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>varchar nvarchar mismatch, union datatype inconsistency, NLS varchar problem, calculation view column type wrong, multiprovider datatype issue, BW archiving type mismatch, HANA upgrade datatype change, cold hot data type difference, sybase IQ varchar length, query fails different datatypes</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 355266</p>
+<p><strong>Reason:</strong></p>
+<p>In the affected releases of SAP HANA, the data type of <span class="SNO_DNT" style="float: none;" translate="no">VARCHAR(M)</span> columns in <span class="SNO_DNT" style="float: none;" translate="no">Union</span> or <span class="SNO_DNT" style="float: none;" translate="no">MultiProvider</span> nodes is derived differently. When a Union or MultiProvider node needs to determine the data type (because no explicit data type definition is available) from multiple sources, HANA now selects the largest data type among all corresponding child nodes. This creates issues because <span class="SNO_DNT" style="float: none;" translate="no">NLS</span> database (<span class="SNO_DNT" style="float: none;" translate="no">Sybase IQ</span>) handles <span class="SNO_DNT" style="float: none;" translate="no">NVARCHAR(M)</span> strings differently than regular HANA storage — these strings are exposed as <span class="SNO_DNT" style="float: none;" translate="no">VARCHAR(3*M)</span> in the corresponding <span class="SNO_DNT" style="float: none;" translate="no">HANA</span> virtual table and then propagated into the HANA Calculation Views built on top.</p>
+<p>The old behavior was that in the same situation (<span class="SNO_DNT" style="float: none;" translate="no">Union</span> or <span class="SNO_DNT" style="float: none;" translate="no">MultiProvider</span> node) where the data type had to be derived, <span class="SNO_DNT" style="float: none;" translate="no">HANA</span> used the data type of the first corresponding child node, thus avoiding the issue.<br/>This old behavior is the expected behavior for <span class="SNO_DNT" style="float: none;" translate="no">BW NLS</span> scenarios.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions 079.07 and 079.08 (SPS07)</li>
+<li>Revisions &gt;= 088.00 (SPS08)</li>
+</ul>
+<li>SAP HANA Cloud Edition:
+<ul>
+<li>Revisions &gt;= 2025.40 (2025 QRC4)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>You are (re)deploying BW scenarios (<span class="SNO_DNT" style="float: none;" translate="no">ADSO</span>, External HANA View, modeled HANA views based on BW content) containing <span class="SNO_DNT" style="float: none;" translate="no">NVARCHAR(M)</span> columns.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 079.09 (SPS07)</li>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<ul>
+<li>SAP HANA Cloud Edition:</li>
+<ul>
+<li>SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+</ul>
+</ul>
+<p><strong>Workaround:</strong></p>
+<p>The steps 1.-4. we document below as "Manual Workaround" can be executed programmatically. Download ABAP program "ZSAP_TYPES_IN_VIRT_TABLE.txt" attached to this Note and run it in your affected system. The program has entry fields for "DSO name" which supports wildcards. Also there are flags "show statements" and "simulate only" which are set by default.</p>
+<p>After running the program, make sure to also run step 5. from the "Manual Workaround" section.</p>
+<p>5. Redeploy the (ADSO) Scenario views by running ABAP Program RSDDB_LOGINDEX_CREATE.</p>
+<p><strong>Manual Workaround:</strong></p>
+<p><span style="font-size: 14px;">As an alternative to using the program in the previous section "Workaround", you can manually modify the existing HANA Virtual Table for the NLS data source and set the required datatypes manually. On a high level, proceed as follows:</span></p>
+<ol>
+<li>Take note of all table columns and their data types.</li>
+<li>Drop all columns of the Virtual Table except for one (e.g. let's say you decide keep the last column).</li>
+<li>Add all dropped columns again. If the dropped column has had datatype <span class="SNO_DNT" style="float: none;" translate="no">VARCHAR(3*M)</span>, add it as <span class="SNO_DNT" style="float: none;" translate="no">NVARCHAR(M)</span>. Otherwise, keep the previous datatype.</li>
+<li>Drop and recreate the remaining colum (in our example, the last column), again changing the datatype if it was of the form <span class="SNO_DNT" style="float: none;" translate="no">VARCHAR(3*M)</span>.</li>
+<li>Redeploy the (ADSO) Scenario views by running ABAP Program <span class="SNO_DNT" style="float: none;" translate="no">RSDDB_LOGINDEX_CREATE</span>.</li>
+</ol>
+<p><span style="font-size: 14px;">Example:</span></p>
+<p><span style="font-size: 14px;">Usually the Virtual Table for <span class="SNO_DNT" style="float: none;" translate="no">BW ADSO &lt;ADSONAME&gt;</span> follows the naming convention <span class="SNO_DNT" style="float: none;" translate="no">"/BIC/OU&lt;ADSONAME&gt;"</span>.</span></p>
+<p><span style="font-size: 14px;">1. As an example, ADSO <span class="SNO_DNT" style="float: none;" translate="no">ZRKADSO3</span> has the Virtual Table <span class="SNO_DNT" style="float: none;" translate="no">"&lt;SCHEMA&gt;"."/BIC/OUZRKADSO3"</span>. Now assume the Virtual Table has the following columns and datatypes:</span></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">(</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> "ARCHREQTSN" DECIMAL(23)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"ARCHDPAKID_SID" INTEGER</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"ARCHRECNO_SID" INTEGER</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"ARCHDOBJID_SID" INTEGER</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALMONTH" VARCHAR(18)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"CALMONTH2" VARCHAR(6)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"CALQUARTER" VARCHAR(15)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"CALQUART1" VARCHAR(3)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"CALWEEK" VARCHAR(18)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"CALYEAR" VARCHAR(12)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"FISCVARNT" VARCHAR(6)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"FISCPER" VARCHAR(21)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"FISCPER3" VARCHAR(9)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"FISCYEAR" VARCHAR(12)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"HALFYEAR1" VARCHAR(3)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ,"WEEKDAY1" VARCHAR(3)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"UNIT" VARCHAR(9)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"RECORDMODE" VARCHAR(3)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">)</span></p>
+<p>2. In this case, the SQL statement for step 1. (Drop all columns of the Virtual Table except one) above is</p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">ALTER TABLE "&lt;SCHEMA&gt;"."/BIC/OUZRKADSO3" DROP</span><br/><span class="SNO_DNT" style="float: none;" translate="no">(</span><br/><span class="SNO_DNT" style="float: none;" translate="no">"ARCHREQTSN" </span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"ARCHDPAKID_SID"</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"ARCHRECNO_SID" </span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"ARCHDOBJID_SID" </span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALMONTH" </span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALMONTH2" </span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALQUARTER" </span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALQUART1" </span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALWEEK" </span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALYEAR" </span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"FISCVARNT" </span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"FISCPER"</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"FISCPER3"</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"FISCYEAR"</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"HALFYEAR1"</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"WEEKDAY1"</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"UNIT"</span><br/><span class="SNO_DNT" style="float: none;" translate="no">)</span></p>
+<p>3. Add the dropped columns again, if the dropped column has had datatype <span class="SNO_DNT" style="float: none;" translate="no">VARCHAR(3*M)</span>, add it as <span class="SNO_DNT" style="float: none;" translate="no">NVARCHAR(M)</span>. Otherwise keep the datatype.</p>
+<p><span class="SNO_DNT" style="float: none;" translate="no"><strong> </strong>ALTER TABLE "&lt;SCHEMA&gt;"."/BIC/OUZRKADSO3" ADD</span></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">(</span><br/><span class="SNO_DNT" style="float: none;" translate="no">"ARCHREQTSN" DECIMAL(23)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"ARCHDPAKID_SID" INTEGER</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"ARCHRECNO_SID" INTEGER</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"ARCHDOBJID_SID" INTEGER</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALMONTH" NVARCHAR(6)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALMONTH2" NVARCHAR(2)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALQUARTER" NVARCHAR(5)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALQUART1" NVARCHAR(1)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALWEEK" NVARCHAR(6)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"CALYEAR" NVARCHAR(4)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"FISCVARNT" NVARCHAR(2)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"FISCPER" NVARCHAR(7)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"FISCPER3" NVARCHAR(3)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"FISCYEAR" NVARCHAR(4)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"HALFYEAR1" NVARCHAR(1)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"WEEKDAY1" NVARCHAR(1)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">,"UNIT" NVARCHAR(3)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">)</span></p>
+<p>4. Repeat step 2. and 3. for the last remaining column of the Virtual Table.</p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">ALTER TABLE "&lt;SCHEMA&gt;"."/BIC/OUZRKADSO3" DROP</span><br/><span class="SNO_DNT" style="float: none;" translate="no">(</span><br/><span class="SNO_DNT" style="float: none;" translate="no">"RECORDMODE"</span><br/><span class="SNO_DNT" style="float: none;" translate="no">)</span></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">ALTER TABLE "&lt;SCHEMA&gt;"."/BIC/OUZRKADSO3" ADD</span><br/><span class="SNO_DNT" style="float: none;" translate="no">(</span><br/><span class="SNO_DNT" style="float: none;" translate="no">"RECORDMODE" NVARCHAR(1)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">)</span></p>
+<p>5. Redeploy the (ADSO) Scenario views by running ABAP Program <span class="SNO_DNT" style="float: none;" translate="no">RSDDB_LOGINDEX_CREATE.</span></p>
+<p><strong>Disclaimer</strong></p>
+<p>The workaround described here may only be used in the context of this SAP Note. Using the workaround requires that the SAP HANA system has the revision specified in the SAP Note. Using the workaround outside of this given scope is not supported.</p>
+<p><span style="font-size: 14px;"> </span></p></div></div></div></div>

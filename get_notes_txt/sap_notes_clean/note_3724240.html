@@ -1,0 +1,44 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>The <span class="SNO_DNT" style="float: none;" translate="no">indexserver</span> crashes with a crashstack like this one:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">----&gt; Symbolic stack backtrace &lt;----</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 0: ptime::ViewQueryRewritter::case_join_set_and_check</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 1: ptime::ViewQueryRewritter::table_case_joined</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 2: ptime::ViewQueryRewritter::from_block</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 3: ptime::QueryExecutor::select_list_from_view_query</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 4: ptime::QueryExecutor::rewrite_view_subquery</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> [...]</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">signal 11, SIGSEGV, CREATE VIEW, CTE, Common Table Expression, CASE JOIN</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 347612</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, a <span class="SNO_DNT" style="float: none;" translate="no">table-case-joined</span> table within a <span class="SNO_DNT" style="float: none;" translate="no">WITH</span> clause in a statement is not handled correctly, leading the <span class="SNO_DNT" style="float: none;" translate="no">indexserver</span> to crash.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS00 - SPS06</li>
+<li>Revisions &lt;= 079.06 (SPS07)</li>
+<li>Revisions &lt;= 087.00 (SPS08)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">CREATE VIEW</span> statement using "<span class="SNO_DNT" style="float: none;" translate="no">SELECT</span> *" to include all columns, is executed on top of a <span class="SNO_DNT" style="float: none;" translate="no">Common Table Expression (CTE)</span> with <span class="SNO_DNT" style="float: none;" translate="no">CASE JOIN</span> clause, e.g.<br/>
+<p><span class="SNO_DNT" style="float: none;" translate="no">CREATE VIEW V_CTE AS</span><br/><span class="SNO_DNT" style="float: none;" translate="no">WITH CTE AS (SELECT A.I, V, DD.II, DD.VV FROM MYTAB1 AS A</span><br/><span class="SNO_DNT" style="float: none;" translate="no">LEFT OUTER MANY TO ONE CASE JOIN</span><br/><span class="SNO_DNT" style="float: none;" translate="no">WHEN A.V = 'abc' THEN RETURN (I AS II, V AS VV) FROM TAB2 M ON A.V = M.V</span><br/><span class="SNO_DNT" style="float: none;" translate="no">END DD) SELECT * FROM CTE WITH DDL ONLY;</span></p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 079.07 (SPS07)</li>
+<li>Revisions &gt;= 088.00 (SPS08)</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>Use explicit column name/s instead of asterisk, e.g.<br/>
+<p><span class="SNO_DNT" style="float: none;" translate="no">CREATE VIEW V_CTE AS</span><br/><span class="SNO_DNT" style="float: none;" translate="no">WITH CTE AS (SELECT A.I, V, DD.II, DD.VV FROM MYTAB1 AS A</span><br/><span class="SNO_DNT" style="float: none;" translate="no">LEFT OUTER MANY TO ONE CASE JOIN</span><br/><span class="SNO_DNT" style="float: none;" translate="no">WHEN A.V = 'abc' THEN RETURN (I AS II, V AS VV) FROM MYTAB2 M ON A.V = M.V</span><br/><span class="SNO_DNT" style="float: none;" translate="no">END DD) SELECT <strong>CTE.I, CTE.V, CTE.II, CTE.VV</strong> FROM CTE WITH DDL ONLY;</span></p>
+</li>
+</ul></div></div></div></div>

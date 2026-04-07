@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When executing a payroll Brazil report such as HBRCALC0, the selection screen fields are displayed incorrectly.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<ul style="list-style-type: disc;"><li>
+<p><span>HR renewal</span><span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p><span>SAP S/4HANA</span><span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p><span>SAP ERP </span><span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p><span>SAP SuccessFactors Employee Central Payroll</span><span> </span></p>
+</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The HR report class assigned in the program attributes of the underlying standard reports is not the SAP standard.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>In transaction SE38, open the executable program behind each affected transaction.</li><li>Choose Program &gt; Attributes and locate the HR report category setting, in the following path: SE38 -&gt; HBRCALC0 -&gt; Características -&gt; Classe de report HR -&gt; Dds. mestre (infotipos) .</li><li>Set the HR report category to the SAP standard value. For example, for report HBRCALC0, the standard value is " __M00001".</li><li>Save and activate the changes.</li><li>Repeat for all affected reports and retest each transaction’s selection screen.</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>selection screen, fields displayed incorrectly, PC00_M37_CALC, PC00_M37_CALC_SIMU, PC00_M37_CEDT, PC00_M37_CDTA, PC00_M37_FERI, PC00_M37_FCOL, Características, Classe de report HR, Dds. mestre (infotipos), HR report category, Attributes</p></div></div></div></div>

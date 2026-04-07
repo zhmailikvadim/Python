@@ -1,0 +1,42 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="longtext" id="__html0">
+<p>During basic operation of the ABAP application server (e.g. program generation / execution), work processes are restarted frequently. In the developer trace files you notice entries like the following:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">SEGV_ACCERR:</span> Invalid permissions for mapped object</p>
+<p>It may not even be possible to log into the system.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">KERNELCOR, mprotect, EsMprotect, Extended Segments Memory</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Certain functionality in the ABAP application server makes use of JIT-compilation for enhanced runtime performance. This technique requires the ability to change the protection of regions of memory at runtime. Some ES memory management related configurations can clash with the protection mechanism, rendering JIT-compilation de facto unusable and causing above-mentioned symptoms.</p>
+<p>Only installations fulfilling <em><strong>ALL</strong></em> of the following criteria are affected:<em><br/></em></p>
+<ul>
+<li>The application server in question is running a UNIX-like operating system (Linux on x86-64, Linux on PowerPC 64 LE, IBM AIX)</li>
+<li>JIT-compilation is enabled for regular expressions and / or the ABAP SQL in-memory engine (profile parameters <span class="SNO_DNT" style="float: none;" translate="no">"abap/jit"</span> and <span class="SNO_DNT" style="float: none;" translate="no">"rsdb/tbi_jit"</span>; both enabled by default)</li>
+<li>Profile parameter <span class="SNO_DNT" style="float: none;" translate="no">"es/use_mprotect"</span> is explicitly set to <span class="SNO_DNT" style="float: none;" translate="no">FALSE</span>, effectively disabling memory protection</li>
+</ul>
+<p>In particular, application servers running Windows are <em><strong>NOT</strong></em> affected.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please apply the corresponding kernel patch as outlined below.</p>
+<p>As a workaround, either:</p>
+<ul>
+<li>remove <span class="SNO_DNT" style="float: none;" translate="no">"es/use_mprotect"</span> from the profile (recommended; requires an application server restart)</li>
+<li>disable JIT-compilation by setting <span class="SNO_DNT" style="float: none;" translate="no">"abap/jit = OFF"</span> and <span class="SNO_DNT" style="float: none;" translate="no">"rsdb/tbi_jit = OFF"</span> (<em><strong>NOT</strong></em> recommended; will have a negative impact on performance)</li>
+</ul>
+<p>This correction is initially delivered with the kernel patch level listed in the <span class="SNO_DNT" style="float: none;" translate="no">"<strong>Support Package Patches</strong>"</span> section of this SAP Note. All subsequent kernel patch levels also contain the correction. Keep in mind that only the latest kernel patch level is available for download, however, it contains all previously delivered corrections. As a result, you can download and install the latest available kernel patch at any time to implement this correction.</p>
+<p>If there is no entry for the kernel patch level in the <span class="SNO_DNT" style="float: none;" translate="no">"<strong>Support Package Patches</strong>"</span> section, the patch is not yet available. The entry will be added upon the delivery of the correction. Please check this SAP Note to see if new patch level entries are added.</p>
+<p>This correction is delivered with the following kernel archives:</p>
+<ul>
+<li>hotfix - file <span class="SNO_DNT" style="float: none;" translate="no">dw.sar</span></li>
+</ul>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span> - files <span class="SNO_DNT" style="float: none;" translate="no">SAPEXE.SAR</span> and <span class="SNO_DNT" style="float: none;" translate="no">SAPEXEDB.SAR</span>  </li>
+</ul>
+<p>Follow the SAP recommendations on how to select and install the kernel patch:</p>
+<ol>
+<li>Apply the latest<strong> <span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span></strong> if it contains the correction (PL of correction is smaller or equal to the PL of the latest SP Stack Kernel). For the list of current SP Stack Kernels, see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Otherwise, the next <span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span> will deliver the correction. Apply the <strong>hotfix </strong>only if you require the correction on short notice.</li>
+<li>The correction may not be available for kernel releases that are out of maintenance. Please upgrade to the corresponding downward compatible kernel (<strong>DCK</strong>), see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Review the <strong>regression note </strong>for the target patch level before installing the patch. For details, see SAP Note <a href="/notes/1802333" target="_blank">1802333</a> (Finding information about regressions in the SAP kernel).</li>
+<li>For instructions on how to download and install kernel patches, see SAP Note <a href="/notes/19466" target="_blank">19466</a> (Downloading SAP kernel patches).</li>
+</ol>
+<p>The paper <span class="SNO_DNT" style="float: none;" translate="no"><a href="https://support.sap.com/deployment-strategies-kernel-abap.pdf" rel="noopener noreferrer" tabindex="-1" target="_blank" title="https://support.sap.com/deployment-strategies-kernel-abap.pdf">Update Strategy for the Kernel of the Application Server ABAP in On Premise Landscapes</a></span> provides detailed SAP recommendations.</p></div></div></div></div>

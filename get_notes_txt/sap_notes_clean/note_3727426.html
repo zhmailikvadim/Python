@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>Indexserver crashes with crash stacks similar to the one below:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ----&gt; Pending exceptions (possible root cause) &lt;----</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> --- Pending assertion:</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> exception 1: no.0000000 (DataAccess/DataContainer/impl/PageChainContainerImpl.cpp)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> Assertion failed: pno_and_size.second &gt;= PageAccess::SIZE_CLASS_MIN &amp;&amp; pno_and_size.second &lt;= PageAccess::SIZE_CLASS_MAX; $message$=invalid page size! page size = $xx$; $xx$=xx</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> NO exception throw location recorded. Stack generation suppressed.</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> exception type information:</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> - 0: public ltt::impl::AssertFailureInfo</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> - 0: public ltt::exception</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> ----&gt; Symbolic stack backtrace &lt;----</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 0: __pthread_kill_implementation</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 1: __GI_raise</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 2: raiseSIGABRT_SEGV_forCrash()</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 3: f_crashImpl(char const*, int, char const*, ltt::const_exception_ptr)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 4: Basis::crashImpl(char const*, int, char const*, ltt::exception const&amp;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 5: Basis::crashImpl(char const*, int, ltt::exception const&amp;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 6: Diagnose::CrashAssertFailureBuilder::doCrash()</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 7: <strong>DataContainer::PageChainContainerPrefetchIterator::PrefetchBuffer::triggerPrefetchDoWork</strong>(PageAccess::PageNo, bool, PageAccess::PageNo const&amp;)::{lambda()#2}::operator()()</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 8: <strong>DataContainer::PageChainContainerPrefetchIterator::PrefetchBuffer::triggerPrefetchDoWork</strong>(PageAccess::PageNo, bool, PageAccess::PageNo const&amp;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 9: <strong>DataContainer::PageChainContainerImpl::prefetchContainerPages</strong>(ResourceManager::Disposition, unsigned long, PageAccess::PageNo const&amp;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 10: <strong>DataContainer::PageChainContainerSPI::prefetchContainerPages</strong>(ResourceManager::Disposition, unsigned long)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">[...]</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Prefetch, CRASH</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 353842</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, there are missing pages unexpectedly handled during prefetching in code processes.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS00 - SPS06</li>
+<li>Revisions &lt;= 079.08 (SPS07)</li>
+<li>Revisions &lt;= 089.01 (SPS08)</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 079.09 (SPS07)</li>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>There is no workaround.</li>
+</ul></div></div></div></div>

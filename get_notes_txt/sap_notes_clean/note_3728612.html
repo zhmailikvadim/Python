@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During the Executive Review stage, fields remain non-editable despite edit permissions being granted.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Compensation</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Navigate to Compensation in SAP SuccessFactors.</li><li>Select the affected template.</li><li>Click on Executive Review.</li><li>Observe that the fields are non-editable despite edit permissions being granted.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Once compensation values have been published to Employee Central (EC) from a form, the system does not allow those form fields to be edited even if the form is moved back to the In-Progress stage. This behavior is expected in SAP SuccessFactors Compensation.</li><li>
+<p>This behavior can be observed in the following scenarios:</p>
+<ol><li>
+<p>A form was launched, published, deleted, and then a new form was launched.</p>
+</li><li>
+<p>A form was launched, moved to the completed step, and later routed back to the in-progress stage.</p>
+</li><li>
+<p>A user was part of a completed form that was published and then transitioned to another form that is currently in progress.</p>
+</li></ol>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Delete the published compensation records from Employee Central for the affected employees.</li><li>Choose one of the following options based on preference:</li></ol>
+<ul><li>**Option 1 – Edit the form in its current In-Progress state:**</li></ul>
+<p>a. Once the published records are removed, the fields in the In-Progress form will become editable again.</p>
+<ul><li>**Option 2 – Edit without re-routing (keep forms at Completed stage):**</li></ul>
+<p>a. Delete the published compensation records from Employee Central for the affected employees.</p>
+<p>b. Enable the setting "Allow edit of completed Compensation forms" in the template's Advanced Settings:</p>
+<p>i. Navigate to Admin Center → Compensation → Compensation Home → Select the Template → Plan Setup → Settings → Advanced Settings.</p>
+<p>ii. Enable/check the "Allow edit of completed Compensation forms" option.</p>
+<p>iii. Click the "Update Form Template" button at the bottom of the page to save changes.</p>
+<p>c. This will allow editing of fields directly from the Completed stage without needing to re-route.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: <a href="https://me.sap.com/notes/0002084807" rel="noopener noreferrer nofollow" target="_blank">KBA 2084807 - Executive Review - Allow edit of completed forms - Compensation and Variable Pay</a>.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>executive review, non-editable fields, compensation management, successfactors, allow edit of completed compensation forms, employee central, published records, in-progress stage, completed stage, merit and bonus planning, advanced settings, template settings, compensation forms, editable.</p></div></div></div></div>

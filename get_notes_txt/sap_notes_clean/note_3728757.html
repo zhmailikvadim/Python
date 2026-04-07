@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">You need to send outbound e-mails from your tenant but you don't know which activation is needed or you have read that DKIM is needed but you are not sure what should be requested to SAP support.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Cloud for Customer</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Send an email from the specified domain.</li><li>Observe that the email is marked as untrusted and quarantined.</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>DKIM : </strong></p>
+<p>DKIM stands for "Domain Keys Identified Mail" and is used to certify that an e-mail was authorized and sent from the owner of the Domain. This technique is used on Business C4C to sign Mass E-mails and Business Mails. </p>
+<p>DKIM (Domain Keys Identified Mail) is used to authenticate outgoing emails so recipients trust that messages are genuinely sent from your domain.</p>
+<p></p>
+<p>The difference between Mass Emails and Business Emails in terms of DKIM mainly comes down to how and where the signing is configured and applied.</p>
+<p><strong></strong></p>
+<p><strong>Mass E-mails:</strong> </p>
+<p>Mass emails (campaigns, newsletters) are typically handled by SAP’s marketing/email infrastructure.</p>
+<p><strong>Key characteristics:</strong></p>
+<p>Separate sending domain (often a subdomain like mail.yourcompany.com)</p>
+<p>DKIM is mandatory/recommended for deliverability</p>
+<p>Marketing campaigns</p>
+<p>Bulk communications</p>
+<p>Helps avoid spam filters </p>
+<p></p>
+<p><strong>Business E-mails:</strong> </p>
+<p>Business emails are transactional or individual emails sent from within C4C (e.g., quotes, tickets, replies).<strong></strong><strong></strong></p>
+<p>👉 <strong>Focus:</strong> Authentication of one-to-one or transactional communication</p>
+<p></p>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 481px;"><colgroup><col style="width: 101px;"/><col style="width: 184px;"/><col style="width: 194px;"/></colgroup><tbody><tr style="height: 14.5pt;"><td style="width: 61pt;">Aspect</td><td style="width: 124pt;">Mass Emails</td><td style="width: 132pt;">Business Emails</td></tr><tr style="height: 14.5pt;"><td>Use case</td><td>Campaigns, newsletters</td><td>Quotes, service emails</td></tr><tr style="height: 14.5pt;"><td>Volume</td><td>High (bulk)</td><td>Low (individual)</td></tr><tr style="height: 14.5pt;"><td>Domain</td><td>Often subdomain</td><td>Main company domain</td></tr><tr style="height: 14.5pt;"><td>DKIM setup</td><td>In SAP (required)</td><td>Often external (mail server)</td></tr><tr style="height: 14.5pt;"><td>Priority</td><td>Deliverability &amp; anti-spam</td><td>Authenticity &amp; trust</td></tr><tr style="height: 14.5pt;"><td>Managed by</td><td>Marketing/email system</td><td>IT/email infrastructure</td></tr></tbody></table></div>
+<p></p>
+<p>Mass Email DKIM → “Make sure thousands of emails don’t go to spam”</p>
+<p>Business Email DKIM → “Make sure this one email is trusted and legit”</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><span style="font-size: 10pt;">To check the two activations in detail, please refer to blogs below:</span></p>
+<ul><li style="list-style-type: none;">
+<ul><li><a href="https://blogs.sap.com/2015/03/28/cloud-for-customer-mass-e-mail-activation/" rel="noopener noreferrer nofollow" target="_blank">Mass E-mail</a></li><li><a href="https://blogs.sap.com/2021/01/15/dkim-key-activation-for-business-emails-in-cloud-for-customerc4c-business-bydesignbyd/" rel="noopener noreferrer nofollow" target="_blank">Business E-Mail</a></li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>DKIM, sales cloud, c4c, email quarantine, untrusted email, spam score, email domain authentication, DKIM profile activation, outbound email issues, </p></div></div></div></div>

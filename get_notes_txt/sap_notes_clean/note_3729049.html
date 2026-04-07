@@ -1,0 +1,62 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>When attempting to run an OData-based import job from SAP Datasphere into an SAP Analytics Cloud (SAC) Planning Model, the job fails or completes with significant rejections.</p>
+</li><li>
+<p>Error Message: "Null value is not allowed for single column dimensions."</p>
+</li><li>
+<p>The issue started occurring immediately following a tenant update to SAP Datasphere (late January 2026).</p>
+</li><li>
+<p>Thousands of rows are rejected, and the data preview in SAC may not explicitly show the null values if they are generated via associations.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>
+<p>SAP Analytics Cloud 2026.2.5  </p>
+</li><li>
+<p>SAP Datasphere 2026.5.1 </p>
+</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Log in to the SAP Analytics Cloud tenant.</p>
+</li><li>
+<p>Open a Planning Model that receives data from SAP Datasphere via an OData connection.</p>
+</li><li>
+<p>Navigate to the Data Management tab and select an existing Import Job</p>
+</li><li>
+<p>Run the import job.</p>
+</li><li>
+<p>Observe the Data Timeline; notice a high volume of rejected rows.</p>
+</li><li>
+<p>Download the Rejection Summary and observe the error: <em>"Null value is not allowed for single column dimensions"</em> for dimensions where data is joined via Associations in the source Datasphere view.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>
+<p>A recent update in SAP Datasphere modified the metadata handling of Association Joins exposed via OData. Fields that were previously handled as empty strings are now arriving as true <code>NULL</code> values.</p>
+</li><li>Since SAC Planning models require every dimension to have a valid Member ID for every record, the system rejects rows containing <code>NULL</code> values unless a default mapping or handling instruction is provided.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>There are two primary methods to resolve this, depending on the desired scope of the fix:</p>
+<h4 data-toc-skip="">Method 1: Connection-Level Handling</h4>
+<p>This is the most efficient fix as it covers all dimensions within the job.</p>
+<ol><li>
+<p>Open the affected Import Job in SAC.</p>
+</li><li>
+<p>Navigate to Import Settings.</p>
+</li><li>
+<p>Enable the switch: "Import Empty Member ID Cells".</p>
+</li><li>
+<p>Save and Run the job.</p>
+</li></ol>
+<h4 data-toc-skip="">Method 2: Manual Mapping</h4>
+<p>Use this if you only want to allow nulls for specific dimensions.</p>
+<ol><li>
+<p>Open the Mapping (Map to Model) step of the import job.</p>
+</li><li>
+<p>Select the affected Dimension (e.g., Afdeling).</p>
+</li><li>
+<p>In the right-side panel, locate the "Map Unmapped Values to" or "Default Value" field.</p>
+</li><li>
+<p>Enter the hash symbol (#).<br/><br/></p>
+</li></ol>
+<h4 data-toc-skip="">Performance Optimization</h4>
+<p>To reduce high turnaround times:</p>
+<ol><li style="list-style-type: none;">
+<ol><li>
+<p>Go to the Pagination Settings in the Import Job.</p>
+</li><li>
+<p>Manually enter the Key Fields from the source view to enable Server-Side Paging.</p>
+</li></ol>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li style="list-style-type: none;">
+<ul><li>KBA <a href="https://me.sap.com/notes/3271051" rel="noopener noreferrer nofollow" target="_blank">3271051</a> - Importing job fails due to "Invalid Token" error from SAP Datasphere OData API in SAP Analytics Cloud.</li><li>KBA<a href="https://me.sap.com/notes/3630265" rel="noopener noreferrer nofollow" target="_blank"> 3630265</a> - Null value is not allowed for single column dimensions error happens when creating the new model type and importing data with null value of the dimension attribute.</li><li>KBA <a href="https://me.sap.com/notes/2569847" rel="noopener noreferrer nofollow" target="_blank">2569847</a> - Where can you find SAC user assistance (help) to use, configure, and operate it more effectively?</li><li>KBA <a href="https://me.sap.com/notes/2487011" rel="noopener noreferrer nofollow" target="_blank">2487011</a> - What information do I need to provide when opening a case for SAP Analytics Cloud?</li><li>KBA <a href="https://me.sap.com/notes/2511489" rel="noopener noreferrer nofollow" target="_blank">2511489</a> - Troubleshooting performance issues in SAP Analytics Cloud</li><li><a href="https://help.sap.com/viewer/2d7115b0e0aa4f78bfd9c06fdc1fe4f6/latest/en-US" rel="noopener noreferrer nofollow" target="_blank">SAP Analytics Cloud Connection Guide</a></li><li><a href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/837228942b504eeeb75efee930727914.html" rel="noopener noreferrer nofollow" target="_blank">SAP Analytics Cloud Get More Help and SAP Support</a></li><li>Need More Help? <a href="https://support.sap.com/en/contact-us.html" rel="noopener noreferrer nofollow" target="_blank">Contact Support</a> </li></ul>
+</li><li>
+<p>Your feedback is important to help us improve our knowledge base.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>sap analytics cloud, import job error, couldn't refresh the data, correlation ID, null value rejection, single column dimensions, odata api, association joins, import empty member id cells, pagination settings, import job failed, data acquisition error, sac planning model, sac import job, null values, data rejection, sap datasphere update</p></div></div></div></div>

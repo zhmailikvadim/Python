@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>On the Analytics Portal, users cannot download or view PDF reports. The following error message is displayed:</p>
+</div>
+<p><em>Unexpected server response (500) while retrieving PDF "<a href="https://xxxx:40000/Portal/api/histories/16/preview/pdf" rel="noopener noreferrer nofollow" target="_blank">https://xxxx:40000/Portal/api/histories/16/preview/pdf</a>".</em></p>
+<p><span style="color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Business One, version for SAP HANA</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Prerequisites:</strong></p>
+<p>The company has been initialized in the Analytics Administration Console.</p>
+<p><strong>Steps to reproduce:</strong></p>
+<p>Access the Analytical Portal through <em>https://ServerName:Port/Portal. </em></p>
+<p><strong>Expected result:</strong></p>
+<p>PDF reports are downloaded or viewed successfully without any issues.</p>
+<p><strong>Actual result:</strong></p>
+<p>Fail to download or view PDF reports, and the following error message is displayed:</p>
+<p><em>Unexpected server response (500) while retrieving PDF "<a href="https://xxxx:40000/Portal/api/histories/16/preview/pdf" rel="noopener noreferrer nofollow" target="_blank">https://xxxx:40000/Portal/api/histories/16/preview/pdf</a>".</em></p>
+<p>The following error is found in the <em>Portal.log</em> file located under <em>\var\log\SAPBusinessOne\AnalyticsPlatform\Portal:</em></p>
+<p><em>"message":"Tried to read data but the maximum length for this record type is 100,000,000.If the file is not corrupt and not large, please open an issue on bugzilla to request increasing the maximum allowable size for this record type.You can set a higher override value with IOUtils.setByteArrayMaxOverride()","stack_trace":"o.a.p.u.RecordFormatException: Tried to read data but the maximum length for this record type is 100,000,000.\nIf the file is not corrupt and not large, please open an issue on bugzilla to request \nincreasing the maximum allowable size for this record type.</em></p>
+<p><em><img alt="" class="img-responsive" height="82" src="/documents/customerkba/4P6dg7OH9Srh5D665TdxvfGolYa2KbZv3iqy0aajX74" title="Screenshot 2026-03-27 215656.png" width="700"/></em></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This is a system limitation.</p>
+<div>
+<p>When the report data exceeds a certain limit, both the PDF preview and download fail with the error message '<em>RecordFormatException</em>'.</p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="text-decoration: underline;"><strong>Workaround:</strong></span></p>
+<p>Download the report in an alternative format to view it.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>PDF report, download, run, 500, limit</p></div></div></div></div>

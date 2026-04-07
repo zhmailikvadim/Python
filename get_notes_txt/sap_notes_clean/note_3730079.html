@@ -1,0 +1,56 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>In SAP Cloud Connector, the “Check Internal Host” functionality fails with an SSL/TLS error:</li></ul>
+<div>
+<div id="code-block-viewer">2026-01-29 15:54:32,455 +0100#INFO#com.sap.scc.rt#AccessControl connection checker# #SccEndpointValidator for &lt;host&gt;:&lt;port&gt;  can't retrieve further TLS information witk IAIK<br/>iaik.security.ssl.SSLException: Peer sent alert: Alert Fatal: handshake failure</div>
+<div> </div>
+</div>
+<ul><li>The error is logged with reference to:</li></ul>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div id="code-block-viewer">
+<div>
+<div><em>AccessControl connection checker</em><br/><em>SccEndpointValidator</em></div>
+<div> </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul><li>Productive communication (e.g. via SAP BTP application) works successfully</li><li>No handshake failure is observed in backend ICM logs for productive requests</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Cloud Connector</li><li>Backend system with TLS configuration (including ECDSA-only or restricted cipher suites)</li><li>SAP BTP connectivity scenarios</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>In Cloud Connector, navigate to Cloud to On-Premise and run “Check Internal Host” for the mapped HTTPS backend.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ol><li>The behavior is caused by the use of different TLS/SSL implementations within SAP Cloud Connector:</li></ol>
+<ul><li>
+<p>Connection Check (Check Internal Host)<br/>Uses an internal diagnostic SSL library:<br/>→ <em>IAIK SSL Library</em></p>
+</li><li>
+<p>Productive Communication<br/>Uses the standard JVM TLS implementation</p>
+</li></ul>
+<p>     2. The IAIK SSL library has limitations in handling certain TLS configurations, especially environments that rely on:</p>
+<ul><li>
+<p>ECDSA-based certificates</p>
+</li><li>
+<p>Restricted cipher suites (e.g. ECDSA-only)</p>
+</li></ul>
+<p>Because of this, the connection checker may fail during the TLS handshake even though the productive communication path is fully functional.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>This is expected behavior.</li></ol>
+<ul><li>The connection checker is a diagnostic tool only and does not reflect the exact behavior of productive communication.</li><li>There is currently no option to configure the connection checker to use the JVM TLS implementation</li></ul>
+<p>     2. To validate connectivity, perform a productive test instead:</p>
+<ul><li>Trigger a request from SAP BTP application to the backend system via Cloud Connector</li><li>Verify:</li></ul>
+<ol><li style="list-style-type: none;">
+<ol><li>
+<p>Backend ICM logs</p>
+</li><li>
+<p>Cloud Connector logs</p>
+</li></ol>
+</li></ol>
+<p>If productive communication is successful<strong>,</strong> the connection checker error can be safely ignored in this context</p>
+<p>     3. Additional information</p>
+<ul><li>The SAP Cloud Connector built-in certificate generator creates RSA-based certificates only</li><li>If required, an ECDSA certificate can be generated externally (e.g. via OpenSSL) and imported into Cloud Connector for testing purposes</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: <a href="https://me.sap.com/notes/0003519777" rel="noopener noreferrer nofollow" target="_blank">3519777 - Error in Cloud Connector's Cloud to On-Premise Page Availability Check</a></li><li>Refer to: <a href="https://me.sap.com/notes/0003379618" rel="noopener noreferrer nofollow" target="_blank">3379618 - How to troubleshoot the error "No common SSL/TLS ciphersuite with SSL/TLS client!"</a></li><li>Refer to: <a href="https://me.sap.com/notes/0003669926" rel="noopener noreferrer nofollow" target="_blank">3669926 - "Peer sent alert: Alert Fatal: handshake failure" is raised when Cloud Connector communicates with third-party load balancer</a></li><li>Refer to: <a href="https://me.sap.com/notes/0002746754" rel="noopener noreferrer nofollow" target="_blank">2746754 - Log and Trace files to troubleshoot scenarios involving SAP BTP &gt; Cloud Connector &gt; AS ABAP</a></li><li>Refer to: <a href="https://me.sap.com/notes/0002708581" rel="noopener noreferrer nofollow" target="_blank">2708581 - ECDSA Support for Outbound Connections in SAP NW AS Java</a></li><li>Refer to: <a href="https://me.sap.com/notes/0003144145" rel="noopener noreferrer nofollow" target="_blank">3144145 - ECDSA support update for SAP Diagnostic Agent</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>cloud connector, connection checker, iaik, ssl handshake failure, ecdsa, ecc, tlsv1.2, no common ciphersuite, clienthello, handshake failure alert, scc_core.trc, strust, ecdhe_ecdsa, abap icm, tls diagnostics</p></div></div></div></div>

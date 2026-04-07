@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>You want to configure the PCC jobs as per your needs for simpler identification.</li><li>SM37 job names for Payroll Control Center (PCC) jobs need to include payroll identifier prefixes at the beginning.</li></ul>
+<section>
+<section id="u_symptom">
+<section>
+<section id="u_resolution">
+<p><strong>Disclaimer : <span><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em> </span></strong></p>
+<p></p>
+</section>
+</section>
+<section><header></header></section>
+<p></p>
+</section>
+</section>
+<section><header></header></section>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Human Capital Management (HCM)</li><li>Payroll Control Center (PCC)</li><li>SAP enhancement package for SAP ERP, version for SAP HANA</li><li>SAP SuccessFactors Employee Central</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Logon into Payroll Control Center.</li><li>Go to 'My Process' application.</li><li>Run PCC steps that create background jobs.</li><li>Open SM37 and review the generated job names.</li><li>Observe that the job names do not include the required payroll identifier prefixes at the beginning.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Custom logic needs to be written.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Go to PYC_CONF_WB t-code.</li><li>Choose 'Step Template' from drop-down menu.</li><li>Copy the PCC step run-time class name(mentioned under step logic field) for which the job details (name) must be changed.</li><li>Copy the standard class <strong>CL_PYC_BPC_REPORT_SIMPLE </strong>and create your own custom class.</li><li>In the custom class, implement method <strong>GET_JOB_NAME </strong>and write your own custom logic to update the job name.</li><li>Go to SE24 t-code.</li><li>Pass the copied step run-time class name.</li><li>In method <strong>FP3_BPC_DET_RT_GET_LIST</strong>, adjust the class referenced by <strong>ls_dto-rpt_rt</strong> which points to a standard class.(CL_PYC_BPC_REPORT_SIMPLE). Change it to your custom class.</li></ol>
+<p>     <img class="img-responsive" height="381" src="/documents/customerkba/947ML86Xs3BdQhVwn0rEweZTqWy8hsTstyWfg5CnSY8" width="1024"/></p>
+<p>     <img class="img-responsive" src="/documents/customerkba/16lbc1qTkzK5TWHGbRzKhyD9tK8pJ12CA88junvoeco"/></p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>PCC jobs name can be easily set from user-id in newly released PCC version: 'Manage Payroll Activity'. No need to write custom logic.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SM37, job name, payroll identifier, prefix, PCC, Payroll Control Center, Manage Payroll Activity, FP3_BPC_DET_RT_GET_LIST, GET_JOB_NAME, CL_PYC_BPC_REPORT_SIMPLE, job naming, runtime class, ECP, background job, naming convention , background job name change</p></div></div></div></div>

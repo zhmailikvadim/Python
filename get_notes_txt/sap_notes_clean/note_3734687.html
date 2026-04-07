@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Customer'd like to send request from API pod/node to a service in the backgroundprocessing node.</p>
+<p>The curl command used to access the background processing service results in Error message: "403 forbidden error".</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Commerce Cloud</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Run the following groovy script from the script console:</p>
+<p>```groovy</p>
+<p>import java.net.*</p>
+<p>import java.io.*</p>
+<p>def url = new URL("<a href="https://backgroundprocessing.ce67qkbx0p-southerng1-s1-public.model-t.cc.commerce.ondemand.com/sgwshealthcheck/healthcheck/status" rel="noopener noreferrer nofollow" target="_blank">https://backgroundprocessing.xxxxxxxx-public.model-t.cc.commerce.ondemand.com/sgwshealthcheck/healthcheck/status</a>")</p>
+<p>def connection = url.openConnection()</p>
+<p>connection.setRequestMethod("GET")</p>
+<p>connection.setConnectTimeout(5000)</p>
+<p>connection.setReadTimeout(5000)</p>
+<p>def responseCode = connection.responseCode</p>
+<p>def responseText = connection.inputStream.getText("UTF-8")</p>
+<p>println "Response Code: "</p>
+<p>println "Response Body:\\n"</p>
+<p>```</p>
+<p>--Result: Observe the 403 forbidden error response.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The IP of the API proxy added does not work as the source IP for the request, which caused the 403 error. </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Add node CIDR and pod CIDR to the allow list in the IP filter of targeting service (backgroundprocessing as above sample)</p>
+<p>The node CIDR and pod CIDR could be found in Dyantrace as below:</p>
+<p>Node CIDR: Kubernetes-&gt; AutomationEngine -&gt;Nodes -&gt; [NodeId]: Internal IP Address<br/>Pod CIDR: Kubernetes-&gt; AutomationEngine -&gt;NameSpace -&gt;......-&gt; Pods -&gt; [PodId]: IP Address</p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://backgroundprocessing.ce67qkbx0p-southerng1-s1-public.model-t.cc.commerce.ondemand.com/sgwshealthcheck/healthcheck/status" rel="noopener noreferrer nofollow" target="_blank">Background Processing Service Health Check</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>403 forbidden error, API node, background node, SAP Commerce Cloud, connectivity issue, IP filter, node CIDR, pod CIDR, groovy script, background processing service</p></div></div></div></div>

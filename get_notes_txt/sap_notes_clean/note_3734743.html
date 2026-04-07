@@ -1,0 +1,50 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>Data acquisition from S/4HANA via OData is significantly slow</li>
+<li>High number of requests observed during data load</li>
+<li>Noticeable latency despite moderate data volume</li>
+</ul>
+<p><strong>Environment</strong></p>
+<ul>
+<li>SAP S/4HANA (OData Services)</li>
+<li>SAP Analytics Cloud (SAC)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> Gateway, S/4Hana on-premise, BDC</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Incorrect batch size request handling</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Cause</strong></p>
+<p>The issue occurs when an <strong>unsupported batch size (e.g., 50,000)</strong> is configured.</p>
+<ul>
+<li>S/4HANA Gateway enforces a <strong>maximum supported batch size of ~5,000</strong></li>
+<li>When SAC is configured with <strong>50,000</strong>, this value is not applied directly</li>
+<li>SAC switches to <strong>server-side pagination</strong></li>
+<li>S/4HANA determines the effective batch size and may reduce it to <strong>~100 records per request</strong></li>
+</ul>
+<p><strong>Effect</strong></p>
+<ul>
+<li>Instead of processing <strong>large batches (5,000 records)</strong></li>
+<li>The system processes <strong>many small batches (~100 records)</strong></li>
+</ul>
+<p>This results in:</p>
+<ul>
+<li>Excessive number of <strong>network round trips</strong></li>
+<li>Increased <strong>latency per request</strong></li>
+<li>Overall <strong>significant performance degradation</strong></li>
+</ul>
+<p><strong>Resolution</strong></p>
+<ul>
+<li>Configure the batch size in SAC to <strong>5,000 (recommended)</strong></li>
+<li>Re-run the data acquisition</li>
+</ul>
+<p><strong>Recommendation</strong></p>
+<ul>
+<li>Always use a batch size of <strong>≤ 5,000</strong> for S/4HANA OData sources</li>
+<li>Avoid configuring higher values (e.g., 50,000), as this triggers inefficient server-side pagination</li>
+</ul>
+<p><strong>Additional Information</strong></p>
+<ul>
+<li>The observed slowness is not due to data volume, but due to <strong>inefficient request handling caused by incorrect batch size configuration</strong></li>
+<li>Proper batch size ensures optimal balance between payload size and number of network calls</li>
+</ul></div></div></div></div>

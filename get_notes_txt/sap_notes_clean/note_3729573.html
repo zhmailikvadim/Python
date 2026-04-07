@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>Error message is raised during processing of Poland KSeF eDocuments:<br/><em>"Status of the eDocument does not allow the execution of process step GET_DRCSTR"</em></p>
+</li><li>
+<p>The issue occurs when attempting one of the following actions in EDOC_COCKPIT:</p>
+<ul><li>
+<p>Execute Get Status</p>
+</li><li>
+<p>Resubmit a rejected eDocument</p>
+</li></ul>
+</li><li>
+<p>The system does not allow further processing of the eDocument despite the document being in rejected status.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP ERP</li><li>SAP S/4HANA</li><li>SAP Document and Reporting Compliance, cloud edition</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Attempt to resubmit a rejected eDocument from the cockpit.</li><li>Trigger the "Get status" process step.</li><li>Observe the error message: "Status of the eDocument does not allow the execution of process step GET_DRCSTR".</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Electronic documents created before the delivery of resubmission functionality do not contain the required process steps in the process framework.</p>
+<p>As a result, when attempting to execute actions such as Get Status (GET_DRCSTR) or resubmission, the system determines that the process step is not applicable for the current document status and raises the error.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This is standard system behavior.</p>
+<ul><li>
+<p>Resubmission and retry functionalities are supported only for electronic documents created after the feature delivery (January 23, 2026).</p>
+</li><li>
+<p>Electronic documents created before this date cannot be resubmitted.</p>
+</li></ul>
+<p>For such older documents:</p>
+<ul><li>
+<p>Correct the source data if required.</p>
+</li><li>
+<p>Create and submit a new electronic document.</p>
+</li></ul>
+<p>To use resubmission functionality, ensure the system is updated with the relevant feature delivery and test with newly created documents.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://i7p.bss.net.sap/sap/support/notes/3702882" rel="noopener noreferrer nofollow" target="_blank">3702882 - Electronic Document Processing for Poland - KSeF: Re-submission Enablement for Customer Invoice (PLKSEF Version 2) and Delete Enablement for Supplier Invoice (PLKSEFIN Version 2)</a></li><li><a href="https://me.sap.com/notes/0003608110" rel="noopener noreferrer nofollow" target="_blank">3608110 - How to join the localization/regional collaboration WorkZone Groups and Community?</a>.</li><li><a href="https://me.sap.com/notes/3570281" rel="noopener noreferrer nofollow" target="_blank">3570281 - How to check for previous or upcoming legal changes for SAP Document and Reporting Compliance</a>.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>ksef resubmit not possible, GET_DRCSTR error, edoc cockpit resubmission poland, rejected invoice ksef retry, process step not allowed edocument</p></div></div></div></div>

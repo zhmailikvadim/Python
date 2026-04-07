@@ -1,0 +1,55 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In your current SAP BW system you use multiple infopackages for a datasource (starting with prefix 0TB) to load data from a transaction banking source system (software components FSAPPL, CB4AHANA or S4FSFND). The infopackages have non-overlapping selection criteria and have been set up to parallelly request and load the data by an application specific parallelization mechanism in the banking source system.</p>
+<p>With the automatic conversion to BW4HANA the infopackages for the same datasource are converted into one single data transfer process (DTP) with extraction mode Delta.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">BW 7.50, BW4HANA</p>
+<p>In-place Conversion, Remote Conversion and Shell Conversion</p>
+<p>Transactional Banking, 0TB*</p>
+<p>SAP Note <a href="/notes/3706178" target="_blank">3706178</a> - When to Use Full Load DTP, Delta, or Delta Initialization with ODP in BW, BW/4HANA</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The following options are possible:</p>
+<p>Option 1)</p>
+<p>You use the converted DTP with extraction mode Delta.</p>
+<p>Option 2)</p>
+<p>You do not use the converted DTP, but manually create DTPs with extraction mode <strong>Delta</strong>. That means you create the same number of DTPs with extraction mode Delta and with the same non-overlapping selection criteria as the infopackages in the SAP BW system.</p>
+<p>Option 3)</p>
+<p>You do not use the converted DTP, but manually create DTPs with extraction mode <strong>Full</strong>. That means you create the same number of DTPs with extraction mode Full and with the same non-overlapping selection criteria as the infopackages in the SAP BW system.</p>
+<p>The following implications must be taken into account:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="2" class="table table-bordered table-striped col-resizeable" style="width: 1156px; height: 387px;">
+<tbody>
+<tr>
+<td style="padding-left: 90px;"></td>
+<td><strong>Adjustment of Data in Banking Source System</strong></td>
+<td><strong>Parallelization of Data Transfer</strong></td>
+<td><strong>Initialization of DTPs</strong></td>
+<td><strong>History Loading</strong></td>
+</tr>
+<tr>
+<td>Option 1)</td>
+<td>
+<p>Control data for extraction in case of timestamp-based datasources.</p>
+</td>
+<td>Not possible, as there is only one DTP.</td>
+<td rowspan="2">
+<p>The initialization of the delta transfer can be performed as follows:</p>
+<ul>
+<li>Initialization without data: Implement SAP Note <a href="/notes/3715485" target="_blank">3715485</a> in the banking source system and perform the instructions in the solution section to enable the datasources in the banking source system for this.</li>
+<li>Initialization with data: It can only be performed for change pointer based datasources.</li>
+</ul>
+</td>
+<td rowspan="3">
+<p>History loading can only be performed for change pointer based datasources. Implement SAP Note <a href="/notes/3529938" target="_blank">3529938</a> in the banking source system and perform the instructions in the solution section to (temporarily) switch the extraction mode for a datasource in the banking source system. No change is required in the BW4HANA system.</p>
+</td>
+</tr>
+<tr>
+<td>Option 2)</td>
+<td rowspan="2">None.</td>
+<td rowspan="2">Same as before the conversion.</td>
+</tr>
+<tr>
+<td>Option 3)</td>
+<td>No initialization is required due to Full DTPs.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Based on the implications option 3) is recommended.</p></div></div></div></div>

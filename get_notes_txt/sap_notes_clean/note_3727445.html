@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The KBA has a detailed summary of the behavior of the two switches in Onboarding General Settings → Restart Settings:</p>
+<ul><li>Allow Recruiting Updates</li><li>Retain Onboarding Information</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Onboarding</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p></p>
+<h3 data-toc-skip=""><span style="font-size: 14pt;">1. Allow Recruiting Updates</span></h3>
+<p><strong><span style="font-size: 10pt;">Purpose:</span></strong></p>
+<ul><li><span style="font-size: 10pt;">Controls whether changes made in Recruiting (Start Date or Hiring Manager) are synchronized with the Onboarding process.</span></li></ul>
+<p><strong><span style="font-size: 10pt;">Behavior:</span></strong></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">When enabled, the system listens for updates from Recruiting.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">If a Start Date or Hiring Manager change occurs in Recruiting:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The system triggers an automatic restart (if auto-restart is configured).</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">During the restart, User Entities and Person Entities are updated with the latest values from Recruiting.</span></p>
+</li></ul>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">When disabled, any updates made in Recruiting will not be reflected in Onboarding, even if restart mechanisms are configured.</span></p>
+</li></ul>
+<p><span style="font-size: 10pt;"><strong>Note:</strong> This switch is mandatory for syncing Recruiting updates with Onboarding.</span></p>
+<h3 data-toc-skip=""><span style="font-size: 14pt;">2. Retain Onboarding Information</span></h3>
+<p><strong><span style="font-size: 10pt;">Purpose:</span></strong></p>
+<ul><li><span style="font-size: 10pt;">Controls whether existing onboarding data (in pages like New Hire Data Review) should be retained or overwritten when a manual restart is performed.</span></li></ul>
+<p><strong><span style="font-size: 10pt;">Behavior:</span></strong></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">This switch only applies when a manual restart is triggered.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">It does not affect scenarios where Auto Restart is configured.</span></p>
+</li></ul>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">Scenario A — Auto Restart Configured</span></h3>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">If Allow Recruiting Updates = ON and Auto Restart is configured:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The system automatically restarts onboarding when Recruiting updates occur.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">User and Person entities are updated from Recruiting.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Retain Onboarding Information switch has no impact in this scenario.</span></p>
+</li></ul>
+</li></ul>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">Scenario B — Manual Restart Performed</span></h3>
+<ul><li><span style="font-size: 10pt;">When Auto Restart is NOT configured and a manual restart is triggered:</span></li></ul>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; border- border-style: solid;"><thead><tr><th style="border-"><span style="font-size: 10pt;">Retain Onboarding Information</span></th><th style="border-"><span style="font-size: 10pt;">System Behavior</span></th></tr></thead><tbody><tr><td style="border-"><span style="font-size: 10pt;">Enabled</span></td><td style="border-"><span style="font-size: 10pt;">Existing New Hire Data Review (NHDR) information from Onboarding is retained after restart.</span></td></tr><tr><td style="border-"><span style="font-size: 10pt;">Disabled</span></td><td style="border-"><span style="font-size: 10pt;">NHDR information is overwritten with the latest data fetched from Recruiting when the restart loads the NHDR page.</span></td></tr></tbody></table></div>
+<h2 data-toc-skip=""><span style="font-size: 13.3333px;">NOTE:</span></h2>
+<ul><li><span style="font-size: 13.3333px;">Both the switches should not be enabled at the same time if Auto-Restart rule is not configured. </span></li></ul>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://help.sap.com/docs/successfactors-onboarding/implementing-onboarding/setting-up-data-flow-from-recruiting-for-onboarding-restart?locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank">Setting Up Data Flow from Recruiting for Onboarding Restart</a></li><li><a href="https://me.sap.com/notes/0003199172" rel="noopener noreferrer nofollow" target="_blank">3199172 - [Onboarding] Allow Recruiting Updates Feature Not Working as Expected - SAP for Me</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Allow Recruiting Updates, Retain Onboarding Information, Restart Settings, Onboarding General Settings, Auto-Restart, Restart, Manual Restart, Recruitin Update, Start Date, Manager Name, Manager, Hire Date, Hire</p></div></div></div></div>

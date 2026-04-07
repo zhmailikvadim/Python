@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripError sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>A new version is in preparation...!</strong> <br/>The content for this document is being improved and a new version is in preparation but not released yet. Please be aware that you are viewing outdated data from the previous version in a restricted mode with limited functionality.  You will be automatically notified once the new version is ready and released. The restrictions are described in <a href="/notes/3453681" style="color:var(--sapLinkColor);" target="_blank">KBA 3453681</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>Remote source configuration:</p>
+<ul>
+<li>Transmit Data in Compact Mode = true</li>
+<li>Enable Transaction Merge = false</li>
+<li>Enable Statement-level Trigger = false</li>
+<li>Triggers Record PK Only = false</li>
+</ul>
+<p>Update data is not replicated to target table. There's no obvious error or warning.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Replication, compact mode, trigger-based, SDI</p>
+<p><strong>Environment:</strong></p>
+<p>SAP HANA SDI 2.0 SP08 Patch 2 and before</p>
+<p><strong>Steps to Reproduce:</strong></p>
+<ul>
+<li>Create remote source with the configurations as above</li>
+<li>In source, create table like these:</li>
+</ul>
+<p style="padding-left: 60px;">CREATE TABLE AAATABLE (<br/>      INT_C1 INTEGER NOT NULL PRIMARY KEY,<br/>      SMALLINT_C2 SMALLINT,<br/>      BIGINT_C3 BIGINT,<br/>      DECIMAL_C4 DECIMAL(10,4),<br/>      NUMERIC_C5 NUMERIC(10,4));<br/>CREATE TABLE BBBTABLE (<br/>      INT_C1 INTEGER NOT NULL PRIMARY KEY,<br/>      SMALLINT_C2 SMALLINT,<br/>      BIGINT_C3 BIGINT,<br/>      DECIMAL_C4 DECIMAL(10,4),<br/>      NUMERIC_C5 NUMERIC(10,4));</p>
+<ul>
+<li>Start CDC replication</li>
+<li>Suspend remote source</li>
+<li>In source, set auto-commit=false and do DMLs like these:</li>
+</ul>
+<p style="padding-left: 60px;">insert into AAATABLE values (100, 100, 100000, 123.4567, null);<br/>insert into BBBTABLE values (100, 100, 100000, 123.4567, null);<br/>Commit;</p>
+<p style="padding-left: 60px;">UPDATE AAATABLE SET NUMERIC_C5 = 555.5555;<br/>Commit;</p>
+<ul>
+<li>Resume remote source</li>
+<li>In the end, NUMERIC_C5 in target table of AAATABLE is null, but it’s 555.5555 in source.</li>
+</ul>
+<p style="padding-left: 60px;">DPAgent logs:<br/>2026-03-02 13:59:34,394 [TRACE] [3f9c183b-eb2e-4c36-82e5-7a3ab2338df672737] DPFramework | ReceiverImpl.sendRowSets [] - AdapterRowSet<br/> RowSet Header String: remoteTableId=89<br/> Number of Columns: 5Number of Rows: 3<br/> INSERT |RemoteTableId:89|SequenceId:0x02000000000000002a000000000000000100000000000000340000|TransactionId:0x0000000a77e8e002|100 |100 |100000 |123.4567 |null<br/> BEFORE_IMAGE |RemoteTableId:89|SequenceId:0x02000000000000002a000000000000000200000000000000360000|TransactionId:0x0000000a77eb8002|100 |100 |100000 |123.4567 |null<br/> AFTER_IMAGE |RemoteTableId:89|SequenceId:0x02000000000000002a000000000000000200000000000000360000|TransactionId:0x0000000a77eb8002|100 |100 |100000 |123.4567 |555.5555 <br/> ]</p>
+<p style="padding-left: 60px;">2026-03-02 13:59:34,736 [TRACE] [3f9c183b-eb2e-4c36-82e5-7a3ab2338df672737] DPFramework | ReceiverImpl.sendRowSets [] - AdapterRowSet<br/> RowSet Header String: remoteTableId=91<br/> Number of Columns: 5Number of Rows: 1<br/> INSERT |RemoteTableId:91|SequenceId:0x02000000000000002a000000000000000300000000000000350000|TransactionId:0x0000000a77e8e002|100 |100 |100000 |123.4567 |null<br/> ]</p>
+<p style="padding-left: 60px;">2026-03-02 13:59:35,067 [TRACE] [3f9c183b-eb2e-4c36-82e5-7a3ab2338df672737] DPFramework | ReceiverImpl.sendRowSets [] - AdapterRowSet<br/> RowSet Header String: <br/> Number of Columns: 0Number of Rows: 2<br/> COMMIT |RemoteTableId:0 |SequenceId:0x02000000000000002a000000000000000400000000000000350001|TransactionId:0x0000000a77eb8002|<br/> COMMIT |RemoteTableId:0 |SequenceId:0x02000000000000002a000000000000000400000000000000350002|TransactionId:0x0000000a77e8e002|<br/> ]</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This correction is delivered in the release(s) listed in the Support Packages and Patches section of this SAP Note.</p></div></div></div></div></div>

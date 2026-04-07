@@ -1,0 +1,62 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>In Solr Admin (Cloud -&gt; Graph), all cores display as down</li><li>Commerce/Backoffice operations that depend on Solr fail. Full indexing attempts fail with errors similar to:
+<ul><li>"<em>Facet search has failed</em>"</li><li>"<em>Could not find a healthy node to handle the request.</em>" (from <em>org.apache.solr.client.solrj.impl.CloudSolrClient</em>)</li><li>"<em>Re-trying request to collection(s) [...] after stale state error from server.</em>"</li></ul>
+</li><li>Solr server logs show core load failures on startup, for example:
+<ul><li>"<em>SolrCore failed to load on startup</em>"</li><li>"<em>Could not load conf for core &lt;collection&gt;shard1_replica_n1: Can't load schema null: Unknown fieldType 'text_spell&lt;lang&gt;' specified on field spellcheck_&lt;lang&gt;</em>"</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Commerce Cloud</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Prepare the environment</p>
+<ul style="list-style-type: disc;"><li>Use an SAP Commerce Cloud project configured with SolrCloud (for example, Solr 9.x).</li><li>Ensure the project is operational before changes (cores green, indexing succeeds).</li></ul>
+</li><li>
+<p>Introduce an incomplete language configuration in <em>schema.xml</em></p>
+<ul style="list-style-type: disc;"><li>Add fields that reference a new spell-check field type, for example:
+<ul style="list-style-type: circle;"><li><em>autosuggest_&lt;lang&gt; </em>with<em> type="text_spell_&lt;lang&gt;"<br/></em></li><li><em>spellcheck_&lt;lang&gt; </em>with<em> type="text_spell_&lt;lang&gt;"</em></li></ul>
+</li><li>Do not add the corresponding <em>&lt;fieldType name="text_spell_&lt;lang&gt;"&gt;...&lt;/fieldType&gt; </em>definition.</li><li>(Optional) Add <em>fulltext_&lt;lang&gt;</em> and <em> dynamicField/copyField </em>entries that reference <em>text_&lt;lang&gt;</em> to broaden the mismatch.</li></ul>
+</li><li>
+<p>(Optional) Update Backoffice configuration</p>
+<ul style="list-style-type: disc;"><li>In Backoffice, navigate to System -&gt; Search and Navigation -&gt; Solr Facet Search Configuration -&gt; Facet Search Configuration and add/enable the new language without fixing the missing field type in <em>schema.xml</em>.</li></ul>
+</li><li>
+<p>Deploy the modified Solr configuration</p>
+<ul style="list-style-type: disc;"><li>Update and upload the affected Solr config set to the cluster used by your collections.</li></ul>
+</li><li>
+<p>Execute a search-dependent operation</p>
+<ul style="list-style-type: disc;"><li>Trigger a full indexing job from Backoffice, or execute a storefront/backoffice search that hits the affected collection.</li></ul>
+</li><li>
+<p>Observe SolrCloud state</p>
+<ul style="list-style-type: disc;"><li>Open Solr Admin -&gt; Cloud -&gt; Graph and verify that the affected collection’s replicas/cores show as down (orange).</li></ul>
+</li><li>
+<p>Check application-side errors</p>
+<ul style="list-style-type: disc;"><li>In SAP Commerce Cloud logs observe errors such as:
+<ul style="list-style-type: circle;"><li>"<em>Facet search has failed</em>"</li><li>"<em>Could not find a healthy node to handle the request.</em>" (from <em>org.apache.solr.client.solrj.impl.CloudSolrClient</em>)</li><li>"<em>Re-trying request to collection(s) [...] after stale state error from server.</em>"</li></ul>
+</li></ul>
+</li><li>
+<p>Confirm the root cause in Solr logs</p>
+<ul style="list-style-type: disc;"><li>Review Solr server logs for startup/core load failures, for example:
+<ul style="list-style-type: circle;"><li>"<em>SolrCore failed to load on startup</em>"</li><li>"<em>Could not load conf for core &lt;collection&gt;shard1_replica_n1: Can't load schema null: Unknown fieldType 'text_spell&lt;lang&gt;' specified on field spellcheck_&lt;lang&gt;</em>"</li></ul>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>A new language was partially introduced in Solr configuration. The schema defines fields such as <em>autosuggest_&lt;lang&gt; </em>and <em>spellcheck_&lt;lang&gt;</em><span style="font-family: verdana, geneva;"> </span>that reference a missing field type <em>text_spell_&lt;lang&gt;</em>. Because the required <em>&lt;fieldType name="text_spell_&lt;lang&gt;"&gt;...&lt;/fieldType&gt; </em>block is absent from <em>schema.xml</em> Solr cannot parse the schema and fails to load the affected cores. As a result, the cluster reports no active replicas and all Solr-dependent features fail.</p>
+<p>This typically occurs when following a language-enablement guide but omitting one of the schema steps. A KBA that outlines all required steps is <a href="https://me.sap.com/notes/2334769" rel="noopener noreferrer nofollow" target="_blank">KBA 2334769 - How to add a language in Solr</a>, which includes creating both the spell-check field type and the related fields/copyFields.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Complete and validate the Solr configuration for the newly added language by ensuring all required elements are present and consistent across <em>schema.xml </em>and <em>solrconfig.xml</em>, and that Backoffice facet configuration aligns with these changes.</p>
+<p>1. Update <em>schema.xml</em> for the new language. Ensure the following are defined (adapt the placeholder <em>&lt;lang&gt;</em> to the intended language code):</p>
+<ul><li>Define the spell-check field type:
+<ul><li>Add a <em>&lt;fieldType name="text_spell_&lt;lang&gt;" class="solr.TextField" ...&gt;</em> with appropriate analyzers and filters for the language.</li></ul>
+</li><li>Define the core text field type:
+<ul><li>Add <em>&lt;fieldType name="text_&lt;lang&gt;" class="solr.TextField" ...&gt; </em>with analyzers/filters suitable for full-text search in the language.</li></ul>
+</li><li>Add fields:
+<ul><li><em>autosuggest_&lt;lang&gt;</em> using <em>text_spell_&lt;lang&gt;</em></li><li><em>text_spell_&lt;lang&gt;</em> using <em>text_spell_&lt;lang&gt;</em></li><li><em>fulltext_&lt;lang&gt;</em> using <em>text_&lt;lang&gt;</em></li></ul>
+</li><li>Add copyField rules:
+<ul><li><em>autosuggest </em>-&gt; <em>autosuggest_&lt;lang&gt;</em></li><li><em>spellcheck </em>-&gt;<em> spellcheck_&lt;lang&gt;</em></li><li><em>*_text_&lt;lang&gt; </em>-&gt; <em>fulltext_&lt;lang&gt;</em></li></ul>
+</li><li>Add dynamicField rules:
+<ul><li><em>*_text_&lt;lang&gt; </em>mapped to<em> text_&lt;lang&gt;</em></li><li><em>*_text_&lt;lang&gt;_mv </em>mapped to<em> text_&lt;lang&gt; </em>(multiValued)</li></ul>
+</li></ul>
+<p>2. Update <em>solrconfig.xml</em> for suggest and spellcheck. Ensure the configuration builds and uses dictionaries for the new language:</p>
+<ul><li>In the <em>firstSearcher QuerySenderListener</em>, add entries to build:
+<ul><li>suggest dictionary with <em>qt=/suggest, spellcheck.dictionary=&lt;lang&gt;, spellcheck.build=true</em></li><li>spellcheck dictionary with <em>spellcheck.dictionary=&lt;lang&gt;, spellcheck.build=true</em></li></ul>
+</li><li>In the <em>suggest</em> component:
+<ul><li>Set the dictionary name to <em>&lt;lang&gt;</em></li><li>Set <em>field=autosuggest_&lt;lang&gt;</em></li><li>Keep or choose an appropriate <em>lookupImpl</em> (e.g., TSTLookup or FSTLookup) per performance needs</li></ul>
+</li><li>In the <em>spellcheck </em>component:
+<ul><li>Set the dictionary name to <em>&lt;lang&gt;</em></li><li>Set <em>field=spellcheck_&lt;lang&gt;</em></li><li>Ensure <em>buildOnCommit=true </em>and/or<em> buildOnOptimize=true</em></li></ul>
+</li></ul>
+<p>3. Align Backoffice facet configuration. In Backoffice, navigate to System -&gt; Search and Navigation -&gt; Solr Facet Search Configuration -&gt; Facet Search Configuration:</p>
+<ul><li>Confirm the language settings include the newly added language.</li><li>Ensure the facet configuration is consistent with the schema and Solr config entries for <em>&lt;lang&gt;</em>.</li></ul>
+<p>4. Indexing and validation</p>
+<ul><li>Trigger a full indexing run from Backoffice.</li><li>Confirm that Solr collections are healthy and that search, suggestions, and spellcheck operate correctly for the new language.</li></ul>
+<p>Notes</p>
+<ul><li>The error "<em>Unknown fieldType 'text_spell_&lt;lang&gt;' specified on field spellcheck_&lt;lang&gt;</em>" indicates the <em>text_spell_&lt;lang&gt;</em> field type is missing in <em>schema.xml</em>.</li><li>All three areas must be updated: <em>schema.xml</em>,<em> solrconfig.xml</em>, and Backoffice facet configuration.</li><li>Omitting any single step (for example, the <em>text_spell_&lt;lang&gt;</em> field type) can prevent cores from starting correctly and cause "<em>no active replicas found.</em>"</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/2334769" rel="noopener noreferrer nofollow" target="_blank">KBA 2334769 - How to add a language in Solr</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Commerce Cloud, Solr, Solr indexation failure, SolrCloud, schema.xml, solrconfig.xml, fieldType, fieldType configuration, text_spell, autosuggest, spellcheck, fulltext, dynamicField, copyField, language analysis, suggester, spellcheck component, unknown fieldType, Could not load conf for core, SolrCore, Solr cores, SolrCore failed to load on startup, no active replicas, cores down, indexing failure, facet search failed, CloudSolrClient, stale state error, search configuration, Backoffice facet search configuration, add a language in Solr</p></div></div></div></div>

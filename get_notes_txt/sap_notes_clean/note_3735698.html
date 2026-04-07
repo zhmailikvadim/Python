@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3735698&amp;TargetLanguage=EN&amp;Component=IS-U-EEG&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3735698/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3735698/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">This SAP Note is relevant for you only if you use SAP EEG Billing for German Electricity Feed.</p>
+<p>When you implement SAP Note <strong>3724868</strong>, the system issues the following error message:</p>
+<ul>
+<li>VIEWFRAME_/ENBIL/V_MLDBOG - Changes to /ENBIL/LUM_CONFIGU03 are forbidden by SAP</li>
+<li>VIEWFRAME_/ENBIL/V_MLDTAB - Changes to /ENBIL/LUM_CONFIGU05 are forbidden by SAP</li>
+<li>VIEWFRAME_/ENBIL/V_TABCAT - Changes to /ENBIL/LUM_CONFIGU07 are forbidden by SAP</li>
+</ul>
+<ul>
+<li>VIEWPROC_/ENBIL/V_MLDBOG - Changes to /ENBIL/LUM_CONFIGU04 are forbidden by SAP</li>
+<li>VIEWPROC_/ENBIL/V_MLDTAB - Changes to /ENBIL/LUM_CONFIGU06 are forbidden by SAP</li>
+<li>VIEWPROC_/ENBIL/V_TABCAT - Changes to /ENBIL/LUM_CONFIGU08 are forbidden by SAP</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p id="">ENBIL</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p id="">ENBIL 606 SP23 or lower</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>The affected modules must be regenerated.</p>
+<p>Perform the following manual steps:</p>
+<p>1.) Call transaction <strong>SE54</strong> and enter the view <strong>/ENBIL/V_MLDBOG</strong> in the "Table/View" field.</p>
+<p>2.) Select <strong>"Generated Objects"</strong> and then choose <strong>"Create/Change".</strong></p>
+<p>3.) On the following screen, <strong>choose "Change" (F7).</strong></p>
+<p>4.) In the dialog box (Change Generated Elements), choose <strong>Module Create</strong> and confirm the selection by <strong>choosing Continue (Enter). </strong></p>
+<p>5.) The modules VIEWFRAME_/ENBIL/V_MLDBOG and VIEWPROC_/ENBIL/V_MLDBOG are regenerated. The editor lock should no longer be set.</p>
+<p>Repeat steps 1.) to 5.) for the views <strong>/ENBIL/V_MLDTAB</strong> and <strong>/ENBIL/V_TABCAT.</strong></p>
+<p>Then implement SAP Note <strong>3724868</strong> again.</p>
+<p> </p></div></div></div></div></div>

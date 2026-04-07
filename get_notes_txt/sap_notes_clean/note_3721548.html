@@ -1,0 +1,164 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0"><span style="font-size: 10pt;">A service order is created in SAP ECC or SAP S/4HANA and successfully replicated to SAP Field Service Management Cloud.</span></p>
+<p><span style="font-size: 10pt;">On the FSM Planning Board:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The service call (service order) is visible.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">However, no activity is displayed or assigned to the service call.</span></p>
+</li></ul>
+<p><span style="font-size: 10pt;">In standard scenarios, an activity is created and transferred together with the service order. In this case, the activity is missing.</span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">SAP Field Service Management (FSM)</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Proaxia Connector (PACG)</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">ECC, S/4 HANA</span></li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><h3 data-toc-skip=""><span style="font-size: 10pt;">Expected Behavior</span></h3>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">A service order is created in ECC/S/4HANA.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The service order and its activity are replicated to FSM Cloud.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The activity is visible on the FSM Planning Board and can be assigned to a technician.</span></p>
+</li></ul>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">Actual Behavior</span></h3>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The service order is successfully created and replicated to FSM Cloud.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The service call appears on the FSM Planning Board.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">No activity exists for the service call.</span></p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><span style="font-size: 10pt;">This issue can occur due to one or more of the following reasons:</span></p>
+<ol><li style="font-size: 10pt;">
+<p><strong><span style="font-size: 10pt;">Incorrect or incomplete customizing in ECC/S/4HANA</span></strong></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Relevant customizing tables are not properly maintained.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Required configuration entries for activity creation are missing.</span></p>
+</li></ul>
+</li><li style="font-size: 10pt;">
+<p><strong><span style="font-size: 10pt;">Service order operation does not meet customizing requirements</span></strong></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The operation master data does not fulfill the conditions required for activity creation.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Mandatory fields or control keys are missing or incorrectly maintained.</span></p>
+</li></ul>
+</li><li style="font-size: 10pt;">
+<p><strong><span style="font-size: 10pt;">Service order created before FSM integration was implemented</span></strong></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The service order was created before the FSM connector was activated.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The activity was never generated for the existing service order.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Therefore, no activity was available for replication.</span></p>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="font-size: 10pt;">In the standard configuration of proaxia’s FSM Cloud Connector, an activity is automatically created once the service order is released.</span></p>
+<p><span style="font-size: 10pt;">However, activity creation can be restricted by configuration settings based on the following parameters:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Control Key</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Planner Group</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Work Center</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Status</span></p>
+</li></ul>
+<p><span style="font-size: 10pt;">Follow the steps below to analyze and resolve the issue.</span></p>
+<p></p>
+<h3 data-toc-skip=""><span style="text-decoration: underline; font-size: 10pt;">1. Check Whether the Activity Was Created</span></h3>
+<ol><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Open the service order.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Use the GOS (Generic Object Services) icon.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Navigate to the Relationships section.</span></p>
+</li></ol>
+<h4 data-toc-skip=""><span style="font-size: 10pt;">Result</span></h4>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><strong>If the activity exists</strong> → Proceed to section 2.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><strong>If no activity exists</strong> → Proceed to section 3.</span></p>
+</li></ul>
+<p style="font-size: 10pt;"></p>
+<h3 data-toc-skip=""><span style="text-decoration: underline; font-size: 10pt;">2. Activity Exists but Is Not Visible in FSM</span></h3>
+<p><span style="font-size: 10pt;">If the activity is visible in the GOS relationships:</span></p>
+<ol><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Open transaction WE09.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Search for outbound IDoc type: <em><strong>/PACG/ECM_ACTIVITYOUT</strong></em></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Use the activity number as selection criteria.</span></p>
+</li></ol>
+<h4 data-toc-skip=""> </h4>
+<h4 data-toc-skip=""><span style="font-size: 10pt;">Check the IDoc Status</span></h4>
+<p><span style="font-size: 10pt;">If the IDoc status is 41 and the activity is not visible on the FSM Planning Board:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Verify whether the connector setup program has been run.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Compare the connector setup version with the current entries in table: <em><strong>/PACG/ECS_SETUP</strong></em></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">If inconsistencies are detected, run transaction: <strong>/PACG/ECM_SETUP</strong></span></p>
+</li></ul>
+<p><span style="font-size: 10pt;">This ensures that the connector configuration matches the maintained setup values.</span></p>
+<p></p>
+<h3 data-toc-skip=""><span style="text-decoration: underline; font-size: 10pt;">3. No Activity Was Created</span></h3>
+<p><span style="font-size: 10pt;">If no activity exists in the GOS relationship, verify whether the operation data meets the activity generation criteria.</span></p>
+<p><span style="font-size: 10pt;">Compare the service order operation values with the configuration maintained in the following transactions:</span></p>
+<h4 data-toc-skip=""><span style="font-size: 10pt;">Control Keys </span></h4>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Defines control keys relevant for activity generation.</span></li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Transaction: <em><strong>/PACG/ECM_TKDEF</strong></em></span></p>
+<div>
+<div>
+<div> </div>
+<div> </div>
+</div>
+</div>
+</li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Documentation: <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/37136310/PACG+ECM_TKDEF+-+Control+keys+relevant+for+activity+generation" rel="noopener noreferrer nofollow" target="_blank">/PACG/ECM_TKDEF - Control keys relevant for activity generation - FSM Cloud Connector - Confluence</a> </span></li></ul>
+<p style="font-size: 10pt;"></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Defines planner group filters for service calls.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Transaction: <em><strong>/PACG/ECM_SC_PGF</strong></em></span></p>
+<div> </div>
+</li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Documentation:  <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/3104931841/2.18+PACG+ECM_SC_PGF+-+Planner+group+filter+for+service+calls" rel="noopener noreferrer nofollow" target="_blank">[2.18] /PACG/ECM_SC_PGF - Planner group filter for service calls - FSM Cloud Connector - Confluence</a> </span></li></ul>
+<p style="font-size: 10pt;"></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Defines work center inclusion/exclusion rules.</span></li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Transaction: <em><strong>/PACG/ECM_SCTD_WCE</strong></em></span></p>
+</li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Documentation:  <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/1203273736/PACG+ECM_SCTD_WCE+-+Workcenter+exclusion+inclusion+for+service+calls" rel="noopener noreferrer nofollow" target="_blank">/PACG/ECM_SCTD_WCE - Workcenter exclusion/inclusion for service calls - FSM Cloud Connector - Confluence</a> </span></li></ul>
+<p style="font-size: 10pt;"></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Defines relevant service call statuses for activity creation.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Transaction: <em><strong>/PACG/ECM_SCSTD</strong></em></span></p>
+</li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Documentation:  <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/37135809/PACG+ECM_SCSTD+-+Status+of+Service+Call" rel="noopener noreferrer nofollow" target="_blank">/PACG/ECM_SCSTD - Status of Service Call - FSM Cloud Connector - Confluence</a> </span></li></ul>
+<h4 data-toc-skip=""> </h4>
+<p><span style="font-size: 10pt;">Ensure that:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The control key is allowed for activity generation.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The planner group is not excluded.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The work center is not filtered out.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The service order has a status that permits activity creation.</span></p>
+</li></ul>
+<p></p>
+<ul></ul>
+<h3 data-toc-skip=""><span style="text-decoration: underline; font-size: 10pt;">4. Manually Trigger Activity Creation</span></h3>
+<p><span style="font-size: 10pt;">If all parameters are correctly maintained and the activity still does not exist:</span></p>
+<ol><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Open the service order in change mode.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Save the document again.</span></p>
+</li></ol>
+<p><span style="font-size: 10pt;">Alternatively, use the transaction to generate the activity: <em><strong>/PACG/ECM_ACT_GEN</strong></em></span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;"> <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/2917957638/2.18+PACG+ECM_ACT_GEN+-+Mass+Activity+Generator" rel="noopener noreferrer nofollow" target="_blank">[2.18] /PACG/ECM_ACT_GEN - Mass Activity Generator - FSM Cloud Connector - Confluence</a> </span></li></ul>
+<p></p>
+<p></p>
+<h3 data-toc-skip=""><span style="text-decoration: underline; font-size: 10pt;">5. Re-Trigger Activity Transfer to FSM</span></h3>
+<p><span style="font-size: 10pt;">If the activity exists but is still not transferred:</span></p>
+<ol><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Run transaction: <em><strong>/PACG/ECM_TRIG_SCALL</strong></em></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Select the option: <em><strong>Send activity</strong></em></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Run the report and review the application log.</span></p>
+</li></ol>
+<p><span style="font-size: 10pt;">The log will indicate whether:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The activity is relevant for sending, or</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">It was filtered out due to configuration.</span></p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to:  <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/overview" rel="noopener noreferrer nofollow" target="_blank">FSM Cloud Connector by proaxia - FSM Cloud Connector - Confluence</a> </li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP FSM, proaxia FSM connector, service order, service call, activity not created, activity not replicated, planning board issue, ECC integration, S/4HANA integration, IDoc /PACG/ECM_ACTIVITYOUT, WE09, activity generation, /PACG/ECM_ACT_GEN, /PACG/ECM_SETUP, customizing check, control key, planner group, work center filter, service order status, GOS relationship</p></div></div></div></div>

@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">During an upgrade to <strong>S/4 HANA 2023</strong>, <strong>S/4 HANA 2025</strong>, <strong>BW HANA 2023 or BW HANA 2025</strong>, the SUM Phase HANA_DEPLOY_UPG deletes the customer HANA Repo objects which exist only in HANA DB but not in HTA(ABAP). This deletion is unexpected as no customer objects should be deleted during an upgrade.<br/><br/>The following error messages, relevant to the issue, can be found in the log files SAPCCC*_REPO.[SID]:<br/><br/><em>"A2 ESCTS_HOT 501 Start of deployment to SAP HANA repository: ......</em><br/><em>A2 ESCTS_HOT 507 " "</em><br/><em>A4 ESCTS_HOT 595XThe following objects exist in HANA only (not in HTA) and will be deleted "</em></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>HTA for HANA Repository, HANA Transport for ABAP, HTA synchronize views, SUM upgrade, HANA_DEPLOY_UPG, RDDHANADEPLOYMENT</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error in the HTA HANA deployment report.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Prevent Deletion of Objects</strong></p>
+<p>The correction instructions of this note will prevent deletion of these objects during an upgrade.</p>
+<p>To prevent the unexpected deletion of customer HANA repository objects during an upgrade, implement the correction contained in this SAP Note 3728992 <strong>directly before the phase HANA_DEPLOY_UPG starts</strong>. For information about how to implement an SAP Note during the update procedure, see SAP Note 2207944.<br/><br/></p>
+<p><strong>Recovery of Lost Objects</strong></p>
+<p>If the upgrade has already been performed without the correction from this note, and customer HANA Repository objects have been deleted, the following recovery procedure can be used.</p>
+<p>The deleted objects must still exist in another location — either in a database backup or in another system in the landscape.</p>
+<p style="padding-left: 30px;"><strong>Identify a source system:</strong></p>
+<p style="padding-left: 30px;">- Restore a HANA database backup taken before the upgrade into a temporary or separate system, or<br/> - Use an existing system in the landscape where the objects are still present (for example, a development or quality system).</p>
+<p style="padding-left: 30px;"><strong>Recover the objects:</strong></p>
+<p style="padding-left: 30px;">1. In the source system, open transaction SCTS_HTA.<br/> 2. Synchronize the missing objects from the HANA Repository into ABAP (direction: HANA → ABAP).<br/> 3. Create a transport request containing the synchronized objects.<br/> 4. Import the transport request into the target (upgraded) system. The HTA import will deploy the previously missing objects to the HANA Repository on the target database.</p></div></div></div></div>

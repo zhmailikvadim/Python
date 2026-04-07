@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">If you use the IAIK library, for example to generate X.509 certificates, and register it as the first global (JVM-wide) JCE security provider, for example by calling iaik.security.provider.IAIK.addAsProvider(), TLS handshakes to systems using certificates chained to DigiCert Global Root G3 can fail.</p>
+<p id="">When IAIK is registered as the first provider, its implementation can be used during TLS certificate validation. Validation may fail if the selected IAIK provider setup does not provide the ECC support required for the certificate chain presented by the peer.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>IAIK, TLS handshake, DigiCert Global Root G3, BTP Neo</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>SAP BTP, Neo Environment</p>
+<p>To comply with the <a href="https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/TechGuidelines/TG02102/BSI-TR-02102-1.pdf?__blob=publicationFile&amp;v=6" target="_blank">latest recommendation from the German BSI on key length for certificates</a> and to improve security, SAP BTP, Neo environment adopts the higher-security-level Root Certificate Authority “DigiCert Global Root G3” PKI, see <a href="https://me.sap.com/notes/3666687" target="_blank">3666687</a>.</p>
+<p><strong>Not adding the DigiCert Global Root G3 to any of the trust stores before the certificate exchange in BTP, Neo Environment happens, may result in communication failures or handshake errors, or even outages. </strong></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To allow ongoing validation and avoid the IAIK-related problems, you have the following options:</p>
+<p><strong>1. Remove Global Provider Registration                                                                                                                  </strong></p>
+<p>    - Remove the IAIK.addAsProvider() statement to avoid registering IAIK as a global (JVM-wide) security provider</p>
+<p><strong>2. Register IAIK as Last Provider                                                                                                                       </strong></p>
+<p>    - Replace IAIK.addAsProvider() with Security.addProvider(new IAIK()) to register IAIK as the last security provider in the chain</p>
+<p><strong>3. Add ECC Support                                                                                                                                      </strong></p>
+<p>    - Register the IAIK ECCProvider to provide ECC (Elliptic Curve Cryptography) algorithms that are not included in the default IAIK JCE security provider</p>
+<p>    - Add the iaik:iaik_ecc_signed dependency to your project</p>
+<p>    - Ensure ECCProvider is registered immediately after the default IAIK provider (at position #2 in the security provider list)</p>
+<p><strong>See also</strong></p>
+<ul>
+<li><a href="https://me.sap.com/notes/3666687" target="_blank">3666687 - Root Certificate Replacement in SAP BTP, Neo Environment</a></li>
+</ul></div></div></div></div>

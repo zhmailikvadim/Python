@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>When creating an external sales order from SAP Sales Cloud Version 2, partner roles maintained on the sales quote are not replicated as expected to the resulting S/4HANA Sales Order. The following issues may occur:</p>
+<ul><li>The contact person (AP) is present in the outbound payload from Sales Cloud v2 but does not appear in the S/4HANA sales order.</li><li>A buyer (EK, custom role) maintained on the account/quote may be absent from the outbound payload and therefore not created in S/4HANA.</li><li>No error messages are raised in Sales Cloud v2 or in the integration flow.</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>
+<div>SAP Sales Cloud Version 2</div>
+</li><li>
+<div>SAP Sales/Service Cloud Integration (GROW integration content)</div>
+</li><li>
+<div>S/4HANA Public Cloud</div>
+</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>In Sales Cloud v2, open an account containing:</p>
+<p>•    a contact person relationship<br/>•    a buyer (custom role) relationship</p>
+<p><br/>1.    Create a Sales Quote, add at least one product, simulate pricing, and create an external sales order.<br/>2.    In S/4HANA, open the resulting sales order and navigate to the Partner section.<br/>3.    Observe that the contact person (AP) and buyer (EK) roles are missing.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>This behavior is due to known limitations in the S/4HANA Public Cloud V2 API:</p>
+<ol><li>
+<p>Partner function support is restricted to customer‑related partner functions.</p>
+<ul><li>Contact persons, buyers, and other non‑customer partner roles are not supported, because partner functions in V2 are language‑dependent.</li></ul>
+</li><li>
+<p>Value mapping is not delivered for unsupported partner functions within the GROW integration content.</p>
+<ul><li>As a result, Sales Cloud v2 cannot successfully map or pass such partner roles to S/4HANA.</li></ul>
+</li><li>
+<p>For custom roles such as buyer (EK):</p>
+<ul><li>Missing value mapping in the integration flow</li><li>Missing external ID mapping for the linked contact</li></ul>
+</li></ol>
+<p>These can prevent the role from appearing in the outbound payload.</p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">1. Acknowledge current S/4HANA Public Cloud V2 API limitations</span></h3>
+<ul><li>Contact person (AP) and other non‑customer roles cannot be replicated to S/4HANA using the V2 API.</li><li>The GROW integration content does not provide value mapping for these partner functions.</li><li>These roles will not appear in S/4HANA even if present in the Sales Cloud v2 payload.</li></ul>
+<h3 data-toc-skip=""><strong><span style="font-size: 10pt;">2. Plan adoption of the S/4HANA Public Cloud V4 API</span></strong></h3>
+<p>The V4 API supports:</p>
+<ul><li>Language-independent partner functions</li><li>Replication of contact persons, workforce, and other extended partner roles</li></ul>
+<p>Customers should plan an upgrade to the V4‑based integration once available in their landscape.</p>
+<h3 data-toc-skip=""><strong><span style="font-size: 10pt;">3. Interim Workaround</span></strong></h3>
+<p>Until the V4 API is adopted:</p>
+<ul><li>Maintain the required partner functions manually in the S/4HANA sales order.</li></ul>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/0003542221" rel="noopener noreferrer nofollow" target="_blank">KBA 3542221 - Custom Party Handling During Equipment (Registered Product) and Functional Location Replication</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><div>sales cloud v2, s/4hana public cloud, partner functions, contact person ap, buyer ek, custom partner role, missing partner, integration, replication, v2 api limitation, v4 api support, value mapping, partner number type, external id mapping, cpi, grow integration content</div></div></div></div></div>

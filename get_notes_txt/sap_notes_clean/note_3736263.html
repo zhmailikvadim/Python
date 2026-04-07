@@ -1,0 +1,175 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You want to enable an SAP HANA SQLDBC or ODBC trace but are unsure of what tracing category or level to use.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>client trace, hdbsqldbc_cons, hdbodbc_cons, SQLDBC trace, ODBC trace</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The SAP HANA client is installed on your system.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Many levels of SQLDBC/ODBC tracing can be very verbose which can significantly affect performance. Additionally, verbose levels risk filling the file system or quickly wrapping size limited traces (likely losing the desired information). The following recommendations give a place to start and generally avoid the most verbose levels.  Always remember to disable tracing once you have reproduced the condition.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Scenario (reason you want tracing)</strong></td>
+<td><strong>Production or Test System</strong></td>
+<td><strong>Suggested Trace Levels (for hdbsqldbc_cons or hdbodbc_cons)</strong></td>
+</tr>
+<tr>
+<td rowspan="2">
+<p>A connect timeout or connect error. For example, the "Connect failed ..." -10709 error.</p>
+<p>An unexpected "Connection down ..." -10807 error (for example, when <a class="external-link" href="https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/197dc47daa1d43efa5a77d3148717842.html?version=latest" rel="nofollow" target="_blank">silent reconnect</a> is expected). Note that the "Connection down ..." error typically indicates that the server or network infrastructure dropped the connection, and SQLDBC tracing may not provide much more information beyond the error text itself.</p>
+</td>
+<td>Production system and takes hours to reproduce</td>
+<td>
+<p>TRACE ONLY ON ERROR &lt;error code&gt; COUNT &lt;number&gt;<sup>1</sup></p>
+<p>TRACE DISTRIBUTION ON LEVEL INFO</p>
+<p>TRACE SQL ON LEVEL ERROR</p>
+<p>TRACE PACKET 0</p>
+<p>TRACE SIZE 10M</p>
+</td>
+</tr>
+<tr>
+<td>Otherwise (a Test system or can be reproduced within minutes)</td>
+<td>
+<p>TRACE DISTRIBUTION ON LEVEL INFO</p>
+<p>TRACE SQL ON LEVEL WARNING</p>
+<p>TRACE PACKET 0</p>
+<p>TRACE SIZE 20M</p>
+<p>TRACE FLUSH ON</p>
+</td>
+</tr>
+<tr>
+<td rowspan="2">An unexpected client error but <strong>not </strong>during connect (most client error codes are in the range -10000 to -21000).</td>
+<td>Production system and takes more than 10 minutes to reproduce </td>
+<td>
+<p>TRACE ONLY ON ERROR &lt;error code&gt; COUNT &lt;number&gt;<sup>1</sup></p>
+<p>TRACE SQL ON LEVEL INFO</p>
+<p>TRACE PACKET 64</p>
+<p>TRACE SIZE 10M</p>
+</td>
+</tr>
+<tr>
+<td>Otherwise</td>
+<td>
+<p>TRACE ONLY ON ERROR &lt;error code&gt;<sup>1</sup></p>
+<p>TRACE SQL ON LEVEL INFO</p>
+<p>TRACE PACKET 1024</p>
+<p>TRACE SIZE 50M</p>
+</td>
+</tr>
+<tr>
+<td rowspan="2">Not <a class="external-link" href="https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/077d30cc847443288d3f0574356de4e7.html?version=latest" rel="nofollow" target="_blank">statement routing</a> or not <a class="external-link" href="https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/a6aa1cc4e070420c97e31fb1afd2ad3d.html?version=latest" rel="nofollow" target="_blank">hint routing</a> as expected.</td>
+<td>Production system and takes more than 10 minutes to reproduce</td>
+<td>
+<p>ideally use TRACE ONLY ON ERROR &lt;error code&gt; COUNT &lt;number&gt;<sup>1</sup> if there is an &lt;error code&gt;</p>
+<p>TRACE DISTRIBUTION ON LEVEL INFO</p>
+<p>TRACE SQL ON LEVEL WARNING</p>
+<p>TRACE PACKET 0</p>
+<p>TRACE SIZE 10M</p>
+<p>TRACE FLUSH ON</p>
+</td>
+</tr>
+<tr>
+<td>Otherwise </td>
+<td>
+<p>TRACE SQL ON LEVEL INFO</p>
+<p>TRACE DISTRIBUTION ON</p>
+<p>TRACE PACKET 1024</p>
+<p>TRACE SIZE 50M</p>
+<p>TRACE FLUSH ON</p>
+</td>
+</tr>
+<tr>
+<td rowspan="3">A suspected client performance issue.</td>
+<td>Production system and takes more than 10 minutes to reproduce</td>
+<td>
+<p>TRACE TIMING ON</p>
+<p>TRACE SQL ON LEVEL WARNING</p>
+<p>TRACE PACKET 0</p>
+<p>TRACE SIZE 10M</p>
+<p>TRACE FLUSH ON</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Otherwise and need to use the SAP internal SQLDBCTraceAnalyzer tool</p>
+</td>
+<td>
+<p>TRACE TIMING ON</p>
+<p>TRACE API ON</p>
+<p>TRACE SHOW TIMESTAMPS ON<sup>2</sup></p>
+<p>TRACE SQL ON LEVEL INFO</p>
+<p>TRACE PACKET 0</p>
+<p>TRACE SIZE 50M</p>
+<p>TRACE FLUSH ON</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Otherwise</p>
+</td>
+<td>
+<p>TRACE TIMING ON</p>
+<p>TRACE API ON</p>
+<p>TRACE SHOW TIMESTAMPS ON<sup>2</sup></p>
+<p>TRACE SQL ON LEVEL WARNING</p>
+<p>TRACE PACKET 0</p>
+<p>TRACE SIZE 50M</p>
+<p>TRACE FLUSH ON</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>You want to see what ODBC functions or Node @sap/hana-client methods are called. You want to see the parameters used with these functions or methods.</p>
+</td>
+<td>Avoid in production systems unless it can be reproduced within a few minutes</td>
+<td>
+<p>TRACE API ON</p>
+<p>TRACE SQL ON LEVEL WARNING</p>
+<p>TRACE PACKET 0</p>
+<p>TRACE SIZE 50M</p>
+<p>TRACE FLUSH ON</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>The application is hung/blocked in the middle of an operation that may be making database requests, but there is no HANA database operation in progress.</p>
+</td>
+<td>
+<p>Avoid in production systems unless it can be reproduced within a few minutes.</p>
+<p>This may have a noticeable performance impact (perhaps in the range of 5-50% slower) while the application is accessing the database.</p>
+</td>
+<td>
+<p>TRACE API ON</p>
+<p>TRACE SQL ON LEVEL INFO</p>
+<p>TRACE PACKET 0</p>
+<p>TRACE SIZE 20M</p>
+<p>TRACE FLUSH ON</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>The application is crashing and you are unable to get a crash call stack or core dump. You think it might be crashing in the the client driver and want to determine where in the client driver it is crashing.</p>
+<p>Note that getting a crash call stack or core dump is preferrable to this tracing. If trying to use tracing to narrow down where the client is crashing, you <strong>must </strong>use TRACE FLUSH ON (otherwise the most important part of the trace will not be written). This level of tracing is <strong>very </strong>verbose and will significantly impact performance.</p>
+</td>
+<td>
+<p>Must <strong>not </strong>be used in production systems since this will significantly affect application performance.</p>
+<p>If you have no alternative but to try this in a production system, ensure the system owner knows that performance will be impacted (the application could run several times slower when accessing the database), and ensure you have permission from the system owner.</p>
+</td>
+<td>
+<p>TRACE API ON</p>
+<p>TRACE DEBUG ON</p>
+<p>TRACE SQL ON LEVEL INFO</p>
+<p>TRACE PACKET 0</p>
+<p>TRACE SIZE 50M</p>
+<p>TRACE FLUSH ON</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>If possible double check that the trace file(s) includes the condition (eg SQL statement or error).</p>
+<p>Notes:</p>
+<ol>
+<li>"TRACE ONLY ON ERROR" can result in tracing after the error occurs not appearing in the trace file. The buffering nature of TRACE ONLY ON ERROR reduces the performance impact of tracing but delays when the tracing is written to the file. If possible, turn off tracing and close the application after reproducing the error to ensure all of the tracing data is written. If closing the application is not possible, the trace will still contain what happened leading up to the error, which is normally the most important part.</li>
+<li>"TRACE SHOW TIMESTAMPS ON" requires the version 2.25 or higher client.</li>
+<li>For a basic description for the trace categories and levels see the <a class="external-link" href="https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/2f3ee8ed47e64ae48547f3a0a18c688c.html?version=latest" rel="nofollow" target="_blank">Client Interface Programming Reference</a>.</li>
+</ol></div></div></div></div>

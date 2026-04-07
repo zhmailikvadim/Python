@@ -1,0 +1,90 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>On the payslip (custom form Z*PAYSLIP_AU and standard SAP_PAYSLIP_AU), the employee address displays:</p>
+<ul><li>
+<p>An additional country line, which is not expected for Australian payslips.</p>
+</li><li>
+<p>The country name appears in a foreign language (e.g., <em>“AUSTRALIEN”</em> instead of <em>“Australia”</em>).</p>
+</li></ul>
+</li><li>
+<p>Issue occurs for specific employees (e.g., PERNR X) but not for others (e.g., PERNR Y) using the same form and variant.</p>
+</li><li>
+<p>Program involved: H99_HRFORMS_CALL</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>
+<p>Country line added due to sender vs. receiver country mismatch</p>
+<ul><li>
+<p>The system determines:</p>
+<ul><li>
+<p>Sender country from the company code (BUKRS)</p>
+</li><li>
+<p>Receiver country from the employee address</p>
+</li></ul>
+</li><li>
+<p>If both countries differ:</p>
+<ul><li>
+<p>The system automatically adds a country line to the address.</p>
+</li></ul>
+</li><li>
+<p>Example:</p>
+<ul><li>
+<p>PERNR X → Company code CH02 (Switzerland) → Sender country = CH</p>
+</li><li>
+<p>Employee address → Australia (AU)</p>
+</li><li>
+<p>Result: Country line is added</p>
+</li></ul>
+</li><li>
+<p>In contrast:</p>
+<ul><li>
+<p>PERNR Y → Company code 1300 (Australia) → Sender = Receiver</p>
+</li><li>
+<p>Result: No country line added</p>
+</li></ul>
+</li></ul>
+</li><li>
+<p>Country name displayed in foreign language</p>
+<ul><li>
+<p>Country text is retrieved from table T005T</p>
+</li><li>
+<p>Based on:</p>
+<ul><li>
+<p>SPRAS = destination country</p>
+</li><li>
+<p>LAND1 = language of sender country</p>
+</li></ul>
+</li><li>
+<p>For PERNR X:</p>
+<ul><li>
+<p>Sender language = D (German)</p>
+</li><li>
+<p>Country = AU</p>
+</li><li>
+<p>Result from T005T = “Australien”</p>
+</li></ul>
+</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>
+<p>The behavior is standard system logic (working as designed).</p>
+</li><li>
+<p>To achieve the expected payslip format (no country line, English country name):</p>
+<ul><li>
+<p>Adjust the configuration of the employee/company assignment, for example:</p>
+<ul><li>
+<p>Align company code country with the employee’s country (if applicable), or</p>
+</li><li>
+<p>Review cross-country employee setup (e.g., global transfer scenarios)</p>
+</li></ul>
+</li><li>
+<p>Alternatively, review:</p>
+<ul><li>
+<p>Address formatting logic in HRFORMS</p>
+</li><li>
+<p>Country/language settings impacting table T005T</p>
+</li></ul>
+</li></ul>
+</li><li>
+<p>As this is a configuration/design topic, it is recommended to:</p>
+<ul><li>
+<p>Engage your SAP HCM/Payroll consulting team</p>
+</li><li>
+<p>Review business requirements for global transfers and payslip formatting</p>
+</li></ul>
+</li></ul></div></div></div></div>

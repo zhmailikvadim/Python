@@ -1,0 +1,104 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You run the <em><strong>Programa de cálculo de nómina mexicana </strong>(HMXCALC0)</em> report for an employee, and the payroll processes customer wage types that has values configured in the following processing classes:</p>
+<ul>
+<li><em><strong>Clasificación de las partes exentas para SDI</strong> (62) - Any value.</em></li>
+<li><em><em><strong>Acumulación y registro de CC-nóminas a delimitar --&gt;CYCL.X024</strong> (41) - values 3, 4, 5, 6, 9 and B.</em></em></li>
+</ul>
+<p>In the scenario described above, the system does not accumulate the customer wage types in the corresponding SDI technical wage types, when processing the <em><strong>HR-MX: Cálculo del salario diario integrado</strong> (MXS1) </em>payroll calculation rule<em>.</em></p>
+<p><strong>Example</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><em><strong>Customer wage type</strong></em></td>
+<td><em><strong>Amount (ARS)</strong></em></td>
+<td><em><strong>Processing Class 41</strong></em></td>
+<td><em><strong>Processing Class 62</strong></em></td>
+<td><em><strong>SDI technical wage type</strong></em></td>
+</tr>
+<tr>
+<td>9XXX</td>
+<td>300,000.00</td>
+<td>4</td>
+<td>L</td>
+<td>/XXX</td>
+</tr>
+</tbody>
+</table></div>
+<p>In the example described above, the system calculates the /XXX wage type amount with ARS 0.00, while it should be calculated with ARS 300,000.00.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>&amp;SDI - For further information, see SAP Note <a href="https://i7p.wdf.sap.corp/sap(bD1lbiZjPTAwMQ==)/bc/bsp/sno/ui_entry/entry.htm?param=69765F6D6F64653D3030312669765F7361706E6F7465735F6E756D6265723D3131373933363426" target="_blank">1179364</a> - CONSULT: List of tags for Mexico notes</p>
+<p>/36S;/37S;/870;/871;/872;/873;/874;/875;/877;/878;/879;/880;/881;/882;/883;/884;/886;/887;/898;/899;/F01;/F03;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This issue occurs as a side effect of SAP Note <a href="/notes/3638296" target="_blank">3638296 <em></em></a><em><a href="/notes/%value" target="_blank">- [MX] Changes: INFONAVIT loan deductions during absences and incapacities 2025</a></em>, which changed the position of the <em><strong>Gross Input and Storage</strong> (X024)</em> payroll calculation rule within the Mexican payroll schema.</p>
+<p>This payroll calculation rule is responsible for transferring wage types configured with processing class 41 values listed above from the <em><strong>Internal Table</strong> (IT)</em> cluster table to the <em><strong>Result Table</strong> (RT)</em> cluster table.</p>
+<p>Previously, the X024 was executed before the calling of the MXS1 in the schema. After the SAP Note installation, it is now executed after the MXS1.</p>
+<p>Because the MXS1 payroll rule only processes wage types from the RT cluster table through the <em><strong>Process Result Table</strong> (PRT)</em> payroll function, wage types <strong>with values configured in both processing classes 41 and 62</strong> will not be present in the RT when MXS1 executes, resulting in this issue.</p>
+<p><strong>Prerequisites</strong></p>
+<p>The following Support Package levels are the minimum prerequisites:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><em><strong>Release</strong></em></td>
+<td><em><strong>Support Package</strong></em></td>
+</tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 07</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 20</td>
+</tr>
+<tr>
+<td>SAP_HR 608</td>
+<td>HR SP D1</td>
+</tr>
+<tr>
+<td>SAP_HR 604 (EhP6 e EhP7)</td>
+<td>HR SP K3</td>
+</tr>
+</tbody>
+</table></div>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To resolve this issue, we recommend implementing one of the following approaches:</p>
+<p><strong>1. Call the new payroll calculation rule MXSA after the MXS1</strong></p>
+<p>If you are certain that <strong>no wage types exist in both the IT and RT cluster tables simultaneously</strong> when MXS1 is called, you can change the <em><strong>HR-MX: Cálculo de bases y contribuciones IMSS </strong>(MXSI)</em> payroll schema to call the <em><strong>HR-MX: Cálculo del salario diario integrado (processamiento en PIT) </strong>(MXSA)</em> payroll calculation rule via <em><strong>Process Internal Table</strong> (PIT)</em> payroll function, after the current calling of MXS1.</p>
+<p>The new payroll calculation rule MXSA is detailed in the <em>Manual Instructions for SAP Note 3734454.pdf</em> file attached to this note.</p>
+<p><strong>2. Create a custom payroll calculation rule to generate standard SDI wage type(s) based on each specific wage type from IT cluster table</strong></p>
+<p>If you are not confortable with the option 1 or if you want to accumulate only a specific set of wage types from IT in the standard SDI wage types <strong>without moving them to RT</strong>, you can create your own custom payroll calculation rule to be called via PIT payroll function after the current calling of MXS1.</p>
+<p>In this rule, configure each wage type to specify which standard SDI wage type it should be accumulated into.</p>
+<p><strong>Log of changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><em><strong>Version</strong></em></td>
+<td><em><strong>Date</strong></em></td>
+<td><em><strong>Release method</strong></em></td>
+<td><em><strong>Comments</strong></em></td>
+</tr>
+<tr>
+<td>2</td>
+<td>April 6, 2026</td>
+<td>Released for Customer.</td>
+<td>Note text adjustment. <strong>No reapply needed.</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>April 1, 2026</td>
+<td>Released for Customer.</td>
+<td>For more information, see <a href="https://itsm.services.sap/now/nav/ui/classic/params/target/kb_view.do%3Fsysparm_article%3DKB0774273" target="_blank">this KBA</a>.</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, access the <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
+<p style="display: inline !important;"><strong>More information</strong></p>
+<ul style="font-size: 14px;">
+<li>To get an e-mail notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
+<li>To stay informed about legal changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">regulatory change manager</a></li>
+<li>For documentation about Payroll Mexico, see <a href="https://help.sap.com/viewer/pymxen608" target="_blank">Payroll Mexico (PY-MX)</a></li>
+</ul></div></div></div></div>

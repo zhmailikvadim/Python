@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When you create a sales document using <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/19d48293097f4a2589433856b034dfa5/2b2fd9fb158e4629bf9106c80dcbf7ff.html?locale=en-US&amp;version=LATEST" target="_blank">Sales Order (A2A)</a> and send the item quantity, the data is not saved into the Target Quantity when you have the item configuration with Schedule Lines Allowed disabled.</p>
+<p>E.g.:</p>
+<div>
+<div>&lt;n0:SalesOrderBulkRequest xmlns:n0="http://sap.com/xi/SD-SLS"&gt;</div>
+<div>    &lt;MessageHeader&gt;</div>
+<div>        &lt;CreationDateTime&gt;2026-03-04T00:00:00.1234567Z&lt;/CreationDateTime&gt;</div>
+<div>        &lt;SenderBusinessSystemID&gt;XXXXX&lt;/SenderBusinessSystemID&gt;</div>
+<div>    &lt;/MessageHeader&gt;</div>
+<div>    &lt;SalesOrder actionCode='01' itemListCompleteTransmissionIndicator='true'</div>
+<div>                pricingElementListCompleteTransmissionIndicator='false'</div>
+<div>                partnerListCompleteTransmissionIndicator='false'</div>
+<div>                paymentPlanItemListCompleteTransmissionIndicator='true'&gt;</div>
+<div>        &lt;ExternalDocumentID&gt;Test&lt;/ExternalDocumentID&gt;</div>
+<div>        &lt;ExternalDocLastChangeDateTime&gt;2026-03-04T00:00:00.1234567Z&lt;/ExternalDocLastChangeDateTime&gt;</div>
+<div>        &lt;SalesOrderType&gt;OR&lt;/SalesOrderType&gt;</div>
+<div>        &lt;SalesOrganization&gt;0001&lt;/SalesOrganization&gt;</div>
+<div>        &lt;DistributionChannel&gt;01&lt;/DistributionChannel&gt;</div>
+<div>        &lt;OrganizationDivision&gt;01&lt;/OrganizationDivision&gt;</div>
+<div>        &lt;SalesGroup&gt;001&lt;/SalesGroup&gt;</div>
+<div>        &lt;SalesOffice&gt;0001&lt;/SalesOffice&gt;</div>
+<div>        &lt;PurchaseOrderByCustomer&gt;Test&lt;/PurchaseOrderByCustomer&gt;</div>
+<div>        &lt;PartneractionCode='04'&gt;</div>
+<div>            &lt;PartnerFunction&gt;AG&lt;/PartnerFunction&gt;</div>
+<div>            &lt;Customer&gt;0001&lt;/Customer&gt;</div>
+<div>        &lt;/Partner&gt;</div>
+<div>        &lt;ItemactionCode='04' pricingElementListCompleteTransmissionIndicator='false' partnerListCompleteTransmissionIndicator='false'&gt;</div>
+<div>            &lt;Material&gt;MATERIAL1&lt;/Material&gt;</div>
+<div>            &lt;RequestedQuantity unitCode="PCE"&gt;1&lt;/RequestedQuantity&gt;</div>
+<div>        &lt;/Item&gt;</div>
+<div>    &lt;/SalesOrder&gt;</div>
+<div>&lt;/n0:SalesOrderBulkRequest&gt;</div>
+<div></div>
+</div>
+<div>
+<div></div>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Target Quantity in Sales Units, VBAP-ZMENG, Target Quantity, TVAP-ETERL, Sched.Line Allowed, REQUESTED_QUANTITY-CONTENT, ORDER_QTY, RV45A-KWMENG, IF_GOAL_SDOC_ITEM=&gt;CO_FIELD_NAME-ORDER_QTY, SalesOrderBulkRequest_In, LORD, MV45AILO_LORD_ITEM_PAI, SET_REQUESTED_QTY_BY_ITEM_QTY, CL_GOAL_SO_ITEM-&gt;IF_GOAL_ENTITY~DO_PAI</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">This is a program error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> Implement the attached correction.</p></div></div></div></div>

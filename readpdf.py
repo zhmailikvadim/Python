@@ -6,7 +6,6 @@ import time
 import keyboard
 import img2pdf
 from PIL import Image
-import os
 import PyPDF2
 from pypdf import PdfWriter
 from PyPDF2 import PdfFileMerger
@@ -23,7 +22,7 @@ import PyPDF2
 
 
 
-repetitions = 650
+repetitions = 640
 for i in range(repetitions):
     myScreenshot = pyautogui.screenshot()
     screenshot_path = f"D:/SapPress/img{i:05}.png"
@@ -35,7 +34,7 @@ for i in range(repetitions):
     pyautogui.moveTo(148, 623) # координаты первого объекта
     pyautogui.click()
     pyautogui.hotkey('ctrl', 'right')
-    time.sleep(2)
+    time.sleep(2.5)
 
     image = Image.open(screenshot_path)
     pdf_bytes = img2pdf.convert(image.filename)

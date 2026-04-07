@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When using <strong>MTM versioned logistics data</strong>, certain records (such as inventory-related transactions like <strong>MATREX</strong>) may get processed even though <strong>price fixation is not applicable</strong> for them.</p>
+<p>In such cases, the field:<strong>CMM_VLOGP_C_GRP-SPREAD_CALCULATION_GROUP </strong>will be <strong>blank (not maintained)</strong> in the pricing procedure.</p>
+<p>If the system attempts to calculate <strong>Spread to Market</strong> for these records, it results in a <strong>runtime dump</strong>.</p>
+<p><br/><br/></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>MATREX, spread calculation , CMM_VLOGP_C_GRP-SPREAD_CALCULATION_GROUP,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>To prevent dumps:</p>
+<ul>
+<li>
+<p>Implement a validation check before spread calculation.</p>
+</li>
+<li>
+<p>If <strong>CMM_VLOGP_C_GRP-SPREAD_CALCULATION_GROUP is initial (blank)</strong>:</p>
+<ul>
+<li>
+<p>Skip spread-to-market calculation.</p>
+</li>
+<li>
+<p>Do not trigger MTM spread logic.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Ensure pricing procedure configuration clearly differentiates:</p>
+<ul>
+<li>
+<p>Transactions with price fixation</p>
+</li>
+<li>
+<p>Inventory / non-price-fixation transactions</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached corrections .</p></div></div></div></div>

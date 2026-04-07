@@ -1,0 +1,62 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When deleting the last row of a Grid, the following DUMP is raised:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Category</strong></td>
+<td>ABAP programming error</td>
+</tr>
+<tr>
+<td><strong>Runtime Errors</strong></td>
+<td>MOVE_TO_LIT_NOTALLOWED_NODATA</td>
+</tr>
+<tr>
+<td><strong>ABAP Program</strong></td>
+<td>SAPLSLVC_FULLSCREEN</td>
+</tr>
+<tr>
+<td><strong>Application Component</strong></td>
+<td>BC-SRV-ALV</td>
+</tr>
+<tr>
+<td><strong>Program error</strong></td>
+<td>Field "&lt;L_BOX&gt;" was to assigned a new value but this field is at least partly<br/>protected against changes.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Then the application is terminated.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ALV; ABAP List Viewer; SAP List Viewer; Grid; List; Selected line; Selections; Selected Row; <br/>LSLVC_FULLSCREENP02; CL_SALV_GUI_ASSIST_GRID; MARKS_SAVE;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p>This issue happened because the ALV was trying to re-select the row that was just deleted after the command operation.</p>
+<p>As there is no more row with that index, then the DUMP was raised.</p>
+<p><strong>Prerequisites</strong></p>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>SAP_BASIS 816</td>
+<td>SP 00</td>
+</tr>
+<tr>
+<td>SAP_BASIS 758</td>
+<td>SP 02</td>
+</tr>
+</tbody>
+</table></div>
+<p id="">When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>From now on, the scenario described in the "Symptom" section no longer occurs.</p>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package.</p>
+<p><span style="font-size: 14px;">However, if you need to install the solution earlier: Use the Note Assistant (SNOTE) to implement the correction instructions.</span></p>
+<p>Learn more at <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
+<p><strong>More information</strong></p>
+<ul>
+<li>To receive an e-mail notification in case of new updates, mark this SAP Note as favorite and add it to your <a href="https://me.sap.com/mynotes" target="_blank">My SAP Notes &amp; KBAs</a> page, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for a complete guide.</li>
+</ul></div></div></div></div>

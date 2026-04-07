@@ -1,0 +1,92 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Framework update (2211‑jdk21.1 and later) upgrades the platform to JDK 21 and Spring 6, establishing SapMachine JDK 21 as the runtime baseline for all subsequent 2211‑jdk21.x releases.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Commerce Cloud</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>SAP Commerce Cloud 2211-jdk21.x releases may include updated:</p>
+<p>SapMachine (JDK 21) patch levels</p>
+<p>Security patches</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<section>
+<p>Kindly refer to the official SAP documentation regarding SapMachine (JDK 21) and version compatibility for SAP Commerce Cloud 2211:</p>
+<p><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/8be4e0379b294fbabf36d26e7ca4169d/478f702a00104636b16d2614d1db30ac.html?q=SapMachine" rel="noopener noreferrer nofollow" target="_blank">Install the Basic Prerequisites</a></p>
+<p>Download the latest <span translate="no">Data Hub</span> ZIP file containing the DH web application. See the <a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/8be4e0379b294fbabf36d26e7ca4169d/9f99b61bd8f14414a60340ee5d77a51f.html?locale=en-US&amp;state=PRODUCTION&amp;version=v2211" rel="noopener noreferrer nofollow" target="_blank">Download</a> section of this guide for further information.</p>
+<ol><li>Install SapMachine JDK 17 from <a href="https://help.sap.com/docs/link-disclaimer?site=https%3A%2F%2Fsap.github.io%2FSapMachine%2F" rel="noopener noreferrer nofollow" target="_blank">https://sap.github.io/SapMachine/</a>. <span translate="no">Data Hub</span> supports 64-bit Java. Based on the version of <span translate="no">Data Hub</span> that you’ve downloaded, install one of the following from <a href="https://help.sap.com/docs/link-disclaimer?site=https%3A%2F%2Fsap.github.io%2FSapMachine%2F" rel="noopener noreferrer nofollow" target="_blank">https://sap.github.io/SapMachine/</a>:
+<div>
+<ul><li>
+<p>SapMachine JDK 17 (for <span translate="no">Data Hub</span> version 2211.x)</p>
+</li><li>
+<p>SapMachine JDK 21 (for <span translate="no">Data Hub</span> version 2211.jdk21.x)</p>
+</li></ul>
+</div>
+</li><li>Install Apache Tomcat 9.0.x from <a href="https://help.sap.com/docs/link-disclaimer?site=https%3A%2F%2Ftomcat.apache.org%2Fdownload-90.cgi" rel="noopener noreferrer nofollow" target="_blank">https://tomcat.apache.org/download-90.cgi</a>.
+<div>
+<p>Follow the instructions in the <a href="https://help.sap.com/docs/link-disclaimer?site=https%3A%2F%2Ftomcat.apache.org%2Ftomcat-9.0-doc%2Fsetup.html?locale=en-US&amp;state=PRODUCTION&amp;version=v2211" rel="noopener noreferrer nofollow" target="_blank">Apache Tomcat documentation</a> to install.</p>
+</div>
+</li><li>Configure Tomcat to add SSL authentication. Follow the instructions in the <a href="https://help.sap.com/docs/link-disclaimer?site=https%3A%2F%2Ftomcat.apache.org%2Ftomcat-9.0-doc%2Fssl-howto.html?locale=en-US&amp;state=PRODUCTION&amp;version=v2211" rel="noopener noreferrer nofollow" target="_blank">Tomcat SSL/TLS Configuration How-To</a> guide.
+<div>
+<aside>
+<div id="n0t">Tip</div>
+<p>The folders you create in the next steps are required for the Hello World tutorials and for using <span translate="no">Data Hub</span>.</p>
+</aside>
+</div>
+</li><li>Create an /opt/datahub folder.</li><li>In the datahub folder, create the following new folders:
+<ol><li>config, used for the files local.properties and datahub.encryption.key.txt</li><li>extensions</li></ol>
+</li><li>Create an XML file.
+<div>
+<aside>
+<div id="n1t">Remember</div>
+<p>All of the <span translate="no">Data Hub</span> documentation is based on the datahub-webapp.xml file you create in the following steps.</p>
+</aside>
+</div>
+</li><li>Open a new file in a text editor and copy the following into the file:
+<div>
+<div>
+<div> </div>
+<div>
+<div>
+<pre><code>&lt;?xml version='1.0' encoding='utf-8'?&gt;
+&lt;!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="noopener noreferrer nofollow" target="_blank">http://www.apache.org/licenses/LICENSE-2.0</a>
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--&gt;
+&lt;!-- The contents of this file will be loaded for each web application --&gt;
+&lt;Context antiResourceLocking="true"
+		docBase="{full path to your Data Hub installation}/hybris/bin/ext-integration/datahub/web-app/datahub-webapp-x.x.x.x-RCx.war"
+		reloadable="true"&gt;
+
+    &lt;Resources className="org.apache.catalina.webresources.StandardRoot" &gt;
+      &lt;PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                    base="/opt/datahub/config" internalPath="/" webAppMount="/WEB-INF/classes" /&gt;
+      &lt;PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                    base="/opt/datahub/extensions" webAppMount="/WEB-INF/lib" /&gt;
+    &lt;/Resources&gt;
+
+&lt;/Context&gt;</code></pre>
+</div>
+<div> </div>
+<div> </div>
+</div>
+</div>
+</div>
+</li><li>Edit the <var>&lt;docBase&gt;</var> parameter to reflect the full path to your <span translate="no">SAP Commerce Cloud</span> installation.
+<div> </div>
+</li><li>Save the file as datahub-webapp.xml into the <var>&lt;TOMCAT_HOME&gt;</var>/conf/Catalina/localhost folder. Note: the <var>&lt;TOMCAT_HOME&gt;</var>/conf/Catalina/localhost does not exist until Tomcat is run.</li><li>Install the cURL command-line tool.
+<div>
+<p>From <a href="https://help.sap.com/docs/link-disclaimer?site=https%3A%2F%2Fcurl.haxx.se%2F" rel="noopener noreferrer nofollow" target="_blank">https://curl.haxx.se/</a>, download and install the cURL software that is appropriate for your operating system.</p>
+</div>
+</li></ol>
+</section>
+</div>
+<div>
+<div>
+<div id="related-information">Related Information</div>
+<div><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/8be4e0379b294fbabf36d26e7ca4169d/d4f38c211baf4d209dd548f2d9b0afce.html?locale=en-US&amp;state=PRODUCTION&amp;version=v2211" rel="noopener noreferrer nofollow" target="_blank">Install SAP Commerce Cloud Data Hub</a></div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SapMachine</p></div></div></div></div>

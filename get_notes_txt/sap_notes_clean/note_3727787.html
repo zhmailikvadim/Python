@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When executing an iFlow using the RFC receiver adapter in SAP Cloud Integration, the message processing fails with the following error:</p>
+<p>com.sap.it.rt.adapter.http.api.exception.HttpResponseException: An internal server error occured: &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&lt;rfc:FUNCTION_NAME.Exception xmlns:rfc="urn:sap-com:document:sap:rfc:functions"&gt;&lt;Name&gt;Initialization of repository destination Destination_Name failed: Opening connection to backend failed: Opening connection to target.system.com denied. Expose the system in your Cloud Connector in case it was a valid request.&lt;/Name&gt;&lt;Text&gt;Initialization of repository destination Destination_Name failed: Opening connection to backend failed: Opening connection to target.system.com denied. Expose the system in your Cloud Connector in case it was a valid request.&lt;/Text&gt;&lt;Message&gt; &lt;ID/&gt; &lt;Number/&gt; &lt;/Message&gt;&lt;Attributes&gt; &lt;/Attributes&gt;&lt;/rfc:FUNCTION_NAME.Exception&gt;. </p>
+<p><span aria-label='com.sap.it.rt.adapter.rfc.exceptions.RFCLibraryException: &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&lt;rfc:BAPI_GOODSMVT_CREATE.Exception xmlns:rfc="urn:sap-com:document:sap:rfc:functions"&gt;&lt;Name&gt;Partner signaled an error on handle [3/91020850]: Access denied for BAPI_TRANSACTION_ROLLBACK on ECA:sapgw10. Expose the function module in your Cloud Connector in case it was a valid request.&lt;/Name&gt;&lt;Text&gt;Partner signaled an error on handle [3/91020850]: Access denied for BAPI_TRANSACTION_ROLLBACK on ECA:sapgw10. Expose the function module in your Cloud Connector in case it was a valid request.&lt;/Text&gt;&lt;Message...'><span style="color: rgb(224, 62, 45);">Image / Data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental </span></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Integration suite</li><li>RFC Receiver adapter</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>1. Configure an iFlow using the RFC receiver adapter in SAP Cloud Integration. <br/>2. Execute the iFlow. <br/>3. Observe the message processing failure with the error message indicating backend connection issues. </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This issue typically occurs due to incorrect configuration between Destination service, and Cloud Connector.</p>
+<p>Possible causes include:</p>
+<ol><li>
+<p>The Virtual Host defined in the Destination configuration is not exposed in the SAP Cloud Connector.</p>
+</li><li>
+<p>The virtual host or port defined in the Cloud Connector does not match the values configured in the destination.</p>
+</li><li>
+<p>The backend server hostname or system details are incorrectly configured either in the destination or Cloud Connector.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<article>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<ol><li>
+<p>Verify if the backend system is exposed in the Cloud Connector.</p>
+</li><li>
+<p>Verify the Destination configuration.<br/>- Ensure the parameters match the Cloud Connector configuration<br/>- The virtual host defined in the Cloud Connector must match the host defined in the destination.</p>
+</li><li>
+<p>Verify the connection from the Destination using the Check Connection option.<br/>- If configured correctly, the connection test will return a successful response : "Backend is reachable from the Cloud Connector."<br/><br/><img alt="" class="img-responsive" height="90" src="/documents/customerkba/d1IjhYQvZ52fwMAX1Wsqw5DFKpPGAIW98SC2b0mGPmw" width="294"/><br/>-  If not configured correctly, a failure error is returned: "Backend is not available in the list of defined system mappings in Cloud connector."<br/><img alt="" class="img-responsive" height="102" src="/documents/customerkba/cC1J-5r3UmWaPWH091JyicfJsjW_scGpMp3zKdWwa74" width="295"/></p>
+</li></ol>
+</div>
+</div>
+</div>
+</div>
+<div> </div>
+<div>
+<div> </div>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div aria-hidden="true"> </div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>SAP Community page : <a href="https://community.sap.com/t5/c-khhcw49343/SAP+Integration+Suite/pd-p/73554900100800003241" rel="noopener noreferrer nofollow" target="_blank">SAP Integration Suite - SAP Community</a></li><li>Online Help page: <a href="https://help.sap.com/docs/integration-suite/sap-integration-suite/what-is-sap-integration-suite" rel="noopener noreferrer nofollow" target="_blank">SAP Integration Suite</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>RFC receiver adapter error, backend connection failed, Cloud Connector configuration, virtual host mismatch, destination service error, initialization failed, system mapping error, iFlow execution failure, internal server error, repository destination issue, BAPI_TRANSACTION_ROLLBACK denied, backend system exposure, connection test failure, RFC adapter troubleshooting, Cloud Connector system mapping, virtual host configuration</p></div></div></div></div>

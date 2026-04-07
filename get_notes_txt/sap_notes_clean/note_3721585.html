@@ -1,0 +1,143 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0"><span style="color: rgb(224, 62, 45);"><strong>This document will be updated following the deployment of version 2604 (April 2026) </strong></span><br/><br/>This guide provides the required steps you must take, in conjunction with your IT staff, partner or SAP Services, to connect to the new GoAnywhere SFTP service after your provisioning is complete. To ensure a smooth transition, we have broken down the process into four phases: Planning, Provisioning, Execution, and Verification.</p>
+<p><strong>This only applies to sftp definitions that reference SAP SFTP servers. The address/URL in reference will include the following:</strong></p>
+<p>From your APM or ALM Instance, Workflow, Agent Compliance, applications, scripts, or third-party tools and users the following URL values need to be modified:<br/><br/></p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100.01%;"><colgroup><col style="width: 33.3333%;"/><col style="width: 33.3333%;"/><col style="width: 33.3333%;"/></colgroup><tbody><tr><td><strong>Current FTP URL (PROD/NonProd) </strong></td><td><strong>New NonProd FTP URL </strong></td><td><strong>New Prod FTP URL </strong></td></tr><tr><td>
+<ul><li>iad-icmsftp-01.east.smf.uc.int</li><li>iad-icmsftp-02.east.smf.uc.int</li><li>iad-icmsftp-03.east.smf.uc.int</li><li>iad-pmsftp-01.east.smf.uc.int</li><li>odsftp.callidusondemand.com</li><li>odsftp.east.smf.uc.int</li><li>pmsftp01.callidusondemand.com</li><li>sftp01.callidusondemand.com</li><li>sftp02.callidusondemand.com</li><li>sftp03.callidusondemand.com</li><li>165.254.192.15</li><li>165.254.192.192</li><li>165.254.192.198</li><li>165.254.194.1</li><li>165.254.194.4</li><li>10.115.0.18</li><li>10.115.2.11</li><li>10.115.2.116</li><li>10.115.2.12</li><li>10.115.3.157</li></ul>
+</td><td>
+<ul><li>xfer-sbox-cdl-iad.calliduscloud.com</li></ul>
+</td><td>
+<ul><li>xfer-cdl-iad.calliduscloud.com </li></ul>
+</td></tr><tr><td>
+<ul><li>dubsftp01.callidusondemand.com</li><li>154.50.200.21</li><li>10.9.0.44</li></ul>
+</td><td>
+<ul><li>xfer-sbox-fra.calliduscloud.com</li></ul>
+</td><td>
+<ul><li>xfer-prd-fra.calliduscloud.com</li></ul>
+</td></tr></tbody></table></div>
+<p><strong><br/>Please be aware that data retention of any file in the new environment will still be governed by a 90 day retention, just as your SAP SFTP environment is today.</strong></p>
+<p><strong>Highlights of this processing change:</strong></p>
+<p style="padding-left: 40px;">• It is being done to provide enhanced security, improved reliability, and support for modern encryption standards.  <br/>• Passwords will no longer be used for authentication for SFTP access.  Going forward, all access will use key-based authentication. <br/>• It is highly recommended that you engage your IT Team or network team / partner / SAP Services to assist with guidance for this change if needed. <br/>• There will now be specific Non Production and Production GoAnywhere SFTP environments, and each will have a userid set up, and both will use the same userid as the current SAP SFTP solution.</p>
+<p><strong>Note –</strong> FAQs can be found in <strong>Appendix 1</strong>.</p>
+<p><strong>NOTE -</strong> This guide is for modifying <strong>EXISTING FTP Definitions</strong>. To avoid modifying all File Sweeps and Extracts you must MODIFY existing definitions. To create a new FTP Definition, see <strong>Appendix 2.</strong> </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Sales Performance Management
+<ul><li>Agent Lifecycle Management</li><li>Agent Performance Management</li><li>Advanced Workflow</li><li>Agent Compliance</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>Your Implementation Checklist: A Step-by-Step Guide</strong></p>
+<p><span style="text-decoration: underline;"><strong>Phase 1: Pre-Cutover Planning &amp; Inventory </strong></span></p>
+<p>Before the migration date, it is critical to identify all systems and processes that interact with the current SAP SFTP service.</p>
+<p style="padding-left: 40px;">1. Copy each of your current FTP Definitions that use the above source FTP URLs and append the name and ID with -old to preserve your current information.</p>
+<p style="padding-left: 40px;">2. Identify All Connecting Systems:</p>
+<ul><li style="list-style-type: none;">
+<ul><li>Create an inventory of all applications, scripts, or third-party tools and users that send files to or retrieve files from or move files within the SAP Agent Performance Management or SAP Agent Lifecycle Management SAP SFTP site.</li><li>Identify any new whitelist / ip allow changes that will be necessary for your security team to deploy for the new solution to work. Your internal network team should be engaged to help identify where existing whitelist entries may exist and need to be updated for the new non-production and production solutions.</li><li>Each connection identified will need a key pair generated for this migration. Work with your IT / Network team to determine how these keys should be generated.</li></ul>
+</li></ul>
+<p style="padding-left: 40px;">3. Check for Special Cases (Critical):</p>
+<ul><li style="list-style-type: none;">
+<ul><li>Workflow/Onboarding Scripts: Do you use any Workflow scripts that reference the SAP SFTP hostname or IP address? These will need to be updated.</li><li>Agent Compliance: If you use Agent Compliance, your implementation will need to be updated.</li></ul>
+</li></ul>
+<p style="padding-left: 40px;">4. Perform SAP SFTP Site Housekeeping (Recommended):</p>
+<ul><li style="list-style-type: none;">
+<ul><li>To ensure a faster and smoother migration experience, we highly recommend reviewing the files currently on your SAP SFTP site and performing some light housekeeping.</li><li>Action: Consider deleting any files that are no longer needed, such as old data load files that have been successfully processed, outdated extracts, or temporary test files. Reducing the number of files to be moved will directly contribute to a more efficient migration.</li></ul>
+</li></ul>
+<p style="padding-left: 40px;">5. Set up Process Notifications in APM/ALM</p>
+<ul><li style="list-style-type: none;">
+<ul><li>Notifications should be set for all imports</li><li>Notifications should be set for all extracts</li></ul>
+</li></ul>
+<p></p>
+<p>These notifications will alert you to errors that may be encountered in using the new GoAnywhere SFTP solution<br/><br/>See <a href="https://help.sap.com/docs/APM_ICM/d7c8dbefd0e64d75bdc6bf2a2e86b8e7/a4fbbffbb27d44b7b3576a7ef932caea.html?q=process+notifications" rel="noopener noreferrer nofollow" style="font-size: 10pt;" target="_blank">Process Notification | SAP Help Portal</a><span style="font-size: 10pt;"> for more information regarding this process.</span> for more information regarding this process.</p>
+<p>If you can identify and generate the keys (4096 bits) needed for your future access before the dates of the data set up of GoAnywhere and the data copies, April 4 (Non-Prod) and June 6 (Prod) , you can follow <strong>Appendix 3</strong> to preload your keys <strong>PRIOR </strong>to the April 4 and June 6 dates.<br/><br/></p>
+<p><span style="text-decoration: underline;"><strong>Phase 2: SAP GoAnywhere Provisioning </strong></span></p>
+<p>All activities with the SAP Provisioning of GoAnywhere will occur in maintenance windows. Activities that will occur will include the following:</p>
+<p style="padding-left: 40px;">1. The GoAnywhere environments for prod and sandbox will be provisioned using the userid currently used for the SAP SFTP servers</p>
+<p style="padding-left: 40px;">2. Data in the current SAP SFTP folders will be copied from the existing SAP SFTP environment to the GoAnywhere SFTP spaces based on the following schedule (image of the timeline is also below):</p>
+<p style="padding-left: 40px;"><strong>Non-Production - April 4, 2026</strong></p>
+<p style="padding-left: 80px;">· Because we cannot guarantee what is considered TEST versus PRODUCTION, ALL FOLDERs (including empty folders) and ALL FILEs that are in your SAP SFTP location will be copied to the Non-Production GoAnywhere SFTP location.</p>
+<p style="padding-left: 80px;">· Your organization will need to connect to the Non-Production GoAnywhere SFTP location and clean out any files and folders that are not Non-Production related.</p>
+<p style="padding-left: 40px;"><strong>Production - June 6, 2026</strong></p>
+<p style="padding-left: 80px;">· Because we cannot guarantee what is considered TEST versus PRODUCTION, ALL FOLDERs (including empty folders) and ALL FILEs that are in your SAP SFTP location will be copied to the Production GoAnywhere SFTP location.</p>
+<p style="padding-left: 80px;">· Your organization will need to connect to the Production GoAnywhere SFTP location and clean out any files and folders that are not Production related.</p>
+<p style="padding-left: 40px;"></p>
+<p><strong>Note:</strong> This copy will occur on the date identified. We are asking you to migrate your processing <strong>after </strong>that, but we are not demanding a completion date, provided it is before <strong>August 1, 2026</strong>. If additional files are loaded to the current SAP SFTP site following the copy, you will need to re-upload those files to the new GoAnywhere SFTP solution for processing.</p>
+<p><strong>Note:</strong> Once connections are set up to the new environments, any unwanted data can be deleted.<br/><br/><strong></strong></p>
+<p><img class="img-responsive" src="/documents/customerkba/tunw-Ll48wbyEYqBs3HoHMLb9SzUhLNq62QxAWgbY6E"/></p>
+<p><span style="text-decoration: underline;"><strong>Phase 3: Post-Provisioning Execution </strong></span></p>
+<p style="margin: 0in 0in 8pt; line-height: 115%; font-size: 10.5pt; font-family: Aptos, sans-serif;"><span style="font-family: verdana, geneva; font-size: 10pt;">Once your environment (SBOX or PROD) is set up, perform the following actions.</span></p>
+<p style="margin: 0in 0in 8pt; line-height: 115%; font-size: 10.5pt; font-family: Aptos, sans-serif;"><span style="font-family: verdana, geneva; font-size: 10pt;"><b>Make sure you have copied your current FTP definitions as outlined in the Phase 1 portion of this document.</b></span></p>
+<p style="margin: 0in 0in 8pt; line-height: 115%; font-size: 10.5pt; font-family: Aptos, sans-serif;"><span style="font-family: verdana, geneva; font-size: 10pt;"><b>Update Your System Connection Details (FTP Servers) Within Your APM/ALM environment: </b></span></p>
+<ol style="margin-bottom: 0in; margin-top: 0px;"><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;"><b>Reopen</b> your current FTP Server definitions</span></li><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Modify the <b>URL</b> to use the correct new URL in place of the old one.  Only change the URL portion, not the folder path.</span></li><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Make sure <b>FTP Transfer Type</b> is set to <b>SFTP – FTP over SSH.</b></span></li><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Make sure the <b>Port</b> selected is 22</span></li><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Make sure <b>SFTP Authorization Type</b> is set to <b>Key</b>.</span></li><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Select<b> Save</b></span></li><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">After you save the record, select the Generate Key item from the menu on the lower right of the screen.  (<b>You MUST choose a key length of 4096</b>)</span></li><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Select the <b>Download Public Key</b> item from the menu on the lower right of the screen.</span></li><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Select OpenSSH from the Public Key Format drop down, enter a File Name to identify the FTP definition, and select Download Public Key dialog button.</span></li><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Repeat for each FTP Server connection you have that points to the current SAP SFTP targets.</span></li><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Once all definitions are updated, open a support ticket (P4), attach all of the public key files you downloaded and get SAP to place the public keys in the GoAnywhere vault for APM or ALM, depending on your product.</span></li><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Once the keys are loaded in the vault, for each definition above,</span>
+<ul style="list-style-type: circle; margin-bottom: 0in; margin-top: 0px;"><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Choose Test to test the FTP connection and ensure that the application can connect based on the information you've defined. If the test fails, please reach out to your partner / SAP Services / whomever is helping with this transition for assistance. If there is still an issue, please open a support ticket.</span></li><li style="margin: 0in 0in 0in 24px; font-size: 10pt; font-family: verdana, geneva;"><span style="font-family: verdana, geneva;">Choose Activate to change the FTP Server's status to Active.</span></li></ul>
+</li></ol>
+<p><strong>Update Your System Connection Details Identified in your Phase 1 Inventory:</strong></p>
+<p style="padding-left: 40px;">1. Each application, script, third-party tool or user that sends files to, retrieves files from, or moves files within the SAP SFTP solution will need to be updated based on the new connection details provided in the migration announcement. For each connection to and from your environment, you will need to:</p>
+<p style="padding-left: 40px;">2. Generate a private/public key pair <strong>(select a key length of 4096 bits)</strong></p>
+<p style="padding-left: 40px;">3. Provide the public key via a support ticket to SAP Support to get the public key added to the appropriate key store for the GoAnywhere SFTP solution.</p>
+<ul><li style="list-style-type: none;">
+<ul><li>The support ticket needs to be a <strong>P4</strong></li><li>The support ticket <strong>should contain all public keys if possible</strong> to limit the number of tickets</li></ul>
+</li></ul>
+<p style="padding-left: 40px;">4. Modify the connection definition to use the new URL and the generated keys to connect</p>
+<p><strong>Note: </strong>Steps 2 &amp; 3 are applicable for any keys that were not uploaded in the bulk process outlined in Appendix 3.</p>
+<p><strong>Heads Up:</strong> Your network team may need to update firewall rules, or IP allow-lists to permit connections to the new hostname. Be sure to coordinate with them.</p>
+<p>If applicable, coordinate the updates in your <strong>Workflow</strong>.</p>
+<ol><li>This will require assistance from whomever manages your workflow environment.</li><li>Any script referencing one of the IP addresses or URLs listed above will need to be updated to the environment specific URL for the new environment.</li><li>A guide to Workflow / Onboarding scripting can be found <a href="https://help.sap.com/docs/Advanced_Workflow/b7cb13f8b6a04157a722ad9ddfde4a28/72a847e27c231014a804993ce4041860.html?version=2602" rel="noopener noreferrer nofollow" target="_blank">here</a>.</li></ol>
+<p>If applicable, coordinate the updates to <strong>Agent</strong> <strong>Compliance </strong></p>
+<ol><li>This will require assistance from whomever manages your compliance configuration. </li><li>A reference for setting up the ftp connections in Agent Compliance can be found <a href="https://help.sap.com/docs/Agent_Compliance/6d5b509c1d5841119173f30d0590a0bd/cc5a6e8881da1014aa58053ce4041860.html?q=sftp" rel="noopener noreferrer nofollow" target="_blank">here</a>.</li></ol>
+<p><span style="text-decoration: underline;"><strong>Phase 4: Verification &amp; Testing </strong></span></p>
+<p>Once the execution steps are complete, you must verify that everything is working as expected.</p>
+<p><span style="text-decoration: underline;"><strong>Perform a Connection Test: </strong></span></p>
+<ol><li>Use your preferred SFTP client to perform a basic connection test with the new hostname, new username, new port, and an SSH key to confirm that you can log in successfully. Test this for all required users. </li></ol>
+<p>Conduct End-to-End File Transfer Tests:</p>
+<ol><li><strong>Inbound Test:</strong> Send a sample inbound file (e.g., a data load file) and confirm it is processed correctly by the APM/ALM system. <br/><strong></strong></li><li><strong>Outbound Test: </strong>Trigger a process that generates an outbound file (e.g., an extract) and confirm you can successfully retrieve it from the GoAnywhere SFTP site. </li><li><strong>Full Test:</strong> Run all imports from a normal processing cycle, along with all payout and extract processing to ensure all files are generated and accessible.</li></ol>
+<p><strong>Congratulations! </strong>Once these tests are successful, your migration for that environment is complete.</p>
+<p><span style="text-decoration: underline;"><strong>What to Do If You Encounter an Issue </strong></span></p>
+<p>If you have any trouble during this process, please do not hesitate to contact our global support team via the <a href="https://me.sap.com/" rel="noopener noreferrer nofollow" target="_blank">SAP for Me</a> portal. They are fully briefed on this migration and ready to assist you.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><span style="text-decoration: underline;"><strong>Appendix 1 - Frequently Asked Questions (FAQ) </strong></span></p>
+<p><strong>Why is this SFTP migration necessary? </strong><br/>Migration to our new platform is required to provide enhanced security, improved reliability, and support for modern encryption standards.  </p>
+<p><strong>Can a user id / password combination still be used for connections? </strong><br/>No. We are moving to a more secure key-based authentication approach.</p>
+<p><strong>How do I set up a key pair for secure SFTP? </strong><br/>Please refer to <a href="https://help.sap.com/docs/SAP_Commissions/0e4b0e05f53e4f87a21c5ccfca72fea6/726da54f7c231014a804993ce4041860.html?version=2602" rel="noopener noreferrer nofollow" target="_blank">Setting Up SFTP Client | SAP Help Portal</a> for more information.</p>
+<p><strong>What connection details do I need to update? </strong><br/>You must update the SFTP hostname, verify the port, and username in all systems and scripts that connect to the SAP SFTP site. Your username will be the same as the one in use for the old SAP SFTP solution that is being phased out. All connections will also need to be updated to use key based authentication, as passwords will no longer be supported.</p>
+<p><strong>Do I need to update my firewall or network settings? </strong><br/>Yes, this is a common point of failure. If your organization restricts outbound traffic, your network team must update firewall rules to allow connections to the new GoAnywhere SFTP hostname on port 22.</p>
+<p><strong>How can I verify that the migration was successful for me? </strong><br/>After updating your connection details, you should perform two key tests: first, a basic connection test to confirm you can log in, and second, an end-to-end test where you transfer sample inbound and outbound files to confirm your processes are working correctly.</p>
+<p><strong>What should I do if I encounter an issue after the migration? </strong><br/>Please contact our global support team immediately via the SAP for Me portal. To help us resolve your issue quickly, please provide specific details about the error you are seeing and the steps you have already taken.</p>
+<p><strong>Is there a risk of data loss during this migration? </strong><br/>No files will be deleted by the migration process. All your data will be copied to the new platform. However, files that are loaded or generated to the SAP SFTP site after the copy occurs <span style="text-decoration: underline;"><strong>will not be present</strong></span> in the new GoAnywhere SFTP solution.</p>
+<p><strong>Is there an automatic rollback option if my tests fail? </strong><br/>No, there is no self-service or automated rollback available to customers. If you encounter a critical issue after migrating, you must revert to the old ftp server using your original connection specifics to go back. This will be a temporary solution though, as the existing SAP SFTP servers will be toggled to read only on <strong>8/1/2026</strong>. </p>
+<p><span style="text-decoration: underline;"><strong>Appendix 2 - Set Up a New GoAnywhere SFTP Connection</strong></span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;">1. In the Portal menu, navigate to <b>(Administrator) &gt; Processing Configuration</b> and choose <b>FTP Server Search</b>.</span></p>
+<p style="padding-left: 40px;"><span style="font-size: 10pt; line-height: 115%; font-family: verdana, geneva;">2. Click on the (<b>+</b>).</span></p>
+<p style="margin: 0in 0in 8pt 0.5in; line-height: 115%; font-size: 10.5pt; font-family: Aptos, sans-serif;"><span style="font-family: verdana, geneva; font-size: 10pt;"><img class="img-responsive" height="332" src="/documents/customerkba/kvFxfT_hrxMkuvFEUUSl-FseZokH0VseGXacYMQ8a7Q" width="624"/></span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;">3. On the FTP Server Detail screen, enter a unique value for the FTP Server Id field.</span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;">4. Enter a unique value for the Full Name field.</span></p>
+<p style="margin: 0in 0in 8pt; line-height: 115%; font-size: 10.5pt; font-family: Aptos, sans-serif;"><span style="font-family: verdana, geneva; font-size: 10pt;">The value is used to describe the FTP server. It defaults to the <b>FTP Server Id</b>.</span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;">5. Enter the <b>URL</b>.</span></p>
+<p style="margin: 0in 0in 8pt; line-height: 115%; font-size: 10.5pt; font-family: Aptos, sans-serif;"><span style="font-family: verdana, geneva; font-size: 10pt;">Indicates the hostname and path to the FTP site, for example, localhost/path/to/files/.</span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;">6. In the Port field enter “<b>22</b>”</span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;">7. Make sure SFTP Authorization Type is set to Key.</span></p>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;">8. Select Save.</span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;">9. After you save the record, select the Generate Key item from the menu on the lower right of the screen.  (You MUST choose a key length of 4096)</span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;">10. Select the Download Public Key item from the menu on the lower right of the screen.</span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;">11. Select OpenSSH from the Public Key Format drop down, enter a File Name to identify the FTP definition, and select Download Public Key dialog button.</span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;">12. Open a support ticket (P4), attach the public key file you downloaded and get SAP to place the public keys in the GoAnywhere vault for APM or ALM, depending on your product.</span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;">13. Once the keys are loaded in the vault, for each definition above,</span></p>
+<ul><li style="list-style-type: none;">
+<ul><li><span style="font-family: verdana, geneva; font-size: 10pt;">Choose <b>Test</b> to test the FTP connection and ensure that the application can connect based on the information you've defined. If the test fails, please reach out to your partner / SAP Services / whomever is helping with this transition for assistance. If there is still an issue, please open a support ticket.</span></li><li><span style="font-family: verdana, geneva; font-size: 10pt;">Choose <b>Activate</b> to change the FTP Server's status to Active.</span></li></ul>
+</li></ul>
+<p><span style="text-decoration: underline;"><strong>Appendix 3 - Public Key Bulk Upload</strong></span></p>
+<p><strong>Uploading Customer Public Keys for Individual SFTP Access</strong></p>
+<p><strong>Purpose</strong></p>
+<p>Customers must upload their <strong>public keys</strong> to enable <strong>individual SFTP access</strong>.  Keys should be generated with <strong>4096 bits</strong>.</p>
+<p><strong>Folder Structure</strong></p>
+<p>Public keys must be uploaded to the following folders:</p>
+<ul><li>For Production - /Prod/PUBLIC_KEYS</li></ul>
+<p style="padding-left: 40px;"><img class="img-responsive" height="125" src="/documents/customerkba/opwBCKmXugoLVyR8FLPOK7IYAWLGfseuXzHLFdS4HCI" width="239"/></p>
+<ul><li>For Non-Production / Sandbox - /Test/PUBLIC_KEYS</li></ul>
+<p style="padding-left: 40px;"><img class="img-responsive" height="100" src="/documents/customerkba/fJrOjVOlJs0BgoBqh4V_8MIluGDdSo2W1CIARgCKFng" width="234"/></p>
+<p> </p>
+<p><strong>Naming Convention</strong></p>
+<p>The public key file must follow the naming convention below:</p>
+<ul><li>For keys being used by applications or scripting a name like the following
+<ul style="list-style-type: circle;"><li>facets.pub</li><li>retrieveextracts.pub</li></ul>
+</li><li>For keys for individuals, use the following:
+<ul style="list-style-type: circle;"><li>Useremailid.pub (user.name@corp.com)</li></ul>
+</li></ul>
+<p><img alt="undefined" class="img-responsive" height="119" src="/documents/customerkba/n1j7iuOwnnFrc10BPJpw9VA2viv5DJBV8l9iicACgqw" width="624"/></p>
+<p><strong>Deadline for Uploading Public Keys</strong></p>
+<p><strong>Keys must be loaded into the folders for bulk processing no later than:</strong></p>
+<ul><li>For Non-Production / Sandbox – <strong>April 3, 2026</strong>.</li><li>For Production – <strong>June 5, 2026</strong>.</li></ul>
+<p><strong>After the Deadline or If no Access</strong></p>
+<p>If customers fail to upload their public keys by the deadline, or if they do not have access to upload the keys, they must contact Support, after April 3 for Non-Production / Sandbox or June 5 for Production, for assistance.  If tickets are needed, please keep the following mind:</p>
+<ul><li>The support ticket needs to be a <strong>P4</strong></li><li>The support ticket <strong>should contain all public keys if possible</strong> to limit the number of tickets </li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>ALM, APM, migration, SFTP Migration, Goanywhere, Compliance, Workflow, FTP, </p></div></div></div></div>

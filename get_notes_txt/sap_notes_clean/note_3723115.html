@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When calculation payroll for trainers before implementation of SAP Note 3720025 the payroll results stored in cluster may contain incorrect HI and Tax bases. SAP Note 3720025 fixes the calculation functions but if the results were already stored to the cluster with incorrect value <strong>SAP strongly recommends you to recalculate payroll for all trainers with retro back to January 2026 with "forced reload of base for trainers" mode.</strong> Mentioned mode could be enabled via entering wage type <strong>/28M into infotype 0014 for period of January 2026 (and/or February 2026, if results for 02/2026 are incorrect as well) with letter "R" filled in field Assignment number (ZUORD)</strong>. Since value (BETRG) is obligatory for this wage type, enter any value between 0 and 300 - when ZUORD contains R in the first place, the value in BETRG is ignored. It just enables the "forced reload of base for trainers" mode and then in calculation base for HI (/3A2) and base for Tax (/3A6) will be reloaded and stored correctly.<br/><br/>Forced reload of base is not relevant for gross-up run nor for any runs with AS-PARM2 starting with SIN string (used in Public Sector for simulation purposes).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">HRSK, HSKCALCM, HSKCALC0, SKCZP, SKCTX, /28M, P0014-ZUORD</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is relevant only for Slovakia (HRSK)</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Source code of payroll functions SKCZP and SKCTX was updated to process forced reload of base for trainers functionality.<br/><br/></p>
+<p><strong>Implementation</strong></p>
+<ul>
+<li>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install a solution earlier, use the Note Assistant to implement the correction instruction. You can find more information about the Note Assistant in SAP Service Marketplace, under <em><strong>service.sap.com/note-assistant</strong></em>.</li>
+</ul>
+<ul>
+<li>Note that documentation, transactions, and Customizing activities are only delivered via Support Package. </li>
+</ul></div></div></div></div>

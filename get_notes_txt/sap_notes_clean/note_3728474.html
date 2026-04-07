@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When opening an Interactive Adobe Form through SAP or Adobe Reader, the following message is displayed:</p>
+<p></p>
+<p><em>"This document enabled extended features in Adobe Acrobat Reader under an evaluation agreement. The evaluation period for extended features has ended. Please ask the document author for the latest version of the document."</em></p>
+<p></p>
+<p>The issue still happen even for newly generated PDFs after a new ReaderRights credential has been installed</p>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Forms Service by Adobe</li><li>SAP NetWeaver all releases</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Install or renew the Adobe ReaderRights credential in NWA.</li><li>Open an Interactive Adobe Form through SAP Portal.</li><li>The form is displayed in Adobe Acrobat Reader.</li><li>Try to edit the form fields.</li><li>The fields are not editable and the error message is shown.</li><li style="font-style: italic;"><em>"This document enabled extended features in Adobe Acrobat Reader under an evaluation agreement. The evaluation period for extended features has ended. Please ask the document author for the latest version of the document."</em></li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<p>After installing or renewing the Adobe ReaderRights credential, ensure that the new credential is correctly applied in the system.</p>
+<ol><li>
+<p>Install the ReaderRights credential in NWA as described in:</p>
+<ul><li>
+<p>KBA <a href="https://me.sap.com/notes/%202860179" rel="noopener noreferrer nofollow" target="_blank">2860179 </a>– How to install a Reader Rights Credential in NWA</p>
+</li><li>
+<p>SAP Note <a href="https://me.sap.com/notes/%20736902" rel="noopener noreferrer nofollow" target="_blank">736902 </a>– Adobe Credentials</p>
+</li></ul>
+</li><li>
+<p>If PDFs were generated with expired ReaderRights credentials, run report FP_REAPPLY_READER_RIGHTS as mentioned in the SAP Note <a href="https://me.sap.com/notes/3706798" rel="noopener noreferrer nofollow" target="_blank">3706798 </a>and SAP Note <a href="https://me.sap.com/notes/3703281" rel="noopener noreferrer nofollow" target="_blank">3703281</a></p>
+<ul><li>
+<p>This report reapplies the ReaderRights to existing PDFs.</p>
+</li></ul>
+</li><li>If the issue persists after installing the new credential, restart the Java servers to ensure that the new credential is fully recognized.</li></ol>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>SAP Note <a href="https://me.sap.com/notes/736902" rel="noopener noreferrer nofollow" target="_blank">736902 </a>- Adobe credentials</li><li>SAP Note <a href="https://me.sap.com/notes/3703281" rel="noopener noreferrer nofollow" target="_blank">3703281 </a>- Batch processing for reapplying ReaderRights credentials</li><li>SAP Note <a href="https://me.sap.com/notes/3703534" rel="noopener noreferrer nofollow" target="_blank">3703534 </a>- Increase in the PDF size after re-applying Reader Rights</li><li>KBA <a href="https://me.sap.com/notes/2860179" rel="noopener noreferrer nofollow" target="_blank">2860179 </a>- How to install a Reader Rights Credential in NWA</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Adobe ReaderRights, Interactive Forms by Adobe, ADS, Adobe Acrobat Reader, Reader Rights, FP_REAPPLY_READER_RIGHTS, Interactive, PDF, Reader, ReaderRights, Apply, Reapply, restart, Java, NWA</p>
+<p></p></div></div></div></div>

@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When running silent data migration for CL_SDM_MIGR_PROJ_01 or CL_SDM_MIGR_AUFK_01, there is exception raised with type:CX_SY_OPEN_SQL_DB.</p>
+<p>This issue is observed in migrate_data_finished method when there are large number of projects or Networks being updated in SDM execution.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CX_SY_OPEN_SQL_DB, CL_SDM_MIGR_AUFK_01, CL_SDM_MIGR_PROJ_01, MIGRATE_DATA_FINISHED, SDM_MON</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> Program Error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please follow the below steps in sequence.</p>
+<p>1. Create correction report:ZPS_SDM_MIGR_CORR_REPO and copy the source code provided in the SAP note attachments "<a href="https://i7p.bss.net.sap/sap/bc/bsp/sno/ui/attachment.htm?iv_key=002075125900000350582026&amp;iv_version=0007&amp;alt=2BCE4CB10DF674B172F4F3F7B32A2E284F492BCB353533358EF734378A3730B42A0C2BC82E0ECEF28F8A2F0F31CA8B774D2B75D1D535373173D1AD30CC722FF474F6CA2EF5F44DF5D2750C09514BCECFCFCE4C8DCF4BCC4DB5F575F4F4F3F57771F571F6F70B01B25D83D4120B0A722092A599504EB16D715E3E00&amp;iv_guid=FA163E458D151FE18AB2611E01F0E4BE" target="_blank">ZPS_SDM_MIGR_CORR_REPO.txt</a>". Execute the created report to update the SDM migration status to '02' in PROJ and AUFK table.</p>
+<p>2. To reset the SDM migration class status,</p>
+<p>    2.1 Execute the SDM_MON transaction to reset the status for the migration class CL_SDM_MIGR_PROJ_01 or CL_SDM_MIGR_AUFK_01 , for the cancelled migrations.<br/>    2.2 Execute the report R_SDM_ONLINE_EXEC to rerun the SDM migration for the class CL_SDM_MIGR_PROJ_01 or CL_SDM_MIGR_AUFK_01 to update the SDM migration as finished</p></div></div></div></div>

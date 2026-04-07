@@ -1,0 +1,190 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "zuserguides",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.13.2",
+      "toolsId": "6cb52468-8e5d-4a6d-825b-6227b7eb1c8c"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZUG_C_GUIDE_HEADER_CDS/",
+        "type": "OData",
+        "settings": {
+          "annotations": ["ZUG_C_GUIDE_HEADER_CDS_VAN", "annotation"],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZUG_C_GUIDE_HEADER_CDS_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUG_C_GUIDE_HEADER_CDS_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/ZUG_C_GUIDE_HEADER_CDS_VAN.xml"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.135.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.f": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.se.mi.plm.lib.attachmentservice": {}
+      },
+      "components": {
+        "sap.se.mi.plm.lib.attachmentservice.attachment.components.stcomponent": {
+          "lazy": true
+        }
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "zuserguides.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false,
+          "metadataUrlParams": {
+            "sap-value-list": "none"
+          }
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [],
+      "targets": {}
+    }
+  },
+  "sap.ui.generic.app": {
+    "_version": "1.3.0",
+    "settings": {
+      "forceGlobalRefresh": false,
+      "objectPageHeaderType": "Dynamic",
+      "considerAnalyticalParameters": true,
+      "showDraftToggle": false
+    },
+    "pages": {
+      "ListReport|ZUG_C_GUIDE_HEADER": {
+        "entitySet": "ZUG_C_GUIDE_HEADER",
+        "component": {
+          "name": "sap.suite.ui.generic.template.ListReport",
+          "list": true,
+          "settings": {
+            "condensedTableLayout": true,
+            "smartVariantManagement": true,
+            "enableTableFilterInPageVariant": true,
+            "filterSettings": {
+              "dateSettings": {
+                "useDateRange": true
+              }
+            }
+          }
+        },
+        "pages": {
+          "ObjectPage|ZUG_C_GUIDE_HEADER": {
+            "entitySet": "ZUG_C_GUIDE_HEADER",
+            "defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
+            "component": {
+              "name": "sap.suite.ui.generic.template.ObjectPage"
+            },
+            "embeddedComponents": {
+              "simple::Attachments": {
+                "id": "simple::Attachments",
+                "componentName": "sap.se.mi.plm.lib.attachmentservice.attachment.components.stcomponent",
+                "title": "{{Attachments}}",
+                "settings": {
+                  "mode": "{= ${ui>/editable} ? 'C' : 'D' }",
+                  "objectType": "ZBUSGUID",
+                  "objectKey": "{uuid_char}",
+                  "isGuid": false,
+                  "attributeHandling": {
+                    "_VisibleAttributes": {
+                      "UPLOADEDBY": true,
+                      "UPLOADEDON": true,
+                      "FILESIZE": true,
+                      "ENABLELINK": true,
+                      "ATTACHMENTSTATUS": true,
+                      "ATTACHMENTTITLE": true,
+                      "SOURCE": true,
+                      "DIRDETAILS": true
+                    },
+                    "_VisibleActions": {
+                      "RENAME": true,
+                      "DELETE": true,
+                      "ADD": true,
+                      "ADDURL": true,
+                      "DOWNLOAD": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}

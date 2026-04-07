@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You have migrated from ECC to S4HANA. <br/>Periodic actual overhead calculation run was executed for a posting period before the migration. You execute actual overhead calculation for the same period after the migration again.  The calculation dumps for some CO objects for which overhead lines were posted before migration.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">KZPI</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Two reasons of such issue are known currently:</p>
+<ol>
+<li>There are inconsistences between CO line items (COEP) and CO totals (COSP/COSS) in ECC system which affects also overhead postings in current period. Migration converts all the postings into ACDOCA and creates special lines (BSTAT = 'C' - Balance Carryforward and Balance Adjustments from Migration) for the balance between single lines and totals in S4. Overhead delta logic is not able to handle  such lines.</li>
+<li>You introduced functional area within the migration, and executed a logic supplying old postings (ACDOCA) by functional area and partner functional area eventually. The logic was incomplete and did not update CO Subkey (HRKFT) for CO relevant postings. Overhead logic fails because of inconsistence between line and CO Subkey content.  </li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Our recommendation is to avoid periodic overhead calculation for migration period in ECC, or to reverse all existing overhead for the period in ECC before migration.</p>
+<ol>
+<li>Check and fix inconsistencies between CO line items and CO totals in ECC before migration. </li>
+<li>When you plan to update functional area in existing ACDOCA items within migration, please be sure that you update CO Subkey for CO relevant postings too. Every experienced consultant should be familiar with the concept of CO Subkey (HRKFT reference to related tables COKEY and COKEY2).</li>
+</ol>
+<p>All these recommendations can be applied within migration preparation phase or before next test migration iteration only. When you have migrated you production already,</p>
+<ol>
+<li>SAP can provide a modification SAP Note with a fix, the logic will exclude existing OH postings the BSTAT = 'C' from processing in overhead applications then.  Side effect can be different result of OH calculation on ECC and S4c after migration for migration period.</li>
+<li>CO Subkey in affected ACDOCA items must be updated to contain the same functional areas as ACDOCA self. Team responsible for ACDOCA update with functional area within migration should take over this task. </li>
+</ol></div></div></div></div>

@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">On Linux systems, a fresh SDA installation fails due to a timeout, and all subsequent installation attempts continue to fail.</p>
+<p><br/>The following symptoms can be observed:</p>
+<ol>
+<li>The file SMDAgent/default/configuration/agent/#/master_password is empty and has both read and write permissions set.</li>
+<li>The SDA agent logs contain exceptions similar to:</li>
+</ol>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">com.sap.solman.agent.core.spring.AbstractSdaFailureAnalyzer org.springframework.beans.factory.BeanCreationException : Error creating bean with name 'jettyServletWebServerFactory' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/ServletWebServerFactoryConfiguration$EmbeddedJetty.class]: illegal permissions on file<br/></span>org.springframework.context.ApplicationContextException: Unable to start web server</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The master_password is generated using system entropy. On some Linux systems, the available entropy is very low. This can have several causes, for example hardware characteristics or limited I/O activity.</p>
+<p>Because of the low entropy, generation of the master_password is significantly slowed down, which in turn causes the SDA installation to run into a timeout.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Remove the existing SDA installation completely, and then perform a fresh installation using the SDA version specified in the Support Packages &amp; Patches section.</p></div></div></div></div>

@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Column values appear misaligned with column headings when executing a Report Painter / Report Writer report via transaction GR55.</p>
+<p>Observed behavior:</p>
+<ul><li>
+<p>Report output becomes misaligned when the following display options are enabled:</p>
+<ul><li>
+<p>Freeze lead column</p>
+</li><li>
+<p>Freeze page header</p>
+</li></ul>
+</li><li>
+<p>When scrolling horizontally, the column headings remain fixed, but the data rows appear shifted relative to the headings.</p>
+</li><li>
+<p>The issue occurs especially when the report contains many columns and the page width has been increased in the report layout settings.</p>
+</li><li>
+<p>As a result, the displayed figures appear under the wrong column headers, making the report difficult to read.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Controlling (CO)</li><li>SAP R/3</li><li>SAP R/3 Enterprise </li><li>SAP ERP Central Component</li><li>SAP ERP</li><li>SAP enhancement package for SAP ERP</li><li>SAP enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA Finance</li><li>SAP S/4HANA</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The scroll bar in Report Painter / Report Writer output is controlled only by the report page dimensions defined in the report layout.</li><li>The scroll behavior is not technically linked to individual report columns or rows. When the page width is extended beyond the visible screen width, the system cannot guarantee alignment between frozen headers and scrolling columns.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>
+<p>Use the standard layout dimensions instead of increasing the page width in the Page Control section of the report layout settings.</p>
+</li><li>
+<p>Keep the page width aligned with the standard visible screen size.</p>
+</li><li>
+<p>Configure the report to include only the number of columns that can comfortably fit within that standard width.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://me.sap.com/notes/0001824596" rel="noopener noreferrer nofollow" target="_blank">KBA 0001824596 - FAQ: Column headers disappear when scrolling</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>GR55, report painter, report writer, freeze lead column, freeze page header, column misalignment, report layout, page control, scrolling issue</p></div></div></div></div>

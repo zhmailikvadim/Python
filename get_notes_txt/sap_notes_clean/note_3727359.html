@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The accumulated depreciation recorded for the second partial retirement, which occurred on the same day as the first partial retirement, appears to be lower than the expected value based on the fixed asset configuration.</p>
+<p><span style="color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em> </span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Business One</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Prerequisites: </strong></p>
+<ul><li>Working with Fixed Assets.</li><li>Under <em>Administration → System Initialization → Company Details → Basic Initialization </em>tab, the <em>Calculate Depreciation By</em> is set as 'Day'.</li><li>In <em>Administration → System Initialization → Posting Periods</em>, the 2024 posting period is set from 2024.01.01 to 2024.12.31. </li><li>The depreciation type 'DT2', for example, is configured under <em>Administration → Setup → Financials → Fixed Assets → Depreciation Types</em> with the following specifications:<br/>
+<ul><li><em>Method</em>: Straight Line</li><li><em>Calculation Base</em>: Yearly </li><li><em>Calculation Method</em>: APC / Total Useful Life</li></ul>
+</li><li>The asset class 'AC1' is configured under <em>Administration → Setup → Financials → Fixed Assets → Asset Classes</em> with the following specifications:
+<ul><li><em>Depreciation Type:</em> DT2</li><li><em>Useful Life:</em> 36</li></ul>
+</li></ul>
+<p><strong>Scenario:</strong></p>
+<ol><li>Navigate to <em>Financials → Fixed Assets → Asset Master Data</em>.</li><li>Add a new fixed asset with information specified below:
+<ul><li><em>Item No.</em>: FA10</li><li><em>Asset Class</em>: AC1</li><li><em>Useful life</em>: 36   </li></ul>
+</li><li>Go to <em>Financials → Fixed Assets → Capitalization.</em></li><li>Create a capitalization for the fixed asset with details outlined below:
+<ul><li><em>Asset No.</em>: FA10</li><li><em>Posting/Document/Asset Value Date</em>: 01.01.2024</li><li><em>Total(LC)</em>: 3600</li><li><em>Quantity</em>: 10</li></ul>
+</li><li>Once the fixed asset capitalization is created, go to <em>Asset Master Data → Fixed Assets → Depreciation</em> tab and verify the monthly depreciation amount, which will be displayed as shown below:
+<ol><li><img alt="" class="img-responsive" height="659" src="/documents/customerkba/qSaifYhECzbBF-XrGIusHZkrwQVvuOjx1skhhwFp9C8" width="741"/></li></ol>
+</li><li>Navigate to <em>Financials → Fixed Assets → Retirement</em> and execute the following: </li></ol>
+<ul><li>First partial retirement with details as outlined below:
+<ul><li><em>Posting Date</em>: 10.04.2024</li><li><em>Quantity</em>: 3 units</li><li><em>Total (LC)</em>: 500</li></ul>
+</li><li><span style="text-decoration: underline;">Result</span>: Calculated accumulated depreciation recorded in retirement journal entry is 99.51.</li></ul>
+<p></p>
+<ul><li>Second partial retirement with details as outlines below:
+<ul><li><em>Posting Date:</em> 10.04.2024</li><li><em>Quantity:</em> 2 units</li><li><em>Total (LC):</em> 600</li></ul>
+</li><li><span style="text-decoration: underline;">Result</span>: Calculated accumulated depreciation recorded in retirement journal entry is 64.55.</li></ul>
+<p><strong>Expected behavior:</strong></p>
+<p>The second partial retirement created on the same posting date computes and records accumulated depreciation of 66.34 by using the planned depreciation that has been recorded.</p>
+<p><strong>Actual behavior:</strong></p>
+<p>The second partial retirement, created on the same posting date, calculates and records accumulated depreciation of 64.55 based on the planned depreciation adjusted for the fixed asset(already retired) included in the first partial retirement.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This is the current system behavior.</p>
+<p>If a fixed asset undergoes multiple retirements recorded in successive steps on the same day, each subsequent retirement considers the asset as already retired based on the first retirement entry for that day. As a result, for the subsequent partial retirement less accumulated depreciation is recorded.</p>
+<p><strong>Illustration of accumulated depreciation calculation:</strong></p>
+<p>When a partial retirement of 3 units was initially recorded for fixed asset 'FA10', the depreciation amount for subperiod 4 in the <em>Asset Master Data</em> was adjusted from 98.52 to 78.87.</p>
+<p><img alt="" class="img-responsive" height="702" src="/documents/customerkba/-aLd70TD_EXgU7Q3DePGkMpdM969cRSJde84qyj-Ig8" width="785"/></p>
+<p>The accumulated depreciation for the remaining 7 units of the fixed asset is calculated as follows:</p>
+<p>Accumulated Depreciation at Year Beginning – Accumulated Depreciation Reversed from First partial retirement + Total Depreciation Amounts (Periods 1 through 3) + (Period 4 Depreciation × 10 / 30)</p>
+<p>= 0 - 99.51 + (101.81 + 95.24 + 101.81) + (78.87 × 10 / 30) = 225.64</p>
+<p>For the 2 units retired in the second partial retirement (occurring on the same date), the accumulated depreciation allocation is calculated as:</p>
+<p>225.64 × 2 / 7 = 64.55</p>
+<p><strong>Workaround:</strong></p>
+<p>When <em>Calculate Depreciation By</em> is configured as 'Day' under <em>Administration → System Initialization → Company Details → Basic Initialization</em>, enter both partial retirements on the final day of the month. Doing so will ensure that the accumulated depreciation value calculated for the second partial retirement achieves the intended outcome.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://help.sap.com/docs/SAP_BUSINESS_ONE/68a2e87fb29941b5bf959a184d9c6727/30344ab3d5b54aebae0f9f5a0dfe4c93.html" rel="noopener noreferrer nofollow" target="_blank">Retirement</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>fixed assets, depreciation calculation, partial retirement, accumulated depreciation, net book value, NBV, depreciation type, incorrect depreciation, asset transaction report, journal entry, retirement calculation, SAP Business One, FA, Retirement, Balances, Incorrect, Wrong, Mismatch, Calculated Values, Reduced, Lower, Posted</p></div></div></div></div>

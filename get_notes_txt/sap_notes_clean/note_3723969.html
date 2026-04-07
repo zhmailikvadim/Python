@@ -1,0 +1,87 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Integration flows using the AEM adapter experience connection failures with the following error</p>
+<p>Error Message: <strong>503: Too Many Connections For Client-Username</strong></p>
+<p>This error occurs when:</p>
+<ul>
+<li>A specific client username has exceeded the maximum number of simultaneous connections allowed by the SAP Integration Suite, advanced event mesh service</li>
+<li>Connection counts temporarily double during Cloud Integration blue-green deployment</li>
+<li>Multiple application instances are sharing the same username</li>
+<li>Service plan connection limits are insufficient for deployment scenarios</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<ul>
+<li>503 Error</li>
+<li>Too Many Connections</li>
+<li>Client Username Limit</li>
+<li>AEM Service</li>
+<li>Connection Pool</li>
+<li>max-connections-per-client-username</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error is triggered by the <strong>max-connections-per-client-username</strong> setting configured in the client profile associated with your username. This setting limits the number of concurrent connections a single username can maintain across all service types (SMF, Web transport, REST, MQTT, and AMQP combined).</p>
+<p><strong>Three Types of 503 Errors</strong></p>
+<ol>
+<li><strong>503: Too Many Connections For Client-Username</strong> — Per-username limit exceeded (this error)</li>
+<li><strong>503: Too Many Connections For VPN</strong> — Message VPN limit exceeded</li>
+<li><strong>503: Too Many Clients</strong> — System-wide broker maximum reached</li>
+</ol>
+<p><strong>Common Scenarios:</strong></p>
+<p><strong>Blue-Green Deployment Impact</strong><br/>During Cloud Integration blue-green deployment of worker nodes, connection counts may temporarily double due to the nature of the deployment strategy. This occurs because both old and new worker nodes establish connections simultaneously during the switchover phase.</p>
+<p><strong>Other Scenarios:</strong></p>
+<ul>
+<li>Multiple application instances sharing the same username</li>
+<li>Service plan connection limits not configured to handle deployment scenarios</li>
+<li>Insufficient connection threshold planning for temporary spikes during deployments</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>1. Increase the Connection Limit</p>
+<p>Adjust the <strong>max-connections-per-client-username</strong> setting in the client profile.</p>
+<p><strong>Reference:</strong> See Configuring Client Profiles in the SAP Integration Suite, advanced event mesh Help <a href="https://help.pubsub.em.services.cloud.sap/Cloud/cloud-lp.htm" target="_blank">documentation</a>.</p>
+<p>2. Use Connection Pooling in Integration Flow (AEM Sender Adapter)</p>
+<p><strong>Starting with AEM Adapter version 1.4.1</strong>, a feature to pool connections on the Sender Adapter end has been introduced, reducing the number of connections created.</p>
+<p><strong>Action Required:</strong></p>
+<ul>
+<li>Upgrade to AEM Adapter version <strong>1.4.1</strong> or higher</li>
+<li>Configure connection pooling in your integration flow</li>
+</ul>
+<p><strong>Reference:</strong> Please refer to the 1.4.1 AEM Adapter release notes and <a href="https://help.sap.com/docs/integration-suite/sap-integration-suite/configure-advanced-event-mesh-receiver-adapter?locale=en-US#performance-optimization" target="_blank">documentation</a>.</p>
+<p>3. Monitor Connection Usage</p>
+<p>Monitor AEM Service events to track connection usage:</p>
+<ul>
+<li>VPN_CLIENT_USERNAME_CONNECTIONS_HIGH — Warning event when approaching limit</li>
+<li>VPN_CLIENT_USERNAME_CONNECTIONS_EXCEEDED — Error event when the limit is exceeded</li>
+</ul>
+<p>4. Check System Limits (AEM Service)</p>
+<p>Be aware of the system-wide connection limits based on your AEM Service edition:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Edition</strong> </td>
+<td><strong>Maximum Connections</strong></td>
+</tr>
+<tr>
+<td>Standard</td>
+<td>100 connections</td>
+</tr>
+<tr>
+<td>Enterprise Edition</td>
+<td>Up to 100,000 connections</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Important Notes</strong></p>
+<p><strong>Plan for Blue-Green Deployments:</strong><br/>Plan your SAP Integration Suite, advanced event mesh service connection thresholds accordingly to avoid <strong>JCSMPErrorResponseException: 503: Too Many Connections</strong> errors during new node startup.</p>
+<p><strong>Proactive Management:</strong></p>
+<ul>
+<li>Configure connection count alerts on your AEM Service</li>
+<li>Ensure your service plan's connection limits can accommodate the temporary spike during blue-green deployments</li>
+<li>Monitor connection metrics regularly to prevent reaching limits</li>
+<li>Consider using connection pooling to reduce the total number of connections required</li>
+</ul>
+<p><strong>Related Information</strong></p>
+<ul>
+<li>SAP Note 3603502 - AEM Adapter in SAP Integration Suite</li>
+<li>SAP Note 3577865 - AEM Adapter compatibility information</li>
+<li>AEM Service Documentation: Configuring Client Profiles</li>
+<li>AEM Adapter 1.4.1 Release Notes</li>
+</ul></div></div></div></div>

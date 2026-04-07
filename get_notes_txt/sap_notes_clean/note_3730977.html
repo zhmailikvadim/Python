@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Opening the Bank Integration launchpad page results in the error: <em>"Failed to execute HTTP request: 404 (404)"</em> with Page ID SAP_FIN_PGT_BSNAGT_PC and space ID SAP_BR_BANK_INT_SPECIALIST.</li><li>The business role SAP_BR_BANK_INT_SPECIALIST was copied from the SAP delivered template and assigned to the user.</li><li>The page template SAP_FIN_PGT_BSNAGT_PC is not available in the Manage Launchpad Pages app.</li><li>The issue exists in release 2602 or higher.</li></ul>
+<p><span style="color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental</em> </span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition 2602 and higher</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul><li>Navigate to the Bank Integration launchpad page.</li><li>The 404 error appears immediately upon opening the page: "Failed to execute HTTP request: 404 (404) — Page ID: SAP_FIN_PGT_BSNAGT_PC | Space ID: SAP_BR_BANK_INT_SPECIALIST" </li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The standard Bank Integration pages were removed in release 2602, and the associated page template SAP_FIN_PGT_BSNAGT_PC is no longer available in the system.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To create the page, follow the below steps:</p>
+<ol><li>In the Manage Launchpad Spaces app, create a custom space using the delivered template SAP_BR_BANK_INT_SPECIALIST as the template, this ensures the space is aligned with the Bank Integration role structure.</li><li>Assign the newly created custom space to the relevant business role in the Maintain Business Roles app to make it visible to the intended users.</li><li>In the Manage Launchpad Pages app, create a new custom page that will serve as the replacement for the deleted standard Bank Integration page.</li><li>Search for the required business catalog associated with the Bank Integration scenario that is SAP_FIN_BC_BSNAGT_PC to identify the available applications.        <img alt="" class="img-responsive" height="621" src="/documents/customerkba/ovzeP0eb94u6VUwyyArQoxO9UUj99eEUfns28xxlxLU" width="480"/><br/><br/></li><li><span>Assign the identified applications to the custom page.</span>
+<div>
+<div aria-label="Message actions" role="group">
+<div>
+<div>
+<div> </div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div> </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>KBA <a href="https://me.sap.com/notes/0002930614" rel="noopener noreferrer nofollow" target="_blank">2930614 - Manage Launchpad Page</a></li><li><a href="https://community.sap.com/t5/enterprise-resource-planning-blog-posts-by-sap/how-to-use-spaces-and-pages-in-sap-s-4hana-cloud-public-edition/ba-p/13522136" rel="noopener noreferrer nofollow" target="_blank">How to use Spaces and Pages in SAP S/4HANA Cloud Public Editi</a><a href="https://me.sap.com/notes/0002930614" rel="noopener noreferrer nofollow" target="_blank"></a><a href="https://community.sap.com/t5/enterprise-resource-planning-blog-posts-by-sap/how-to-use-spaces-and-pages-in-sap-s-4hana-cloud-public-edition/ba-p/13522136" rel="noopener noreferrer nofollow" target="_blank">on</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>bank integration, 404, page id SAP_FIN_PGT_BSNAGT_PC, space id SAP_BR_BANK_INT_SPECIALIST, page template missing, manage launchpad pages, manage launchpad spaces, fiori launchpad, s/4hana cloud public edition, page not found, deleted page, release 2602, catalog assignment, custom page, custom space</p></div></div></div></div>

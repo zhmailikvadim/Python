@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><span>Wrong results when using <em>Import from Excel</em> for Inventory Counting when working with Batch and with UOM.</span></p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>
+<p>Create item "uom1" with<em> UOM group</em> where 1 Case = 43.02 Pack. Go to <em>Inventory Data</em>, choose "Pack" for <em>UoM Code</em>,  and <span>choose "Case"</span> for</p>
+<p><em>Inventory Counting UoM Code</em>.</p>
+</li>
+<li>
+<p>Add <em>Goods Receipt</em> for this item with quantity 273.87 and allocate 3 batches the following way:</p>
+<p>C1 - 35.70</p>
+<p>C2 - 86.04</p>
+<p>C3 - 152.13.</p>
+</li>
+<li><span>Create <em>Inventory Counting</em> for the item:</span></li>
+<ul>
+<li>Set focus on <em>"UoM Counted Qty" </em> and click <em>Add Items</em> &gt; <em>Import Items.</em></li>
+<li><span>In the<em> Import from Excel</em> form pop-up, map the file columns to the object fields as follows:</span></li>
+</ul>
+</ol>
+<p style="padding-left: 90px;"><em><span style="font-size: 14px;">A - Item Code</span></em><br/><em><span style="font-size: 14px;">B - Item Description</span></em><br/><em><span style="font-size: 14px;">C - Warehouse Code</span></em><br/><em><span style="font-size: 14px;">D - Counted Quantity</span></em><br/><em><span style="font-size: 14px;">E - UoM Code</span></em><br/><em><span style="font-size: 14px;">F - Batch Number  </span></em></p>
+<ol>
+<ul>
+<li>Import the following Excel file: </li>
+</ul>
+</ol>
+<p style="padding-left: 90px;"><span style="font-size: 14px;">uom1    uom1    01    0.83    Case    C1</span><br/><span style="font-size: 14px;">uom1    uom1    01    2.19    Case    C2</span><br/><span style="font-size: 14px;">uom1    uom1    01    3.23    Case    C3</span></p>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">4. </span><em>UoM Counted Qty </em>is 6.25 and press <em>Ctrl + Tab</em> to allocate the batches. The <em>Batch Number Counting</em> form pop-up appears.</p>
+<p><strong>Expected behavior:</strong></p>
+<p><span>You will see in the <em>Rows from Documents</em> that <em>Quantity</em> is 268.875, <em>Total Needed</em> is 0 (blank), and <em>Total Selected</em> is 268.875. </span></p>
+<p><strong>Actual behavior:</strong></p>
+<p><span>You will see in the <em>Rows from Documents </em>that <em>Quantity</em> is 268.875, <em>Total Needed</em> is -0.001, and<em> Total Selected</em> is 268.876. </span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""><span>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section </span><strong>References</strong><span> below lists the related feature package or patch once they become available. Be aware that </span><strong>References</strong><span> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</span></p></div></div></div></div>

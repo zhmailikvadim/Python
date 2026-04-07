@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ol id="__html0"><li>Preserve existing tasks, comments, and assignments</li><li>Avoid “Former User” entries</li><li>Maintain user consistency after IAS changes</li></ol>
+<p></p>
+<p><span style="color: rgb(224, 62, 45);"><strong>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</strong></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Cloud ALM</li><li>SAP Cloud Identity Services – Identity Authentication (IAS) </li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>An SAP Cloud ALM tenant is already in use</li><li>Customer attempts to change or replace the connected IAS tenant</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The ability to change the connected IAS tenant depends on the current IAS connection state of the SAP Cloud ALM tenant.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Log on to SAP Cloud ALM</li><li>Navigate to User Management</li><li>Identify whether the IAS connection is in: <strong>State A (modifiable)</strong> or <strong>State B (locked)</strong></li></ol>
+<p><strong><img class="img-responsive" height="417" src="/documents/customerkba/7yuWe28VBiv6VaDdR8IemTq2UZhslE7qKUVqZ1WRnIw" width="888"/></strong></p>
+<ul></ul>
+<h2 data-toc-skip=""> </h2>
+<h2 data-toc-skip=""><span role="text" style="font-size: 12pt;">Scenario 1: IAS in State A</span></h2>
+<p>In this case, the following approach can be used:</p>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">1. Configure new IAS as Corporate Identity Provider</span></h3>
+<ul><li>Configure the new IAS tenant as a Corporate Identity Provider in the currently used IAS tenant</li><li>Refer to: <a href="https://help.sap.com/docs/cloud-identity-services/cloud-identity-services/corporate-identity-providers?version=Cloud" rel="noopener noreferrer nofollow" target="_blank"><em>Corporate Identity Providers</em></a> (SAP Help Portal)</li></ul>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">2. Maintain consistent Subject Name Identifier (SNI)</span></h3>
+<p><span style="font-size: 10pt;">To avoid "Former Member" entries throughout SAP Cloud ALM, it is mandatory to keep the "Subject Name Identifier" stable. </span></p>
+<p><span style="font-size: 10pt;"><img class="img-responsive" height="348" src="/documents/customerkba/_T50Mxhm_FzNuUyIL_TYB_yHjPJ8nF5jciHa-F4AN_A" width="730"/></span></p>
+<ul><li>In the current IAS tenant:
+<ul><li>Go to Applications → SAP Cloud ALM</li><li>Identify the Subject Name Identifier (SNI) (e.g. <code>email</code>)</li></ul>
+</li><li>Ensure the new IAS tenant:
+<ul><li>Uses the same SNI</li><li>Sends exactly the same value, including casing</li></ul>
+</li></ul>
+<p>Ensure that the same Subject Name Identifier is used for the Corporate IDP configuration, which you created under Scenario 1 - step 1.</p>
+<p>Check this on the side of the new IAS Tenant, under the application created for the currently used IAS tenant.</p>
+<p>Note that also the values need to be exactly the same. I. e., if you've been using "email" as subject name identifier and you have a user "<a href="mailto:john.doe@your-company.com" rel="noopener noreferrer nofollow" target="_blank">john.doe@your-company.com</a>", the new IAS tenant needs to send exactly the same value, with the same casing.</p>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">3. Validate</span></h3>
+<p>After configuration:</p>
+<ul><li>Log on via the current IAS tenant (acting as proxy)</li><li>Navigate to:
+<ul><li>SAP BTP Cockpit → Subaccount → Security → Users</li></ul>
+</li></ul>
+<p>Verify:</p>
+<ul><li>Only one user entry exists</li><li>The user ID remains unchanged</li></ul>
+<p>If a duplicate user is created:</p>
+<ul><li>The SNI configuration is not aligned and must be corrected</li></ul>
+<p></p>
+<h2 data-toc-skip=""><span role="text" style="font-size: 12pt;">Scenario 2: IAS in State B</span></h2>
+<p>In this case:</p>
+<ul><li>Changing the connected IAS tenant is not supported</li></ul>
+<p>If a different IAS tenant must be used:</p>
+<ul><li>Delete the SAP BTP SP Cloud ALM Subaccount and recreate it, afterwards a different IAS tenant can be assigned</li><li>This action result in a new SP Cloud ALM subscription, however this will also result in complete data loss, consequently, all previously created configurations and project content must be recreated.</li></ul>
+<h3 data-toc-skip=""> </h3>
+<h3 data-toc-skip=""><span role="text" style="font-size: 10pt;">Additional Information</span></h3>
+<ul><li>To avoid “Former User” entries, maintaining a consistent Subject Name Identifier (SNI) across identity providers is essential</li><li>Differences in SNI or attribute values will lead to creation of new user identities</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: SAP Note <a href="https://me.sap.com/notes/0003020352" rel="noopener noreferrer nofollow" target="_blank">0003020352 - How to specify a different IAS tenant for your cloud alm tenant</a></li><li>Refer to: SAP Note  <a href="https://me.sap.com/notes/0003121352" rel="noopener noreferrer nofollow" target="_blank">0003121352 - How to create and onboard cloud alm users</a></li><li>Refer to: SAP Note  <a href="https://help.sap.com/docs/cloud-identity-services/cloud-identity-services/corporate-identity-providers?version=Cloud" rel="noopener noreferrer nofollow" target="_blank">Corporate Identity Providers</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>cloud alm, ias, identity authentication service, change ias tenant, migrate users, subject name identifier, corporate identity provider, former member, duplicate users, user assignments, tasks export, user mapping, role collections, access loss, onboarding users</p></div></div></div></div>

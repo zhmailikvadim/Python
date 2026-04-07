@@ -1,0 +1,78 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>In SAP HANA MDS<sup>1)</sup> you observe, that a hierarchy parent node value is incorrectly calculated in the context of a calculated measure, if unbooked readmode is enabled.</p>
+<p>If you fully expand the parent node, then its value is shown correctly.</p>
+<p><sup>1)</sup> MDS: MultiDimensional Services; analytical engine in SAP HANA, responsible for processing analytic request fom SAP Analytics clienst such as SAP Analytics Cloud (SAC) or SAP Analysis for Office.</p>
+</div>
+<div></div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Analytics Cloud, SAC, SAP Analysis Office, SAP Design Studio, InA/MDS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, the hierarchy was not internally drilled and cells of hidden children (which should have referenced constant selection values) not created, causing visible parent nodes to not be correctly aggregated along the hierarchy (i.e. the exception aggregation along the hierarchy for the formula in question).</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2.0 database, EPMMDS plugin:</li>
+<ul>
+<li>"Fullversion EPMMDS" plugin revision: &lt; 1.00.202614.00</li>
+</ul>
+<li>SAP HANA Cloud Edition: </li>
+<ul>
+<li>&lt; CE 2026.14.0</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<p>In a model you create the following:</p>
+<ul>
+<li>Dimension A with a hierarchy</li>
+<li>Calculated Measure CM1 with an exception aggregation (e.g. SUM) over dimension A and a formula using operands with different constant selection contexts, e.g. the following two</li>
+<ul>
+<li>Calculated Measure M2 with constant selection on dimension B with a filter on value B_BOOKED.</li>
+<li>Measure M3</li>
+</ul>
+</ul>
+<p>The following entry exists in the datasource:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Dimension A</td>
+<td>Dimension B</td>
+<td>Measure M2</td>
+<td>Measure M3</td>
+</tr>
+<tr>
+<td>A_LEAF</td>
+<td>B_BOOKED</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table></div>
+<p>When modelling the query you:</p>
+<ul>
+<li>put dimension A into drill with the hierarchy with readmode "unbooked values"</li>
+<li>have a global filter</li>
+<ul>
+<li>on a parent node A_PARENT (with child A_LEAF) of the hierarchy of dimension A (<strong>no</strong> drill/expansion to A_LEAF)</li>
+<li>on a dimension value B_<strong>UN</strong>BOOKED of dimension B</li>
+</ul>
+<li>have selected CM1</li>
+</ul>
+<p>The value for calculated measure CM1 and node A_PARENT is then shown to be NULL (empty cell) although it should be 1, as the exception aggregation should have aggregated the value from A_LEAF.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA database Revisions:</p>
+<ul>
+<li>SAP HANA 2.0 database, EPMMDS plugin:</li>
+<ul>
+<li>"Fullversion EPMMDS" plugin revision: &gt;= 1.00.202614.0</li>
+</ul>
+<li>SAP HANA Cloud Edition:</li>
+<ul>
+<li>&gt;= CE 2026.14.0</li>
+</ul>
+</ul>
+<p><strong>Workaround:</strong></p>
+<p>Add an additional constant calculated measure CCM4 (e.g. "0"). Then add CCM4 as operand to CM1 by a simple addition.</p>
+<div id="gtx-trans" style="position: absolute; left: 27px; top: 783.312px;">
+<div class="gtx-trans-icon"></div>
+</div></div></div></div></div>

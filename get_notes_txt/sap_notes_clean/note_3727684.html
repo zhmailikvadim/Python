@@ -1,0 +1,67 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Valid during period 1.4.2026 – 30.9.2027 an Employer's Contribution is temporary lowered for Employees in an age of 18-22 years at start of income year. For year 2026 this means Employees born year 2003-2007.</p>
+<p>For such employees the Employer's Contribution is calculated with a rate of 20.81% for gross income that does not exceed 25.000 SEK per calendar month. For gross amounts above this limit, standard Employer’s contribution of 31.42% should be paid.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">EC, Employer's Contribution, ECONY, HR_SE_CALC_ECONT</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The new rate of <span style="text-decoration: underline;">20.81%</span> used in EC calculation for younger Employees is valid from 1.4.2026 and is stored under the constant ECONY in table T511K (please follow the document with manual steps attached to this SAP note to apply these changes).</p>
+<p>The calculation of age necessary for Employer's Contribution reflects the fact that Employee's age needs to be defined at the start of each income year for legal purposes.</p>
+<p> </p>
+<div class="table-responsive"><table border="0" cellpadding="1" cellspacing="1" class="table table-bordered table-striped col-resizeable" style="width: 1188px; height: 91px;">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>01</td>
+<td>2026.03.18</td>
+<td>Release for customers - changes mentioned in the section of Solution have been done</td>
+</tr>
+<tr>
+<td>02</td>
+<td>2026.03.18</td>
+<td>Release for customers - manual steps instruction added, no change in the functionality</td>
+</tr>
+<tr>
+<td>03</td>
+<td>2026.03.27</td>
+<td>Release for customers - validity of SAP note release for 608 extended based on customer's request, no change in the functionality</td>
+</tr>
+</tbody>
+</table></div>
+<p> </p>
+<p><strong>Delivery</strong></p>
+<p>For correct application of this note, please implement Correction Instructions attached to the SAP note (by SNOTE transaction) and follow manual post-implementation steps described in attachment of this SAP note ("Manual_steps_3727685.pdf") or import appropriate Support Package into your system.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This problem is caused by a program error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the attached program corrections or import the<br/>relevant Support Package.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Max Parallel, ODH, Package Size</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>ODH process was designed to run in a batch work process. So, to enable parallel processing via RFC in dialog, ODH tool provides a new configuration parameter 'Max Parallel'.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ol>
+<li>Import the relevant Support Package or implement the correction instructions.</li>
+<li>In ODH transaction:</li>
+<ol>
+<li>Mark the ODH class.</li>
+<li>Hit the button 'Details(Analysis)'.</li>
+<li>Hit the button 'Show Parameters'. Here you choose 'Max Parallel'.</li>
+<li>Select a rule that you want to change its 'Max parallel'.</li>
+</ol>
+<li>If you set the 'Max Parallel' to more than 1 (default), the parallelization processing will run in dialog work process. In this case, you need to modify the 'Package size' parameter to avoid timeout.</li>
+</ol>
+<p>Note: The default value of Max Parallel is 1 which means the processing run in batch.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>S4MOBADDON-8364, /MERP/CL_PM_NOTIFICATION_OD, /MERP/CL_PM_FUNCLOC1_OD, /MERP/CL_PM_EQUIPMENT1_OD, Pre Sync ABAP Objects, Optimised Delta Sync</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Reason: ABAP enhancements required to support pre sync functionality.</p>
+<p>Prerequisite: Prior to installing this note, please ensure the Mobile Foundation layer ABAP objects SAP note <a href="https://me.sap.com/notes/3581875" target="_blank">3581875</a> is installated in the system.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please apply this note in SAP system.</p></div></div></div></div>

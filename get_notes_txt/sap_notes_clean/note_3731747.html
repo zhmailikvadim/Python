@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You have a very large backlog for some receiver channel(s) which has been stopped for some time. Starting the channel, your PI system experiences performance or memory issues. Checking on DB level, table XI_AF_ADM_MSG_STOP has a very large number of entries.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>OOM, XI_AF_ADM_MSG_STOP, channel backlog</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>There is an automatic procedure to resend messages for stopped receiver channel once they are up. An issue with the program logic causes a very large amount of data to be loaded from DB in memory causing memory or performance issues.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The issue is resolved with source code correction. An automatic mechanism is implemented to prevent memory or performance issues. With the current change, only up to 30,000 messages per channel can be resent automatically at once, when the receiver channel is up. An AFW scheduler job is added to clean the DB table.</p>
+<p>You need to apply the patch of this note.</p>
+<p>With it two new properties are added to XPI Service: AF Core:</p>
+<p> - administration.stoppedChannelsDataReorgInterval - defines the time period in milliseconds for running the job to delete the entries in table XI_AF_ADM_MSG_STOP. This job can only delete all the content or does nothing.</p>
+<p> - administration.stoppedChannelsDeleteAllData - set this property to <em><strong>true</strong></em><strong> </strong>to have the job clean up the table content.</p>
+<p>In all cases when there are more than 30,000 messages per channel, the automatic mechanism of resending messages for stopped receiver channels will break and no messages will be resent. You need to use an MS Restart Job to resend those messages.</p>
+<p>To clean up the table's content in those cases, set the property administration.stoppedChannelsDeleteAllData to <em><strong>true.</strong></em> With the next data reorganization job run or any channel with failed messages restart, all entries (for all channels) will be cleared on DB level.<strong><br/></strong></p>
+<p>Hint: To avoid issues, stop the sender channels in order to eliminate any incoming messages to the PI system, before stopping the receiver channels.</p></div></div></div></div>

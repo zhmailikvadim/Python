@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">After upgrade of the Solution Manager 7.2 to SP19 and higher, you get a syntax error in program  CL_SMT_WC_TPM_TPCK_EXIT=======CP <br/>Include CL_SMT_WC_TPM_TPCK_EXIT=======CM011: Syntax error in line 000001<br/>Method 'ADAPT_EVENT_DELETE' does not exist. Thereis, however, a method with the similar name 'ADAP </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Solution Manager 7.2</li><li>Test Management</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Syntax error after upgrade to SP &gt;=19</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Method <strong>ADAPT_EVENT_DELETE</strong> was removed and no longer needed in higher SP's</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The Method is obsolete in higher SP's and clean-up is required.</p>
+<ol><li>
+<div>Execute SE24</div>
+</li><li>
+<div>Select Class CL_SMT_WC_TPM_TPCK_EXIT</div>
+</li><li>
+<div>Click on Change</div>
+</li><li>
+<div>From the menu, select Utilities &gt; Clean Up &gt; Method includes</div>
+</li><li>confirm the pop-up that you want to delete - click yes</li><li>
+<div>Activate</div>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>spau, transport request, syntax error, generation of programs, include generation, solution manager 7.2, test management, CL_SMT_ACT_OTPK_RT_RUN_EXEC, CL_SMT_TPLN_UTIL, CL_SMT_OTPK_UTIL, CL_SMT_WC_TPM_TPCK_EXIT, /SALM/CL_CUSTOMER_EXT_UTIL, AGS_SMT_TPLN_MASSCOPY, IS_TESTPLAN, SKIP_EXT_EOBJ_CREATION</p></div></div></div></div>

@@ -1,0 +1,53 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>Smart Data Access (SDA) remote queries that access a remote calculation view through a virtual table may return unexpected results when the virtual table is created with a projection column list.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Virtual Table, Calculation View, Smart Data Access, SDA, Unexpected Results, Remote Query</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 356354</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, the result-correction process for remote queries against a remote calculation view is not applied with the virtual table created with a projection column list.</p>
+<p>As documented in SAP Note <a href="/notes/1764658" target="_blank">1764658</a>, calculation views do not behave in a purely relational manner in all scenarios. When accessing a calculation view remotely, SAP HANA includes a correction step to ensure consistent results. However, this step is not triggered correctly for virtual tables defined with projection columns.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS00 - SPS06</li>
+<li>Revisions &lt;= 079.08 (SPS07)</li>
+<li>Revisions &lt;= 089.01 (SPS08)</li>
+</ul>
+</ul>
+<ul>
+<li><span style="font-size: 14px;">SAP HANA Cloud:</span></li>
+<ul>
+<li>2025 QRC2 - 2026 QRC1</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>SDA is configured, and its remote source points to SAP HANA system.</li>
+<li>The target object referenced by the virtual table is a calculation view on the remote SAP HANA system.</li>
+<li>The virtual table is created with an explicit projection column list:</li>
+</ul>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="font-size: 14px; float: none;" translate="no">CREATE VIRTUAL TABLE [&lt;local_schema_name&gt;.]&lt;local_table_name&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong style="font-size: 14px;">(&lt;column_lists&gt;)</strong></span><br/><span class="SNO_DNT" style="font-size: 14px; float: none;" translate="no">AT "&lt;remote_source&gt;"."&lt;database_name&gt;"."&lt;remote_schema_name&gt;"."&lt;remote_calculation_veiw_name&gt;";</span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS07: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher</li>
+</ul>
+<li>or higher</li>
+</ul>
+<ul>
+<li>SAP HANA Cloud:</li>
+<ul>
+<li>SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+</ul>
+</ul>
+<p><strong>Workaround:</strong></p>
+<p>Recreate the virtual table without a projection column list so that all columns are included:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">CREATE VIRTUAL TABLE [&lt;local_schema_name&gt;.]&lt;local_table_name&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">AT "&lt;remote_source&gt;"."&lt;database_name&gt;"."&lt;remote_schema_name&gt;"."&lt;remote_calculation_veiw_name&gt;";</span></p></div></div></div></div>

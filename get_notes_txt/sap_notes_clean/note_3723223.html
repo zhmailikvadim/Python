@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">This article explains how to sync Users from SuccessFactors HCM to SmartRecruiters and highlights some important details about the process.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SmartRecruiters for SAP SuccessFactors</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="font-size: 10pt;"><strong>Important Details:</strong></span></p>
+<ul><li style="color: rgb(224, 62, 45); font-weight: bold;"><strong><span style="color: rgb(224, 62, 45);">User synchronization happens only from SuccessFactors to SmartRecruiters.</span></strong></li><li>The synchronization starts after enabling the <strong>Enable SmartRecruiters</strong> switch in Provisioning.</li><li>After the first sync, the <strong>+ Add new user</strong> button under <em>SmartRecruiters → Settings → User management</em> is disabled.</li><li>The sync duration depends on the number of Users and may take several hours.</li><li>After enabling the Provisioning switch, the sync job runs every hour.</li><li>Users are created in SmartRecruiters with Employee as the System Role.</li><li>User details in SmartRecruiters (such as Name and Email) cannot be changed in SmartRecruiters. Changes must be done in SuccessFactors.</li></ul>
+<p><span style="font-size: 10pt;"><strong>Required User Data</strong></span></p>
+<p><span style="font-size: 8pt;">The following fields must have values for the sync to work:</span></p>
+<ul><li>email</li><li>firstName</li><li>lastName</li><li>userName</li><li>personUUID</li><li>status</li></ul>
+<p>If any of these fields are missing, the User will not be synced.</p>
+<p><span style="font-size: 10pt;"><strong>Email Address Rules</strong></span></p>
+<p><span style="font-size: 8pt;">Each SmartRecruiters User must have a unique Email Address:</span></p>
+<ul><li>The same Email Address (for example, <span><a target="_blank">user@company.com</a></span>) can be used for only one User in SmartRecruiters.</li><li>If the same person needs access to multiple environments (for example, Production and Sandbox), different Email Addresses must be used.
+<ul><li>Example:
+<ul><li><span>user@company.com</span> (Production)</li><li><span>user+sbx@company.com</span> (Sandbox)</li></ul>
+</li></ul>
+</li><li>Email Addresses must be unique across all SmartRecruiters environments.</li><li>Email Address cannot be empty.</li></ul>
+<p>If Users share the same Email Address or if the Email Address is missing, the sync will fail.</p>
+<p><strong><span style="font-size: 10pt;">How to Run the Sync Manually</span></strong></p>
+<p>If the sync fails or needs to run immediately:</p>
+<ol><li>Go to <strong>Admin Center</strong> → <strong>Scheduled Job Manager</strong></li><li>Find the job <strong>Synchronize Users from SuccessFactors HCM to SmartRecruiters</strong></li><li>Select <strong>View Details</strong></li><li>Click <strong>Run it now</strong></li></ol>
+<p><strong><span style="font-size: 10pt;">Access to SmartRecruiters</span></strong></p>
+<p>After Users are synced, access must be granted in permissions:</p>
+<ol><li>Go to <strong>Admin Center</strong> → <strong>Manage Permission Roles</strong>;</li><li>Find and edit the role that you want to give access to;</li><li>Under <em>User Permissions</em>, select <em>SmartRecruiters</em>;</li><li>Select the permission Access <em>SmartRecruiters</em>.</li></ol>
+<p><span style="font-size: 10pt;"><strong>Frequently Asked Questions:</strong></span></p>
+<ul><li><strong>Can I see details of the sync job (for example, number of Users imported)?</strong><br/>
+<ul><li>No. The sync job does not show details about the data being processed. This may be added in future updates.</li></ul>
+</li><li><strong>Can I see the full list of Users imported from SuccessFactors?</strong><br/>
+<ul><li>No. There is no option to view the full list of imported Users in SmartRecruiters.</li></ul>
+</li></ul>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Implementation Guide - <a href="https://help.sap.com/docs/SMARTRECRUITERS_FOR_SAP_SUCCESSFACTORS" rel="noopener noreferrer nofollow" target="_blank">Synchronizing Users from SAP SuccessFactors to SmartRecruiters</a></li><li><a href="https://me.sap.com/notes/3736892" rel="noopener noreferrer nofollow" target="_blank">3736892</a> - SuccessFactors User not syncing to SmartRecruiters - SmartRecruiters for SAP SuccessFactors</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SmartRecruiters, synchronization, Provisioning, failure, duplicate, Email, missing, Scheduled Job Manager, Single, Sign-On, SSO, SR</p></div></div></div></div>

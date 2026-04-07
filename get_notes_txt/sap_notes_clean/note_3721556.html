@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the Manage Asset Retirement Obligations Fiori application, the value help for the Interest Rate Key field (int_rate_key) does not function correctly.</p>
+<p>Users may experience one of the following behaviors:</p>
+<ul>
+<li>The value help button is not displayed at all</li>
+<li>The value help button appears but clicking it shows the message: "Right now, there are no visible columns in the table. Please select the columns you need in the table settings."</li>
+<li>The value help dialog opens but displays no data</li>
+</ul>
+<p>This issue occurs in the following areas of the application:</p>
+<ul>
+<li>Obligation Header (General Data section)</li>
+<li>Accounting Principle-specific settings</li>
+</ul>
+<p>The value help for Inflation Rate Key (inf_rate_key) works correctly.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">int_rate_key, /FOM/C_OblHeader, /FOM/C_OblAP, /FOM/C_VH_INTEREST_RATE, /FOM/WORKBENCH_SRV, Asset Retirement Obligation, ARO, Interest Rate Key, Value Help, F4 Help, OData, CDS Annotation, @Consumption.valueHelpDefinition</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The issue is caused by an invalid character (trailing space) in the @Consumption.valueHelpDefinition annotation in the following CDS views:</p>
+<ul>
+<li>/FOM/C_OblHeader (lines 79-81)</li>
+<li>/FOM/C_OblAP (lines 46-48)</li>
+</ul>
+<p>The annotation incorrectly references the value help entity with a trailing space:</p>
+<pre><code class="language-abap">@Consumption.valueHelpDefinition: [ { entity: { name: '/FOM/C_VH_INTEREST_RATE ', element: 'id' } } ]</code></pre>
+<p>This trailing space after /FOM/C_VH_INTEREST_RATE causes the OData metadata generation to fail, resulting in the Common.ValueList annotation not being created for the int_rate_key field.</p>
+<p>The issue manifests in SAP S/4HANA 1909 and later releases due to stricter annotation processing in the OData framework. Systems running SAP S/4HANA 1809 are not affected.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">As a general rule, SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in SAP Support Portal, under <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
+<p>After successfull implementation, clear the OData metadata cache using transaction /n/IWFND/CACHE_CLEANUP.</p></div></div></div></div>

@@ -1,0 +1,81 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Este documento proporciona una guía detallada para la correcta configuración, cálculo y mantenimiento de los descuentos de Infonavit en SAP HCM. Incluye información sobre tipos de descuentos, tablas y reglas relevantes, conceptos de nómina involucrados, opciones de configuración, particularidades legales y técnicas, así como recomendaciones y resolución de errores comunes.</p>
+<ol><li>Introducción</li><li>Tipos de Descuentos Infonavit (Códigos SAP, diferencias y ejemplos)</li><li>Configuración de Descuentos Infonavit (Tablas, reglas, parámetros)</li><li>Conceptos de Nómina Involucrados</li><li>Cálculo del Descuento Infonavit (Bases, acumulados)</li><li>Particularidades y Casos Especiales (</li><li>Puntos de Atención (customizaciones, tablas, debug, errores comunes)</li><li>Referencias y Observaciones Finales</li></ol><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<ul style="list-style-type: disc;"><li>
+<p>HR renewal </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP S/4HANA </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP ERP  </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP SuccessFactors Employee Central Payroll </p>
+</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h3 data-toc-skip="">1. Introducción</h3>
+<p>Este KBA está orientado a consultores, usuarios de nómina y equipos de soporte para la correcta configuración, cálculo y mantenimiento de los descuentos de Infonavit en SAP HCM, considerando los cambios legales y técnicos recientes, así como mejores prácticas y errores comunes.</p>
+<hr/>
+<h3 data-toc-skip="">2. Tipos de Descuentos Infonavit y Códigos SAP</h3>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><thead><tr><th>Tipo de Descuento</th><th>Código SAP (Ejemplo)</th><th>Descripción</th></tr></thead><tbody><tr><td>Descuento Fijo</td><td>381</td><td>Descuento mensual fijo de Infonavit</td></tr><tr><td>Descuento por Porcentaje</td><td>381</td><td>Descuento calculado sobre salario base</td></tr><tr><td>Descuento por UMA</td><td>381</td><td>Descuento según veces UMA asignadas</td></tr><tr><td>Arrears (Atrasos)</td><td>389, 38A, 38B</td><td>Ajustes por deducciones no tomadas</td></tr><tr><td>Seguro de Vivienda</td><td>387</td><td>Cuota bimestral para seguro de vivienda</td></tr></tbody></table></div>
+<p>Diferencias:</p>
+<ul><li>Fijo: Monto específico descontado cada periodo.</li><li>Porcentaje: Calculado sobre el salario base integrado.</li><li>UMA: Multiplicador de la Unidad de Medida y Actualización, actualizado anualmente.</li><li>Arrears: Si no se puede descontar el total, el saldo pendiente se acumula para el siguiente periodo.</li><li>Seguro de Vivienda: Cuota bimestral, puede requerir configuración adicional para integración con Arrears.</li></ul>
+<hr/>
+<h3 data-toc-skip="">3. Configuración de Descuentos Infonavit</h3>
+<h4 data-toc-skip="">Tablas relevantes</h4>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><thead><tr><th>Tabla</th><th>Finalidad</th></tr></thead><tbody><tr><td>T512W</td><td>Catálogo de conceptos de nómina (wage types)</td></tr><tr><td>T51P6</td><td>Parámetros de deducciones (Deduction Not Taken)</td></tr><tr><td>T54C1</td><td>Periodicidad de acumulación para reset de Arrears</td></tr><tr><td>T512Z</td><td>Historial de copia de conceptos</td></tr></tbody></table></div>
+<h4 data-toc-skip="">Reglas y Esquemas</h4>
+<ul><li>MXYN: Esquema principal para el cálculo de Infonavit.</li><li>XPDD, X024, X025: Reglas para transferir, acumular y validar conceptos.</li><li>PRDNT, DNTK: Reglas para deducciones no tomadas (Deduction Not Taken).</li><li>P0370: Payroll function para Infonavit.</li></ul>
+<h4 data-toc-skip="">Clases de Procesamiento (Processing Class)</h4>
+<ul><li>PC 4: Define si el concepto se acumula en bases.</li><li>PC 6: Permite que el concepto pase sin procesamiento adicional (valor “6”).</li><li>PC 41: Determina el tratamiento en la transferencia de IT a RT.</li></ul>
+<h4 data-toc-skip="">Feature 32INF</h4>
+<p>Permite definir el comportamiento del sistema ante valores no descontados (arrears), con opciones:</p>
+<ul><li>0: Intentar cobrar en el siguiente periodo.</li><li>1: Ignorar valores pendientes.</li><li>T: Consultar la tabla T54C1 para reset periódico.</li></ul>
+<hr/>
+<h3 data-toc-skip="">4. Conceptos de Nómina Involucrados</h3>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><thead><tr><th>Concepto</th><th>Función</th><th>Observación</th></tr></thead><tbody><tr><td>381</td><td>Descuento de crédito Infonavit</td><td>Base del proceso</td></tr><tr><td>389</td><td>Arrears (Atrasos)</td><td>Saldo pendiente</td></tr><tr><td>38A</td><td>Arrears a trasladar al siguiente periodo</td><td>Generado por reglas</td></tr><tr><td>38B</td><td>Arrears reseteados</td><td>Informativo</td></tr><tr><td>387</td><td>Seguro de vivienda</td><td>Cuota bimestral</td></tr><tr><td>/389</td><td>Acumula deducciones no tomadas</td><td>Técnico</td></tr><tr><td>/38A, /38B</td><td>Conceptos técnicos para ajustes</td><td>Técnico</td></tr></tbody></table></div>
+<hr/>
+<h3 data-toc-skip="">5. Cálculo del Descuento Infonavit</h3>
+<ul><li>El sistema identifica el tipo de descuento (fijo, porcentaje, UMA).</li><li>Calcula el monto a descontar según la configuración y días base.</li><li>Si el salario no es suficiente, el saldo pendiente se acumula en Arrears (/389).</li><li>En el siguiente periodo, se intenta descontar el saldo acumulado, según la opción configurada en la feature 32INF y la tabla T54C1.</li></ul>
+<p>Días Base:</p>
+<ul><li>Se consideran días calendario menos ausencias/incapacidades según la ley y configuración.</li><li>Para cuotas patronales, solo se descuentan ausencias.</li><li>Para créditos, se descuentan ausencias e incapacidades.</li></ul>
+<hr/>
+<h3 data-toc-skip="">6. Particularidades y Casos Especiales</h3>
+<h4 data-toc-skip="">Arrears (Atrasos)</h4>
+<ul><li>Si no es posible descontar el total, el saldo se transfiere a /389.</li><li>El tratamiento de Arrears depende de la configuración de la feature 32INF y la tabla T54C1.</li></ul>
+<h4 data-toc-skip="">Cambios Legales y Opciones de Configuración</h4>
+<ul><li>La ley prohíbe deducir ausencias/incapacidades para el cálculo del Infonavit.</li><li>Opciones de configuración:
+<ul><li>Opción 1: No limitar el descuento (no recomendado).</li><li>Opción 2: Limitar al neto y descartar lo no pagado.</li><li>Opción 3: Limitar al neto y trasladar lo no pagado a periodos siguientes.</li><li>Opción 4: Igual a la 3, pero con reset periódico de Arrears.</li></ul>
+</li></ul>
+<h4 data-toc-skip="">Seguro de Vivienda</h4>
+<ul><li>Concepto 387, cuota bimestral.</li><li>No está incluido por defecto en la solución de Arrears/reset, pero puede ser configurado por el cliente.</li></ul>
+<h4 data-toc-skip="">Reporte y Ajustes Manuales</h4>
+<ul><li>El reporte al gobierno (SUA) puede requerir ajustes manuales si no se logra descontar el total.</li><li>Empresas grandes pueden tener dificultad para realizar ajustes manuales masivos.</li></ul>
+<hr/>
+<h3 data-toc-skip="">7. Ejemplos Prácticos</h3>
+<h4 data-toc-skip="">Ejemplo 1 – Descuento Fijo con Arrears</h4>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><thead><tr><th>Periodo</th><th>Descuento Programado</th><th>Salario Disponible</th><th>Descontado</th><th>Acumulado en /389</th></tr></thead><tbody><tr><td>Enero</td><td>$1,000</td><td>$800</td><td>$800</td><td>$200</td></tr><tr><td>Febrero</td><td>$1,000 + $200</td><td>$1,500</td><td>$1,200</td><td>$0</td></tr></tbody></table></div>
+<h4 data-toc-skip="">Ejemplo 2 – Reset de Arrears Bimestral</h4>
+<ul><li>En enero y febrero, el empleado no puede pagar todo el descuento.</li><li>Al cierre del bimestre, el saldo pendiente se resetea y no se intenta cobrar en marzo.</li></ul>
+<h4 data-toc-skip="">Ejemplo 3 – Error de Configuración</h4>
+<ul><li>Un concepto personalizado no tiene configurada la Processing Class 4.</li><li>Al ejecutar la nómina, aparece el error X025.</li><li>Solución: Configurar la Processing Class 4 con valor “6” para permitir el paso.</li></ul>
+<hr/>
+<h3 data-toc-skip="">8. Puntos de Atención</h3>
+<h4 data-toc-skip="">Customizaciones y Conceptos Modelo</h4>
+<ul><li>No utilizar conceptos modelo (Mxxx) en productivo.</li><li>SAP puede modificarlos o eliminarlos sin previo aviso.</li></ul>
+<h4 data-toc-skip="">Tablas y Reglas</h4>
+<ul><li>Revisar siempre la configuración en T512W, T51P6 y T54C1.</li><li>Verificar que los conceptos personalizados estén correctamente parametrizados en las Processing Classes.</li></ul>
+<h4 data-toc-skip="">Debug y Errores Comunes</h4>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><thead><tr><th>Error</th><th>Causa Probable</th><th>Solución</th></tr></thead><tbody><tr><td>X025 Error</td><td>Falta de configuración en PC4</td><td>Configurar valor “6”</td></tr><tr><td>No acumula base</td><td>Concepto transferido antes de acumular</td><td>Ajustar orden de reglas</td></tr><tr><td>No genera /389</td><td>Falta de llamada a la regla correcta</td><td>Revisar esquema y reglas</td></tr></tbody></table></div>
+<h4 data-toc-skip="">Historial de Copia</h4>
+<ul><li>Usar la tabla T512Z para identificar el origen de conceptos copiados.</li></ul>
+<hr/>
+<h3 data-toc-skip="">9. Referencias y Observaciones Finales</h3>
+<ul><li>Notas SAP: Consultar siempre las notas más recientes para actualizaciones legales y técnicas.</li><li>Documentación Oficial SAP: Revisar guías de configuración de nómina México.</li><li>Legislación Vigente: Verificar límites y reglas de descuento de Infonavit.</li><li>Recomendaciones:
+<ul><li>Probar siempre en ambiente de calidad antes de transportar a productivo.</li><li>Documentar todas las customizaciones realizadas.</li><li>Si surgen errores, revisar primero la configuración de las Processing Classes y el orden de las reglas.</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Infonavit; PY-MX; ARREAS; UMA; /389; 381; 32INF; Processing Class 4; DDNTK; X025</p></div></div></div></div>

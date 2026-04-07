@@ -1,0 +1,72 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">During the installation of DM SERVER - APPL SERVER 10.1, the setup wizard reaches the prerequisite check step and fails to recognize the Microsoft SQL Server Command Line Utilities software, even though it appears to be correctly installed on the system. The installation cannot proceed.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html0"><code>DM SERVER, APPL SERVER 10.1, prerequisite check, sqlcmd, SQL Server Command Line Utilities, ODBC Driver 17, SQL Command Line Utilities 15, installation failure, setup wizard<br/></code></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The prerequisite check fails due to one or more of the following reasons:</p>
+<ul>
+<li>Multiple versions of <code>sqlcmd.exe</code> are present on the system, causing a conflict during the prerequisite check.</li>
+<li>An incompatible version of the ODBC Driver and/or SQL Server Command Line Utilities is installed.</li>
+<li>The prerequisite check requires specifically:
+<ul>
+<li>ODBC Driver 17</li>
+<li>SQL Server Command Line Utilities 15</li>
+</ul>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Follow the steps below to resolve the issue:</p>
+<h3 data-toc-skip="" id="step-1-check-for-existing-installations-of-sqlcmd.exe">Step 1: Check for Existing Installations of <code>sqlcmd.exe</code></h3>
+<p>Open a Command Prompt (<code>cmd.exe</code>) and run the following command:</p>
+<pre><code>cmd.exe /C where sqlcmd.exe
+</code></pre>
+<p>Expected Output:</p>
+<ul>
+<li>Only one version/path of <code>sqlcmd.exe</code> should be listed.</li>
+</ul>
+<p>If multiple entries are listed:</p>
+<ul>
+<li>This indicates multiple versions are installed and conflicting.</li>
+<li>Proceed to Step 2 to uninstall all existing versions before reinstalling the correct ones.</li>
+</ul>
+<h3 data-toc-skip="" id="step-2-uninstall-existing-components">Step 2: Uninstall Existing Components</h3>
+<p>Uninstall both of the following components via Control Panel → Programs and Features (or Settings → Apps):</p>
+<ol>
+<li>Microsoft ODBC Driver for SQL Server <em>(all versions present)</em></li>
+<li>Microsoft SQL Server Command Line Utilities <em>(all versions present)</em></li>
+</ol>
+<blockquote>
+<p>Important: Ensure that all existing versions of both components are completely removed before proceeding to the next step.</p>
+</blockquote>
+<h3 data-toc-skip="" id="step-3-install-the-required-versions">Step 3: Install the Required Versions</h3>
+<p>Download and install the following components in the order listed:</p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable">
+<thead>
+<tr><th>Order</th><th>Component</th><th>Required Version</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Microsoft ODBC Driver for SQL Server</td>
+<td>Version 17</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Microsoft SQL Server Command Line Utilities</td>
+<td>Version 15</td>
+</tr>
+</tbody>
+</table></div>
+<p><span style="font-size: 14px;"><strong>Note:</strong> ODBC Driver 17 needs to be installed before SQL Server Command Line Utilities 15, as the Command Line Utilities depend on the ODBC Driver.</span></p>
+<p>Download links are available via the official Microsoft documentation or the Microsoft Download Center.</p>
+<h3 data-toc-skip="" id="step-4-verify-the-installation">Step 4: Verify the Installation</h3>
+<p>After installation, re-run the verification command to confirm only one version is recognized:</p>
+<pre><code>cmd.exe /C where sqlcmd.exe
+</code></pre>
+<p>Confirm that only a single path is returned, pointing to the newly installed version.</p>
+<h3 data-toc-skip="" id="step-5-re-run-the-dm-server-appl-server-10.1-setup">Step 5: Re-run the DM SERVER - APPL SERVER 10.1 Setup</h3>
+<ul>
+<li>Restart the installation wizard.</li>
+<li>The prerequisite check should now successfully recognize the SQL Server Command Line Utilities.</li>
+<li>Proceed with the installation as normal.</li>
+</ul></div></div></div></div>

@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>After running the upgrade for either IPS or BI the SIA (Server Intelligence Agent) and associated servers do not start</li>
+<li>After starting, it goes immediately to stopped state</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""><strong> Keywords</strong></p>
+<p>IPS 2025, IPS not starting, IPS upgrade failed, IPS SIA not starting, servers not starting IPS 2025</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong><span style="font-size: 14px;">Environment</span></strong></p>
+<ul>
+<li><span style="font-size: 14px;">SAP BusinessObjects Business Intelligence (BI) Platform 2025</span></li>
+<li><span style="font-size: 14px;">SAP Information Platform Service 2025</span></li>
+<li><span style="font-size: 14px;">Linux and Windows</span></li>
+</ul>
+<p><strong><span style="font-size: 14px;">Reproducing the Issue</span></strong></p>
+<ol>
+<li><span style="font-size: 14px;">Run the upgrade to IPS / BI 2025</span></li>
+<li><span style="font-size: 14px;">Try to start the servers</span></li>
+<li><span style="font-size: 14px;">Servers failed to start</span></li>
+<li><span style="font-size: 14px;">Can't login to CMC</span></li>
+</ol>
+<p><strong><span style="font-size: 14px;">Cause</span></strong></p>
+<p><span style="font-size: 14px;">The cause is currently under investigation by Development.</span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The issue is currently under investigation by Development.<br/><br/>A few workarounds exist to help resolve this situation.</p>
+<p><strong>Workaround #1 </strong></p>
+<p>A few java options in the SIA configuration were not updated from Java 8 to Java 17 convention, which may have caused SIA to not startup -</p>
+<ol>
+<li>Go to the sap_bobj folder and take a backup of ccm.confg</li>
+<li>Remove these parameters from ccm.config [note: <em>these are no longer valid in Java 17 which is current Java version used 2025 and higher</em>]<br/>"<strong>-XX:+PrintGCTimeStamps</strong>" <br/>"<strong>-XX:+PrintGCDetails</strong>" <br/>"<strong>-XX:LogGcMaxFileCount</strong>=3" <br/>"<strong>-XX:LogGcMaxFileSize</strong>=5m" <br/>"<a href="mailto:-XtraceFile=/usr/sap/SAP/sap_bobj/logging/server_jvm_@PID.log" target="_blank"><strong>-XtraceFile</strong>=/usr/sap/SAP/sap_bobj/logging/server_jvm_@PID.log</a>" <br/><strong>GCHistoryFilename</strong>=/usr/sap/SAP/sap_bobj/logging/server_gc.prf" <br/><strong>-Xloggc*:file</strong>=/usr/sap/SAP/sap_bobj/logging/server01_jvm_%p.log:tags,time,uptime,level:filecount=3,filesize=5M"</li>
+</ol>
+<p><strong>Workaround #2<br/> </strong>Create a new node with default servers using the temporary CMS option.</p>
+<ul>
+<li>Linux:<a href="https://me.sap.com/notes/1571993" target="_blank">1571993 - How to a add a new node in BOE 4.x and BI 2025 UNIX Environment - SAP for Me</a></li>
+<li>Windows:<a href="https://help.sap.com/docs/SAP_INFORMATION_PLATFORM_SERVICES/212dee6a944d49618dc87ade60db0207/46d228ca6e041014910aba7db0e91070.html?q=add+node+ccm" target="_blank">To add a node on Windows | SAP Help Portal</a></li>
+</ul>
+<p>NOTE:  After restarting SIA, If the APS still does not startup, please refer to SAP Note <a href="https://me.sap.com/notes/3571941" target="_blank">3571941</a> - Cloned or Newly Created Adaptive Processing Server (APS) Server Fails to Start in Upgrade Scenario</p></div></div></div></div>

@@ -1,0 +1,77 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">This article explains the concept of <em>Number of Processing Packages</em> in the SAP IBP Copy Operator, its impact on performance and memory usage, common warning messages, and recommendations for determining the optimal configuration.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Copy Operator</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Use and execute the Copy Operator in IBP</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h2 data-toc-skip=""><span role="text">1. Overview of Packaged Processing</span></h2>
+<p>To optimize memory consumption, the Copy Operator in SAP IBP supports packaged processing, where data is split and processed in smaller chunks.</p>
+<h3 data-toc-skip=""><span role="text">How it works</span></h3>
+<ul><li>Data is divided period-wise (e.g., months).</li><li>The total number of periods is split into N packages, based on the configured parameter “Number of Processing Packages”.</li><li>Each package is processed sequentially.</li><li>For Details see <a href="https://help.sap.com/viewer/bf99e931b8d44aafb4e306ec3602cbdd/latest/en-US/ddb2f83536064affa3b516588208ba68.html" rel="noopener noreferrer nofollow" target="_blank">Processing of Key Figures</a> in the application help.</li></ul>
+<h3 data-toc-skip=""><span role="text">Example</span></h3>
+<p>If a copy operator processes 12 months, it can be split into 1 to 12 packages:</p>
+<div>
+<div>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><thead><tr><td style="border-style: solid;"><strong>Number of Packages</strong></td><td style="border-style: solid;"><strong>Behavior</strong></td><td style="border-style: solid;"><strong>Impact</strong></td></tr></thead><tbody><tr><td style="border-style: solid;">1</td><td style="border-style: solid;">All 12 months processed in a single package</td><td style="border-style: solid;">Faster runtime, higher memory usage</td></tr><tr><td style="border-style: solid;">12</td><td style="border-style: solid;">Each month processed individually</td><td style="border-style: solid;">Lower memory usage, longer runtime</td></tr></tbody></table></div>
+</div>
+</div>
+<h3 data-toc-skip=""><span role="text">Key Trade-off</span></h3>
+<ul><li>Fewer packages → Better performance, higher memory consumption</li><li>More packages → Lower memory consumption, slower execution</li></ul>
+<h2 data-toc-skip=""><span role="text">2. Warning Messages Related to Packaged Processing</span></h2>
+<p>During execution, the Copy Operator may generate warnings indicating potential inefficiencies or risks.</p>
+<h3 data-toc-skip=""><span role="text">2.1 Warning: “Please check the settings for packaged execution”</span></h3>
+<h4 data-toc-skip=""><span role="text">Cause</span></h4>
+<ul><li>Triggered when a source key figure contains a filter block, especially on PERIODID.</li></ul>
+<h4 data-toc-skip=""><span role="text">Background</span></h4>
+<ul><li>If filtering occurs late in processing, the system may still read the entire time horizon before applying the filter.</li><li>In such cases, splitting into multiple packages may not provide performance benefits.</li><li>Processing everything in one package could be more efficient.</li></ul>
+<h4 data-toc-skip=""><span role="text">Important Limitation</span></h4>
+<ul><li>The system detects the presence of a filter block, but cannot determine when it is applied (early vs. late in processing).</li></ul>
+<h4 data-toc-skip=""><span role="text">Recommendations</span></h4>
+<ul><li>Remove the filter block if possible.</li><li>If not:
+<ul><li>Test with Number of Processing Packages = 1</li><li>Compare runtime performance.</li></ul>
+</li></ul>
+<h3 data-toc-skip=""><span role="text">2.2 Warning: “Increase the value of parameter NUMBER_OF_PROCESSING_PACKAGES”</span></h3>
+<h4 data-toc-skip=""><span role="text">Cause</span></h4>
+<ul><li>Triggered when processed records exceed the threshold defined by:
+<ul><li>MIN_RECORDS_FOR_MEMORY_WARNING (global configuration parameter)</li></ul>
+</li></ul>
+<h4 data-toc-skip=""><span role="text">Interpretation</span></h4>
+<ul><li>Indicates potential high memory usage, but:
+<ul><li>Memory consumption depends on multiple factors:
+<ul><li>Data volume</li><li>Key figure complexity</li><li>Calculation logic</li></ul>
+</li></ul>
+</li></ul>
+<h4 data-toc-skip=""><span role="text">Recommendations</span></h4>
+<ul><li>Analyze actual memory usage using the Monitor System Tasks app.</li><li>If memory usage is acceptable:
+<ul><li>Consider increasing MIN_RECORDS_FOR_MEMORY_WARNING to suppress unnecessary warnings.</li></ul>
+</li><li>If memory usage is high:
+<ul><li>Increase the Number of Processing Packages.</li></ul>
+</li></ul>
+<h2 data-toc-skip=""><span role="text">3. Determining the Optimal Number of Processing Packages</span></h2>
+<p>There is no universal setting—the optimal value depends on data volume and usage scenario.</p>
+<h3 data-toc-skip=""><span role="text">General Guidelines</span></h3>
+<h4 data-toc-skip=""><span role="text">Low Data Volume (e.g., interactive use)</span></h4>
+<ul><li>Example: Excel-triggered planning runs</li><li>Recommendation:
+<ul><li>Use fewer packages (1–2)</li><li>Benefit from faster execution</li></ul>
+</li></ul>
+<h4 data-toc-skip=""><span role="text">High Data Volume (e.g., batch jobs)</span></h4>
+<ul><li>Example: Nightly planning runs</li><li>Recommendation:
+<ul><li>Use more packages</li><li>Prevent memory bottlenecks</li></ul>
+</li></ul>
+<h3 data-toc-skip=""><span role="text">Performance vs. Memory Trade-off</span></h3>
+<div>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><thead><tr><td style="border-style: solid;"><strong>Scenario</strong></td><td style="border-style: solid;"><strong>Recommended Setting</strong></td></tr></thead><tbody><tr><td style="border-style: solid;">Fast execution required</td><td style="border-style: solid;">Fewer packages</td></tr><tr><td style="border-style: solid;">Memory constraints</td><td style="border-style: solid;">More packages</td></tr><tr><td style="border-style: solid;">Complex key figure logic (If no Filter block on PERIODID exists)</td><td style="border-style: solid;">More packages</td></tr><tr><td style="border-style: solid;">Simple calculations</td><td style="border-style: solid;">Fewer packages</td></tr></tbody></table></div>
+<p></p>
+<h2 data-toc-skip=""><span role="text">4. Monitoring and Analysis</span></h2>
+<p>To make informed decisions:</p>
+<ul><li>Use the <a href="https://help.sap.com/viewer/feae3cea3cc549aaa9d9de7d363a83e6/LATEST/en-US/be7dfc15dba94e778a98f7ce1bafaea5.html" rel="noopener noreferrer nofollow" target="_blank">Monitor System Tasks</a> app to:
+<ul><li>Track memory usage</li><li>Analyze runtime behavior</li><li>Identify bottlenecks in disaggregation and copy operations<br/><br/></li></ul>
+</li><li>Use the Execution History of the copy Operator to see 
+<ul><li>Memory usage Information</li><li>Runtime information</li></ul>
+</li></ul>
+<p></p>
+<h2 data-toc-skip=""><span role="text">5. Best Practices</span></h2>
+<ul><li>Start with a balanced configuration (e.g., 3–6 packages).</li><li>Adjust based on:
+<ul><li>Runtime performance</li><li>Memory consumption</li></ul>
+</li><li>
+<p>For small jobs, use package size one. This applies especially for jobs that are scheduled from Excel during the day for ad-hoc copy operations</p>
+</li><li>
+<p>If a source key figures has a filter block on any PERIODID, use package size one.<br/>It may be necessary to split jobs by appropriate attribute filters. To understand and eliminate filter blocks, please see the <a href="https://www.youtube.com/watch?v=FbKe4BezxXM" rel="noopener noreferrer nofollow" target="_blank">Video</a></p>
+</li></ul>
+<p></p>
+<p></p>
+</div></div></div></div></div>

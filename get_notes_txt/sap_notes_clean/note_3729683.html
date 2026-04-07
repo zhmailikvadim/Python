@@ -1,0 +1,60 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">An employee has received paid maternity leave from the employer. Subsequently, the employee receives maternity compensation from the social insurance authority. The employer needs to recover the salary amount that was already paid.</p>
+<p>In such scenarios, customers often consider reversing the original payment by <strong>replacing the paid leave with unpaid leave retroactively,</strong> or by introducing adjustments in future payroll periods.</p>
+<p>The following challenges may occur:</p>
+<ul><li>Retroactive changes to absence or payroll data trigger recalculation of closed and posted payroll periods</li><li>Recovery needs to be aligned with specific wage components (such as Basic Salary and Housing Allowance) in a controlled manner</li><li>Historical payroll results should remain unchanged while recovery is processed in future periods</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP ERP HCM</li><li>Human Capital Management (HCM)</li><li>SAP ERP Payroll Saudi Arabia</li><li>SAP HCM for SAP S/4HANA</li><li>SAP HCM for SAP S/4HANA Cloud Private Edition</li><li>Payroll processing with absence valuation and retroactive accounting</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><section>
+<section id="u_reproducing_the_issue">
+<div>
+<p>Information on Legal Change</p>
+<span id="sys_readonly.kb_template_kcs_article.u_reproducing_the_issue"></span></div>
+</section>
+</section><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><strong>Standard Retroactive Accounting Behavior</strong></p>
+<p>When changes are made retroactively to absence or payroll-relevant master data (for example replacing an existing absence record or adjusting payment-relevant infotypes), the system detects the earliest master data change in the payroll status and triggers retroactive payroll recalculation for all affected periods.</p>
+<p>This behavior applies regardless of the specific solution approach used and results in recalculation of closed and posted payroll results.<br/><br/><img class="img-responsive" src="/documents/customerkba/_-VpklzC6fLsKq1P3rgMb9s3BJIU4oiFRZylarAHO1k"/></p>
+<p><strong>Standard Deduction and Arrears Processing</strong></p>
+<p>When deductions (such as employee contributions) exceed the available net pay, the system does not force full deduction. Instead, it processes deductions up to the available amount and carries forward any remaining balance to subsequent payroll periods.</p>
+<p>These carried-forward amounts are stored and processed as arrears (claims) and are automatically recovered in future payroll runs when sufficient net pay becomes available.</p>
+<p><img class="img-responsive" src="/documents/customerkba/_-VpklzC6fLsKq1P3rgMb9s3BJIU4oiFRZylarAHO1k"/></p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>Standard Approach: Forward-Looking Recovery Without Retroactive Impact</strong></p>
+<p>To avoid retroactive payroll recalculation and maintain historical payroll results, forward-looking recovery approaches are recommended.</p>
+<p><img class="img-responsive" src="/documents/customerkba/_-VpklzC6fLsKq1P3rgMb9s3BJIU4oiFRZylarAHO1k"/></p>
+<p><strong>Option 1: Recurring Deduction (IT0014)</strong></p>
+<p>Create a recurring deduction to recover the overpaid amount over future payroll periods.</p>
+<ul><li>Avoids retroactive impact on closed payroll periods</li><li>Provides controlled repayment scheduling</li><li>Simple to configure using standard infotype IT0014</li></ul>
+<p><strong>Implementation:</strong></p>
+<ol><li>Determine the total recovery amount</li><li>Create recurring deduction record(s) via transaction PA30 → IT0014</li><li>Specify the deduction wage type, amount, and validity period</li><li>Maintain Number and Unit fields to control the repayment duration (for example:
+<ul><li>Number = 6</li><li>Unit = Months<br/>to distribute recovery over 6 payroll periods)</li></ul>
+</li><li>Process payroll normally; the deduction is applied in each payroll run</li></ol>
+<p><strong>For scenarios requiring recovery aligned with specific wage components:</strong></p>
+<p>Split the total recovery amount into multiple deduction wage types based on the required ratio (for example Basic Salary and Housing Allowance).</p>
+<p><img class="img-responsive" src="/documents/customerkba/_-VpklzC6fLsKq1P3rgMb9s3BJIU4oiFRZylarAHO1k"/></p>
+<p><strong>Option 2: Loan (IT0045)</strong></p>
+<p>Treat the overpaid amount as a loan and recover it through installments.</p>
+<ul><li>Provides structured tracking of balances</li><li>Supports automatic repayment processing through payroll</li><li>Requires additional configuration</li></ul>
+<p><strong>Implementation:</strong></p>
+<ol><li>Create a loan record via transaction PA30 → IT0045</li><li>Maintain a payment entry of type<strong> "Loan Payment (External)"</strong> in the Payments tab to establish the balance without triggering an actual payment to the employee</li><li>Configure repayment parameters (installment amount, frequency)</li><li>Repayments are processed automatically through payroll</li></ol>
+<p><img class="img-responsive" src="/documents/customerkba/_-VpklzC6fLsKq1P3rgMb9s3BJIU4oiFRZylarAHO1k"/></p>
+<p><strong>Option 3: Unpaid Leave (IT2001)</strong></p>
+<p>This option replaces the original paid maternity leave with unpaid leave for the same period.</p>
+<p>This approach is sometimes considered to reverse the original payment through standard absence processing.</p>
+<p><strong>Impact:</strong></p>
+<ul><li>Triggers retroactive payroll recalculation for closed and posted periods</li><li>Applies standard factoring logic, reducing all wage types (Basic Salary, Housing Allowance, and others)</li><li>If partial payments remain, deductions such as <strong>GOSI employee contributions</strong> may exceed available net pay</li><li>In such cases, the system carries forward the unpaid portion as arrears (claims), which may accumulate across payroll periods</li></ul>
+<p><strong>This option is not recommended when payroll periods are already closed and posted.</strong></p>
+<p><img class="img-responsive" src="/documents/customerkba/_-VpklzC6fLsKq1P3rgMb9s3BJIU4oiFRZylarAHO1k"/></p>
+<p><strong>Advanced Guidance: Dynamic Distribution via Payroll Logic</strong></p>
+<p>For scenarios where the recovery amount must be dynamically distributed across specific wage components (for example Basic Salary and Housing Allowance based on a defined ratio), a more advanced approach can be implemented using payroll schema logic.</p>
+<p><strong>Approach:</strong></p>
+<p>A single recovery amount (for example from IT0014 or IT0045) is processed in payroll and split into multiple deduction wage types through a custom Personnel Calculation Rule (PCR).</p>
+<p>The PCR:</p>
+<ul><li>Calculates the required ratio (based on current wage types or predefined percentages)</li><li>Generates separate deduction amounts per component (for example Basic vs Housing)</li></ul>
+<p>These generated wage types are then processed through standard payroll deduction logic, including deduction priority and arrears (claims) carry-forward (for example for GOSI employee contributions when net pay is insufficient).</p>
+<p><strong>Technical Note:</strong></p>
+<p>This is typically implemented through custom PCR logic within the payroll schema (for example in factoring or deduction processing subschemas such as XPPF or related processing steps).</p>
+<p><strong>Characteristics:</strong></p>
+<ul><li>Provides full flexibility and automation</li><li>Keeps standard deduction and arrears behavior intact</li><li>Requires custom schema design, testing, and maintenance</li><li>Not part of standard system behavior</li></ul>
+<p><img class="img-responsive" src="/documents/customerkba/_-VpklzC6fLsKq1P3rgMb9s3BJIU4oiFRZylarAHO1k"/></p>
+<p><strong>Recommendation</strong></p>
+<p>In scenarios where payroll periods are already closed and posted, forward-looking repayment approaches such as recurring deductions (IT0014) or loan-based recovery (IT0045) are generally more stable and easier to manage.</p>
+<p>For recovery aligned with specific wage components, splitting the recovery amount into multiple deduction wage types in IT0014 provides a simple and transparent solution without requiring schema changes.</p>
+<p><strong>Best Practice Consideration</strong></p>
+<p>Maintaining minimal payable amounts (for example selective allowances) only to cover statutory contributions such as GOSI may still result in insufficient net pay and accumulation of arrears (claims). This approach should be carefully evaluated, as it does not guarantee that contributions will be fully deducted during unpaid leave periods.</p>
+<p><img class="img-responsive" src="/documents/customerkba/_-VpklzC6fLsKq1P3rgMb9s3BJIU4oiFRZylarAHO1k"/></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>maternity leave, paid leave, unpaid leave, salary recovery, overpayment, social insurance compensation, retroactive accounting, IT2001, IT0014, IT0045, deduction, arrears, claims, GOSI, payroll recalculation, recurring deduction, loan, wage type, PCR, schema, recovery, net pay</p></div></div></div></div>

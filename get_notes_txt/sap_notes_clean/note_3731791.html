@@ -1,0 +1,59 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Outbound emails sent from SAP Service Cloud Version 2 or SAP Sales Cloud Version 2 fail with delivery errors or bounce messages.</li><li>Examples of errors include:
+<ul><li>5.3.0 - Other mail system problem</li><li>554 - "The user 'anonymous' is not in the email contributor group."</li><li>Other observed behaviors:
+<ul><li>Email is not delivered to the recipient</li><li>No response or follow-up email is received</li><li>Bounce message is returned to the sender</li><li>In SAP Service Cloud Version 2, the timeline email card may display (under the email body):
+<ul><li>Permanent - OnAccountSuppressionList</li><li>Example technical details: <br/>Recipient Address: test@example.com<br/>SMTP Status Code: 5.1.1</li></ul>
+</li></ul>
+</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Service Cloud Version 2 1.0</li><li>SAP Sales Cloud Version 2 1.0</li><li><a href="https://help.sap.com/docs/CX_NG_SVC/56436b4e8fa84dc8b4408c7795a012c4/dc7a9c396cdf4af5891bcfc10f1acd5e.html?q=Suppression&amp;locale=en-US&amp;version=CSS_SHIP&amp;state=PRODUCTION#configure-mail-transfer-agent-%28mta%29" rel="noopener noreferrer nofollow" target="_blank">SAP-managed MTA</a> (Amazon SES) or customer-managed MTA</li><li>External recipient systems (e.g., Microsoft 365, Exchange, Other) </li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Send an email from a case or any other supported application via the email channel to a recipient address.</li><li>Observe in <a href="https://help.sap.com/docs/CX_NG_SVC/56436b4e8fa84dc8b4408c7795a012c4/dc7a9c396cdf4af5891bcfc10f1acd5e.html?q=Inbound+Email+Monitoring#monitor-outbound-emails" rel="noopener noreferrer nofollow" target="_blank">Outbound Email Monitoring</a> that the message status is “Sent”.</li><li>Check the bounce/return message (in the mailbox defined by the return path or in <a href="https://help.sap.com/docs/CX_NG_SVC/56436b4e8fa84dc8b4408c7795a012c4/dc7a9c396cdf4af5891bcfc10f1acd5e.html?q=Inbound+Email+Monitoring#monitor-inbound-emails" rel="noopener noreferrer nofollow" target="_blank">Inbound Email Monitoring<strong></strong></a>) showing either:
+<ul><li>“Permanent – <strong>OnAccountSuppressionList</strong>”</li><li>SMTP 5.1.1, and possibly “554 MessageRejected”</li><li>or any other 5.x.x error</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The error originates from the <strong>recipient mail system</strong>, not from SAP.</li><li>The suppression would be done by either Amazon SES or the customer's own MTA provider.</li><li>The errors indicate a permanent delivery failure (SMTP 5.x.x).</li><li>The potential root causes depends on the recipient mailbox configuration or status. Below are some examples: 
+<ol><li><strong>Mailbox exists but rejects external/anonymous senders</strong>
+<ul><li>Mailbox only accepts authenticated or approved senders</li><li>External senders are treated as <strong>anonymous</strong> and rejected</li><li>Example:
+<ul><li>554 5.3.0 - The user 'anonymous' is not in the email contributor group</li></ul>
+</li></ul>
+</li><li><strong>Mailbox exists but has restricted sender permissions</strong>
+<ul><li>Only specific users or groups are allowed</li><li>External or unapproved senders are blocked</li><li>Examples:
+<ul><li>550 5.7.1 Client does not have permissions to send</li><li>550 5.7.1 Unable to relay</li><li>554 5.7.1 Access denied</li></ul>
+</li></ul>
+</li><li><strong>Mailbox does not exist (invalid or inactive address)</strong>
+<ul><li>Email address is incorrect, deleted, or not provisioned</li><li>Examples:
+<ul><li>550 5.1.1 User unknown</li><li>550 5.1.1 Recipient address rejected</li><li>554 5.1.1 No such user</li></ul>
+</li></ul>
+</li><li><strong>Mailbox exists but is unavailable or misconfigured</strong>
+<ul><li>Mailbox cannot receive emails due to:
+<ul><li>Disabled mailbox</li><li>Quota/storage capacity</li><li>Backend configuration problems</li></ul>
+</li><li>Examples:
+<ul><li>554 5.2.0 Mailbox unavailable</li><li>550 5.2.1 Mailbox disabled</li></ul>
+</li></ul>
+</li><li><strong>Mail flow or security restrictions</strong>
+<ul><li>Messages are blocked by:
+<ul><li>Transport rules</li><li>Security gateways or spam filters</li><li>Connector or relay restrictions</li></ul>
+</li><li>Examples:
+<ul><li>550 5.7.1 Message rejected due to security policy</li><li>550 5.7.1 Sender not authenticated</li></ul>
+</li></ul>
+</li><li>Suppression list (secondary effect)
+<ul><li>When any of the above scenarios returns a 5.x.x permanent failure:
+<ul><li>The sending infrastructure (e.g., Amazon SES used by SAP) classifies it as a hard bounce</li><li>The recipient address is automatically added to a suppression list</li><li>Further emails to the same address are blocked</li></ul>
+</li><li>This is reflected in SAP Service Cloud Version 2 as: Permanent - OnAccountSuppressionList</li><li>The suppression list is not the root cause, but a result of previous delivery failures.</li></ul>
+</li></ol>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li><strong>Fix recipient-side issue:</strong>
+<ul><li>Ensure the mailbox (where applicable): 
+<ol><li>Exists and is active</li><li>Accepts emails from external senders</li><li>Allows the sending system or domain</li></ol>
+</li><li>Review (where applicable): 
+<ol><li>Mailbox permissions</li><li>Distribution group restrictions</li><li>Application mailbox configuration</li></ol>
+</li></ul>
+</li><li><strong>Review mail flow and security settings:</strong>
+<ul><li>Check:
+<ul><li>Transport rules</li><li>Connectors</li><li>Email security policies</li></ul>
+</li><li>Ensure external emails are not rejected</li></ul>
+</li><li><strong>Validate with testing</strong>
+<ol><li>Send a test email from an external account to: test@example.com (the same email that got bounced)</li><li>Confirm successful delivery</li><li>Check if the bounce is still present</li></ol>
+</li><li><strong>Remove the offending email from suppression list (if/when applicable)</strong> 
+<ul><li>After resolving the root cause:
+<ul><li><strong>If using SAP default MTA (Amazon SES):</strong>
+<ol><li>Open an SAP support case</li><li>Request removal from the suppression list</li></ol>
+</li><li><strong>If using customer-managed MTA:</strong>
+<ol><li>Contact internal IT / email infrastructure team</li><li>Remove the address from the suppression list</li></ol>
+</li><li>⚠️<strong> </strong><span>Do not remove suppression before fixing the root cause, as the suppression may be retriggered. </span></li></ul>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to KBA: <a href="https://me.sap.com/notes/3433341" rel="noopener noreferrer nofollow" target="_blank">3433341</a> - Resolving Outbound Email Blocking Issues in Service Cloud V2</li><li><a href="https://help.sap.com/docs/CX_NG_SVC/56436b4e8fa84dc8b4408c7795a012c4/dc7a9c396cdf4af5891bcfc10f1acd5e.html?q=Suppression&amp;locale=en-US&amp;version=CSS_SHIP&amp;state=PRODUCTION" rel="noopener noreferrer nofollow" target="_blank">Configure Emails</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>mail bounce, outbound email failure, SAP Service Cloud V2, SAP Sales Cloud V2, suppression list, OnAccountSuppressionList, Amazon SES, SMTP 5.1.1, SMTP 5.7.1, SMTP 5.3.0, email not delivered, hard bounce, email rejection, anonymous sender error, contributor group error, mailbox unavailable, user unknown, email permissions, mail flow restriction, email delivery issue</p></div></div></div></div>

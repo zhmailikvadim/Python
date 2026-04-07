@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When posting a document using one of the following RFA functions: Finance Accounts Payable, Finance Accounts Receivable, Finance Accounts Payable Items, Finance Accounts Receivable Items, you find the following inconsistency: the value of Tax Base Amount is equal to the value of Tax Amount.</p>
+<p>This is only observed for use cases when the Tax Rate is not equal to zero.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">LOD-PER-OP Rel 3.0 SP 27</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>In order to get the solution, please implement the automatic correction instructions using transaction SNOTE and perform the manual post-implementation steps.</p>
+<p>You will now find these new components on the RFA Rules tab:</p>
+<p> - for Finance Accounts Payable: amount[ 6 ]-amt_base(_long)</p>
+<p> - for Finance Accounts Receivable Rules tab: amount[ 3 ]-amt_base(_long)</p>
+<p> - for Finance Accounts Payable Items and Finance Accounts Receivable Items: amount-amt_base(_long)</p>
+<p>For tax related line items, the new component AMT_BASE should be mapped to the value of Tax Base Amount and the component AMT_DOCCUR should be mapped to the value of Tax Amount.</p>
+<p>For all the other items of a document, the component AMT_BASE can be left empty.</p></div></div></div></div>

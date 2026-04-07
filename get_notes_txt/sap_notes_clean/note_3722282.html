@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>You observed following error information:</p>
+<p>e LJIT ljit_types_EAPI.cpp(00380) : types: failed to retrieve current connection<br/>e ceExecute cePopCustomLjit.cpp(00580) : Llang Runtime Error: Exception::SQLError: No connection found</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>You're using planning engine command PleCheck</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 349085</p>
+<p><strong>Reason:</strong></p>
+<ul>
+<li>Due to a programming error in SAP HANA planning engine.</li>
+<li>You are using planning engine of BW Integrated Planning in combination with PAK on HANA level. </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 079.08 (SPS07)</li>
+<li>Revisions &gt;= 089.01 (SPS08)</li>
+<li>or higher</li>
+</ul>
+</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>Include the involved planning function in the table RSPLS_HDB_ACT_PF  via transaction SM30, so this specific PF is forced to be executed in ABAP runtime. Make sure the column "Active" of the table entry remains unchecked.</li>
+</ul>
+<p><strong> </strong></p></div></div></div></div>

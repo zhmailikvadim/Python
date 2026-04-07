@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">This SAP Note contains the required BRFplus files to carry out the output management setup for SAP S/4HANA  within VSS.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">VSS, Output management, output control, BRF+, BRFplus, output parameter determination</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="__html0"><strong>1. Import the BRFplus applications</strong></p>
+<p>Each XML file you are going to import contains one BRFplus application.<br/>When you start newly with your SAP S/4HANA system, you can pick the according zip file matching your VSS and S4CORE version to begin with.</p>
+<p><span style="text-decoration: underline;">Note:</span> The import of a BRFplus application from an XML file will overwrite any existing version of this BRFplus application including its content (business rules). <br/>There is no delta handling. Please make sure that you save your current version before you import the attached files.</p>
+<p><strong>1.1 Download the attached zip file based on your S4CORE version:</strong></p>
+<p>VSS7 / S4CORE108<br/>    SP00 --&gt; BRF_File_VSS7_S4CORE108_SP00.zip</p>
+<p>VSS7 / S4CORE109<br/>    SP00 --&gt; BRF_File_VSS7_S4CORE109_SP00.zip</p>
+<p><span style="text-decoration: underline;">Note:</span> Do not use a zip file from a different release if you do not find a zip file for your current VSS and S4CORE Component version.</p>
+<p><strong>1.2 Extract the files to a temporary folder.</strong></p>
+<p><strong>1.3 Perform the upload following these steps:</strong></p>
+<ul>
+<li>Start transaction BRF+.<br/><span style="text-decoration: underline;">Note:</span> If required, personalize your screen (see attachment BRF+_Personalization.jpg), and change the user mode from Simple to Expert.<br/><br/></li>
+<li>On the Business Rule Framework plus screen, choose Tools &gt; XML Import.</li>
+<li>On the Business Rule Framework plus – XML Import screen, under File and Transport Request, <br/>browse for the local *.xml files you want to import. You need to import the files one after the other.</li>
+<li>In the Customizing Request field, enter an applicable Customizing Request ID.</li>
+<li>Choose Upload XML File.</li>
+<li>When prompted, select the Delete Additional Objects After Import option. This ensures that only objects from the XML file remain in the system. <br/>This is especially important when you want to overwrite an existing BRFplus application.</li>
+<li>Choose Back to Workbench.</li>
+</ul>
+<p><strong>2. Transporting the BRFplus application(s) and business rules</strong></p>
+<p>The BRFplus applications of the output parameter determination use storage type 'Customizing'. <br/>This means you can record and transport changes to the application with a customizing request from development to quality to production system.</p>
+<p>However, you need to assure that in the source system, customizing changes and the recording of customizing changes are allowed (transaction SCC4).<br/>The business rules of the output parameter determination technically belong to corresponding decision table of the BRFplus application. They can also be transported as Customizing.</p>
+<p><strong>2.1 Handling of master data</strong></p>
+<p>Technically, business rules are stored in BRFplus decision tables. Each decision table consists of columns which are each assigned to a specific data type. <br/><br/>For the system, it doesn't make any difference if a table column represents Customizing data, master data, or transactional data. <br/>Due to the storage type ‘Customizing’ of the BRFplus application, everything will be recorded as Customizing by default.</p>
+<p>However, master data usually cannot be transported and is only maintained in the target system. <br/>So before transporting the BRFplus changes, remove any master data which is not available in the target system. <br/>Double-maintain this content in the target system. Note that the target system needs to allow Customizing changes for you to be able to do this. <br/><br/>Ideally, you can at least transport master data from the quality to the production system, so that you do not need to maintain anything in production.</p></div></div></div></div>

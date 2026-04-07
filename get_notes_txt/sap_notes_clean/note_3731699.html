@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During SUM upgrade, phase SHDINST_DB_PREP fails with the following error in SHDUSRCRE.log:</p>
+<p>BR1334E Owner SAPSR3SHD already exists in database</p>
+<p>BR1336E Creating database owner SAPSR3SHD failed</p>
+<p><br/>When checking the previous retry attempt in the SHDUSRCRE.log or SHDUSRCRE.SAV file, one of the following errors is found:</p>
+<p>ORA-01950: no privileges on tablespace 'SYSTEM'</p>
+<p>ORA-01031: insufficient privileges</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Software Update Manager (SUM)</li><li>Oracle Database 12c or higher</li><li>ABAP Stack</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The BR1336E error is a secondary symptom, not the root cause. The actual error sequence is:</p>
+<ul><li>BRCONNECT successfully creates the shadow user SAPSR3SHD.</li><li>BRCONNECT then tries to save the shadow user password in the SAPUSER table owned by OPS$&lt;SID&gt;ADM.</li><li>OPS$&lt;SID&gt;ADM does not have sufficient privileges on the SYSTEM tablespace, causing the INSERT/UPDATE to fail with ORA-01950 or ORA-01031.</li><li>Because the password step fails, SAPSR3SHD is left behind in the database.</li><li>When SUM retries the phase, it finds SAPSR3SHD already exists and reports BR1334E/BR1336E.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>1. Check the SHDUSRCRE.log for the actual error. Look for entries containing ORA-01950 or ORA-01031 before the BR1336E entry.</p>
+<p><br/><br/>2. Grant privileges to the OPS$ user:</p>
+<p>    sqlplus / as sysdba</p>
+<p>    SQL&gt; GRANT UNLIMITED TABLESPACE TO "OPS$&lt;SID&gt;ADM";</p>
+<p>    SQL&gt; GRANT RESOURCE TO "OPS$&lt;SID&gt;ADM";</p>
+<p>    Replace &lt;SID&gt; with actual system SID (e.g., OPS$T22ADM).</p>
+<p><br/><br/>3. Drop the leftover SAPSR3SHD user:</p>
+<p>    SQL&gt; DROP USER SAPSR3SHD CASCADE;</p>
+<p><br/><br/>4. Verify the user is removed:</p>
+<p>   SQL&gt; SELECT username FROM dba_users WHERE username = 'SAPSR3SHD';</p>
+<p>   Result Must return: no rows selected</p>
+<p><br/><br/>5. Retry the failed SUM phase.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>BR1336E, BR1334E, BR0832E, BR0301E, BR1335I, SAPSR3SHD, SAPSR3SH, OPS$, SAPUSER, ORA-01950, ORA-01031, BRCONNECT, SHDUSRCRE, SHDUSRCRE.SAV, SHDINST_DB_PREP, shadow schema, shadow user, SUM, Software Update Manager, tablespace, SYSTEM, insufficient privileges, password_change, crown, PREP_INSTALL</p></div></div></div></div>

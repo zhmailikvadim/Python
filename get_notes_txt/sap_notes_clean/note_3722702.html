@@ -1,0 +1,143 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> Known restrictions for SAP HANA Automated Predictive Library (APL) 2608</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="__html12">You can find information about this release in the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/apl/91a027b369cc4d1898806a779a23e206/c57b6f4e4e324fcaa1ece849228e67c7.html" target="_blank">What's New</a> documentation on the SAP Help Portal.</p>
+<p id="__html26">The following restrictions apply to this release:</p>
+<ul id="__html21">
+<li><strong>AFL Performance Considerations<br/></strong>The AFL generation process is a necessary process, but it can be time consuming, especially where the tables being used contain a large number of columns. It is recommended to avoid generating these wrappers for every single APL function call. If possible, the generated wrappers should be re-used as much as possible. This can be achieved by using the APL Deployment Unit and its stored procedures as opposed to directly calling the APL functions. See the APL Developer Guide for more information.</li>
+<li><strong>SAP HANA Table and Column Names<br/></strong>When defining and using table types with APL, blanks, double quotes ("), single quotes ('), tab (\t), and return (\) are not supported in column names: The AFL wrapper generation fails when a table type contains column names with spaces. In procedure mode, this results in the error message "Invalid char (blank) in a field name of &lt;table name&gt;". In direct mode, this results in the following error message: "AFL error exception: AFL error: Internal error : generating parameter string failed."<br/>When using the RECOMMEND function, the table name for the dataset must be KXLINKS1.</li>
+<li><strong>Precision Issue for the DECIMAL Data Type<br/></strong>If you run a function whose input and output datasets have a DECIMAL column, the input value precision might be altered in the output table.</li>
+<li><strong>Change of Behavior of Padding for CHAR(N) Data Type Columns Starting with SAP HANA 2.0 SPS03<br/></strong>See SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2680891" target="_blank">2680891</a>.</li>
+<li><strong>Model Name When Exporting as a Stored Procedure</strong><br/>When exporting an SAP HANA Automated Predictive Library (APL) model as a stored procedure, the first character of the model name cannot be a number.</li>
+<li><strong>Certain Geolocation-based Analysis Graph Types are not Supported</strong><br/>Proximity, Colocation, and Frequent Path analysis graphs are not supported.</li>
+<li><strong>Statbuilder Cannot be Created with Multiple Input Datasets</strong><br/>The CREATE_MODEL function cannot create a Statbuilder model if multiple datasets are used.</li>
+<li><strong>Confusion Matrix and Multinomial Classification Model</strong><br/>The COMPUTE_CONFUSION_MATRIX function does not support multinomial classification models. It only supports binary classification models (legacy and gradient boosting).</li>
+<li><strong>Export Profit Curves and Multinomial Classification Model</strong><br/>The EXPORT_PROFITCURVES function does not support multinomial classification models.</li>
+<li><strong>Export Apply Code Restrictions</strong><br/>The EXPORT_APPLY_CODE function does not support time series and social network analysis models. For regression (gradient boosting), binary classification (gradient boosting), and multinomial classification (gradient boosting), only JSON export is supported.</li>
+<li><strong>Gradient Boosting: interoperability issue between platforms of different endianness</strong><br/>A gradient boosting model created on an IBM Power Systems (Big Endian) platform can't be reloaded on an Intel or IBM Power Systems (Little Endian) platform. Conversely, a gradient boosting model created on a "Little Endian" platform can't be reloaded on a "Big Endian" platform.</li>
+<li><strong>ANY Procedure: SQL Data Type Restrictions<br/></strong>The SQL data types used in the dataset columns are not converted when running an APL function with the ANY procedure. Therefore, they must comply with SAP HANA AFL restrictions. The only data types allowed in datasets are: "INTEGER", "BIGINT", "DOUBLE", "CLOB", "NCLOB", "VARCHAR", "NVARCHAR", "DATE", "TIME", "TIMESTAMP", "SECONDDATE", and "DECIMAL".</li>
+<li><strong>Time-Series model: slowdown with CREATE_MODEL_AND_TRAIN, TRAIN_MODEL, and FORECAST functions<br/></strong>A change in the model selection strategy for time-series prevents SAP HANA APL from optimizing the model on shorter horizons than the one requested by the end user. This may increase the training time.</li>
+</ul>
+<p id="__html26">---------------------------------------------------</p>
+<p id="__html0"><strong>Upgrade from a version prior to 1903 (for HANA 2+):</strong></p>
+<p>Due to the change to the software component version of SAP HANA APL 1903, upgrades must follow a specific process:</p>
+<div class="myNNFV2-container">
+<div class="myNNFV2-table-responsive">
+<div class="myNNFV2-container">
+<div class="myNNFV2-table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Note:</strong> Make sure that you use the SAP HANA resident lifecycle management tool <em>hdblcm</em>:<br/><em>/hana/shared/$SAPSYSTEMNAME/hdblcm/hdblcm<br/></em>$SAPSYSTEMNAME is automatically populated. If $SAPSYSTEMNAME is not set up, use &lt;SID&gt; instead.<br/>Do not use the SAP HANA APL installer’s <em>hdblcm</em> tool.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol>
+<li>Run ./hdblcm --action=update_components --component_dirs=&lt;Extract_APL_Folder_Path&gt;/installer --ignore=check_version</li>
+<li>Follow the instructions on screen. The software component is sap_afl_sdk_apl. </li>
+</ol>
+<p><strong>Note: Use the normal upgrade procedure to upgrade from a version higher than or equal to 1903 to version 2508.</strong></p>
+<div>
+<p>------------------------------------------------</p>
+<p>The following SAP HANA databases are supported by this release:</p>
+<div class="myNNFV2-container">
+<div class="myNNFV2-table-responsive">
+<div class="myNNFV2-container">
+<div class="myNNFV2-table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>APL Supported Platform</td>
+<td>HANA 2.0 SPS03</td>
+<td>HANA 2.0 SPS04</td>
+<td>HANA 2.0 SPS05</td>
+<td>HANA 2.0 SPS06</td>
+<td>HANA 2.0 SPS07</td>
+<td>HANA 2.0 SPS08</td>
+</tr>
+<tr>
+<td>Intel Architecture</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr>
+<td>IBM PowerPC "Little Endian"</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>This release is delivered on the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://launchpad.support.sap.com/#/softwarecenter" target="_blank">SAP Support Portal</a> under the version <strong>APL 4 FOR HANA 2 SP03+</strong>, which you can install on SAP HANA 2.0 SPS03 and beyond.</p>
+</div>
+<div>
+<p>------------------------------------------------</p>
+<p>SAP HANA APL has the same maintenance timeline as SAP HANA. For more information about the SAP HANA release and maintenance strategy, see SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2378962" target="_blank">2378962</a> <em>- SAP HANA 2.0 Revision and Maintenance Strategy</em>.</p>
+</div></div></div></div></div>

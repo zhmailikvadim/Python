@@ -1,0 +1,68 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>Unexpected outputs are returned for <span class="SNO_DNT" style="float: none;" translate="no">BLOB</span> columns on <span class="SNO_DNT" style="float: none;" translate="no">FOR JSON</span> or <span class="SNO_DNT" style="float: none;" translate="no">XML</span> when executing with <span class="SNO_DNT" style="float: none;" translate="no">ESX</span> engine.</p>
+<p>--Example Scenarios 1--</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">CREATE TABLE TESTTAB (A BINARY(10), B <strong>BLOB</strong>);</span><br/><span class="SNO_DNT" style="float: none;" translate="no">INSERT INTO TESTTAB VALUES (x'414243', x'414243');</span></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT * FROM TESTTAB <strong>FOR JSON</strong> WITH HINT (USE_ESX_PLAN);</span></p>
+<p style="padding-left: 60px;">-- For <span class="SNO_DNT" style="float: none;" translate="no">JSON</span>, the output shows the unexpected result with <span class="SNO_DNT" style="float: none;" translate="no">ESX</span> plan.</p>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">[</span><br/><span class="SNO_DNT" style="float: none;" translate="no">      {</span><br/><span class="SNO_DNT" style="float: none;" translate="no">           "A": "414243",</span><br/><span class="SNO_DNT" style="float: none;" translate="no">           "B": "<strong>ABC</strong>"</span><br/><span class="SNO_DNT" style="float: none;" translate="no">      }</span><br/><span class="SNO_DNT" style="float: none;" translate="no">]</span></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT * FROM TESTTAB <strong>FOR XML</strong> WITH HINT (USE_ESX_PLAN);</span></p>
+<p style="padding-left: 60px;">-- For <span class="SNO_DNT" style="float: none;" translate="no">XML</span>, the output also shows the unexpected result with <span class="SNO_DNT" style="float: none;" translate="no">ESX</span> plan.</p>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">&lt;resultset&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">     &lt;row&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">         &lt;A&gt;414243&lt;/A&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">         &lt;B&gt;<strong>ABC</strong>&lt;/B&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">     &lt;/row&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">&lt;/resultset&gt;</span></p>
+<p>--Example Scenario 2--</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">CREATE TABLE TESTTAB (A BINARY(10), B <strong>BLOB</strong>);</span><br/><span class="SNO_DNT" style="float: none;" translate="no">INSERT INTO TESTTAB VALUES (x'ABC', x'ABC');</span></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT * FROM TESTTAB <strong>FOR JSON</strong> WITH HINT (USE_ESX_PLAN);</span></p>
+<p style="padding-left: 60px;">-- This returns <span class="SNO_DNT" style="float: none;" translate="no">"<em>invalid CESU-8 encoding for Unicode string</em>"</span> error message.</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT * FROM TESTTAB <strong>FOR XML</strong> WITH HINT (USE_ESX_PLAN);</span></p>
+<p style="padding-left: 60px;">-- This returns <span class="SNO_DNT" style="float: none;" translate="no">"<em>invalid CESU-8 encoding for Unicode string</em>"</span> error message.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>JSON, XML, ESX, FOR JSON, FOR XML, BINTOHEX, BLOB</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 354769</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming missing in SAP HANA, the evaluation of <span class="SNO_DNT" style="float: none;" translate="no">BINTOHEX</span> for <span class="SNO_DNT" style="float: none;" translate="no">BLOB</span> columns on <span class="SNO_DNT" style="float: none;" translate="no">FOR XML/JSON</span> is not considered in <span class="SNO_DNT" style="float: none;" translate="no">ESX</span> process.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS06 - SPS08</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>The table has the <span class="SNO_DNT" style="float: none;" translate="no"><strong>BLOB</strong> </span>column.</li>
+</ul>
+<p style="padding-left: 30px;">AND</p>
+<ul>
+<li>The statement is with "<span class="SNO_DNT" style="float: none;" translate="no"><strong>FOR XML</strong></span>" or "<span class="SNO_DNT" style="float: none;" translate="no"><strong>FOR JSON</strong></span>".</li>
+</ul>
+<p style="padding-left: 30px;">AND</p>
+<ul>
+<li>The execution is handled by <span class="SNO_DNT" style="float: none;" translate="no"><strong>ESX</strong> </span>engine.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>Possible workaround would be to make the statement to be executed by <span class="SNO_DNT" style="float: none;" translate="no">HEX</span> engine, by applying <span class="SNO_DNT" style="float: none;" translate="no"><strong>USE_HEX_PLAN</strong></span> hint.</li>
+</ul>
+<p>--From Example Scenarios 1--</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT * FROM TESTTAB <strong>FOR JSON </strong>WITH HINT (USE_HEX_PLAN);</span></p>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">-- Output shows the expected output.</span><br/><span class="SNO_DNT" style="float: none;" translate="no">[</span><br/><span class="SNO_DNT" style="float: none;" translate="no">     {</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "A": "414243",</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "B": "<strong>414243</strong>"</span><br/><span class="SNO_DNT" style="float: none;" translate="no">     }</span><br/><span class="SNO_DNT" style="float: none;" translate="no">]</span></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT * FROM TESTTAB <strong>FOR XML</strong> WITH HINT (USE_HEX_PLAN);</span></p>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">-- Output shows the expected output.</span><br/><span class="SNO_DNT" style="float: none;" translate="no">&lt;resultset&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">    &lt;row&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">        &lt;A&gt;414243&lt;/A&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">        &lt;B&gt;<strong>414243</strong>&lt;/B&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">    &lt;/row&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">&lt;/resultset&gt;</span></p>
+<p>--From Example Scenarios 2--</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT * FROM TESTTAB <strong>FOR JSON </strong>WITH HINT (USE_HEX_PLAN);</span></p>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">-- Output shows the expected output.</span><br/><span class="SNO_DNT" style="float: none;" translate="no">[</span><br/><span class="SNO_DNT" style="float: none;" translate="no">     {</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "A": "0ABC",</span><br/><span class="SNO_DNT" style="float: none;" translate="no">          "B": "<strong>0ABC</strong>"</span><br/><span class="SNO_DNT" style="float: none;" translate="no">     }</span><br/><span class="SNO_DNT" style="float: none;" translate="no">]</span></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT * FROM TESTTAB <strong>FOR XML</strong> WITH HINT (USE_HEX_PLAN);</span></p>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">-- Output shows the expected output.</span><br/><span class="SNO_DNT" style="float: none;" translate="no">&lt;resultset&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">    &lt;row&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">        &lt;A&gt;0ABC&lt;/A&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">        &lt;B&gt;<strong>0ABC</strong>&lt;/B&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">    &lt;/row&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">&lt;/resultset&gt;</span></p></div></div></div></div>

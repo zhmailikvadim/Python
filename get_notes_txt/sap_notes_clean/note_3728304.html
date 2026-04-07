@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="longtext" id="__html0">
+<p>Users who should be logged off remain present in the system. A work process crash occurs during the ThFinalizeSession() operation. This issue may only affect users with multiple open modes for the same login.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">login/disable_multi_gui_login</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The Work Process responsible for mode deletion crashes during the operation and is unable to complete the task. The following c-stack must be present in the WP trace file:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p><br/>LinStackBacktrace(void**, int, int)<br/>LinStack(_IO_FILE*)<br/>CTrcStack2+0x9c<br/>SigIGenAction(int, siginfo_t*, void*)<br/>&lt;signal handler called&gt;</p>
+<p>(__memcmp_avx2_movbe+0x212)</p>
+<p>ThResFreeSession(int, TH_DB_ACTION) <br/>ThFinalizeSession(int, unsigned char)<br/>ThPerformLogoff(int, unsigned char)<br/>SessionHandler::handleRequest(REQUEST_BUF*, bool) <br/>ThStart()+0x818<br/>DpMain+0x3e8<br/>main+0x2e</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><br/>A known issue occurs when multiple logon control is active with the parameter login/disable_multi_gui_loginand the logoff triggered by the option "Continue with this logon and end any other logons in the system" does not remove all the screens of the other logons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This correction is initially delivered with the kernel patch level listed in the <span class="SNO_DNT" style="float: none;" translate="no">"<strong>Support Package Patches</strong>"</span> section of this SAP Note. All subsequent kernel patch levels also contain the correction. Keep in mind that only the latest kernel patch level is available for download, however, it contains all previously delivered corrections. As a result, you can download and install the latest available kernel patch at any time to implement this correction.</p>
+<p>If there is no entry for the kernel patch level in the <span class="SNO_DNT" style="float: none;" translate="no">"<strong>Support Package Patches</strong>"</span> section, the patch is not yet available. The entry will be added upon the delivery of the correction. Please check this SAP Note to see if new patch level entries are added.</p>
+<p>This correction is delivered with the following kernel archives:</p>
+<ul>
+<li>hotfix - file <strong>dw.sar<br/></strong></li>
+</ul>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span> - files <span class="SNO_DNT" style="float: none;" translate="no">SAPEXE.SAR</span> and <span class="SNO_DNT" style="float: none;" translate="no">SAPEXEDB.SAR</span>  </li>
+</ul>
+<p>Follow the SAP recommendations on how to select and install the kernel patch:</p>
+<ol>
+<li>Apply the latest<strong> <span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span></strong> if it contains the correction (PL of correction is smaller or equal to the PL of the latest SP Stack Kernel). For the list of current SP Stack Kernels, see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Otherwise, the next <span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span> will deliver the correction. Apply the <strong>hotfix </strong>only if you require the correction on short notice.</li>
+<li>The correction may not be available for kernel releases that are out of maintenance. Please upgrade to the corresponding downward compatible kernel (<strong>DCK</strong>), see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Review the <strong>regression note </strong>for the target patch level before installing the patch. For details, see SAP Note <a href="/notes/1802333" target="_blank">1802333</a> (Finding information about regressions in the SAP kernel).</li>
+<li>For instructions on how to download and install kernel patches, see SAP Note <a href="/notes/19466" target="_blank">19466</a> (Downloading SAP kernel patches).</li>
+</ol>
+<p>The paper <span class="SNO_DNT" style="float: none;" translate="no"><a href="https://support.sap.com/deployment-strategies-kernel-abap.pdf" rel="noopener noreferrer" tabindex="-1" target="_blank" title="https://support.sap.com/deployment-strategies-kernel-abap.pdf">Update Strategy for the Kernel of the Application Server ABAP in On Premise Landscapes</a></span> provides detailed SAP recommendations.</p></div></div></div></div>
