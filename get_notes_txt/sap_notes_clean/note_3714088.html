@@ -1,0 +1,77 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><h2 data-toc-skip="" id="__html0"> </h2>
+<ul><li>
+<p>Error message <strong>AAPO189</strong> occurs during posting  </p>
+</li><li>
+<p>The <strong>Asset Master Record</strong> and the <strong>Cost Center</strong> are assigned to the same Profit Center  (e.g. A). </p>
+</li><li>
+<p>During posting, the system derives a <strong>different Profit Center </strong>(e.g. B).</p>
+</li><li>
+<p>The posting is <strong>blocked with an error message.</strong></p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul style="list-style-position: inside;"><li>FIN Asset Accounting</li><li>SAP ERP</li><li>SAP ERP Central Component</li><li>SAP enhancement package for SAP ERP</li><li>SAP enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA</li><li>SAP S/4HANA Finance</li><li>SAP S/4HANA Cloud Private Edition</li><li>SAP Fiori for SAP S/4HANA Finance,</li><li>SAP Fiori for SAP S/4HANA,</li><li>SAP Fiori for SAP S/4HANA Cloud Private Edition</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><h2 data-toc-skip=""> </h2>
+<ol><li>
+<p>Create or maintain an Asset Master with Profit Center A.</p>
+</li><li>
+<p>Ensure that the <strong>Identity Indicator for Profit Center</strong> is not set in FI-AA customizing.</p>
+</li><li>
+<p>In the FI-AA error table, set the message type for Profit Center to Error.</p>
+</li><li>
+<p>Create a Posting (e.g. ML81N) </p>
+<ul><li>
+<p>Use account assignment to an order or cost object</p>
+</li><li>
+<p>which derives a different Profit Center (e.g. B)</p>
+</li></ul>
+</li><li>
+<p>Post the document.</p>
+</li><li>
+<p>The system raises error <strong>AAPO189 </strong>and blocks the posting.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><h2 data-toc-skip=""> </h2>
+<p>The error is caused by<strong> inconsistent FI-AA customizing for the Profit Center:</strong></p>
+<ul><li>
+<p>The <strong>Identity Indicator is not set</strong>, meaning different Profit Centers are allowed by design.</p>
+</li><li>
+<p>At the same time, the message type is set to “Error” in the FI-AA error table.</p>
+</li><li>
+<p>This combination <strong>(non-identical allowed + error message</strong>) is not supported and leads to AAPO189.</p>
+</li></ul>
+<p>Note:<br/>In earlier releases, this inconsistency might not have been enforced due to missing or incorrect checks.<br/>After upgrades, the<strong> standard system behavior is correctly applied</strong>, leading to the error.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h3 data-toc-skip=""><span style="font-size: 10pt;">. Check Profit Center Activation (Transaction ACSET)</span></h3>
+<ul><li>
+<p>Go to transaction <strong>ACSET</strong></p>
+</li><li>
+<p>Ensure that <strong>PRCTR (Profit Center)</strong> is activated as an account assignment object:</p>
+<ul><li>
+<p>for all valuation areas with real-time posting</p>
+</li></ul>
+</li><li>
+<p>Activate PRCTR where missing</p>
+</li></ul>
+<hr/>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">2. Adjust Message Control for Profit Center (Mandatory)</span></h3>
+<p>Customizing path:<br/><strong>FI → Asset Accounting → Integration with General Ledger → Additional Account Assignment Objects → Error Table</strong></p>
+<ul><li>
+<p>For <strong>Profit Center (PRCTR):</strong></p>
+<ul><li>
+<p>Change message type from Error<br/>→ <strong>to Warning or No Message</strong></p>
+</li></ul>
+</li></ul>
+<p>✔ Result:<br/>Postings with a different Profit Center are allowed as intended by the customizing.</p>
+<hr/>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">3. Segment Handling (Optional, Recommended)</span></h3>
+<ul><li>
+<p>The Identity Indicator may remain unchanged</p>
+</li><li>
+<p>Set message type for Segment:</p>
+<ul><li>
+<p><strong>from Error → to No Message</strong></p>
+</li></ul>
+</li></ul>
+<p>✔ Benefit:</p>
+<ul><li>
+<p>Enables automatic segment derivation from the asset</p>
+</li><li>
+<p>Avoids inconsistencies in derivation logic</p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p></p>
+<p></p>
+<p>SAP KBA <a href="https://me.sap.com/notes/2562534" rel="noopener noreferrer nofollow" target="_blank">2562534 </a>- AAPO189 (Kostenstelle) beim Durchführen eines Anlagenzugangs </p>
+<p>SAP Note <a href="https://me.sap.com/notes/684659" rel="noopener noreferrer nofollow" target="_blank">684659</a>  - FAQ Kontierungsobjekte ab Release 4.70 </p>
+<p>SAP Note <a href="https://me.sap.com/notes/1787595" rel="noopener noreferrer nofollow" target="_blank">1787595</a> - Transaktion OAMK/OAMK2: Konto ist nicht aufgeführt </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>AAPO189  ML81N  FI-AA  Profit Center  PRCTR  ACSET  Asset Accounting  S/4HANA</p></div></div></div></div>

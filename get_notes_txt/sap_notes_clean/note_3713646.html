@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Outbound Idocs are not being sent and remain in IDoc status 03.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ASANWEE, ASAAEMEE, IDocs, 03</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>A new authorization check was introduced to function module /ASADEV/ACI_IDOC_PORT_TRIGGER. If there is no authorization, then IDocs were not processed further.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implementing this note enhances the authorization check for a global authorization setting.</p>
+<p>Implement the note and perform the manual steps:</p>
+<p>1. Go to transaction n/ASADEV/ACI_PART.<br/> Create or update the entry with the following value:<br/> - ACI Global Constant = ACI_AUTH_GLOBAL_IDOC_PORT</p>
+<p>2. Go to transaction n/ASADEV/ACI_PAR.<br/> Create or update the entry with the following values:<br/> - ACI Global Constant = ACI_AUTH_GLOBAL_IDOC_PORT<br/> - Field Value = X</p>
+<p>If no global authorization is required, ensure that users are assigned the necessary authorization for object /ASADEV/RC.</p></div></div></div></div>

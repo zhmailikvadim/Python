@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">A runtime error CALL_FUNCTION_CONFLICT_LENG occurs during execution of functionality that triggers logic from include /SPDGS/LPDX1F04.<br/>The application terminates with exception CX_SY_DYN_CALL_ILLEGAL_TYPE and program flow is interrupted.<br/>The dump indicates that parameter lengths or types do not match the expected signature during a function module call.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">IS-MFM, CORE, PDA, CALL_FUNCTION_CONFLICT_LENG, CX_SY_DYN_CALL_ILLEGAL_TYPE, SAP Meat and Fish Management by msg.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">A field length or type conflict occurs during the dynamic call of a function module inside include /SPDGS/LPDX1F04, which leads to the program termination. The error is caused by incorrect or incomplete parameter typing in a function module call.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>History:</strong><br/>SAP Note created on 28.01.2026.</p>
+<p>Version 2: Note for 6.20</p>
+<p><strong>Description of Correction:</strong><br/>The parameter mapping in the function module call has been corrected.<br/>All parameters are now passed with the correct ABAP types.<br/>Structures correspond to the required length definitions of the called function module.<br/>All sequences or internal structures required for processing are correctly initialized before the call.<br/>The adjustment to the parameter interface now prevents runtime conflicts and ensures an uninterrupted process flow.</p>
+<p><strong>Functional Dependencies:</strong><br/>None.</p>
+<p><strong>Manual Changes:</strong><br/>No manual changes are required for end users.</p></div></div></div></div>

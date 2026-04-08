@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When a contract contains multiple line items, the "Approve ACM Trading Contract" application displays the same 'Delivery Period From' and 'Delivery Period To' values across all rows in the list view, even when the line items have different delivery periods.</p>
+<p>Replication Steps</p>
+<p>1.Create a trading contract in the "Maintain ACM Trading Contracts" application.</p>
+<p>2.Add at least two line items with different 'Delivery Period From' and 'Delivery Period To' values for each line item.</p>
+<p>3.Save the contract.</p>
+<p>4.Open the "Approve ACM Trading Contract" application.</p>
+<p>5.Ensure that the 'Delivery Period From' and 'Delivery Period To' columns are visible in the list table.</p>
+<p>6.Search for the created contract.</p>
+<p>7. The list table displays contract with multiple line items having same 'Delivery Period From' and 'Delivery Period To' dates.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Agricultural Contract Management; ACM; Approve ACM Trading Contract; Delivery Period From; Delivery Period To;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Reason:This issue occurs because the key field defined for the list display entity (List Screen Table) in the "Approve ACM Trading Contract" application is 'Contract Number'.As a result, the Fiori UI framework overwrites non-key-related data with the latest record when multiple entries share the same key.</p>
+<p>Pre-requisites: UI Note 3711668 must be implemented first. After that, implement UI Note 3706163 to ensure the solution to work as expected.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Import the relevant support pack or apply the correction instruction(s).</p></div></div></div></div>

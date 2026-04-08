@@ -1,0 +1,146 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP Note contains information about planning the installation, upgrades and support packages of the ABAP add-on C2SFIBU</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Release strategy, C2SFIBU 809, Maintenance Information</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ol>
+<li>General information</li>
+<li>Overview</li>
+<ul>
+<li>SAP Product Availability Matrix (PAM)</li>
+<li>Download</li>
+<li>Modifications</li>
+</ul>
+<li>C2SFIBU 809</li>
+<ol style="list-style-type: lower-alpha;">
+<li>Installation</li>
+<li>Upgrade</li>
+<li>Conflict Resolution Transport</li>
+<li>Uninstallation</li>
+</ol></ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p> </p>
+<ol>
+<li><span style="font-size: 14px;">General information</span></li>
+</ol>
+<ul>
+<li>
+<div style="padding-left: 30px;">See the general information from SAP Note <a href="/notes/70228" target="_blank">70228</a>.</div>
+</li>
+<li>
+<div style="padding-left: 30px;">In general it is not possible to uninstall ABAP add-ons. Uninstallable Add-ons are listed centrally in SAP Note <a href="/notes/2011192" target="_blank">2011192</a>.<br/><br/></div>
+</li>
+<li>
+<div style="padding-left: 30px;">Upgrades with ABAP add-ons</div>
+</li>
+<ul>
+<li>In systems in which an ABAP add-on is installed, you can upgrade only to SAP releases that are supported for this add-on.</li>
+<li>Note that there is a delay between the delivery of the SAP standard releases and the release of the corresponding add-on releases.</li>
+<li>If S/4 conversion is planned on a system with add-ons, then the add-on upgrade is integrated in the conversion process. To carry out this conversion, you require the target release add-on relevant packages in addition to the SAP standard upgrade packages.If you are scheduling an upgrade or the import of an enhancement package, note that you should not import the latest Support Package Stack in the source release directly before the upgrade to ensure that the required, equivalent Support Package is already available in the target release.<br/>For more information about this, see SAP Note <a href="/notes/832594" target="_blank">832594</a> and the following information on SAP Support Portal.<br/><a href="http://support.sap.com/sp-stacks" target="_blank">http://support.sap.com/sp-stacks</a> -&gt; SP Stack Information -&gt; SP Stack Strategy</li>
+</ul>
+</ul>
+<ol start="2">
+<li>Overview</li>
+</ol>
+<ul>
+<ul style="list-style-type: circle;">
+<li>SAP Product Availability Matrix<br/>The following information about the add-on in the SAP Product Availability Matrix is available on SAP Support Portal at <a href="https://apps.support.sap.com/sap/support/pam" target="_blank">https://apps.support.sap.com/sap/support/pam</a><br/>- Availability<br/>- End of maintenance<br/>- Release for products with enhancement packages<br/>- Language support</li>
+</ul>
+</ul>
+<ol start="2">
+<ul>
+<li>
+<p>Download<br/>SAP Solution Manager's cloud-based Maintenance Planner enables easy and efficient planning of all changes in your SAP system landscape such as updates, upgrades, and new installations.Therefore, separate installation/upgrade media is no longer required as the Maintenance Planner is automatically calculating all software packages needed for your installation/upgrade. But, in case you attempt to download the packages manually, the software is available on SAP Support Portal at <a href="https://launchpad.support.sap.com/#/softwarecenter" target="_blank">https://launchpad.support.sap.com/#/softwarecenter</a>. Insert the technical name of the software component in the search field of the Software Download Center. The technical name of the software component can be found in the Installation Guide (in the Product Availability Matrix) or Installation Note. In the case of manual download, please make sure that you also download the newest ACP of the Add-on. More information on ACPs is available in SAP Note 1119856.</p>
+</li>
+</ul>
+</ol><ol start="2">
+<ul>
+<li>The add-on modifies the component S4CORE<br/>If you have already imported more Support Packages for this component into your SAP system than are specified as the minimum requirement in this SAP Note, you must check whether Conflict Resolution Transports (CRTs) are available for the add-on.<br/> </li>
+</ul>
+</ol><ol start="3">
+<li>C2SFIBU 809</li>
+<ol style="list-style-type: lower-alpha;">
+<li>Installation<br/>Name of the Installation Package (AOI):<br/>SAPK-809AGINC2SFIBU<br/><br/>Required Support Packages:<br/><br/>
+<div class="table-responsive"><table border="1" cellpadding="1" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td width="115">
+<p>Component</p>
+</td>
+<td width="90">
+<p>Release</p>
+</td>
+<td width="256">
+<p>Support Packages</p>
+</td>
+</tr>
+<tr>
+<td width="115">
+<p>SAP_BASIS</p>
+</td>
+<td width="90">
+<p>816</p>
+</td>
+<td width="256"></td>
+</tr>
+<tr>
+<td width="115">
+<p>S4CORE</p>
+</td>
+<td width="90">
+<p>109</p>
+</td>
+<td width="256"></td>
+</tr>
+</tbody>
+</table></div>
+<br/><br/></li>
+<li>Upgrade/Conversion<br/><br/>Name of the Upgrade Package (AOI/AOU):<br/><br/>SAPK-809AGINC2SFIBU<br/><br/>Required Support Packages<br/><br/><br/>
+<div class="table-responsive"><table border="1" cellpadding="1" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td width="115">
+<p>Component</p>
+</td>
+<td width="90">
+<p>Release</p>
+</td>
+<td width="256">
+<p>Support Packages</p>
+</td>
+</tr>
+<tr>
+<td width="115">
+<p>SAP_BASIS</p>
+</td>
+<td width="90">
+<p>816</p>
+</td>
+<td width="256"></td>
+</tr>
+<tr>
+<td width="115">
+<p>S4CORE</p>
+</td>
+<td width="90">
+<p>109</p>
+</td>
+<td width="256"></td>
+</tr>
+</tbody>
+</table></div>
+In upgrade/converison phase "MAIN_SHDRUN/ACT_UPG the following confirmation is required:</li>
+</ol></ol>
+<p style="padding-left: 90px;"><span style="font-size: 14px;">...</span></p>
+<p style="padding-left: 90px;"><span style="font-size: 14px;">Repository Modifications?</span></p>
+<p style="padding-left: 90px;"><span style="font-size: 14px;">...</span></p>
+<p style="padding-left: 90px;"><span style="font-size: 14px;">The following tables with customer appends are affected:</span></p>
+<p style="padding-left: 90px;">MARC   Affected Append   YYAPMARC_US</p>
+<p style="padding-left: 90px;">MARC   Affected Append   YYAPROH_C</p>
+<p style="padding-left: 90px;">MARC   Affected Append   YYMARC PUL</p>
+<p style="padding-left: 90px;">...</p>
+<p style="padding-left: 90px;"><strong>You can confirm for theses appends, that "Adjustments have been made."</strong></p>
+<ol><ol start="3" style="list-style-type: lower-alpha;">
+<li>Support Packages / Conflict Resolution Transport<br/><br/>You can download the available Support Packages in the Softwarecenter<br/><a href="https://launchpad.support.sap.com/#/softwarecenter" target="_blank">https://launchpad.support.sap.com/#/softwarecenter<br/></a>Please select Support Packages &amp; Patches and find your product using the provided categorizations.<br/><br/>An overview of the available Support Packages and their Release dates for most products can be found on this page:<br/><a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information.html" target="_blank">https://support.sap.com/en/release-upgrade-maintenance/maintenance-information.html<br/><br/><br/></a></li>
+<li>Uninstallation<br/><br/>C2SFIBU 809 is a modifying Add-on. Standard uninstallation process with SUM/SAINT is not possible. On customer request, a special uninstallation package can be created. <br/><br/><br/></li>
+</ol></ol></div></div></div></div>

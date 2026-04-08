@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the processes "Receipt of Energy Amounts (SUP View)" (DE_B_MET_ENERGY_VALUE_SUP) and "Receipt of Energy Amounts (DSO View)" (DE_B_MET_ENERGY_VALUE_DSO), the cloud system does not send an APERAK Z20 message when the OBIS code received from market partner is invalid.</p>
+<p>This issue is relevant for the market roles: SUP, DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>MSCONS, MET, 13109, Obis Code, APERAK Z20, DE_B_MET_ENERGY_VALUE_SUP, DE_B_MET_ENERGY_VALUE_DSO</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Enhancement</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please note that the validation of OBIS for energy amount is customer specified, you need to enhance your own check logic in business system then send the result to cloud, the recommanded steps are the following:</p>
+<ul>
+<li>Extend the step "Send Response to Supply Scenario Read Request" in the processes DE_B_MET_ENERGY_VALUE_SUP or DE_B_MET_ENERGY_VALUE_DSO.</li>
+<li>Add a customer-specific check group to validate the OBIS code.</li>
+<li>If the OBIS code is invalid, populate the following fields in UBD:</li>
+<li>- /us4g/ubd_data-req_result-req_result_code = 'Error'</li>
+<li>- /us4g/ubd_data-req_result-req_result_txt = 'Invalid OBIS'</li>
+<li>The business system then sends this information to the cloud along with the supply scenario response</li>
+<li>When cloud system receives above result code and result text, it will send an APERAK message with error code Z20.</li>
+</ul></div></div></div></div>

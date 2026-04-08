@@ -1,0 +1,161 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP Note contains information about planning the installation, upgrades and support packages of the ABAP add-on ST-PI 758</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Release strategy, ST-PI 758 Maintenance Information</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ol>
+<li>General information</li>
+<li>ST-PI 758</li>
+<ol style="list-style-type: lower-alpha;">
+<li>Installation</li>
+<li>Upgrade</li>
+<li>Support Packages</li>
+<li>Uninstallation</li>
+</ol></ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p> </p>
+<ol>
+<li><span style="font-size: 14px;">General information</span></li>
+</ol>
+<ul>
+<li>
+<div style="padding-left: 30px;">See the general information from SAP Note <a href="/notes/70228" target="_blank">70228</a>.</div>
+</li>
+<li>
+<div style="padding-left: 30px;">In general it is not possible to uninstall ABAP add-ons. Uninstallable Add-ons are listed centrally in SAP Note <a href="/notes/2011192" target="_blank">2011192</a>.<br/>Please check chapter Uninstallation for this [Add-on] and find further instructions there. Further uninstallable Add-ons are listed centrally in SAP Note <a href="/notes/2011192" target="_blank">2011192</a>.</div>
+</li>
+<li>
+<div style="padding-left: 30px;">Upgrades with ABAP add-ons</div>
+</li>
+<ul>
+<li>In systems in which an ABAP add-on is installed, you can upgrade only to SAP releases that are supported for this add-on.</li>
+<li>Note that there is a delay between the delivery of the SAP standard releases and the release of the corresponding add-on releases.</li>
+<li>If an add-on upgrade is connected with a change of the SAP release, it is integrated into the SAP upgrade (repository or system switch). To carry out this upgrade, you require an additional add-on exchange package in addition to the SAP standard upgrade packages. If the SAP standard upgrade is carried out without this additional exchange package, the add-on will no longer work after the upgrade. The entire SAP system is inconsistent.<br/>For more information about this problem, see SAP Note <a href="/notes/33040" target="_blank">33040</a>.</li>
+<li>If S/4 conversion is planned on a system with add-ons, then the add-on upgrade is integrated in the conversion process. To carry out this conversion, you require the target release add-on relevant packages in addition to the SAP standard upgrade packages.If you are scheduling an upgrade or the import of an enhancement package, note that you should not import the latest Support Package Stack in the source release directly before the upgrade to ensure that the required, equivalent Support Package is already available in the target release.<br/>For more information about this, see SAP Note <a href="/notes/832594" target="_blank">832594</a> and the following information on SAP Support Portal.<br/><a href="http://support.sap.com/sp-stacks" target="_blank">http://support.sap.com/sp-stacks</a> -&gt; SP Stack Information -&gt; SP Stack Strategy<br/><br/></li>
+</ul>
+</ul>
+<ol start="3">
+<li>2. ST-PI 758<br/><br/></li>
+<ol style="list-style-type: lower-alpha;">
+<li>Installation<br/>Name of the Installation Package (AOI):<br/>SAPK-758AGINSTPI<br/><br/>
+<div><strong>ST‑PI 758 – Supported Product Versions</strong>
+<p>The <strong>ST‑PI 758</strong> component is supported starting from the following product versions:</p>
+<ul>
+<li><strong>SAP S/4HANA 2023 FPS 00</strong></li>
+<li><strong>SAP BW/4HANA 2023 FPS 00</strong></li>
+<li><strong>SAP S/4HANA Foundation 2023 FPS 00</strong></li>
+</ul>
+</div>
+<br/>
+<div>Please <strong>select ST‑PI 758 as the target release</strong> during the planning phase in the Maintenance Planner.</div>
+<br/>
+<div class="table-responsive"><table border="1" cellpadding="1" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 406px; height: 66px;">
+<tbody>
+<tr>
+<td width="115">
+<p>Component</p>
+</td>
+<td width="90">
+<p>Release</p>
+</td>
+<td width="90">
+<p>Support Package</p>
+</td>
+</tr>
+<tr>
+<td width="115">
+<p>SAP_BASIS</p>
+</td>
+<td width="90">
+<p>758</p>
+</td>
+<td width="90">
+<p>SP 00</p>
+</td>
+</tr>
+<tr>
+<td width="115">
+<p>SAP_ABA</p>
+</td>
+<td width="90">
+<p>75I</p>
+</td>
+<td width="90">
+<p>SP 00</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<br/><br/><br/></li>
+<li>Upgrade/Conversion<br/>Name of the Upgrade Package:<br/>SAPK-758AGINSTPI<br/><br/>
+<div>The following source ST‑PI releases are supported</div>
+<p>ST-PI 740 <br/>ST-PI 2008_1_710<br/><br/></p>
+<div>
+<p><strong>1) Updating only ST‑PI (Component Update Only)</strong></p>
+<p><strong>Minimum Source Release:<br/></strong></p>
+<div class="table-responsive"><table border="1" cellpadding="1" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td width="115">
+<p>Component</p>
+</td>
+<td width="90">
+<p>Release</p>
+</td>
+</tr>
+<tr>
+<td width="115">
+<p>SAP_BASIS</p>
+</td>
+<td width="90">
+<p>758 SP00</p>
+</td>
+</tr>
+<tr>
+<td width="115">
+<p>SAP_ABA</p>
+</td>
+<td width="90">
+<p>75I SP00</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>You can download the available package SAPK-758AGINSTPI in the Softwarecenter under Installations &amp; Upgrade <br/><a href="https://launchpad.support.sap.com/#/softwarecenter" target="_blank">https://launchpad.support.sap.com/#/softwarecenter<br/><br/></a>Perform the Update via SAINT.</p>
+<p><strong>2) System Upgrade/Conversion<br/></strong><br/>If you are performing a complete system upgrade/conversion, please select <strong>ST‑PI 758</strong> as the target release during planning in the Maintenance Planner.<br/><br/><strong>Minimum Target Release:</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="1" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td width="115">
+<p>Component</p>
+</td>
+<td width="90">
+<p>Release</p>
+</td>
+</tr>
+<tr>
+<td width="115">
+<p>SAP_BASIS</p>
+</td>
+<td width="90">
+<p>758 SP00</p>
+</td>
+</tr>
+<tr>
+<td width="115">
+<p>SAP_ABA</p>
+</td>
+<td width="90">
+<p>75I SP00</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</li>
+</ol></ol><ol><ol start="3" style="list-style-type: lower-alpha;">
+<li>Support Packages<br/><br/>You can download the available Support Packages in the Softwarecenter<br/><a href="https://launchpad.support.sap.com/#/softwarecenter" target="_blank">https://launchpad.support.sap.com/#/softwarecenter<br/></a>Please select Support Packages &amp; Patches and find your product using the provided categorizations.<br/><br/>An overview of the available Support Packages and their Release dates for most products can be found on this page:<br/><a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information.html" target="_blank">https://support.sap.com/en/release-upgrade-maintenance/maintenance-information.html<br/><br/><br/></a></li>
+<li>Uninstallation<br/><br/>
+<div>The uninstallation of ST‑PI is not permitted, as the add‑on is an integral part of the product stack.</div>
+<br/><br/><br/><br/><br/></li>
+</ol></ol></div></div></div></div>

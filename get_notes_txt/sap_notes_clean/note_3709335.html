@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>Error message appears when trying to create a formula with a field that contains a 'NEWLINE' (line break, enter) in the name in Crystal Reports designer:<br/><br/><em>The field name is not known.<br/><br/></em></li>
+<li>In Crystal Reports for Enterprise replacing the NEWLINE with a space resolves the issue, but in Crystal Reports it does not recognize the field with a space.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>crystal bw new line break enter field name not known</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""><strong>Environment</strong></p>
+<ul>
+<li>SAP Crystal Reports 2025 Patch 7</li>
+<li>SAP Crystal Reports 2020 SP5 Patch 3</li>
+<li>SAP BW</li>
+</ul>
+<p><strong>Steps to Reproduce</strong></p>
+<ol>
+<li>Open a Crystal report.</li>
+<li>Create a new formula.</li>
+<li>Add a field which contains a 'new line' in the name.<br/><em>It looks like this in the formula editor:</em><br/><br/><em>{New field</em><br/><em>test}</em><br/><br/></li>
+<li>Check if the formula is valid. (top left 'x-2' icon or ALT+C)</li>
+<li>Error appears: 'The field name is not known.'</li>
+<li>Try to use space instead of a line break/enter for the field.</li>
+<li>In this case Crystal does not recognise the field.<br/><br/></li>
+</ol>
+<p><strong>Cause</strong></p>
+<ul>
+<li>This is a feature gap between Crystal Reports 20xx and Crystal Reports for Enterprise.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>Crystal Reports 20xx does not support line break in formula and has no logic to convert line break to space.</li>
+<li>As a workaround modify the field name to remove line break and replace it with a space.</li>
+<li>There is an enhancement request exists and you can vote for this idea via link: <a href="https://influence.sap.com/sap/ino/#/idea/368765" rel="noopener noreferrer" target="_blank">https://influence.sap.com/sap/ino/#/idea/368765</a></li>
+</ul></div></div></div></div>

@@ -1,0 +1,67 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>When querying a virtual table using <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access</span> (<span class="SNO_DNT" style="float: none;" translate="no">SDA</span>) or <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Integration</span> (<span class="SNO_DNT" style="float: none;" translate="no">SDI</span>), you may encounter an error message such as:</p>
+<p> </p>
+<p><strong>HANA logs</strong></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">Remote Source [<em>&lt;RemoteSource&gt;</em>] is not accessible to perform the operation: failed to parse user information from the credential</span></p>
+<p> </p>
+<p><strong>Application logs</strong></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">C  SQLCODE    : 403</span><br/><span class="SNO_DNT" style="float: none;" translate="no">C  SQLERRTEXT : internal error: failed to parse user information from the credential</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Federation; SDA; Smart Data Access; SDI; Smart Data Integration; Security; Credentials;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 355224</p>
+<p><strong>Reason:</strong></p>
+<p>Possible causes include missing secondary or technical user credentials, active remote connections that remain after the remote source is modified, incorrect credential patterns, or other configuration issues.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>All Revisions</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ol>
+<li><span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access</span> or <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Integration</span> is utilized.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To resolve this issue, please review the following known root causes and ensure that each one has been addressed.</p>
+<p> </p>
+<p><strong>(1) Missing Credentials / Secondary Credentials</strong></p>
+<p>Ensure that either a technical user or appropriate secondary credentials are properly assigned:</p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">SELECT * FROM SYS.CREDENTIALS WHERE PURPOSE = '<em>&lt;RemoteSource&gt;</em>';</span></li>
+</ul>
+<p>The default output, when the same technical user credentials are used for all users, is shown below. This is indicated by the value "<span class="SNO_DNT" style="float: none;" translate="no">NULL</span>" in the "<span class="SNO_DNT" style="float: none;" translate="no">USER_NAME</span>" column:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">USER_NAME,COMPONENT,PURPOSE,CREDENTIAL_TYPE,PSE_NAME</span><br/><span class="SNO_DNT" style="float: none;" translate="no">NULL,SAPHANAFEDERATION,<em>&lt;RemoteSource&gt;</em>,PASSWORD,NULL</span></p>
+<p>If the column contains a specific user name (or multiple rows with different user names), indicates that secondary credentials are used. If the user you are using to access the remote source is not listed,</p>
+<p>it means that remote credentials for that user are missing. If the column displays only a question mark ("?"), this indicates that no technical user credentials are assigned at all. Hence not a single user can access the remote source.</p>
+<ul>
+<li>For more information, please refer to the "<span class="SNO_DNT" style="float: none;" translate="no"><a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/93159ac691654784898d2f6e700f821f.html" target="_blank">Managing Secondary Credentials</a></span>" chapter in the SAP HANA Administration Guide for the SAP HANA Platform.</li>
+</ul>
+<p> </p>
+<p><strong>(2) Altered Remote Source</strong></p>
+<p>If the remote source was modified at any point—for example, if it was previously used with SDA and later switched to an SDI adapter—there may still be old sessions active with outdated or invalid metadata, such as user credentials.</p>
+<ol>
+<li>Check if there are any active connections that are using different metadata for the corresponding remote source:</li>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">SELECT * FROM M_REMOTE_CONNECTIONS WHERE REMOTE_SOURCE_NAME = '<em>&lt;RemoteSource&gt;</em>';</span></li>
+</ul>
+<li>Close these old connections, preferably from the ABAP side. If that is not possible, you can also terminate the sessions directly at the HANA level by executing the following SQL statement, as described in KBA <a href="https://userapps.support.sap.com/sap/support/knowledge/en/2092196" rel="noopener noreferrer" target="_blank">2092196</a>:</li>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">ALTER SYSTEM DISCONNECT SESSION '<em>&lt;Connection_ID&gt;</em>';</span></li>
+<li>Replace <span class="SNO_DNT" style="float: none;" translate="no">&lt;Connection_ID&gt;</span> with the actual session ID you want to terminate.</li>
+</ul>
+</ol>
+<p><strong> </strong></p>
+<p><strong>(3) Incorrect Credentials Pattern</strong></p>
+<p>Ensure that credentials are created following the pattern shown below, as specified in the SAP HANA Administration Guide. Use only this sequence when creating credentials or configuring a remote source:<strong><strong><br/></strong></strong></p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">"user=testuser;password=mypassword"</span></li>
+</ul>
+<p> </p>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li>There may be additional causes other than those mentioned above.</li>
+</ul></div></div></div></div>

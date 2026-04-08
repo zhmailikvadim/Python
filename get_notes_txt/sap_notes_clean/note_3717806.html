@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>Indexserver crashes with a crash stack similar to the below:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">----&gt; Symbolic stack backtrace &lt;----<br/>      0: mdx::statement::Set::isSetCartesian<br/>      1: mdx::statement::Set::optimize<br/>      2: mdx::statement::Base::optimize<br/>      3: mdx::statement::Function::optimize<br/>      4: mdx::statement::functions::Crossjoin::optimize<br/>      5: mdx::statement::Base::optimize<br/>      6: mdx::statement::BinaryOperator::optimize<br/>      7: mdx::statement::Base::optimize<br/>      8: mdx::statement::Axis::optimize<br/>      9: mdx::statement::Base::optimize<br/>      10: mdx::statement::SelectStatement::optimize<br/>      11: mdx::parser::SimbaParser::parseStatement<br/>      12: mds::api::MDXProcessor::executeMdxStatement<br/>      [...]</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">MDX</span>, <span class="SNO_DNT" style="float: none;" translate="no">isSetCartesian</span>, <span class="SNO_DNT" style="float: none;" translate="no">EPM</span>, <span class="SNO_DNT" style="float: none;" translate="no">BPC</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 353054</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, indexserver does not handle the invalid syntax query, causing an indexserver crash.<br/>Here is a example for the invalid syntax query:</p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">MDX WITH....</span><br/><span class="SNO_DNT" style="float: none;" translate="no">SELECT</span><br/><span class="SNO_DNT" style="float: none;" translate="no">NON EMPTY</span><br/><strong><span class="SNO_DNT" style="float: none;" translate="no">{ ( [dimension_A].[hierarchy_A].&amp;[member_A],[dimension_B].[<strong>hierarchy_C</strong>].&amp;[<strong><strong>member_E</strong></strong>] ),</span></strong><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>( [<strong>dimension_A</strong>].[hierarchy_B].&amp;[<strong>member_B</strong>],[<strong>dimension_B</strong>].[<strong>hierarchy_C</strong>].&amp;[<strong><strong>member_F</strong></strong>] )}</strong>,</span><br/><span class="SNO_DNT" style="float: none;" translate="no">{ [dimension_A].[hierarchy_A].&amp;[member_C] },</span><br/><span class="SNO_DNT" style="float: none;" translate="no">{ [dimension_A].[hierarchy_A].&amp;[member_D] }</span><br/><span class="SNO_DNT" style="float: none;" translate="no">ON COLUMNS,</span><br/><span class="SNO_DNT" style="float: none;" translate="no">... ON ROWS FROM .... WHERE(...)</span></p>
+<p>The first set in above query is illegal, because the tuples inside the set have different dimensions or hierarchies.<br/><br/></p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS00 - SPS06</li>
+<li>Revisions &lt;= 079.08 (SPS07)</li>
+<li>Revisions &lt;= 089.01 (SPS08)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>You are executing a MDX query with a set consists of tuples that have different dimensions or hierarchies.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions to prevent indexserver crash, and get expected error thrown for the query:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions of SPS07: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Apply one of following workarounds:</strong></p>
+<ul>
+<li>Make sure that tuples in a set have same dimensions and hierarchies as below.<br/>If you need to query on different dimensions or hierarchies, please execute in a separate statement.<br/><br/><span class="SNO_DNT" style="float: none;" translate="no">MDX WITH....</span><br/><span class="SNO_DNT" style="float: none;" translate="no">SELECT</span><br/><span class="SNO_DNT" style="float: none;" translate="no">NON EMPTY</span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>{ ( [dimension_A].[hierarchy_A].&amp;[<strong>member_A</strong>],[<strong>dimension_B</strong>].[<strong>hierarchy_C</strong>].&amp;[<strong>member_E</strong>] ),</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>( [dimension_A].[hierarchy_A].&amp;[<strong><strong>member_B</strong></strong>],[<strong>dimension_B</strong>].[<strong><strong>hierarchy_C</strong></strong>].&amp;[<strong><strong>member_F</strong></strong>] )}</strong>,</span><br/><span class="SNO_DNT" style="float: none;" translate="no">{ [dimension_A].[hierarchy_A].&amp;[member_C] },</span><br/><span class="SNO_DNT" style="float: none;" translate="no">{ [dimension_A].[hierarchy_A].&amp;[member_D] }</span><br/><span class="SNO_DNT" style="float: none;" translate="no">ON COLUMNS,</span><br/><span class="SNO_DNT" style="float: none;" translate="no">... ON ROWS FROM .... WHERE(...)</span><br/><br/>or</li>
+</ul>
+<ul>
+<li>Wrap the sets with <strong>CROSSJOIN( )</strong>.<br/>This workaround handles invalid queries by returning an expected syntax error indicating that the MDX set must be defined with the same dimensions and hierarchies.<br/></li>
+</ul></div></div></div></div>

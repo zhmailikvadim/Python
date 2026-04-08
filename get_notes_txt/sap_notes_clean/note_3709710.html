@@ -1,0 +1,60 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Customer is <strong>not using SAP's Default SMTP</strong> but rather their <strong>own MTA Provider</strong></li><li>As a <strong>workaround</strong>, the customer resends the <a href="https://api.sap.com/api/SalesSvcCloudV2_email/overview" rel="noopener noreferrer nofollow" target="_blank">email via API call</a> - KBA <a href="https://me.sap.com/notes/3543859" rel="noopener noreferrer nofollow" target="_blank">3543859</a> - Email API not sending emails out of SAP Sales Cloud V2 </li><li>Customers observe the following behavior:
+<ul><li>Outbound email show <strong>Transmission Status</strong> = <strong>Failed </strong>but no actual error message the Outbound Email Monitoring. The email is not delivered to the end recipient. Or</li><li>Email shows as <strong>Sent</strong>, but timeline is not updated and recipient does not receive the email</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Service Cloud V2</li><li>SAP Sales Cloud Version 2</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul><li>Possible <strong>scenarios</strong>:
+<ul><li>Email sent normally from SAP Sales or Service Cloud via the UI</li><li>Email sent out via <a href="https://api.sap.com/api/SalesSvcCloudV2_email/overview" rel="noopener noreferrer nofollow" target="_blank">Email API</a></li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><strong>Scenario A: Email Sent via SAP Sales Cloud V2 UI</strong></p>
+<ul style="list-style-position: inside;"><li><strong>Possible Causes:</strong>
+<ol style="list-style-position: inside;"><li><strong>Email not successfully processed</strong>
+<ul style="list-style-position: inside;"><li>Internal processing failure before SMTP handover.</li><li>Errors may not be exposed in the UI.</li></ul>
+</li><li><strong>MTA handover failed (Customer SMTP only)</strong>
+<ul style="list-style-position: inside;"><li>MIME could not be handed over to customer’s SMTP server.</li><li>No timeline entry is created.</li></ul>
+</li><li><strong>Email did not trigger due to user input issues</strong>
+<ul style="list-style-position: inside;"><li>Missing or incorrect recipient addresses.</li><li>Incomplete case context.</li></ul>
+</li></ol>
+</li></ul>
+<p><strong>Scenario B: Email Sent via API (POST to email-service)</strong></p>
+<ul style="list-style-position: inside;"><li><strong>Possible Causes:</strong>
+<ol style="list-style-position: inside;"><li>Email interaction not created
+<ul style="list-style-position: inside;"><li><strong>Payload missing required objects:</strong>
+<ul style="list-style-position: inside;"><li>Case</li><li>Business Partner</li></ul>
+</li></ul>
+</li><li><strong>Incorrect transmission status used</strong>
+<ul><li>transmissionStatus: "SEND" used instead of "CREATE", skipping creation logic or vice-versa.</li></ul>
+</li><li><strong>Validation failed but no error surfaced</strong>
+<ul style="list-style-position: inside;"><li>Backend rejects the email interaction silently if structure is invalid or not linked properly.</li></ul>
+</li><li><strong>SMTP handover failed</strong>
+<ul style="list-style-position: inside;"><li>If MIME generation or MTA handover fails, the timeline will not update.</li></ul>
+</li></ol>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li><strong>For UI-based Emails</strong> 
+<ol><li><strong>Validate Context:</strong> Confirm that the recipient and related data (e.g., Case, Business Partner) were valid at the time the email was triggered.</li><li><strong>Check Outbound Email Monitoring</strong>
+<ul><li><strong>Status: Sent (no errors)</strong><br/>→ Email MIME was successfully handed over to the MTA provider.</li><li><strong>Status: Failed (with errors)</strong><br/>→ Review the error details. Search for a relevant KBA or raise a case with SAP Support.</li><li><strong>Status: Failed (no error, reprocessing ineffective)</strong><br/>→ Raise a case with SAP Support.</li></ul>
+</li><li><strong>If Using a 3rd-Party SMTP Provider</strong>
+<ul><li>Check your MTA logs to confirm email receipt for processing.</li><li>If no logs are found and no error is displayed in Service Cloud:<br/>→ Raise an SAP Support case with the following:
+<ul><li>Case ID</li><li>Timestamp of attempted send</li><li>User ID</li></ul>
+</li></ul>
+</li></ol>
+</li><li><strong>For API-based Emails</strong>
+<ol><li><strong>Validate your API payload</strong>
+<ul><li>Must include:
+<ul><li>caseReference</li><li>businessPartner</li><li>Valid Email channel and direction</li></ul>
+</li><li>Use:
+<ul><li>"transmissionStatus": "CREATE"
+<ul><li>will write to the timeline, and associate to a BP and related objects based on the payload</li><li>will not actually sending the email out</li><li>entry will not be displayed in the Outbound Monitor.</li></ul>
+</li><li>"transmissionStatus": "SEND"
+<ul><li>will write to the timeline, and associate to a BP and related objects based on the payload</li><li>will send the email out to the end recipient</li><li>entry will be displayed in the Outbound Monitor</li></ul>
+</li></ul>
+</li><li>Also refer to the following KBAs:
+<ul><li><a href="https://me.sap.com/notes/3543859" rel="noopener noreferrer nofollow" target="_new">KBA 3543859 – Email API not sending emails out of SAP Sales Cloud V2</a></li><li><a href="https://me.sap.com/notes/3472917" rel="noopener noreferrer nofollow" target="_new">KBA 3472917 – Issues while creating email interactions over the REST API email-service</a></li></ul>
+</li></ul>
+</li><li><strong>Check Outbound Monitoring:</strong>
+<ul><li>If not visible, the interaction was never created or failed silently.</li></ul>
+</li><li><strong>Do not reprocess via API</strong> unless the issue is resolved:
+<ul><li>Reprocessing without root cause may cause:
+<ul><li>Duplicates</li><li>Corrupt case states </li><li>Affect other backend processes</li></ul>
+</li></ul>
+</li><li><strong>Raise a support ticket with:</strong>
+<ul><li>API payload</li><li>Timestamp</li><li>Associated Case ID and related object details</li></ul>
+</li></ol>
+</li><li><strong>Additional Recommendations</strong>
+<ul><li>Monitor SMTP server logs for custom MTA setups.</li><li>If timeline entry exists but the email wasn’t delivered, the issue is likely with the SMTP provider and beyond SAP’s tracking.</li><li>SAP is actively evaluating enhancements to improve visibility into final delivery outcomes and error transparency for both UI and API-triggered emails.</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>KBA <a href="https://me.sap.com/notes/3543859" rel="noopener noreferrer nofollow" target="_blank">3543859</a> – Email API not sending emails out of SAP Sales Cloud V2</li><li>KBA <a href="https://me.sap.com/notes/3472917" rel="noopener noreferrer nofollow" target="_blank">3472917</a> – Issues while creating email interactions over the REST API email-service</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>outbound emails, case timeline, email monitor, timeline-service, iam-service, service timeout, database layer, CPU usage, query optimization, cascading timeouts, SAP Sales Cloud, SAP Service Cloud, email-service, outbound email, missing timeline, missing email, API email, transmissionStatus, SMTP, MTA, Sales Cloud V2, Case timeline, Outbound Monitor, create email interaction, custom SMTP, email not sent</p></div></div></div></div>

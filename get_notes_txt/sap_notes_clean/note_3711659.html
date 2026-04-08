@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The <em>Master Data Cleanup Wizard</em> does not find an item with a specific property selected.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Business One</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Prerequisite:</strong></p>
+<p>1. SAP Business One FP 2408 or higher version is used.</p>
+<p>2. Select property no.:50 for Item X today (<em>Item Master Data → Properties </em>tab).</p>
+<p></p>
+<p><strong>Scenario:</strong></p>
+<p>1. Run the Master Data Cleanup Wizard on the same day when property no.:50 was selected (<em>Administration → Utilities → Master Data Cleanup Wizard).</em></p>
+<p>2. In step 1 of the wizard select the <em>Start New Master Data Cleanup Run </em>option<em>.</em></p>
+<p>3. In step 2 of the wizard select the<em> Item Master Data o</em>ption.</p>
+<p>4. In step 3 of the wizard select the<em> Additional Filters</em> checkbox and click on the Ellipsis icon. The <em>Additional Filters</em> window is opened.</p>
+<p>5. Select the checkbox <em>Find items with only the selected properties </em>and select the property 50. Click <em>OK, </em>then click on<em> Search.</em></p>
+<p></p>
+<p><strong>Expected behavior:</strong></p>
+<p>Item X is not found by the wizard.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>From the version SAP Business One FP 2408, in case the update date of an item is the same date as the running date of <em>Master Data Cleanup Wizard</em>, the item will be filtered out in the selection and will not be found by the wizard. This is correct behavior as per system design and due to requirements added by the <em>Audit Trail Report</em> functionality. </p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Note <a href="/notes/3458114" rel="noopener noreferrer nofollow" target="_blank">3458114.</a></p></div></div></div></div>

@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The payroll constant SILLO for the year 2026 should be <strong>4147.10</strong>, not <strong>4147.09</strong>.</p>
+<p>This constant is used as the minimal social insurance allowance base.</p>
+<p>SAP has always set this constant as the result of deduction of the 3 social insurance premiums that are paid by the employee, from the minimal wage (SILL2):</p>
+<p style="padding-left: 30px;">4806 - [4806 * 9.76%] - [4806 * 1.50%] - [4806 * 2.45%] =</p>
+<p style="padding-left: 30px;">4806 - 469.07 - 72.09 - 117.75 = 4147.09</p>
+<p>Article 45 of the act of social insurance allowances, DU.1999.060.0636, speaks about a single deduction at the rate 13.71%:</p>
+<p style="padding-left: 30px;">4806 - [4806 * 13.71%] =</p>
+<p style="padding-left: 30px;">4806 - 658.90 = 4147.10</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>T511K, SILL2, SILLO, PLZLA.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Error in the pre-calculated payroll constant SILLO for the year 2026.</p>
+<p id="">The incorrect value was released with the SAP Note <a href="/notes/0003662703" target="_blank">3662703</a> - Payroll constants 2026.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The payroll constant SILLO for the year 2026 has been corrected in the customizing table T511K.</p>
+<p>A manual correction of the constant is recommended - using the maintenance view V_T511K.</p>
+<p>This correction will be included in the Support Packages listed below.</p>
+<p> </p>
+<p id="">A similar error occurs for the SILLO setting for the year 2022: it should have been 2597.33, instead of 2597.32. However, the correction for the year 2022 will not be included in any Support Package, because such a small correction, after 4 years, should rather be avoided.</p></div></div></div></div>

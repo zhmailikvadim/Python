@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>How to achieve Cascading in custom MDF objects?</li><li>How to set field criteria on custom Generic Objects fields?</li><li>How to limit the display of values in field of custom Generic Objects type based on the value selected on a different custom GO field?</li></ul>
+<p><span style="color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em> </span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP SuccessFactors HXM Suite</li><li>Metadata Framework (MDF)</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To limit the value on one Generic Object field, based on the value selected on another Generic Object field, we can make use of Field Criteria in the following Steps.</p>
+<p><strong>Example Scenario: </strong>From MDF object: <strong>cust_Test</strong>, selective values in field <strong>cust_SubA </strong>should be controlled by the value user selected in field<strong> cust_A</strong>. </p>
+<p><strong></strong></p>
+<p><strong>Step1: </strong>Create <strong>Valid When Association </strong>for the two custom MDF Object <strong>cust_A </strong>and <strong>cust_SubA</strong>. Refer below a one to many Valid When relationship as shown in the screenshot.<strong></strong></p>
+<p><strong>cust_A: </strong>value selected from this field cust_A controls what values can be selected in cust_SubA</p>
+<p><strong>cust_SubA:</strong> selective values <span style="text-decoration: underline;">are controlled &amp; limited</span> from the value selected in field cust_A</p>
+<p><strong><span style="color: rgb(224, 62, 45);">IMPORTANT NOTES：</span></strong></p>
+<p><strong><span style="color: rgb(224, 62, 45);">Child object (Effective dating = FROM PARENT) can’t be used as a reference in another object and its impact to system. </span></strong></p>
+<p><strong><span style="color: rgb(224, 62, 45);">For both field reference and Valid when association, reference Objects must NOT be a Child Object. </span></strong></p>
+<p><img class="img-responsive" height="1101" src="/documents/customerkba/7J8Dm7YFbWLWNvTiTb_NTtVOUFiyZg3a8vPeb1LhVkc" width="765"/></p>
+<p></p>
+<p><strong>Step2</strong>：Create some sample data for the Object <strong>cust_A </strong>and also add some records for<em> </em>Object <strong>cust_SubA </strong>via the Manage Data page. Here, we take "one-one mapping" relationship as example:</p>
+<p><img class="img-responsive" height="669" src="/documents/customerkba/WMUXCPSsAD5GHFfp3tk5KL8sCGQSCbnK-S3Ju6_upD4" width="663"/></p>
+<p><strong></strong></p>
+<p><strong>Step3: Add the two custom MDF Objects fields in main object: cust_Test.</strong></p>
+<p>Below is a main custom MDF object: <strong>cust_Test</strong>, that has 2 fields of data type = Generic Object: <strong>cust_A </strong>and <strong>cust_SubA.</strong></p>
+<p><strong>cust_A: </strong>value selected from this field cust_A controls what values can be selected in cust_SubA</p>
+<p><strong>cust_SubA:</strong> selective values <span style="text-decoration: underline;">are controlled &amp; limited</span> from the value selected in field cust_A</p>
+<p><img class="img-responsive" height="533" src="/documents/customerkba/YyKZA8V-l4J2MWoemAOpawS8LPtd7e_edh8pSxjvsqU" width="777"/></p>
+<p><strong>Step4: In main Object cust_Test, add the required field criteria which will limit the values displayed in<em> cust_SubA </em>based on the value selected in field <em>Cust_A.</em></strong></p>
+<p><strong>You have to add the Field Criteria on the field : <span style="color: rgb(224, 62, 45);">cust_SubA</span>, as shown in the below screenshot:</strong></p>
+<p><strong><img class="img-responsive" height="450" src="/documents/customerkba/-sqSuxwsL4OK1HatVTQskql52jpM6m3Eso7TXlpcIbw" width="913"/></strong></p>
+<p><strong><span style="color: rgb(224, 62, 45);">Destination Field Name: <span>cust_A's field name configured in </span>main Object: cust_Test -&gt; cust_A</span></strong></p>
+<p><strong><span style="color: rgb(224, 62, 45);">Source Field Name</span>: taken from[<span style="color: rgb(224, 62, 45);">Association Name </span>in <span style="color: rgb(224, 62, 45);">cust_SubA</span>].[InternalCode <span style="color: rgb(224, 62, 45);">Name </span>in <span style="color: rgb(224, 62, 45);">cust_A</span>] = &gt; cust_A_Association.mdfSystemInternalCode</strong></p>
+<p><strong><img class="img-responsive" height="447" src="/documents/customerkba/4XQF-zVUPpmH-15oRiyqq8L5E_LWMXQabw3p1yB1hdQ" width="928"/></strong></p>
+<p><strong></strong></p>
+<p><strong>Check Result:</strong></p>
+<p>Now if go to manage data &gt; create record of main Object: cust_Test<strong>, value from cust_SubA successfully controlled by value selected from cust_A:</strong></p>
+<p><img class="img-responsive" height="857" src="/documents/customerkba/cHgYm5T_xaN0UQSwCN3p649RCCrR0Mjlu1j9VLly82E" width="942"/></p>
+<p></p>
+<p><strong></strong></p>
+<p><strong><em><br/></em> </strong></p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/2285359/E" rel="noopener noreferrer nofollow" target="_blank">2285359 - Adding an Association from Custom Foundation Object to MDF Foundation Object (GO to GO) - Employee Central - SAP for Me</a></p>
+<p><a href="https://help.sap.com/docs/successfactors-platform/implementing-metadata-framework-mdf/field-criteria?version=2511" rel="noopener noreferrer nofollow" target="_blank">Field Criteria | SAP Help Portal</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Metadata Framework, MDF, Field Criteria, GO, Generic Object, cascading, GOs, filtering </p></div></div></div></div>

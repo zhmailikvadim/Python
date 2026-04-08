@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">I want to include custom header fields in the SOAP message of my web services export tasks, but the default task output only includes standard header fields.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<p>Identify the web services export task that needs custom headers.</p>
+</li><li>
+<p>Generate the <span style="font-family: 'courier new', courier; font-size: 11pt;">WSDL</span> for the task from <strong>Integration Manager-&gt;Integration Configuration -&gt;Export Task-&gt;View <span style="font-family: 'courier new', courier; font-size: 11pt;">WSDL</span></strong><span style="font-size: 11pt;">.</span></p>
+</li><li>
+<p>Work with your integration or middleware team to modify the<span style="font-family: 'courier new', courier;"> <span style="font-size: 10pt;"><span style="font-size: 11pt;">XSLT</span></span><strong><span style="font-size: 10pt;"> </span></strong><span style="font-size: 10pt; font-family: verdana, geneva;">mapping</span></span> or <span style="font-family: 'courier new', courier; font-size: 11pt;">SOAP</span><strong> </strong>header configuration<strong> </strong>to include the required custom header fields.</p>
+</li><li>
+<p>Deploy the updated mapping in your middleware:</p>
+<ul><li>
+<p><strong>SAP PI/PO</strong>: Deploy the updated <strong>integration flow or service mapping</strong> to the <strong>PI runtime engine</strong>.</p>
+</li><li>
+<p><strong>SAP CPI (Cloud Integration)</strong>: Deploy the updated <strong>integration flow</strong> to the <strong>tenant runtime</strong>.</p>
+</li><li>
+<p><strong>Other middleware/ESB</strong>: Apply the mapping changes and activate the <strong>integration flow/service</strong> that handles <strong>Ariba</strong> messages.</p>
+</li></ul>
+</li><li>
+<p>Test the integration by sending a sample export from <strong>Ariba</strong> and verify that the custom header fields appear correctly in the <span style="font-family: 'courier new', courier; font-size: 11pt;">SOAP message</span> received by the external system.</p>
+</li></ol></div></div></div></div>

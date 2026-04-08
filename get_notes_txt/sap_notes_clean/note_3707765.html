@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3707765&amp;TargetLanguage=EN&amp;Component=IS-U-EEG&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3707765/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3707765/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>The creation of a generating unit of the energy type <em>WINDOFF (wind offshore) </em> with a commissioning date later than 1/1/2023 terminates with the error message <em>No billing attributes are assigned to operand assignment VGEEGMPSAN (/ENBIL/BI 082)</em>.<em> </em></p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>Transaction /ENBIL/GU</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p id="">Missing customizing</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Maintain the missing billing attribute for energy type <em>WINDOFF</em> for operand assignment <em>VGEEGMPSAN</em> as follows:</p>
+<ol>
+<li>Call <strong>transaction</strong> <em>SM34.</em></li>
+<li>In the "<strong>View cluster</strong>" field, enter <em>/ENBIL/VC_ENTYPE </em> and choose "<em>Maintain</em>".</li>
+<li>Select the <em>WINDOFF</em> <strong>energy type</strong> and <em>double-click</em> Compensation <em>Version</em> in the <em>Dialog Structure</em> area. <em><br/></em></li>
+<li>Select <strong>version</strong> <em>7</em> and <em>double-click</em> <em>Oper<em></em>and Assignment </em> in the <em>Dialog Structure area.</em></li>
+<li>Select the <strong>operand assignment</strong> <em>VGEEGMPSAN</em> and <em>double-click</em> Billing <em>Attributes</em> in the <em>Dialog Structure</em> area.</li>
+<li>Choose New <strong>Entries</strong>.</li>
+<li>In the Billing Attribute column, use the F4 help to select the characteristic <em>Exceedance of Maximum Duration AFVM </em> and <em>SAP</em> as the configuration source.</li>
+<li>Save the change in a transport request and transport it to all your system/clients where this Customizing is required.</li>
+</ol></div></div></div></div></div>

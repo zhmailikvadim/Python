@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When creating a order Without Charge order in VA01 and entering an item with blocked material, the Order Without Charge is still being created even though the sales status is set to "B" block. However, the expectation is that the system should block the Order Without Charge with error message "V1028."</p>
+<div id="__hbox5-__vbox6-24">
+<div id="__data2483">
+<div id="__toolbar2-__vbox6-24" role="toolbar"></div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Sales And Distribution (SD)</li><li>SAP ERP Central Component</li><li>SAP ERP</li><li>SAP Enhancement package for SAP ERP</li><li>SAP Enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA</li><li>SAP S/4HANA Cloud Private Edition</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Assign a block status to a material on the material master (MM02 transaction).</li><li>Create an Order Without Charge in VA01, input an item with the blocked material.</li><li>The Order Without Charge order is still being created even though the sales status is set to "B" block.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The creation of a sales order is not controlled by the material status alone, but rather by the customizing of the sales status.</p>
+<div id="__vbox3-__vbox6-16">
+<div id="__hbox4-__vbox6-16">
+<div id="__data1108">
+<p>Set the sales status for the relevant SD Document to 'B' (Error message) as needed. For example:</p>
+</div>
+</div>
+</div>
+<ul><li>Set "Sales Order" (TVMS-SPVBC) to "B" for Order (SD Document Category 'C')</li><li>Set "Free Delivery" (TVMS-SPVBI) to "B" for Order Without Charge (SD Document Category 'C')</li><li>Set "Credit Memo Req" (TVMS-SPVBK) to "B" for Credit Memo Request (SD Document Category 'K')</li></ul>
+<p>If the sales status for the relevant SD Document is not correctly set to 'B', for example, if only "Sales Order" is set to 'B' but "Free Delivery" is not, Order Without Charge orders can still be created, even though it is believed that the sales status has been set to 'B'.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Confirm the SD Document Category assigned to the order type using transaction VOV8.</li><li>Update the sales status configuration as needed.</li></ol>
+<p>The Sales statuses can be defined in the IMG at:</p>
+<p>SPRO → Logistics - General → Material Master → Settings for Key Fields → Data Relevant to Sales and Distribution → Define Sales Statuses.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>KBA - <a href="https://me.sap.com/notes/0003446335" rel="noopener noreferrer nofollow" target="_blank">3446335</a> - Impact of material blocked status on sales order creation</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>V1028, RV_MATERIAL_STATUS_CHECK</p></div></div></div></div>

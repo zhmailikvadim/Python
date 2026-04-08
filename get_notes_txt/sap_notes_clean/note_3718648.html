@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0"> When payroll is processed after an employee transfer, the PLR information in the BRTAX table is deleted.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<ul style="list-style-type: disc;"><li>
+<p><span>HR renewal</span><span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p><span>SAP S/4HANA</span><span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p><span>SAP ERP </span><span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p><span>SAP SuccessFactors Employee Central Payroll</span><span> </span></p>
+</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>PLR payment in January:<br/>The PLR (Profit Sharing) is paid to the employee in January.</p>
+</li><li>
+<p>Employee transfer in February:<br/>The employee is transferred to a different company (or department) in February.</p>
+</li><li>
+<p>Payroll processing after transfer:<br/>When the first payroll is processed after the employee’s transfer, the PLR information in the BRTAX table is deleted.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The system is designed to retain PLR information in the BRTAX table only in the following situations: if there is no change in the employee’s company, or if the employee, after being transferred, returns to their previous company. In any other case where there is a company change and the employee does not return to their original company, the PLR information in the BRTAX table is deleted when payroll is processed after the transfer.<br/><br/>For more information on this behavior, please refer to the following SAP Notes:</p>
+<ul><li>SAP Note <a href="https://me.sap.com/notes/0001931923" rel="noopener noreferrer nofollow" target="_blank">1931923</a> - PLR: Incorrect IRRF tax payment when EE changes company<br/>** This note resets the BRTAX when there is a company change.</li><li>SAP Note <a href="https://me.sap.com/notes/0002922827" rel="noopener noreferrer nofollow" target="_blank">2922827</a> - PLR - Tax payment after two transferences at the same year<br/>** This note restores the PLR info in BRTAX when the employee returns to the previous company.</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: SAP Note <a href="https://me.sap.com/notes/0001931923" rel="noopener noreferrer nofollow" target="_blank">1931923</a> - PLR: Incorrect IRRF tax payment when EE changes company.</li><li>Refer to: SAP Note <a href="https://me.sap.com/notes/0002922827" rel="noopener noreferrer nofollow" target="_blank">2922827</a> - PLR - Tax payment after two transferences at the same year.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>PLR, BRTAX annual base, PLR IR calculation, payroll, Brazil, company transfer, PC00_M37_CALC</p></div></div></div></div>

@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The liveCache installer displays a warning that you are about to install an LCAPPS Package of LCAPPS release 10.0 over an existing package of LCAPPS release 7.0.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>liveCache LCAPPS package Installer SCM APO sdbinst sdbsetup sdbupd</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>liveCache (LCAPPS) release 7.0 for SCM 7.00 and SCM 7.01 (SCM without Enhancement Package (EHP) or EHP 1) is not compatible with LCAPPS release 10.0 for SCM 7.02 or later, although it usually uses the same MaxDB versions. An upgrade from release 7.0 to 10.0 is allowed as part of an SCM upgrade only.</p>
+<p>As of liveCache build <strong>100.57</strong> the installer checks the existing LCAPPS release and advises against an upgrade from 7.0 to 10.0.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>!! Take this warning very seriously !!</strong></p>
+<p>In merely all cases you should abort the installation by accepting the default answer "no", and failing to do so will render your SCM system unusable.</p>
+<p><strong>1. Wrong Package</strong></p>
+<p>In most cases this warning is displayed, because you downloaded the wrong liveCache package of LCAPPS release 10.0 which is not compatible with SCM 7.00 or SCM 7.01. To determine your SCM release:</p>
+<ul>
+<li>Log on to the SCM system.</li>
+<li>In the menu select System &gt; Status and press the "Details" button beneath the product version.</li>
+<li>Search for component SCMAPO.</li>
+</ul>
+<p>If you encountered the installer warning, the release of SCMAPO most certainly is either 700 or 701. For these SCM releases it is mandatory to use LCAPPS release 7.0, instructions to find the corresponding packages are given in note <strong>2037583</strong>. If with these instructions you do not find the package for your operating system or for the desired MaxDB version, read the next section for possible reasons.</p>
+<p><strong>2. End of Maintenance</strong></p>
+<p>SCM 7.00 and 7.01 are out of standard maintenance since 2026, and we do not provide newer liveCache builds of release 7.0 for these SCM releases any longer. The final liveCache version is build <strong>70.53</strong> based on MaxDB <strong>7.9.11.10</strong>.</p>
+<ul>
+<li>Due to technical problems the last version for Linux on x86 is build <strong>70.51</strong> based on MaxDB <strong>7.9.10.12</strong>.</li>
+<li>Windows is no longer supported as of Windows Server 2012, see note 2836399.</li>
+</ul>
+<p>Any liveCache packages based on a MaxDB version later than 7.9.11.10 for sure are not compatible with SCM 7.00 or 7.01.</p>
+<p><strong>3. Migration to S/4 or SCM Upgrade?</strong></p>
+<p>The default strategy to keep your system up-to-date, supported and adopted to newer operating systems is to migrate to S/4 PPDS and other SAP products provided as replacement for SCM functionality.</p>
+<p>If you consider it necessary to stay on SCM, you should upgrade to the most recent release 7.14. When doing so you should opt to migrate your liveCache from MaxDB to HANA, as standard maintenance for MaxDB based liveCaches ends in 2027, and no further updates will be provided as of then.</p>
+<p><strong>4. Upgrade SCM 7.02 or Later</strong></p>
+<p>You should answer "yes" to the installer warning only during the process of upgrading from SCM 7.00 or 7.01 to SCM 7.02 or later and want to stay on a MaxDB based liveCache. You can <strong>not</strong> perform the liveCache upgrade to release 10.0 in advance, as this release is <strong>not</strong> compatible to SCM 7.00 or SCM 7.01.</p></div></div></div></div>

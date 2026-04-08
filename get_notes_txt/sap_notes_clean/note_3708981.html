@@ -1,0 +1,202 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"> </p>
+<p></p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><colgroup><col/><col/><col/><col/><col/><col/><col/></colgroup>
+<tbody>
+<tr><th class="confluenceTh">
+<h3 data-toc-skip="">Priority</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">SAP Case ID</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Description</h3>
+</th></tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">1490948/2025</td>
+<td class="confluenceTd">Error while generating report in BRH</td>
+</tr>
+<tr>
+<td class="confluenceTd">High</td>
+<td class="confluenceTd">56550/2026</td>
+<td class="confluenceTd">My Release Register Issue</td>
+</tr>
+<tr>
+<td class="confluenceTd">High</td>
+<td class="confluenceTd">199143/2026</td>
+<td class="confluenceTd">Documents attached to PCN-level release checks are not available</td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">225891/2026</td>
+<td class="confluenceTd">Countries/Regions are not available when exporting to Excel from BRH</td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="3">
+<p>The following changes are based on an extended analysis of the current production system behavior regarding the performance of certain features. They have been added to the regular change to stabilize and improve the performance of the application.</p>
+</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Change history details not visible in user responsibility template</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">SQL error and HTTP 500 when activating business rules</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">S4-inbound: Crashes due to unauthenticated GET calls </td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Kafka stabilization items</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Avoid duplicate re-processing of messages</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">BRH Outbound: Additional logging to cover all versioning functional scenarios </td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p></p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><colgroup><col/><col/><col/><col/><col/><col/><col/></colgroup>
+<tbody>
+<tr><th class="confluenceTh">
+<h3 data-toc-skip="">Priority</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">SAP Case ID</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Description</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Resolution</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Suggested Testing</h3>
+<p><strong>Disclaimer</strong><br/>Testing suggestions are provided as guidance only. Customers are solely responsible for performing thorough testing in their environment.</p>
+<h3 data-toc-skip=""> </h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Documentation Update</h3>
+<h3 data-toc-skip="">(Y/N)</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Details of Updated Documents</h3>
+</th></tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">1490948/2025</td>
+<td class="confluenceTd">Error while generating report in BRH</td>
+<td class="confluenceTd">An internal error occurs when you try to generate a release decision report in the <strong>My Release Decisions</strong> app. To resolve this issue, the service retry mechanism for the Adobe Document Service (ADS) has been improved by adding an exponential backoff strategy. This update helps prevent HTTP 429 errors during high-concurrency PDF generation, improving the overall request reliability.</td>
+<td class="confluenceTd">Testing should cover the generation of release decision reports in the <strong>My Release Decisions</strong> app.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">High</td>
+<td class="confluenceTd">56550/2026</td>
+<td class="confluenceTd">My Release Register Issue</td>
+<td class="confluenceTd">
+<p>When the <strong>Store Release Register Reports</strong> setting is turned off in the <strong>Manage Release Configurations</strong> app, exporting a release register report in the <strong>My Release Register</strong> app navigates to a URL that throws a transient error.  This issue has been resolved with a code fix.</p>
+</td>
+<td class="confluenceTd">
+<p>Testing should cover the export of release register reports in the <strong>My Release Register</strong> app with your existing configuration setup.</p>
+</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">High</td>
+<td class="confluenceTd">199143/2026</td>
+<td class="confluenceTd">Documents attached to PCN-level release checks are not available</td>
+<td class="confluenceTd">
+<p>In the <strong>My PCN Release Decisions</strong> app, attachments for PCN-level release checks disappear from the PCN release decision item after a release decision is set.  This issue occurs because the snapshot created when you set the release decision doesn't include attachments for PCN-level release checks. The issue has been resolved by correcting the snapshotting logic.</p>
+</td>
+<td class="confluenceTd">Testing should cover adding attachments to the PCN-level release checks in the <strong>My PCN Release Decisions</strong> app, then verifying that the attachments can be viewed and downloaded after a release decision is set.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">Medium</td>
+<td class="confluenceTd">225891/2026</td>
+<td class="confluenceTd">Countries/Regions are not available when exporting to excel from BRH</td>
+<td class="confluenceTd">
+<p>When exporting the worklist from the <strong>My PCN Release Decisions</strong> app, the countries/regions were not visible in the export to Excel, resulting in an empty column. This issue has been fixed, and the export now correctly includes and displays the associated country/region values.</p>
+</td>
+<td class="confluenceTd">Testing should cover exporting the worklist from the <strong>My PCN Release Decisions</strong> app. Ensure that all the details included in the worklist are exported, including the countries/regions.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="7">
+<p>The following changes are based on an extended analysis of the current production system behavior regarding the performance of certain features. They have been added to the regular change to stabilize and improve the performance of the application.</p>
+<p><strong>Note</strong>: The primary focus for (all) test cases should be to verify that there are no functional changes after the regular change has been deployed.</p>
+</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Change history details not visible in user responsibility template</td>
+<td class="confluenceTd">In the <strong>Manage Release Configurations</strong> app under <strong>User Responsibility Templates</strong>, the change history details are not visible when user responsibilities are deleted. The code fix addresses cases where the old value is missing during a deletion, but the new value is present. It substitutes the old value with the new value to ensure the change log is not empty. </td>
+<td class="confluenceTd">Testing should cover the change log for user responsibility templates in the <strong>Manage Release Configurations</strong> app.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">SQL error and HTTP 500 when activating business rules</td>
+<td class="confluenceTd">A code modification is introduced to resolve the database lock issue that can occur when business rules are activated.</td>
+<td class="confluenceTd">Testing should cover the activation of business rules in the <strong>My Release Decisions</strong> app and th<strong>e My PCN Release Decisions</strong> app. Open worklist items that have inactive business rules and choose the <strong>Activate Business Rule</strong> button.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">S4-inbound: Crashes due to unauthenticated GET calls </td>
+<td class="confluenceTd">All expected calls from SAP S/4HANA should be authenticated POST calls that push entities and configuration. Restrictions are now in place to ensure this.</td>
+<td class="confluenceTd">This is a technical change with no functional impact. There are no specific test recommendations other than standard regression testing.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Kafka stabilization items</td>
+<td class="confluenceTd">
+<p>The fail-safe mechanism for publishing messages to Dead Letter Queue (DLQ) topics has been enhanced.  This change leverages the existing "publishMessage" method to make the publishing method generic and extends the iron-kafka binding configuration validity from 90 to 120 days.</p>
+</td>
+<td class="confluenceTd">This is a technical change with no functional impact. There are no specific test recommendations other than standard regression testing.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Avoid duplicate re-processing of messages</td>
+<td class="confluenceTd">
+<p>The Kafka integration sometimes can't confirm successful message processing to Kafka due to long processing times. This leads to messages being picked up again and results in duplicate processing.</p>
+<p>To resolve this duplicate processing, the message processing state is now stored at the database level. Before processing a message, the system checks whether the message was already processed. If it was, the system skips it.</p>
+</td>
+<td class="confluenceTd">This is a technical change with no functional impact. There are no specific test recommendations other than standard regression testing.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">BRH Outbound: Additional logging to cover all versioning functional scenarios </td>
+<td class="confluenceTd">Added more internal logs to capture all exception scenarios and the request context. This helps the internal team with investigations when there's an issue sending a release decision to SAP S/4HANA.</td>
+<td class="confluenceTd">This is a technical change with no functional impact. There are no specific test recommendations other than standard regression testing.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div>

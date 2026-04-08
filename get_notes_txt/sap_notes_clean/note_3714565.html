@@ -1,0 +1,47 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="longtext" id="__html0">
+<p>ABAP programs (background jobs, RFCs, ...) that are using CL_HTTP_CLIENT to send out outbound HTTP requests are sporadically aborted without a runtime error.</p>
+<p> </p>
+<p>Trace file dev_icm shows the following line:</p>
+<p><em><span class="SNO_DNT" style="float: none;" translate="no">"Client connection to [...] broken. Request with 0 bytes sent -1 seconds ago"</span></em></p>
+<p>That line references the ABAP session identifier (<span class="SNO_DNT" style="float: none;" translate="no">Tnn_Unnnn_Mn</span>), the ABAP program that is aborted and the host that is accessed by the aborted ABAP program.</p>
+<p> </p>
+<p>Trace file dev_disp shows the following line:</p>
+<p><em><span class="SNO_DNT" style="float: none;" translate="no">"DpHdlSoftCancel: cancel request for Tnn_Unnnn_Mn received from ICMAN (reason=DP_SOFTCANCEL_ICM_CONNECTION_CLOSED)"</span></em></p>
+<p>That line also references the same ABAP session (<span class="SNO_DNT" style="float: none;" translate="no">Tnn_Unnnn_Mn</span>).</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">KERNELCOR</span>  cancelation</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The issue fixed by this SAP Note is caused by a program error that is triggered in rare scenarios only. It can occur both for HTTP/1 and HTTP/2, but it is more likely that the issue occurs for outbound HTTP/2 connections.</p>
+<p>This SAP Note only applies, if <strong>all</strong> of the following prerequisites are fulfilled:</p>
+<ol>
+<li>The aborted ABAP program uses CL_HTTP_CLIENT.</li>
+<li>dev_icm / dev_disp show the traces that are described above.</li>
+<li>The ABAP session identifier (<span class="SNO_DNT" style="float: none;" translate="no">Tnn_Unnnn_Mn</span>) is identical in both traces and matches the session of the aborted ABAP program.</li>
+</ol>
+<p> </p>
+<p><em><span class="SNO_DNT" style="float: none;" translate="no">"Client connection to [...] broken"</span>:</em></p>
+<p>That line will be written, if a peer aborted a network connection before sending the HTTP response. This SAP Note does not solve issues that cause the abortion of the network connection. It only solves that ABAP sessions are canceled because of that abortion.</p>
+<p><em>  </em></p>
+<p><em><em><span class="SNO_DNT" style="float: none;" translate="no">"DpHdlSoftCancel: cancel request for Tnn_Unnnn_Mn received from ICMAN (reason=DP_SOFTCANCEL_ICM_CONNECTION_CLOSED)"</span>:</em></em></p>
+<p>That line usually does not indicate an error but shows normal behavior. If an HTTP client aborts a network connection - for example by closing the browser tab or window, ABAP processing can be safely stopped.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This correction is initially delivered with the kernel patch level listed in the <span class="SNO_DNT" style="float: none;" translate="no">"<strong>Support Package Patches</strong>"</span> section of this SAP Note. All subsequent kernel patch levels also contain the correction. Keep in mind that only the latest kernel patch level is available for download, however, it contains all previously delivered corrections. As a result, you can download and install the latest available kernel patch at any time to implement this correction.</p>
+<p>If there is no entry for the kernel patch level in the <span class="SNO_DNT" style="float: none;" translate="no">"<strong>Support Package Patches</strong>"</span> section, the patch is not yet available. The entry will be added upon the delivery of the correction. Please check this SAP Note to see if new patch level entries are added.</p>
+<p>This correction is delivered with the following kernel archives:</p>
+<ul>
+<li>hotfix - file dw.sar.<strong><br/></strong></li>
+</ul>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span> - files <span class="SNO_DNT" style="float: none;" translate="no">SAPEXE.SAR</span> and <span class="SNO_DNT" style="float: none;" translate="no">SAPEXEDB.SAR</span>  </li>
+</ul>
+<p>Follow the SAP recommendations on how to select and install the kernel patch:</p>
+<ol>
+<li>Apply the latest<strong> <span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span></strong> if it contains the correction (PL of correction is smaller or equal to the PL of the latest SP Stack Kernel). For the list of current SP Stack Kernels, see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Otherwise, the next <span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span> will deliver the correction. Apply the <strong>hotfix </strong>only if you require the correction on short notice.</li>
+<li>The correction may not be available for kernel releases that are out of maintenance. Please upgrade to the corresponding downward compatible kernel (<strong>DCK</strong>), see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Review the <strong>regression note </strong>for the target patch level before installing the patch. For details, see SAP Note <a href="/notes/1802333" target="_blank">1802333</a> (Finding information about regressions in the SAP kernel).</li>
+<li>For instructions on how to download and install kernel patches, see SAP Note <a href="/notes/19466" target="_blank">19466</a> (Downloading SAP kernel patches).</li>
+</ol>
+<p>The paper <span class="SNO_DNT" style="float: none;" translate="no"><a href="https://support.sap.com/deployment-strategies-kernel-abap.pdf" rel="noopener noreferrer" tabindex="-1" target="_blank" title="https://support.sap.com/deployment-strategies-kernel-abap.pdf">Update Strategy for the Kernel of the Application Server ABAP in On Premise Landscapes</a></span> provides detailed SAP recommendations.</p></div></div></div></div>

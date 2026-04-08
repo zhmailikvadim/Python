@@ -1,0 +1,57 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are using an <span class="SNO_DNT" style="float: none;" translate="no">SAP</span> product based on <span class="SNO_DNT" style="float: none;" translate="no">SAP NetWeaver ABAP</span> on <span class="SNO_DNT" style="float: none;" translate="no">IBM i</span>. During a system upgrade or SP update using <span class="SNO_DNT" style="float: none;" translate="no">Software Update Manager (SUM)</span>, you encounter a problem in phase <span class="SNO_DNT" style="float: none;" translate="no">PREP_INSTALL/SHDINST_OS</span>. The shadow instance cannot be created. <span class="SNO_DNT" style="float: none;" translate="no">SHDINST_OS.LOG</span> shows the following error:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">1 ETQ200 Executing actual phase 'PREP_INSTALL/SHDINST_OS'.</span><br/><span class="SNO_DNT" style="float: none;" translate="no">3 ETQ399 Executing command: CALL PGM(SAP&lt;sid&gt;UPG/RUNLIBCMD) PARM('SAP&lt;sid&gt;UPG' 'CRTR3INST SID(&lt;sid&gt;) INST(20) ROLE(*SHADOW) PROFILE(''/usr/sap/&lt;sid&gt;/SUM/abap/system/&lt;sid&gt;/SYS').</span><br/><span class="SNO_DNT" style="float: none;" translate="no">1EETQ399 Last error code set is: SHADOW Instance could not be created. Check joblog for details.</span></p>
+<p>In the job log you see entries like the following:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">The user profile &lt;sid&gt;adm has been changed.</span><br/><span class="SNO_DNT" style="float: none;" translate="no">The value for the SUPGRPPRF parameter is not correct.</span><br/><span class="SNO_DNT" style="float: none;" translate="no">CRTR3INST: Error updating user &lt;sid&gt;OFR</span><br/><span class="SNO_DNT" style="float: none;" translate="no">CRTR3INST: Failed to create instance &lt;nn&gt; for system &lt;sid&gt;</span></p>
+<p>User profile <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;ADM</span> has been changed to <span class="SNO_DNT" style="float: none;" translate="no">USRCLS(*PGMR) INLMNU(*SIGNOFF) LMTCPB(*YES)</span>.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">IBM i, AS/400, CRTSAPUSR, iSeries</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The problem occurs only if the following conditions are met:</p>
+<ul>
+<li>The SAP system is configured to use the new user concept (see <a href="https://me.sap.com/notes/1123501" target="_blank">SAP Note 1123501</a>), but user profile <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;OFR</span> still exists.</li>
+<li>The system update or upgrade procedure using <span class="SNO_DNT" style="float: none;" translate="no">SUM</span> creates a shadow instance.</li>
+<li>The upgrade kernel (in library <span class="SNO_DNT" style="float: none;" translate="no">SAP&lt;sid&gt;UPG</span>) has a lower patch level than the kernel in the source system. OR: SAP Host Agent 7.22 patch level 69 or higher is installed on the system.</li>
+<li>The upgrade kernel (in library <span class="SNO_DNT" style="float: none;" translate="no">SAP&lt;sid&gt;UPG</span>) suffers from the problem described in <a href="https://me.sap.com/notes/3701638" target="_blank">SAP Note 3701638</a> (aka. <a href="https://me.sap.com/notes/3628734" target="_blank">SAP Note 3628734</a>, TOP 8). The upgrade kernel is lower than the one mentioned in the Support Packages &amp; Patches section of <a href="https://me.sap.com/notes/3701638" target="_blank">SAP Note 3701638</a>, but greater than the one in <a href="https://me.sap.com/notes/3627373" target="_blank">SAP Note 3627373</a>:</li>
+<ul>
+<li>Kernel 7.54: greater than PL 600, but lower than PL 633 </li>
+<li>Kernel 7.53: greater than PL 1500, but lower than PL 1535</li>
+<li>Kernel 7.22: greater than PL 1500, but lower than PL 1514</li>
+</ul>
+</ul>
+<p>If all of the above is true, <span class="SNO_DNT" style="float: none;" translate="no">SUM</span> fails to create the shadow instance. This happens, because <span class="SNO_DNT" style="float: none;" translate="no">SUM</span> runs as user <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;ADM</span> and calls <span class="SNO_DNT" style="float: none;" translate="no">SAPINLPGM</span> from the upgrade kernel. Due to the problem described in <a href="https://me.sap.com/notes/3628734" target="_blank">SAP Note 3628734</a>, TOP 8, this disables the current user, which is <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;ADM</span>.</p>
+<p>The problem cannot be worked around by re-enabling <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;ADM</span> as long as user profile <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;OFR</span> still exist.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Select an upgrade kernel which includes the <span class="SNO_DNT" style="float: none;" translate="no">ILE</span> patch for your kernel version mentioned in <a href="https://me.sap.com/notes/3701638" target="_blank">SAP Note 3701638</a>:</p>
+<ul>
+<li>Kernel 7.54: <span class="SNO_DNT" style="float: none;" translate="no">ILE.SAR PL 633</span></li>
+<li>Kernel 7.53: <span class="SNO_DNT" style="float: none;" translate="no">ILE.SAR PL 1535</span></li>
+<li>Kernel 7.22: <span class="SNO_DNT" style="float: none;" translate="no">ILE.SAR PL 1514</span></li>
+</ul>
+<p>If you haven't started the update procedure yet, add the ILE patch matching your upgrade kernel version mentioned in <a href="https://me.sap.com/notes/3701638" target="_blank">SAP Note 3701638</a> to the download directory. Once started, <span class="SNO_DNT" style="float: none;" translate="no">SUM</span> will automatically recognize the patch and add it to the upgrade kernel.</p>
+<p>If you have started the update already, we recommend to reset <span class="SNO_DNT" style="float: none;" translate="no">SUM</span> to add the patch.</p>
+<p>If resetting <span class="SNO_DNT" style="float: none;" translate="no">SUM</span> is not an option, you have two options to work around the problem:</p>
+<ul>
+<li>Workaround 1: Follow <a href="https://me.sap.com/notes/1177123" target="_blank">SAP Note 177123</a> to manually update the upgrade kernel.</li>
+<li>Workaround 2: Delete user profile <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;OFR</span>. (Since running <span class="SNO_DNT" style="float: none;" translate="no">SAPINLPGM </span>will not disable the current user profile if <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;OFR</span> does not exist anymore.) Then enable user <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;ADM</span> again perform the following two commands:</li>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">CHGOBJOWN OBJ(&lt;sid&gt;ADM) OBJTYPE(*USRPRF) NEWOWN(&lt;sid&gt;ADM) CUROWNAUT(*REVOKE)</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">CHGUSRPRF USRPRF(&lt;sid&gt;ADM) INLPGM(SAP&lt;sid&gt;IND/SAPINLPGM) LMTCPB(*NO)</span></li>
+</ul>
+</ul>
+<p><span style="text-decoration: underline;">Workaround 1 (Manually update upgrade kernel)</span></p>
+<p>Follow <a href="https://me.sap.com/notes/1177123" target="_blank">SAP Note 1177123 - "IBM i: Reconstructing an ILE kernel library from SAR archive"</a> to extract the ILE patch for your upgrade kernel version to library <span class="SNO_DNT" style="float: none;" translate="no">SAP_TOOLS</span>.</p>
+<p>Replace the following objects in <span class="SNO_DNT" style="float: none;" translate="no">SAP&lt;sid&gt;UPG</span> by the objects in <span class="SNO_DNT" style="float: none;" translate="no">SAP_TOOLS</span>:</p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">CRTSAPUSR *CMD</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">CRTSAPUSR *PGM</span></li>
+</ul>
+<p><span style="text-decoration: underline;">Workaround 2 (Delete <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;OFR</span>):</span></p>
+<p><span style="font-size: 14px;">If the SAP system has been switched from to old to new user concept according to <a href="https://me.sap.com/notes/1123501" target="_blank">SAP Note 1123501</a>, user profile <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;OFR</span> might still exist, although it is technically not needed anymore to run SAP. If there are no other reasons to keep it, you can delete it to work around the problem described above. </span></p>
+<p><span style="font-size: 14px;">Such reasons might be (amongst others) that the user still owns objects. Use the following command to check this:</span></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">WRKOBJOWN USRPRF(&lt;sid&gt;OFR) OBJTYPE(*ALL)</span></p>
+<p>If so, use <span class="SNO_DNT" style="float: none;" translate="no">CHGOBJOWN</span> to transfer ownership and <span class="SNO_DNT" style="float: none;" translate="no">CHGPGP</span> to assign a new primary group if possible.</p>
+<p>Verify also if the user profile is still used as a logon user or to run scheduled jobs.</p>
+<p>Once user profile <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;OFR</span> has been deleted, user <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;ADM</span> can be enabled again using the following commands:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">CHGOBJOWN OBJ(&lt;sid&gt;ADM) OBJTYPE(*USRPRF) NEWOWN(&lt;sid&gt;ADM) CUROWNAUT(*REVOKE)</span></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">CHGUSRPRF USRPRF(&lt;sid&gt;ADM) INLPGM(SAP&lt;sid&gt;IND/SAPINLPGM) LMTCPB(*NO)</span></p></div></div></div></div>

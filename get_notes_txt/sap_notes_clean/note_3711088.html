@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You archive actual postings' line items using archiving object COPA2. Some line items are not archived.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">ACDOCA, WRTTP, RKEVRK4D, COPA, Archiving, COPA2, S4HANA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Records posted as type 'Statistical Actual' can be posted by modification described in SAP Note 3490500.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the correction instructions.</p>
+<p>Please note that program RKEVRK4D is only a 'template program' for the generation of the 'actual' program RK4Dxxxx (xxxx = name of the operating concern), which is called during archiving.</p>
+<p>In order to regenerate this program, call function module RKE_GENERATE_ARCHIVE in the test environment and start it for the respective operating concern.<br/>Example: the name of the operating concern is 'S001', then you have to regenerate program RK4DS001.</p>
+<p>Steps for generating program RK4DS001:<br/>•    Call Transaction SE37 (Function Builder)<br/>•    Function module: 'RKE_GENERATE_ARCHIVE'<br/>•    Choose 'Single test' (F8)<br/>•    Enter import parameters ERKRS = 'S001' and MODE = '*'<br/>•    Choose 'Execute' (F8).</p></div></div></div></div>

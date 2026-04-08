@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Dump happens when the HR_Timesheet is enabled and PM_Confirmation is disabled. The error occurs when we update the Timesheet of a Technician and sync to SAP.</p>
+<p>The dump doesn't appear when PM_Confirmation is enabled and HR_Timesheet is disabled.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAMXXXX_PM_CONFIRMATION, HR_TIMESHEET, PM_CONFIRMATION, S4MOBADDON-8260.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>If the HR_Timesheet is active then first we will update the time in CATSDB and then call the PM confirmation API to update CNF status if the final confirmation flag is set. CNF status is always set by the PM Confirmation API for both the options.  SAMXXXX_PM_CONFIRMATION oMDO should be assigned to HR_TIMESHEET in scope.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Execute program /MFND/CORE_CONFIG_IMPORT_PROG  using BIN file and save to the transport.</p>
+<p>Open ConfigPanel -&gt;Component Assignments-&gt;Choose your App-&gt;click subtab oMDO Assignment-&gt;find oMDO SAMXXXX_PM_CONFIRMATION and make it active for  HR_TIMESHEET ( in case you decided disable PM_Confirmation )</p></div></div></div></div>

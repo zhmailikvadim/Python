@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In Dynatrace, you may observe that the following process shows multiple restarts:</p>
+<ul><li>
+<p>npd-log-counter</p>
+</li><li>
+<p>log-counter</p>
+</li></ul>
+<p><img class="img-responsive" height="678" src="/documents/customerkba/OXL9Z6ouQvrMbOud-y65U_RZSxI1pqbvzKv9C1mLgXc" width="1060"/></p>
+<p>Despite the visible restart count:</p>
+<ul><li>
+<p>No Kubernetes pods are restarting</p>
+</li><li>
+<p>No application containers are restarting</p>
+</li><li>
+<p>No SAP Commerce Cloud services are disrupted</p>
+</li><li>
+<p>No business functionality is affected</p>
+</li></ul>
+<p>The behaviour is limited to the infrastructure process itself.</p>
+<p><strong><span style="color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></span></strong></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Commerce Cloud</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The npd-log-counter / log-counter process is a host-level infrastructure component.</p>
+<p>It is:</p>
+<ul><li>
+<p>Not a Kubernetes pod</p>
+</li><li>
+<p>Not part of the application workload</p>
+</li><li>
+<p>Not related to SAP Commerce Cloud services</p>
+</li><li>
+<p>Not responsible for business logic execution</p>
+</li></ul>
+<p>This process is periodically started and managed at the Kubernetes node level. Its lifecycle behavior, including restarts, is expected and part of normal cluster operations.</p>
+<p>Dynatrace monitors both application workloads and host-level processes. As a result, these normal infrastructure restarts may appear in monitoring views, even though they do not indicate instability or failure.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>No corrective action is required.</p>
+<p>If preferred, Dynatrace can be configured to:</p>
+<ul><li>
+<p>Exclude infrastructure-level processes such as npd-log-counter and log-counter from alerting</p>
+</li><li>
+<p>Adjust monitoring rules to focus on Kubernetes pods and relevant application workloads</p>
+</li></ul>
+<p>This helps reduce monitoring noise and ensures alerts remain aligned with application health and business impact.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/51e59196a5fc4bcb94300e50652e454f/5a4dee7bd1684cb08b3fa570274a4790.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Observability, Monitoring, and Performance Management</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>npd-log-counter, log-counter, Dynatrace, process restart, process restarts, host-level process, infrastructure process, Kubernetes node process, Kubernetes monitoring, false positive alert, restart alert, process monitoring, SAP Commerce Cloud</p></div></div></div></div>

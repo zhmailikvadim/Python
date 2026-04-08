@@ -1,0 +1,82 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">As part of the document splitting process sometimes the system cannot determine the account assignments of the document splitting characteristics for individual line items. In this case, the account assignments are may be determined via inheritance.</p>
+<p><span style="color: rgb(224, 62, 45);">"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental." </span></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Inheritance of Account Assignments transfers the account assignments which are defined as split criteria. </p>
+<p>The values of the split criteria are always taken into consideration together as a combination of the account assignments. The field values are inherited only in case the account assignment combination is unique within the complete document. That means the account assignments are being inherited if the values of the split criteria in the complete document are the same.</p>
+<p><br/>Only account assignments relevant for the balance sheet (g/l split criteria) are taken over since it is rather a fallback mechanism for the unassgined processes. </p>
+<p><span><strong>Examples:</strong></span></p>
+<div>
+<p>In the Define Document Splitting Characteristics for General Ledger Accounting configuration activity, you can view and define document splitting characteristics.</p>
+</div>
+<div>The following characteristics are set:<br/><br/>
+<div id="horizontal-viewport-0">
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" id="loio1523886abceb4d10b56043a18cc72d7d__table_x5f_rd4_y1c" rules="all" summary=""><caption> </caption><colgroup><col width="25%"/><col width="25%"/><col width="25%"/><col width="25%"/></colgroup><thead><tr><th id="d111197e44">
+<p>Characteristics</p>
+</th><th id="d111197e47">
+<p>Zero Balance</p>
+</th><th id="d111197e50">
+<p>Partner Field</p>
+</th><th id="d111197e53">
+<p>Mandatory</p>
+</th></tr></thead><tbody><tr><td headers="d111197e44">
+<p>Profit Center</p>
+</td><td headers="d111197e47">
+<p>Not Selected</p>
+<p></p>
+</td><td headers="d111197e50">
+<p>PPRCTR</p>
+</td><td headers="d111197e53">
+<p>Not Selected</p>
+<p></p>
+</td></tr><tr><td headers="d111197e44">
+<p>Segment</p>
+</td><td headers="d111197e47">
+<p>Selected</p>
+<p></p>
+</td><td headers="d111197e50">
+<p>PSEGMENT</p>
+</td><td headers="d111197e53">
+<p>Selected</p>
+<p></p>
+</td></tr></tbody></table></div>
+</div>
+</div>
+<p><br/><br/><strong>Example 1</strong></p>
+<p>Journal Entry</p>
+<p>Entry View: Document type SA: Derived business transaction variant 0000 (unspecified posting) </p>
+<p><img class="img-responsive" height="353" src="/documents/customerkba/f7sjvrscV0MUDUu6W8mvlffSlfarU609XBwXhgl12ic" width="832"/></p>
+<p></p>
+<p>Account assignment for Profit Center YB110 Segment 1000_A  in the document is unique. Profit Center YB110 Segment 1000_A  is inherited into item 2 in the Ledger View.<br/><br/></p>
+<p><img class="img-responsive" height="357" src="/documents/customerkba/pPZJ5fP6ZQ0x9vwhoL1544JsDa53F_fw3D6qDchT30c" width="872"/><br/><br/><br/></p>
+<p><strong>Example 2:</strong></p>
+<p>A Journal Entry is created with the following lines</p>
+<p>Entry View</p>
+<p><br/><img class="img-responsive" height="359" src="/documents/customerkba/p-9780YEBZVJDiCWY4eMjVh7FWV6-ihz3sethl9y5qI" width="867"/><br/><br/>Ledger View <br/><br/><img class="img-responsive" height="370" src="/documents/customerkba/eRB3SSfQMYKNpebFQbzVSW4I6jmFeLS9SCvhQICmkeY" width="882"/><br/><br/></p>
+<p>If field B (Segment) is set with the default value of the account assignment and field A (Profit Center) is not filled, the Inheritance fills the value of field A.</p>
+<p>Inheritance takes place in this example as the assignment of the line which inherits the assignment string has the same value as in the assignment string itself.</p>
+<p></p>
+<p><strong>Example 3<br/></strong></p>
+<p>A Journal Entry is created with the following lines</p>
+<p>Entry View<br/><br/></p>
+<p><strong><br/></strong><br/><img class="img-responsive" height="378" src="/documents/customerkba/cnNP06kV6gYx58DvpmBNaZTP-Zi1vNH5KER8baGPCn0" width="924"/><br/><br/><br/>Ledger View<br/><br/><img class="img-responsive" height="421" src="/documents/customerkba/tGbo8Yhmp_AYh6ehQRw6AKI9n2e7f8_LWhDdQpZ_9VI" width="924"/><br/><br/><br/>Inheritance cannot work in this example as there is not a unique account assignment string. Inheritance will only work if the account assignment values are unique within the document.  The values of the split criteria are always taken into consideration together as a combination of the account assignments.  <br/><br/>See also kba<a href="https://me.sap.com/notes/2810442" rel="noopener noreferrer nofollow" target="_blank"> 2810442 - Substitutions and Document Splitting</a><br/><br/>Never set a proposal account assignment characteristic in accounts in which an account assignment by document splitting is expected, this principle applies to all account assignments which you expect to be filled via rule base split, inheritance or constant.<br/><br/><strong>Inheritance logic on partner account assignments<br/><br/></strong></p>
+<p>In the example configuration shown for the split criteria the field Zero balance is selected for the Segment and Partner Segment. The Zero balance field is not selected for the Profit Center and Partner Profit Center. </p>
+<p>The partner fields are only considered as part of the inheritance logic if the document splitting characteristic is marked as zero balance.</p>
+<p>Entry view</p>
+<p></p>
+<p><strong><img class="img-responsive" height="265" src="/documents/customerkba/IaX2y5FIY5BOUn0OnlX5G6AkYcpuhJ9mGuc9Z7pVu1M" width="908"/></strong></p>
+<h3 data-toc-skip=""> </h3>
+<p>Ledger view <br/>No partner profit center is inherited as the profit center is not defined as a zero balance characteristic.  Partner Segment is inherited into the second line item. <br/><br/><img class="img-responsive" height="275" src="/documents/customerkba/GC4ftHc3ywrnPUzfXLn65SHqJ8kccIPOW1a8SeQRJ3o" width="975"/></p>
+<h3 data-toc-skip="" id="Inheritancelogic-Example4"><br/><br/>Further principles in relation to inheritance:</h3>
+<p><strong>Inheritance via clearing: </strong><br/><br/>Automatic split for clearing processes</p>
+<p>For clearing lines, the account assignments are derived by referring to the original line items to be cleared. During the automatic splitting, only the cleared items of the original documents are considered in order derive the relevant account assignments for the clearing lines and to split the line accordingly if necessary. If a clearing line contains a different account assignment in the entry view (which normally should not happen in the standard) it will be overwritten by the account assignments from the cleared items. This logic is followed in order to make sure that the whole clearing process does balance to zero also on the account assignment level.   <br/><br/></p>
+<p><strong>Inheritance via invoice reference:</strong></p>
+<p>If a document is posted with an invoice reference in fields Invoice Reference (REBZG), Invoice Reference Fiscal Year (REBZJ,), Journal Entry Line Item Reference (REBZZ), this is referring to the cleared items. Hence document splitting can derive the account assignments in the Ledger view of the residual items by using document splitting information of the referred item as base items, i.e. split the residual items by the same ratio of amounts per account assignment values.</p>
+<p>Only items with the following values of Follow-On Document Type (REBZT) (and with a valid Invoice Reference (REBZG)) are always split via invoice reference regardless any other condition: A P V Z U O W T C Q</p>
+<p>For example :</p>
+<ul><li style="list-style-type: none;">
+<ul><li>residual items posted to the same G/L account</li><li>down payment clearing</li></ul>
+</li></ul>
+<p>Unlike to "inheritance via clearing" the "inheritance via invoice reference" doe not overwrite account assignments from the entry view.</p>
+<p></p>
+<p><strong>Inheritance during FI reversal</strong></p>
+<p>The account assignments in the reversal document should be the same as in the reversed document. If there were initial account assignments in the reversed document, these should also remain initial in the reversal document and should not be filled through inheritance.</p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/0fa84c9d9c634132b7c4abb9ffdd8f06/4911c9cc2a934a18e10000000a42189b.html?locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank">Document Splitting</a><br/><br/><a href="https://me.sap.com/notes/3662230" rel="noopener noreferrer nofollow" target="_blank">3662230 - Segment and Profit Center Constants within a two-step Bank Statement posting</a> <br/><br/><br/></p></div></div></div></div>

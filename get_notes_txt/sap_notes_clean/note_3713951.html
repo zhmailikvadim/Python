@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Start of Supply for Electricity (DSO View)" (DE_B_GPKE_DSO_SOS_REG), when a negative APERAK is received while sending deregistration to the old supplier in step 1300-0200 of the cloud process DE_C_GPKE_DSO_SOS_REG, and you refetch the data through a remote exception in the business system, incomplete data is sent through step 0850 of process DE_B_GPKE_DSO_SOS_REG.</p>
+<p>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">GPKE, Start of Supply for Electricity, DE_B_GPKE_DSO_SOS_REG, DE_C_GPKE_DSO_SOS_REG, BM_GPKE_DSO_SOS_DEREG_REQ, /US4G/CL_PRST_DSO_DEREG_DATA, UBD, APERAK, refetch scenario, deregistration, old supplier</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because step 0850 of process DE_B_GPKE_DSO_SOS_REG sent only supply scenario UBD data.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, step 0850 sends complete data, and the system creates a successful TDoc for business message BM_GPKE_DSO_SOS_DEREG_REQ. You need to activate the following BC set and trigger the refetch scenario through a remote exception. You can verify the fix by checking that the system sends the correct data to deregister the old supplier.</p></div></div></div></div>

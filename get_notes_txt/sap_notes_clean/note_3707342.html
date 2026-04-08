@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> SAP Customer Checkout point-of-sale, cloud edition 3.0 2503 PL02</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Documentation: <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_CUSTOMER_CHECKOUT_CLOUD" id="menurkt0" rel="noreferrer noopener" target="_blank" title="https://help.sap.com/docs/sap_customer_checkout_cloud">https://help.sap.com/docs/SAP_CUSTOMER_CHECKOUT_CLOUD</a><br/><br/>Partner Edge: <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://partneredge.sap.com/en/products/sapcc/scccld/about.html" id="menurkt4" rel="noreferrer noopener" target="_blank" title="https://partneredge.sap.com/en/products/sapcc/scccld/about.html">https://partneredge.sap.com/en/products/sapcc/scccld/about.html</a></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> SAP Customer Checkout point-of-sale, cloud edition 3.0 2503 PL02 following issues/features have been fixed or added.</p>
+<p id="__html0"><strong>SAP Customer Checkout: Price List</strong></p>
+<ul>
+<li>
+<p><strong>Symptom:</strong> When a customer-, user-, or role-specific price list contains prices that are only valid in the future or the past (based on <code>ValidTo</code> or <code>ValidFrom</code> fields), the article price is set to 0 instead of falling back to the standard price lists.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Resolved the bug that prevented the system from attempting fallback price lists when specific price lists were outside their validity period.</p>
+</li>
+</ul>
+<p><strong>SAP Customer Checkout: US Local Mode</strong></p>
+<ul>
+<li>
+<p><strong>Symptom:</strong> A rounding amount of $0.01 is incorrectly calculated and displayed on the receipt.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Fixed the logic error in the US local tax mode that caused these rounding issues.</p>
+</li>
+</ul>
+<p><strong>SAP Customer Checkout: TSE/DSFINV-K Export</strong></p>
+<ul>
+<li>
+<p><strong>Symptom:</strong> Signature configuration was not working correctly, causing broken exports. Additionally, the handling of required fields was malfunctioning.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Export of signature data and the management of mandatory fields are now working as expected.</p>
+</li>
+</ul>
+<p>S<strong>AP Customer Checkout/SAP Customer Checkout manager: TSE <strong>DSFINV-K </strong>Integration &amp; Receipt Archive Service</strong></p>
+<ul>
+<li>
+<p><strong>Symptom:</strong> For "No-Sale" receipts, the <code>transactionEndTime</code> was returned as <code>null</code> and no signature was displayed in the SAP Customer Checkout manager &gt; Receipts app &gt; Signature tab.</p>
+</li>
+<li>
+<p><strong>Expected Result:</strong> The <code>transactionEndTime</code> should be transmitted with the correct end time to the archive service, and the signature should be visible in the SAP Customer Checkout manager Receipts app.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Resolved the issue where the TSE signature remained empty and the transaction end time was null (Archive -&gt; Integration Suite) for no-sale receipts.</p>
+</li>
+</ul></div></div></div></div>

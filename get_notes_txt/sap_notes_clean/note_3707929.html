@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>errorcode=-4221 encountered during database connectivity between sap java application and db2 database.</li><li>Error message: "Couldn't connect to DB com.sap.sql.log.OpenSQLException: Exception of type com.ibm.db2.jcc.am.user caught: [jcc][1068][10625][4.33.32] Caught java.security.user while encrypting data. See attached Throwable for details. ERRORCODE=-4221, SQLSTATE=null."</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP on Db2 for LUW</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>With DB2 11.5.9.0 and version 4.33 of the IBM Data Server Driver for JDBC and SQLJ (db2jcc4.jar), the default security mechanism is encrypted user ID and password security. <br/><br/></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Try the following workaround of reverting to the previous(11.5.8 and before) default security mechanism for userID and password:</p>
+<p>Add "securityMechanism=3" to your connection string using the sap configtool.</p>
+<div id="message-list_1760726417.289599" role="listitem">
+<div role="presentation">
+<div role="document">
+<div role="presentation">
+<div>
+<div>
+<div>
+<ol><li>Open the configtool located at: /usr/sap/&lt;SID&gt;/.../j2ee/configtool/configtool.sh</li><li>Got to "Secure Store &gt; Connection Pools" and you should find URL/connection string like this:  "jdbc:db2://&lt;hostname&gt;:&lt;port&gt;/&lt;SID&gt;:currentSchema=&lt;SCHEMA&gt;;&lt;param_1&gt;=&lt;value&gt;;&lt;param_2&gt;=&lt;value&gt;;"</li><li>Add string "securityMechanism=3;" at the end of the connection string. Add extra ';' at the begining to separate it from previous parameter config. For example: "jdbc:db2://&lt;hostname&gt;:&lt;port&gt;/&lt;SID&gt;:currentSchema=&lt;SCHEMA&gt;;&lt;param_1&gt;=&lt;value&gt;;&lt;param_2&gt;=&lt;value&gt;;securityMechanism=3;"</li></ol>
+<p>After that, restart the server, the issue can be resolved. </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: <a href="https://me.sap.com/notes/0003411665" rel="nofollow">SAP Note 3411665 - DB6: bootstrap error: java.security.user while encrypting data. ERRORCODE=-4221</a></li><li>Refer to: <a href="https://me.sap.com/notes/3262702" rel="nofollow">SAP Note 3262702 - SAP JVM Upgrade</a></li><li>Refer to: <a href="https://me.sap.com/notes/0003649131" rel="nofollow">SAP Note 3649131 - Configuring crypto.policy in java.security file</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>errorcode=-4221, jvm upgrade, db2 version upgrade, bootstrap error, java.security configuration, encrypted user ID and password security, securityMechanism=3</p></div></div></div></div>

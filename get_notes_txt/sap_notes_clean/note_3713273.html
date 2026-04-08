@@ -1,0 +1,52 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><span>The </span><em>Reverse Batches and Serials Trace Report</em><span> duplicates some batches/serial numbers in higher depths, sometimes leading to out of memory and crashing the application.</span></p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Scenario:</strong></p>
+<p>1. Go to <em>Inventory → Item Master Data</em>, create item A1, in the <em>General</em> tab, choose <em>Managed by Serial Number</em> on every transaction.<br/>2. Go to <em>Inventory → Item Master Data</em>, create items A2, B2, A3, B3, C3, D3, in <em>General</em> tab, choose <em>Managed by Batch</em> on every transaction f<span>or all items</span>.<br/>3. Go to <em>Inventory → Inventory Transactions → Goods Receipt</em>, receive A3, B3, C3, D3, all qty = 1, price = 1, in the <em>Batch Allocation</em> <span>popup </span>form, set batch number A3-01, B3-01, C3-01, D3-01. <em>Update</em> and add the Goods Receipt.</p>
+<p>4. Go to <em>Production → Bill of Materials</em>, create the following BOMs:<br/>Parent: A1, Children: A2, B2<br/>Parent: A2, Children: A3, B3<br/>Parent: B2, Children: C3, D3</p>
+<p>5. Go to <em>Production → Production Order,</em> create Production Order 1:<br/><em>Type<em>:</em></em> Standard, <em>Parent:</em> A2, <em>Children</em>: A3, B3.</p>
+<p>6. Click the last record to find Production Order 1, change status from <em>Planned</em> to <em>Released</em>.</p>
+<p>7. In Production Order 1, right-click <em>→</em> <em>Issue Component</em>, create <em>Issue for Production</em> for A3, B3. In the  <em>Batch Allocation</em> <span>popup </span>form, click <em>Auto Select</em> to select A3-01, <em>Update</em>, choose the 2nd row, click <em>Auto Select</em> to select B3-01. <em>Update </em><span>and a</span><span>dd</span><span> the document.</span></p>
+<p>8. In Production Order 1, right-click <em>→</em> <em>Report Completion</em>, create Receipt from Production for A2, in the  <em>Batch Allocation <span>popup</span></em> form, set batch number A2-01. <em>Update </em><span>and a</span><span>dd</span><span> the document.</span></p>
+<p>9. Go to <em>Production → Production Order</em>, create Production Order 2:<br/><em>Type</em>: Standard, <em>Parent:</em> B2, <em>Children:</em> C3, D3.</p>
+<p>10. Click the last record to find Production Order 2, change status from <em>Planned</em> to <em>Released.</em></p>
+<p>11. In Production Order 2, right-click <em>→</em> <em>Issue Component</em>, create Issue for Production for C3, D3. In the <em>Batch Allocation</em> <span>popup </span>form, click <em>Auto Select</em> to select C3-01, <em>Update</em>, choose the 2nd row, click <em>Auto Select</em> to select D3-01.  <em>Update </em>and add the document.</p>
+<p>12. In Production Order 2, right-click <em>→</em> <em>Report Completion</em>, create Receipt from Production for B2. In the <em>Batch Allocation <span>popup</span></em> form, set batch number B2-01. <em>Update</em> and add the document.</p>
+<p>13. Go to <em>Production → Production Order,</em> create Production Order 3:<br/><span><em>Type:</em> Disassembly</span>, <em>Parent:</em> A2, <em>Children:</em> A3, B3.</p>
+<p>14. Click the last record to find Production Order 3, change status from <em>Planned</em> to <em>Released</em>.</p>
+<p>15. In Production Order 3, right-click <em>→</em> Issue <em>Component</em>, create Issue for Production for A2. In the <em>Batch Allocation <span>popup</span></em> form, click <em>Auto Select</em> to select A2-01. <em>Update</em><span> and add the document.</span></p>
+<p>16. In Production Order 3, right-click <em>→</em> <em>Report Completion</em>, create Receipt from Production for A3, B3, in the <em>Batch Allocation</em> <span>popup </span>form, set batch number A3-01, click <em>Yes</em> for the popup message <em>"A3-01 already exists, continue?"</em>, <em>Update</em>, choose the second row, set batch number B3-01, click <em>Yes</em> for the popup message <em>"B3-01 already exists, continue?".</em> <em>Update</em><span> and add the document. </span></p>
+<p>17. Go to <em>Production → Production Order</em>, create Production Order 4:<br/><em>Type:</em> Standard, <em>Parent:</em> A2, <em>Children:</em> A3, B3.</p>
+<p>18. Click the last record to find Production Order 4, change status from Planned to Released.</p>
+<p>19. In Production Order 4, right-click <em>→</em> <span>Issue </span><em>Component</em><span>,</span> create Issue for Production for A3, B3. In the <em>Batch Allocation</em> <span>popup </span>form, click <em>Auto Select</em> to select A3-01, <em>Update</em>, choose the second row, click <em>Auto Select</em> to select B3-01. <em>Update</em> and add the document.</p>
+<p>20. In Production Order 4, right-click <em>→</em> <em>Report Completion</em>, create Receipt from Production for A2. In the  <em>Batch Allocation</em> <span>popup </span>form, set batch number A2-01, click<em> Yes</em> for the popup message <em>"A2-01 already exists, continue?". </em> <em>Update</em><span> and add the document. </span></p>
+<p>21. Go to <em>Production → Production Order</em>, create Production Order 5:<br/><em>Type:</em> Standard, <em>Parent:</em> A1, <em>Children:</em> A2, B2;</p>
+<p>22. Click the last record to find Production Order 5, change status from <em>Planned</em> to <em>Released</em>.</p>
+<p>23. In Production Order 5, right-click <em>→</em> <span>Issue </span><em>Component</em><span>,</span> create Issue for Production for A2, B2. In the  <em>Batch Allocation</em> <span>popup </span>form, click <em>Auto Select</em> to select A2-01, <em>Update,</em> choose the second row, click <em>Auto Select</em> to select B2-01. <em>Update</em><span> and add the document.</span></p>
+<p>24. In Production Order 5, right-click <em>→</em> <em>Report Completion</em>, create Receipt from Production for A1. In the  <em>Serial Allocation</em> <span>popup </span>form, set serial number A1-01. <em>Update</em><span> and add the document.</span></p>
+<p>25. Go to <em>Inventory → Item Master Data</em>, find A1, right-click <em>Serial Transaction Report</em>, in the <em>Serial Transaction Report</em>, right-click <em>Serial Number</em> A1-01 <em>→</em> <em>Reverse Batches and Serials Trace Report.</em></p>
+<p><strong><strong>Expected behavior:</strong></strong></p>
+<ol>
+<li>In depth 2, 3 records listed for A2-01, 2 records listed for B2-01</li>
+<li>In depth 3, 3 records listed for A3-01, 3 records listed for B3-01</li>
+<li>Only 3 depths <span>exist</span>.</li>
+</ol>
+<p><strong>Actual behavior:</strong></p>
+<ol>
+<li>In depth 2, 4 records listed for A2-01</li>
+<li>In depth 3, 4 records listed for A3-01, 4 records listed for B3-01</li>
+<li>Depth 4 exists: 4 records for A2-01 listed</li>
+<li><span>Depth 5 exists</span>, 4 records for A3-01 listed, 4 records for B3-01 listed.<strong> </strong></li>
+</ol></div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p>
+<p><em><strong><strong>Workaround: </strong></strong></em></p>
+<p>Do not use <em>Serial Transaction Report</em> <em>→ </em><span>right-click Serial Number A1-01 </span><em>→</em><span> <em>Reverse Batches and Serials Trace Report</em>.</span></p>
+<p><span>Use <em>Inventory → Inventory Report <em>→ <span><em>Reverse Batches and Serials Trace Report</em> </span></em></em>to open<em><em><span> </span></em>Selection Criteria<em><span> and </span></em></em>check option<em><em><span> Omit Disassembly Transactions </span></em>to<em><span> Improve Performance to run the report.</span></em></em></span></p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p>SnB, hang, oom, block, shut down</p></div></div></div></div>

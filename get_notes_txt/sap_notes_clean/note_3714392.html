@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">User is not able to set up value of authorization object S_SERVICE for OData Service RSBPC_ODATA_EXPORT_SRV.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAC, Export, write back to BW, Gateway</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Gateway service need to be executed to generate the HASH.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Execute Gateway service by either of two methods below:</p>
+<p>1. Execute the Gateway service from Gateway Client,</p>
+<ul>
+<li>Access TCODE /n/IWFND/GW_CLIENT to enter SAP Gateway Client</li>
+</ul>
+<ul>
+<li>Input Request URI: /sap/opu/odata/sap/RSBPC_ODATA_EXPORT_SRV/$metadata</li>
+</ul>
+<p>2. Access URL in the browser: http(s)://&lt;hostname&gt;:&lt;port&gt;/sap/opu/odata/sap/RSBPC_ODATA_EXPORT_SRV/$metadata</p>
+<p>After that, verify by checking table USOBHASH, filter by OBJ_NAME = RSBPC*, the corresponding records of SRV_NAME are generated.</p></div></div></div></div>

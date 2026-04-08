@@ -1,0 +1,129 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Device Installation and Finalization of Technical Master Data" (APEU_B_MCM_TMD_PROCESS), step 0340 (Post Acknowledgement to Cloud) fails when the device transaction date is in the future.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>US4G, device installation, Post Acknowledgement to Cloud, device transaction date, MCM, technical master data</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Post acknowledgement to cloud step is getting failed if device transaction date is in future.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, step 0340 completes without an error, and the process APEU_B_MCM_TMD_PROCESS continues and completes successfully.</p>
+<p>For existing error cases, you need to reverse step 0340 and rerun the process to reprocess the step. You can verify the fix by checking that the process completes successfully.</p>
+<p><strong>Translations</strong></p>
+<p>The translations will be shipped with the next support package. Please refer to the information on SAP Support Portal at <a href="https://support.sap.com/sp-stacks" target="_blank">https://support.sap.com/sp-stacks</a>.</p>
+<p>Affected transport objects include:</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 601px;">
+<tbody>
+<tr>
+<td valign="top" width="66">
+<p><strong>PgID</strong></p>
+</td>
+<td valign="top" width="66">
+<p><strong>Object Type</strong></p>
+</td>
+<td valign="top" width="469">
+<p><strong>Object Name</strong></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="66">
+<p>LIMU</p>
+</td>
+<td valign="top" width="66">
+<p>CLSD</p>
+</td>
+<td valign="top" width="469">
+<p>/US4G/CL_IM_BADI_MCM_TRANS_DAT</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="66">
+<p>LIMU</p>
+</td>
+<td valign="top" width="66">
+<p>CPUB</p>
+</td>
+<td valign="top" width="469">
+<p>/US4G/CL_IM_BADI_MCM_TRANS_DAT</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="66">
+<p>LIMU</p>
+</td>
+<td valign="top" width="66">
+<p>CPRO</p>
+</td>
+<td valign="top" width="469">
+<p>/US4G/CL_IM_BADI_MCM_TRANS_DAT</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="66">
+<p>LIMU</p>
+</td>
+<td valign="top" width="66">
+<p>METH</p>
+</td>
+<td valign="top" width="469">
+<p>/US4G/CL_IM_BADI_MCM_TRANS_DAT/APEU/IF_BADI_MCM_TRANS_DATA~TRANSFORM_OUTPUT_TO_CLOUD</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="66">
+<p>LIMU</p>
+</td>
+<td valign="top" width="66">
+<p>REPT</p>
+</td>
+<td valign="top" width="469">
+<p>/US4G/CL_IM_BADI_MCM_TRANS_DATCP</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p> Package: /US4G/AP_MCM</p>
+<p>Software component: US4G</p>
+<p>Application component: IS-U-IDX</p>
+<p>If you want to enter the translations manually before the next support package, you can do so as follows:</p>
+<ol start="1">
+<li>Call transaction SE63.</li>
+<li>In the command field (where you would normally enter a transaction code), enter the object type as shown in the table below and press ENTER.</li>
+<li>Enter the object name as shown in the table below. </li>
+<li>If required, change the source and/or target languages.</li>
+<li>Click <em>Edit</em>.</li>
+<li>Enter the translation in the text field below the source text.</li>
+<li>Click <em>Save</em> and <em>Back.</em></li>
+</ol>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 778px;">
+<tbody>
+<tr>
+<td valign="top" width="75">
+<p><strong>Object Type</strong></p>
+</td>
+<td valign="top" width="312">
+<p><strong>Object Name</strong></p>
+</td>
+<td valign="top" width="180">
+<p><strong>English Source Text</strong></p>
+</td>
+<td valign="top" width="212">
+<p><strong>German Translation</strong></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="75">
+<p>REPT</p>
+</td>
+<td valign="top" width="312">
+<p>/US4G/CL_IM_BADI_MCM_TRANS_DATCP</p>
+</td>
+<td valign="top" width="180">
+<p>{"installationDate": "</p>
+</td>
+<td valign="top" width="212">
+<p>{"installationDate": "</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, see SAP Note <a href="https://me.sap.com/notes/980626" target="_blank">980626</a> - SE63 Translation Transport.</p></div></div></div></div>

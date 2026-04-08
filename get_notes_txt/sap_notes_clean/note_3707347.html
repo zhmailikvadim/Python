@@ -1,0 +1,66 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0"><span style="font-size: 10pt;">Cloud Portal was migrated from BTP Neo to Kyma runtime in March 2026. As part of this migration, the API token capability is replaced with a new Technical User Management feature for improved security and manageability.</span></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><span style="font-size: 10pt;">Within the migration, the following changes were implemented:</span></p>
+<p><span style="font-size: 10pt;">Previous Method - API Token Management:</span></p>
+<ul><li style="font-size: 10pt;">Required creating API tokens</li><li style="font-size: 10pt;">Required S or P users from external accounts.sap.com</li></ul>
+<p><span style="font-size: 10pt;">New Method - Technical Users:</span></p>
+<ul><li style="font-size: 10pt;">Integrated into Cloud Portal User Management</li><li style="font-size: 10pt;">Uses client credentials authentication (Client ID, Client Secret, Resource, Token Endpoint)</li><li style="font-size: 10pt;">Streamlined process within the Cloud Portal interface</li></ul>
+<p><span style="font-size: 12pt;"><strong>Impact:</strong></span></p>
+<p><span style="font-size: 10pt;">CI/CD pipelines and automation scripts using Cloud Portal API needs to be updated to use Technical User credentials instead of API tokens.</span></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="font-size: 10pt;">To utilize the Technical User management feature, please follow these steps:</span></p>
+<p><strong><span style="font-size: 10pt;">Step 1: Create a Technical User</span></strong></p>
+<ol><li style="font-size: 10pt;"><span style="font-size: 10pt;">Log into the Cloud Portal.</span></li><li style="font-size: 10pt;">From the side navigation of the Cloud Portal, select User Management.</li><li style="font-size: 10pt;">Select Technical Users.</li><li style="font-size: 10pt;">Select Create.</li><li style="font-size: 10pt;">Set Permissions for the technical user:
+<ul><li style="font-size: 10pt;">Role: Choose between <samp>CUSTOMER_SYS_ADMIN</samp> or <samp>CUSTOMER_DEVELOPER</samp> depending on your needs.</li><li style="font-size: 10pt;">Environment Access: Select the environments this technical user can access. Environment selection depends on the environments available in your subscription.</li></ul>
+</li><li style="font-size: 10pt;">Select Create to proceed.</li></ol>
+<p></p>
+<p><strong><span style="font-size: 10pt;">Step 2: Save Your Credentials</span></strong></p>
+<p><span style="font-size: 10pt;"><strong>IMPORTANT:</strong> After creation, a popup will display your technical user credentials. This is a <span style="text-decoration: underline;">one-time display only</span>. If you navigate away without saving these credentials, they cannot be recovered and will require you to create a new technical user.</span></p>
+<p><span style="font-size: 10pt;">Copy and securely store the credentials immediately:</span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Token Endpoint URL</span></li><li style="font-size: 10pt;">Client ID (name)</li><li style="font-size: 10pt;">Client Secret</li><li style="font-size: 10pt;">Resource</li></ul>
+<p></p>
+<p><strong><span style="font-size: 10pt;">Step 3: Use Your Technical User</span></strong></p>
+<p><span style="font-size: 10pt;">Once you’ve created your technical user and saved the credentials, you can authenticate using both CLI and direct API methods:</span></p>
+<ul><li style="font-size: 10pt;"><em><span style="font-size: 10pt;">Method 1: Using CLI Commands<br/></span></em>
+<ol><li style="font-size: 10pt;">The command line interface is packaged as a ZIP file. Search for CX COMM CLOUD MAN CLI at <a href="https://help.sap.com/docs/link-disclaimer?site=https%3A%2F%2Flaunchpad.support.sap.com%2F%23%2Fsoftwarecenter%2Fsearch%2Fcx%252520comm" rel="noopener noreferrer nofollow" target="_blank">SAP Software Downloads</a>.</li><li style="font-size: 10pt;">Configure the CLI with your technical user credentials using the appropriate configuration commands:<br/>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 70.8816%; height: 132px;"><colgroup><col style="width: 100%;"/></colgroup><tbody><tr><td>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">sapccm config set client-id {CLIENT_ID_VALUE}</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">sapccm config set client-secret {CLIENT_SECRET_VALUE}</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">sapccm config set token-url {TOKEN_URL_VALUE}</span></p>
+</td></tr></tbody></table></div>
+<span style="font-size: 10pt;">The CLI will then automatically:</span>
+<ol><li style="font-size: 10pt;"> Retrieve the bearer token using your credentials</li><li style="font-size: 10pt;">Handle token management in the background</li><li style="font-size: 10pt;">Allow your existing CLI commands to work normally<br/><br/></li></ol>
+</li></ol>
+</li><li style="font-size: 10pt;"><em>Method 2: Using Direct API Access<br/><br/></em>For direct API usage, you’ll need to handle token retrieval manually:<br/><br/>
+<ol><li style="font-size: 10pt;"> First, obtain a bearer token:<br/>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 53.8496%; height: 38px;"><colgroup><col style="width: 100%;"/></colgroup><tbody><tr><td>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">curl &lt;&lt;token_endpoint&gt;&gt; -X POST \</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">-H 'Content-Type: application/x-www-form-urlencoded' \</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">-H 'Accept: application/json' \</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">-d "client_id=&lt;&lt;client_id&gt;&gt;" \</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">-d "client_secret=&lt;&lt;client_secret&gt;&gt;" \</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">--data-urlencode 'grant_type=client_credentials' \</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">--data-urlencode 'resource=&lt;&lt;resource&gt;&gt;'</span></p>
+</td></tr></tbody></table></div>
+<p><span style="font-size: 10pt;">The response will look like this:</span></p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 53.5028%; height: 202px;"><colgroup><col style="width: 100%;"/></colgroup><tbody><tr><td>
+<p><span style="font-family: 'courier new', courier;">{</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">"access_token":"...",</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">"token_type":"Bearer",</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">"expires_in":3600</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">}</span></p>
+</td></tr></tbody></table></div>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">You can then use the bearer token for API calls. The new header is: x-approuter-authorization.<br/>For an example cURL command:</span></p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 87.6077%; height: 133px;"><colgroup><col style="width: 100%;"/></colgroup><tbody><tr><td>
+<p><span style="font-family: 'courier new', courier;"><span style="font-size: 10pt;">curl </span>https://portalapi.commerce.ondemand.com/v2/subscriptions<span style="font-size: 10pt;">/{subscriptionCode}/environments \</span></span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">-H "x-approuter-authorization: Bearer &lt;&lt;access_token&gt;&gt;"</span></p>
+</td></tr></tbody></table></div>
+</li></ol>
+</li></ul>
+<p></p>
+<p><strong><span style="font-size: 10pt;">Step 4: Verify Functionality</span></strong></p>
+<p><span style="font-size: 10pt;">Confirm that your technical user can:</span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Successfully authenticate using the client credentials</span></li><li style="font-size: 10pt;">Perform an API call to get a list of environments</li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Perform a CLI command to get a list of environments</span></li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><span style="font-size: 10pt;">Please refer to the following SAP Help documentation for additional information:</span></p>
+<ul><li style="font-size: 10pt;"><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/0c2050f6d31f49ddb6eba18509060ae5/57bef96f18034193af93d2cc36f6d526.html" rel="noopener noreferrer nofollow" target="_blank"><span style="font-size: 10pt;">Technical Users Documentation</span></a></li><li style="font-size: 10pt;"><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/452dcbb0e00f47e88a69cdaeb87a925d/66abfe678b55457fab235ce8039dda71.html" rel="noopener noreferrer nofollow" target="_blank">Cloud Portal API Documentation</a></li><li style="font-size: 10pt;"><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/9116f1cfd16049c3a531bfb6a681ff77/8acde53272c64efb908b9f0745498015.html" rel="noopener noreferrer nofollow" target="_blank">Command Line Interface Documentation</a></li></ul>
+<p><span style="font-size: 10pt;">For frequently asked questions, please check the following FAQ section on SAP Help:</span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;"><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/0fa6bcf4736c46f78c248512391eb467/edcfd89aa5154be59910ebb7081030e3.html#frequently-asked-questions" rel="noopener noreferrer nofollow" target="_blank">Migration of Cloud Portal to Kyma Runtime - Frequently Asked Questions</a></span></li></ul>
+<p><span style="font-size: 10pt;">For questions not covered on above link or issues with the Technical Users feature, please contact SAP Support.</span></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><div>
+<p><span style="font-size: 10pt;">technical users, api token management, user management, client credentials authentication, cloud portal migration, kyma runtime, cli commands, bearer token</span></p>
+</div></div></div></div></div>

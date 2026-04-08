@@ -1,0 +1,264 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">GST tax amount shall be calculated based on the Retail Sale Price (RSP) for notified goods, with the provision coming into effect from 1 February.<br/>Tax amount = (Retail sale price X tax rate in % of applicable taxes) / (100+ sum of applicable tax rate)  <br/><strong><span style="color: rgb(224, 62, 45);"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em> </span></strong></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4HANA Private Cloud</li><li>SAP S/4HANA On-Premise</li><li>SAP ERP</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p><strong>Configurations on Sales side: </strong></p>
+</div>
+<div>
+<p><strong>Step 1</strong>: Create an access sequence to identify Tobacco goods and retrieve the relevant condition records that are mentioned in further steps. </p>
+</div>
+<div>
+<p>Transaction: V/07 </p>
+</div>
+<div>
+<p><strong>Step 2</strong>: Create new condition types for RSP Price, GST types and a GST Total for sum of these taxes. Configure the above access sequence created. </p>
+</div>
+<div>
+<p>Transaction: V/06 </p>
+</div>
+<div>
+<p>ZMRP : To maintain the Retail Sale price (RSP) </p>
+</div>
+<div>
+<p>ZOIG, ZOCG, ZOSG, ZOUG : For calculation of tax amounts </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="204" src="/documents/customerkba/uoURYdNyyQf4ixN_bDlU_LG_5V2d3rHziyYaBsTrgmg" width="642"/></span>  </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p>ZMRP Condition: To maintain the Retail Sale price (RSP) </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="372" src="/documents/customerkba/oLqkUmV0bN_lHVHHN554LTzjIRnQVyYU2LPfYCH1x2A" width="642"/></span> </p>
+</div>
+<div>
+<p>ZOIG,ZOCG, ZOSG, ZOUG: For calculation of tax amounts </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="326" src="/documents/customerkba/hYaqwza_cHYEmN2bRJg1Rqh4PSy74soL36oOlmWpwLM" width="642"/></span> </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p>ZRGS: Sum of total GST that is calculated (Note that it should be configured as Negative)  </p>
+</div>
+<div>
+<p>Note: This condition ZRGS is required only if Base Value is inclusive of tax. It is not required if Base Value (PPR0) does not include taxes. </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="342" src="/documents/customerkba/gLAIkfMOQ1XM2q_lyoBWnwdSta6uoIq4Utf6nCuvT7A" width="642"/></span> </p>
+</div>
+<div>
+<p><strong>Step 3</strong>: Identify the routine number that needs to be enhanced. Suggested routine is 345. </p>
+</div>
+<div>
+<p>Enhance the routine logic with sample code provided below </p>
+</div>
+<div>
+<p>CALL FUNCTION 'J_1BSA_COMPONENT_ACTIVE' </p>
+</div>
+<div>
+<p>EXPORTING </p>
+</div>
+<div>
+<p>bukrs = komk-bukrs </p>
+</div>
+<div>
+<p>component = '**' </p>
+</div>
+<div>
+<p>IMPORTING </p>
+</div>
+<div>
+<p>active_component = lv_comp </p>
+</div>
+<div>
+<p>EXCEPTIONS </p>
+</div>
+<div>
+<p>component_not_active = 1 </p>
+</div>
+<div>
+<p>OTHERS = 2. </p>
+</div>
+<div>
+<p>IF lv_comp EQ 'IN'. </p>
+</div>
+<div>
+<p>DATA: lv_cond TYPE j_1icondname. </p>
+</div>
+<div>
+<p>DATA: lv_taxrate TYPE komv-kwert. </p>
+</div>
+<div>
+<p>CONSTANTS mc_10 TYPE kwert VALUE 10. </p>
+</div>
+<div>
+<p>CONSTANTS mc_100 TYPE kwert VALUE 10000. </p>
+</div>
+<div>
+<p>DATA: lv_mrp_po_kwert TYPE kwert. </p>
+</div>
+<div>
+<p>CALL FUNCTION 'J_1I4_GET_KWERT' </p>
+</div>
+<div>
+<p>IMPORTING </p>
+</div>
+<div>
+<p>MRP_kwert = lv_mrp_po_kwert. </p>
+</div>
+<div>
+<p>IF lv_mrp_po_kwert IS NOT INITIAL. </p>
+</div>
+<div>
+<p>xkomv-kawrt = lv_mrp_po_kwert. </p>
+</div>
+<div>
+<p>ENDIF. </p>
+</div>
+<div>
+<p>lv_taxrate = xkomv-kbetr / mc_10. </p>
+</div>
+<div>
+<p>SELECT SINGLE cond_name FROM j_1iexcdefn INTO lv_cond WHERE kalsm = komk-kalsm AND kschl = xkomv-kschl. </p>
+</div>
+<div>
+<p>CASE lv_cond. </p>
+</div>
+<div>
+<p>WHEN 'IGSTAR' OR 'IGSTSOFFAP'. </p>
+</div>
+<div>
+<p>xkwert = ( xkomv-kawrt * lv_taxrate ) / ( mc_100 + lv_taxrate ) . </p>
+</div>
+<div>
+<p>xkomv-kawrt = xkomv-kawrt - xkwert . </p>
+</div>
+<div>
+<p>WHEN 'CGSTAR' OR 'SGSTAR' OR 'UTGSTAR' OR 'CGSTSOFFAP' OR 'SGSTSOFFAP' OR 'UTGSTSOFFAP'. </p>
+</div>
+<div>
+<p>xkwert = ( xkomv-kawrt * lv_taxrate ) / ( mc_100 + ( lv_taxrate * 2 ) ). </p>
+</div>
+<div>
+<p>xkomv-kawrt = xkomv-kawrt - ( 2 * xkwert ) . </p>
+</div>
+<div>
+<p>ENDCASE. </p>
+</div>
+<div>
+<p>ENDIF. </p>
+</div>
+<div>
+<p><strong>Step 4</strong>: Configure the Pricing procedure with above condition types </p>
+</div>
+<div>
+<p>Transaction: V/08 </p>
+</div>
+<div>
+<p>ZMRP : Should be statistical </p>
+</div>
+<div>
+<p>ZOIG, ZOCG, ZOSG, ZOUG: Maintain the above routine that calculates the Tax amount in ‘Alt Calc Cndn Amnt’.  </p>
+</div>
+<div>
+<p>ZRGS: Sum of all above 4 GST conditions. It doesn’t have Alt Calc Cndn. Amn.t condition formula assigned to it like for other conditions. </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="302" src="/documents/customerkba/YZCwllIh6Gf_0r7bthJSJq8zWwTbE5u1UVH24G1GV-Q" width="642"/></span> </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p><strong>Step 5</strong>: Maintain the condition records  </p>
+</div>
+<div>
+<p>Transaction: VK11 </p>
+</div>
+<div>
+<p>ZMRP: Maintain the retail sale price of the good  </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="188" src="/documents/customerkba/k7sWurdEJBY583VYYeT6t1KuV5FKYYK4A32oLunE1oY" width="642"/></span> </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p>ZOIG, ZOCG, ZOSG, ZOUG:: Maintain the Tax rate of the good  </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="212" src="/documents/customerkba/jp0GJZHjGtnahnBvvyGKjp3q1FvoCHCYAvgSfo9t7vI" width="642"/></span> </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p>ZRGS : Configure 100%  </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="170" src="/documents/customerkba/P2Tp7FIHW0Sn_6TA5DwYfZ9cMdvyDup7j0DyyukWOes" width="642"/></span> </p>
+</div>
+<div>
+<p><strong>Step 6</strong>: Maintain tax conditions mapping in J_1IEXCDEFN table </p>
+</div>
+<div>
+<p>IMG Path: Financial Accounting -&gt; Financial Accounting Global Settings -&gt; Tax on Sales/Purchases -&gt; Basic Settings -&gt; India -&gt; Goods and Services Tax -&gt; General Settings -&gt; Classify Condition Types for Goods and Services Tax </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="252" src="/documents/customerkba/bUbsSmomdOZdqTl2YYkbEEQk5a1EnxciNfrOr6ac-wM" width="504"/><br/><br/><br/></span> VA01: Sample sales order<br/><br/>Here  <br/>Quantity = 10 </p>
+</div>
+<div>
+<p>Actual Price: Rs 80 / qty </p>
+</div>
+<div>
+<p>Retail Sale Price: Rs 100 / qty </p>
+</div>
+<div>
+<p>IGST  =  Rs 28.57 (40% is reverse calculated on RSP) </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="312" src="/documents/customerkba/QW36mHLPlF-FDZWk64F2bNdOKTPJOgZB5PXAwtjoXU0" width="642"/></span> </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p>Billing :  </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="246" src="/documents/customerkba/cK6a82PArmDdmXoSVnGQyyRdC-O278RUeLnp2MKWPQ4" width="642"/></span> </p>
+</div>
+<div>
+<p> </p>
+</div>
+<div>
+<p>Accounting Posting: </p>
+</div>
+<div>
+<p>Here tax Base and tax amount are based on Retail Sale Price </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="210" src="/documents/customerkba/FrHU6P-6MbOYlb1SQcNzPFf2KpT4BsAcw1nc0i4w4-M" width="642"/></span> </p>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Note - <a href="https://me.sap.com/notes/3709536" rel="noopener noreferrer nofollow" target="_blank">3709536 </a>- Saving MRP price for Pricing Procedure</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP SD pricing configuration, SAP condition technique, V/07 access sequence configuration, V/06 condition type setup, V/08 pricing procedure configuration, SAP GST configuration, SAP MRP pricing, ZMRP condition type, ZOIG ZOCG ZOSG ZOUG condition types, ZRSG GST total condition, SAP tax calculation routine, alternate calculation type SAP, VK11 condition records, SAP pricing procedure India GST, SAP tobacco pricing, SAP excise GST MRP pricing, SAP reverse tax calculation, SAP MRP based taxation, SAP sales order pricing VA01, SAP GST on MRP, SAP pricing for tobacco goods, SAP India localization SD, SAP pricing schema GST, SAP condition records GST, SAP SD tax on MRP, SAP pricing procedure customization, SAP tax condition configuration, SAP GST reverse charge pricing</p></div></div></div></div>

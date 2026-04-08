@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<div>The following error occurred in the IPS (Identity Provisioning) job log from source system to Ariba target system.</div>
+<div> </div>
+<div><em>error=Could not connect to target host https://&lt;ariba API host&gt;/api/mds/v1/prod Caused by: Unexpected character ('&lt;' (code 60)): expected a valid value (JSON String, Number, Array, Object or token 'null', 'true' or 'false')</em></div>
+<div><em> at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1],</em></div>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Identity Provisioning</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Run the IPS job.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The property "URL" of the Ariba target system is not configured correctly.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>As per the document <a href="https://help.sap.com/docs/cloud-identity-services/cloud-identity-services/target-sap-ariba-applications" rel="noopener noreferrer nofollow" target="_blank">SAP Ariba Applications | SAP Help Portal</a>, the property URL should contain only the host name without the URL path.<br/>For example:</p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" id="loio47c890311337469e8615de705c54b3f4__d352e1664" summary=""><thead><tr><th id="d169941e112">SAP Ariba</th><th id="d169941e116">Identity Provisioning</th><th id="d169941e120">Values</th></tr></thead><tbody><tr><td headers="d169941e112">
+<p>SCIM API URL</p>
+</td><td headers="d169941e116">
+<p>URL</p>
+</td><td headers="d169941e120">
+<p><strong>Examples</strong>:</p>
+<ul><li>
+<p>US: <a href="https://openapi.ariba.com" rel="noopener noreferrer nofollow" target="_blank">https://openapi.ariba.com</a></p>
+</li><li>
+<p>Europe: <a href="https://eu.openapi.ariba.com" rel="noopener noreferrer nofollow" target="_blank">https://eu.openapi.ariba.com</a></p>
+</li><li>
+<p>UAE: <a href="https://mn1.openapi.ariba.com" rel="noopener noreferrer nofollow" target="_blank">https://mn1.openapi.ariba.com</a></p>
+</li></ul>
+</td></tr></tbody></table></div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://help.sap.com/docs/cloud-identity-services/cloud-identity-services/target-sap-ariba-applications" rel="noopener noreferrer nofollow" target="_blank">SAP Ariba Applications | SAP Help Portal</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Ariba, Unexpected character, INCLUDE_SOURCE_IN_LOCATION, code 60</p></div></div></div></div>

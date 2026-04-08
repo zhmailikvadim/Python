@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When executing a footprint calculation for a specific period, the process fails with a "Missing value for opening stock" error.</p>
+<p>This behavior is observed even when:</p>
+<ol><li>
+<p>The product was successfully calculated in the immediately preceding period.</p>
+</li><li>
+<p>The master data and business transactions (Data Readiness) are correctly maintained.</p>
+</li><li>
+<p>Upon inspection in the Manage Footprint Results app, the previous period's result shows the status "Calculated with Warnings".</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Sustainability Footprint Management</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Open the Calculate Footprints app.</p>
+</li><li>
+<p>Create or select a footprint inventory for the subsequent period (e.g., April 2023).</p>
+</li><li>
+<p>Ensure that the product from the previous period (which resulted in a "Warning") is part of the Opening Stock (beginning inventory) for the current month.</p>
+</li><li>
+<p>Execute the calculation by choosing Calculate.</p>
+</li><li>
+<p>Monitor the calculation status in the Organizational Footprint Inventories or Product Footprint Inventories tab.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Previously, the SFM calculation engine was designed with a strict validation rule: it would only "inherit" and carry over the footprint result from the previous period if its status was "Calculated Successfully".</p>
+<p>If a Plausibility Check (configured in the <em>Manage Plausibility Checks</em> app) identified a deviation (e.g., a variance in <span><span aria-hidden="true">CO2​e</span></span> higher than the defined threshold), the item was marked with a "Warning". Under the old logic, this status was treated as "unreliable" for the opening balance of the next period, causing the calculation to break due to a missing reference value for the beginning of the month.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>A standard product enhancement has been released in SFM.</p>
+<p>The calculation logic has been updated to allow the propagation of footprints with the status "Calculated with Warnings". This ensures that plausibility alerts—which are often based on business-justified variances—do not stop the automated roll-up process for subsequent periods.</p>
+<p>Action Required:</p>
+<ol><li>
+<p>Ensure the previous period's calculation is finished (even if with Warnings).</p>
+</li><li>
+<p>Restart the calculation for the current period in the Calculate Footprints app.</p>
+</li><li>
+<p>The system will now correctly identify the "Warning" result as a valid Opening Stock footprint and complete the calculation.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://help.sap.com/docs/sustainability-footprint-management/application-help-for-corporate-and-products/calculating-cycles?q=calculating+cylces" rel="noopener noreferrer nofollow" target="_blank">Calculating Cycles</a>.</li><li><a href="https://help.sap.com/docs/sustainability-footprint-management/application-help-for-corporate-and-products/using-manage-calculation-variants-application?q=manage+purchased+" rel="noopener noreferrer nofollow" target="_blank">Manage Calculation Variants</a>.</li><li><a href="https://help.sap.com/docs/sustainability-footprint-management/application-help-for-corporate-and-products/using-manage-purchased-product-footprints-application-1e18e85502f145bd9ccfb71d59695e46?q=manage+purchased+" rel="noopener noreferrer nofollow" target="_blank">Manage Purchased Product Footprints</a>.</li><li><a href="https://help.sap.com/docs/sustainability-footprint-management/application-help-for-corporate-and-products/creating-purchased-product-and-purchased-product-group-footprints?q=manage+purchased+" rel="noopener noreferrer nofollow" target="_blank">Creating Footprints for Purchased Products and Product Groups</a>.</li><li><a href="https://help.sap.com/docs/sustainability-footprint-management/application-help-for-corporate-and-products/creating-calculation-variant?q=manage+purchased+" rel="noopener noreferrer nofollow" target="_blank">Creating a Calculation Variant</a>.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SUS-PFM, SFM, OFI, PFI, Opening Stock, Calculated with Warnings, Plausibility Check, Roll-up, Opening Balance, Sustainability, Calculate Footprint, Calculation Variant.</p></div></div></div></div>

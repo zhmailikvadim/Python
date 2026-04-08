@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">A blank screen shows when attempting to view a form from the mobile client. After doing a clean reset / initial sync, this blank screen persists.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Asset Manager</p>
+<p>SAP Service and Asset Manager</p>
+<p>SAM</p>
+<p>SSAM</p>
+<p>SDF</p>
+<p>SAP Dynamic Forms</p>
+<p>ICMTANGOAMF10-40314</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Basic understanding of MDK based applications</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>unzip <strong>3714352.patch.zip</strong> temporarily to the SAPAssetManager metadata folder of your application, creating <strong><strong>3714352.patch</strong></strong></p>
+<p>Open a terminal at this location and apply this patch with</p>
+<p><strong>patch -p1 &lt; <strong><strong>3714352.patch</strong></strong></strong></p>
+<p>This will modify</p>
+<ul>
+<li><strong>Rules/Common/CompleteReset.js</strong></li>
+<li><strong>Rules/Forms/SDF/InitialTransmit.js</strong></li>
+</ul>
+<p>After the patch is applied, delete the temporary<strong> <strong><strong>3714352</strong></strong><strong>.patch</strong></strong> file.</p>
+<p>Finally, deploy your new metadata to apply these changes.</p></div></div></div></div>

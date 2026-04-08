@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In transaction /SPMEAT/PE12, when selecting a disassembly order and material, the system displays change IDs that are not permitted according to the material master data.<br/>Despite being disallowed, these change IDs appear in the selection list and can be chosen.<br/>Selecting such a non‑allowed change ID triggers an error message indicating that no corresponding production entry exists.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">IS-MFM, MEAT, Change ID, Classification, /SPMEAT/PE12, Material Master, Disassembly Process, SAP Meat and Fish Management by msg.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Due to missing validation logic in the GUI change‑ID list, the system does not filter out change IDs that are not allowed based on the material master data.<br/>As a result, disallowed IDs remain selectable even though subsequent processing will reject them.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>History:</strong><br/>SAP Note created on 11 February 2026.</p>
+<p><strong>Description of Correction:</strong><br/>The selection logic for the Change ID list in transaction /SPMEAT/PE12 has been enhanced.<br/>The corrected implementation ensures that:<br/>Only allowed change IDs from the material master data are displayed.<br/>Non‑allowed change IDs are suppressed from the user interface and cannot be selected.<br/>This prevents the error that previously appeared when a user selected a disallowed ID.</p>
+<p><br/><strong>Functional Dependencies:</strong><br/>None.</p>
+<p><strong>Manual Changes:</strong><br/>No manual changes are required for end users.</p></div></div></div></div>

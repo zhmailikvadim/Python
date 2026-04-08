@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>How to mass delete of grounded documents in SuccessFactors?</li><li>Instead of deleting the grounded documents from Manage Document Grounding page manually, how to mass delete multiple grounded documents?</li></ul>
+<p><strong><span style="color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em>  </span></strong></p>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP SuccessFactors HCM Suite</li><li>Joule</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>Example</strong>:</p>
+<p>In SuccessFactors Instance &gt; Manage Document Grounding, there has 9 documents grounded, and user wants to <strong>mass delete the 3 of the documents, for other grounded documents, remain the configurations.</strong></p>
+<p><strong><img class="img-responsive" height="410" src="/documents/customerkba/byRvV2NkbSEqZHmqCWOVS8EGd4knAjqyD4c-kRRu798" width="639"/></strong></p>
+<p><strong>Step1: </strong>Export <strong>VectorContent </strong>Generic Object's MDF Data</p>
+<p>1)Go to Import and Export Data &gt; "Select Generic Object" choose "VectorContent" </p>
+<p>2) Keep selections as below, click "Export" button, download the the MDF data Zip file from Schedule Job Manager:</p>
+<p><img class="img-responsive" height="782" src="/documents/customerkba/r7I3ntqAkxnKI0QrxZgNwjX2VgpHH4hfAm800qeFWCg" width="870"/></p>
+<p></p>
+<p></p>
+<p><strong>Step2</strong>: Edit <strong>VectorContent.csv </strong>file</p>
+<p>1) Extract the downloaded zip file &gt; Only open file: <strong>VectorContent.csv, you will see all existing </strong></p>
+<p><span style="color: rgb(224, 62, 45);"><strong>Kindly Note: Please do not make <span style="text-decoration: underline;">any changes in any other files in this zip file</span>, to avoid data &amp; configuration impact.</strong></span></p>
+<p><img class="img-responsive" height="676" src="/documents/customerkba/iLG6Qb-CG7RtkYHWPpPXni7TBiLzHH5TMVB3Ug0W3hY" width="2441"/></p>
+<p>2) Verify the 3 grounded documents which you want to remove the grounding, keep them in the file,<span style="text-decoration: underline;"> <span style="color: rgb(224, 62, 45); text-decoration: underline;"><strong>Remove other rows which you wish to keep the metadata of the grounded documents.</strong></span></span></p>
+<p><span>3) </span>Add "Delete" on the [OPERATOR] column for the files for which you want to remove the grounding and save the file.<strong> For example, I want to delete only 3 files so I just have those 3 files in the csv file with "Delete" Operator:</strong></p>
+<p><img class="img-responsive" height="208" src="/documents/customerkba/wZPOKL9udDBhiorTZuRaLxmoydzFKOjkKiv1-RACACI" width="2176"/><br/><br/></p>
+<p><strong>Step3</strong>: Validate and Import VectorContent.csv file to mass delete the grounded documents</p>
+<p>1) Validate updated VectorContent.csv by go to Import and Export Data &gt; Import Data &gt; Select "VectorContent" &gt; Import the file saved in <strong>Step2 </strong>&gt; click validate button.</p>
+<p>In this you can see 3 are processed and 3 are passed the checks.</p>
+<p><img class="img-responsive" height="759" src="/documents/customerkba/MQ6fIb-keR_f2sFvVXZIuM9n69HEbKHvYNErX4RmgXE" width="1165"/></p>
+<p>2) Once validation is successful, go back to Import and Export Data &gt; Import Data &gt; Select "VectorContent" &gt; Import the file saved in <strong>Step2 </strong>&gt; click Import button, to delete the 3 grounded documents.</p>
+<p><img class="img-responsive" height="819" src="/documents/customerkba/tRpuSrDGTpyVyIhB_NBxWqyuBC66XLA9EZnAyQ-_cNw" width="1249"/></p>
+<p></p>
+<p>Once the job is completed, we are successfully able to delete the grounded documents.</p>
+<p><strong>Note: you can tag those deleted documents again from the Add metadata option after the pipeline gets triggered once again for the Sharepoint site you integrated with SuccessFactors instance.</strong></p>
+<p><img class="img-responsive" height="492" src="/documents/customerkba/CCGSV0NtMsC65C2vJZzvovsd0CU9NooMN7oJiZFWIMg" width="1081"/></p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/3454707/E" rel="noopener noreferrer nofollow" target="_blank">3454707 - Answer user queries about HR policies availability in Joule in SuccessFactors - SAP for Me</a></p>
+<p><a href="https://me.sap.com/notes/3679918/E" rel="noopener noreferrer nofollow" target="_blank">3679918 - [Joule in SuccessFactors] Tips for HR Policy Q&amp;A Contextualization - SAP for Me</a></p>
+<p><a href="https://community.sap.com/t5/technology-blog-posts-by-sap/joule-document-grounding-with-contextualization-aka-metadata-to-your/ba-p/14304077" rel="noopener noreferrer nofollow" target="_blank">Joule - Document Grounding with Contextualization ... - SAP Community</a></p>
+<p><a href="https://help.sap.com/docs/successfactors-platform/using-admin-center/document-grounding-for-ai-assisted-use-cases?version=2511" rel="noopener noreferrer nofollow" target="_blank">Document Grounding for AI-Assisted Use Cases | SAP Help Portal</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Manage Document Grounding, SF, adding metadata, delete grounded document, VectorContent, SF, Joule</p></div></div></div></div>

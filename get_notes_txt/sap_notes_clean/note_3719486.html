@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The communication protocol between the SAP GUI and the dispatcher allows GUI responses to be discarded. However this is fatal for SNC encrypted GUI communication with flow control. A missing package raises the following error in SNC processor in the work process:</p>
+<p>M ThSncIn: process input data of rq_id 356252889 at 11010058 with length 664<br/>N *** ERROR =&gt; SncPFrameIn()==SNCERR_GSSAPI [D:/depot/bas/78 4458]<br/>N GSS-API(maj): An earlier expected token has not yet been received</p>
+<p>In the dispatcher trace dev_disp the following trace can be seen:</p>
+<p>DpRTmPrepareReq: multiple send of T7_U77_M3: discard outdated response</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">multiple send</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">There is no workaround.</p>
+<p>Apply a new kernel patch. The fix is secured with the new dynamic profile parameter <strong>rdisp/allow_discard_gui_response</strong> of type boolean with values 0, 1, on, off and so on. Its initial value "0" activates the fix. In case of unexpected problems, the parameter can be switched to "1" to restore the behavior, which was active before the patch.</p>
+<p>The correction is delivered with the kernel archives:</p>
+<div class="longtext">
+<ul>
+<li>Kernel patch - dw<em>.sar</em><em></em><strong><br/></strong></li>
+</ul>
+<ul>
+<li>SP stack kernel files SAPEXE.SAR and SAPEXEDB.SAR</li>
+</ul>
+</div>
+<p>The corrections are contained in all patch levels that are <strong>equal to or greater than</strong> the patch level specified in the "<strong>Support Package Patches</strong>" section for the relevant kernel release.<br/>If there is no entry there, the patch has not yet been delivered. The patch level will be entered automatically once the patch is available for download. You can <strong>subscribe</strong> to this SAP Note to be notified when it is updated.</p>
+<p>Follow <strong>our recommendations</strong> for applying a kernel patch:</p>
+<ol>
+<li>Import the <strong>latest SP stack kernel</strong> if it already contains the correction. For a list of current SP Stack Kernels, see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Apply the <strong>hotfix</strong> only if it is a serious error that is not yet corrected by the latest SP Stack Kernel. </li>
+<li>Check the <strong>regression note</strong> for the desired patch level before applying the kernel patch. For detailed information, see SAP Note <a href="/notes/1802333" target="_blank">1802333</a> (Finding information about regressions in the SAP kernel).</li>
+<li>For instructions on how to download and apply a kernel patch, see SAP Note <a href="/notes/19466" target="_blank">19466</a> (Downloading SAP kernel patches).</li>
+</ol>
+<p>For detailed information about our recommendations, see the strategy document: <a href="https://support.sap.com/deployment-strategies-kernel-abap.pdf" rel="noopener noreferrer" tabindex="-1" target="_blank" title="https://support.sap.com/deployment-strategies-kernel-abap.pdf">Update Strategy for the Kernel of the Application Server ABAP in On Premise Landscapes</a>.</p></div></div></div></div>

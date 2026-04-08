@@ -1,0 +1,67 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When an application using ALV IDA calls FREE within a process action, the following runtime dump occurs:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Category</strong></td>
+<td>ABAP programming error</td>
+</tr>
+<tr>
+<td><strong>Runtime Errors</strong></td>
+<td>OBJECTS_OBJREF_NOT_ASSIGNED_NO</td>
+</tr>
+<tr>
+<td><strong>Exception</strong></td>
+<td>CX_SY_REF_IS_INITIAL</td>
+</tr>
+<tr>
+<td><strong>ABAP Program</strong></td>
+<td>CL_SALV_GUI_GRID_CONTROLER_IDACP</td>
+</tr>
+<tr>
+<td><strong>Application Component</strong></td>
+<td>BC-SRV-ALV</td>
+</tr>
+<tr>
+<td><strong>Program error</strong></td>
+<td>Access using a 'ZERO' object reference is not possible.</td>
+</tr>
+</tbody>
+</table></div>
+<p>This happens whenever FREE is called for the ALV IDA instance that is currently being processed.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ALV; ABAP List Viewer; SAP List Viewer; Grid; List; CL_SALV_GUI_GRID_CONTROLER_IDA-&gt;ON_PROCESS_ACTION; CL_SALV_GUI_GRID_CONTROLER_IDA-&gt;IF_SALV_GUI_GRID_FWK_RECEIVER~PROMPT_NOTIFICATION_ON_CHANGE; MO_GUI_GRID_MODEL; MO_FWK_OBSERVER;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p>The dump occurs because the ALV IDA object is no longer available after the FREE call.</p>
+<p>Once the process action finishes, the grid controller continues with internal post‑processing in order to update the grid state if the action may have modified it.</p>
+<p>However, because the grid object was already freed, further access to it results in a null‑reference dump.</p>
+<p><strong>Prerequisites</strong></p>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>SAP_UI 816</td>
+<td>SP 00</td>
+</tr>
+<tr>
+<td>SAP_UI 758</td>
+<td>SP 02</td>
+</tr>
+</tbody>
+</table></div>
+<p id="">When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The grid controller now skips the remaining post‑processing steps if the ALV IDA object reference is no longer available. This prevents the null‑reference dump from occurring after the object has been freed.</p>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package.</p>
+<p><span style="font-size: 14px;">However, if you need to install the solution earlier: Use the Note Assistant (SNOTE) to implement the correction instructions.</span></p>
+<p>Learn more at <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
+<p><strong>More information</strong></p>
+<ul>
+<li>To receive an e-mail notification in case of new updates, mark this SAP Note as favorite and add it to your <a href="https://me.sap.com/mynotes" target="_blank">My SAP Notes &amp; KBAs</a> page, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for a complete guide.</li>
+</ul></div></div></div></div>

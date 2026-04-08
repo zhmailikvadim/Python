@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>The availability of specific BADIs/user exits for different system versions is unclear.</li><li>Clarification is needed to identify the compatibility of BADIs/user exits with SAP S/4HANA Private Cloud, SAP S/4HANA Public Cloud, GTS11 with ERP or S/4HANA feeder system, GTS E4H with ERP or S/4HANA feeder system, and ERP.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4 HANA for International Trade</li><li>Intrastat Processing</li><li>SAP S/4HANA Public Cloud</li><li>SAP S/4HANA Private Cloud</li><li>GTS E4H (edition for HANA)</li><li>GTS 11.0</li><li>ERP</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h2 data-toc-skip="">The following Badi's/customer exits are available for implementing custom requirements:</h2>
+<p><strong><br/>S/4HANA Private Cloud</strong></p>
+<ul><li>BADI_INTRASTAT_SELECTION
+<ul><li>Method: CHANGE_DATA - Change Data for Intrastat Declaration</li><li>Method: GET_PURCHASE_DOCS - Get additional purchasing documents</li><li>Method: GET_BILLING_DOCS - Get additional billing documents</li></ul>
+</li></ul>
+<p><strong><br/>S/4HANA Public Cloud </strong>(3 different badis are available)</p>
+<ul><li>INTRASTAT_CHANGE_DATA
+<ul><li>Method: CHANGE_DATA - Change Data for Intrastat Declaration</li></ul>
+</li><li>INTRASTAT_GET_BILLING_DOCS
+<ul><li>Method: GET_BILLING_DOCS - Get additional billing documents</li></ul>
+</li><li>INTRASTAT_GET_PURCHASE_DOCS
+<ul><li>Method: GET_PURCHASE_DOCS - Get additional purchasing documents<br/><br/></li></ul>
+</li></ul>
+<p><strong>GTS11 with ERP or S/4HANA feeder system</strong> (badi is available in the feeder system)</p>
+<ul><li>/SAPSLL/ECR_EXTRACT
+<ul><li>Method: IS_SD_CHANGE_MAPPING - Mapping for SD Issues and SD Receipts (Returns)</li><li>Method: IS_MM_CHANGE_MAPPING - Mapping for MM Receipts</li><li>Method: IS_SD_IB_CHANGE_MAPPING - Mapping for Intercompany Billing (SD) as MM Transactions</li><li>Method: IS_MM_RET_CHANGE_MAPPING - Mapping for MM Issues (Returns) <br/><br/></li></ul>
+</li></ul>
+<p><strong>GTS E4H (edition for HANA) with ERP or S/4HANA feeder system</strong> (badi is available in the feeder system)</p>
+<ul><li>/SAPSLL/INTRASTAT_SELECTION
+<ul><li>Method: CHANGE_DATA - Change Data for Intrastat Declaration<br/><br/></li></ul>
+</li></ul>
+<div id="horizontal-viewport-0"></div>
+<p><strong>ERP</strong></p>
+<ul><li>EXIT_SAPLV50G_001:
+<ul><li>Influence data selection and modify document header and item information during the declaration process. Documents can be included/excluded.</li></ul>
+</li><li>EXIT_SAPLV50G_002:
+<ul><li>Modify data immediately before it is written to the intermediate file (VEIAV table).</li></ul>
+</li></ul>
+<p><em><strong><br/>Note:</strong></em><br/>Implementation of a user exit is considered a modification and falls under consulting scope, not SAP product support. For more details, please refer to the note 170183 on considerations when applying modifications.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Note: <a href="https://me.sap.com/notes/3598273" rel="noopener noreferrer nofollow" target="_blank">3598273</a> - INTRASTAT: Use of BAdIs in SAP S/4HANA Cloud, Public Edition</li><li>Note: <a href="https://me.sap.com/notes/3364197" rel="noopener noreferrer nofollow" target="_blank">3364197</a> - INTRASTAT Use of BADI_INTRASTAT_SELECTION in transactions VE01 and MEIS</li><li>KBA: <a href="https://me.sap.com/notes/3541651" rel="noopener noreferrer nofollow" target="_blank">3541651</a> - User exits for Intrastat on ERP</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>userexits, badis, implementations, public cloud, private cloud, userexits, ERP, change data, include, exclude, documents, intrastat reporting, VE01, MEIS, VEIAV, /ECRS/RP_EDIT, </p></div></div></div></div>

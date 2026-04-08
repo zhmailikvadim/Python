@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Upgrading to build 2.00.079.06 (fa/hana2sp07, “79.06”) can cause existing Flowgraphs to fail execution and causes newly created Flowgraphs to generate invalid code for Aggregation Node outputs. The root symptom is that the Aggregation node’s expression attribute is no longer treated as valid in the Flowgraph editor’s generated code. This is a defect that may block flowgraphs that previously worked.</p>
+<ul>
+<li>Updated Flowgraphs (created before patching, then updated after patching) fail to execute.</li>
+<li>New Flowgraphs: when columns are added to nodes upstream of an Aggregation Node, those columns are automatically included in the Aggregation Node’s outputs but the generated expression is faulty (invalid or incorrect).</li>
+<li>In the Flowgraph editor, generated code no longer includes or uses the AggregationNode/outputs expression attribute as it did in prior versions.</li>
+<li>Error messages or stack traces in the Flowgraph execution logs indicating invalid expression or missing/ignored expression elements</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span style="font-size: 14px;">Flowgraph, Aggregation</span></p>
+<p><span style="text-decoration: underline;"><strong><span style="font-size: 14px;">Environment:</span></strong></span></p>
+<p><span style="font-size: 14px;">SAP HANA 2.00.079.06 (fa/hana2sp07)</span></p>
+<p><span style="text-decoration: underline;"><strong><span style="font-size: 14px;">Steps to Reproduce:</span></strong></span></p>
+<ol>
+<li>On a system running a version prior to 2.00.079.06.1754480252, create a Flowgraph containing an Aggregation Node. Confirm aggregation output expressions appear in the editor-generated code.</li>
+<li>Patch the system to 2.00.079.06.1754480252 (79.06).</li>
+<li>Update an existing Flowgraph (e.g., change source/target tables or update synonyms) — note that the Flowgraph can no longer be executed.</li>
+<li>Alternatively, create a new Flowgraph on 79.06 and add columns to nodes upstream of the Aggregation Node. Observe that those columns are automatically added to the Aggregation Node outputs and the generated expression is invalid or missing in the generated code.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Workaround: If the expression attribute is removed, the Flowgraphs run successfully as before.</p></div></div></div></div>

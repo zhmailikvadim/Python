@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="longtext" id="__html0">
+<p>When an ABAP application server is started, it may be observed that it runs ABAP programs before the ICM is operational. This may lead to error situations. Especially, it may happen that ABAP Daemons remain in a hanging state. (In this particular case, SAP GUI transaction <span class="SNO_DNT" style="float: none;" translate="no">SMDAEMON</span> shows daemons in state "Waiting during Starting". In the work process trace files (<span class="SNO_DNT" style="float: none;" translate="no">dev_w*</span>), the following entry can be found:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">*** WARNING =&gt; ThWaitForOtherProcesses: ICM still not operational</span></p>
+<p>And in the ICM trace (<span class="SNO_DNT" style="float: none;" translate="no">dev_icm</span>) the following entry can be found:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">*** ERROR =&gt; IcmHandleAdmMsg: Connect request during startup</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">KERNELCOR</span>, <span class="SNO_DNT" style="float: none;" translate="no">ICM</span>, <span class="SNO_DNT" style="float: none;" translate="no">ABAP Daemon Framework (ADF)</span>, SAP Note <span class="SNO_DNT" style="float: none;" translate="no">3352374</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The reason is that in SAP Kernel 793 and older releases the Dispatcher only waits up to 2 minutes until the ICM is operational. If this time is insufficient for the ICM startup, the application server may start ABAP programs without an operational ICM. Beginning with SAP Kernel 916, the profile parameter "<span class="SNO_DNT" style="float: none;" translate="no">rdisp/server_startup/icm_gw_wait_time</span>" is introduced to configure this waiting time. The default value <span class="SNO_DNT" style="float: none;" translate="no">0</span> means that the Dispatcher waits without timeout, i.e., it waits until the ICM is operational.</p>
+<p>The correction of this SAP Note introduces the profile parameter "<span class="SNO_DNT" style="float: none;" translate="no">rdisp/server_startup/icm_gw_wait_time</span>" with the default value <span class="SNO_DNT" style="float: none;" translate="no">0</span> for SAP Kernel versions 789 and 793.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Workaround:</strong></p>
+<p>Possible workarounds are described in SAP Note <a href="/notes/3352374" target="_blank">3352374</a>. (These work arounds are not needed if the kernel correction of this SAP Note has been applied or if the system runs already with SAP Kernel 916 or later.)</p>
+<p><strong>Final solution:</strong></p>
+<p>Apply the kernel correction that is provided with this SAP Note. (Please note that this correction is already included in all versions of SAP Kernel 916 and later releases.)</p>
+<p>This correction is initially delivered with the kernel patch level listed in the <span class="SNO_DNT" style="float: none;" translate="no">"<strong>Support Package Patches</strong>"</span> section of this SAP Note. All subsequent kernel patch levels also contain the correction. Keep in mind that only the latest kernel patch level is available for download, however, it contains all previously delivered corrections. As a result, you can download and install the latest available kernel patch at any time to implement this correction.</p>
+<p>If there is no entry for the kernel patch level in the <span class="SNO_DNT" style="float: none;" translate="no">"<strong>Support Package Patches</strong>"</span> section, the patch is not yet available. The entry will be added upon the delivery of the correction. Please check this SAP Note to see if new patch level entries are added.</p>
+<p>This correction is delivered with the following kernel archives:</p>
+<ul>
+<li>hotfix - file <span class="SNO_DNT" style="float: none;" translate="no">dw.sar<strong><br/></strong></span></li>
+</ul>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span> - files <span class="SNO_DNT" style="float: none;" translate="no">SAPEXE.SAR</span> and <span class="SNO_DNT" style="float: none;" translate="no">SAPEXEDB.SAR</span>  </li>
+</ul>
+<p>Follow the SAP recommendations on how to select and install the kernel patch:</p>
+<ol>
+<li>Apply the latest<strong> <span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span></strong> if it contains the correction (PL of correction is smaller or equal to the PL of the latest SP Stack Kernel). For the list of current SP Stack Kernels, see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Otherwise, the next <span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span> will deliver the correction. Apply the <strong>hotfix </strong>only if you require the correction on short notice.</li>
+<li>The correction may not be available for kernel releases that are out of maintenance. Please upgrade to the corresponding downward compatible kernel (<strong>DCK</strong>), see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Review the <strong>regression note </strong>for the target patch level before installing the patch. For details, see SAP Note <a href="/notes/1802333" target="_blank">1802333</a> (Finding information about regressions in the SAP kernel).</li>
+<li>For instructions on how to download and install kernel patches, see SAP Note <a href="/notes/19466" target="_blank">19466</a> (Downloading SAP kernel patches).</li>
+</ol>
+<p>The paper <span class="SNO_DNT" style="float: none;" translate="no"><a href="https://support.sap.com/deployment-strategies-kernel-abap.pdf" rel="noopener noreferrer" tabindex="-1" target="_blank" title="https://support.sap.com/deployment-strategies-kernel-abap.pdf">Update Strategy for the Kernel of the Application Server ABAP in On Premise Landscapes</a></span> provides detailed SAP recommendations.</p></div></div></div></div>

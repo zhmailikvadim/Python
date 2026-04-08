@@ -1,0 +1,51 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>Indexserver crashes with a crash stack similar to the below:</p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">----&gt; Symbolic stack backtrace &lt;----</span><br/><span class="SNO_DNT" style="float: none;" translate="no">0: SQLDBC::SQLDBC_PreparedStatement::prepare</span><br/><span class="SNO_DNT" style="float: none;" translate="no">1: SQLDBC::SQLDBC_Catalog::SQLColumns</span><br/><span class="SNO_DNT" style="float: none;" translate="no">2: QLColumns_Enc</span><br/><span class="SNO_DNT" style="float: none;" translate="no">3: SQLColumnsW</span><br/><span class="SNO_DNT" style="float: none;" translate="no">5: federation::OdmInternalService::do_odbc</span><br/><span class="SNO_DNT" style="float: none;" translate="no">[...]</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ODBC, Client, Federation, SDA, Low Memory</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 352886</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, HANA ODBC driver of SDA could not handle the operations of remote queries if a small memory allocation failed.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA Client:</li>
+<ul>
+<li>Revisions &lt;= 2.27.19</li>
+</ul>
+</ul>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions &lt;= 079.08 (SPS07)</li>
+<li>Revisions &lt;= 089.00 (SPS08)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>HANA is extremely low in memory globally or </li>
+<li>Statement memory limit is reached.</li>
+<li>And SDA is configured between HANA databases.</li>
+<li>And ODBC function to access the remote HANA DB is called.(ex. <span class="SNO_DNT" style="float: none;" translate="no">CREATE VIRTUAL TABLE</span>)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA Client: Client can be downloaded and installed separately.
+<ul>
+<li>Revisions &gt;= 2.27.23</li>
+</ul>
+</li>
+</ul>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">or</span></p>
+<ul>
+<li>SAP HANA 2: Patched client revision is included.</li>
+<ul>
+<li>Revisions of SPS07: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher</li>
+</ul>
+<li>or higher</li>
+</ul></div></div></div></div>

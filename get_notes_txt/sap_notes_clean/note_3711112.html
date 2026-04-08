@@ -1,0 +1,220 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You use S4HANA Group Reporting, release higher than S4CORE 103 (OP 1809).</p>
+<p>Application "Manage Global Hierarchies" does not load Importing file and shows error message: "Subnode exceeds xx characters".</p>
+<p>For example you are loading Consolidation Financial Statement Item hierarchy, and the error message informs you about exceeding 10 characters for a subnode.</p>
+<p>It could also happen that the content of hierarchy is not getting loaded within the app.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>F7995, F2918, UHDT_CATG, exceeded length of node IDs</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You upgraded from lower release than S4CORE 104 (OP 1909).</p>
+<p>The lengths of Node IDs were changed to meet requirements.</p>
+<p>On lower releases, it was possible to specify Node IDs using longer lengths of strings.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Starting OP1909, you need to ensure that Node IDs are respecting the maximum hierarchy ID length.</p>
+<p>The easiest way to perform the changes is an import of respective MD - Excel import.</p>
+<p>Please note, higher releases allow to use more hierarchy types, so not every entity from following list is part of OP 1909 e.g.</p>
+<p>Please refer to the following list of entities and their respective maximum lengths of Node ID:</p>
+<p><strong>Type          Business Entity                       Max ID Length.       Hierarchy Type Description</strong></p>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 831px;"><colgroup><col width="87"/><col width="200"/><col width="161"/><col width="383"/></colgroup>
+<tbody>
+<tr>
+<td height="20" width="87">CS01</td>
+<td width="200">FINCS_SEGMENT</td>
+<td class="xl65" width="161">20</td>
+<td width="383">Consolidation Segment</td>
+</tr>
+<tr>
+<td height="20">CS02</td>
+<td>FINCS_GLACCOUNT</td>
+<td class="xl65">20</td>
+<td>Consolidation G/L Account</td>
+</tr>
+<tr>
+<td height="20">CS03</td>
+<td>FINCS_COSTCENTER</td>
+<td class="xl65">20</td>
+<td>Consolidation Cost Center</td>
+</tr>
+<tr>
+<td height="20">CS04</td>
+<td>FINCS_PROFITCENTER</td>
+<td class="xl65">20</td>
+<td>Consolidation Profit Center</td>
+</tr>
+<tr>
+<td height="20">CS05</td>
+<td>FINCS_FUNCTIONALAREA</td>
+<td class="xl65">20</td>
+<td>Consolidation Functional Area</td>
+</tr>
+<tr>
+<td height="20">CS06</td>
+<td>FINCS_BUSINESSAREA</td>
+<td class="xl65">20</td>
+<td>Consolidation Business Area</td>
+</tr>
+<tr>
+<td height="20">CS07</td>
+<td>FINCS_FINTRANSTYPE</td>
+<td class="xl65">20</td>
+<td>Consolidation Financial Transaction Type</td>
+</tr>
+<tr>
+<td height="20">CS08</td>
+<td>FINCS_CUSTOMER</td>
+<td class="xl65">20</td>
+<td>Consolidation Customer</td>
+</tr>
+<tr>
+<td height="20">CS09</td>
+<td>FINCS_SUPPLIER</td>
+<td class="xl65">20</td>
+<td>Consolidation Supplier</td>
+</tr>
+<tr>
+<td height="20">CS10</td>
+<td>FINCS_PROJECT</td>
+<td class="xl65">20</td>
+<td>Consolidation Project</td>
+</tr>
+<tr>
+<td height="20">CS11</td>
+<td>FINCS_SALESORGANIZATION</td>
+<td class="xl65">20</td>
+<td>Consolidation Sales Organization</td>
+</tr>
+<tr>
+<td height="20">CS12</td>
+<td>FINCS_PRODUCTSOLD</td>
+<td class="xl65">20</td>
+<td>Consolidation Product Sold</td>
+</tr>
+<tr>
+<td height="20">CS13</td>
+<td>FINCS_CUSTOMERGROUP</td>
+<td class="xl65">20</td>
+<td>Consolidation Customer Group</td>
+</tr>
+<tr>
+<td height="20">CS14</td>
+<td>FINCS_COUNTRY</td>
+<td class="xl65">20</td>
+<td>Consolidation Country/Region</td>
+</tr>
+<tr>
+<td height="20"><strong>CS15</strong></td>
+<td><strong>FINCS_FSITEM</strong></td>
+<td class="xl65"><strong>10</strong></td>
+<td><strong>Consolidation Financial Statement Item</strong></td>
+</tr>
+<tr>
+<td height="20">CS16</td>
+<td>FINCS_RITEM</td>
+<td class="xl65">10</td>
+<td>Consolidation Reporting Item</td>
+</tr>
+<tr>
+<td height="20">CS17</td>
+<td>FINCS_UNIT</td>
+<td class="xl65">20</td>
+<td>Consolidation Unit</td>
+</tr>
+<tr>
+<td height="20">CS18</td>
+<td>FINCS_SITEM</td>
+<td class="xl65">20</td>
+<td>Consolidation Subitem</td>
+</tr>
+<tr>
+<td height="20">CS19</td>
+<td>FINCS_DOCTY</td>
+<td class="xl65">20</td>
+<td>Consolidation Document Type</td>
+</tr>
+<tr>
+<td height="20">CS20</td>
+<td>FINCS_RCOMP</td>
+<td class="xl65">20</td>
+<td>Company</td>
+</tr>
+<tr>
+<td height="20">CS21</td>
+<td>FINCS_PLEVL</td>
+<td class="xl65">20</td>
+<td>Consolidation Posting Level</td>
+</tr>
+<tr>
+<td height="20">CS22</td>
+<td>FINCS_MATERIALGROUP</td>
+<td class="xl65">20</td>
+<td>Consolidation Material Group</td>
+</tr>
+<tr>
+<td height="20">CS23</td>
+<td>FINCS_MATERIAL</td>
+<td class="xl65">20</td>
+<td>Consolidation Material</td>
+</tr>
+<tr>
+<td height="20">CS24</td>
+<td>FINCS_FINSRVCSPRODGROUP</td>
+<td class="xl65">30</td>
+<td>Consolidation Financial Services Product Group</td>
+</tr>
+<tr>
+<td height="20">CS25</td>
+<td>FINCS_FUND</td>
+<td class="xl65">20</td>
+<td>Consolidation Fund</td>
+</tr>
+<tr>
+<td height="20">CS26</td>
+<td>FINCS_GRANT</td>
+<td class="xl65">20</td>
+<td>Consolidation Grant</td>
+</tr>
+<tr>
+<td height="20">CS27</td>
+<td>FINCS_BILLINGDOCUMENTTYPE</td>
+<td class="xl65">20</td>
+<td>Consolidation Billing Document Type</td>
+</tr>
+<tr>
+<td height="20">CS28</td>
+<td>FINCS_DISTRIBUTIONCHANNEL</td>
+<td class="xl65">20</td>
+<td>Consolidation Distribution Channel</td>
+</tr>
+<tr>
+<td height="20">CS29</td>
+<td>FINCS_DIVISION</td>
+<td class="xl65">20</td>
+<td>Consolidation Division</td>
+</tr>
+<tr>
+<td height="20">CS30</td>
+<td>FINCS_INDUSTRY</td>
+<td class="xl65">20</td>
+<td>Consolidation Industry</td>
+</tr>
+<tr>
+<td height="20">CS31</td>
+<td>FINCS_PLANT</td>
+<td class="xl65">20</td>
+<td>Consolidation Plant</td>
+</tr>
+<tr>
+<td height="20">CS32</td>
+<td>FINCS_SALESDISTRICT</td>
+<td class="xl65">20</td>
+<td>Consolidation Sales District</td>
+</tr>
+<tr>
+<td height="20">CS33</td>
+<td>FINCS_PRODUCTGROUP</td>
+<td class="xl65">20</td>
+<td>Consolidation Product Sold Group</td>
+</tr>
+</tbody>
+</table></div>
+<p>Please ensure that all Node IDs align with the maximum length specified for consolidation master data.</p></div></div></div></div>

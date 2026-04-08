@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">From January 2026 new version of VAT form and output XML structure is introduced in Croatia.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Croatia, VAT Changes 2023, PDV, U-RA, I-RA, /CCEE/HRFI_RFUVDE00, RFUMSV00, /CCEE/HRFI_RFUMS, J_3K_VATFORM2026, HR_URA_2023, Food Donations</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Legal change</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement attached correction instructions including manual post-implementation steps.</p>
+<p>There are new fields on the selection screen of Croatian VAT return report /CCEE/HRFI_RFUVDE00 in new Food Donations section:</p>
+<p>Purchase value and Sales value in rates 5%, 13% and 25%.</p>
+<p>These fields must be filled manually.</p>
+<p>These are then poulated in the output XML file in tags:</p>
+<ul>
+<li>Podatak701</li>
+<li>Podatak702</li>
+<li>Podatak703</li>
+<li>Podatak704</li>
+</ul>
+<p> At the same time, there is new SAPScript form J_3K_VATFORM2026, having new section PODACI O OBAVLJENIM DONACIJAMA HRANE ( Information on food donation done ).</p>
+<p>This section contains the same information as above mentioned output XML file.</p>
+<p>Don't forget to set the new form name in the view V_T007F as described in attached manual steps file.</p>
+<p> </p></div></div></div></div>

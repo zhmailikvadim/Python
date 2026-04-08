@@ -1,0 +1,172 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"></p>
+<div class="table-responsive"><table border="1" cellpadding="1" cellspacing="0" class="table table-bordered table-striped col-resizeable"><colgroup><col/><col/><col/><col/><col/><col/></colgroup>
+<tbody>
+<tr><th class="confluenceTh">
+<h3 data-toc-skip=""><strong>Priority</strong></h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip=""><strong>SAP Case ID</strong></h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip=""><strong>Description</strong></h3>
+</th></tr>
+<tr>
+<td class="confluenceTd">High</td>
+<td class="confluenceTd">139222/2026</td>
+<td class="confluenceTd">BRH WLI not loading quickly with Custom Views</td>
+</tr>
+<tr>
+<td class="confluenceTd">High</td>
+<td class="confluenceTd">144942/2026</td>
+<td class="confluenceTd">Unable to regenerate WLI</td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="3">The following changes are based on an extended analysis of the current production system behavior regarding the performance of certain features. They have been added to the hotfix to stabilize and improve the performance of the application.</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Long-running processes in background processing could lead to redundant task executions </td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Large inbound data payload could lead to degradations in background processing</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Regeneration of PCN Release Decision Items might fail under certain conditions</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Processing of background tasks is not restricted/bound to task-specific producer/consumer application types.</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Internal data replication between microservices could lead to unintended high database resource consumption, impacting the performance of the receiving microservice.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p></p>
+<p class="auto-cursor-target"><strong>Important Information:  </strong></p>
+<p class="auto-cursor-target">The coding changes in the hotfix do not affect the functionality of SAP Batch Release Hub for Life Sciences. They are intended to stabilize and improve the performance of certain high data load scenarios - see the respective Resolution in the table below.<br/>Customers who are not experiencing performance issues might not perceive an improvement.</p>
+<p class="auto-cursor-target"><strong>List of Fixes Delivered:</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="1" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr><th class="confluenceTh">
+<h3 data-toc-skip=""><strong>Priority</strong></h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip=""><strong>SAP Case ID</strong></h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip=""><strong>Description</strong></h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Resolution</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Testing Suggestion</h3>
+<p><strong>Disclaimer:</strong><br/>Testing suggestions are provided as guidance only. Customers are solely responsible for performing thorough testing in their environment.</p>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Documentation Update</h3>
+<h3 data-toc-skip="">(Y/N)</h3>
+</th><th class="confluenceTh">
+<h3 data-toc-skip="">Details of Updated Documents</h3>
+</th></tr>
+<tr>
+<td class="confluenceTd">High</td>
+<td class="confluenceTd">139222/2026</td>
+<td class="confluenceTd">BRH WLI not loading quickly with Custom Views</td>
+<td class="confluenceTd">
+<p>Users experience long load times or timeouts when using the <strong>My Release Decisions</strong> app when the <strong>Countries/Regions</strong> column is selected as part of the table variant. To resolve this issue, the underlying SQL view stacks were improved to load the required data more efficiently, especially for large datasets.</p>
+<p>The changes impact the following areas:</p>
+<ul>
+<li>My Release Decisions - General data retrieval for the <strong>Release Decisions</strong> table, especially when the <strong>Countries/Regions</strong> column is selected as part of the table variant</li>
+<li>Release Decision Details - Data retrieval for the <strong>Countries/Regions</strong> section</li>
+<li>Regulatory Data Check - Data retrieval for the <strong>Release Check Details</strong> section</li>
+</ul>
+</td>
+<td class="confluenceTd">
+<p>The primary focus for (all) test cases should be to verify that there are no functional changes after the hotfix has been deployed. For example, using the <strong>My Release Decisions </strong>app should show exactly the same content before the hotfix and afterwards (standard regression testing).</p>
+<p>Secondary test focus is to check performance improvements for the described features (Countries/Regions and Release Check Details). Only applicable if there was a performance degradation for the respective features in your production environment.</p>
+</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">High</td>
+<td class="confluenceTd">144942/2026</td>
+<td class="confluenceTd">Unable to regenerate WLI</td>
+<td class="confluenceTd">
+<p>Users are unable to regenerate worklist items. When you try to regenerate a worklist item to a different release type, the following error could occur: “A user is not responsible for the selected release type”. This issue is related to the 2511 release, which improved the authorization check for responsibilities within quality departments, particularly during the regeneration of worklist items.<br/>The problem stems from the authorization check mechanism and is due to inconsistent field naming conventions at the database level for material types and material groups. Because of these naming discrepancies, when the system compares material types and material groups, it may evaluate specific values as undefined. This can cause the responsibility check to fail. To resolve this issue, the inconsistent naming has been fixed.</p>
+</td>
+<td class="confluenceTd">Test scope should cover the regeneration scenario, either with the same or a different release type.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd" colspan="7">
+<p>The following changes are based on an extended analysis of the current production system behavior regarding the performance of certain features. They have been added to the hotfix to stabilize and improve the performance of the application.</p>
+<p><strong>Repetition</strong>: The primary focus for (all) test cases should be to verify that there are no functional changes after the hotfix has been deployed.</p>
+</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Long-running processes in background processing could lead to redundant task executions </td>
+<td class="confluenceTd">
+<p>Background worker process management has been stabilized by adding an improved heartbeat implementation, covering scenarios where long-running processes must be executed.</p>
+</td>
+<td class="confluenceTd">The change will improve the enhanced change detection in batches with large component trees. A test case should include one or several changes to a batch with a big component tree. </td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Large inbound data payload could lead to degradations in background processing</td>
+<td class="confluenceTd">
+<p>Message compression has been enabled for all affected processing queues/topics.<br/>Redundant/unnecessary data will be omitted from the message payload during internal processing.</p>
+</td>
+<td class="confluenceTd">Test scenarios should include a large inbound data payload leading to delayed processing in <abbr>SAP</abbr> Batch Release Hub for Life Sciences before the hotfix.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Regeneration of PCN Release Decision Items might fail under certain conditions</td>
+<td class="confluenceTd">
+<p>The related coding was improved to correctly propagate the full user context in all scenarios.</p>
+</td>
+<td class="confluenceTd">
+<p>Only applicable for customers using the <abbr>PCN</abbr> functionality in <abbr>SAP</abbr> Batch Release Hub for Life Sciences.</p>
+<p>Test that the <abbr>PCN</abbr> regeneration feature is working as expected.</p>
+</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Processing of background tasks is not restricted/bound to task-specific producer/consumer application types.</td>
+<td class="confluenceTd">
+<p>Background processing tasks are isolated between the various producer and consumer application types, which improves background processing stability and performance.</p>
+</td>
+<td class="confluenceTd">No dedicated test recommendations other than executing standard regression tests verifying that there are no functional changes after the hotfix has been deployed.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+<tr>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">n/a</td>
+<td class="confluenceTd">Internal data replication between microservices could lead to unintended high database resource consumption, impacting the performance of the receiving microservice.</td>
+<td class="confluenceTd">
+<p>The data replication's implementation was improved to manage database memory allocation more efficiently, especially during peak load situations.</p>
+</td>
+<td class="confluenceTd">Test cases should cover high load scenarios like sending a large amount of changes in a short time or in a single message.</td>
+<td class="confluenceTd">N</td>
+<td class="confluenceTd">n/a</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div>

@@ -1,0 +1,40 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During a tenant or database restore using BACKINT with the AWS Backint Agent, the recovery starts normally and backup.log shows data recovery activity, but the restore does not complete and no database error is raised.</p>
+<p>Typical backup.log sequence:</p>
+<ul><li><code>RECOVERY state of service: ... RecoveryExecuteDataRecoveryInProgress</code></li><li>services (for example indexserver or other database services) enter recovery phase</li><li><code>RECOVERY state of service: ... RecoveryLogInitializationStarted</code></li><li>afterwards no further progress entries appear</li></ul>
+<p>The database remains in recovery state and the restore appears “hung”.<br/>SAP HANA database traces may not contain a direct database error because the database is waiting for the external BACKINT provider.</p>
+<p>In comparison, restores performed from a source system located in the same AWS account complete successfully.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP HANA DB Version 2.0</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The behavior is typically not related to SAP HANA recovery logic but to the external BACKINT storage layer.</p>
+<p>When SAP HANA performs a restore using BACKINT, the database depends on the external backup storage provider. In environments using the AWS Backint Agent, the database waits for the storage layer to deliver data from Amazon S3.</p>
+<p>If the source backups are stored in a different AWS account, insufficient cross-account permissions (for example missing S3 <code>GetObject</code> and/or <code>ListBucket</code> permissions, missing role trust, or missing KMS access) can prevent the AWS Backint agent from retrieving the backup objects.</p>
+<p>In this situation the storage request does not fail immediately at database level. Instead, SAP HANA remains waiting for the external component, which results in a restore that stays active but makes no progress and produces no database error.</p>
+<p>This situation can lead to scenarios where restores from the same AWS account succeed while restores from a different AWS account remain waiting for data retrieval.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Verify and correct the AWS Backint and S3 configuration for cross-account restore.</p>
+<ol><li>
+<p>In the source account (where backups are stored):</p>
+<ul><li>
+<p>Grant read access to the target system IAM role in the S3 bucket policy</p>
+</li><li>
+<p>Ensure permissions include at least <code>s3:GetObject</code> and <code>s3:ListBucket</code></p>
+</li><li>
+<p>If encryption is used, allow KMS decryption permissions</p>
+</li></ul>
+</li><li>
+<p>In the target account:</p>
+<ul><li>
+<p>Verify IAM role trust relationship (AssumeRole) with the source account</p>
+</li><li>
+<p>Confirm the role used by the HANA host is the one referenced in the bucket policy</p>
+</li></ul>
+</li><li>
+<p>Verify AWS SAP integration components on the HANA host:</p>
+<ul><li>
+<p><code>systemctl status aws-dataprovider</code></p>
+</li><li>
+<p>review logs in <code>/var/log/aws-dataprovider</code></p>
+</li><li>
+<p><code>rpm -qa | grep aws-sap</code></p>
+</li><li>
+<p>confirm Backint version with <code>hdbbackint -v</code></p>
+</li></ul>
+</li><li>
+<p>After permissions and services are corrected, repeat the restore operation.</p>
+</li></ol>
+<p>If required, involve the AWS team or the Backint provider to validate S3 policies and IAM roles.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>AWS Backint, RecoveryLogInitializationStarted, HANA restore hangs, S3 cross account permissions, aws-dataprovider</p></div></div></div></div>

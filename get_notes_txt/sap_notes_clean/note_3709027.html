@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">During the loading of the SAP ME Activity Manager, the system initializes UI libraries that use jQuery 2.2.4, an outdated version that is no longer maintained.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP ME, Welcome page</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Steps to Reproduce</strong>:</p>
+<p>1. Open the SAP ME Home page.<br/>2. Open Developer Tools in the browser.<br/>3. Inspect/trace the UI files being loaded.<br/>4. Observe that the system is using jQuery version 2.2.4 within the Activity Manager module.</p>
+<p><strong>Actual Result</strong>: The system loads an older jQuery version (2.2.4), which an analysis tool flags as outdated.</p>
+<p><strong>Expected Result</strong>: SAP ME should load a supported and up‑to‑date version of jQuery.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The solution is delivered as a code‑level correction. The system now imports jQuery version 3.7.1, an actively maintained release that provides improved stability, modern functionality, and updates not present in older branches.</p>
+<p><strong>Impact</strong></p>
+<p>The code change implemented to address the symptom above is isolated to Welcome page.</p></div></div></div></div>

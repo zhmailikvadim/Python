@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Rates on the job posting are sent to suppliers instead of the rates defined in the rate grid.</li><li><span style="font-size: 10pt;">This occurs even when the supplier and site are correctly associated with the rate grid, and the expectation is for the job posting rates to be replaced during distribution.</span></li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>In Rates 1.0, rate grid values only replace job posting rates when the system can apply the rate types without creating an invalid mix.</p>
+<p>Rates 1.0 does not allow the following rate types to be mixed on a job posting or during rate replacement:</p>
+<ul><li>rate</li><li>pay rate based</li><li>bill rate based</li><li>pay rate with coefficient</li></ul>
+<p>If any Rate Category/UOM on the job posting uses one of these rate types and the corresponding rate group uses a different type, and the rate group does not include every Rate Category/UOM combination from the job posting, the system cannot apply a partial replacement.<br/>Because these rate types cannot coexist in a single job posting in Rates 1.0, the system prevents mixing and defaults to pulling all rates from the job posting instead of the rate grid.</p>
+<div>
+<p>Factor‑type rates are not part of this restriction and do not affect this replacement logic.</p>
+</div>
+<p>This behavior is specific to Rates 1.0.</p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>To ensure that rate grid values replace job posting rates:</p>
+<ol><li>Review all Rate Category and UOM combinations on your job posting template.</li><li>Review the same combinations in the rate group used by your rate grid.</li><li>Compare the sets to identify combinations missing from the rate group.</li><li>For any missing combinations, choose one of the following:
+<ul><li>Remove the missing combination from the job posting template, <em>or</em></li><li>Add the missing combination to the rate group using a consistent rate type.</li></ul>
+</li></ol>
+<div><strong>Important</strong>:<br/>Changes to rate groups, rate types, or job posting templates do not retroactively update previously distributed job postings.<br/>All corrections apply only to job postings created or distributed <em>after</em> the configuration changes are made.</div>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><section>
+<ul><li><a href="https://me.sap.com/notes/0003058059" rel="noopener noreferrer nofollow" target="_blank">KB0160739 - Why don't the rates on job posting details match the rate grid?</a></li><li><a href="https://me.sap.com/notes/0003149566" rel="noopener noreferrer nofollow" target="_blank">KB0367396 - Why the rates buyer sees for Job Posting Details/Rate Details are different from what supplier sees</a></li><li>
+<p><a href="https://me.sap.com/notes/0003123235" rel="noopener noreferrer nofollow" target="_blank">KB0333122 - Why does the a rate schedule-based work order not have the rate grid rate?</a></p>
+</li></ul>
+<p></p>
+</section><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><div>
+<p>rate grid not applied, rate type mismatch, pay rate based, bill rate based, pay rate with coefficient, factor type clarification, rate group mismatch, rates 1.0 behavior, job posting rates, distribution rates</p>
+</div></div></div></div></div>

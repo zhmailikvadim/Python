@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>A Purchase Order is generated (automatically or manually) in SAP S/4HANA Cloud based on the awarded quotation.</p>
+</li><li>
+<p>The Purchase Order Number generated in SAP S/4HANA Cloud is not sent back to SAP Ariba Sourcing.</p>
+</li><li>
+<p>The PO Number is missing from the Audit Logs in SAP Ariba Sourcing.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Create an RFQ in SAP S/4HANA Cloud and publish the RFQ to SAP Ariba Sourcing.</p>
+</li><li>
+<p>Submit bids from the supplier side in SAP Ariba Sourcing.</p>
+</li><li>
+<p>Award the sourcing event in SAP Ariba Sourcing.</p>
+</li><li>
+<p>Verify that the award data flows to SAP S/4HANA Cloud and a Purchase Order (PO) is generated.</p>
+</li><li>
+<p>Check the Audit Logs in the SAP Ariba Sourcing project.</p>
+</li><li>
+<p>The S/4HANA Purchase Order number is not visible in the logs.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This behavior is by design for the Scope Item 4BL integration scenario.</p>
+<ul><li>
+<p>SAP Ariba Sourcing is utilized strictly for the RFQ and Quotation Award stages.</p>
+</li><li>
+<p>Once the award is decided, the data is transmitted to SAP S/4HANA Cloud to create the follow-on document (Purchase Order).</p>
+</li><li>
+<p>The integration is designed as a one-way hand-off at this stage. The procurement cycle continues entirely within SAP S/4HANA Cloud.</p>
+</li><li>
+<p>There is no standard mechanism or supported workflow in Scope Item 4BL to send the generated Purchase Order number back to SAP Ariba Sourcing for confirmation or audit logging.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This is standard system behavior. No further action is required.</p>
+<ul><li>
+<p>The generation of the Purchase Order in SAP S/4HANA Cloud marks the completion of the sourcing process initiated in SAP Ariba Sourcing.</p>
+</li><li>
+<p>Tracking of the Purchase Order and subsequent procurement activities (such as Goods Receipt and Invoicing) must be performed within SAP S/4HANA Cloud.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>purchase order number, audit logs, sap ariba sourcing, sap s4 hana public cloud, rfq, quotation award, 4BL process, procurement cycle, PO number not returned, sap ariba sourcing issue, sap s4 hana issue</p></div></div></div></div>

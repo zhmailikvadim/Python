@@ -1,0 +1,71 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>In SAP HANA systems with cross or cyclic <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access</span> (SDA) configurations, <span class="SNO_DNT" style="float: none;" translate="no">PostCommitExecutor</span> threads may become stuck during federation commit operations. This can result in database deadlocks and potentially lead to system unavailability.</p>
+<p>Based on the runtimedumps, you will observe the following call stack(s), with the three key calls highlighted:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">[thr=xxxxx]: <strong>PostCommitExecutor</strong> at</span><br/><span class="SNO_DNT" style="float: none;" translate="no">0: __libc_poll+0x50 ()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">1: NonBlockingSocket::doPoll()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">2: NonBlockingSocket::poll() </span><br/><span class="SNO_DNT" style="float: none;" translate="no">3: Network::SimpleClientSocket::receive() </span><br/><span class="SNO_DNT" style="float: none;" translate="no">4: SQLDBC::SocketCommunication::receiveBuffer()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">5: SQLDBC::SocketCommunication::receiveHeader()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">6: SQLDBC::SocketCommunication::receive()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">7: SQLDBC::ClientRuntime::receive()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">8: SQLDBC::PhysicalConnection::receive()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">9: SQLDBC::Connection::doReceive()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">10: SQLDBC::Connection::sqlaexecute()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">11: SQLDBC::Connection::sqlaexecute()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">12: SQLDBC::Connection::commit()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">13: SQLDBC::SQLDBC_Connection::commit()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">14: sdbSQLEndTran</span><br/><span class="SNO_DNT" style="float: none;" translate="no">15: federation::OdmService::doOdbc()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">16: federation::OdmInternalService::do_odbc()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">17: void ltt::impl::FunctionPR&lt;&gt;::callback_fn&lt;&gt;()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">18: Execution::impl::runThirdPartyCode()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">19: federation::OdbcAccess::do_odbc()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">20: federation::OdbcAccess::SQLTransact()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">21: <strong>federation::OdbcAccess::CommitTransaction()</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no">22: federation::FederationTxnCallback::execute()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">23: <strong>TransactionManager::Transaction::postcommit()</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no">24: ptime::Transaction::postcommit()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">25: ptime::Action::handle_postcommit()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">26: ptime::PostCommitExecutor::process()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">27: <strong>ptime::PostCommitExecutor::run()</strong><br/>[...]</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Federation; Smart Data Access; SDA; Deadlock; HANA; <span class="SNO_DNT" style="float: none;" translate="no">PostCommitExecutor</span>;<span class="SNO_DNT" style="float: none;" translate="no"> Safe Mode</span>; Transaction;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 353795</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, <span class="SNO_DNT" style="float: none;" translate="no">PostCommitExecutor</span> threads can deadlock when processing transactions involving federation (<span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access</span>) operations in cross or cyclic remote source configurations. The issue occurs because post-commit operations, both with and without federation involvement, are mixed in the same <span class="SNO_DNT" style="float: none;" translate="no">PostCommitExecutor</span> job queues. Since these queues handle operations sequentially, this mixing can lead to deadlock situations.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS00 - SPS06</li>
+<li>Revisions &lt;= 079.08 (SPS07)</li>
+<li>Revisions &lt;= 089.01 (SPS08)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ol>
+<li>HANA-to-HANA Connection: The issue affects only HANA-to-HANA <strong>SDA</strong> scenarios using the <span class="SNO_DNT" style="float: none;" translate="no"><strong>hanaodbc</strong></span> adapter.<br/> </li>
+<li>Cross or Cyclic SDA Setup: Two or more HANA systems have remote sources pointing to each other, creating either:</li>
+</ol>
+<ul>
+<ul>
+<li><span style="font-size: 14px;">Cross setup: System A → System B AND System B → System A</span></li>
+<li><span style="font-size: 14px;">Cyclic setup: System A → System B → System C → ... → System A</span></li>
+</ul>
+</ul>
+<ol start="3">
+<li>DML Read/Write Mode: Remote sources are configured with <span class="SNO_DNT" style="float: none;" translate="no">dml_mode=readwrite.</span> <br/> </li>
+<li>Concurrent Write Operations: Multiple connections perform DML operations (<span class="SNO_DNT" style="float: none;" translate="no">INSERT</span>, <span class="SNO_DNT" style="float: none;" translate="no">UPDATE</span>, <span class="SNO_DNT" style="float: none;" translate="no">DELETE</span>) through Federation simultaneously.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 079.09 (SPS07)</li>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li><strong><strong><span style="font-size: 14px;">Option 1 - </span></strong></strong>Remove Cyclic Dependencies<br/><br/>Modify the application logic and SDA configuration to <strong>eliminate </strong><strong>cross</strong> or <strong>cyclic remote source setups</strong>. Review your remote source topology and restructure to avoid circular references.<br/>To identify potential cross or cyclic dependencies, document remote sources on all systems.</li>
+</ul>
+<ol>
+<li><span style="font-size: 14px;">On each system, run:<br/><br/><span class="SNO_DNT" style="float: none;" translate="no">SELECT REMOTE_SOURCE_NAME,</span><br/><span class="SNO_DNT" style="float: none;" translate="no">CONNECTION_INFO,</span><br/><span class="SNO_DNT" style="float: none;" translate="no">ADAPTER_NAME</span><br/><span class="SNO_DNT" style="float: none;" translate="no">FROM REMOTE_SOURCES</span><br/><span class="SNO_DNT" style="float: none;" translate="no">WHERE ADAPTER_NAME = 'hanaodbc';</span><br/><br/></span></li>
+<li>Extract hostname/port from <span class="SNO_DNT" style="float: none;" translate="no">CONNECTION_INFO</span> (typically contains <span class="SNO_DNT" style="float: none;" translate="no">ServerNode=hostname:port</span>)</li>
+<li>Create a topology diagram showing System A → System B → System C relationships</li>
+<li>Look for cycles where any path leads back to the starting system</li>
+</ol>
+<p style="padding-left: 30px;"><em><span style="text-decoration: underline;">Note:</span></em> If you are using different hostnames or virtual IPs (for example, defined in the hosts file), it is recommended to use the physical hostname or IP address when drawing the topology diagram.</p>
+<ul>
+<li><strong>Option 2 - </strong>Enable Prioritized PostCommit Handling<br/>
+<p>This workaround separates Federation-involved post-commit operations into a dedicated <span class="SNO_DNT" style="float: none;" translate="no">PrioritizedPostCommitExecutor</span> queue, preventing circular dependencies.</p>
+<p><em><span style="text-decoration: underline;">Important</span></em>: Apply this configuration on ALL systems involved in the cross/cyclic SDA setup.</p>
+<span class="SNO_DNT" style="float: none;" translate="no">ALTER SYSTEM ALTER CONFIGURATION ('indexserver.ini', 'SYSTEM')</span><br/><span class="SNO_DNT" style="float: none;" translate="no">SET ('smart_data_access', 'allow_loopback') = 'true'</span><br/><span class="SNO_DNT" style="float: none;" translate="no">WITH RECONFIGURE COMMENT 'SAP Note 3711406. Workaround for Bug 353795. Revert after upgrade to a revision containing the fix';</span></li>
+</ul>
+<ul>
+<li><strong>Option 3</strong> - Enable <span class="SNO_DNT" style="float: none;" translate="no">SDA Safe Mode</span><br/><br/>Enabling <span class="SNO_DNT" style="float: none;" translate="no">Safe Mode</span> for ODBC connections <strong>will not prevent</strong> this issue, but it can help minimize business impact if your HANA system encounters such a situation. <br/>If the issue occurs, you can resolve it by restarting the scriptserver in one of the involved systems.<br/><br/>To enable <span class="SNO_DNT" style="float: none;" translate="no">Safe Mode</span>, please refer to SAP Note <span class="SNO_DNT" style="float: none;" translate="no"><a href="https://me.sap.com/notes/2602761/E" target="_blank">2602761</a></span> and the <span class="SNO_DNT" style="float: none;" translate="no"><a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/6f01ebd7ed574fcfbf493ebd303eb6b1.html" target="_blank">SAP HANA Administration Guide for SAP HANA Platform</a></span> for detailed instructions.</li>
+</ul>
+<p><strong> </strong></p>
+<p><strong>Disclaimer</strong></p>
+<p>The SAP HANA configuration parameter [<span class="SNO_DNT" style="float: none;" translate="no">smart_data_access</span>] <span class="SNO_DNT" style="float: none;" translate="no">allow_loopback </span>is an internal parameter and may only be used in the context of this SAP Note. Using such a parameter requires that the SAP HANA system has the revision specified in the SAP Note. Using internal parameters outside of this given scope is not supported. Please unset this parameter once you have upgraded to a revision containing the permanent solution.</p></div></div></div></div>

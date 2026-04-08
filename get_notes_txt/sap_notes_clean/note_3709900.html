@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the processes "Triggering of Device Change on SUP" (DE_B_MDC_TRG_DEV_CHANGE_SUP) and "Triggering of Device Change on DSO View" (DE_B_MDC_TRG_DEV_CHANGE_DSO), there is no extension point to add a custom wait step between step 0200 and step 0300.</p>
+<p>This issue is relevant for the market roles: SUP, DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> IMS, TAF7, TAF1, MeLo, MaLo, UTILMD, device change</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> The error occurred because the standard TAF7 check expects both OBIS values to be present in the MeLo UTILMD message. When partners split the OBIS values between MeLo and MaLo, the check fails, causing the system to fall back to TAF1.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system adds extension steps to the process in step 0210, allowing you to enhance the process to handle split OBIS scenarios.</p></div></div></div></div>

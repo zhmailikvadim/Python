@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During SAP Java runtime, the following error is reported:</p>
+<pre><br/>SQL error occurred on connection BXP:master:guest: code=208, state="42000", message="J2EE_CONFIG not found</pre><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>
+<p>SAP NetWeaver AS Java</p>
+</li><li>
+<p>SAP Adaptive Server Enterprise (ASE)</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Error 208 in ASE indicates:</p>
+<ul><li>Invalid object name – the referenced table does not exist in the current database context.</li><li>The table <code>J2EE_CONFIG</code> is a SAP Java system table and does not exist in the master database.</li><li>The connection is being established against the wrong database (master) instead of the SAP Java application database</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Check JDBC configuration in NWA:</p>
+<ul><li>
+<p>Validate the <code>ServiceName</code> parameter.</p>
+</li><li>
+<p>Ensure it points to the correct SAP Java database.</p>
+</li><li>Verify the login is valid (SAPSR3DB) instead guest.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>J2EE_CONFIG, code=208, SQL error occurred on connection</p></div></div></div></div>

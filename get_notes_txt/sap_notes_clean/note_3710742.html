@@ -1,0 +1,60 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">As of SAP_BASIS release 757, when opening the Layout Administration screen in the settings dialog, an HTML End-of-List section is displayed.</p>
+<p>This section may appear empty or contain technical information text such as:</p>
+<ul>
+<li><em>Report:BCALV_TEST_FULLSCREEN,Log_Group:,Handle:</em></li>
+</ul>
+<p>This text was intended to provide technical details about the layout loaded from table LTDX, allowing analysis without debugging.</p>
+<p>The information is displayed only if the user has the required authorizations and if at least one layout is available in the administration screen.</p>
+<p>In addition, a new test report SALV_GUI_LAYOUT_EXPLORER (transaction SALV_LAYOUT_EXPLORER) was introduced.</p>
+<p>It uses this technical data to display layout details from LTDX, primarily to support troubleshooting, especially in cloud environments.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ALV; ABAP List Viewer; Grid; &amp;ERW; Administration...; Settings; Layout; CLOUD; Public Cloud;</p>
+<p>REUSE; SALV; SALV OM; LTDX; WinGUI; WindowsGUI; HTMLGUI; WebGUI; JavaGUI;</p>
+<p>AUTHORITY-CHECK OBJECT; S_ALV_LAYO; S_ALV_LAYR; ACTVT FIELD 23;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p>The End-of-List information in the Layout Administration screen was originally intended to support SAP analysis together with the new test report.</p>
+<p>However, this information is technical in nature and does not need to appear on the screen in all scenarios.</p>
+<p><strong>Prerequisites</strong></p>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>SAP_BASIS 816</td>
+<td>SP 00</td>
+</tr>
+<tr>
+<td>SAP_BASIS 758</td>
+<td>SP 02</td>
+</tr>
+<tr>
+<td>SAP_BASIS 757</td>
+<td>SP 00</td>
+</tr>
+</tbody>
+</table></div>
+<p id="">When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This note changes how technical layout information is displayed when opening the Layout Administration settings.</p>
+<p>The HTML End-of-List section will no longer be shown.</p>
+<p>Instead, the technical information is now available directly within the layout list as hidden columns.</p>
+<p>The following new columns can be displayed if the user has the required authorization:</p>
+<ul>
+<li>Report </li>
+<li>Handle </li>
+<li>Log Group </li>
+</ul>
+<p>These fields can be added to the list using the Change Layout dialog in the Layout Administration screen.</p>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package.</p>
+<p><span style="font-size: 14px;">However, if you need to install the solution earlier: Use the Note Assistant (SNOTE) to implement the correction instructions.</span></p>
+<p>Learn more at <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
+<p><strong>More information</strong></p>
+<ul>
+<li>To receive an e-mail notification in case of new updates, mark this SAP Note as favorite and add it to your <a href="https://me.sap.com/mynotes" target="_blank">My SAP Notes &amp; KBAs</a> page, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for a complete guide.</li>
+</ul></div></div></div></div>

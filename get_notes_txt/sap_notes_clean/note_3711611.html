@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During a tenant recovery or system refresh, the following SQL command fails when executed on SYSTEMDB:</p>
+<pre><code>ALTER DATABASE &lt;tenant_name&gt; ADD 'scriptserver';
+</code></pre>
+<p>with the error:</p>
+<pre><code>general error: nameserver failed to process the request;
+No changes to database in recovery
+</code></pre>
+<p>The tenant remains in recovery state and required tenant services cannot be added or modified.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP HANA DB Version 2.0</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The tenant database is already in recovery state.</p>
+<p>This can occur when attempting to apply a documented resolution (for example, adding ScriptServer) after the recovery process has already been started.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Tenant services must be configured before starting the tenant recovery.</p>
+<p>For restore/refresh target scenarios, use one of the following approaches:</p>
+<ul><li>Preferred (clean approach):<br/>Drop and recreate the target tenant, enable the required services (for example ScriptServer), and then start the tenant recovery.</li><li>Alternative:<br/>Ensure the tenant is fully out of recovery state before attempting any service or topology changes.</li></ul>
+<p>After the tenant is in a clean state and the required services are configured, re-run the tenant recovery using the same backup.</p>
+<p>SAP Help documentation for tenant lifecycle and service configuration:</p>
+<ul><li><a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/4fe29514fd584807ac9f2a04f6754767/65cd51970fa44f36a4c9083915cf3162.html" rel="noopener noreferrer nofollow" target="_blank">CREATE DATABASE / DROP DATABASE (Tenant Management)</a></li><li><a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/4fe29514fd584807ac9f2a04f6754767/ee36e3441ae24a7883ab353631ecd4d6.html" rel="noopener noreferrer nofollow" target="_blank">Enable ScriptServer for a tenant</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>tenant recovery state, scriptserver add fails, no changes to database in recovery, system refresh, hana tenant lifecycle</p></div></div></div></div>

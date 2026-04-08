@@ -1,0 +1,58 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>Fiori tiles are missing or show "Cannot load tile" in the Quality (QA) or Production (PROD) environments.</p>
+</li><li>
+<p>Standard transport of the catalog did not resolve the issue, or the catalog appears empty in the target system.</p>
+</li><li>Initial troubleshooting via <code>/UI2/FLC</code> or <code>/UI2/FLIA</code> indicates the Catalog ID is missing from the backend or the Page Cache.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>S/4HANA</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The Catalog definition in the target system has become desynchronized or was not fully captured in the original Transport Request (TR). A "Fresh" transport is required to overwrite the corrupted or missing metadata in the target system.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h4 data-toc-skip="">I. Create and Prepare a New Transport</h4>
+<ol><li>
+<p>Access transaction <em><strong>SE01</strong></em> (Transport Organizer) or <em><strong>SE10</strong></em> (Transport Organizer: Display).</p>
+</li><li>
+<p>Click <em><strong>Create</strong></em> and select <strong>C<em>ustomizing Request</em></strong>.</p>
+</li><li>
+<p>Provide a descriptive Short Text (e.g., "Repair Transport for Catalog [Catalog_ID]").</p>
+</li><li>
+<p>Note the generated Transport Number - May be in format: K (e.g., <code>SIDK900XXX</code>or DEVK900123)</p>
+</li></ol>
+<h4 data-toc-skip="">II. Assign Transport in Fiori Launchpad Designer</h4>
+<ol><li>
+<p>Open the Fiori Launchpad Designer (Customization scope):</p>
+<ul><li>
+<p>URL: <code>https://&lt;host&gt;:&lt;port&gt;/sap/bc/ui5_ui5/sap/arsrvc_upb_admn/main.html?scope=CUST</code></p>
+</li><li>
+<p>Or Transaction: /UI2/FLPD_CUST</p>
+</li></ul>
+</li><li>
+<p>Click the <em><strong>Settings</strong></em> (gear icon) in the top-right corner.</p>
+</li><li>
+<p>In the <em><strong>Assign Transport Request </strong></em>dialog, select the Request created in Step I.</p>
+</li><li>
+<p>Click <strong>OK</strong> (to set as default transport). All subsequent changes will now be recorded in this  transport TR.  Additional references (<a href="https://help.sap.com/docs/SAP_NETWEAVER_740/a7b390faab1140c087b8926571e942b7/21211535923c46d88a14e8a1a048fde1.html?version=7.4.29" rel="noopener noreferrer nofollow" target="_blank">Setting Default Transport Request</a>)</p>
+</li></ol>
+<h4 data-toc-skip="">II. Perform a "Dummy" Edit to Force Object Capture</h4>
+<ol><li>
+<p>Locate the problematic Catalog and the specific Tile.</p>
+</li><li>
+<p>Click on the Tile to enter <em><strong>Edit</strong></em> mode.</p>
+</li><li>
+<p>Modify the Title field slightly (e.g., add a "1" or a hyphen to the end).</p>
+</li><li>
+<p>Click Save. This action forces the system to record the entire Catalog/Tile object into the assigned Transport Request (from the earlier step).</p>
+</li><li>
+<p><em>(Optional)</em> Change the Title back to the original name and Save again to maintain naming standards.  Note: This is optional but for testing purposes and guarantee, it is better to show that you have an actual change and cause a delta for debugging purposes.  Sometimes the platform needs to see some differences. </p>
+</li></ol>
+<h4 data-toc-skip="">IV. Release and Import (Release Transport Request)</h4>
+<ol><li>
+<p>Go to <em><strong>SE10</strong></em> (Transport Organizer).</p>
+</li><li>
+<p>Expand your Request, right-click the Task (sub-entry), and select Release.</p>
+</li><li>
+<p>Right-click the Main Request and select Release.</p>
+</li><li>
+<p>Coordinate with your BASIS team to import this TR into the target system (QA/PROD) via <em><strong>STMS</strong></em> (Transport Management System).</p>
+</li></ol>
+<p><strong>Note:</strong> At this point, try to see if the changes were applied to confirm the fix is done.  Sometimes, cache clearing may be needed (See extra steps below).<br/><br/></p>
+<h4 data-toc-skip="">V. Post-Import Cache Clearing (Mandatory - If Step I to IV is limited)</h4>
+<p>After the import, run the following steps in the target system to ensure the new metadata is active:<br/><br/>----Checklist-----</p>
+<p>Typical workflow for cache clearing (in sequential order):</p>
+<ol><li>Clear HTTP Server cache -  Tcode = SMICM → HTTP Plugin → Server Cache → Invalidate Globally </li><li>Clear Metadata Cache - Report/Tcode =  /IWFND/CACHE_CLEANUP </li><li>Clear Metadata Cache (backend) - Report/Tcode =  /IWBEP/CACHE_CLEANUP </li><li>Invalidate Global UI2 caches - Report/Tcode =  /UI2/INVALIDATE_GLOBAL_CACHES </li><li>Recalculate Application Index - Report/Tcode =  /UI5/APP_INDEX_CALCULATE </li><li>If needed: Sychronize Chip cache - Report/Tcode =  /UI2/CHIP_SYNCHRONIZE_CACHE </li><li>If needed: Invalidate Client Cache - Report/Tcode =  /UI2/INVALIDATE_CLIENT_CACHES </li><li>If needed: /UI2/PAGE_CACHE_SYNCHRONIZE  &lt;-- On newer systems this is mandatory (A popular customer missed step). <br/><br/></li></ol>
+<p>Note: The order of execution was provided above (1 to 5) . Step 6, 7, and 8 are additional steps ran if the prior sequential steps are limited to resolve the cache issue. </p>
+<p><br/><br/></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://me.sap.com/notes/3619889" rel="noopener noreferrer nofollow" target="_blank">3619889</a> - Fiori Launchpad Refresh of Quality (or Production) shows missing Tiles - Cannot Load Tile</li><li><a href="https://me.sap.com/notes/3657015" rel="noopener noreferrer nofollow" target="_blank">3657015</a> -  Transporting SAP Fiori Launchpad tiles to avoid overwriting changes </li><li> <a href="https://me.sap.com/notes/2445685" rel="noopener noreferrer nofollow" target="_blank">2445685</a> -  How To Add existing catalogs and groups in CUST scope to transport requests </li><li> <a href="https://me.sap.com/notes/2319491" rel="noopener noreferrer nofollow" target="_blank">2319491</a> -  How to clean up the cache after applying changes that affect SAP Fiori apps </li><li> <a href="https://me.sap.com/notes/3595712" rel="noopener noreferrer nofollow" target="_blank">3595712</a> -  Steps to clean application cache and browser cache in SAP Fiori </li><li> <a href="https://me.sap.com/notes/2449635" rel="noopener noreferrer nofollow" target="_blank">2449635</a> -  How to calculate SAPUI5 application index </li></ul></div></div></div></div>

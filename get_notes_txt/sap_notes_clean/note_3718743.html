@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Error below is occurring in Power BI when attempting to connect to SF OData API using an OData connector:</p>
+<p>"Metadata Errors: UnexpectedXmlAttribute: 'CollectionKind' not expected in context` at multiple positions in the feed.".</p>
+<p><strong>Important note: </strong>SAP does not own or control the Power BI OData connector implementation. If you need assistance with the Power BI configuration or the recommended workaround presented in the Resolution section of this KBA, <strong>please contact Microsoft Support.</strong></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP SuccessFactors HCM Suite
+<ul><li>OData API</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>This error occurs because Power BI sends a $metadata request to the SuccessFactors API, and the returned XML payload contains unexpected attributes named "CollectionKind". These attributes are deprecated in the OData protocol, which causes Power BI to fail when parsing the metadata.</p>
+<p>This issue only occurs when using the OData connector in Power BI. The connector is unable to correctly interpret the payload returned by the $metadata request.</p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The deprecated CollectionKind attribute cannot be removed or suppressed on the SuccessFactors server side, as doing so would affect all customers and could lead to unpredictable impacts.</p>
+<p>On the Power BI side, this limitation prevents the OData connector from retrieving the full dataset from SuccessFactors.</p>
+<p>Microsoft has provided the following alternatives:</p>
+<ol><li>
+<p><strong>Specify an entity or table in the OData connection string.</strong><br/>This prevents Power BI from issuing a generic $metadata request and instead requests metadata only for the specified entity, avoiding the problematic payload.</p>
+</li><li>
+<p><strong>Use the Web connector instead of the OData connector.</strong><br/>Microsoft has confirmed that the Web connector has no known functional or performance limitations in this scenario and is the recommended approach until the issue is resolved.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>web connector, power bi, metadata, unexpected xml attribute, microsoft, CollectionKind</p></div></div></div></div>

@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div class="table-responsive" id="__html0"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100%;"><colgroup><col style="width: 99.9058%;"/></colgroup><tbody><tr><td>
+<pre><span style="font-family: 'courier new', courier; font-size: 10pt;">INFO d.h.c.h.PrintOutputHandler [Thread-7] sterr: fatal: could not read Username for '<a href="https://dev.azure.com" rel="noopener noreferrer nofollow" target="_blank">https://dev.azure.com</a>': No such device or address</span><br/><span style="font-family: 'courier new', courier; font-size: 10pt;">Exception in thread "main" de.hybris.ccv2.BuilderException: Executing of external command failed with exit code: 128</span><br/><span style="font-family: 'courier new', courier; font-size: 10pt;">    at de.hybris.ccv2.executor.Executor.executeOperationOnce(Executor.java:78)</span><br/><span style="font-family: 'courier new', courier; font-size: 10pt;">    at de.hybris.ccv2.executor.Executor.execute(Executor.java:102)</span><br/><span style="font-family: 'courier new', courier; font-size: 10pt;">    at de.hybris.ccv2.repository.git.GitCloner.clone(GitCloner.java:75)</span><br/><span style="font-family: 'courier new', courier; font-size: 10pt;">    at de.hybris.ccv2.task.CloneCustomerProjectTask.process(CloneCustomerProjectTask.java:94)</span><br/><span style="font-family: 'courier new', courier; font-size: 10pt;">    at de.hybris.ccv2.Builder.runTask(Builder.java:294)</span><br/><span style="font-family: 'courier new', courier; font-size: 10pt;">    at de.hybris.ccv2.Builder.lambda$runTasks$3(Builder.java:260)</span><br/><span style="font-family: 'courier new', courier; font-size: 10pt;">    at java.base/java.lang.Iterable.forEach(Iterable.java:75)</span><br/><span style="font-family: 'courier new', courier; font-size: 10pt;">    at de.hybris.ccv2.Builder.runTasks(Builder.java:256)</span><br/><span style="font-family: 'courier new', courier; font-size: 10pt;">    at de.hybris.ccv2.Builder.runTasksAndHandleException(Builder.java:234)</span><br/><span style="font-family: 'courier new', courier; font-size: 10pt;">    at de.hybris.ccv2.Builder.run(Builder.java:113)</span><br/><span style="font-family: 'courier new', courier; font-size: 10pt;">    at de.hybris.ccv2.Builder.main(Builder.java:62)</span></pre>
+</td></tr></tbody></table></div>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><section>
+<section id="u_environment">
+<p>SAP Commerce Cloud</p>
+</section>
+</section>
+<section><header></header></section><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><section>
+<section id="u_reproducing_the_issue">
+<p>Attempt to run a build in the SAP Commerce Cloud environment.  </p>
+</section>
+</section><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><section>
+<section id="u_cause">
+<p>The credentials used for Azure authentication might be incorrect, expired, or lacking the necessary permissions.  </p>
+</section>
+</section><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div id="message-list_1751619475.035429">
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>Make sure the user authentication is correct and has the necessary permissions.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>build failure</p></div></div></div></div>

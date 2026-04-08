@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">When entering slaughter process data via RAF Slaughter Process Entry, a PDA record is created even though the corresponding slaughter data record is locked by another user. The PDA record should not be created and should instead be rolled back.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">IS-MFM, MEAT, RAF Slaughter Process, PDA Record, /SPMEAT/SLDT, /SPDGS/BAPI_PDA_CREATE, SAP Meat and Fish Management by msg.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">A logic issue in Function Module /SPMEAT/DP_SLP_CHANGE leads to the creation of a PDA record even when the slaughter data record is locked. The recently introduced import parameter I_NO_COMMIT of function module /SPDGS/BAPI_PDA_CREATE is not used correctly, causing the commit to occur although the slaughter data update cannot proceed.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="__html0"><strong>History:</strong><br/>SAP Note created on 29.01.2026.</p>
+<p><strong>Description of Correction:</strong><br/>The function module /SPMEAT/DP_SLP_CHANGE has been modified so that when calling /SPDGS/BAPI_PDA_CREATE, the import parameter I_NO_COMMIT is correctly passed as abap_true. This prevents the PDA record from being locked if the battle record is locked.</p>
+<p><strong>Functional Dependencies:</strong><br/>Note 3708724 must be installed.</p>
+<p><strong>Manual Changes:</strong><br/>No manual changes are required for end users.</p></div></div></div></div>

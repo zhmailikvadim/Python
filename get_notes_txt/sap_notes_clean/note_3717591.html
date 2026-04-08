@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Behavior of "lastModifiedBy" field in the Manage Workflow Request when the workflow is approved  directly by the approver accessing the system</li><li>Behavior of "lastModifiedBy" field in the Manage Workflow Request when the workflow is approved via  proxy  on behalf of the approver</li><li>The lastModifiedBy field in the Manage Workflow Request does not change after approvals made directly by the approver</li></ul>
+<section>
+<div id="container-c51746354fda4f41b90face41-top_right_container">
+<div>
+<div>
+<div> </div>
+</div>
+</div>
+</div>
+</section><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p></p>
+<ul><li>SAP SuccessFactors HCM Suite</li><li>SAP SuccessFactors Metadata framework (MDF)</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Scenario 1: Workflow Approved Directly by the Assigned Approver</strong></p>
+<p>1.Login to instance -&gt; Navigate to Manage Workflow Requests.</p>
+<p>2. Create or identify a transaction that triggers a workflow (for example, an employee data change requiring approval).</p>
+<p>3. Log in as the assigned workflow approver.</p>
+<p>4. Access the pending approval request from To-Do or Manage Workflow Requests -&gt; Approve the workflow request.</p>
+<p>5.Search for the approved workflow request. Observe the value of the lastModifiedBy field is not updated </p>
+<p><strong>Result</strong>:<br/>The lastModifiedBy field does not update to reflect the approver who approved the workflow.</p>
+<p></p>
+<p><strong>Scenario 2: Workflow Approved via Proxy</strong></p>
+<p>1.Login to instance -&gt; Navigate to Manage Workflow Requests.</p>
+<p>2. Create or identify a transaction that triggers a workflow (for example, an employee data change requiring approval).</p>
+<p>3. Log in as the assigned workflow approver.</p>
+<p>4. Access the pending approval request from To-Do or Manage Workflow Requests -&gt; Approve the workflow request.</p>
+<p>5.Search for the approved workflow request. Observe the value of the lastModifiedBy field is updated with proper approver details</p>
+<p><strong>Result</strong>:<br/>The lastModifiedBy field reflects a different behavior compared to direct approval (i.e.,the value of the lastModifiedBy field is updated with proper approver details)</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>There is a workflow inconsistency observed when the approver directly approves the workflow. In such cases, the "lastModifiedBy" field does not reflect the approver’s name. This behavior has been identified as a code-related issue. </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>The Engineering team is aware of this issue and is currently investigating it. At this time, we do not have a confirmed timeline for the fix.</li><li>Please refer to the KBA for further updates. The KBA will be updated once the fix is planned and the timeline is available on the roadmap.</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://help.sap.com/viewer/7a4a65f1ace44f5ba6e969f7e952674a/latest/en-US/39081e44351b4784a5daac416a85740b.html" rel="noopener noreferrer nofollow" target="_blank">Implementing and Configuring Workflows in Employee Central</a></li><li><a href="https://userapps.support.sap.com/sap/support/knowledge/en/2544336" rel="noopener noreferrer nofollow" target="_blank">2544336 - Custom MDF workflow and its behavior depending on Pending Data = Yes/ No</a></li><li><a href="https://me.sap.com/notes/2791120" rel="noopener noreferrer nofollow" target="_blank">2791120 - Error When Changing Pending Data of Object to Yes - SAP for Me</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Manage Workflow Requests, lastModifiedBy in workflow approval, direct approval, proxy approval, proxy user, workflow inconsistency, approver name not updated,  MDF workflow,  known issue, MDF-84680 </p></div></div></div></div>

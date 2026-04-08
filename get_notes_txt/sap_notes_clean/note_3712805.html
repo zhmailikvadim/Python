@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>In designer, when creating a Web Services REST datastore and selecting OAuth2.0 as authorization type, there is no scope option</li>
+<li>Job fails with error: " HTTP error:&lt;401, Unauthorized Error: { "statusCode": 401, "message": "Unauthorized. Access token is missing, invalid, or expired." }&gt;"</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""><strong>Keywords</strong></p>
+<p>WS REST API, datastore, scope, OAuth2.0, access token URL, invalid access token, 401, Unauthorization</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment</strong></p>
+<p>SAP Data Services 4.3 Support Package 3</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""><strong>Reproducing the Issue</strong></p>
+<ol>
+<li>Create a Web Services REST datastore and select OAuth2.0 as authorization type</li>
+<li>Fill all the required information</li>
+<li>Save the datastore successfully</li>
+<li>Run job, it fails with error</li>
+</ol>
+<p><strong>Solution</strong></p>
+<p>In designer UI, the scope option will be added into Web Services REST datastore configuration in the later SAP Data Services release</p>
+<p>As workaround to fix the job error, please take below actions:</p>
+<ol>
+<li>Modify the WADL file to add the param name "Authorization" as following for the API you want to call in job<br/><em>&lt;param name="Authorization" style="header" type="xsd:string" required="true"/&gt;</em></li>
+<li>Reimport function into designer to refresh the function structure</li>
+<li>Change the datastore authorization to Basic rather than the OAuth2</li>
+<li>Get the access token value either in POSTMAN or defining a separate job to get the access token</li>
+<li>In the issue dataflow Query, hardcode the value of Authorization field to the bear access token value you obtained in above step4</li>
+</ol></div></div></div></div>

@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>You are encountering the following or a similar error message when querying a remote <span class="SNO_DNT" style="float: none;" translate="no">Microsoft SQL Server</span> <span class="SNO_DNT" style="float: none;" translate="no">Database</span> via <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access</span>.</p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">[Microsoft][ODBC Driver XX for SQL Server] [SQL Server] Reference to database and/or server name in '&lt;MSSQL OBJECT&gt;' is not supported in this version of SQL Server. For query "&lt;SQL QUERY&gt;"</span></li>
+</ul>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Federation; SDA; MSSQL; Azure; Microsoft;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>The error message, which commonly occurs in <span class="SNO_DNT" style="float: none;" translate="no">Azure</span> <span class="SNO_DNT" style="float: none;" translate="no">SQL Databases</span>, indicates an attempt to perform cross-database or cross-server queries. Unlike on-premises <span class="SNO_DNT" style="float: none;" translate="no">SQL Server</span>, <span class="SNO_DNT" style="float: none;" translate="no">Azure SQL Database</span> is a fully managed service that enforces isolation between databases. As a result, direct referencing using three-part (e.g., Database.Schema.Table) or four-part (e.g., Server.Database.Schema.Table) naming conventions is not supported.</p>
+<ol>
+<li><a href="https://learn.microsoft.com/en-us/answers/questions/1465193/cross-database-reference-in-azure-sql-database" target="_blank">Cross database reference in Azure SQL Database</a></li>
+<li><a href="https://techcommunity.microsoft.com/blog/azuredbsupport/lesson-learned-307reference-to-database-andor-server-name-is-not-supported-in-th/3726508" target="_blank">Lesson Learned #307:Reference to database and/or server name is not supported in this version</a></li>
+<li><a class="question-hyperlink" href="https://stackoverflow.com/questions/63906108/reference-to-database-and-or-server-name-is-not-supported-in-this-version-of-sql" target="_blank">Reference to database and/or server name is not supported in this version of SQL Server</a></li>
+<li><a href="https://learn.microsoft.com/en-us/answers/questions/63756/how-to-join-two-azure-databases-on-the-same-azure" target="_blank">How to join two Azure databases on the same Azure Server</a></li>
+<li><a class="question-hyperlink" href="https://stackoverflow.com/questions/11284998/cant-query-between-databases-in-sql-azure" target="_blank">Can't query between databases in SQL Azure</a></li>
+</ol>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>All Revisions</li>
+</ul>
+</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ol>
+<li><span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access</span> connection to <span class="SNO_DNT" style="float: none;" translate="no">MSSQL (Azure)</span> and</li>
+<li>Cross-database / cross-server queries are executed in <span class="SNO_DNT" style="float: none;" translate="no">MSSQL (Azure)</span>.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please note that <span class="SNO_DNT" style="float: none;" translate="no">Microsoft Azure SQL Database</span> is supported in HANA Cloud only through the Data Access Agent, and in HANA 2.0 only through Smart Data Integration, as outlined in SAP Note <a href="https://me.sap.com/notes/2600176/E" target="_blank">2600176</a>.</p>
+<p>Any other scenario is not supported. For supported configurations, please contact Microsoft Support for further guidance.</p>
+<p><strong> </strong></p></div></div></div></div>

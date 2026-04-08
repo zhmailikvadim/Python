@@ -1,0 +1,40 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You have installed a new Release or Support Package (SP) for one of the following products:</p>
+<ul>
+<li>SAP S/4HANA Utilities for Billing Enhancements of German Energy 2602</li>
+<li>SAP S/4HANA Utilities for Intelligent Metering of German Energy 2602</li>
+<li>SAP S/4HANA Utilities Master Data Updates Option for Germany 2602</li>
+</ul>
+<p>As the first configuration activity, you need to activate the business configuration (BC) sets uploaded by the installation. These BC sets contain default Customizing settings, and in particular, the configuration for the German Utilities processes.</p>
+<p><strong>Note that the activation sequence described below is crucial to avoid inconsistencies in the configuration!</strong></p>
+<p>This SAP Note is applicable for the following own roles in the German Utilities market:</p>
+<ul>
+<li>Meter operator (MOS)</li>
+<li>Distribution system operator (DSO)</li>
+<li>Supplier (SUP)</li>
+<li>Party responsible for settlement (PRS)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>US4G, Backend, Business System, Market Communication, MaCo, MaKo, Billing, Metering, Master Data Updates, Switching, MOS, DSO, SUP, PRS, MSB, VNB, BKV</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You have installed the current Release or Support Package (SP). That is, you have implemented the latest installation packages for the US4G and UIUS4G components.</p>
+<p>For more information, see the SAP Note under <em>References</em> below.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>First, perform the steps in section <strong>A)</strong>. Then, depending on your scenario, select one of the sections <strong>B1)</strong> or <strong>B2)</strong>, and perform the steps in only the selected section.<br/><br/></p>
+<p><strong>A)</strong> <strong>In all cases</strong>, regardless of whether you are implementing a new installation, a release upgrade, or an SP upgrade, activate the following BC sets in the given sequence:</p>
+<p>These are full BC sets that <strong>contain all </strong>required configuration settings.</p>
+<ol>
+<li>The <strong>BC sets of Market Process Management</strong> in SAP S/4HANA.<br/>See: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/905da66b76d1449fbe6ac26484842994/aa55e8fd30a14606a0e57ff6b3dd9b58.html" target="_blank">Activation of Business Configuration Sets</a><br/><br/></li>
+<li><strong>Optional: /US4G/BC_ARCH_CLOUD_CONFIG </strong>for settings for the archiving of completed cloud documents in the business system.<br/>See: <a href="https://help.sap.com/docs/SAP_MARKET_COMMUNICATION_FOR_UTILITIES/87668a65965146678743b8c55ff50233/7b9ac9941d9740e7af6be44f2cf0a874.html" target="_blank">Remote Archiving in the Business System</a><br/><strong><br/></strong></li>
+<li><strong>Optional: </strong>The <strong>BC sets of the Measurement Management (MCM)</strong> adapter for the German market.<br/>See: <a href="https://help.sap.com/docs/MASTER_DATA_UPDATES_FOR_GERMANY/5b56fb57bbd94cb08302ce0f2ab9bd26/98ef2a8769ca4b2986a24ed619be48af.html" target="_blank">MCM Business Configuration (BC) Sets</a><br/><br/></li>
+</ol>
+<p><strong>B1)</strong> For a <strong>new installation</strong>, activate the following BC sets in the given sequence:</p>
+<p>Activate all the listed BC sets. That is, the general ones and the ones for your market role(s). These are full BC sets that <strong>in sum contain all</strong> required configuration settings.</p>
+<p><strong>Before</strong> activating the US4G BC sets using SCPR20, activate the below IS-U Switch BC sets as described under this <a href="https://help.sap.com/docs/ABAP_PLATFORM_NEW/1d51ac4c098042528cadb1d5bcb1ab23/4d8abfdb118127f4e10000000a15822b.html?q=switch%20bc%20set" target="_blank">help link</a>. The reason is that these Switch BC sets are set as non-cascading. So, the contents are not deployed to other clients when the business functions are activated.</p>
+<p><strong>ISU_TFK003_T</strong><strong><br/></strong><strong>ISU_TECDE_S</strong><br/><strong><strong>ISU_605_AMI_VC_EVENT_MNGMNT_C_1</strong></strong></p>
+<p><strong>Before</strong> activating the US4G BC sets using SCPR20, set the <em>Deletion Function</em> to <em>Switch On</em>. To do so, call transaction SCPR20 and choose <em>Utilities</em> -&gt; <em>User Settings</em> -&gt; <em>Maint. Transaction</em>. This setting is required because some BC sets contain entries that are deleted and should not be part of the delivery.</p>
+<p><strong>/US4G/3_0_NEW_COMM_2602_SP00_p1 </strong>for general process settings, part 1<br/><strong>/US4G/3_0_NEW_COMM_2602_SP00_p2</strong> for general process settings, part 2<br/><strong>/US4G/3_0_NEW_DSO_2602_SP00</strong> for processes for the market role DSO<br/><strong>/US4G/3_0_NEW_MOS_2602_SP00</strong> for processes for the market role MOS<br/><strong>/US4G/3_0_NEW_MOS_CI_2602_SP00</strong> for convergent invoicing processes for the market role MOS<br/><strong>/US4G/3_0_NEW_SUP_2602_SP00</strong> for processes for the market role SUP<br/><strong>/US4G/3_0_NEW_PRS_2602_SP00</strong> for processes for the market role PRS<br/><br/></p>
+<p><strong>B2)</strong> For an <strong>upgrade from release 2305 SP08 </strong>(shipped on February 13, 2026) <strong>to release 2602</strong> (shipped on February 24, 2026) activate the following BC sets in the given sequence:<strong><br/></strong></p>
+<p>Activate all the listed BC sets. That is, the general ones and the ones for your market role(s). These are delta BC sets that <strong>collate</strong> configuration settings over the version history.</p>
+<p><strong>Before</strong> activating the BC sets using SCPR20, set the <em>Deletion Function</em> to <em>Switch On</em>. To do so, call transaction SCPR20 and choose <em>Utilities</em> -&gt; <em>User Settings</em> -&gt; <em>Maint. Transaction</em>. This setting is required because some BC sets contain entries that are deleted and should not be part of the delivery.</p>
+<p><strong>/UIUS4G/3_0_COMM_2602_SP00</strong> for general user interface (UI) settings<br/><strong>/US4G/3_0_COMM_2602_SP00</strong> for general process settings</p></div></div></div></div>

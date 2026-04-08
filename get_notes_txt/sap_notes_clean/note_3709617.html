@@ -1,0 +1,62 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">A customer is implementing MFA using Risk-Based Authentication (RBA) in SAP Customer Data Cloud and wants to ensure that email verification is performed before allowing MFA (phone number) enrollment.</p>
+<p>The customer observes the following behaviour:</p>
+<ul><li>
+<p>If a user’s email address is already verified</p>
+</li><li>
+<p>When MFA (Assurance Level 20) is required</p>
+</li><li>
+<p>The user is taken directly to phone number registration</p>
+</li><li>
+<p>No additional email OTP verification is requested before MFA enrollment</p>
+</li></ul>
+<p>The customer asks whether it is possible to:</p>
+<ul><li>
+<p>Force email verification again before MFA enrollment</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>
+<p>SAP Customer Data Cloud (CDC)</p>
+</li><li>
+<p>Risk-Based Authentication (RBA)</p>
+</li><li>
+<p>Email Identity Verification</p>
+</li><li>
+<p>MFA (Phone / SMS / Authenticator App)</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Email verification in CDC is a one-time account state, not a verification step that is automatically repeated.</p>
+</li><li>
+<p>Once an email address is verified, CDC considers email ownership confirmed and does not re-trigger email OTP verification during subsequent actions such as MFA enrollment.</p>
+</li><li>
+<p>RBA is not a sequential workflow engine:</p>
+<ul><li>
+<p>RBA evaluates risk and enforces a single required assurance level</p>
+</li><li>
+<p>If multiple RBA rules apply, CDC enforces only the highest assurance level</p>
+</li><li>
+<p>Lower levels (for example, Level 10) are implicitly satisfied when Level 20 is enforced</p>
+</li></ul>
+</li></ol>
+<p>As a result:</p>
+<ul><li>
+<p>Two RBA rules cannot be chained to force “verify email first, then enroll MFA”</p>
+</li><li>
+<p>If MFA (Level 20) is required and the email is already verified, the user proceeds directly to MFA enrollment</p>
+</li></ul>
+<p></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This behaviour is expected and aligned with CDC design.</p>
+<ul><li>
+<p>If <code>isVerified = true</code> for the user’s email:</p>
+<ul><li>
+<p>CDC does not prompt for email OTP again</p>
+</li><li>
+<p>MFA enrollment is allowed directly when Level 20 is required</p>
+</li></ul>
+</li><li>
+<p>RBA cannot be used to re-verify email ownership once the email is already verified</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To prevent MFA enrollment after password-only authentication and mitigate MFA enrollment hijacking scenarios, SAP recommends the following approach:</p>
+<h4 data-toc-skip="">1. Enforce email verification via flow logic (not RBA)</h4>
+<ul><li>
+<p>Require email verification during onboarding or first login</p>
+</li><li>
+<p>Use Screen Sets and account state checks (for example, <code>isVerified</code>) to block access to MFA enrollment screens if the email is not verified</p>
+</li><li>
+<p>Email verification should be treated as a precondition, not an RBA step</p>
+</li></ul>
+<p>Official documentation:<br/><a href="https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/f3193f26c43f4e77adc44a69899ea77b.html?utm_source=chatgpt.com" rel="noopener noreferrer nofollow" target="_new">https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/f3193f26c43f4e77adc44a69899ea77b.html</a></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Customer Data Cloud, CDC, MFA, RBA, Email Verification, Identity Verification, Assurance Levels, MFA Enrollment, Screen Sets</p></div></div></div></div>

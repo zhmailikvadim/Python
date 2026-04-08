@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>Redirects to custom.jsp are not working in BI</li>
+</ul>
+<div id="container-8a4c7824e9a9471c895fd4d7c-top_right_container">
+<div class="uiaction-bar-wrapper">
+<div class="uiaction-bar">
+<div class="uiaction-bar-btn-container"></div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> BI launchpad, custom.jsp</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong><span style="font-size: 14px;">Environment</span></strong></p>
+<ul>
+<li><span style="font-size: 14px;">SAP BusinessObjects Business Intelligence (BI) Platform 4.x / 2025</span></li>
+<li><span style="font-size: 14px;">Windows</span></li>
+<li><span style="font-size: 14px;">Linux / Unix </span></li>
+</ul>
+<p><strong><span style="font-size: 14px;">Steps to reproduce</span></strong></p>
+<ol>
+<li>Stop tomcat.</li>
+<li>Navigate to ..\tomcat\webapps\BOE\WEB-INF\internal, then backup and edit global.properties and FioriBI.properties</li>
+<li>In global.properties, change the value of <em>precompiled.jsp.files.use</em> to false.</li>
+<li>In FioriBI.properties, change the value of <em>redirection.iframe.1.redirectto.url </em>to /custom.jsp.</li>
+<li>Navigate to ..\tomcat\webapps\BOE\WEB-INF\eclipse\plugins\webpath.FioriBI\web, customize the custom.jsp file according to your requirements. </li>
+<li>Clear tomcat cache(Only BOE folder is enough) as per <a href="https://me.sap.com/notes/1879431" rel="noopener noreferrer nofollow" target="_blank">1879431</a>.</li>
+</ol>
+<p><strong>Note</strong>: The provided custom.jsp file by the BI is intended for customers to implement custom pages.</p>
+<p><strong>Cause</strong></p>
+<p>Missing default configuration</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>This issue is fixed in the patches listed in the "Support Packages &amp; Patches" section below.<br/>Due to different internal processes, the "Support Packages &amp; Patches" section of the SAP Note will be populated as below:<br/>  - for fixes delivered in "Support Packages": immediately (even if the "Support Package" is planned to be released several months later)<br/>  - for fixes delivered in "Patches": <strong>ONLY</strong> once the "Patch" is released <strong>AND</strong> available on SMP (not before)<br/>For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article 2144559 in References section.</li>
+</ul>
+<p><strong>Workaround</strong></p>
+<p>See <a href="/notes/3715168" target="_blank">3715168</a> - Workaround for SAP Notes 3699457 / 3707023</p></div></div></div></div>

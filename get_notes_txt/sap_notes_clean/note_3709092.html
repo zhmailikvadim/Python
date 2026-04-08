@@ -1,0 +1,53 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>When running an SAP HANA MDS<sup>1)</sup> query you receive an error message</p>
+<ul>
+<li>Error code 42014:<br/>"Caught exception : exception 42111: SQL Error : SQL Error"</li>
+</ul>
+<p><sup>1)</sup> MDS: MultiDimensional Services; analytical engine in SAP HANA, responsible for processing analytic request fom SAP Analytics clienst such as SAP Analytics Cloud (SAC) or SAP Analysis for Office.</p>
+</div>
+<div></div>
+<div></div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Analytics Cloud, SAC, SAP Analysis Office, SAP Design Studio, InA/MDS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, a SQL statement was missing a string conversion of a field.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2.0 database, EPMMDS plugin revision:
+<ul>
+<li>"Internal Version"  &lt; 1.00.2026.14</li>
+</ul>
+</li>
+<li>SAP HANA Cloud Edition</li>
+<ul>
+<li>&lt; CE 2026.14</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>You create a dimension with a keyattribute with an NVARCHAR type.</li>
+<li>You create a level-based-hierarchy whose last level has a non-NVARCHAR type (e.g. date, integer)</li>
+<li>In your query you request the dimension with the hierarchy in question active <strong>and</strong> request additional display attributes.</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<p>Either change the type of:</p>
+<ul>
+<li>last hierarchy level column to NVARCHAR or</li>
+<li>the dimension key attribute to VARCHAR (if possible)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA database Revisions:</p>
+<ul>
+<li>SAP HANA 2.0 database, EPMMDS plugin revision:
+<ul>
+<li>"Internal Version"  1.00.202614.00 or higher</li>
+<li>See SAP Note 2444261 for availability of this EPMMDS plugin revision for your SAP HANA revision</li>
+</ul>
+</li>
+<li>SAP HANA Cloud Edition</li>
+<ul>
+<li>CE 2026.14 or higher</li>
+</ul>
+</ul></div></div></div></div>

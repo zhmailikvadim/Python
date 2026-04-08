@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the application log for the availability check with advanced Available-to-Promise (external identification ATP_CHECK_ONLINE), the message ATP_SBC_SOURCING 001 appears, even though Supply Creation-based Confirmation (SBC) is not used for the corresponding material. The text of the message is "Sources are not configured for line item &lt;x&gt;/&lt;y&gt; product &lt;z&gt;".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">CL_ATP_SBC_CONTROLLER_ADAPTER  CL_ATP_SBC_SOURCING_CONTROLLER  GET_SOURCING_METHOD_INSTANCE</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error: If an ATP check implicitly involves the deletion of a sales order item (for instance, when repeatedly checking an item that uses Alternative-based Confirmation), also SBC is involved about the deletion. There is no check if the item to be deleted is relevant for SBC. It is recognized that data to process the deletion in SBC are missing and the log entry is written.</p>
+<p>With the correction, it is correctly recognized that SBC is not used for the item.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Upgrade to S/4HANA 2023 SP06. If this is not possible, apply the attached correction instruction.</p>
+<p>Make sure that also the correction instructions from the prerequisite notes are applied. Usually this should be done automatically by the note assistant.</p></div></div></div></div>

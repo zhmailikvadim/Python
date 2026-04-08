@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>You are using the XML Digital Signer adapter in SAP Cloud Integration (SAP Integration Suite) to sign an XML payload.</p>
+</li><li>
+<p>The requirement dictates that the Reference URI in the &lt;ds:Reference&gt; tag must point to a specific element ID (e.g., URI="#voucher").</p>
+</li><li>
+<p>However, the output signature currently generates an empty Reference URI (URI=""), which signifies that the entire document is signed, or the targeted element is not being correctly referenced.</p>
+</li><li>
+<p>When attempting to fix this by adding the<strong> <em>CamelXmlSignatureContentReferenceUri </em></strong>header, the processing fails with the following error: <span style="text-decoration: underline;"><em>javax.xml.crypto.dsig.XMLSignatureException: ... ResourceResolverException: Cannot resolve element with ID [ID_Value]</em></span></p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Integration Suite</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>1. Configure the iFlow to digitally sign the payload.<br/>2. Attempt to populate the URI value in the signature reference field.<br/>3. Deploy and test the iFlow.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The XML Signer does not recognize the "id" attribute as a valid XML ID Type because it is not explicitly defined in an XSD Schema.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To successfully generate a signature with a specific Reference URI, you must provide the XML Signer with both the Reference URI value and the XML Schema (XSD) that defines the ID attribute.</p>
+<p>Follow these steps in your Integration Flow:</p>
+<ol><li>
+<p>Upload the XSD Schema:</p>
+<ul><li>
+<p>Ensure the XML Schema (e.g., factura.xsd) that defines the structure of your payload (specifically the element with the ID attribute) is uploaded to the Resources tab of your Integration Flow.</p>
+</li></ul>
+</li><li>
+<p>Configure the Content Modifier:</p>
+<ul><li>
+<p>Add a Content Modifier step immediately before the XML Signer step.</p>
+</li><li>
+<p>Navigate to the Message Header tab and add the following two headers:</p>
+</li></ul>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable" style="width: 86.9553%; height: 75.4688px;"><thead><tr style="height: 18.6589px;"><td style="width: 20.5167%; height: 18.6589px;"><strong>Name</strong></td><td style="width: 10.4798%; height: 18.6589px;"><strong>Value</strong></td><td style="width: 65.8795%; height: 18.6589px;"><strong>Description</strong></td></tr></thead><tbody><tr style="height: 18.6589px;"><td style="width: 20.5167%; height: 18.6589px;"><strong>CamelXmlSignatureContentReferenceUri</strong></td><td style="width: 10.4798%; height: 18.6589px;">#YourIDValue</td><td style="width: 65.8795%; height: 18.6589px;">(e.g., #voucher). This sets the specific Reference URI in the signature output.</td></tr><tr style="height: 38.151px;"><td style="width: 20.5167%; height: 38.151px;"><strong>CamelXmlSignatureSchemaResourceUri</strong></td><td>xsd/YourSchema.xsd</td><td style="width: 65.8795%; height: 38.151px;">(e.g., xsd/factura.xsd). This points to the uploaded schema resource, allowing the adapter to identify the ID attribute correctly.</td></tr></tbody></table></div>
+</li><li>
+<p>Deploy and Test:</p>
+<ul><li>
+<p>Save and deploy the Integration Flow.</p>
+</li><li>
+<p>The XML Signer will now use the schema to resolve the element ID and populate the &lt;ds:Reference URI="#YourIDValue"&gt; correctly in the output.</p>
+</li></ul>
+</li></ol>
+<h4 data-toc-skip="">Please refer this official help page of SAP for any additional information </h4>
+<ul><li>
+<p><a href="https://help.sap.com/docs/integration-suite/sap-integration-suite/xml-digital-signature" rel="noopener noreferrer nofollow" target="_blank">Sign the Message Content with XML Digital Signature | SAP Help Portal</a></p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Help <a href="https://help.sap.com/docs/integration-suite/sap-integration-suite/xml-digital-signature" rel="noopener noreferrer nofollow" target="_blank">Sign the Message Content with XML Digital Signature | SAP Help Portal</a><a href="https://help.sap.com/docs/integration-suite/sap-integration-suite/xml-digital-signature" rel="noopener noreferrer nofollow" target="_blank"></a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>XML Digital Signature, XML Signer, Cannot resolve element with ID, ResourceResolverException, Reference URI, CamelXmlSignatureContentReferenceUri, CamelXmlSignatureSchemaResourceUri, Enveloped Signature</p></div></div></div></div>

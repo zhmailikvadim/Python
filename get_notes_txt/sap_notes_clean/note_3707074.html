@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>With the release 2602 CE, <cite>DMS</cite> (Document Management Service) can now be added as external (SL1) via the Attachment facet at the header level of a Purchase Requisition in the Manage Purchase Requisitions - Professional app or via Documents tab in the Create Purchase Requisition - Advanced.</p>
+</div>
+<div>
+<p><img class="img-responsive" src="/documents/customerkba/avlq8FVEgjikNr-R22aTR7Tm2EiWaBxShVcONas3jRU"/></p>
+<p><img class="img-responsive" height="324" src="/documents/customerkba/wuRu8PfBxKwDRJaRLhaLPsqcAql96sGEtbmkY1NFC-A" width="1094"/></p>
+<p>This can enable the transfer of header attachments from Purchase Requisition to Purchase Order.</p>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><section>
+<section id="u_environment">
+<p>SAP S/4HANA Cloud Public Edition 2602</p>
+</section>
+</section><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To be able to transfer attachments between Purchase Requisitions (PR) to Purchase Orders (PO) the configuration on the HDM needs to be done. For this the customizing activity Activate HDM for Attachment Object Type can be used by the configuration expert. Please check the path shown in the screenshots below.</p>
+<p>In the CBC or Manage Your Solution find the SSCUI 105346:</p>
+<p><img class="img-responsive" height="752" src="/documents/customerkba/Ih5RKVxrNDFqk3lK_niEXdnQN8T2oZ6ULAbntSy3YQo" width="1315"/></p>
+<p>Open the activity Activate HDM for Attachment Object Type and activate the PURCHASEREQUISITION, PURCHASEREQUISITIONITEM and PURCHASEORDER:</p>
+<p><img class="img-responsive" height="764" src="/documents/customerkba/1UQJIItLshq4N6ubX-diwxCdMiH7hMepaMwHHXV_pFw" width="1314"/></p>
+<p>Select PURCHASEREQUISITION, PURCHASEREQUISITIONITEM or PURCHASEORDER and navigate to Activate Document Frameworks, then select Document Management System and navigate to Maintain Default and Restricted Document Types. In this view is possible to maintain which will be the default Document Type for attachment:</p>
+<p><img class="img-responsive" height="438" src="/documents/customerkba/n9S9_DD8P0EwKxvJ-YI0IgxbROuP-6wZMyDVBq2WmL8" width="1314"/></p>
+<p>SL1 is for External Use<br/>SL9 is for Internal Use</p>
+<p>After the configuration a new tab will be displayed in the Purchase Requisition and Purchase Order Header in the Advanced app, the Documents tab: </p>
+<p><img class="img-responsive" height="389" src="/documents/customerkba/wuRu8PfBxKwDRJaRLhaLPsqcAql96sGEtbmkY1NFC-A" width="1314"/></p>
+<p>All the attachments added in this tab will be transferred from the Purchase Requisition to the Purchase Order. Meaning that if an attachment is desired to be transfer it need to be added in the Documents tab on header and not in the Service for Object - Attachment List.<br/>In the Item line there is also a button called Documents:</p>
+<p><img alt="" class="img-responsive" height="181" src="/documents/customerkba/Ey0vr3GQtPZJVMnMC4U5ZqamAtWmhRCtAyGYmG4BUj8" title="Screenshot 2026-02-19 at 16.05.54.png" width="1318"/></p>
+<p>Also in the Manage Purchase Requisitions - Professional app the SL1 document type will be displayed:</p>
+<p><img class="img-responsive" height="414" src="/documents/customerkba/avlq8FVEgjikNr-R22aTR7Tm2EiWaBxShVcONas3jRU" width="1320"/></p>
+<p>Attachments added through here will be sent to the Purchase Order after the conversion between PR and PO.</p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Help Portal - <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/ee9ee0ca4c3942068ea584d2f929b5b1/39f899684b4a44168692049162f4f7e2.html?parentHref=https://help.sap.com/whats-new/7d3d11840a6543329e72391cf4d48e2d?Line_of_Business=Sourcing%2Band%2BProcurement&amp;parentName=What%27s+New+Viewer+-+SAP+S/4HANA+Cloud+Public+Edition" rel="noopener noreferrer nofollow" target="_blank">Transfer of Purchase Requisition Header Attachments to Purchase Order</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Attachment transfer, SL9, SL1, Purchase Order, Purchase Requisition, attachments, header</p></div></div></div></div>

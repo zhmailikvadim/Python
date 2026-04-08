@@ -1,0 +1,48 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When attempting to delete a custom field created in the Custom Fields and Logic app for business context /IAM/ISSUE_ROOT, the system raises an error indicating that the field cannot be deleted due to existing usages.</p>
+<p>The Custom Fields and Logic UI displays a message:<em> </em><strong><em>"The selected field(s) cannot be removed from the business context due to the following existing usage(s). Please remove the usages and try again."</em></strong></p>
+<p>Also, the structure is non-editable to remove the field as per KBA <a href="https://me.sap.com/notes/3600064" rel="noopener noreferrer nofollow" target="_blank">3600064 - Custom Field cannot be deleted due to external usages - SAP for Me</a> suggestions.</p>
+<p>Even after:</p>
+<ul><li>Executing report SDDIC_DDLS_INDEX_ALL_SOURCES following SAP Note <a href="https://me.sap.com/notes/3137922" rel="noopener noreferrer nofollow" target="_blank">3137922 - Custom Fields fail to be Published/Deleted due to dependencies on own generated objects - SAP for Me</a>,</li><li>Removing external usages in BRF+/FDT functions in all relevant clients (e.g., clients 400 and 500),</li><li>Ensuring that the custom field is no longer referenced in generated classes or BRF+ objects, </li><li>Checking where‑used data shows no remaining relevant references.</li></ul>
+<p>the deletion in the Custom Fields app still fails.</p>
+<p></p>
+<p>Then both Custom Fields and Logic UI and transaction SCFD-LOG display message:</p>
+<ul><li style="font-style: italic; font-weight: bold;"><strong><em>Create a task for transport request &lt;transport_request&gt;.</em></strong></li></ul>
+<p>After creating a task for the transport request &lt;transport_request&gt; and updating apps "Configure Software Packages" (with 'Automatic Task Handling' on) and "Register Extensions for Transport." as per KBA <a href="https://me.sap.com/notes/0003032581" rel="noopener noreferrer nofollow" target="_blank">3032581 - Publish Custom Fields fail with transport request/tasks related issues. - SAP for Me</a> </p>
+<p>The deletion in the Custom Fields app still fails,</p>
+<p></p>
+<p>With Custom Fields and Logic UI displays messages:</p>
+<ul><li style="font-weight: bold; font-style: italic;"><em><strong>Please check custom field log (transaction SCFD_LOG for further messages).</strong></em></li><li style="font-weight: bold; font-style: italic;"><em><strong>Could not be published</strong></em></li></ul>
+<p>In transaction SCFD_LOG, the following error is raised during deletion:</p>
+<ul><li style="font-style: italic; font-weight: bold;"><strong><em>Return Code: 8. Object type: TABL. Object name: /IAM/D_I_ROOT. Nametab for table /IAM/D_I_ROOT cannot be generated.</em></strong></li></ul>
+<p>Inspection of table /IAM/D_I_ROOT in SE11 shows the root cause:</p>
+<ul><li style="font-style: italic; font-weight: bold;"><strong><em>Table change not possible. There is a DB trigger on the table.</em></strong><br/><strong><em>Table /IAM/D_I_ROOT (Statements could not be generated)</em></strong></li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Custom Fields app</li><li>SAP S/4HANA Cloud Private Edition 2023</li><li>HEC_ABAP</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Log in to FLP .</li><li>Search for the 'Custom Fields' Fiori app.</li><li>Open the custom field.</li><li>Click on the delete button available at the bottom.</li><li>System gives an error: "The selected field(s) cannot be removed from the business context due to the following existing usage(s). Please remove the usages and try again."</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Although BRF+/FDT references were removed from all relevant clients and created a task for the transport request &lt;transport_request&gt; and updated apps "Configure Software Packages" (with 'Automatic Task Handling' on) and "Register Extensions for Transport", the custom field deletion still fails because the generated database structure /IAM/D_I_ROOT cannot be regenerated.</p>
+<p>In transaction SCFD_LOG, the following error is raised during deletion:</p>
+<ul><li style="font-style: italic; font-weight: bold;"><strong><em>Return Code: 8. Object type: TABL. Object name: /IAM/D_I_ROOT. Nametab for table /IAM/D_I_ROOT cannot be generated</em></strong></li></ul>
+<p>Inspection of table /IAM/D_I_ROOT in SE11 shows the root cause:</p>
+<ul><li style="font-style: italic; font-weight: bold;">Table change not possible. There is a DB trigger on the table.<br/>Table /IAM/D_I_ROOT (Statements could not be generated)</li><li>As long as the DB trigger is present, the system cannot regenerate or adjust the table structure</li><li>This prevents the deletion and regeneration cycle required for removing the custom field</li></ul>
+<p>This behavior is aligned with SAP Note <a href="https://me.sap.com/notes/0002284776" rel="noopener noreferrer nofollow" target="_blank">2284776 - Table change not possible. There is a DB trigger on the table. - SAP for Me</a></p>
+<p>Custom field deletion is a cross-client technical operation. Any DDIC structure regeneration (including append removal) must succeed. A DB trigger on the affected table blocks this step.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>For error <em><strong>"The selected field(s) cannot be removed from the business context due to the following existing usage(s). Please remove the usages and try again."</strong></em>:</p>
+<ol><li>Remove the custom field from the specified FDT functions and activate them.</li><li>Fix errors in the BRF+ function Z_CR_PR_TEMP_FUNCTION following the provided steps:
+<ol><li>
+<p>Open t-code BRF+,  BRF+ workbench will be opened in browser</p>
+</li><li>
+<p>Search for function Z_CR_PR_TEMP_FUNCTION , click check button and observe errors.</p>
+</li><li>
+<p>Click Top Expression PR_MAIN_DECITION_TABLE =&gt; click Edit button for the decision table PR_MAIN_DECITION_TABLE</p>
+</li><li>
+<p>Click button "Export To Excel" to backup the data as Excel</p>
+</li><li>
+<p>Click button "Table Settings" -&gt; In the popup, remove the Z elements.</p>
+</li><li>
+<p>Press OK to close the popup and press save and activate the change.</p>
+</li><li>
+<p>Press check button for function Z_CR_PR_TEMP_FUNCTION to see if the error still happen.</p>
+</li></ol>
+</li></ol>
+<p> </p>
+<p>For error <em><strong>"</strong><strong>Create a task for transport request &lt;transport_request&gt;."</strong></em>:</p>
+<p>Create a task for the transport request &lt;transport_request&gt; and update apps "Configure Software Packages" (with 'Automatic Task Handling' on) and "Register Extensions for Transport." as per KBA <a href="https://me.sap.com/notes/0003032581" rel="noopener noreferrer nofollow" target="_blank">3032581 - Publish Custom Fields fail with transport request/tasks related issues. - SAP for Me</a> </p>
+<p> </p>
+<p>For errors:</p>
+<ul><li style="font-weight: bold; font-style: italic;"><em><strong>Please check custom field log (transaction SCFD_LOG for further messages).</strong></em></li><li style="font-weight: bold; font-style: italic;"><em><strong>Could not be published</strong></em></li><li style="font-weight: bold; font-style: italic;"><em><strong>Return Code: 8. Object type: TABL. Object name: /IAM/D_I_ROOT. Nametab for table /IAM/D_I_ROOT cannot be generated.</strong></em></li></ul>
+<p>Remove the DB trigger on table /IAM/D_I_ROOT and retry the custom field deletion. Once the deletion is finished, the trigger can be added again if required. Further information regarding this issue can be found in note <a href="https://me.sap.com/notes/0002284776" rel="noopener noreferrer nofollow" target="_blank">2284776 - Table change not possible. There is a DB trigger on the table. - SAP for Me</a></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://me.sap.com/notes/0003137922" rel="noopener noreferrer nofollow" target="_blank">3137922 - Custom Fields fail to be Published/Deleted due to dependencies on own generated objects</a></li><li><a href="https://me.sap.com/notes/0003032581" rel="noopener noreferrer nofollow" target="_blank">3032581 - Publish Custom Fields fail with transport request/tasks related issues</a></li><li><a href="https://me.sap.com/notes/0002284776" rel="noopener noreferrer nofollow" target="_blank">2284776 - Table change not possible. There is a DB trigger on the table</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>custom field deletion, /IAM/ISSUE_ROOT, SCFD_LOG error, nametab generation failure, DB trigger on /IAM/D_I_ROOT, BRF+/FDT usages, cross‑client where-used check, generated objects, class and method dependencies, external usages removal, client 400 and 500 references, DDIC regeneration, SAP Note 2284776, custom field append removal, table regeneration blocked, dependency cleanup, business context deletion failure</p></div></div></div></div>

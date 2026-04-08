@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Sudden change in the database hardware key.</li><li>License expiration noted in HANA Studio</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP HANA Database</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Logon screen went down.</li><li>Check the systems from OS level; they are up and running fine.</li><li>Open HANA Studio and observe that the license has expired.</li><li>Consult the backup team; backups are failing due to license expiration.</li><li>Check the hardware key and observe that it has changed.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The root cause of the issue is most likely a system identity change, such as a system rename, which can cause the hardware key to change unexpectedly.</li><li>The hardware key change leads to the expiration of the license.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<p><strong>Check for System Identity Changes:</strong></p>
+<ul style="list-style-type: disc;"><li>
+<p>Verify if any system identity change (such as a system rename) was performed recently. Hardware keys often change when the system’s identity is altered.</p>
+</li></ul>
+</li><li>
+<p><strong>Analyze Relevant Files:</strong></p>
+<ul style="list-style-type: disc;"><li>
+<p>Review the following files to investigate the cause of the hardware key change:</p>
+<ul><li>
+<p>sldreg.xml: This file contains system registration details and can indicate if there were any changes to the system.</p>
+</li><li>
+<p>hdblcm trace files: These trace files can provide information about configuration changes that might have triggered the hardware key change.</p>
+</li></ul>
+</li></ul>
+</li><li>
+<p><strong>Resolve the License Issue:</strong></p>
+<ul style="list-style-type: disc;"><li>
+<p>After identifying the cause, work with SAP account team or support to refresh or reassign the license to match the new hardware key.</p>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: <a href="https://me.sap.com/notes/0002663013" rel="noopener noreferrer nofollow" target="_blank">0002663013 - How to request a new license key when the Hardware Key changed</a></li><li>Refer to: <a href="https://me.sap.com/notes/0002729787" rel="noopener noreferrer nofollow" target="_blank">0002729787 - FAQ: SAP HANA Data Supplier for System Landscape Directory (SLD), Solution Manager and Focused Run (FRUN)</a></li><li>Refer to: <a href="https://me.sap.com/notes/0002848708" rel="noopener noreferrer nofollow" target="_blank">0002848708 - How to get the HTTP trace of sldreg(.exe)</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>database hardware key change, license expiration, SAP HANA, backups failing, system identity change, system rename, license expired error, sldreg.xml, trace files, M_LICENSE, M_LICENSES</p></div></div></div></div>

@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When replicating an employee the following error message is displayed: </p>
+<ul><li>Fill mandatory field : PXXXX-XXXXX for time segment xx.xx.xxxx to xx.xx.xxxx<br/>Message No. ECPAO_IN_PROCESSING039</li></ul>
+<p>These KBA aims to explain which fields are mandatory for the replication.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP SuccessFactors Employee Central integration to SAP Business Suite</li><li>Employee Master data replication </li><li>Business Integration Builder (BIB)</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Some fields are mandatory for the replication of determined Infotypes, and this mandatory fields can differ based on the country of the Company.</p>
+<p>The system uses one of these two tables to determine the mandatory fields:</p>
+<ul><li> V_T588MFPROPC (Custom) or</li><li>V_T588MFPROPS (SAP Internal) </li></ul>
+<p>When a field have the flag "Required Entry" marked, that field will be set as mandatory for that Infotype during the replication.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To fix this issue, follow these steps below:</p>
+<ol><li><span style="font-size: 10pt;">To identify which fields are mandatory, at first it is necessary to identify the Country/Molga of the Company in the T500P table.</span></li><li><span style="font-size: 10pt;">After that with the Molga and the Infotype values, it is possible to check inside the V_T588MFPROPC or V_T588MFPROPS table to identify which fields are mandatory.</span></li><li><span style="font-size: 10pt;">To make a field optional or mandatory please refer to SAP Note <a href="https://me.sap.com/notes/0002489963" rel="noopener noreferrer nofollow" target="_blank">2489963 - How to make a field Optional or Mandatory in Master Data Replication? - SAP for Me</a></span><span style="font-size: 10pt;"><br/>Please note that some fields are mandatory due to Country requirement, and cannot be set to optional.</span></li></ol>
+<ol></ol>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>mandatory field, Message No. ECPAO_IN_PROCESSING039, ECPAO_IN_PROCESSING039, Employee Master Data Replication, <span style="font-size: 10pt;">T500P, V_T588MFPROPC, V_T588MFPROPS</span></p></div></div></div></div>

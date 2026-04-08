@@ -1,0 +1,147 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="OutlineElement Ltr SCXW84514092 BCX8" id="__html0">
+<p class="Paragraph SCXW84514092 BCX8">This SAP Note informs you about restrictions related to SAP S/4HANA Service 2025 FPS1.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Release restrictions, SAP S/4HANA 2025 FPS1</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note provides information about restrictions that exist for SAP S/4HANA 2025 FPS1.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="OutlineElement Ltr SCXW242319744 BCX8">
+<p class="Paragraph SCXW242319744 BCX8"><strong> S/4HANA Accounting Integration </strong></p>
+</div>
+<div class="ListContainerWrapper SCXW242319744 BCX8">
+<ul>
+<li><span style="font-size: 14px;">Integration with Central Finance is not supported beyond </span><a href="https://roadmaps.sap.com/board?PRODUCT=73554900100800000266&amp;range=CURRENT-LAST#;INNO=919816F2ECD11EEFA4BE9838F801973F%20%20" style="font-size: 14px;" target="_blank">central market segment reporting</a><span style="font-size: 14px;">, released with S/4HANA 2025 FPS0</span></li>
+<li>Predictive Accounting Integration for Service Orders and Service Contracts is not supported.</li>
+<li><span style="font-size: 14px;">Revenue Recognition for Inhouse Repair based on outbound delivery is not supported.<br/></span></li>
+</ul>
+</div>
+<div class="ListContainerWrapper SCXW242319744 BCX8">
+<div class="OutlineElement Ltr SCXW262488853 BCX8">
+<p class="Paragraph SCXW262488853 BCX8"><strong> S/4HANA Service Order Management </strong></p>
+</div>
+<div class="ListContainerWrapper SCXW262488853 BCX8">
+<ul>
+<li><span style="font-size: 14px;">Down-payments are not supported in Service Order.</span></li>
+<li><span style="font-size: 14px;">Intercompany service order process:</span></li>
+<ul>
+<li><span style="font-size: 14px;">Event-Based Revenue Recognition (EBRR) is not supported for the intercompany item in a service hierarchy (in the customer-facing service order).</span></li>
+<li><span style="font-size: 14px;">The process with an intercompany service order and a fixed price service item is only supported when Sales Billing is used.</span></li>
+<li><span style="font-size: 14px;">The intercompany service order process is not supported with Contract Accounts Receivable and Payable (FI-CA) and Convergent Invoicing (CI) to FI-CA.</span></li>
+</ul>
+<li>The “Monitor Advance Shipment Stock” app does not consider the quantity of parts for which already a return order was created or returned to the warehouse.</li>
+<li><span style="font-size: 14px;">Planned cost are not supported for intercompany service items with collective accounting.<br/></span></li>
+</ul>
+</div>
+<div class="ListContainerWrapper SCXW262488853 BCX8">
+<div class="OutlineElement Ltr SCXW194140676 BCX8">
+<p class="Paragraph SCXW194140676 BCX8"><strong>Service with Advanced Execution </strong></p>
+</div>
+<div class="OutlineElement Ltr SCXW194140676 BCX8">
+<p class="Paragraph SCXW194140676 BCX8">While the restrictions from the other sections of this Service note are also applicable here, the following are specific to Service with Advanced Execution.</p>
+</div>
+<div class="ListContainerWrapper SCXW194140676 BCX8">
+<ul>
+<li>No integration or data exchange between the service request and the plant maintenance notification.</li>
+<li>No integration or data exchange between the service order and the billable maintenance order in warranty determination.</li>
+<li>Resource-related cost (RRCO) subitems in service quotations and service orders do not support credit check.</li>
+<li>Requote is not supported for service quotation with non-statistical RRCs</li>
+<li>The “Monitor Advance Shipment Stock” app does not support advance shipment from a billable maintenance order.</li>
+<li>Product substitution is not supported for execution order items.</li>
+</ul>
+</div>
+<div class="ListContainerWrapper SCXW194140676 BCX8">
+<p><strong> Service with Advanced Execution - Maintenance Management</strong></p>
+<div class="ListContainerWrapper SCXW87432561 BCX8">
+<ul>
+<li>Billable maintenance order can't be created through an external API.</li>
+<li>A maintenance order cannot be converted into a billable maintenance order through the OData API.</li>
+<li>Plant maintenance operation level controlling is not supported.</li>
+<li>The direct creation of a billable maintenance order and conversion of PM orders into billable maintenance orders are not supported via EAM Fiori Apps.</li>
+<li>An advance shipment order, created from a billable maintenance order, does not support procurement relevant sales order item categories (e.g. TAB), if the order type of the billable maintenance order is using the enhanced procurement mode.</li>
+<li>Warranty processing of billable maintenance order and warranty claims integration is not supported. Warranty is supported in the service order.</li>
+<li>In case of list transactions like IW39, it is not possible to search with service fields in the selection group "Service Order Selection" with the search parameter "EQ initial", with exception of the fields Service Transaction ID and Service Item ID.</li>
+<li>Status changes in the billable maintenance order are supported only in the transaction IW32 and certain FIORI Apps. It is not supported in other channels such as IW41, IW42, BAPIs, list transactions, mass change and so on.<a href="https://sap.sharepoint.com/teams/S4HANAAssetServiceManagement/Shared%20Documents/General/11-Engineering/Service%20Engineering/2023_Q4/OP%202025%20FPS1/_Release%20Information/Restriction_Note_2025_FPS1_Draft.docx#_msocom_1" target="_blank"><br/></a></li>
+<li>Configurable service products can't be entered in transaction IW32 when creating a billable maintenance order.</li>
+<li>In case a billable maintenance order is part of a hierarchy and direct settlement of the billable maintenance order is not allowed, the settlement amount and balance is not shown in the plan/actual comparison in transactions IW32 or IW33. Instead the settlement is only shown in the respective Financial Service Fiori apps.</li>
+</ul>
+</div>
+<div class="ListContainerWrapper SCXW87432561 BCX8">
+<p><strong>Service with Advanced Execution – Finance</strong></p>
+<ul>
+<li>Financial hierarchy with service contract item is not supported with execution order items with the billing relevance "Summarized Billing".</li>
+<li>Execution order items with Summarized billing are not supported in EBRR.</li>
+</ul>
+<p><strong>S/4HANA Service Contract Management</strong></p>
+<ul>
+<li>When Item-based Accounting is activated, then quantity and value-based service contracts are not supported.</li>
+<li>Contracts with item-based accounting are not integrated with Revenue Accounting and Reporting (RAR). Event-Based Revenue Recognition should be used instead (EBRR, see <a href="https://me.sap.com/notes/3357625" target="_blank">https://me.sap.com/notes/3357625</a> ).</li>
+<li>There is no migration for S/4HANA service contracts based on internal order to S/4HANA service contract with item-based accounting. But there is the possibility for a transition of a production system to Item-based accounting. Find further details <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/c9b5e9de6e674fb99fff88d72c352291/65817aeab95a4ff3a1578de5d4538e37.html" target="_blank">here</a>.</li>
+<li>There is no migration for service contracts from Sales and Distribution (VW contracts) to S/4HANA service contract. A migration object for service contracts is available with S/4HANA 2025 FPS0.</li>
+</ul>
+<p><strong>Cross application functions</strong></p>
+<ul>
+<li><span style="font-size: 14px;">Concurrent employment is not supported in S/4HANA Service processes (which includes Field Service process, In-House Repair process, Recurring Service). The Service Processes are working with Business Partner with Employee Role (BUP003) not with Employment Role (BUP010).</span></li>
+</ul>
+</div>
+</div>
+<p><strong>Restrictions resolved - The following restrictions were resolved with 2025 FPS1 (Descriptions are in most cases the original restrictions)</strong></p>
+<p><strong>S/4HANA Service Order Management</strong></p>
+<ul>
+<li>Planned costs are not supported for intercompany service items.</li>
+<li>Tool Items are Supported only with Item based Accounting.</li>
+</ul>
+<p><strong>S/4HANA Accounting Integration</strong></p>
+<ul>
+<li>-</li>
+</ul>
+<p><strong>Service with Advanced Execution </strong></p>
+<ul>
+<li><span style="font-size: 14px;">-</span></li>
+</ul>
+<p><strong> Service with Advanced Execution - Maintenance Management</strong></p>
+<ul>
+<li><span style="font-size: 14px;">A maintenance order cannot be converted into a billable maintenance order through the BAPI BAPI_ALM_ORDER_MAINTAIN.</span></li>
+<li>The usage of EAM Fiori Apps for the connected billable maintenance order from service with advanced execution is only supported for display of billable maintenance orders and certain actions like status change. It is not supported for change of maintenance orders and mass changes.</li>
+<li>None of the mass change transactions are currently supported for billable orders like IW37 or IW37N.</li>
+</ul>
+<p><strong>Service with Advanced Execution - Finance</strong></p>
+<ul>
+<li>Percentage of completion method (POC) are not supported for resource-related billing.</li>
+</ul>
+<p><strong>Additional Information</strong></p>
+<p>This section provides additional information that is not restrictions.</p>
+<ul>
+<li>Item-based accounting can be activated in customizing <em>Service -&gt; Transactions -&gt; Basic Settings -&gt; Settings for Service Transactions -&gt; Integration -&gt; Enable Item-Based Accounting for Service Management</em></li>
+<li>Since S/4HANA 2023 FPS3 it is  possible to use the Account-Assignment Manager in parallel to Item-Based Accounting if the service processes were started using the Account-Assignment Manager and then Item-Based Accounting was activated. For details to the transtion please check:  <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f5d3e1005efd4e86acf9a65abf428082/db28fa4aeeaa44f6a69cbf4c8320ceeb.html" target="_blank">https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/f5d3e1005efd4e86acf9a65abf428082/db28fa4aeeaa44f6a69cbf4c8320ceeb.html</a></li>
+<li>Reversing the activation of Item-based Accounting may incur financial inconsistencies and is not recommended.</li>
+<li>Results Analysis is not supported (EBRR supported).</li>
+<li>You can't use the Billing Plan on the service order/repair order header. Thus, IMG activity <em>Assign Billing Plan Type to Business Transaction Type</em> is not supported for business transaction types that are assigned to business object type BUS2000116.</li>
+<li>Time recording in Service Request is not supported.</li>
+<li>Service confirmations can only be created as a follow-up from service orders and not from the Create Service Confirmation app (Fiori app ID TBT117MCR) since this app is not supported with item-based accounting.</li>
+<li>Service with Advanced Execution is only supported with Item-based Accounting.</li>
+<li>The billed value in the item level billing assignment block of execution order item will only be displayed when billing relevance is Billing on Completion.</li>
+<li>Settlement of billed costs in billable maintenance order should be avoided.</li>
+<li>Profit Center reorganization is not supported for Service Orders with Advanced Execution.</li>
+<li>The creation and change of billable maintenance orders along with the synchronization of the service relevant attributes - Billable indicator, Sales Area, and Service Product are supported only via SAPGUI. For more information, see note <a href="https://me.sap.com/notes/3363107" target="_blank">3363107</a>.</li>
+<li>New fields for service processing (e.g., service product, service order etc.) are not supported in report RIAUFK20 via SE38 or using transaction variants. These fields are only supported if you run transaction IW38 or IW39 directly.</li>
+<li>The result list of BAPI list function module (e.g., BAPI_ALM_ORDERHEAD_GET_LIST) does not support the service-related fields for billable maintenance orders. The result list has no information specific for billable maintenance orders.</li>
+<li>The advance shipment document generated from the billable maintenance order currently displays the maintenance order number in the document flow. The service order is not displayed in the advance shipment document but can be viewed in the document flow connected to the maintenance order.</li>
+<li>Assignment of contract to the advance shipment order generated out of billable maintenance orders is not supported.</li>
+<li>It is not possible to change the profit center and accounting indicator fields directly in the billable maintenance orders. These fields can be changed only in the corresponding execution order item in the service transaction, and these changes will be transferred to the billable maintenance order.</li>
+<li>In Distributed Execution when the corresponding list of billable maintenance orders includes a suborder hierarchy, it is recommended that the execution order item be set to Completed only after all the connected maintenance orders have first been set to Technically Completed. Setting the execution order item status to Completed before the technical completion of the billable maintenance orders can lead to errors.</li>
+<li>Billable maintenance orders must belong to the same company code as the connected service order. This means the company code of the sales area in the service order and the company code of the planning plant in the maintenance order must be same.</li>
+<li>For resource-related quotation items, service contract determination / assignment is not supported for the subitems. But the prices and discounts for the subitems are influenced automatically by the contract assigned to the main item.</li>
+<li>Field Service Management (FSM) integration and the advanced execution order process can be used together in the service order. But in certain cases, the execution status on header level does not reflect the sum of all execution statuses on the item level correctly. These cases occur if the execution status for service items relevant for FSM integration has not yet been set, so is still in execution status 'Not Available'.</li>
+<li>Attachments are only copied to the intercompany service order if the service order was already saved after the attachment has been uploaded and before the intercompany item is released.</li>
+<li>Intercompany checks and other validations are not supported in maintenance plan.  Service order and maintenance order should be from same company code in maintenance plan.</li>
+<li>The use of an equipment or functional location with a WBS element reference in a maintenance order will lead to inconsistencies and hence is not recommended.</li>
+<li>IS_Maintenance flag is not supported as a filter in the RAP business object service order.</li>
+<li>No delivery Customizing for service contract integration with service execution order item. One can refer to scope item 426. Item categories SCN1, SCN2, SCN3 integration with service execution order item. This is delivered with transaction type SC1 as inactive.</li>
+<li>In recurring service with advanced execution, error in the execution order item due to GTS check would not block the release of the corresponding maintenance order when the Release Immediately checkbox is selected for the maintenance order type in the Customizing. If the maintenance order should not be released when the execution order item has an error due to GTS check, the Release Immediately checkbox for the maintenance order type should not be selected.</li>
+<li>If you are using the enterprise organizational model and the sales area assignment to sales document types for service transactions, you have to manually copy these entries into the new service specific sales area assignment table customizing table. You can remove the entries after this from the sales document specific table, if you do not use the service to sales order integration.  IMG path of the new table: Service -&gt; Basic Functions  -&gt; Enterprise Organizational Management -&gt; Assign Sales Area to Service Transaction Types</li>
+<li>Resource-related cost (RRCO) subitems in service order can't be billed directly. The resources consumed can be billed only via resource-related billing using the app Create Resource-Related Billing Requests (DP92).</li>
+</ul>
+</div>
+</div></div></div></div></div>

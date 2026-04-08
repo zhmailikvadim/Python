@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When you log on to SAP Business One and click Enterprise search, refresh Fiori-style cockpit or open Pervasive Analytics Designer after a period of inactivity, the following error messages appear:</p>
+<ul><li><em>HTTP Status 500 - Internal Server Error</em></li><li><em>{"errorCode":401,"errorMessage":"Your session is invalid, you are quit. You can refresh page and login again."}</em></li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Business One version for HANA</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Prerequisite:</strong></p>
+<p>      The Fiori-style cockpit is enabled.</p>
+<p><strong>Scenario:</strong></p>
+<ol><li>Log on to the SAP Business One client.</li><li>Leave the system inactive for a certain period.</li><li>Attempt to perform an Enterprise search, refresh the Fiori-style cockpit or open Pervasive Analytics Designer.</li></ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The corresponding operation works correctly.</p>
+<p><strong>Actual behavior:</strong></p>
+<div>
+<p>The following error messages appear:</p>
+<ul><li><em>HTTP Status 500 - Internal Server Error</em></li><li><em>{"errorCode":401,"errorMessage":"Your session is invalid, you are quit. You can refresh page and login again."}</em></li></ul>
+</div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The token expires due to extended user inactivity.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Access <a href="https://sldip:40020/auth/admin/sapb1/console," rel="noopener noreferrer nofollow" target="_blank">https://&lt;server&gt;:40020/auth/admin/sapb1/console</a></li><li>On the left column, navigate to <em>Configure </em>&gt; <em>Realm settings</em>.</li><li>Select <em>Session </em>tab. </li><li>Adjust the value for <em>SSO Session Idle</em> and<em> SSO Session Max</em> to a larger duration.</li></ol>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>HTTP Status 500, enterprise search, Pervasive Analytics, refresh</p></div></div></div></div>

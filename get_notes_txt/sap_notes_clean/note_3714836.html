@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> You want to implement IP-based allow-listing as an additional security layer for applications running on SAP BTP, Cloud Foundry runtime.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">IP-based allow-listing, x-cf-true-client-ip, Cloud Foundry, SAP BTP, security filtering, defense-in-depth, network access control, application security, client IP address</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">According to defense-in-depth principles, IP-based filtering can be added on top of the strong foundation of authentication and authorization mechanisms. For comprehensive guidance on security in SAP BTP, see <a href="https://help.sap.com/docs/btp/sap-business-technology-platform/btp-security" target="_blank">Security</a>.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="__html0">SAP BTP, Cloud Foundry runtime provides the <em>x-cf-true-client-ip</em> request header to enable IP-based filtering. This header contains the original client’s IP address (IPv4 or IPv6) and is included in every request sent to applications. When a <a href="https://docs.cloudfoundry.org/services/route-services.html" target="_blank">route-service</a> is configured, the same IP address is reported to both the route-service and the backend application, always pointing to the original client.</p>
+<p><strong>Application/Route-Service Logic</strong></p>
+<p>Choose your approach:</p>
+<ul>
+<li>Implement filtering directly in your application logic, or</li>
+<li>Create a dedicated route-service application that intercepts and filters requests</li>
+</ul>
+<p>Implement the filtering logic:</p>
+<ul>
+<li>Implement a mechanism to load your allow-list of approved IP addresses or IP ranges</li>
+<li>For each incoming request:</li>
+</ul>
+<ol><ol>
+<li>Retrieve the IP address from the <em>x-cf-true-client-ip</em> header</li>
+<li>Validate the IP address against your configured allow-list</li>
+<li>Allow or deny the request based on the validation result</li>
+</ol></ol>
+<p><strong>Security Considerations</strong></p>
+<ul>
+<li>Never rely on IP-based allow-listing alone; always combine it with strong authentication mechanisms such as mutual TLS (mTLS)</li>
+<li>Implement a secure mechanism to manage and update the allow-list configuration</li>
+<li>Follow security best practices and defense-in-depth principles</li>
+</ul>
+<p><strong>Sample Implementation</strong></p>
+<p>For a detailed sample implementation with step-by-step deployment instructions, refer to the blog post <a href="https://community.sap.com/t5/technology-blog-posts-by-sap/ip-based-allow-listing-for-applications/ba-p/14140136" target="_blank">IP-Based Allow-Listing for Applications</a>. The blog post covers:</p>
+<ul>
+<li>A working route-service implementation with a protected backend application</li>
+<li>Complete CF CLI commands for deployment and configuration</li>
+<li>A sample application <em>ip-allow-listing-route-service, </em>available at <a href="https://github.com/SAP-samples/cf-routing-samples" target="_blank">https://github.com/SAP-samples/cf-routing-samples</a> <strong>(not for production use!)</strong></li>
+</ul></div></div></div></div>

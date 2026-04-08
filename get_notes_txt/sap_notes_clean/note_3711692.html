@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Applying a Windows Database Bundle Patch with command:</p>
+<p><strong>opatch apply</strong></p>
+<p>fails at prerequisite check "CheckActiveFilesAndExecutables" with errors similar to:</p>
+<p>"Verifying environment and performing prerequisite checks...</p>
+<p>Prerequisite check "CheckActiveFilesAndExecutables" <strong>failed</strong>.<br/>The details are:Following active files/executables/libs are used by ORACLE_HOME :&lt;drive&gt;:\oracle\&lt;database-name&gt;\19.0.0</p>
+<p>&lt;drive&gt;:\oracle\&lt;database-name&gt;\19.0.0\bin\<strong>oravssmsgus.dll</strong><br/>&lt;drive&gt;:\oracle\&lt;database-name&gt;\19.0.0\<strong>ORAEVRUS19.dll</strong><br/>&lt;drive&gt;:\oracle\&lt;database-name&gt;\19.0.0\oui\lib\win64\<strong>vcruntime140.dll</strong><br/>UtilSession failed: <strong>Prerequisite check "CheckActiveFilesAndExecutables" failed.</strong><br/>Log file location: &lt;drive&gt;:\oracle\&lt;database-name&gt;\19.0.0\cfgtoollogs\opatch\opatch&lt;date and time&gt;.log</p>
+<p>OPatch failed with <strong>error code = 73</strong>"</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>"Windows Bundle Patch" "opatch apply" CheckActiveFilesAndExecutables  "error code = 73" oravssmsgus.dll ORAEVRUS19.dll vcruntime140.dll tasklist "Process Explorer" "Microsoft Defender" MOS 3075245.1 KB736608 MOS 2753449.1 KB106870</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error occurs because there are active non-Oracle processes holding locks on dll files under Oracle home.</p>
+<p>Especially Security/Monitoring processes such as Microsoft Defender might still hold the dll files.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Assuming the Oracle database has already been stopped, in order to determine the processes and fix the OPatch failure follow the steps:</p>
+<p>1) Double-check that all SAP applications and client tools that may load Oracle dll files (SQL*Plus, SQL Developer, OEM agents pointing to Oracle home, PowerShell sessions that used Oracle modules) are stopped.</p>
+<p>2) Run <strong>services.msc</strong> as Administrator and double-check all Oracle services tied to Oracle Home are stopped. For example:</p>
+<p>- OracleService&lt;ORACLE_SID&gt;<br/>- Oracle&lt;Oracle home Key&gt;TNSListener<br/>- OracleVssWriter&lt;ORACLE_SID&gt;<br/>- OracleJobScheduler&lt;ORACLE_SID&gt;</p>
+<p>etc.<br/> <br/>2) Identify which processes hold the dll files reported by opatch using the command:</p>
+<p><strong>tasklist /m &lt;dll-name&gt;</strong></p>
+<p>For example:</p>
+<p>tasklist /m oravssmsgus.dll<br/> tasklist /m ORAEVRUS19.dll<br/> tasklist /m vcruntime140.dll</p>
+<p>If tasklist return the name of such processes, stop them.</p>
+<p>3) Since tasklist command might not identify all processes holding the dll files, use next the utility <strong>Process Explorer.</strong></p>
+<p>If it is not installed on your system, download the utility Process Explorer from Microsoft site:</p>
+<p><strong>https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer</strong></p>
+<p>Install it by unzipping the file ProcessExplorer.zip in a working directory.</p>
+<p>Execute it from a Command Prompt started as Administrator:</p>
+<p><strong>cd &lt;Process Explorer directory&gt;</strong><br/><strong>procexp.exe</strong></p>
+<p>Inside Process Explorer click "<strong>Find</strong>" -&gt; "<strong>Find Handle or DDL</strong>" and enter the mentioned dll files names. For example search for:<br/>oravssmsgus.dll<br/>ORAEVRUS19.dll<br/>vcruntime140.dll</p>
+<p>Stop the process(es) accessing the dll files.</p>
+<p>4) Retry applying the Windows Database Bundle Patch:</p>
+<p><strong>opatch apply</strong></p></div></div></div></div>

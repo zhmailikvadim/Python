@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In SAP Adaptive Server Enterprise (ASE), a database session appears in status <code>recv sleep</code> with command <code>AWAITING COMMAND</code>, while still holding transaction log resources.<br/>When running:</p>
+<pre><code>dbcc sqltext(&lt;spid&gt;)</code></pre><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP ASE 16.0</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This behavior is by design in SAP ASE.</p>
+<p>When a session is in <code>recv sleep / AWAITING COMMAND</code> state:</p>
+<ul><li>
+<p>The last SQL statement has already finished execution.</p>
+</li><li>
+<p>The server is waiting for the next request from the client.</p>
+</li><li>
+<p>There is no active SQL statement associated with the session.</p>
+</li></ul>
+<p>The command <code>dbcc sqltext(spid)</code> only displays the SQL text of a currently executing statement.<br/>Once execution is complete, the SQL text buffer may be cleared or reused, which explains why <code>dbcc sqltext</code> may return:</p>
+<ul><li>
+<p>No output, or</p>
+</li><li>
+<p>Only a short fragment of text.</p>
+</li></ul>
+<p>Despite being idle, the session may still hold transaction log space if the client:</p>
+<ul><li>
+<p>Executed a data modification statement (INSERT/UPDATE/DELETE), and</p>
+</li><li>
+<p>Did not issue a COMMIT or ROLLBACK.</p>
+</li></ul>
+<p>In this case, the open transaction remains active, and log space is retained until the transaction is completed or the connection is terminated.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>There is no database-side fix required.</p>
+<p>To prevent transaction log retention:</p>
+<ul><li>
+<p>Ensure applications explicitly issue COMMIT or ROLLBACK after DML statements.</p>
+</li><li>
+<p>Avoid leaving database connections idle with open transactions.</p>
+</li><li>
+<p>Review application logic and connection pooling behavior.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>dbcc sqltext, rec sleep , waiting command, </p></div></div></div></div>

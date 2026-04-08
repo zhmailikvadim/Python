@@ -1,0 +1,89 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html28">For new features in the 2.28 HANA Client, please see the "What’s new in the SAP HANA Client" section in the official HANA Client 2.28 documentation:</p>
+<p id="__html28"><a href="https://help.sap.com/viewer/product/SAP_HANA_CLIENT/2.28/en-US" target="_blank" title="https://help.sap.com/viewer/product/SAP_HANA_CLIENT/2.5/en-US">https://help.sap.com/viewer/product/SAP_HANA_CLIENT/2.28/en-US</a></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="__html0"><strong>================================================================================</strong><br/><strong>NEW FIXES AND CHANGES IN 2.28.19</strong><br/><strong>================================================================================</strong></p>
+<p><strong>Underlying SQLDBC changes common to multiple interfaces</strong></p>
+<ul>
+<li>Issue Number 355833: When connecting to HANA Cloud, an "Invalid connect reply" error was not specific.</li>
+</ul>
+<p style="padding-left: 60px;">When connecting to HANA Cloud, an "Invalid connect reply (server may not be SAP HANA)" error may have been reported when HANA Cloud returned an invalid response. If connecting through an HTTP proxy, a malformed message may also not have been detected. This issue has been improved to give a more specific error. When connecting to SAP HANA Cloud and it incorrectly returns an HTTP response, the error message will now report "Invalid connect reply (received HTTP response, not SAP HANA): HTTP &lt;status&gt; : &lt;details&gt;" instead.</p>
+<ul>
+<li>Issue Number 355677: SQLDBC SQL=INFO tracing was overly verbose for very large result sets.</li>
+</ul>
+<p style="padding-left: 60px;">Previously, SQLDBC SQL=INFO tracing traced multiple lines for every row fetched, making it overly verbose for very large result sets. This issue has been fixed by moving these lines to SQL=DEBUG tracing.</p>
+<p><strong>ODBC changes</strong></p>
+<ul>
+<li>Issue Number 349601: SQLDriverConnectW could have incorrectly returned SQL_SUCCESS_WITH_INFO and not populate the OutConnectionString value.</li>
+</ul>
+<p style="padding-left: 60px;">After 2.14.23 on non-Windows platforms, SQLDriverConnectW could have erroneously returned SQL_SUCCESS_WITH_INFO and did not return a truncated string buffer in OutConnectionString. The driver had been expecting byte semantics for the buffer length, when the ODBC specification says the driver should expect characters.<br/> <br/> This issue has been fixed. If the OutConnectionString value is required for an ODBC application, the application should call SQLDisconnect on the connection handle, then call SQLDriverConnectW again and specify a *StringLength2Ptr + 1 buffer length that was returned from the original SQL_SUCCESS_WITH_INFO SQLDriverConnectW call.</p>
+<p><strong>JDBC changes</strong></p>
+<ul>
+<li>Issue Number 356324: When connecting to HANA Cloud, a "Data receive failed. java.io.IOException" error may have been inaccurately reported.</li>
+</ul>
+<p style="padding-left: 60px;">When connecting to HANA Cloud, a "Data receive failed. java.io.IOException" error may have been inaccurately reported. If connecting through an HTTP proxy, a malformed message may also not have been detected. This issue has been fixed. When connecting to SAP HANA Cloud and it incorrectly returns an HTTP response, the error message will now report "Invalid connect reply (received HTTP response, not SAP HANA): HTTP &lt;status&gt; &lt;details&gt;" instead.</p>
+<ul>
+<li>Issue Number 355923: A socket connection could have remained open when connecting through a SOCKS or HTTP proxy.</li>
+</ul>
+<p style="padding-left: 60px;">When connecting to HANA through a SOCKS or HTTP proxy, if the proxy closed the connection, then the JDBC driver would not have closed its socket. This issue has been fixed.</p>
+<p><strong>================================================================================</strong><br/><strong>NEW FIXES AND CHANGES IN 2.28.17</strong><br/><strong>================================================================================</strong></p>
+<p><strong>Hdbsql changes</strong></p>
+<ul>
+<li>Issue Number 351377: Aligned output of floating DECIMAL or SMALLDECIMAL values could have been displayed incorrectly.</li>
+</ul>
+<p style="padding-left: 60px;">Aligned output of floating DECIMAL or SMALLDECIMAL values could have been silently truncated or allocated with an excessive width. These issues have been fixed.</p>
+<p><strong>Underlying SQLDBC changes common to multiple interfaces</strong></p>
+<ul>
+<li>Issue Number 351976: When connecting via an HTTP Proxy, the Keep-Alive header was missing.</li>
+</ul>
+<p style="padding-left: 60px;">When connecting via an HTTP Proxy via proxyHTTP=1, the "Proxy-Connection: Keep-Alive" HTTP header was missing. This issue has been fixed.</p>
+<ul>
+<li>Issue Number 354703: siteType=ANY and replicationRole=ANY reconnect role switches resulted in errors.</li>
+</ul>
+<p style="padding-left: 60px;">siteType=ANY and replicationRole=ANY connection properties did not allow the role to change on reconnect, resulting in an error if such a reconnect role switch occurred. This issue has been fixed to no longer give an error in this case. To avoid a role switch on reconnect, it is recommended that the use of siteType=ANY and replicationRole=ANY is avoided.</p>
+<p><strong>ODBC changes</strong></p>
+<ul>
+<li>Issue Number 349984: SQLSetConnectAttr() could have crashed when tracing was enabled.</li>
+</ul>
+<p style="padding-left: 60px;">In rare cases, SQLSetConnectAttr() could have crashed when tracing was enabled. This issue has been fixed.</p>
+<p><strong>JDBC changes</strong></p>
+<ul>
+<li>Issue Number 351380: Specifying a large trace size with KB, MB, or GB units could have caused the size to be set to 8 KB.</li>
+</ul>
+<p style="padding-left: 60px;">If you set the maximum trace file size via the command:<br/> <br/> java -jar ngdbc.jar TRACE SIZE &lt;value&gt; (KB|MB|GB)<br/> <br/> where the result of &lt;value&gt; * the units multiplier was greater than 2^63-1, then the JDBC driver could have set the maximum trace file size to 8 KB (the minimum). This issue has been fixed. Now the driver sets the maximum trace file size to unlimited.</p>
+<ul>
+<li>Issue Number 351379: Specifying a large trace size could have caused a NumberFormatException.</li>
+</ul>
+<p style="padding-left: 60px;">If you set the maximum trace file size via the commmand:<br/> <br/> java -jar ngdbc.jar TRACE SIZE &lt;value&gt;<br/> <br/> where &lt;value&gt; was greater than 2^63-1, then the JDBC driver would have thrown a NumberFormatException. This issue has been fixed. Now the driver reports:<br/> <br/> Invalid command, invalid size: &lt;value&gt;</p>
+<p><strong>ADO.NET changes</strong></p>
+<ul>
+<li>Issue Number 354638: Installing the nuget package could result in a warning.</li>
+</ul>
+<p style="padding-left: 60px;">Installing the nuget package could result in a warning: "NETSDK1206: Found version-specific or distribution-specific runtime identifier(s): linux-alpine-x64". This issue has been fixed.</p>
+<ul>
+<li>Issue Number 353979: The .NET driver could have failed to generate ADO.NET trace information.</li>
+</ul>
+<p style="padding-left: 60px;">When running a .NET app, The .NET driver could have failed to generate ADO.NET trace information. This issue has been fixed.</p>
+<p><strong>Node.js changes</strong></p>
+<ul>
+<li>Issue Number 352179: The error text "No Connection Available" was unclear.</li>
+</ul>
+<p style="padding-left: 60px;">Previously, the error text "No Connection Available" was unclear. This issue has been fixed so that the error text is now "No Connection Available (the connection may not have been successfully connected, was already disconnected, or was disconnected while this operation was in progress)".</p>
+<ul>
+<li>Issue Number 350056: In rare timing dependent cases, the driver could have crashed.</li>
+</ul>
+<p style="padding-left: 60px;">If the driver did not close the result set before closing the statement, in rare timing dependent cases, the driver could have crashed. This issue has been fixed.</p>
+<p><strong>Client Installer changes</strong></p>
+<ul>
+<li>Issue Number 352932: hana-ml was updated to 2.28.260317.</li>
+</ul>
+<p style="padding-left: 60px;">hana-ml was updated to 2.28.260317.<br/> <br/> New Functions:<br/> - Added info function in dataframe to get table information.<br/> - Added discovery agent and data agent in agents module.<br/> - Added PAL CrossEncoder :class:`~hana_ml.text.pal_cross_encoder.PALCrossEncoder`.<br/> - Added text log parser function (BRAIN).<br/> <br/> Enhancements:<br/> - Enhanced to support the composite task in PAL scheduler.<br/> - Enhanced the regex support in text tokenizer.<br/> - Enhanced the TargetEncoder info display for visualizer.<br/> - Enhanced the massive ts report with better visualization.<br/> - Supported confidence and prediction interval for automl time series.<br/> - Supported text operator in PAL automl.<br/> - Enhanced AutoML time series model report with seasonality aggregation chart.<br/> - Loading progress details on request for massive automl.</p>
+<ul>
+<li>Issue Number 354710: LCMsdk was updated to 2.9.46.</li>
+</ul>
+<p style="padding-left: 60px;">LCMsdk was updated to 2.9.46.</p>
+<p><strong>HDBALM Client changes</strong></p>
+<ul>
+<li><span style="font-size: 14px;">Issue Number 353640: Running hdblam with Python 3.12 or higher would have resulted in script warnings.</span></li>
+</ul>
+<p style="padding-left: 60px;">Running hdbalm with Python 3.12 or high would have resulted in SyntaxWarnings in the help screens. This issue has been fixed.</p></div></div></div></div>

@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Sending of 55616 from Responsible DSO to SUP" (DE_C_MDC_55616_DSO2SUP_SEND), the payload of the outbound UTILMD 55616 message incorrectly contained the SEQ+Z44 segment in step 1300.</p>
+<p>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> MDC_55616_DSO2SUP, Location Bundle Structure, UTILMD, data provider method, condition 526, segment elements</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error occurred because the data provider method for SEQ+Z44 didn't utilize condition [526].</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system excludes the unexpected segment SEQ+Z44 and subsequent segment elements from the UTILMD 55616 message payload. You can import the BC set /US4G/102_SP08_DSO_NOTE_3712661 to apply the fix. You can verify the fix by checking that in the cloud process document at step 1300, the UTILMD 55616 message is sent successfully without error.</p></div></div></div></div>

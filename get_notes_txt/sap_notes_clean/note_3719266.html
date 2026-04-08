@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><span style="text-decoration: underline;"><strong>Version History</strong></span></p>
+<p style="padding-left: 30px;"><strong>Version 1 &amp; 2 (23.02.2026): Pilot Version</strong></p>
+<p style="padding-left: 30px;"><strong>Version 3 (27.02.2026): General Availability (No changes from Pilot Version)</strong></p>
+<p>An employee was terminated, and that leaving date was sent to ROS, and passed to NAERSA, then NAERSA issue an APEN with an event type of<strong> 'Left Employment Initiation'</strong>. Subsequently, if that same employee gets reinstated - not re-hired (i.e. the termination action gets deleted), then ROS and NEARSA are out of step with payroll. The AEPN is '<em>incorrect</em>' but still must be applied, because it is the current active AEPN. Before the introduction of this SAP Note, Payroll Function P3448 checks that the event type of <strong>'Left Employment Initiation'</strong> is only applied to leavers and issues the following rejection in payroll.</p>
+<p style="padding-left: 60px;">HRIE_AE(116) <strong>Error; EMPID &amp;1 has 'Left Employment Initiation' AEPN, but has not left!</strong></p>
+<p>After the introduction of this SAP Note, Payroll Function P3448 checks that the event type of 'Left Employment Initiation' is usually applied to leavers and issues the following warning in payroll, but importantly still allows the AEPN to be processed. This allows time for ROS and NAERSA to "catch up" with payroll.</p>
+<p style="padding-left: 60px;">HRIE_AE(116) <strong>Warning; EMPID &amp;1 has 'Left Employment Initiation' AEPN, but has not left</strong></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Payroll Function P3448, Leaver Re-instated</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>EITHER</p>
+<p style="padding-left: 30px;">Apply the relevant HRSP</p>
+<p>OR</p>
+<p style="padding-left: 30px;">1) Apply the correction instructions attached to this SAP Note, via SNOTE.</p>
+<p style="padding-left: 30px;">2) Only valid for the following SAP_BASIS Releases/SPs</p>
+<p style="padding-left: 60px;">Release Validity(Low - High)</p>
+<p style="padding-left: 90px;">700 700-SAPKB70037<br/> 701 701-SAPKB70122<br/> 702 702-SAPKB70222<br/> 731 731-SAPKB73126<br/> 740 740-SAPKB74023<br/> 750 750-SAPK-75017INSAPBASIS<br/> 751 751-SAPK-75109INSAPBASIS<br/> 752 752-SAPK-75205INSAPBASIS<br/> 753 753-SAPK-75303INSAPBASIS<br/> 754 754-SAPK-75401INSAPBASIS</p>
+<p style="padding-left: 60px;">If you are not on a high enough basis release, you will need to change the following message manually;</p>
+<p style="padding-left: 90px;">Transaction : SE91<br/>Message Class : HRIE_AE</p>
+<p style="padding-left: 90px;">Message Number : 116<br/>Click Pushbutton : CHANGE<br/>Message Text : Warning; EMPID &amp;1 has 'Left Employment Initiation' AEPN, but has not left</p>
+<p style="padding-left: 90px;"><strong>Save &amp; Activate</strong></p></div></div></div></div>

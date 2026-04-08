@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The report <code>/SIE/SF_ED_LOG_EX_BACK</code> includes a built-in <code>WAIT UP TO</code> functionality to prevent system overload. However, the wait time is unnecessarily applied even when the previous run of <code>ARCHIVE_LINK_EXPORT_ALL</code> only outputs the message <em>"EDIBP data already archived"</em> without performing any actual archiving.</p>
+<p>As a result, jobs take significantly longer to complete (sometimes days) due to excessive waiting between run IDs, even when no data is being processed.</p>
+<p><strong>Expected Behavior:</strong> The <code>WAIT UP TO P_TIME SECONDS</code> should only be triggered when data is actually moved to the archive. This change would optimize job execution time and prevent unnecessary delays.</p>
+<p>Additionally, message 203 in message class was missing, and has been now created with this note.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CIP2SAP, runID, WAITING LOOP, ArchiveLink, YYEDIBP</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program design</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the correction instructions</p></div></div></div></div>

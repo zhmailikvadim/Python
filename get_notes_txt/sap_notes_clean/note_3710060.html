@@ -1,0 +1,42 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0" style="padding-left: 30px;">The error <em>“Error during script processing”</em> occurs when viewing a Lumira document created using the Generic Analysis template</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Lumira Designer 2025, SAP Lumira Server 2025, BI 2025 Patch8 , Bookmark , Add Datasource , Generic Analysis template</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong style="font-size: 14px;">Steps to reproduce:</strong></p>
+<p><strong>       Issue 1 Bookmark</strong></p>
+<ol>
+<li>Open Lumira Document (created with Generic Analysis template) in Lumira Designer 2025 Client(execute locally or in BI Platform)</li>
+<li>Click on the Bookmark icon and select Manage Bookmark</li>
+</ol>
+<p style="padding-left: 30px;">  &gt;&gt; Observe that "Error during script processing" dailog box is seen</p>
+<p style="padding-left: 30px;"><strong>Issue 2 Add Datasource</strong></p>
+<ol>
+<li>Open Lumira Document (created with Generic Analysis template) in Lumira Designer 2025 Client(execute locally or in BI Platform)</li>
+<li>Click on the Add Datasource icon .</li>
+<li>Select the connection and query and then click ok</li>
+</ol>
+<p>        &gt;&gt; Observe that blank screen is seen with error "Error during script processing"</p>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>NOTE : Fix will be available in Lumira 2025 Patch 1</strong></p>
+<p><strong>Workaround f</strong><strong>or an existing document in Lumira 2025</strong></p>
+<ol>
+<li>
+<p style="display: inline !important;">Login to Lumira Designer.</p>
+<strong> For BI Platform workflow:</strong> Right-click on the BI Platform document and select download the document.</li>
+<li><span style="font-size: 14px;">Open the downloaded document in Lumira Designer.</span></li>
+<li><span style="font-size: 14px;">Follow the steps outlined in the attached document </span><strong style="font-size: 14px;">“Lumira 2025_Generic_Analysis_Script Update”</strong><span style="font-size: 14px;"> to update the script in your document.</span></li>
+<li><span style="font-size: 14px;">After applying the changes, save the document and execute the </span><strong style="font-size: 14px;">Bookmark</strong><span style="font-size: 14px;"> and </span><strong style="font-size: 14px;">Add Data Source</strong><span style="font-size: 14px;"> workflow in the document.</span></li>
+</ol>
+<p><strong>Workaround for newly created document in Lumira 2025</strong></p>
+<ol>
+<li>Close the Lumria Designer client</li>
+<li>Open the Machine containing Lumira Designer</li>
+<li>Navigate to the following directory &lt;&lt;INSTALL_DIR&gt;&gt;\SAP Lumira\Lumira Designer\plugins</li>
+<li>In pulgins folder and locate the following folder <strong>com.sap.ip.bi.zen.content_25.0.0</strong> and take backup to other location</li>
+<li>Download <strong>Lumira2025_Script_Fix.zip</strong> to local machine and extract it</li>
+<li>Navigate the following directory  &lt;&lt;INSTALL_DIR&gt;&gt;\SAP Lumira\Lumira Designer\plugins\com.sap.ip.bi.zen.content_25.0.0\templates\APPLICATIONS\READY_TO_RUN_MAIN\GENERIC_ANALYSIS and replace  attached content_biapp</li>
+<li>Navigate the following directory &lt;&lt;INSTALL_DIR&gt;&gt;\SAP Lumira\Lumira Designer\plugins\com.sap.ip.bi.zen.content_25.0.0\templates\templates\DOCUMENTS\READY_TO_RUN and replace attached Generic_Analysis.lumx file</li>
+<li>Start Lumira Designer client</li>
+</ol></div></div></div></div>

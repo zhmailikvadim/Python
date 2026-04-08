@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Template for Receiving MR Info Process" (DE_B_MET_TMP_MR_INFO), there is no extension step available for customers to implement their specific logic to send APERAK Z37 when receiving MSCONS with segment DTM+60.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>APERAK, Z37, DTM, DE_B_MET_MR_INFO_DSO, MET, MSCONS, meter reading, extension step, segment DTM+60</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error occurred because the system lacked an extension step in the process for customers to enhance their specific logic to send APERAK Z37.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>Then activate BC-Set <em>/US4G/3_0_COM_SP06_NOTE_3709186 </em>with T-Code SCPR20, make sure option [Deletion Functionality-&gt;Switch On] is ticked.</p>
+<p>After implementing this SAP Note, the system provides an extension step 0115 in process DE_B_MET_TMP_MR_INFO.</p>
+<p>This allows you to enhance your specific logic to send APERAK Z37 when receiving MSCONS with segment DTM+60.</p>
+<p>You need to ask your developers to enhance the check logic in extension step 0115 (process DE_B_MET_TMP_MR_INFO).</p>
+<p>There is sample code in Class /US4G/CL_CHK_MET_PROCESS, Method  CHECK_MET_APERAK_SPECIFIC, plesae read before starting your enhancement.</p>
+<p>You can verify the fix by checking that extension step 0115 is available in the process and that your custom logic for sending APERAK Z37 runs successfully.</p></div></div></div></div>

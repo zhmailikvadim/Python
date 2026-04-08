@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>The FLP screen appears empty (no tiles or groups visible).</li><li>The error persists even when explicitly adding <code>?sap-spaces=false</code> to the URL. </li><li>Upon logging into the Fiori Launchpad (FLP), users receive the error message: "Failure - Unable to load groups."</li><li>Browser Console logs show hundreds of errors related to "CHIP instances" and "PAGE_BUILDER_PERS" service failures.</li><li>In a Network Trace (HAR file), the <code>start_up</code> OData response might show a conflict where <code>spacesMyhome</code> is <code>false</code> but the framework flag <code>spacesEnabled</code> is still returning <code>true</code>.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA 2021</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>There are two primary levels where this failure occurs:</p>
+<ol><li>
+<p>Framework Mismatch (Configuration): The FLP engine is stuck in "Spaces" mode despite global settings being set to "Classic." This happens when user personalization or role attributes override the global <code>SPACES = false</code> setting.</p>
+</li><li>
+<p>CHIP Catalog Corruption (Database/Code): A known program error in the CHIP catalog cache mechanism causes the system to attempt to insert duplicate primary keys into the <code>/UI2/CHIP_CSTAT</code> or <code>/UI2/CHIP_CPAR</code> tables. This crashes the Page Builder service before it can render the "Classic" tiles.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>Phase 1:</strong> Validate Configuration (The "Stage and Curtains" Logic) Ensure the system is not trying to load the "Spaces Stage" without any content.</p>
+<ol><li>
+<p>Verify Transaction <code>/UI2/FLP_CUS_CONF</code> (and <code>/UI2/FLP_SYS_CONF</code>):</p>
+<ul><li>
+<p>Set <code>SPACES = false</code></p>
+</li><li>
+<p>Set <code>SPACES_MYHOME = false</code></p>
+</li></ul>
+</li><li>
+<p>Check for Role-Based Overrides: Ensure no PFCG roles assigned to the user contain a "Space ID" or "Page ID" in the Menu tab.</p>
+</li></ol>
+<p><strong>Phase 2:</strong> Fix CHIP Corruption (The Permanent Solution) If Phase 1 does not resolve the issue, the CHIP catalog is likely corrupted.</p>
+<ol><li>
+<p>Implement SAP Note <a href="https://me.sap.com/notes/3295872" rel="noopener noreferrer nofollow" target="_blank">3295872 </a>- <em>Fiori Launchpad: Duplicate key in CHIP catalog cache</em>.</p>
+<ul><li>
+<p>This note corrects the logic in class <code>/UI2/CL_CHIP_CATALOG_CACHE</code>.</p>
+</li></ul>
+</li><li>
+<p>Execute the following reports in order via SE38 to scrub the corrupted data:</p>
+<ul><li>
+<p><code>/UI2/CHIP_SYNCHRONIZE_CACHE</code> (Syncs the CHIP catalog)</p>
+</li><li>
+<p><code>/UI2/INVALIDATE_GLOBAL_CACHES</code> (Clears server shared memory)</p>
+</li><li>
+<p><code>/UI2/INVALIDATE_CLIENT_CACHES</code> (Clears user browser cache)</p>
+</li></ul>
+</li></ol>
+<p><strong>Phase 3:</strong> Database Verification (Advanced) If the reports fail, Basis/Security should check technical table <code>/UI2/V_CONFPROP</code> to ensure the <code>SPACES_ENABLEMENT</code> flag is not hard-coded to <code>true</code> at a layer that overrides standard configuration.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Fiori Launchpad, Failure - Unable to load groups, S/4HANA 2021, spacesMyhome, spacesEnabled true, /UI2/FLP_CUS_CONF, /UI2/INVALIDATE_GLOBAL_CACHES, PAGE_BUILDER_PERS error, SAP Note 3295872, CHIP Catalog Cache, Duplicate key error Fiori, sap-spaces=false not working</p></div></div></div></div>

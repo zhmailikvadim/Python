@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When an attachment is uploaded to a Quality Notification in SAP S/4HANA, the Notification Change Event is not triggered and the update is not sent to SAP Business Network.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>
+<p>SAP S/4HANA</p>
+</li><li>
+<p>Quality Management (QM)</p>
+</li><li>
+<p>Quality Notifications</p>
+</li><li>
+<p>SAP Business Network integration (via CIG)</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>In standard SAP S/4HANA, attachments for Quality Notifications are processed through the Generic Object Services (GOS) framework. Attachment creation or modification does not generate a change document for the Quality Notification header or item.</p>
+<p>Notification Change Events are raised only when a change document is created. Since attachment-only updates do not create change documents, no Notification Change Event is generated.</p>
+<p>There is no standard configuration, SPRO setting, or CIG parameter available to trigger Notification Change Events based solely on attachment creation.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This behavior is expected and working as designed in standard SAP S/4HANA.</p>
+<p>If attachment-only updates must trigger a Notification Change Event and be sent to SAP Business Network, a customer-specific enhancement is required. Customers can implement a supported enhancement (for example, using BADI_QMEL_SAVE) to programmatically perform a controlled update to the Quality Notification when an attachment is saved. This controlled update creates a change document and enables the Notification Change Event to be generated.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Quality Notification, Attachment, Change Document, Notification Change Event, SAP Business Network, CIG, BADI_QMEL_SAVE</p></div></div></div></div>

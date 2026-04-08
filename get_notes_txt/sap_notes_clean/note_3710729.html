@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>SAML authentication fails for BI Launchpad.</li>
+<li>Logon attempts result in a looping behavior between logon.jsp and main.jsp until the maximum allowed number of sessions is reached.</li>
+<li>Error message displayed: <strong>"An error occurred, kindly retry. If issue persists, please contact your administrator. Please close this window."</strong></li>
+<li>Multiple BI Launchpad sessions are created when checked in CMC &gt; sessions due to automatic login attempts.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAML, SSO, loop, redirect, infinite loop, endless</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>SAP BusinessObjects Business Intelligence (BI) Platform 4.x / 2025</li>
+<li>SAML</li>
+</ul>
+<p><strong>Steps to reproduce: </strong></p>
+<ol>
+<li>Ensure SAML authentication is configured and functioning correctly in previous BI versions.</li>
+<li>Upgrade to eg BI 4.3 Support Pack 5 Patch 3.</li>
+<li>Attempt to log in to BI Launchpad using SAML authentication.</li>
+<li>Observe that multiple concurrent sessions are created while the login attempt retires are made.</li>
+<li>Once reached the max limit of concurrent sessions, fails with :<strong>"An error occurred, kindly retry. If issue persists, please contact your administrator. Please close this window."</strong></li>
+</ol>
+<p><strong>Cause</strong></p>
+<p>This issue only happens when using the external (Standalone) biprws for BOE, which is no longer the default</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This issue is fixed in the patches listed in the "Support Packages &amp; Patches" section below.</p>
+<p>The "Support Packages &amp; Patches" section will be populated with the relevant patch levels once they are released.</p>
+<p>For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article 2144559 in References section.</p></div></div></div></div>

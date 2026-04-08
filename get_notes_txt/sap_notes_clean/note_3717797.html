@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In an SAP HANA System Replication landscape, the secondary (DR) system cannot be started independently.</p>
+<p>A standalone database startup fails with: <code>FAIL: process hdbindexserver not running</code></p>
+<p>The indexserver stops during startup although no service crash is visible.</p>
+<p>Typical indexserver trace entries:</p>
+<pre><code>PersistenceLayer startup failed
+exception 3020027
+retryPageLoadAfterFailedChecksumCheck
+retrieved invalid page again
+assign failed with persistence startup error
+</code></pre>
+<p>However:</p>
+<ul><li>the database starts successfully when System Replication is enabled</li><li>the system operates normally as a secondary site</li><li>no service termination occurs while replication is active</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP HANA DB Version 2.0</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>During a standalone startup SAP HANA performs a local database recovery using the data and log volumes of the host.</p>
+<p>If the local persistence recovery cannot be completed successfully, the indexserver startup is prevented.</p>
+<p>When the system starts as a System Replication secondary, the database state is synchronized with the primary system through log replay. The redo logs received from the primary system allow the secondary system to reconstruct a consistent database state even if the local persistence recovery cannot be completed independently.</p>
+<p>Therefore, the database may start successfully in replication mode while a standalone startup fails.</p>
+<p>This behavior is consistent with the SAP HANA System Replication architecture, where the secondary system state is derived from the primary system during synchronization and log replay.</p>
+<p>References:</p>
+<ul><li><a href="https://me.sap.com/notes/1999880" rel="noopener noreferrer nofollow" target="_blank">SAP HANA System Replication FAQ</a><br/><a href="https://me.sap.com/notes/1999880" rel="noopener noreferrer nofollow" target="_new"></a></li><li><a href="https://me.sap.com/notes/2165547" rel="noopener noreferrer nofollow" style="font-size: 10pt;" target="_blank">SAP HANA Database Backup &amp; Recovery in a System Replication Landscape</a></li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Attempting to repair the persistence of the secondary system independently is generally not recommended in a System Replication setup.</p>
+<p>To restore an operational state, the secondary system must be re-initialized from the primary system using System Replication.</p>
+<p>Rebuild the secondary site using a fresh System Replication initialization:</p>
+<ol><li>Ensure the secondary database is fully stopped.</li><li>If necessary, remove the existing replication configuration.</li><li>Register the secondary system again to the primary system using:</li><li>hdbnsutil -sr_register</li><li>Start the secondary database and allow the initial data synchronization (data shipping) to complete.</li><li>The reinitialization rebuilds the persistence on the secondary system and restores a consistent database state. </li></ol>
+<p>After synchronization, the system operates normally again as a secondary site.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>system replication, secondary startup failure, persistence recovery, indexserver not running, redo log replay</p></div></div></div></div>

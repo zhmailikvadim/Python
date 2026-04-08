@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When tracing a work process at level 3 for the database (component B), a DBSQL_INTERNAL_ERROR occurs when the kernel module abosqlstmt_prepare is called.</p>
+<p>The internal note in the short dump shows the following information:</p>
+<p>The termination was triggered in function "checkTokenIndex"<br/>of the SAP kernel, in line ### of the module<br/> "//bas/GIT/krn/include/dbi/parser/dbi_parser_token_registry.h".<br/>The internal operation just processed is "METH".<br/>Internal mode was started at ###.<br/>"index is not set"</p>
+<p>Also in the developer trace of the work process, the output of the CL_OSQL_STATEMENT_FACTORY=&gt;COMPILE( ) tree ends unexpectedly with lines of<br/>------------------ C-STACK ----------------------<br/>...<br/>------------------ c-stack end ------------------</p>
+<p>And short dump occurence is also registered:<br/>A  Error Code DBSQL_INTERNAL_ERROR.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">DBSQL_INTERNAL_ERROR, "index is not set", abosqlstmt_prepare, checkTokenIndex</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The problem occurs because the trace printing function attempts to retrieve the token index and token text for node, which does not have a token (for example FIELD_LIST_ENTRY).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">In the patched kernel, if the node has no token, value token="None" is printed:</p>
+<p>Example:</p>
+<p>&lt;FIELD_LIST_ENTRY token="None" tree_node_type="FIELD_LIST_ENTRY"&gt;</p>
+<p>This correction is originally delivered with the kernel patch level listed in section "<strong>Support Package Patches</strong>" of this SAP Note. All later kernel patch levels also contain this correction. Note that only the latest kernel patch is available for download. It contains all corrections delivered so far. Therefore, you can download and apply the latest kernel patch at any time to implement this correction.</p>
+<p>If no kernel patch level is entered in section "<strong>Support Package Patches</strong>", the patch is not yet available. The entry appears with the delivery of the correction. Check this SAP Note to see whether new kernel patch levels have been entered.</p>
+<p>This correction is delivered with the following SAP kernel archives:</p>
+<ul>
+<li>Hotfix - file <em><em></em></em>dw.sar<strong><br/></strong></li>
+</ul>
+<ul>
+<li>SP Stack Kernel - Files SAPEXE.SAR and SAPEXEDB.SAR</li>
+</ul>
+<p>Follow the SAP recommendations for selecting and installing the kernel patch:</p>
+<ol>
+<li>Apply the latest <strong>SP Stack Kernel</strong> if it contains the correction. For a list of the current SP stack kernels, see SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2083594" target="_blank">2083594</a> (SAP kernel versions and SAP kernel patch levels).</li>
+<li>Otherwise, the correction will be provided with the next SP Stack Kernel. Apply the <strong>hotfix </strong>only if you need the correction at short notice.</li>
+<li>The correction may not be available for kernel releases that are no longer maintained. Upgrade to the corresponding downward-compatible kernel (<strong>DCK</strong>), see SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2083594" target="_blank">2083594</a> (SAP kernel versions and SAP kernel patch levels).</li>
+<li>Check the <strong>regression note</strong> for the target patch level before applying the patch. For detailed information, see SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/1802333" target="_blank">1802333</a> (find information about regressions in the SAP kernel).</li>
+<li>For instructions on how to download and apply kernel patches, see SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/19466" target="_blank">19466</a> (Downloading SAP kernel patches).</li>
+</ol>
+<p>For detailed information about SAP recommendations, see the strategy document: <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://support.sap.com/deployment-strategies-kernel-abap.pdf" rel="noopener noreferrer" tabindex="-1" target="_blank" title="https://support.sap.com/deployment-strategies-kernel-abap.pdf">Update Strategy for the Kernel of the Application Server ABAP in On Premise Landscapes</a>.</p></div></div></div></div>

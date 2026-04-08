@@ -1,0 +1,83 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>After migrating from SAP ECC to SAP S/4HANA, issues occur in Personnel Time Management processing:</p>
+<ul><li>
+<p>Time Management records beyond the go-live date (03.11.2025) are not visible.</p>
+</li><li>
+<p>Records created before migration are visible in SAP S/4HANA but cannot be processed further.</p>
+</li><li>
+<p>Creation of certain absence types is not possible.</p>
+</li><li>
+<p>Absence quotas cannot be created or updated via infotype 2006.</p>
+</li><li>
+<p>Error message displayed during absence creation or quota maintenance:<br/>“No entries found in table T554Y_REAC”</p>
+</li><li>
+<p>In some cases, absences are posted with the current date instead of the requested date.</p>
+</li><li>
+<p>Issue mainly occurs after transporting ECC customizing to SAP S/4HANA Quality.</p>
+</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4HANA </li><li>SAP Human Capital Management (HCM) </li><li>Personnel Time Management </li><li>Time Data Recording and Management <br/><br/></li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Perform system conversion or migration from SAP ECC to SAP S/4HANA.</p>
+</li><li>
+<p>Ensure business function H4S4_1 is activated.</p>
+</li><li>
+<p>Transport Personnel Time Management customizing from ECC Production to SAP S/4HANA Quality.</p>
+</li><li>
+<p>Attempt one of the following:</p>
+<ul><li>
+<p>Create absences for specific absence types.</p>
+</li><li>
+<p>Maintain absence quotas using infotype 2006.</p>
+</li></ul>
+</li><li>
+<p>System raises error “No entries found in table T554Y_REAC” or Time Management processing behaves inconsistently.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>
+<p>With activation of business function H4S4_1, SAP S/4HANA introduces a new collision-check framework for time infotypes.</p>
+<p>Key points:</p>
+<ul><li>
+<p>Table T554Y_REAC does not exist in SAP ECC.</p>
+</li><li>
+<p>SAP S/4HANA uses new customizing views:</p>
+<ul><li>
+<p>V_T554Y_REAC – Reaction indicator for overlapping time infotypes</p>
+</li><li>
+<p>V_T554Y_MOCOL – Collision grouping</p>
+</li></ul>
+</li><li>
+<p>Table T554Y_MOCOL has delivery class C.</p>
+</li><li>
+<p>The SAP standard collision group “00 – SAP Standard” is delivered only in client 000.</p>
+</li><li>
+<p>In target clients, V_T554Y_MOCOL may be empty if customizing was not cascaded from client 000.</p>
+</li><li>
+<p>Conversion report RPU_PT_CONV_T554Y fails if entry 00 is missing, resulting in incomplete collision configuration and processing errors.</p>
+</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>
+<ol><li>
+<p>Maintain Collision Group “00 – SAP Standard”</p>
+<ul><li>
+<p>Manually create or copy entry 00 in view V_T554Y_MOCOL from client 000 to the affected client.</p>
+</li><li>
+<p>Required if customizing was not automatically cascaded.</p>
+</li></ul>
+</li><li>
+<p>Implement SAP Note 3299479</p>
+<ul><li>
+<p>Ensures correct handling of collision grouping and prevents recurrence during system copies or upgrades.</p>
+</li></ul>
+</li><li>
+<p>Execute Conversion Report</p>
+<ul><li>
+<p>Run report RPU_PT_CONV_T554Y after ensuring V_T554Y_MOCOL is correctly maintained.</p>
+</li><li>
+<p>Transfers existing collision rules to the new SAP S/4HANA views.</p>
+</li></ul>
+</li><li>
+<p>Verify Customizing</p>
+<ul><li>
+<p>IMG path:<br/><em>Specify System Reaction to Overlapping Time Infotypes</em></p>
+</li><li>
+<p>Ensure views V_T554Y_REAC, V_T554Y_MOCOL, and V_T554Y_KLZBI are consistently maintained.</p>
+</li></ul>
+</li></ol>
+<p>After completing these steps, Personnel Time Management processing works as expected.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="SAP%20Note%203164668" rel="noopener noreferrer nofollow" target="_blank">SAP Note 3164668</a> </li><li><a href="SAP%20Note%203299479" rel="noopener noreferrer nofollow" target="_blank">SAP Note 3299479</a> <br/><br/></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p><br/>SAP S/4HANA migration, collision framework, time infotypes, customizing transport, quota maintenance error, absence creation issue, overlapping time infotypes, collision group 00, SAP standard collision group, client 000 configuration, RPU_PT_CONV_T554Y failure, SAP Note 3299479, SAP Note 3164668, V_T554Y_REAC setup, V_T554Y_MOCOL setup</p></div></div></div></div>

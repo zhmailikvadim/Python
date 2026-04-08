@@ -1,0 +1,232 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When you navigate to a Project System hierarchy report or cost element report (report painter reports), for example, the Project System report <strong>S_ALR_87013542 “</strong><strong>Project Costs - Actual/Commitment/Total/Planned in CO Area Currency”</strong> in the Fiori Launchpad, the system does not display the report output even if you passed all required input fields for the selection screen in the navigation. Instead, it displays the starting page, i.e. the selection screen of the report, but not all input fields are filled. You need to manually enter the missing selection parameters and press "Enter" to open the report output page.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>S_ALR, report painter, GR55, financial reports, actual cost, plan cost, planned cost, commitment cost, project system, navigation, authorization, ps_rep_navigation, SAP S/4HANA 2025, SAP S/4HANA Cloud Private Edition 2025.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is due to a technical restriction of the classical cost element and hierarchy reports. As of SAP S/4HANA 2025 FPS01, a solution is available for cost element, i.e. report painter reports in Project System.</p>
+<p>Hierarchy reports, i.e. reports that were generated based on <strong>CJE0</strong> are not supported by this solution due to additional technical restrictions. For such reports, the data is to be entered manually on the selection screen of the transactions.</p>
+<p>This solution applies to scenarios where users navigate to a report painter report listed in the table below from Fiori applications using a custom business catalog based on the technical catalog <strong>SAP_TC_PS_BE_APPS</strong>.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Following are the possible issues that might be encountered after the upgrade:</strong></p>
+<p><strong>1 – Authorization for new transaction PS_REP_NAVIGATION</strong></p>
+<p><strong>Problem </strong></p>
+<p>In earlier releases, Fiori applications for Project System could navigate to the <strong>S_ALR</strong> reports directly from the Fiori Launchpad. However, <strong>selected parameters</strong> (such as Project Definition, WBS Element, Network, Activity, or Material) from the Fiori applications were <strong>not automatically transferred</strong> to the corresponding <strong>S_ALR</strong> reports.<br/> As a result, users had to manually re-enter the same parameters after the report opened in the SAP GUI.</p>
+<p><strong>Resolution</strong></p>
+<p>To overcome this, a new transaction <strong>PS_REP_NAVIGATION</strong> has been introduced.<br/> It serves as an intermediate navigation layer between Fiori applications and report painter reports.</p>
+<p>All users who previously had access to report painter reports and now wish to navigate to these reports from Fiori applications must also be granted authorization for the<strong> PS_REP_NAVIGATION </strong>transaction.<br/> Without this authorization, navigation from Fiori applications to the corresponding report painter reports is not possible.</p>
+<p>The technical catalog <strong>SAP_TC_PS_BE_APPS</strong> has been updated.</p>
+<p>List of supported S_ALR financial reports which have been adjusted in standard as of SAP S/4HANA 2025 FPS01 to the new solution:</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 628px;">
+<tbody>
+<tr>
+<td valign="top" width="335">
+<p>Apps/Title/Subtitle/Information</p>
+</td>
+<td valign="top" width="159">
+<p>Report Painter Reports Transaction/SAP Fiori ID</p>
+</td>
+<td valign="top" width="134">
+<p>Report Group</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Actual Period Comparison</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013545</p>
+</td>
+<td valign="top" width="134">
+<p>6PP4</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Debit in Object/CO Area Currency</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013550</p>
+</td>
+<td valign="top" width="134">
+<p>6PPR</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Actual Debit/Credit</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013552</p>
+</td>
+<td valign="top" width="134">
+<p>6PPT</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Commitments Period Comparison</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013546</p>
+</td>
+<td valign="top" width="134">
+<p>6PP5</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Actual/Commitment/Total/Planned in CO Area Currency</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013542</p>
+</td>
+<td valign="top" width="134">
+<p>6PP1</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Actual/Plan/Variance Absolute/Variance Percentage</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013543</p>
+</td>
+<td valign="top" width="134">
+<p>6PP2</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Actual/Planned Comparison with Partner</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013549</p>
+</td>
+<td valign="top" width="134">
+<p>6PPP</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Actual/Planned Period Comparison</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013544</p>
+</td>
+<td valign="top" width="134">
+<p>6PP3</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Planned Period Comparison</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013547</p>
+</td>
+<td valign="top" width="134">
+<p>6PP6</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Compare Plan Versions</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013554</p>
+</td>
+<td valign="top" width="134">
+<p>6PPV</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Planned Debits in Object/CO Area Currency</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013551</p>
+</td>
+<td valign="top" width="134">
+<p>6PPS</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Planned Debit/Credit</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013553</p>
+</td>
+<td valign="top" width="134">
+<p>6PPU</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Project Results</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013555</p>
+</td>
+<td valign="top" width="134">
+<p>6PPW</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Revenues and Earnings - Actual/Planned Period Comparison</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013571</p>
+</td>
+<td valign="top" width="134">
+<p>6PP3</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Revenues and Earnings - Actual/Plan/Variance Absolute/Variance Percentage</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013570</p>
+</td>
+<td valign="top" width="134">
+<p>6PP2</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Revenues and Earnings - Project Results</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013572</p>
+</td>
+<td valign="top" width="134">
+<p>6PPW</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="335">
+<p>Project Costs - Statistical Key Figures/Periods</p>
+</td>
+<td valign="top" width="159">
+<p>S_ALR_87013548</p>
+</td>
+<td valign="top" width="134">
+<p>6PP7</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>2 – Navigation to customer defined report painter reports from Fiori applications</strong></p>
+<p><strong>Problem</strong></p>
+<p>When you navigate from the Fiori applications to the custom report painter reports, it does not display the required page. Instead, it displays the starting page of the report, but not all input fields are filled. If you enter the missing parameters and press "Enter", the application calls the page that you expected in the previous step.</p>
+<p><strong>Resolution</strong></p>
+<p>In case a <strong>custom report</strong> is configured in the Fiori catalog to directly launch from the Fiori applications, and you want to auto-fill the parameters while navigating to the custom report painter reports for Project System objects (such as Project Definition, WBS Element, Network, Activity, and Material), a similar configuration approach can be applied as implemented in the <strong>SAP_TC_PS_BE_APPS</strong> technical catalog. Instead of calling the <strong>custom transaction</strong> directly from the catalog, configure the catalog entry to call <strong>PS_REP_NAVIGATION </strong>transaction.<br/> Then, maintain the <strong>custom transaction</strong> as a <strong>parameter</strong> with the name ‘Transaction’ in the catalog and set the custom transaction code as the <strong>default value </strong>(see the example below), along with the relevant Project System object parameters.</p>
+<p>Example:</p>
+<p>Transaction S_ALR_87013542</p>
+<p>Target mapping changes for action –</p>
+<p><a href="https://userapps.support.sap.com/sap/support/sapnotes/public/services/attachment.htm?iv_key=002075125800000423402026&amp;iv_guid=FA163EA594AF1FE180E7465BA4E198F3&amp;alt=2BCE4CB10DF674B172F4F3F7B32A2E284F492BCB353533368BF734378C3730B42AF1F4A80ACFF30C2C0D8FCC3374333231F273CEF0F6CF33F1092ECD71F40FF1F62C0E2A08702AAAD4750C09514BCECFCFCE4C8DCF4BCC4DB5F575F4F4F3F57771F571F6F70B01B25D83D4120B0A722092A599504EB16D715E3E00" target="_blank"> /sap/support/sapnotes/public/services/attachment.htm?iv_key=002075125800000423402026&amp;iv_guid=FA163EA594AF1FE180E7465BA4E198F3&amp;alt=2BCE4CB10DF674B172F4F3F7B32A2E284F492BCB353533368BF734378C3730B42AF1F4A80ACFF30C2C0D8FCC3374333231F273CEF0F6CF33F1092ECD71F40FF1F62C0E2A08702AAAD4750C09514BCECFCFCE4C8DCF4BCC4DB5F575F4F4F3F57771F571F6F70B01B25D83D4120B0A722092A599504EB16D715E3E00</a></p>
+<p>Configure action with new transaction code and parameters-</p>
+<p><a href="https://userapps.support.sap.com/sap/support/sapnotes/public/services/attachment.htm?iv_key=002075125800000423402026&amp;iv_guid=FA163E03D1231FE180E746CBAA8818EA&amp;alt=2BCE4CB10DF674B172F4F3F7B32A2E284F492BCB353533368BF734378C3730B42AF1F4A80ACFF30C2C0D8FCC3374333231F273CEF0F6CF33F1092ECD71F40FF1F62C0E2A08702AAAD4750C09514BCECFCFCE4C8DCF4BCC4DB5F575F4F4F3F57771F571F6F70B01B25D83D4120B0A722092A599504EB16D715E3E00" target="_blank"> /sap/support/sapnotes/public/services/attachment.htm?iv_key=002075125800000423402026&amp;iv_guid=FA163E03D1231FE180E746CBAA8818EA&amp;alt=2BCE4CB10DF674B172F4F3F7B32A2E284F492BCB353533368BF734378C3730B42AF1F4A80ACFF30C2C0D8FCC3374333231F273CEF0F6CF33F1092ECD71F40FF1F62C0E2A08702AAAD4750C09514BCECFCFCE4C8DCF4BCC4DB5F575F4F4F3F57771F571F6F70B01B25D83D4120B0A722092A599504EB16D715E3E00</a></p>
+<p id="">This setup ensures that the <strong>PS_REP_NAVIGATION</strong> transaction handles the parameter passing automatically and navigates to the <strong>custom transaction</strong> with the selected Project System object values prefilled, eliminating the need for manual input on the initial screen.</p></div></div></div></div>

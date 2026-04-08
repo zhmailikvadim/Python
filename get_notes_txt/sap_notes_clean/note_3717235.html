@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">1.) Inconsistent salesRelevant flag values between getConfiguration and getConfiguration(when delta bean is enabled) API for several knowledge bases (KBs).</p>
+<p>2.) Inconsistent salesRelevant flag values between getConfiguration and getExternalConfiguration methods for non-classical knowledge bases (KBs) such as FBS_OFFICE.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>salesRelevant, getConfiguration, getExternalConfiguration, delta bean, non-classical KB, classical KB, SALES ADT characteristics, FBS_OFFICE, SME_OFFICE, FBS_ADMINISTRATION, SME_ADMINISTRATION, SSCCharacteristicGroupMasterDataPopulator, lastInstance, firstInstance, isSalesRelevant, sales relevance determination, characteristic group visibility</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Prerequisites:</p>
+<ul>
+<li>SAP Solutions Configuration (SSC) on-premise system</li>
+<li>Knowledge bases configured in the system (both classical and non-classical KBs such as FBS_OFFICE, SME_OFFICE)</li>
+<li>Delta bean feature enabled (for Issue 1)</li>
+<li>Characteristic groups with SALES ADT characteristics</li>
+</ul>
+<p>Reason:</p>
+<ul>
+<li>When delta bean is enabled, the instance hierarchy may be processed differently, causing the last instance to have different sales relevance properties than the first instance.</li>
+<li>For non-classical KBs like FBS_OFFICE, the FBS_ADMINISTRATION characteristic group contains SALES ADT characteristics but lacks BOM-related characteristics. Additionally, its instance type is KLAH. This causes: </li>
+</ul>
+<ol>
+<li><span style="font-size: 14px;">) </span><span style="font-size: 14px;">getConfiguration to return salesRelevant=true (SALES ADT characteristics are present)</span></li>
+<li><span style="font-size: 14px;">) getExternalConfiguration to return salesRelevant=false</span></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>Replaced the reference from lastInstance to firstInstance when determining sales relevance.</li>
+<li>Replace the conditional logic for setting salesRelevant with a direct reference to the instance's sales relevance value.</li>
+</ul></div></div></div></div>

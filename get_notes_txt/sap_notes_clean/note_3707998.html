@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>After promoting Crystal reports from 4.2 to 4.3, the reports are not working</li>
+<ul>
+<li>In Crystal Reports designer, get the error: Unknown Database Connector ErrorDetails: Failed to retrieve List of ValuesPrevious Error:Error returned from returned from Web Intelligence server: Component:WISErrorCode: 10901ErrorType: USERMessage:The following database error occurred: ORA-12154: TNS:could not resolve the connect identifier specified. For information about this error, please refer to SAP Knowledge Base Article 2054721 on the SAP Support Portal. (IES 10901)Prefix:ERR</li>
+<li>In CMC, get the error: The viewer could not process and event. Failed to open the connection.XXXXX [] ----- Error code:0 [CRWEB00000119]</li>
+</ul>
+<li>The report is based on UNV universe</li>
+<li>The Oracle connection is working in Information Design Tool</li>
+<li>No issue when creating a new Crystal report based on the same UNV universe </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>crystal reports, CR, oracle, connection, ORA-12154, TNS, middleware, connection server, client</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment</strong></p>
+<ul>
+<li>SAP Crystal Reports 2020 Support Pack 04 Patch11</li>
+<li>SAP BusinessObjects Business Intelligence Platform 4.3 SP04 Patch11</li>
+<li>Oracle client</li>
+</ul>
+<p><span style="font-size: 14px;"><strong>Steps to reproduce</strong></span></p>
+<ol>
+<li>Promote a Crystal Report from 4.2 to 4.3 using a BIAR file, including all the dependencies (UNV universe and Oracle connection)</li>
+<li>Install 64-bit Oracle client and configure the TNS name in tnsname.ora file on BI 4.3 server machine</li>
+<li>Launch Crystal Report Client tool</li>
+<li>Log on to BI server</li>
+<li>Open the report<br/>=&gt;&gt;Fail to open with below error message: Unknown Database Connector ErrorDetails: Failed to retrieve List of ValuesPrevious Error:Error returned from returned from Web Intelligence server: Component:WISErrorCode: 10901ErrorType: USERMessage:The following database error occurred: ORA-12154: TNS:could not resolve the connect identifier specified. For information about this error, please refer to SAP Knowledge Base Article 2054721 on the SAP Support Portal. (IES 10901)Prefix:ERR</li>
+</ol>
+<p><strong><span style="font-size: 14px;">Cause</span></strong></p>
+<ul>
+<li>The cause of the issue is under investigation by development team.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>The Solution is under investigation by development team.</li>
+</ul></div></div></div></div>

@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<div>During the Initial Load of Employees from SAP S/4HANA Cloud Public Edition to SAP Sales Cloud Version 2, some employee records do not appear in the Sales Cloud system although the scheduled replication job completes successfully.</div>
+</div>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4HANA Cloud Public Edition</li><li>SAP Sales Cloud Version 2</li><li>Employee Replication / Master Data Integration</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Go to Settings</li><li>Search and Open Employee view</li><li>You expect to see one or more employee not fetched in the query.</li></ol>
+<p></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>Employees without a Work Assignment in SAP S/4HANA Cloud Public Edition are not eligible for replication to SAP Sales Cloud Version 2.</p>
+<p>When analyzing the inbound payload received by Sales Cloud, the WorkAssignment node is missing, indicating that the employee does not have any active work assignment in S/4HANA.<br/>Sales Cloud requires at least one valid work assignment for an employee to be created.</p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>1- Maintain a Work Assignment in SAP S/4HANA Cloud</strong></p>
+<div>Ensure that the affected employees in S/4HANA Cloud have at least one active Work Assignment.<br/>Only employees with a valid work assignment are replicated to SAP Sales Cloud Version 2.</div>
+<hr/>
+<p><strong>2- Re-execute the Employee Replication Job in Sales Cloud V2</strong></p>
+<div>
+<p>After maintaining the Work Assignment, trigger the delta replication job.</p>
+</div>
+<ol><li>Go to Settings</li><li>Open Communication Configuration</li><li>Select Integrate Master Data with SAP S/4HANA</li><li>Under Scheduled Asynchronous Outbound Configurations, search for:  Schedule Employee Replication from SAP S/4HANA Cloud Public Edition</li><li>In the Action column, click the square icon</li><li>Select Immediate Run</li><li>Click Save</li></ol>
+<p>After the job completes and the messages arrive in Sales Cloud, check again in Employee settings.</p>
+<div>
+<p>The previously missing employees should now be available in the system.</p>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><div>Employees must have at least one valid Work Assignment with appropriate dates and organizational data.</div>
+<div>Employees without Work Assignment are skipped automatically by the mapping service.</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><div>SAP Sales Cloud Version 2, SAP S/4HANA Cloud Public Edition, Employee, WorkAssignment node, Workforce Person, Employee initial load, Initial load, Data synchronization</div></div></div></div></div>

@@ -1,0 +1,44 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The choice between Full Load DTP, Delta, or Delta Initialization with ODP (Operational Data Provisioning) in SAP BW, BW/4HANA is a challenge and you need to know what is the best approach to use according to your business scenario.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4HANA</li><li>SAP ERP</li><li>SAP NetWeaver</li><li>SAP BW/4HANA</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h4 data-toc-skip="">Overview</h4>
+<p>The choice between Full Load DTP, Delta, or Delta Initialization with ODP (Operational Data Provisioning) in SAP BW depends on data volume, source system capabilities, business requirements, and performance considerations. Each approach serves specific scenarios in the data loading process.</p>
+<h4 data-toc-skip="">DTP Types Comparison</h4>
+<div>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><thead><tr><th>DTP Type</th><th>Use Case</th><th>Data Volume</th><th>Frequency</th><th>Performance Impact</th></tr></thead><tbody><tr><td>Full Load</td><td>Complete data refresh, data repair, small datasets</td><td>Small to medium</td><td>Infrequent</td><td>High resource usage</td></tr><tr><td>Delta</td><td>Incremental updates, ongoing operations</td><td>Any volume</td><td>Regular/scheduled</td><td>Optimized performance</td></tr><tr><td>Delta Initialization</td><td>Historical data load, delta setup</td><td>Large volumes</td><td>One-time setup</td><td>Variable based on approach</td></tr></tbody></table></div>
+</div>
+<h4 data-toc-skip="">Decision Criteria</h4>
+<h5 data-toc-skip="">Full Load DTP</h5>
+<ul><li>When to Use:
+<ul><li>Small data volumes where complete refresh is acceptable </li><li>Data repair scenarios for specific semantic filters with wrong transformation rules</li><li>Source systems that don't provide delta mechanisms </li><li>When existing records need to be overwritten in the target</li></ul>
+</li><li>Advantages:
+<ul><li>Simple implementation and execution</li><li>Complete data consistency guaranteed</li><li>Can repair data with specific filters </li></ul>
+</li><li>Disadvantages:
+<ul><li>High resource consumption for large datasets</li><li>Overwrites existing data completely</li><li>Not suitable for high-volume scenarios</li></ul>
+</li></ul>
+<h5 data-toc-skip="">Delta DTP</h5>
+<ul><li>When to Use:
+<ul><li>Source system supports delta extraction </li><li>Regular incremental data updates are required</li><li>Ongoing operational data loading</li><li>When only changed/new records need processing</li></ul>
+</li><li>Prerequisites:
+<ul><li>Source DataSource must support delta mechanism</li><li>Delta initialization must be completed first </li><li>Filter conditions for different Delta DTPs must be non-overlapping</li></ul>
+</li><li>Advantages:
+<ul><li>Optimal performance for incremental loads</li><li>Preserves system resources</li><li>Maintains data consistency with proper sequencing </li></ul>
+</li></ul>
+<h5 data-toc-skip="">Delta Initialization</h5>
+<ul><li>When to Use:
+<ul><li>First-time historical data load from source systems</li><li>High-volume scenarios where full DTP would be too slow</li><li>When different filter settings are needed for historical vs. ongoing data </li><li>Setting up delta processes without transferring data</li></ul>
+</li><li>Process Steps:
+<ol><li>Create DTP with Extraction Mode set to Full (for historical data)</li><li>Create second DTP with Extraction Mode set to Delta and "Delta Init w/o Data" checkbox selected </li><li>Execute the Delta DTP again to start actual delta loading</li></ol>
+</li><li>Considerations:
+<ul><li>Risk of data changes between Full load and Delta Initialization </li><li>Requires careful timing to avoid missing changes</li><li>May involve system downtime for some applications</li></ul>
+</li></ul>
+<h4 data-toc-skip="">ODP-Specific Considerations</h4>
+<ul><li>Source System Requirements:
+<ul><li>DataSource must be ODP-enabled (ROOSATTR table with EXPOSE_EXTERNAL = 'X') </li><li>Source system connection under ODP-SAP (Extractors) must be established</li></ul>
+</li><li>Delta Capability:
+<ul><li>ODP supports delta extraction through Operational Delta Queue (ODQ)</li><li>Delta framework guarantees records are uploaded only once and in correct order</li></ul>
+</li><li>Extraction Logic:
+<ul><li>Direct extraction from source system bypassing PSA when using ODP </li><li>Data stored in different ODQ tables: ODQDATA_F (Full), ODQDATA_C (Init), ODQDATA (Delta) </li></ul>
+</li></ul>
+<h4 data-toc-skip="">Best Practices</h4>
+<ol><li>Use Delta DTPs for regular operational loads to optimize performance</li><li>Implement Full DTP before Delta approach for high-volume historical data scenarios </li><li>Ensure proper filter design - overlapping conditions not allowed for Delta DTPs</li><li>Monitor ODQ using ODQMON transaction for delta queue management </li><li>Use Standard DataStore Objects when loading from different sources to control update sequence </li></ol>
+<h4 data-toc-skip="">Common Scenarios</h4>
+<ul><li>Initial Load: Delta DTP for low volume, Full DTP + Delta Init for high volume</li><li>Regular Updates: Delta DTP with scheduled execution</li><li>Data Repair: Full DTP with specific semantic filters</li><li>Historical Data: Full DTP before Delta approach with different filter settings</li></ul>
+<p><span style="color: rgb(224, 62, 45);"><strong>IMPORTANT:</strong></span> Always keep in mind that for some of SAP delivered extractors/datasources this can vary as they have their unique logic, so it is require to check with the responsible application and obey its logic accordingly. </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP BW, ODP (Operational Data Provisioning), DTP (Data Transfer Process), Data loading, Delta extraction, Full load, Delta initialization, ODQMON, ODQ (Operational Delta Queue), ROOSATTR, ODQDATA_F, ODQDATA_C, ODQDATA, RSA7, RSBC056, ST12, SM12, ODQ_E_TSN, EXPOSE_EXTERNAL, LO extractors, FI extractors, CO extractors, Master data extraction, Generic extractors, CRM extractors, Application extractors, Function module extractors, Time-stamp based, Change document based, After image delta, Additive delta, Parallel processing, Background jobs, Archiving strategy, How to configure, Best practices, Troubleshooting guide, Performance tuning, Setup instructions, Migration approach, Error resolution, Monitoring procedures, Optimization techniques, Implementation guide, Incremental loading, Historical data loac, Real-time extraction, Data provisioning, ETL process, Data warehouse, Business Intelligence, HANA extraction, Cloud extraction, On-premise extraction</p></div></div></div></div>

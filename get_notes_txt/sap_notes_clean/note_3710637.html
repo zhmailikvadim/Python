@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">New records are being added to Change Logs and to the AUSR table for several users, when importing a Crystal Report.</p>
+<p><span style="color: rgb(224, 62, 45);"><em>Image Disclaimer: Images and data in this SAP Note are from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em>  </span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Business One</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Prerequisite:</strong></p>
+<p>Go to <em>Administration → System Initialization → Authorizations → General Authorizations, </em>mark one of the users, check for example the Banking under Subject column. Make sure it's not set to <em>Various Authorizations</em>. It can be <em>Full </em><em>Authorization</em>.</p>
+<p><strong>Scenario:</strong></p>
+<p>1. Log in to SAP Business One with a superuser and go to <em>Administration </em><em>→ Setup → General → Report and Layout Manager</em>.</p>
+<p>2. Press <em>Import</em> and <em>Next</em> and press on <em>Browse</em> to choose any Crystal Report. Under<em> Content Type</em> choose a report and choose the location in the three dots button - for example <em>Banking Reports</em>. Press on <em>Next</em> and <em>Finish</em>.</p>
+<p>3. Check the user <em>Change Log</em> of one of the users who was not involve in the import (or check records in table AUSR).</p>
+<p><strong>Expected Behavior: </strong></p>
+<p>No records added to Change Log (table AUSR).</p>
+<p><strong>Actual Behavior: </strong></p>
+<p>New records were added to Change Log (table AUSR).</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This is correct system behavior.</p>
+<p>When importing a new Crystal Report, table CDPM is getting updated for the related Father column.</p>
+<p>After adding this permission of the report to the Authorizations window, due to the newly added record being <em>No Authorization</em>, the father's permission needs to be updated to <em>Various Authorizations</em>, it indicates that its child record permission has multiple types.</p>
+<p>As a result, this will affect Authorizations change log of all relevant users. The column <em>ALLOWENCES </em>of <em>OUSR</em> table is updated and any changes to it will be added to the AUSR table for the relevant users.</p>
+<p>So, for some users, when importing a report, it will cause the Father record to be updated, and the update operation will be recorded in the AUSR table.</p>
+<p><strong>For example:</strong> when importing a new report called 'wwc' under Banking Reports, the Father is Banking (39).</p>
+<p><img alt="" class="img-responsive"/><img alt="" class="img-responsive" height="675" src="/documents/customerkba/5F9MJLkJ1F4ABtfbN24U8ayInB4LwWzVyELUfDu9_Ew" width="937"/></p>
+<p>Since the Authorization for Banking changed to <em>Various Authorizations</em> after the import, this affected table AUSR for the relevant users.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>History log, case, logistics</p></div></div></div></div>

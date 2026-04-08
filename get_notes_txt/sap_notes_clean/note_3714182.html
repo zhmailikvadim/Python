@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In the Fixed Asset Acquisition Form for Poland (<strong>PL_FXDAST_FORM_ACQ</strong>), the field <strong>Asset National Classification (KŚT)</strong> is empty in the generated PDF form, although the classification value is maintained in the Asset Master (for example in Evaluation Group fields).</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>
+<p>SAP S/4HANA with Document and Reporting Compliance (DRC / ACR)</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><h3 data-toc-skip=""> </h3>
+<ol><li>
+<p>Maintain the Asset National Classification in the Asset Master (for example in Evaluation Group fields such as ANLA-ORD41 or ANLA-ORD42).</p>
+</li><li>
+<p>Execute report <strong>PL_FXDAST_FORM_ACQ </strong>via DRC.</p>
+</li><li>
+<p>Generate the Fixed Asset Acquisition PDF form.</p>
+</li><li>
+<p>The field <strong>KŚT / Asset National Classification</strong> is empty in the output.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The source field for the Asset National Classification is controlled by a <strong>report-specific configuration parameter</strong> in the DRC framework.</p>
+<p>If this parameter is missing or not maintained, the report cannot determine which Asset Master field should be used as the source. As a result, the KŚT field remains empty in the generated form.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Maintain the report-specific parameter for report ID <strong>PL_FXDAST_FORM_ACQ:</strong></p>
+<p><strong>1. Open view cluster maintenance:</strong></p>
+<p style="padding-left: 40px;">Transaction SM34<br/>View cluster: SRFVC_RPG_ENT</p>
+<p><strong>2. Select the relevant Reporting Entity (e.g. Poland reporting entity).</strong></p>
+<p><strong>3. Navigate to the report category:</strong></p>
+<p style="padding-left: 40px;">PL_FXDAST_FORM_ACQ</p>
+<p><strong>4. Maintain the parameter:</strong></p>
+<p style="padding-left: 40px;">G_FXDAST_NATL_CLFN_SRCE_FLD</p>
+<p><strong>5. Set the parameter value according to the desired source field for the Asset National Classification.</strong></p>
+<p>Supported values:</p>
+<p style="padding-left: 40px;">1 — National Classification Code (New Asset Master)<br/>2 — Asset Super Number (ANLA-ANLUE) (Old Asset Master)<br/>3 — Evaluation Group 1 (ANLA-ORD41) (Old Asset Master)<br/>4 — Evaluation Group 2 (ANLA-ORD42) (Old Asset Master)<br/>5 — Evaluation Group 3 (ANLA-ORD43) (Old Asset Master)<br/>6 — Evaluation Group 4 (ANLA-ORD44) (Old Asset Master)<br/>7 — Evaluation Group 5 (ANLA-GDLGRP) (Old Asset Master)</p>
+<p style="padding-left: 120px;"><em>Note:</em><br/><em>Value 1 can be used only for customers with the New Asset Master (UPA business function enabled).</em><br/><em>For configurations with UPA disabled, values 2–7 can be used.</em></p>
+<p><strong>6. Save the settings.</strong></p>
+<p><strong>7. Execute report PL_FXDAST_FORM_ACQ again.</strong></p>
+<p style="padding-left: 40px;">The Asset National Classification (KŚT) field is now populated in the generated PDF form.</p>
+<p style="padding-left: 120px;"><em>Note:</em><br/><em>Only one source field can be used at a time.</em></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP-Notes</p>
+<p><a href="https://me.sap.com/notes/3094895/D" rel="noopener noreferrer nofollow" target="_blank">3094895 – PL/SK Fixed asset forms: ACR Configuration parameters</a></p>
+<p><a href="https://me.sap.com/notes/3494302/E" rel="noopener noreferrer nofollow" target="_blank">3494302 – PL/RO/SK Fixed Asset Forms (Acquisition, Location Transfer, Retirement)</a></p>
+<p><a href="https://me.sap.com/notes/3637508/E" rel="noopener noreferrer nofollow" target="_blank">3637508 – PL/RO/SK Fixed Asset Forms: PDF Forms in Country Languages</a></p>
+<p><a href="https://me.sap.com/notes/2964659/E" rel="noopener noreferrer nofollow" target="_blank">2964659 – PL/SK Fixed asset forms: technical changes (BRF+ replacement, using another CDS view)</a></p>
+<p><a href="https://me.sap.com/notes/3069745/D" rel="noopener noreferrer nofollow" target="_blank">3069745 – PL/SK Fixed asset forms (ACR): avoid status Generation Failed when no documents found</a></p>
+<p><a href="https://me.sap.com/notes/3378746/E" rel="noopener noreferrer nofollow" target="_blank">3378746 – PL/SK Fixed asset forms: Adding reference document number</a></p>
+<p><a href="https://me.sap.com/notes/3303693/E" rel="noopener noreferrer nofollow" target="_blank">3303693 – PL/SK Fixed asset forms: filtering the transactions by representative ledger</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>RC Fixed Asset Forms Poland, PL_FXDAST_FORM_ACQ  Asset National Classification (KŚT)</p></div></div></div></div>

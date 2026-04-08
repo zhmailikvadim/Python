@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> You want to migrate spatial data from a third-party DBMS to SAP HANA and need to find the proper Spatial Reference System (SRS) for your spatial data in SAP HANA.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html0">Spatial data migration, geographic spatial reference systems</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Types of spatial reference systems</strong></p>
+<p>Each geometry in a spatial database is associated with an ID that identifies its spatial reference system. The two major types of spatial reference systems are geographic spatial reference systems and projected spatial reference systems.</p>
+<p><strong>Geographic spatial reference systems</strong></p>
+<p>In geographic spatial reference systems, the earth’s surface is modelled as a rotating ellipse with a major and a minor axis called spheroid. Coordinates use angular units like degree. Besides an angular unit, those reference systems also define a linear unit, which is meter or foot in most cases. The linear unit is used in distance and area computations; for example, to measure the distance between two points on the earth’s surface.</p>
+<p>A prominent example of a geographic spatial reference system is the “World Geodetic System 1984” with ID 4,326. This is the spatial reference system used by GPS.</p>
+<p><strong>Projected spatial reference systems</strong></p>
+<p>Projected spatial reference systems are based on geographic spatial reference systems, but define a projection on top of the geographic spatial reference system. The projection projects points from the earth’s curved surface onto a flat 2-dimensional map.</p>
+<p>Projected spatial reference systems use a linear unit for both coordinates and distance/area computations. The linear unit is meter or foot in most cases.</p>
+<p>Prominent examples of projected spatial reference systems are the WGS 84 / Pseudo-Mercator spatial reference system with ID 3,857 and the family of UTM spatial reference systems with IDs 32,601 to 32,660 and 32,701 to 32,760.</p>
+<p><strong>Spatial datatypes in SAP HANA and other DBMSs</strong></p>
+<p>SAP HANA offers only a single spatial data type (ST_Geometry) while some third-party DBMSs offer two spatial data types, usually named geometry and geography.</p>
+<p>SAP HANA decides---based on the type of the spatial reference system (geographic or projected)---whether to perform its computations on a spheroid or in a flat plane.</p>
+<p>Databases with two different spatial data types usually only execute computations on the spheroid if the geography data type is used. If the geometry data type is used, these DBMSs interpret the angular unit as linear unit and execute computations in the flat plane.</p>
+<p>To mimic this behavior, SAP HANA offers a planar variant of all geographic spatial reference systems. Those spatial reference systems have an SRS ID offset of 1,000,000,000.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>If you are migrating from a DBMS that offers only a single spatial data type, then you can use the SRS in SAP HANA with the same ID as in the source DBMS.</li>
+<li>If you are migrating from a DBMS that distinguishes between a geometry and a geography type, then you must pay special attention when selecting the SRS in SAP HANA.</li>
+<li>If you are using a geographic spatial reference system in the source DBMS (geographic spatial reference systems use coordinates with an angular unit like degree) and use the geography data type, then you can use the spatial reference system with the same ID in SAP HANA.</li>
+<li>If you are using a geographic spatial reference system in a source DBMS offering both a geometry and geography type and you use the geometry type, then you must add 1 billion to the ID of the spatial reference system in the source DBMS.</li>
+<li>If you are using a projected spatial reference system in the source DBMS (projected spatial reference systems use coordinates with a linear unit like meter or foot) and use the geometry datatype, then you can use the spatial reference system with the same ID in SAP HANA.</li>
+</ul>
+<p>You can find information about how to create spatial reference systems in HANA at <a href="https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-database-spatial-reference/create-predefined-spatial-reference-system-identified-by-srs-id-statement?locale=en-US&amp;version=LATEST" target="_blank">CREATE PREDEFINED SPATIAL REFERENCE SYSTEM IDENTIFIED BY &lt;srs-id&gt; Statement</a>.</p>
+<p>Example 1: You are using the geographic spatial reference system with ID 4,326 in a source DBMS that offers a geometry and geography data type, and you are using the geometry datatype. The proper spatial reference system in SAP HANA has the ID 1,000,004,326.</p>
+<p>Example 2: You are using the geographic spatial reference system with ID 4,326 in a source DBMS that offers a geometry and geography data type, and you are using the geography datatype. The proper spatial reference system in SAP HANA has the ID 4,326.</p>
+<p>Example 3: You are using the projected spatial reference system with ID 3,857 in a source DBMS that offers a geometry and geography data type, and you are using the geometry data type. The proper spatial reference system in SAP HANA has the ID 3,857.</p>
+<p>Example 4: You are using the spatial reference system with ID 4,326 in a source DBMS that offers a geometry type only. The proper spatial reference system in SAP HANA has the ID 4,326.</p></div></div></div></div>

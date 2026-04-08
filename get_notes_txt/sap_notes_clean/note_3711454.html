@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Scheduled recurring jobs (weekly, monthly, yearly) for both EC/Non -EC instances , in which the selected timezone is non-UTC, are not executing at their configured schedule times.</li></ul>
+<p><span><em>For example, jobs scheduled to run at 08:00 (UTC+9, Asia/Tokyo) are instead executing at 23:00 (UTC+9). </em><em> 23:00 should be the UTC time and not UTC+9.(Aisa/Tokyo timezone)</em></span></p>
+<ul><li><em style="font-size: 10pt;">Scheduled recurring jobs (weekly, monthly, yearly) are not executing at their configured schedule when the scheduled time is converted to UTC. </em></li></ul>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors HXM Suite</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Log in to instance -&gt; Scheduled Job Manager .</p>
+</li><li>
+<p>Navigate to Monitor Jobs.</p>
+</li><li>
+<p>Search for the scheduled job</p>
+</li><li>
+<p>Click on the job to observe that the scheduled time differs from the actual execution (run) time configured at the time of job scheduling.</p>
+</li></ol>
+<p></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue is caused by a time zone configuration change affecting job scheduling.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p> This is a known issue with the Engineering team. A fix is scheduled to be deployed to the <strong><span>Preview environment on February 24</span></strong> and to the<strong><span> Production environment on February 26, 2026.</span></strong></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://userapps.support.sap.com/sap/support/knowledge/en/2906009" rel="noopener noreferrer nofollow" target="_blank">2906009 - Scheduled Job Manager on SuccessFactors</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Scheduled Jobs, UTC Conversion, Time Zone Change, Incorrect Execution Time, Job Scheduling, Schedule Job Manager, Provisioning, Monitor Jobs, SuccessFactors,SFPLS-44315 , INC19705554</p></div></div></div></div>

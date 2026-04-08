@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Release Note SAP Enterprise Threat Detection 2.0 SP07 PL06</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>You can find the installation file(s) in the <em>Support Packages and Patches </em>area of SAP Software Download Center at <a href="https://me.sap.com/softwarecenter" target="_blank">Software Center - SAP for Me</a>.</p>
+<p><strong>Please note:</strong></p>
+<ul>
+<li>Make sure you follow the installation instructions described in <a href="https://help.sap.com/docs/SAP_ENTERPRISE_THREAT_DETECTION/5b40f58ce41c49a19487096dee5fe97d/2787353b60404c9f916d913bce368ef7.html" target="_blank">Installing Patches</a>.  </li>
+<li>For the required prerequisites regarding the underlying SAP HANA platform, check SAP Note <a href="/notes/2137018" target="_blank">2137018 - <strong>Compatibility information for SAP Enterprise Threat Detection support packages and SAP HANA revisions</strong></a>.</li>
+<li>To leverage enhancements for ABAP log providers for SAP Enterprise Threat Detection 2.0 SP07, implement SAP Note  <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3313550" target="_blank">3313550</a><a href="/notes/3304113" target="_blank"><br/></a></li>
+</ul>
+<p><em><strong>Documentation</strong></em></p>
+<p>All guides for SAP Enterprise Threat Detection are available at <a href="http://help.sap.com/sapetd" target="_blank">http://help.sap.com/sapetd</a>.</p>
+<p><em><strong>SAP Enterprise Threat Detection 2.0 SP07 PL06 provides corrections <strong><em>for the following issues</em></strong>:</strong></em></p>
+<p><strong>Forensic Lab UI</strong></p>
+<ul>
+<li>The fields Privilege Name, Privilege Type and Privilege Grantee Type were sometimes not filled when transferring User Change Log from ABAP Log Extractor (New).</li>
+</ul>
+<p><strong>Streaming</strong></p>
+<ul>
+<li>Payloads sent to the Log Collector by the ABAP Log Extractor (New) were not properly parsed in some cases. This could cause several issues like wrong timestamps being parsed.</li>
+<li>One or several Log Collector queues remained full for a long time, which meant that Log Collector couldn't send data to the remote endpoint fast enough. Now the Log Collector's HTTPSender supports multithreading, which improves performance.</li>
+<li>A new configuration in the <a href="https://help.sap.com/docs/SAP_ENTERPRISE_THREAT_DETECTION/eb42e48f5e9c4c9ab58a7ad73ff3bc66/f8b1ddcbdcc64e5887b8d632967f9003.html" target="_blank">Normalizer Processing Settings</a> allows to save original logs (sent from new ABAP Log Provider) in a short form. This allows to reduce memory consumption of Original Logs in Kafka, Hot and Warm storages. Example configuration:</li>
+<li>
+<p>       &lt;<strong>UseShortFormatForOriginalLogs</strong>&gt;</p>
+<p>                                                &lt;<strong>Enabled</strong>&gt;true&lt;/<strong>Enabled</strong>&gt;</p>
+<p>                                                &lt;<strong>LogType</strong>&gt;BusinessTransactionLog&lt;/<strong>LogType</strong>&gt;</p>
+<p>                                                &lt;<strong>LogType</strong>&gt;...&lt;/<strong>LogType</strong>&gt;</p>
+<p>        &lt;/<strong>UseShortFormatForOriginalLogs</strong>&gt;</p>
+</li>
+</ul></div></div></div></div>

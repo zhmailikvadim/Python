@@ -1,0 +1,97 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">SAP BusinessObjects Live Data Connect is a component that enables SAP Analytics Cloud to leverage existing WebI documents and relational BI universes created with the information design tool (UNX).</p>
+<div class="OutlineElement Ltr SCXW53668345 BCX0">
+<p class="Paragraph SCXW53668345 BCX0">SAP BusinessObjects Live Data Connect is an application embarking its own application server and is used by SAP Analytics Cloud when you are accessing live data on SAP universes and WebI documents.</p>
+</div>
+<div class="SCXW53668345 BCX0">
+<div class="OutlineElement Ltr SCXW53668345 BCX0">
+<p class="Paragraph SCXW53668345 BCX0">The following instructions create an SAP Analytics Cloud model based on a relational universe or WebI document without replicating data in the cloud:</p>
+</div>
+<div class="ListContainerWrapper SCXW53668345 BCX0"><ol class="BulletListStyle1 SCXW53668345 BCX0">
+<li class="OutlineElement Ltr SCXW53668345 BCX0">
+<p class="Paragraph SCXW53668345 BCX0">Connect to SAP BusinessObjects BI Platform and get the list of relational universes and WebI documents</p>
+</li>
+<li class="OutlineElement Ltr SCXW53668345 BCX0">
+<p class="Paragraph SCXW53668345 BCX0">Select a universe or WebI document, run the Query Builder and create a query by selecting objects</p>
+</li>
+<li class="OutlineElement Ltr SCXW53668345 BCX0">
+<p class="Paragraph SCXW53668345 BCX0">Retrieve the metadata and save your model</p>
+</li>
+<li class="OutlineElement Ltr SCXW53668345 BCX0">
+<p class="Paragraph SCXW53668345 BCX0">Reuse your model for SAP Analytics Cloud stories</p>
+</li>
+</ol></div>
+</div>
+<div class="SCXW53668345 BCX0">
+<div class="OutlineElement Ltr SCXW53668345 BCX0"></div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<div class="OutlineElement Ltr BCX0 SCXW203013685">
+<p class="Paragraph BCX0 SCXW203013685">The SAP BusinessObjects Live Data Connect 2025 release is the sole version supporting SAP BusinessObjects 2025. If you upgrade this version from SAP BusinessObjects Live Data Connect 3.4.4 the same configuration file could be kept and reused for version 2025.</p>
+</div>
+<div class="OutlineElement Ltr BCX0 SCXW203013685">
+<p class="Paragraph BCX0 SCXW203013685">Make sure that you have the following elements before installing SAP BusinessObjects Live Data Connect 2025.</p>
+</div>
+<div class="ListContainerWrapper BCX0 SCXW203013685">
+<ul class="BulletListStyle1 BCX0 SCXW203013685">
+<li class="OutlineElement Ltr BCX0 SCXW203013685">
+<p class="Paragraph BCX0 SCXW203013685">An SAP BusinessObjects Business Intelligence 2025 installation</p>
+</li>
+<li class="OutlineElement Ltr BCX0 SCXW203013685">
+<p class="Paragraph BCX0 SCXW203013685">Microsoft Visual C++ 2015 Redistribuable Packages.</p>
+</li>
+<li class="OutlineElement Ltr BCX0 SCXW203013685">
+<p class="Paragraph BCX0 SCXW203013685">The SAP BusinessObjects Live Data Connect 2025 component available on the <a href="https://me.sap.com/softwarecenter/search/SAP%2520BOE%2520LIVE%2520DATA%2520CONNECT%25202025" target="_blank">SAP Support Portal</a>.</p>
+</li>
+</ul>
+<p>Installing SAP BusinessObjects Live Data Connect on the same computer as SAP BusinessObjects Business Intelligence is not supported, so make sure you have a dedicated computer for your SAP BusinessObjects Live Data Connect setup.</p>
+<p>If you are using SAML authentication, when configuring CORS (Cross-Origin Resource sharing), make sure your SAML identity provider URL is included in the list of allowed origins. Refer to the <a href="https://help.sap.com/docs/SAP_BUSINESSOBJECTS_LIVE_DATA_CONNECT/6be6d1fc887046f7a5e5c1aa52505e86/0181a9565abf448fba5d265fb795b440.html?locale=en-US" target="_blank">documentation</a> for more information.</p>
+<p><strong>New features in LDC 2025 (Release date: March 1st, 2026)</strong></p>
+<ul>
+<li>Support of SAP BusinessObjects 2025</li>
+</ul>
+<p><strong>Known Restrictions</strong></p>
+<p>SAP BusinessObjects Live Data Connect 2025 has below restrictions:</p>
+<ul>
+<li><span style="font-size: 14px;">The query builder doesn't support multi-columns list of values.</span></li>
+<li><span style="font-size: 14px;">It does not support universe delegated measures.</span></li>
+<li><span style="font-size: 14px;">It does not support universe hierarchical list of values.</span></li>
+<li><span style="font-size: 14px;">It does not support SAP Analytics Cloud linked dimensions.</span></li>
+<li><span style="font-size: 14px;">It is not possible to create a model on universe containing cascading prompts or prompts depending on contexts.</span></li>
+<li><span style="font-size: 14px;">Creating calculated dimensions from a chart is not supported.</span></li>
+<li><span style="font-size: 14px;">Sort: LDC does not support custom order.</span></li>
+<li><span style="font-size: 14px;">Rank: "Apply to each dimension" is not supported when measure relies on IF </span></li>
+<li><span style="font-size: 14px;">HANA input parameters or variables on currencies or units displays keys instead of the descriptions.</span></li>
+<li><span style="font-size: 14px;">HANA multi-colomns are not supported</span></li>
+<li><span style="font-size: 14px;">HANA dynamic default variable value on dates is not supported</span></li>
+<li><span style="font-size: 14px;">It is not possible to compose IF with LIKE i.e. IF( LIKE(), , )</span></li>
+<li><span style="font-size: 14px;">Live Universe Connectivity is not supported from SAP Analytics Cloud mobile application</span></li>
+<li><span style="font-size: 14px;">When connecting to a clustered BI Platform, you must choose one CMS as the entry point for LDC and reference it under the boe.nameserver parameter.</span></li>
+<li><span style="font-size: 14px;">When using calculated measures on a Live Universe Connectivity datasource, make sure the connection language is set to EN (english) to avoid misinterpretation of decimal separators.</span></li>
+<li><span style="font-size: 14px;">Connecting to LDC from the same machine (localhost) is not supported. Your LDC server should always be running on a different computer than your web browser.</span></li>
+<li><span style="font-size: 14px;">In the member selector, in Optimized Design Experience stories, search is not supported for hierarchical presentations.</span></li>
+</ul>
+<p>You'll find the complete list of limitations <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/doc/00f68c2e08b941f081002fd3691d86a7/release/en-US/feb30bcf4f994042987b120194503a36.html" target="_blank">here</a>.</p>
+<p><strong>Known Issues</strong></p>
+<ul>
+<li>Showing the key instead of the description in list of values of index aware prompt</li>
+<li>Manual entry is allowed for constrained prompts</li>
+<li>Partial refresh is silent for charts</li>
+<li>Not able to work with live connectivity on universe after killing user session in the Central Management Console of SAP BI Platform.</li>
+<li>High precision numeric measures generate an error</li>
+<li>In some cases (eg when the query panel is maximized), double clicking a predefined filter in the query panel may result in it being added twice to the query. You should either remove the incorrectly added predefined filter, or use drag and drop to add it to your query.</li>
+<li>In some cases, expand and collapse icons may appear incorrectly in SAP Analytics Cloud tables.</li>
+<li>Default values for calculated/dynamic variables are evaluated only once, when the story is created. Reopening the story does not trigger reevaluating the values for these variables.</li>
+<li>In optimized mode, for tables, only the crosstab is supported, other layouts trigger calculations that break.</li>
+<li>Histogram charts do not render on Live Universe Connectivity datasources.</li>
+<li>Conditional aggregation does not work on Live Universe Connectivity datasources.</li>
+<li>Scheduling of Live Universe Connection based documents does not work.</li>
+<li>In Optimized Design Experience stories, applying a measure-based story filter on Live Universe Connection charts breaks them.</li>
+<li>In Optimized Design Experience stories, recursive rank and break grouping in sort may behave incorrectly in tables.</li>
+</ul>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> The SAP Live Data Connect for BusinessObjects Installation and Security Guide is available at <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/viewer/6be6d1fc887046f7a5e5c1aa52505e86/latest/en-US/7618c88853674e768920f34cdbe1a97a.html" target="_blank">this address</a>.</p>
+<script src="chrome-extension://blagilkhjofbaghcmaifoobgophanabl/content.js" type="text/javascript"></script>
+<script src="chrome-extension://blagilkhjofbaghcmaifoobgophanabl/content.js" type="text/javascript"></script>
+<script src="chrome-extension://blagilkhjofbaghcmaifoobgophanabl/content.js" type="text/javascript"></script></div></div></div></div>

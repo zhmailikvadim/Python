@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In Open SQL, a select from an internal table or buffered table yields wrong results. <br/>Typically a filter condition on a CHAR or NUMC or similar column is involved.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SSE2, AVX, SQLEngine, jit-compiler , CHAR comparison</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The problem does not usually appear as an optimization targeting an old cpu vectorization capabilty is affected. Typically on newer hardware different vectorization instructions are applied. <br/>The SAP Kernel runs on a very old  x86_64 CPU or a virtualization where the effective CPU capabilities are hidden by the virtualization, so that the ABAP Kernel assumes only SSE2 optimization can be done. <br/>The problem may only appear on some queries and may be dependend on the OS, as it depends on register choice of the jit engine. <br/><br/></p>
+<p>The problem disappears if the dynamic profile parameter rsdb/tbi_jit is set to the value OFF. <br/>Note: This should be only used for problem analysis and the default setting ON should be used for productive usage.<br/>The problem disappears on virtualized hardware if the CPU vectorization is configured to use AVX or similar.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="longtext">
+<p>Install the kernel patch.<br/>The kernel patch can be applied irrespective of the specific hardware or vectorization used in your system. As the flawed vectorization is not chosen, it has no effect then.</p>
+<div class="longtext">
+<p>After installing the kernel patch, illegal values may be treated differently (e.g sorted differntly). <br/>In a future release the operations will fail. Thus it is of paramount importance that the source of these values is eliminated in the SAP Coding. <br/><br/></p>
+<p>Apply the indicates Kernel Patch or above.</p>
+<p id="">These corrections were originally delivered with the kernel patch level specified in the "<strong>Support Package Patches</strong>" section of this SAP Note. All later kernel patch levels also contain these corrections. Note that only the latest kernel patch is available for download. It contains all previously delivered corrections. This means that you can always download and apply the latest kernel patch in order to implement the corrections.</p>
+<p>If no kernel patch level is entered in the "<strong>Support Package Patches</strong>" section, the patch is not yet available. The entry appears with the delivery of the corrections. Check this SAP Note to find out whether new kernel patch levels have been entered.</p>
+<p>These corrections are delivered with the following SAP kernel archives:</p>
+<ul>
+<li>Hotfix - file <em></em>dw.sar<strong><br/></strong></li>
+</ul>
+<ul>
+<li>SP Stack Kernel files SAPEXE.SAR and SAPEXEDB.SAR </li>
+</ul>
+<p>Follow our recommendations for selecting and applying the kernel patch:</p>
+<ol>
+<li>Import the latest <strong>SP Stack Kernel</strong> if it contains the corrections. For a list of current SP Stack Kernels, see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> ("SAP Kernel Versions and SAP Kernel Patch Levels").</li>
+<li>Otherwise, the corrections will be provided with the next SP Stack Kernel. Apply the <strong>hotfix</strong> only if you need the corrections quickly.</li>
+<li>The correction might not be available for kernel releases that are no longer maintained. Perform an upgrade to the relevant downward-compatible kernel (<strong>DCK</strong>); see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP kernel versions and SAP kernel patch levels).</li>
+<li>Check the <strong>regression note</strong> for the target patch level before applying the patch. For detailed information, see SAP Note <a href="/notes/1802333" target="_blank">1802333</a> (Finding information about regressions in the SAP kernel).</li>
+<li>For instructions on how to download and apply kernel patches, see SAP Note <a href="/notes/19466" target="_blank">19466</a> (Downloading SAP kernel patches).</li>
+</ol>
+<p>For detailed information about our recommendations, see the following strategy document: <a href="https://support.sap.com/deployment-strategies-kernel-abap.pdf" rel="noopener noreferrer" tabindex="-1" target="_blank" title="https://support.sap.com/deployment-strategies-kernel-abap.pdf">Update Strategy for the Kernel of the Application Server ABAP in On Premise Landscapes</a>.</p>
+</div>
+</div></div></div></div></div>

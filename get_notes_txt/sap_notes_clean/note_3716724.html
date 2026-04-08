@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Adding the Form Section table to a Story report based on a Single Performance Template data source results in duplicate rows for each section.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP SuccessFactors Performance Management</li><li>SAP SuccessFactors People Analytics</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Log in to the system and navigate to Reporting &gt; Story Reports.</p>
+</li><li>
+<p>Create a new Story report.</p>
+</li><li>
+<p>Select a data source based on a single Form Template.</p>
+</li><li>
+<p>In the report, add the following tables:</p>
+<ul><li>
+<p>The Form Template table (single template).</p>
+</li><li>
+<p>The Form Section table.</p>
+</li></ul>
+</li><li>
+<p>Add the required standard fields from the Form Section table to the report.</p>
+</li><li>
+<p>Add one or more custom elements (custom fields) from the selected Form Template to the report:</p>
+<ul><li>
+<p>Note that when using a single Form Template as the data source, custom elements appear as columns.</p>
+</li></ul>
+</li><li>
+<p>Run the report and review the output.</p>
+</li><li>In the Preview- duplicate columns can be seen for each custom element for each section.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This is expected behavior by design. In Story Reports, each custom element in a form section is treated as a separate record, resulting in one row per custom element and causing duplicate section rows.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Use the Cross Tab option in the Story Report to restructure the data so custom elements display as columns and duplicate rows are consolidated.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/3292104/E" rel="noopener noreferrer nofollow" target="_blank">3292104 - How to report on custom section fields in Story report - Performance Management - SAP for Me</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>PMGM report count, chart widget discrepancy, duplicate records, count calculation issue, story report, form section table, custom elements, reporting issue, data discrepancy, percentage calculation, PMGM analytics, duplicate rows</p></div></div></div></div>

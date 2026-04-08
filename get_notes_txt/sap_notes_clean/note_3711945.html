@@ -1,0 +1,53 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>In the My Inbox Fiori application, users are unable to see a list of available users when attempting to create a substitute.</p>
+</li><li>
+<p>The "Manage My Substitute" -&gt; "Add New Substitute" dialog displays an empty list or no search results.</p>
+</li><li>
+<p>The same functionality works correctly in the SAP GUI via transaction SBWP (SAP Business Workplace).</p>
+</li><li>
+<p>The issue also impacts the ability to forward tasks to other users.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Private Edition 2023</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Log in to the Fiori Launchpad and open the My Inbox app.</p>
+</li><li>
+<p>Click on the user profile icon and select Manage My Substitute.</p>
+</li><li>
+<p>Click on Add New Substitute.</p>
+</li><li>
+<p>Observe that the user list remains empty or the search returns no results.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The discrepancy between the SAP GUI and the Fiori app exists because:</p>
+<ol><li>
+<p>SBWP uses traditional SAP Business Workplace functionality with direct backend access.</p>
+</li><li>
+<p>My Inbox relies on the Task Gateway Service. If the "Enable User List" flag is not activated in the Gateway configuration, the service will not fetch or provide user search capabilities to the Fiori frontend.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h3 data-toc-skip="">Step 1: Enable User List in Task Gateway Service</h3>
+<ol><li>
+<p>Log in to the Frontend/Gateway system.</p>
+</li><li>
+<p>Execute transaction SPRO.</p>
+</li><li>
+<p>Navigate to: <em>SAP NetWeaver</em> → <em>Gateway Service Enablement</em> → <em>Content</em> → <em>Task Gateway</em> → <em>Task Gateway Service</em> → Task Gateway Service Settings.</p>
+</li><li>
+<p>Check the flag Enable User List. (Note: Ensure other flags are left blank unless specifically required for other processes).</p>
+</li><li>
+<p>If no entry exists for your service, click New Entries to create the configuration.</p>
+</li><li>
+<p>Save the changes.</p>
+</li></ol>
+<h3 data-toc-skip="">Step 2: Verify System Alias Configuration</h3>
+<ol><li>
+<p>Check the Task Gateway system alias configuration in the Gateway maintenance.</p>
+</li><li>
+<p>Ensure that the flags Local SAP GW and For Local App are set correctly according to your specific landscape architecture (Hub vs. Embedded).</p>
+</li></ol>
+<h3 data-toc-skip="">Step 3: Check for BAdI Interference</h3>
+<ol><li>
+<p>Verify if the BAdI <code>/IWPGW/BADI_TGW_USER_DETAIL</code> is implemented.</p>
+</li><li>
+<p>If an implementation exists, ensure it is not filtering out users incorrectly. Consider deactivating it temporarily to test if it is the source of the empty list.</p>
+</li></ol>
+<h3 data-toc-skip="">Step 4: Backend Configuration</h3>
+<ol><li>
+<p>In the Backend system, ensure that the task classes and substitution profiles are maintained according to the SAP Help Portal guidelines for Flexible Workflow.</p>
+</li><li>
+<p>Confirm that users exist and are valid in both the frontend and backend systems.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>My Inbox, Manage My Substitute, Empty User List, SBWP, Task Gateway, /IWPGW/BADI_TGW_USER_DETAIL, Substitution, CA-INB-FIO, S/4HANA, Forward Task</p></div></div></div></div>

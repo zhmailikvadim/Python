@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP Note provides the enhancement for the retroactive calculation of severance payment.</p>
+<p>Below is an example scenario:</p>
+<ol>
+<li>An employee left the company in 2025/02. <br/>The Severance Payment (new) MBSP wage type had been maintained with a value of 10,000 in the <strong>Additional Payments</strong> (0015) infotype.</li>
+<li>The regular payroll run of 2025/02 was run (/491 = 10,000). </li>
+<li>An allowance wage type was maintained in the <strong>Additional Payments</strong> (0015) infotype in 2025/02. </li>
+<li>In 2025/03, the regular run of March was run. And the retroactive run for February was triggered.</li>
+</ol>
+<p>In the previous solution, the amount in the Taxable Severance Payment (/491) wage type was zero in the period 2025/03 for 2025/02.</p>
+<p>Now after you apply this SAP Note, when you run the <strong><em>Payroll Driver, Version China</em></strong> (HCNCALC0) report for the employee above, the amount of /491 in the retroactive period of February will be 10,000 instead of zero in the IT and RT tables.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">CNL5, CNL9, /491</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is an enhancement. You have applied the SAP note <a href="/notes/3644114" target="_blank">3644114</a>.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Do either of the following:</p>
+<ul>
+<li>Apply the Support Package.</li>
+<li>Carry out the manual activities described in the attachment<strong> ManualSteps3705811.pdf</strong>.</li>
+</ul></div></div></div></div>

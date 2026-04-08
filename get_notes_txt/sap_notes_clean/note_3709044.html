@@ -1,0 +1,125 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">SAP UI5/Fiori applications and OData Gateway services show outdated data, metadata cache issues, or performance degradation due to accumulated client and metadata caches. Users report applications not reflecting recent changes despite deployments. Financial control products recommend daily cache cleanup scheduling.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>UI5 cache invalidation; OData metadata cache cleanup; Fiori launchpad cache issues; Gateway $metadata cache staleness; Background job SM37 scheduling; Programs /UI5/APP_INDEX_CALCULATE, /UI2/INVALIDATE_CLIENT_CACHES. Financial Control, FCFPSL, FCCOREUI, Adjustment Hub, Approval Hub, Reporting App, Recon, Subtn, drilldown.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Caching improves performance but causes inconsistencies after app updates, transport imports, or model changes. Daily scheduling prevents buildup. Prerequisites: SAP_UI 7.50+ or NetWeaver 7.40+, proper authorizations (SM37, SE38, S_DEVELOP), and execute in gateway/frontend systems. No parameters typically needed for these reports unless model-specific (e.g., /IWBEP/R_MGW_CLEANUP_MD_CACHE)</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Schedule each program daily via SM37 after creating variants in SE38.</p>
+<p><strong>Step 1: Create Variant in SE38</strong></p>
+<ol>
+<li>Run SE38, enter program (e.g., /UI5/APP_INDEX_CALCULATE).</li>
+<li>Click <strong>Execute</strong> (F8).</li>
+<li>Enter defaults if prompted (often none), then <strong>Save</strong> as variant (e.g., "DAILY_CLEANUP") via <strong>Goto &gt; Variants &gt; Save As Variant</strong>.<a href="file:///C:/Users/local_C5388370/INetCache/Content.Outlook/KMNJKRQ8/i%20have%20few%20sap%20report%20for%20Ui5%20to%20clean%20cache%20which.docx#fn4" target="_blank"><sup><br/></sup></a></li>
+</ol>
+<p><strong>Step 2: Schedule Job in SM36</strong></p>
+<ol>
+<li>Run SM36.</li>
+<li>Enter <strong>Job Name</strong> (e.g., "UI5_APP_INDEX_DAILY").</li>
+<li>Click <strong>Step</strong>, select ABAP Program, enter program name and variant.</li>
+<li>Set <strong>Server</strong> (auto) and <strong>Immediate</strong> print specs if needed.</li>
+<li>Save steps, then <strong>Start Condition</strong>: Choose <strong>Daily</strong> (e.g., 2:00 AM), select weekdays, save.<a href="file:///C:/Users/local_C5388370/INetCache/Content.Outlook/KMNJKRQ8/i%20have%20few%20sap%20report%20for%20Ui5%20to%20clean%20cache%20which.docx#fn4" target="_blank"><sup><br/></sup></a></li>
+</ol>
+<p><strong>Step 3: Release and Monitor in SM37</strong></p>
+<ol>
+<li>Run SM37, filter by job name/status <strong>Released</strong>.</li>
+<li>Select job, click <strong>Release</strong> (or auto if immediate).</li>
+<li>Refresh to monitor: Green=success, Red=failed. Check logs via <strong>Job &gt; Log</strong>.<a href="file:///C:/Users/local_C5388370/INetCache/Content.Outlook/KMNJKRQ8/i%20have%20few%20sap%20report%20for%20Ui5%20to%20clean%20cache%20which.docx#fn4" target="_blank"><sup><br/></sup></a></li>
+</ol>
+<p>Repeat for all:</p>
+<div>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td valign="top">
+<p>Program</p>
+</td>
+<td valign="top">
+<p>Purpose</p>
+</td>
+<td valign="top">
+<p>Notes</p>
+</td>
+</tr>
+<tr>
+<td valign="top">
+<p>/UI5/APP_INDEX_CALCULATE</p>
+</td>
+<td valign="top">
+<p>UI5 app index rebuild <a href="file:///C:/Users/local_C5388370/INetCache/Content.Outlook/KMNJKRQ8/i%20have%20few%20sap%20report%20for%20Ui5%20to%20clean%20cache%20which.docx#fn3" target="_blank"><sup><br/></sup></a></p>
+</td>
+<td valign="top">
+<p>Daily frontend system</p>
+</td>
+</tr>
+<tr>
+<td valign="top">
+<p>/UI2/INVALIDATE_CLIENT_CACHES</p>
+</td>
+<td valign="top">
+<p>Client caches invalidation <a href="file:///C:/Users/local_C5388370/INetCache/Content.Outlook/KMNJKRQ8/i%20have%20few%20sap%20report%20for%20Ui5%20to%20clean%20cache%20which.docx#fn3" target="_blank"><sup><br/></sup></a></p>
+</td>
+<td valign="top">
+<p>Daily</p>
+</td>
+</tr>
+<tr>
+<td valign="top">
+<p>/UI5/UPD_ODATA_METADATA_CACHE</p>
+</td>
+<td valign="top">
+<p>OData metadata update</p>
+</td>
+<td valign="top">
+<p>Daily gateway</p>
+</td>
+</tr>
+<tr>
+<td valign="top">
+<p>/UI2/INVALIDATE_GLOBAL_CACHES</p>
+</td>
+<td valign="top">
+<p>Global UI2 caches</p>
+</td>
+<td valign="top">
+<p>Daily</p>
+</td>
+</tr>
+<tr>
+<td valign="top">
+<p>/IWFND/R_MED_CACHE_CLEANUP</p>
+</td>
+<td valign="top">
+<p>Gateway metadata cache <a href="file:///C:/Users/local_C5388370/INetCache/Content.Outlook/KMNJKRQ8/i%20have%20few%20sap%20report%20for%20Ui5%20to%20clean%20cache%20which.docx#fn6" target="_blank"><sup><br/></sup></a></p>
+</td>
+<td valign="top">
+<p>Daily gateway; use SPRO path alternative</p>
+</td>
+</tr>
+<tr>
+<td valign="top">
+<p>/IWBEP/R_MGW_MED_CACHE_CLEANUP</p>
+</td>
+<td valign="top">
+<p>Gateway model cache <a href="file:///C:/Users/local_C5388370/INetCache/Content.Outlook/KMNJKRQ8/i%20have%20few%20sap%20report%20for%20Ui5%20to%20clean%20cache%20which.docx#fn6" target="_blank"><sup><br/></sup></a></p>
+</td>
+<td valign="top">
+<p>Daily gateway</p>
+</td>
+</tr>
+<tr>
+<td valign="top">
+<p>/IWBEP/R_MGW_CLEANUP_MD_CACHE</p>
+</td>
+<td valign="top">
+<p>Specific model cache</p>
+</td>
+<td valign="top">
+<p>Enter model name in variant <a href="file:///C:/Users/local_C5388370/INetCache/Content.Outlook/KMNJKRQ8/i%20have%20few%20sap%20report%20for%20Ui5%20to%20clean%20cache%20which.docx#fn2" target="_blank"><sup><br/></sup></a></p>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p> </p>
+<p>Jobs run automatically post-release; reschedule via SM37 &gt; Job &gt; Change if needed.</p></div></div></div></div>

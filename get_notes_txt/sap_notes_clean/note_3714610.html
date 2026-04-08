@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Manual delegations automatically removed after import in Parent-child environments</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-family: verdana, geneva; font-size: 10pt;">Log into the child realm.</span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-family: verdana, geneva; font-size: 10pt;">Navigate to <strong>Manage &gt; Core Administration</strong></span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-size: 10pt;"><span style="font-family: verdana, geneva;">Go to <strong>User Manager &gt; </strong></span><strong><span style="font-family: verdana, geneva;">Delegations</span></strong></span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-family: verdana, geneva; font-size: 10pt;">Create a Delegation.</span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-family: verdana, geneva; font-size: 10pt;">Enter the <strong>Delegator</strong>'s details (e.g., name and ID).</span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-family: verdana, geneva; font-size: 10pt;">Enter the <strong>Delegatee</strong>'s details (e.g., name and ID).</span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-family: verdana, geneva; font-size: 10pt;">Specify the <strong>Delegation </strong>start and end dates.</span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-family: verdana, geneva; font-size: 10pt;">Provide a reason for the <strong>Delegation</strong>.</span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-family: verdana, geneva; font-size: 10pt;">Save the <strong>Delegation</strong>.</span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-family: verdana, geneva; font-size: 10pt;">Go to the parent realm.</span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-family: verdana, geneva; font-size: 10pt;">Go to <strong>Manage &gt; Core Administration</strong></span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-family: verdana, geneva; font-size: 10pt;">Navigate to <strong>Site Manager &gt; Data Import/Export</strong></span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-size: 10pt;"><span style="font-family: verdana, geneva;">Run the <span style="font-family: 'courier new', courier;">Import User Delegation <span style="font-family: verdana, geneva;">task</span></span></span><strong></strong></span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-family: verdana, geneva; font-size: 10pt;">Observe that the Delegation is removed after replication.</span></li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><span style="font-size: 10pt;">When the <span style="font-family: 'courier new', courier;">Import User Delegation </span>task is executed, the system processes the file as follows:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The imported file is treated as the single source of truth.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">All existing delegations in the system are reset.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">New delegations are created exclusively based on the data contained in the import file.</span></p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="font-size: 10pt;">This behavior is standard and expected system functionality. During import events, the system overwrites the existing delegation records and reconstructs them strictly according to the contents of the imported file.</span></p>
+<p><span style="font-size: 10pt;">In parent–child (multi-variant) environments, an additional behavior must be considered:</span></p>
+<p><span style="font-size: 10pt;">After the replication process is completed, if the <span style="font-family: 'courier new', courier;">Import User Delegation</span> task is executed:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Delegations that were recreated manually via the UI (e.g., through UP requests or Core Administration) are removed.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The import process overwrites all existing delegations and retains only those present in the import file.</span></p>
+</li></ul>
+<p><span style="font-size: 10pt;">As a result, any delegations re-created through the UI will be deleted after replication if delegation updates are subsequently performed via the import process.</span></p>
+<div>
+<article>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<p><span style="font-size: 10pt;">This behavior is working as designed. In environments where delegation updates are managed through integration, the import file must always contain the complete and accurate set of required delegations. Any delegations not included in the import file will be removed during the import process.</span></p>
+</div>
+</div>
+</div>
+</div>
+<div> </div>
+</div>
+</div>
+</article>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p><span style="font-size: 10pt;">delegation, SAP Ariba, multi-realm, parent-child environment, delegation removal, import user delegation, reset-and-recreate, UI-created delegations, delegation synchronization, delegation import logic</span></p></div></div></div></div>

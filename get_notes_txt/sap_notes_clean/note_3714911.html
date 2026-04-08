@@ -1,0 +1,58 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">A stored procedure appears to be running for an extended period, resulting in:</p>
+<ul><li>
+<p>Performance degradation</p>
+</li><li>
+<p>Blocking situations</p>
+</li><li>
+<p>High CPU or I/O consumption</p>
+</li></ul>
+<p>There is a need to determine which SQL statement is currently being executed.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Adaptive Server Enterprise (ASE)</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Standard monitoring commands in ASE only display session status and do not show the exact SQL statement currently being processed inside a stored procedure.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<div>
+<article>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<h3 data-toc-skip=""> </h3>
+<p>1. Identify Active Sessions</p>
+<p>sp_who</p>
+<p>or</p>
+<p>select spid, status, cpu, physical_io, cmd<br/>from master..sysprocesses<br/>where status != 'sleeping'</p>
+<p><br/>Identify the SPID of the active process.</p>
+<p>2. Display the Currently Executing SQL Statement</p>
+<p>dbcc traceon(3604)</p>
+<p>go</p>
+<p>dbcc sqltext(&lt;spid&gt;)</p>
+<p>go </p>
+<p><br/>This command displays the SQL statement currently being executed by the ASE engine.</p>
+<p>It is particularly useful when a stored procedure is running and you need to determine which internal SQL statement is active at that moment.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+<div id="thread-bottom-container">
+<div id="thread-bottom">
+<div>
+<div>
+<div><form>
+<div>
+<div>
+<div>
+<div>
+<div id="prompt-textarea"></div>
+</div>
+</div>
+</div>
+</div>
+</form></div>
+</div>
+</div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>dbcc sqltext, running stored procedure,  SQL statement </p></div></div></div></div>

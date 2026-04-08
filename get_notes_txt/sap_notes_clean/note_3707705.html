@@ -1,0 +1,52 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>The User is able to create the Joule skill using the <a href="https://developers.sap.com/tutorials/joulestudio-skill-create.html#0b24d940-1dfb-472f-b0fd-c7bcb8fb9f06" rel="noopener noreferrer nofollow" target="_blank">Use Joule Studio to Create and Deploy a Joule Skill</a> SAP Developer Tutorials.</li><li>When deploying the Joule skill or project, the process fails with the following error.<br/><br/><strong>Deployment Information</strong><br/>The project "&lt;project or skill name&gt;", version "X.X.X" cannot be deployed by the component "Integration Gateway".<br/>The project &lt;project or skill name&gt;, version X.X.X cannot be deployed in this environment because the user does not have the required "extensibility_developer" role in Joule. Please contact your administrator to get the necessary permissions.<br/><br/><img alt="" class="img-responsive" height="206" src="/documents/customerkba/tWNLTMlvD8L0G4WinmsK0OsDsLTtGVBGo_fpOiRIa2E" width="440"/></li></ul>
+<p><span style="color: rgb(224, 62, 45);"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em> </span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li aria-label="SAP BTP, Cloud Foundry runtime and environment">
+<div>
+<div>SAP BTP, Cloud Foundry runtime and environment</div>
+</div>
+</li><li>Joule</li><li>SAP Build Automation</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The role "extensibility_developer" is not visible in the subaccount because the corresponding service is not subscribed in the subaccount where the deployment is being attempted.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Ensure that users who access Joule Studio are assigned the required role collections for both Joule and SAP Build Process Automation.</p>
+<p>Steps to be followed:</p>
+<ol><li>
+<p>In the SAP BTP cockpit, assign the below role collections in the subaccount where SAP Build Process Automation and Joule is subscribed.<br/><br/><strong>SBPA Roles:</strong></p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" rules="all" style="height: 413.053px; width: 64.147%;" summary=""><thead><tr style="height: 45.3009px;"><th id="d4140e71" style="width: 26.8277%; height: 45.3009px;">
+<p>Role Collection</p>
+</th><th id="d4140e74" style="width: 73.1413%; height: 45.3009px;">
+<p>Description</p>
+</th></tr></thead><tbody><tr style="height: 55.9583px;"><td headers="d4140e71" style="width: 26.8277%; height: 55.9583px;">
+<p>ProcessAutomationAdmin</p>
+</td><td headers="d4140e74" style="width: 73.1413%; height: 55.9583px;">
+<p>Manages the process configuration, permissions, and authorizations within <span translate="no">SAP Build Process Automation</span>.</p>
+</td></tr><tr style="height: 63.9583px;"><td headers="d4140e71" style="width: 26.8277%; height: 63.9583px;">
+<p>ProcessAutomationDeveloper</p>
+</td><td headers="d4140e74" style="width: 73.1413%; height: 63.9583px;">
+<p>Manages the creation, editing, and publishing of individual processes and automations within <span translate="no">SAP Build Process Automation</span>.</p>
+</td></tr><tr style="height: 45.3009px;"><td headers="d4140e71" style="width: 26.8277%; height: 45.3009px;">
+<p>ProcessAutomationParticipant</p>
+</td><td headers="d4140e74" style="width: 73.1413%; height: 45.3009px;">
+<p>Participates in active processes.</p>
+</td></tr><tr style="height: 101.262px;"><td headers="d4140e71" style="width: 26.8277%; height: 101.262px;">
+<p>ProcessAutomationDelegate</p>
+</td><td headers="d4140e74" style="width: 73.1413%; height: 101.262px;">
+<p>Manages access to the application based on the specific resources granted, such as projects and environments. These permissions enable users to view, edit, or administer the application and allows to supervise the visibility scenario dashboards.</p>
+</td></tr><tr style="height: 101.273px;"><td headers="d4140e71" style="width: 26.8277%; height: 101.273px;">
+<p>ProcessAutomationExpert</p>
+</td><td headers="d4140e74" style="width: 73.1413%; height: 101.273px;">
+<p>Empower business process experts with comprehensive (advanced/premium) operational visibility, analytical process performance insights, and the ability to initiate, work on, and approve tasks, alongside instance-level monitoring and drill-down capabilities for enhanced process performance management.</p>
+</td></tr></tbody></table></div>
+<br/><strong>Joule Roles:</strong><br/><br/>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" rules="all" style="width: 59.3809%; height: 119.259px;" summary=""><thead><tr style="height: 45.3009px;"><th id="d4140e158" style="width: 30.9768%; height: 45.3009px;">
+<p>Role</p>
+</th><th id="d4140e161" style="width: 68.9774%; height: 45.3009px;">
+<p>Description</p>
+</th></tr></thead><tbody><tr style="height: 63.9583px;"><td headers="d4140e158" style="width: 30.9768%; height: 63.9583px;">
+<p>extensibility_developer</p>
+</td><td headers="d4140e161" style="width: 68.9774%; height: 63.9583px;">
+<p>Develop, compile, and deploy Joule custom capabilities.</p>
+</td></tr><tr style="height: 10px;"><td headers="d4140e158" style="width: 30.9768%; height: 10px;">
+<p>end_user</p>
+</td><td headers="d4140e161" style="width: 68.9774%; height: 10px;">
+<p>Use Joule.</p>
+</td></tr></tbody></table></div>
+</li><li>
+<p>Go to the BTP Cockpit to assign the required role collections to users or groups. Assign roles to users via user groups rather than individual users. Create and manage these groups using the <strong>Cloud Identity Services</strong> and assign the relevant role collections to the groups. Refer about assigning roles in the <span translate="no">SAP BTP</span> Cockpit, see <a href="https://help.sap.com/products/BTP/65de2977205c403bbc107264b8eccf4b/31532c77bd61421e9d40d100fd75ef52.html?locale=en-US&amp;version=Cloud" rel="noopener noreferrer nofollow" target="_blank">Assigning Role Collections to Users or User Groups</a>. </p>
+</li><li>Verify that the Joule environment is shared with the user or group that has permission to execute Joule skills. In <strong>SAP Build</strong> Lobby, go to the <strong>Control Tower</strong> to share the environment. </li></ol>
+<p><strong>Note:</strong> SAP Build Process Automation and Joule subscriptions do not need to be in the same Global account or Subaccount; however, using the same IAS across both subaccounts is mandatory. </p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://help.sap.com/docs/Joule_Studio/45f9d2b8914b4f0ba731570ff9a85313/11f93c7775274b2996e1469b1bc07584.html" rel="noopener noreferrer nofollow" target="_blank">Assign Users to Roles</a>.</li><li><a href="https://help.sap.com/docs/btp/sap-business-technology-platform/assign-users-to-role-collections" rel="noopener noreferrer nofollow" target="_blank">Assign Users to Role Collections</a>.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>extensibility_developer, role missing, deployment error, Integration Gateway, subaccount roles, SAP Build Process Automation, SAP BTP Cockpit, Custom IDP, IAS tenant, role assignment, skill deployment, joule, joule skill, project, joule agent, administrator, Cloud Identity Services, SAP Build, Lobby, Control Tower, Environments, assign role collection, user, user groups, roles, IAS, same, mandatory.</p></div></div></div></div>

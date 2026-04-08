@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><pre id="__html0">Runtime errors: TSV_TNEW_PAGE_ALLOC_FAILED while extracting from 0CO_OM* <br/><br/>"TSV_TNEW_PAGE_ALLOC_FAILED"<br/>"SAPLPSBF" or LPSBFU05<br/>"PSBW_SELECT_ACTIVITY"<br/><br/>or <br/><br/>"TSV_TNEW_PAGE_ALLOC_FAILED" " "<br/>"SAPLPSBS" or "LPSBSU09"<br/>"PSBW_GET_OBJNR_FOR_NWA" </pre>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>S/4HANA</li><li>SAP ERP</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Attempt to extract data from the 0CO_OM* datasources in BW from ECC/ERP or S/4HANA.</li><li>Observe runtime errors: TSV_TNEW_PAGE_ALLOC_FAILED.</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>1. Increase the Heap memory or EM according to basis Note <a href="https://me.sap.com/notes/2180736" rel="noopener noreferrer nofollow" target="_blank">2180736</a> - TSV_TNEW_PAGE_ALLOC_FAILED;<br/>Or<br/>Increase the frequency of the delta extaction to make sure every time the data size to be processed it not quite high; </p>
+<p>2. Set parameter NOOBJPRESL in BWOM_SETTINGS for the affected DataSource</p>
+<ul><li style="list-style-type: none;">
+<ul><li>Purpose: Avoid object pre-selection to reduce memory footprint.</li><li>How:
+<ul><li>Maintain table BWOM_SETTINGS (e.g., via SM30) and create/update an entry for the specific DataSource.</li><li>Parameter name: NOOBJPRESL</li><li>Value: X</li></ul>
+</li><li>Reference: SAP Note <a href="https://me.sap.com/notes/2159875" rel="noopener noreferrer nofollow" target="_blank">2159875</a> (for explanation; implement it if applicable).
+<p>Use object-relevant selections to avoid full-table reads</p>
+<ul><li>Suggested fields: KOKRS (Controlling Area), POSID (WBS Element), PSPID (Project Definition).</li><li>Do not run the data extraction with completely empty selections on large datasets.</li></ul>
+</li></ul>
+</li></ul>
+<p>3. Performance tuning (MAXSIZE). Some CO-OM DataSources use parameter MAXSIZE from table BWOM_SETTINGS to control data package size.</p>
+<ul><li style="list-style-type: none;">
+<ul><li>Reference: SAP Note <a href="https://me.sap.com/notes/2546578" rel="noopener noreferrer nofollow" target="_blank">2546578</a>.</li><li>Action:
+<ul><li>Maintain BWOM_SETTINGS for the affected DataSource.</li><li>Parameter name: MAXSIZE.</li><li>Recommended value: between 10,000 and 100,000.</li><li>Set this parameter if it is currently empty.</li></ul>
+</li><li>Important considerations:
+<ul><li>Not all CO-OM DataSources honor MAXSIZE.</li><li>The number of records per data package may differ from the raw MAXSIZE due to calculation logic (see SAP Note <a href="https://me.sap.com/notes/417307" rel="noopener noreferrer nofollow" target="_blank">417307</a>).</li><li>Package sizes can vary significantly between packages by design (see SAP Note <a href="https://me.sap.com/notes/413992" rel="noopener noreferrer nofollow" target="_blank">413992</a>; FYI only, no correction needed).</li></ul>
+</li></ul>
+</li></ul>
+<p>4. While using Service API (SAPI), follow the instructions per KBA <a href="https://me.sap.com/notes/2941940" rel="noopener noreferrer nofollow" target="_blank">2941940</a> - [BW Central KBA] Troubleshooting SAP Service API performance or configuration issues (Data Packages, Work Processes, RFC Connections, Partner Profiles) too.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>runtime error, tsv_tnew_page_alloc_failed, 0co_om_nwa_2, data extraction, bw, ecc, overhead cost controlling, extraction failure, runtime errors, bwom_settings, </p>
+<p>0CO_OM_OPA_1, 0CO_OM_OPA_1_D, 0CO_OM_OPA_20, 0CO_OM_OPA_21, 0CO_OM_OPA_6, 0CO_OM_OPA_40, 0CO_OM_OPA_7,</p>
+<p>0CO_OM_WBS_1, 0CO_OM_WBS_1_D,  0CO_OM_WBS_20, 0CO_OM_WBS_2, 0CO_OM_WBS_3, 0CO_OM_WBS_4,</p>
+<p>0CO_OM_WBS_5, 0CO_OM_WBS_6, 0CO_OM_WBS_7,</p>
+<p>0CO_OM_NAE_1, 0CO_OM_NAE_1_D, 0CO_OM_NAE_2, 0CO_OM_NAE_3</p>
+<p>0CO_OM_NTW_1 0CO_OM_NTW_1_D 0CO_OM_NTW_2 0CO_OM_NTW_3</p>
+<p>0CO_OM_NWA_1 0CO_OM_NWA_1_D 0CO_OM_NWA_2 0CO_OM_NWA_3 0PS_CSH_NWA</p></div></div></div></div>

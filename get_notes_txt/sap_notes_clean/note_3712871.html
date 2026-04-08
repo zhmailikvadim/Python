@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In transaction "ME32L" where the system displays an error message "Net Price must be greater than 0," when attempting to save a new schedule line. </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li><span>Materials Management (MM)</span></li><li><span>SAP S4/HANA </span></li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><div>
+<ol style="list-style-type: decimal;"><li>
+<p><span>Enter transaction </span><span>ME32L.</span> </p>
+</li><li>
+<p>Provide scheduling agreement number. </p>
+</li><li>
+<p>Try to add another line item by providing the details in material, target quantity, and net price.   </p>
+</li><li>
+<p>After clicking enter, save the scheduling agreement.    </p>
+</li><li>
+<p>Error appears: - "Net Price must be greater than 0 - <span>06218</span><span>" </span><span>  </span></p>
+</li></ol>
+</div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>In table PRCD_ELEMENTS, entry for previous items in SA does not exist. Due to this, when checking the item conditions screen against these items or making changes to this SA, the system re-checks the price, but no price can be determined, then error 06218 shows. In addition, the table PRCD_ELEMENTS is only valid in S/4HANA release. In ECC releases, the table used for document conditions is KONV.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Perform the price determination manually with clicking the update button with option B in item conditions screen against those items whose entry does not exist in PRCD_ELEMENTS so that system can fetch the valid condition properly. This is only valid if the scheduling is ‘time-independent’.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Scheduling agreement, PRCD_ELEMENTS, net price, <span>06218, item conditions, price, time-independent</span></p></div></div></div></div>

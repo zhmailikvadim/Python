@@ -1,0 +1,49 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You declare your import declaration in SAP GTS do customs system DMS.</p>
+<p>You declare a Previous document (qaldoc SUMA) on item level. You enter unit of measurement for this document, but it does not create any unitCode for &lt;WriteOff&gt; in the &lt;PreviousDocument&gt; element. As a result, you receive error DK1349 saying, that measureUnitType should be provided in 'KGM'.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Denmark, DK, XML, import, /SAPSLL/LLEG_ECC_DATAF56, /SAPSLL/CL_CHECK_DK_IDMS_IE415, CHECK_ITEM_DOCUMENTS, DK1349, SUMA, PreviousDocument</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The problem is caused by a program error.</p>
+<p>Links between &lt;PreviousDocument&gt; elements and SAP GTS fields on item level are listed below.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 702px; height: 202px;">
+<tbody>
+<tr>
+<td>XML element</td>
+<td>SAP GTS field name</td>
+</tr>
+<tr>
+<td>./PreviousDocument/TypeCode</td>
+<td>Type (PAPTY)</td>
+</tr>
+<tr>
+<td>./PreviousDocument/ID</td>
+<td>Number (PAPNO)</td>
+</tr>
+<tr>
+<td>./PreviousDocument/LineNumeric</td>
+<td>Item (PAPIT)</td>
+</tr>
+<tr>
+<td>./PreviousDocument/WriteOff/QuantityQuantity</td>
+<td>Depreciation Quantity (PAPQU)</td>
+</tr>
+<tr>
+<td>./PreviousDocument/WriteOff/unitCode</td>
+<td>UoM (LICUM)</td>
+</tr>
+<tr>
+<td>./PreviousDocument/WriteOff/Packaging/QuantityQuantity</td>
+<td>
+<p>Quantity (PAPPC)</p>
+</td>
+</tr>
+<tr>
+<td>./PreviousDocument/WriteOff/Packaging/TypeCode</td>
+<td>Supplement (PAPAD)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections instructions.</p>
+<p>Update your mapping according to point 23 in Note <a href="https://me.sap.com/notes/2406946" target="_blank">2406946</a>.</p></div></div></div></div>

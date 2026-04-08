@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Updates of data in the SAP S/4HANA Cloud Private Edition system are no longer reflected in SAP Business Data Cloud.</p>
+<p>You find an error message like the following in SAP Cloud Connector:</p>
+<ul>
+<li>An error occurred when trying to connect to &lt;some_number&gt;@cf.sap.hana.ondemand.com. See 'Log and Trace Files' and in particular scc_core.trc for details. Certificate has expired</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>certificate, expired, renewal, replication</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The certificate used for the integration between SAP Cloud Connector and SAP Business Data Cloud has expired.</p>
+<p>Additionally, before certificate expiry, SAP Cloud Connector will present a warning about an upcoming expiry.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP Cloud Connector version 2.18 and higher provides functionality for automatic certificate renewal. See SAP Knowledge Base Article 3632133 for how to enable this functionality.<br/>We have sent this notification to all customers using SAP Business Data Cloud. If you have already enabled automatic certificate renewal, no action is required.</p>
+<p>According to SAP Note 3302250, a regular update of SAP Cloud Connector is required to stay in the range of supported SAP Cloud Connector versions. Additionally, SAP Cloud Connector will notify users about new SAP Cloud Connector versions. When updating SAP Cloud Connector in the context of SAP Business Data Cloud, it is advisable to upgrade to the latest released version.</p>
+<p>If you are running an SAP Cloud Connector version that is supporting additional integrations that you cannot upgrade for some reason, you can run a dedicated SAP Cloud Connector deployment specifically for SAP Business Data Cloud and SAP S/4HANA Cloud Private Edition integration. However, such a change requires dismantling the existing "Integration with SAP Business Data Cloud" UCL formation. Please contact SAP Support to reset the integration before re-creating the UCL formation.</p>
+<p>The same is true for already expired certificates, so re-creating the UCL formation is required as well.</p></div></div></div></div>

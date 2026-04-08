@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">1. New Attestation Feature</p>
+<p>2. Approval Hub Fixes : When Approver was trying to approve the item , approver was unable to do so because of Warning Pop Message on Application.</p>
+<p>In the Approval Hub Application, for all the actions &amp; Headers which we were showing in my worklist or in the details page, The entities to be called were derived from the category process configuration.</p>
+<p>The issue was that the filtration was happening considering the process &amp; category. This meant that if for any combination of category &amp; process if there were 2 row items, it was fetching the first-row item all the time. Since for any combination there can be 2 sub process.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span style="font-size: 14px;">Financial Control , FCA App, Approval Hub</span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The fix has been done to cater the above-mentioned issue by considering the sub process along with category &amp; process. So, this solution eliminates the makes sure that unique record is picked when filtering the category process configuration.</p>
+<p>Another Fix has been done to allow approver to approve the item when workflow reaches at its level.</p>
+<p><strong>ATTESTATION Feature:</strong></p>
+<p>A configurable attestation has been introduced for the <strong>Approve</strong> and <strong>Reject</strong> actions in the Approval Hub application. When users trigger either action from the <strong>My Worklist</strong> or <strong>Item Details</strong> page, a dialog now displays an attestation message with a checkbox based on backend configuration.</p>
+<p>The attestation’s <strong>visibility</strong>, <strong>mandatory behavior</strong>, and <strong>display text</strong> are dynamically controlled via backend settings for each action and item type, ensuring compliance requirements can be enforced without additional frontend changes.</p>
+<p> </p>
+<p><strong>New Elements</strong></p>
+<ul>
+<li>Attestation section added within the Approve and Reject dialogs.</li>
+<li>Checkbox enabling users to explicitly acknowledge the attestation before proceeding.</li>
+<li>Dynamic attestation text displayed when configured.</li>
+<li>Mandatory mark when the attestation is required to be confirmed by the user.</li>
+</ul></div></div></div></div>

@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Error encountered during payroll processing related to aggregation of chapter viii wage type.</li><li>Incorrect calculation of /444 wage type in the RT table.<br/><strong>Disclaimer : <em> <span style="color: rgb(224, 62, 45);">"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</span></em><span style="color: rgb(224, 62, 45);"> </span></strong></li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Human Capital Management (HCM)</li><li>SAP R/3</li><li>SAP ERP Central Component</li><li>SAP ERP</li><li>SAP enhancement package for SAP ERP</li><li>SAP enhancement package for SAP ERP, version for SAP HANA</li><li>Payroll India</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Run the payroll using the payroll driver for the provided variant.</li><li>Check the value of /444 wage type in the RT table.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>PAN card details has not been maintained correctly on info-type 185(Subtype : 0002).</li><li>
+<section id="u_cause">
+<p>Coding correction related to SAP note has been missing from the system.</p>
+</section>
+</li><li>Incorrect configuration of pay-date maintained on V_T549S table.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Go to PA30. Pass the PERNR details and info-type number as 185(Subtype : 0002).</li><li>Maintain PAN card details.</li><li>Implement the following SAP Notes to address related issues:
+<ul><li style="list-style-type: none;">
+<ul><li style="list-style-type: none;">
+<ul><li><a href="https://me.sap.com/notes/3498413" rel="noopener noreferrer nofollow" target="_blank">3498413 </a>- Tax deduction for employees with no PAN or inoperative PAN</li><li><a href="https://me.sap.com/notes/0003472696" rel="noopener noreferrer nofollow" target="_blank">3472696 </a>- Income Tax Deduction at Higher Tax Rate even with correct PAN details</li><li><a href="https://me.sap.com/notes/3504763" rel="noopener noreferrer nofollow" target="_blank">3504763 </a>- PAN Inoperative: Income Tax Deduction for Employees With Gross Salary Below Exempted Taxable Limit</li></ul>
+</li></ul>
+</li></ul>
+</li><li>If still issue is not resolved after implementing the note , execute the transaction SM30.</li><li>Pass the view name V_T549S.</li><li>Click on the maintain button.</li><li>Pass the HCM Localization value as 40.</li><li>Click on the position button. Pass correct combination of period parameter and Date modifier value along with current payroll year.</li><li>Maintain correct pay-date and save it. As per the standard Pay-date should be on / after 25 th of that pay-period.</li></ol>
+<p>          <img class="img-responsive" height="379" src="/documents/customerkba/cbeYl_OWEU7lfKGNrlO_YdX0C1bxa6sc9Ree87CdweA" width="650"/></p>
+<section>
+<section id="u_resolution">
+<section>
+<section id="u_resolution">
+<p><strong></strong></p>
+</section>
+</section>
+<section><header></header></section>
+</section>
+</section>
+<section><header></header></section>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>aggregation of chapter viii, wage type /444, incorrect pay-date, V_T549S table, /444 , Chapter VIII</p></div></div></div></div>

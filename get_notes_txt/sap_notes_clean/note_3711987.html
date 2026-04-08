@@ -1,0 +1,47 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Despite parameter <span class="SNO_DNT" style="float: none;" translate="no">enable_full_automatic_unload = true</span>, tables are not fully unloaded after execution of the table consistency check (TCC). Some columns remain loaded in memory, leading to increased memory consumption. Manual unload is required afterwards.</p>
+<p>For example, a table with a partitioning criteria using the columns ("MANDT", "RECORD_ID") and 4 partitions. Both columns remain in memory across all 4 partitions after the table consistency check, even if they were unloaded before the TCC command started.</p>
+<p>The consistency check is executed using the following command: <br/><span class="SNO_DNT" style="float: none;" translate="no">CALL CHECK_TABLE_CONSISTENCY('CHECK', '&lt;SCHEMA_NAME&gt;', '&lt;TABLE_NAME&gt;');</span></p>
+<p>Regarding the <strong>enable_automatic_unload</strong> parameter, SAP Note <a href="https://me.sap.com/notes/2116157" target="_blank">2116157 – FAQ: SAP HANA Consistency Checks and Corruptions</a> states: <em>“If set to true, the main storages of columns loaded by the consistency check are unloaded when the check is finished (SAP Note 2962334) whenever possible</em>"</p>
+<p>Starting with SAP HANA 2.0 SPS 06, both parameters <span class="SNO_DNT" style="float: none;" translate="no">enable_automatic_unload</span> and <span class="SNO_DNT" style="float: none;" translate="no">enable_full_automatic_unload</span> are set to true by default.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CHECK_TABLE_CONSISTENCY, table unload, consistency check</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>The table consistency check (TCC) performs validations at both the table level and the table‑partition level. Automatic unload is supported only for checks executed at the table-partition level; it is not available for table‑level checks.</p>
+<p>For partitioned tables, certain validations—such as verifying the assignment of rows to partitions—are performed at the table level. As a result, columns involved in the partitioning criteria, along with the ROWID, remain loaded after the check. Similarly, the cross‑partition unique constraint check is also a table‑level operation, which causes the internal index column <span class="SNO_DNT" style="float: none;" translate="no">"$uc_&lt;UNIQUE_KEY_NAME&gt;$"</span> to remain loaded.</p>
+<p>Additionally, the foreign key check is another example of a table‑level check where automatic unload does not apply.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS07</li>
+<li>and higher</li>
+</ul>
+</ul>
+<ul>
+<li>and higher</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>Running a table consistency check on partitioned tables using only the '<span class="SNO_DNT" style="float: none;" translate="no">CHECK</span>' option of the <span class="SNO_DNT" style="float: none;" translate="no">CHECK_TABLE_CONSISTENCY</span>.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="font-size: 14px;">Option 1: Execute the '<span class="SNO_DNT" style="float: none;" translate="no">CHECK</span>' action without <span class="SNO_DNT" style="float: none;" translate="no">CHECK_PARTITIONING_DATA</span>, <span class="SNO_DNT" style="float: none;" translate="no">CHECK_UNIQUE_CONSTRAINTS</span>:</span></p>
+<ul>
+<li>
+<p><span class="SNO_DNT" style="float: none;" translate="no">CALL CHECK_TABLE_CONSISTENCY('CHECK,-CHECK_PARTITIONING_DATA,-CHECK_UNIQUE_CONSTRAINTS', '&lt;SCHEMA_NAME&gt;', '&lt;TABLE_NAME&gt;')</span></p>
+</li>
+</ul>
+<p><span style="font-size: 14px;">Option 2: If the missing unloads are critical, Execute the <span class="SNO_DNT" style="float: none;" translate="no">CHECK_PARTITIONING_DATA</span> and <span class="SNO_DNT" style="float: none;" translate="no">CHECK_UNIQUE_CONSTRAINTS</span> actions separately followed by an explicit unload. e.g.</span></p>
+<ul>
+<li>
+<p><span class="SNO_DNT" style="float: none;" translate="no">CALL CHECK_TABLE_CONSISTENCY('CHECK_UNIQUE_CONSTRAINTS', '&lt;SCHEMA_NAME&gt;', '&lt;TABLE_NAME&gt;');</span></p>
+</li>
+<li>
+<p><span class="SNO_DNT" style="float: none;" translate="no">CALL CHECK_TABLE_CONSISTENCY('CHECK_PARTITIONING_DATA', '&lt;SCHEMA_NAME&gt;', '&lt;TABLE_NAME&gt;');</span></p>
+</li>
+<li>
+<p><span class="SNO_DNT" style="float: none;" translate="no">UNLOAD "&lt;SCHEMA_NAME&gt;","&lt;TABLE_NAME&gt;"; or UNLOAD "&lt;SCHEMA_NAME&gt;","&lt;TABLE_NAME&gt;" PARTITION (PART_ID);</span></p>
+</li>
+</ul></div></div></div></div>

@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">While using the Fiori app – Manage Payments, the application terminates with an error.<br/>The issue results in a short dump, which can be observed in transaction ST22.</p>
+<p>The short dump indicates a syntax error occurring during the execution of the Manage Payments app.<br/>Relevant ST22 dump details have been attached for further analysis.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA 2023 </p>
+<ul><li>
+<p>S4CORE 106 </p>
+</li><li>
+<p>S4CORE 107 </p>
+</li><li>
+<p>S4CORE 108 </p>
+</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul><li>
+<p>Log on to the SAP S/4HANA system.</p>
+</li><li>
+<p>Launch the Fiori app – Manage Payments.</p>
+</li><li>
+<p>Search for or select an existing payment.</p>
+</li><li>
+<p>Perform the relevant action in the app (for example, open or process the payment).</p>
+</li><li>
+<p>The application terminates with an error.</p>
+</li><li><img alt="test11.png" class="img-responsive" height="158" src="https://itsm.services.sap/ed8033962b26fa54f852f539c191bfee.iix?t=large" width="509"/></li><li>
+<p>A short dump is generated, which can be verified in transaction ST22 (syntax error).</p>
+</li><li><img alt="1111.png" class="img-responsive" height="287" src="https://itsm.services.sap/e980b3562b26fa54f852f539c191bfdf.iix?t=large" width="507"/></li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>
+<p>The issue occurs while using the Fiori app – Manage Payments.</p>
+</li><li>
+<p>The application triggers backend processing in ABAP class <code>/PF1/CL_BCM_INTEGRATION</code>.</p>
+</li><li>
+<p>A syntax error (SYNTAX_ERROR) is raised at runtime.</p>
+</li><li>
+<p>The dump is caused by an unknown data type <code>/PF1/RMC_BCQN_APL_TYPES</code>.</p>
+</li><li>
+<p>This indicates a missing or inconsistent SAP correction (SAP Note / SP level mismatch).</p>
+</li><li>
+<p>As a result, the OData request fails and the app terminates with an error.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>
+<p>Implement SAP Note 3411297 in the affected system.</p>
+</li><li>
+<p>After implementing the note, re-test the scenario using the Manage Payments Fiori app to verify whether the issue is resolved.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Additional information: <br/><a href="https://me.sap.com/notes/0003411297" rel="noopener noreferrer nofollow" target="_blank">SAP Note KB0869724 - BCM+APM: Downport of Class API for CPON Service to S4HANA 2021</a> <br/>Knowledge Article <a href="https://me.sap.com/notes/0003411297" rel="noopener noreferrer nofollow" target="_blank">SAP Note KB0869724 - BCM+APM: Downport of Class API for CPON Service to S4HANA 2021</a></p></div></div></div></div>

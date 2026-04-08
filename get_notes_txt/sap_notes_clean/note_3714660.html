@@ -1,0 +1,81 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p class="code-line" id="__html0">Foreign employees in the Czech Republic, particularly employees from country/regions that do not use the Latin alphabet may have multiple name variants:</p>
+<ul>
+<li>Civil registry Identity ("Matriční identita"): The official Czech transcription of the name as recorded in Czech civil registry documents.</li>
+</ul>
+<ul>
+<li>Passport identity ("Pasová identita"): The international transliteration of the name into Latin characters as shown in the passport.</li>
+<li>Original name in non -Latin alphabet</li>
+</ul>
+<p class="code-line">The new JMHZ (Unified Monthly Employer Report) legal requirement mandates that employee names must be reported in a specific format compliant with Czech and Latin characters. The system must allow storing names:</p>
+<ul class="code-line">
+<li class="code-line">Civil Registry Identity for JMHZ legal reporting</li>
+<li class="code-line">Passport identity for employee identification and search purposes</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span style="font-size: 14px;">HRCZ, IT0002, IT0021, IT0182</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>According to Act No. 323/2025 Coll. (Act on the Uniform Monthly Employer Report), employers in the Czech Republic are required to submit the JMHZ report containing employee data in a strictly defined XML format.</li>
+<li>Under Czech law, the civil registry identity takes legal precedence over the passport identity in official records. Once a Czech civil registry document is registered, the name in official records is the Registry Identity.</li>
+<li><a href="https://ipc.gov.cz/en/life-in-the-czech-republic/civil-registry-and-passport-identity/" target="_blank">Civil Registry and Passport Identity</a></li>
+<li>This SAP Note is relevant for the Czech Republic only.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Recommendation for storing employee names when multiple variants exist.</p>
+<p><span style="text-decoration: underline;">1. Store the Civil Registry Identity in standard name infotypes:</span></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Infotype</td>
+<td>Usage</td>
+</tr>
+<tr>
+<td>IT0002 (Personal Data)</td>
+<td>Store employee's civil registry identity in the standard name fields</td>
+</tr>
+<tr>
+<td>IT0021 (Family Members)</td>
+<td>Store family member's civil registry identity in the standard name fields</td>
+</tr>
+</tbody>
+</table></div>
+<p class="code-line">Enter the name exactly as it appears on Czech civil registry documents.</p>
+<p class="code-line">This guideline ensures compliance with the JMHZ XSD character validation.</p>
+<p><span style="text-decoration: underline;">2. Store the Passport identity in Infotype IT0182 (Alternative Names):</span></p>
+<p class="code-line">This SAP Note enables the use of IT0182 for Czech localization to store the employee's passport identity. Passport identity can be used for employee identification, search or other business support purpose. Enablement is configured in table T582L for Molga 18.</p>
+<p class="code-line">Usage:</p>
+<ul class="code-line">
+<li class="code-line">Use subtype "2" – <em>Full name as shown in IC/passport</em> to store the passport name.</li>
+</ul>
+<ul class="code-line">
+<li class="code-line">Enter the employee's name as it appears in their passport, the international variant.</li>
+</ul>
+<p class="code-line">Remarks:</p>
+<ul class="code-line">
+<li class="code-line">Currently the Infotype 0182 is described as "Alternative Names Asia" which is planned to be adjusted to more international description "Alternative Names".</li>
+<li class="code-line">Search help in <code>PA30</code>(PREM) will be enhanced with field <code>IT0182-ALNAM</code> to ease searching for employee.</li>
+<li class="code-line">These adjustments will be part of future separate delivery.</li>
+</ul>
+<p><strong>Important:</strong> Apply current version of SAP Note 875986 for NW 7.0x or 1668882 for NW 7.3x and higher. Otherwise an old version of SNOTE can lead to missing coding changes when applying SAP Notes.</p>
+<ul>
+<li>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install a solution earlier, use the Note Assistant to implement the correction instruction. You can find more information about the Note Assistant in SAP Service Marketplace, under <em><strong>service.sap.com/note-assistant</strong></em>. </li>
+<li>Note that documentation, transactions, and Customizing activities are only delivered via Support Package.</li>
+<li>To implement the solution, you must carry out manual activities (see attachment if it exists) and implement the correction instructions that are valid for your release.</li>
+<li>The description of the solution is in the manual activity section. To implement the solution, you must carry out the manual activities.</li>
+</ul>
+<p><strong>Version History</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>27.03.2026</td>
+<td>Released for all customers</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div>

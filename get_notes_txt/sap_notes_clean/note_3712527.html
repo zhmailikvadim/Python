@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Technical note to improve the handling of test doubles in automated tests. There are no functional errors available.</p>
+<p>Class <code>/SCMTMS/CL_LINC_A_PROC_TOR_UPD</code> contains unnecessary local wrapper classes and interfaces that were originally introduced to enable test double creation for unit testing purposes.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>/SCMTMS/CL_LINC_A_PROC_TOR_UPD; EWM-TM Integration; EWM-TM TOR Update; Unit Tests; Test Doubles; Factory Pattern; Dependency Injection;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>During the initial implementation of class <code>/SCMTMS/CL_LINC_A_PROC_TOR_UPD</code>, local wrapper classes and interfaces were introduced to facilitate unit testing by enabling the creation of test doubles. However, subsequent analysis revealed that:</p>
+<ol>
+<li>The class already implements a factory pattern that supports dependency injection</li>
+<li>The ABAP Test Double Framework can be utilized directly without additional wrapper layers</li>
+<li>The local wrapper implementations add unnecessary complexity to the codebase</li>
+<li>Maintenance overhead is increased without providing additional functional value</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> Implement the attached correction instructions or import the specified Support Package.</p></div></div></div></div>

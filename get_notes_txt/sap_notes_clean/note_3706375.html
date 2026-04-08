@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">If a completed production order has both confirmed goods received and in-procurement scrap,  PMMO Pegging assigns twice the correct quantity of scrap that is still in procurement.</p>
+<p>When this happens, Pegging inflates the Total Order Quantity by the real quantity of in-procurement scrap.  Pegging issues application log warning message pmmo_pegging-262 to reflect this:  "Adjusted total order quantity for replen. &amp;1 from &amp;2 to &amp;3 &amp;4".</p>
+<p>(For example, if production order 1234567890 should have 2 ea. of in-procurement scrap, out of a total order quantity of 10 ea., the message would read "Adjusted total order quantity for replen. OR001234567890 from 10 to 12 EA".  The quantities of all assignments created for this order will add up to 12 ea., of which 4 ea. will be for in-procurement scrap.  All of these assignments will have 12 ea. in the Total Order Quantity field.)</p>
+<p>This happens when database table AFPO contains true ('X') for both fields DNREL and ELIKZ for this order.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PMMO_PEGGING, RPMMOPEG, in process scrap, in-process scrap, in procurement scrap, incorrect total order quantity, scpqty, totalreplqty, pmmo_assignment, TECO, pmmo_pegging262, duplicate in-procurement scrap, confirmed scrap, overassignment, over assignment, overpegged, over-pegged, over-pegging</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">This is due to a programming error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement this SAP Note, or apply the service pack that contains it, and then re-run Pegging.</p></div></div></div></div>

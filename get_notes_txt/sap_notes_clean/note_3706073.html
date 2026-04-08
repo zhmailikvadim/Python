@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In system configurations of an Application Server ABAP with multiple instances, users may sporadically encounter a connection error popup when launching SAP GUI transactions.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Business Client; SAP BC; NWBC;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Since the NWBC ABAP Runtime Patch 91, navigation targets within the same system are directly enriched with system parameters. However, these parameters are stored locally in the user's cache. In older SAP Business Client patches, this can lead to an inconsistent resolution of SAP GUI connection data, because information from the current system connection and the cached target URL may be combined in an inconsistent way.<br/><br/>There is already an SAP Note which describes the same symptom when using a Web Dispatcher for the initial system connection. Now the issue described by this SAP Note is an incremental correction, which also involves direct system connections to ABAP Servers with multiple instances.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please install the patch mentioned in section "Support Packages &amp; Patches" or a newer one (SAP Business Client patches are always cumulative).</p>
+<p>If the patch, which contains the correction from this SAP Note, is not delivered yet you can check the following SAP Notes for the expected delivery dates:</p>
+<ul>
+<li>SAP Business Client 8.00: <a href="/notes/3278341" target="_blank">3278341</a></li>
+</ul></div></div></div></div>

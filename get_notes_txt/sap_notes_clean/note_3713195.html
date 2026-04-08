@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">You are running the last regular payroll period of a month, however the system is not applying the monthly tax adjustment.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<ul style="list-style-type: disc;"><li>
+<p>HR renewal<span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP S/4HANA<span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP ERP <span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP SuccessFactors Employee Central Payroll<span> </span></p>
+</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This issue is caused by an incorrect customizing of the system.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>The SAP standard functionality provides the tax method ‘4’ (Adjustment by period) in table T7MX03 to calculate a monthly tax adjustment.<br/>This method should be used for ‘O’ (Regular payments) with table ‘ME01’ (Monthly tax table). With this method, the income is projected to the tax table periodicity, in this case monthly periodicity.<br/>For any payroll periodicity, when tax method ‘4’ is applied, a projection factor is applied to the monthly taxable income, even in the last payroll period of the month.<br/><br/></li><li>It is possible to apply, by user-exits, the method ‘4’ in the last payroll period of the month but with projection factor equal to 1.00 and without changing the customization of table T7MX03.<br/>For a guide on how to apply the user-exits, please refer to SAP Note <a href="https://me.sap.com/notes/2894372" rel="noopener noreferrer nofollow" target="_blank">2894372</a> - [MX] Monthly tax adjustment by user-exits.<br/><br/></li><li>If the user-exit was applied according to SAP Note 2894372, and the system is still not applying the monthly tax adjustment on the last regular payroll period of a month, please check if the last regular payroll period of the month was set correctly in tables T549Z, T549X, and T54C1.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SE01, ME01,  T7MX03,  V_T7MX03 , T549Z, v_T549Z, T549X, V_T549X, T54C1, V_T54C1, PC00_M32_CALC, HMXCALC0, method 4, user-exits, user exits, customer exits, customer-exit, EXIT_HMXCISR0_004, EXIT_HMXCISR0_002, &amp;IMPUESTO, PCISMMX0, method NOMINA_ORDINARIA</p></div></div></div></div>

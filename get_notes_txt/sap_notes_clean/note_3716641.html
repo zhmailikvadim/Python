@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>This article explains how to use the "Save Unit for Analysis" feature in SAP IBP to remove error-causing units from queue processing and allow subsequent units to proceed.</li><li>The "Save Unit for Analysis" feature allows users to remove the top-most erroneous unit from a processing queue. By doing so, subsequent units are allowed to execute without being blocked by the error. The saved (erroneous) units are moved to a separate, system-created queue for later analysis and resolution.</li><li>
+<div id="n0t"><strong>Caution:<br/></strong>We recommend that you use this feature with caution and process only the units that are independent from the one with errors, for example, units for sales orders with multiple line items.</div>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Integrated Business Planning for Supply Chain Management (SCM-IBP)</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h3 data-toc-skip="">Scenario Example</h3>
+<p>Suppose you have a queue, e.g. SAP_SCENARIO_1, where the top-most unit is in error status and is blocking three subsequent processable units.</p>
+<h4 data-toc-skip="">Steps to Save Erroneous Unit:</h4>
+<ol><li>
+<p>Identify the Blocked Queue:</p>
+<ul><li>Open the queue monitor and locate the queue where processing is stalled due to an error on the top unit (e.g., SAP_SCENARIO_1).</li></ul>
+</li><li>
+<p>Initiate 'Save Unit':</p>
+<ul><li>Select the top-most erroneous unit.</li><li>Click the Save Unit for Analysis button.</li></ul>
+</li><li>
+<p>Result:</p>
+<ul><li>The erroneous unit is moved to a new, internally named queue, SAVED_{UNIT_ID}.</li><li>In the monitor, this queue displays the original queue name (e.g., SAP_SCENARIO_1) at the bottom of the list, ordered by the time it was saved.</li><li>The previously blocked, processable units are now able to execute.</li></ul>
+</li><li>
+<p>Monitor Saved Queues:</p>
+<ul><li>Saved units are visible at the bottom of the monitor.</li></ul>
+</li><li>
+<p>Handling Dependencies:</p>
+<ul><li>If an erroneous unit is found in multiple queues, saving it will place it in a single saved queue and unblock all associated queues, unless there are additional errors.</li></ul>
+</li><li>
+<p>Multiple Saves:</p>
+<ul><li>Re-saving the same erroneous unit from the same queue creates a new SAVED_{UNIT_ID} each time, resulting in multiple saved queues with the same original name.</li></ul>
+</li></ol>
+<hr/>
+<h2 data-toc-skip="">Additional Information / Notes</h2>
+<ul><li>Un-save/Return Limitation:
+<ul><li>There is no feature to return a saved unit to its original queue ("unsave" or "re-park"). <span style="text-decoration: underline;">To process it, resolve the underlying error and restart the unit manually, either at the unit or queue level.</span></li></ul>
+</li><li>Naming Convention:
+<ul><li>Internally, saved unit queues are labeled SAVED_{UNIT_ID}, but the monitor shows them under the corresponding original queue name.</li></ul>
+</li></ul>
+<h2 data-toc-skip="">FAQ</h2>
+<p>Q: What happens after I save an erroneous unit?<br/>A: The unit is placed in a dedicated saved queue, and processing of the remaining units continues.</p>
+<p>Q: Can I move a saved unit back to its original queue?<br/>A: No. After fixing the error, manually restart the unit.</p>
+<p>Q: What if the erroneous unit was blocking multiple queues?<br/>A: All affected queues will be unblocked after the unit is saved.</p>
+<p>Q: Why do I see multiple saved queues with the same name?<br/>A: Saving different erroneous units from the same queue creates a new saved queue for each unit.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Help - <a href="https://help.sap.com/docs/SAP_INTEGRATED_BUSINESS_PLANNING/feae3cea3cc549aaa9d9de7d363a83e6/472af4a24e864d9a8199d655f4c02138.html?version=LATEST&amp;locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Monitor bgRFC Queues</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>save, unit, park, queue, luw, error, message, failed, bg, rfc, monitor, SBGRFCMON, analysis, fm, call, reprocess, process, delete</p></div></div></div></div>

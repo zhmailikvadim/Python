@@ -1,0 +1,70 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Users are unable to edit items when logged in Backoffice under a user group that has permissions to edit the corresponding itemtype while another user group assigned doesn't have permissions to edit that itemtype.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Commerce Cloud</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>In backoffice, configure Role A to allow editing one itemtype (e.g.subscription) and Role B to restrict editing subscription itemtype.</li><li>Assign the two BackOffice user groups to a single employee.</li><li>Log in under Role A and attempt to edit subscription items but found can't edit.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The behavior is expected.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Please refer to <a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/aa417173fe4a4ba5a473c93eb730a417/8b4aa00e866910148df2920f69d68b27.html#user-account-as-member-of-several-individual-user-groups" rel="noopener noreferrer nofollow" target="_blank">User Account as Member of Several Individual User Groups</a> listed examples.<br/>The forth line matches above scenario that one user group denied edit, one user group granted edit and no permission setting for user, the final effective access is denied. <br/><br/></p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" id="loio8b4aa00e866910148df2920f69d68b27__table_c1p_325_4wb" rules="all" summary=""><thead><tr><th id="d191442e837">
+<p>Permission Setting for testgroup1</p>
+</th><th id="d191442e840">
+<p>Permission Setting for testgroup2</p>
+</th><th id="d191442e843">
+<p>Permission Setting for testuser</p>
+</th><th id="d191442e846">
+<p>Effective Access Right for testuser</p>
+</th></tr></thead><tbody><tr><td headers="d191442e837">
+<p>granted</p>
+</td><td headers="d191442e840">
+<p>(no setting)</p>
+</td><td headers="d191442e843">
+<p>(no setting)</p>
+</td><td headers="d191442e846">
+<p>granted</p>
+</td></tr><tr><td headers="d191442e837">
+<p>denied</p>
+</td><td headers="d191442e840">
+<p>(no setting)</p>
+</td><td headers="d191442e843">
+<p>(no setting)</p>
+</td><td headers="d191442e846">
+<p>denied</p>
+</td></tr><tr><td headers="d191442e837">
+<p>granted</p>
+</td><td headers="d191442e840">
+<p>(no setting)</p>
+</td><td headers="d191442e843">
+<p>denied</p>
+</td><td headers="d191442e846">
+<p>denied</p>
+</td></tr><tr><td headers="d191442e837">
+<p><strong>denied</strong></p>
+</td><td headers="d191442e840">
+<p><strong>granted</strong></p>
+</td><td headers="d191442e843">
+<p><strong>(no setting)</strong></p>
+</td><td headers="d191442e846">
+<p><strong>denied</strong></p>
+</td></tr><tr><td headers="d191442e837">
+<p>denied</p>
+</td><td headers="d191442e840">
+<p>granted</p>
+</td><td headers="d191442e843">
+<p>denied</p>
+</td><td headers="d191442e846">
+<p>denied</p>
+</td></tr><tr><td headers="d191442e837">
+<p>(no setting)</p>
+</td><td headers="d191442e840">
+<p>granted</p>
+</td><td headers="d191442e843">
+<p>denied</p>
+</td><td headers="d191442e846">
+<p>denied</p>
+</td></tr><tr><td headers="d191442e837">
+<p>(no setting)</p>
+</td><td headers="d191442e840">
+<p>(no setting)</p>
+</td><td headers="d191442e843">
+<p>(no setting)</p>
+</td><td headers="d191442e846">
+<p>denied (default)</p>
+</td></tr></tbody></table></div>
+<p>This means when conflict permissions set for user, the effective access will be denied. And if no permission setting for user, then by default it's denied.<br/>Because deny setting for access rights rank higher than grant setting for access rights.</p>
+<p></p>
+<p>For more details, please go through examples in <a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/aa417173fe4a4ba5a473c93eb730a417/8b4aa00e866910148df2920f69d68b27.html#effective-access-rights-for-a-user-account-in-a-user-group" rel="noopener noreferrer nofollow" target="_blank">Effective Access Rights for a User Account in a User Group</a> and set the permission properly.</p>
+<ol></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/aa417173fe4a4ba5a473c93eb730a417/8b4aa00e866910148df2920f69d68b27.html" rel="noopener noreferrer nofollow" target="_blank">Access Rights</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>multiple user groups, conflicting permissions, access rights, item editing, BackOffice, impex file, user group permissions</p></div></div></div></div>

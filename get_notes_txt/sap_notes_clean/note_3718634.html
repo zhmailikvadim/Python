@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>The "Smart Insights" functionality on a dashboard based on an Import Model to BW/4HANA is not working as expected.</li><li>Insights are not displaying correct values, such as incorrect variance calculations and percentage values.</li><li>This issue occurs for all stories.</li><li>The functionality was working correctly on dashboards developed over the past year.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAC Analytics Cloud 2026.3.1 </p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p></p>
+<ol><li>Log into SAC;</li><li>Open the Story;</li><li>Navigate to the left side of the dashboard and go to the chart;</li><li>Click on 'More Actions' (three dots) and open 'Smart Insights';</li><li>Observe that the first insight shows the top 10 values as 1% overall, however, the real value would be 22%;
+<ol><li>It also happens with another insights.</li></ol>
+</li></ol>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><section>
+<section id="u_cause">
+<p>This issue is related to filters of type range, as observed in the linked story. When a filter of type “member selection” is applied instead (using the same date values), the issue no longer occurs.</p>
+<ul></ul>
+<p></p>
+</section>
+</section>
+<section><header></header></section><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><section>
+<section id="u_cause">
+<ul><li>The Smart Insight feature has been redesigned in the upcoming release on <strong>QRC2</strong> with an updated architecture. With this new implementation, the issue is fully resolved.</li><li><strong>Workaround:</strong> keep the existing Range filter and add an additional filter of type “Member Selection” on the same dimension, using the same date value(s). Applying the Member Selection filter on top of the existing Range filter prevents the issue from occurring.
+<ul><li>This configuration can be used until the permanent fix is delivered in the upcoming release.</li></ul>
+</li></ul>
+<p></p>
+</section>
+</section>
+<section><header></header></section><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>KBA <a href="https://me.sap.com/notes/2569847" rel="noopener noreferrer nofollow" target="_blank">2569847</a> - Where can you find SAC user assistance (help) to use, configure, and operate it more effectively?</li><li>KBA <a href="https://me.sap.com/notes/2487011" rel="noopener noreferrer nofollow" target="_blank">2487011</a> - What information do I need to provide when opening a case for SAP Analytics Cloud?</li><li>KBA <a href="https://me.sap.com/notes/2511489" rel="noopener noreferrer nofollow" target="_blank">2511489</a> - Troubleshooting performance issues in SAP Analytics Cloud
+<ul></ul>
+</li><li><a href="https://help.sap.com/viewer/2d7115b0e0aa4f78bfd9c06fdc1fe4f6/latest/en-US" rel="noopener noreferrer nofollow" target="_blank">SAP Analytics Cloud Connection Guide</a></li><li><a href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/837228942b504eeeb75efee930727914.html" rel="noopener noreferrer nofollow" target="_blank">SAP Analytics Cloud Get More Help and SAP Support</a></li><li>Need More Help? <a href="https://support.sap.com/en/contact-us.html" rel="noopener noreferrer nofollow" target="_blank">Contact Support</a> </li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>smart insights, incorrect values, variance calculation, import model, BW/4HANA, dashboards, SAC predictive, percentage discrepancy, insights error, story issue, Analytics</p></div></div></div></div>

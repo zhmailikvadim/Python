@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">MDG EAM 2023, 2024</p>
+<p id="__html0">When you are processing multiple Material BOM objects in a single change request, post activation of the CR some of the MBOM objects are getting replicated to the target system.</p>
+<p>There is a wait time of 2 seconds by default in the DRF replication process, in some cases this wait time is not sufficient and causing this replication issue in the system. So increase this wait time according to your requirement in the TVARVC table.</p>
+<p>Table Name: TVARVC<br/>Variable name : UGI_WAIT_TIME_MBOM_DISTRIBUTE<br/>Selection type : P<br/>Field value(LOW) : &lt;enter wait time in seconds&gt;</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">MDG EAM, UGI_WAIT_TIME_MBOM_DISTRIBUTE, TVARVC, /UGI/EAM_MROBOM_MAP_KEY, CL_USMD_DISTRIBUTION_SERVICES</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Program Error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement this note and perform the manual Activity:</p>
+<p>Add the Parameter and set the value</p>
+<p>Follow the below steps :</p>
+<p><br/>Run t-code STVARV<br/> <br/>Click on Create and Add the Parameter name as<br/>"UGI_WAIT_TIME_MBOM_DISTRIBUTE" and set the value as X.<br/> <br/>Click on Save<br/> <br/>Note : After saving the details, Please verify the table TVARVC for the<br/>below entry<br/> <br/>Variable name : UGI_WAIT_TIME_MBOM_DISTRIBUTE<br/>Selection type : P<br/>Field value(LOW) : &lt;enter wait time in seconds&gt;</p></div></div></div></div>

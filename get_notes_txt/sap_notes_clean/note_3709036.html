@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<div>When I search for rates using a specific currency in Admin &gt; Rates, I see fewer rate card records than I expect.</div>
+</li><li>
+<div>For the records that appear, the minimum and maximum rate values display as 0.00 even though valid rate ranges appear during Job Posting creation.</div>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<div>
+<p>You see fewer Rate Codes and 0.00 rate values in Admin &gt; Rates when your organization uses a role‑based rate card. A role‑based rate card varies only by job role and does not change by supplier, site, or worker pay type.<br/>Because the templates can store the minimum and maximum bill rate values directly, you reuse the same Rate Code across many templates. You do not need to create a separate Rate Code for each role or template.</p>
+<p>When you reuse a Rate Code:</p>
+<ul><li>Only a small number of Rate Codes exist for the currency</li><li>Those Rate Codes do not contain template‑level rate ranges</li><li>Admin &gt; Rates displays fewer results</li><li>The Rate Codes that appear show 0.00 for minimum and maximum values</li></ul>
+<div>You create separate Rate Codes only when rates vary across multiple dimensions, such as supplier, site, or worker pay type in addition to job level. To support this more complex rate structure, SAP Fieldglass uses:</div>
+<div>
+<div>
+<ol><li>Rate Codes to capture each variation.</li><li>A Rate Group to collect related Rate Codes.</li><li>A Rate Grid to map rates to supplier–site combinations.</li><li>A Job Posting Template that references the Rate Grid.</li></ol>
+<p>This multi‑step configuration produces the large number of populated Rate Codes you expect to see in Admin &gt; Rates when you manage supplier‑ or site‑based rate cards.<br/>When you use a role‑based rate card, the templates already contain the ranges you need, so the system does not require additional Rate Codes.</p>
+</div>
+</div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Create a Report to view accurate rate ranges.</p>
+<div>
+<ol><li>Sign into your SAP Fieldglass account.</li><li>Click Analytics.</li><li>Click Create Report.</li><li>Choose Job Posting Template as the module.</li><li>Add these fields:
+<ul><li>Min Template Bill Rate</li><li>Max Template Bill Rate</li><li>Minimum Pay Rate (optional)</li><li>Maximum Pay Rate (optional)</li></ul>
+</li><li>Add a filter for the currency you want to review.</li><li>Run the report.</li></ol>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>template rate ranges, role based configuration, currency rate search, rate code reuse, rate card visibility, admin rates list, fieldglass rate setup, template bill rate fields, analytics rate report, job posting template report, missing rate values, rate code 0.00, rate card reporting, template configuration rates</p></div></div></div></div>

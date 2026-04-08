@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>When using <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access</span> (<span class="SNO_DNT" style="float: none;" translate="no">SDA</span>) to connect to an ABAP system via the ABAP ODBC adapter, a query cancellation may become stuck in the following call stack. This situation blocks garbage collection, eventually causing the HANA system to hang.</p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">0000000[thr=00000]: JobWrk0000 at</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 0:  in __lll_lock_wait (libpthread.so.0)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 1: in __GI___pthread_mutex_lock (libpthread.so.0)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 2: in ThrCSLock (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 3: in RfcCsGuard::RfcCsGuard() (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 4: in <strong>RfcStaticConnectionsManager::isValidConnection</strong>(RfcConnectionBase*) (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 5: in RfcConnectionBase::getConnectionFromHandle(_RFC_CONNECTION_HANDLE*) (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 6: in RfcGetCustomData (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 7: in Dbc2AbapSqlConn::RfcEpponClientCallStart() (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 8: in RfcConnectionBase::onClientCallStart() (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 9: in SyncContext::executeContext(RfcConnectionBase*, RfcFunction*, _RFCID) (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 10: in ContextBase::rfcCallReceive(RfcConnectionBase*, RfcFunction*, _RFCID) (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 11: in ServiceConnection::ping() (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 12: in RfcPing (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 13: in Dbc2AbapSqlConn::SQLGetConnectAttrW() (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 14: in sSQLGetConnectAttr() (ODBC_driver_for_ABAP.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 15: in federation::OdmService::doOdbc() at federation/connectors/odm/Service.cpp:1278 (libhdbrskernel.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 16: in federation::OdmServiceHandler::doOdbc() at federation/connectors/odm/Service.cpp:145 (libhdbrskernel.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 17: in void ltt::impl::FunctionPR&lt;void ()&gt;::callback_fn&lt;federation::OdbcAccess::do_odbc()::{} at federation/adapter/odbcaccess.cpp:4234 (libhdbrskernel.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 18: in Execution::impl::runThirdPartyCode() at ltt/functional.hpp:2187 (libhdbbasis.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 19: in federation::OdbcAccess::do_odbc() at Basis/Execution/ContextStateScope.hpp:349 (libhdbrskernel.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 20: in federation::OdbcAccess::<strong>SQLGetConnectAttr</strong>() at federation/adapter/odbcaccess.cpp:5699 (libhdbrskernel.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 21: in federation::OdbcAccess::IsConnected() at federation/adapter/odbcaccess.cpp:1228 (libhdbrskernel.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 22: in federation::OdbcAccess::Retcode() at federation/adapter/odbcaccess.cpp:3895 (libhdbrskernel.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 23: in federation::OdbcAccess::BindColumnsAndExecute() at federation/adapter/odbcaccess.cpp:1729 (libhdbrskernel.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 24: in federation::OdbcAccess::ExecuteQuery() at federation/adapter/odbcaccess.cpp:2610 (libhdbrskernel.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">...</span><br/><span class="SNO_DNT" style="float: none;" translate="no">47: in __GI___clone (libc.so.6)</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Federation; SDA; ABAPODBC; Hung; Blocked GC;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 348911</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in the ABAP ODBC driver, an inconsistent synchronization (mutual exclusion) state may occur.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS08</li>
+<li>or higher</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>Smart Data Access to ABAP using ABAP ODBC adapter versions <strong>prior</strong> to 100.23.23</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>For SAP HANA 2 apply one of the following ABAP ODBC driver version:</p>
+<ul>
+<li>ABAP ODBC adapter 100.23.23</li>
+<li>or higher </li>
+</ul>
+<p> </p></div></div></div></div>

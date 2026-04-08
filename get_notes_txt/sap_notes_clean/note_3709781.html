@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When running MRP, you are facing below dump message:<br/><br/></p>
+<p>Category               ABAP programming error<br/>Runtime Errors         AMDP_EXECUTION_FAILED<br/>Except.                CX_AMDP_EXECUTION_FAILED<br/>ABAP: Program          CL_PPS4_MRP_PURCHASING========CP<br/>Application Component  PP-MRP</p>
+<p></p>
+<p>What happened?</p>
+<p>     During execution of database procedure<br/>     CL_PPS4_MRP_PURCHASING=&gt;DETERMINE_PRIORITY<br/>     an error occurred.<br/>     SQL code of the database: 314<br/> </p>
+<p></p>
+<p>Database Procedure (AMDP) Information</p>
+<p>    Full error message from the database:</p>
+<p>    numeric overflow: "SAPHANADB"."CL_PPS4_MRP_RUN=&gt;MAT_PLANT_MRP#stb2#20241010075451": line 16</p>
+<p>    col 3 (at pos 586): "SAPHANADB"."CL_PPS4_MRP_RUN=&gt;MAT_PLANT_MRP": line 71 col 6 (at pos</p>
+<p>    2659): "SAPHANADB"."CL_PPS4_MRP_RUN=&gt;MAT_PLANT_MRP_PREPARE_SINGLE": line 261 col 8 (at pos</p>
+<p>    11491): "SAPHANADB"."CL_PPS4_MRP_CALC=&gt;CALC_CHANGES": line 702 col 12 (at pos 27493):</p>
+<p>    "SAPHANADB"."CL_PPS4_MRP_SOURCING=&gt;SOS_DET": line 114 col 5 (at pos 5208):</p>
+<p>    "SAPHANADB"."CL_PPS4_MRP_SOURCING=&gt;SOS_PREP_EXT_PROC": line 25 col 7 (at pos 1375):</p>
+<p>    "SAPHANADB"."CL_PPS4_MRP_PURCHASING=&gt;PURG_SOS_SELECT": line 14 col 7 (at pos 704):</p>
+<p>    "SAPHANADB"."CL_PPS4_MRP_PURCHASING=&gt;SELECT_SOURCE_FROM_CDS": line 392 col 5 (at pos 17745):</p>
+<p>    "SAPHANADB"."CL_PPS4_MRP_PURCHASING=&gt;DETERMINE_PRIORITY": line 43 col 8 (at pos 1574),</p>
+<p>    "SAPHANADB"."CL_PPS4_MRP_PURCHASING=&gt;DETERMINE_PRIORITY": line 10 col 7 (at pos 411),</p>
+<p>    "SAPHANADB"."CL_PPS4_MRP_PURCHASING=&gt;DETERMINE_PRIORITY": line 17 col 7 (at pos 635),</p>
+<p>    "SAPHANADB"."CL_PPS4_MRP_PURCHASING=&gt;DETERMINE_PRIORITY": line 24 col 8 (at pos 962),</p>
+<p>    "SAPHANADB"."CL_PPS4_MRP_PURCHASING=&gt;DETERMINE_PRIORITY": line 30 col 8 (at pos 1149),</p>
+<p>    "SAPHANADB"."CL_PPS4_MRP_PURCHASING=&gt;DETERMINE_PRIORITY": line 36 col 8 (at pos 1339):</p>
+<p>    cannot convert "67448124210.000" to the type DECIMAL(13, 3) for column BSTMI<br/> </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP ERP Logistics (PP)  </li><li>SAP S/4 HANA, on premise</li><li>SAP S/4HANA Cloud Private Edition</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Run T-code: MD01N.</li><li>Check the dump in T-CODE: ST22.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The field BSTMI is of type MENG13 which is length 13 with 3 decimals. This means maximum allowed value is: 9999999999.999.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>In order to avoid this dump you need to adjust UMREZ or UMREN value maintained for Info record.</p></div></div></div></div>

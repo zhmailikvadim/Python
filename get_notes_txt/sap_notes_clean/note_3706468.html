@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the processes "Start of Supply for Electricity (DSO View)" (DE_B_GPKE_DSO_SOS_REG) and "Start of Basic or Backup Supply for Electricity (DSO View)" (DE_B_GPKE_DSO_SBS), the system doesn't include a one-hour wait step before continuing the process.</p>
+<p>This issue is relevant for the market role: DSO.<br/><br/>Wait step 0605 added in process Trigger of Master Data Changes (DE_B_GPKE_TRIG_MDC_ASSGN_DSO) which is embeded process of DE_B_GPKE_DSO_SOS_REG &amp; <br/>DE_B_GPKE_DSO_SBS .</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">GPKE, DE_B_GPKE_DSO_SOS_REG, DE_B_GPKE_DSO_SBS, DE_B_GPKE_TRIG_MDC_ASSGN_DSO,Trigger of Master Data Changes, wait deadline, start of supply, basic supply, backup supply, electricity</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> The error occurred because the processes were missing a one-hour wait deadline step.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system includes a one-hour wait deadline step in the processes. Step 3000-605 is added to process DE_B_GPKE_DSO_SOS_REG, and step 2000-605 is added to process DE_B_GPKE_DSO_SBS. Import the BC set /US4G/3_0_SUP_SP07_NOTE_3706468 to apply these changes. You can verify the fix by retesting the scenario and confirming that the one-hour wait step runs successfully in both processes.</p></div></div></div></div>

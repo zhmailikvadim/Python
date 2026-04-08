@@ -1,0 +1,68 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are trying to display the document/attachment in the browser.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Connection failed, Browser compatibility, Content Disposition, URL</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The issue occurs because the URL is accessed directly on the browser and SAP back-end system may not be involved in the communication.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Knowledge Provider (KPro) stores the documents in the Content Repositories created in the SAPGUI transaction 'OAC0'. These Documents are accessible within the <abbr>SAP</abbr> system via KPro APIs. When the documents are to be downloaded/displayed on the Frontend, <abbr>SAP</abbr> uses direct communication where KPro generates a URL which can be accessed from the user's frontend/web browser (Chrome/ Edge/ Safari)</p>
+<p>When the URLs are used on the frontend, the customer should have access to the Content server host.</p>
+<p>When <abbr>SAP</abbr> triggers a URL to access content, the browser independently handles the retrieval and processing of that content. The communication occurs directly between the front-end (browser) and the content server, without <abbr>SAP</abbr> mediating the interaction.</p>
+<p>This means</p>
+<ul class="tight">
+<li>
+<p><strong><abbr>SAP</abbr> Support Scope</strong>: Issues related to accessing or reading content from the content server are managed by <abbr>SAP</abbr> support.</p>
+</li>
+<li>
+<p><strong>Customer Responsibility</strong>: Problems concerning URL access, network connectivity, or content rendering in the browser after the URL is triggered on the browser fall under the customer's responsibility. Customers should verify these issues with their content server vendor.</p>
+</li>
+</ul>
+<p>Document Display and Compatibility:</p>
+<p>The display and handling of documents after the URL is triggered depend entirely on the browser's compatibility and settings, which are beyond <abbr>SAP</abbr>'s control. Customers experiencing issues with the generation/creation of the URL can contact <abbr>SAP</abbr> support, <abbr>BC</abbr>-SRV-KPR-<abbr>CMS</abbr> component. And once the URL is fired over to the browser, any issues related to URL reachability, network connectivity, browser behaviour, or content rendering are your responsibility.</p>
+<p>Content-Disposition:</p>
+<p>The HTTP response header <strong>Content-Disposition</strong> determines how a browser handles returned content.</p>
+<p>Reference: <a class="external-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition" rel="nofollow" target="_blank">https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition</a></p>
+<p>The Content Server can set the <abbr>HTTP</abbr> response header Content-Disposition, which instructs the browser how to handle the returned content.</p>
+<ul>
+<li>
+<p>Content-Disposition:<strong> inline</strong><br/>Displays the content directly within the webpage or inside an embedded viewer (Default behavior).</p>
+</li>
+<li>
+<p>Content-Disposition: <strong>attachment</strong><br/>Forces the browser to download the file instead of displaying it.</p>
+</li>
+</ul>
+<p>To resolve display-related issues, ensure that the Content Server is sending the appropriate Content-Disposition value in the response.</p>
+<ul>
+<li>
+<p>For <strong><abbr>SAP</abbr> Content Server</strong>, refer to <abbr>SAP</abbr> Note 842709 – <abbr>SAP</abbr> Content Server: Setting the Content-Disposition Response Header.</p>
+</li>
+<li>
+<p>For <strong>OpenText Core Archive</strong>, refer to <abbr>SAP</abbr> Note 3330802 - Core Archive for <abbr>SAP</abbr> Solutions - Core Archive Connector - Parameters CONTENT_DISPOSITION_TYPE and CONTENT_DISPOSITION_EXCEPTION_LIST in ICS.Setup</p>
+</li>
+<li>
+<p><a href="https://me.sap.com/notes/2774742" target="_blank">2774742 - Cross-Site Scripting (<abbr>XSS</abbr>) vulnerability in ABAP Server and ABAP Platform</a></p>
+</li>
+</ul>
+<p><strong>FAQ's:</strong></p>
+<p>1. Document cannot be displayed in the SAPGUI HTML Viewer and a connection error occurs. What should be checked?</p>
+<p>Answer: If an HTTP-based Content Server is used, first verify whether the Content Server can be reached directly from the frontend browser.</p>
+<p>This can be tested by calling the ServerInfo URL in a standard web browser:</p>
+<p lang="en-US">&lt;protocol (HTTP/HTTPS)&gt;://&lt;Content Server Host&gt;:&lt;Port&gt;/&lt;Script&gt;?serverInfo&amp;pVersion=0045</p>
+<p>Example:</p>
+<p lang="en-US"><a href="http://www.testcontentserver.com:50034/bc/server/000?serverInfo&amp;pVersion=0045" target="_blank">https://www.testcontentserver.com:883/bc/server/000?serverInfo&amp;pVersion=0045</a></p>
+<p>Result Interpretation:</p>
+<ul type="disc">
+<li>If the ServerInfo page is displayed successfully, basic network connectivity to the Content Server is working.</li>
+<li>If the page cannot be accessed, check network, firewall, proxy, or DNS configuration between the frontend and the Content Server.</li>
+</ul>
+<p>2. PDF and PNG files open directly in the browser, but DOCX files are downloaded. Is this expected behaviour?</p>
+<p>Answer: Yes. This behaviour is expected and is controlled by the browser.</p>
+<p>Most modern browsers provide native inline rendering for file formats such as:</p>
+<ul type="disc">
+<li>PDF</li>
+<li>PNG</li>
+<li>JPG</li>
+</ul>
+<p>However, DOCX files are not supported for inline display by standard web browsers. As a result, browsers automatically download DOCX files instead of displaying them within the browser window.</p>
+<p>This behaviour is determined by the browser’s capabilities and cannot be influenced by SAP.</p>
+<p>For details on supported file formats and rendering behaviour, consult the documentation of the respective browser vendor or Microsoft.</p></div></div></div></div>

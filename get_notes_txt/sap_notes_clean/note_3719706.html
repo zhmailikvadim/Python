@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In certain system constellations, expanding the BOM item container of a versioned material BOM may result in an error message related to material number formatting.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> PLM-42137, ECTR, Versioned BOM, /DSCSAG/MAT_BOM_READ, /DSCSAG/MAT_BOM_READ2</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>In specific scenarios, material number conversion was not executed consistently for versioned BOMs.</p>
+<p>The issue may occur in systems where versioned BOMs are used and the material number format configuration restricts certain external representations.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The material number conversion logic was adjusted to ensure consistent handling for versioned and non‑versioned BOMs.<br/>The following functional enhancements were implemented:</p>
+<ul>
+<li>In /DSCSAG/MAT_BOM_READ, redundant conversion of the input material number was removed, as the number is already be provided in internal format.</li>
+<li>In /DSCSAG/MAT_BOM_READ2, the internal‑to‑external conversion was harmonized for both versioned and non‑versioned BOM.</li>
+</ul></div></div></div></div>

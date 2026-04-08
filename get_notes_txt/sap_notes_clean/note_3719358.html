@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>After the HANA upgrade, system constantly gets alerts with below message:<br/><span class="SNO_DNT" style="float: none;" translate="no">301 unique constraint violated: "_SYS_STATISTICS"."ALERT_DELTA_MEM_MERGE_FAIL": line 21 col 592 (at pos 2274): Table(STATISTICS_ALERTS_BASE), Index(_SYS_TREE_CS_#152153_#0_#P0) with error: unique constraint violation in self check for table PIN::_SYS_STATISTICS:STATISTICS_ALERTS_BASE...</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">301 unique constraint violated</span>, <span class="SNO_DNT" style="float: none;" translate="no">delta merge</span>, <span class="SNO_DNT" style="float: none;" translate="no">OOM</span>, <span class="SNO_DNT" style="float: none;" translate="no">ALERT_DELTA_MEM_MERGE_FAIL</span>, <span class="SNO_DNT" style="float: none;" translate="no">STATISTICS_ALERTS_BASE</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 353013</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, indexserver tries to insert records to <span class="SNO_DNT" style="float: none;" translate="no">STATISTICS_ALERTS_BASE</span> table with existing <span class="SNO_DNT" style="float: none;" translate="no">index</span>, causing the unique constraint violation.</p>
+<p><em></em><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions 079.05 - 079.08 (SPS07)</li>
+<li>Revisions 085.00 - 089.01 (SPS08)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>You recently upgraded HANA to one of the affected releases.<br/><br/>and<br/><br/></li>
+<li>Delta merge fails due to OOM or memory shortage. You get non empty result from <span class="SNO_DNT" style="float: none;" translate="no">HOST_DELTA_MERGE_STATISTICS</span> with <span class="SNO_DNT" style="float: none;" translate="no">cs_error = <strong>2484</strong></span>.<br/>You can check this by executing below query:<br/>
+<p><span class="SNO_DNT" style="float: none;" translate="no">SELECT * FROM "_SYS_STATISTICS".HOST_DELTA_MERGE_STATISTICS WHERE success = 'FALSE' AND type != 'HINT' AND cs_error = <strong>2484</strong>;</span></p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 079.09 (SPS07)</li>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher<br/><br/></li>
+</ul>
+<p><strong>Remark:</strong></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">'301 unique constraint violated'</span> alert is caused by internal error while inserting a record to <span class="SNO_DNT" style="float: none;" translate="no">STATISTICS_ALERTS_BASE</span> table.<br/>However, this is triggered by delta merge failure. To resolve fundamental issue, please analyze why the delta merge got failed.</p></div></div></div></div>

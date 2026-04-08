@@ -1,0 +1,115 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>While creating instance during the selection of runtime environment (CF, Kyma, Neo) showing "You don't have permission to work in CF</li><li>The user is unable to view the subscription and service under the SAP Business Technology Platform (BTP) subaccount.</li><li>The issue occurs due to missing authorization as a Cloud Foundry (CF) Org Manager.</li></ul>
+<p><img alt="" class="img-responsive" height="397" src="/documents/customerkba/2UsUT5F02AYT_eLWqZlxBIWKMFjHYHAtilw1oUIDVVA" width="522"/></p>
+<p><span style="color: rgb(224, 62, 45);">Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Business Technology Platform </p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Attempt to subscribe to the Forms Service by Adobe free plan in a Cloud Foundry environment.</li><li>Observe that the "Create" button is greyed out.</li><li>Verify that the user is unable to view the subscription or service under the subaccount.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The user does not have the necessary authorization as a Cloud Foundry Org Manager, which prevents access to view instances in the SAP Business Technology Platform subaccount.<br/><br/><br/></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Verify User Role: Confirm that the user is not currently assigned the Cloud Foundry Org Manager role.</li><li>Identify a Current Org Manager:</li></ol>
+<ul><li>Contact the current Org Manager to assist in adding the user to the organization.</li><li>The Org Manager can add users without assigning any roles initially.</li></ul>
+<ol><li>Add User as Org Member:</li></ol>
+<ul><li>The Org Manager should log in to the BTP Cockpit.</li><li>Navigate to the organization settings.</li><li>Add the user as an Org Member without assigning specific roles at this stage.</li></ul>
+<p>     I. Assign Org Manager Role (if necessary):</p>
+<ul><li>If the user needs to manage the organization, the Org Manager can assign the Cloud Foundry Org Manager role after the user has been added as an Org Member.</li></ul>
+<p>     II. Re-attempt Access:</p>
+<ul><li>Once the user has been added as an Org Member, they should be able to view the instances in the subaccount.</li></ul>
+<p>     2. Self-Service Method:</p>
+<ul><li>If the current Org Manager is unavailable and the user is a Subaccount Administrator.<br/>
+<ol style="list-style-type: decimal;"><li>As Subaccount Administrator navigate to the <a href="https://cockpit.eu10.hana.ondemand.com/" rel="noopener noreferrer nofollow" target="_blank">BTP Cockpit</a>, select the relevant Global Account, and open the Subaccount where the problematic Organization is located.</li><li>Click on Services then Instances and Subscriptions.</li><li>At the Environments section there is an entry called the same as the Organization's name and the Environment of this entry is Cloud Foundry Runtime.</li><li>Click on the button ... and select Update</li><li>Press Next &gt;</li><li>Use the following JSON format to provide the user details:
+<ol style="list-style-type: lower-roman;"><li>
+<p>For adding users with the default sap.ids origin use this format (no need to specify origin):</p>
+<div>
+<div>
+<div>
+<div>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 388.433px;"><tbody><tr><td style="width: 388.433px;">
+<div>
+<div>{</div>
+<div><span translate="no">    "usersToAdd": [</span></div>
+<div><span translate="no">       {</span></div>
+<div><span translate="no">       "email": "john.do@sap.com",</span></div>
+<div><span translate="no">       "id": "I999999"</span></div>
+<div><span translate="no">    }</span></div>
+<div><span translate="no">  ]</span></div>
+<div><span translate="no">}</span></div>
+</div>
+</td></tr></tbody></table></div>
+</div>
+</div>
+</div>
+</div>
+</li><li>
+<p>For adding users with custom Idp origin use this format:</p>
+<div>
+<div>
+<div>
+<div>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable"><tbody><tr><td>
+<div>
+<div>{</div>
+<div><span translate="no">    "usersToAdd": [</span></div>
+<div><span translate="no">       {</span></div>
+<div><span translate="no">       "email": "john.do@sap.com",</span></div>
+<div><span translate="no">       "id": "I999999",</span></div>
+<div><span translate="no">       "origin": "custom.idp.value"</span></div>
+<div><span translate="no">    }</span></div>
+<div><span translate="no">  ]</span></div>
+<div><span translate="no">}</span></div>
+</div>
+</td></tr></tbody></table></div>
+</div>
+</div>
+</div>
+</div>
+</li><li>
+<p>It is also possible to add multiple users with and without origin:</p>
+<div>
+<div>
+<div>
+<div>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable"><tbody><tr><td>
+<div>
+<div>{</div>
+<div><span translate="no">    "usersToAdd": [</span></div>
+<div><span translate="no">       {</span></div>
+<div><span translate="no">       "email": "john.do@sap.com",</span></div>
+<div><span translate="no">       "id": "I999999"</span></div>
+<div><span translate="no">    },</span></div>
+<div><span translate="no">    {</span></div>
+<div><span translate="no">       "email": "john.do@sap.com",</span></div>
+<div><span translate="no">       "id": "I999999",</span></div>
+<div><span translate="no">       "origin": "custom.idp"</span></div>
+<div><span translate="no">    }</span></div>
+<div><span translate="no">  ]</span></div>
+<div><span translate="no">}</span></div>
+</div>
+</td></tr></tbody></table></div>
+</div>
+</div>
+</div>
+</div>
+</li><li>
+<p>To remove users as org admin just change the name of the json struct to “usersToRemove” like so:</p>
+<div>
+<div>
+<div>
+<div>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable"><tbody><tr><td>
+<div>
+<div>{</div>
+<div><span translate="no">    "usersToRemove": [</span></div>
+<div><span translate="no">       {</span></div>
+<div><span translate="no">       "email": "john.do@sap.com",</span></div>
+<div><span translate="no">       "id": "I999999"</span></div>
+<div><span translate="no">    }</span></div>
+<div><span translate="no">  ]</span></div>
+<div><span translate="no">}</span></div>
+</div>
+</td></tr></tbody></table></div>
+</div>
+</div>
+</div>
+</div>
+</li></ol>
+</li></ol>
+<p>7. Press Update Instance to complete the process.<br/><br/></p>
+<p></p>
+<p>The Update takes a few seconds to complete, and once done, the chosen user will become Org Manager.<br/>To complete the process, this configuration has to be removed, otherwise there will be errors like “User &lt;Name&gt; is already Org Manager”.<br/>To remove the configuration – follow the steps above, but replace the text from 6.) with “{}” and update the instance again.<br/><br/>Notes:</p>
+<ul><li>Navigate to the Trust Configuration tab of SAP BTP to find the correct Origin Key for the "origin" field.</li><li>In the ID field, it is possible to use any P-User, S-User or I-User.</li></ul>
+</li></ul>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>KBA 3249765 - How to add an Org Manager to a Cloud Foundry org<br/><a href="https://help.sap.com/docs/btp/sap-business-technology-platform/add-org-members-using-cockpit?locale=en-US" rel="noopener noreferrer nofollow" target="_blank"></a></li><li><a href="https://help.sap.com/docs/btp/sap-business-technology-platform/add-org-members-using-cockpit?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Add Org Members Using the Cockpit</a> <br/><a href="https://help.sap.com/docs/btp/sap-business-technology-platform/add-space-members-using-cockpit" rel="noopener noreferrer nofollow" target="_blank"></a></li><li><a href="https://help.sap.com/docs/btp/sap-business-technology-platform/add-space-members-using-cockpit" rel="noopener noreferrer nofollow" target="_blank">Add Space Members</a><br/><a href="https://help.sap.com/docs/btp/sap-business-technology-platform/about-user-management-in-cloud-foundry-environment" rel="noopener noreferrer nofollow" target="_blank"></a></li><li><a href="https://help.sap.com/docs/btp/sap-business-technology-platform/about-user-management-in-cloud-foundry-environment" rel="noopener noreferrer nofollow" target="_blank">About User Management in the Cloud Foundry Environment</a><br/><br/><br/></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Cloud Foundry, Org Manager, authorization, SAP Business Technology Platform, Forms Service by Adobe, free plan, instance creation, subscription, greyed-out button, missing role, subaccount access.</p></div></div></div></div>

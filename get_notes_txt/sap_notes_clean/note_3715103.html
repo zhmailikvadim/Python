@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The Impact Analysis raises an error message like</p>
+<p>TABL &lt;TABNAME&gt;: High Row-change rate &lt;ChangeRate&gt; versus total rows &lt;Total number of rows&gt;; see note 3715103</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Software Update Manager, SUM, Impact Analysis, Downtime-optimized Conversion</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You are performing the Impact Analysis for a Downtime-optimized Conversion with the Software Update Manager and you are receiving an error message during the Impact Analysis</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This message serves as a warning that the affected table is updated very frequently. As a result, the replication triggers that record changes on this table may have an impact on certain business processes, particularly with regard to performance. Because the ratio between the total number of rows and the number of updated rows is relatively high, you should evaluate whether the table can be excluded from uptime handling and instead be transferred during downtime.</p>
+<p><strong>Note:</strong> It is not mandatory to remove tables from uptime handling when they are flagged by this check. The purpose of this message is to raise awareness and to recommend validating whether uptime handling is appropriate for this table.</p>
+<p>The decision depends on several factors:</p>
+<ul>
+<li>
+<p><strong>Downtime requirements</strong> Database triggers introduce a small performance overhead on the production system, which is usually not noticeable to end users. However, for certain database platforms and in cases of very high update frequency, it may be preferable to avoid update handling for the table and transfer its data during downtime instead.</p>
+</li>
+<li>
+<p><strong>Overall performance requirements of the production system</strong> Depending on system utilization, it may be beneficial to exclude tables from uptime handling having a high change rate but a relatively small total number of rows.</p>
+</li>
+</ul></div></div></div></div>

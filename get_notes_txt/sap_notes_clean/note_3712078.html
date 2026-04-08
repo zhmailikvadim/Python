@@ -1,0 +1,54 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">On a Windows platform, a Java agent and supporting software are installed on the customer’s system, and the Java agent is consumed by SAP Analytics Cloud to support the following features:</p>
+<div class="longtext">
+<div class="longtext">
+<div class="longtext">
+<div class="longtext">
+<div class="longtext">
+<div class="longtext">
+<div class="longtext">
+<ul>
+<li>Acquire data from On-Premise SAP BW systems</li>
+<li>Acquire data from On-Premise SAP BPC MS systems</li>
+<li>Acquire data from On-Premise SAP Universe
+<ul class="p-rich_text_list p-rich_text_list__bullet">
+<li>SBOP 4.3 requires version 1.0.354 or higher.</li>
+</ul>
+</li>
+<li>Acquire data from On-Premise SAP ERP Central Component 6.0</li>
+<li>Acquire data from On-Premise SAP HANA Views</li>
+<li>Acquire data from On-Premise JDBC Datasources</li>
+<li>Acquire data from On-Premise File Server</li>
+<li>Export data to On-Premise File Server </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>SAP <strong>strongly recommends</strong> applying maintenance shipments (on-premise application integrations) regularly at least every 6 months. For more details see the following SAP Note: <a href="/notes/2658835" target="_blank">SAP Note 2658835</a></p>
+<div class="longtext">
+<p>It is also <strong>recommended</strong> that you upgrade to the latest SAP Analytics Cloud agent version 1.0.459 to take advantage of new improvements and bug fixes for all data acquisition types.</p>
+<p>The agent’s <strong>required</strong> minimum version is 1.0.449.</p>
+<div class="longtext">
+<p>List of Changes:</p>
+<ul>
+<li>Code cleanup</li>
+<li>Upgrade SAPJVM from 8.106.106 to 8.107.107</li>
+<li>Update <abbr>JSON</abbr>-java version from 20230618 to 20251224</li>
+<li>Apache Tomcat from 9.0.112 to 9.0.115</li>
+<li>Unblock Cloud kit upgrade if Cloud Connector is installed externally before the initial Cloud kit install.</li>
+<li>Fix missing hierarchy nodes for hierarchical model import from BW queries with hierarchical key figure structure.</li>
+</ul>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ol>
+<li>Download SAP Analytics Cloud Agent Simple Deployment Kit from <a href="https://launchpad.support.sap.com/#/softwarecenter" target="_blank">SAP Software Downloads</a>.</li>
+<li>Unzip the contents to your local file system, and follow the instructions in the README.txt included in the .zip, and the Post-Setup Guide available in the deployment folder.</li>
+<li>Please upgrade to this version at the earliest time as this version contains an improvement for better handling of large data volume for BW acquisitions, and please ensure that Tomcat has at least 4GB of memory. Please refer to this SAP Note to increase the agent Tomcat memory. <a href="/notes/3664717" target="_blank" title="3664717  - Modify SAP Analytics Cloud agent Apache Tomcat memory allocation for Tomcat9_SACAgent">3664717</a><a href="/notes/3664717" target="_blank"> - Tomcat Edit Service Configuration Tool for Tomcat9_SACAgent</a></li>
+</ol>
+<p id="">Note: Upgrading to SAP Cloud Connector 2.17 or later requires minimum version 2.13 (see SAP Note 2539713).  If you are upgrading to this version from 1.0.118 to 1.0.333, please upgrade to 1.0.443 first before upgrading to the latest SAC Simple Deployment Kit.</p></div></div></div></div>

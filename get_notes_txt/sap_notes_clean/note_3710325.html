@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>The recruitment system intermittently fails to load job requisition approvals and offer approvals, returning a 504 Gateway Time-out.  </p>
+</div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>The issue can be reproduced by the following conditions and actions: </p>
+</div>
+<div>
+<ol style="list-style-type: decimal;"><li>
+<p>Description fields in SuccessFactors (such as job requisition descriptions) are designed to store textual information only. </p>
+</li><li>
+<p>Oversized image or binary data is stored within these LOB/text description columns, contrary to their intended usage. </p>
+</li><li>
+<p>A <strong>fuzzy search index</strong><strong> </strong>is enabled on these description fields. </p>
+</li><li>
+<p>As image and binary content is added, the <strong>fuzzy search index</strong> grows excessively in size. </p>
+</li><li>
+<p>During system operations that require full table loading into memory (such as approval processing or system maintenance activities), SAP HANA loads the table together with the associated <strong>fuzzy search index</strong>. </p>
+</li><li>
+<p>Due to the oversized <strong>fuzzy search index</strong> created on non-textual content, data loading and index creation times become slow and intermittent. </p>
+</li><li>
+<p>These delays lead to timeouts at the application layer, resulting in intermittent <em>504 Gateway Time-out errors</em> across multiple approval flows in SuccessFactors. </p>
+</li></ol>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Disable the fuzzy search index on the affected description fields to prevent excessive data loading and index creation times. Additionally, ensure that these description fields are used strictly for <strong>textual content only</strong>, in accordance with their functional and technical design, avoiding the storage of images or any other binary data. </p></div></div></div></div>

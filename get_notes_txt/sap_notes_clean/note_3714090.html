@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Error Message No V1227 - New Pricing is no longer possible.</li><li>The system does not pick the latest price from the Info Record for price-changed purchase orders that are partially delivered.</li><li>This issue occurs specifically for partially delivered purchase orders where the latest price should be determined automatically.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4 HANA Cloud Public Edition</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Create a Purchase Order.</p>
+</li><li>
+<p>Post a partial delivery for the Purchase Order in MIRO.</p>
+</li><li>
+<p>Update the price in the Purchasing Info Record.</p>
+</li><li>
+<p>Verify that the partially delivered Purchase Order does not automatically adopt the updated price from the Info Record.</p>
+</li><li>
+<p>Attempt to manually apply the new price by selecting Update under the Conditions tab in the Purchase Order.</p>
+</li><li>System will give Error Message no. V1227 - New pricing is no longer possible.
+<p></p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The automatic price update is not possible after GR is already posted.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>
+<p>This is standard behavior. The net price can be changed manually, but should check whether this change possibly requires to cancel follow-on documents.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="/notes/3205358" rel="noopener noreferrer nofollow" target="_blank"></a><a href="/notes/3168171" rel="noopener noreferrer nofollow" style="font-size: 10pt;" target="_blank">SAP Note 3168171 - New price determination is no longer possible automatically after follow-on documents</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Error Message no. V1227, New pricing is no longer possible, latest price, info record, partially delivered purchase order, price determination, SAP S/4HANA Cloud Public Edition, purchase contract management, sourcing and procurement, price update, automatic price determination, purchase order issue,</p></div></div></div></div>

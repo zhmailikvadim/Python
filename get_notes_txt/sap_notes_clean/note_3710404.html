@@ -1,0 +1,145 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="OutlineElement Ltr SCXW174386907 BCX8" id="__html0"></div>
+<div class="OutlineElement Ltr SCXW174386907 BCX8"></div>
+<div class="OutlineElement Ltr SCXW174386907 BCX8"></div>
+<div class="OutlineElement Ltr SCXW174386907 BCX8">
+<div class="OutlineElement Ltr SCXW174386907 BCX8">
+<p>The PDF visualization for Poland's National e-Invoicing System (KSeF) does not display all the required data fields. Additionally, the current layout contains several visual inconsistencies, missing legal annotations, and incorrect data handling, which can lead to incomplete or non-compliant invoice documents for end-users.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This note introduces a new version of the PDF visualization to align with recent updates to the KSeF logical structure and to address reported bugs and layout improvements. The changes ensure greater compliance, improved readability, and a more user-friendly presentation of the invoice data.</p>
+<p>Poland, eDocument, eDoc, eInvoicing, electronic invoice, electronic invoicing, Poland eInvoice, Document Compliance, Digital Compliance, DC, B2B, National System of e-Invoices, KSeF, Krajowy System e-Faktur, e-Faktura, faktura ustrukturyzowana, faktura elektroniczna, Electronic Document, Document and Reporting Compliance, electronic document processing, PDF</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div><br/><br/></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable">
+<thead>
+<tr>
+<td class="confluenceTd"><strong>Version</strong></td>
+<td class="confluenceTd">
+<p><strong>Date</strong></p>
+</td>
+<td class="confluenceTd">
+<p><strong>Reason</strong></p>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="confluenceTd">
+<p>01</p>
+</td>
+<td class="confluenceTd">
+<p>January 31, 2026</p>
+</td>
+<td class="confluenceTd">Released</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>02</p>
+</td>
+<td class="confluenceTd">
+<p>February 19, 2026</p>
+</td>
+<td class="confluenceTd">Missing tags added to the PDF layout</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div></div>
+<div></div>
+<div>
+<p>This note provide information about the changes included to the PDF visualization for Polish e-invoices. The changes are detailed below and are grouped by functional area.</p>
+</div>
+<div></div>
+<div><span style="font-size: 14px;"><strong>Note Version 1:</strong></span></div>
+<div></div>
+<div><ol>
+<li><span style="font-size: 14px;">New Fields and Data Points Added</span></li>
+</ol>
+<p>The PDF layout has been enhanced to include the following new fields, ensuring all relevant data from the XML is visible:</p>
+<ul>
+<li><strong>DaneIdentyfikacyjne/IDWew</strong>: The IDWew field from the DaneIdentyfikacyjne section is now displayed in Podmiot3 section.</li>
+<li><strong>Fa/KursWalutyZ</strong>: The exchange rate used for tax calculation (KursWalutyZ) is now visible when an invoice is issued in a foreign currency.</li>
+<li><strong>Correction Invoice Data</strong>:
+<ul>
+<li><strong>Fa/Podmiot1K</strong>: The Corrected Seller section is now fully supported and displayed in correction invoices.</li>
+<li><strong>Fa/Podmiot2K</strong>: The Corrected Buyer section is now fully supported and displayed in correction invoices.</li>
+<li><strong>Fa/Podmiot1K/GLN</strong>: The Global Location Number (GLN) for the Corrected Seller (Podmiot1K) is now included.</li>
+</ul>
+</li>
+<li><strong>Party Identifiers</strong>:
+<ul>
+<li><strong>NrID</strong>: Tax identifiers for Podmiot3 (Third Party) are now displayed.</li>
+<li><strong>Fa/Podmiot2</strong>: Local Government (JST) or Governmental (GV) unit identifiers for the Buyer (Podmiot2) are now correctly shown.</li>
+</ul>
+</li>
+<li><strong>Invoice Line Item Details (FaWiersz)</strong>:
+<ul>
+<li><strong>Fa/FaWiersz/P_12_XII: </strong>The excise duty amount (P_12_XII) is now displayed in the line item table.</li>
+<li><strong>Fa/FaWiersz/P_12_Zal_15: </strong>The flag indicating product or service is listed in Attachment 15 of VAT Act (P_12_Zal_15) is now included.</li>
+<li><strong>Fa/FaWiersz</strong>: Item classification codes GTIN, PKWiU, CN, and GTU are now visible for each invoice line.</li>
+</ul>
+</li>
+<li><strong>Payment and Settlement</strong>:
+<ul>
+<li><strong>Fa/Rozliczenie/DoRozliczenia</strong>: The amount remaining to be settled (DoRozliczenia) is now displayed in the Settlement (Rozliczenie) section.</li>
+<li><strong>Fa/Platnosc</strong>: The Paid Amount (Zaplacono) section has been adjusted to correctly calculate and display values in all scenarios.</li>
+</ul>
+</li>
+<li><strong>Tax Summary Table</strong>:</li>
+<ul>
+<li><strong>Fa/Podsumowanie</strong>: The field P_13_6_3 has been added to the tax summary.</li>
+</ul>
+</ul>
+<ol start="2">
+<li>Legal Annotations and Mandatory Phrases</li>
+</ol>
+<p>The following legally required annotations and indicators are now correctly displayed on the PDF when present in the XML data:</p>
+<ul>
+<li><strong>P_17</strong>: Self-Billing is now displayed when the invoice is issued under a self-billing agreement.</li>
+<li><strong>P_18</strong>: Reverse Charge: The "odwrotne obciążenie" annotation is now displayed when the P_18 flag is set.</li>
+<li><strong>Fa/Adnotacje/P_23</strong>: Split Payment: The "Mechanizm podzielonej płatności" annotation is now included when required.</li>
+<li><strong>Fa/FaWiersz/P_12_XII:</strong> The tax amount for OSS procedure (P_12_XII) is now displayed in the line item table.</li>
+<li><strong>Fa/Podmiot3</strong>: Third Party Roles: Descriptions for the role of Podmiot3 are now included for better context.</li>
+</ul>
+<ol start="3">
+<li>Layout Enhancements and Visibility Rules</li>
+</ol>
+<p>To improve clarity and reduce clutter, the layout has been optimized with dynamic visibility rules:</p>
+<ul>
+<li><strong>Elimination of Empty Tables</strong>:Tables that previously showed headers but had no content (e.g., extra columns for invoice items) will now be completely hidden if they are empty. This applies to several sections to ensure a cleaner look.</li>
+</ul>
+<ol start="4">
+<li>Table Restructuring and Fixes</li>
+</ol>
+<p>Several sections and tables have been adjusted for better alignment and correctness:</p>
+<ul>
+<li><strong>Fa/Transport</strong>: Transport Section: The layout of the transport details table has been revised for improved readability.</li>
+<li><strong>Fa/Platnosc</strong>: Payment Information Section: This section has been updated to correctly display all payment-related fields.</li>
+<li><strong>Fa/Platnosc</strong>: Functional Link for Cashless Payments: Where applicable, the payment section now includes a link to facilitate cashless payments.</li>
+</ul>
+<p><strong>Note Version 2:</strong></p>
+<ul>
+<li><strong>Fa/PodmiotUpowazniony: </strong>Full support for displaying the details of the Authorized Entity (PodmiotUpowazniony) section when present in the XML.</li>
+<li><strong>Fa/Podmiot2/BrakID:</strong> The flag indicating that the Buyer has no identifier is now supported and displayed.</li>
+<li><strong>Fa/Podmiot3/IDNabywcy:   </strong>The Buyer's ID within the Podmiot3 section system is now visible.</li>
+<li><strong>Fa/Podmiot3/GLN: </strong> The Global Location Number (GLN) for the Podmiot3 is now included.</li>
+<li><strong>Fa/Podmiot3/AdresKoresp: </strong>The Correspondence Address for the Podmiot3 is now displayed.</li>
+<li><strong>Fa/Podmiot3/NrKlienta: </strong>The Customer Number assigned by the Seller in the Podmiot3 is now shown</li>
+<li><strong>Fa/ZaliczkaCzesciowa: </strong>The section for Partial Advance Payments is shown.</li>
+<li><strong>Fa/Platnosc/PlatnoscInna:</strong> Other Payment Method information is displayed.</li>
+<li><strong>Fa/Platnosc/OpisPlatnosci:</strong> A detailed description of the other payment method is displayed.</li>
+<li><strong>Fa/Platnosc/RachunekBankowy/RachunekWlasnyBanku:</strong> The "Own Bank Account" flag for standard bank accounts is presented.</li>
+<li><strong>Fa/Platnosc/RachunekBankowyFaktora/RachunekWlasnyBanku:</strong> The "Own Bank Account" flag for the factor's bank account is presented.</li>
+<li><strong>Fa/Adnotacje/NoweSrodkiTransportu:</strong> The full section indicating intra-community supply of new means of transportation is now displayed, including vehicle details and reference to invoice items.</li>
+</ul>
+<p><strong> </strong></p>
+<p><strong>Product Documentation</strong></p>
+</div>
+</div>
+</div></div></div></div></div>

@@ -1,0 +1,50 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>A procedure call fails with error:</p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">SAP DBTech JDBC: [257]: sql syntax error: search table error: sql syntax error: incorrect syntax near "$".</span></p>
+<p><strong>Note</strong>:The error above is a general error when a SQL fails. Please review the prerequisites below to determine if your issue matches the one described in this SAP Note.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Procedure, Syntax Error</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 319250</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, conflicting naming conventions is not properly handled during Calculation Engine code generation.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS00 - SPS06</li>
+<li>Revisions &lt;= 079.08 (SPS07)</li>
+<li>Revisions &lt;= 089.01 (SPS08)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>Table variables return Calculation Engine(CE) related values which produces CE code generation internally.</li>
+<li>And the table variables are referenced in SQL operation such as SELECT.</li>
+<li>And the table variables are declared as an output parameter.</li>
+<li>The issue can be reproduce with the following example:</li>
+</ul>
+<p style="display: inline !important; padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">CREATE TABLE MYTAB(A INT);</span></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">CREATE OR REPLACE PROCEDURE PR_TABLE_OUT(<strong>OUT O1</strong> TABLE(A INT), OUT O2 TABLE(A INT))</span><br/><span class="SNO_DNT" style="float: none;" translate="no">AS BEGIN</span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong> TABLEVAR</strong> = <strong>CE_COLUMN_TABLE</strong>(MYTAB);</span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong> O1</strong> = SELECT * FROM <strong>:TABLEVAR</strong>;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">O2 = SELECT * FROM <strong>:O1</strong>; </span><strong>--conflict naming convention occurs.</strong><br/><span class="SNO_DNT" style="float: none;" translate="no">END;</span></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">CALL PR_TABLE_OUT(?, ?) WITH HINT(IGNORE_PLAN_CACHE);</span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 079.09 (SPS07)</li>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<ul></ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>Rewrite the procedure body to remove read dependency of parameter value for other statements.</li>
+</ul>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">For example, the procedure in the prerequisites could be rewritten like following:</span></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">CREATE OR REPLACE PROCEDURE PR_TABLE_OUT(OUT O1 TABLE(A INT), OUT O2 TABLE(A INT))</span><br/><span class="SNO_DNT" style="float: none;" translate="no">AS BEGIN</span><br/><span class="SNO_DNT" style="float: none;" translate="no">TABLEVAR = CE_COLUMN_TABLE(MYTAB);</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> <strong>O1_1</strong> = SELECT * FROM :TABLEVAR;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">O1 = SELECT * FROM :<strong>O1_1</strong>;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">O2 = SELECT * FROM :<strong>O1_1</strong>;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">END;</span></p></div></div></div></div>

@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are experiencing a performance issue with the BADI 'FARRIC_BADI_INVOICE' while performing SD Billing using the program 'SDBILLDL'. The determination of missing accounts for invoice conditions may require significant processing time and can lead to excessive memory consumption, which may result in the short dump TSV_TNEW_PAGE_ALLOC_FAILED.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SD Integration Component, SDBILLD, FARRIC_BADI_INVOICE, EXCLUDE_CONDITIONS_SD01, SDIG, SD01, Condition Exclusion, Account Determination</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You have activated the invoice-generated performance obligation functionality (SDIG) in the RAR Sales Integration. The SD Integration component sends Revenue Accounting Items of type SDIG to support this functionality.</p>
+<p>Condition exclusion using FARRIC_BADI_INVOICE (method IF_FARRIC_INVOICE-&gt;EXCLUDE_CONDITIONS_SD01) is performed after account determination for invoice conditions. As a result, account determination is executed for conditions that are later excluded, leading to unnecessary processing.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached Correction Instruction (CI) or the relevant Support Package.</p></div></div></div></div>

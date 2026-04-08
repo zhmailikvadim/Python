@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In Datasphere, you are using an SFTP server as the source of a Replication Flow.</p>
+<p>Suppose that your folder structure in the SFTP server is as follows:</p>
+<p>- folder 1</p>
+<p>--&gt; subfolder 2</p>
+<p>--&gt; --&gt; file 1</p>
+<p>--&gt; --&gt; file 2</p>
+<p>That is, the files are located inside subfolder 2.</p>
+<p>In the Replication Flow, you add the SFTP source, and you navigate to subfolder 2, and you don't see the files.</p>
+<p>You find that, if you use a Data Flow, you see the files.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Datasphere</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul><li>Create new Replication Flow</li><li>Add SFTP server as source</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Replication Flows work differently than Data Flows.</p>
+<p>See this help page which is specific to Replication Flows:  <a href="https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/749638060e8746e48b0f9bf0e50c6d0c.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Add the Source for a Replication Flow | SAP Help Portal</a> </p>
+<p>It mentions: "For cloud storage providers, the container is the folder that contains the relevant dataset folders."</p>
+<p>That means that the Container is the folder, that contains the subfolder, that contains the files.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Therefore, with the folder structure that we mentioned before:</p>
+<p>- folder 1</p>
+<p>--&gt; subfolder 2</p>
+<p>--&gt; --&gt; file 1</p>
+<p>--&gt; --&gt; file 2</p>
+<p>If you want to access those files as sources, you need to select:</p>
+<p>- 'folder 1' as Container</p>
+<p>- 'subfolder 2' as Source Object</p>
+<p>When done this way, you will be able to find the files within that Source Object.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/749638060e8746e48b0f9bf0e50c6d0c.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Add the Source for a Replication Flow | SAP Help Portal</a> </p>
+<p></p></div></div></div></div>

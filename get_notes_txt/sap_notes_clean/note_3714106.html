@@ -1,0 +1,168 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">SAP Customer Checkout + SAP Customer Checkout manager 2.0 FP21 PL23 can be used for fresh installation also for upgrading from previous versions.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> SAP Customer Checkout + SAP Customer Checkout manager 2.0 FP21 PL23</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> SAP Customer Checkout + SAP Customer Checkout manager 2.0 FP21 PL23</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP Customer Checkout + SAP Customer Checkout manager 2.0 FP21 PL23 following issues/features have been fixed or added.</p>
+<h3 data-toc-skip="">SAP Customer Checkout: Pepper PlugIn</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> Payment on terminal issue with a different currency than requested by the POS. A customer had to pay approximately 250 EUR but chose to pay in a foreign currency (e.g., Argentine Pesos). On the terminal, ARS was selected, and approximately 400,000 ARS were charged. The POS processed this as EUR because it was unaware of the currency change. Currently, the currency from the transaction result is not mapped. Since the amount differed from the initial request, the payment item was updated to the new numerical value. If no exchange rate is configured for the foreign currency, the POS should not update the amount but should instead retain the original amount if a currency change is detected.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Fixed the incorrect amount maintenance after paying with a different currency on the terminal.</p>
+</li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout: Pepper PlugIn</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> To resolve payment terminal issues with multiple card payments for a single receipt, an option was introduced to configure a delay before each card payment. However, a delay should only occur between two card payments, not before the first one.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Adapted the delay between card payments in the plugin configuration to ensure a delay is only added between two card payments, but not before the first one.</p>
+</li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout: Cashing-up report</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> Some printed cashing-up reports show number of PoS systems: 0.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Fixed a bug that caused some cashing-up reports to show the number of POS systems as 0 when Business Day mode is set.</p>
+</li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout: Performance</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> For large datasets (e.g., from 2016 to 2026), the optimization strategy performs well. However, for small timeframes (e.g., triggering a Cash-In from the POS for the current state only), the strategy leads to excessive overhead and is too slow.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Improved the performance of POS-triggered Cash-In operations.</p>
+</li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout: US local tax mode</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> A rounding amount of 0.01 penny is calculated and displayed on the receipt.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Fixed rounding issues in US local tax mode.</p>
+</li>
+</ul>
+<h3 data-toc-skip="">Customer Checkout: Quantity type code</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> The quantity type code for selection materials was missing from the selection structure export.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> The quantity type code for selection materials is now included in the selection structure export.</p>
+</li>
+</ul>
+<p><span style="font-size: 16px; font-weight: bold;">SAP Customer Checkout: TSE/DSFINV-K</span></p>
+<ul>
+<li>
+<p><strong>Symptom:</strong> When a "No Sale" receipt is posted from the POS, the signature in the Receipts app in the SAP Customer Checkout manager is empty, and the transaction end time in the archive is null.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Fixed the issue where the TSE signature was empty in the Receipts app and the transaction end time was null (Archive -&gt; Integration Suite) for "No Sale" receipts.</p>
+</li>
+</ul>
+<p><span style="font-size: 16px; font-weight: bold;">SAP Customer Checkout / SAP Customer Checkout manager: TSE/DSFINV-K</span></p>
+<ul>
+<li>
+<p><strong>Symptom:</strong> In the DSFinV-K export, sales items from canceled receipts are not displayed in <code>lines.csv</code>.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Sales items from canceled receipts are now shown in <code>lines.csv</code> during DSFinV-K exports.</p>
+</li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout / SAP Customer Checkout manager: TSE/DSFINV-K</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> Print-outs for Cash-in/Cash-out and Pay-in/Pay-out should contain a QR code and the same information as a standard sales receipt.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Added QR code printing for Cash-in / Cash-out and Pay-in / Pay-out transactions.</p>
+</li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout / SAP Customer Checkout manager: TSE/DSFINV-K</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> Debtor items (payment on credit) are currently handled like payment items. For DSFinV-K exports, they should be handled as sales items.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Fixed issues with payment on credit in the DSFinV-K export.</p>
+</li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout / SAP Customer Checkout manager: TSE/DSFINV-K</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> The generated DSFinV-K ZIP archive contains a file called <code>parameters.txt</code>. This file is generated by default by the jobs framework and causes issues when read by services that validate the archive.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Removed the <code>parameters.txt</code> file from the DSFinV-K ZIP archive.</p>
+</li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout /SAP Customer Checkout manager: Discount</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> In some scenarios involving total amount recalculations ("flops"), the discount is inconsistently removed.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Discount calculation is now working as expected.</p>
+</li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout / SAP Customer Checkout manager: Coupon influencer scenario</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> If multiple SAP Customer Checkout systems request an influencer coupon simultaneously, all POS systems receive the same coupon instance. This causes the local assignment check to falsely succeed, resulting in all systems assigning the same coupon.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> In the coupon influencer scenario, a separate new instance is now created for every coupon request instead of returning the first valid instance.</p>
+</li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout manager: MS SQL Exception</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> In MS SQL databases, <code>TIMESTAMP</code> is considered a row version rather than a date/time. When <code>CAST(null as TIMESTAMP)</code> is used for a column of type Date, the database throws the following exception: <em>Operand type clash: timestamp is incompatible with datetime2</em>.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Fixed the database exception occurring in MS SQL when the archive communication arrangement is active and "Attach DSFinV-K file" is enabled for the Sales Summary outbound service.</p>
+</li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout manager: Article Export</h3>
+<ul>
+<li>
+<p><strong>Symptom:</strong> When an article had multiple price lists removed and one new price list added, filtering the export by the single price list still showed the article linked to the removed lists.</p>
+</li>
+<li>
+<p><strong>Fix:</strong> Fixed the issue where prices that had already been removed from an article were still being exported.</p>
+</li>
+</ul>
+<h3 data-toc-skip=""></h3>
+<h3 data-toc-skip="">New Features Added</h3>
+<h3 data-toc-skip="">SAP Customer Checkout: Encryption Key Management</h3>
+<ul>
+<li>Added functionality to specify custom root encryption key </li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout: French Localization</h3>
+<ul>
+<li>Added additional print option for sales line/items in hardware settings</li>
+<li>Automatic configuration when switching country to France or French territory:
+<ul>
+<li>Print PoS system and group: ON</li>
+<li>Cashier info: Print cashier ID only</li>
+<li>Sales person info: Print sales person ID only</li>
+<li>Sales item/line quantity info: Print number of sales lines</li>
+</ul>
+</li>
+<li>Enhanced settings for existing SAP Customer Checkout installations </li>
+</ul>
+<h3 data-toc-skip="">SAP Customer Checkout: Pepper PlugIn Enhancements</h3>
+<ul>
+<li>Added info popups to cashier for customer/merchant receipt signatures and ID verification requirements</li>
+<li>Implemented automatic "repeat last receipt" transaction (Code 201) for Netherlands credit card terminal requirements </li>
+</ul>
+<h3 data-toc-skip=""></h3></div></div></div></div>

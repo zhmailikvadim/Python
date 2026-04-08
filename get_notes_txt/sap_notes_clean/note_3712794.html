@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Receipt of Quotation for MOS Billing (SUP View)" (DE_B_MOSB_QUOT_SUP), the DTD check step 50 - "Do the offered items correspond to the contractual relationship?" (with rejection code A03) using code list E_0208 was not supported. An extension of the check group in the business system with custom implementation was needed.</p>
+<p>This issue is relevant for the market role: SUP.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DTD, MOSB_SUP, E_0208, A03, quotation, 15002, CHK_MOSB_QUOTES_DTD_0208_CUS_EXT, /US4G/CL_CHK_MOSB_PROCESS, CHK_QUOT_REF_REQT, WrongQuotationItemForReqQuotMOE</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Program error and configuration error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system supports the DTD check step 50 - "Do the offered items correspond to the contractual relationship?" (with rejection code A03) using code list E_0208 in the process "Receipt of Quotation for MOS Billing (SUP View)".</p>
+<p>To extend the check, follow these steps:</p>
+<p>1. Open the definition of check CHK_MOSB_QUOTES_DTD_0208_CUS_EXT (E_0208(A03): Check if Quote Offer items deviating from the contractual relationship) in the Fiori app Configure Checks.</p>
+<p>2. Select Extend.</p>
+<p>3. Assign your own check class and check method.</p>
+<p>4. For the implementation of the check method, refer to check method CHK_MOSB_QUOTES_DTD_0208_CUS_EXT of check class /US4G/CL_CHK_MOSB_PROCESS.</p>
+<p>When implementing the check logic:</p>
+<p>- Implement the logic to check DTD check step 50.<br/>- If the check fails, set the UBD value of E_0208 A03 "WrongQuotationItemForReqQuotMOE" into UBD structure /US4G/UBD_DATA-INFO_EVENT-RESPONSE_STATUS_LIST and set the check result as "REJECT".<br/>- If the check passes, don't set INFO_EVENT data and set the check result as "CONFIRM".</p>
+<p>You can verify the fix by checking that the system supports the DTD check step 50 with rejection code A03 using code list E_0208 in the quotation receipt process.</p></div></div></div></div>

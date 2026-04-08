@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP Note aims to describe the standard behavior for goods receipt activities of planned orders and production orders when using co-products and by-products.</p>
+<p>When you create a planned order with multiple receipts in PP/DS, the planned order in PP/DS will have one GR activity for each receipt. The GR time is taken from the product master. This means in particular, that when you use co- or by-products, you may have multiple GR-activities.</p>
+<p>Please be aware of the following standard behavior for PP integration:</p>
+<ol>
+<li>When creating a planned order in PP, the behavior is different. In PP/DS, you will see only one GR activity for the master output, but no GR activity for co- or by-products.</li>
+<li>During conversion into manufacturing orders, GR activities for by-products are lost. The same also happens when the PP/DS planned order had one GR activity for each receipt.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Goods receipt processing time, handling resource, goods receipt activity, goods receipt time, planned order, GR, co-product, by-product</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>In cases 1. and 2. described above, the GR times for the co- and by-products are not known in the PP orders. As users want to see consistent goods receipt dates for the relevant order items, the described behavior was introduced in SAP standard.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The described symptom is standard behavior.</p>
+<p>Sometimes, it might be more important for users to work GR activities for co- and by-products in the two cases specified above. In this case, you can change the behavior using customer coding. You can use</p>
+<ol>
+<li>Customer exit EXIT_/SAPAPO/SAPLCIF_ORD_001 to re-read the PP/DS goods receipt processing time for the non-master outputs from the product master.</li>
+<li>Method ORDER_INB_MODIFY_AFTER_MERGE of BAdI /SAPAPO/CL_EX_CL_EX_CIF_IP to create an additional GR activity for planned orders. </li>
+</ol>
+<p><strong>Important: In this case, you need to accept that the relevant receipts will be displayed in PP/DS with goods receipt processing time. And in PP without the goods receipt processing time.</strong></p>
+<p>Furthermore, the implementation of the mentioned user exit and BAdI method is within customer responsibility. Unwanted results or sideeffects caused by customer own implementations, are not covered by SAP Standard Support. Same for questions on how specific additional requirements can be covered in such an implementation. These tasks are typical consultant work in the project.</p></div></div></div></div>

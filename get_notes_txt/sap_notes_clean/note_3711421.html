@@ -1,0 +1,56 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">You have created a custom field having a Default Mapping of Direct Reference and when changing attribute from source entity, those values are not reflected into target entities.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Sales Cloud Version 2</li><li>SAP Service Cloud Version 2</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><em>Note that this just an example and it can be applied to different scenarios.</em></p>
+<p>1. Click on the User Icon.<br/>2. Go to Settings &gt; All Settings. <br/>3. Go to the Extensibility Administration.<br/>4. Select Contact Service &gt; Contact.<br/>5. Go to the Custom Fields tab.<br/>6. Create a Custom Field (e.g. ABC).</p>
+<p>7. Select Lead Service &gt; Lead.<br/>8. Go to the Custom Fields tab.<br/>9. Create a Custom Field (e.g. DEF) with Direct Reference to the field created into the Contact service (e.g. ABC).</p>
+<p>10. Go to the Contact Object Worklist (OWL).<br/>11. Open a Contact.<br/>12. From this Contact, create a Lead.<br/>13. Observe that the values of the custom field from the Contact are copied to the newly created Lead.</p>
+<p>14. Navigate to the Contact.<br/>15. Make a change to the custom field within the Contact (e.g., ABC).<br/>16. Notice that the corresponding values in the Lead custom field do not automatically update to reflect this change. </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Direct mappings operate by copying values from the parent record to the child record at the moment of mapping. After this one-time copy, the child fields become independent. Subsequent changes made to the original source entity, such as a Contact, do not automatically propagate to the corresponding fields on the target entity, such as a Lead.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Subsequent changes made to the original source entity, such as a Contact, do not automatically propagate to the corresponding fields on the target entity, such as a Lead.. The Lead’s fields remain separate and do not follow the parent’s updates.</p>
+<p>The only exception to this rule is when the mapped entity (e.g., Contact)  associated with the target entity (e.g., Lead) is changed. For instance, if the Lead’s Contact lookup is switched to a different Contact, the Lead’s mapped fields will be updated to reflect the new Contact’s data. This behavior aligns with the documentation discussion about associated entity references, which pertains to updates occurring when the mapped entity association changes, not when the original parent record is edited after mapping.</p>
+<p>A possible alternative to achieve a scenario where changes in the parent entity update the child entity could involve implementing External Hooks in the Account service. These hooks would trigger PATCH calls to the associated target entities (e.g., Leads) according to specific business requirements.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://help.sap.com/docs/CX_NG_SVC/2c87cece32844c91836e535aef8f9642/d3bdfac0c6b141c0bac27408c3ed159f.html?" rel="noopener noreferrer nofollow" target="_blank">Create Extension Fields</a></li><li><a href="https://help.sap.com/docs/CX_NG_SVC/2c87cece32844c91836e535aef8f9642/4c30b837f3a74354955cd1e4a25d3b7d.html" rel="noopener noreferrer nofollow" target="_blank">Create External Hooks</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><div id="__xmlview0--dynamicPageId-contentWrapper">
+<div id="__xmlview0--dynamicPageId-content">
+<div id="__xmlview0--dynamicPageId-contentFitContainer">
+<div id="__vbox15">
+<div id="chatContent">
+<div id="Chats">
+<div id="__vbox14-Chats-1">
+<div id="__data57">
+<div id="__bubble1-Chats-1">
+<div id="__bubble1-Chats-1--ChatContainer">
+<div id="__bubble1-Chats-1--ChatBox">
+<div id="__vbox19">
+<div id="__vbox18-__vbox19-0">
+<div id="__data59">
+<div id="__formatter3-__vbox19-0">
+<p>Direct Reference, Default Mapping, Custom Fields, Extensibility Administration, Contact Service, Lead Service, Contact Object Worklist, External Hooks, PATCH calls</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="__vbox13-Chats-1"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer id="__xmlview0--dynamicPageId-footerWrapper">
+<div id="__toolbar3">
+<div id="__xmlview0--promptTextArea">
+<div id="__box4">
+<div id="__box1">
+<div id="__data62">
+<div id="__area2">
+<div id="__area2-content">
+<div id="__area2-hidden"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<p></p></div></div></div></div>

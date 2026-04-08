@@ -1,0 +1,58 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">******************************************************************************************************************************************************************************************************************</p>
+<p>WARNING: This is an SAP Tax Declaration Framework Note. If you do not have SAP TDF installed in your system, this SAP Note does not apply to you. SAP TDF requires a specific license.<br/>******************************************************************************************************************************************************************************************************************</p>
+<p>This SAP Note provides you with corrections to the following reports:</p>
+<ul>
+<li><strong>EFD ICMS IPI</strong> (/TMF/EFD) report:</li>
+<ul>
+<li>Register <strong>C170 </strong>and<strong> C190</strong> do not generate the <strong>ICMS Aliquot</strong> (ALIQ_ICMS) fields correctly when the <strong>Fiscal Situation Code</strong> (CST_ICMS) field equals to 061 for ICMS single-phased transactions.</li>
+<li>The system does not generate Register <strong>D761.</strong> </li>
+</ul>
+<li><strong>ECF</strong> (/TMF/ECF) report:</li>
+<ul>
+<li>Register <strong>0000</strong> generates an error when you enter a value greater than 100 in the <strong>Scission Remaining Patrimony</strong> (PAT_REMAIN_CIS) field.</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>TDF, Brazil, SPED, EFD ICMS IPI, ECF, 0000, C170, C190, D760, D761.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is relevant only for Brazil.</p>
+<p>You have implemented SAP Note 3698679 and 3702926.</p>
+<p>You have upgraded your system to SAP TDF Support Package 20.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After implementing this SAP Note, the updates listed below are made to your system:</p>
+<ul>
+<li>/TMF/EFD report:</li>
+<ul>
+<li>Register C170: The <strong>CA_ALIQ_ICMS</strong> calculated field on the <strong>J_C170</strong> node is updated to generate the ALIQ_ICMS field with a value equal of 0 when the CST_ICMS field is equal to 061 in the <strong>EFD_C170</strong> view. As a result, the ALIQ_ICMS is generated correctly.</li>
+<li>Register C190: The <strong>CA_ALIQ_ICMS</strong> calculated field on the <strong>P_REMOVE_NULL_VALUES</strong> node is updated to generate the ALIQ_ICMS field with a value equal of 0 when the CST_ICMS field is equal to 061 in the <strong>EFD_C190_013</strong> view. As a result, the ALIQ_ICMS is generated correctly.</li>
+<li>Register D760: The <strong>Document Date </strong>(DT_DOC) field is enabled in the <strong>EFD_D760</strong> view, allowing the system to insert data into the <strong>/TMF/D_SERV_NF_T </strong>buffer table. As a result, the buffer table is correctly populated and the <strong>D761 </strong>register is generated as expected.</li>
+</ul>
+<li>/TMF/ECF report:</li>
+<ul>
+<li>Register 0000: The <strong>CA_PAT_REMAIN_CIS</strong> calculated field on the <strong>J_EMPRESA</strong> node is updated. The system enforces an upper limit of 100; all input values exceeding this threshold are automatically set to 100 in the <strong>EFD_0000</strong> view. As a result, the register no longer generates an error when the PAT_REMAIN_CIS field is greater than 100.</li>
+</ul>
+</ul>
+<p id="">As a general rule, SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in SAP Support Portal, under <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive"><table border="1" cellpadding="2" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Version</td>
+<td>Date</td>
+<td>Reason</td>
+</tr>
+<tr>
+<td>1</td>
+<td>January 30, 2026</td>
+<td>Released Note</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div></div></div></div></div>

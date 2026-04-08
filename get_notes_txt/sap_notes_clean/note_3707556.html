@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The mapping setting for "EndpointID" in the electronic document for <span>Peppol </span>is incorrect.</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<p><strong>Prerequisites:</strong></p>
+<p>You work in a localization that uses the Peppol protocol as described in SAP Note <a href="https://me.sap.com/notes/2915144">2915144 - Electronic Documents Functionality for Peppol</a>.</p>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li><span>For a business partner, define the value "123" in the <em>Participant ID</em> field on the <em>Business Partner Master </em></span><span><em>Data <em>→ </em>eDoc</em> tab. </span></li>
+<li><span>Add an electronic A/R invoice for the business partner and successfully generate the XML file using the format provided in SAP Note <a href="https://me.sap.com/notes/2915144">2915144</a>.</span></li>
+<li><span>Check the value in the<em> EndpointID</em><span> node in the generated XML file.</span></span></li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The value "123" is shown in the <em>EndpointID</em><span> node.</span></p>
+<p><strong>Actual behavior:</strong></p>
+<p><span>The value "123" is not shown in the </span><em>EndpointID</em><span> node.</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The <em>EndpointID</em> node is connected to the <em>GlbLocNumB</em> <span>node</span>, as it should be according to <a class="urLnk" href="https://i7p.wdf.sap.corp/sap/bc/bsp/sno/ui/attachment.htm?iv_key=002075125800000248622026&amp;iv_version=0001&amp;alt=2BCE4CB10DF674B172F4F3F7B32A2E284F492BCB353533368FF734378C3730B42AF1F4A8CAF6A9CACA2FCD732A7037B548AC08F076C98D082DF20ACF73F40F8C8A2C0E2CF7F70E2BD0750C09514BCECFCFCE4C8DCF4BCC4DB5F575F4F4F3F57771F571F6F70B01B25D83D4120B0A722092A599504EB16D715E3E00&amp;iv_guid=FA163E5CC6E61FE0BF9C68FEDC7338E9" id="DEFAULT_ATTACHMENT_C_attachments_1_1" rel="opener" tabindex="0" target="_blank"><span class="urTxtStd">SAP Business One and PEPPOL UBL Mappings v1.0.pdf</span></a>.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p>
+<h4 data-toc-skip="">Workaround:</h4>
+<p>Enter the GLN in <em>Business Partner Master Data <em>→</em> Addresses <em>→</em> Bill To.</em></p></div></div></div></div>

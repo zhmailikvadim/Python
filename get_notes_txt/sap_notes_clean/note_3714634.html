@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>After in-place upgrade to BI 2025, in Central Configuration Manager (CCM), after starting the Server Intelligence Agent (SIA), it immediately goes to stopped state</li>
+<li>In the upgrade logs, it can be seen that DeployFiles and AddNode fail with error:<br/> Could not reach CMS '&lt;HOSTNAME&gt;'. Specify the correct host and port and check for network issues, please refer to SAP Knowledge Base Article 2151044 on the SAP Support Portal. (FWM 20030)|Could not reach CMS '&lt;HOSTNAME&gt;'. Specify the correct host and port and check for network issues, please refer to SAP Knowledge Base Article 2151044 on the SAP Support Portal. (FWM 20030)*_*#*</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""><strong>Environment</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence (BI) Platform 2025</li>
+<li>Windows</li>
+<li>Linux / Unix </li>
+</ul>
+<p><strong>Steps to Reproduce</strong></p>
+<ol>
+<li>Upgrade from 4.x to BI 2025</li>
+<li>Observe the SIA cannot be started post upgrade</li>
+</ol>
+<p><strong>Cause</strong></p>
+<p>Java 8 -&gt; Java 17 upgrade means there is no JRE directory. AddNode updates the server command lines to point to the new directory structure of sapjvm, due to it's failure the SIA is still pointing to the non-existent JRE directory.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The issue has been forwarded to development for further investigation</p></div></div></div></div>

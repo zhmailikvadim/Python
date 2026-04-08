@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">You are performing the SUM DMOVE2S4, to perform the DB migration to HANA DB on RISE environment. The phase EU_CLONE_MIG_DT_RUN is running for a long time.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>NetWeaver ABAP based systems.</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Monitor the SUM phase EU_CLONE_MIG_DT_RUN.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>In the file "MIGRATE_DT_00059_&lt;package/table&gt;_IMP.run", there is the following information.</div>
+<div> </div>
+<div>ProcReadLatencyAvg: 76357.4 ms</div>
+<div>ProcWriteLatencyAvg: 209.8 ms</div>
+<div>ProcAvgReadSpeed: 0.1 MB/sec # 0.5 GB/h</div>
+<div>ProcAvgWriteSpeed: 47.7 MB/sec # 167.6 GB/h</div>
+<div> </div>
+<div>(This is just an example.)</div>
+<div> </div>
+<div>According to the SUM DMO central Note (example: Note <a href="https://me.sap.com/notes/3620679" rel="noopener noreferrer nofollow" target="_blank">3620679</a> - Database Migration Option (DMO) of SUM 2.0 SP25), there is a latency and bandwidth requirements, as below.</div>
+<div> </div>
+<div>********************************************************</div>
+<div>g) DMO Move to SAP S/4HANA (on Hyperscaler)</div>
+<div>* Technical requirements:</div>
+<div>    * A low latency with less than 20 ms</div>
+<div>    * A high bandwidth of more than 400 MBit/s</div>
+<div>********************************************************</div>
+<div> </div>
+<div>While according to the above file content, both the read latency and write latency are too high.</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Please contact your network team to improve the network performance to meet the technical requirements.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>For more information about upgrade/update troubleshooting, refer to our <a href="https://wiki.scn.sap.com/wiki/x/mYB5Fw" rel="noopener noreferrer nofollow" target="_blank">System Upgrade and Update WIKI</a>.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>slow, long time, latency, DMOVE2S4</p></div></div></div></div>

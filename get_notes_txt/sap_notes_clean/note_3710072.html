@@ -1,0 +1,51 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><strong>Requirement: </strong>It should be possible to configure and control the properties of the items of the Changes Record dynamically also in the 'All Objects' tab instances.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PLM-CR, All Objects tab, display, items, filter, sort, object type, 3655773, 3680118.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Advance Development.</p>
+<p><strong>Prerequisite SAP Note</strong>:3655773 &amp; 3680118.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Use transaction SNOTE to implement the corrections delivered with this SAP Note in the affected Change Record system or import the relevant Support Package.</p>
+<p><strong>Benefit:</strong></p>
+<p>After implementing the corrections from both the SAP Notes, the business users can get the below mentioned features:</p>
+<ul>
+<li>When a Change Record Item (say MAT-Material) inherits 'Change Number' from header, the corresponding item instance is disabled for deletion from the tab 'All Objects'.</li>
+<li>When a CR Item requires 'Digital Signature' for change in the value for 'Processing Status', this CR item cannot be deleted from the tab 'All Objects'.</li>
+<li>When Process Route Task's are created for a CR Item, the CR Item cannot be deleted from the tab 'All Objects' for the below mentioned Items-types</li>
+<ul>
+<li>MAT</li>
+<li>RCP</li>
+<li>BOM</li>
+<li>INP</li>
+</ul>
+<li>The field '<strong>Item Relevance</strong>' will be read only for the below mentioned Item-types from the tab 'All Objects' having the values mentioned under the section - <strong>Configuration for 'Define Status Checks and Actions'</strong></li>
+<ul>
+<li>MAT</li>
+<li>BOM</li>
+<li>MR</li>
+<li>INP</li>
+<li>SPC</li>
+<li>RCP</li>
+<li>PRG</li>
+<li>ETL</li>
+</ul>
+</ul>
+<p><strong>Configuration for 'Define Status Checks and Actions':</strong></p>
+<ul>
+<li>Execute transaction SPRO </li>
+<li>Navigate to "SAP Customizing Implementation Guide -&gt; Logistics - General -&gt; Product Lifecycle Management (PLM) -&gt; Change Records -&gt; Settings for Change Records".</li>
+<li>Choose the node "Define Status Checks and Actions".</li>
+<li>Say for a particular row for having the below values:</li>
+<ul>
+<li>Field 'User Status Action' - SE10</li>
+<li>Field 'Status Profile' - S02</li>
+<li>Field 'Status Act' is having one of the values mentioned below:</li>
+</ul>
+<ul>
+<ul>
+<li>LOCKITMS - Lock All Items of Change Record</li>
+<li>PRTLLOCK -  Partial Lock All Items of Change Record</li>
+</ul>
+</ul>
+</ul></div></div></div></div>

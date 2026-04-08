@@ -1,0 +1,153 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><h3 data-toc-skip="" id="__html0">Description</h3>
+<p>This KBA provides guidance on the setup, validation, and common troubleshooting steps required to use My Forms (Fiori 2.0) with Employee Central Payroll (ECP).</p>
+<p>To ensure My Forms functions correctly, the system must have:</p>
+<ul><li>
+<p>the required SAP Fiori and frontend and backend components</p>
+</li><li>
+<p>a correctly configured SAP Fiori Launchpad</p>
+</li><li>
+<p>the My Forms application, including target mapping, roles, and OData services</p>
+</li><li>
+<p>correct Payroll Unified Configuration in Employee Central</p>
+</li></ul>
+<p>This KBA covers commonly required configuration steps and currently known troubleshooting checks.</p>
+<p></p>
+<h3 data-toc-skip="">Important Links </h3>
+<p>The following official SAP documentation provides detailed information on setup, prerequisites, and usage of My Forms in Employee Central Payroll:</p>
+<ul><li>
+<p><a href="https://help.sap.com/docs/successfactors-employee-central-payroll/implementing-employee-central-payroll-based-on-sap-human-capital-management-for-sap-erp-hcm/using-payroll-unified-configuration?q=fiori" rel="noopener noreferrer nofollow" target="_blank">Using Payroll Unified Configuration </a>-&gt; Includes general ECP setup information and integration prerequisites)</p>
+</li><li>
+<p><a href="https://help.sap.com/docs/successfactors-employee-central-payroll/implementing-employee-central-payroll-based-on-sap-human-capital-management-for-sap-erp-hcm/setting-up-portlets?q=fiori" rel="noopener noreferrer nofollow" target="_blank">Employee Central Payroll -  Payroll Information Portlet Setup </a>-&gt; (Note: Only ESS scenarios using a static URL with SSO authentication are supported)</p>
+</li><li><a href="https://help.sap.com/docs/successfactors-employee-central-payroll/implementing-employee-central-payroll-based-on-sap-human-capital-management-for-sap-erp-hcm/using-my-forms-fiori-2-0?q=fiori" rel="noopener noreferrer nofollow" target="_blank">Using My Forms (2.0) </a>-&gt; Info on using My Forms and requred portlet URL</li><li>
+<p><a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/c6c3ffd90792427a9fee1a19df5b0925/4941436617274cf599fda2b8d357d33e.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">My Forms - Application Documentation </a>-&gt; Overview of My Forms functionality, prerequisites, and supported scenarios)</p>
+</li><li>
+<p><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps%28'F4938'%29/S31PCE" rel="noopener noreferrer nofollow" target="_blank">SAP Fiori Library - My Forms (Fiori 2.0) -&gt; </a>(Detailed Fiori app information including roles, catalogues, target mappings, and OData services)</p>
+</li></ul>
+<p></p>
+<h3 data-toc-skip=""> </h3><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Fiori 2.0</li><li>SAP SuccessFactors Employee Central Payroll</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h3 data-toc-skip="">1. Backend Software Components (Mandatory Prerequisite)</h3>
+<p style="padding-left: 40px;">Ensure the required backend software components are installed at a supported level. It is recommended to always use the latest available support package level.</p>
+<p style="padding-left: 40px;">Required components:</p>
+<ul><li style="list-style-type: none;">
+<ul><li>
+<p><strong>UIHR002 </strong>- Frontend component for HCM Fiori applications</p>
+</li><li>
+<p><strong>GBX01HR5 </strong>- Backend payroll component for HCM Fiori applications</p>
+</li></ul>
+</li></ul>
+<p style="padding-left: 40px;">The required and latest support package levels can be verified using the relevant KBA <a href="https://me.sap.com/notes/0003283299" rel="noopener noreferrer nofollow" target="_blank">3283299</a></p>
+<p style="padding-left: 40px;"></p>
+<h3 data-toc-skip="">2. Required Role Assignments (Mandatory)</h3>
+<p style="padding-left: 40px;">The following standard roles must be assigned to the employee user:</p>
+<ul><li style="list-style-type: none;">
+<ul><li>
+<p>SAP_HCMFAB_BCR_EMPLOYEE_T<br/>Provides access to Employee Fiori applications, including My Forms.</p>
+</li><li>
+<p>SAP_HCMFAB_MYFORMS_APP<br/>Provides the required authorizations for My Forms OData services and HR data.</p>
+</li></ul>
+</li></ul>
+<p style="padding-left: 40px;">More information on the My Forms application and its configuration can be found in the official <a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps%28'F4938'%29/S31PCE" rel="noopener noreferrer nofollow" target="_blank">Fiori library documentation.</a></p>
+<p style="padding-left: 40px;"></p>
+<h3 data-toc-skip="">3. Fiori Launchpad Target Mapping (Mandatory)</h3>
+<p style="padding-left: 40px;">Verify that the My Forms application is correctly maintained in the SAP Fiori Launchpad Designer .</p>
+<p style="padding-left: 40px;">Required target mapping values:</p>
+<ul><li style="list-style-type: none;">
+<ul><li>
+<p><strong>Semantic Object:</strong> Employee</p>
+</li><li>
+<p><strong>Action</strong>: displayForms</p>
+</li><li>
+<p><strong>Application Type: </strong>SAPUI5 Fiori App</p>
+</li><li>
+<p><strong>Application ID:</strong> hcm.fab.myforms</p>
+</li><li>
+<p><strong>Standard Catalog: </strong>SAP_HCMFAB_BC_EMPLOYEE_T</p>
+</li><li>
+<p><strong>Standard Role:</strong> SAP_HCMFAB_BCR_EMPLOYEE_T</p>
+</li></ul>
+</li></ul>
+<p style="padding-left: 80px;"><img alt="required target mapping" class="img-responsive" height="393" src="/documents/customerkba/TGyELa3J9iWktYAzS2UVX4BQaFLSBJu4hlPAP8ffF70" style="border-width: 3px; border-style: outset; margin: 3px;" title="required target mapping" width="742"/></p>
+<p style="padding-left: 40px;">If Z catalogs are used, the target mapping must be copied manually from the standard catalog.</p>
+<p style="padding-left: 40px;">If the Fiori Launchpad Designer cannot be accessed, refer to:</p>
+<ul><li style="list-style-type: none;">
+<ul><li>
+<p><strong>SAP Note <a href="https://me.sap.com/notes/3011106" rel="noopener noreferrer nofollow" target="_blank">3011106</a> </strong> Fiori Launchpad Designer returns 403 Forbidden</p>
+</li><li>
+<p><strong>SAP Note <a href="https://me.sap.com/notes/2729557" rel="noopener noreferrer nofollow" target="_blank">2729557</a></strong>  Standard SAP catalogs and groups missing in Fiori Launchpad Designer</p>
+</li></ul>
+</li></ul>
+<h3 data-toc-skip="">5. Payroll Unified Configuration - Portlet Setup (Mandatory)</h3>
+<p style="padding-left: 40px;">The Payroll Information Portlet configuration in Employee Central is mandatory.<br/>My Forms will not appear in Employee Central unless this configuration exists and is active.</p>
+<p style="padding-left: 40px;">Required configuration:</p>
+<ul><li style="list-style-type: none;">
+<ul><li>
+<p>Payroll Unified Configuration maintained per country/region</p>
+</li><li>
+<p>Payroll System Configuration set to Active</p>
+</li><li>
+<p>A Payroll Information Portlet exists</p>
+</li><li>
+<p>A URL link to My Forms is configured</p>
+</li></ul>
+</li></ul>
+<p style="padding-left: 40px;">Portlet link configuration:</p>
+<ul><li style="list-style-type: none;">
+<ul><li>
+<p>Link Type: URL</p>
+</li><li>
+<p>Permission Category: Self Service</p>
+</li><li>URL:
+<pre><span>https://&lt;ECP_HOST&gt;/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-ushell-config=headerless#Employee-displayForms<br/><img alt="Portlet Config" class="img-responsive" height="315" src="/documents/customerkba/FFnsqBFeMbzGqhY_a7yQnBUIQlFQyQmKKN_c4M5cRQw" style="border-width: 3px; border-style: outset; margin: 3px;" title="Portlet Config" width="861"/><br/></span></pre>
+</li></ul>
+</li></ul>
+<h3 data-toc-skip=""> </h3>
+<h3 data-toc-skip="">6. Required OData Services (Mandatory)</h3>
+<p style="padding-left: 40px;">The following OData services must be active and correctly assigned in /IWFND/MAINT_SERVICE:</p>
+<ul><li style="list-style-type: none;">
+<ul><li>
+<p>HCMFAB_MYFORMS_SRV - Retrieves forms and PDFs</p>
+</li><li>
+<p>HCMFAB_COMMON_SRV - Required during application startup</p>
+</li></ul>
+</li></ul>
+<p style="padding-left: 40px;">Both services must be assigned to the correct system alias.</p>
+<p style="padding-left: 40px;"><img alt="Maintain services" class="img-responsive" height="303" src="/documents/customerkba/7xboi79t9vGTC49uW1ZYWdAqmOu-kmNW__R-59j1miA" style="border-width: 3px; border-style: outset; margin: 3px;" title="Maintain services" width="821"/></p>
+<h3 data-toc-skip="">7. Required Fiori Launchpad Infrastructure Services</h3>
+<p>Ensure the following SAP Fiori Launchpad infrastructure services are active in tx: SICF:</p>
+<ul><li>
+<pre>/sap/bc/ui2/start_up</pre>
+</li><li>
+<pre>/sap/bc/ui2/page_builder_conf</pre>
+</li><li>
+<pre>/sap/bc/ui2/page_builder_pers</pre>
+</li><li>
+<pre>/sap/bc/ui2/interop</pre>
+</li><li>
+<pre>/sap/bc/lrep
+</pre>
+</li></ul>
+<p>LREP must be active for Fiori applications to load correctly.</p>
+<p><img class="img-responsive" height="124" src="/documents/customerkba/k1_q9w-QOc-YmHds_DBvIp6SkTnHU11E1WN-pz06qlk" style="border-width: 3px; border-style: outset; margin: 3px;" width="552"/></p>
+<h3 data-toc-skip="">8. Additional Required Data Services - For Fiori Launchpad to Work</h3>
+<p style="padding-left: 40px;">The following services are required for Fiori Launchpad to work. Make sure they are activate in tx: SICF and /n/iwfnd/maint_services and are assigned to the local system alias.</p>
+<ul><li style="list-style-type: none;">
+<ul><li>/UI2/PAGE_BUILDER_CONF</li><li>/UI2/PAGE_BUILDER_CUST</li><li>/UI2/PAGE_BUILDER_PERS/</li><li>/UI2/TRANSPORT</li><li>/UI2/INTEROP</li><li>/UI2/LAUNCHPAD</li></ul>
+</li></ul>
+<p style="padding-left: 40px;"><img alt="" class="img-responsive" height="271" src="/documents/customerkba/-yn_DSbkugNZVanLOtKxmJrTio3Pbx2phbXJu1gQq1E" style="border-width: 3px; border-style: outset; margin: 3px;" width="892"/></p>
+<p></p>
+<h3 data-toc-skip="">9. Authorization Validation (Troubleshooting)</h3>
+<p style="padding-left: 40px;">If My Forms does not load or appears blank:</p>
+<p style="padding-left: 40px;">Perform an authorization trace using ST01 (not SU53)</p>
+<p style="padding-left: 40px;">Reproduce the My Forms launch while tracing</p>
+<p style="padding-left: 40px;">Check for missing authorizations related to:</p>
+<ul><li style="list-style-type: none;">
+<ul><li>/UI2/* services</li><li>HCMFAB_COMMON_SRV</li><li>HCMFAB_MYFORMS_SRV</li></ul>
+</li></ul>
+<h3 data-toc-skip="">10. Country-Specific Form Enablement (Reference)</h3>
+<p style="padding-left: 40px;">My Forms displays documents that are generated by country-specific processes.<br/>Depending on the country/region, additional SAP Notes may be required to enable localized forms in the My Forms (Fiori 2.0) application.</p>
+<p style="padding-left: 40px;">Below is a list of anchor SAP Notes per country/region.<br/>Each note references any additional prerequisites or follow-up notes required for that localization.</p>
+<h4 data-toc-skip="" style="padding-left: 40px;">Country-Specific Reference SAP Notes:<strong></strong></h4>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><thead><tr><th>Country</th><th>SAP Note</th><th>Component</th></tr></thead><tbody><tr><td><em>Austria</em></td><td><a href="https://me.sap.com/notes/3456815" rel="noopener noreferrer nofollow" target="_blank">3456815 - M5C SAP Fiori payslip L16</a></td><td>PY-AT</td></tr><tr><td><em>Brazil</em></td><td><a href="https://me.sap.com/notes/3288581" rel="noopener noreferrer nofollow" target="_blank">3288581 - Fiori My Forms App: Brazilian Income Declaration form</a></td><td>PY-BR</td></tr><tr><td><em>Canada</em></td><td><a href="https://me.sap.com/notes/3460842" rel="noopener noreferrer nofollow" target="_blank">3460842 - Fiori My Forms App: Year End Report, Canada forms</a></td><td>PY-CA</td></tr><tr><td><em>Czech Republic</em></td><td><a href="https://me.sap.com/notes/3292803" rel="noopener noreferrer nofollow" target="_blank">3292803 - HRCZ - My Forms (Fiori 2.0) - Individual ELDP overview</a></td><td>PA-PA-CZ</td></tr><tr><td><em>Germany</em></td><td><a href="https://me.sap.com/notes/3049342" rel="noopener noreferrer nofollow" target="_blank">3049342 - My Forms: German BAdI implementation</a></td><td>PY-DE</td></tr><tr><td><em>Great Britain</em></td><td><a href="https://me.sap.com/notes/3401344" rel="noopener noreferrer nofollow" target="_blank">3401344 - HRGB - My Forms (Fiori 2.0) - P60 / P11D / BSS forms display</a></td><td>PY-GB</td></tr><tr><td><em>Hong Kong</em></td><td><a href="https://me.sap.com/notes/3373749" rel="noopener noreferrer nofollow" target="_blank">3373749 - Hong Kong IR56B/E/F/G Forms as Content for Fiori App "My Forms"</a></td><td>PA-PA-HK</td></tr><tr><td><em>Malaysia</em></td><td><a href="https://me.sap.com/notes/3019828" rel="noopener noreferrer nofollow" target="_blank">3019828 - Malaysia EA Form and PCB2(II) Form as Content for Fiori App "My Forms"</a></td><td>PY-MY</td></tr><tr><td><em>Netherlands</em></td><td><a href="https://me.sap.com/notes/2973571" rel="noopener noreferrer nofollow" target="_blank">2973571 - YELC 2020/2021: My Forms' Localized Fiori Tile for Dutch Annual Tax Statement</a></td><td>PA-PA-NL</td></tr><tr><td><em>Norway</em></td><td><a href="https://me.sap.com/notes/3502593" rel="noopener noreferrer nofollow" target="_blank">3502593 - HRNO - My Forms Annual Tax Statement</a></td><td>PY-NO</td></tr><tr><td><em>Portugal</em></td><td><a href="https://me.sap.com/notes/3017166" rel="noopener noreferrer nofollow" target="_blank">3017166 - Individual Income Declaration as Content for Fiori App "My Forms"</a></td><td>PY-PT</td></tr><tr><td><em>Romania</em></td><td><a href="https://me.sap.com/notes/3486618" rel="noopener noreferrer nofollow" target="_blank">3486618 - HRRO - Fiori My Forms App enhancement</a></td><td>PY-RO</td></tr><tr><td><em>Singapore</em></td><td><a href="https://me.sap.com/notes/3019351" rel="noopener noreferrer nofollow" target="_blank">3019351 - Singapore Key Employment Terms Form as Content for Fiori App "My Forms"</a></td><td>PA-PA-SG</td></tr><tr><td><em>Slovakia</em></td><td><a href="https://me.sap.com/notes/3320790" rel="noopener noreferrer nofollow" target="_blank">3320790 - HRSK - Fiori My Forms App enhancement for Tax reporting</a></td><td>PY-SK</td></tr><tr><td><em>South Africa</em></td><td><a href="https://me.sap.com/notes/3650730" rel="noopener noreferrer nofollow" target="_blank">3650730 - Fiori My Forms App: South Africa Tax Certificates</a></td><td>PA-PA-ZA</td></tr><tr><td><em>United States</em></td><td><a href="https://me.sap.com/notes/3048028" rel="noopener noreferrer nofollow" target="_blank">3048028 - Online W-2 View &amp; Print as Content for Fiori My Forms</a></td><td>PY-US-TR</td></tr></tbody></table></div>
+<p style="padding-left: 40px;">Only the SAP Notes relevant to the customer’s country/region need to be applied.</p>
+<p style="padding-left: 40px;"></p>
+<h3 data-toc-skip=""> Final note</h3>
+<p>If all steps above are correctly implemented and the issue persists, please open a support incident under component PA-FIO-FO and include the results of the checks performed.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>My Forms, Fiori My Forms, SAP Fiori 2.0, Employee Central Payroll, ECP, SAP HCM, Payroll, ESS, Payroll Information Portlet, SAP Fiori Launchpad, Target Mapping, HCMFAB_MYFORMS, HCMFAB_MYFORMS_SRV, HCMFAB_COMMON_SRV, UIHR002, GBX01HR5, Country-specific forms, Tax forms, Payslip, Year-end forms, Payroll forms, My Forms setup, My Forms configuration, My Forms troubleshooting</p></div></div></div></div>

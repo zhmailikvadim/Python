@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> Records in Tables /ACCGO/T_CAS_CAI and /ACCGO/T_APPDATA are blank with SDM_VERSION field</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html0">/ACCGO/T_CAS_CAI, /ACCGO/T_APPDATA, SDM_VERSION field, Blank SDM Version</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>In few instances the tables /ACCGO/T_CAS_CAI and /ACCGO/T_APPDATA are having blank SDM version</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The Utility Program is designed to accommodate changes required to update the SDM_VERSION field in database tables where the field is currently blank. The migration classes /ACCGO/CL_SDM_ACM_T_CAS_CAI and /ACCGO/CL_SDM_ACM_T_APPDATA are used to update their respective tables.</p>
+<p>The program updates the SDM_VERSION value to ‘01’ based on the user’s input selection. Users also have the option to execute the program in Test Mode.</p>
+<p>This is a one-time activity performed in the system to update the SDM_VERSION fields using silent migration, where records are updated as a background task.</p>
+<p>After the update is completed, application logs are generated showing the total number of records updated in both tables, along with the execution time.</p>
+<p>Once the note is implemented, Execute the program: /ACCGO/ACM_SDM_VERS_UPD_UTIL with the default parameters for 'Name of migration class'.</p></div></div></div></div>

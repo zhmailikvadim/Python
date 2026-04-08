@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><strong>Employer’s Return of Remuneration and Pensions for Tax Years</strong> (HHKCTXB0) report can generate IR56B forms for employees whose total income is 0. However, Inland Revenue Department (IRD) does not recommend submitting forms for these employees.</p>
+<p>The SAP Note enhances the report and supports the configuration of not generating forms for employees whose total income is 0：</p>
+<ul>
+<li>If you configure 'UT' in the feature <strong>HR-HK: End of tax year form (IR56B)</strong> (27IRB), report dose <strong>not</strong> generate forms for employees with zero total income and pops up error message 'The employee's total income is 0.'.</li>
+<li>If you do not configure 'UT' in 27IRB, report generates forms for these employees by default. </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>HHKCTXB0, 27IRB, IR56B, Total income, ir56-total</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is an enhancement.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Do either of the following:</p>
+<ul>
+<li>Import the relevant Support Package into your system.</li>
+<li>Implement the correction instructions relevant to your release, then carry out the following manual activities:</li>
+</ul>
+<ol><ol>
+<li>In transaction <strong>SE91</strong>, change message class <strong>3Q</strong>, message <strong>245</strong>.</li>
+<li>Enter the following data:
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Message</strong></td>
+<td><strong>Short text</strong></td>
+<td><strong>Self-explanatory</strong></td>
+</tr>
+<tr>
+<td>245</td>
+<td>The employee's total income is 0.</td>
+<td>X</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+<li>Save your entries.</li>
+</ol></ol></div></div></div></div>

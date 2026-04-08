@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In app Monitor Purchase Contract items , the search help of material group filter does not return any data</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Fiori</li><li>SAP S/4HANA</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Access Monitor Purchase contract Items app</li><li>Click the search help button of filter material group</li><li>no data returns</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The issue is because that access user is missing authorization for authorization object M_MATE_WGR<br/><br/></li><li>Search help of material group is from CDS View : C_MM_MaterialGroupValueHelp, in the DCLS of C_MM_MaterialGroupValueHelp<br/>authorization object M_MATE_WGR is checked with activity '03' or 'F4'</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Please assign user for authorization object M_MATE_WGR with '03' or 'F4' activity</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><div>
+<div>
+<p>@EndUserText.label: 'role_label'</p>
+<p>@MappingRole: true</p>
+<p>// 3120323 - added MaterialAuthorizationGroup instead of MaterialGroup for Auth Check</p>
+<p>define role C_MM_MaterialGroupValueHelp {</p>
+<p>grant select on C_MM_MaterialGroupValueHelp</p>
+<p>where ( MaterialAuthorizationGroup ) =</p>
+<p>aspect pfcg_auth ( M_MATE_WGR,</p>
+<p>BEGRU,</p>
+<p>actvt = '03' )</p>
+<p>or</p>
+<p>( MaterialAuthorizationGroup ) =</p>
+<p>aspect pfcg_auth ( M_MATE_WGR,</p>
+<p>BEGRU,</p>
+<p>ACTVT = 'F4' )</p>
+<p>;</p>
+<p></p>
+<p>}</p>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>C_MM_MaterialGroupValueHelp;M_MATE_WGR;</p></div></div></div></div>

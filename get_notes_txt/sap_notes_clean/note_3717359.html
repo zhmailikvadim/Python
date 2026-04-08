@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During a SAP HANA data backup using a Backint interface, the backup stops at a high completion percentage (for example between 80% and 95%).</p>
+<p>The SAP HANA database remains online and productive operations continue.</p>
+<p>The following entries can be found in the indexserver trace:</p>
+<pre><code>[110075] Backup was canceled by user
+[2110005] multistream data transfer terminated
+</code></pre>
+<p>No database crash or restart occurs.</p>
+<p>The behavior may be interpreted as a database backup failure although the database itself is operational.</p>
+<p>This KBA applies if:</p>
+<ul><li>the database remains online</li><li>no indexserver crash occurs</li><li>only the backup operation is canceled</li><li>the errors 110075 and 2110005 appear together</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP HANA DB Version 2.0</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><pre>SAP HANA transfers backup data to the Backint interface via streaming mechanisms (for example using operating system pipes).</pre>
+<p>The SAP HANA database acts as the data producer while the Backint process acts as the consumer of the backup stream.</p>
+<p>If the Backint consumer temporarily stops reading from the pipe (for example due to storage, media server, or network processing delays), the pipe buffer becomes full.<br/>When the pipe buffer is full, SAP HANA backup write operations block.</p>
+<pre>Blocked backup write operations can impact internal persistence operations such as savepoint processing.</pre>
+<pre>In this situation SAP HANA may terminate the backup operation when the backup stream cannot be consumed by the Backint interface.</pre>
+<pre>The cancellation does not indicate a database failure but a blocked backup data transfer. </pre><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Verify the Backint consumer and the downstream backup infrastructure.</p>
+<p>The SAP HANA database successfully produces the backup stream.<br/>Further analysis must focus on the Backint consumer and the connected backup infrastructure.</p>
+<p>Typical checks:</p>
+<ul><li>Backup tool throughput</li><li>Storage response times</li><li>Media server performance</li><li>Network throughput between database host and backup infrastructure</li></ul>
+<p>Coordinate the analysis with the backup vendor or storage team.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/3394744" rel="noopener noreferrer nofollow" target="_blank"></a>The error message “Backup was canceled by user” does not indicate a manual cancellation.<br/>It indicates that SAP HANA actively terminated the backup to prevent internal blocking caused by an unconsumed backup stream.</p>
+<p>The database remains consistent and operational.<br/><br/>No SAP HANA software defect is indicated when the database remains online and only the backup operation is canceled. <br/><br/><a href="https://me.sap.com/notes/3394744" rel="noopener noreferrer nofollow" target="_blank">SAP Note 3394744 – SAP HANA Backint FAQ</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>backint, 110075, 2110005, multistream data transfer terminated, backup canceled by user</p></div></div></div></div>

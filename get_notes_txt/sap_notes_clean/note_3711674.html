@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During a tenant recovery or system refresh (for example using<br/><code>RECOVER DATA … USING BACKINT</code>), the recovery fails with the error:</p>
+<pre><code>recovery could not be completed:
+Error during recovery: Found service neither active nor starting for recovery:
+DBID &lt;n&gt;@&lt;host&gt;:&lt;port&gt;
+</code></pre>
+<p>The recovery does not proceed, although the backup itself is accessible and no BACKINT or media errors are reported.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP HANA DB Version 2.0</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>In the analyzed scenario, the tenant-specific ScriptServer was not available on the target tenant.</p>
+<p>During recovery, SAP HANA expects all required tenant services to be available. If a required service is missing, the recovery process fails with the above error.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Enable the missing service for the affected tenant on SYSTEMDB, restart the tenant, and re-run the recovery.</p>
+<p>Example for enabling the ScriptServer:</p>
+<pre><code>ALTER SYSTEM STOP DATABASE &lt;tenant_name&gt;;
+ALTER DATABASE &lt;tenant_name&gt; ADD 'scriptserver';
+ALTER SYSTEM START DATABASE &lt;tenant_name&gt;;
+</code></pre>
+<p>Verify that the service is running:</p>
+<pre><code>SELECT DATABASE_NAME, SERVICE_NAME, PORT, SQL_PORT<br/>  FROM SYS_DATABASES.M_SERVICES<br/> WHERE DATABASE_NAME = '&lt;tenant_name&gt;'<br/> ORDER BY SERVICE_NAME, PORT;
+</code></pre>
+<p>After the required service is running, repeat the tenant recovery using the same backup.</p>
+<p>The procedure for enabling the ScriptServer for a tenant is documented in the SAP Help Portal.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>SAP KBA <a href="https://me.sap.com/notes/3220393" rel="noopener noreferrer nofollow" target="_blank">3220393 – <em>While recovery, an error "Found service neither active nor starting for recovery" happened</em></a></li><li>SAP KBA <a href="https://me.sap.com/notes/3613110" rel="noopener noreferrer nofollow" target="_blank">3613110 – <em>Error during recovery: Found service neither active nor starting for recovery</em></a></li><li>SAP Help Portal – <em><a href="https://help.sap.com/docs/apl/419fd47c26b345239fdbb5e476a6bc54/3d3c895e626640bc9d239113b9257cb8.html" rel="noopener noreferrer nofollow" target="_blank">Enable Script Server for a tenan</a>t</em><a href="https://help.sap.com/docs/apl/419fd47c26b345239fdbb5e476a6bc54/3d3c895e626640bc9d239113b9257cb8.html?utm_source=chatgpt.com" rel="noopener noreferrer nofollow" target="_new"></a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>tenant recovery, scriptserver, system refresh, backup recovery, DBID error</p></div></div></div></div>

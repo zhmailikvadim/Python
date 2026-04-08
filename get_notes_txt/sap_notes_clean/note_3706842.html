@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Some customers do not want to create an <strong>Approvable Edit Rule</strong> that grants full editing permission for anyone that can see the approvable.  This is usually defined as follows under the <strong>Approvable Edit Rule</strong> tab:</p>
+<ul><li><strong>Other</strong>
+<ul><li style="font-weight: bold;"><strong>All Are True</strong></li><li><strong>Edit Without Effects</strong></li></ul>
+</li></ul>
+<p>However, some configurations only want certain groups to edit and not broad access.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>In order to ensure groups can edit, you will need to add the group(s) to their own edit rule.  For example:</p>
+<ul><li><strong>Any Are True</strong>
+<ul><li><strong>User in Group[xxxxxxx]</strong></li><li><strong>User in Group[yyyyyyy]</strong></li><li><strong>User in Group[zzzzzzzz]</strong></li></ul>
+</li></ul>
+<p>Feel free to add as many groups as you need.  This will then grant users in that group the ability to see the Edit button on the given approvable.</p>
+<p>Please note, unless you have the above configuration as an edit rule, creating an edit rule <span style="text-decoration: underline;"><strong>with</strong></span> actions that are only performed during an edit will not work.</p>
+<p>Example:</p>
+<ul><li><strong>All Are True</strong>
+<ul><li><strong>User in Group[xxxxxxx]</strong></li><li><strong>Field Changed[yyyyyyy]</strong></li></ul>
+</li></ul>
+<p>This condition will return <strong>false</strong> since changing a field is only allowed during an edit.  However, to first see the Edit button, you must first build a condition that grants that group access.</p></div></div></div></div>

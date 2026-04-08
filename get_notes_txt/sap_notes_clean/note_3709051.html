@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>When attempting to create a proxy assignment, the system displays one of the following error messages upon saving:
+<ul><li>
+<p>“Inactive username entered for the account holder”</p>
+</li><li>
+<p>“Inactive username entered for the proxy”</p>
+</li></ul>
+</li><li>This occurs even though both users are active in the system</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors HCM Suite</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Navigate to proxy management.</li><li>Specify the user who will act as the proxy.</li><li>Specify the account holder the proxy will act on behalf of.</li><li>Select the Modules.</li><li>Enter the Start Date and the End Date.</li><li>Click on Save.</li><li>Observe the error message: "Inactive username entered for the account holder" or "Inactive username entered for the proxy"</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>There is an extra space character (leading or trailing) after the username of either:</p>
+<ul><li>
+<p>the account holder, or</p>
+</li><li>
+<p>the proxy user.</p>
+</li></ul>
+<p>This causes the system to interpret the username as invalid or inactive.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<p>Re-enter the username for the account holder and/or proxy user.</p>
+</li><li>
+<p>Ensure there are no leading or trailing spaces.</p>
+</li><li>
+<p>Click <strong>Save</strong> again.</p>
+</li><li>
+<p>The proxy assignment will be saved successfully, and the error message will no longer appear.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://me.sap.com/notes/2087311" rel="noopener noreferrer nofollow" target="_blank">2087311</a> - Proxy Management and Proxy Now - SuccessFactors HCM</li><li><a href="https://me.sap.com/notes/3425415" rel="noopener noreferrer nofollow" target="_blank">3425415</a> - Unable to proxy as user's concurrent employments using the Employment Switcher</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Proxy Management error, Inactive username entered for, Cannot assign proxy, SuccessFactors proxy assignment, Proxy save error, Username inactive error, Trailing space in username, Inactive username entered for the account holder, Inactive username entered for the proxy</p></div></div></div></div>

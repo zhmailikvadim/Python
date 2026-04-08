@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When you find that there are two HANA Cockpit installations within a single instance, but only one is needed, you may want to remove the redundant one. This KBA guides you on how to delete HANA Cockpit in a specific space.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP HANA Cockpit 2</li><li>SAP HANA, platform edition 2.0</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Having more than one HANA Cockpit deployed within the same instance is not the recommended by SAP and may cause confusion or conflict when managing HANA resources. <br/>To streamline administration and avoid potential resource contention, it is recommended to keep only a single HANA Cockpit per instance. </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>We recommend retaining only one Cockpit per instance. Follow the steps below to remove HANA Cockpit from a specified space (e.g. “SAP”):</p>
+<ol><li>Log in to the HANA Cockpit host as the <strong>&lt;sid&gt;adm</strong> user.</li><li>Switch to the space where you want to perform the deletion. Important: Ensure you are targeting the correct space (e.g., "SAP") before proceeding.
+<div>
+<pre><code>xs t -s SAP</code></pre>
+</div>
+</li><li>Uninstall HANA Cockpit (com.sap.hana.cockpit) in the specified space:
+<div>
+<pre><code>xs uninstall XSAC_COCKPIT</code></pre>
+</div>
+</li><li>Uninstall HRTT (com.sap.xsa.hrtt) in the specified space:
+<div>
+<pre><code>xs uninstall XSAC_HRTT</code></pre>
+</div>
+</li><li>Uninstall Portal Service (XSAC_PORTAL_SERV) in the specified space:
+<div>
+<pre><code>xs uninstall XSAC_PORTAL_SERV</code></pre>
+</div>
+</li><li>Uninstall XSA Cockpit (com.sap.core.account) in the specified space:
+<div>
+<pre><code>xs uninstall XSAC_XSA_COCKPIT</code></pre>
+</div>
+</li><li>Confirm the uninstallation. There should now only be "alm-product-installer" remaining in the space:
+<div>
+<pre><code>xs mtas</code></pre>
+</div>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p> HANA Cockpit, uninstall, delete, space, remove cockpit, SAP space, duplicate cockpit, multiple cockpit installation</p></div></div></div></div>

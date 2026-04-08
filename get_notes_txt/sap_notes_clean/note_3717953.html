@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are using SAP Service and Asset Manager (SSAM) application with SAP Field Service Management (FSM) integration and require SSAM users to be assigned to different FSM companies</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Service and Asset Manager, SSAM, FSM, SAP Field Service Management, MAIF, Mobile Application Integration Framework</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>New Feature - Steps to implement user based FSM company assignment</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This consulting note lists the pre-requisistes and steps to configure User based FSM company assignment when integrating SSAM with FSM.</p>
+<p>Until now, SSAM supported the definition of a single FSM company when integrating with SAP FSM. The FSM company name and ID are defined in the MAIF Admistration and Monitoring portal server configuration properties and this configuration is then applicable to the entire application and therefore all the users. With the application of this note, the default FSM company configured in the Administration and Monitoring server properties can be overriden by user specific FSM company assignment using User Parameters. Note that a user can one be assigned to a single FSM company.</p>
+<p>Some additional filters have also been delivered for the Customer, Material and S/4HANA Business Partner oMDOs as part of this functionality to facilitate a closer mapping between the SSAM data download filters and the SAP backend and FSM integration. These new filters are not specific to FSM integration. They can be configured just like any other existing filters and therefore not explained in this note.</p>
+<p><strong>Pre-requisites for configuring User Based FSM Company assignment:</strong></p>
+<ol>
+<li>Install the following notes:</li>
+<ol style="list-style-type: lower-roman;">
+<li><a class="link-title" href="https://me.sap.com/notes/3715747" rel="noopener" target="_blank">3715747 - Add Company Code filter to the CUSTOMER oMDO</a></li>
+<li><a class="link-title" href="https://me.sap.com/notes/3716424" rel="noopener" target="_blank">3716424 - New filters added to the S/4HANA Service Business Partner oMDO</a></li>
+<li><a class="link-title" href="https://me.sap.com/notes/3717973" rel="noopener" target="_blank">3717973 - New filter added to the Material oMDO</a></li>
+<li><a class="link-title" href="https://me.sap.com/notes/3697555/E" rel="noopener" target="_blank">3697555 - PM/CS - Update the Object Link table with FSM Account and Company ID</a></li>
+<li><a class="link-title" href="https://me.sap.com/notes/3701835/E" rel="noopener" target="_blank">3701835 - Update the Object Link table with FSM Account and Company ID for the S/4HANA Service Orders</a></li>
+<li><a class="link-title" href="https://me.sap.com/notes/3706819" rel="noopener" target="_blank">3706819 - Support User based company assignment for FSM integration for PM/CS Orders</a></li>
+<li><a class="link-title" href="https://me.sap.com/notes/3710227" rel="noopener" target="_blank">3710227 - Support User based company assignment for FSM integration for S/4HANA Service</a></li>
+<li><a class="link-title" href="https://me.sap.com/notes/3706683" rel="noopener" target="_blank">3706683 - Support User based company assignment for external worker User creation</a></li>
+<li><a class="link-title" href="https://me.sap.com/notes/3705676/E" rel="noopener" target="_blank">3705676 - Update the USER INFO classes to support FSM Multiple company integration</a></li>
+</ol>
+<li>Ensure that all the steps specified in the <a href="https://help.sap.com/docs/service-asset-manager/sap-service-and-asset-manager-configuration-guide/field-service-technician-persona-feature-configurations?locale=en-US&amp;version=2511" target="_blank">documentation</a> for configuring the SSAM to FSM configuration are completed depending on the persona and order types. Note that the default FSM Company Name and ID must still be configured in the Administration and Monitoring server properties.</li>
+</ol>
+<p><strong>Configuring User Based FSM Company assignment:</strong></p>
+<p>If you are using Plant Maintenance (PM) or Customer Service (CS) orders, define the FSM company name in the /MFND/FSM_COMP_NAME User parameter.</p>
+<p>If you are using S/4HANA Service Orders, define the FSM company name in the /MFND/FSM_CMP_NM_S4 User parameter.</p></div></div></div></div>

@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> In the process "Calculation of Energy Amounts (MOS MaLo)" (DE_B_MET_ENERGY_AMOUNT_CALC_MOSMALO), step 0350 returned an incorrect iMS case indicator for complex locations. The method /US4G/IF_GENERIC_UTIL~GET_IMS_POD_INFO in class /US4G/CL_GENERIC_UTIL displayed incorrect values.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html0">MET, iMS indicator, complex locations, /US4G/CL_UBD_ENERGY_VALUE, DET_ENERGY_DATA_FOR_CAL, /US4G/CL_GENERIC_UTIL, GET_IMS_POD_INFO, energy amount calculation</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because neither the caller nor the callee cleared the data during iteration or at the beginning of the method. When parameters were passed by reference, unintended values were carried over to the next step.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the method /US4G/IF_GENERIC_UTIL~GET_IMS_POD_INFO in class /US4G/CL_GENERIC_UTIL returns the correct iMS indicator. You need to rerun step 0350 to calculate the energy amount again. You can verify the fix by checking that the energy amount is calculated correctly.</p></div></div></div></div>

@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The required <code class="hyc-common-markdown__code__inline">Pre-Persist-Hook </code>header is missing in OData requests during base unit​ replication from ERP to SAP Commerce Cloud.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The OOTB XSLT mapping <code class="hyc-common-markdown__code__inline">BatchUnitsData.xsl </code>only includes the persist-hook header for sales units, but omits it for base units.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="ybc-p"><span style="font-size: 14px;"><br/>Add four parameters in iflow Replicate B2B Customer From SAP ERP To SAP Commerce Cloud. This change has been included in package </span><span style="font-size: 14px;">SAP Commerce Cloud Integration with SAP ERP 1.31.1. After upgrading the package, select the integration iflow, select Edit. Enter the following values for each field, as needed:</span></div>
+<ul class="ybc-ul-component">
+<li class="ybc-li-component ybc-li-component_ul">
+<div class="ybc-p">b2bCustomerPostPersistHook: If needed, define the custom PostPersistHook for the B2BCustomer receiver.</div>
+</li>
+<li class="ybc-li-component ybc-li-component_ul">
+<div class="ybc-p">b2bCustomerPrePersistHook: If needed, define the custom PrePersistHook for the B2BCustomer receiver.</div>
+</li>
+<li class="ybc-li-component ybc-li-component_ul">
+<div class="ybc-p">b2bUnitPostPersistHook: If needed, define the custom PostPersistHook for the B2BUnits receiver.</div>
+</li>
+<li class="ybc-li-component ybc-li-component_ul">
+<div class="ybc-p">b2bUnitPrePersistHook: If needed, define the custom PrePersistHook for the B2BUnits receiver.</div>
+</li>
+</ul></div></div></div></div>

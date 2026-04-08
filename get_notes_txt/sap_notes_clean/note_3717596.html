@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">After clicking Excel Export from Collections Browser in Backoffice, you get a 502 proxy timeout error in the UI.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Cloud Commerce Backoffice.</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Go to Backoffice.</li><li>Open Report Definition. </li><li>Open Report.</li><li>Select from date to date.</li><li>Click Search for result.</li><li>Click On Export Button.</li></ol>
+<p>Set backoffice.excel.export.max.rows= to a higher number, default is 2000, safety threshold is 500 items. Also having a large number of attributes for each item in the report can trigger a proxy timeout.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Too many items and/or attributes to be returned before proxy server's timeout expires.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Even though the UI times out in the foreground, the report may still be generated in the Background, check your download location for the report.</p>
+<p>To fix UI issue and speed up report generation try:-</p>
+<p></p>
+<p>1. Check the timeout value for Backoffice:</p>
+<p><a href="https://me.sap.com/notes/3455527/E" rel="noopener noreferrer nofollow" target="_blank">3455527 - Error: 502 - Bad Gateway or Proxy Timeout</a> </p>
+<p>2. Check how many attributes are necessary to export with each item. It is recommend to only export the attributes you need, as if you have 100 attributes exported for 200 items thats 20,000 attributes in total, and localised attributes may require more processing. See:</p>
+<p><a href="https://help.sap.com/docs/SAP_COMMERCE/c0234cf985ba4390b4eebe4a38a4457f/1763d14a7efb408fb37976b804fe7724.html?locale=en-US&amp;version=LATEST#exporting-an-excel-file" rel="noopener noreferrer nofollow" target="_blank">Exporting an excel file</a></p>
+<p>3. The report will work by generating SQL's which should be visible in Dynatrace monitoring, check if these need additional indexes to function faster and check that they are executed on the READ ONLY REPLICA DB:</p>
+<p>Check if the report queries are using read-only DB (can be that all Backoffice queries are going to READ ONLY REPLICA DB by default see):</p>
+<p><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/aa417173fe4a4ba5a473c93eb730a417/51204da1b55d468484ba73222eaea5ce.html#additional-features" rel="noopener noreferrer nofollow" target="_blank">Querying the Read-only Replica</a><br/><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/aa417173fe4a4ba5a473c93eb730a417/51204da1b55d468484ba73222eaea5ce.html#additional-features" rel="noopener noreferrer nofollow" target="_blank"></a></p>
+<p>or Hint the report queries to use Read-only DB:</p>
+<p><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/aa417173fe4a4ba5a473c93eb730a417/51204da1b55d468484ba73222eaea5ce.html#query-categorization" rel="noopener noreferrer nofollow" target="_blank">Query Categorization</a></p>
+<p>Querying the Read-only DB is better for reporting functions.</p>
+<p></p>
+<p>Note: The Excel export tool is a report on Product Configuration meant for bulk product updating. By default, export and import actions are available in Collection Browser, for a Product type. If used to create other types of reports (such as customer or promotions reports) it may need customisation.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Excel</p>
+<p>Export</p>
+<p>report</p>
+<p>502</p>
+<p></p></div></div></div></div>

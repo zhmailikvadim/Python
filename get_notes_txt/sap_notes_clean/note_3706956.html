@@ -1,0 +1,230 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>You are looking for guidance on how to configure proxy server settings for your <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access (SDA)</span> connections.</p>
+<p>You may observe that <span class="SNO_DNT" style="float: none;" translate="no">SDA</span> connections fail with below timeout errors or similar error messages:</p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">SAP DBTech JDBC: [403]: internal error: Cannot get remote source objects: [SAP AG][LIBODBCHDB SO][HDBODBC] Communication link failure;-10709 Connection failed (RTE:[89009] Socket connect timeout (10000 ms); $host$= (<em>host</em>:<em>port</em>))</span></li>
+</ul>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SDA; Federation; Proxy; Timeout; Smart Data Access; HANA; IQ; ASE; MaxDB; Oracle; MSSQL; Oracle; DB2; Netezza; GBQ; Teradata;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>In scenarios where proxy servers are used, additional proxy configuration is required for the corresponding ODBC adapter.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions of SPS00 - SPS08</li>
+</ul>
+</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ol>
+<li><span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access (SDA)</span> remote connection to any supported remote database</li>
+<li>And the local system is configured to use a proxy server.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To configure proxy server information for <span class="SNO_DNT" style="float: none;" translate="no">Smart Data Access (SDA)</span> connections, please refer to the configuration guidelines provided by the vendor for the required ODBC driver properties.</p>
+<p>Additionally, as outlined in SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2600176/E" target="_blank">2600176</a>, check the vendor's distribution Web site for release notes, software patches, and other relevant information.</p>
+<p> </p>
+<p>Related parameters can be configured in one of the following ways:</p>
+<ul>
+<li>Directly within the remote source definition</li>
+<li>In the corresponding DSN section of the <span class="SNO_DNT" style="float: none;" translate="no"><code>.odbc.ini</code> </span>file</li>
+<li>System-wide by setting environment variables, if supported by the ODBC driver</li>
+</ul>
+<p>Choose the method that best fits your environment and the capabilities of your ODBC driver. Furthermore, please note the parameter names (for example, "proxyHostname", "proxyPort", etc.) may differ depending on your ODBC driver and vendor documentation.</p>
+<p>Always refer to the documentation for the exact parameter names required by your driver and protect sensitive data such as credentials in accordance with your company's security policies.</p>
+<p> </p>
+<p><span style="text-decoration: underline;"><em>Remote Source Properties</em></span></p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">[CREATE | ALTER] REMOTE SOURCE "&lt;REMOTE_SOURCE&gt;" ADAPTER &lt;ADAPTER_NAME&gt; CONFIGURATION '&lt;...&gt;;proxyHttp=true;proxyHostname=&lt;host&gt;;proxyPort=&lt;port&gt;;proxyUserName=&lt;user_name&gt;;proxyPassword=&lt;password&gt;';</span></li>
+</ul>
+<p> </p>
+<p><span style="text-decoration: underline;"><em>DSN</em></span></p>
+<p>Add the ODBC driver-specific parameters and values to the corresponding DSN entry inside the "<span class="SNO_DNT" style="float: none;" translate="no">.odbc.ini</span>" file as illustrated below:</p>
+<p style="padding-left: 30px;"><br/><span class="SNO_DNT" style="float: none;" translate="no">[DSN1]</span><br/><span class="SNO_DNT" style="float: none;" translate="no">Driver = /path/to/driver</span><br/><span class="SNO_DNT" style="float: none;" translate="no">Server = your_server_address</span><br/><span class="SNO_DNT" style="float: none;" translate="no">Port = your_port</span><br/>&lt;...&gt;<br/><span class="SNO_DNT" style="float: none;" translate="no">proxyHttp=true</span><br/><span class="SNO_DNT" style="float: none;" translate="no">proxyHostname=&lt;host&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">proxyPort=&lt;port&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">proxyUserName=&lt;user_name&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">proxyPassword=&lt;password&gt;</span></p>
+<p> </p>
+<p><em><span style="text-decoration: underline;">Environment Variable</span></em></p>
+<p class="auto-cursor-target">Depending on whether the ODBC driver supports this approach, it may also be possible to set environment variables as shown below:</p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">export http_proxy=http://&lt;proxy&gt;:&lt;port&gt;</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">export https_proxy=http://&lt;proxy&gt;:&lt;port&gt;</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">export no_proxy="localhost, 127.0.0.1, .googleapis.com"</span></li>
+</ul>
+<p>If credentials are required, you can use the following environment variable configuration:</p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">export http_proxy="http://username:password@proxy-url:port"</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">export https_proxy="http://username:password@proxy-url:port"</span></li>
+</ul>
+<p> </p>
+<p><strong><em>HANA</em></strong></p>
+<p>For HANA remote sources, you can edit the remote source directly and maintain the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/7cab593774474f2f8db335710b2f5c50.html" target="_blank">HANA ODBC Connection Properties</a> as outlined in the SAP HANA Client Interface Programming Reference.</p>
+<p>Edit the remote source and maintain the HANA ODBC Connection Properties:</p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">ALTER REMOTE SOURCE "&lt;REMOTE_SOURCE&gt;" ADAPTER HANAODBC CONFIGURATION 'ServerNode=&lt;servernode:SQLport&gt;;Driver=libodbcHDB.so;dmlmode=readwrite;encrypt=true;sslValidateCertificate=false;<strong>proxyHttp=true;proxyHostname=&lt;host&gt;;proxyPort=&lt;port&gt;;proxyUserName=&lt;user_name&gt;;proxyPassword=&lt;password&gt;</strong>';</span></li>
+</ul>
+<p>Alternatively, you can create a DSN entry in the <span class="SNO_DNT" style="float: none;" translate="no"><code>.odbc.ini</code></span> file and add the required parameters directly to that entry.</p>
+<p> </p>
+<p><strong><em>IQ</em></strong></p>
+<p>The SAP IQ ODBC driver provides the following configuration parameters for SOCKS proxy support:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">ProxyHost=&lt;string&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">ProxyPort=&lt;integer&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">ProxyUsername=&lt;string&gt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">ProxyPassword=&lt;string&gt;</span></p>
+<p>These parameters can be specified in your DSN or connection string to enable connections through a SOCKS proxy server.</p>
+<p>For client applications, you specify network protocol options using the CommLinks (LINKS) connection parameter:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">CommLinks=tcpip(ProxyHost=&lt;string&gt;;ProxyPort=&lt;integer&gt;;ProxyUsername=&lt;string&gt;;ProxyPassword=&lt;string&gt;;...)</span></p>
+<p>For more details, please refer to the following documentation:</p>
+<ol>
+<li><a href="https://help.sap.com/docs/SAP_IQ/8e6989ea146b41d78f671443295cd7a0/a6e56e2084f21015bfa79d027b6d121a.html" target="_blank">Network Communications Parameters</a></li>
+<li><a href="https://help.sap.com/doc/1948d3f607fc4e7b9745d07669ad0f1b/16.1.5.0/en-US/SAP_IQ_Communication_Reference_en.pdf" target="_blank">SAP IQ Connection and Communication Parameters Reference</a></li>
+</ol>
+<p> </p>
+<p><strong><em>Adaptive Server Enterprise (ASE)</em></strong></p>
+<p>The SAP Adaptive Server Enterprise documentation does not mention any available configuration options for connecting through a proxy server.</p>
+<ul>
+<li><a href="https://help.sap.com/docs/SAP_ASE_SDK/b3c09d30f5d148fb8339f43f9f029ff0/b1dd3876bbf910149ce1e9ba11d2d013.html" target="_blank">Connection Parameters</a></li>
+</ul>
+<p>However, it may still be possible to configure proxy support by setting the appropriate environment variables or by adding commonly used ODBC keywords to your connection settings.</p>
+<p>See also <a href="https://docs.devart.com/odbc/ase/tunneling.htm" target="_blank">Connecting to ASE Using HTTP Tunneling</a>.</p>
+<p> </p>
+<p><strong><em>MaxDB</em></strong></p>
+<p>The SAP MaxDB documentation does not mention any available configuration options for connecting through a proxy server.</p>
+<ol>
+<li><a href="https://maxdb.sap.com/" target="_blank">SAP® MaxDB™ – The SAP Database</a></li>
+<li><a href="https://help.sap.com/docs/SAP_NETWEAVER_DBOS/679253cae6ab4103a75c7109f1478abb/4677b96888115808e10000000a114a6b.html" target="_blank">SAP MaxDB ODBC Manual</a></li>
+<li>SAP Note <a href="https://me.sap.com/notes/767598/E" target="_blank">767598</a> - Available SAP MaxDB documentation</li>
+</ol>
+<p>However, it may still be possible to configure proxy support by setting the appropriate environment variables or by adding commonly used ODBC keywords to your connection settings.</p>
+<p> </p>
+<p><strong><em>ABAPODBC</em></strong></p>
+<p>The ODBC Driver for ABAP provides the following additional parameters to enable use of a proxy server:</p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" id="loiofd87d401fff440b8b184c20e64273303__odbc_add_config" rules="all" summary=""><caption></caption><colgroup><col width="33.333333333333336%"/><col width="33.333333333333336%"/><col width="33.333333333333336%"/></colgroup>
+<thead class="thead">
+<tr class="row"><th class="entry" id="d58433e626">
+<p>Parameter</p>
+</th><th class="entry" id="d58433e629">
+<p>Description</p>
+</th><th class="entry" id="d58433e632">
+<p>Valid Values</p>
+</th></tr>
+</thead>
+<tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="d58433e626">
+<p>ProxyHost</p>
+</td>
+<td class="entry" headers="d58433e629">
+<p>Host name of an HTTP proxy (optional parameter)</p>
+</td>
+<td class="entry" headers="d58433e632">
+<div class="title" id="n3t"></div>
+</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="d58433e626">
+<p><samp class="ph codeph">ProxyPort</samp></p>
+</td>
+<td class="entry" headers="d58433e629">
+<p>Port of an HTTP proxy (optional parameter)</p>
+</td>
+<td class="entry" headers="d58433e632">
+<div class="title"></div>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>To define connection parameters for the ODBC driver, you create an ODBC data source and DSN for a business or communication user. An ODBC data source is a set of connection parameters, <br/>stored in the registry or in a file. The available parameters are relevant for Windows and Linux.</p>
+<p>For more information, please refer to the "<a href="https://help.sap.com/docs/abap-cloud/abap-integration-connectivity/parameters-for-odbc-data-source" target="_blank">Parameters for the ODBC Data Source</a>" section in the "ABAP Integration and Connectivity Guide".</p>
+<p> </p>
+<p><strong><em>Oracle</em></strong></p>
+<p>For the majority of the Oracle ODBC drivers, you can specify proxy details directly within the connection properties or DSN entry:</p>
+<ol>
+<li><span class="SNO_DNT" style="float: none;" translate="no">ProxyHost: The hostname or IP address of the proxy server.</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">ProxyPort: The port used by the proxy server.</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">ProxyUser: (Optional) The username for proxy authentication.</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">ProxyPassword: (Optional) The password for proxy authentication.</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">ProxyMode: (Optional) Specifies the proxy mode. </span></li>
+</ol>
+<p>These parameters can be entered in the DSN configuration wizard or added directly to the connection string:</p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">DRIVER={DataDirect 8.0 Oracle Wire Protocol};HostName=123.210.123.210;PortNumber=5439;ProxyHost=123.255.78.90;ProxyPort=1521;... </span></li>
+</ul>
+<p>For the native Oracle ODBC driver using sqlnet.ora and tnsnames.ora configuration files, you can configure an HTTP proxy using Oracle Net configuration files. To enable this, add SQLNET.USE_HTTPS_PROXY=on to your sqlnet.ora file.<br/>Then, within the address section of your database service name entry in tnsnames.ora, specify the proxy hostname and port using the https_proxy and https_proxy_port parameters. For example:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">ADB1_high = (description=</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> (address=</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> (https_proxy=proxyhostname)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> (https_proxy_port=80)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> (protocol=tcps)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> (port=1522)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> (host=adb.example.oraclecloud.com)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> )</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> (connect_data=(service_name=adb1_high.adb.oraclecloud.com))</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> (security=(ssl_server_dn_match=yes))</span><br/><span class="SNO_DNT" style="float: none;" translate="no">)</span></p>
+<p> </p>
+<p>For more details, please refer to the following documentation:</p>
+<ol>
+<li><a href="https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/connect-prepare-oci-wallets.html" target="_blank">Prepare for Oracle Call Interface, ODBC, and JDBC OCI Connections with Wallets (mTLS)</a> </li>
+<li><a href="https://docs.progress.com/bundle/datadirect-oracle-odbc-80/page/Connecting-through-a-proxy-server.html#:~:text=Using%20a%20connection%20string:%20DRIVER,sales.us.acme.com" target="_blank">Connecting through a proxy server</a></li>
+</ol>
+<p> </p>
+<p><strong><em>MSSQL</em></strong></p>
+<p>Microsoft’s comprehensive overview of available ODBC parameters does not include any proxy server configuration options.</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/sql/connect/odbc/dsn-connection-string-attribute?view=sql-server-ver17" target="_blank">DSN and Connection String Keywords and Attributes</a></li>
+</ul>
+<p>As a workaround, you can try adding commonly used ODBC keywords from other vendors to the corresponding DSN section inside the <span class="SNO_DNT" style="float: none;" translate="no">.odbc.ini</span> file.</p>
+<p>For further guidance, please contact Microsoft Support.</p>
+<p> </p>
+<p><strong><em>Google BigQuery (GBQ)</em></strong></p>
+<p>To set connector-wide configuration options on a non-Windows machine:</p>
+<ol>
+<li>In a text editor, open the simba.googlebigqueryodbc.ini configuration file.</li>
+<li>In the <span class="SNO_DNT" style="float: none;" translate="no">[Driver]</span> section, specify configuration properties as key-value pairs. Start a new line for each key-value pair.<br/>For example, to specify a proxy server and to log information from the libcurl library, type the following:</li>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">Proxy=http://&lt;proxy.mycompany.ca&gt;:&lt;port&gt;</span></li>
+</ul>
+</ol>
+<p>In case a proxy is used, please note below:</p>
+<ul>
+<ul>
+<li>You must make sure that the proxy allows communication to <span class="SNO_DNT" style="float: none;" translate="no"><em>crl.pki.goog</em></span> and <span class="SNO_DNT" style="float: none;" translate="no"><em>ocsp.pki.goog</em></span>.<br/><br/></li>
+<li>Required certificates may have to be copied to the proxy host accordingly. These certificates are always required, because the communication with Google api is always secured.<br/><br/></li>
+<ul>
+<li>Otherwise following error may occur: error setting certificate verify locations:  <span class="SNO_DNT" style="float: none;" translate="no">CAfile: /etc/pki/tls/certs/ca-bundle.crt CApath: none</span><br/><br/></li>
+<li>See also SAP Note <a href="https://me.sap.com/notes/3159682/E" target="_blank">3159682</a>. - SDA - Google BigQuery ODBC Driver Setup</li>
+</ul>
+</ul>
+</ul>
+<p>For more information, please refer to the Magnitude Simba <a href="https://storage.googleapis.com/simba-bq-release/odbc/Simba%20Google%20BigQuery%20ODBC%20Connector%20Install%20and%20Configuration%20Guide-3.1.6.1026.pdf" target="gcs">Installation and Configuration Guide</a>, which can be found here: <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers" target="_blank">ODBC and JDBC drivers for BigQuery</a>.</p>
+<p> </p>
+<p><strong><em>IBM DB2</em></strong></p>
+<p>IBM’s official documentation for DB2 does not provide a comprehensive overview of available ODBC parameters or instructions for configuring proxy server settings with the DB2 ODBC adapter.</p>
+<p>As a workaround, you can try adding commonly used ODBC keywords from other vendors to DB2’s configuration files, either <span class="SNO_DNT" style="float: none;" translate="no">db2dsdriver.cfg</span> or <span class="SNO_DNT" style="float: none;" translate="no">db2cli.ini</span>.</p>
+<p>For further guidance, please contact IBM Support.</p>
+<p> </p>
+<p><strong><em>IBM Netezza</em></strong></p>
+<p>IBM’s official documentation for Netezza does not provide a comprehensive overview of available ODBC parameters or instructions for configuring proxy server settings with the Netezza ODBC adapter.</p>
+<p>As a workaround, you can try adding commonly used ODBC keywords from other vendors to the corresponding DSN section inside the <span class="SNO_DNT" style="float: none;" translate="no">.odbc.ini</span> file.</p>
+<p>For further guidance, please contact IBM Support.</p>
+<p><strong><em> </em></strong></p>
+<p><strong><em>Teradata</em></strong></p>
+<div class="content-locale-en-US content-locale-en depth-3">
+<div id="msh1699291106742">
+<div class="body conbody">
+<p class="p">Teradata ODBC Driver, starting with version 20.00, can be configured to use a proxy server when making connections to servers or database nodes. Only HTTP proxy servers are supported. <br/>Proxy server information is passed to Teradata ODBC Driver using connection string parameters. Using OS proxy settings is not supported at this point.</p>
+<p class="p">Order of precedence (highest to lowest):</p>
+<ol class="ol">
+<li class="li">Connection string</li>
+<li class="li">Environment variables</li>
+</ol>
+<p>Proxy server settings can be passed to Teradata ODBC Driver via the connection string. The following connection string parameters are supported:</p>
+<ol>
+<li><span class="SNO_DNT" style="float: none;" translate="no">HTTP_PROXY</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">HTTP_PROXY_USER</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">HTTP_PROXY_PASSWORD</span></li>
+</ol>
+<p>Proxy server information can be passed to Teradata ODBC Driver using environment variables. Set the environment variables before running the Teradata ODBC Driver client application. <br/>The following environment variables are available:</p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">[http://][username:password@](host-name|ipv4_address|ipv6_address)[:port]</span></li>
+</ul>
+<p>For more details, please refer to the official documentation on <a href="https://docs.teradata.com/r/Enterprise_IntelliFlex_Lake_VMware/ODBC-Driver-for-Teradata-User-Guide-20.00/ODBC-Driver-for-Teradata-Application-Development/Online-Certificate-Status-Protocol-OCSP-OCSP-Stapling-and-Certificate-Revocation-List-CRL/Proxy-Server-Support" target="_blank">Teradata ODBC Driver Proxy Server Support</a>.</p>
+</div>
+</div>
+</div>
+<p><strong><em> </em></strong></p>
+<p><strong><strong>Remarks:</strong></strong></p>
+<ul>
+<li>To configure proxy settings for SDA-based real-time remote table replication, please refer to SAP Note <a href="https://me.sap.com/notes/3547023/E" target="_blank">3547023</a>.</li>
+<li>Please also review SAP Note <a href="/notes/3117294" target="_blank">3117294</a>.</li>
+</ul></div></div></div></div>

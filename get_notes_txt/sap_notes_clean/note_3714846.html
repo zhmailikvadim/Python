@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In S/4HANA, you implemented notes in your development system including DDLs related to the balance carryforward (BCF). The names of the DDLs start with FGL_BCF* or V_FGL_BCF*; corresponding view names in DDIC start with FGLV_BCF*. When the transport is released to your quality and/or production system, you get activation errors during import.</p>
+<p><strong>Example 1:</strong></p>
+<p><em>DDL Source FGL_BCF_BS could not be activated</em><br/><em>(E - The column wwxyz_pa is unknown)</em></p>
+<p>-&gt; CO-PA characteristic WWXYZ_PA exists in your development system in ACDOCA but not in quality or production.</p>
+<p><strong>Example 2:</strong></p>
+<p><em>DDL Source FGL_BCF_PROT could not be activated</em><br/><em>(E - The column zz_example_jei is unknown)</em></p>
+<p>-&gt; Custom field ZZ_EXAMPLE_JEI exists in your development system in ACDOCA but not in quality or production.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FGL_BCF V_FGL_BCF CVE-2026-0501 3687749 FAGLGVTR FGLV_BCF 3700593 FGL_MIG_REGENERATE_CDS_BCF FGL_MIG_REGENERATE_CDS_GL FGL_MIG_REGENERATE_CDS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Mismatch of extensibility fields in the S/4HANA system landscape leads to syntax errors in generated CDS views.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The CDS views related to the BCF are partially generated to include extensibility fields in ACDOCA. If you have ongoing developments based on the extensibility options described in note 2453614, there can be a mismatch of extensibility fields between the development system and quality/production. In case the CDS views are transported in generated state, this usually leads to activation errors during the import of the transport request.</p>
+<p>There are 2 options to resolve this:</p>
+<p><strong>Option 1:</strong></p>
+<p>Use this option if the transport was already imported. Execute report FGL_MIG_REGENERATE_CDS_BCF <strong>without</strong> option 'Reset to Delivery'. This step has to be performed in each system in which the transport gets imported. Note that you still get an activation error during import in each system and this step corrects the views after the import.</p>
+<p><strong>Option 2:</strong></p>
+<p>Use this option before releasing the transport in development. Execute report FGL_MIG_REGENERATE_CDS_BCF <strong>with</strong> option 'Reset to Delivery'. Note that in some scenarios (mainly older basis releases) DDIC dependencies prevent the complete reset of the views in the first execution of the report; If errors come up in the first execution of FGL_MIG_REGENERATE_CDS_BCF with option 'Reset to Delivery', repeat this step a few times.</p>
+<p>This step transport the CDS views without extensibility fields and activation errors during import are avoided.</p>
+<p>Note that regenerating FGL_MIG_REGENERATE_CDS_BCF without option 'Reset to Delivery' is not required in the target systems since the BCF will ensure the CDS views are correctly generated during runtime.</p>
+<p><strong>Remark:</strong></p>
+<p>If the views are inconsistent in quality and/or production, e.g. resulting from manual correction attempts, but are consistent in development, you can use report FINS_PUT_DDLS_INTO_REQUEST to add all dependent and Financials related CDS views to a new transport request. To avoid potential activation issues, regenerate all views with FGL_MIG_REGENERATE_CDS_GL with option 'Reset to Delivery' before releasing this transport request.</p></div></div></div></div>

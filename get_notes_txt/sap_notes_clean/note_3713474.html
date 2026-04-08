@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You want to know what JDBC driver version currently supported by Microsoft can be used with SAP ME 15.5.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Microsoft JDBC Driver certification, mssql-jdbc-12.10.1.jre8.jar, MSSQL 2022</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>SAP has certified a newer Microsoft JDBC driver version for usage with SAP Manufacturing Execution 15.5.</p>
+<p>Microsoft JDBC Driver version 8.4 has reached its end-of-support date (July 31, 2025), therefore a newer driver version must be used going forward.</p>
+<p>This note provides information about the certified Microsoft JDBC driver version that can be used with SAP ME/MECTC/MEINT/MEINTCTC/MESCRIPTS 15.5 when running on Microsoft SQL Server 2022.</p>
+<p>Microsoft maintains the driver lifecycle and compatibility matrix here: <a href="https://learn.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server-support-matrix" target="_blank">https://learn.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server-support-matrix</a>. Customers should always verify general platform support and lifecycle status using the Microsoft support matrix.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The following Microsoft JDBC driver version is certified for use with:</p>
+<ul>
+<li>SAP ME 15.5</li>
+<li>SAP MEINT 15.5</li>
+<li>SAPMECTC 15.5</li>
+<li>SAPMEINTCTC 15.5</li>
+<li>SAPMESCRIPTS 15.5</li>
+<li>Microsoft SQL Server 2022</li>
+</ul>
+<p><strong>Certified driver:</strong><br/>mssql-jdbc-12.10.1.jre8.jar (Microsoft JDBC Driver 12.10 for SQL Server)<br/>The driver can be used during:</p>
+<ul>
+<li>SAP ME installation and database setup</li>
+<li>SAP ME database migration and upgrade procedures</li>
+<li>CTC wizards for database configuration and upgrade</li>
+</ul>
+<p>The <strong>mssql-jdbc-12.10.1.jre8.jar</strong> file must be specified as the JDBC driver during execution of the SAP ME Database Setup (Installation) and SAP ME Database and Data Migration (Upgrade) CTC wizards.</p>
+<p><strong>Important Notes:</strong></p>
+<p>Starting with Microsoft JDBC Driver 10.2, SSL encryption is enabled by default and required by the driver. Therefore, the SQL Server instance must be properly configured for SSL/TLS connections.<br/>If SSL is not configured on the database server, database connectivity tests and CTC wizards will fail.</p>
+<p>Ensure that:</p>
+<ul>
+<li>SQL Server has a valid TLS configuration.</li>
+<li>Certificates are properly installed.</li>
+<li>Trust settings are aligned with your security policy.</li>
+</ul>
+<p>The current ME behavior aligns with modern security best practices and encourages users to implement SSL. <br/>However, security level is not strictly enforced by ME application after completion of CTC tasks.<br/>Security settings can be changed later at the customer’s initiative and upon acceptance of risks. For example, by adding parameters to the jdbc connection string of the datasources.</p></div></div></div></div>

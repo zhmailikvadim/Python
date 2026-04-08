@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are trying to connect with OData Adapter using OAuth, for example Microsoft CRM.</p>
+<p>Inside your datastore, you selected the following parameters:</p>
+<ul>
+<li>Authentication Type: OAuth 2.0</li>
+<li>Grant Type: Client credentials</li>
+<li>Client ID:  &lt;your private value&gt;</li>
+<li>Token Endpoint: &lt;your URL from Microsoft&gt;</li>
+<li>Client Secret: &lt;your private value&gt;</li>
+<li>Scope: &lt;your CRM url&gt;</li>
+<li>Default base64 Binary Field Length: 16</li>
+<li>Depth: 2</li>
+<li>OData Version: V4</li>
+<li>Require CSRF Header: No</li>
+<li>Odata Metadata Header: minimal</li>
+</ul>
+<p>After hitting the test connection, you get the following error:</p>
+<ul>
+<ul>
+<li><strong>Test failed for the default configuration 'Test' of datastore: 'Your_datastore_name':</strong></li>
+<li><strong>Timed Out, timeout : 250000 expired.. BrokerClient TimedOut for Destination : com.acta.adapter.odata.OdataAdapter.data_2 .</strong></li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Cloud Integration for data services - all agent versions</p>
+<p>SAP Data Services - all versions</p>
+<p>This issue is tracked in Corrective Measure 002075125800000548372026.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The SAP Data Services Development / Adapter team has identified the root cause that the metadata - including entities and functions - due to performance intensive logic related to unbound functions metadata.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>For SAP Data Services: The correction is delivered in the release(s) listed in the Support Packages and Patches section of this <abbr>SAP</abbr> Note.</p>
+<p>For SAP Cloud Integration for data services: The correction for this agent issue is delivered in SAP Cloud Integration for data services version 2603 (1.0.11.6370).</p>
+<p><strong>In addition to the fix, you must perform the following step:</strong></p>
+<p>In your agentConfiguration.bat or .sh, in the field "Additional Java Launcher Options", add max heap and min heap as -Xms1024m -Xmx2048m.</p></div></div></div></div>

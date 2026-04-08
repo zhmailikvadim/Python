@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When moving WBS in the structure of a project the message CJ418 'WBS element &amp; can no longer be shifted' is returned </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP ERP Project System (PS)</li><li>SAP R/3</li><li>SAP R/3 Enterprise</li><li>SAP ERP Central Component</li><li>SAP ERP</li><li>SAP Enhancement package for SAP ERP</li><li>SAP Enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA, on-premise</li><li>SAP S/4HANA Cloud Private Edition</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Run CJ20N <br/>Enter Project /WBS<br/>Move WBS or change structure <br/>Message CJ418 is raised  <br/><img alt="" class="img-responsive" height="227" src="/documents/customerkba/O01TPd7YkxUSzwGvYYDkECbTvUNdleJEECSprxlHqVU" width="542"/></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>There is a budget assigned to the WBS element on which there are costs </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Costs will have to be removed from the WBS then Re-post any costs  (See  SAP Note 95838) </p>
+<p>The status 'BUDG' will need to be reset in order to change the project hierarchy.</p>
+<p>The WBS element may have been budgeted using only ONE "type" of activity of budgeting like "original budget" or "Supplement" or "Return" or "Transfer", then it is possible to reset the status BUDG.</p>
+<p><br/>If for example,  the budget is created with CJ30 and added some additional budget using transaction CJ37 (Supplement) it is not possible anymore to reset the status BUDG.<br/><br/>So If you want to reset the status BUDG you need to do the following:</p>
+<p>1. Delete your budget of the WBS element within that transaction which you first used to create your budget.</p>
+<p>2. Goto transaction OPSX.</p>
+<p>Enter your WBS-element.</p>
+<p>If you choose "no test run" BUDG will be reset.<br/><br/>Then check the status once more through CJ20N. If the status BUDG is no longer present the hierarchy can be changed for the WBS element.</p>
+<p>However <br/>If you have already assign costs/PR/PO against the WBS. <br/>System will not allow you to un-release the budget. <br/>In this situation if you can't reverse the cost booked under WBS, there is one way in standard which should work even when actuals are already existing:</p>
+<p>1) turn off the budget check using transaction CJBW</p>
+<p>2) delete the budget values from the affected subtrees (the one where the WBS-element to be replaced is at the moment, and the one where it is to be replaced to).</p>
+<p>3) unset 'BUDG' status using transaction OPSX</p>
+<p>4) relocate WBS-element</p>
+<p>5) recreate budget values</p>
+<p>6) activate budget check using transaction CJBV (if necessary, as this should be done automatically after 5)).</p>
+<p>(Where possible  perform these steps in a test system and verify the results before doing so in a production system.)</p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Note : 1054684 - How can the 'Budgeted' status be reset?<br/>Note : 1145955 - Orders, WBS elements: Delete budget, reset status<br/>Note : 95838    - Work breakdwon strcture - changeabilty of hierarchy <br/>KBA  : 2138404 :Error message CJ418 is returned when adding multiple WBS elements by BAPI_PROJECT_MAINTAIN</p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>CJ20, CJ33, CJ37, CJ30, CJ02, CJ418,  " WBS element &amp; can no longer be shifted" .</p>
+<p></p></div></div></div></div>

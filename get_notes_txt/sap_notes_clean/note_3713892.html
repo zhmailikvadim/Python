@@ -1,0 +1,106 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">This is a collection of useful articles and frequently asked questions related to Biographical Information Fields and the Configuration.</p>
+<p><span style="color: rgb(224, 62, 45);"><strong><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></strong></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Employee Central - Biographical Information</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li style="font-weight: bold;"><strong><a href="#Documentation" rel="noopener noreferrer nofollow" target="_self">Documentations</a></strong></li><li>Frequently Asked Question on:
+<ul><li style="font-weight: bold;"><strong><a href="#PersonID_UserID_fields" rel="noopener noreferrer nofollow" target="_self">Person ID/User ID fields</a></strong></li><li style="font-weight: bold;"><strong><a href="#Biographical_Information_fields" rel="noopener noreferrer nofollow" target="_self">Biographical Information fields.</a></strong><strong></strong></li></ul>
+</li></ul>
+<p></p>
+<h3 data-toc-skip="">Documentation</h3>
+<ul><li>List of fields in Biographical Information: <a href="https://help.sap.com/docs/successfactors-employee-central/data-model-field-information-for-employee-central/biographical-information?version=2511" rel="noopener noreferrer nofollow" target="_blank">Fields in Biographical Information</a> </li><li>Differences in Latest People Profile (PPX) compared to legacy People Profile (PP3): <a href="https://help.sap.com/docs/successfactors-employee-central/implementing-employee-central-core/biographical-information" rel="noopener noreferrer nofollow" target="_blank">Biographical Information | SAP Help Portal</a> </li><li>Country/Region - Specifics in Employee central: <a href="https://help.sap.com/docs/successfactors-employee-central/countryregion-specifics/country-region-specifics-in-employee-central?version=2511" rel="noopener noreferrer nofollow" target="_blank">Country/Region-Specifics in Employee Central | SAP Help Portal</a> </li></ul>
+<h2 data-toc-skip=""><span style="font-size: 12pt;">Frequently Asked Questions (FAQs)</span></h2>
+<p><strong></strong></p>
+<h3 data-toc-skip=""><span style="font-size: 10pt;"><strong>Person ID/ User ID fields:</strong></span></h3>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100.041%;"><colgroup><col style="width: 49.9799%;"/><col style="width: 49.9799%;"/></colgroup><tbody><tr><td>
+<h3 data-toc-skip="" style="text-align: center;"><strong>Question</strong></h3>
+</td><td style="text-align: center;">
+<h3 data-toc-skip=""><strong>Answer</strong></h3>
+</td></tr><tr><td>
+<p>What are the different IDs in Employee Central?</p>
+</td><td>
+<ul><li>Refer KBAs
+<ul><li> <a href="https://me.sap.com/notes/2493579/E" rel="noopener noreferrer nofollow" target="_blank">2493579 - Person/User IDs Used Within Employee Central - Employee Profile - SAP for Me</a> </li><li><a href="https://me.sap.com/notes/2495643/E" rel="noopener noreferrer nofollow" target="_blank">2495643 - SuccessFactors User IDs - Clarifying the Different IDs - SAP for Me</a></li></ul>
+</li></ul>
+</td></tr><tr><td style="height: 52.7917px;">
+<p>Can the duplicate error message “This Person ID External XXXX already exists. Please enter a new unique value.” be customized?</p>
+</td><td style="height: 52.7917px;">
+<ul><li>
+<p>This error message is hard coded in SuccessFactors and cannot be customized.  </p>
+</li></ul>
+</td></tr><tr><td style="height: 109.979px;">
+<p>During hire, can we populate Person ID External into a custom field using a Business Rule? </p>
+</td><td style="height: 109.979px;">
+<ul><li>Currently this is not possible because:
+<ul><li>During the hire process, the Person ID External is not yet saved to the database, so Business Rules retrieve a null value.</li><li>Additionally, using Context User in the rule also returns null, because the user record is created only after the hire is completed.  </li></ul>
+</li></ul>
+</td></tr><tr><td style="height: 68.1875px;">
+<p>Can we hide the Person ID External field from the Biographical Information Portlet? </p>
+</td><td style="height: 68.1875px;">
+<ul><li>
+<p>Yes. A Business Rule can be configured to set the visibility of the Person ID External field to “None”.</p>
+</li><li>Create an onView business rule using Biographical Information Model as its base object and scenario "Trigger onView Rules for HRIS Elements" that sets the visibility of the person-id-external field to "none", assign this rule to personInfo HRIS Element with Event type "onView".</li></ul>
+</td></tr><tr><td style="height: 129.771px;">
+<p>Can we update the Person ID External field? </p>
+</td><td style="height: 129.771px;">
+<ul><li>The Person ID External field can be updated either via UI or via Import. 
+<ul><li><strong>Via UI</strong>: Navigate to Manage Business Configuration (BCUI) → 'personInfo' HRIS element → set field visibility of field 'person-Id-external' to Edit. </li><li><strong>Via Import</strong>: Updates are allowed if the Allow Import attribute for the field is set to Yes. (BCUI  → 'personInfo' HRIS element → click 'details' of the field 'person-Id-external' and set 'allow import' to Yes.</li></ul>
+</li></ul>
+</td></tr><tr><td style="height: 145.167px;">
+<p>Can we include Person-id-external (Person ID) field in the import templates of Job History, Compensation Information and Pay Component Recurring (PCR)?</p>
+<section><header></header></section>
+</td><td style="height: 145.167px;">
+<ul><li>
+<p>Use of person-id-external in the import templates of Job History, Compensation Information and Pay Component Recurring is not supported. However, person-id-external continues to be supported for import of the following elements:</p>
+<ul><li>Employment Details</li><li>Biographical Information</li><li>Dependents</li><li>Global Assignments</li><li>Pension Payouts</li><li>Personal Information</li><li>Global Information</li><li>Termination Details</li><li>Phone Information</li><li>Email Information</li><li>National Id Information</li><li>Address Information</li><li>Emergency Contact Information</li></ul>
+</li><li>Please refer the KBA <a href="https://me.sap.com/notes/2925330/E" rel="noopener noreferrer nofollow" target="_blank">2925330 - Person-id-external field not available in import template - SAP for Me</a> </li></ul>
+</td></tr></tbody></table></div>
+<p></p>
+<p></p>
+<h3 data-toc-skip=""><span style="font-size: 10pt; ">Biographical Information fields</span></h3>
+<ul></ul>
+<div>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100.041%; height: 1145.14px;"><colgroup><col style="width: 49.9379%;"/><col style="width: 49.9379%;"/></colgroup><tbody><tr style="height: 27.9583px;"><td style="height: 27.9583px; text-align: center;">
+<h3 data-toc-skip=""><strong>Question</strong></h3>
+</td><td style="height: 27.9583px; text-align: center;">
+<h3 data-toc-skip=""><strong>Answer</strong></h3>
+</td></tr><tr style="height: 236.323px;"><td style="height: 236.323px;">
+<p>How to hide Date of Birth/Region of Birth/Country of Birth Using Business Rule?</p>
+</td><td style="height: 236.323px;">
+<ul><li>To restrict access to Date of Birth/Region of Birth/Country of Birth field in the portlet, please refer the KBA <a href="https://me.sap.com/notes/2732325/E" rel="noopener noreferrer nofollow" target="_blank">2732325 - How to Hide Date Of Birth/Region Of Birth/Country Of Birth Using Business Rule - SAP for Me</a> </li><li>Currently it is not possible to hide the fields through RBP. This is expected behavior because the date of birth in Employee Data refers to the Employee Profile, while in Employee Central it is part of the Biographical Information portlet, and access to that portlet provides visibility to all its fields, including date of birth.</li></ul>
+</td></tr><tr style="height: 125.833px;"><td style="height: 125.833px;">
+<p>Can the Date of Birth be entered as today’s date or a future date? </p>
+</td><td style="height: 125.833px;">
+<ul><li>From 1H 2025 release, a validation is added which prevents saving the Date of Birth field with today’s or future dates. This validation also applies during the hire process and will block hire submission if violated.</li><li>Reference What's new viewer: <a href="https://help.sap.com/docs/successfactors-release-information/8e0d540f96474717bbf18df51e54e522/754064690bfa43838b21319e91099485.html" rel="noopener noreferrer nofollow" target="_blank">ECT-241843 - Date of Birth Validation for Employees</a></li></ul>
+</td></tr><tr style="height: 103.729px;"><td style="height: 103.729px;">
+<p>Can the Date of Birth field be masked only for certain countries?  </p>
+</td><td style="height: 103.729px;">
+<ul><li>Currently this is not supported because Biographical Information is not country specific, unlike objects such as Job Information. </li></ul>
+</td></tr><tr style="height: 125.833px;"><td style="height: 125.833px;">
+<p>Can we view historical changes for the Date of Birth field in Biographical Information? </p>
+</td><td style="height: 125.833px;">
+<ul><li>Biographical Information is not an effective dated entity, so historical changes are not stored.</li><li>To review changes, use Audit Reports, specifically: Table Reports → Person and Employment Audit Report domain. </li></ul>
+</td></tr><tr style="height: 125.833px;"><td style="height: 125.833px;">
+<p>What could be the reason a field is not visible in the Biographical information UI even when permissions are granted?  </p>
+</td><td style="height: 125.833px;">
+<ul><li>A common reason is that the field is not enabled for the Employee Person Type.</li><li>Even if permissions are granted, the field will not appear unless it is enabled for that person type. </li><li>In Manage Business Configuration (BCUI) → expand personInfo and check if the field is enabled in person types like 'personInfo_employee', 'personInfo_contingent worker' etc.</li></ul>
+</td></tr><tr style="height: 125.833px;"><td style="height: 125.833px;">
+<p>Can the 'Date of Birth' and 'Country of Birth  be used in Personal Information portlet?</p>
+</td><td style="height: 125.833px;">
+<ul><li>Currently it is not possible to use these fields in Personal Information.</li><li>Country of Birth and Date of Birth is only supported under Biographical Information Portlet (i.e personInfo HRIS element) </li></ul>
+</td></tr><tr style="height: 103.729px;"><td style="height: 103.729px;">
+<p>Can the Biographical Fields be enabled specifically for "Add new Employee" and "Add contingent worker"?</p>
+</td><td style="height: 103.729px;">
+<ul><li>Yes, it is possible to add the person types for Employee and Contingent worker, and the visibility will be based on the person types configured.</li><li>In Manage Business Configuration (BCUI) → expand personInfo and enable in person types like 'personInfo_employee', 'personInfo_contingent worker' etc.</li></ul>
+</td></tr><tr style="height: 170.073px;"><td style="height: 170.073px;">
+<p>Can the permission be provided for Biographical Information fields Individually?</p>
+</td><td style="height: 170.073px;">
+<ul><li>Currently it is not possible to provide permission individually. RBP only allows to grant element level permissions and not field level.</li><li>A Business Rule can be configured to change the visibility of the field. Please refer the KBA <a href="https://me.sap.com/notes/2585107/E" rel="noopener noreferrer nofollow" target="_blank">2585107 - Unable to Find Biographical Information Fields in RBP - SAP for Me</a> </li></ul>
+</td></tr><tr><td>
+<p>Can we create country specific configuration for Biographical Information?</p>
+</td><td>
+<ul><li>It is possible to create the country-specific configuration for the countries: Chile, France, Brazil, Venezuela. </li><li>Please refer the KBAs:
+<ul><li><a href="https://me.sap.com/notes/3359692/E" rel="noopener noreferrer nofollow" target="_blank">3359692 - Availability of Country specific fields for Biographical Information - SAP for Me</a> </li><li><a href="https://me.sap.com/notes/2599316/E" rel="noopener noreferrer nofollow" target="_blank">2599316 - Region of Birth Field becomes a picklist for some Countries in Biographical Information - SAP SuccessFactors Employee Central - SAP for Me</a> </li></ul>
+</li></ul>
+</td></tr><tr><td>
+<p>What is the logic to display Localized Biographical Information fields on block or card in Latest People Profile (PPX)</p>
+</td><td>
+<ul><li>Refer <a href="https://help.sap.com/docs/successfactors-employee-central/implementing-employee-central-core/biographical-information?version=latest" rel="noopener noreferrer nofollow" target="_blank">Viewing Biographical Information in People Profile</a></li></ul>
+</td></tr></tbody></table></div>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://me.sap.com/notes/2493579/E" rel="noopener noreferrer nofollow" target="_blank">2493579</a> - Person/User IDs Used Within Employee Central - Employee Profile</li><li><a href="https://me.sap.com/notes/2495643/E" rel="noopener noreferrer nofollow" target="_blank">2495643 </a>- SuccessFactors User IDs - Clarifying the Different IDs</li><li><a href="https://me.sap.com/notes/2732325/E" rel="noopener noreferrer nofollow" target="_blank">2732325 </a>- How to Hide Date Of Birth/Region Of Birth/Country Of Birth Using Business Rule</li><li><a href="https://me.sap.com/notes/2585107/E" rel="noopener noreferrer nofollow" target="_blank">2585107 </a>- Unable to Find Biographical Information Fields in RBP</li><li><a href="https://me.sap.com/notes/3359692/E" rel="noopener noreferrer nofollow" target="_blank">3359692 </a>- Availability of Country specific fields for Biographical Information</li><li><a href="https://me.sap.com/notes/2599316/E" rel="noopener noreferrer nofollow" target="_blank">2599316 </a>- Region of Birth Field becomes a picklist for some Countries in Biographical Information - SAP SuccessFactors Employee Central</li><li><a href="https://me.sap.com/notes/2925330/E" rel="noopener noreferrer nofollow" target="_blank">2925330 </a>- Person-id-external field not available in import template</li><li><a href="https://me.sap.com/notes/2287959/E" rel="noopener noreferrer nofollow" target="_blank">2287959 </a>- Person ID External already exists<a href="https://me.sap.com/notes/2925330/E" rel="noopener noreferrer nofollow" target="_blank"></a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Date of birth, date-of-birth, DOB, Biographical Information, Permissions, Business rule, hide, none, view, edit, Person Info, Biographical, Manage Business Configuration, Employee profile, employee central, Region of birth, region-of-birth, country of birth, country-of-birth, visibility, hire, contingent, add new employee, add contingent, person ID, person ID external, Biographical, User ID, Country, specific, Global Assignment, import, template, person-id-external, person id, Job information, Employment information, Compensation information, Email Information, Phone information, Personal Information, Dependents, Termination, Address Information, Emergency contact Information, Pension Payouts, Global Information, This Person ID External, already exists, Please enter a new unique value, personInfo_employee, personInfo_contingent worker, localized biographical information</p></div></div></div></div>

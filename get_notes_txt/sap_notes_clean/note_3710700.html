@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> You seek information on how to configure the Intel CPU-idle time management on your SAP HANA servers.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> HANA, C-state, intel_idle, Red Hat, SUSE</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Modern CPU cores can enter idle states, when they are not busy, to save energy. Energy saving is achieved by lowering frequency, reducing voltage, or shutting down parts of the core. Depending on the CPU's generation, different idle states are available. The higher the idle state, the more energy can be saved. That comes at the expense of a higher wakeup latency.</p>
+<p id="__html0">The default Linux idle time management driver on hardware with Intel processors is "intel_idle".</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">As SAP HANA benefits from low latency idle states, a recommended balance can be achieved by allowing the intel_idle driver to make use of C-states with a wakeup latency of up to 70 microseconds (µs).<br/>The Linux distributors' SAP-specific helper tools assess the available C-states and their corresponding wakeup latencies. Based on this assessment, they choose the maximum (i.e. deepest) idle state according to this guidance.<br/>Please see the distributors' documentation for more details:</p>
+<ul>
+<li>SAP Note <a href="/notes/3427561" target="_blank">3427561</a> on Red Hat systems for the 'sap-hana' tuned profile</li>
+<li>SAP Note <a href="/notes/1275776" target="_blank">1275776</a> for 'saptune' on SUSE systems</li>
+</ul>
+<p><strong>More background information</strong></p>
+<p>The '<span class="SNO_DNT" style="float: none;" translate="no">cpupower</span>' tool helps to display the available idle states and their corresponding wakeup latency, like in the following, shortened example:</p>
+<p><span class="SNO_DNT" style="float: none;" translate="no"># cpupower idle-info</span><br/><span class="SNO_DNT" style="float: none;" translate="no">CPUidle driver: intel_idle</span><br/><span class="SNO_DNT" style="float: none;" translate="no">[..]</span><br/><span class="SNO_DNT" style="float: none;" translate="no">Number of idle states: 4</span><br/><span class="SNO_DNT" style="float: none;" translate="no">Available idle states: POLL C1 C1E C6</span><br/><span class="SNO_DNT" style="float: none;" translate="no">POLL:</span><br/><span class="SNO_DNT" style="float: none;" translate="no">[..]</span><br/><span class="SNO_DNT" style="float: none;" translate="no">Latency: 0</span><br/><span class="SNO_DNT" style="float: none;" translate="no">C1:</span><br/><span class="SNO_DNT" style="float: none;" translate="no">Latency: 1</span><br/><span class="SNO_DNT" style="float: none;" translate="no">[..]</span><br/><span class="SNO_DNT" style="float: none;" translate="no">C1E:</span><br/><span class="SNO_DNT" style="float: none;" translate="no">Latency: 2</span><br/><span class="SNO_DNT" style="float: none;" translate="no">[..]</span><br/><span class="SNO_DNT" style="float: none;" translate="no">C6:</span><br/><span class="SNO_DNT" style="float: none;" translate="no">Latency: 290</span><br/><span class="SNO_DNT" style="float: none;" translate="no">[..]</span></p>
+<p>In this example, the deepest idle state to be utilized should be set to 'C1E' - which corresponds to index #2 in the list of available states. This state should be selected because it represents the deepest C-state that still conforms to the recommended wakeup latency of up to 70 microseconds.</p>
+<p><strong>It is recommended to configure the available CPU idle states by using the tools provided by your OS distributor, as described above.</strong></p>
+<p>To manually limit the available CPU idle states at OS level, you can use the 'cpupower' tool:</p>
+<p># cpupower idle-set --disable-by-latency 70</p>
+<p>This disables the usage of C-states with more than 70 microseconds (in this example deeper than C1E, index #2, until the next OS reboot.</p>
+<p><br/>To manually make these settings persistent across OS reboots, you can append the following to the Linux kernel command line:</p>
+<p>intel_idle.max_cstate = &lt;index&gt;<br/>intel_idle.max_cstate = 2</p>
+<p>After a reboot, the usage of C-states deeper than C1E (index #2) will be disabled in this example.</p>
+<p><br/><strong>Please note:</strong> The number of available CPU idle states may already be limited at the hardware or hypervisor level, making them invisible on OS level. For more information, please consult the respective vendor's or technology's documentation. For example:</p>
+<ul>
+<li><a href="/notes/1656250" target="_blank">1656250</a> - AWS </li>
+<li><a href="/notes/2993054" target="_blank">2993054</a> - Azure </li>
+<li><a href="/notes/2100566" target="_blank">2100566</a> - Lenovo </li>
+<li><a href="/notes/2015392" target="_blank">2015392</a> - VMware </li>
+</ul>
+<p>The loaded CPUidle driver should be 'intel_idle'. Which can be checked as follows:</p>
+<p># cat /sys/devices/system/cpu/cpuidle/current_driver<br/>intel_idle</p>
+<p>For more technical details, please refer to the Linux Kernel documentation<br/><a href="https://docs.kernel.org/admin-guide/pm/cpuidle.html#idle-states-control-via-kernel-command-line" target="_blank">https://docs.kernel.org/admin-guide/pm/cpuidle.html#idle-states-control-via-kernel-command-line</a><br/><a href="https://docs.kernel.org/admin-guide/pm/intel_idle.html#enumeration-of-idle-states" target="_blank">https://docs.kernel.org/admin-guide/pm/intel_idle.html#enumeration-of-idle-states</a><br/><br/></p></div></div></div></div>

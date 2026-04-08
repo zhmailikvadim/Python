@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Mobile app (Android, iOS and Windows Client) ignores “Locked” state set on the Planning Board, handover and reassignment succeeds with no error message.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<div>
+<div>
+<p>SAP Field Service Management</p>
+</div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol style="list-style-type: decimal;"><li>Log in 'Shell'</li><li>Navigate to 'Planning &amp; Dispatching Board'</li><li>
+<p>On the Planning Board assign an activity to a technician</p>
+</li><li>
+<p>Lock the assignment</p>
+</li><li>
+<p>Log in mobile app</p>
+</li><li>
+<p>Open the assigned activity</p>
+</li><li>
+<p>Tap the three dots and select 'Handover to person'</p>
+</li><li>
+<p>Select another technician</p>
+</li><li>
+<p>Save the changes</p>
+</li></ol>
+<p><strong>Actual Behavior:</strong><br/>The activity can be handed over to another technician even when it is locked.</p>
+<p><strong>Expected Behavior:</strong><br/>It should not be possible to hand over the activity to another technician if the activity is locked</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">The 'Locked' feature only works on the "Planning Board" and "Partner Portal". </span><span style="font-size: 10pt;">Technically the handover does not consider the field "<span style="font-family: 'courier new', courier;">technicianFixed</span>" in ServiceAssignment DTO.</span></li><li>The original idea of LOCKED feature was mainly for the dispatcher, who could lock an activity by time, technician, or both. <br/>This was meant to make sure that once the dispatcher and the customer agreed on a date or time, it would stay fixed and no one else or the system could change it.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>There are two solutions to prevent an handover:</p>
+<ol><li>Business Rule: Implement a validation business rule to prevent the handover on mobile app (link at 'See Also'). </li><li><span style="font-size: 10pt;">Screen Configuration: Hide the handover action in the mobile app (link at 'See Also').</span></li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><span style="font-size: 10pt;">SAP Help Portal official documentation about '</span><a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_ai/locked-activity-handling.html" rel="noopener noreferrer nofollow" style="font-size: 10pt;" target="_blank">Locked activity handling</a>'.</li><li><span style="font-size: 10pt;">SAP Help Portal official documentation about '</span><a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_admin/validate.html" rel="noopener noreferrer nofollow" style="font-size: 10pt;" target="_blank">Validation Business Rule</a><span style="font-size: 10pt;">' and '</span><a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_mobile/handover-take-it.html" rel="noopener noreferrer nofollow" style="font-size: 10pt;" target="_blank">Screen configuration</a>'.<a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_crowd/partner-registration.html?locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank"></a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>despite, locked, status, possible, handover, permission, inconsistent behavior</p></div></div></div></div>

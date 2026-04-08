@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The application log related to the value chain is currently filled with 999,999 messages.When there are more than 999999 entries for a specifc value chain, it is not possible to process any documents in value chain and system terminates with CX_VCM_APP_LOGGER dump.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CX_VCM_APP_LOGGER, BALHDR, VCM, Purchase Order, Sales Order</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>There is a limitation in the application log, which can store only up to 999,999 messages for a single log instance. When an application log linked to a value chain becomes full, meaning the tally of messages reaches 999,999, the value chain and related objects (such as sales orders, purchase orders, deliveries, etc.) cannot be processed further.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please implement the attached correction instructions.</p>
+<p>This note provides a report to create a new log to replace the existing one, allowing for the processing of objects associated with a value chain where the current log is full.</p>
+<p>However, please note that after creating the new log, the old messages will no longer be visible in the Monitor Value Chain Fiori app. They can still be accessed via SLG1 or SLGD transactions using the chain instance GUID or log handle.</p></div></div></div></div>

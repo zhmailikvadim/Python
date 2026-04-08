@@ -1,0 +1,72 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3710399&amp;TargetLanguage=EN&amp;Component=FT-LEG-NPO&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3710399/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3710399/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>This SAP Note enables the management of the source of goods for externally procured products.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+<li>SAP Fiori app: Manage Country/Region of Origin (F8875)</li>
+<li>Report for Processing Material Documents </li>
+<ul>
+<li>SAP Fiori app: Schedule Determination of Country/Region of Origin (F9122)</li>
+<li>Transaction /SAPSLL/PRCOO_CREATE (report /SAPSLL/CREATE_PRCOO)</li>
+</ul>
+<li>Report for Updating Current Batch Quantity</li>
+<ul>
+<li>SAP Fiori app: Schedule Update of Batch Stock (F9333)</li>
+<li>/SAPSLL/PRCOO_BATQTY (report /SAPSLL/UPDATE_PRCOO_BAT_QTY)</li>
+</ul>
+<li>Transfer of the determined country/region of origin to the S/4HANA feeder system</li>
+<ul>
+<li>Product Master via OData v2 Service "Product Master (A2X)"</li>
+<li>Charge via OData v2 Batch Master Record Service</li>
+</ul>
+<li>Monitoring the transfer and update of the country/region of origin from source documents using AIF interfaces:</li>
+<ul>
+<li>Namespace: /GTS</li>
+<li>Interface: PRCOOB_CHG ("Transfer Goods Origin to Batch of Feeder System")</li>
+<li>Interface: PRCOO_CHG ("Transfer Goods Origin to Product of Feeder System")</li>
+<li>Interface: PRCOO_LTSD ("Update Country of Origin from LTSD")</li>
+<li>Interface: PRCOOIMDEC ("Update of Country of Origin from Customs Import Declaration")</li>
+</ul>
+</ul>
+<p><strong>Constraints</strong></p>
+<ul>
+<li>For batch-managed products, the batch must be managed at batch level "Plant". Batch levels "Material" and "Client" are currently not supported. The batch level "Material" is supported by an additional SAP Note that will be published at a later point in time.</li>
+</ul>
+<p><strong>Documentation</strong></p>
+<p>Information about the application, configuration, and administration of the solution can be found in the following documents:</p>
+<ul>
+<li><a href="https://help.sap.com/docs/SAP_GLOBAL_TRADE_SERVICES_EDITION_HANA/3e27235faf0442d380b529b89bb82982/852257aafb9b4a448f1650c70c9c6334.html" target="_blank">Application Help</a></li>
+<li><a href="https://help.sap.com/docs/SAP_GLOBAL_TRADE_SERVICES_EDITION_HANA/cb75bbde7d0b4dbe8dd2b578213ed614/31d5678285e942fcb061aae9f28abd6a.html" target="_blank">Configuration Guide</a></li>
+<li><a href="https://help.sap.com/docs/SAP_GLOBAL_TRADE_SERVICES_EDITION_HANA/61a9deae2f1940a18b1000aaddf27523/17f38c489eff47e2b0ac4c0d4c296050.html" target="_blank">Administration Guide</a></li>
+<li><a href="https://help.sap.com/docs/SAP_GLOBAL_TRADE_SERVICES_EDITION_HANA/09fe61fcf7614503802bd2e775ba9e99/fdf65ae7e5dc4f55b3a21096e45def84.html" target="_blank">Integration Guide</a></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p id="">Trade policy country of origin, NPO, origin of goods</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>The function requires integrated material documents from an <strong>S/4HANA 2021 (S4CORE 106)</strong> system or later.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p><span style="text-decoration: underline;"><strong>SAP GTS, edition for SAP HANA</strong></span></p>
+<p><strong>Due to the complexity of the new function, we strongly recommend that you import Support Package 01.</strong></p>
+<p>If this is not possible, implement the following SAP Notes in the specified sequence in your SAP GTS, edition for SAP HANA system (software component GTSCORE):</p>
+<ol>
+<li><a href="/notes/3718394" target="_blank">3718394</a></li>
+<li><a href="/notes/3692606" target="_blank">3692606</a></li>
+<li><a href="/notes/3710400" target="_blank">3710400</a></li>
+<li><a href="/notes/3710452" target="_blank">3710452</a></li>
+<li><a href="/notes/3710453" target="_blank">3710453</a></li>
+<li><a href="/notes/3710455" target="_blank">3710455</a></li>
+<li><a href="/notes/3710456" target="_blank">3710456</a></li>
+<li><a href="/notes/3710457" target="_blank">3710457</a></li>
+<li><a href="/notes/3710466" target="_blank">3710466</a></li>
+<li><a href="/notes/3720007" target="_blank">3720007</a></li>
+<li><a href="/notes/3710467" target="_blank">3710467</a></li>
+</ol>
+<p>In addition, implement the following SAP Notes in your SAP GTS, edition for SAP HANA system (software component UIGRCGTS):</p>
+<ol>
+<li><a href="/notes/3710459" target="_blank">3710459</a></li>
+<li><a href="/notes/3720148" target="_blank">3720148</a></li>
+</ol>
+<p><span style="text-decoration: underline;"><strong>SAP S/4HANA</strong></span></p>
+<p>Implement the following SAP Note in the connected SAP S/4HANA systems:</p>
+<ol>
+<li><a href="/notes/3682750" target="_blank">3682750</a></li>
+</ol></div></div></div></div></div>

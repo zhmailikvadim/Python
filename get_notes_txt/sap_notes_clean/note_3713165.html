@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">After you upgrade the system to SAP S/4HANA OP2023, the Itemization for Posting Totals (transaction FPT5) and the Itemization for G/L Documents from FI-CA (transaction FPT5) or FPG5 show the totals but do not display the assigned document lines for archived documents.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FP-GL, FP-SUM, CO-PA, DFKKSUM, RFKKGL20, PAOBJNR, FPT5, DFKKSUM</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Reason:With Release S/4HANA OP2023, the data type of the profitability segment is changed from numeric to character-like (field PAOBJNR, change from NUMC10 to CHAR10). As a result, the initial value changes from '0000000000' to SPACE.</p>
+<p>Prerequisites: You archived the Reconciliation Key with PAOBJNR value '0000000000'.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After implementing this SAP Note, the system correctly displays the assigned document lines for archived documents in transactions FPT5 and FPG5.</p>
+<p id="">Implement the corrections in accordance with the attached correction instructions or import the relevant Support Package.</p></div></div></div></div>

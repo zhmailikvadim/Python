@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Warning message appears in SSCUI 103379 - Define Currency for Ledgers and Company Codes:</li></ul><p>  "Assign consistent grp crcy types to CC if is relevant for user" (Message FINS_ACDOC_CUST516).  </p><ul><li>The same warning message is visible in the Central Business Configuration (CBC).</li><li>Error occurs when attempting to transfer currency values from ACDOCA to ACDOCU during the Release Universal Journal (UJ) task.</li><li>Inconsistent currency configuration between consolidation versions and company codes.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<div>
+<div>
+<p>SAP S/4HANA Cloud Public Edition</p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div> </div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Open SSCUI 103379 - Define Currency Settings for Ledgers and Company Codes.</li><li>You will see the following warning message:</li></ol>
+<p>"Some internal inconsistencies have been found:<br/>Assign consistent grp crcy types to CC  if  is relevant for grp reptg<br/>Assign consistent grp crcy types to CC  if  is relevant for grp reptg"</p>
+<p></p>
+<p><strong>Remark</strong>: The same warning message can be seen in the Central Business Configuration (CBC)</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The warning is triggered when there is inconsistent customizing between the group currency of the consolidation version and the currency code of the assigned Group Currency Source.</p>
+<p>This typically occurs when:</p>
+<ul><li>The consolidation version is defined with Group Currency Source = K (Global Currency), and</li><li>The group currency in the consolidation version differs from the group currency stored in ACDOCA for the assigned ledger and company codes (for example, ACDOCA contains GBP, while the consolidation version uses USD or SGD).</li></ul>
+<p>Group Currency Source = K instructs the system to copy group currency values directly from ACDOCA into ACDOCU without currency translation. Therefore, the currency keys must be identical.</p>
+<p>When different group currencies are defined per consolidation version, this condition is not fulfilled, and the system raises the warning message (FINS_ACDOC_CUST516).</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This is the expected system behavior. </p>
+<p>The warning does not block consolidation processing and can be ignored if Group Currency Source = K is intentionally used and the company codes are not relevant for the affected consolidation versions.</p>
+<p>No Accounting or Ledger configuration changes are required for the recommended scenario.</p>
+<p>If the requirement is to <strong>translate company code values into different group currencies per consolidation version</strong>, proceed as follows:</p>
+<ol><li>Open Define Versions for the affected consolidation versions.</li><li>Set Group Currency Source to blank (&lt;empty&gt;) instead of K (Global Currency).</li><li>Ensure that exchange rates are maintained for the relevant currencies and periods.</li><li>Run Currency Translation (CT) in the Data Monitor after data is available in ACDOCU.</li></ol>
+<p>With Group Currency Source = &lt;empty&gt;, Group Reporting calculates group currency values using Currency Translation (CT) instead of copying them from ACDOCA.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Note <a href="https://me.sap.com/notes/3015594" rel="noopener noreferrer nofollow" target="_blank">3015594</a> - FAQ SAP S/4HANA Ledger and Currency Customizing (e.g. transaction FINSC_LEDGER)</p>
+<p>KBA <a href="https://me.sap.com/notes/3470534" rel="noopener noreferrer nofollow" target="_blank">3470534</a>- Why cannot the group currency in the Consolidation Version be edited?</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>currency translation, CBC warning, FINS_ACDOC_CUST516, inconsistent currency configuration, consolidation version, SSCUI 103379, SAP S/4HANA Cloud, data monitor, global currency, currency source, ACDOCA, ACDOCU.</p></div></div></div></div>

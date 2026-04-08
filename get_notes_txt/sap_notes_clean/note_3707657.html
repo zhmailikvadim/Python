@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">ENSA1 (enserver) process may terminate with following stack written to dev_enqrepl trace<br/><br/></p>
+<p>[Thr 139897829069888] *** WARNING =&gt; EnqStoreClass::getRequest: store Replication store slot &lt;NN&gt; not filled [ensutil.cpp 2917]<br/>[Thr 139897829069888] ------------------ C-STACK ----------------------<br/>en.sapHP1_ASCS00[S](LinStackBacktrace+0xa8)[0x56366ea9ba18,0xe4a18]<br/>en.sapHP1_ASCS00[S](LinStack+0x41)[0x56366ea9f03c,0xe803c]<br/>en.sapHP1_ASCS00[S](CTrcStack2+0x4b)[0x56366ea9a7bc,0xe37bc]<br/>en.sapHP1_ASCS00[S](SigThrDefaultSigaction.constprop.0+0x270)[0x56366ec8a3f0,0x2d33f0]<br/>&lt;signal handler called&gt; [0x7f3cb56e9990,0x12990]<br/>en.sapHP1_ASCS00[S](EnqReqClass::setReplicated()+0xb)[0x56366ecd057b,0x31957b]<br/>en.sapHP1_ASCS00[S](EnReplicateRepToEnq::process()+0x224)[0x56366ec93904,0x2dc904]<br/>en.sapHP1_ASCS00[S](ReplThread::Loop()+0x1fef)[0x56366ecaec2f,0x2f7c2f]<br/>en.sapHP1_ASCS00[S](ThreadStart+0x28)[0x56366ecdfdd8,0x328dd8]<br/>libpthread.so.0[N](start_thread+0xea)[0x7f3cb56df1ca,0x81ca]<br/>[Thr 139897829069888] ------------------ c-stack end ------------------<br/>[Thr 139897829069888] ***LOG Q0E=&gt; SigThrDefaultSigaction, signal ( 11) [ensaux.c 848]<br/><br/></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>signal 11, enserver, setReplicated, EnReplicateRepToEnq</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Error in coding.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The correction is delivered with the kernel archives:</p>
+<ul>
+<li>ENSERVER patch - <em>enserver.sar</em><em></em><strong><br/></strong></li>
+</ul>
+<ul>
+<li>SP stack kernel files SAPEXE.SAR and SAPEXEDB.SAR </li>
+</ul>
+<p>The corrections are contained in all patch levels that are <strong>equal to or greater than</strong> the patch level specified in the "<strong>Support Package Patches</strong>" section for the relevant kernel release.<br/>If there is no entry there, the patch has not yet been delivered. The patch level will be entered automatically once the patch is available for download. You can <strong>subscribe</strong> to this SAP Note to be notified when it is updated.</p>
+<p>Follow <strong>our recommendations</strong> for applying a kernel patch:</p>
+<ol>
+<li>Import the <strong>latest SP Stack Kernel</strong> if it already contains the corrections. For a list of current SP Stack Kernels, see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Apply the <strong>hotfix</strong> only if it is a serious error that is not yet corrected by the latest SP Stack Kernel. </li>
+<li>Check the <strong>regression note</strong> for the desired patch level before applying the kernel patch. For detailed information, see SAP Note <a href="/notes/1802333" target="_blank">1802333</a> (Finding information about regressions in the SAP kernel).</li>
+<li>For instructions on how to download and apply a kernel patch, see SAP Note <a href="/notes/19466" target="_blank">19466</a> (Downloading SAP kernel patches).</li>
+</ol>
+<p>For detailed information about our recommendations, see the strategy document: <a href="https://support.sap.com/deployment-strategies-kernel-abap.pdf" rel="noopener noreferrer" tabindex="-1" target="_blank" title="https://support.sap.com/deployment-strategies-kernel-abap.pdf">Update Strategy for the Kernel of the Application Server ABAP in On Premise Landscapes</a>.</p></div></div></div></div>

@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>When using the integration package SAP Sales Cloud Version 2 Integration with SAP CPQ (latest version), an error occurs when attempting to edit the iFlow Create Follow-Up Quote in SAP CPQ from Opportunity.</p>
+<p>The error indicates that JMS (Java Message Service) is required. JMS capabilities are not included in the Basic Edition of SAP Cloud Integration.</p>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Sales Cloud Version 2</li><li>Integration for SAP Sales/Service Cloud</li><li>SAP Sales Cloud Version 2 Integration with SAP CPQ (latest version)</li><li>SAP Cloud Integration (part of SAP Integration Suite)</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Deploy or open the integration package SAP Sales Cloud Version 2 Integration with SAP CPQ.</li><li>Open the iFlow Create Follow-Up Quote in SAP CPQ from Opportunity.</li></ol>
+<div>The system displays an error stating that JMS is required.</div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The iFlow uses JMS (Java Message Service) for asynchronous message processing.</p>
+<p>JMS functionality in SAP Cloud Integration is only available with:</p>
+<ul><li>SAP Integration Suite – Standard and Premium Edition, or</li><li>Consumption-based (CPEA) licensing, with Cloud Integration service enabled.</li></ul>
+<p>The Basic Edition does not include JMS message broker capabilities and therefore cannot support CPQ integration scenarios that rely on JMS.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p><strong>Short-Term solution:</strong> To enable JMS and use the CPQ follow-up quote iFlow, upgrade the SAP BTP license to one of the following:</p>
+<ul><li>Integration Suite – Standard Edition, at a minimum.</li></ul>
+<p>For more information, refer to:</p>
+</div>
+<ul><li><a href="https://me.sap.com/notes/2903776" rel="noopener noreferrer nofollow" target="_blank">2903776 </a>- SAP Integration Suite – Service Plans and Upgrade Paths</li><li><a href="https://userapps.support.sap.com/sap/support/knowledge/en/3386855" rel="noopener noreferrer nofollow" target="_blank">3386855 </a>- The component JMS Sender with version 1.2 is not supported in SAP Cloud Integration profile due to missing license</li><li><a href="https://me.sap.com/notes/3558865" rel="noopener noreferrer nofollow" target="_blank">3558865</a>- iFlow contains components that require an upgrade to your existing Cloud Integration license</li><li>[Self-service enablement of Cloud Integration service on consumption-based model - SAP Community]: <a href="https://community.sap.com/t5/technology-blog-posts-by-sap/self-service-enablement-of-cloud-integration-service-on-cloud-foundry/ba-p/13404094" rel="noopener noreferrer nofollow" target="_blank">https://community.sap.com/t5/technology-blog-posts-by-sap/self-service-enablement-of-cloud-integration-service-on-cloud-foundry/ba-p/13404094</a></li></ul>
+<div>
+<p>Please contact your SAP Account Executive for guidance on licensing or upgrading to the required edition.</p>
+<p><strong>Long-Term solution: </strong></p>
+<div>In previous versions of the integration with SAP CPQ, the iFlow included a JMS component to work around limited API capabilities and to ensure stable processing. With recent updates to the CPQ API, this workaround is no longer required.</div>
+<div> </div>
+<div>What will Change:<br/>SAP CPQ has introduced enhancements to its API that now allow direct updates to the fields that previously required JMS-based handling.<br/>Thanks to this improvement, the integration can be simplified, and JMS can be safely removed from the iFlow while maintaining full functional support.</div>
+<div>
+<p>SAP is currently updating the affected iFlow to reflect this improvement. The updated version (1.2.1) will:</p>
+<ul><li>Remove the JMS component</li><li>Use the enhanced CPQ API for direct field updates</li><li>Improve transparency and reduce complexity in the integration design</li></ul>
+<p>This new version is in the publication pipeline and will appear in the integration package once released.</p>
+</div>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>JMS message queues is planned to be used in the most of new release iflows.</p>
+<p>So the need to activate Enterprise Messaging on the tenant to run scenarios with JMS/AS2/XI (with JMS storage ) adapter</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>iflow error, SAP CPQ, SAP Sales Cloud, JMS requirement, Cloud Platform Integration, Enterprise Edition, asynchronous messaging, license upgrade, CPQ integration, SAP Integration Suite</p></div></div></div></div>

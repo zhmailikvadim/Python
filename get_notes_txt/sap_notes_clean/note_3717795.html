@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When attempting to update an Identity Authentication Service (IAS) user using <a href="https://help.sap.com/docs/cloud-identity-services/cloud-identity-services/identity-directory-scim-rest-api?version=Cloud" rel="noopener noreferrer nofollow" target="_blank">Identity Directory API</a>, a 400 error occurs.</p>
+<p>API Endpoint:<br/><code>PUT /scim/Users/&lt;SCIM ID&gt; HTTP/1.1</code><code></code></p>
+<p>Response Code: 400</p>
+<p>“scimType”:“invalidValue”,“detail”:“<strong>Both name and value properties must be provided in case of custom attributes attribute</strong>.“,”status”:“400”}</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Identity Authentication Service</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Attempt to create or update IAS users using the specified API endpoint.</li><li>Observe the error message indicating missing properties for custom attributes.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue occurs due to missing "name" or "value" property in the payload for custom attributes when making the API call. Both "name" and "value" properties must be provided for custom attributes.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Review the payload details to ensure that the payload being sent in the API call contains both the "name" and "value" properties for custom attributes. For example, the correct payload format should be:</p>
+<p>```</p>
+<p>"urn:sap:cloud:scim:schemas:extension:custom:2.0:User": {</p>
+<p>"attributes": [</p>
+<p>{</p>
+<p>"name": "customAttribute1",</p>
+<p>"value": "AAAAA"</p>
+<p>}</p>
+<p>]</p>
+<p>}</p>
+<p>```</p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://help.sap.com/docs/cloud-identity-services/cloud-identity-services/identity-directory-scim-rest-api?version=Cloud" rel="noopener noreferrer nofollow" target="_blank">Identity Directory API | SAP Help Portal</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>responseCode 400, invalidValue error, Both name and value properties must be provided in case of custom attributes attribute, custom attributes, IAS, API, Identity Directory API</p></div></div></div></div>

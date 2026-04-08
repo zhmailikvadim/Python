@@ -1,0 +1,64 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">After system upgrade, the PackingInstructionNumber field in Dangerous Goods Logistics Packing Instructions (table EHDGMD_LPI) may be empty for existing records, preventing proper cross-system integration scenarios where packing numbers with business semantics are required instead of system-specific UUIDs.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> DG - Dangerous Goods</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Prior to the enhancement, Dangerous Goods Logistics Packing Instructions used only system UUIDs (PackingInstructionSystemUUID) to reference packing instructions. To support remote integration scenarios where Product Compliance is used with multiple logistics servers, the system now requires packing instruction numbers that carry business semantics and can be used across systems.</p>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>Migration applies to all clients except client '000'</li>
+<li>Source data must exist in table PACKKP with valid packing instruction numbers (POBJID)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div>
+<p>The migration is executed automatically during system upgrade via the Software Delivery Manager Infrastructure (SDMI) framework. The migration performs the following steps:</p>
+<ol>
+<li>
+<p><strong>Data Selection:</strong></p>
+<ul>
+<li>Identifies all Dangerous Goods Logistics Packing Instructions where PackingInstructionNumber is initial (empty)</li>
+<li>Uses CDS view P_DNGRSGDSLGSPAINSNMIGRATION to track the status for the need of the migration</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Derivation:</strong></p>
+<ul>
+<li>For each record with a valid PackingInstructionSystemUUID:
+<ul>
+<li>Looks up the corresponding packing instruction number (POBJID) from table PACKKP</li>
+<li>Matches using PACKNR = PackingInstructionSystemUUID</li>
+</ul>
+</li>
+<li>Populates the PackingInstructionNumber field with the retrieved value</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Update:</strong></p>
+<ul>
+<li>Updates table EHDGMD_LPI using indicator-based UPDATE (only PackingInstructionNumber field is modified)</li>
+<li>Processes records in packages of 100,000 entries for optimal performance</li>
+<li>Marks migrated records with status '01' (done)</li>
+</ul>
+</li>
+<li>
+<p><strong>Execution Modes:</strong></p>
+<ul>
+<li>Test mode: Performs migration with automatic rollback for validation</li>
+<li>Productive mode: Commits migrated data to the database</li>
+</ul>
+</li>
+</ol>
+<p><strong>Business Impact During Migration Runtime:</strong></p>
+<p>The migration has minimal business impact:</p>
+<ol>
+<li>
+<p><strong>My Packaged Dangerous Goods App:</strong> No impact, the application does not have usage of the migrated field.</p>
+</li>
+<li>
+<p><strong>New Data Created During Migration:</strong> Any new packing instructions created during migration runtime will already contain the packing instruction number and do not require migration.</p>
+</li>
+<li>
+<p><strong>System Performance:</strong> Migration processes data in packages to minimize performance impact. The migraiton is really lightweight updating only one field and selecting from one reference table.</p>
+</li>
+<li><strong>DG Checks: </strong>Checks on packing instructions will be downported with 2025 FPS2, so there were no checks being executed.</li>
+</ol></div></div></div></div></div>

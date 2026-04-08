@@ -1,0 +1,74 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">When attempting to access New Supplier Profile Summary in SAP Ariba Supplier Lifecycle and Performance, a few users encounter issues accompanied by the following warning:</div>
+<div>
+<ul><li>To sign in to the application you have to grant the application access to your browser storage. By pressing Continue, a new popup will appear where you can grant the access. If you block this you will not be able to sign in.</li><li>You have either blocked access to your browser storage or have never opened the current page before. To continue, please go to your browser settings and reset the embedded content permissions, or open the confirmation page.</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Navigate to the supplier management section in SAP Ariba Supplier Lifecycle and Performance.</li><li>Attempt to view the supplier profile.</li><li>Observe the error message regarding browser storage access.</li><li>Note that the page results in a blank screen.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This is a browser storage / embedded content / popup permission issue, and end users usually hit it because cookies, local storage, or pop-ups are blocked (often by privacy settings or extensions).</p>
+<p>The application needs:</p>
+<ul><li>
+<p>Cookies &amp; browser storage (local/session storage)</p>
+</li><li>
+<p>Pop-ups or embedded content permissions</p>
+</li><li>
+<p>Sometimes third-party cookies (if auth is embedded or redirected)</p>
+</li></ul>
+<p>If any of these are blocked, sign-in fails.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Few browser specific settings to check and update are as below.</p>
+<div>Settings for <strong>Microsoft Edge (Chromium) </strong>browser.</div>
+<div> </div>
+<div>Allow cookies &amp; storage</div>
+<ol style="list-style-type: decimal;"><li>
+<div role="presentation">Open <strong>Settings</strong></div>
+</li><li>
+<div role="presentation">Go to <strong>Privacy, Search and Services</strong>.</div>
+</li><li>
+<div role="presentation">Click <strong>Cookies</strong>.</div>
+</li><li>
+<div role="presentation">Make sure: <strong>Allow sites to save and read cookie data</strong> is ON and <strong>Block third-party cookies</strong> → Turn OFF (or add an exception)</div>
+</li></ol>
+<div> Reset permissions for your site</div>
+<ol style="list-style-type: decimal;"><li>
+<div role="presentation">Open the app page</div>
+</li><li>
+<div role="presentation">Click the <strong>lock icon </strong>in the address bar</div>
+</li><li>
+<div role="presentation">Select <strong>Permissions</strong> for this site</div>
+</li><li>
+<div role="presentation">Click <strong>Reset permissions</strong></div>
+</li><li>
+<div role="presentation">Reload the page</div>
+</li></ol>
+<div>Allow pop-ups</div>
+<div>
+<ol style="list-style-type: decimal;"><li>
+<div role="presentation">Open <strong>Settings</strong></div>
+</li><li>
+<div role="presentation">Go to <strong>Privacy, Search and Services</strong>.</div>
+</li><li>
+<div role="presentation">Click <strong>Site Permissions</strong>.</div>
+</li><li>Click <strong>All Permissions</strong>.</li><li>Click <strong>Popups and Redirects</strong>.</li><li>Add the application.</li></ol>
+</div>
+<p></p>
+<p>Settings for <strong>Google Chrome</strong><span style="font-size: 10pt;"> browser.</span></p>
+<div role="presentation"> </div>
+<div>Enable cookies &amp; storage</div>
+<ol style="list-style-type: decimal;"><li>
+<div role="presentation">Open <strong>Settings</strong></div>
+</li><li>
+<div role="presentation">Go to <strong>Privacy and security</strong> → <strong>Third-party cookies</strong>.</div>
+</li><li>
+<div role="presentation">Select: <strong>Allow third-party cookies.</strong></div>
+</li></ol>
+<div>Reset site permissions</div>
+<ol style="list-style-type: decimal;"><li>
+<div role="presentation">Open the app page</div>
+</li><li>
+<div role="presentation">Click <strong>lock</strong> <strong>icon</strong> → <strong>Site settings</strong></div>
+</li><li>
+<div role="presentation">Click <strong>Clear data and Reset permissions</strong></div>
+</li><li>
+<div role="presentation">Reload</div>
+</li></ol>
+<div>Allow pop-ups</div>
+<ol style="list-style-type: decimal;"><li>
+<div role="presentation"><strong>Go to Privacy and security </strong>→ <strong>Site Settings </strong>→ <strong>Pop-ups and redirects</strong></div>
+</li><li>
+<div role="presentation">Add your app URL to Allowed</div>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>supplier profile, blank screen, browser storage access, allow third-party cookies, sap ariba, supplier lifecycle, performance, error message, privacy settings, browser settings, troubleshooting, browser storage, embedded content permissions, browser settings</p></div></div></div></div>

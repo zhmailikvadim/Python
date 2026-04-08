@@ -1,0 +1,137 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">As described in the <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">Regulatory Change Manager</a>, under <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-17859" target="_blank">Base remuneration for Social Insurance withholding - RG 38/2026</a>, this SAP Note provides you with the relevant system changes to address General Resolution 38/2026 published by the Argentine government's social insurance agency (Administración Nacional de La Seguridad Social).</p>
+<p>Effective March 1, 2026, the base remuneration maximum and minimum limits for social insurance withholding are set as follows:</p>
+<ul>
+<li>Minimum Limit for Welfare (Obra Social): <strong>248,962.98 </strong> ARS </li>
+<li>Minimum Limit for SIPA, ART, and INSSJyP: <strong>124,481.49</strong> ARS </li>
+<li>Maximum Limit for SIPA, Welfare (Obra Social), ART, and INSSJyP: <strong>4,045,590.45 </strong> ARS </li>
+</ul>
+<p>For more information, check the official announcement issued in the <a href="https://www.boletinoficial.gob.ar/detalleAviso/primera/338571/20260220" target="_blank">Boletín Oficial de la República Argentina</a>.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>&amp;SSOCIAL - For further information, see SAP Note <a href="https://i7p.wdf.sap.corp/sap(bD1lbiZjPTAwMQ==)/bc/bsp/sno/ui_entry/entry.htm?param=69765F6D6F64653D3030312669765F7361706E6F7465735F6E756D6265723D3131353236373126" target="_blank">1152671</a> - CONSULT: List of tags for Argentina notes</p>
+<p>PC00_M29_CALC;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Prerequisites</strong></p>
+<p>The following Support Package levels are the minimum prerequisites:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><em><strong>Release</strong></em></td>
+<td><em><strong>Support Package</strong></em></td>
+</tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 05</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 18</td>
+</tr>
+<tr>
+<td>SAP_HR 608</td>
+<td>HR SP C9</td>
+</tr>
+<tr>
+<td>SAP_HR 604 (EhP6 e EhP7)</td>
+<td>HR SP K1</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</p>
+<p>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The following entries have been updated in the <strong>Constantes de nómina</strong> (V_T511P) table view to address this legal change:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong class="columnName">Constante</strong></td>
+<td><strong class="columnName">Constante liquid.</strong></td>
+<td><strong class="columnName">Inicio</strong></td>
+<td><strong class="columnName">Final</strong></td>
+<td><strong class="columnName">Importe</strong></td>
+<td><strong class="columnName">Mon.</strong></td>
+</tr>
+<tr>
+<td>SESMO</td>
+<td>Mínimo mens.aportes contr. O.S</td>
+<td>01.03.2026</td>
+<td>31.12.9999</td>
+<td>248,962.98</td>
+<td>ARS</td>
+</tr>
+<tr>
+<td>SESMS</td>
+<td>Minimo mens.aportes contr.SIJP</td>
+<td>01.03.2026</td>
+<td>31.12.9999</td>
+<td>124,481.49</td>
+<td>ARS</td>
+</tr>
+<tr>
+<td>SESTO</td>
+<td>Tope mensual aportes O.S.</td>
+<td>01.03.2026</td>
+<td>31.12.9999</td>
+<td>4,045,590.45</td>
+<td>ARS</td>
+</tr>
+<tr>
+<td>SESTS</td>
+<td>Tope mensual aportes SIJP</td>
+<td>01.03.2026</td>
+<td>31.12.9999</td>
+<td>4,045,590.45</td>
+<td>ARS<br/><br/></td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information about the development delivered with this SAP Note, see the following What's New topics on SAP Help Portal:</p>
+<ul>
+<li>SAP S/4HANA and SAP S/4HANA Cloud Private Edition: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/69b793a20d56436f820ed7c76dc77251.html" rel="noopener noreferrer" target="_blank">Base Remuneration for Social Insurance Withholding for March 2026</a></li>
+<li>SAP ERP: <a href="https://help.sap.com/docs/SAP_ERP/063e7e5f4d7f4fc0be08565793a9b941/69b793a20d56436f820ed7c76dc77251.html" rel="noopener noreferrer" target="_blank">Base Remuneration for Social Insurance Withholding for March 2026</a></li>
+</ul>
+<p><strong>Log of changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><em><strong>Version</strong></em></td>
+<td><em><strong>Date</strong></em></td>
+<td><em><strong>Release method</strong></em></td>
+<td><em><strong>Comments</strong></em></td>
+</tr>
+<tr>
+<td>1</td>
+<td>February 24, 2026</td>
+<td>Released for Customer.</td>
+<td>For more information, see <a href="https://itsm.services.sap/now/nav/ui/classic/params/target/kb_view.do%3Fsysparm_article%3DKB0774273" target="_blank">this KBA</a>.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, proceed as follows:</p>
+<ol>
+<li>Apply the manual activity</li>
+</ol>
+<p>For more information, access the <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
+<p>List of objects modified (M) by this SAP Note:</p>
+<ul>
+<li>Table view V_T511P.</li>
+</ul>
+<p><strong>More information</strong></p>
+<ul>
+<li>To receive e-mail notifications of updates to this SAP Note, visit <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
+<li>To stay informed about legal changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">Regulatory Change Manager</a>.</li>
+<li>For documentation about Payroll Argentina, see <a href="https://help.sap.com/viewer/pyaren608" target="_blank">Payroll Argentina (PY-AR)</a>.</li>
+</ul>
+<p><strong>Disclaimers</strong></p>
+<p>The website accessible through this hyperlink is an external website which is not part of SAP's offering. By clicking on the hyperlink YOU AGREE that, unless expressly stated otherwise in your agreements with SAP:</p>
+<ol>
+<li>The content of the linked website and any further external website is not content provided by or on behalf of SAP, nor it is under SAP's control.</li>
+<li>The fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the content and information provided in such websites.</li>
+<li>SAP does not give any representation regarding the quality, safety suitability, accuracy or reliability of any external website or any information, content and materials provided thereon.</li>
+<li>You visit those external websites entirely at your own risk. SAP must not be directly or indirectly responsible or liable for any damage or loss caused, or alleged to be caused by, or in connection with your use of, or reliance on any content, goods or services available on, or through any linked website.</li>
+</ol></div></div></div></div>

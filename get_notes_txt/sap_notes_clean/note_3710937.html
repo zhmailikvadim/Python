@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Error encountered while trying to connect a custom connector between SAP Customer Data Platform (CDP) and Emarsys (EMS).</li><li>Error message: "Bad Request. Request returned unsuccessful status code. Response content: {"error":"invalid_client","error_description":"Client authentication failed (e.g., unknown client, no client authentication included, or unsupported authentication method). The OAuth 2.0 Client supports client authentication method 'client_secret_basic', but method 'client_secret_post' was requested. You must configure the OAuth 2.0 client's 'token_endpoint_auth_method' value to accept 'client_secret_post'."}"</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Customer Data Platform</li><li>Connector Studio</li><li>Emarsys Integration</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Create a custom connector in CDP Connector Studio.</li><li>Create a destination application using the custom connector.</li><li>Configure all URL and credential information correctly.</li><li>Attempt to connect the destination application.</li><li>Observe the error message indicating client authentication failure.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Emarsys expects the authentication method 'client_secret_basic', but CDP sends 'client_secret_post'.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li style="font-size: 10pt;"><span style="font-size: 10pt;">Copy and paste the current JSON from the connector studio "Publish" step to a text editor and add the JSON below to the "securitySchemes" object.</span>
+<ul><li style="font-size: 10pt;">
+<p>```json</p>
+<p>"securitySchemes": {</p>
+<p>  "OAuth2 - via Header": {</p>
+<p>    "type": "oauth2",</p>
+<p>    "flows": {</p>
+<p>      "clientCredentials": {</p>
+<p>        "scopes": {},</p>
+<p>        "tokenUrl": ""</p>
+<p>      }</p>
+<p>    }</p>
+<p>  }</p>
+<p>}</p>
+<p>```</p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The name should be 'Header', and the tokenUrl can be specified.</span></p>
+</li></ul>
+</li></ul>
+</li><li>Call the endpoint below and pass the updated JSON in the request body to make this change.
+<ul><li><span style="font-size: 10pt;"><span style="font-size: 10pt;">PUT </span>https://cdp.eu5.gigya.com/api/workspaces/</span><span style="font-size: 10pt;">{{workspaceId}}/applibrary/{{customConnectorId}}?userkey={{userKey}}&amp;secret={{secret}}</span>
+<ul><li>Replace {{customConnectorId}} with the ID of the custom connector, which can be found at the end of the URL when editing a connector.</li></ul>
+</li></ul>
+</li><li>Verify the change by calling the same endpoint with HTTP GET (no request body):
+<ul><li>GET https://cdp.eu5.gigya.com/api/workspaces/<span style="font-size: 10pt;">{{workspaceId}}/applibrary/{{customConnectorId}}?userkey={{userKey}}&amp;secret={{secret}}</span></li></ul>
+</li><li>Add a new application based on the updated custom connector.</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://help.sap.com/docs/customer-data-platform/integration-guide/actions-and-events?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">SAP Customer Data Platform Integration Guide - Actions and Events</a></li><li><a href="https://help.sap.com/docs/SAP_EMARSYS/f8e2fafeea804018a954a8857d9dfff3/4cd6f9f7686f4fcf97a065784082017c.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">SAP Emarsys Security Settings</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>cdp, emarsys, oauth 2.0, connection error, invalid_client, client_secret_basic, client_secret_post, authentication method, securitySchemes, custom connector, token_endpoint_auth_method, sap customer data platform, oauth2 via header, connector studio</p></div></div></div></div>

@@ -1,0 +1,70 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP Note contains answers to frequently asked questions on how the data from the operation activities is transferred to the order.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAPLMPE_OAC_RECG, CL_MPE_OAC_UR_EXEC, CORUPROC1,</p>
+<p>AFRP0, MPE_OAC_UR</p>
+<p>Background process, Update Request, Confirmation Request</p>
+<p>Performance,</p>
+<p>Cost Activities, Operation Confirmation</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please familiarize yourself with the online documentation <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9c4986bda35f4840ae438960ffbef64d/899a2e95d4d2430b851591a6580c99a5.html?locale=en-US&amp;ai=true&amp;version=LATEST" target="_blank">How Actual Data from the Operation Activities is Transferred to the Order</a>.<br/>This provides detailed information and an explanation on how the order is updated via a background process which is decoupled from the operation activity execution itself.</p>
+<p><strong>Answers to additional/dedicated questions:</strong></p>
+<p><strong>Question 1: Why is the order / operation not updated after having posted an action for an operation activity?</strong></p>
+<p><strong>Answer:</strong></p>
+<p>Please check the online documentation <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/9c4986bda35f4840ae438960ffbef64d/899a2e95d4d2430b851591a6580c99a5.html?locale=en-US&amp;ai=true&amp;version=LATEST" target="_blank">How Actual Data from the Operation Activities is Transferred to the Order</a>. The following sections are particularly relevant:</p>
+<ul>
+<li>Exception: Situations in which OA Postings do Not Trigger Operation Postings</li>
+<li>Troubleshooting</li>
+</ul>
+<p>In addition, the background process is not triggered if it is clear from the posted action that no operation update is necessary, i.e., if neither the status nor the quantity of the operation changes, e.g.:</p>
+<ul>
+<li>Actions "Pause" and "Resume Work" do not influence the operation's status.</li>
+<li>Any action (with the exception of ‘scrap’) on an operation activity that is neither start-OA nor end-OA of the operation does not influence the operation's actual data.</li>
+</ul>
+<p><strong>Question 2: How is the user of the generated operation confirmation determined?</strong></p>
+<p><strong>Answer:</strong></p>
+<p>The automatically generated operation confirmation typically comprises data from many actions that have been executed for the corresponding operation activities.</p>
+<ul>
+<li>Those actions might have been executed by different users.</li>
+<li>In addition, the decoupled background process with which the confirmation was posted might have been executed by a different user.</li>
+</ul>
+<p>The operation confirmation stores two users (which are displayed in transaction CO14 “Display production Order Confirmation” on the tab “Administration”, for example):</p>
+<ul>
+<li>Entered by User (field AFRU-ERNAM):</li>
+<ul>
+<li>This is the user with which the confirmation is created e.g., the user with which report CORUPROC1 was executed to convert the confirmation request records into confirmations.</li>
+<li>This user might not have participated in the execution of the operation activities at all.</li>
+</ul>
+<li>Created By (field AFRU-EXNAM):</li>
+<ul>
+<li>This is one user who participated in the execution of the operation activities of that operation.</li>
+<li>Typically, this is the user who posted the very last action.</li>
+</ul>
+</ul>
+<p><strong>Question 3: Is there a way to influence the generated operation confirmations?</strong></p>
+<p><strong>Answer:</strong></p>
+<p>Yes, there is a BAdI that can be used to adjust the generated confirmations according to the individual needs:</p>
+<ul>
+<li>This is BAdI-Definition EX_MPE_EXEC_OPERATION_ACTIVITY of enhancement spot ES_MPE_EXEC_SHOP_FLOOR_ORDER.</li>
+<li>In SAP’s standard IMG, this can be found via the path “Production -&gt; Manufacturing for Production Engineering and Operations -&gt; Business Add-Ins (BAdIs) -&gt; Production Operations -&gt; Order Confirmations -&gt; BAdI: Adjustment of PP Confirmations”.</li>
+<li>Please familiarize yourself with the corresponding IMG documentation, which explains which fields must not be adjusted, for example.</li>
+</ul>
+<p><strong>Question 4: How are the activities of the operation confirmation calculated?</strong></p>
+<p><strong>Answer:</strong></p>
+<p>With the automatically generated operation confirmation, up to six actual activities can be posted (fields AFRU-ISM01 to AFRU-ISM06 with corresponding units AFRU-ILE01 to AFRU-ILE06).</p>
+<ul>
+<li>Without making any adjustments, the actual activities are calculated “as planned”; i.e., the actual activities are calculated by the formulae, using the actual confirmed quantity, for example.</li>
+<li>You can adjust this logic according to your needs via the BAdI EX_MPE_EXEC_OPERATION_ACTIVITY of enhancement spot ES_MPE_EXEC_SHOP_FLOOR_ORDER.<br/>In SAP’s standard IMG, this can be found via the path “Production -&gt; Manufacturing for Production Engineering and Operations -&gt; Business Add-Ins (BAdIs) -&gt; Production Operations -&gt; Order Confirmations -&gt; BAdI: Adjustment of PP Confirmations”.</li>
+<ul>
+<li>There is an example class CL_MPE_ADJ_PP_CONF that can be used as a copy template. It shows one way of using the actual durations of the corresponding actions as a basis for calculating the activities of the operation confirmation.</li>
+<li>Note that a precondition for that logic is previous assignment of each activity to a record type group (<em>setup, processing, teardown</em>) in the Activities Overview table in the Costing tab in the work center master data.</li>
+</ul>
+</ul>
+<p><strong>Question 5: Is there any way to influence the background process to increase the system performance?</strong></p>
+<p><strong>Answer:</strong></p>
+<p>The background process is run with default technical settings.</p>
+<ul>
+<li>Standard Customizing can be used to optimize the background processes based on the specific circumstances in the current client by adjusting those default settings.</li>
+<li>These Customizing settings don‘t change any business logic.</li>
+<li>For detailed information on how to do so, check note <a href="https://me.sap.com/notes/3660199" target="_blank">3660199 – Optimizing Performance of Background Execution</a>.</li>
+</ul></div></div></div></div>

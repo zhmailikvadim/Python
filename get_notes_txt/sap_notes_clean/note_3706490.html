@@ -1,0 +1,65 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>NOTE_3591743 is executed according to the post-implementation steps of SAP Note 3592673.</p>
+</li><li>
+<p>When running the report in Test Mode, the error message "Delivering entries for table TVDIR is not approved yet" is logged twice.</p>
+</li></ul>
+<p><strong><span style="color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></span></strong></p>
+<p><img class="img-responsive" height="340" src="/documents/customerkba/qcsIjDQxK-uTr3uOfpxJvCFuN_895eUWlP58754IL6M" width="844"/></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>
+<p>NOTE_3591743 attempts to deliver entries to table TVDIR.</p>
+</li><li>
+<p>Delivery of table entries to TVDIR is technically not possible.</p>
+</li><li>
+<p>The required entries already exist in the system, either completely or partially.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Although NOTE_3591743 cannot deliver changes to table TVDIR, the required entries already exist in the system.</p>
+<p>NOTE_3591743 attempts to create the following entries in TVDIR:</p>
+<p><img class="img-responsive" height="487" src="/documents/customerkba/KXJT5dOaJ3270rrFIrxMiPTO8IBuTOEKsJx0YBtfpPE" width="1544"/></p>
+<p><img class="img-responsive" height="483" src="/documents/customerkba/qPHplWooQ-AgVoUoTHcRNtdEZmry4R9cZtdR2LerK98" width="1546"/></p>
+<p></p>
+<p>Two possible scenarios exist:</p>
+<p><span style="text-decoration: underline;"><strong>Scenario A</strong></span></p>
+<ul><li>
+<p>The required entries already exist in table TVDIR.</p>
+</li><li>
+<p>The entries are identical to the records in up-to-date internal SAP systems (except the timestamps, which are irrelevant).</p>
+</li><li>
+<p>For views/tables FIUAV_RECON_REP1 and FIUAV_RECON_REP2, the entries match the values shown in the screenshot below.</p>
+</li></ul>
+<p>Result:</p>
+<ul><li>
+<p>All required changes are already present.</p>
+</li><li>
+<p>No further action is required.</p>
+</li><li>
+<p>The TVDIR error messages can be ignored.</p>
+</li><li>
+<p>Execution of the subsequent steps of NOTE_3591743 can be continued.</p>
+</li></ul>
+<p><img class="img-responsive" height="366" src="/documents/customerkba/j4zGT120sar7iYcAsUUt4pqEK2g1mCWjad1kaGSLSiI" width="940"/></p>
+<p> </p>
+<p><span style="text-decoration: underline;"><strong>Scenario B</strong></span></p>
+<ul><li>
+<p>The required entries exist in table TVDIR.</p>
+</li><li>
+<p>A minor difference exists compared to the records in up-to-date internal SAP systems.</p>
+</li><li>
+<p>For FIUAV_RECON_REP2, the value 'X' is missing in the Checkbox column.</p>
+</li></ul>
+<p><img class="img-responsive" height="315" src="/documents/customerkba/Zh-496BxbE44RYscnVR7Z-94M-PWmsG7FfXs1DqwYIo" width="934"/></p>
+<p> </p>
+<p>Resolution:</p>
+<p>The missing change must be applied manually and transported to all relevant systems together with the other changes of NOTE_3591743..</p>
+<ol><li>Run transaction SE54</li><li>Enter table/view FIUAV_RECON_REP2 and choose "Create / Change".<br/><img class="img-responsive" height="466" src="/documents/customerkba/SvfiaqzBj7Fu2nfARhPB9IJEi7obVou6IDww_Kx7nnw" width="1057"/></li><li>Select a workbench request</li><li>From the transaction menu, navigate to Utilities &gt; Table Maintenance Generator<br/><img class="img-responsive" height="319" src="/documents/customerkba/uf5-3hGlHETTP-lLJj_BCSuotO5YAi_PaBMtdQh7lA4" width="730"/></li><li>Change the recording routine to “No, or user, recording routine”. <br/><img class="img-responsive" height="531" src="/documents/customerkba/XRGJ5BnAVWeffS9QGfIGzeA7ODI-W8p1kmM3_dECb60" width="931"/></li><li>Save the changes and confirm the warning “You are changing a function group which does not belong to you”.</li></ol>
+<p> </p>
+<p>Result:</p>
+<ul><li>
+<p>After applying the change, the TVDIR error messages can be ignored.</p>
+</li><li>
+<p>Execution of the remaining steps of NOTE_3591743 can be continued.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Note <a href="https://me.sap.com/notes/3591743" rel="noopener noreferrer nofollow" target="_blank">3591743</a> - Fiori Intercompany Balance Reconciliation: Email Template for Ukraine, PDF and Email Language Selection</p>
+<p>SAP Security Note <a href="https://me.sap.com/notes/3565506" rel="noopener noreferrer nofollow" target="_blank">3565506</a> - [CVE-2026-0511] Multiple vulnerabilities in SAP Fiori App (Intercompany Balance Reconciliation)</p>
+<p>KBA <a href="https://me.sap.com/notes/0003705265" rel="noopener noreferrer nofollow" target="_blank">3705265</a> - SAP package to save objects during implementation of SAP Note 3592824</p>
+<p>KBA <a href="https://me.sap.com/notes/0003706807" rel="noopener noreferrer nofollow" target="_blank">3706807</a> - Errors in DDLS P_RU_BPBALANCE1 after implementing SAP Note 3043063</p>
+<p>KBA <a href="https://me.sap.com/notes/3708345" rel="noopener noreferrer nofollow" target="_blank">3708345</a> - Activation error: It is not possible to expand path element ADDRESSDEFAULTREPRESENTATION during the implementation of SAP Note 3591743</p>
+<p>KBA <a href="https://me.sap.com/notes/3708356" rel="noopener noreferrer nofollow" target="_blank">3708356</a> - Activation errors in Access Controls C_RU_BPBALANCEC, C_RU_BPBALRECNCLNITM during the implementation of SAP Note 3591743</p>
+<p>KBA <a href="https://me.sap.com/notes/3708406" rel="noopener noreferrer nofollow" target="_blank">3708406</a> - Not all corrections applied during the implementation of SAP Notes 3591743, 3565506</p>
+<p>KBA <a href="https://me.sap.com/notes/3708409" rel="noopener noreferrer nofollow" target="_blank">3708409</a> - Error "Unknown message with" during the implementation of SAP Notes 3591743, 3565506</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>[CVE-2026-0511],  [CVE-2026-0496], [CVE-2026-0495], Intercompany Balance Reconciliation, F1819, SNOTE, Note Assistant</p></div></div></div></div>

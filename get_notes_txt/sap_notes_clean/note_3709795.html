@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Uncertainty regarding the correct procedure for generating the Income Declaration (Informe de Rendimentos) following the replacement of DIRF by eSocial.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<ul style="list-style-type: disc;"><li>
+<p>HR renewal </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP S/4HANA </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP ERP  </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP SuccessFactors Employee Central Payroll </p>
+</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>As of now, no new regulation regarding the Income Declaration (Informe de Rendimentos) has been announced.</p>
+<p>Therefore, the generation and delivery of the Income Declaration to employees remain the employer’s responsibility.</p>
+<ul><li>
+<p>Generation of the Income Declaration:</p>
+<ul><li>
+<p>Use SAP report HBRCCED0, which generates the Income Declaration based on payroll results.</p>
+</li><li>
+<p>The Income Declaration is generated following the same approach used in the previous year, and customers are enabled to issue the statement accordingly.</p>
+</li></ul>
+</li><li>
+<p>Existing Functionality with eSocial Validation:</p>
+<ul><li>
+<p>Data can be compared with eSocial totalizers (report RPU_PAYBR_EFD_EE_SUMM_EVENTS) to identify possible discrepancies.</p>
+</li></ul>
+</li><li>The Income Declaration is a legal report that follows specific regulations requiring the <strong>exclusion of negative values</strong>. The SAP system is designed to automatically discard such values to ensure compliance with these legal requirements.  The negative values are discarded in class CL_HR_BR_CCED, method DELETE_NEGATIVE_VALUES. For more information, please refer to KBA <a href="https://me.sap.com/notes/2751972" rel="noopener noreferrer nofollow" target="_blank">2751972</a> - Income Declaration (HBRCCED0) / DIRF - Difference between program results and detailed log.</li></ul>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://github.com/leandrodavila/InformeRendimentos_x_eSocial/blob/master/modelos/Comprovante_Rendimentos_x_eSocial.md" rel="noopener noreferrer nofollow" target="_blank">Mapping between S-5002 x Income Declaration created by the GT-Piloto</a><br/><a href="https://workzone.one.int.sap/site#workzone-home&amp;/groups/Sr0zPWokOUR8i9WdA6q4Vs/forums?folder_id=hvs6ZEISKAH56dynP9J8Al&amp;view_mode=list" rel="noopener noreferrer nofollow" target="_blank">Income Declaration Forum</a><br/><br/></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Income Declaration, Informe de Rendimentos, DIRF, S-5002, HBRCCED0, RPU_PAYBR_EFD_EE_SUMM_EVENTS, eSocial, negative, negativo, monthly result is less than zero, menor que zero, PC00_M37_CCED, RETRO,<strong> </strong>exclusion of negative values, valores negativos, exclusão, class CL_HR_BR_CCED, method DELETE_NEGATIVE_VALUES</p></div></div></div></div>

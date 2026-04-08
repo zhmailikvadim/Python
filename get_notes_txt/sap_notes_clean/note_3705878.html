@@ -1,0 +1,63 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>
+<p>The extractor <strong>C_CmmdtyVersLogcPrcgDocsDEX</strong>, which is based on table <strong>CMM_VLOGP</strong>, provides <strong>incorrect values for Term-to-Document FX conversion</strong>.</p>
+</li>
+<li>
+<p>Due to incorrect field mapping, <strong>Term-to-Document FX factors</strong> are not derived correctly in downstream consumers (e.g. exposure, valuation, or reporting).</p>
+</li>
+<li>
+<p>The fields <strong>TermToDocFixedFactorFrom</strong> and <strong>TermToDocFixedFactorTo</strong> were <strong>mapped incorrectly</strong>, leading to:</p>
+<ul>
+<li>
+<p>Incorrect FX conversion results</p>
+</li>
+<li>
+<p>Inconsistent NFE / MTM values</p>
+</li>
+<li>
+<p>Mismatch between valuation and reporting layers</p>
+</li>
+</ul>
+</li>
+<li>
+<p>The issue is observed during data extraction via <strong>C_CmmdtyVersLogcPrcgDocsDEX</strong>, even though the source data in <strong>CMM_VLOGP</strong> is correct.</p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CMM; ACRA; Advanced Commodity Risk Analytics; Data Extractor; VLOGP; C_CmmdtyVersLogcPrcgDocsDEX; I_VersionedLogcDocument</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p>In the base view <strong>I_VersionedLogcDocument</strong>, the fields required for <strong>Term-to-Document FX conversion</strong> were <strong>incorrectly mapped</strong>.<br/> Specifically:</p>
+<ul>
+<li>
+<p><strong>TermToDocFixedFactorFrom</strong> was mapped to <strong>previous_md_factor_from</strong></p>
+</li>
+<li>
+<p><strong>TermToDocFixedFactorTo</strong> was mapped to <strong>previous_md_factor_to</strong></p>
+</li>
+</ul>
+<p>However, the correct source fields for Term-to-Document FX conversion are:</p>
+<ul>
+<li>
+<p><strong>fx_fix_factor_from_term_to_doc</strong></p>
+</li>
+<li>
+<p><strong>fx_fix_factor_to_term_to_doc</strong></p>
+</li>
+</ul>
+<p>Due to this incorrect mapping, the extractor <strong>C_CmmdtyVersLogcPrcgDocsDEX</strong>, which consumes <strong>I_VersionedLogcDocument</strong>, propagated incorrect FX conversion factors.</p>
+<p><strong>Prerequisite</strong></p>
+<ul>
+<li>
+<p>The issue occurs only when <strong>Term-to-Document FX conversion</strong> is relevant for the pricing or valuation scenario.</p>
+</li>
+<li>
+<p>The extractor <strong>C_CmmdtyVersLogcPrcgDocsDEX</strong> is used for data extraction based on <strong>CMM_VLOGP</strong>.</p>
+</li>
+<li>
+<p>No data inconsistency exists in <strong>CMM_VLOGP</strong>; the issue is limited to the <strong>field mapping in the CDS view</strong>.</p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the note.</p></div></div></div></div>

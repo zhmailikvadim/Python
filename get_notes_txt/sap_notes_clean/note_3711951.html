@@ -1,0 +1,67 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> You want to upgrade the SAP HANA component "<a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://launchpad.support.sap.com/#/softwarecenter/template/products/%20_APP=00200682500000001943&amp;_EVENT=DISPHIER&amp;HEADER=Y&amp;FUNCTIONBAR=N&amp;EVENT=TREE&amp;NE=NAVIGATE&amp;ENR=73555000100200004274&amp;V=MAINT&amp;TA=ACTUAL&amp;PAGE=SEARCH/SAP%20EXTENDED%20APP%20SERVICES%201" target="_blank">SAP EXTENDED APP SERVICES 1</a>".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> Update SAP HANA extended application services, advanced model, SAP HANA XS advanced model, SAP HANA XS Advanced, XSA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="__html0">This release of SAP HANA extended application services, advanced model contains important security updates and is recommended to be installed by all customers using a previous release:</p>
+<p id="__html28">Compatibility:</p>
+<div class="longtext" id="__html26">
+<ul>
+<li>This release is compatible with SAP HANA 2 SPS05 and SPS07, and SPS08</li>
+<li>This release requires at least RHEL 8 or SLES 15 SP3, see also <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3475745" target="_blank">SAP Note 3475745</a>.</li>
+</ul>
+<p>Download:</p>
+<ul>
+<li>Download this release from the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://launchpad.support.sap.com/#/softwarecenter/template/products/%20_APP=00200682500000001943&amp;_EVENT=DISPHIER&amp;HEADER=Y&amp;FUNCTIONBAR=N&amp;EVENT=TREE&amp;NE=NAVIGATE&amp;ENR=73555000100200004274&amp;V=MAINT&amp;TA=ACTUAL&amp;PAGE=SEARCH/SAP%20EXTENDED%20APP%20SERVICES%201" target="_blank">SAP Support Portal</a>.</li>
+</ul>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""><strong>XS Advanced Runtime</strong></p>
+<p>Added:</p>
+<ul>
+<li>The <em>xs users</em> command now shows more information about users, like e-mail address, human readable name and role collections. In addition, you can get information about XS Advanced users maintained by an external Identity Provider.</li>
+</ul>
+<p>Fixed:</p>
+<ul>
+<li>Fixed an issue where the command <em>XSA select-xsa-runtime-db</em> would return with the following error message after restoring a backup that was taken from a system with a different platform (x86, ppc64) even when the XS Advanced version matches up.<br/><br/><em>The installed XSA version '1.&lt;x&gt;.&lt;y&gt;.&lt;timestamp a&gt;' is lower than the XSA version '1.&lt;x&gt;.&lt;y&gt;.&lt;timestamp b&gt;' in the selected tenant database. Please install the latest XSA version, first, before re-trying this command. </em><br/><br/></li>
+<li>Fixed an issue where access logs displayed by the <em>xs logs</em> command could have been out of order.</li>
+<li>Fixed an issue with the login redirect to UAA after configuring an external domain, e.g. with the <em>xs create-domain --external</em> command, without configuring a port explicitely using the <em>--port </em>option. The following error messages would be visible in the browser:<br/><br/><em>Corrupted Content Error</em><br/><br/>or<br/><br/><em>ERR_INVALID_REDIRECT<br/><br/></em>As a workaround for previous XS Advanced versions, use the xs cli <em>--port</em> <em>&lt;port&gt;</em> option with the command <em>xs create-domain --external </em>to configure the router port (30&lt;SNR&gt;33 by default) of the external domain explicitely or specify the router port explicitely when configuring an external domain with the XS Advanced Cockpit.</li>
+</ul>
+<p><strong>UAA Server</strong></p>
+<ul>
+<li>Changed the default value in xsuaaserver.ini of property<br/><br/><code class="notranslate">[login.yml]<br/>wantAssertionSigned</code>=true<br/><br/></li>
+<li>Implemented comprehensive audit logging for HANA authentication events in the OIDC module, enabling tracking of authentication success and failure events with detailed contextual information.</li>
+</ul>
+<p><strong>Components</strong></p>
+<p>System components:</p>
+<ul>
+<li>SAP WebDispatcher: 793.324.324</li>
+<li>UAA: 5.45.0-20260203131806</li>
+<li>OIDC: 5.45.0-20260203131806</li>
+<li>HANA Service Broker: 1.7.0</li>
+</ul>
+<p>System applications:</p>
+<ul>
+<li>Auditlog Service: 3.2.0</li>
+<li>Deploy Service: 1.73.69</li>
+<li>Product Installer: 1.51.0</li>
+</ul>
+<p>Application runtimes:</p>
+<ul>
+<li>SAP JVM 8: 81.108.108</li>
+<li>SapMachine 17: 17.0.18</li>
+<li>SapMachine 21: 21.0.10</li>
+<li>Apache Tomcat 9: 9.0.115</li>
+<li>Apache Tomcat 10: 10.1.52</li>
+<li>SAP TomEE 7: 1.67.0 (based on Apache TomEE 7.0.9 and Apache Tomcat 9.0.115)</li>
+<li>Apache TomEE 10: 10.1.3</li>
+<li>Node.js 20: 20.20.0</li>
+<li>Node.js 22: 22.22.0</li>
+<li>SAP HANA JDBC driver: 2.26.12</li>
+</ul>
+<p>Buildpacks:</p>
+<ul>
+<li>SAP Java Buildpack: 2.0.9</li>
+<li>SAP Node.js Buildpack: 4.7.0</li>
+<li>SAP Python Buildpack: 1.1.0</li>
+</ul></div></div></div></div>

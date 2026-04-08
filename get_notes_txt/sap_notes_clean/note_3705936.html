@@ -1,0 +1,76 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>HEX queries fail with an error like below:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">general error: solution cache is missing, exp=(0, 0), op=HEX SELECT (opId: P:0000): FILTER: 'TABU' = (0, 0) SortList: (0, 0) ASC, (0, 0) ASC, (0, 0) ASC, (0, 0) ASC; $condition$=exists(op)</span></p>
+<p><strong>Note</strong>:The error above is a general error when a HEX query fails. Please review the prerequisites below to determine if your issue matches the one described in this SAP Note.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>HEX, customizing transport request, S4</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 352847</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, the information of the queried field is handled improperly between query operations such as <span class="SNO_DNT" style="float: none;" translate="no">JOIN</span> or <span class="SNO_DNT" style="float: none;" translate="no">UNION ALL</span>.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions of SPS07</li>
+<li>Revisions &lt;= 089.00 (SPS08)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>
+<p style="display: inline !important;">A query has <span class="SNO_DNT" style="float: none;" translate="no">UNION ALL</span> and one of the <span class="SNO_DNT" style="float: none;" translate="no">UNION ALL</span> result returns constant values</p>
+</li>
+<li>And the query has <span class="SNO_DNT" style="float: none;" translate="no">JOIN, TOP</span> and<span class="SNO_DNT" style="float: none;" translate="no"> ORDER BY</span> operators</li>
+<li>And the <span class="SNO_DNT" style="float: none;" translate="no">JOIN</span> operator refers the constant value from the<span class="SNO_DNT" style="float: none;" translate="no"> UNION ALL</span></li>
+<li>And the query is compiled to run on the <span class="SNO_DNT" style="float: none;" translate="no">HEX</span> engine</li>
+</ul>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">For example:</span></p>
+<div>
+<div>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT "TAB0".A0 FROM</span></p>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">(SELECT TOP 100 * FROM "TAB0" ORDER BY "TAB0".A0, "TAB0".B0, "TAB0".C0, "TAB0".D0, "TAB0".E0)</span></p>
+<p style="padding-left: 90px;"><span class="SNO_DNT" style="float: none;" translate="no">LEFT OUTER JOIN</span></p>
+<p style="padding-left: 90px;"><span class="SNO_DNT" style="float: none;" translate="no">(</span></p>
+<p style="padding-left: 120px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT 1 AS "TAB1".A1, "TAB1".B1, "TAB1".C1, "TAB1".D1 FROM "TAB1"</span></p>
+<p style="padding-left: 120px;"><span class="SNO_DNT" style="float: none;" translate="no">UNION ALL</span></p>
+<p style="padding-left: 120px;"><span class="SNO_DNT" style="float: none;" translate="no">SELECT 1 AS "TAB2".A1, 2, "TAB2".C1, "TAB2".D1 FROM "TAB2"</span></p>
+<p style="padding-left: 90px;"><span class="SNO_DNT" style="float: none;" translate="no">) U</span></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">ON "TAB0".C0 = U.A1 AND "TAB0".D0 = U.B1 AND "TAB0".E0 = U.C1</span></p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">GROUP BY "TAB0".A0, "TAB0".B0, "TAB0".C0, "TAB0".D0, "TAB0".E0, U.A1, U.B1, U.C1, U.D1;</span></p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 089.01 (SPS08)</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<div class="longtext">
+<p>Apply the hint <span class="SNO_DNT" style="float: none;" translate="no">NO_SEMI_JOIN_REDUCTION</span> by using one of the following methods:</p>
+<ul>
+<li>Use a statement hint, for example:</li>
+</ul>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">ALTER SYSTEM ALTER STATEMENT HINT (NO_SEMI_JOIN_REDUCTION) COMMENT 'SAP Note 3657808. Revert after upgrade to a revision containing the fix' FOR &lt;statement_string&gt; or &lt;statement_hash&gt;;</span></p>
+<ul>
+<li>Add WITH HINT at the end of the SQL statement, for example:</li>
+</ul>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">&lt;statement_ string&gt; WITH HINT(NO_SEMI_JOIN_REDUCTION);</span></p>
+<ul>
+<li>Set a configuration parameter, for example:</li>
+</ul>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">ALTER SYSTEM ALTER CONFIGURATION ('indexserver.ini', 'SYSTEM') SET ('sql', 'enable_semi_join_reduction') = 'false' WITH RECONFIGURE COMMENT 'SAP Note 3657808. <em>Revert after upgrade to a revision containing the fix</em>';</span></p>
+<p><strong>Note</strong>: Setting configuration parameter<span class="SNO_DNT" style="float: none;" translate="no"> indexserver.ini [sql] enable_semi_join_reduction</span> impacts all queries in system widely. Please revert the workaround once you have upgraded to a revision containing the permanent solution.</p>
+<p><strong>Disclaimer</strong></p>
+<p>The SAP HANA configuration parameter <span class="SNO_DNT" style="float: none;" translate="no">indexserver.ini [sql] enable_semi_join_reduction</span> is an internal parameter and may only be used in the context of this SAP Note. Using such a parameter requires that the SAP HANA system has the revision specified in the SAP Note. Using internal parameters outside of this given scope is not supported. Please unset this parameter once you have upgraded to a revision containing the permanent solution.</p>
+</div>
+<p><span style="font-size: 14px;"> </span></p></div></div></div></div>

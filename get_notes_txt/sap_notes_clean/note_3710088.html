@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Alternate Reference Number is not generated in header accounting document for RCM invoices. </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Go to Manage Journal Entries App.</li><li>Search for Journal Entry Document XYZ. (XYZ represents the Journal Entry Document ID)</li><li>The value is missing for the field "Alternate Reference Number".</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Missing configuration for ODN Generation for Reverse Charge.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Following are the steps to create the Official Document Numbering (ODN) for the Reverse Charge Mechanism (RCM) cases:</p>
+<ol><li>
+<p>Maintain vendor classification in supplier Business Partner in the Vendor: Country Spec Enh 2 tab as <em>0</em> or <em>2</em>. Apart from classification, RCM ODN is also triggered for the Suppliers outside India.</p>
+</li><li>
+<p>Create new document class for <em>RE</em> document type, for example: <em>ZRE</em>.</p>
+</li><li>
+<p>Assign document type <em>RE</em> to the new document class.</p>
+</li><li>
+<p>Create the new number group, for example: <em>ZRE001</em>.</p>
+</li><li>
+<p>Create number range for the earlier created number group.</p>
+</li><li>
+<p>Assign business place to the document class.</p>
+</li><li>
+<p>When you trigger the supplier invoice for the RCM cases, ODN for RCM cases is in the Alternate reference field in the header accounting document. </p>
+</li></ol>
+<p></p>
+<p>Kindly check the Help Document <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/634261119fec4d58970471f2c4a9a740/6635af97c59e41f999810b8607140b28.html?version=2602.500" rel="noopener noreferrer nofollow" target="_blank">Configuring Official Document Numbering | SAP Help Portal</a>  for detailed configuration steps. </p></div></div></div></div>

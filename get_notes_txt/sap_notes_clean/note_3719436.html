@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are a customer of the new Group Reporting logic and want to import consolidation units.</p>
+<p>You obtain the following error:</p>
+<p>"Fiscal year variant of company codes in accounting and version XXX differ"</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>T001, FINSC_LEDGER, Company Code, Consolidation Unit, PAPM, TF00</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>One of this consolidation unit, say XYZ is assigned to a company code XYZ. This company code is assigned to company XYZ. For this company a ledger customizing has been done in FINSC_LEDGER. Beside the company code XYZ there are<strong> additional</strong> company codes assigned to company XYZ. For these company codes as that are not used for accounting no ledger configuration is present. The import check searches for these company codes in the ledger configuration but cannot find them and thus a fiscal year variant.</p>
+<p>There is no fallback to T001.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the correction instruction of this SAP Note or install the corresponding support package.</p>
+<p>Note the correction adapts:</p>
+<ul>
+<li>Having a set of company codes with the identical company assigned (scenario described above)</li>
+<li>Having a parallel ledger (non-leading) or an extension ledger with a subset of the company codes assigned</li>
+<li>Checks on local currency, group currency, functional currency, and fiscal year variant are only performed based on the assigned company codes to the ledger and no longer on the superset of all company codes with the same assigned company</li>
+</ul>
+<p><strong>Note:</strong></p>
+<p>This correction introduces a translation relevant text. As texts are only transslated in a support package it is therefore only visible in english.</p></div></div></div></div>

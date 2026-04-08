@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "End of Supply for Electricity (DSO View)" (DE_B_GPKE_DSO_EOS), step 2500, it was not possible to skip the triggering of the 100% process.</p>
+<p>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> EOS, End of Supply, Trigger 100% process, GPKE, DE_B_GPKE_DSO_EOS, custom extension, check step, checkgroup</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error occurred because there was no checkgroup configured in the check step (step 2500) to allow you to write your own logic to decide whether to run the triggering of the 100% process.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system provides a custom extension check ID that you can use to write your logic for skipping the triggering of the 100% process. If the process is skipped, the system jumps from step 2500 to step 8950. Otherwise, the system triggers step 2550. You need to activate the BC set /US4G/3_0_DSO_SP07_NOTE_371348 and retrigger the process. You can verify the fix by checking that the process behaves according to your custom logic and either skips to step 8950 or continues to step 2550 as expected.</p>
+<p>This SAP Notes is relevant for the following role: DSO</p>
+<p><br/>Please activate correction BC set by following steps mentioned in Manual Activity Correction Instruction.</p></div></div></div></div>

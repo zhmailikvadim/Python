@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3712473&amp;TargetLanguage=EN&amp;Component=IS-H-PM-PAT&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3712473/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3712473/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>In a variant of the Clinical Process Builder (CPB), you change the address on the <em>Next of Kin </em> subscreen. After this change, the system may issue error message AM 215 <em>"Region &amp;2 is not defined for country &amp;1</em>". It is not possible to save the changed data. The region is not available in the address of the dependent and therefore cannot be adjusted.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>AM215, AM 215, region, country, address, next of kin, CPB, Clinical Process Builder, NV2000, SAPLNBUPA_PNOK_SCR, screen 0100, RNDADDR-REGION, RNDADDR-REGION_TXT, 00058, 00 058, TNDCV</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Reason: Check of regional structure using BAS (Business Address Services); the "Region" field is not visible for the next of kin.</p>
+<p>Prerequisites:</p>
+<ul>
+<li>The business function ISH_BP_OM "SAP Patient Management Rearchitecture BP/OM" is active in your system. This business function is available as of SAP enhancement package 4 for SAP ERP 6.0, Industry Extension Healthcare (IS-H 604).</li>
+<li>You have assigned a region to the cities in the regional structure in the Implementation Guide.</li>
+<li>The change of the address leads to a different region according to the maintained data in the regional structure.</li>
+<li>You change the address manually, that is: You overwrite the data. </li>
+</ul>
+<p>If you select the location using the input help, the error does not occur. The system can automatically copy the region assigned to this city.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Import the specified Support Package.</p>
+<p>If the business function ISH_BP_OM 'SAP Patient Management Rearchitecture BP/OM' is active in your system, the <em>Region</em> field is now available on the <em>Next of Kin</em> subscreen regardless of the country version. In this way, you can also adjust the region manually if you make a manual change.</p>
+<p>If you now manually change the address in such a way that this leads to a different region without adjusting the region, the system issues error message 00 058 <em>"Entry &lt;country&gt; &lt;region&gt; does not exist in T005S" (check your entry).</em></p>
+<p>If you have generally not assigned any regions in the regional structure in your system and you do not want to use the <em>Region</em> field in the next of kin's address, you can hide the field using the screen modification function in SAP Healthcare - Industry-Specific Components for Hospitals. To do this, use the IMG activity <em>Maintain Screen Modification</em> (transaction ON04) to create an entry with the following values:</p>
+<ul>
+<li>Institution: * or a specific institution</li>
+<li>Program: SAPLNBUPA_PNOK_SCR</li>
+<li>Screen: 0100</li>
+<li>Set the two fields RNDADDR-REGION (Region) and RNDADDR-REGION_TXT (Text for Region) to inactive.</li>
+</ul>
+<p>As long as the corresponding support package is not implemented in your system, you can use the input help to select the location again after the system has sent message AM 215. As a result, the system adopts the region and you can save the data.</p></div></div></div></div></div>

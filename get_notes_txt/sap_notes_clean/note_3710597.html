@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p>Difference in foreign currency (FC) amounts in a journal entry of purchase return.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisites:</strong></p>
+<ol start="1" type="1">
+<li>In the General Settings define for <em>Display Settings</em> – <em>Prices</em> 4 Decimals.</li>
+<li>In the <em>Currencies - Setup</em> define 6 Decimals for USD.</li>
+</ol>
+<p><strong>Scenario:</strong></p>
+<ol start="1" type="1">
+<li>Create a Purchase Order for a Vendor with currency USD.</li>
+</ol>
+<ul type="disc">
+<li>Rate = 31.49</li>
+<li>First row: Item1, <em>Quantity</em> = 7, <em>Unit Price</em> = 113.300000 USD, <em>Tax Code</em> = Relevant code with 5%.</li>
+<li>Second row: Item2, <em>Quantity</em> = 9, <em>Unit Price</em> = 353.444600 USD, <em>Tax Code</em> = Relevant code with 5%.</li>
+<li>Modify the value in <em>Total (Doc)</em> in the second row from 3,181.001400 USD to 3,181.000000 USD.</li>
+</ul>
+<ol start="2" type="1">
+<li>Create a Goods Receipt PO (GRPO) based on the Purchase Order.</li>
+<li>Copy the GRPO to Goods Return and add the document.</li>
+<li>Check the values in the posted Journal Entry for the Goods Return document.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The values in the <em>Credit (FC) / Debit (FC)</em> are 3974.100000 USD, same as the document value in <em>Total Before Discount</em>.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>The values in the <em>Credit (FC) / Debit (FC)</em> fields are 3974.100032 USD.</p>
+<p>*Same issue occurs if creating a GRPO Cancellation document.</p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p>
+<p><em><strong><strong> </strong></strong></em></p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p>OJDT, JE</p></div></div></div></div>

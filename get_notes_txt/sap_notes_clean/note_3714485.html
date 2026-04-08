@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>This is a standard system limitation in the current SAP S/4HANA version.</li><li>The Bank Area value help is not supported correctly in the affected Fiori applications.</li><li>Although configuration is correct, the system does not fetch or display Bank Area values.</li><li>A relevant SAP correction note exists, but cannot be implemented due to version incompatibility.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA 2023</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul><li>
+<p>Log in to the SAP Fiori Launchpad.</p>
+</li><li>
+<p>Open the Fiori application “Manage In-House Bank Accounts”.</p>
+</li><li>
+<p>Choose Create to create a new In-House Bank Account.</p>
+</li><li>
+<p>In the creation screen, click on the “Bank Area” field to select a value.</p>
+</li><li>
+<p>Observe that the value help list appears empty, and no Bank Area values are displayed.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>
+<p>Although Bank Area is correctly configured in the system, users cannot select Bank Area in any Fiori application, for example, “Manage In-House Bank Accounts”.</p>
+</li><li>
+<p>The issue occurs because the authorization role does not contain explicit values for the Bank Area field (/PF1/BKARE) in authorization object /PF1/IHBBK.</p>
+</li><li>
+<p>If /PF1/BKARE is left unrestricted, the system cannot derive the Bank Area context, resulting in empty value help and no selectable values across all related Fiori apps.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>
+<p>Although the authorization object /PF1/IHBBK is assigned and activity is maintained, the Bank Area field (/PF1/BKARE) is not restricted to any value.</p>
+</li><li><img class="img-responsive" height="250" src="/documents/customerkba/5TfeVxG_qHifro3GjqGwuUeCyKNU1Brw7tlz9DlAsHg" width="568"/></li><li>
+<p>For IHB / Fiori applications, the system requires explicit Bank Area values to be maintained in the role.</p>
+</li><li>
+<p>If /PF1/BKARE is left without restriction, the authorization check cannot derive the Bank Area context, and therefore no values are displayed in the app or F4 help.</p>
+</li><li>
+<p>Maintain the required Bank Area value(s) explicitly in field /PF1/BKARE, regenerate the role, and re-test the application.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3>Additional information:<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><ul><li>
+<p>Bank Area not showing</p>
+</li><li>
+<p>Bank Area empty in Fiori app</p>
+</li><li>
+<p>Manage In-House Bank Accounts Bank Area missing</p>
+</li><li>
+<p>IHB Bank Area authorization issue</p>
+</li><li>
+<p>/PF1/IHBBK authorization object</p>
+</li><li>
+<p>/PF1/BKARE not populated</p>
+</li><li>
+<p>Bank Area F4 help empty</p>
+</li><li>
+<p>In-House Banking Fiori authorization</p>
+</li><li>
+<p>FSCM IHB Bank Area selection issue</p>
+</li></ul></div></div></div></div>

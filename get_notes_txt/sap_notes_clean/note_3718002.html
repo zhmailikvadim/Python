@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">After updating the index price in FDCS17, the floating leg price of Commodity Swap is not automatically updated in FTR_EDIT when the deal is opened in display mode. </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA<br/><br/></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Display price for floating leg of Commodity Swap (FTR_EDIT)</li></ol>
+<p><img class="img-responsive" src="/documents/customerkba/PLjJa5na7pPzOw-W5FAOf6eXBNevWSbXYgq2WS8niOc"/></p>
+<p><img class="img-responsive" src="/documents/customerkba/8KE2Kdxp0do2uMU8GChWECQ2_UlEHIHp80SGKPU5vVs"/></p>
+<p>  2. Maintain Today’s Price (FDCS17)</p>
+<p><img class="img-responsive" height="393" src="/documents/customerkba/1DEnVVlOS2zxG-GpVfg-KzHCj85VZTD13QiE3vsv3QU" width="917"/></p>
+<p> 3. Check the price for floating leg of Commodity Swap in display mode (FTR_EDIT) - PRICE NOT UPDATE</p>
+<p><img class="img-responsive" src="/documents/customerkba/8X3suXOCuJZMj9tFJ2OBBdRIYjVG2L6OMzKmfsrL-80"/></p>
+<p> 4. Now open the transaction in Change Mode and hit the Enter button (FTR_EDIT) - PRICE UPDATE</p>
+<p><img class="img-responsive" src="/documents/customerkba/TzZij2vuqavE2SvR_FOg4eOjv_LauReb2dlx6ngdjAk"/></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Updating the index price in FDCS17 does not automatically trigger:</p>
+<ul><li>Flow rebuild</li><li>Recalculation of floating leg</li><li>Market data refresh</li></ul>
+<p></p>
+<p>The recalculation logic is triggered only during:</p>
+<ul><li>Change mode processing</li><li>ENTER event</li><li>SAVE event</li></ul>
+<p></p>
+<p>This is due to standard system design:<br/>Display mode does not execute recalculation logic or rebuild flows.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This is expected standard behavior.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Commodity Swap, Floating Leg, FDCS17, FTR_EDIT, Index Price, Monthly Deals, Fix to Float, Float to Fix, Market Data, Recalculation, Flow Rebuild, MtM, Display Mode, Change Mode</p></div></div></div></div>

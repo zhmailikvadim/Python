@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p>Add-ons processes (addon.exe) appear in the <em>Connected Clients</em> list.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisites:</strong></p>
+<p>Run the add-ons which use Single Sign-On method to connect to the SAP Business One company database as below:</p>
+<p><span>int setConnectionContextReturn = 0;</span><br/><span>int connectToCompanyReturn = 0;</span><br/><span>string sCookie = null; </span><br/><span>string sConnectionContext = null; </span><br/><span>int lRetCode = 0;</span><br/><span>oCompany = new SAPbobsCOM.Company();</span><br/><span>sCookie = oCompany.GetContextCookie(); </span><br/><span>sConnectionContext = SBO_Application.Company.GetConnectionContext( sCookie );</span><br/><span>if ( oCompany.Connected == true ) { </span><br/><span> oCompany.Disconnect(); </span><br/><span>}</span><br/><span>setConnectionContextReturn = oCompany.SetSboLoginContext( sConnectionContext );</span><br/><span>connectToCompanyReturn = oCompany.Connect();</span></p>
+<p><strong>Scenario:</strong></p>
+<p>Go to <em>Administration → Utilities </em>and open <em>Connected Clients</em> form.</p>
+<p><strong>Expected behavior:</strong></p>
+<p>Add-ons processes do not appear in the <em>Connected Clients</em> list.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>Add-ons processes appear in the <em>Connected Clients</em> list.</p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p></div></div></div></div>

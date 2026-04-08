@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Error “Recipient role with id ‘/RULE/MRM_AG_BADI’ cannot be resolved.” is faced when clicking on save as complete.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Log in to the SAP system with a user who processes supplier invoices.</p>
+</li><li>
+<p>Navigate to the Supplier Invoice processing application (e.g., FB60, MIRO, or Fiori App “Create Supplier Invoice” — depending on customer setup).</p>
+</li><li>
+<p>Open the supplier invoice XYZ. (XYZ means supplier invoice ID)</p>
+</li><li>
+<p>Attempt to submit the invoice for approval via the workflow action (e.g., <em>Submit</em>, <em>Park and Complete</em>, <em>Send for Approval</em>).</p>
+</li><li>
+<p>The system attempts to trigger the workflow for the invoice.</p>
+</li><li>
+<p>The following error message is displayed:<br/>“Recipient role with id '/RULE/MRM_AG_BADI' cannot be resolved.”</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>It is necessary to check with customer's development team.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The error "Recipient role with id '/RULE/MRM_AG_BADI' cannot be resolved" was occurred because your custom code in BADI MRM_WORKFLOW_AGENTS cannot determine workflow recipient properly. Also, is necessary assign any business user (CB user which has Business Partner) as approver.</p>
+<p>The custom code falls outside of scope of product support.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>BAdI, Supplier Invoice, MRM_WORKFLOW_AGENTS, /RULE/MRM_AG_BADI, Workflow, Supplier Invoice Workflow.</p></div></div></div></div>

@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You transfer material master data between different systems using Product SOAP API.</p>
+<p>The payload contains Advanced Planning-specific section '&lt;PlantSCMAdvancedPlanning&gt;' on plant level.</p>
+<p>In specific situations, this section can cause mapping issues in the receiving system, resulting in error message 'The value '' is not in the value range of the XML schema type 'decimal' or it does not meet the specified limitations'.<br/>The affected field name is 'MaxDaysOfSupplyPenaltyAmount'.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>MARC_APS_EXT, ProductMDMBulkReplicateRequest_Out, ProductMDMBulkReplicateRequest_In, MDM_PRD_PRODUCT_MDMPLANT_SCMAD, MAX_DAYS_OF_SUPPLY_PENALTY_AMO, PlantSCMAdvancedPlanning, MaxDaysOfSupplyPenaltyAmount, MAXDOS_PEN</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The table 'MARC_APS_EXT' containing Advanced Planning related data on plant level is empty for a specific material. This can happen if 'Advanced Planning' is not active for the corresponding material in this specific plant.</p>
+<p>Due to a program error, the SOAP service is transferring a blank value for field 'MAXDOS_PEN', although this value is invalid based on the field definition.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached Correction Instruction or the mentioned Support Package.</p></div></div></div></div>

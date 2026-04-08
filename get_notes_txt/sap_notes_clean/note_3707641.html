@@ -1,0 +1,91 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">With SAP S/4HANA Cloud Private Edition 2025 FPS01 and SAP S/4HANA 2025 FPS01, you can perform intercompany transfers for service objects and perform in-house service processes within intercompany service orders.</p>
+<p>If you use In-House Service in a release earlier than SAP S/4HANA Cloud Private Edition 2025 FPS01 or SAP S/4HANA 2025 FPS01, specific Customizing settings are required in Customizing for <strong>Service</strong>.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>You need to make the following settings Customizing for <strong>Service</strong>.</p>
+<p><strong>Partner processing</strong></p>
+<p>To enable entries in the <strong>End Customer</strong> field, you must make settings in the following Customizing activities:</p>
+<ol>
+<li><strong>Define Partner Functions</strong></li>
+</ol>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">Create an entry for the end customer and assign the function category <strong>End Customer</strong> to it</span></p>
+<ol start="2">
+<li><strong>Define Access Sequences</strong></li>
+</ol>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">Create an access sequence to copy the entry from the <strong>Sold-To Party</strong> field to the <strong>End Customer</strong> field.</span></p>
+<p class="ALB1andN1commentsparagraph" style="padding-left: 30px; display: inline !important;">Make the following settings for your access sequence in the Individual Accesses view:</p>
+<ul>
+<li>Dialog sequence: 10</li>
+<li>Source: <strong>Current Partner</strong></li>
+<li><strong>Wait Until Source is Available</strong> checkbox: Selected</li>
+<li><strong>Mapping/Definition for Partner Being Searched</strong> checkbox: Selected</li>
+<li>Partner function category: <strong>Sold-To Party</strong></li>
+<li>Usage in source:<strong> Customer Relationship Management</strong></li>
+</ul>
+<ol start="3" style="list-style-type: decimal;">
+<li><strong style="font-size: 14px;">Define Partner Determination Procedure in Service</strong></li>
+</ol>
+<ul>
+<li>Assign the partner function <strong>End Customer (CRM)</strong> to the procedure <strong>REPA2021 (In-House Services)</strong>.</li>
+<li>Assign the access sequence that you have defined in step 2 to the partner function and make the following settings:</li>
+<ul>
+<li>Minimum: 1</li>
+<li>Maximum: 1</li>
+</ul>
+</ul>
+<p class="ASStandardparagraph">The end customer is displayed in the following apps:</p>
+<ul>
+<li>In the <strong>Manage In-House Services</strong> app, on the <strong>In-House Service Details</strong> screen</li>
+<li>In the <strong>Manage In-House Service Objects</strong> app, on the <strong>In-House Service Objects Details</strong> screen</li>
+</ul>
+<p>This field shows the business partner that originally sent the object for service and typically owns it. This business partner matches the sold-to party specified for the original in-house service. In the intercompany in-house service, the sold-to party is the business partner of the sales organization that launched the intercompany process.</p>
+<p>For more information, see the Customizing documentation in <strong>Service</strong> under <strong>In-House Service</strong><strong>-&gt;Define Partner Processing</strong>.</p>
+<p><strong>Text management</strong></p>
+<p class="U4Headinginmodule">The following settings are required to copy entries that have been made in the text fields of the original in-house service to the text fields in the intercompany in-house service:</p>
+<p class="U5Heading2ndlevelinmodule">Text object: CRM_ORDERH</p>
+<ul>
+<li>Definition of Procedure view for text determination procedure REPA2020 (Texts for In-House Service)</li>
+<ul>
+<li>Text type: R001 (Customer Instruction)</li>
+<li>Access sequence: R001</li>
+</ul>
+<li>Definition of Access Sequence view for access sequence R001</li>
+<ul>
+<li>Sequence: <strong>0001</strong></li>
+<li>Copy from: <strong>CRM_ORDERI</strong></li>
+<li>Assigned function module: <strong>CRMS4_REPA_COPY_TEXT_TO_HEADER</strong></li>
+<li><strong>Continue</strong> checkbox: Not selected</li>
+</ul>
+</ul>
+<p class="U5Heading2ndlevelinmodule">Text object: CRM_ORDERI</p>
+<ul>
+<li><strong>Definition of Procedure</strong> view for text determination procedure <strong>REPA2022 (Texts for In-House Service Objects)</strong></li>
+<ul>
+<li>Text type: R001 (Customer Instruction)<br/>Access sequence: R001</li>
+</ul>
+</ul>
+<ul>
+<ul>
+<li><span style="font-size: 14px;">Text type: R002 (Examination Results)<br/></span>Access sequence: R001</li>
+</ul>
+</ul>
+<ul>
+<li><strong>Definition of Access Sequence</strong> view for access sequence <strong>R001</strong>:</li>
+<ul>
+<li>Text type: <strong>R001</strong><br/>Sequence: <strong>0001</strong><br/>Copy from: <strong>CRM_ORDERH</strong><br/>Assigned function module: <strong>CRMS4_REPA_COPY_TEXT_TO_ITEM</strong><br/><strong>Continue</strong> checkbox: Selected</li>
+<li>Text type: <strong>R002</strong><br/>Sequence: <strong>0002</strong><br/>Copy from: <strong>CRM_ORDERH</strong><br/>Assigned function module: <strong>CRMS4_REPA_COPY_TEXT_TO_ITEM</strong><br/><strong>Continue</strong> checkbox: Selected</li>
+<li>Text type: <strong>R001</strong><br/>Sequence: <strong>0003</strong><br/>Copy from: <strong>CRM_ORDERI</strong><br/>Assigned function module: <strong>CRMS4_REPA_COPY_TXT_TO_ITEM_IC</strong><br/><strong>Continue</strong> checkbox: Not selected</li>
+<li>Text type: <strong>R002</strong><br/>Sequence: <strong>0004</strong><br/>Copy from: <strong>CRM_ORDERI</strong><br/>Assigned function module: <strong>CRMS4_REPA_COPY_TXT_TO_ITEM_IC</strong><br/><strong>Continue</strong> checkbox: Not selected</li>
+</ul>
+</ul>
+<p>For more information, see the Customizing documentation in <strong>Service</strong> under <strong>In-House Service</strong><strong>-&gt;Define Text Management</strong>.</p>
+<p><strong><span style="font-size: 14px;">Specific settings for the </span>intercompany transfer for service objects: PPF (Post Processing Framework) actions</strong></p>
+<p>You perform actions to create follow-up service transactions and documents, or to add service objects to existing service transactions in the <strong>Manage In-House Service Objects</strong> app under <strong>Decide</strong> for service objects related to the original in-house service.</p>
+<p class="ASStandardparagraph">For service objects related to intercompany in-house services, it is not intended to create follow-up service transactions and documents or to add service objects to existing service transactions. Instead, you do this for the service objects related to the original in-house service.</p>
+<p class="ASStandardparagraph">The parameter <strong>IS_ INTERCOMPANY</strong> in the scheduling conditions that are maintained in the <strong>Define Conditions Customizing</strong> activity is used to specify if such actions for the action profiles <strong>REPA2021 (Actions for In-House Services)</strong> and <strong>REPA2022 (Actions for In-House Service Objects)</strong> are provided for intercompany in-house services or not. The following values apply to this parameter:</p>
+<ul>
+<li>No value: The action is provided for in-house services and intercompany in-house services.</li>
+<li>` `: The action is not provided if the in-house service is an intercompany in-house service. We recommend using this value.</li>
+<li>’<strong>X</strong>':  The action is provided only for intercompany in-house services.</li>
+</ul>
+<p>For more information, see the Customizing documentation in <strong>Service</strong> under <strong>In-House Service</strong><strong>-&gt;Define Actions</strong>.</p></div></div></div></div>

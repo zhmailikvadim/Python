@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Inactive Distribution Rule is available for selection in SAP Business One, Web client.</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>The <em>Use Multidimensions</em> checkbox is selected in the <span class="ph pname">SAP Business One</span> client (<em>Administration → System Initialization → General Settings → Cost Accounting</em><span> tab</span>) and <em>In Separate Columns</em> <span>is selected for <em>Display Distribution Rules</em></span>.</li>
+<li>There are several active Dimensions (<em>Financials</em><em> → </em><em>Cost Accounting</em><em> → </em><em>Dimensions</em>).</li>
+<li>There are several active Cost Centers (<em>Financials</em><em> → </em><em>Cost Accounting</em><em> → </em><em>Cost Centers)</em>.</li>
+</ul>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Log in SAP Business One client, go to <em>Financials</em><em> → </em><em>Cost Accounting</em><em> → Distribution Rules</em>, define several Distribution Rules for Dimension X.</li>
+</ol>
+<ul>
+<ul>
+<li>Distribution Rules "A", "B", "C", with <em>Active</em> checkbox ticked and the <em>Effect From... To</em> date range covers the system date.</li>
+<li>Distribution Rules "D", with <em>Active</em> checkbox not ticked.</li>
+<li>Distribution Rules "E", with <em>Active</em> checkbox ticked however the <em>Effect From... To</em> date range does not cover the system date. For example, Effective From 01.01.2024 To 31.12.2024，while the system date is 10.01.2026.</li>
+</ul>
+</ul>
+<ol start="2">
+<li>Go to <em>Purchasing - A/P → Purchase Order, </em>select a Business Partner in the header and an item in the row.</li>
+<li>Make the Dimension X visible in the row, press tab in the Dimension X column, and the <span>Distribution Rules "A", "B", "C" are in the<span> </span><em>List of Distribution Rules</em><span> window</span>.</span></li>
+<li><span>Log in SAP Business One web client and try to create the same Purchase Order and select <span>Distribution Rules for <span>Dimension X.</span></span></span></li>
+</ol><strong style="font-size: 14px;">Expected behavior:</strong><br/>
+<p>Only the active <span>Distribution Rules ("<span>A", "B", "C"</span>) are in the</span><span> </span><em>List of Distribution Rules</em><span> window</span><span>.</span></p>
+<p><strong>Actual behavior:</strong></p>
+<p>All the <span>Distribution Rules ("A", "B", "C",<span>"D", "E") </span>are in the </span><em>List of Distribution Rules</em><span> window</span><span>.</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p></div></div></div></div>

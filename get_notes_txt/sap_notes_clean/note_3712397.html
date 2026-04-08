@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When running transaction CURTOADV_CREATE, no PDS generation log is displayed during the first execution. Re‑executing the same selection immediately afterward produces the expected log output.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CURTOADV_CREATE, PDS, PPDS_ERP_CUSLNTRTO_CIF_REPORT, integration</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This behavior occurs after upgrading to SAP S/4HANA Cloud, private edition 2025 SP00. Due to a missing ELSE section in report PPDS_ERP_CUSLNTRTO_CIF_REPORT, the PDS option table was not populated correctly during the initial run. A missing branch in the selection logic prevented the default PDS option entry from being appended. As a result, the first execution could not be completed and produced no log.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This behavior is corrected by implementing the attached SNOTE correction instruction. The correction adjusts the PDS option handling coding.</p></div></div></div></div>

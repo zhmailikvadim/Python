@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Using Calculated Columns for Date Format Conversion</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors HCM Suite</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h4 data-toc-skip="">Using Calculated Columns for Date Format Conversion</h4>
+<p>Step 1: Create a Calculated Column</p>
+<ol><li>Navigate to your Story Report in SAP Analytics Cloud</li><li>Go to Query Designer and select Data → Create Calculated Column </li><li>Select Calculated Column → Add</li></ol>
+<p>Step 2: Apply Date Conversion Formula</p>
+<p>For converting dates to numeric format (DDMMYYYY), use this formula structure:</p>
+<pre><code>1CONCAT(
+2  RIGHT(CONCAT("0", TOTEXT(DAY([FIELDNAME]))), 2),
+3  CONCAT(
+4    RIGHT(CONCAT("0", TOTEXT(MONTH([FIELDNAME]))), 2),
+5    TOTEXT(YEAR([FIELDNAME]))
+6  )
+7)</code></pre>
+<p>For YYYYMMDD format, use:</p>
+<pre><code>1CONCAT(
+2  TOTEXT(YEAR([FIELDNAME])),
+3  CONCAT(
+4    RIGHT(CONCAT("0", TOTEXT(MONTH([FIELDNAME]))), 2),
+5    RIGHT(CONCAT("0", TOTEXT(DAY([FIELDNAME]))), 2)
+6  )
+7)</code></pre><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>calculated column, report story, date field, dd, mm, yy, yyyy, date format, change, modify, formatting, date</p></div></div></div></div>

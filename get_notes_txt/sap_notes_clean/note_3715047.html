@@ -1,0 +1,417 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP Note provides you with essential information about SAP Ariba Sourcing and Procurement for Public Sector in S/4HANA Release OP2025 FPS1.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Ariba Sourcing and Procurement for Public Sector in S/4HANA, S4PPS, PPS, S/4HANA 2025 FPS1</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> You want to get additional information about SAP Ariba Sourcing and Procurement for Public Sector in S/4HANA as part of product version SAP S/4HANA 2025.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ol>
+<li> As a first step kindly refer to the central release notes <a href="https://me.sap.com/notes/3493301" target="_blank">3493301</a> and <a href="https://me.sap.com/notes/3658070" target="_blank">3658070</a> to get information on SAP S/4HANA 2025</li>
+<li>Please refer to the <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/2ee60d04e7d549b5b5afb155ac0d7a2d/5ed6b8f66f3f4ddf9f220e136c347f14.html?version=2025.000" target="_blank">product documentation</a> for details on the features offered by SAP Ariba Sourcing and Procurement for Public Sector</li>
+<li>Please <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/5550be7056c34ee6ada730c35e41e967/d7f52e7fc74f48408217c6fafe0ef67d.html?version=2025&amp;state=DRAFT" target="_blank">refer to this link</a> to get the list of all Front-End Business Roles which are relevant for SAP Ariba Sourcing and Procurement for Public Sector</li>
+<li>The <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/5550be7056c34ee6ada730c35e41e967/102437625b4f4f56b2bb395fc1ffba92.html?state=DRAFT" target="_blank">authorization objects</a> relevant for SAP Ariba Sourcing and Procurement for Public Sector are <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/5550be7056c34ee6ada730c35e41e967/102437625b4f4f56b2bb395fc1ffba92.html?state=DRAFT" target="_blank">described here</a></li>
+<li>To start using the solution, the <a href="#BusinessFunctions" target="_self">Business Functions described here</a> need to be activated in the system</li>
+<li>Please <a href="#FioriAppsReference" target="_self">refer to this section for details on the various Fiori Apps</a> for SAP Ariba Sourcing and Procurement for Public Sector</li>
+<li>Please <a href="#ServiceGroups" target="_self">follow the steps in this section</a> to publish the required ODATA v4 Service Groups</li>
+<li>A guide on the configuration aspects of the solution are provided in an attachment of this note [S4HANA_OP2025_FPS1_Configuration_Guide_PPS.zip]</li>
+</ol>
+<p><strong>ACTIVATION OF BUSINESS FUNCTIONS</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>#</strong></td>
+<td><strong>Business Function</strong></td>
+<td><strong>Switch</strong></td>
+<td><strong>Purpose</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>PPS_NG_MVP2025</td>
+<td>PPS_NG_MVP2025</td>
+<td>This is the main switch which activates the solution and all other switches are dependent on this switch</td>
+</tr>
+<tr>
+<td>2</td>
+<td>PPS_NG_SMARTNUMBER_01</td>
+<td>PPS_NG_SMARTNUMBER_01</td>
+<td>Activates the smart number functionality</td>
+</tr>
+<tr>
+<td>3</td>
+<td>PPS_NG_OPTIONS_01</td>
+<td>PPS_NG_OPTIONS_01</td>
+<td>Activates the feature called "Options"</td>
+</tr>
+<tr>
+<td>4</td>
+<td>PPS_NG_PEROP</td>
+<td>PPS_NG_PEROP</td>
+<td>Activates the feature called "Period of Performance"</td>
+</tr>
+<tr>
+<td>5</td>
+<td>PPS_NG_BI</td>
+<td>PPS_NG_BI</td>
+<td>Activates the feature called "Budget Impact"</td>
+</tr>
+<tr>
+<td>6</td>
+<td>PPS_NG_FPD</td>
+<td>PPS_NG_FPD</td>
+<td>Activates the "Future Posting Date" functionality</td>
+</tr>
+<tr>
+<td>7</td>
+<td>PPS_NG_INCRE_FUND</td>
+<td>PPS_NG_INCRE_FUND</td>
+<td>Activates the concept called "Incremental Funding"</td>
+</tr>
+<tr>
+<td>8</td>
+<td>PPS_NG_DOC_TOTAL</td>
+<td>PPS_NG_DOC_TOTAL</td>
+<td>Activates the feature to show additional totals at the PO document level</td>
+</tr>
+<tr>
+<td>9</td>
+<td>PPS_NG_MC</td>
+<td>PPS_NG_MC</td>
+<td>Activates the feature called "Mixed Contract"</td>
+</tr>
+<tr>
+<td>10</td>
+<td>PPS_NG_MS</td>
+<td>PPS_NG_MS</td>
+<td>Activates the "Multiple Supplier" feature</td>
+</tr>
+<tr>
+<td>11</td>
+<td>PPS_NG_PA</td>
+<td>PPS_NG_PA</td>
+<td>Activates the feature called "Price Arrangements"</td>
+</tr>
+<tr>
+<td>12</td>
+<td>PPS_NG_NOVATION</td>
+<td>PPS_NG_NOVATION</td>
+<td>Activates the feature called "Novation"</td>
+</tr>
+<tr>
+<td>13</td>
+<td>PPS_NG_OPEN_TEXT</td>
+<td>PPS_NG_OPEN_TEXT</td>
+<td>Activates the integration with OpenText (if you are opting for integration with OpenText for attachment handling)</td>
+</tr>
+<tr>
+<td>14</td>
+<td>PPS_NG_EPS</td>
+<td>PPS_NG_EPS</td>
+<td>Activates the integration with External Publishing Systems</td>
+</tr>
+<tr>
+<td>15</td>
+<td>PPS_NG_EPS_SAM</td>
+<td>PPS_NG_EPS_SAM</td>
+<td>Activates the integration with SAM.gov</td>
+</tr>
+<tr>
+<td>16</td>
+<td>PPS_NG_SP_INT</td>
+<td>PPS_NG_SP_INT</td>
+<td>Activates the integration of PPS with Sourcing Project</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>DEPENDENT SWITCHES</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>#</strong></td>
+<td><strong>Business Function</strong></td>
+<td><strong>Switch</strong></td>
+<td><strong>Purpose</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>MM_PUR_SRVCPROC_ITM_HIER</td>
+<td>MM_PUR_SRVCPROC_SFWS_ITM_HIER</td>
+<td>Activates the item hierarchies feature in core applications: PR, PO &amp; PC </td>
+</tr>
+<tr>
+<td>2</td>
+<td>MM_PUR_PURCHORD_REWORK_WFL</td>
+<td>MM_PUR_PURCHORD_REWORK_WFL</td>
+<td>Activates a feature which allows re-work on workflows submitted for approvals</td>
+</tr>
+<tr>
+<td>3</td>
+<td>LOG_MMFI_P2P</td>
+<td><em>&lt;All Switches under this Function&gt;</em></td>
+<td>Activates the feature which enables payment plan functionality</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong><a name="FioriAppsReference" target="_blank"></a>FIORI APPS - REFERENCE</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>#</strong></td>
+<td><strong>Fiori App</strong></td>
+<td><strong>Link to Details</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Manage Funds Requests - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8298')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8298')/S31PCE</a><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F6845')/S31PCE" target="_blank"><br/></a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Manage Novation Requests - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8425')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8425')/S31PCE</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Manage Contract Hierarchies - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8424')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8424')/S31PCE</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Manage Purchase Requisitions - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F6845')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F6845')/S31PCE</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Manage Entity Hierarchies - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8496')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8496')/S31PCE</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Manage Profile Attributes - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8495')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8495')/S31PCE</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Manage Workflows for Funds Requests - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8497')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8497')/S31PCE</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Schedule Novation Runs - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8843')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8843')/S31PCE</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Manage Workflows for Purchase Orders - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F7358')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F7358')/S31PCE</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Schedule Novation Checks - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8844')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8844')/S31PCE</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>Schedule Funds Management Posting - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F7407')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F7407')/S31PCE</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>Schedule Registered Suppliers Processing - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8351')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8351')/S31PCE</a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>Manage Workflows for Novation Requests - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8494')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8494')/S31PCE</a></td>
+</tr>
+<tr>
+<td>14</td>
+<td>Manage Workflows for Purchase Contracts - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F7772')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F7772')/S31PCE</a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>Schedule Entity Attributes Buffering - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8841')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8841')/S31PCE</a></td>
+</tr>
+<tr>
+<td>16</td>
+<td>Manage Workflows for Purchase Requisitions - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F7773')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F7773')/S31PCE</a></td>
+</tr>
+<tr>
+<td>17</td>
+<td>Schedule Processing of Purchase Requisition Items - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8429')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8429')/S31PCE</a></td>
+</tr>
+<tr>
+<td>18</td>
+<td>Display Funds Request - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8572')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8572')/S31PCE</a></td>
+</tr>
+<tr>
+<td>19</td>
+<td>Display Novation Request - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8571')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8571')/S31PCE</a></td>
+</tr>
+<tr>
+<td>20</td>
+<td>Display Purchase Requisition - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8660')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8660')/S31PCE</a></td>
+</tr>
+<tr>
+<td>21</td>
+<td>Manage Service Entry Sheets - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8848')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8848')/S31PCE</a></td>
+</tr>
+<tr>
+<td>22</td>
+<td>Schedule Deobligation Runs - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8297')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8297')/S31PCE</a></td>
+</tr>
+<tr>
+<td>23</td>
+<td>Schedule Closeout Runs - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8350')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8350')/S31PCE</a></td>
+</tr>
+<tr>
+<td>24</td>
+<td>Schedule Deobligation Status Checks - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8842')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8842')/S31PCE</a></td>
+</tr>
+<tr>
+<td>25</td>
+<td>Schedule Optional Item Status Update - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8845')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8845')/S31PCE</a></td>
+</tr>
+<tr>
+<td>26</td>
+<td>Schedule Notifcations for Optional Items - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8846')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8846')/S31PCE</a></td>
+</tr>
+<tr>
+<td>27</td>
+<td>Schedule Closeout Status Checks - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8847')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8847')/S31PCE</a></td>
+</tr>
+<tr>
+<td>28</td>
+<td>Manage Sourcing Projects - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8187')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8187')/S31PCE</a></td>
+</tr>
+<tr>
+<td>29</td>
+<td>Manage Supplier Quotations - Public Services</td>
+<td><a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8188')/S31PCE" target="_blank">https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps('F8188')/S31PCE</a></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong><strong><a name="ServiceGroups" target="_blank"></a>ODATA V4 SERVICES TO BE ACTIVATED</strong></strong></p>
+<p>Kindly follow the steps provided in the SAP Note: <a href="https://me.sap.com/notes/0002948977" target="_blank">https://me.sap.com/notes/0002948977</a> and activate the below ODATA V4 Service Groups</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>#</strong></td>
+<td><strong>ODATA V4 Service Group</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>UI_PPSENTITYHIERARCHY_MANAGE</td>
+</tr>
+<tr>
+<td>2</td>
+<td>UI_PPSENTITYPROFILE_MANAGE</td>
+</tr>
+<tr>
+<td>3</td>
+<td>UI_PPSFUNDSREQUEST_MANAGE </td>
+</tr>
+<tr>
+<td>4</td>
+<td>UI_PPSMASSUPLOAD_UTILITY </td>
+</tr>
+<tr>
+<td>5</td>
+<td>UI_PPSNOVATIONREQUEST_MANAGE </td>
+</tr>
+<tr>
+<td>6</td>
+<td>UI_PPSPURCONTRHIERARCHY_MANAGE </td>
+</tr>
+<tr>
+<td>7</td>
+<td>UI_PPSSUPPLIERLIST_PROCESS </td>
+</tr>
+<tr>
+<td>8</td>
+<td>UI_PPS_CLOSEOUT_PROCESS </td>
+</tr>
+<tr>
+<td>9</td>
+<td>UI_PPS_DEOBLIGATION_PROCESS</td>
+</tr>
+<tr>
+<td>10</td>
+<td>UI_PPS_PURCHASEORDER_MANAGE_2</td>
+</tr>
+<tr>
+<td>11</td>
+<td>UI_PPS_PURCONTRACT_MANAGE_2</td>
+</tr>
+<tr>
+<td>12</td>
+<td>UI_PPS_PURREQUISITION_MANAGE_2</td>
+</tr>
+<tr>
+<td>13</td>
+<td>UI_PPS_PURREQUISITION_PROCESS</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong><strong>SICF SERVICE ACTIVATION</strong></strong></p>
+<p>Internet Communication Framework (ICF) services must be activated to enable proper functionality of SAP Fiori applications, OData services, and web-based interfaces. All ICF services are initially inactive for security reasons and require manual activation based on your implementation requirements.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Functionality</strong></td>
+<td><strong>SICF Path</strong></td>
+<td><strong>Comments</strong></td>
+</tr>
+<tr>
+<td>Core Services</td>
+<td>/default_host/sap/bc/ui2/flp</td>
+<td>SAP Fiori Launchpad core functionality</td>
+</tr>
+<tr>
+<td> </td>
+<td>/default_host/sap/bc/ui2/start_up</td>
+<td>Launchpad startup services</td>
+</tr>
+<tr>
+<td> </td>
+<td>/default_host/sap/public/bc/ui2</td>
+<td>Public UI2 resources</td>
+</tr>
+<tr>
+<td> </td>
+<td>/default_host/sap/public/bc/ui5_ui5</td>
+<td>Public UI5 resources</td>
+</tr>
+<tr>
+<td>Integration Services</td>
+<td>/default_host/sap/opu/odata</td>
+<td>Standard OData service endpoint with sub-nodes</td>
+</tr>
+<tr>
+<td> </td>
+<td>/default_host/sap/public/opu</td>
+<td>Public OData resources including MIME repository access</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>SPECIAL CONSIDERATIONS</strong></p>
+<p>1. In the documentation overview section bullet point 4, please interpret the below statement:</p>
+<p>"If you use the Business Network (optional), the purchase order or changes to the purchase order are transferred either electronically to your supplier using the Ariba Network, or by email notification."</p>
+<p>as</p>
+<p>"If you use the Business Network (optional), the modalities of integration with S4PPS needs to be aligned with the implementation partner(s) during the customer implementation phase."</p>
+<p><span style="font-size: 14px;"> </span></p></div></div></div></div>

@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">After migration the Information Steward repository from one type of Database to a different one, importing objects into the new Database fails.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Information Steward 4.x</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This appears to be expected behavior when migrating between different database types. The import tool does not automatically convert database connection configurations across different database systems. This behavior is currently under review.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>Workaround Steps:</strong></p>
+<ol><li>
+<p>Create a temporary project in the target environment:</p>
+<ul><li>Open an empty/uninvolved IS project in the new environment (with SAP HANA database)</li><li>Manually add tables to this project</li><li>Create a rule and a rule task</li></ul>
+</li><li>
+<p>Export the temporary project:</p>
+<ul><li>Export the entire temporary project</li><li>This will generate a zip file with the correct SAP HANA connection XML format</li></ul>
+</li><li>
+<p>Extract the correct connection information:</p>
+<ul><li>Open the exported zip file from step 2</li><li>Locate and copy the SAP HANA connection information from the XML files</li></ul>
+</li><li>
+<p>Modify the original export file:</p>
+<ul><li>Take your original export file (e.g., <code>simplified_Project_20251204_110946.zip</code> from the DB2 environment)</li><li>Open this zip file</li><li>Replace the old connection information with the SAP HANA connection information copied in step 3</li><li>Important: Leave all other files unchanged</li></ul>
+</li><li>
+<p>Save and import:</p>
+<ul><li>Save the modified zip file (e.g., <code>simplified_Project_20260107_110946_HANA.zip</code>)</li><li>Import this edited zip file into the target environment</li><li>Import should now complete successfully</li></ul>
+</li></ol>
+<p> </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Information Steward, Import, Projects, Fail,  Database, Migration, Upgrade</p></div></div></div></div>

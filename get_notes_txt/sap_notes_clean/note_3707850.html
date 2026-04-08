@@ -1,0 +1,163 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p>Multiple issues occur in the India localization scenarios across sales and purchasing documents, including incorrect behavior when linking down payments, copying documents, validating excisable items, retaining GST attributes, handling place of supply, serial/batch enablement, copying GST tax invoices, and using freight with non‑GST items.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Scenario 1:</strong> <strong>Net </strong><strong>amount drawing fails when </strong><strong>system currency is different than local currency (</strong><strong>down </strong><strong>payment </strong><strong>link)</strong></p>
+<p><strong>Prerequisites:</strong></p>
+<p>The GST configuration is enabled.</p>
+<p><strong>Scenario:</strong></p>
+<ol start="1">
+<li>Log in to the SAP Business One client.</li>
+<li>Create an A/R down payment invoice for any item with quantity 1, pay it in the <em>Payment Means</em> form, and add the A/R down payment invoice.</li>
+<li>Log in to the SAP Business One, Web client.</li>
+<li>Create an A/R invoice for the same customer, branch, item, and tax code as in the created A/R down payment invoice and increase the item quantity to two.</li>
+<li>Open the <em>Down Payment to Draw</em> form and select the down payment created in step 2.</li>
+<li>Set the <em>Net Amount to Draw </em>and choose <em>Update</em>.</li>
+<li>Choose <em>Add &amp; View</em>.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The A/R invoice is added successfully.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>An error message appears: <em>There is a difference between the document total and its components. [A/R Invoice – Document Total (SC)].</em></p>
+<p> </p>
+<p><strong>Scenario 2:</strong> <strong>Copy </strong><strong>from </strong><strong>a delivery to </strong><strong>an A/R </strong><strong>invoice fails</strong></p>
+<p><strong>Prerequisites:</strong></p>
+<p>The GST sequence determination is activated.</p>
+<p><strong>Scenario:</strong></p>
+<ol start="1">
+<li>Log in to the SAP Business One, Web client.</li>
+<li>Open the <em>Deliveries</em> tile.</li>
+<li>Select a delivery and choose <em>Copy To</em> → <em>A/R Invoice</em>.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The A/R invoice is created successfully.</p>
+<p><strong>Actual behavior:</strong></p>
+<p>An error message appears: <em>Internal error (-10) occurred</em>.<br/> Copying succeeds only when sequence numbers are unlocked.</p>
+<p> </p>
+<div class="longtext">
+<p><strong>Scenario 3:</strong> <strong>Incorrect error message appears for standalone A/R or A/P invoices containing excisable items</strong></p>
+<p><strong>Prerequisites:</strong></p>
+<p>Excisable item and excisable warehouse are defined.</p>
+<p><strong>Scenario:</strong></p>
+<ol start="1">
+<li>Create an A/R invoice or an A/R credit memo (standalone).</li>
+<li>Select an excisable item and an excisable warehouse.</li>
+<li>Add the document.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>A correct error message is displayed: <em>Cannot create </em><em>a standalone AP/AR </em><em>invoice </em><em>or AP/AR </em><em>credit </em><em>memo with </em><em>excisable item</em><em>s.</em></p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>An incorrect error message appears: <em>There are Non‑excisable Item(s) with CENVAT tax code.</em></p>
+<p> </p>
+<p><strong>Scenario 4 - “Supply Covered Under Sec. 7 of IGST Act” </strong><strong>field resets after item selection</strong></p>
+<p><strong>Prerequisites:</strong></p>
+<p>The GST configuration is enabled.</p>
+<p><strong>Scenario:</strong></p>
+<ol start="1">
+<li>Open a purchase quotation.</li>
+<li>Go to the <em>Tax</em> tab and set the <em>Supply Covered Under Sec. 7 of IGST Act</em> field to <em>Yes</em>.</li>
+<li>Add an item.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The field <em>Supply Covered Under Sec. 7 of IGST Act</em> remains <em>Yes</em>.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>The field <em>Supply Covered Under Sec. 7 of IGST Act</em> resets to <em>No</em>.</p>
+<p> </p>
+<p><strong>Scenario 5 – </strong><strong>The Place of Supply </strong><strong>field is not refreshed after deleting </strong><strong>the first </strong><strong>document row</strong></p>
+<p><strong>Prerequisites:</strong></p>
+<p>Warehouses 01 and 02 are configured with different states.</p>
+<p><strong>Scenario:</strong></p>
+<ol start="1">
+<li>Create a purchase request or purchase quotation.</li>
+<li>In the first row, add an item with warehouse 01.</li>
+<li>In the second row, add an item with warehouse 02.</li>
+<li>Delete the first row.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The <em>Place of Supply</em> field is refreshed to match the state of warehouse 02.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>The <em>Place of Supply</em> field remains unchanged with the state of warehouse 01.</p>
+<p> </p>
+<p><strong>Scenario 6 - Net amount editing fails in an A/R credit memo created from an A/R invoice</strong></p>
+<p><strong>Scenario:</strong></p>
+<ol start="1">
+<li>Create an A/R down payment invoice.</li>
+<li>Create the corresponding A/R invoice in the web client.</li>
+<li>Draw the net amount.</li>
+<li>Copy the A/R invoice to an A/R credit memo.</li>
+<li>In the <em>Total Down Payment</em> section, set the <em>Net Amount to Draw</em> to a lower amount.</li>
+<li>Add the document.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The A/R credit memo is added successfully.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>You cannot add the A/R credit memo after editing the net amount.</p>
+<p> </p>
+<p><strong>Scenario 7 - Serial/Batch should be disabled when “Without Qty Posting” is selected</strong></p>
+<p><strong>Prerequisites:</strong></p>
+<p>A GST Debit Memo transaction type is defined.</p>
+<p><strong>Scenario:</strong></p>
+<ol start="1">
+<li>Create an A/R invoice and set the <em>Transaction Type</em> to GST Debit Memo.</li>
+<li>Select a serial/batch item.</li>
+<li>Select the <em>Without Qty Posting</em> checkbox.</li>
+<li>Select batch/serial number in the <em>Batch/Serial</em> field.</li>
+<li>Add the document.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The batch/serial number selection is disabled.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>Document is added, but the selected batch/serial number is cleared instead of being disabled.</p>
+<p> </p>
+<p><strong>Scenario 8 - Copy </strong><strong>from A</strong><strong>/P </strong><strong>invoice</strong><strong> to A</strong><strong>/P </strong><strong>credit </strong><strong>memo fails for GST </strong><strong>tax </strong><strong>invoice</strong></p>
+<p><strong>Scenario:</strong></p>
+<ol start="1">
+<li>Create an A/P invoice and set the <em>Transaction Type</em> to <em>GST Tax Invoice</em>.</li>
+<li>Choose <em>Copy From</em> → <em>A/P Credit Memo</em>.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The A/P invoice is successfully copied to an A/P credit memo.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>The copy operation fails.</p>
+<p> </p>
+<p><strong>Scenario 9 - </strong><strong>Freight is not applicable for non-GST items in the Bill of Supply</strong></p>
+<p><strong>Scenario:</strong></p>
+<ol start="1">
+<li>Create a goods receipt with a non‑GST item.</li>
+<li>Create an A/R invoice with the <em>Transaction Type</em> of <em>Bill of Supply</em>.</li>
+<li>Go to the <em>Contents</em> tab, enter the non‑GST item, set a unit price, and add freight.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The freight value is acceptable without any errors.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>A system error is displayed when entering freight for non‑GST item.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The issues were caused by inconsistent validation and calculation logic in India localization for sales and purchasing documents, leading to incorrect handling of GST rules, document copying, and field behavior in specific scenarios.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p></div></div></div></div>

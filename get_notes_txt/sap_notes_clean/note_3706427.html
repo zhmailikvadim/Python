@@ -1,0 +1,67 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">To provide economic relief following severe flooding in Southern Thailand, the Ministry of Labour has announced a temporary reduction in the Social Security Fund (SSF) contribution rates.</p>
+<p>This change impacts the payroll process for companies and insured persons located in specific disaster-affected provinces for a period of six months, from the contribution period of <strong>December 2025</strong> to <strong>May 2026</strong>.</p>
+<p>The specific impacts are as follows:</p>
+<ul>
+<ul>
+<li>For employers and insured persons under Section 33 (employees) located in the provinces of Trang, Nakhon Si Thammarat, Narathiwat, Pattani, Phatthalung, Yala, Songkhla, Satun, and Surat Thani, the contribution rate is reduced to <strong>3%</strong> of the employee's wages for both the employer and the employee.</li>
+<li>For voluntary insured persons under Section 39 registered in the same provinces, the monthly contribution is reduced to 283 Baht.</li>
+</ul>
+</ul>
+<p>Employers or insured persons who have already paid contributions at the previous, higher rates for the affected periods may submit a request for a refund of the excess amount to the Social Security Office.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">T7THSR</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">This is a legal change.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This is a consulting note on how to change the employer's and employee's SS contribution rate.</p>
+<p>There are two SS rate tables for Thailand, statutory rate (V_T7THSS) and company rate (V_T7THSR). The company rate has the higher priority in the system.</p>
+<p>Since this legal change is only applicable to the above mentioned provinces in Thailand, the statutory table V_T7THSS remains unchanged.</p>
+<p><strong>This note does not include any system change of the SS rate, it only provides suggestions on how to change the company rate (V_T7THSR).</strong> It is a customizing table which needs to be changed by yourselves if this legal change is applicable to your employees. Make sure to confirm with SSO authority in your registered area which area or branch get effect to change SS contribution rate before change the configuration.</p>
+<p>Go to SM30, change the rate in V_T7THSR according to your configuration.</p>
+<p>Here is an example for your reference:</p>
+<p>Sample configuration for PS grouping 01 and SS category 0001:</p>
+<div class="table-responsive"><table border="2" cellpadding="2" cellspacing="2" class="table table-bordered table-striped col-resizeable" style="width: 649px; height: 94px;"><colgroup><col span="6" width="87"/></colgroup>
+<tbody>
+<tr>
+<td height="21" width="87">PS Grp SSC </td>
+<td width="87">SS Category</td>
+<td width="87">Start Date </td>
+<td width="87">End Date</td>
+<td width="87">Emp Co Rte</td>
+<td width="87">Empr Co Rt</td>
+</tr>
+<tr>
+<td height="21">              01</td>
+<td>          0001</td>
+<td>01.01.2023</td>
+<td>30.11.2025</td>
+<td>        5</td>
+<td>         5</td>
+</tr>
+<tr>
+<td height="21"></td>
+<td> </td>
+<td>01.12.2025</td>
+<td>31.05.2026</td>
+<td>        3</td>
+<td>         3</td>
+</tr>
+<tr>
+<td height="21"></td>
+<td> </td>
+<td>01.06.2026</td>
+<td>31.12.9999</td>
+<td>        5</td>
+<td>         5</td>
+</tr>
+</tbody>
+</table></div>
+<p>This legal change is published in January 2026, but it was effective back from December 2025.</p>
+<p>The system can only calculate the SS contributions based on the new rate from year 2026. It cannot automatically adjust the SS contribution for the previous year, because it may cause inconsistency with the tax you have already submitted for 2025.</p>
+<p>For the overpaid SS contribution of 2025, you need to calculated it manually and claim the refund from SSO by yourself.</p>
+<p>For more information about the development delivered with this SAP Note, see the entry for this SAP Note in the What's New topic on SAP Help Portal.</p>
+<ul>
+<li>SAP S/4HANA: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/7075d7a2e2fe4c7cb5ba847f35b964f7.html" target="_blank" title="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/7075d7a2e2fe4c7cb5ba847f35b964f7.html">Social Security Contribution Rate Reduction for Flood-Affected Provinces</a></li>
+<li>SAP ERP: <a href="https://help.sap.com/docs/SAP_ERP/063e7e5f4d7f4fc0be08565793a9b941/7075d7a2e2fe4c7cb5ba847f35b964f7.html" target="_blank" title="https://help.sap.com/docs/SAP_ERP/063e7e5f4d7f4fc0be08565793a9b941/7075d7a2e2fe4c7cb5ba847f35b964f7.html">Social Security Contribution Rate Reduction for Flood-Affected Provinces</a></li>
+</ul></div></div></div></div>

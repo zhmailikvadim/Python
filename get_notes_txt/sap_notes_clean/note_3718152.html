@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><br/>A task that has two or more data flows using the same target table has issues in the Monitor Log.</p>
+<p>Example:<br/><a href="https://jira.tools.sap/secure/attachment/10782836/10782836_image-2026-02-19-10-30-23-076.png" id="10782836_thumb" target="_blank" title="image-2026-02-19-10-30-23-076.png"></a></p>
+<ul>
+<li>In BTP Neo, after running this task, you see on the Monitor Log tab the State/Row count/Elapsed time/Absolute time for <strong>all the data flows</strong> (two or more).</li>
+<li>In BTP Kyma, after running this task, you see on the Monitor Log tab the State/Row count/Elapsed time/Absolute time <strong>just for the latest data flow executed</strong>. Previous data flow executions are replaced/overwritten by the latest data flow execution.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Cloud Integration for data services - Kyma Server 2511 issue</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>All the data flows of the task started and completed successfully. When we have the same target table being written multiple times by different data flows, the monitor log is replaced (re-started) during the task execution. This issue is just the "monitor log" visualization and there is no data loss or missing records in the target.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The SAP Development team is aware of the issue and we plan to fix this in future releases.</p>
+<p><strong>Workaround</strong></p>
+<ul>
+<li>Check the full Monitor log on the agent machine.</li>
+<li>Look into \log\JobServer_DSoD_Agent\dsod_agent_repo__(sandbox or prod).</li>
+<li>Search for your job name and find the log for the respective timestamp executed.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>VSS, Vehicle Model Master, /DBE/VMODEL, gearbox, /DBE/C_VEH_GBOX</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Missing functionality.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the attached note and run the attached correction program /DBE/NOTE_3718153 to resolve this issue (Step 2 &amp; Step 3). Following is recommended, when executing the program:</p>
+<ul>
+<li>When prompted for a package, enter /DBE/VEHICLE_MASTER</li>
+<li>When seeing a message "Object ... can be created in a package of namespace /DBE/ only", press button "Further for All''. </li>
+</ul>
+<p>The note also introduces functionality that automatically updates vehicle Generic Options based on the new columns in the /DBE/C_VEH_GBOX table.</p></div></div></div></div>

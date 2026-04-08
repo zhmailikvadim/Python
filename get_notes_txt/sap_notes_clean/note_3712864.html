@@ -1,0 +1,199 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0" style="margin: 0in 0in 8pt; line-height: 107%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-family: verdana, geneva; font-size: 10pt;"><a target="_blank"><span>This Document is with respect to Address Management Tasks/Processes during Client Copy.</span></a></span></p>
+<p style="margin: 0in 0in 8pt; line-height: 107%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-family: verdana, geneva; font-size: 10pt;">It covers the following topics: </span></p>
+<ol><li style="line-height: 107%; font-size: 10pt; font-family: Calibri, sans-serif;"><a href="#A1" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: verdana, geneva; font-size: 10pt;">Client Copy Tool </span></a></li><li style="line-height: 107%; font-size: 10pt; font-family: Calibri, sans-serif;"><span style="font-family: verdana, geneva; font-size: 10pt;"><a href="A2" rel="noopener noreferrer nofollow" target="_blank">Types of Client Copy </a></span></li><li style="line-height: 107%; font-size: 10pt; font-family: Calibri, sans-serif;"><a href="#A3" rel="noopener noreferrer nofollow" target="_blank"><span style="font-family: verdana, geneva; font-size: 10pt;">Profiles </span></a></li><li style="line-height: 107%; font-size: 10pt; font-family: Calibri, sans-serif;"><a href="#A4" rel="noopener noreferrer nofollow" target="_blank"><span style="font-family: verdana, geneva; font-size: 10pt;">Follow-up / Next Steps </span></a></li><li style="line-height: 107%; font-size: 10pt; font-family: Calibri, sans-serif;"><a href="#A5" rel="noopener noreferrer nofollow" target="_blank"><span style="font-family: verdana, geneva; font-size: 10pt;">Transactions </span></a></li><li style="line-height: 107%; font-size: 10pt; font-family: Calibri, sans-serif;"><a href="#A6" rel="noopener noreferrer nofollow" target="_blank"><span style="font-family: verdana, geneva; font-size: 10pt;">Tips </span></a></li><li style="line-height: 107%; font-size: 10pt; font-family: Calibri, sans-serif;"><span style="font-family: verdana, geneva; font-size: 10pt;"><a href="#A7" rel="noopener noreferrer nofollow" target="_blank">FAQ </a><br/>7.1. What are the steps to be followed before client copy? </span><span style="font-family: verdana, geneva; font-size: 10pt;"><br/>7.2. Why should we take backup of the data before doing client copy? <br/>7.3. Can we retrieve the lost data after client copy? <br/>7.4. When should we implement the Note? <br/>7.5. Why Business Users conversion to classic? <br/>7.6. How to get the converted business users be reconverted? </span><span style="font-family: verdana, geneva; font-size: 10pt;"><br/>7.7. Sync report Link <br/>7.8. Why user master related address data being deleted with Profiles like SAP_APPL &amp; SAP_APPX? How to handle it? </span></li></ol>
+<p style="margin: 0in 0in 8pt; line-height: 107%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-family: verdana, geneva; font-size: 10pt;">To know complete details of Client Copy tool please refer – <a href="https://wiki.one.int.sap/wiki/display/ApplServ/Client+Copy+Tool" rel="noopener noreferrer nofollow" target="_blank">Client Copy Tool</a></span></p>
+<p style="margin: 0in 0in 8pt; line-height: 107%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-family: verdana, geneva; font-size: 10pt; color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul style="list-style-position: inside;"><li>Sales and Distribution (SD)</li><li>Logistics Execution (LE)</li><li>SAP ERP Central Component</li><li>SAP ERP</li><li>SAP enhancement package for SAP ERP</li><li>SAP enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA</li><li>SAP S/4HANA Cloud Private Edition</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li style="font-family: verdana, geneva; font-size: 10pt;"><a id="A1" target="_blank"></a><span style="font-size: 10pt;"><strong>Client Copy Tool</strong></span><br/>
+<p><span style="font-size: 10pt;">Client copy tool can be used to copy data between clients of same or different systems. The data that is copied is defined with the help of profile with which the client copy tool is executed. Based on the profile selected, application/customizing/user master data are copied during the execution of client copy tool.</span></p>
+</li><li style="font-family: verdana, geneva; font-size: 10pt;"><a id="A2" target="_blank"></a><span style="font-size: 10pt;"><strong>Types of Client Copy </strong></span><br/><br/><span style="font-size: 10pt;">Client copy can be performed in three different ways based on the requirement.</span><br/><br/><span style="font-size: 10pt;"><span style="font-family: verdana, geneva;"><strong>2.1. Local Client Copy </strong><br/><br/>Using local client copy, data can be copied between two clients of the same systems. SCCLN is the transaction for local client copy. Execution can be triggered by providing source and target client values along with profile name.<br/></span><span style="font-family: verdana, geneva;"><br/><strong>2.2. Export/Import Client Copy </strong><br/></span></span>
+<p><span style="font-size: 10pt;">Using Export/Import client copy, data can be copied between different systems. SCC8N is the transaction for client export. SCC7N is the transaction for client import.</span></p>
+<span style="font-family: verdana, geneva; font-size: 10pt;"><br/><strong>2.3  Remote Client Copy </strong><br/></span>
+<p><span style="font-size: 10pt;">Using Remote client copy, data can be copied between different systems. SCC9N is the transaction for remote client copy.</span><br/><br/></p>
+</li><li style="font-family: verdana, geneva; font-size: 10pt;"><a id="A3" target="_blank"></a><span style="font-size: 10pt;"><strong>Profiles</strong> </span><br/>
+<p><span style="font-size: 10pt;">Copy profile is the parameter used in the client copy process, based on which the tool decides what type of data must be copied.</span></p>
+<p><span style="font-size: 10pt;">Below table indicates whether address management exits are performing any relevant steps during client copy for the profiles.</span></p>
+<p><span style="font-size: 10pt;">Profiles supported by different client copy methods.</span></p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable"><tbody><tr><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">Profile</span></p>
+</td><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">Local(SCCLN)</span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;">Export/Import (SCC8N/SCC7N)</span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;">Remote (SCC9N)</span></p>
+</td></tr><tr><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_APPL</span></p>
+</td><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;"> </span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td></tr><tr><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_APPX</span></p>
+</td><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;"> </span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td></tr><tr><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_CUST</span></p>
+</td><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;"> </span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td></tr><tr><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_CUSV</span></p>
+</td><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;"> </span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td></tr><tr><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_CUSX</span></p>
+</td><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;"> </span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td></tr><tr><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_USER</span></p>
+</td><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td></tr><tr><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_EXPC</span></p>
+</td><td style="width: 116.85pt;" valign="top">
+<p><span style="font-size: 10pt;"> </span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;">X</span></p>
+</td><td style="width: 116.9pt;" valign="top">
+<p><span style="font-size: 10pt;"> </span></p>
+</td></tr></tbody></table></div>
+<p><span style="font-size: 10pt;">Note: The source system data is not changed in any profile. Only the target system(client) will be affected. During the process, Address Services uses temporary tables called Shadow Tables to manage the copy of data from source to target.</span></p>
+<p><span style="font-size: 10pt;">During the User Copy/Retain process on the target, business users will be converted to classic users, which need to be converted back to business users by referring the <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/4cef93946a0b48ec89533b3c34443b85/ad1844a95745436bb5d4147fdcf1391f.html?version=2022&amp;q=%2FSHCM%2FRH_SYNC_BUPA_EMPL_SINGLE" rel="noopener noreferrer nofollow" target="_blank">link</a>.</span></p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 517.25pt;"><tbody><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">Copy Profile</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description and details</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_USER</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: User Master Records and Authorization Profiles</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: Yes</span></p>
+<p><span style="font-size: 10pt;">User data: Source users will be copied to target, and the business users will be converted to classic users.</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_CUST</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: Customizing</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: Yes</span></p>
+<p><span style="font-size: 10pt;">User data: Target users will be retained. Business users will be converted to classic users.</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_CUSV</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: Customizing and User Variants</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: Yes</span></p>
+<p><span style="font-size: 10pt;">User data: Target users will be retained. Business users will be converted to classic users.</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_CUSX</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: Customizing w/o Authorization Profiles and Roles</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: Yes</span></p>
+<p><span style="font-size: 10pt;">User data: Target users will be retained. Business users will be converted to classic users.</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_APPL</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: Customizing and Application Data w/o Change Docs</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: Yes</span></p>
+<p><span style="font-size: 10pt;">User data: Target users will be retained. Business users will be converted to classic users.</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_APPX</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: SAP_APPL w/o Authorization Profiles and Roles</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: Yes</span></p>
+<p><span style="font-size: 10pt;">User data: Target users will be retained. Business users will be converted to classic users.</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_EXPC</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: Customizing Including Cross-Client Customizing</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: Yes</span></p>
+<p><span style="font-size: 10pt;">User data: Target users will be retained. Business users will be converted to classic users.</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_UCUS</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: Customizing and User Master Records</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: No</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_UCSV</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: Customizing, User Master Records and User Variants</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: No</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_ALL</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: All Client-Specific Data w/o Change Documents</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: No</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">DELETE</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: Client deletion</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: Yes</span></p>
+<p><span style="font-size: 10pt;">User data: Target users will be retained. Business users will be converted to classic users.</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_EXBC</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: Customizing, Users and Cross-Client Customizing</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: No</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_EXPA</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: SAP_ALL with Cross-Client Customizing</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: No</span></p>
+</td></tr><tr><td style="width: 76.25pt;" valign="top">
+<p><span style="font-size: 10pt;">SAP_RECO</span></p>
+</td><td style="width: 441.0pt;" valign="top">
+<p><span style="font-size: 10pt;">Description: Recovery (Only if Source Client = Target Client)</span></p>
+<p><span style="font-size: 10pt;">BAS exit is triggered: No</span></p>
+</td></tr></tbody></table></div>
+</li><li style="font-family: verdana, geneva; font-size: 10pt;"><a id="A4" target="_blank"></a><span style="font-size: 10pt;"><strong>Follow-up / Next Steps</strong></span><br/><span style="font-size: 10pt;"> </span>
+<ul><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-size: 10pt;">For profiles where the data must be retained in target, the data should be populated into shadow table before client copy, so that the same can be inserted back to target without any data loss during client copy.</span></li><li style="font-family: verdana, geneva; font-size: 10pt;"><span style="font-size: 10pt;">PCA refactoring is required where the business users are converted to classic users for profiles where the application data will be removed during client copy. Hence, retaining business user data in USR21 table and other address tables can lead to inconsistency.<br/></span></li></ul>
+</li><li style="font-family: verdana, geneva; font-size: 10pt;"><a id="A5" target="_blank"></a><span style="font-size: 10pt;"><strong>Transactions</strong> </span>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">SCCLN – Local client copy</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">SCC8N – Client export</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">SCC7N – Client Import</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">SCC9N – Remote client copy</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">SCC3 – Client tools log analysis</span>
+<p><span style="font-size: 10pt;">The transactions SCCLN/SCC8N/SCC7N/SCC9N are supported from 752 and above.</span></p>
+<p><span style="font-size: 10pt;">Caution:</span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Please take back up of data before client copy.</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">For doing remote client copy using profiles SAP_APPL/SAP_APPX, please follow the below steps:</span></li></ul>
+<ol style="list-style-type: upper-alpha;"><li style="font-size: 10pt;"><span style="font-size: 10pt;">Perform user master export from target system (SAP_USER profile)</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Execute the remote client copy using SAP_APPL/SAP_APPX</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Import back the user master data which was exported in step A.</span></li></ol>
+</li></ul>
+</li><li style="font-family: verdana, geneva; font-size: 10pt; font-weight: bold;"><a id="A6" target="_blank"></a><span style="font-size: 10pt;"><strong>Tips </strong></span></li></ol>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Important SAP Notes related to client copy issues. <a href="/notes/2825603" rel="noopener noreferrer nofollow" target="_blank">2825603</a>-Issues with address master data after client copy</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">After a note implementation in both Source and Target Systems, client copy needs to be triggered again.</span></li></ul>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Client Copy execution status and logs – Transaction SCC3 can be used to monitor the status of client copy execution. Overall status of the execution and status on specific steps can be viewed here.<br/><img alt="" class="img-responsive" height="184" src="/documents/customerkba/JRd4QLieE1LEn33ySUPAX_FnoTMKhaYO93uuBs2nnzM" width="624"/></span>
+<p><span style="font-size: 10pt;">If the processing status is finished and exit status (Initialization/Analysis Phase/Postprocessing Phase) don’t have any error, that indicates the client copy executed successfully. Processed table details as part of address can be viewed in “processed Tables’ tab.</span></p>
+<span style="font-size: 10pt;"><img alt="" class="img-responsive" height="440" src="/documents/customerkba/Iu5YXCVcAIc0-fyJ3eQP__-i2XTDUtnRDemQ30PqZOg" width="624"/></span>
+<p><span style="font-size: 10pt;">If the status has any errors, the tabs ‘General Messages’ and ‘Exit Messages’ can be used to check the details.</span></p>
+<span style="font-size: 10pt;"><img alt="" class="img-responsive" height="129" src="/documents/customerkba/h3MVtAV6JcftodoShLvnVgrgvuTui0-ZRFiUARk94OA" width="624"/><br/><br/>7.<strong> </strong><a id="A7" target="_blank"></a><strong>FAQ </strong><br/><strong>7.1. What are the steps to be followed before client copy? </strong></span>
+<p><span style="font-size: 10pt;">Please take back up of data before client copy.</span></p>
+<p><span style="font-size: 10pt;">For doing remote client copy using profiles SAP_APPL/SAP_APPX, please follow the below steps:</span></p>
+<ol style="list-style-type: upper-alpha;"><li style="font-size: 10pt;"><span style="font-size: 10pt;">Perform user master export from target system (SAP_USER profile)</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Execute the remote client copy using SAP_APPL/SAP_APPX</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Import back the user master data which was exported in step A.</span></li></ol>
+<span style="font-size: 10pt;"><span style="font-family: verdana, geneva;"><br/><strong>7.2. Why should we take backup of the data before doing client copy? </strong></span></span></li></ul>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;">Sometimes due to unforeseen circumstances data might get corrupted so it is best practice to have backup of data which can be used to restore system.</span></p>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;"><strong><span style="font-family: verdana, geneva;">7.3. Can we retrieve the lost data after client copy? </span></strong></span></p>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;">If a backup has been taken before executing Client Copy, then it can be used to restore the data, if there is no backup data of the target system then we cannot retrieve lost data.</span></p>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;"><span style="font-family: verdana, geneva;"><br/><strong>7.4. When should we implement the Note? </strong></span></span></p>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;">Notes should be implemented in both source and target systems before starting the client copy process.</span></p>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;"><span style="font-family: verdana, geneva;"><br/><strong>7.5. Why Business Users conversion to classic? </strong></span></span></p>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;">Application data will be affected during the client copy process. Hence retaining the users as business users will lead to inconsistent data in the system. Hence the conversion of business users to classical users are required.</span></p>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;"><span style="font-family: verdana, geneva;"><br/><strong>7.6. How to get the converted business users be reconverted? </strong></span></span></p>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;">Classic users can be converted to business users with the help of HCM_Sync_Reports - /SHCM/RH_SYNC_BUPA_EMPL_SINGLE or /SHCM/RH_SYNC_BUPA_FROM_EMPL.</span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;"><br/><strong>7.7. Sync report Link </strong></span></p>
+<p style="padding-left: 40px;"><span style="font-family: verdana, geneva; font-size: 10pt;"><a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/4cef93946a0b48ec89533b3c34443b85/ad1844a95745436bb5d4147fdcf1391f.html?version=2022&amp;q=%2FSHCM%2FRH_SYNC_BUPA_EMPL_SINGLE" rel="noopener noreferrer nofollow" target="_blank">SAP Help Portal</a><br/><br/><strong>7.8. Why user master related address data being deleted with Profiles like SAP_APPL &amp; SAP_APPX? How to handle it? </strong></span></p>
+<p style="padding-left: 40px;"><span style="font-size: 10pt;">For doing remote client copy using profiles SAP_APPL/SAP_APPX, please follow the below steps:</span></p>
+<ol><li style="list-style-type: none; font-size: 10pt;">
+<ol style="list-style-type: upper-alpha;"><li style="font-size: 10pt;"><span style="font-size: 10pt;">Perform user master export from target system (SAP_USER profile)</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Execute the remote client copy using SAP_APPL/SAP_APPX</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Import back the user master data which was exported in step A.</span></li></ol>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>client copy, address, client copy tool, export, import, steps, profile, profiles, transaction, SCCLN, SCC8N, SCC7N, SCC9N, SCC3, tips, FAQ, status, log, issue, missing, inconsistent, not consistent, backup, lost data, business users, classic, /SHCM/RH_SYNC_BUPA_EMPL_SINGLE, /SHCM/RH_SYNC_BUPA_FROM_EMPL</p></div></div></div></div>

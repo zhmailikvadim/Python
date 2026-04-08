@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When executing the Post Credit-Risk-Based Impairment job in Schedule General Ledger Jobs, the run fails with the error message:</p>
+<p>'Unable to get tax rate of journal entry &amp;1/&amp;2. Please open a ticket.'</p>
+<p>The error may occur for one or multiple journal entries and prevents successful completion of the impairment run.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Public Cloud.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The error occurs when a journal entry selected for credit-risk-based impairment contains a tax code but has no corresponding tax line / tax base data.</p>
+<p>When a tax code is present on a document line, the impairment program must determine a tax rate to decide whether valuation should be performed on a net or gross basis. This tax rate is derived from the document’s tax data. If no tax base or tax amount exists, the system cannot determine a valid tax rate and terminates the run with this error.</p>
+<p>Typical scenarios include, but are not limited to:</p>
+<ul><li>
+<p>Migrated open items where VAT was settled in a legacy system and no tax line was migrated</p>
+</li><li>
+<p>Zero-amount invoices where no tax line is generated</p>
+</li><li>
+<p>Documents posted with tax codes but without tax calculation</p>
+</li><li>
+<p>Documents that are not suitable for impairment but are still selected by the run</p>
+</li></ul>
+<p>This behavior is expected by design.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Ensure that documents selected for credit-risk-based impairment are tax-consistent:</p>
+<ul><li>
+<p>Documents that require impairment must either</p>
+<ul><li>
+<p>contain a valid tax code and corresponding tax line data, or</p>
+</li><li>
+<p>contain no tax code at all.</p>
+</li></ul>
+</li><li>
+<p>Documents that should not be impaired (for example, clearing documents or other non-credit-risk-relevant items) should be excluded from the impairment run (for example, via account selection or semantic tagging).</p>
+</li></ul>
+<p>If the affected documents are migrated open items where tax was already settled in a legacy system and no tax line exists by design, there is currently no standard way to process these documents in the credit-risk-based impairment run. In this case, the only supported options are to exclude the documents from the run or request a product enhancement.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Post Credit-Risk-Based Impairment, Schedule General Ledger Jobs, FINS_FI_CLS129, Unable to get tax rate of journal entry, tax code without tax line, missing tax base, BSET</p></div></div></div></div>

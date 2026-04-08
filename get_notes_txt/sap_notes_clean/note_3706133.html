@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>When opening SAP HANA Web-based Development Workbench, the browser shows "403 - Forbidden".</p>
+</li><li>
+<p>When opening SDI Data Provisioning monitors, the browser shows "403 - Forbidden".</p>
+</li><li>
+<p>XS Engine is reachable, but access is denied.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP HANA Smart Data Integration</p>
+<p></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Open <span style="font-size: 10pt;">SAP HANA Web-based Development Workbench under </span><span style="font-size: 10pt;">http://&lt;host&gt;:80&lt;instance&gt;/sap/hana/ide</span></p>
+</li><li>Observe the error "403 - Forbidden"</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>One (or more) of the following:</p>
+<ol><li>
+<p>The URL points to the incorrect database (SYSTEMDB instead of the relevant tenant DB). In an MDC system, both the monitors and the Workbench are normally used from the tenant DB. When trying to access then in SYSTEMDB context, XS can respond with 403 because the required content is not available there.</p>
+</li><li>
+<p>The request is routed to SYSTEMDB because the tenant virtual host name (alias host name) is not configured correctly. Without this hostname mapping, the Web Dispatcher routes the request to SYSTEMDB by default.</p>
+</li><li>
+<p>The user does not have the required roles:</p>
+<ul><li>
+<p>Workbench related roles</p>
+</li><li>
+<p>Monitor related roles</p>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<p>Make sure the correct tenant DB is used in the URL (instead of the SYSTEMDB)</p>
+</li><li>
+<p>Fix tenant host name mapping (so the request goes to the tenant DB, not SYSTEMDB)</p>
+<ul><li>
+<p>Relevant SAP Help Portal article: <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/2fb0d4e5bcf249d9a86e74ffb0a04f6e.html?utm_source=chatgpt.com&amp;locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Configure HTTP(S) Access to Tenant Databases via SAP HANA XS Classic</a></p>
+</li></ul>
+</li><li>
+<p>Assign the required roles to the user</p>
+<ul><li>
+<p>SAP HANA Web-based Development Workbench: </p>
+<ul><li>sap.hana.ide.roles::Developer &gt;&gt; Contains all necessary permissions</li><li>Reference: SAP Help Portal <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/b3d0daf2a98e49ada00bf31b7ca7a42e/7f99b0f952d04792912587c99e299ef5.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">SAP HANA Web-Based Development Workbench</a></li></ul>
+</li><li>
+<p>Data Provisioning Monitors:</p>
+<ul><li>sap.hana.im.dp.monitor.roles::Monitoring &gt;&gt; Access the monitors </li><li>sap.hana.im.dp.monitor.roles::Operations  &gt;&gt; Perform administration tasks</li></ul>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>403, forbidden, workbench, monitor, SDI, smart data integration, SAP HANA XS classic , XS Engine, Web-based Development Workbench  </p></div></div></div></div>

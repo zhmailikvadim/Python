@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When WRO4j is enabled for JavaScript minimization in the storefront, the build or runtime process fails during JavaScript resource processing.</p>
+<p>The following exception is reported in the logs while minimizing JavaScript files:</p>
+<div>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100%;"><colgroup><col style="width: 99.9344%;"/></colgroup><tbody><tr><td>
+<div><span style="font-family: 'courier new', courier;">Caused by: ro.isdc.wro.model.resource.processor.support.JSMin$UnterminatedStringLiteralException</span></div>
+</td></tr></tbody></table></div>
+</div>
+<div> </div>
+<div>
+<div>The error occurs during the processing of JavaScript resources in the responsive addon, preventing successful generation of the minified JavaScript bundle.</div>
+</div><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>1. Install the CX recipe in a local SAP Commerce Cloud project (for example, version 2211.47) and complete the system initialization.</p>
+<p>2. Enable WRO4J and detailed debug logging by adding the following properties to local.properties:</p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100%;"><colgroup><col style="width: 99.935%;"/></colgroup><tbody><tr><td>
+<p><span style="font-family: 'courier new', courier;">storefront.wro4j.enabled=true</span></p>
+<p><span style="font-family: 'courier new', courier;">log4j2.logger.wro4j.name=ro.isdc</span><br/><span style="font-family: 'courier new', courier;">log4j2.logger.wro4j.level=debug</span><br/><span style="font-family: 'courier new', courier;">log4j2.logger.wro4j.appenderRef.stdout.ref=STDOUT</span></p>
+</td></tr></tbody></table></div>
+<p>3. Create a JavaScript file named <code>test.js</code> under the following directory:</p>
+<p>bin/custom/yb2bacceleratorstorefront/web/webroot/_ui/responsive/common/js</p>
+<div>Add a multi-line string definition using ES6 template literals, for example:</div>
+<div> </div>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100%; height: 61.9922px;"><colgroup><col style="width: 99.935%;"/></colgroup><tbody><tr style="height: 61.9922px;"><td style="height: 61.9922px;"><span style="font-family: 'courier new', courier;"><span style="font-size: 10pt;">var test_html_section = <strong>`</strong>&lt;div class="errorText"&gt;<br/></span>       &lt;div&gt;${textEroor}&lt;/div&gt;</span><br/><span style="font-family: 'courier new', courier;">&lt;/div&gt;<strong>`</strong></span></td></tr></tbody></table></div>
+<p>4. Perform a full project rebuild and start the SAP Commerce Tomcat server.</p>
+<p>5. Access the storefront using the following URL in a web browser:</p>
+<p><a href="https://localhost:9002/yb2bacceleratorstorefront/?site=powertools" rel="noopener noreferrer nofollow" target="_blank">https://localhost:9002/yb2bacceleratorstorefront/?site=powertools</a> </p>
+<p>6. Observe that the JavaScript minimization process fails and the error described in the Symptom section occurs.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The <code>JSMin</code> tool does not natively support ECMAScript 6 (ES6) syntax, and the maintainer has indicated that ES6 compatibility is not planned. Since JSMin is designed for ES5 syntax, attempting to minify ES6 code may result in errors or incomplete minification.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>To avoid JavaScript processing and minification issues, multi‑line string definitions should not be used within custom storefront JavaScript files.</p>
+<p>For example, replace ES6 template literal–based multi‑line strings such as:</p>
+</div>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100%; height: 61.9922px;"><colgroup><col style="width: 99.935%;"/></colgroup><tbody><tr style="height: 61.9922px;"><td style="height: 61.9922px;">
+<div><span style="font-family: 'courier new', courier;">var test_html_section = `&lt;div class="errorText"&gt;</span></div>
+<div><span style="font-family: 'courier new', courier;">        &lt;div&gt;${textEroor}&lt;/div&gt;</span></div>
+<div><span style="font-family: 'courier new', courier;">&lt;/div&gt;`;</span></div>
+<strong></strong></td></tr></tbody></table></div>
+<p>to</p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100%; height: 61.9922px;"><colgroup><col style="width: 99.935%;"/></colgroup><tbody><tr style="height: 61.9922px;"><td style="height: 61.9922px;">
+<div><span style="font-family: 'courier new', courier;">var test_html_section = '&lt;div class="errorText"&gt;'</span></div>
+<div><span style="font-family: 'courier new', courier;">        + '&lt;div&gt;' + textEroor + '&lt;/div&gt;'</span></div>
+<div><span style="font-family: 'courier new', courier;">        + '&lt;/div&gt;';</span></div>
+</td></tr></tbody></table></div>
+<div>
+<p>This approach ensures compatibility with JavaScript processors and minifiers that do not fully support ES6 syntax.</p>
+<p>Recommendation:<br/>It is strongly recommended to convert all custom JavaScript files to ES5 syntax to prevent build‑time or runtime issues during resource minification and to ensure consistent behavior across environments.</p>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>wro4j, minify, minify js files, minify javascript files, minification, jsMin, UnterminatedStringLiteralException</p></div></div></div></div>

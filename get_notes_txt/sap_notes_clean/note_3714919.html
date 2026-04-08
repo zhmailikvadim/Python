@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When attempting to run the Historical Firefighter Assignments report under "Reports and Analytics &gt; Emergency Access User Management Reports", the message "No POWL object types are assigned to you. Please inform your system administrator." is displayed.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>GRC Access Control</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Start NWBC.</li><li>Navigate to the tab "Reports and Analytics &gt; Emergency Access User Management Reports".</li><li>Click on the link for "Historical Firefighter Assignments".</li><li>A new pop-up window appears with the error message: "No POWL object types are assigned to you. Please inform your system administrator."</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Missing configurations.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Perform following steps to address it:</p>
+<ul><li>Check POWL Type definition:
+<ul><li>Start transaction POWL_TYPE.
+<ul><li>Check the existence of the following entry:
+<ul><li>POWL Type ID: GRAC_FFARC</li><li>Description: Historical Firefighter Assignments</li><li>Feeder class: CL_GRAC_POWL_SPM_FFARC</li><li>"Sync. call" and "No Msg. Wrapping" is unchecked</li></ul>
+</li><li>If it does not exist, please create it and save it.</li></ul>
+</li></ul>
+</li></ul>
+<ul><li>Check POWL Type - Role assignment:
+<ul><li>Start transaction POWL_TYPER.
+<ul><li>Check the existence of the following entry:
+<ul><li>Application ID: GRAC_FFARC</li><li>Role: empty</li><li>POWL TYPE ID: GRAC_FFARC</li></ul>
+</li><li>If it does not exist, please create it and save it.</li></ul>
+</li></ul>
+</li></ul>
+<ul><li>Check POWL Query definition:
+<ul><li>Start transaction POWL_QUERY.
+<ul><li>Check the existence of the following entry:
+<ul><li>Query ID: GRAC_FFARC</li><li>Description: All</li><li>POWL Type ID: GRAC_FFARC</li><li>"Sync. call", "Layout":  empty,</li><li>Refresh Type: Manual only</li></ul>
+</li><li>If it does not exist, please create it and save it.</li></ul>
+</li></ul>
+</li></ul>
+<ul><li>Check POWL Query - Role assignment:
+<ul><li>Start transaction POWL_QUERYR.
+<ul><li>Check the existence of the following entry:
+<ul><li>Application: GRAC_FFARC</li><li>Role: empty</li><li>Query ID: GRAC_FFARC</li><li>Everything else: empty</li></ul>
+</li><li>If it does not exist, please create it and save it.</li></ul>
+</li></ul>
+</li></ul>
+<p>Also confirm whether the manual steps of note <a href="https://me.sap.com/notes/0003105586" rel="noopener noreferrer nofollow" target="_blank">0003105586</a> are correctly performed.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><span>SAP Note <a aria-label="Link 0003105586" href="https://me.sap.com/notes/0003105586" id="menurja9" rel="noopener noreferrer nofollow" target="_blank">3105586</a> - Enhancement for Firefighter Assignment - Historical Firefighter Assignments</span></li><li>SAP Note <a href="https://me.sap.com/notes/3593669" rel="noopener noreferrer nofollow" target="_blank">3593669</a> - "No POWL object types are assigned you. Please inform your system administrator." error occurs when launching a POWL application<a href="https://me.sap.com/notes/3593669" rel="noopener noreferrer nofollow" target="_blank"></a></li></ul>
+<ul></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>no powl object types, historical firefighter assignments, emergency access management, EAM, powl type definition, powl query definition, powl role assignment, grc firefighter report, powl error, emergency access reports, powl configuration, powl query, powl type</p></div></div></div></div>

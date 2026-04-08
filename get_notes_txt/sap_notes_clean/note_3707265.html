@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">During mass processing of INVOIC generation, the <em>gv_leitweg_equiv</em> flag is not cleared, causing incorrect behavior:</p>
+<ul>
+<li>First invoice: Processed as an X-Invoice.</li>
+<li>Second invoice: Incorrectly treated as a non-X-Invoice with zero tax, generating faulty TAX segments (header and item) in the IDOC despite no tax being applicable.</li>
+</ul>
+<p>A previous X-Invoice in the message processing flow triggers incorrect tax segment generation for subsequent invoices.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CIP2SAP, SIDOC, IDOC, X-Rechnung, INVOIC OUT, TTP2667, TTP2478</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the correction instruction</p></div></div></div></div>

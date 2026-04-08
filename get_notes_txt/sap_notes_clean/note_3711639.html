@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripError sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>A new version is in preparation...!</strong> <br/>The content for this document is being improved and a new version is in preparation but not released yet. Please be aware that you are viewing outdated data from the previous version in a restricted mode with limited functionality.  You will be automatically notified once the new version is ready and released. The restrictions are described in <a href="/notes/3453681" style="color:var(--sapLinkColor);" target="_blank">KBA 3453681</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul>
+<li>Reading from SAP system using an ABAP dataflow and loading into SQL Server, when having NULL values, throws an error:</li>
+<li>[Microsoft][ODBC Driver 18 for SQL Server] Invalid character value for cast specification</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><strong>Keywords</strong></p>
+<p>ABAP dataflow, SAP, NULL, BODS, SQL server</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment</strong></p>
+<ul>
+<li>SAP Data Services 2025 (14.4.0.165)</li>
+<li>SAP Application system (ECC)</li>
+<li>Microsoft SQL Server 2019</li>
+<li>Microsoft ODBC Driver 18</li>
+</ul>
+<p><strong>Reproducing the issue</strong></p>
+<ul>
+<li>Reading from a SAP table which contains NULL values, using ABAP dataflow, will return the error in the symptom</li>
+<li>Enabling Convert SAP null to null, on SAP Data Services Designer, when using ABAP dataflow the error persists</li>
+<li>Running with Execute Preloaded or Generate and Execute does not mitigate the issue</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">This issue has been forwarded to Development for further investigation.</p>
+<p>Workaround:</p>
+<ul>
+<li>Use SAP Table Reader instead of an ABAP dataflow</li>
+<li>Map the columns using function nlv() to convert the NULL values</li>
+</ul></div></div></div></div></div>

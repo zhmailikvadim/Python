@@ -1,0 +1,51 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>When running an SAP HANA MDS<sup>1)</sup> query you retrieve a result set with empty cells or the data entry is not possible for a cell.</p>
+<p><sup>1)</sup> MDS: MultiDimensional Services; analytical engine in SAP HANA, responsible for processing analytic request fom SAP Analytics clienst such as SAP Analytics Cloud (SAC) or SAP Analysis for Office.</p>
+</div>
+<div></div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Analytics Cloud, SAC, SAP Analysis Office, SAP Design Studio, InA/MDS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, dimension members which were <strong>only</strong> relevant in a context with constant selection, were erroneously considered for axis tuple creation purposes if that dimension was in drill and had an active hierarchy.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2.0 database, EPMMDS plugin:</li>
+<ul>
+<li>"Fullversion EPMMDS" plugin revision: &lt; 1.00.202614.0</li>
+</ul>
+<li>SAP HANA Cloud Edition: </li>
+<ul>
+<li>&lt; CE 2026.14.0</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>In an Account Model you create members</li>
+<ul>
+<li>Measure Member: Selection on a Measure with constant selection with constant dimension "Dimension1"</li>
+<li>Account Member: Selection on an account with an arbitrary exception aggregation on exception aggregation dimension "Dimension1"</li>
+</ul>
+<li>"Dimension1" is in drill with a hierarchy. The hierarchy has a hierarchy node "Parent" with a child "Child".</li>
+<li>The global filter is set to dimension hierarchy node "Child", i.e. "Parent" should not be shown.</li>
+<li>Node "Parent" is booked and its value has to be retrieved due to the constant selection.</li>
+</ul>
+<p>In such a case the node "Parent" was determined to be the parent node of node "Child" in the context of the axis creation, although "Parent" was not part of the result set due to the global filter.</p>
+<p>This caused the axis tuples to be in an invalid state.<strong> </strong></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA database Revisions:</p>
+<ul>
+<li>SAP HANA 2.0 database, EPMMDS plugin:</li>
+<ul>
+<li>"Fullversion EPMMDS" plugin revision: &gt;= 1.00.202614.0</li>
+</ul>
+<li>SAP HANA Cloud Edition:</li>
+<ul>
+<li>&gt;= CE 202514.0</li>
+</ul>
+<li>SAP Analytics Cloud: &gt;= 2025.28 (QRC3 2026)</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<p>Remove the global filter on the dimension hierarchy in question or adjust it in such a way, that the filter of the constant selection is at least as restrictive as the global filter (with regards to that dimension).</p>
+<p>In case the measure member is not reused in a formula: Due to the constant selection, the values for all hierarchy nodes of the dimension in question are the same. Consider moving the constant selection measure to another widget where you remove the dimension from drill.</p></div></div></div></div>

@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p>Encountered an error retrieving database details from the System Landscape Directory while accessing the company database.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisites:</strong></p>
+<p>Two SQL Server instances are registered in the System Landscape Directory (SLD), each containing a database with identical names.</p>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>
+<div class="WordSection1">Restore the company database with the same schema name on both SQL Server instances.</div>
+</li>
+<li>
+<div class="WordSection1">Log on to the SAP Business One Client.</div>
+</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>Successful login to the SAP Business One client.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>The following error occurs in the SAP Business One client:</p>
+<p><em>"Failed to get database information from System Landscape Directory"</em></p>
+<p>The login process for the web client is also failing with an error message:</p>
+<p><em><span>Error while doing SAML SSO, check SLD log for detail; please open a new browser window, try to access the target SP resource once again.</span></em></p>
+<p><span>The sldService.log contains the error notification:</span></p>
+<p><em><span><span>"jakarta.persistence.NonUniqueResultException: More than one result was returned from Query.getSingleResult()"</span></span></em></p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p></div></div></div></div>

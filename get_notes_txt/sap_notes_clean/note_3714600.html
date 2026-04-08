@@ -1,0 +1,171 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In an Adaptation Project for the SAP Fiori app "Perform Operation Activity", the implementations of the UI Controller Hooks in the override section of the Controller Extension of the Worklist Controller are not executed.</p>
+<p>The UI Controller Hooks in the Worklist.Controller are defined in such a way that the implementation is inserted into the Worklist Controller source code section and executed at runtime.</p>
+<p>In an adaptation project, the extension of the worklist controller takes place as a class-based extension, which supports multi-level extensions and enables the implementation of custom methods for expanding the controller with new functions. Lifecycle hooks, such as "onInit" or other public methods of the worklist controller, can be overriden in the override section of the Controller Extension.</p>
+<p>However, the implementation of the UI Controller Hooks in the override section is not recognized at runtime, because the corresponding source code location in the worklist controller is still undefined. The inserting of the UI Controller Hook coding from the override section of the Controller Extension into the Worklist controller, is not working in a Controller Extension.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>F2898, MPE_ACT_DETS1, i2d.mpe.activitydetails1, Business Application Studio, BAS, PEO, App Extensibility: Perform Operation Activity (Expert), Object Mixin</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The implementation of the UI Controller Hooks in the override section of the Controller Extension is not recognized at runtime.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>However, it is still possible to implement the UI Controller Hooks.</p>
+<p><strong>Option 1:</strong></p>
+<p>In the Controller Extension file, modify the original Worklist controller's prototype, as in the example below. The implementations of the UI Controller Hook functions are above the controller extension implementation. The coding of the UI Controller Hook function will be inserted into the Worklist Controller source code. As a result, the UI Controller Hook is not undefined at runtime and will be executed.</p>
+<div>sap.ui.define(   </div>
+<div>    [</div>
+<div>        'sap/ui/core/mvc/ControllerExtension'  </div>
+<div>        ,'i2d/mpe/activitydetails1/controller/Worklist.controller'</div>
+<div>    ],</div>
+<div>    function (</div>
+<div>        ControllerExtension</div>
+<div>        ,WorklistController</div>
+<div>    ) {</div>
+<div>        'use strict';</div>
+<div>       </div>
+<div>        WorklistController.prototype.&lt;UIControllerHookName&gt; = function (&lt;variableName&gt;) {</div>
+<div></div>
+<div>            // your custom code for the UI Controller Hook</div>
+<div>           </div>
+<div>        };</div>
+<div>        ...</div>
+<div></div>
+<div>
+<div>        return ControllerExtension.extend("app.variant.&lt;ControllerExtensionName&gt;", {</div>
+<div>
+<div>
+<div>        // // this section allows to extend lifecycle hooks or override public methods of the base controller</div>
+<div>            override: {</div>
+<div>            //  /**</div>
+<div>            //   * Called when a controller is instantiated and its View controls (if available) are already created.</div>
+<div>            //   * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.</div>
+<div>            //   * @memberOf app.variant.&lt;ControllerExtensionName&gt;</div>
+<div>            //   */</div>
+<div>                onInit: function() {</div>
+<div>                    </div>
+<div>                    //  ...</div>
+<div>                },</div>
+<div>           }</div>
+<div>       });</div>
+<div></div>
+<div>});</div>
+</div>
+</div>
+</div>
+<p><strong>Option 2:</strong></p>
+<p>In the controller extension file, overwrite the onInit lifecycle hook. An anonymous function or a custom function can be assigned to the individual UI controller hooks. With this approach, functionality can be moved to custom methods, reused, and overriden in further extensions.</p>
+<p><span style="font-size: 10px;"> </span></p>
+<div>
+<div>sap.ui.define(</div>
+<div>    [</div>
+<div>        'sap/ui/core/mvc/ControllerExtension'</div>
+<div>        ,'sap/ui/core/mvc/OverrideExecution'</div>
+<div>    ],</div>
+</div>
+<div>
+<div>    function (</div>
+<div>        ControllerExtension</div>
+<div>        ,OverrideExecution</div>
+<div>    ) {</div>
+</div>
+<div>
+<div>        'use strict';
+<div>
+<div>         return ControllerExtension.extend("app.variant.&lt;ControllerExtensionName&gt;", {</div>
+<div>             metadata: {</div>
+<div>            //  // extension can declare the public methods</div>
+<div>            //  // in general methods that start with "_" are private</div>
+<div>                methods: {</div>
+<div>            //      publicMethod: {</div>
+<div>            //          public: true /*default*/ ,</div>
+<div>            //          final: false /*default*/ ,</div>
+<div>            //          overrideExecution: OverrideExecution.Instead /*default*/</div>
+<div>            //      },</div>
+<div>            //      finalPublicMethod: {</div>
+<div>            //          final: true</div>
+<div>            //      },</div>
+<div>            //      onMyHook: {</div>
+<div>            //          public: true /*default*/ ,</div>
+<div>            //          final: false /*default*/ ,</div>
+<div>            //          overrideExecution: OverrideExecution.After</div>
+<div>            //      },</div>
+<div>            //      couldBePrivate: {</div>
+<div>            //          public: false</div>
+<div>            //      }      </div>
+<div></div>
+<div>                    //Custom function 1</div>
+<div>                    _updateSomething1: {</div>
+<div>                        public: false,</div>
+<div>                        finally: false,</div>
+<div>                        overrideExecution: OverrideExecution.After</div>
+<div>                    }, </div>
+<div></div>
+<div>
+<div>                    //Custom function 2</div>
+<div>                    _updateSomething2: {</div>
+<div>                        public: false,</div>
+<div>                        finally: false,</div>
+<div>                        overrideExecution: OverrideExecution.Instead</div>
+<div>                    }, </div>
+</div>
+<div>                }</div>
+<div>            },</div>
+<div></div>
+<div>
+<div>
+<div>            _updateSomething1: function (oData) {</div>
+<div>                </div>
+<div>               // Implement cutom coding</div>
+<div></div>
+<div>            },</div>
+<div></div>
+<div>
+<div>            _updateSomething2: function (oData) {</div>
+<div>                </div>
+<div>               // Implement cutom coding</div>
+<div></div>
+<div>            },</div>
+</div>
+<div></div>
+</div>
+</div>
+<div>
+<div>            // // this section allows to extend lifecycle hooks or override public methods of the base controller</div>
+<div>            override: {</div>
+<div>            //  /**</div>
+<div>            //   * Called when a controller is instantiated and its View controls (if available) are already created.</div>
+<div>            //   * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.</div>
+<div>            //   * @memberOf app.variant.&lt;ControllerExtensionName&gt;</div>
+<div>            //   */</div>
+<div>                </div>
+<div>                 onInit: function() {</div>
+<div>                    </div>
+<div>                     // Assign anonymous function to the controller hook</div>
+<div>                     this.getView().getController().&lt;UIControllerHookName1&gt; = function (&lt;variableName&gt;) {</div>
+<div>                       </div>
+<div>                        // Implement custom coding ....</div>
+<div>                       </div>
+<div>                        // Execute custom function</div>
+<div>                        this._updateSomething1(&lt;variableName&gt;);</div>
+<br/>
+<div>                     }.bind(this);</div>
+<div></div>
+<div>                     // Assign custom function to the controller hook</div>
+<div>
+<div>                     this.getView().getController().&lt;UIControllerHookName2&gt; = this._updateSomething2.bind(this);</div>
+<div></div>
+</div>
+<div>                },</div>
+</div>
+</div>
+</div>
+<div></div>
+<div>
+<div>
+<div>            }</div>
+<div>        });</div>
+<div>    }</div>
+<div>);</div>
+</div>
+</div>
+<div></div>
+</div></div></div></div></div>

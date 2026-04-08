@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>The SRS log shows error 702:<br/>E. ERROR #1028 DSI EXEC(105(1)) - neric/dsi/dsiqmint.c(5381) Message from server: Message: 702, State 1, Severity 20 -- 'Memory request for xxxxx bytes exceeds the size of single page of 16384 bytes.</li><li>The ASE error log reports the same.<br/>
+<pre>Error: 702, Severity: 20, State: 1</pre>
+<pre>Memory request for 16899 bytes exceeds the size of single page of 16384 bytes.</pre>
+</li><li>If the 702 error is set to print a stack trace via sp_altermessage 702, "with_stack","true" it will look like this:<br/>
+<pre>memalloc<br/>LeSQLRep::_sqlRepParamSet
+LeSQLRep::SqlRepFixMatrix
+LeDMLOp::_LeSqlRepLogSupport
+LeInsertOp::_LeOpNext
+LeEmitNoSndOp::_LeOpNext
+LePlanNext</pre>
+</li><li>The setting for "sql statement replication" is enabled.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Adaptive Server Enterprise (ASE) 16.0</li><li>RepAgent is enabled</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>This problem is seen only when the query text is exceeding 16 kilobytes of text.</li><li>The parameter 'sql statement replication' is enabled.</li><li>The issue has been logged under<strong> SAP CR 831716</strong>. Its description reads, "Error 702, "Memory request for xxxxx bytes exceeds the size of single page of 16384 bytes.", may be reported when "sql statement replication" is enabled.".</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol></ol>
+<ul><li>This issue has been fixed.</li><li>The fix will be available starting in SAP Adaptive Server Enterprise (ASE) 16.0 SP04 PL09</li></ul>
+<p>Workaround:</p>
+<p style="padding-left: 40px;">Disable 'sql statement replication' if the 702 is encountered by a very large sql statement.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Sybase, ASEServer, SAPASE, repserver, repagent, CR831716, CR#831716, 831716</p></div></div></div></div>

@@ -1,0 +1,111 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP Note provides important information and considerations related to the product SAP GRC UIDP Masking for SAP HANA.</p>
+<p>Master Note: <a href="/notes/3713860" target="_blank">3713860</a></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAPGRC 100, GRCUIDP 100, UISAPGRC 100, SAP GRC UIDP Masking, UI Masking</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>important information and considerations for SAP GRC UIDP Masking for SAP HANA</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Technical Considerations:</strong></p>
+<p>This product is available on SAP S/4 HANA Foundation 2025 and SAP S/4HANA 2025 on-premise and private cloud editions.</p>
+<p><span style="text-decoration: underline;"><strong>SAP GUI </strong></span></p>
+<ol>
+<li>Masking and Blocking are not supported for field(s) where
+<ul>
+<li>the field is not captured by the UI masking recording tool, and<strong> </strong></li>
+<li>the technical address (table name - field name/data element) is not available in F1 help.</li>
+</ul>
+</li>
+<li>Masking is not supported for following:</li>
+<ul>
+<li>Proposed values in dropdown list</li>
+<li>Debugging</li>
+<li>SQL command editors</li>
+<li>Checkboxes &amp; radio buttons</li>
+<li>HTML based controls/views</li>
+<li>SAPScript and Smart Forms</li>
+<li>ALV reports developed using IDA</li>
+<li>Messages</li>
+</ul>
+<li>For certain scenarios where download or print output cannot be masked due to technical constraints, customers can disable these options using Button Disable Configuration. In downloaded Excel files, masked values remain type-compatible; for example, numeric columns are replaced with their initial value, such as “0000.”</li>
+<li>In query transaction SQ01, only data element based masking configuration is supported.</li>
+</ol>
+<p><span style="text-decoration: underline;"><strong>WebClient UI </strong></span></p>
+<ol>
+<li>Masking is supported for UI fields that are part of context node in a UI component. Fields created through custom BSP pages, tags, and HTML elements will not be supported.</li>
+<li>Masking is not supported for</li>
+<ul>
+<li>UI fields or attributes with custom logic implemented in the UI layer (server or client side)</li>
+<li>Data in attachments</li>
+<li>Data in customer fact sheet</li>
+<li>Data in recent items</li>
+</ul>
+</ol>
+<p><span style="text-decoration: underline;"><strong>Web Dynpro ABAP</strong></span></p>
+<ol>
+<li>Masking is supported for the following UI elements</li>
+<ul>
+<li>Input field</li>
+<li>Text edit</li>
+<li>Text view</li>
+<li>Label</li>
+<li>Button</li>
+<li>Checkbox</li>
+<li>Dropdown by index</li>
+<li>Table</li>
+<li>Dropdown by key</li>
+<li>Dropdown by list box</li>
+<li>Link to URL</li>
+<li>Link to action</li>
+</ul>
+<li>Proposed values in dropdown lists cannot be masked.</li>
+<li>Masking is not supported in print scenarios. Customers can disable the Print button by maintaining the Button Technical Address in the masking configuration.</li>
+</ol>
+<p><strong><span style="text-decoration: underline;">SAPUI5/SAP Fiori </span><strong><br/></strong></strong></p>
+<ol>
+<li>Blocking is only supported in Fiori/UI5 applications consuming OData v2</li>
+<li>Masking and Blocking are not supported in the following:</li>
+<ul>
+<li>Primary key fields (these fields are required for navigation and update scenarios. However, it is possible to use these as context attributes in policies)</li>
+<li>Get stream (BLOB content)</li>
+<li>Fiori Launchpad hosted in environments other than on-premise or private cloud</li>
+</ul>
+<li>For download or print scenarios, fields with data types other than string are replaced with dummy values.</li>
+<li>In a few cases, where OData service does not support runtime addition of fields to an entity, additional configuration may be required. In such applications:</li>
+<ul>
+<li>Properties of types other than string are cleared irrespective of the masking pattern configured</li>
+<li>Masked fields remain editable, however, any changes made to these values are discarded</li>
+</ul>
+</ol>
+<p><span style="text-decoration: underline;"><strong>Embedded Analytics in S/4HANA</strong></span></p>
+<ol>
+<li>Masking/Blocking is supported only for read-only scenarios</li>
+<li>In SAP Analytics Cloud, support is available only for S/4HANA live data connection scenarios</li>
+<li>Numeric and date/time fields are masked using dummy values instead of masking characters (for example **), due to type conversion constraints</li>
+<li>Masking/Blocking applies only when data is processed through InA protocol / ABAP BICS in S/4HANA embedded analytics and SAC</li>
+<li>The following user interfaces are outside the masking/blocking scope:</li>
+<ul>
+<li>SAP Analysis for Office</li>
+<li>Lumira</li>
+<li>SAP BO Web Intelligence</li>
+<li>List / HTML / ABAP Web / Java Web in RSRT</li>
+</ul>
+<li>For ABAC based scenarios, context attributes must be included in the query result</li>
+</ol>
+<p><strong><span style="text-decoration: underline;">Other Considerations</span></strong></p>
+<ol>
+<li>Data Blocking Features:</li>
+<ul>
+<li>In SAP GUI, output-based blocking does not apply to classical reports generated using WRITE statements and print forms</li>
+<li>The total record count displayed reflects the actual number of records, regardless of suppressed records</li>
+<li>In scenarios where out-of-box blocking is not available (for example, machine-to-machine communication such as RFCs and Web Services), applications can be enhanced to use the UI Data Protection API to implement blocking.</li>
+</ul>
+<li>The Reveal on Demand feature is available in SAP GUI and SAP Fiori only.</li>
+<li>In create and update scenarios, if a masked field is blank, it appears disabled for input. This can be handled by configuring blank fields to be ignored for masking.</li>
+<li>Masking and Blocking are not supported for:</li>
+<ul>
+<li>Standalone BSP applications (non-SAPUI5 and non-CRM).</li>
+<li>Standalone HTML applications (non-SAPUI5).</li>
+<li>Universal WorkLists (UWL).</li>
+</ul>
+</ol></div></div></div></div>

@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">ErrorMessage: App could not be opened either due to an incorrect SAP Fiori launchpad configuration or a missing role assignment.Details: { "info": "Failed to resolve navigation target \"#ReportingTask-manageTaxItems? This is most likely caused by an incorrect SAP Fiori launchpad content configuration or by a missing role assignment." ,"#ReportingTask-manageTaxItems?</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><section>
+<section id="u_environment">
+<p></p>
+<ul><li>SAP S/4HANA 2020</li><li>SAP S/4HANA 2021</li><li>SAP S/4HANA 2022</li><li>SAP S/4HANA 2023</li></ul>
+</section>
+</section><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Open the Run Statutory Reports Fiori application.</li><li>Enter the required details: Reporting Entity Name, Report Category Name, and Reporting Year, then click Go.</li><li>Select a reporting task and execute the report run.</li><li>Click on the activity MANAGE TAX ITEMS.</li><li>Error Message:<br/>The app could not be opened, either due to an incorrect SAP Fiori launchpad configuration or a missing role assignment.<br/>
+<p>ErrorMessage: App could not be opened either due to an incorrect SAP Fiori launchpad configuration or a missing role assignment.Details: { "info": "Failed to resolve navigation target \"#ReportingTask-manageTaxItems? This is most likely caused by an incorrect SAP Fiori launchpad content configuration or by a missing role assignment.",  "#ReportingTask-manageTaxItems?</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>App Implementation steps and the Replication of business catalog required</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<p><strong>Front-End Server : Activate SAP UI5 Application<br/><br/></strong></p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" id="loio625f247b24d942729b7cb0314e55be3b__table_evh_c3w_4hb" rules="all" style="height: 91.5759px; width: 37.8481%;" summary=""><thead><tr style="height: 37.3912px;"><th id="d35276e123" style="width: 37.4633%; height: 37.3912px;">
+<p>Component</p>
+</th><th id="d35276e129" style="width: 55.0997%; height: 37.3912px;">
+<p>Technical Name</p>
+</th></tr></thead><tbody><tr style="height: 38.3862px;"><td headers="d35276e123" style="width: 37.4633%; height: 38.3862px;">
+<p>SAP UI5 Application</p>
+</td><td headers="d35276e129" style="width: 55.0997%; height: 38.3862px;">
+<p><samp>FIN_MNG_TAX_ITM</samp></p>
+</td></tr><tr style="height: 15.7985px;"><td headers="d35276e123" style="width: 37.4633%; height: 15.7985px;">
+<p>Generic Drill-Down Application</p>
+</td><td headers="d35276e129" style="width: 55.0997%; height: 15.7985px;">
+<p><samp>/sap/bc/ui5_ui5/sap/fin_mng_tax_itm</samp></p>
+</td></tr></tbody></table></div>
+<p><strong> </strong></p>
+</li><li><strong>Front-End Server :  Activate OData Services<br/><br/></strong>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" id="loio625f247b24d942729b7cb0314e55be3b__table_r1s_5hw_4hb" rules="all" style="height: 76px; width: 33.2156%;" summary=""><thead><tr><th id="d35276e65" style="width: 46.6786%;">
+<p>Component</p>
+</th><th id="d35276e71" style="width: 44.8472%;">
+<p>Technical Name</p>
+</th></tr></thead><tbody><tr><td headers="d35276e65" style="width: 46.6786%;">
+<p>OData Service (Version Number)</p>
+</td><td headers="d35276e71" style="width: 44.8472%;">
+<p><samp>FIGL_MANAGE_TAX_ITEMS_SRV</samp></p>
+</td></tr></tbody></table></div>
+ 
+<div>
+<p>For more information about activating OData services, see <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/3cc1da1e1e364fadb9b1af653a9597d2/55b840530a3ee447e10000000a441470.html?locale=en-US&amp;state=PRODUCTION&amp;version=2025.001" rel="noopener noreferrer nofollow" target="_blank">Activating OData Services</a>.</p>
+<p></p>
+</div>
+</li><li>Check the user is assigned with report specific authorizations as guided in the help document link: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/3cc1da1e1e364fadb9b1af653a9597d2/ba0732ef314b4083a7290cb3f5ae3c4b.html" rel="noopener noreferrer nofollow" target="_blank">Country/Region-Specific Role Authorizations</a> .<br/><a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/3cc1da1e1e364fadb9b1af653a9597d2/ba0732ef314b4083a7290cb3f5ae3c4b.html" rel="noopener noreferrer nofollow" target="_blank"></a></li><li>
+<p>Replication of catalog SAP_TC_FIN_GLO_BE_APPS in front-end GUI system.<br/><br/>Run the report program /UI2/GET_APP_DESCR_REMOTE_DEV in SE38 transaction with the following parameters in the front-end GUI system:<br/><br/>Replication system alias         : S4FIN<br/>Backend technical catalog ID  : SAP_TC_FIN_GLO_BE_APP<br/>Replication mode                   : full<br/>Testmode                              : unchecked</p>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Manage tax items - <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/3cc1da1e1e364fadb9b1af653a9597d2/003643c406a44c259f0be085f4deb6dd.html?locale=en-US&amp;state=PRODUCTION&amp;version=2025.001&amp;q=manage%20tax%20item" rel="noopener noreferrer nofollow" target="_blank">Manage Tax Items for Legal Reporting | SAP Help Portal</a></li><li>Fiori apps library: <a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps%28'F1515'%29/S28OP" rel="noopener noreferrer nofollow" target="_blank">Run Statutory Reports</a></li><li><a href="https://me.sap.com/notes/2748454" rel="noopener noreferrer nofollow" target="_blank">2748454</a> - SAP Document and Reporting Compliance - Statutory Reporting: Troubleshooting Guide</li><li>0003062349 - Navigation error occurs when accessing analytics application via Run Statutory Reports Fiori app after SAP S/4HANA upgrade </li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><section>
+<p>#ReportingTask-manageTaxItems?, Manage tax items, FI-LOC-SRF, FI-LOC-SRF-RUN, ACR, DRC, tax items, </p>
+</section></div></div></div></div>

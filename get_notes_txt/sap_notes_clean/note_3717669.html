@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The field c_TipoDeComprobante is not determined when generating an e-document with source SD_INVOICE, causing XML generation to fail. The XML shows the attribute TipoDeComprobante as empty, resulting in an invalid invoice that is rejected by the tax authority, blocking the electronic invoicing process. </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Open the eDocument Cockpit APP.</li><li>Search for the e-invoice.</li><li>Choose the button Go to - Application Log.</li><li>Observe the error messages:</li></ol>
+<ul><li>"Error interno: Error de generación de XML: Error"Error interno: Error de generación de XML: Errorde serialización de comprobant [EN: "Internal Error: XML Generation Error: Error"Internal Error: XML Generation Error: Verifier Serialization Error]</li><li>error: '' is not a valid value forc_TipoDeComprobante."</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Missing or incorrect value maintained in the value mapping <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/ce12687340f040afb02c3a9d01039a4c/209b44b7b6ac415486b23164a6d71d14.html?locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank">Configuring Document Types (DOC_TYPE)</a>.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Based on the value mapping <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/ce12687340f040afb02c3a9d01039a4c/209b44b7b6ac415486b23164a6d71d14.html?locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank">Configuring Document Types (DOC_TYPE)</a> , the system maps the document types that you use in your SAP system to the document types that the SAT has defined and fills in the 'TipoDeComprobante' field in invoice XML files. Therefore, please follow below steps to ensure the correspond values are maintained well.</p>
+<ol><li>
+<p>Go to transaction /AIF/VMAP.</p>
+</li><li>
+<p>Navigate to Value Mapping → Define Value Mappings.</p>
+</li><li>
+<p>Select the mapping object DOC_TYPE.</p>
+</li><li>
+<p>Verify the source values in the mapping entries:</p>
+</li><li>
+<p>Ensure they correspond to valid SD document categories such as (M= Invoice, N= Credit Memo, O= Debit Memo).</p>
+</li><li>
+<p>Ensure the target values are aligned with the expected TipodeComprobante values required by the Mexican tax authority, for example: [ I = Ingreso (income), E = Egreso (expense), T = Traslado (transfer)].</p>
+</li><li>
+<p>Save and activate your changes.</p>
+</li></ol>
+<p>Once done,  please re-run the XML display and verify that TipodeComprobante is now populated correctly.</p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/ce12687340f040afb02c3a9d01039a4c/209b44b7b6ac415486b23164a6d71d14.html?locale=en-US&amp;version=LATEST" rel="nofollow">Configuring Document Types (DOC_TYPE)</a>.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>eDocument, Mexico, c_TipoDeComprobante, XML, TipoDeComprobante, DOC_TYPE</p></div></div></div></div>

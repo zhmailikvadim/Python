@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>An error occurs when attempting to re-upload all lines of the bill of materials (BoM) through Data Transfer Workbench (DTW) after removing all lines from the BoM using the "bill of materials management" window.</li><li>Error message: "9 Update Failed 00146 user cannot be edited [ITT1.Quantity][line: 18] user cannot be edited [ITT1.Quantity][line: 18]65171".</li><li>The issue persists despite verifying items, components, quantities in the template, and decimals in SAP general settings.</li></ul>
+<p><span style="color: rgb(224, 62, 45);"><em>Image/data in this SAP Note is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Data Transfer Workbench for:</p>
+<ul><li>SAP Business One </li><li>SAP Business One, version for SAP HANA</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Steps to reproduce:</strong></p>
+<p>1. Remove all content lines from a BoM product using the "Bill of Materials" window in SAP Business One Client.</p>
+<p><img class="img-responsive" height="617" src="/documents/customerkba/z3AvYSpPcWB-npYzSMI3JimuaUom_8jIJXkRkRYnlTM" width="1004"/></p>
+<p>2. Create a new Data Transfer Workbench (DTW) import template for BoM rows containing “Text” data types for the BoM product. </p>
+<p>3. Fill the Quantity and Price columns with 0s for the "Text" data type rows in the DTW template.</p>
+<p><img class="img-responsive" height="117" src="/documents/customerkba/MjUP1hgtkeDDkac2AwZ1dGvVSPYCanQumclP-47Da9M" width="1003"/></p>
+<p>4. Attempt to update the BoM product with new rows by loading the new DTW template with the data through Data Transfer Workbench (DTW).</p>
+<p></p>
+<p><strong>Actual Result:</strong></p>
+<p>DTW returns the error message: "9 Update Failed 00146 user cannot be edited [ITT1.Quantity][line: 18] user cannot be edited [ITT1.Quantity][line: 18]65171".</p>
+<p></p>
+<p><strong>Expected Result:</strong></p>
+<p>No errors occurrs, and the DTW template is successfully loaded, allowing the BoM product to be updated with new rows.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue was caused by '0's in the Quantity and Price columns for the text data type lines in the DTW import template.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>1. Open the template used for uploading the BoM rows.</p>
+<p>2. Locate the Quantity and Price columns for the text lines.</p>
+<p>3. Remove any '0's present in these columns for the text lines.</p>
+<p>4. Save the updated template.</p>
+<p><img class="img-responsive" height="138" src="/documents/customerkba/ba0KLy_DG0uz1igUt_Qpa6BhpcKaa477Amwmmz7SwJQ" width="1004"/></p>
+<p>5. Re-upload the BoM lines through DTW using the updated template.</p>
+<p>6. Verify that the BoM updates successfully without errors.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://me.sap.com/notes/0001924616" rel="noopener noreferrer nofollow" target="_blank">SAP Note KB0978811 - DTW - Update Item Master Data UoM - Troubleshooting error messages</a>  </p>
+<p>Refer to: <a href="https://me.sap.com/notes/0000865191" rel="noopener noreferrer nofollow" target="_blank">SAP Note KB0983091 - Troubleshooting - Data Transfer Workbench</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>bill of materials, BoM, Data Transfer Workbench, DTW, error, update failed, ITT1.Quantity, line 18, template, Quantity column, Price column, text lines, troubleshooting, SAP Business One</p></div></div></div></div>

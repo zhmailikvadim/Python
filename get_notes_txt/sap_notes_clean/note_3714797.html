@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p></p>
+<p>When adding a Purchase Invoice based on a GRPO, the "Consider Quantity" is not updated correctly as sent in the DI API code.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisites:</strong></p>
+<p>Fixed Assets has been enabled on the <em>Administration </em>→ <em>System Initialization </em>→ <em>Company Details </em>→ <em>Basic Initialization</em> tab.</p>
+<p><strong>Scenario:</strong></p>
+<p></p>
+<ol>
+<li>Go to <em>Modules</em> → <em>Financials</em> → <em>Fixed Assets → Asset Master Data </em>and add new Fixed Asset Master Data (for example: ItemFA). </li>
+<li>Go to <em>Modules</em> → Purchasing - A/P → Goods Receipt PO (GRPO) and add a GRPO for Fixed Asset Master Data added in step 1. Don't select the checkbox for Consider Quantity at line level in GRPO.</li>
+<li>Add an A/P Invoice based on the GRPO added in step 2 using DI API or Service Layer. For example:<br/><br/><span>SAPbobsCOM.Documents oPurchaseInvoices = (SAPbobsCOM.Documents)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oPurchaseInvoices);</span><br/><span>            oPurchaseInvoices.CardCode = "V10000";</span><br/><span>            oPurchaseInvoices.Lines.BaseEntry = 477;</span><br/><span>            oPurchaseInvoices.Lines.BaseType = 20;</span><br/><span>            oPurchaseInvoices.Lines.BaseLine = 0;</span><br/><span>            oPurchaseInvoices.Lines.ConsiderQuantity = BoYesNoEnum.tYES;</span><br/><span>            int RetVal = oPurchaseInvoices.Add();</span></li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The Consider Quantity at the row level in the A/P Invoice is selected.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>The Consider Quantity at the row level in the A/P Invoice is not selected.</p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p></div></div></div></div>

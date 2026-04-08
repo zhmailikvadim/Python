@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">EOD In-House Bank - G/L Transfer Job is unable to post GL with message</p>
+<p><em>'Payment item &amp;1 &amp;2 &amp;3 already transferred to FI'<br/><br/></em></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>IHB, DB_ITEM_FI, FIBTI, EOD In-House Bank - G/L Transfer Job<br/><br/>/PF1/CL_IHB_BC_PRX_FIBTI<br/><br/>E007/pf1/ihb_fi</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The presence of records with status 02 (posted) in the DB_ITEM_FI table caused an error during the GL posting process.<br/><br/></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div>
+<p>An additional check was added to determine whether posting needs to be performed.<br/><br/>The logic of the check is as follows:</p>
+<ul>
+<li>If the finance notification UUID has already been generated on the GL side and the GL document failed, then posting is skipped.</li>
+<li>If the finance notification UUID has not been generated on the GL side, then posting continues.</li>
+<li>If the finance notification UUID  has not been saved in the FI table, but the finance notification UUID has been generated on the GL side, then posting continues.</li>
+</ul>
+<span style="font-size: 14px;"><br/></span><span style="font-size: 14px;">Please apply SAP Note or assigned Support Package</span></div></div></div></div></div>

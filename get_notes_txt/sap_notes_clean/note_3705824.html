@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">An ATP check for ABC Subitems with partial deliveries reduces the requested quantity to the already delivered amount and does a recheck for the remaining amounts. <br/> This works fine if the delivery quantity is not zero in the delivery document.</p>
+<p>The sales order item cannot be deleted, and the quantity cannot be reduced to the already delivered amount which is zero. (Item becomes incomplete)<br/> ATP check does not run for the item in question if there is no change on the quantity and in case, we do change the quantity the ATP check runs for the added quantity.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ABC sub items, subitems, ATP, merge, lv_merge_case,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>missing functionality with ABC solution</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The solution in this case intends to include the item in the merge functionality removing the requirements and running ATP check.<br/>Depending on the ATP result. In case the material plant and the storage location are the same (Merge Case A) we do merge the result with the existing item.<br/>In case the result has a different plant or a storage location we reject the item with the rejection reason 00 and create a new item.</p>
+<p>Please implement the attached correction instruction.</p></div></div></div></div>

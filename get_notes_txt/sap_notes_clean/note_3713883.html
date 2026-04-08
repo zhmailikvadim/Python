@@ -1,0 +1,59 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The freight line of marketing documents does not display correctly <span>in the tax reconciliation report</span>.</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<p><strong>Prerequisite:</strong></p>
+<ul>
+<li>You are working in a localization where <em>Extended Tax Reporting</em> is supported.</li>
+<li>In <em>Administration</em><span> → </span><em>System Initialization</em><span> → </span><em>Company Details</em><span> → <em>Accounting Data</em>, <span><em>Extended Tax Reporting</em> is selected.</span></span></li>
+<li>In <em>Administration</em> → <em>System Initialization</em> → <em>Company Details</em> → <em>Basic Initialization</em>, <em>Use Perpetual Inventory</em> is selected.</li>
+<li>On the <em>Administration</em> → <em>System Initialization</em> → <em>Document Settings</em> → <em>General</em> tab, <em>Manage Freight in Documents</em> is selected.</li>
+<li>In <em>Administration</em> → <em>Setup</em> → <em>General</em> → <em>Freight</em>, define freight FR1 as follows:</li>
+</ul>
+<p>        <em>Revenue Account: 8600</em></p>
+<p>        <em>Expense Account: 4600</em></p>
+<p><em>       Stock/Fixed Asset</em>: <em>Selected</em></p>
+<p><strong>Scenario 1:</strong></p>
+<ol>
+<li>Add an Inventory and Purchasing item I001.</li>
+<li>Add an A/P invoice with a vendor as follows:</li>
+</ol>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">Line 1: <em>Item Code:</em> I001, <em>Quantity:</em> 1, <em>Unit Price:</em> 100, <em>G/L Account</em>: 1200, <em>Tax Code</em>: I1 (10%), </span><em style="font-size: 14px;">Distribute Freight</em><span style="font-size: 14px;">: </span><em style="font-size: 14px;">Yes</em></p>
+<ol start="3">
+<li>Add freight on the document header:</li>
+</ol>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">Line 1: FR1, <em>Net Amount</em>: 10, <em>Tax Group</em>: I1 (10%), </span><em style="font-size: 14px;">Stock/Fixed Asset</em><span style="font-size: 14px;">: Yes</span></p>
+<ol start="4">
+<li>Close the Freight window. Now, on the document header, the Tax in total is 11, and the Document Total is 121.</li>
+<li>Add the A/P invoice.</li>
+<li><span>Go to </span><em>Financials</em><span> → </span><em>Financial Reports</em><span> → </span><em>Accounting</em><span> </span><strong>→</strong><span> </span><em>Tax</em><span> → <em>BAS Report Generation/Tax Report Generation </em>(depending on the localization), select the period when the A/P Invoice was added, and other relevant information, click 'OK'. <br/>In the Tax Declaration Name form, find Tax Code 'I1' and select the A/P Invoice added in step 5. Click<em> 'Add'</em>.</span></li>
+<li>Go to <em>Financials</em> → <em>Financial Reports</em> → <em>Accounting</em> <strong>→</strong> <em>Tax</em> → <em>Tax Reconciliation Report</em>, select the <em>Tax Declaration Name</em> that was added in step 6; choose tax code 'I1'. Run the report.</li>
+</ol>
+<p><strong>Actual behavior:</strong></p>
+<p>The freight line is missing in the report.</p>
+<p><strong>Expect behavior:</strong></p>
+<p>The freight line is correctly displayed under the G/L account 1200.</p>
+<p><strong>Scenario 2:</strong></p>
+<ol>
+<li>Add an Inventory and Purchasing item I001.</li>
+<li>Add an A/P invoice with a vendor as follows:</li>
+</ol>
+<p><span>       Line 1:<em> Item Code:</em> I001, <em>Quantity:</em> 1, <em>Unit Price:</em> 100, <em>G/L Account</em><span>: 1200, </span><em>Tax Code:</em> I1 (10%), </span><em>Distribute Freight</em><span>: </span><em>No</em></p>
+<ol start="3">
+<li>Add freight on the document header:</li>
+</ol>
+<p><span>       Line 1: FR1, <em>Net Amount</em>: 10, <em>Tax Code</em>: I1 (10%), </span><em>Stock/Fixed Asset</em><span>: Yes</span></p>
+<ol start="4">
+<li>Close the Freight window. Now, on the document header, the Tax in total is 11, and the Document Total is 121.</li>
+<li>Add the A/P invoice.</li>
+<li>Go to <em>Financials</em> → <em>Financial Reports</em> → <em>Accounting</em> <strong>→</strong> <em>Tax</em> → <em>BAS Report Generation/Tax Report Generation</em>(depends on the localization), select the period when the A/P Invoice added in step 5, and other relevant information, click 'OK'. <br/>In the Tax Declaration Name form, find Tax Code 'I1' and select the A/P Invoice added in step 5. Click 'Add'.</li>
+<li>Go to <em>Financials</em> → <em>Financial Reports</em> → <em>Accounting</em> <strong>→</strong> <em>Tax</em> → <em>Tax Reconciliation Report</em>, select the <em>Tax Declaration Name</em> that was added in step 6; choose tax code 'I1'. Run the report.</li>
+</ol>
+<p><strong>Actual behavior:</strong></p>
+<p>The freight line is missing in the report.</p>
+<p><strong>Expected behavior:</strong></p>
+<p>The freight line is correctly displayed under the <span>Freight Expense</span> account 4600.</p>
+<p><strong>Note:</strong></p>
+<p>This issue also occurs with Service type A/P Invoice.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""><span>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section </span><strong>References</strong><span> below lists the related feature package or patch once they become available. Be aware that </span><strong>References</strong><span> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</span></p>
+<p><span>Workaround: temporarily disable <em>Extended Tax Reporting</em> when running the report.</span></p></div></div></div></div>

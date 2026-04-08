@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When you start the process <em>Setup/Replacement of Devices (MOS View)</em> (DE_B_IM_DEV_CHANGE) using one of the following API methods from class /US4G/CL_IM_PROCESS_API, the system doesn't create a process document if an error occurs during the submission of the installation reply. Some customers want the option to trigger a process anyway.</p>
+<p>The following API methods are affected:</p>
+<ul>
+<li>START_DEVICES_INSTALL</li>
+<li>START_DEVICES_CHANGE</li>
+<li>START_DEVICES_ADD</li>
+<li>START_DEVICES_REMOVE </li>
+</ul>
+<p>This issue is relevant for the market role: MOS.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">/US4G/CL_IM_PROCESS_API, START_DEVICES_INSTALL, START_DEVICES_CHANGE, START_DEVICES_ADD, START_DEVICES_REMOVE, installation reply, process document, PDOC, kME, mME, IMS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error occurs because the API methods exit without creating the process document when the installation reply encounters an error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections from this SAP Note or import the next Support Package.</p>
+<p>After you implement this SAP Note, the system introduces a new parameter IV_IGNORE_IR_ERROR_ON_SUBMIT in all four methods. By default, this parameter has the value ABAP_FALSE, which maintains the existing behavior. If you set the parameter to ABAP_TRUE, the methods don't exit, and the system creates the process document with the erroneous installation reply, if requested.</p>
+<p>If you need this functionality, adjust your coding and set parameter IV_IGNORE_IR_ERROR_ON_SUBMIT to ABAP_TRUE. You can verify the fix by checking that the system creates a process document when the submission of an installation reply fails in these four methods after you set the parameter in your coding.</p></div></div></div></div>

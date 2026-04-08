@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">SSC(Solution Sales Configuration) External Configuration API incorrectly defines multiple mandatory parameters (id, kbbuild, kbid, rootItem, and configXML) in the request payload schema. For CPS integration, only rootItem should be mandatory. The current implementation creates unnecessary redundancy by requiring these many parameters. This misalignment between API specification and CPS requirements increases integration complexity and forces API consumers to provide duplicate/unnecessary data.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">MANDATORY_PARAMETERS, REQUIRED_FIELDS, EXTERNAL_CONFIGURATION_API, SSC_API, CPS_INTEGRATION, ROOTITEM, CONFIGXML, API_VALIDATION, REQUEST_SCHEMA, PARAMETER_REDUNDANCY, API_CONTRACT, SCHEMA_DEFINITION, OPENAPI, KBBUILD, KBID, BACKEND_ALIGNMENT</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Prerequisites:</strong></p>
+<p>- Understanding of SSC External Configuration API and CPS integration<br/>- Knowledge of configuration creation methods:</p>
+<ul>
+<li>recreateConfigFromXmlWithContext() (when configXML provided)</li>
+<li>createConfiguration() (when configXML is null/absent)</li>
+</ul>
+<p>- Access to OpenAPI YAML/JSON files for parameter schema updates<br/>- Test data: valid rootItem values and sample configXML<br/>- Access to API validation and routing logic code<br/>- Testing tools to verify both configuration creation paths<br/>- Understanding of parameter validation requirements</p>
+<p><strong>Reason:</strong></p>
+<p>SSC External Configuration API incorrectly enforces five mandatory parameters (id, kbbuild, kbid, rootItem, configXML). Only rootItem is required for CPS integration. The current implementation creates unnecessary redundancy (both rootItem and configXML required) and prevents flexible configuration creation patterns. API contract must be updated to align with CPS backend requirements - making rootItem the only mandatory field and implementing conditional routing based on configXML presence.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Solution: Changes as part of API Parameter Optimization:</p>
+<p>1. Updated Mandatory Parameters:<br/> - Changed from: id, kbbuild, kbid, rootItem, configXML (all mandatory)<br/> - Changed to: rootItem (only mandatory), all others optional</p>
+<p>2. Implemented Conditional Configuration Logic:<br/> <br/> Validation:<br/> - Added rootItem presence check<br/> - Reject request if rootItem is missing<br/> - Proceed if rootItem is present</p>
+<p>Configuration Creation Routes:<br/> - IF configXML provided WITH rootItem:</p>
+<ul>
+<li>Call recreateConfigFromXmlWithContext()</li>
+<li>Generate configId from XML context</li>
+</ul>
+<p><br/> - IF configXML is null/absent:</p>
+<ul>
+<li>Call createConfiguration()</li>
+<li>Generate new configId from rootItem</li>
+</ul>
+<p>3. Code Modifications:</p>
+<p>Parameter Validation:<br/> - Removed mandatory checks for: id, kbbuild, kbid, configXML<br/> - Retained mandatory check for: rootItem only</p>
+<p>Configuration Routing:<br/> - Added conditional logic to route to appropriate creation method<br/> - Handles both recreation (with XML) and new creation (without XML)</p>
+<p>4. Documentation Updates:<br/> - Updated OpenAPI YAML 'required' array to rootItem<br/> - Marked id, kbbuild, kbid, configXML as optional<br/> - Added usage pattern documentation</p>
+<p>Files Modified:<br/> - API validation logic<br/> - Configuration routing/creation logic<br/> - OpenAPI specification YAML/JSON</p></div></div></div></div>

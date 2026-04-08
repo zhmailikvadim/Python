@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The payee name (name of the receiver/recipient) is too short.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">RPCDCP00, HRPAD_PAYEE_NAME, HRPAY00_COLDME_ALV_CONTENT, HRPAY00_COLDME_ALV_INFO, RPMREP00, INDX(HR)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>- You implemented SAP note <a href="/notes/3719443" target="_blank">3719443</a>.</p>
+<p>- You use report RPCDCP00 for collective transfers.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>Implement the attached correction instructions or import the HR Support Package relevant for your release.</li>
+<li>In case you are using report RPMREP00 to do distributed reporting, then all your systems need to have the same SP level.</li>
+<li>After implementing the note and before running the report RPMREP00 you may go and remove the entries in database table INDX for RELID = 'HR' and PGMID = 'SCHEDULR'.</li>
+</ul>
+<p>As solution we now use the new data element HRPAD_PAYEE_NAME for component ETEXT in structures HRPAY00_COLDME_ALV_CONTENT and HRPAY00_COLDME_ALV_INFO. (Old data element was EMTXT.)</p>
+<p><em>Remark:</em></p>
+<p>The cluster table INDEX (for RELID = HR) is only used temporarily during the runtime. The export is done in form DATA_EXPORT (include RPCDCI00) and the back-conversion (of the imported data) is done in form REDEFINE (include RPCDCI00). Thus, both sides use the same structure, so that the above structural change will work.</p></div></div></div></div>

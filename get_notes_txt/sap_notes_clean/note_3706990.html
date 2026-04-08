@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When launching the Review Booklet application, the Generative AI "Analytical Business Insight" side panel fails to open. The browser console (F12) shows the authorization error "No Start UI_ANALYTIC_BUSINESSINSIGHT," indicating the user lacks the required Start authorization for the UI_ANALYTIC_BUSINESSINSIGHT OData service and preventing the Analytical Business Insight UI from loading.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> Analytical Business Insight, UI_ANALYTIC_BUSINESSINSIGHT, AI400</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>In S/4HANA 2025 FPS00, FPS01 release, UI_ANALYTIC_BUSINESSINSIGHT OData service is missing in SAP pre-delivered standard businss role <strong>SAP_BR_EMPLOYEE</strong>.<strong><br/></strong></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>It is recommended to implement the fix with the next service package FPS02 containing this correction, alternatively, the below attached manual correction instruction can be implemented.</p>
+<p>One customizing PFCG role in your system such as <strong>ZBR_<strong>EMPLOYEE</strong></strong>,  has to be modified in below way to include <strong>transaction F8405</strong>.</p>
+<p>1: launch transaction /UI2/FLPCM_CONF, in the Catalogs tab, click create to create Fiori business catalog, input your customized ID, such as "<strong>ZBC_RVB_ABI_Test</strong>" and Title "Analytics - Review Booklet Business Insights", and save it.</p>
+<p>2: select the created catalog <strong>ZBC_RVB_ABI_Test</strong>, click Add Tiles/Target Mappings, choose "Add Tiles/TMs to selected Catalog".</p>
+<p>3: input <strong>F8405</strong> , click go, then select the found record, click Add TM Reference.</p>
+<p>4: launch transaction PFCG, input <strong>ZBR_<strong>EMPLOYEE</strong></strong> and change it, select your transport request.</p>
+<p>5: under the Menu tab, click add transaction, select Launchpad Catalog under SAP Fiori Launchpad, input Catalog ID <strong>ZBC_RVB_ABI_Test</strong> and continue.</p>
+<p>6: go to Authorizations tab, click Change Authorization Data button to ensure <strong>F8405 </strong>transaction is under object class AAAB for authorization object S_TCODE, click save button.</p>
+<p>7: assign the customizing PFCG role to the users for testing.</p></div></div></div></div>

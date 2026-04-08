@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When CSRF token protection is disabled for custom OData V2 services, observe that:</p>
+<ul><li>
+<p>The HTTP header <code>X-Requested-With</code> is mandatory</p>
+</li><li>
+<p>Requests fail if the header is missing</p>
+</li><li>
+<p>However, the value of the header appears to be arbitrary</p>
+<ul><li>
+<p>Examples such as <code>"x"</code>, <code>"test"</code>, <code>"abc"</code> all work</p>
+</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4HANA</li><li>SAP Gateway</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This behavior is intended and by design.</p>
+<p>When CSRF protection is disabled:</p>
+<ul><li>
+<p>SAP Gateway does not validate the value of header <code>X-Requested-With</code></p>
+</li><li>
+<p>The system checks only for the presence of the header</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This is expected System Behavior</p>
+<ul><li>The header X-Requested-With must be present</li><li>The value can be any arbitrary string</li><li>Using "x" is recommended, but not enforced</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: <a href="https://help.sap.com/doc/saphelp_ssb/1.0/en-US/e6/cae27d5e8d4996add4067280c8714e/content.htm?no_cache=true" rel="nofollow">SAP Help Documentation on CSRF Token and Header</a>.</li><li>Refer to: <a href="https://community.sap.com/t5/technology-blog-posts-by-members/disable-authentication-pop-up-and-csrf-token-for-odata-calls-using-sap/ba-p/13152937?utm_source=chatgpt.com" rel="nofollow">SAP Community Blog: Disable Authentication Pop-up and CSRF Token for OData Calls</a>.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>csrf token, odata v2 services, x-requested-with header, arbitrary header value, middleware, sap note 2751277, sap s/4hana, custom odata services, header validation, disable csrf protection, sap business partner module.</p></div></div></div></div>

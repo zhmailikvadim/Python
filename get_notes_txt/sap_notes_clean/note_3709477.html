@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">How to assign rights to non- admin user to access security editor</p>
+<p>Without proper rights user will receive -error <strong>"You do not have the right to open the Security Editor for repository [localhost:6400 (user - Enterprise)]". </strong><strong></strong><strong></strong></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><header></header>
+<section id="u_environment">
+<p>SAP BusinessObjects Business Intelligence Platform 4.X</p>
+</section><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Open a session in IDT with affected user</li><li>Click on Windows on top</li><li>Select security Editor</li><li>Receive error</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>User do not have proper rights</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>Assign Rights at Application Level:</strong></p>
+<p>Navigate to Application in CMC home</p>
+<ol><li>Right click on Information Design Tool</li><li>Select user "Add Principals"</li><li>Add and Assign security</li><li>Assign view rights</li><li>Go to advanced</li><li>Add/Remove Rights &gt; Grant access to " Edit this object"</li><li>Under Application section&gt; Information design Tool&gt; Grant "Administrator security profiles" access &gt; Apply &gt; Ok</li></ol>
+<p><br/><strong>For Connection to be visible:</strong></p>
+<p>Go to CMC &gt; Connection &gt; Manage &gt; Select Top-level Security &gt; All Connections &gt; Add Principals &gt; Add and Assign security &gt; Assign view right &gt; Apply &gt; OK</p>
+<p></p>
+<p><strong>For universes to be visible:</strong></p>
+<p>Go to CMC &gt; Universes &gt; Manage &gt; Select Top level security &gt; All universes &gt; Add Principals &gt; Add and Assign security &gt; Assign view right &gt; Apply &gt; OK</p>
+<p></p>
+<p>To Insert and change data security profile under universe (security editor) grant below rights:</p>
+<p>In &gt; Advanced &gt; Add/Remove rights</p>
+<p>Go to System&gt; Universe (Information Design Tool) &gt; Grant All rights under "<strong>Specific rights for universe"</strong></p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>BI, CMC, IDT, Rights, view, Security editor, BO, admin, non-admin, universe, connection</p></div></div></div></div>

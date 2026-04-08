@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When generating output documents (for example Sales Quotation, Billing Document, Purchase Order, etc.) using a custom Adobe form template in SAP S/4HANA Cloud Public Edition, the following behavior is observed:</p>
+<ul><li style="list-style-type: none;">
+<ul><li>
+<p>JavaScript logic in the Adobe form works correctly in Adobe LiveCycle Designer (local preview).</p>
+</li><li>
+<p>The same JavaScript does not execute when the form is rendered via Adobe Document Services (ADS) in the cloud system.</p>
+</li><li>
+<p>Dynamic content (e.g., calculated text, conditional logic, item summarization) is missing in the generated PDF.</p>
+</li><li>
+<p>The form behaves as expected only when tested in interactive (fillable) mode.</p>
+</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Create or modify a custom Adobe form template using Adobe LiveCycle Designer.</li><li>Implement JavaScript logic (e.g., in form:ready, initialize, or calculation events).</li><li>Assign the form template to an output type in Output Management.</li><li>Generate the output document from the relevant application (e.g., Manage Sales Quotations, Manage Billing Documents).</li><li>Open the generated PDF.</li></ol>
+<p><strong>Result:</strong></p>
+<p>JavaScript logic does not execute in the generated PDF.</p>
+<p><strong>Expected (from Designer preview):</strong></p>
+<p>JavaScript executes and dynamic values are displayed.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>In SAP S/4HANA Cloud Public Edition:</p>
+<ul><li>Only print forms (non-interactive PDFs) are supported.</li><li>Interactive (fillable) PDF forms are not supported.</li><li>The system does not pass the interactive (FILLABLE) parameter during form generation.</li><li>This behavior is by design.</li></ul>
+<p>Output documents generated through Output Management are intended to remain stable and auditable. Interactive form functionality is therefore intentionally restricted in the Public Cloud environment.</p>
+<p>As stated in SAP Help ( <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/a630d57fc5004c6383e7a81efee7a8bb/29486b73324f47868a8aa1fa4a5a35bf.html" rel="noopener noreferrer nofollow" target="_blank">Application Form Templates | SAP Help Portal</a>):</p>
+<p>"Currently, only print forms are supported, while interactive forms are not."</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This is expected system behavior.</p>
+<p>Interactive PDF generation cannot be enabled in SAP S/4HANA Cloud Public Edition.</p>
+<p><strong>Supported Approach:</strong></p>
+<ul><li>Design custom forms as print forms only.</li><li>Ensure all logic is compatible with non-interactive server-side rendering.</li><li>Avoid reliance on interactive or client-side execution behavior.</li><li>Adjust JavaScript logic to function within print-form limitations.</li></ul>
+<p><strong>If interactive functionality is required:</strong></p>
+<ul><li>Submit an enhancement request via the SAP <a href="/notes/2963059" rel="noopener noreferrer nofollow" target="_blank">Customer Influence Portal</a>.</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/a630d57fc5004c6383e7a81efee7a8bb/29486b73324f47868a8aa1fa4a5a35bf.html" rel="noopener noreferrer nofollow" target="_blank">Application Form Templates | SAP Help Portal</a></li><li>Refer to: <a href="https://me.sap.com/notes/3304182/E" rel="noopener noreferrer nofollow" target="_blank">3304182 - How to preview data on Adobe LiveCycle Designer - SAP for Me</a> </li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>JavaScript, Adobe Form, Adobe Document Services (ADS), Server-Side Rendering, SAP S/4HANA Cloud Public Edition, Interactive Forms, Non-Interactive Mode, Fillable Parameter, LiveCycle Designer, Output Management, Quotation Printout, Form Services, Document Rendering, Interactive PDF, Custom Form Logic, Sales Quotation Form, Billing Form, Print Form Only, FP_JOB_OPEN, Run At Client And Server. </p></div></div></div></div>

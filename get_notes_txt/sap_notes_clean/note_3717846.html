@@ -1,0 +1,110 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">This SAP Note provides instructions for enabling a new version of the Romania VAT 300 declaration tax box reporting structure in SAP S/4HANA Cloud Public Edition. The system supports Romania’s VAT changes effective from January 2026.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html0">Romania, VAT 300, legal change, RO_VAT_300, RO_VAT_300_V5, DRC, Document and Reporting Compliance</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">This update follows a legal change that takes effect from January 2026. This SAP Note is valid only for Romania.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Instructions:</strong></p>
+<p><strong>A. Copy already existing tax box structure (in case you already configured it in SAP Note <a href="/notes/3670097" target="_blank">3670097</a>):</strong></p>
+<p><strong>  </strong>1. Run Configuration activity: <strong>Define Enhanced Tax Box Structure (ID: 103011)</strong>.<br/>    a. Select <strong>Configure</strong><br/>    b. Enter <strong>RO</strong> (Romania) in the Country/Region field.<br/>    c. Click <strong>Apply</strong> to proceed.</p>
+<p>  2. Modify the validity of the existing tax box structure.<br/>    a. For the row with Tax Box Structure Type = V300N, change <strong>Valid To = 31.12.2025</strong>.<br/>    b. Select the checkbox for the row with Tax Box Structure Type = V300N and click on <strong>Expand &lt;-&gt; Collapse</strong>. For Tax Box Structure Type = V300N there will be two rows: <strong>01.07.2025 - 31.12.2025</strong> and <strong>01.01.2026 - 31.12.9999</strong>.<br/>    c. Select the checkbox for the row with Tax Box Structure Type = V300N, Valid From: 01.01.2026 and click on <strong>Delete</strong>. Confirm and save.</p>
+<p>  3. Copy the existing tax box structure with new validity.<br/>    a. Select the checkbox for the row with Tax Box Structure Type = V300N and click on <strong>Copy As...</strong>. For the newly created record, maintain <strong>Valid From: 01.01.2026</strong> and <strong>Valid To: 31.12.9999</strong>.<br/>    b. When prompted, select the option to <strong>copy all</strong> dependent entries.</p>
+<p>  4. Delete the nodes that are no longer used from the new tax box structure.</p>
+<ul>
+<li>List of obsolete nodes: <strong>R12_3_1</strong>, <strong>R12_3_2</strong>, <strong>R24_1</strong>, <strong>R24_2</strong>, <strong>R25_3_1</strong>, <strong>R25_3_2</strong>, <strong>R69_1</strong>, <strong>R69_2</strong>, <strong>R70_1</strong>, <strong>R70_2</strong>, <strong>R71_1</strong>, <strong>R71_2</strong>, <strong>R73_1</strong>, <strong>R73_2</strong>, <strong>R74_1</strong>, <strong>R74_2</strong>, <strong>R75_1</strong>, <strong>R75_2</strong>, <strong>R76_1</strong>, <strong>R76_2</strong>, <strong>R77_1</strong>, <strong>R77_2</strong></li>
+</ul>
+<p><strong><strong>      Note:</strong> </strong>Start from the <strong>Assignment of Tax Group to Tax Box</strong> view. Continue with <strong>Define Tax Boxes (External)</strong> and <strong>Define Tax Groups (internal)</strong> views. Save after maintaining each view.</p>
+<p>  5. Update tax box descriptions in the <strong>Define Tax Boxes (External)</strong> view.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 636px; height: 419px;">
+<tbody>
+<tr>
+<td><strong>Tax Box</strong></td>
+<td><strong>Old Description</strong></td>
+<td><strong>New Description</strong></td>
+</tr>
+<tr>
+<td>R25_1</td>
+<td>Line 27 base</td>
+<td>Line 26 base</td>
+</tr>
+<tr>
+<td>R25_2</td>
+<td>Line 27 VAT</td>
+<td>Line 26 VAT</td>
+</tr>
+<tr>
+<td>R25_1_1</td>
+<td>Line 27.1 base</td>
+<td>Line 26.1 base</td>
+</tr>
+<tr>
+<td>R25_1_2</td>
+<td>Line 27.1 VAT</td>
+<td>Line 26.1 VAT</td>
+</tr>
+<tr>
+<td>R25_2_1</td>
+<td>Line 27.2 base</td>
+<td>Line 26.2 base</td>
+</tr>
+<tr>
+<td>R25_2_2</td>
+<td>Line 27.2 VAT</td>
+<td>Line 26.2 VAT</td>
+</tr>
+<tr>
+<td>R26_1</td>
+<td>Line 30 base</td>
+<td>Line 29 base</td>
+</tr>
+<tr>
+<td>R26_1_1</td>
+<td>Line 30.1 base</td>
+<td>Line 29.1 base</td>
+</tr>
+<tr>
+<td>R28_2</td>
+<td>Line 32 VAT</td>
+<td>Line 31 VAT</td>
+</tr>
+<tr>
+<td>R29_2</td>
+<td>Line 33 VAT</td>
+<td>Line 32 VAT</td>
+</tr>
+<tr>
+<td>R30_1</td>
+<td>Line 34 base</td>
+<td>Line 33 base</td>
+</tr>
+<tr>
+<td>R30_2</td>
+<td>Line 34 VAT</td>
+<td>Line 33 VAT</td>
+</tr>
+<tr>
+<td>R31_2</td>
+<td>Line 35 VAT</td>
+<td>Line 34 VAT</td>
+</tr>
+<tr>
+<td>R43_2</td>
+<td>Line 28 VAT</td>
+<td>Line 27 VAT</td>
+</tr>
+<tr>
+<td>R44_2</td>
+<td>Line 29 VAT</td>
+<td>Line 28 VAT</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong><strong>B. Create new tax box structure from scratch (in case you did NOT configure it in SAP Note <a href="/notes/3670097" target="_blank">3670097</a> as a part of the previous legal change):</strong></strong></p>
+<p>  1. Run Configuration activity: <strong>Define Enhanced Tax Box Structure (ID: 103011).<br/></strong>    a. Select <strong>Configure<br/></strong>    b.<strong> </strong>Enter <strong>RO</strong> (Romania) in the Country/Region field.<br/>    c. Click <strong>Apply</strong> to proceed.</p>
+<p>  2. On each configuration activity tab, select <strong>(Menu) &gt; Table View &gt; Import Spreadsheet &gt; Contents</strong> and import the respective excel sheets attached to this note in each tab.</p>
+<p><strong>      Note:</strong> For <strong>Define</strong> <strong>Tax Groups (Internal)</strong> tab (excel sheet no. 3), import variant <strong>3a</strong> in case <strong>RITA is not active</strong> in the system, and variant <strong>3b</strong> (with Reporting Country field maintained) in case <strong>RITA is active</strong>.</p>
+<p>  3. Maintain the tax groups.</p>
+<ul>
+<li>On the <strong>Define Tax Groups (Internal)</strong> tab, assign the correct tax codes and transaction types to the corresponding tax groups.</li>
+</ul></div></div></div></div>

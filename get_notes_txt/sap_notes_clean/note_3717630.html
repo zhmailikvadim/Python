@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When suppliers are invited and have submitted the external questionnaire, the registration status does not update to Pending Approval and remains in In Registration.</p>
+<p>Error message observe as below.</p>
+<p>java.lang.NullPointerException: Cannot invoke 'String.length()' because 's' is null</p>
+<p>at javax.mail.internet.MimeUtility.checkAscii(MimeUtility.java:1475)</p>
+<p>at javax.mail.internet.MimeUtility.encodeWord(MimeUtility.java:720)</p>
+<p>at javax.mail.internet.MimeUtility.encodeText(MimeUtility.java:527)</p>
+<p>at ariba.collaborate.core.HtmlEmailMessage.createMimeMessage(HtmlEmailMessage.java:172)</p>
+<p>at ariba.collaborate.core.EmailMessage.send(EmailMessage.java:2680)</p>
+<p>at ariba.collaborate.core.action.EmailNotification.fire(EmailNotification.java:157)</p>
+<p>at ariba.base.fields.Trigger.fire(Trigger.java:173)</p>
+<p>at ariba.base.core.BaseObject.fireTrigger(BaseObject.java:6827)</p>
+<p>at ariba.base.core.BaseObject.doFireTriggers(BaseObject.java:6673)</p>
+<p>at ariba.base.core.BaseObject.fireTriggers(BaseObject.java:6565)</p>
+<p>at ariba.collaborate.core.action.EmailNotification.sendMailToSingleUser(EmailNotification.java:960) ...</p>
+<p>at ariba.collaborate.core.TaskApprovable.sendMail(TaskApprovable.java:2104) ...</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Invite suppliers to the production realm.</li><li>Suppliers submit the external questionnaire.</li><li>Observe that the registration status remains in "In Registration" instead of updating to "Pending Approval".</li><li>Error message "java.lang.NullPointerException: Cannot invoke 'String.length()' because 's' is null" is recorded in the history tab of the registration project.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The error is happening while building or encoding an email, specifically when the system is trying to encode text for MIME.</p>
+<p>In this case, below email notification templates were not migrated successfully and had no subject or content.</p>
+<ul><li>Sent to the approval task owner and any active watchers when the task is fully approved.</li><li>Sent to the task owner when a task has been started because its predecessors have been completed.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Update the email notification templates in the realm by adding subject, email body content and translations. The default template content can be referenced from another environment.</p>
+<ol></ol>
+<p>To update the email templates, follow below steps.</p>
+<ol><li>Login as Customer Administrator.</li><li>Go to Manage &gt; Administration &gt; Project Manager &gt; Project Email Templates.</li><li>Expand Project Type: Supplier Registration Project.</li><li>Select the task and click Edit.</li><li>Once the Subject, email body content and translatiosn are added, click Save.</li></ol>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>supplier registration, in registration, pending approval, questionnaire submission, null pointer exception, content missing, email templates, production realm, SM administration, String.length, NullPointerException</p></div></div></div></div>

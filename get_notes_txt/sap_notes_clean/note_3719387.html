@@ -1,0 +1,103 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0"><span style="font-size: 10pt;">After a new implementation, upgrade, company rollout, or related system change, the FSM Connector functionality works only partially.</span></p>
+<p><span style="font-size: 10pt;">Typical observations include:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>/PACG*</code> IDocs are generated and processed successfully in ECC/S4.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">No errors are visible in IDoc processing.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">However, results are not fully visible in FSM.</span></p>
+</li></ul>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">Example</span></h3>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Service orders are replicated and visible on the FSM Planning Board.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Related activities are missing in FSM.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Object changes appear to be only partially synchronized.</span></p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Field Service Management (FSM)</li><li>Proaxia Connector (PACG)</li><li>ECC, S/4 HANA</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Expected behavior: </strong></p>
+<ul><li>
+<p>Communication between ECC/S4 and FSM works correctly.</p>
+</li><li>
+<p>All relevant objects and changes are replicated completely.</p>
+</li><li>
+<p>Customized connector functionality operates as defined.</p>
+</li><li>
+<p>All related objects (e.g., service orders and activities) are visible in FSM.</p>
+</li></ul>
+<p></p>
+<p><strong>Actual behavior: </strong></p>
+<ul><li>
+<p><span style="font-size: 10pt;">Partial functionality is observed.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>/PACG*</code> IDocs are successfully generated and processed.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">No technical errors are reported.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Some replicated data or dependent objects are missing in FSM.</span></p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><span style="font-size: 10pt;">The issue is typically caused by one of the following:</span></p>
+<ol><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Customizing tables in ECC/S4 are not properly updated.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Post-implementation steps were not done.</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The FSM Connector setup program was not (re)done after:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">A new installation</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">An upgrade</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">A new company rollout</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">SAP Note implementation (if required)</span></p>
+</li></ul>
+</li></ol>
+<p><span style="font-size: 10pt;">Most communication and functional inconsistencies in the FSM Connector are caused by missing execution of the setup program.</span></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h3 data-toc-skip=""><span style="font-size: 10pt;">Run Setup Program</span></h3>
+<p><span style="font-size: 10pt;">Run transaction: </span><span style="font-size: 10pt;"><code>/PACG/ECM_SETUP
+</code></span></p>
+<p><span style="font-size: 10pt;">This program must be run in the following scenarios:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">New installation of the FSM Connector</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Implementation of a new company</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Connector upgrade (Add-On or Service Pack implementation)</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">SAP Note implementation (if manual steps indicate it)</span></p>
+</li></ul>
+<h3 data-toc-skip=""> </h3>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">Important: Multiple Logical Systems / Companies</span></h3>
+<p><span style="font-size: 10pt;">If multiple companies use different combinations of:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Logical system</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Distribution model</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Partner profile</span></p>
+</li></ul>
+<p><span style="font-size: 10pt;">The setup program must be run separately for each combination (triple) of these parameters.</span></p>
+<p><span style="font-size: 10pt;">If each company uses its own dedicated logical system, distribution model, and partner profile, run the setup program individually for each configuration.</span></p>
+<p style="margin: 0cm 0cm 8pt; line-height: 115%; font-size: 12pt; font-family: 'aptos' , sans-serif;"></p>
+<h2 data-toc-skip=""><span style="font-size: 10pt;">Verification</span></h2>
+<p><span style="font-size: 10pt;">To verify whether the setup program was run correctly:</span></p>
+<ol><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Run transaction:</span><span style="font-size: 10pt;"><code>/PACG/ECM_VERSION
+</code></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Compare the displayed value of Setup Version with:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The latest version stored in table:</span><span style="font-size: 10pt;"><code>/PACG/ECS_SETUP</code></span></p>
+</li></ul>
+</li></ol>
+<p><span style="font-size: 10pt;">If the Setup Version in <code>/PACG/ECM_VERSION</code> does not match the latest entry in <code>/PACG/ECS_SETUP</code>, run<code>/PACG/ECM_SETUP</code>.</span></p>
+<p></p>
+<h2 data-toc-skip=""><span style="font-size: 10pt;">Additional Information</span></h2>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>/PACG/ECM_SETUP</code> – <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/37138406/PACG+ECM_SETUP+-+FSM+Connector+s+Setup" rel="noopener noreferrer nofollow" target="_blank">FSM Connector Setup Program</a></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>/PACG/ECM_VERSION</code> – <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/37138429/PACG+ECM_VERSION+-+Show+FSM+Connector+s+Version" rel="noopener noreferrer nofollow" target="_blank">Display FSM Connector Version</a></span></p>
+</li></ul>
+<p><span style="font-size: 10pt;">Refer to the FSM Cloud Connector documentation (Confluence) for detailed setup and post-implementation instructions.</span></p>
+<p></p>
+<h2 data-toc-skip=""><span style="font-size: 10pt;">Summary</span></h2>
+<p><span style="font-size: 10pt;">If IDocs are processed successfully but data is only partially visible in FSM, the most likely root cause is that the setup program <code>/PACG/ECM_SETUP</code> was not run after installation, upgrade, or system changes.</span></p>
+<p><span style="font-size: 10pt;">Re-running the setup program typically resolves the issue.</span></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to:  <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/37138406/PACG+ECM_SETUP+-+FSM+Connector+s+Setup" rel="noopener noreferrer nofollow" target="_blank">/PACG/ECM_SETUP - FSM Connector's Setup - FSM Cloud Connector - Confluence</a> </li><li>Refer to:  <a href="https://proaxia-prod-doc.atlassian.net/wiki/spaces/PFCC/pages/37138429/PACG+ECM_VERSION+-+Show+FSM+Connector+s+Version" rel="noopener noreferrer nofollow" target="_blank">/PACG/ECM_VERSION - Show FSM Connector's Version - FSM Cloud Connector - Confluence</a> </li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>FSM Connector, SAP FSM integration, ECC to FSM replication, S4HANA to FSM integration, partial data replication, IDoc processed but data missing, /PACG IDocs, /PACG/ECM_SETUP, /PACG/ECM_VERSION, FSM connector setup version, SAP connector upgrade issue, post implementation steps missing, customizing tables not updated, distribution model configuration, partner profile configuration, logical system configuration, service order replicated but activities missing, FSM planning board issue, SAP add-on upgrade, SAP note manual steps, connector setup program execution, SAP integration troubleshooting</p></div></div></div></div>

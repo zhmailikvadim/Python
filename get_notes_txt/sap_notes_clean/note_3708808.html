@@ -1,0 +1,47 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0"> </div>
+<div><span style="font-size: 14px;">Contact persons created with gender selection show incorrect synchronization where the legacy Gender field is set to 'E' instead of the selected gender value, while GenderEx field contains the correct value.</span></div>
+<div> </div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisites:</strong></p>
+<p>SAP Business One FP 2508 or higher (Contact person functionality with GenderEx field available)</p>
+<p><strong>Scenario:</strong></p>
+<p><strong></strong></p>
+<ol>
+<li>Go to <em>Business Partners → Business Partner Master Data</em></li>
+<li>Open an existing business partner or create a new one</li>
+<li>Navigate to the <em>Contact Persons</em> tab</li>
+<li>Fill in the following fields:
+<ul>
+<li><em>Contact ID</em> Enter any value</li>
+<li><em>Gender</em>: Select for instance 'Male'</li>
+</ul>
+</li>
+<li>Fill in any UDF (User Defined Field) or standard field on the contact tab (such as <em>Title</em>, <em>Position</em>, <em>E-Mail</em>, <em>Phone</em>, etc.)</li>
+<li>Click <em>Add</em> to save the contact person</li>
+<li>Check the OCPR table data for the created contact person record</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p></p>
+<p>Both <em>Gender</em> and <em>GenderEx</em> fields in the OCPR table should contain synchronized values that correspond to the gender selection made in the user interface. <em>Gender</em> should contain:</p>
+<ul>
+<li>'M' for Male or 'F' for Female when standard genders are selected</li>
+<li>'E' when gender is not specified</li>
+<li>'I' when gender is one of the genders defined by users in the <em>Gender - Setup</em> window</li>
+</ul>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext"><span style="font-size: 14px;">When any UDFs or fields on the contact tab are populated after selecting a </span><em style="font-size: 14px;">Gender</em><span style="font-size: 14px;">:</span></div>
+</div>
+</div>
+</div>
+<ul>
+<li>GenderEx field contains the correct value ('M', 'F', 'E', or user-defined gender code)</li>
+<li>Gender field is incorrectly set to 'E' instead of the selected gender value</li>
+</ul>
+<p><strong>Additional Information: </strong></p>
+<p>When no UDFs or additional fields on the contact tab are populated after selecting a <em>Gender</em>, both fields synchronize correctly.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p></div></div></div></div>

@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">If there is a mutiple bytes character (eg, Japanese Character, Chinese Character) in the Data Services query, some additional configuration is needed, otherwise these characters may not be parsed correctly, error: "Regular expression is invalid: quantifier does not follow a repeatable item".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> <strong>Environment</strong>:</p>
+<ul>
+<li>SAP Data Services 4.3 SP3 Patch 10</li>
+</ul>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>Design a job with MongoAdapter as source.</li>
+<li>Add a XML Map, in the query field of XML map, add a string contains mutiple-bytes character, save and execute the job.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The root cause of this issue is that in some of the system, the multiple bytes character cannot be parsed correctly with default encoding (code page), as the result, the code page should be changed accordingly.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please follow the steps below to customize the code page in the Data Services.</p>
+<ol>
+<li>Open the locale Selector, change the Default locale to the code page accordingly, alternatively, the UTF-8 may be chosen. </li>
+<li>Save and restart the 'SAP Data Services' in the services to apply this change. </li>
+</ol></div></div></div></div>

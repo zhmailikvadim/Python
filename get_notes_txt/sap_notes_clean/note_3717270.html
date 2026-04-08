@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">After returning to Ariba from a punchout session, the customer is receiving the following error message:</p>
+<p>“PunchOut Catalog Shopping Unsuccessful: Requisition XXX has not been updated with the items from your shopping cart.”</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><span style="background-  font-size: 10pt;">SAP Ariba Catalog Management</span></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The supplier is sending invalid &lt;From&gt; &lt;/From&gt; and &lt;To&gt; &lt;/To&gt; credentials in the PunchOut Order Message. </p>
+<p>Example: </p>
+<div>
+<div>&lt;From&gt;</div>
+<div style="padding-left: 40px;">&lt;Credential domain="<strong>DUNS</strong>"&gt;</div>
+<div style="padding-left: 40px;"><strong>&lt;Identity&gt;XXXXX&lt;/Identity&gt;</strong></div>
+<div style="padding-left: 40px;">&lt;/Credential&gt;</div>
+<div>&lt;/From&gt;</div>
+<div>&lt;To&gt;</div>
+<div style="padding-left: 40px;">&lt;Credential domain="<strong>DUNS</strong>"&gt;</div>
+<div style="padding-left: 40px;"><strong>&lt;Identity&gt;XXXXXX&lt;/Identity&gt;</strong></div>
+<div style="padding-left: 40px;">&lt;/Credential&gt;</div>
+<div>&lt;/To&gt;</div>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Ask the supplier to verify the credentials being sent in the PunchOut Order Message. </li><li>Correct the invalid credentials provided in the PunchOut Order Message. </li><li>Test the PunchOut session and ensure the requisition updates successfully with the shopping cart items.</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://help.sap.com/docs/business-network-for-procurement/cxml-solutions/example-punchoutordermessage-document?q=cxml+solutions" rel="noopener noreferrer nofollow" target="_blank">Example PunchOutOrderMessage Document</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>punchout session, requisition error, catalog shopping unsuccessful, invalid credentials, SAP Ariba, punchoutorderemessage</p></div></div></div></div>

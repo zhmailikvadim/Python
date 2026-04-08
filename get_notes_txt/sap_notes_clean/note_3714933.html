@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<div id="copilot-message-r84">
+<div>
+<div>
+<div>
+<div>
+<div>
+<div id="chatMessageResponser82">
+<div aria-hidden="true">
+<div>
+<p>When comparing results between transactions MD06 and RMMD06NEW, the output does not match.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div> </div>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4HANA</li><li>SAP S/4HANA Cloud Private Edition</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Standard system behavior.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>When evaluating material "1234" for a specific plant and MRP controller, the following logic applies:</p>
+<ul><li><strong>MD06 </strong>retrieves existing MRP lists based on the assigned selection criteria. It reads data from table MDKP, where an MRP list may already exist for the material.</li><li><strong>RMMD06NEW </strong>selects materials directly from the material master according to the MRP controller maintained in the master data.</li></ul>
+<p>Differences in the results may occur when the MRP controller stored in the MRP list (MDKP) does not match the MRP controller maintained in the material master, which is an unusual but possible data inconsistency.</p>
+<p></p>
+<p>This behavior is by design.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><div>MD06, RMMD06NEW, MRP list, MRP controller, material master, MDKP, MDKP-DTART, DTART = MD, MRP list inconsistency, MRP controller mismatch, MRP list selection logic, material selection in MRP, MRP list missing, incorrect MDKP entries, expected system behavior</div></div></div></div></div>

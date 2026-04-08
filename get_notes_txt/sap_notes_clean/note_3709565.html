@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Questions regarding SAML configuration and management in FSM environments.</li><li>Clarifications on Single Logout (SLO) URLs and bindings.</li><li>Questions on user matching attributes and additional claims required for FSM.</li><li>Concerns about security and protocol constraints, including signed assertions and encryption requirements.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>FSM System Administration</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Review the provided project specifications regarding the deployment of Microsoft Entra ID MFA solution.</li><li>Analyze the open points/questions listed in the case description related to SAML configuration, SP settings, SLO, claims, and security constraints.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>In FSM (DEV and PROD), where is the authoritative location where the SAML/IdP configuration is maintained (exact admin menu path)?</strong></p>
+<ul><li><em>https://{cluster}.fsm.cloud.sap/admin/accounts/YOUR_FSM_ACCOUNT_ID/samlConfigs -&gt; <strong>Please replace "YOUR_FSM_ACCOUNT_ID" with your provided FSM account ID</strong><br/><br/></em></li></ul>
+<p><strong>Service Provider (SP) settings to be configured in Entra ID (per environment)</strong></p>
+<ul><li style="list-style-type: none;">
+<ul><li>Please provide/export the full SP metadata XML for both DEV and PROD (files, not excerpts).</li><li><em>https://{cluster}.fsm.cloud.sap/api/oauth2/v2/saml/{account name}/metadata</em></li><li>Logout / Single Logout (SLO)If SLO is supported/used, please provide the Single Logout URL(s) and the binding (HTTP-Redirect / HTTP-POST) for DEV and PROD.</li></ul>
+</li></ul>
+<p><strong>Please confirm whether SLO is required or optional for FSM in this setup.</strong></p>
+<ul><li> <em>SLO is optional.</em></li></ul>
+<p><strong>Claims &amp; user matching</strong></p>
+<ul><li>What attribute does FSM use to match users at login?</li><li><span style="font-size: 10pt;">For NameID, should Entra send mail, UPN, or another attribute?</span></li></ul>
+<p><em>        Users are found via email address.</em></p>
+<p><strong>Are any additional claims required by FSM (e.g., groups/roles/tenant attributes), or is authorization fully managed inside FSM after authentication?</strong></p>
+<ul><li><em>When using MS AD, all authorization such as roles and policy group are set in FSMN Admin Portal</em></li></ul>
+<p><strong>Any known edge cases we should consider (multiple domains, aliases, external users/partners)?</strong></p>
+<ul><li><em> There might be special cases that might require specific configuration. In this case, please let us know if there's any</em></li></ul>
+<p><strong>Security / protocol constraints, <span style="font-size: 10pt;">FSM requires:</span></strong></p>
+<ul><li style="list-style-type: none;">
+<ul><li>
+<ul><li>Signed assertions only vs signed response as well</li><li>Any encryption requirements</li><li><em style="font-size: 10pt;">Signed assertion using URL https://{cluster}.fsm.cloud.sap/api/oauth2/v2/saml/{Account name}/consume</em></li></ul>
+</li></ul>
+</li></ul>
+<p><strong>Does the AuthnContext need to remain as today (e.g., PasswordProtectedTransport with comparison exact), or can it be relaxed?</strong></p>
+<ul><li><em>This setting is optional and can be set accordingly to customer's needs</em></li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>saml authentication, microsoft entra id, fsm system administration, single logout, claims configuration, signed assertions, encryption requirements, service provider metadata, user matching attributes, fsm admin portal, security constraints, protocol constraints, microsoft active directory</p></div></div></div></div>

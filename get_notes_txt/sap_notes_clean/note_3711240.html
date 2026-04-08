@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>In the Manage Purchase Contracts app, no purchase contracts are returned when no selection criteria are entered.</li><li>Purchase contracts are only displayed when a specific contract number is provided.</li><li>Some purchase contracts are missing from the result list, preventing users from excluding or processing them further.</li><li>The issue occurs even though the purchase contracts exist and are active in the system</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<ul style="list-style-type: none;"><li aria-label="SAP S/4HANA Cloud Public Edition">
+<div>
+<div>SAP S/4HANA Cloud Public Edition</div>
+</div>
+</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Open the Manage Purchase Contracts application.</p>
+</li><li>
+<p>Ensure that purchase contracts exist with a document currency different from the company code currency.</p>
+</li><li>
+<p>Ensure that the exchange rate is missing in one conversion direction between the document currency and the company code currency (for example, maintained for Currency A → Currency B, but not for Currency B → Currency A).</p>
+</li><li>
+<p>In the Manage Purchase Contracts app, do not enter any selection criteria.</p>
+</li><li>
+<p>Execute the search.</p>
+</li></ol>
+<p>Result:</p>
+<ul><li>
+<p>No purchase contracts are returned, or some contracts are missing from the result list.<br/><br/></p>
+</li></ul>
+<ol><li>
+<p>Enter a specific contract number for one of the affected purchase contracts.</p>
+</li><li>
+<p>Execute the search again.</p>
+</li></ol>
+<p>Result:</p>
+<ul><li>
+<p>The purchase contract is displayed only when searched by contract number.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The affected purchase contracts are created in a document currency that differs from the company code currency.</li><li>During contract selection, the system performs currency conversion checks between the document currency and the company code currency.</li><li>The required exchange rate is not fully maintained for both conversion directions between the two currencies.</li><li>Although an exchange rate may exist in one direction (for example, Currency A → Currency B), the reverse exchange rate (Currency B → Currency A) is missing.</li><li>Due to the missing exchange rate, the system cannot complete currency conversion during the selection process, causing the affected purchase contracts to not be displayed in the Manage Purchase Contracts app.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Maintain the missing exchange rate between the document currency and the company code currency in both directions.</li><li>Use the Currency Exchange Rates app to maintain the required exchange rates:<br/>App Name: Currency Exchange Rates (App ID: F3616)</li><li>Ensure that exchange rates are available for:<br/>- Document Currency → Company Code Currency<br/>- Company Code Currency → Document Currency</li><li>After maintaining the exchange rates, re-open the Manage Purchase Contracts app and execute the search again.</li><li>The purchase contracts should now be displayed correctly without requiring manual entry of contract numbers.</li></ol>
+<ul></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Purchase Contracts, Outline agreements, Currency conversion, TCURR</p></div></div></div></div>

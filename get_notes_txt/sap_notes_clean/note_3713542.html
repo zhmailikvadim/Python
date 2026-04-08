@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><span style="font-size: 14px;">While closing a situation instance in My Situations-Extended application, a shortdump in class CL_SIT2_DCTX_CAPTURER, method PROCESS_INSTANCES may occur.<br/>This shortdump prevents closing the instance.</span></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Situation Handling - Extended framework ; My Situations - Extended</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Prerequisites :</strong></p>
+<p>1. You are using the extended framework of Situation Handling.</p>
+<p>2. You are using situation types where data context capturing is enabled.</p>
+<p><strong>Reason</strong> : The shortdump occures only if the situation type to which the situation instance belongs has been deleted before closing all instances. This leads to inconsistent</p>
+<p>type information at the time of capturing of the data context and this causes the shortdump.<br/><br/></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please apply the attached correction which adds a check to skip processing the situation type in such cases and thus, prevents the shortdump.</p></div></div></div></div>

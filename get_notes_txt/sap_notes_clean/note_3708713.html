@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>For processes instantiated from the templates:</p>
+<ul>
+<li><strong>MDC Template Main: Responsible to Authorized (Responsible View)</strong> (<code>DE_B_MDC_MAIN_SEND_RESP_TEMPLATE</code>)</li>
+<li><strong>MDC Template: Responsible to Authorized (Responsible View)</strong> (<code>DE_B_MDC_SEND_RESP_TEMPLATE</code>)</li>
+</ul>
+<p>When a <strong>BPEM Clarification Case</strong> occurs, the system creates a <strong>child process document</strong> in <strong>S/4</strong>. However, the corresponding <strong>main process document</strong> does <strong>not</strong> contain a link to this child document. The two are related only via the same <strong>Additional Business Object (ABO)</strong> and <strong>not</strong> through <strong>Linked Documents</strong>.</p>
+<p>Expected Behavior</p>
+<ul>
+<li>The main process document should list the newly created child process under <strong>Linked Documents</strong>, enabling direct navigation.</li>
+<li>
+<div>Add the common access reference of the cloud child process document in the 'Additional Header Data' section of the S4 main process document header.</div>
+</li>
+<li>The child process document should reference back to the main process (clear parent–child relationship).</li>
+</ul>
+<p>Actual Behavior</p>
+<ul>
+<li>The main and child processes share the same ABO, but <strong>Linked Documents are not generated</strong>, preventing navigation via document links.</li>
+</ul>
+<p>Impact</p>
+<ul>
+<li>Loss of end-to-end traceability.</li>
+<li>Users cannot efficiently navigate from the main to the child process; miss the parent–child relationship.</li>
+</ul>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Main process document, Child process document, Linked documents</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because the system lacks a implemented function to link the main and child process documents via Linked Documents.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div>
+<p>Apply the corrections from the relevant SAP Note or import the corresponding support package.</p>
+<p>Behavior After the Fix<br/>When a child process document is created in an MDC process, the system automatically links the main process document and the child process document via Linked Documents.</p>
+</div></div></div></div></div>

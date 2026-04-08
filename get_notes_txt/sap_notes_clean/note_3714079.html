@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3714080&amp;TargetLanguage=EN&amp;Component=FS-RI-AC&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3714080/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3714080/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>After you calculate a result-independent condition in a Risk Manager account with different original currencies and account currencies, the user changes entries that affect the change of the exchange rate. However, you expect the program to not update the amount in the original currency when you save the account.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>/MSG/H_FINA1</p>
+<p>/MSG/RBU-AB_BETR</p>
+<p>/MSG/RP_BCABRREC-DIFFBU</p>
+<p>COGS</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p><strong>Prerequisite: </strong> In the IMG activity "Edit Defaults for Accounting (Calculation Fields)", the indicator for posting the differences is activated.</p>
+<p><strong>Reason:</strong></p>
+<p>The program determines the differences between the actual amount and the target amount in the original currency and account currency of the condition posting. The exchange rate change influences the update of the amount in the settlement currency. The difference amount in original currency is zero. The program filters out condition postings with the difference amount equal to zero in the original currency.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p><strong>History:</strong></p>
+<p>February 10, 2026: Newly created</p>
+<p><strong>Troubleshooting Description:</strong></p>
+<p>The program filters out only those condition postings that have difference amounts equal to zero in original and account currencies.</p></div></div></div></div></div>

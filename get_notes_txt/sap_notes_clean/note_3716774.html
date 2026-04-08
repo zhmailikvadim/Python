@@ -1,0 +1,52 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>Transaction Amount and Transaction Currency, marked as sensitive, are still visible in Inbound and Outbound Payment Orders in the Manage Payments app.</p>
+</li><li>
+<p>Payment Items, though marked as sensitive, are displayed in the app.</p>
+</li><li>
+<p>Expected masking/hiding of sensitive fields (Transaction Amount, Transaction Currency) is not applied.</p>
+</li><li>
+<p>Issue occurs after loading the payment file in XML and viewing Inbound/Outbound POs.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA 2023</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Load a payment file in XML format.</p>
+</li><li>
+<p>Open the Manage Payments app.</p>
+</li><li>
+<p>View Inbound and Outbound Payment Orders.</p>
+</li><li>
+<p>Observe that for Outbound POs, Transaction Amount and Transaction Currency are visible.</p>
+</li></ol>
+<p>Expected Result:</p>
+<ul><li>
+<p>Transaction Amount and Transaction Currency should be masked/hidden as per sensitivity settings.</p>
+</li><li>
+<p>Payment Items marked as sensitive should also not be visible.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Sensitive fields (Transaction Amount, Transaction Currency, and Payment Items) are not being correctly masked in the Manage Payments app despite configuration, likely due to a missing or misapplied masking logic in the app’s display layer for Inbound and Outbound Payment Orders.</p>
+<p><img class="img-responsive" height="211" src="/documents/customerkba/vpFbkax-DZ7aWORDsYqrx7ZonkGCSemyFWqfSh70Fd8" width="423"/></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>
+<p>The visibility of Transaction Amount and Transaction Currency in the Manage Payments app is due to the user having full authorization for object <code>/PF1/DISP</code> with <code>/PF1/DATAT = *</code>.</p>
+</li><li>
+<p>To restrict and mask this sensitive data, the security team should remove or appropriately limit the <code>/PF1/DISP</code> authorization for the user.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3>Additional information:  <br/><a href="https://me.sap.com/notes/0003520725" rel="nofollow">SAP Note KB0897300 - Manage Payments - sensitive data fields not masked in payment item list view</a> <br/><a href="https://me.sap.com/notes/0003578454" rel="nofollow">SAP Note KB0958783 - Sensitive Payment details in plain text in change log of workflow item</a> <br/><a href="https://me.sap.com/notes/0003560499" rel="nofollow">KBA KB0938965 - Storage Access API enablement</a> <br/>Knowledge Article <a href="https://me.sap.com/notes/0003520725" rel="nofollow">SAP Note KB0897300 - Manage Payments - sensitive data fields not masked in payment item list view</a> <br/>Knowledge Article <a href="https://me.sap.com/notes/0003578454" rel="nofollow">SAP Note KB0958783 - Sensitive Payment details in plain text in change log of workflow item</a><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><ul><li>
+<p>Manage Payments</p>
+</li><li>
+<p>Payment Order (PO)</p>
+</li><li>
+<p>Inbound Payment</p>
+</li><li>
+<p>Outbound Payment</p>
+</li><li>
+<p>Sensitive Data</p>
+</li><li>
+<p>Transaction Amount</p>
+</li><li>
+<p>Transaction Currency</p>
+</li><li>
+<p>Payment Items</p>
+</li><li>
+<p>Masking / Data Masking</p>
+</li><li>
+<p>Authorization /PF1/DISP</p>
+</li><li>
+<p>Security / Access Control</p>
+</li><li>
+<p></p>
+</li></ul></div></div></div></div>

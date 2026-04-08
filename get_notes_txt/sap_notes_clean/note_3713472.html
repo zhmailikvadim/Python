@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In SAP Manufacturing Execution where increasing the database's decimal precision beyond six fractional digits (e.g., to 12 digits) causes a "Rounding Necessary" exception during data collection with formula parameters. Although high-precision values are successfully written to the database, attempts to read them back result in errors in POD.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP ME, DC500</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Steps to reproduce:</p>
+<p>1. Update the decimal precision to 12 digits for the DC-related tables.</p>
+<p>2. Create a Data Collection (DC) with two numeric parameters P10, P20 and one formula parameter P30.</p>
+<p>3. Configure parameter P30 with the following script:</p>
+<p>delta = P20 - P10;<br/>exit(delta.toPrecision(8));</p>
+<p>4. Release an SFC and collect data in any POD with the following values:<br/>P10 = 6.8E-12<br/>P20 = 5.8E-10</p>
+<p>5. Click the 'Save' button.</p>
+<p><strong>Actual Result</strong>: An internal error is thrown in the POD. In the default trace logs, the error RoundingNecessaryException is recorded.</p>
+<p><strong>Expected Result</strong>: The save operation completes successfully.</p>
+<p>6. Open the Data Collection Result report and retrieve the data collected for the SFC.</p>
+<p><strong>Actual Result</strong>: An internal error is thrown.</p>
+<p><strong>Expected Result</strong>: The report displays the collected values correctly.</p>
+<p>This behavior occurs because, after retrieving BigDecimal values from MS Server and the Hana database, the existing logic trims trailing zeros without considering that the value may be represented in scientific notation.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The solution is provided in the form of a code correction. The system will use the standard Java stripTrailingZeros() method of the BigDecimal class, which performs the same operation as the previously implemented logic and correctly handles scientific notation</p>
+<p><strong>Impact</strong></p>
+<p>The code change implemented to address the symptom may impact all HANA and SQL Server database  retrieval queries with Big Decimal columns.</p>
+<p><span style=" font-family: SourceSansPro, Helvetica, Arial, sans-serif; font-size: 14px; white-space-collapse: preserve; background-"> </span></p></div></div></div></div>

@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During execution of a task chain in SAP Datasphere, the following error message may appear:</p>
+<p><em>“This task job could not be executed due to a system outage or some part of the database system not being available at the time of the planned execution. Wait for the next scheduled job execution time or reschedule the job.”</em></p>
+<p>The task chain fails and is not executed as scheduled.</p>
+<p>This typically occurs temporarily and affects only certain scheduled runs.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Datasphere</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The failure is usually caused by a temporary service disruption, such as:</p>
+<ul><li>Deployment of waves or maintenance activities in SAP Datasphere.</li><li>Certain parts of the database system or underlying services being unavailable at the time of scheduled execution.</li></ul>
+<p><strong>Note:</strong> This is expected behavior during short-term system unavailability and does not indicate a persistent issue with the task chain configuration.</p>
+<p>Reference SAP release note <a href="https://me.sap.com/notes/0002984828" rel="noopener noreferrer nofollow" target="_blank">2984828</a></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Wait for the Next Scheduled Execution:</p>
+<ul><li>The task chain will automatically execute during its next scheduled run once the system is fully available.</li></ul>
+<p>Reschedule the Job (Optional):</p>
+<ul><li>If immediate execution is required, reschedule the job to a later time when the system is stable.</li></ul>
+<p>Monitor SAP Maintenance Notifications:</p>
+<ul><li>Review KBA <a href="https://me.sap.com/notes/0002882762" rel="noopener noreferrer nofollow" target="_blank">2882762</a> to understand maintenance activities that may affect Datasphere customers. This KBA is regularly updated with information about planned system waves and other events that can impact scheduled jobs.</li></ul>
+<p></p>
+<p>Temporary failures due to system outages are expected during maintenance or deployment waves - No changes to the task chain configuration are required.</p>
+<p>Administrators are encouraged to subscribe to SAP maintenance notifications to anticipate potential temporary disruptions.</p></div></div></div></div>

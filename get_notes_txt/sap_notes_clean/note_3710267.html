@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When creating or using a lead filter that includes multiple territories (for example Territory A, Territory B, and Territory C), the result list does not display the expected total number of leads.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Sales Cloud and SAP Service Cloud Version 2</li><li>SAP Sales Cloud Version 2 <br/><br/></li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><h3 data-toc-skip=""> </h3>
+<ol style="list-style-position: inside;"><li>Navigate to Menu → Leads.</li><li>Open the Advanced Filter.</li><li>In the Territory field, select:
+<ul style="list-style-position: inside;"><li>One parent territory (for example, <em>Territory A</em>)</li><li>Its sub-territories (for example, <em>Territory B</em> and <em>Territory C</em>)</li></ul>
+</li><li>Ensure that Include Sub-Territories is set to True.</li><li>Click Apply.
+<ul style="list-style-position: inside;"><li>Result: For example, 10 leads are displayed.</li></ul>
+</li><li>Reset the filter.</li><li>Search using only Territory B.
+<ul style="list-style-position: inside;"><li>Result: For example, 2 leads are displayed.</li></ul>
+</li><li>Reset the filter.</li><li>Search using only Territory C.
+<ul style="list-style-position: inside;"><li>Result: For example, 3 leads are displayed.</li></ul>
+</li><li>Reset the filter.</li><li>Search using only Territory A.
+<ul style="list-style-position: inside;"><li>Result: No leads are displayed, as no leads are directly assigned to the parent territory.</li></ul>
+</li></ol>
+<h3 data-toc-skip=""><strong><span style="font-size: 10pt;">Unexpected Behavior-</span></strong></h3>
+<p>Users may question why the combined filter returns 10 leads, while:</p>
+<ul style="list-style-position: inside;"><li>Territory B returns 2 leads</li><li>Territory C returns 3 leads</li><li>Territory A returns 0 leads</li></ul>
+<p>This creates the perception that 5 additional leads are appearing unexpectedly.</p>
+<p> </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This behavior is due to territory hierarchy evaluation.</p>
+<p>When Include Sub-Territories is set to TRUE:</p>
+<ul style="list-style-position: inside;"><li>The system evaluates the entire hierarchy of the selected parent territory.</li><li>Leads assigned to sub-territories are returned as part of the parent territory.</li><li>The filter does not perform a simple arithmetic summation of each selected territory.</li></ul>
+<p>As a result, the total number of leads returned may be higher than the visible sum of individually filtered territories.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This behavior is working as designed.</p>
+<p>To avoid confusion:</p>
+<ul><li>Mark "Include Sub-Territories" to FALSE when filtering multiple territories independently.</li><li>Review the territory hierarchy structure if independent lead aggregation is required.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Lead filter, Territory filter, Include Sub-Territories, Territory hierarchy, Parent territory, Sub-territory, Lead count mismatch, Incorrect lead count,</p></div></div></div></div>

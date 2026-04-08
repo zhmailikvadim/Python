@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The "FromDate" in the ODPV table for fixed asset is incorrect after canceling a Capitalization and posting it again with a different "Asset Value Date".</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>Fixed Assets solution is enabled from <em>Administration → System Initialization → Company Details → Basic Initialization → Enable Fixed Assets</em>, and <em>Calculate Depreciation By: Day </em>is selected.</li>
+</ul>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Go to <em><span class="ph menucascade"><span class="ph uicontrol">Administration →</span> <span class="ph uicontrol">Setup</span> → <span class="ph uicontrol">Financials</span> → <span class="ph uicontrol">Fixed Assets</span> → <span class="ph uicontrol">Depreciation Types</span></span></em><span class="ph menucascade"><span class="ph menucascade"><span class="ph uicontrol">, and define a Depreciation Type "X". In the <em>General</em> tab, select <em>PR Temporis Type:Exact Daily Base</em> for <em>Depreciation Convention - Acquisition.</em></span></span></span><span><br/></span></li>
+<li>Go to <em>Financials → Fixed Assets → Asset Master Data</em>, and add an asset FA001 with Depreciation Type "X" assigned.</li>
+<li>Go to <em>Main Menu </em><em>→ Financials → Fixed Assets → Capitalization</em>, and add a Capitalization for asset FA001 with <em>Asset Value Date</em> 01.01.2026.</li>
+<li><span>Go to </span><em>Tools<em> →</em> Queries → Query Generator</em><span>, and input table ODPV. The "Period Start Date" (</span><em>FromDate </em>field<em>)</em><span> for the first sub-period is 01.01.2026 for the asset.</span></li>
+<li>Cancel the Capitalization added in step 2.</li>
+<li>A<span>dd another Capitalization for asset FA001 with </span><em>Asset Value Date</em><span> 05.01.2026.</span></li>
+<li>Check the data in ODPV table again.</li>
+</ol>
+<p style="display: inline !important;"><strong>Actual Result:</strong></p>
+<p>The <span>"Period Start Date" (</span><em>FromDate </em><span>field</span><em>)</em><span> for the first sub-period</span><em> </em>is still 01.01.2026.</p>
+<p><strong>Expected Result:</strong></p>
+<p>The<span> "Period Start Date" (</span><em>FromDate </em><span>field</span><em>)</em><span> for the first sub-period </span>is 05.01.2026.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p></div></div></div></div>

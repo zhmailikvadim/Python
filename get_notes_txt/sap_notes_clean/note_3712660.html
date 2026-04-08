@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">The sum line of log in the transaction /SAPAPO/BOD_MAINT is not calculated by default.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Transaction /SAPAPO/BOD_MAINT</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The log messages will be displayed and calculated immediately if the component 'SHOW_ALL' is filled with 'X' in the display profile.</p>
+<p id="__html0">In note 3711082, function module 'BAL_DSP_PROFILE_DETLEVEL_GET' is replaced with 'BAL_DSP_PROFILE_SINGLE_LOG_GET'.</p>
+<p>However, this leads to log messages only being grouped by message problem class in overview.</p>
+<p>This note is to revert the changes in note 3711082 to get the log messages organized per BOD.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Replace function module 'BAL_DSP_PROFILE_SINGLE_LOG_GET' with 'BAL_DSP_PROFILE_DETLEVEL_GET'.</p>
+<p>Then fill the component 'SHOW_ALL' with 'X'.</p></div></div></div></div>

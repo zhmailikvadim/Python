@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><h4 data-toc-skip="" id="__html0">A key user attempts to use the Adapt UI functionality to embed a BTP custom application as a subsection content (e.g., in the <em>Manage Sourcing Projects</em> app, ID F4861).</h4>
+<ul><li>
+<p>When navigating to Advanced Settings, the Sandbox Parameters (such as allow-scripts, allow-same-origin, etc.) are missing or not visible.</p>
+</li><li>
+<p>The issue is environment-specific; these parameters are visible in one subaccount (e.g., Development) but missing in another (e.g., Test) despite the user having identical roles.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA 2023</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>
+<p>Framework Delta: Although both systems appear to be on the 1.120 branch, the version in the faulty environment (1.120.0) is a legacy build from October 2023.</p>
+</li><li>
+<p>Feature Availability: The capability to manage sandbox settings for iFrame-embedded content via UI Flexibility was introduced in later builds. The working environment (1.120.39) uses a 2025 cloud-aligned build that includes these backported advanced adaptation features.</p>
+</li><li>
+<p>ATO Status: In many cases, the affected environment also lacks a configured Adaptation Transport Organizer (ATO), which is required for full UI flexibility management.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<p>Upgrade SAPUI5: Update the SAPUI5 framework in the affected environment to match the working environment version (1.120.39) or higher.</p>
+<ul><li>
+<p><em>Note: SAP officially recommends SAPUI5 version 1.124 or higher for full support of these specific sandbox parameters.</em></p>
+</li></ul>
+</li><li>
+<p>Enable ATO: Ensure the Adaptation Transport Organizer is correctly set up in the target system using transaction <code>S_ATO_SETUP</code>.</p>
+</li><li>
+<p>Sync Cloud Update Cycles: Align the RISE Private Cloud update schedules to ensure feature parity across the Development, Test, and Production landscapes.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Adapt UI, Sandbox parameters, Advanced Settings, SAPUI5 1.120.0, F4861, Manage Sourcing Projects, UI Flexibility, SAP BTP Custom App, RISE Private Cloud, ATO missing, iFrame sandbox, Key User Adaptation, CA-UI5-FL-RTA</p></div></div></div></div>

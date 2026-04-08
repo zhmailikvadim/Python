@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When working with a production order, a short dump (MESSAGE_TYPE_X) occurs during the component replacement process in transaction /SPDGS/PDAON.<br/>After selecting a replacement option, the application terminates with a runtime error if the order is locked.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">IS-MFM, CORE, PDA, / SPDGS / PDAON, CO02, component replacement, order lock, runtime error, MESSAGE_TYPE_X, exception handling, SAP Meat and Fish Management by msg.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The component replacement logic does not properly evaluate or handle the enqueue (lock) status of the production order before executing follow‑up processes.<br/>If the order is locked at the time of the replacement call, an unhandled exception is raised, resulting in a short dump.<br/>The issue can be reproduced only when the production order is locked.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>History:</strong><br/>SAP Note created on 11 February 2026.</p>
+<p><strong>Description of Correction:</strong><br/>The logic executed during component replacement in /SPDGS/PDAON is enhanced to ensure stable behavior when a production order is locked:</p>
+<p>Lock check is performed before the replacement dialog is opened or a replacement variant is processed.<br/>When a lock is detected, the system now issues a controlled, user‑friendly message instead of triggering a short dump.<br/>Exception handling is added around the relevant replacement‑processing routines to prevent MESSAGE_TYPE_X runtime errors.</p>
+<p>This ensures that a locked production order no longer causes a termination during component replacement.</p>
+<p><strong>Functional Dependencies:</strong><br/>None.</p>
+<p><strong>Manual Changes:</strong><br/>No manual changes are required for end users.</p></div></div></div></div>

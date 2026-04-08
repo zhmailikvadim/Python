@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You use multiple valuations that are not taken into account in overhead costing. As a result, some postings of periodic overhead documents may be  canceled when multiple valuation was posted in original cost documents.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Overhead, KZPI, KZPP, KPPS, KPPZ, multiple valuations, VERSN, version, KSP4, KSI4, CPZP, CPZI, KGP2, KGP4, KGO2, KGO4, KGI2, KGI4, CJ46, CJ47, CJ44, CJ45, CO43, KGI2, VA44, CK11N</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>New logic for multiple valuations has been delivered in past, but must be activated explicitly.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Important: First test the functionality in a test environment before you use it productively. Also, perform the manual pre-implementation steps before you implement the SAP Note. Please read the SAP Note description carefully.</strong></p>
+<p><span style="text-decoration: underline;"><strong>1. Activation of the new functionality</strong></span></p>
+<p>To activate the function, call transaction FIN_FLAGS, enter the value X for the parameter KASC_PARA_VALUATION, and save your entry. As a result, multiple valuations are now taken into account for overheads. When you can't enter value 'X' (only numeric values are allowed), please import SAP Note <a href="/notes/3726063" target="_blank">3726063</a> to fix it.</p>
+<p><span style="text-decoration: underline;">Important</span>: You can deactivate the new function for multiple valuations for overheads again by deleting the value X in the parameter KASC_PARA_VALUATION. No overheads are changed; all overheads that have already been posted remain. We therefore recommend that you reverse all of the overheads before deactivating the functionality.</p>
+<p><strong><span style="text-decoration: underline;">2. Important notes on using this new functionality:</span></strong></p>
+<ul>
+<li>
+<p>Due to the multiple valuations, the entire overhead costing is reversed for each object and period before new overheads are calculated. This is only the case in the posting run. In the test run, the overheads are only calculated and all debits to be posted are displayed in the detail list.</p>
+</li>
+<li>
+<p>To enable the valuation to be influenced in the costing sheet, the standard dependency D070 (overhead type/version) is available for the overhead rate. You can also enter the attribute 'Version' in your own dependencies.</p>
+</li>
+<li>
+<p>The user exit EXIT_SAPLKASC_001 can be used to edit the basis. It receives the new parameter T_COSSA_REF, which contains the total costs determined in all valuations.</p>
+</li>
+<li>
+<p>The user exits EXIT_SAPLKASC_002 and EXIT_SAPLKASC_003 are called separately for each view (as for each overhead rate or credit already).</p>
+</li>
+<li>Cumulated overheads are not supported.</li>
+</ul></div></div></div></div>

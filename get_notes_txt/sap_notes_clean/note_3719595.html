@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<ul><li>SAP Analytics Cloud (SAC) Content models fail to load.</li><li>In the browser console, the following error appears:<br/>"42014", "BACKEND_ERROR", "Can't read the view : _SYS_BIC:t.UKHNW8.sap.fpa.services.userFriendlyPerfLog/MODEL_NAME\u000a" </li></ul>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><section>
+<section id="u_environment">
+<ul><li>SAP Analytics Cloud 2026.2.3</li></ul>
+</section>
+</section><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<div>Log in to the SAC tenant.</div>
+</li><li>
+<div>In the left navigation panel, go to Files.</div>
+</li><li>Navigate to:<br/>System → Common → SAC Content → SAC Content Overview – Models<br/>or<br/>System → Common → SAC Content → SAC Content Performance – Models.</li><li>
+<div>Open any SAC Content model, for example: RESOURCE.</div>
+</li><li>
+<div>Observe:
+<ul><li>The screen remains blank.</li><li>A backend error appears in Network/Console.</li></ul>
+</div>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>SAC Content models are tenant‑specific and not meant to be transported between tenants.<br/>In this case, models were imported from another environment, causing corrupted SAC Content artifacts.</p>
+<h3 data-toc-skip="">How to verify the issue:</h3>
+<ol><li>Navigate to<br/>System → Common → SAC Content → SAC Content Overview – Models<br/>or<br/>System → Common → SAC Content → SAC Content Performance – Models.</li><li>Check the Changed By column:
+<ul><li>If it is not empty, the model was altered or imported, which should not occur for SAC Content models.</li></ul>
+</li><li>In Transport → Monitor, confirm that these models were included in an imported package.</li></ol>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>To restore the SAC Content models correctly:</p>
+<ol><li>Delete all affected models and any dependent SAC Content stories (standard or custom).
+<ul><li>Ensure this is done before the next full system update.</li><li>Refer to the <a href="https://www.sap.com/about/agreements/cloud-services.html?search=Service%20Level%20Agreement&amp;amp;sort=latest_asc#pdf-asset=a66a878f-237d-0010-87a3-c30de2ffd8ff&amp;amp;page=3" rel="noopener noreferrer nofollow" target="_blank">SAC maintenance documentation</a> for update schedules.</li></ul>
+</li><li>Remove the standard SAC Content stories based on the affected models from Deleted Files.
+<ul><li>Important: Standard content must be permanently removed from Deleted Files so the update can redeploy them.</li></ul>
+</li><li>After the next full system update:
+<ul><li>SAC Content models and standard stories will redeploy correctly.</li></ul>
+</li><li>Once the standard content is restored, re‑import or restore your custom stories (if still exist in Deleted Files).</li></ol>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: <a href="https://me.sap.com/notes/3544340" rel="noopener noreferrer nofollow" target="_blank">3544340 - System Overview Story keeps on loading after 2024 QRC 4 update</a></li><li>Refer to: <a href="https://me.sap.com/notes/3598082" rel="noopener noreferrer nofollow" target="_blank">3598082 - Unable to view SAC content in SAP Analytics Cloud (SAC)</a></li></ul>
+<ul><li>KBA <a href="https://me.sap.com/notes/2569847" rel="noopener noreferrer nofollow" target="_blank">2569847</a> - Where can you find SAC user assistance (help) to use, configure, and operate it more effectively?</li><li>KBA <a href="https://me.sap.com/notes/2487011" rel="noopener noreferrer nofollow" target="_blank">2487011</a> - What information do I need to provide when opening a case for SAP Analytics Cloud?</li><li>KBA <a href="https://me.sap.com/notes/2511489" rel="noopener noreferrer nofollow" target="_blank">2511489</a> - Troubleshooting performance issues in SAP Analytics Cloud
+<ul></ul>
+</li><li><a href="https://help.sap.com/viewer/2d7115b0e0aa4f78bfd9c06fdc1fe4f6/latest/en-US" rel="noopener noreferrer nofollow" target="_blank">SAP Analytics Cloud Connection Guide</a></li><li><a href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/837228942b504eeeb75efee930727914.html" rel="noopener noreferrer nofollow" target="_blank">SAP Analytics Cloud Get More Help and SAP Support</a></li><li>Need More Help? <a href="https://support.sap.com/en/contact-us.html" rel="noopener noreferrer nofollow" target="_blank">Contact Support</a> </li></ul>
+<p>Your feedback is important to help us improve our knowledge base.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>system overview, SAC tenant, KPIs not displaying, exception 42208, _SYS_BIC view error, resource model, blank screen, SAC content folder, backend error, analytics cloud administration, troubleshooting SAC</p></div></div></div></div>

@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">To address the security issue <a href="https://nvd.nist.gov/vuln/detail/CVE-2025-66516" rel="noopener noreferrer nofollow" target="_blank">CVE-2025-66516</a> with a low version of tika libraries (&lt;3.2.1).</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>sap commerce cloud + all solr version</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>In this case manual step will be required for customers, but <em>only</em> if customer already:</p>
+<ul><li>enabled <em>langid</em> module in solr.xml (language detection module is not enabled by default) - <a href="https://solr.apache.org/guide/solr/latest/indexing-guide/language-detection.html" rel="noopener noreferrer nofollow" target="_blank">https://solr.apache.org/guide/solr/latest/indexing-guide/language-detection.html</a></li><li>enabled <em>TikaLanguageIdentifierUpdateProcessorFactory</em> in solrconfig.xml (by default solrconfig.xml does not contain this configuration) - <a href="https://solr.apache.org/guide/solr/latest/indexing-guide/language-detection.html#configuring-tika-language-detection" rel="noopener noreferrer nofollow" target="_blank">https://solr.apache.org/guide/solr/latest/indexing-guide/language-detection.html#configuring-tika-language-detection</a></li></ul>
+<p>If above conditions are met, 1 line in solrconfig.xml will need to be changed</p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable" style="width: auto;"><tbody><tr><th>Before</th><th>After</th></tr><tr><td>
+<div>
+<div>
+<pre>&lt;processor class="org.apache.solr.update.processor.LangDetectLanguageIdentifierUpdateProcessorFactory"&gt;
+  ...
+&lt;/processor&gt;</pre>
+</div>
+</div>
+</td><td>
+<div>
+<div>
+<pre>&lt;processor class="de.hybris.platform.solr.update.processor.SAPTikaLanguageIdentifierUpdateProcessorFactory"&gt; ... &lt;/processor&gt;</pre>
+<p></p>
+</div>
+</div>
+</td></tr></tbody></table></div>
+<p>If you do not have any such configuration in solrconfig.xml, you can ignore the changes.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>solr, tika, <a href="https://nvd.nist.gov/vuln/detail/CVE-2025-66516" rel="noopener noreferrer nofollow" target="_blank">CVE-2025-66516</a></p></div></div></div></div>

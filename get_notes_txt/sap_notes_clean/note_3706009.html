@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Purge Key Figure Data application job is scheduled with check box Delete Planning Objects selected, but planning object is not deleted.</li><li>Job log displays following warning messages:<br/><em>Warning Deletion of planning objects may not be possible.</em><br/><em>Warning To delete planning objects, add the following versions: &lt;VersionID_1&gt;, &lt;VersionID_2&gt;</em></li><li>When the "Preview" option is selected during a simulation run of the purge job, qualified planning objects are not listed.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Integrated Business Planning (SCM-IBP)</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Go to Application Job app, click on + to schedule a new job and select 'Purge Key Figure Data' template.</p>
+</li><li>
+<p>Enter parameters such as Planning Area, Version, Base Planning Level.</p>
+</li><li>
+<p>Select either Older Than (Period Offset) or Later Than (Period Offset).</p>
+</li><li>
+<p>Enter value for the parameter Period Offset.</p>
+</li><li>
+<p>You may or may not select Planning Filter.</p>
+</li><li>
+<p>Select check box Delete Planning Objects.</p>
+</li><li>
+<p>Simulate or Run the job.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Planning objects may be used in several versions at the same time. Unless a version has version-specific master data, it typically shares the planning objects with the base version. One or more versions that use the same planning objects are missing in the selection. Therefore, deleting the planning objects may not be possible.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>While scheduling the purge key figure data job, if the selected base planning level has key figures which are selected in user‑defined versions which are not version‑specific, make sure to include all those versions and the _BASELINE when scheduling the job.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>KBA <a href="https://me.sap.com/notes/2900809" rel="noopener noreferrer nofollow" target="_blank">2900809</a> - Purge Key Figure Data job is not deleting planning object</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>invalid planning objects, master data, purge jobs, simulation mode, IBP, planning objects, deletion issue, planning area, versions missing, version-specific master data, simulation, preview</p></div></div></div></div>

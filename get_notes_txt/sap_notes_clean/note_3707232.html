@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The Accrual Object field is not available in journal entry postings.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4 HANA</li><li>SAP S/4 HANA FINANCE</li><li>Financial accounting (FI)</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Try to post accrual and notice that accrual object is not updated in ACDOCA.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The Accrual Object field can be made available in posting screens by configuring it as optional or mandatory in the field status of the corresponding G/L account. </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<div>
+<p>When entering a journal entry, the field status of each field (including the Accrual Object) is determined by the combination of: </p>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>The Field Status Group maintained in the G/L Account Master Record (Transaction FS00) </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>The Field Status defined in the Posting Key Configuration (Transaction OB41) </p>
+</li></ul>
+<p>Hence in the settings 'Accrual object' shall be made available:</p>
+</div>
+<p>This configuration is performed in Transaction OB14 and OB41, under the section “Additional Account Assignments.” </p>
+</div>
+<div>
+<p>Transaction OB14 requires specifying the Field Status Variant, which is defined in the company code master data (Customizing view V_001_B – “Enter Global Parameters”). </p>
+<div> </div>
+<div> </div>
+<div> </div>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>OB14, OB41, Field status, field status variant, accrual object, ACDOCA, accrual</p></div></div></div></div>

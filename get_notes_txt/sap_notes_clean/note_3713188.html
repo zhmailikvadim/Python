@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>A Service Entry Sheet (SES) is created in Ariba and successfully interfaced to S/4HANA Cloud.</p>
+</li><li>
+<p>The SES is approved in S/4HANA, but no status update (Approved/Rejected) is sent back to Ariba.</p>
+</li><li>
+<p>No outbound messages or errors are visible in Message Monitoring or SRT_MONI for the status update.</p>
+</li><li>
+<p>The customer is unable to proceed with invoicing in Ariba because the SES remains in "Sent" or "Awaiting Approval" status.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Create a Service Purchase Order in SAP S/4HANA Public Cloud.</li><li>Generate a Service Entry Sheet (SES) for the Service Purchase Order in Ariba.</li><li>Approve the SES in SAP S/4HANA Public Cloud.</li><li>Verify that the receipt request generated from SAP S/4HANA Public Cloud reflects correctly in Ariba.</li><li>Observe that the SES status in Ariba does not update to "Approved."</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The S/4HANA outbound framework uses the <code>SenderBusinessSystemID</code> from the inbound SES request to determine the target for the status update. If the Business System ID maintained in the Communication System does not exactly match the ID sent by Ariba/CIG, the system cannot identify a valid recipient, and the outbound trigger fails silently.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<p>Check the inbound payload for the SES in Message Monitoring app of S/4HANA (Communication Arrangement <code>SAP_COM_0237</code>, Inbound Service <code>ServiceEntrySheetRequest_In</code>).</p>
+</li><li>
+<p>Identify the value in the tag <code>&lt;SenderBusinessSystemID&gt;</code>.</p>
+</li><li>
+<p>Go to the Communication Systems app and open the system associated with <code>SAP_COM_0237</code></p>
+</li><li>
+<p>Compare the Business System ID field with the value from the payload.</p>
+</li></ol>
+<p>Ensure consistency between the Ariba Network/CIG configuration and the S/4HANA Communication System:</p>
+<ol><li>
+<p>Option A (Recommended): Update the Business System ID in the S/4HANA Communication Systems app to match the ID being sent in the XML payload.</p>
+</li><li>
+<p>Option B: Adjust the Sender/Receiver transformation in SAP Integration Suite, managed gateway (CIG) to ensure the Business System ID sent to S/4HANA matches the existing configuration in the S/4HANA system.</p>
+</li></ol>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>ses status synchronization, sap s/4hana public cloud, ariba, service po, ses approval status, sy/530 error, cx_sy_no_handler, cx_sy_ref_is_initial, ses not updated, sap ariba integration, service entry sheet</p></div></div></div></div>

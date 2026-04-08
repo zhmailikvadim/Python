@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>The TS Approval is paused and next step is "Buyer needs to restart approval"</li><li>There is the following error on the approval level: </li></ul>
+<p>Time Sheet is paused. One of the following conditions is true:<br/>1. Approvers have no approve/reject permission for the roles defined in the approval group Time Sheet Approval<br/>2. There is no approver with enough signature authority to approve this Time Sheet<br/>3. There are no approvers assigned to the user role<br/><br/>Please have your System Administrator do the necessary changes and then restart this approval.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div id="copilot-message-rf0">
+<div>
+<div>
+<div>
+<div>
+<div>
+<div id="chatMessageResponsereu">
+<div aria-hidden="false">
+<div>
+<p>Scenario 1: The approval paused because the workflow attempted to route to the SAP Fieldglass Administrator, which is only used for troubleshooting and cannot approve transactions. This occurs when the Administrator role is used but no other active user holds that role, or when an Approval Chaining workflow cannot find anyone in the chain with sufficient signature authority. As the system escalates through supervisors, it eventually reaches a supervisor whose listed Supervisor is the SAP Fieldglass Administrator, causing the approval to pause. </p>
+<p>Scenario 2: The role set on the Approval Group Level is pointing to the SAP Fieldglass Administrator. As an example: Approval Level is set to Work Order Owner, and the WO Owner is SAP Fieldglass Administrator.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div> </div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<div>
+<p>Scenario 1: Assign an appropriate user to the Administrator role or give a user in the approval chain sufficient signature authority to approve the work order, then restart the approval.</p>
+<p>Scenario 2: Revise Work Order, changing its owner to a valid user, then open affected Time Sheet and click on Restart Approval.</p>
+</div>
+</div>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://help.sap.com/docs/SAP_Fieldglass/ffa619f0fca0497986e7331d046d07f2/87d003c4518f4add991fdad96dcbb102.html" rel="noopener noreferrer nofollow" target="_blank">Time Sheet Statuses</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Approval, Approval Paused, Buyer Needs to Restart Approval, cannot restart, time sheet</p></div></div></div></div>

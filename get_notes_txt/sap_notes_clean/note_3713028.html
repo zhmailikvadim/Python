@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">In the process "New Installation for Feed-In (SUP View)" (DE_B_MPES_NIN_SUP), step 1000-0080 encountered an error during MOS determination, even though MOS data was sent by the DSO.</p>
+<p id="__html0">This issue is relevant for the market role: SUP.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">MPES, New Installation, DE_B_MPES_NIN_SUP, /US4G/RP_TRIGGER_GPKE_NIN, MOS determination, table /US4G/DEF_SP, BADI li_badi_susc_process, get_supply_scenario_partners, IS_UBD_POD_DATA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because table /US4G/DEF_SP was not maintained when no explicit MOS was provided, or BADI li_badi_susc_process -&gt; get_supply_scenario_partners was not enhanced to retrieve the MOS data sent by the DSO.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, you can implement your own solution by using the optional importing parameter IS_UBD_POD_DATA. You need to enhance the BADI to determine the MOS sent by the DSO. You can verify the fix by triggering the process using the trigger report /US4G/RP_TRIGGER_GPKE_NIN and checking that step 1000-0080 is processed successfully.</p></div></div></div></div>

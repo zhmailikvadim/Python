@@ -1,0 +1,109 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When transitioning data mapping definitions in <strong>SAP Group Reporting Data Collection (GRDC)</strong> to newer OData services, users may encounter validation errors. Legacy mapping files based on older templates may contain field names that have either been renamed or deprecated in the enhanced API structures.</p>
+<p>When uploading an outdated mapping file, one of the following error messages is displayed:</p>
+<ul>
+<li><strong>For Input Columns:</strong> <em>"Column <code>&lt;column_name&gt;</code> is used in the mapping file as an input column but doesn't exist in the source table."</em></li>
+<li><strong>For Output Columns:</strong> <em>"Column <code>&lt;column_name&gt;</code> is used in the mapping file as an output column but doesn't exist or isn't writable in the ACDOCU table."</em></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>S/4HANA Finance, SAP S/4HANA Cloud, Data Mapping Templates, Field Mapping Gap, API Versioning, API Deprecation, OData Services, Transformation Rules, Technical Name Changes, Field Migration</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">To ensure a successful migration of data mapping definitions to the enhanced OData services, customers must manually adjust their mapping files and source filters to align with the updated data structures. While the enhanced APIs provide a more comprehensive set of financial attributes, certain legacy fields have been deprecated, while others have undergone technical name changes to comply with the latest S/4HANA Finance data model.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Proceed as follows to update your GRDC ACDOCA and ACDOCU data mapping files.</p>
+<p><strong>1. ACDOCA: From API_JOURNALENTRYITEMBASIC_SRV to API_GLACCOUNTLINEITEM</strong></p>
+<p>When updating your ACDOCA data mappings, please apply the following changes:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p><strong>Legacy API</strong></p>
+<strong>API_JOURNALENTRYITEMBASIC_SRV</strong></td>
+<td>
+<p><strong>Enhanced API</strong></p>
+<strong>API_GLACCOUNTLINEITEM</strong></td>
+<td><strong>Action</strong></td>
+</tr>
+<tr>
+<td>ControllingDebitCreditCode</td>
+<td>DebitCreditCode</td>
+<td>Rename</td>
+</tr>
+<tr>
+<td>FiscalYear</td>
+<td>LedgerFiscalYear</td>
+<td>Rename</td>
+</tr>
+<tr>
+<td>Project</td>
+<td>N/A</td>
+<td>Remove</td>
+</tr>
+<tr>
+<td>ConsolidationLedger</td>
+<td>N/A</td>
+<td>Remove</td>
+</tr>
+<tr>
+<td>WBSElement</td>
+<td>N/A</td>
+<td>Remove</td>
+</tr>
+<tr>
+<td>PartnerWBSElement</td>
+<td>N/A</td>
+<td>Remove</td>
+</tr>
+<tr>
+<td>MaterialGroup</td>
+<td>N/A</td>
+<td>Remove</td>
+</tr>
+<tr>
+<td>SoldMaterial</td>
+<td>N/A</td>
+<td>Remove</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>2. ACDOCU: From API_GRTRANSACTIONDATA_SRV to API_CNSLDTNGRPJRNLITEM</strong></p>
+<p class="MsoNormal">When updating your ACDOCU data mappings, please apply the following changes:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p><strong>Legacy API</strong></p>
+<strong> API_GRTRANSACTIONDATA_SRV</strong></td>
+<td>
+<p><strong>Enhanced API</strong></p>
+<strong>API_CNSLDTNGRPJRNLITEM</strong></td>
+<td><strong>Action</strong></td>
+</tr>
+<tr>
+<td>QuantityInBaseUnit</td>
+<td>CnsldtnQuantityInBaseUnit</td>
+<td>Rename</td>
+</tr>
+<tr>
+<td>WBSElementExternalID</td>
+<td>WBSElement</td>
+<td>Rename</td>
+</tr>
+<tr>
+<td>ConsolidationLedger</td>
+<td>N/A</td>
+<td>Remove</td>
+</tr>
+<tr>
+<td>ConsolidationPostingItem</td>
+<td>N/A</td>
+<td>Remove</td>
+</tr>
+<tr>
+<td>WBSDescription</td>
+<td>WBSElementDescription</td>
+<td>Rename</td>
+</tr>
+</tbody>
+</table></div>
+<p class="MsoNormal">Once you have adjusted the field names and removed the deprecated fields as outlined above, you must update your mapping definitions in the GRDC Data Mapping application.</p></div></div></div></div>

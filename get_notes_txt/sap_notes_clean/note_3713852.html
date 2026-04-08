@@ -1,0 +1,54 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The Sales Employee in the App "Manage Documented Credit Decision" is displaying "SAP Workflow Runtime".<br/><br/></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue occurs under specific conditions when changes to the sales order prompt a credit approval process.</p>
+<ol><li>At the point of the sales order creation by a business user, the credit check is successful. However, when changes are applied to the sales order (e.g., an amount increase from 0 to 180,000.00), this may trigger an approval workflow.</li><li>During this approval process, the Workflow Runtime User (SAP_WFRT) performs a credit check due to the change, leading to a failed credit check.</li><li>As a result of the failed credit check, the DCD is created under the Workflow Runtime User, which becomes the recorded user in the "Sales Employee" field since this is the user actively processing the sales order during the DCD creation.</li></ol>
+<p>Other blocked sales orders may not exhibit this behavior if the initial creation by the business user already led to a failed credit check. In such cases, the user displayed is the actual individual who created or updated the sales order. </p>
+<div id="__xmlview0--dynamicPageId-contentWrapper">
+<div id="__xmlview0--dynamicPageId-content">
+<div id="__xmlview0--dynamicPageId-contentFitContainer">
+<div id="__vbox15">
+<div id="chatContent">
+<div id="Chats">
+<div id="__vbox14-Chats-19">
+<div id="__data218">
+<div id="__bubble1-Chats-19">
+<div id="__bubble1-Chats-19--ChatContainer">
+<div id="__bubble1-Chats-19--ChatBox">
+<div id="__vbox55">
+<div id="__vbox54-__vbox55-0">
+<div id="__data220">
+<div id="__formatter21-__vbox55-0">
+<p>However, for orders where a subsequent change triggers an approval process, the Workflow Runtime User will be observed in those fields.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="__vbox13-Chats-19"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer id="__xmlview0--dynamicPageId-footerWrapper">
+<div id="__toolbar3">
+<div id="__xmlview0--promptTextArea">
+<div id="__box4">
+<div id="__box1">
+<div id="__data224">
+<div id="__area11">
+<div id="__area11-content">
+<div id="__area11-hidden"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This behavior is by design and the app "Manage Documented Credit Decision" accurately reflects the user that triggered the DCD creation. No corrective actions are required for the observed behavior as it aligns with standard system functionality.</p>
+<p>To avoid seeing the Workflow Runtime User under specific scenarios, check and prevent the automated approval workflows from executing under the Workflow Runtime User or ensure that the sales order credit check can handle changes without triggering approvals unnecessarily.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Manage Documented Credit Decision, Sales Order, SAP Workflow Runtime, Sales Employee, Changed by</p></div></div></div></div>

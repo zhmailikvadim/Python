@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>
+<p class="mb-2 last:mb-0">Following error occurs when refreshing Web Intelligence report based on SAP Datasphere Analytic Model with restricted key hidden calculation measures : "Database System returned state 'DATA_ACCESS_PROBLEMS'. Message = The used variable is not input enabled"</p>
+</li>
+<li>The message indicates that certain variables (e.g., date-related or input-specific variables) are not input-enabled, causing their provided values to be overwritten by default values. Additionally, some base measures or dimension attributes (e.g., inventory-related metrics) cannot be found, and certain custom members (e.g., formula-based calculations) reference non-existent members in dimensions.</li>
+<li>
+<p class="mb-2 last:mb-0">This error specifically arises when the "<strong>Is Auxiliary</strong>" option is enabled at the backend level in the data platform for restricted key hidden calculation measures.</p>
+</li>
+<li>Conversely, if the "<strong>Is Auxiliary</strong>" option is disabled, the report refreshes successfully without issues.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>webi, webintelligence, BICS, DWC, calculated, RKF, refresh, prompt, input, variable,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment : </strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence platform 4.3 Support Package 04 Patch 15</li>
+<li>Web Intelligence</li>
+</ul>
+<p><strong> Steps To Reproduce :</strong></p>
+<ol>
+<li>Logon to BI Launchpad</li>
+<li>Open Web Intelligence report based on SAP Datasphere Analytic Model containing restricted key hidden calculation measures with "<strong>Is Auxiliary</strong>" setting enabled</li>
+<li>Refresh the report</li>
+<li>In Prompts window, enter the required values and click Run</li>
+<ol style="list-style-type: none;">
+<li>&gt;&gt; Error occurs</li>
+</ol></ol>
+<p><strong>Cause</strong> :</p>
+<ul>
+<li>This issue is caused by a defect in the product.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This issue is fixed in the patches listed in the "Support Packages &amp; Patches" section below.<br/>Due to different internal processes, the "Support Packages &amp; Patches" section of the SAP Note will be populated as below:</p>
+<ul>
+<li>for fixes delivered in "Support Packages": immediately (even if the "Support Package" is planned to be released several months later)</li>
+<li>for fixes delivered in "Patches": <strong>ONLY </strong>once the "Patch" is released <strong>AND </strong>available on SMP (not before)</li>
+</ul>
+<p>For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article <a href="/notes/2144559" target="_blank">2144559</a> in References section.</p></div></div></div></div>

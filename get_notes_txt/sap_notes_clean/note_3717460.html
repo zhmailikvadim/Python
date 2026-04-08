@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">After initial sync, register the device for Digital signature. After entering the passphrase move to the next screen, where it generates a secret key.</p>
+<p>Secret key is not presented on the screen. Client is stuck with a loading indicator going on forever.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<ul id="__html28">
+<li>SAP Service and Asset Manager</li>
+<li>SAM</li>
+<li>SSAM</li>
+<li>ICMTANGOAMF10-42824</li>
+<li>Digital signature</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p><em>The page's OnLoaded rule retrieves the secret key faster than the related field is displayed on the page.</em></p>
+<p><strong>Prerequisites</strong>:</p>
+<ul>
+<li> BAS or Visual Studio Code with SAM MDK project</li>
+<li>`patch` command (available on BAS and macOS by default) via terminal or other patching utility</li>
+<li>Read the <a class="external-link" href="https://community.sap.com/t5/enterprise-resource-planning-blogs-by-sap/how-to-apply-metadata-patch-in-sap-service-and-asset-manager/ba-p/13801041" rel="nofollow" target="_blank">guidelines</a> on how to apply the patch and read the appendix section if you receive any error</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To remove the OnLoaded rule and instead use the field's Value property, retrieving the secret key after the control has loaded.</p>
+<p>To apply the patch, download the attached 3717460.patch file and save it in a known location, preferably adjacent to your SAM.mdkproject.</p>
+<p>If you are on Windows, see SAP Note <a class="external-link" href="/notes/3533879" rel="nofollow" target="_blank">3533879</a> for how to install a .patch file in Windows. If you are on a Mac, follow the steps below:</p>
+<ol>
+<li>Open a terminal in the root of your SAM metadata (i.e. SAM.mdkproject/metadata or SAM.mdkproject/metadata/base.definitions)</li>
+<li>Run the terminal command `<em><em>patch --remove-empty-files -p4 </em></em><em>&lt; path/to/3717460</em><em>.patch</em>`. </li>
+<li>Verify in the terminal window that the following files have been modified and listed as patched, as indicated by the console output:</li>
+</ol>
+<ul>
+<ul>
+<li><span style="font-size: 14px;">patching file 'Actions/OData/DigitalSignature/CreateTOTPDevice.action'</span></li>
+<li>patching file 'Pages/DigitalSignature/PasscodeTOTP.page'</li>
+<li>patching file 'Rules/DigitalSignature/CreateSignatureSuccess.js'</li>
+<li>patching file 'Rules/DigitalSignature/GetTOTP.js'</li>
+<li>patching file 'Rules/DigitalSignature/GetTOTPOnloaded.js'</li>
+<li>patching file 'Rules/DigitalSignature/TOTPDefaultDeviceReadLink.js'</li>
+</ul>
+</ul></div></div></div></div>

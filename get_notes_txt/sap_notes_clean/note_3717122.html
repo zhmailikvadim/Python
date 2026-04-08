@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Is it possible to use the 'AND' and 'OR' condition in rules in a custom task template? </li><li>When adding an AND or OR type in the condition, an error occurs and it's not possible to save the template.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Onboarding</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Defect:</p>
+<ul><li>In theory, these complex conditions are supported, however, the schema validation in the editor will not allow you to enter such criteria.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>WORKAROUND: </strong>No known workaround at this time.</p>
+<p><strong>PERMANENT FIX: ECT-267816</strong></p>
+<ul><li>The Engineering Team has introduced a code-fix to update the schema so this type of of complex condition can be used in the custom task editor.</li><li>The code correction is scheduled to be deployed in the next production release on 1H2026 (May 15, 2026).</li><li><strong>NOTE: Roadmap disclaimer applies</strong>. Kindly follow this KBA for any changes. Click the 'star' button to mark it as favorites and get notified for changes.</li></ul>
+<p>Once the fix has been applied, use the below sample format shared by the Engineering Team:</p>
+<div>{</div>
+<div>"type": "AND", # options: "AND" | "OR"</div>
+<div>"conditions": [</div>
+<div>{</div>
+<div>"type": "LEAF",</div>
+<div>"expectedValue": 20,</div>
+<div>"scope": "#/properties/age"</div>
+<div>},</div>
+<div>{</div>
+<div>"type": "LEAF",</div>
+<div>"expectedValue": "John",</div>
+<div>"scope": "#/properties/name"</div>
+<div>}</div>
+<div>]</div>
+<div>}</div>
+<p> </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>ECT-267816, Custom Task, Custom Task rule, Condition, NHA, JSONForm, Schema, custom task template editor, New Hire Tasks, Onboarding Tasks, Onboarding, Tasks, OBX</p></div></div></div></div>

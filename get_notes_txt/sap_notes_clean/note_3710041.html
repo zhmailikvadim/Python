@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When running report /APEU/RP_MCM_MIGRATION_POST for multiple MCM instances, migration runtime increases significantly due to huge volume data in related actor internal table.</p>
+<p>For large data volumes, testing and productive migration may not be feasible.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>APEU, /APEU/RP_MCM_MIGRATION_POST, Actor Data, UCOM</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">APEU, 2508<br/><br/>The internal table used to collect actor data is not cleared per instance, leading to growing data volume and increased runtime.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please implement the attached the correction instruction.</p>
+<p>The <strong>lt_ucom_actors</strong> internal table is cleared after processing actor data for each MCM instance.<br/><br/>This prevents data accumulation across instances and restores stable migration runtime.</p></div></div></div></div>

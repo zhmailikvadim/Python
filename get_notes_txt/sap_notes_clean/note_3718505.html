@@ -1,0 +1,66 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When attempting to cancel a goods movement document in an Advance Intercompany Stock Transfer scenario, the cancellation fails because the posting date used for the cancellation corresponds to the posting date of the original material document rather than the current date. If the posting date of the original document falls within a closed period, one of the following error messages is issued:</p>
+<ul>
+<li>
+<p>M7053: “Posting only possible in periods XX and XX in company code XX”</p>
+</li>
+<li>
+<p>M7037: “In plant &amp;, post to current period &amp;/&amp;”</p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> M7 037, M7-037, M7/053,  Cancel Goods Issue, Reverse GI with Posting Date, Posting Date,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Posting date of the cancellation document is in the past and the previous period is closed.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Use the Business Add-In (BAdI) <strong>MMIM_CREATE_GM_POSTING_DATE</strong> (method <strong>IF_MMIM_CREATE_GM_POSTING_DATE~CHANGE</strong>) to adjust the posting date during cancellation via the VCM monitor.</p>
+<p>Please refer to the following manual implementation to create the BAdI implementation, including copying the sample code:</p>
+<p><strong>Steps to Create and Activate the BAdI Implementation</strong></p>
+<ol>
+<li>
+<p>Go to transaction <strong>SE18</strong>.</p>
+</li>
+<li>
+<p>Enter BAdI name <strong>MMIM_CREATE_GM_POSTING_DATE</strong> and choose <strong>Display</strong>.</p>
+</li>
+<li>
+<p>Position the cursor on <strong>Implementation</strong>, then right mouse-click and select:<br/> <strong>Create Enhancement Implementation</strong></p>
+<ul>
+<li>
+<p><strong>Enhancement Implementation</strong>: <code>ZZ_MM_POSTING_DATE</code></p>
+</li>
+<li>
+<p><strong>Short Text</strong>: <code>ZZ_MM_POSTING_DATE</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Click <strong>Continue</strong> and save the enhancement implementation.</p>
+</li>
+<li>
+<p>Position the cursor again on <strong>Implementation</strong>, then right mouse-click and select:<br/> <strong>Create BAdI Implementation</strong></p>
+<ul>
+<li>
+<p><strong>BAdI Implementation</strong>: <code>ZZ_POSTING_DATE_IMP</code></p>
+</li>
+<li>
+<p><strong>Description</strong>: <code>ZZ_POSTING_DATE_Implementation</code></p>
+</li>
+<li>
+<p><strong>Implementing Class</strong>: <code>ZZ_POSTING_DATE_IMP</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Press <strong>Enter</strong>, then click <strong>Copy Sample Class</strong>.</p>
+</li>
+<li>
+<p>Replace the implementation of METHOD <strong>if_mmim_create_gm_posting_date~change</strong> with the code from the attachment <strong>"IF_MMIM_CREATE_GM_POSTING_DATE.txt".</strong></p>
+</li>
+<li>
+<p>Activate the BAdI implementation.</p>
+</li>
+</ol>
+<p>If <strong>serial numbers</strong> are involved, the posting date must be the current date or the same as, or later than, the Date of Last Goods Movement (see SAP Note <strong>2515305</strong>). In this case, you can adjust the implementation by uncommenting out the following statement so that the posting date is set to the system date:</p>
+<p>  <strong>         postingdate = cl_abap_context_info=&gt;get_system_date( ).</strong></p>
+<p> </p></div></div></div></div>

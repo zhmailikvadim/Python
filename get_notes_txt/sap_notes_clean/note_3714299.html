@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>An error occurs during the posting of a physical inventory document.</li><li>The error message "GETWA_NOT_ASSIGNED" appears when attempting to post the document from the transaction /SCWM/PI_PROCESS.</li><li>The issue arises when adding a new material to a storage bin during the counting process, where the material physically exists but has never been recorded in the system for that bin.</li><li>The error was observed during testing of the physical inventory process.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Extended Warehouse Management (SCM-EWM)</li></ul>
+<div>
+<div>
+<div>
+<ul><li>SAP Extended Warehouse Management Physical inventory (SCM-EWM-PI)</li></ul>
+<p></p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div> </div>
+</div>
+</div>
+<p><br/><br/></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Create a physical inventory (PI) document for storage bin counting (HL).</li><li>Enter count results for materials already existing in the PI bin.</li><li>Add a new material to the bin, specifying its stock type, owner, and quantity.</li><li>Attempt to post the PI document from the transaction /SCWM/PI_PROCESS.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Program error. </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Please implement below notes in the effected system to avoid the issue. </p>
+<ol><li><a href="https://me.sap.com/notes/3571027" rel="noopener noreferrer nofollow" target="_blank">3571027 - Dump when posting an inventory document.</a></li><li><a href="https://me.sap.com/notes/3552063" rel="noopener noreferrer nofollow" target="_blank">3552063 - /SCWM/PI_PROCESS: Dump "ASSERTION_FAILED" when processing PI document in transaction on the press of Enter.</a></li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>GETWA_NOT_ASSIGNED, physical inventory, SAP S/4HANA, /SCWM/PI_PROCESS, storage bin counting, short dump, SAP Notes, inventory document posting error, new material</p></div></div></div></div>

@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">The processing of the message type /PACG/ECM_ATTCHMIN ends with the short dump with the following runtime error ITAB_ILLEGAL_SORT_ORDER. The first processing of the idoc successfully stores the attachment in the object, e.g. an activity or a service order, however the status of the idoc is not changed and remains in 64. The next processing changes the status of that idoc to 51 and displays the error message "Attachment ARCH/PACG/ECM... already created".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">FSM, E4C, Connector, Attachment, /PACG/ECM_ATTCHMIN, ITAB_ILLEGAL_SORT_ORDER, /PACG/ECM_CL_X_UTIL, /PACG/ECM_ASCI</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="__html0">This is caused by incorrect handling of sorted table in method 'IDOC_FOR_AUFNR' (class /PACG/ECM_CL_X_UTIL).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Please, implement this correction instruction and change the status of the affected idocs to 68. This can be done from transaction /PACG/ECM_COCKPIT2 by using the option "Set to processed".</p></div></div></div></div>

@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When deploying projects in SAP Build Cloud Visual Functions, may experience the following:</p>
+<ul><li>Deployments remain in “Deploying” status and do not complete.</li><li>The issue affects all Visual Function projects in the same subaccount.</li><li>Creating, importing, or cloning a project does not resolve the problem—deployments still remain stuck.</li><li>The deployment does not progress to either Deployed or Failed, even after several hours or days.</li></ul>
+<p>Because deployments cannot finish, publishing updates or delivering new versions is not possible.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p> SAP Build Apps</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>In rare cases, the deployment process fails because a required database instance cannot be successfully provisioned during deployment.</p>
+<p>When this occurs:</p>
+<ul><li>The deployment workflow waits for the database provisioning step to complete.</li><li>Since the provisioning does not finish successfully, the deployment remains in “Deploying” indefinitely.</li><li>Because the shared provisioning step is blocked, all Visual Function deployments in the same subaccount are affected.</li></ul>
+<p>This behaviour is not related to customer configuration within the project.</p>
+<p></p>
+<p>Please note:</p>
+<ul><li>This condition is rare and typically affects an entire subaccount rather than an individual project.</li><li>The behaviour does not indicate an issue with the project content or customer-side deployment process.</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="font-size: 10pt;">This issue cannot be resolved through customer actions in the SAP Build interface because the underlying cause is a failure during the creation of the HANA instance required by Cloud Visual Functions.</span></p>
+<p><span style="font-size: 10pt;">When the HANA instance provisioning step fails, the deployment workflow cannot continue, and all Visual Function deployments for the affected subaccount remain stuck in “Deploying.”</span></p>
+<p><span style="font-size: 10pt;">After Support resolves the issue on the backend, new deployments should complete normally.</span></p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><div>SAP Build, Cloud Visual Functions</div></div></div></div></div>

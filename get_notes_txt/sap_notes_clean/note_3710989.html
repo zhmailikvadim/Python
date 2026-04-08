@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The error “Product * is not completely serialized” (SCWM/STOCK_UPLOAD 101) is triggered during warehouse stock migration when serialization is required.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<p>SAP S/4HANA Cloud Public Edition</p>
+</div>
+</div>
+</div>
+<p></p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div> </div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li> Go to Migrate Your Data app.</li><li> Upload the migration file and prepare the mapping task.</li><li> Simulate the migration process.</li><li> Observe the following error messages:<br/>-&gt; Product * is not completely serialized    /SCWM/STOCK_UPLOAD    101         <br/>-&gt; Error in items assigned to this header. Stock items were not uploaded.    /SCWM/STOCK_UPLOAD    81</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Potential root causes include:  </p>
+<ul><li> Absence of a serial number profile assigned to the product at stock level;  </li><li> Inconsistency in the migration file (.xml), where the specified quantity does not align with the number of provided serial numbers.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>Assign the serial number profile for the affected materials to "C" (at stock level) during stock movements.</li><li>Review the migration file (.xml) and ensure that the quantity specified matches the number of associated serial numbers. For example, if the quantity is 3, provide three serial numbers in the Serial Number Data sheet.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>warehouse stock migration, serialization error, incomplete serialization, migration cockpit, stock upload error, serial number profile, repair serial number profile, warehouse monitor, migration file incomplete, stock level serialization, document item level serialization.</p></div></div></div></div>

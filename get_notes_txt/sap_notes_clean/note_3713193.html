@@ -1,0 +1,148 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>The server is unresponsive and not accepting new connections.</li><li>The server is slow, and no new users can access it. Connections are slow.</li><li>Following symptoms may be noticed:</li><li>
+<pre><span style="font-family: verdana, geneva;">.iqmsg:<br/>
+I. 02/04 10:04:43. 0000670389 Disconnect:  SA connHandle: 489543  SA connID: 193  IQ connID: 0000670389  User: usss_safe
+I. 02/04 10:04:43. 0000670556 Collation ISO_BINENG, Case Respect, Blank Padding On, Comparisons are Binary
+I. 02/04 10:04:43. 0000670535 TINFO t=1804804967 v=1804804967 c=1804805001 gt=0 gc=0 pcv=0 ME=0 MSE=0 TRR=0 #=0
+I. 02/04 10:04:43. 0000670553 Txn 1804805002 0 1804805002
+I. 02/04 10:04:43. 0000670553 Connect:  SA connHandle: 489678  SA connID: 62  IQ connID: 0000670553  User: adewh
+I. 02/04 10:04:43. 0000670556 Txn 1804805003 0 1804805003
+I. 02/04 10:04:43. 0000670556 Connect:  SA connHandle: 489680  SA connID: 64  IQ connID: 0000670556  User: dbops
+I. 02/04 10:05:23. 0000000000 Cancellation request received:  SA connHandle: 489672  SA connID: 51  IQ connID: 0000670547  User: pdba_monitor
+I. 02/04 10:05:44. 0000000000 Cancellation request received:  SA connHandle: 468424  SA connID: 330  IQ connID: 0000641895  User: pdba_monitor
+I. 02/04 10:05:44. 0000000000 Cancellation request received:  SA connHandle: 489673  SA connID: 55  IQ connID: 0000670548  User: pdba_monitor
+I. 02/04 10:06:23. 0000000000 Cancellation request received:  SA connHandle: 489672  SA connID: 51  IQ connID: 0000670547  User: pdba_monitor
+I. 02/04 10:06:44. 0000000000 Cancellation request received:  SA connHandle: 489673  SA connID: 55  IQ connID: 0000670548  User: pdba_monitor
+I. 02/04 10:06:44. 0000000000 Cancellation request received:  SA connHandle: 468424  SA connID: 330  IQ connID: 0000641895  User: pdba_monitor
+I. 02/04 10:33:12. 0000641895 Cmt 1804805004 Txn 1804805000
+I. 02/04 10:33:12. 0000669482 Rbck
+I. 02/04 10:33:12. 0000670537 Rbck
+I. 02/04 10:33:12. 0000670511 Disconnect:  SA connHandle: 489644  SA connID: 346  IQ connID: 0000670511  User: usss_safe
+I. 02/04 10:33:12. 0000670496 Disconnect:  SA connHandle: 489629  SA connID: 320  IQ connID: 0000670496  User: usss_safe
+I. 02/04 10:33:12. 0000670274 Disconnect:  SA connHandle: 489454  SA connID: 39  IQ connID: 0000670274  User: usss_safe
+I. 02/04 10:33:12. 0000670503 Disconnect:  SA connHandle: 489635  SA connID: 329  IQ connID: 0000670503  User: usss_safe
+I. 02/04 10:33:12. 0000670537 PostRbck
+I. 02/04 10:33:12. 0000670215 Rbck
+I. 02/04 10:33:12. 0000670215 PostRbck
+I. 02/04 10:33:12. 0000670558 Collation ISO_BINENG, Case Respect, Blank Padding On, Comparisons are Binary
+I. 02/04 10:33:12. 0000670559 Collation ISO_BINENG, Case Respect, Blank Padding On, Comparisons are Binary
+I. 02/04 10:33:12. 0000670560 Collation ISO_BINENG, Case Respect, Blank Padding On, Comparisons are Binary
+I. 02/04 10:33:12. 0000670561 Collation ISO_BINENG, Case Respect, Blank Padding On, Comparisons are Binary
+-------
+ 
+Also, in Iqmsg messages such as  s_buf::WaitForSignal_DontCareIfBusy- Timed out on _condvar, timeout value= 10 secondssbuf= 0x7ff1b4feadf0 btype= 7, can be found around the issue timeframe.
+ 
+ 
+I. 02/04 09:32:14. 0000668405 TINFO t=1804794693 v=1804794693 c=1804794694 gt=0 gc=0 pcv=0 ME=0 MSE=0 TRR=0 #=0
+I. 02/04 09:32:14. 0000668405 Disconnect:  SA connHandle: 488092  SA connID: 334  IQ connID: 0000668405  User: trisig
+I. 02/04 09:32:14. 0000668259 Disconnect:  SA connHandle: 487994  SA connID: 151  IQ connID: 0000668259  User: trisig
+I. 02/04 09:32:15. 0000668387 140688710276864 s_buf::WaitForSignal_DontCareIfBusy- Timed out on _condvar, timeout value= 10 secondssbuf= 0x7ff1b4feadf0 btype= 7
+I. 02/04 09:32:16. 0000668401 [20896]: Insert for 't_adewh_feed_control' completed in 7 seconds.  1 rows inserted.
+I. 02/04 09:32:18. 0000668352 Disconnect:  SA connHandle: 488061  SA connID: 262  IQ connID: 0000668352  User: usss_safe
+I. 02/04 09:32:20. 0000668409 Collation ISO_BINENG, Case Respect, Blank Padding On, Comparisons are Binary
+I. 02/04 09:32:20. 0000668409 Txn 1804794695 0 1804794695
+I. 02/04 09:32:20. 0000668409 Connect:  SA connHandle: 488093  SA connID: 340  IQ connID: 0000668409  User: adewh
+I. 02/04 09:32:20. 0000668409 Cmt 1804794696 Txn 1804794695
+I. 02/04 09:32:20. 0000668409 TINFO t=1804794695 v=1804794695 c=1804794696 gt=0 gc=0 pcv=0 ME=0 MSE=0 TRR=0 #=0
+…
+…
+…
+I. 02/04 10:38:20. 0000671055 RemoveDirtiable sbuf:0x7ff1baadfb60 txn:1804806729|1804797686
+I. 02/04 10:38:20. 0000671055 RemoveDirtiable sbuf:0x7ff12d997e40 txn:1804806729|1804797686
+I. 02/04 10:38:20. 0000671055 RemoveDirtiable sbuf:0x7ff1d2bfe4d0 txn:1804806729|1804797686
+I. 02/04 10:38:20. 0000671055 RemoveDirtiable sbuf:0x7ff198bbaf30 txn:1804806729|1804797686
+I. 02/04 10:38:20. 0000671055 RemoveDirtiable sbuf:0x7ff17e1471e0 txn:1804806729|1804797686
+I. 02/04 10:38:25. 0000670939 140685238765312 s_buf::WaitForSignal_DontCareIfBusy- Timed out on _condvar, timeout value= 10 secondssbuf= 0x7ff1c358c220 btype= 12
+I. 02/04 10:38:27. 0000671064 Chk
+I. 02/04 10:38:27. 0000671064 ChkDone [NumTxnCP: 124]
+I. 02/04 10:38:27. 0000671064 IQ Checkpoint block: 2621474
+I. 02/04 10:38:27. 0000671064 PostChk
+I. 02/04 10:38:28. 0000671060 [20896]: Insert for '#fi_temp' completed in 13 seconds.  319 rows inserted.
+I. 02/04 10:38:28. 0000671065 [20896]: Insert for '#fi_temp' completed in 13 seconds.  319 rows inserted.
+I. 02/04 10:38:28. 0000671076 Collation ISO_BINENG, Case Respect, Blank Padding On, Comparisons are Binary
+I. 02/04 10:38:28. 0000671063 [20896]: Insert for '#fi_temp' completed in 13 seconds.  319 rows inserted.
+-------
+Other relevant messages that can be symptom:
+ 
+ 
+W. 02/04 10:05:43.919158 Task 0x728c60(Request task 744) is trying get forbid mutex held by task 0x6f7df0(Request task 557) for more than 60000 ms
+W. 02/04 10:05:43.919286 Task 0x6f7df0(Request task 557) state: OS thread id=0x7ff50ce8b700
+W. 02/04 10:05:43.919336 Task 0x6f7df0(Request task 557) state: worker=0x7ff4bc000930 wakend=0 waiting=2
+W. 02/04 10:05:43.919364 Worker 0x7ff4bc000930 state: wakend=0 waiting=0 in_atomic=0 is_dedicated=0 in_critical_section=0 allow_forbid=0
+W. 02/04 10:05:43.920109 Task 0x71a4d0(Request task 687) is trying get forbid mutex held by task 0x6f7df0(Request task 557) for more than 60000 ms
+W. 02/04 10:05:43.920186 Task 0x714760(Request task 664) is trying get forbid mutex held by task 0x6f7df0(Request task 557) for more than 60000 ms
+W. 02/04 10:05:43.920236 Task 0x711ec0(Request task 654) is trying get forbid mutex held by task 0x6f7df0(Request task 557) for more than 60000 ms
+W. 02/04 10:05:43.920303 Task 0x6f7df0(Request task 557) is trying get forbid mutex held by task 0x6f9e70(Request task 565) for more than 60000 ms
+W. 02/04 10:05:43.920360 Task 0x6f7df0(Request task 557) state: OS thread id=0x7ff50ce8b700
+W. 02/04 10:05:43.920409 Task 0x6f7df0(Request task 557) state: OS thread id=0x7ff50ce8b700
+W. 02/04 10:05:43.920451 Task 0x6f7df0(Request task 557) state: OS thread id=0x7ff50ce8b700
+W. 02/04 10:05:43.920485 Task 0x6f9e70(Request task 565) state: OS thread id=0x7ff4a7894700
+W. 02/04 10:05:43.920520 Task 0x6f7df0(Request task 557) state: worker=0x7ff4bc000930 wakend=0 waiting=1
+W. 02/04 10:05:43.920559 Task 0x6f7df0(Request task 557) state: worker=0x7ff4bc000930 wakend=0 waiting=1
+W. 02/04 10:05:43.920590 Task 0x6f7df0(Request task 557) state: worker=0x7ff4bc000930 wakend=0 waiting=0
+W. 02/04 10:05:43.920619 Task 0x6f9e70(Request task 565) state: worker=0x7ff490000930 wakend=0 waiting=0
+W. 02/04 10:05:43.920649 Worker 0x7ff4bc000930 state: wakend=0 waiting=0 in_atomic=0 is_dedicated=0 in_critical_section=0 allow_forbid=0
+W. 02/04 10:05:43.920682 Worker 0x7ff4bc000930 state: wakend=0 waiting=0 in_atomic=0 is_dedicated=0 in_critical_section=0 allow_forbid=0
+W. 02/04 10:05:43.920719 Worker 0x7ff4bc000930 state: wakend=0 waiting=0 in_atomic=0 is_dedicated=0 in_critical_section=0 allow_forbid=0
+W. 02/04 10:05:43.920746 Worker 0x7ff490000930 state: wakend=0 waiting=0 in_atomic=0 is_dedicated=0 in_critical_section=0 allow_forbid=0
+W. 02/04 10:05:43.921073 Task 0x71c140(Request task 694) is trying get forbid mutex held by task 0x6f7df0(Request task 557) for more than 60000 ms
+W. 02/04 10:05:43.921154 Task 0x6f7df0(Request task 557) state: OS thread id=0x7ff50ce8b700
+W. 02/04 10:05:43.921188 Task 0x6f7df0(Request task 557) state: worker=0x7ff4bc000930 wakend=0 waiting=2
+W. 02/04 10:05:43.921218 Worker 0x7ff4bc000930 state: wakend=0 waiting=0 in_atomic=0 is_dedicated=0 in_critical_section=0 allow_forbid=0
+W. 02/04 10:05:43.924114 Task 0x724340(Request task 726) is trying get forbid mutex held by task 0x6f7df0(Request task 557) for more than 60000 ms
+W. 02/04 10:05:43.924236 Task 0x6f7df0(Request task 557) state: OS thread id=0x7ff50ce8b700
+W. 02/04 10:05:43.924265 Task 0x6f7df0(Request task 557) state: worker=0x7ff4bc000930 wakend=0 waiting=2
+W. 02/04 10:05:43.924291 Worker 0x7ff4bc000930 state: wakend=0 waiting=0 in_atomic=0 is_dedicated=0 in_critical_section=0 allow_forbid=0
+W. 02/04 10:05:43.925110 Task 0x6fd740(Request task 575) is trying get forbid mutex held by task 0x6f7df0(Request task 557) for more than 60000 ms
+W. 02/04 10:05:43.925215 Task 0x7116a0(Request task 652) is trying get forbid mutex held by task 0x6f7df0(Request task 557) for more than 60000 ms
+W. 02/04 10:05:43.925295 Task 0x724750(Request task 727) is trying get forbid mutex held by task 0x6f7df0(Request task 557) for more than 60000 ms
+W. 02/04 10:05:43.925429 Task 0x6f7df0(Request task 557) state: OS thread id=0x7ff50ce8b700
+W. 02/04 10:05:43.925484 Task 0x6f7df0(Request task 557) state: OS thread id=0x7ff50ce8b700
+W. 02/04 10:05:43.925529 Task 0x6f7df0(Request task 557) state: OS thread id=0x7ff50ce8b700
+W. 02/04 10:05:43.925571 Task 0x6f7df0(Request task 557) state: worker=0x7ff4bc000930 wakend=0 waiting=2
+W. 02/04 10:05:43.925614 Worker 0x7ff4bc000930 state: wakend=0 waiting=0 in_atomic=0 is_dedicated=0 in_critical_section=0 allow_forbid=0
+W. 02/04 10:05:43.925646 Task 0x6f7df0(Request task 557) state: worker=0x7ff4bc000930 wakend=0 waiting=2
+W. 02/04 10:05:43.925694 Task 0x6f7df0(Request task 557) state: worker=0x7ff4bc000930 wakend=0 waiting=2
+W. 02/04 10:05:43.925768 Worker 0x7ff4bc000930 state: wakend=0 waiting=0 in_atomic=0 is_dedicated=0 in_critical_section=0 allow_forbid=0
+W. 02/04 10:05:43.925810 Worker 0x7ff4bc000930 state: wakend=0 waiting=0 in_atomic=0 is_dedicated=0 in_critical_section=0 allow_forbid=0
+W. 02/04 10:05:43.927121 Task 0x7157a0(Request task 668) is trying get forbid mutex held by task 0x6f7df0(Request task 557) for more than 60000 ms
+W. 02/04 10:05:43.927226 Task 0x6f7df0(Request task 557) state: OS thread id=0x7ff50ce8b700
+W. 02/04 10:05:43.927274 Task 0x6f7df0(Request task 557) state: worker=0x7ff4bc000930 wakend=0 waiting=2
+W. 02/04 10:05:43.927301 Worker 0x7ff4bc000930 state: wakend=0 waiting=0 in_atomic=0 is_dedicated=0 in_critical_section=0 allow_forbid=0
+W. 02/04 10:05:43.933134 Task 0x706550(Request task 610) is trying get forbid mutex held by task 0x6f7df0(Request task 557) for more than 60000 ms
+W. 02/04 10:05:43.933222 Task 0x6f7df0(Request task 557) state: OS thread id=0x7ff50ce8b700
+W. 02/04 10:05:43.933271 Task 0x6f7df0(Request task 557) state: worker=0x7ff4bc000930 wakend=0 waiting=2
+W. 02/04 10:05:43.933326 Worker 0x7ff4bc000930 state: wakend=0 waiting=0 in_atomic=0 is_dedicated=0 in_critical_section=0 allow_forbid=0
+I. 02/04 10:06:23.018425 Connection terminated abnormally
+I. 02/04 10:06:23.018525 Disconnected TCPIP client's AppInfo: HOST=blkcdbs004;PID=72100;EXE=PDBA SQL Capture
+I. 02/04 10:06:44.031168 Connection terminated abnormally
+-------
+ 
+I opened gstack_output_20260204_102403.txt file and searched for Thread 0x7ff50ce8b700
+ 
+gstack_output_20260204_102403.txt
+ 
+Thread 3756 (Thread 0x7ff50ce8b700 (LWP 29953)):
+#0  0x00007ffff5f0fa35 in pthread_cond_wait@@GLIBC_2.3.2 () from /lib64/libpthread.so.0
+#1  0x00007ffff6da3250 in UnixTask::wait(unsigned short) () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#2  0x00007ffff6da07f6 in CondVar::wait(Mutex&amp;) () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#3  0x00007ffff6da2ddb in TimedMutex::get() () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#4  0x00007ffff6b07626 in Worker::get_all_forbid_mutexes() () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#5  0x00007ffff6b08a93 in Worker::forbid(unsigned int, unsigned int, unsigned int, unsigned int) () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#6  0x00007ffff71f91b4 in DB_Commit_Chgs(Connection*) () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#7  0x00007ffff6bfb807 in Connection::commit_work() () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#8  0x00007ffff6d39710 in do_close(Connection*, a_cursor*, unsigned int, unsigned int) () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#9  0x00007ffff6d3fbd1 in do_cursor_execute(Connection*, a_stmt*) () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#10 0x00007ffff6d4bb49 in db__execute_any_imm(Connection*, an_sqlpres_receive*) () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#11 0x00007ffff6d5fe66 in RequestProcedure::call() () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#12 0x00007ffff6b03a41 in Worker::spawn(Procedure*) () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#13 0x00007ffff6d63d56 in EngStream::handle_ind(unsigned char, unsigned int) () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#14 0x00007ffff6d6588f in EngStream::execute() () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#15 0x00007ffff6d65a0d in RQConnItem::do_request() () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#16 0x00007ffff6d5d7ae in RQBaseItem::do_work(Worker*) () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#17 0x00007ffff6da14b7 in RequestQueue::worker_body() () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#18 0x00007ffff6d5eb69 in request_task(void*) () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#19 0x00007ffff71e982e in run_task_body () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#20 0x00007ffff6da3118 in UnixTask::pre_body(void*) () from /usr/local/sybase16/IQ-16_1/lib64/libiqserv16_r.so
+#21 0x00007ffff5f0bea5 in start_thread () from /lib64/libpthread.so.0
+#22 0x00007ffff5426b0d in clone () from /lib64/libc.so.6</span></pre>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><pre>SAP IQ/16.1.050.2612/14315/P/SP05.12.</pre><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul><li>The issue occurred without any specific steps to reproduce.</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The issue has been identified and logged under SAP CR 831761. Its description reads, "<em>IQ is hanging unresponsive</em>".</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>There is currently no target SAP IQ Service Pack scheduled for this issue (SAP CR 831761). It has been assigned to our Product Group and it is under investigation.</li><li>Please mark this KBA as a Favorite to be automatically notified when the CR status is changed.</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>server unresponsive, slow connections, outage, connection timeout, server slowness, no new users, unresponsive server</p></div></div></div></div>

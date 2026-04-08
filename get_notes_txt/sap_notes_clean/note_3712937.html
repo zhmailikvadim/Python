@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In SAP C4C, visibility rules for Mashups are evaluated only once during the initial loading of the UI view (for example, when the Ticket TI view is opened). <br/>These rules are not dynamically re-evaluated when field values or conditions change while the user is already inside the view.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Cloud For Customer</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Open the Overview view.</p>
+</li><li>
+<p>Verify that a visibility rule is configured to display the mashup only when a specific status value is met.</p>
+</li><li>
+<p>Open a record whose status does not meet the visibility condition.</p>
+</li><li>
+<p>Change the status so that it meets the visibility condition.</p>
+</li><li>
+<p>Observe that the mashup does not become visible immediately after the status change.</p>
+</li><li>
+<p>Refresh or reload the view, and confirm that the mashup is displayed.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>When a visibility rule is created based on certain conditions (status, category, custom fields, etc.), the system:</p>
+<ul><li>Evaluates the rule at view initialization</li><li>Determines whether the mashup should be visible or hidden</li><li>Renders the UI accordingly</li></ul>
+<p>During runtime, when the ticket data changes (for example, a status update or field modification inside the TI view), the UI framework does not trigger a re-render or re-evaluation of mashup visibility rules. This is because:</p>
+<ul><li>Mashups are treated as static UI components once loaded</li><li>Visibility rules are part of the view metadata, not event-driven logic</li><li>The C4C UI client uses cached context data for performance reasons</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>As a result, even though the underlying condition changes, the mashup’s visibility state remains the same until the view is reloaded.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP C4C, mashup visibility, UI rules, ticket status, static UI components, visibility evaluation, refresh view, dynamic updates, cached context data, metadata rules.</p></div></div></div></div>

@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">HTTP 403 error when calling POST /jobs. Error: “The service requested is not available”</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Prepare a REST request for creating a Sourcing reporting job using the following endpoint:<br/><span style="font-family: 'courier new', courier;">POST https://openapi.ariba.com/api/sourcing-reporting-job/v2/&lt;env&gt;/jobs?realm=&lt;REALM&gt;</span></p>
+</li><li>
+<p>Include valid headers (<span style="font-family: 'courier new', courier;">apikey: &lt;API_KEY&gt;, Content-Type: application/json</span>).</p>
+</li><li>
+<p>Use a request body similar to:<br/><span style="font-family: 'courier new', courier;">{</span><br/><span style="font-family: 'courier new', courier;">  "viewTemplateName": "&lt;VIEW_TEMPLATE_NAME&gt;",</span><br/><span style="font-family: 'courier new', courier;">  "filters": {</span><br/><span style="font-family: 'courier new', courier;">    "LastModifiedFrom": "&lt;ISO_UTC_TIMESTAMP&gt;",</span><br/><span style="font-family: 'courier new', courier;">    "LastModifiedTo":   "&lt;ISO_UTC_TIMESTAMP&gt;"</span><br/><span style="font-family: 'courier new', courier;">  }</span><br/><span style="font-family: 'courier new', courier;">}</span></p>
+</li><li>
+<p>Execute the request.</p>
+</li><li>
+<p>Observed result: HTTP 403, message “The service requested is not available”.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The request used the <span style="font-family: 'courier new', courier;">/v2</span> endpoint, which is valid only for Operational Reporting for Procurement.</li><li>Operational Reporting for Sourcing currently only supports version 1 (<span style="font-family: 'courier new', courier;">/v1</span>).</li><li>Using the Procurement request as a template and cloning it can inadvertently introduce the wrong version, causing a 403 response.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<p>Use the correct endpoint for Operational Reporting for Sourcing:<br/><span style="font-family: 'courier new', courier;">POST https://openapi.ariba.com/api/sourcing-reporting-job/v1/&lt;env&gt;/jobs?realm=&lt;REALM&gt;</span></p>
+</li><li>
+<p>Keep all required headers and authentication details.</p>
+</li><li>
+<p>Send the same request body as before.</p>
+</li><li>
+<p>The job submission should now complete successfully when using <span style="font-family: 'courier new', courier;">/v1</span>.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>post job, REST API, incorrect URL, version 2, API call, error message, asynchronous method, asynchronous, asynchronous jobs</p></div></div></div></div>

@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are using Planning&amp;Dispatching and encounter one of the followning problems:</p>
+<ul>
+<li>When planning services or calculating a track you get messages like “Processing Channel 1: missing configuration (inbound destination)” . Reason: Missing authorizations in role /PLCP/PLANNING.</li>
+<li>The calculated results of a scenario were incomplete: the track information was missing. Reason: Missing authorizations in role /PLCP/EXEC_SCENARIO.</li>
+</ul>
+<p>This note changes the authority check for accessing the background processing configuration. It requests authorizations for field 'TABLE' as /PLCE/R_BGPROCESSINGCONFIG of authorization object S_TABU_NAM (instead of /PLCE/R_BGPROCESSINGCONF ; note the missing suffix IG).</p>
+<p>Probably you need to adjust the authorization settings for your users. See also the "Solution" section below.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Planning&amp;Dispatching, PLCE, PLCP, /PLCP/CONFIGURATION, /PLCP/EXEC_SCENARIO, /PLCP/PLANNING, /PLCE/R_BGPROCESSINGCONF, /PLCE/R_BGPROCESSINGCONFIG, /PLCE/BP_R_BGPROCESSINGCONF_S</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections instruction.</p>
+<p>If you are using the authorization roles delivered with the PLCP-AddOn, you can update it by uploading the roles that come as attachment with this note.</p>
+<p>Save the appropriate file to your file system and remember its location.</p>
+<p>File PFCG_ROLES_NOTE_3713101_<em><strong>101_758</strong></em>.SAP is valid for AddOn release PLCP 101_758.</p>
+<p>File PFCG_ROLES_NOTE_3713101_<em><strong>102_816</strong></em>.SAP is valid for AddOn release PLCP 102_816.</p>
+<p>Start transaction PFCG (Role Maintenance).</p>
+<p>Choose menu entry Role -&gt; Upload.</p>
+<p>Open file PFCG_ROLES_NOTE_3713101_<em><strong>XXX_YYY</strong></em>.SAP  that corresponds to your system release.</p>
+<p>A list of 3 roles to be imported is presented. Some roles have Status red light ("Caution"), some are green ("OK"). Red lighted roles exist and will be overwritten. That is the intended action. Go ahead by pressing Enter ("Transfer").</p>
+<p>You should get the message that 3 roles were loaded from the file.</p>
+<p>Leave the transaction.</p>
+<p>If you need these roles in other clients or systems, you can use transactions PFCG or PFCGMASSTRANSPORT to transport all necessary /PLCP/*-roles (/PLCP/CONFIGURATION, /PLCP/EXEC_SCENARIO, /PLCP/PLANNING).</p></div></div></div></div>

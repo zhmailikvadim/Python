@@ -1,0 +1,47 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>Your SAP system runs on a Virtual Machine which has been setup in the "Alibaba Cloud" public cloud infrastructure.</li>
+<li>Your SAP system does not have a valid SAP license.</li>
+<li>In transaction SLICENSE, there is no license key and no active hardware key.</li>
+<li>In transaction SM21, the syslog contains entries like:</li>
+</ul>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">Msg server hardware ID missing (HWID_MSERR)</span></p>
+<p style="padding-left: 60px;">The hardware ID of the message server is not known in the application server.</p>
+<p style="padding-left: 60px;">HWID_MSERR An error has occured while determining the hardware ID in the message server. System log messages in the message server should give you an indication about the cause of the error.</p>
+<p style="padding-left: 60px;">HWID_PENDING The application server has still not received a hardware ID from the message server. Use the earlier system log entries to check whether the connection to the message server was opened correctly. You can monitor the message server with the message server monitor (transaction SMMS).The dev_w* developer traces contains entries like:</p>
+<p style="padding-left: 60px;">ERROR =&gt; SlicLikeyGetHardwareKey: no hwid from MSG server<br/>ERROR =&gt; 11 likey_get_validity_dates: Error getting the hardware key. You might find some information in file "dev_ms" on the message server</p>
+<ul>
+<li>The dev_ms developer trace contains entries like:</li>
+</ul>
+<p style="padding-left: 60px;">NiIRead: raw read for hdl 1 timed out (4000ms)<br/>*** ERROR =&gt; NiRawRead NiRc=-5 len=0 [virtinfoxx.c 495]<br/>VirtIMetaDataServiceGetValue: can't read document<br/>*** ERROR =&gt; SlicGetFullHwId: invalid parameter. Please check SAP note 2533233. [slichwid.c 1691]<br/>*** ERROR =&gt; SlicGetHwId: SlicGetFullHwId failed! [slichwid.c 662]</p>
+<ul>
+<li>The command 'saplicense -get' returns the following error:</li>
+</ul>
+<p style="padding-left: 60px;">*** SAPLICENSE (Release 7xx) ERROR ***<br/>ERROR: Unexpected function call<br/>DETAILS: NiIHSBufInit: already initialized</p>
+<ul>
+<li>on SAP kernel 7.93 the hardware key may be generated, but it is unstable and changes frequently, eg. when running "saplicense -get"</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>license, saplikey, saplicense, SLICENSE, hardware key, VM ID, Instance Id,  Linux, virtual machine, VM, cloud, IaaS, Alibaba Cloud, Aliyun</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Starting with SAP kernel patch levels listed in SAP note <a href="https://me.sap.com/notes/2533233" target="_blank">2533233</a> the hardware key for the SAP license is no longer based on the MAC address (as in on-premise Linux installations) but on a unique VM ID which is provided as part of the Alibaba Cloud infrastructure, provided by the Alibaba Instance Metadata Service.</p>
+<p>If the Instance Metadata Service is set to "Security Hardened" mode, and if your SAP kernel is running on a patch level that is older than the ones listed below, then the above symptoms will occur.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>Make sure that the Alibaba Cloud Instance Metadata Service (IMDS) for your VM is enabled.</li>
+<li>If you decide to set the IMDS mode to "Method 1: Security hardening mode", then you have to update your SAP kernel to one of the following versions:</li>
+<ul>
+<li>SAP kernel 7.22 EXT PL #1515 or higher</li>
+<li>SAP kernel 7.53 PL #1539 or higher</li>
+<li>SAP kernel 7.54 PL #636 or higher</li>
+<li>SAP kernel 7.93 PL #350 or higher</li>
+<li>SAP kernel 9.16 PL #89 or higher</li>
+<li>SAP kernel 9.17 PL #29 or higher</li>
+<li>SAP kernel 9.18 PL #20 or higher</li>
+<li>SAP kernel 9.19 PL #5 or higher</li>
+</ul>
+</ul>
+<ul>
+<li>If you want to set the IMDS mode to "Method 2: Normal mode", then no SAP kernel update is required. The described symptoms do not occur.</li>
+<li>For details about the IMDS configuration please consult the <a href="https://www.alibabacloud.com/help/en/ecs/user-guide/view-instance-metadata/?spm=a2c63.p38356.0.i1#a68b0c6c86uct" target="_blank">Alibaba Cloud IMDS documentation</a>.</li>
+</ul></div></div></div></div>

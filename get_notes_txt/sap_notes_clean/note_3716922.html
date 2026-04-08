@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<ul>
+<li>When running partition-related functions in the class CL_MFLE_AMDP, the process fails on SAP HANA Cloud with SQL errors about missing objects.</li>
+<li>Functions that count entries or read partitions may short dump with CX_SQL_EXCEPTION due to references to a removed monitoring view or column.</li>
+<li>The issue occurs when determining table partitions (typically during MFLE conversion).</li>
+</ul>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">CL_MFLE_AMDP; COUNT_ENTRIES; GET_PARTITIONS; M_DATABASE; SYS.M_CS_PARTITIONS; SYS.TABLES (PARTITION_SPEC); SYS.TABLE_PARTITIONS; PARTITIONED_TABLES; CX_SQL_EXCEPTION; SNOTE</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The reason is a program error. The code still uses deprecated HANA system artifacts—monitoring view M_CS_PARTITIONS and column PARTITION_SPEC in SYS.TABLES—which are not available on HANA Cloud.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply attached Correction Instruction.</p>
+<p>The correction adapts CL_MFLE_AMDP to detect the database version and use supported objects on HANA Cloud (e.g., switch from M_CS_PARTITIONS to TABLE_PARTITIONS and from PARTITION_SPEC to PARTITION_DEFINITION where applicable).</p>
+<p>No manual post‑implementation steps are required.</p></div></div></div></div>

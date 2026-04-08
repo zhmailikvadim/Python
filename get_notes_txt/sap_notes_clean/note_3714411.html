@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When checking expensive statements, some statements are confirmed, but may be disappeared afterwards, however some older expensive statements are not overwritten. <br/><br/></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP HANA database</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Expensive statements are port dependent, some are from xsengine and some are from indexserver.<br/>Indexserver often executes more expensive SQL statements, and it may overwrite it's expensive statements but xsengine will not.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Please check based on port. It is possible that indexserver generated expensive statements are already overwritten but older xsengine statements still exist in expensive statement list.<br/>This is controlled by parameter(default 30000):</p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" id="loio5faf04f17830464eacdb7938b383d2ab__table_n4n_rq4_gn" rules="all" summary=""><tbody><tr><td headers="d91661e98">
+<p>In-memory tracing records</p>
+</td><td headers="d91661e101">
+<p>in_memory_tracing_records</p>
+</td><td headers="d91661e104">
+<p>30000</p>
+</td><td headers="d91661e107">
+<p>Specifies the maximum number of trace records (per service) stored in memory.</p>
+</td></tr></tbody></table></div>
+<p>It can be confirmed by following SQL:</p>
+<p>select port, count(*)<br/>from m_expensive_statements<br/>group by port;</p>
+<p>30.003    30.000<br/>30.007    4.525</p>
+<p>In this sample you can see 30003 which is usually indexserver has already reached 30000 limitation but xsengine is still not, there are only 4525 entries generated for xsengine. So xsengine will retain much more older expensive SQL statements, this can be confirmed by:</p>
+<p>select port, min(start_time)<br/>from m_expensive_statements<br/>group by port;</p>
+<p>30.003    20260211144707429656000<br/>30.007    20250716065248600385000</p>
+<p>In this sample we can see xsengine statements are retained even in 2026, but the oldest indexserver expensive SQL is on 2026/02/11.</p>
+<p><br/><br/></p></div></div></div></div>

@@ -1,0 +1,56 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>The memory allocator <span class="SNO_DNT" style="float: none;" translate="no">Pool/RowTableUpdateAllocator</span> keeps increasing, when <span class="SNO_DNT" style="float: none;" translate="no">MERGE INTO</span> statements are executed against a ROW table.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">Pool/RowTableUpdateAllocator</span>, MERGE INTO, ROW TABLE</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 340874</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, the memory allocator <span class="SNO_DNT" style="float: none;" translate="no">Pool/RowTableUpdateAllocator</span> is not properly cleared after an execution of <span class="SNO_DNT" style="float: none;" translate="no">MERGE INTO</span> statement against a ROW table.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS00 - SPS06</li>
+<li>Revisions &lt;= 079.08 (SPS07)</li>
+<li>Revisions &lt;= 089.01 (SPS08)</li>
+</ul>
+<li>SAP HANA Cloud:
+<ul>
+<li>Versions of 2025 QRC1 - 2025 QRC2</li>
+<li>Versions &lt;= 2025.28.30 (2025 QRC3)</li>
+<li>Versions &lt;= 2025.40.19 (2025 QRC4)</li>
+<li>Versions &lt;= 2026.2.6 (2026 QRC1)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>MERGE INTO statements are executed against a ROW table.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions of SPS07: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<ul>
+<li>SAP HANA Cloud:</li>
+<ul>
+<li>Versions &gt;= 2025.28.31 (2025 QRC3)</li>
+<li>Versions &gt;= 2025.40.20 (2025 QRC4)</li>
+<li>Versions &gt;= 2026.2.7 (2026 QRC1)</li>
+<li>or higher</li>
+</ul>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>Change a table type from ROW to COLUMN by executing the following command:<br/><br/><span class="SNO_DNT" style="float: none;" translate="no">ALTER TABLE &lt;SCHEMA&gt;.&lt;ROW_TABLE&gt; ALTER TYPE COLUMN;</span></li>
+</ul></div></div></div></div>

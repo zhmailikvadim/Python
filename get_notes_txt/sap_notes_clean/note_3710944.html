@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<div>When the Web Intelligence report is refreshed using manually entered prompt values (for a value which is not present in backend database), the report returns no data.</div>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP BusinessObjects Business Intelligence Platform 4.3</li><li>Web Intelligence (Webi)</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<div>Log in to the BI Launchpad.</div>
+</li><li>
+<div>Open the Web Intelligence (WebI) report that contains prompts.</div>
+</li><li>
+<div>In the prompt screen, manually enter a value that does not exist for the corresponding prompt‑related dimension (i.e., a value that is not present in the database).</div>
+</li><li>
+<div>Run/Refresh the report.<br/>&gt;&gt; Observe that the report returns no data.</div>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>In SAP BusinessObjects 4.3, the system enforces a stricter interpretation of prompt parameters.</li><li>If the value defined in the WebI report is invalid, the system executes the query with the wrong value, resulting in a blank report.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This is by design behavior as the value does not exist for that prompt variable.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Webi, Report, prompt, no value</p></div></div></div></div>

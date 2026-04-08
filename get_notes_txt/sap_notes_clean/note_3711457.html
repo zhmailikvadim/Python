@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>The "EsigibilitaIVA" field within the Italian e-invoicing XML in the SAP S/4HANA Cloud Public Edition system defaults to "I" (VAT due immediately), regardless of the NATURE_CODE.</li><li>How to populate the field with "S" (Split Payment)?</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<div>
+<div>
+<ul><li>SAP S/4HANA Cloud Public Edition</li><li>SAP Document and Reporting Edition, Cloud Edition</li></ul>
+</div>
+</div>
+</div>
+<div> </div><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>eDocument cockpit application</li><li>Select the source document</li><li>Display XML</li><li>Locate the "EsigibilitaIVA" field within the XML.</li><li>Observe that the field defaults to "I" regardless of the NATURE_CODE.</li><li>Attempt to configure the tax code or flag the customer as Split Payment relevant.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The "EsigibilitaIVA" field inside "DatiRiepilogo" defaults to "I" because Split Payment is not explicitly activated.</li><li>The system does not map the field based on the NATURE_CODE.</li><li>Here is the abbreviation for each value in EsigibilitaIVA field: <br/>
+<p>I - VAT due immediately<br/>D - VAT due later<br/>S - Split Payment (VAT split payments)</p>
+</li></ul>
+<p></p>
+<p></p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Configure the value mapping for Natura Code (GET_NATURA_CODE) under namespace /EDOIT.</li><li>Ensure that the tax code 'S1' is configured for <strong>Split Payment</strong>.</li><li>Verify that the customer is flagged as Split Payment relevant.</li></ol>
+<p>Refer to the SAP Help documentation on configuring value mapping for Natura Code (GET_NATURA_CODE): <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/4603118feda9495892abadbe8f8c3d14/4ea5260544a543088a6d4cd0c00bcc10.html" rel="noopener noreferrer nofollow" style="font-size: 10pt;" target="_blank">Configuring Value Mapping for Natura Code (GET_NATURA_CODE) (Mandatory) | SAP Help Portal</a><span style="font-size: 10pt;">.</span></p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>EsigibilitaIVA, Italy, eInvoice, XML, split payment, VAT,split payments, SAP S/4HANA Cloud Public Edition, GET_NATURA_CODE, tax code, configuration, value mapping, split payment activation.</p></div></div></div></div>

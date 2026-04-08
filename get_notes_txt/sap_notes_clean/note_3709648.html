@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Displaying an object link of type QM notification (for example QMQMEL) from a document may return the error DO | 410 in function module /DSCSAG/OBJECT_SAP_DISPLAY.</p>
+<p>The issue may occur when displaying QM notification object links (for example CMQMEL, NMQMEL, PMQMEL, QMQMEL, SMQMEL) via function module /DSCSAG/OBJECT_SAP_DISPLAY.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>(PLM-41927), /DSCSAG/OBJECT_SAP_DISPLAY, QMEL</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The function module reads the table name for the object type from field TCLO-OBTAB and uses it to determine field properties.<br/>For certain QM notification object types, this field does not contain a suitable table name, which may lead to an error during the field information lookup.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Function module /DSCSAG/OBJECT_SAP_DISPLAY has been adjusted.<br/>For QM notification object types, the header table QMEL is used to determine field information instead of the value from TCLO-OBTAB.</p></div></div></div></div>

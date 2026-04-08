@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">What should be the minimum length of cluster key password?</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul style="list-style-position: inside;"><li>SAP BusinessObjects Business Intelligence Platform 4.3/2025</li><li>Windows</li><li>Linux / Unix</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>1. Launch the Central Configuration Manager.<br/>2. In the CCM, right-click the Server Intelligence Agent (SIA) and choose Stop.<br/>   Caution: Do not proceed to Step 3 until the SIA status is marked as "Stopped".<br/>3. Right-click the Server Intelligence Agent (SIA) and choose Properties. The "Properties" dialog box opens.<br/>4. Click the Configuration tab.<br/>5. Click Change next to "CMS Cluster Key Configuration". A warning message is displayed.<br/>6. Click Yes to continue. The "Change Cluster Key" dialog box opens.<br/>7. Provide a cluster key shorter than 6 characters in both the “New Cluster Key” and “Confirm New Cluster Key” fields.</p>
+<p>Note: On Windows platforms, cluster keys must contain a combination of upper- and lower-case characters. Alternately, users can also generate a random key. A random key is required in order to be FIPS-compliant.</p>
+<p>8. Click OK to submit the new cluster key. An error message appears indicating that the cluster key is too simple. The key must be at least six characters long. you must use at least two of the following character types: uppercase, lowercase, numbers, or punctuation.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><section>
+<section id="u_cause">
+<section id="u_cause">
+<ul><li>The Business Intelligence Platform 4.x does not accept the password if it is set less than the given limit.</li></ul>
+</section>
+</section>
+</section>
+<section><header></header></section><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<ul><li>Minimum supported password length: 6 characters.</li><li>
+<div>
+<p>Passwords shorter than 6 characters are not supported by the system.</p>
+</div>
+</li></ul>
+</div>
+<div> </div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/2699662" rel="noopener noreferrer nofollow" target="_blank">2699662 - Cluster Key does not accept Special character. - SAP for Me</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><section>
+<div>BOE, BI Platform, Cluster key, Password policy, Minimum length, Maximum length, 6 characters</div>
+<p></p>
+</section>
+<section></section></div></div></div></div>

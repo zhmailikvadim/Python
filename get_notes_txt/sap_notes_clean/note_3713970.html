@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Users can't sync after a 'UnifiedPerson' entry is created via an API request.</li><li>A synchronization error appears on mobile.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<div>
+<div>
+<p>SAP Field Service Management</p>
+</div>
+</div>
+</div>
+<p></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Create UnifiedPerson via <a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_data_api/creating-objects.html" rel="noopener noreferrer nofollow" target="_blank">Data API</a><br/><span style="font-family: 'courier new', courier;">POST - <code>https://{{cluster}}.fsm.cloud.sap/api/data/v4/UnifiedPerson?account={{accountName}}&amp;clientIdentifier=COR_CON_NONE&amp;dtos=UnifiedPerson.11&amp;company={{companyName}}</code></span></li><li>Set a random value for the <code>refId</code> field. <br/>If <code>refId</code> is not set in the API call, the following error appears: <code>CA-249: Field [refId] is not valid [must not be null].</code><span aria-label="Data API - Create Person / UnifiedPerson"><a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_data_model/create-person-data-api.html" rel="noopener noreferrer nofollow" target="_blank"></a>​</span><br/>The <code>refId</code> must be included in the API request. This field is required by the <a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_data_model/unifiedpersondto_v13.html" rel="noopener noreferrer nofollow" style="list-style-type: unset;" target="_blank">UnifiedPerson DTO</a>. </li><li>send the POST request</li><li>Log in with the affected user in the mobile app.</li><li>Sync the app.
+<p></p>
+</li></ol>
+<p><strong>Actual behavior:</strong><br/>A synchronization issue occurs on mobile. A sync error is shown.</p>
+<p><strong>Expected behavior:</strong><br/>The mobile app should sync successfully without any synchronization errors.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>If the <code>refId</code> differs from the <code>id</code>, a synchronization issue occurs.</p>
+<div>
+<div>Check in Query API:</div>
+<div><code>SELECT p.id, p.refId, p.type, p.userName, p.code 
+FROM Person p  
+WHERE p.type = 'ERPUSER' AND p.userName = '...';</code><code></code></div>
+<div><code>SELECT up.id, up.refId, up.types, up.userName, up.code 
+FROM UnifiedPerson up  
+WHERE up.userName = '...'; </code></div>
+</div>
+<p><br/>Entries in the Person table (for <code>ERPUSER</code>: <code>id</code> and <code>refId</code>) are inconsistent, please refer the SAP Help Portal official documentation about '<a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_data_model/person-unifiedperson.html#ongoing-solution-example" rel="noopener noreferrer nofollow" target="_blank">Person - UnifiedPerson</a>'.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>Set both <code>refId</code> and <code>id</code> to the same value in the request body.</li><li>Sample:
+<div><span style="font-family: 'courier new', courier;"><code>"refId": "0123456789ABCDEF0123456789ABCDEF",</code></span></div>
+<div><span style="font-family: 'courier new', courier;"><code>"id": "0123456789ABCDEF0123456789ABCDEF"</code></span></div>
+<div> </div>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Help Portal official documentation about <a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_data_model/person-unifiedperson.html#ongoing-solution-example" rel="noopener noreferrer nofollow" target="_blank">Person - UnifiedPerson</a>, <a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_data_model/unifiedpersondto_v13.html" rel="noopener noreferrer nofollow" style="list-style-type: unset;" target="_blank">UnifiedPerson DTO</a> and <a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_data_api/creating-objects.html" rel="noopener noreferrer nofollow" target="_blank">Data API</a>.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>sync issue, mobile app synchronization, ERP user missing, synchronization error, API call, UnifiedPerson, Person, CA-249 error, refId, ID mismatch,</p></div></div></div></div>

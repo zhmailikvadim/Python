@@ -1,0 +1,256 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Starting with 2026 QRC1 (2026.02) the System &gt; Monitor &gt; Trace feature is removed.</p>
+<p>Tenant logs that are useful for troubleshooting Data Acquisition workflows are still available under System &gt; Overview.</p>
+<p>This note explains how to locate and view those logs using the Alerts tab and Data Analyzer.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You have access to System &gt; Overview.</p>
+<p>You can open Data Analyzer from System &gt; Overview.</p>
+<p>Users who receive an on-screen error toast during Data Acquisition and need more detailed logs.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<h3 data-toc-skip="" id="HowtoFindDataAcquisitionLogsinSystemOverview-ViewLogsinSystemOverview">View Logs in System Overview </h3>
+<ol>
+<li>Navigate to System &gt; Overview</li>
+<li>Click the Alerts tab</li>
+<li>Click Client</li>
+<li>In the "Top 10 Messages, Components and User by Errors" chart, click inside the chart area (blank space) to reveal the three-dots (More Actions) menu.</li>
+<li>Choose More Actions &gt; Open Data Analyzer...
+<ul>
+<li>Select either Open in Current Tab or Open in New Tab</li>
+</ul>
+</li>
+<li>In Data Analyzer, add or enable the following columns to approximate System Monitor Trace with columns Timestamp | Trace Level | User Name | Component <a class="external-link" href="https://jira.tools.sap/browse/FPA00-66709" rel="nofollow" target="_blank">|</a> Message | Correlation ID | Detail, add additional columns
+<ul>
+<li>Add <strong>Timestamp </strong>| <strong>Level</strong> | <strong>User ID</strong> | <strong>DETAIL</strong> columns</li>
+</ul>
+</li>
+<li>Sort log messages by date.
+<ul>
+<li>Change Timestamp &gt; Sort Options &gt; Newest to Oldest.
+<ul>
+<li>Note, not Z-A</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Remove or adjust the default Level = ERROR filter to include INFO and DEBUG messages if needed.</li>
+<li>System Overview does not support substring filtering exactly like System Monitor Trace.  Use Filter by Member to enter a substring then select matching members from the results to include them in the analysis.</li>
+</ol>
+<h3 data-toc-skip="" id="HowtoFindDataAcquisitionLogsinSystemOverview-ExamplesandSuggestedFiltersforDataAcquisitionTroubleshooting">Examples and Suggested Filters for Data Acquisition Troubleshooting</h3>
+<div class="table-wrap">
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable"><colgroup><col/><col/><col/></colgroup>
+<thead class="tableFloatingHeaderOriginal">
+<tr class="tablesorter-headerRow"></tr>
+</thead>
+<tbody>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>PriviliegeChecker</p>
+</td>
+<td class="confluenceTd">Refresh failed due to missing privilege.</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>PrivilegeChecker</p>
+</td>
+<td class="confluenceTd">User does not have rate update privileges.</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.connection</p>
+</td>
+<td class="confluenceTd">There is no SAP Cloud Connector (SCC) connected to your subaccount matching the requested tunnel for subaccount</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.dm.schedule</p>
+</td>
+<td class="confluenceTd">Refresh Failed</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.core</p>
+</td>
+<td class="confluenceTd">Object ONPREMDEFAULT-&lt;SUBACCOUNT_ID&gt; was not found or you do not have permissions to read it.</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.core</p>
+</td>
+<td class="confluenceTd">Please verify SAP Cloud Platform Cloud Connector connection status; and check the Cloud Connector logs to see if the network firewall is blocking external access. If connected, please contact SAP Support regarding backend connectivity issue. HTTP Status: 503, Action: Check version</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dataAcquisition</p>
+</td>
+<td class="confluenceTd">Some services are temporarily unavailable. Thank you for your patience while we find a solution.</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dataAcquisition</p>
+</td>
+<td class="confluenceTd">An unexpected error occurred in data acquisition service, please contact system administrator. 404 Not Found: Requested route ('&lt;HOST_URL&gt;') does not exist.</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dataAcquisition</p>
+</td>
+<td class="confluenceTd">Unable to connect to datasource. Check the connection details and user credentials, and then try again.</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dataMotive</p>
+</td>
+<td class="confluenceTd">Data Motive Service unavailable.</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>INFO</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dm</p>
+</td>
+<td class="confluenceTd">Couldn't refresh because a privilege is missing. Check the System Monitor Trace for possible causes.</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dm</p>
+</td>
+<td class="confluenceTd">Error occurred in SAP Concur driver: An unexpected error occurred. Contact system administrator for help.</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dm</p>
+</td>
+<td class="confluenceTd">Failed to get import data job detail due to internal errors</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dm</p>
+</td>
+<td class="confluenceTd">Failed to get job detail with id &lt;JOB_ID&gt;</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dm</p>
+</td>
+<td class="confluenceTd">Failed to start data import job due to following technical error: "oMapping is undefined"</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dm</p>
+</td>
+<td class="confluenceTd">Failed to start data import job due to job validation error: "The data import job "&lt;JOB_ID&gt;" does not exist, or you do not have rights to read it."</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dm</p>
+</td>
+<td class="confluenceTd">It seems you do not have enough privileges to update the currency conversion table t.L:BW_TCUR, please contact your system administrator.</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>INFO</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dm</p>
+</td>
+<td class="confluenceTd">Schema of data source has been changed! Expected number of columns: &lt;X&gt; Received: &lt;Y&gt;</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dm</p>
+</td>
+<td class="confluenceTd">Unable to connect to SAP Concur. Check the connection details and user credentials, and then try again.</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dm</p>
+</td>
+<td class="confluenceTd">Unexpected response from Concur driver: JSON.parse: unexpected non-whitespace character after JSON data at line 1 column 5 of the JSON data; 502 Bad Gateway: Registered endpoint failed to handle the request.</td>
+</tr>
+<tr>
+<td class="confluenceTd">
+<p>ERROR</p>
+</td>
+<td class="confluenceTd">
+<p>sap.fpa.services.resource.dm</p>
+</td>
+<td class="confluenceTd">User does not have enough privileges on the model, dimensions, or currency to run the schedule/import job.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>Placeholder strings:</p>
+<ul>
+<li>&lt;HOST_URL&gt;</li>
+<li>&lt;JOB_ID&gt;
+<ul>
+<li>eg: A1234567890ABCDEF1234567890ACDEF</li>
+</ul>
+</li>
+<li>&lt;SUBACCOUNT_ID&gt;</li>
+<li> &lt;X&gt;
+<ul>
+<li>eg: 13</li>
+</ul>
+</li>
+<li>&lt;Y&gt;
+<ul>
+<li>eg: 7</li>
+</ul>
+</li>
+</ul></div></div></div></div>

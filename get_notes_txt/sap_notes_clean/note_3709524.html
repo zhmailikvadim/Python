@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Error returned when calling the Flow Extension halt endpoint for an Advance Ship Notice</li><li>API response contains the error message:<br/>ILLEGAL_STATE_TRANSITION : Illegal state transition for event &lt;FlowExtension_ID&gt;</li><li>Event is not rejected and the expected failed routing status is not sent</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Configure a Flow Extension for Advance Ship Notice with type set to "suspendresume"</p>
+</li><li>
+<p>Trigger the Flow Extension event</p>
+</li><li>
+<p>Call the OpenAPI halt endpoint, for example:</p>
+<p><span style="font-family: 'courier new', courier;">POST /api/flowextension/v1/prod/flowextensions/action/&lt;FlowExtension_ID&gt;/events/&lt;Event_ID&gt;/halt</span></p>
+<p></p>
+</li><li>
+<p>Observe that the API responds with:</p>
+<p>ILLEGAL_STATE_TRANSITION : Illegal state transition for event &lt;FlowExtension_ID&gt;</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The Flow Extension is configured with type "suspendresume"</li><li>This type does not support event rejection using the halt endpoint</li><li>Calling the halt action with this configuration results in an invalid state transition</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<p>Update the Flow Extension configuration file</p>
+</li><li>
+<p>Change the FlowExtension type from:</p>
+<p>type="suspendresume"</p>
+<p>to:</p>
+<p>type="suspendresumehalt"</p>
+</li><li>
+<p>Deploy the updated configuration</p>
+</li><li>
+<p>Trigger a new Flow Extension event</p>
+</li><li>
+<p>Call the halt endpoint again</p>
+</li></ol>
+<p></p>
+<p>After updating the type to "suspendresumehalt", the halt endpoint works as expected and the event can be successfully rejected.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://www.relevant-link-in.case.com" rel="nofollow">Flow Extension API Documentation</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>configuration update, SAP Business Network REST API</p></div></div></div></div>

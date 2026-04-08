@@ -1,0 +1,68 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Open Connectors (OCN) SharePoint Connector authentication based on Microsoft Access Control Service (ACS) will stop working after <strong>April 2nd, 2026</strong> due to Microsoft's retirement of ACS. All the SharePoint connections that use <strong>ACS authentication</strong> will be impacted.</p>
+<p><br/><strong>Note:</strong> SharePoint connections using Graph/Azure AD authentication will continue to function, no action will be required.</p>
+<p>You are impacted only if your SharePoint element instance is configured to use Azure ACS authentication. To verify:</p>
+<ol>
+<li>Navigate to your SharePoint element instance configuration.</li>
+<li><span style="font-size: 14px;">Locate the setting: "Use Graph Authentication"</span></li>
+<ul>
+<li>false → Azure ACS authentication (<strong>Action Required</strong>)</li>
+<li>true → Azure AD OAuth authentication (<strong>No Action Required</strong>)</li>
+</ul>
+</ol>
+<p>After the retirement date, customers may observe the following issues:</p>
+<ul>
+<li>SharePoint connector authentication failure with ACS</li>
+<li>Failures in integration scenarios based on SharePoint Connector using ACS authentication</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Microsoft has announced the end of life (EOL) of Azure Access Control Service (ACS), which directly impacts SharePoint integrations that rely on legacy ACS authentication. More details about the retirement can be found in Microsoft official notification.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please take following actions, if you are using Microsoft ACS authentication in SharePoint connector:</p>
+<ul>
+<li>Migrate from ACS authentication to Azure AD OAuth authentication, which is the recommended way forward from Microsoft. Of course, you can keep using SharePoint connector.</li>
+<li>Avoid using Microsoft ACS for creating new SharePoint Connector instances.<br/><br/></li>
+</ul>
+<p><strong>Movement Guide: Move from ACS to Azure AD OAuth<br/></strong></p>
+<p>The SharePoint Connector uses the Azure AD OAuth v1 endpoint:</p>
+<p><a href="https://login.microsoftonline.com/common/oauth2/authorize" target="_blank">https://login.microsoftonline.com/common/oauth2/authorize</a></p>
+<p>When using the v1 endpoint for Graph-based authentication, the scope parameter is ignored. The token audience is determined by the 'resource' parameter.</p>
+<p>Important behavior:</p>
+<ul>
+<li>resource= determines the token audience</li>
+<li>scope= is ignored when using the v1 endpoint for Graph-based authentication</li>
+<li>Permissions are determined by what is configured in the Azure AD application</li>
+<li>The scope cannot be configured while creating the element instance</li>
+</ul>
+<p><strong> </strong></p>
+<p><strong>Step 1: Register an Application in Azure AD</strong></p>
+<ol>
+<li>Go to Azure Portal.</li>
+<li>Navigate to Microsoft Entra ID → Manage → App registrations → New registration.</li>
+<li>Provide:</li>
+<ul>
+<li>Name</li>
+<li>Supported account type</li>
+<li>Redirect URI: https://auth.cloudelements.io/oauth</li>
+</ul>
+<li>Click Register.</li>
+</ol>
+<p><br/><strong>Step 2: Create a Client Secret</strong></p>
+<ol>
+<li>Navigate to Certificates &amp; Secrets → New client secret.</li>
+<li>Copy and securely store:</li>
+<ul>
+<li>Application (Client) ID</li>
+<li>Directory (Tenant) ID</li>
+<li>Client Secret</li>
+</ul>
+</ol>
+<p><br/><strong>Step 3: Configure API Permissions</strong><br/>Configure the required SharePoint or Microsoft Graph permissions in the Azure AD application.<br/>Permissions granted in Azure AD determine what access the element instance receives.<br/>Grant admin consent if required.</p>
+<p><br/><strong>Step 4: Update SharePoint Element Instance Configuration</strong><br/>Update your existing SharePoint element instance with the following values:</p>
+<ul>
+<li><span style="font-size: 14px;">Use graph authentication = true</span></li>
+<li>API Key = Azure AD Application (Client) ID</li>
+<li>API Secret = Client Secret</li>
+</ul>
+<p><span style="font-size: 14px;"><strong>Note:</strong> The MS OAuth Scope field is not required for v1 Graph-based authentication</span></p>
+<p>Save the configuration and re-authenticate the element instance.</p></div></div></div></div>

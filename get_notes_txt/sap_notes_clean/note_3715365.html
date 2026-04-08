@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">If creating a diagram in Solution Documentation with the SMUDE API or the Process Management API, the diagram version ID attribute is not created in the database.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DIA_VERSION_ID, COLLABDIA, IFACEDIA, PROCDIA, UNIVERSALDIA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The cardinality of the attribute DIA_VERSION_ID is 0:1, so it is not a must.<br/>The coding could not distinguish between attribute is saved in the database with initial value 0 or it is not save, this means NULL. But in both cases in the coding it's handled like 0 which is the initial value.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please implement the correction instruction of the SAP Note with transaction SNOTE. Then always, independent with which API, the DIA_VERSION_ID attribute with value 0 is saved in the database when creating the diagram.</p></div></div></div></div>

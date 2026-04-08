@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "DTD Checks for Invoice of Grid Usage Billing" (DE_INV_GUB_DTD), valid as of 01.10.2025, step 0400 requires an error correction due to legal changes issued by the BDEW that were published on 16.01.2026.</p>
+<p>This SAP Note is relevant for the following role: SUP (Supplier).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>IDEXGE, Error Correction, 16.01.2026, Grid Usage Billing, DTD checks for Invoice of Grid Usage Billing, DE_INV_GUB_DTD, 491, 492, 494, GE_INVC_DTD_GUB_2510_CHK_494, E_0406, E_0407</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Error correction due to legal change.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p lang="en-US">Implement the corrections in this SAP Note or import the relevant support package.</p>
+<p lang="en-US">After implementing this SAP Note, when the process value of the item level DTD check step 491 is ZERO_AMT, the system continues to the next item.</p>
+<p lang="en-US">You need to reset the invoice and then trigger the DTD check process again.</p>
+<p lang="en-US">You can verify the fix by checking the DTD check process.</p>
+<p lang="en-US"><strong>Note:</strong></p>
+<p lang="en-US">The Help Portal documentation at "<strong>DTD Checks Executed for Grid Usage Planning</strong>" (menu path: <strong>SAP Intercompany Data Exchange for German Electric Utilities -&gt;</strong> <strong>Bill and Payment Processing for the Deregulated German Market -&gt; Enhancements for Market Partner Roles -&gt; Supplier -&gt; Mass Processing for Bill and Payment Advice Notes -&gt; DTD Check Process for Invoice Documents -&gt; DTD Checks Executed for Grid Usage Billing</strong>) should include the following table entry:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 1235px; height: 52px;">
+<tbody>
+<tr>
+<td><strong>Check Group</strong></td>
+<td><strong>Check ID</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Check Class</strong></td>
+<td><strong>Check Method</strong></td>
+<td><strong>Default Check Result</strong></td>
+<td><strong>To be Implemented by Supplier</strong></td>
+<td><strong>To be Implemented by SAP</strong></td>
+</tr>
+<tr>
+<td>GE_INVC_DTD_GUB_2510_CHK_494</td>
+<td>GE_CHK_0268</td>
+<td>Check if Amount Matches Maximum Demand</td>
+<td>/IDEXGE/CL_CHECK_METHOD_DTD</td>
+<td>CHK_INVC_ITEM_DELV_NOTE_MAX_DM</td>
+<td>SAP_DUMMY</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+</tbody>
+</table></div>
+<p lang="en-US">This will be updated with the next release.</p></div></div></div></div>

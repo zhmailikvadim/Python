@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The /LSCH/ DRF entries are deleted when you upgrade from lower version of ISLS addon to ISLS-400 SP2 or even higher(e.g. ISLS-500), the DRF business objects cannot be replicated automatically to BRH anymore.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>BRH, DRF, ISLS 400 SP2</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>In the release of ISLS-400 SP2, the /LSCH/ DRF Switch BC sets are deleted on the basis that they should be copied only if the switch /LSCH/BF_BRH is activated, this is to keep the system clean when the component is not in use(especially after the merging of BRH, ICSM and CGTO into one single addon).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>You need to reactivate the Switch BC sets following the steps:</p>
+<p>1. Execute t-code sfw_browser<br/>2. Locate to <br/>/LSCH/BF_BRH</p>
+<p style="padding-left: 30px;">/LSCH/SW_BRH_MAIN</p>
+<p style="padding-left: 60px;">/LSCH/SWITCH_ENH</p>
+<p style="padding-left: 90px;">Switch BC Sets</p>
+<p style="padding-left: 120px;">/LSCH/SBC_IDSTC_TEXT<br/> /LSCH/SBC_SET_DRF_ID_CODE<br/> /LSCH/SBC_SET_DRF<br/> /LSCH/SBC_OUTB_CFG<br/> /LSCH/SBC_SET_DRF_OTC<br/> /LSCH/SBC_SET_DRF_BS<br/> /LSCH/SBC_SET_DRF_ATTR<br/> /LSCH/SBC_SET_DRF_BO<br/> /LSCH/SBC_SET_DRFVC_IMPL</p>
+<p>3. Double click on the SBC set<br/>4. Set "Activation Options-Ignore Previous Activations" to Clicked-On<br/>5. Click "Activate Switch BC Set" button<br/>6. Repeat 3-5 for all the Switch BC sets listed above.</p></div></div></div></div>

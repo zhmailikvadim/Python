@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When synchronizing invoices between the Kazakhstan Invoice Journal (transaction FIKZREGINV or RPFIKZ_REGINV) and the Kazakhstan ESF (Electronic Invoice Information System), the following warning message appears:</p>
+<ul><li>An error occurred: E::000 Error when calling SOAP Runtime Functions:. For more information please see Application Log.</li></ul>
+<p>In the Application Log (function View Application Log), the following error is displayed:</p>
+<ul><li>Error when calling SOAP Runtime functions: soap:Server Лимит не может превышать 250 Лимит не может превышать 250<br/>J_3RF_DDX020</li></ul>
+<p>The error message translates to:</p>
+<ul><li>“The limit cannot exceed 250.”</li></ul>
+<p></p>
+<p><strong><span style="color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></span></strong></p>
+<p><img class="img-responsive" height="82" src="/documents/customerkba/k9-MtSJ7h3vuJVtcpO4Ef69qntyEo0yDJt9j41D62eo" width="708"/></p>
+<p><img class="img-responsive" height="188" src="/documents/customerkba/dJ2aQ7LHBdoZIDxvbsYpHeMs41mqQrgBREv_EtY1Yd4" width="852"/></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP ERP 6.0</li><li>SAP S/4HANA</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue is caused by a system limitation introduced by the Kazakhstan ESF portal.</p>
+<p>The ESF system allows a maximum of 250 invoices per synchronization request (upload or download).</p>
+<p>If more than 250 invoices are included in a single request, the ESF portal rejects the request and returns the above error message.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To resolve the issue, maintain the synchronization limits in the SAP system.</p>
+<ol><li>
+<p>Go to transaction FIKZ_DI_BF.</p>
+</li><li>
+<p>Set the following parameters to <strong>250</strong>:</p>
+<ul><li>
+<p><em>Limit of Invoices to Download at Once</em></p>
+</li><li>
+<p><em>Limit of Invoices to Upload at Once</em></p>
+</li></ul>
+</li></ol>
+<p>After the adjustment, the system automatically splits invoices into batches of maximum 250 documents per request.</p>
+<p>This ensures compliance with the ESF system limitation and prevents the error from occurring.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Do you want to sync data with the web services?, SRT_UTIL, EGOV, Display Incoming Invoices List, Display Outgoing Invoices List, SLG1</p></div></div></div></div>

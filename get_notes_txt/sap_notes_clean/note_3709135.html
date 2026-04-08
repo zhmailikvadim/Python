@@ -1,0 +1,157 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">This guide helps to get details on the Warehouse Order (WO) and Warehouse Task (WT) information from SAP S/4HANA Cloud Public Edition – Embedded WM to external systems (for example, automation equipment, robots, or AS/RS) using the Warehouse Order and Warehouse Task – Send to External System (A2A) API. </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p><span style="font-size: 10pt;">SAP S/4HANA Cloud Public Edition</span></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<div>
+<p>The outbound integration for Warehouse Orders (WO) and Warehouse Tasks (WT) is configured using SAP standard Communication Management capabilities. Once configured, the relevant WOs and WTs are distributed to the external system via SOAP messages. </p>
+</div>
+<div>
+<p>Upon receipt of these messages, the processing of the WOs and WTs becomes the responsibility of the external system. This includes updates (confirmation / cancellation), which must be sent back to SAP using the <strong><a href="https://api.sap.com/api/WAREHOUSEORDER_0001/overview" rel="noopener noreferrer nofollow" target="_blank">Warehouse Order and Task (A2X)</a>,</strong> ensuring that all process updates are correctly reflected in Warehouse Management. </p>
+</div>
+<div>
+<p><span role="presentation"><img class="img-responsive" height="325" src="/documents/customerkba/Kd9_F0NHiT7LYnXeIdrzmJHYwX9xV6rscAZb7MoomAo" width="624"/></span> </p>
+</div>
+<div>
+<p><strong>1. Which communication scenario is required for Warehouse Order and Warehouse Task for outbound integration? </strong></p>
+</div>
+<div>
+<p>The outbound integration for Warehouse Orders (WO) and Warehouse Tasks (WT) is configured using SAP standard Communication Management in SAP S/4HANA Cloud Public Edition. </p>
+</div>
+<div>
+<p>SAP provides further details in the official Setup Guide, which describes in detail how to configure: </p>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Communication User </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Communication System </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Communication Arrangement with Outbound Service </p>
+</li></ul>
+</div>
+<div>
+<p>Including authentication, endpoint configuration, and additional recommended properties. For the complete and authoritative configuration procedure, refer to the Setup Guide, chapter 4, as described in the <strong><a href="https://me.sap.com/roadmapviewer/group//roadmap/82b2db84548d41209cda972f0fac428b:FA163ED752201EDABF%E2%80%A6" rel="noopener noreferrer nofollow" target="_blank">Roadmap Viewer</a></strong> at:  &gt; Accelerators -&gt; Realize -&gt; Warehouse Management Setup Guide.docx (Public). </p>
+<p></p>
+</div>
+<div>
+<p><strong>2. Are there any recommended design principles for outbound A2A communication? </strong></p>
+</div>
+<div>
+<p>Yes. High-level design recommendations are documented in the mentioned Setup Guide and should be considered when configuring the integration. </p>
+</div>
+<div>
+<p>These include: </p>
+</div>
+</div>
+<div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Using a dedicated communication arrangement for outbound communication (SOAP) to ensure a clear separation of concerns. </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Creating separate communication systems and communication arrangements for each external receiver system when multiple external systems (for example, robots and an AS/RS) are connected. </p>
+</li></ul>
+</div>
+<div>
+<p>The detailed explanation of these recommendations is maintained exclusively in the Setup Guide. </p>
+</div>
+<div>
+<p><strong>3. How are outbound Warehouse Order and Warehouse Task messages triggered? </strong></p>
+</div>
+<div>
+<p>Once the communication arrangement is active and correctly configured: </p>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Warehouse Order and Warehouse Task outbound messages are triggered automatically by standard embedded WM processing. </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>A valid queue must be determined and consistently used for Warehouse Orders (WO) and Warehouse Tasks (WT). </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>If the queue used in WM does not match the operating environment of the external system, the outbound SOAP message is not triggered. </p>
+</li></ul>
+</div>
+<div>
+<p>No additional custom development is required. </p>
+</div>
+<div>
+<p><strong>4. What happens after the outbound message is sent? </strong></p>
+</div>
+<div>
+<p>After the external system receives the outbound SOAP message, processing Warehouse Orders and Warehouse Tasks is handled externally. </p>
+</div>
+<div>
+<p>Execution feedback, such as confirmations or cancellations, must be sent back to SAP using the Warehouse Order and Task (A2X) interface to ensure that execution status is correctly reflected in Embedded EWM. </p>
+</div>
+<div>
+<p><strong>5. How can outbound message processing be monitored? </strong></p>
+</div>
+<div>
+<p>Outbound processing can be monitored using standard integration and message monitoring tools in SAP S/4HANA Cloud Public Edition. </p>
+</div>
+<div>
+<p>Monitoring supports validation of: </p>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Successful message transmission </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Technical errors during outbound processing </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Communication and authentication issues </p>
+</li></ul>
+</div>
+<div>
+<p>For further details, refer to:  <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/c46da892efa14cea8347e9b872199d6f/bc8ae207b17444f9873c14ca02b2a9b2.html" rel="noopener noreferrer nofollow" target="_blank">Warehouse Order and Task – Send to External System (A2A)</a> </p>
+</div>
+<div>
+<p><strong>Additional Information </strong></p>
+</div>
+</div>
+<div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>The Warehouse Order and Warehouse Task – Send to External System (A2A) API is available as of SAP S/4HANA Cloud Public Edition release 2602. </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>The integration is fully based on the standard Communication Arrangement with Outbound Service framework. </p>
+</li></ul>
+</div>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><div>
+<ul style="list-style-type: disc;"><li>
+<p>Warehouse Order and Task – Send to External System (A2A) <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/c46da892efa14cea8347e9b872199d6f/bc8ae207b17444f9873c14ca02b2a9b2.html?version=2602.VAL" rel="noopener noreferrer nofollow" target="_blank">https://help.sap.com/docs/SAP_S4HANA_CLOUD/c46da892efa14cea8347e9b872199d6f/bc8ae207b17444f9873c14ca02b2a9b2.html?version=2602.VAL</a> </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Communication Arrangement with Outbound Service – Setup Guide <br/><a href="https://help.sap.com/docs/s4hana-best-practices/setting-up-warehouse-inbound-processing-3br-feddbd6f25c875b6623f5db0cf698660/communication-arrangement-with-outbound-service" rel="noopener noreferrer nofollow" target="_blank">https://help.sap.com/docs/s4hana-best-practices/setting-up-warehouse-inbound-processing-3br-feddbd6f25c875b6623f5db0cf698660/communication-arrangement-with-outbound-service</a> </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Communication Arrangements – Overview <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/0f69f8fb28ac4bf48d2b57b9637e81fa/fab3fd449cf74c6384622b98831e989e.html" rel="noopener noreferrer nofollow" target="_blank">https://help.sap.com/docs/SAP_S4HANA_CLOUD/0f69f8fb28ac4bf48d2b57b9637e81fa/fab3fd449cf74c6384622b98831e989e.html</a> </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Communication Scenario – Concept <br/><a href="https://help.sap.com/docs/abap-cloud/abap-integration-connectivity/communication-scenario" rel="noopener noreferrer nofollow" target="_blank">https://help.sap.com/docs/abap-cloud/abap-integration-connectivity/communication-scenario</a> </p>
+</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP S/4HANA Cloud Public Edition, Embedded WM, Warehouse Order API, Warehouse Task API, Communication Arrangement, Outbound Service, A2A Integration, SCM-EWM-API-2CL, Release 2602. </p></div></div></div></div>

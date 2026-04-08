@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When adding component and creating subnetwork in a collective order, error Message C2145 "Subnetwork for component &amp;1 &amp;2 cannot be created" occurs, even though the following causes in error diagnosis are not fulfilled:</p>
+<p>The collective order was not completely imported for processing</p>
+<ul><li>the component was deleted</li><li>a subtree already exists for the component</li><li>a goods issue has already been carried out for the component</li><li>the component has no requirements quantity</li><li>the component is a split batch record</li><li>the material status of the component does not permit in-house production</li><li>the component is
+<ul><li>a by-product</li><li>a co-product</li><li>externally procured</li><li>a variable-sized item</li><li>a text item</li><li>a part to be discontinued</li><li>a bulk material</li><li>an intra material</li><li>a pipeline material</li></ul>
+</li></ul>
+<p><span style="color: rgb(224, 62, 45);"><span><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></span> </span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p>
+<div>
+<div> </div>
+</div>
+<p></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Go to Change Production Order app.</li><li>Enter a collective order.</li><li>Add a component, "Component &amp; &amp; is a direct production assembly Create subnetwork?" dialog occurs.</li><li>Click "Yes", error "Subnetwork for component &amp;1 &amp;2 cannot be created (Message no. C2145)" occurs.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>System will check if entire collective order is processed when creating subnetwork for component. If not, which means the value of "Process Entire Collective Order" is empty in coding, then system will prevent the creation of the subnetwork.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Make sure entire collective order is processed. There are two ways:</p>
+<ol><li>Choose "Collective Order" selection when entering the production order.<br/><img alt="" class="img-responsive" height="432" src="/documents/customerkba/LAXih3A3lbPb0PT_oCfLians3hLnF2vudB2mO970eo8" width="650"/></li><li>Click "Read Total" button in order structure screen to make sure all orders are ticked.<br/><img alt="" class="img-responsive" height="420" src="/documents/customerkba/dkuUBJRsWPivXmPN_s7zznf71q4pbuhFDir1y0qeHC4" width="650"/></li></ol>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>C2145, collective order, sub-network, production order, subtree creation, Process Entire Collective Order, CO02</p></div></div></div></div>

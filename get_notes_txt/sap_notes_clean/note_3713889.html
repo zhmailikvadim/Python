@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When opening a query <span>in a List View via Web Client, the following error occurs:</span></p>
+<p><em> reproduce: ======Can't create element====== Node: {"ctrlType":"menu","items":<span class="error">[{"ctrlType":"Button","guid":"cx8TAnznA2DJnbf83Lt7Tq","text":"Define New","icon":null,"isLegacy":true,"editable":{},"type":"Transparent","__NODE_PATH__":"ListView.menu.Button","ctrl":"b1.apps.player.control.button.Button","option":{}}]</span>,"guid":"eYw7UEkk3Qynbr4DjuHNax","text":"Views","icon":null,"isLegacy":true,"editable":{},"loadItems":{"procName":"B1_COMMON.MenuButton.loadViewsItem","isServerSide":false},"itemSelected":{"procName":"B1_COMMON.MenuButton.onAnalyticMenuSelect","isServerSide":false},"type":"Transparent","_NODE_PATH_":"ListView.menu","ctrl":"b1.apps.player.widget.MenuButtonWidget","option":{}} </em></p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<p><strong>Prerequisites:</strong></p>
+<p><span>Working with Web Client.</span></p>
+<p><strong>Scenario:</strong></p>
+<p>Go to <em>Analytics → User Defined Query </em><span>→</span> save the query below, for example:</p>
+<p>SELECT T0.[ItemCode], T0.[ItemName], T0.[OnHand],</p>
+<p>T0.[ReorderQty] AS [מלאי_מומלץ],<br/> T0.[MinLevel],<br/> T0.[ReorderQty] - T0.[OnHand] [כמות_מומלצת_לרכישה] <br/>FROM OITM T0<br/>WHERE T0.[ReorderQty] &gt; T0.[OnHand]</p>
+<p><strong>Expected behavior:</strong></p>
+<p>Field names can contain only Unicode letters, digits, and underscores.</p>
+<p><strong>Actual behavior:</strong></p>
+<p><span class="error">When running a query as above that includes a Hebrew field name (t<span>his</span> affects multiple languages, including Hebrew, Arabic, and Chinese, etc.) or alias and clicking on "Open List View," the Web Client returns an error:</span></p>
+<p><em><span class="error"> reproduce: ======Can't create element====== Node: {"ctrlType":"menu","items":<span class="error">[{"ctrlType":"Button","guid":"cx8TAnznA2DJnbf83Lt7Tq","text":"Define New","icon":null,"isLegacy":true,"editable":{},"type":"Transparent","__NODE_PATH__":"ListView.menu.Button","ctrl":"b1.apps.player.control.button.Button","option":{}}]</span>,"guid":"eYw7UEkk3Qynbr4DjuHNax","text":"Views","icon":null,"isLegacy":true,"editable":{},"loadItems":{"procName":"B1_COMMON.MenuButton.loadViewsItem","isServerSide":false},"itemSelected":{"procName":"B1_COMMON.MenuButton.onAnalyticMenuSelect","isServerSide":false},"type":"Transparent","_NODE_PATH_":"ListView.menu","ctrl":"b1.apps.player.widget.MenuButtonWidget","option":{}} </span></em></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""><span>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section </span><strong>References</strong><span> below lists the related feature package or patch once they become available. Be aware that </span><strong>References</strong><span> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</span></p>
+<p> </p>
+<p><strong>Workaround:</strong></p>
+<p>Keep the SQL UDQ in English characters, in the Web Client UDQ "Columns" section the important thing is that the "<em>Name</em>" field will be only in English. Then there is no problem changing the text <em>Description</em> field to another language. If this is done, the UDQ will validate and will open the List View correctly, displaying the foreign language <em>Description</em> as the column text.</p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p id=""><span>List View</span></p></div></div></div></div>

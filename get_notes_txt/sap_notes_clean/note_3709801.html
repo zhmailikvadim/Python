@@ -1,0 +1,42 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0"></p>
+<ul><li>Newly updated field labels in Story Designer are not appearing in story visualizations</li><li>Field labels display old values despite successful label changes in designer interface</li><li>Label updates visible in edit mode but not reflected in story view mode</li><li>Inconsistent label display across different widgets or story components</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors HCM Suite</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><h4 data-toc-skip="">Possible Root Causes</h4>
+<h5 data-toc-skip="">1. Story Designer Cache Issues</h5>
+<ul><li>Story Designer interface caching previous label configurations</li><li>Browser cache retaining old field label definitions</li><li>Story session cache not refreshing after label changes</li><li>Widget-level cache preventing label update propagation</li></ul>
+<h5 data-toc-skip="">2. Label Hierarchy Conflicts</h5>
+<ul><li>Model-level labels overriding Story Designer changes</li><li>Data source field labels taking precedence over custom labels</li><li>Widget-specific label settings conflicting with designer updates</li><li>Query Designer labels not synchronized with Story Designer changes </li></ul>
+<h5 data-toc-skip="">3. Field Mapping and Configuration</h5>
+<ul><li>Field mappings not updated after label changes</li><li>Calculated field labels not refreshing properly</li><li>Dimension attribute labels not propagating to visualizations</li><li>Measure label formatting preventing display updates</li></ul>
+<h5 data-toc-skip="">4. Translation and Localization Issues</h5>
+<ul><li>Missing translations for custom field labels causing display problems</li><li>Language-specific label configurations not properly maintained </li><li>Extension field labels requiring translation setup even for original language</li><li>Locale settings affecting label visibility in different languages</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><h4 data-toc-skip="">Resolution Steps</h4>
+<h5 data-toc-skip="">Option 1: Story Designer Label Refresh</h5>
+<ol><li>
+<p>Force Label Update</p>
+<ul><li>Re-edit field labels in Story Designer field properties</li><li>Save story explicitly after making label changes</li><li>Refresh Story Designer interface and verify label persistence</li><li>Test label display in story view mode after refresh</li></ul>
+</li><li>
+<p>Field Remapping</p>
+<ul><li>Remove affected fields from widgets and re-add with updated labels </li><li>Update field mappings in Story Designer data panel</li><li>Refresh field list in Story Designer to pull latest configurations</li><li>Verify field binding reflects updated label information</li></ul>
+</li></ol>
+<h5 data-toc-skip="">Option 2: Translation and Language Configuration</h5>
+<ol><li>
+<p>Extension Field Translation Setup</p>
+<ul><li>Navigate to Extensibility → Language Adaptation for extension fields </li><li>Maintain translations for all extension fields, even for original language</li><li>Make dummy changes to extension fields to trigger model updates</li><li>Verify translation setup for custom field descriptions </li></ul>
+</li><li>
+<p>Language-Specific Label Management</p>
+<ul><li>Check user locale settings and adjust if necessary </li><li>Verify label translations exist for user's language preference </li><li>Test story with different language settings to isolate issues</li><li>Update field descriptions and labels in Learning Administration if applicable </li></ul>
+</li></ol>
+<h5 data-toc-skip="">Option 3: Widget-Level Label Override</h5>
+<ol><li>
+<p>Manual Widget Label Update</p>
+<ul><li>Access individual chart/table styling and label options</li><li>Override field labels directly at widget level</li><li>Apply custom formatting to display updated labels</li><li>Update axis labels, legends, and column headers manually</li></ul>
+</li><li>
+<p>Widget Recreation</p>
+<ul><li>Delete problematic widgets showing incorrect labels</li><li>Recreate charts/tables with updated field configurations</li><li>Use copy/paste functionality to reset widget label settings</li><li>Apply consistent labeling across all recreated components</li></ul>
+</li></ol>
+<h5 data-toc-skip="">Option 4: Cache and Session Resolution</h5>
+<ol><li>
+<p>Clear Story Cache</p>
+<ul><li>Perform hard browser refresh (Ctrl+F5 or Cmd+Shift+R)</li><li>Clear all browser data including cache and local storage</li><li>Reset SAC application cache through developer tools</li><li>Clear any saved story states or bookmarks with old labels</li></ul>
+</li><li>
+<p>Story Recreation for Persistent Issues</p>
+<ul><li>Create new story instance to test label visibility </li><li>Recreate problematic reports if existing stories don't reflect changes</li><li>Import updated story templates from Content Store if available</li><li>Apply template-specific customizations with proper label configuration</li></ul>
+</li></ol></div></div></div></div>

@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">During Business Partner replication from SAP S/4HANA Cloud Public Edition to Sales Cloud v2 (or other external systems) using standard replication mechanisms (e.g. SAP_COM_008, <em>Replicate by Replication Model</em>), the replication fails with the following error:"Value is not a valid date in accord with the XML format for ABAP".</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>In SAP S/4HANA Cloud, maintain a Business Partner with Payment Card (Credit Card) data under:</p>
+<ul><li>
+<p>Business Partner → Payment Transactions</p>
+</li></ul>
+</li><li>
+<p>In the credit card details:</p>
+<ul><li>
+<p>Valid To Date is maintained</p>
+</li><li>
+<p>Valid From Date is left blank</p>
+</li></ul>
+</li><li>
+<p>Trigger BP replication:</p>
+<ul><li>
+<p>Via Replicate by Replication Model</p>
+</li><li>
+<p>Or during initial load to Sales Cloud v2 / C4C</p>
+</li></ul>
+</li><li>
+<p>Replication fails before outbound XML is successfully generated</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The issue occurs due to the "VALID_FROM" date field in the Business Partner data being set to "01/01/0001 00:00:00" in the table BUT000. This invalid date format causes the XML conversion error during the replication process.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Maintain the “Valid From Date” for all affected Payment Card entries:</p>
+<ol><li>Open the Business Partner</li><li>Navigate to Payment Transactions → Credit Card Details</li><li>Enter a valid Valid From Date, for example, If the "VALID_FROM" date is set to "01/01/0001 00:00:00", update the field to a valid date format, such as "01/01/1900".</li><li>Ensure that the "VALID_FROM" date is properly maintained in the credit card details under payment transactions for the Business Partner.</li><li>Retest the replication process using the standard app "Replicate by replication model" to confirm the resolution of the issue.</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: [KBA 3101357 - BP Replication via Web Service fails with CX_SY_CONVERSION_NO_DATE_TIME (DRF_OUTBOUND012 &amp; DRF_OUTBOUND081)](https://me.sap.com/notes/0003101357)</li><li>Refer to: [SAP Note 3072643 - Latest information about support platforms](https://me.sap.com/notes/0003072643)</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>business partner replication, SAP S/4HANA Cloud, Sales Cloud, replication error, value is not a valid date, XML format for ABAP, SOAP error log, VALID_FROM date, initial load, SAP_COM_008, replication model, CX_SY_CONVERSION_NO_DATE_TIME, DRF_OUTBOUND012, DRF_OUTBOUND081</p></div></div></div></div>

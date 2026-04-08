@@ -1,0 +1,250 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You have implemented or wish to upgrade your system to S/4HANA OP 2025 FPS1 (On-premise/Private cloud) for Oil &amp; Gas Field Logistics.</p>
+<p>Please be aware of the restrictions as part of this release.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Field Logistics, Field, logistics, restrictions, oil, s/4, S/4HANA, HANA, Hold and Cross-docking, cross-docking, F1706, putaway, put away, storage, pick, Process Receipt, F5316, Manage Logistics - Supplier items, F5082, Process Cross-Plant Receipts, F4713, Pack Container, F5786, Manage Field Logistics Voyages, F6040, Initiate Returns by Product, F4252, Initiate Transfer, F6664, Manage Kits, F8005, Process Returned Items, F7985, Logistics Tracking, F7382</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>General notes</strong></p>
+<p>The Field Logistics process is supported only for IM or embedded EWM; but not for decentral EWM or Stock Room Management.</p>
+<p>The supply process derivation of Field Logistics is only integrated with the WebDynpro application for Process Maintenance Order (W0017). It is not integrated with the following ways of creating or changing maintenance orders: transactions  IW31/IW32/IW38, Migration Cockpit, other backend creation of maintenance orders.</p>
+<p>Field Logistics does not support version management concept when changing core objects like Purchase Order using Field Logistics applications.</p>
+<p><strong>Supply Process determination and handling</strong></p>
+<p>Please note that Field logistics can be used with both inventory management scenarios (IM) with and without inbound delivery (LE), as well as warehouse scenarios (embedded Extended Warehouse Management). Most of the restrictions in the list below apply for the usage of EWM, but some are general for all cases.</p>
+<ol>
+<li>“Hold and Cross-docking” functionality is applicable only for specific supply processes (SP) where the linking of all documents starting from the maintenance/network order, through the stock transfer order between remote and base, and finally the outbound delivery from the base can be established. For all other supply processes, the functionality does not apply. Even if the Hold flag is set or removed in the maintenance/network order in case of the other SPs, this will have no effect on the handling while receiving at base. These items will not be considered for  “Hold &amp; Cross- docking”, they will be subject to the usual goods receipt and, if EWM is used, putaway into storage.</li>
+<ul>
+<li>The “Hold &amp; Cross-docking” functionality is supported for the following supply processes (please refer to the SAP help documentation for supply processes and versions):</li>
+</ul>
+</ol>
+<ul>
+<ul>
+<ul>
+<li>SP13 with versions “V1”, “V3”</li>
+<li>SP14 with versions “Blank” and “V1”</li>
+</ul>
+<li>The “Hold &amp; Cross-docking” functionality is not supported for the following supply processes:</li>
+<ul>
+<li>SP11 with versions “Blank”, “V1”, “V2” and “V3”</li>
+<li>SP12 with versions “Blank” and “V1”</li>
+<li>SP13 with versions “Blank” and “V2”</li>
+<li>SP14 with version “V4”</li>
+</ul>
+</ul>
+</ul>
+<ol start="3">
+<li>Restrictions related to Quality Management with EWM:</li>
+</ol>
+<ul>
+<ul>
+<li>Usage decision for a partial quantity of an item is not supported</li>
+<li>The usage decision code “Sample Consumption” is not supported in the EWM inspection</li>
+<li>“Hold and Cross-docking” is not supported if the usage decision for an inspection lot is executed using transaction <em>/SCWM/QINSP_S4</em> (mass transaction to decide inspection lots in EWM)</li>
+</ul>
+</ul>
+<ol start="4">
+<li>In case the quantity of an item with status “On hold” or “Cross docking” is manually released to stock in EWM, then manual split of the deliveries and handling units is not supported. Once the stock is released, it cannot be referenced back to its original maintenance/network order. The release to stock is supported only for a scenario of scrapping. For more details on the scrapping refer to the documentation <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/87f9b54f9c4f4e75aff0061860a6589a/b9e53468ff0947679144d268bd7ce5c1.html?locale=en-US&amp;state=DRAFT&amp;version=2208.500&amp;q=scrapping" target="_blank">here</a>.<br/><br/></li>
+<li>The Field Logistics “Hold and Cross-docking” functionality does not support packing scenarios in EWM where complete or partial quantities of items with different Field Logistics status are packed into the same HU.<br/><br/></li>
+<li>For Field Logistics relevant EWM deliveries, only a late ODO split on HU level is possible. A split for unpacked outbound delivery order items (= unpicked items) with a Field Logistics processing status ‘Hold’ or ‘Cross-Docking’ will be prevented.<br/><br/></li>
+<li>Hold &amp; Cross docking functionality is not supported for inbound deliveries with a line item for the handling unit packaging material.<br/><br/></li>
+<li>Hold &amp; Cross docking functionality is not supported in case items from different plant maintenance/network orders are packed into the same HU on Logistics Execution (LE) side (even if they belong to the same purchase order/inbound Delivery).<br/><br/></li>
+<li>Restrictions related to nested HU’s in EWM:</li>
+</ol>
+<ul>
+<ul>
+<li>Packing of Field Logistics cross docking relevant HUs into top HUs or packing of nested HUs is only supported in the hold area after putaway for hold area is done, or the goods issue area after picking is done (implicitly this means that packing nested HUs in the GR-Area is not supported)</li>
+<li>Nested HUs are not supported before the usage decision is performed for QM relevant products</li>
+</ul>
+</ul>
+<ol start="10">
+<li>Consolidation of purchase requisitons from SP11, SP12 and SP14 into one purchase order, or consolidation of stock transfer requisitions from SP11, SP12 and SP14 into one stock transfer order, or consolidation of purchase requisitions/stock transfer requisitions from two different supply processes is not supported in Field Logistics. Consolidation of purchase requisitions into one purchase order and stock transfer requisitions into one stock transfer order is supported only for SP13 supply process.<br/><br/></li>
+<li>During processing of maintenance or network order, in case there is a change in assigning supply process/supply process versions in <em>Maintain Supply Process determination by Plant</em> configuration, the behavior of creating follow on documents will not change in the maintenace or network order being processed</li>
+<li>Alternate base plant supply process is not supported in case of single plant scenario.<br/><br/></li>
+<li>When output type is configured to auto pick LE OBD’s, in case of processing non-stock items in warehouse, user must manually confirm the pick warehouse task in the cross-docking OBD that is created by Field Logistics.<br/><br/></li>
+<li>In case Special Procurement Key (SPK) is maintained that do not fit the best practices master data, then the alternate plant functionality will not work, as SPK will overwrite the plant value.</li>
+<li>Determination of supply process for Maintenance Order (MO) and Network Order (NO): when supply process is being determined at any point in time during document creation or change, if it is not possible for the logic to back track to the source order (MO or NO), by default Field Logistics will use the determination logic from the following path in Customizing, under <em>Logistics General -&gt; Field Logistics -&gt; General -&gt; Settings for Maintenance Orders -&gt; Maintain Supply Process Determination by Plant for Maintenance Order</em><br/><br/></li>
+<li>The V5 version for supply processes defaults the item category in the network order components to 'N'. However, when a user tries to create components with SP11, SP12 and SP13 V5 account assigned STR with PR/Res set to immediately, and also inputs item category as L manually before pressing enter; Field Logistics overwrites the item category to N. After determining Supply process, Project systems would have already set procurement type to "Reservation for Network" based on initial user input of item category L. This creates an inconsistent data. It is hence recommended in such cases that the component must be deleted and re-entered correctly.<br/><br/></li>
+<li>Field logistics does not support update of requisitioner and tracking number information in a purchase requisition creation during SP13 STR to STO conversion. The information should be updated using ME52N transaction or its relevant purchase requisition Fiori application.<br/><br/></li>
+<li>In case it is required to perform partial quantity reversal of good receipts multiple times using MIGO transaction, then it is recommended to perform goods receipt reversal based on respective material documents and not based on purchase order (using movement type 102).<br/><br/></li>
+<li>Hold process is not yet supported for account assigned STR's created from maintenance order or network order for supply processes SP11, SP12 and SP13 with version V5.<br/><br/></li>
+<li>During Move to Stock into a EWM storage location, a EWM Inbound Delivery Order is created for which GR should be done manually using the core transaction /SCWM/PRDI.<br/><br/></li>
+<li>The following restrictions apply with respect to Project Systems and Field Logistics integration functionality:</li>
+<ul>
+<li>Currently in Field Logistics there is no provision to switch on/off Network Order usage. Hence, if a customer has configured Field Logistics plants as well as switched on the Field Logistics business function, then the Field Logistics processes will be triggered in Network Order creation as well.</li>
+<li>This also means, that any warnings/error messages will be visible on the screen whenever network orders are created for those plants, although the organization does not want to use Network Order with Field Logistics.</li>
+<li>Currently, configuring user status profiles for Network Order in Field Logistics is made mandatory. Not configuring the same will display an error on the screen during create/save of Network orders.</li>
+<li>When creating a network order containing both non-stock and stock items, the long text for non-stock items is not updated in the purchase requisition items while it is working correctly for stock items.</li>
+</ul>
+</ol>
+<p><strong>Process Receipt Fiori App</strong></p>
+<p>Please note that Field logistics can be used with both inventory management scenarios (IM) with and without inbound delivery (LE), as well as warehouse scenarios (embedded Extended Warehouse Management). Most of the restrictions in the list below apply for the usage of EWM, but some are general for all cases.</p>
+<ol>
+<li>The Field Logistics “Hold and Cross-docking” functionality is supported for dual plant setup only at base plant with inventory management (use of IM) as well as warehouse scenarios (use of embedded Extended Warehouse Management) while receiving, primarily with the Fiori applications <em>Process Receipts</em> (F5316) and <em>Change Inbound Deliveries – Deliveries</em> (F1706) . It is not considered relevant and is not supported at a remote plant or in a single plant setup.<br/><br/></li>
+<li>“Hold and Cross-docking” functionality is applicable only for specific supply processes (SP) where the linkage of all documents starting from the maintenance/network order, through the stock transfer order between remote and base and finally the outbound delivery from the base  can be established. For all other supply processes, the functionality does not apply. Even if the Hold flag is set or removed in the maintenance/network order in case of the other SPs, this will have no effect on the handling while receiving at base. These items will not be considered for  “Hold &amp; Cross- docking”, they will be subject to the usual goods receipt and, if EWM is used, putaway into storage.</li>
+<ul>
+<li>The “Hold &amp; Cross-docking” functionality is supported for the following supply processes (please refer to the SAP help documentation for supply processes and versions):</li>
+</ul>
+</ol>
+<ul>
+<ul>
+<li>SP13 with versions “V1”, “V3”</li>
+<li>SP14 with versions “Blank” and “V1”</li>
+</ul>
+</ul>
+<ol>
+<ul>
+<li>The “Hold &amp; Cross-docking” functionality is not supported for the following supply processes:</li>
+</ul>
+</ol>
+<ul>
+<ul>
+<li>SP11 with versions “Blank”, “V1”, “V2” and “V3”</li>
+<li>SP12 with versions “Blank” and “V1”</li>
+<li>SP13 with versions “Blank” and “V2”</li>
+<li>SP14 with version “V4”</li>
+</ul>
+</ul>
+<ol start="3">
+<li>Creation of handling units (HUs) is mandatory for a goods receipt to be executed as part of the “Hold &amp; Cross-docking” process with EWM. In case there are no handling units, it is possible to post goods receipt by selecting “Forego cross-docking”,which will change the Field Logistics status to “Putaway to storage”. In such cases, the usual putaway process (without Hold &amp; Cross Docking) will be executed in EWM. Note that outbound documents will still be created (Stock Transfer Order, Outbound Delivery).<br/><br/></li>
+<li>Customers using EWM with Field Logistics should not configure Post Processing Framework (PPF) for creation of pick and putaway warehouse tasks as follow-on processes after goods receipt. The tasks are created automatically when goods receipts posting is done using either of the Fiori applications <em>Process Receipts</em> (F5316) or <em>Change Inbound Deliveries – Deliveries</em> (F1706). <br/><br/></li>
+<li>In any of the following cases, if an item is assigned to a container before goods receipt, the association in the container remains with the purchase order only:</li>
+</ol>
+<ul>
+<ul>
+<li>Goods receipt in IM or Put away scenarios in EWM (e.g. all versions of SP11 and SP12)</li>
+<li>Cross-docking item for which the “Forego cross-docking” flag was set (EWM)</li>
+</ul>
+</ul>
+<p>For the Hold and Cross-docking cases, the association is replaced with the outbound delivery as soon as this is created after goods receipt.</p>
+<p> If a container has a purchase order associated with it, it does not allow dispatch. There are 2 solutions to this:</p>
+<ul>
+<ul>
+<li>Remove the associated purchase order item before goods receipt from the Fiori app <em>Process receipts</em>, or after goods receipt from the Fiori app <em>Pack Containers</em></li>
+<li>Manually create a stock transfer order and outbound delivery for the “forego cross-docking” item, then pick the outbound delivery to ensure a goods issue of it and a dispatch of the container is enabled</li>
+</ul>
+</ul>
+<ol start="6">
+<li>In case an EWM inbound delivery has items with different Field Logistics (FL) status (the three options are “Cross-docking”, “On hold and “Put away to storage”) and not all items are packed, then it is only possible to receive all items at once from the list page of the <em>Process Receipts</em> Fiori app. Receiving each item from the object page individually or receiving partial quantity of an item is not supported. In case of goods receipt reversal is executed for an individual item of inbound delivery, then the goods receipt for all the items in the material document is reversed.<br/><br/></li>
+<li>Restrictions to goods reversal in the Process Receipts application:</li>
+</ol>
+<p>Goods receipt reversal cannot be performed in the following cases:</p>
+<ul>
+<ul>
+<li>Usage decision is completed for quality managed material</li>
+<li>Subsequent warehouse task is confirmed</li>
+<li>Open warehouse task exists. In this case, the user needs to cancel the warehouse task before proceeding with the goods receipt reversal</li>
+</ul>
+</ul>
+<ol start="8">
+<li>In case of a partial receipt of warehouse inbound delivery (only some items of the delivery are to be received) the quantities for the non-received items are updated to zero and a new inbound delivery is automatically created for the remaining quantities of these items. If the partial goods receipt fails, the quantities of the original delivery are still set to zero, but a new inbound delivery must be manually created.<br/><br/></li>
+<li>The Fiori app <em>Process receipts</em> does not support receipt of LE inbound deliveries with handling units.<br/><br/></li>
+<li>In case of receiving items into valuated or non-valuated goods receipt stock (movement type 109 or 105), partial quantity receivable is not supported. This means Process Receipts application will support 109 or 105 movement type with the same quantity for which 107 or 103 is posted using Post Goods Movement application (MIGO). This also applies to HU quantity in an inbound item quantity when the item is packed in a HU.<br/><br/></li>
+<li>It is not supported for EWM delivery items with Field Logistics (FL) status "Cross-docking" or "On hold":</li>
+</ol>
+<ul>
+<ul>
+<li>To receive more than one batch number per item</li>
+<li>To receive cross-delivery HUs (HU containing also content belonging to another inbound delivery)</li>
+<li>To pack cross-delivery HUs</li>
+</ul>
+</ul>
+<ol start="12">
+<li>In case of receiving non-stock items, it is recommended to maintain different number ranges for LE HU and warehouse HU's in order to aviod duplicate entries in the object of Fiori app <em>Process receipts.<br/><br/></em></li>
+<li>Field Logistics does not support receiving or issuing of items with alternate unit of measure across its supply chain.<br/><br/></li>
+<li>Process Receipts application supports receiving of PO items with account assignment categories F (Order) and N (Network order) and item categories Blank (Standard), L (Sub-Contracting), E (Enhanced Limits), R (Rental Text Item) and V (Supplier Owned).</li>
+<li>Process Receipts application does not support tagging for Field Logistics packages.</li>
+<li>When items are partially reversed using MIGO transaction with movement type 102 for purchase order after receiving, the received quantity in Process Receipts application will continue to display the quantity from the material document that was created during receipt.</li>
+<li>The Process Receipts application will support goods receipt of serialized materials with Inbound Delivery exclusively for SDCC value 01 (None).</li>
+<li>Process Receipts application does not support the following:</li>
+<ul>
+<li>Receiving of items in alternate unit of measure with 2 step GR. Both the steps of the GR should be in the same unit if measure.</li>
+<li>Receiving serialized materials in alternate UoM with item distribution.</li>
+<li>Partial quantity reversal. User must reverse full quantity and then receive the required partial quantity.</li>
+</ul>
+<li>Process Receipts application does not support receiving PO items created as part of SP13 V5 supply process version.</li>
+<li>Please note that SP11 V5 version is in compatibility mode as of OP 2025 FPS0 release. The same will be phased out in the future releases. You could instead explore the SP12 V5 version as a replacement.</li>
+<li>The following restrictions apply when posting goods receipt with an Inbound Delivery is packed in a HU</li>
+<ol>
+<li>Posting partial quantities for serialized delivery items is not possible. Only whole item quantity will be allowed</li>
+<li>Posting partial GR with partial quantities will not be possible for HU-managed storage locations</li>
+<li>Posting goods receipt with inbound deliveries in (valuated) GR blocked stock - https://me.sap.com/notes/1225077/E</li>
+<li>Problems with two-step goods receipts using inbound deliveries - https://me.sap.com/notes/1373027</li>
+<li>Handling Unit disappears in Inbound Delivery when partial GR is posted - https://me.sap.com/notes/2195664</li>
+</ol></ol>
+<p><strong>Initiate Returns by Product Fiori App</strong></p>
+<p>Please note that Field Logistics can be used with both inventory management scenarios (IM), as well as warehouse scenarios (embedded Extended Warehouse Management). Most of the restrictions in the list apply for the usage of EWM, but some are general for all cases.</p>
+<ol>
+<li>In the Field Logistics <em>Initiate Returns by Product</em> Fiori application, if partial picking is performed for a delivery, it becomes the final delivery for the corresponding stock transfer order i.e., the stock transfer order quantity gets adjusted to the picked quantity.<br/><br/></li>
+<li>Field Logistics Fiori apps do not support Quality Management related processes at remote locations.<br/><br/></li>
+<li>Customers should not configure Post Processing Framework (PPF) in EWM for creation of pick warehouse tasks as follow-on processes after delivery creation. The tasks are created automatically when a source bin is selected for the quantity to be returned using the Fiori application <em>Initiate Returns by Product</em> (F4252).<br/><br/></li>
+<li>The Initiate Returns by Product Fiori app does not support returns in a single plant scenario.</li>
+</ol>
+<p><strong>Initiate Returns by Order Fiori App</strong></p>
+<ol>
+<li>When returning back serialised material with a different valuation than the original issued one, the corresponding serial master record must be updated with the valuation value.</li>
+<li>The application does not currently support alternative UoM cases. </li>
+<li>While returning items back to the stock, UoM is not editable. The application uses the UoM maintained in the reservation.</li>
+<li>UoM is not editable while returning to stock and/or initiating returns using the mass returns page.</li>
+<li>The returned Qty field in the app does not update for single plant cases yet.</li>
+</ol>
+<p><strong>Process Cross-Plants Receipts Fiori App</strong></p>
+<p>Please note that Field logistics can be used with both inventory management scenarios (IM), as well as warehouse scenarios (embedded Extended Warehouse Management). Most of the restrictions in the list apply for the usage of EWM, but some are general for all cases.</p>
+<ol>
+<li>When processing items in the Fiori app <em>Process Cross Plant Receipts</em>, the operation (receive/not-found) is performed at the delivery header level, that is receiving one item of a delivery shall result in all items belonging to the delivery being received. This applies  for “not-found” items as well.<br/><br/></li>
+<li>When non-stock items are received at a warehouse enabled storage location (embedded EWM) at remote, the warehouse task will be created with destination bin derived from the warehouse process type configuration. Further when issue to order is performed for such items in the <em>Process Cross-Plants Receipt</em> Fiori app and they have recipient location assigned in the maintenance order, the following restrictions apply:</li>
+</ol>
+<ul>
+<ul>
+<li>The destination bin of the warehouse task created at remote is not automatically updated with respect to the recipient location </li>
+<li>A new warehouse task with destination bin derived for recipient location is not created</li>
+</ul>
+</ul>
+<ol start="3">
+<li>Customers should not configure Post Processing Framework (PPF) in EWM for creation of pick and putaway warehouse tasks as follow-on processes after goods receipt. The tasks are created automatically when goods receipts posting is done using the Fiori application <em>Process Cross-plant Receipts</em> (F4713).<br/><br/></li>
+<li>When receipts are reversed using standard LoB applications, Process Cross-Plant receipts application shall only update the reversal status if the issue to order has not been performed.<br/><br/></li>
+<li>For the account assigned STO cases, the item after receival is treated as SP15, and therefore attributes such as Serial Number/ Valuation type/ Batch are not maintained by Field Logistics anymore.</li>
+<li>When receiving a delivery with multiple items, the application currently posts the receipt at the header level. In such cases, an error pop-up may appear stating that the operation is not enabled. This is a temporary limitation and will be addressed in the future release. The error message does not block the process, and the receipts are still posted successfully.</li>
+</ol>
+<p><strong>Manage Kits</strong></p>
+<ol>
+<li>The Fiori app Manage Kits only supports the main inventory location as EWM managed storage location, the staging and dropping storage locations must be IM managed.<br/><br/></li>
+<li>The application only supports auto-staging when received using the FL application "Process Cross-plant receipts". Receiving the kit items using standard LoB apps into staging storage location shall not update the items' status as "staged".<br/><br/></li>
+<li>The kit items arriving from base plant must be received into the staging storage location and not EWM/ IM managed storage location. Receiving the kit items into main inventory from PCPR application shall update the status of the items to “auto staged” and move items to “staged” facet in the Kit object page.<br/><br/></li>
+<li>When staging the items from EWM managed main inventory storage location, Manage kits application only triggers creation of the EWM Outbound delivery document. Creation of WH task(s) and its confirmation must be done manually.</li>
+<li>If auto-staging is switched off in the FL config and user manually updates the sloc to the staging location while receiving, item shall not be staged in the application</li>
+</ol>
+<p><strong>Pack Container Fiori App</strong></p>
+<ol>
+<li>When processing items in the Fiori app <em>Pack Container</em>, the operation (add/delete/goods issue) is performed at the delivery header level, that is assigning one item of a delivery to a container shall result in all items belonging to the delivery being assigned. <br/><br/></li>
+<li>The kit view in the app is not deisgned for manual editing (adding or deleting) of entries and as such the extensibility does not support adding fields from the related business objects.<br/><br/></li>
+<li>Dispatch on Hold is only supported at the level of kit definition specified in the configuration (SPRO) i.e. only at Order header or Order Operation/Activity level.</li>
+</ol>
+<p><strong>Process Returned Items</strong></p>
+<ol>
+<li>For the activity <em>Return to Vendor</em>, the application supports creation of new return PO only for SP15/ SERV items.<br/><br/></li>
+<li>The activities list in the application only loads for the English language. User shall have to manually maintain the activities in the FL config for any other required language.<br/><br/></li>
+<li>The application does not support the transfer of rental items use cases.</li>
+<li>Move to Stock functionality does not support partial quantity in Process Returned Items application</li>
+<li>The storage location in Process Returned Items application after moving non-stock items to stock shall continue to display the location where the non-stock items were received.</li>
+</ol>
+<p><strong>Manage Logistics Fiori App</strong></p>
+<ol>
+<li>Manually created outbound deliveries cannot be linked to the items in the database.<br/><br/></li>
+<li>Supply chain processing of non-stock, rental and supplier items in Field Logistics are not supported with batch, valuation type and serial numbers.<br/><br/></li>
+<li>When multiple rental items are added to different purchase order service line items using ME22N transaction, the rental items are always considered for first service line item in the purchase order. This is because there is no mapping availabe between service line item and rental item in core purchase order item database. This restriction is not applicable when rental items are added using Manage Logistics application.<br/><br/></li>
+<li>When two rental items are added from core purchase order ME21N transaction or its relevant fiori application, considering one item for one service and the other rental item for second service line, there is an assumption made that the rental items are always considered for the first service line in PO. (the subsequent service lines in PO is always ignored). This is because corresponding mapping cannot be done between rental and service line items due to lack of information. Whereas this mapping is available when rental items are added from the Manage Logistics application.</li>
+<li>Move to Stock functionality does not support partial quantity in Manage Logistics application</li>
+<li>The following restrictions apply with respect to Ad-hoc item functionality:</li>
+<ul>
+<li>The Adhoc item will not be created in manage logistics when a Delivery Without Reference is created in VL01NO without certain mandatory parameters. The failure of Adhoc item creation from VL01NO will be displayed as warning on the screen in the transaction with possible reasons for failure.</li>
+<li>Any changes to fields other than Material, Description, Quantity, and Unit of measure shall not be back synced to Manage Logistics and vice versa.</li>
+<li>You can add additional items in the Delivery Without Reference created by cross-docking the non-stock or rental items. You can also add additional items to the DWR created in VL01NO for a corresponding Adhoc item. Please note, that every additional item added in the DWR shall be an Adhoc item in Manage logistics.</li>
+<li>In case the ad-hoc item is packed in a HU from VL01NO, the same HU will be shown in the manage logistics app along with the packaging material information. That is, ad-hoc items packed in HU using VL01NO are not supported in FL</li>
+</ul>
+</ol>
+<p><strong>Returns Overview</strong></p>
+<ol>
+<li>The Overview page cards 'Delayed Rental Items', 'Completed Returns' and 'In Process Returns' does not offer navigation to any specific app for detailed view of the data.<br/><br/></li>
+<li>The card 'Return Status' allows navigation to the Initiate Returns application with the filter values for plant and return status fields alone.</li>
+</ol>
+<p><strong>Logistics Tracking</strong></p>
+<p>Prerequisite for using the Logistics Tracking application is an activation and usage of the Best Practices scope item 6BA.</p></div></div></div></div>

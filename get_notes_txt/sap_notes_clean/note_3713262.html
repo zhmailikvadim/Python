@@ -1,0 +1,72 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>Documents sent from SAP Ariba to SAP S/4HANA Cloud (such as Central RFQ Confirmation, Purchase Orders, or Goods Receipts) are failing.</p>
+</li><li>
+<p>In the Transaction Tracker on SAP Integration Suite, managed gateway for spend management and SAP Business Network (formerly CIG), the transaction status is FAILED.</p>
+</li><li>
+<p>The error log displays the following details: "S4 system response is FAILED and ErrorCode:401 and ErrorResponse: .. Suggested Action: Document failed to deliver to S4HANA System. ErrorCode: CIG-PLT-00649."</p>
+</li><li>
+<p>The issue may occur for various document types, including but not limited to Central RFQ Confirmation.</p>
+</li></ul>
+<p><img class="img-responsive" src="/documents/customerkba/9ANoee_P0pMNqiMFyCMaqPWPH77ij33czwRI4khktOg"/></p>
+<p><span style="color: rgb(224, 62, 45);">"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental" </span> </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Trigger an Inbound Document from Ariba:</p>
+<ul><li>
+<p>Perform a standard business action in SAP Ariba that triggers a message to SAP S/4HANA Cloud.</p>
+</li></ul>
+</li><li>
+<p>Monitor Integration Status:</p>
+<ul><li>
+<p>Log in to SAP Integration Suite, managed gateway for spend management and SAP Business Network (formerly CIG).</p>
+</li><li>
+<p>Navigate to the Transaction Tracker.</p>
+</li><li>
+<p>Search for the document ID or filter by the Timestamp of the action performed in Step 1.</p>
+</li></ul>
+</li><li>
+<p>Verify Failure:</p>
+<ul><li>
+<p>Observe that the transaction status is FAILED.</p>
+</li><li>
+<p>Click on the Error Link or view the Exchanged Document logs.</p>
+</li><li>
+<p>Confirm the error message in the response payload or log details:"S4 system response is FAILED and ErrorCode:401 and ErrorResponse: .. Suggested Action: Document failed to deliver to S4HANA System. ErrorCode: CIG-PLT-00649."</p>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue is caused by an authentication failure for the Inbound Communication User configured in SAP S/4HANA Cloud. The password maintained in the CIG connection project does not match the current password of the Communication User in the S/4HANA system (e.g., the password may have expired, been locked, or changed without updating CIG).</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To resolve the <code>401 Unauthorized</code> error, you must synchronize the credentials between S/4HANA Cloud and the Managed Gateway (CIG). Follow these steps:</p>
+<ol><li>
+<p>Identify the Communication User in S/4HANA Cloud:</p>
+<ul><li>
+<p>Log in to your SAP S/4HANA Cloud system.</p>
+</li><li>
+<p>Navigate to the Communication Systems app.</p>
+</li><li>
+<p>Search for the Communication System ID associated with your Ariba integration.</p>
+</li><li>
+<p>Open the system and check the Users for Inbound Communication section to identify the User Name.</p>
+</li></ul>
+</li><li>
+<p>Reset the Password:</p>
+<ul><li>
+<p>Navigate to the Maintain Communication Users app.</p>
+</li><li>
+<p>Search for the user identified in Step 1.</p>
+</li><li>
+<p>Select the user and click Change Password.</p>
+</li><li>
+<p>Set a new, complex password and save your changes.</p>
+</li></ul>
+</li><li>
+<p>Update Credentials in CIG (Managed Gateway):</p>
+<ul><li>
+<p>Log in to the SAP Integration Suite, managed gateway portal.</p>
+</li><li>
+<p>Go to My Projects and open the relevant integration project.</p>
+</li><li>
+<p>Navigate to the Connections step.</p>
+</li><li>
+<p>Locate the connection for your S/4HANA Cloud system.</p>
+</li><li>
+<p>Update the Password field with the new password you just set in Step 2.</p>
+</li><li>
+<p>Save the changes and deploy the project if necessary (depending on your specific project setup, a connection update might apply immediately, but a redeployment ensures config sync).</p>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>401 error, authorization error, CIG to S/4HANA, Central RFQ Confirmation, CIG-PLT-00649, failed confirmation transaction, inbound communication user, password reset, SAP Ariba Sourcing, SAP Integration Suite, managed gateway for spend management and SAP Business Network, Public Cloud, S/4HANA</p></div></div></div></div>

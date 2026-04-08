@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">It is unable to update material revision level with change number via API_PRODUCT(ODATA V4).</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Update revision level should use method Batch instead of POST or Patch directly.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>It is suggested to refer to below Body</p>
+<p></p>
+<p></p>
+<p>-batch</p>
+<p>Content-Type: multipart/mixed; boundary=changeset_batch</p>
+<p>-changeset_batch</p>
+<p>Content-Transfer-Encoding: binary</p>
+<p>Content-Type: application/http</p>
+<p>Content-ID: 2</p>
+<p>POST Product('<span style="color: rgb(224, 62, 45);"><em>product number</em></span>')/_ProductChangeMaster HTTP/1.1</p>
+<p>Content-Type: application/json;charset=utf-8</p>
+<p>accept: application/json</p>
+<p>{</p>
+<p>"Product": "<span style="color: rgb(224, 62, 45);"><em>product number</em></span>",</p>
+<p>"ChangeNumber": "<span style="color: rgb(224, 62, 45);"><em>change number</em></span>",</p>
+<p>"RevisionLevel": "<span style="color: rgb(224, 62, 45);"><em>new revision level</em></span>"</p>
+<p>}</p>
+<p>-changeset_batch--</p>
+<p>-batch--</p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://api.sap.com/api/CE_PRODUCT_0002/resource/Product_Change_Master" rel="nofollow">API_PRODUCT documentation</a> </p><p>Refer to: <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/3c916ef10fc240c9afc594b346ffaf77/d3291df50b124cfe807d344ea00ab5ad.html?locale=en-US&amp;state=PRODUCTION&amp;version=LATEST&amp;q=revision+level" rel="nofollow">Product Change Master documentation</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>API_PRODUCT, update revision level, change number, batch request, PATCH method, gateway parsing error, Product Master, Product Change Master, SAP S/4HANA Cloud</p></div></div></div></div>

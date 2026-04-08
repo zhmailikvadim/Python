@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">After upgrading to a new optimization engine version (build date February 2026 or newer), Load Consolidation shows variations in runtime performance (faster or slower execution depending on the scenario).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Load Consolidation, LCO</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>As part of continuous efforts to enhance SAP Transportation Management (TM), improvements in the <strong>Load Consolidation</strong> functionality have been implemented, specifically in the optimization engine. This enhancement is designed to:</p>
+<ul>
+<li><strong>Improve solution quality</strong> (reduced costs, etc.)</li>
+<li><strong>Optimize runtime performance</strong> (faster processing of consolidation scenarios)</li>
+</ul>
+<p>The new optimization engine has undergone testing across a wide range of scenarios to ensure quality standards. However, there is a possibility that some users may experience longer runtimes for Load Consolidation compared to the previous version.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>If you observe slower execution for Load Consolidation after upgrading to a new optimization engine, the automatic runtime setting can be used. Depending on this setting, Load Consolidation is able to reduce the actual runtime automatically depending on the complexity of the scenario.</p>
+<p>This functionality is available by setting an optimization extra parameter (see note 578044):</p>
+<ul>
+<li>Application: TVSO</li>
+<li>Section: VSO</li>
+<li>Name: RuntimeAutomatic</li>
+<li>Switch: String</li>
+<li>Char.String: (string see below)</li>
+</ul>
+<p>Possible string values are:</p>
+<ul>
+<li>"FASTEST": a valid load plan is returned as fast as possible. The solution might not be the best for complex scenarios but can still be good.</li>
+<li>"FAST": focus on short runtimes, but the runtime is a bit higher compared to "FASTEST".</li>
+<li>"BALANCED": balancing runtime and solution quality.</li>
+<li>"QUALITY": focuses more on solution quality, which results in longer runtimes.</li>
+</ul></div></div></div></div>

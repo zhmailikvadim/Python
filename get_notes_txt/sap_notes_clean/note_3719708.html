@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the processes "New Installation Process (DSO View)" (DE_C_GPKE_NIN_DSO) and "New Installation Process (DSO View)" (DE_C_MPES_NIN_DSO), the UTILMD business message is missing mandatory information in step 0150, which leads to an APERAK.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">MPES, GPKE, New Installation Process, UTILMD, APERAK, diverse data, clarification case, retrieve data</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error occurred because the method for RETRIEVE DATA didn't account for the scenario where the ubd_data-diverse field could be initial. When this field is empty, the UTILMD business message isn't filled with mandatory information.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system creates a clarification case when the required information isn't available, preventing the UTILMD from being sent with incomplete data. You need to retrigger the process. You can verify the fix by checking that empty diverse data creates a clarification case with the error message "Error occurred when reading table" in step 0150, and the process runs without errors.</p></div></div></div></div>

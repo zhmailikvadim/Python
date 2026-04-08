@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When updating the settings for a notification type in the Fiori Launchpad (FLP) and choosing Save, an error occurs stating that the "<strong>Property DoNotDeliverEmail is missing</strong>". As a result, the settings are not saved successfully.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Property "DoNotDeliverEmail" is invalid. FLP settings update not successful.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The property DoNotDeliverEmail is not supported in SAP systems running SAP_GWFND release lower than 754. In these releases, the OData service /IWNGW/NOTIFICATION_SRV does not expose the DoNotDeliverEmail property in its metadata.</p>
+<p>The issue is caused by a release mismatch between the frontend and backend systems when the SAP_UI component is on a release starting 754, while the backend SAP_GWFND release is lower than 754.</p>
+<p>While updating the notification settings in FLP, the frontend sends an update request containing the property DoNotDeliverEmail, which is only supported in higher releases. Since this property is not available in the lower backend release(&lt;754), the update request fails.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> Kinldy implement this note.</p></div></div></div></div>
