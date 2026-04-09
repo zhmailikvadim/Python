@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When user maintains dimension members, some column in dimension list view may disappear.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Standard Mode, Admin Client</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>There is some dirty data in the backend table that causes this error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please follow the below steps to create a local program at backend in order to clean up the dirty data.</p>
+<p>Step 1. Open t-code SE80 and select 'Local Objects' in tab 'Repository Browser'.</p>
+<p>Step 2. Use mouse to rigth click on the root folder and select 'Create' then 'Program', input an program name such as 'ZCLEAN_DIRTY_DATA', leave the check box of 'Create with TOP Include' unchecked, then click ok.</p>
+<p>Step 3. Copy the following line into the program.</p>
+<p>delete from rsbpc_web_up where user_id = '{USER_ID}' and category = '{CATEGORY}'.</p>
+<p>Step 4. Replace the place holder {USER_ID} with the user name that met the column missing issue, for instance, USERA.</p>
+<p>Step 5. Find the correct value for the place holder {CATEGORY} following below steps 5.1 - 5.4.</p>
+<p>Step 5.1 Open t-code SE16 in a new session and open table RSBPC_WEB_UP.</p>
+<p>Step 5.2 Set USER_ID with the user that met the column missing issue, for instance, USERA. Set NAME with the value colSeq. The value for NAME is case-sensitive. Then excute or press F8.</p>
+<p>Step 5.3 In the column 'CATEGORY', find the correct value for {CATEGORY}. The format of CATEGORY value should be 'members_{ENVIRONMENT_NAME}_{DIMENSION_NAME}'. For instance, if the missing column issue happens in the dimension 'ENTITY' of the environment 'ENVIRONMENT_TEST', the value of CATEGORY should be 'members_ENVIRONMENT_TEST_ENTITY'. If you find this value in the column 'CATEGORY', please double click on it to open it. Please note that if there is no such value for the dimension that has the error, this note may not work.</p>
+<p>Step 5.4 Copy the value of CATEGORY, for instance, 'members_ENVIRONMENT_TEST_ENTITY', and replace the place holder '{CATEGORY}' in the local program. After doing it, the program should be like following:</p>
+<p>delete from rsbpc_web_up where user_id = 'USERA' and category = 'members_ENVIRONMENT_TEST_ENTITY'.</p>
+<p>Step 6. Activate the program and excute, then re-log on web client to verify if the missing column appears again.</p>
+<p> </p>
+<p> </p>
+<p> </p></div></div></div></div>

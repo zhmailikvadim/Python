@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">SAML2LoginModule is enabled in SAP NetWeaver Administrator (NWA).</p>
+<p>While trying to connect a Knowledge Management (KM) repository (e.g. <a href="https://mo-74f534a24.mo.sap.corp:52001/irj/go/km/docs/" target="_blank">https://&lt;host&gt;:&lt;port&gt;/irj/go/km/docs/</a> ) with WinSCP as a WebDav Client, it is not working as long as SAML2LoginModule is active.</p>
+<p>In WinSCP only blank screen is displayed.</p>
+<p>Removing SAML2LoginModule, the KM content is displayed in WinSCP.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>EP Release Independent</li>
+<li>SAP NetWeaver</li>
+<li>SAP Composition Environment</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>SAML2LoginModule is enabled in SAP NetWeaver Administrator (NWA) (<a href="https://mo-74f534a24.mo.sap.corp:52001/irj/go/km/docs/" target="_blank">https://&lt;host&gt;:&lt;port&gt;</a>/nwa/auth):</p>
+<p><img alt="SAML2LoginModule_active.jpg" class="img-responsive" height="530" src="/documents/customerkba/Y0yDQ8ejABBJBV2yLc-j56npHFatLCMvyqmoeh2NkMg" title="SAML2LoginModule_active.jpg" width="617"/></p>
+<p>The "Enable WEbDAV server" is selected in WebDAV Protocol setting in System Adminsitration -&gt; System Configuration -&gt; Knowledge Management -&gt; Content Management -&gt; Protocols -&gt; Show Advanced Option -&gt; WebDAV Protocol</p>
+<p><img alt="WebDAV Protocol.JPG" class="img-responsive" height="445" src="/documents/customerkba/nmjak8S__TOmjNLQThn2rO36y0ewACt-ovkpv8T-0XU" title="WebDAV Protocol.JPG" width="478"/></p>
+<p>While connecting to KM content in WinSCP, a blank screen is displayed, KM content is not available:</p>
+<p><img alt="WinSCP.JPG" class="img-responsive" height="329" src="/documents/customerkba/63TvhjShcBCMgk2WGv5NaMnNqRB8Rksd_qcnMSNkS_M" title="WinSCP.JPG" width="487"/></p>
+<p>After removing the SAML2LoginModule from "ticket" configuration in NWA, the KM content is available in WinSCP.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The current latest WinSCP version (5.11.2) can not handle ?saml2=disabled option.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>1. Disable the SAML2LoginModule in NWA if continuing to use WinSCP as the WebDAV client for KM content</p>
+<div class="WordSection1">
+<p>2. Another option would be to use SAP Portal Drive. The "?saml2=disabled" option is handled in SAP Portal Drive 6.0 Patch1 and above.<br/>    The parameter ”?saml2=disabled" must be added manually to each Portal URL, for each connection item in Portal Drive during setup of connection to corresponding Portal.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>KBA <a href="https://me.sap.com/notes/1874339" target="_blank">1874339</a> - Disabling the SAML2 login module via URL allowing user/password login instead.</p>
+<p>SAP Note <a href="https://me.sap.com/notes/1773388" target="_blank">1773388</a> - KM Content could not be accessed by WebDAV client<br/>SAP Note <a href="https://me.sap.com/notes/450615" target="_blank">450615</a> - WebDAV Server/WebDAV client does not work<br/>SAP Note <a href="https://me.sap.com/notes/929628" target="_blank">929628</a> - WebDAV: Enable/Disable access via WebDAV client</p>
+<p>SAP Documentation - <a href="https://help.sap.com/saphelp_nw73/helpdata/en/56/60abeb28028d4fa84c2a81b730a498/frameset.htm" target="_blank">WebDAV</a></p>
+<p>SAP Note <a href="https://me.sap.com/notes/2442922" target="_blank">2442922</a> - SAP Portal Drive 6.0 (64-bit version)</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Enterprise Portal 7.0, EP 7.0, Enterprise Portal 7.01, EP 7.01, Enterprise Portal 7.02, EP 7.02, Enterprise Portal 7.03, EP 7.03, Enterprise Portal 7.1, EP 7.1, Enterprise Portal 7.2, EP 7.2, Enterprise Portal 7.30, EP 7.30, Enterprise Portal 7.31, EP 7.31, Enterprise Portal 7.40, EP 7.4, Enterprise Portal 7.50, EP 7.5, webdav, portal drive, 6.0</p></div></div></div></div>

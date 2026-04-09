@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ol id="__html1">
+<li>If bank account id is changed retroactively for deduction wage types recorded via screen 2046 of infotypes 0014 and 0267, then no warning message appears to draw the attention of the user that it is risky.</li>
+<li>For some kind of deductions a bank account id should be always filled in but the system does not check that and does not warn the user.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>IT0014 IT0267 2046 T7PLG0 T7PL13 PY-BNKIDDC PY-BNKIDCK</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Changing the bank account id on infotypes 0014 and 0267 retroactively is dangerous because in the payroll result the entries in tables RT DDNTK and ARRRS are linked together by using this information as well and doing so the earlier deducted amounts are left out of the consideration. On the other hand it is permitted to change the bank account id to '-', which means the cancellation of the deduction.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ol>
+<li>Screen 2046 of infotypes 0014 and 0267 is updated to send warning message 102(HR001PL) in case the bank account id is updated retroactively.</li>
+<li>You can also impose that for specific deduction classes the bank account id should be populated and warn the user with message 101(HR001PL). The deduction classes can be enumerated in the value filed of T7PL13 switch called PY-BNKIDDC. The model customization delivers classes 1 and 2 with value '12' (no separator character has to be used between the classes).</li>
+</ol>
+<p>The warnings are enabled if switch PY-BNKIDCK in table T7PL13 has value '1' in its value field. In case you have implemented some own checks e.g. via infotype exits, then you have the possibility to disable the new warnings.</p>
+<p>The correction is available via Support Packages listed below.</p></div></div></div></div>

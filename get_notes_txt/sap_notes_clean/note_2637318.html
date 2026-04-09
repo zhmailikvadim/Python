@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are able to create Invoice Requests with Invoice items and Credit Memo items via Web Service even when you don't have scoped the question: Do you want to allow customer invoice requests/invoices to contain invoice and credit memo line items?</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Business ByDesign.</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<div>Go to the Business Configuration work center.</div>
+</li>
+<li>Go to the Implementation Projects view.</li>
+<li>Click on Edit Project Scope button.</li>
+<li>Navigate to step 4 - Questions.</li>
+<li>Select Sales, then Customer Invoicing, then Miscellaneous.</li>
+</ol>
+<p>You are able to see that the second question: Do you want to allow customer invoice requests/invoices to contain invoice and credit memo line items? is not checked as In Scope.</p>
+<p>You use the Web Service CustomerInvoiceRequest and you are able to send Invoice items and Credit Memo items without any error.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>This is the system behavior. The scoping question: Do you want to allow customer invoice requests/invoices to contain invoice and credit memo line items? is related to Manual Invoice Requests, which explains the reason for being able to create External Customer Invoice Requests via the web service having both credit memo and invoice items in one invoice document even when this question is not checked in scoping.</p>
+<p>Note that the &lt;ReceivablesPropertyMovementDirectionCode&gt; indicates whether the item will be debited (invoice item) = 2 or credited (credit memo item) =1.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>An alternative option may be to check the SAP Customer Influencer Site to submit an idea: <a href="https://influence.sap.com/sap/ino/#/campaign/896" target="_blank">https://influence.sap.com/sap/ino/#/campaign/886</a>.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Invoice Request ; Credit Memo Items ; Invoice Items ; Web Service ; CustomerInvoiceRequest.</p></div></div></div></div>

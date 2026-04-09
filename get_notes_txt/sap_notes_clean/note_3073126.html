@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You get following warning message when creating a Supplier Invoice for few Suppliers:</p>
+<p>Warning: 'Check tax codes; chain transaction taxation may apply'.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id=""> SAP Business ByDesign</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<p>Go to the Supplier Invoicing work center</p>
+</li>
+<li>
+<p>Select the Invoices and Credit Memo view</p>
+</li>
+<li>
+<p>Search and open the particular Supplier Invoice X (X refers to invoice id)</p>
+</li>
+<li>
+<p>Click the View All button</p>
+</li>
+<li>
+<p>Select the Check button</p>
+</li>
+<li>
+<p>Warning displayed: 'Check tax codes; chain transaction taxation may apply'</p>
+</li>
+<li>
+<p>Open another Supplier Invoice Y with similar data but different Supplier but it does not trigger the warning message</p>
+</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>For the affected Supplier Invoice, under Items tab, select the "Parties and Locations" sub-tab, here you can see in the "Ship-From" address, the data in the field C/O is different from the data maintained in the same field C/O in "Parties and Locations" tab under the "General" tab. So, the system displays the warning because the field has different values.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Please maintain matching and correct data in similar fields in the business documents to avoid such messages.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Check tax codes; chain transaction taxation may apply; Supplier Invoice error; Ship From in Supplier Invoice</p></div></div></div></div>

@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=2016948&amp;TargetLanguage=EN&amp;Component=FI-RA&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/2016948/D" style="color:var(--sapLinkColor);" target="_blank">/notes/2016948/D</a>.</span></div></div><div id="__html1"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>In the monitor for revenue accounting items, the two fields PL_ACCOUNT and GL_ACCOUNT are not differentiated; only the text 'G/L Account' is displayed. As a result, the column headers are not unique.</p>
+<p>In addition, fields are missing in the structures for the revenue accounting items.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>FARR_RAI_MON, FARR_RAI_CONF, FARR_PL_ACCOUNT</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>The fields PL_ACCOUNT and GL_ACCOUNT use the same data element.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the corrections or import the relevant Support Packages.</p>
+<p>The following fields have been added:</p>
+<p>XPREDOC: Indicator that describes that a revenue accounting item is the predecessor of another revenue accounting item (for all statuses if the RAI class category is Order Item).</p>
+<p>PROC_TMSTP_UTC: Processing time of the processed revenue accounting item (for the main items of all revenue posting items with the status "Processed").</p>
+<p>Important: Before you make these changes, you should delete all revenue accounting item classes, including the generated objects.</p>
+<p>Also implement SAP Note <a href="/notes/2015926" target="_blank" title="2015926 - Configuration and generation of revenue posting items, various errors">2015926</a>.</p>
+<p> </p></div></div></div></div></div>

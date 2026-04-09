@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>Error CX005 'No configuration profile selected for configurable object' raised when creating a Sales / Production / Purchase Order for a Material</li>
+<li>Configurable Material has a Configuration Profile assigned which is Released and valid but still the error "No configuration profile selected" is raised.</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP ERP Logistics (LO)</li>
+</ul>
+<ul>
+<li>SAP R/3</li>
+<li>SAP R/3 Enterprise</li>
+<li>SAP ERP Central Component</li>
+<li>SAP ERP</li>
+<li>SAP Enhancement package for SAP ERP</li>
+<li>SAP Enhancement package for SAP ERP, version for SAP HANA</li>
+<li>SAP S/4HANA, on-premise </li>
+</ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The Ehancement <span>CUCQ0001 is activate ( User Exit <span> EXIT_SAPLCUCQ_001 ) but contains no code or the custom code doesnt return a configuration profile in the internal table YCUCO</span></span></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span>Please either deactivate the Enhancement or change the coding in the Exit to return the table YCUCO with a configuration profile</span></p>
+<p><span><span>Please refer to the documentation in transaction SMOD that gives sample coding that you can use.</span></span></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>"CX 005" , CU41 , CU42 , CU43 , KMAT , CUOBJ , <span>  it_cuco , <span> et_cuco  ,<span>'CUCQ_GET_CONFIGURATION_PARAMS' <span>CL_CU_PROFILE=================CP , <span>CL_CU_PROFILE=================CM005 , <span>cuco</span></span></span></span></span></span></p></div></div></div></div>

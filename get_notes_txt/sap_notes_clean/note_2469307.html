@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are ordering the shopping cart with a catalog item, but during the follow on document creation you get the error: <strong>Shopping cart XXX: M3 351 Material XXX not maintained in plant XXX</strong></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<ul>
+<li>SAP Supplier Relationship Management (SRM)</li>
+<li>SAP enhancement package for SAP Supplier Relationship Management</li>
+</ul>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Create a shopping cart with catalog items referring SRM product ID</li>
+<li>Order the shopping cart</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>Product with local logsys will not be interpreted in the backend</li>
+<li>
+<p>In the SPRO catalog customizing, the field <strong>logical system</strong> should be empty or populated by the SRM system ID</p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Maintain the product according to the target system.</li>
+<li>Maintain the catalog customizing <strong>logical system</strong> field empty, so that the logic can choose the right system from the received data or from material master maintained in SRM.  <br/>This can be done in the following <strong>SPRO</strong> path: <strong>SRM Server</strong> &gt;&gt; <strong>Master Data</strong> &gt;&gt; <strong>Content Management</strong> &gt;&gt; <strong>Define External Web Services</strong>  &gt;&gt;  Double-click the relevant Catalog to open the<strong> Details tab</strong> &gt;&gt; set the <strong>Logical System</strong> field to empty.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>EBP, Catalog, Customizing, Product, SC, Shopping cart Material not maintained in plant,</p></div></div></div></div>

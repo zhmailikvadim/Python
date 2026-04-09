@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">After upgrading from Redwood CPS 8 to BPA 9.0.11 or higher, some jobs are not triggered as per schedule.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Business Process Automation by Redwood version 9.0.11.x or higher</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>In BPA 9.0.11 and higher, Runtime Parameter default expressions are no longer evaluated as Process Definition Owner by default.</p>
+<p>Previously, the default expressions of runtime parameters were evaluated using a session of the process definition owner; this is changed in BPA 9.0.11 and higher. In 9.0.11 and higher, the default expressions will be evaluated as the process owner, the user submitting the process. This means that the process owner will need permissions to all objects used by the expression. You set the session subject to the process definition owner by specifying JobDefinitionOwner in the Evaluate Runtime Parameters With User field on the Options tab of the process definition and chain definition editors; the technical name of the field is EvaluationOwnerType.</p>
+<p>Before 9.0.11, processes/jobs used to be resubmitted in an internal session, this cause differences in parameter evaluation between initial submit and resubmit. From 9.0.11, process resubmits are done in a Process Owner session. This has impact on jobs/proceses initially submitted by users that are disabled or have their roles/privileges revoked as they do not have the correct privileges anymore to resubmit the job/process.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>You can identify processes (jobs) effected by this issue by running the following queries in the BPA support servlet: <a href="http://&lt;hostname&gt;:&lt;port&gt;/redwood/support" target="_blank">http://&lt;hostname&gt;:&lt;port&gt;/redwood/support</a></p>
+<p>Look for Scheduled Jobs of disabled Subjects/Owners:</p>
+<p style="padding-left: 90px;">select j.* from Job j, Subject s where j.ParentJob is null and j.Status in ('S', 'R', 'H', 'W') and j.OwnerSubject = s.UniqueId and s.Disabled = 't'</p>
+<p>Look for users that own jobs but have no roles anymore:</p>
+<p style="padding-left: 90px;"><br/>select s.* from Subject s where exists (select 1 from Job j where (j.Status in ('S','R','W','O','a','q','V','I','N','8','6','Q','B','o','c','G','4','H','-') or (j.Status in ('C', 'E', 'U', 'K') and exists (select 1 from ActionWork a where a.ActionWorkType = 'G' and a.RelatedObjectId = j.JobGroup) ) ) and j.SubmitFrame is not null and j.OwnerSubject = s.UniqueId) and   not exists (select 1 from SubjectRoleGrant g where g.GranteeSubject = s.UniqueId)</p>
+<p> Solution:</p>
+<ol>
+<li>Resubmit the processes found in the output of the queries above with a new user.</li>
+<li>Ensure that the process owner has all privileges required to scheduleprocesses. The required privileges can be found in the BPA admin guide.</li>
+<li>Update the Evaluate Runtime Parameters With User filed on the processdefinitions to specify JobDefinitionOwner. The processes will then use that user's privileges when scheduling processes.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Redwood CPS BPA upgrade 9.0.11 jobs processes not triggered</p></div></div></div></div>

@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The outbound processing of ORDERS / ORDCHG SIDocs is aborted if table YH050 does not contain entries for one or more profit centers of the purchase order items.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CIP2SAP SIDoc, IDoc, TTP1443, CR 1443, /SIE/SF_ED_SER_FIBU, GET_DEP_STRUC_4_PRCTR,  yyordit-dep_str</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><span style="text-decoration: underline;">Reason:</span><br/>Program error in note 2234640 for TTP1443: During processing of EDI messages (SIDocs) the depth structure of a profit center shall be read from CIP2SAP customizing table YH050.</p>
+<p><span style="text-decoration: underline;">Prerequisite:</span><br/>The issue occurs only if note 2234640 for TTP1443 is implemented.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the correction instruction.</p>
+<p>The correction from this SAP Note resets the input-readiness of the cells for %XT or %YT in the aforementioned situation.</p>
+<p><strong>Example:</strong></p>
+<p>The query contains the characteristics 'product range', 'product group', and 'product' in the rows, as well as the key figure structure with the elements 'turnover' and '%YT turnover'. The universal display hierarchy is used in the rows (in the Query Designer, this is the setting 'Display as Hierarchy'. The characteristics and structure are used in the following sequence in the rows: 'Product range', 'key figure structure', 'product group', 'product'. No totals are displayed in the result list for 'product range', but these are required for the inverse formula calculation with regard to %YT. In this case, the input-readiness of %YT in the key figure structure is reset.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Input-ready query, inverse formulas, %XT, %YT, universal display hierarchy, UHRY, PROCESS_EXEC_PLAN-03, PROCESS_EXEC_PLAN, CL_RSR_RRK0_PLAN</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li><strong><span style="text-decoration: underline;">SAP BW 7.50</span></strong><br/>Import Support Package 12 for SAP BW 7.50 (SAPK-75012INSAPBW) into your BW system. The support package is available once <strong>SAP Note 2586174</strong> ("SAPBWNews NW BW 7.50 ABAP SP12"), which describes this SP in more detail, has been released for customers.</li>
+</ul>
+<p> </p>
+<ul>
+<li><span style="text-decoration: underline;"><strong>SAP BW 7.51</strong></span><br/>Import Support Package 7 for SAP BW 7.51 (SAPK-75107INSAPBW) into your BW system. The support package is available once <strong>SAP Note 2586678</strong> ("SAPBWNews NW BW 7.51 ABAP SP7"), which describes this SP in more detail, has been released for customers.</li>
+</ul>
+<p> </p>
+<ul>
+<li><span style="text-decoration: underline;"><strong>SAP BW 7.52</strong></span><br/>Import Support Package 2 for SAP BW 7.52 (SAPK-75202INSAPBW) into your BW system. The support package is available once <strong>SAP Note <strong>2564916</strong> </strong>("SAPBWNews NW BW 7.52 ABAP SP2"), which describes this SP in more detail, has been released for customers.</li>
+</ul>
+<p> </p>
+<ul>
+<li><span style="text-decoration: underline;"><strong>SAP BW/4HANA 1.0</strong></span><br/>Import Support Package 9 for SAP BW/4HANA 1.0 (SAPK-10009INDW4CORE) into your BW system. The Support Package is available once the SAP Note with the short text "SAPBWNews SAP BW/4HANA 1.0 SP09", which describes this SP in more detail, has been released for customers.</li>
+</ul>
+<p>In urgent cases, you can implement the correction instructions as an advance correction.</p>
+<p><strong>You must first read SAP Notes 1668882 and 2248091, which provide information about transaction SNOTE.</strong></p>
+<p>To provide information in advance, the SAP Note(s) specified above might already be available before the support package is released. In this case, however, the short text of the SAP Note still contains the term "preliminary version".</p></div></div></div></div>

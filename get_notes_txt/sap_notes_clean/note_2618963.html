@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1"> When Design Studio is trying to connect to a Universe containing formuli, an exception causes the dashboard to crash in Business Objects Enterprise Platform with a message similar to:</p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Error while calling method "doSetTemplateCommand"</td>
+</tr>
+<tr>
+<td><strong>While processing the current request, an exception occurred which could not be handled by the application or the framework.</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>The stack trace will contain this as the root cause:</p>
+<p>Stack trace: java.lang.NoClassDefFoundError: org/antlr/runtime/RecognitionException<br/> at com.sap.sl.parameter.formula.iface.FormulaEngine.createFormulaCompiler(FormulaEngine.java:37)<br/> at com.sap.sl.parameter.formula.iface.FormulaEngine.compileFormula(FormulaEngine.java:66)<br/> at com.sap.sl.parameter.formula.iface.FormulaEngine.compileFormula(FormulaEngine.java:56)</p>
+<p>The problem is exclusive to the Design Studio Add-On to BI Platform (the issue does not occur in the designer).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">doSetTemplateCommand, org/antlr/runtime/RecognitionException, java.lang.NoClassDefFoundError</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The problem occurs due to a missing second-order dependency specification in the Design Studio Add-On Analysis Service.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This issue will be addressed in the Specified Support Packages &amp; Patches.</p>
+<p><strong>Work Around:</strong></p>
+<p>As the root cause for this incident is not a source code issue, this can be fixed in place by an SAP Business Objects Enterprise Platform administrator with access to the install directories of the machine.</p>
+<p>These steps should apply to all Operating Systems:</p>
+<p>1) Navigate to the Analysis Application Design Service directory (For example, if installed in the default location on Windows of  "C:\Program Files (x86)\SAP BusinessObjects\SAP BusinessObjects Enterprise XI 4.0", this will be located here "C:\Program Files (x86)\SAP BusinessObjects\SAP BusinessObjects Enterprise XI 4.0\java\pjs\services\AnalysisApplicationDesignService\lib")</p>
+<p>2) <strong>*Before performing any actions below*</strong> we should backup the existing binary we need to update. The patch pertains to this specific binary "com.sap.ip.bi.zen.boe.dsl.wrapper.jar". The easiest way to to back this up is to copy this jar somewhere safe, or make a copy in this directory and give it a different extension (ex. com.sap.ip.bi.zen.boe.dsl.wrapper.backup).</p>
+<p>3) Treating com.sap.ip.bi.zen.boe.dsl.wrapper.jar as a ".zip" file, unzip this to a work location. There are many ways to do this, but an easy way is to change the ".jar" extension to ".zip". After unzipping, you should see two items: another jar named "com.sap.ip.bi.zen.rt.bics.provider.dsl.jar" and a folder called META-INF.</p>
+<p>4) We want to modify the MANIFEST.MF file located in the META-INF folder. Open this file in a text editor. We need to add a package to the "Require-Bundle:" specification. The package we are going to add to this line is "<strong>org.antlr.runtime</strong>".</p>
+<p>5) Manifests are strange files, they need to have specific formatting. Firstly, any line in the file is limited to 71 characters in length. Second, if an entry is longer than one line, the following line will have a space at the start. So, we need to add a "," to the end of the line where the last bundle specified and add the new bundle name after that. If the "<strong>org.antlr.runtime</strong>", can't fit on the line, just split it at the 71 character mark, making sure to leave a space at the beginning of the next line. A picture is attached to this note that shows what the difference should look like after adding this bundle name, highlighting how the bundle may need to be split (the file contents may differ depending on version).</p>
+<p>6) After updating the manifest, zip the "com.sap.ip.bi.zen.rt.bics.provider.dsl.jar" jar and the META-INF folder back up, and rename the resulting file back to the original name "com.sap.ip.bi.zen.boe.dsl.wrapper.jar".</p>
+<p>7) From the Central Management Console, stop the AdaptiveProcessing Server (APS) that hosts the Analysis Application Service (repeat this step for each APS hosting an Analysis Application Service, if you have multiple). Once the APS has stopped, navigate to the work directory for the APS (Ex. using the same default directory as above, "C:\Program Files (x86)\SAP BusinessObjects\SAP BusinessObjects Enterprise XI 4.0\java\pjs\container\work"). Here you will find work directories for many servers. They are named the same as they are in the Central Management console, typically &lt;SIA Node Name&gt;.&lt;Server Name&gt; (ex. BOESERVER.AdpativeProcessingServer). Delete the directory that correspondds to the APS you stopped.</p>
+<p>8) Copy the jar you created in step 5 to the AnalysisApplicationDesignService install folder (as mentioned, default on Windows "C:\Program Files (x86)\SAP BusinessObjects\SAP BusinessObjects Enterprise XI 4.0\java\pjs\services\AnalysisApplicationDesignService\lib") *<strong>making sure you have backed up the original* (step 2)</strong>.</p>
+<p>9) Once this is done, just start the APS from the Central Management console. You can always restore your system by replacing your patched binary with the original, following steps 6-7.</p></div></div></div></div>

@@ -1,0 +1,72 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You would change the Copying Rules configuration for for example a Purchase Order (PO) item long text like Material PO Text from following settings:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Sequence</td>
+<td>Source object</td>
+<td>Text Fixed</td>
+<td>Fixed indicator</td>
+</tr>
+<tr>
+<td>0</td>
+<td>Purchase Order</td>
+<td>Material PO text</td>
+<td><strong>&lt;empty&gt; (Text automatically adopted in target object)</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Material Master</td>
+<td>Purchase Order text</td>
+<td>
+<p><strong>* (User can have text adopted in target object)</strong></p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>to following setup:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Sequence</td>
+<td>Source object</td>
+<td>Text Fixed</td>
+<td>Fixed indicator</td>
+</tr>
+<tr>
+<td>0</td>
+<td>Purchase Order</td>
+<td>Material PO text</td>
+<td><strong>* (User can have text adopted in target object)</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Material Master</td>
+<td>Purchase Order text</td>
+<td>
+<p><strong>&lt;empty&gt; (Text automatically adopted in target object)Sequence Source object Source Text Fixed indicator</strong></p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>but when you do that any existing PO lose their links to the Material PO Text, so previuosly text appeared on ME23n item long text tab, but now nothing.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Materials Management (MM)</li>
+<li>SAP ERP Central Component</li>
+<li>SAP ERP</li>
+<li>SAP enhancement package for SAP ERP</li>
+<li>SAP enhancement package for SAP ERP, version for SAP HANA</li>
+<li>SAP S/4HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The reason for the text not being displayed is, that it’s not linked to the Purchase Order item directly. Before you have made the customizing changes, the fix indicator in the copying rules was set to *. In such a case the system will check for the text maintained in the material master as it is not linked to the Purchase Order yet. You can find the entry for the Material PO text maintained in the material master in table STXH (TDOBJECT = MATERIAL; TDNAME = your material number ; TDID = BEST).<br/>In case the text was not copied to the Purchase Order Item manually by pressing the ‘Adopt Text’ button, the text will not be found anymore when the copying rules changed.</p>
+<p>The reason behind this behavior is that system only search for the Material PO Text maintained in the material master if the fix indicator is set to *. When the copying rule is changed to &lt;empty&gt;, the system will search in table STXH for the relevant Material PO Text linked to the Purchase Order Item. When the text is not linked to the PO item directly, it won’t be found and displayed.</p>
+<p>To summarize:</p>
+<p>- When fix indicator set to *, text will be read from the material master first<br/>- When the text was taken over by user, the text will be saved in STXH and further on read from this table<br/>- When fix indicator is set to space / blank ' ' text will always be read from STXH once the PO was created (only during creation it will still be read from material master)</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>The current system behavior is expected and won’t be changed.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id="">If you want to keep such text in such POs, then the only option is to change the indicator back to * and adopt the texts manually to the POs</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>me21n me22n BAPI_PO_CREATE1 BAPI_PO_CHANGE Manage Purchase Order PO Purchase Order Text copying rules</p></div></div></div></div>

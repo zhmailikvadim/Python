@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">After click on total expander to collapse all subtotal result groups GridView control becomes empty. This happens if original GridView was scrolled beyond visible extent. After GridView collapse scroll position is not validated.</p>
+<p>The issue can be recreated using Personas SL client with following scenario:</p>
+<p>Scenario:<br/>1. Go to SE38 transaction code.<br/>2. Set program name to ‘BCALV_GRID_10’ and press F8 to execute the report.<br/>3. Again click on execute button or press F8 to get the output<br/>4. Select ‘Plane Type’ column and choose ‘Sort in Ascending order’ or ‘Sort in descending order’ button available in grid toolbar.<br/>5. Select ‘Airfare’ column and click on ‘Total’ button available in grid toolbar.<br/>6. Now select both the ‘Plane Type’ and ‘Airfare’ columns and click on ‘Subtotals’ button.<br/>7. Scroll to the bottom of the table.<br/>8. Click on Totals icon to collapse data.<br/>Expected: All data rows collapsed. Visible only subtotal and total data. <br/>Result: Empty grid.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>GridView - ALV grid control.</p>
+<p>Total expander - UI element in ALV GridView which is used to collapse/expand total or subtotal groups.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To resolve this issue please do the following:</p>
+<p>Determine the patch number of the SAPEXE SAR package with the highest patch number for your kernel version on the SAP Service Marketplace (SMP). If the SAPEXE patch number is higher than or equal to the highest patchlevel number you see in the section <strong>Support Packages &amp; Patches </strong>of this SAP note for your SAP kernel version, you should download and install the SAPEXE SAR package. Otherwise, download and install the most recent DW.SAR archive.</p>
+<p>If there is no entry with the patch number yet, please re-check this SAP note at a later point in time. The patch number level will be added automatically once the corresponding patch is available on SAP Service Marketplace.</p>
+<p>You can find up to date information about the status of the patch delivery in the following SAP notes:</p>
+<p>SAP kernel 745: <a href="/notes/2199308" target="_blank">2199308</a></p>
+<p>SAP kernel 742: <a href="/notes/2098894" target="_blank">2098894</a></p>
+<p>SAP kernel 722: <a href="/notes/2198998" target="_blank">2198998</a></p>
+<p><strong>FAQ:</strong><br/><strong>Expected delivery dates of SAP kernel patches<br/></strong></p>
+<ul>
+<li>SAP Kernel patches are usually delivered weekly or bi-weekly on Friday depending on the release. From the patchlevel of latest delivered patch you can roughly conclude when the patch you need will become available.</li>
+</ul>
+<p><strong>Downloading SAP Kernel patches</strong></p>
+<ul>
+<li>All patches are available in the Software Center on SAP Service Marketplace (<a href="http://service.sap.com/patches" target="_blank">http://service.sap.com/patches</a>). Detailed information on the exact location of the patches can be taken from note 563161. SAP Note 330793 explains how to download patches from SAP Service Marketplace.</li>
+</ul>
+<p><strong>Installation of SAP kernel patches</strong></p>
+<ul>
+<li>SAP note 19466 explains how install SAP Kernel patches.</li>
+</ul></div></div></div></div>

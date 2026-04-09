@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The following exception is logged into the smdagent.trc or SMDSystem.log:</p>
+<p>May 9, 2014 2:16:43 PM [Thread[ExDaemon:exmgmt:jobmgr_1,5,exmgmt:j...] Error      Exception occured when trigerring task for executor : exmpush in execution manager: Execution Manager[exmgmt:jobmgr] 1011980385 :</p>
+<p>[...]</p>
+<p>[EXCEPTION]<br/>java.lang.IllegalThreadStateException<br/>               at java.lang.ThreadGroup.addUnstarted(ThreadGroup.java:843)<br/>               at java.lang.Thread.init(Thread.java:403)<br/>               at java.lang.Thread.init(Thread.java:355)<br/>               at java.lang.Thread.&lt;init&gt;(Thread.java:625)<br/>               at com.sap.smd.server.exec.ExecThreadFactory.newThread(ExecThreadFactory.java:22)</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Diagnostics Agent, SMD, IllegalThreadStateException, thread, EXM, executor</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>A program error is present in the life-cycle of agent task executor, leading to registering a task on a thread which is not alive.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Deploy the LM-SERVICE Software Component, mentioned in the "Support Packages &amp; Patches" section. <br/>Before proceeding with the deployment, pay attention to the general recommendations of SAP note 1483508.</p></div></div></div></div>

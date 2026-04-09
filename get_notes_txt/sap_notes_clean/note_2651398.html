@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Error in framework.trc when trying to open a virtual table created of Remote Source using File Adapter Remote Source with SharePoint integration:</p>
+<ul>
+<li>2018-05-03 10:57:57,844 [ERROR] com.sap.hana.dp.sharepointservices.SharePointService.downloadFile[462]    - Exception : com.sun.xml.internal.ws.client.ClientTransportException: The server sent HTTP status code 301: Moved Permanently</li>
+<li>2018-05-03 10:57:57,844 [ERROR] com.sap.hana.dp.adapter.framework.core.WorkerThread.processRequest[349]    - AdapterException while processing request "SDA Request for FileAdapter of type FEDERATION_SET_STATMENT"</li>
+<li>2018-05-03 10:57:57,845 [ERROR] com.sap.hana.dp.adapter.framework.core.WorkerThread.processRequest[350]    -  : Failed to download file From http://companyname.sharepoint.com/teams/*     Context: null</li>
+<ul>
+<li>   com.sap.hana.dp.adapter.sdk.AdapterException:  : Failed to download file From http://companyname.sharepoint.com/teams/*.</li>
+<li>   at com.sap.hana.dp.sharepointservices.SharePointService.downloadFile(SharePointService.java:463)</li>
+<li>   at com.sap.hana.dp.fileadapter.basement.TransportSharePoint.collectFiles(TransportSharePoint.java:63)</li>
+<li>   at com.sap.hana.dp.fileadapter.FileAdapter.executeStatement(FileAdapter.java:689)</li>
+<li>   at com.sap.hana.dp.adapter.sdk.adapterbase.BaseAdapterClass.executeStatement(BaseAdapterClass.java:768)</li>
+<li>   at com.sap.hana.dp.adapter.framework.core.WorkerThread.processExecuteStatement(WorkerThread.java:1360)</li>
+<li>   at com.sap.hana.dp.adapter.framework.core.WorkerThread.processRequest(WorkerThread.java:233)</li>
+<li>   at com.sap.hana.dp.adapter.framework.core.WorkerThread.run(WorkerThread.java:1924)</li>
+<li>   at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)</li>
+<li>   at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)</li>
+<li>   at java.lang.Thread.run(Thread.java:812)</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>
+<div>SAP HANA Smart Data Integration</div>
+</li>
+<li>
+<div>Office365’s SharePoint online</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Office 365 SharePoint is different from SharePoint on premise, because Office 365 SharePoint uses Microsoft's OAuth authentication. When you visit that file link, it will redirect to Microsoft, and FileAdapter did not originally support this authentication feature.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>If you are using Office365 SharePoint, upgrade the DP Agent to the latest version compatible with your environment (must be at least version 2.4.2).</li>
+<li>Then <a href="https://help.sap.com/docs/HANA_SMART_DATA_INTEGRATION/7952ef28a6914997abc01745fef1b607/43f7e6dcf7bb407ab8f619d37c82577e.html?version=2.0_SPS06" target="_blank">REFRESH</a> the FileAdapter from the upgraded DP Agent.</li>
+<li>Now the File Adapter remote source should have <a href="https://help.sap.com/docs/HANA_SMART_DATA_INTEGRATION/7952ef28a6914997abc01745fef1b607/2f837119bc124f01a1536226e37f1ca7.html?locale=en-US" target="_blank">credential options</a> (application ID and tenant ID) relevant to Office365 SharePoint.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="https://help.sap.com/docs/HANA_SMART_DATA_INTEGRATION/7952ef28a6914997abc01745fef1b607/d0dc8d5cf27442fb95b6ff008a393e1c.html?version=2.0_SPS06" target="_blank">SDI Help Portal - Register an Application on Microsoft Azure Portal to Enable Access to SharePoint on Microsoft Office365</a></p></div></div></div></div>

@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p><span>When adding Internal Reconciliation with Deposit using DI API, an error occurs: <em>Internal error (-5001) occurred.</em></span></p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>
+<div class="WordSection1">
+<p>Go to <em>Banking → Deposits → Deposit</em>, select the account and enter the required details. Choose <em>Add</em>.</p>
+</div>
+</li>
+<li>
+<div class="WordSection1">Perform Internal Reconciliation for the Deposit created in step 1 using DI API. For example:</div>
+</li>
+</ol>
+<p style="padding-left: 60px;"><span>InternalReconciliationsService service = oCompany.GetCompanyService().GetBusinessService(ServiceTypes.InternalReconciliationsService);</span><br/><span> InternalReconciliationOpenTrans openTrans = service.GetDataInterface(InternalReconciliationsServiceDataInterfaces.irsInternalReconciliationOpenTrans);</span><br/><span> InternalReconciliationParams reconParams = service.GetDataInterface(InternalReconciliationsServiceDataInterfaces.irsInternalReconciliationParams);</span><br/><span> openTrans.CardOrAccount = CardOrAccountEnum.coaCard;</span><br/><span> openTrans.ReconDate = Convert.ToDateTime("2025/12/24");</span><br/><span> openTrans.InternalReconciliationOpenTransRows.Add();</span><br/><span> openTrans.InternalReconciliationOpenTransRows.Item(0).Selected = BoYesNoEnum.tYES;</span><br/><span> openTrans.InternalReconciliationOpenTransRows.Item(0).TransId = 3289243;</span><br/><span> openTrans.InternalReconciliationOpenTransRows.Item(0).TransRowId = 0;</span><br/><span> openTrans.InternalReconciliationOpenTransRows.Item(0).ReconcileAmount = 122858.92;</span><br/><span> openTrans.InternalReconciliationOpenTransRows.Add();</span><br/><span> openTrans.InternalReconciliationOpenTransRows.Item(1).Selected = BoYesNoEnum.tYES;</span><br/><span> openTrans.InternalReconciliationOpenTransRows.Item(1).TransId = 3524854;</span><br/><span> openTrans.InternalReconciliationOpenTransRows.Item(1).TransRowId = 1;</span><br/><span> openTrans.InternalReconciliationOpenTransRows.Item(1).ReconcileAmount = 122858.92;</span><br/><span> reconParams = service.Add(openTrans);</span></p>
+<p><strong>Expected behavior:</strong></p>
+<p><span>The Internal Reconciliation is added successfully and no error occurs.</span></p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>The Internal Reconciliation is not added. Instead, the following error occurs: <em>Internal error (-5001) occurred.</em></p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p></div></div></div></div>

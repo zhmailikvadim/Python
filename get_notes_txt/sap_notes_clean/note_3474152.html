@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p class="p1" id="__html1">When creating a price condition in SAP S4HANA or SAP ERP that partially overlaps in validity time with an existing price condition, and then replicating the newly created price condition record to SAP Commerce Cloud, it is possible that a certain previously created price row in SAP Commerce Cloud may disappear.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> <strong>Reason</strong></p>
+<p class="p1">The issue arises from a discrepancy between the identifier attributes used in SAP S4/HANA or SAP ERP and those used in SAP Commerce Cloud.</p>
+<p class="p1">SAP S4/HANA and SAP ERP use a combination of attributes as the identifier for the price condition, including attributes that correspond to "sapConditionId" and "endTime" attributes of SAP Commerce Cloud price row. But in SAP Commerce Cloud, the collection of attributes as the identifier for a price row does not include "endTime". Instead, it only includes "sapConditionId", which is not a unique attribute.</p>
+<p class="p1">This discrepancy causes an issue where, if the endTime attribute values are different, but other values of identifier attributes in a replicated price condition from SAP S4/HANA/ERP are the same as those of an existing price row of SAP Commerce Cloud, the replicated price condition will erroneously update the existing price row instead of creating a new one as expected. As a result, the previously existing price row in SAP Commerce Cloud will be overwritten and disappear due to this incorrect update.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p class="p1">To fix this issue, SAP Commerce Cloud adds the "endTime" attribute into the collection of identifier attributes. This fix will be available in 2211.26 release.</p>
+<div id="gtx-trans" style="position: absolute; left: 1119px; top: 437px;">
+<div class="gtx-trans-icon"></div>
+</div></div></div></div></div>

@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">Transaction MB5B and transaction MB51 show different stock value from transaction J3RFLVMOBVED/J3RFLVMOBVEDH for the same material.</p>
+<p><em><span style="color: #ff0000;">"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</span></em></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP ERP 6.0 and higher</li><li>SAP enhancement package for SAP ERP</li><li>SAP enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4 HANA</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>1, Run transaction MB51.</p>
+<p><img alt="5.png" class="img-responsive" src="/documents/customerkba/ccRchFFHK-Oa9whZRhpugWjYOpVxRUJU6T3itbYonPQ" title="5.png"/></p>
+<p>and result will be:</p>
+<p><img alt="6.png" class="img-responsive" src="/documents/customerkba/Wyiw7d-K51n-WE2cRSFXjmUvk6ZlG05VvNLG1HCZPtc" title="6.png"/></p>
+<p>2, Run transaction MB5B.</p>
+<p><img alt="7.png" class="img-responsive" src="/documents/customerkba/hsakcH_ltKKL8EICeLVWQFMeSSx4l8PfjYe3FbWAe54" title="7.png"/></p>
+<p>as result:</p>
+<p><img alt="8.png" class="img-responsive" src="/documents/customerkba/ylduL8CbFYgH4QgTGxVOVxF7fncORJgkkrRRunz9xSU" title="8.png"/></p>
+<p>3, Run transaction J3RFLVMOBVED with the same data:</p>
+<p><img alt="9.png" class="img-responsive" src="/documents/customerkba/948-3mbGoxI_71Gqxub_EKRgU7ytQGzUG77DkuuNzMU" title="9.png"/></p>
+<p>and the result will be empty:</p>
+<p><img alt="2017-11-01_15-46-39.jpg" class="img-responsive" src="/documents/customerkba/v8SgJ3KrSTo0LEVuhM1h_8LQ-uf1D3HGlpLjWnkeiZs" title="2017-11-01_15-46-39.jpg"/></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Transaction J3RFLVMOBVED displays only valuated stock and this report can work only with transaction MB5B.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<div>Do not use transaction MB51 to check stock for transaction J3RFLVMOBVED.</div>
+</li><li>
+<div>Use transaction MB5B only with flag "Valuated stock" to get the correct result. The same recommendation is valid for transaction J3RFLVMOBVEDH.</div>
+</li></ol>
+<p><img alt="11.png" class="img-responsive" src="/documents/customerkba/miHpoWbPYkziK4Ny78LYkXbVgjh4O4qGC_S6PYhrhhw" title="11.png"/></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>MB5B, MB51, J3RFLVMOBVED, J3RFLVMOBVEDH, stock, stock overview, Russia, RU, Обзор запасов, Россия, valuated stock, MMBE,</p>
+<p></p></div></div></div></div>

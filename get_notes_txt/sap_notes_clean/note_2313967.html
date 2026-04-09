@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>An "ODBC error [42703] is raised saying that the (first) column of my Table does not exist" when trying to connect tables in Data Manager.</li>
+<li>Data Manager is unable to connect tables with column names containing special characters.</li>
+<li>Data Manager fails to connect with tables with column names in mixed cases.</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Predictive Analytics 2.5</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol dir="ltr">
+<li>
+<div align="left">Launch SAP Predictive Analytics.</div>
+</li>
+<li>
+<div align="left">Go to Data Manager &gt; Create a Data Manipulation and click on the Magnifier.</div>
+</li>
+<li>
+<div align="left">It works as expected (I can view a sample from the targeted table).</div>
+</li>
+<li>
+<div align="left">Then click next &gt; (fields of the table are correctly detected) &gt; Views (tab) &gt; Data and Statistics.</div>
+</li>
+<li>
+<div align="left">Refresh and it throws error.</div>
+</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p align="left" dir="ltr">Issue has been identified due to mixed case or special characters used in column names of tables.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p align="left" dir="ltr">When connecting to DBMS, Automated Analytics does not use quotes around table and column names by default. So if they contain mixed cases or special characters including spaces, they can be misinterpreted by the DBMS. To change this behavior, you need to set the <em>CaseSensitive</em> option to "<em>True</em>" as explained in the <em>ODBC Fine Tuning guide</em>.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Predictive analytics, ODBC error, data manipulation</p></div></div></div></div>

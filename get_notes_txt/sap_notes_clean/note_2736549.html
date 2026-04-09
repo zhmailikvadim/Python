@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are using Portal Services on XSA, and you configured the SUPPORT_INDEPENDENT_APP attribute in your site application with "true" value. <span style="font-size: 10px;"><br/></span></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FLP@XSA, Fiori, site, portal services, xsa</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong>: program error.</p>
+<p><strong>Prerequisites</strong>: You are using Portal Services on XSA.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The fix is provided in SAP npm module: site-entry 1.9.18.</p>
+<p>Workaround: Setting SUPPORT_INDEPENDENT_APP attribute to "false" will enable the functionality of routes plugins for the applications.</p>
+<p>This operation is done using the XS CLI (described in <a href="https://help.sap.com/viewer/4505d0bdaf4948449b7f7379d24d0f0d/2.0.03/en-US/addd59069e6f444ca6ccc064d131feec.html" target="_blank">https://help.sap.com/viewer/4505d0bdaf4948449b7f7379d24d0f0d/2.0.03/en-US/addd59069e6f444ca6ccc064d131feec.html</a>).</p>
+<p>Launch the XS CLI, and login to the relevant system.</p>
+<p>First switch to "SAP" space: "xs t -s SAP".</p>
+<p>Then perform the following settings: "xs set-env sap-portal-persistency SUPPORT_INDEPENDENT_APP false".</p>
+<p>This command will change the environment variable SUPPORT_INDEPENDENT_APP of sap-portal-persistency application to "false".</p>
+<p>The "set-env" command is described in the following documentation: <a href="https://help.sap.com/viewer/4505d0bdaf4948449b7f7379d24d0f0d/2.0.01/en-US/8bb90c8be912431dab74877a492a3f5a.html" target="_blank">https://help.sap.com/viewer/4505d0bdaf4948449b7f7379d24d0f0d/2.0.01/en-US/8bb90c8be912431dab74877a492a3f5a.html</a></p></div></div></div></div>

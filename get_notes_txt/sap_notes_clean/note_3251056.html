@@ -1,0 +1,54 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">Prices are not updated in SAP Backend System like S/4HANA when replicating order from SAP Commerce via CPI using async price.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Commerce Cloud</li><li>SAP CPI</li><li>S/4HANA</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Submit an order in the storefront</li><li>sap-order-process will replicate the order from Commerce to CPI to S/4HANA</li><li>Order is properly created but prices are updated.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>Missing COND_TYPE in E1BPCOND segment of IDOC SALESORDER_CREATEFROMDAT204 sent to S/4HANA caused the prices not updated. See <a href="https://api.sap.com/integrationflow/Replicate-Orders-From-SAP-Commerce-Cloud-To-SAP-S4HANA/resources/mapping/MapOrderIDoc.mmap" rel="noopener noreferrer nofollow" target="_blank">IDOC mapping</a> in the iflow <a href="https://api.sap.com/integrationflow/Replicate-Orders-From-SAP-Commerce-Cloud-To-SAP-S4HANA" rel="noopener noreferrer nofollow" target="_blank">Replicate-Orders-From-SAP-Commerce-Cloud-To-SAP-S4HANA</a>.</div>
+<div><br/></div>
+<div>This is caused by missing conditionCode in sapCpiOutboundPriceComponents of the payload sent from Commerce like below.</div>
+<div>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; width: 100%;"><tbody><tr><td style="width: 100%;">
+<div>
+<div>"sapCpiOutboundPriceComponents": [</div>
+<div>{</div>
+<div>"conditionCounter": "1",</div>
+<div>"orderId": "123456",</div>
+<div>"absolute": "true",</div>
+<div>"entryNumber": "-1",</div>
+<div>"currencyIsoCode": "USD",</div>
+<div>"value": "9.99",</div>
+<div>"integrationKey": "-1|123456"</div>
+<div>},</div>
+<div>{</div>
+<div>"conditionCounter": "25",</div>
+<div>"orderId": "123456",</div>
+<div>"absolute": "false",</div>
+<div>"entryNumber": "0",</div>
+<div>"value": "0.0",</div>
+<div>"conditionCode": "MWST",</div>
+<div>"integrationKey": "0|123456"</div>
+<div>},</div>
+<div>{</div>
+<div>"conditionCounter": "2",</div>
+<div>"orderId": "123456",</div>
+<div>"absolute": "true",</div>
+<div>"entryNumber": "-1",</div>
+<div>"currencyIsoCode": "USD",</div>
+<div>"value": "0.0",</div>
+<div>"integrationKey": "-1|123456"</div>
+<div>},</div>
+<div>{</div>
+<div>"conditionCounter": "3",</div>
+<div>"priceQuantity": "1.0",</div>
+<div>"unit": "PCE",</div>
+<div>"orderId": "123456",</div>
+<div>"absolute": "true",</div>
+<div>"entryNumber": "0",</div>
+<div>"currencyIsoCode": "USD",</div>
+<div>"value": "28.0",</div>
+<div>"integrationKey": "0|123456"</div>
+<div>}</div>
+<div>],</div>
+</div>
+</td></tr></tbody></table></div>
+</div>
+<div>While using asynchronous price, during the order conversion, each price component will be created from the order entries and the conditionCode is set from corresponding SAPConfiguration - PRICING CONDITION TYPES FOR SALES ORDERS associated with the order.</div>
+<div><br/></div>
+<div>In this case, empty PRICING CONDITION TYPES FOR SALES ORDERS will lead to missing conditionCode in each price component.</div>
+<div><br/></div>
+<div><br/></div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Please follow <a href="https://help.sap.com/docs/SAP_COMMERCE_INTEGRATIONS/8ce6157b995e418093b6e5410bcd74b2/da46f91e7f9f49a098f1e45dd3c9da80.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Mapping Price and Cost Values</a> to map price components to condition types in the SAP back end (SAP S/4HANA, SAP ERP, or SAP CRM). Mapping makes it possible for price components to be replicated with sales orders from SAP Commerce Cloud to the SAP back end via CPI or DataHub.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://help.sap.com/docs/SAP_COMMERCE_INTEGRATIONS/8ce6157b995e418093b6e5410bcd74b2/4de682b754194a2493584e10c0864244.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Configuring Pricing from SAP Commerce Cloud: SAP Commerce Cloud Settings</a></li><li><a href="https://help.sap.com/docs/SAP_COMMERCE_INTEGRATIONS/8ce6157b995e418093b6e5410bcd74b2/f840b448cac948d8b8a9d70298120787.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Mapping for Pricing Components</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SCPI, SAP BTP, oms order, omm, async price</p></div></div></div></div>

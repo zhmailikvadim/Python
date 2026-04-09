@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>When users transmits data from the client, it presents a blank transmit screen</li>
+<li>This blank screen seems to be transmitting data but the users of the device may try again that can cause duplicate transaction</li>
+<li>Example: When a notification edit was done on the mobile device then a Notification completion (NOCO) can be duplicated</li>
+<ul>
+<li>This is when the transmit starts, it will fail because the transaction set (posts) and removes the notification then the second set attempts to do the same transaction, but the notification is already completed</li>
+</ul>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP Work Manager 6.1</li>
+<li>SAP Mobile Platform 3.0 (SP04 - WPF client 70.5.4)</li>
+</ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p> </p>
+<ol>
+<li>AG-24170: Fixed in SMP 3.0 SP05: The WPF client does not perform a transmit if the "Hide" transmission is enabled from the Agentry editor under the action step.</li>
+<li>SMPAgentry-3166: WPF Client gets stuck on closing the transmit screen.  - In this issue when the Start + Stop (by pressing stop button), the WPF gets stuck on closing the transmit screen. This particular issue is seen in newer version of SMP 3.0  70.6.7 SDK.</li>
+<li>SMPAgentry-1577 - Double Transmit on loss of connectivity (SMP 3.0 SP5). - If after any SMP 3.0 server reboot, any Agentry client devices that were previously set as online lose their connection and when a transmit is initiated will transmit twice - fix in SMP 3.0 SP5.</li>
+<li>SMPAgentry-2155 - After the server goes down,the push would not work and the transmit will fail. It will take two transmits for the user to be acknowledged by the system. So with this, the first transmit will fail and the 2nd transmit will re-authenticate to get connected (This could also be why the user have a blank screen).</li>
+<li>This is an SAP Work Manager 6.1 bug.</li>
+</ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Two potential solutions:</p>
+<ol>
+<li>Install and upgrade to SMP 3.0 SDK SP07 to get the Agentry client fixes on transmit with blank screens.</li>
+<li>Apply SAP note: 2151097 - SAP Work Manager - Duplicate transaction gets created if Transmit fails to connect to the Server.</li>
+</ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP note: 2151097</p></div></div></div></div>

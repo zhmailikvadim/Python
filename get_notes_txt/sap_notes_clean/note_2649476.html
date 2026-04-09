@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Travel expenses Germany: This SAP Note deals with the legal change to tax-free amounts of the per diems for meals and accommodation as of January 01, 2016.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>T706V, T706U, Molga 01, trip provision variant (Morei) 01.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>There is a legal change.</p>
+<p><acronym>BMF</acronym> circular dated December 09, 2015 - IV C 5 - S 2353/08/10006, doc. no. 2015/1117215</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After you import the relevant HR Support Package, the Customizing changes described are available in client 000 of your system. Implement these changes in your production client. For the new meals and accommodation per diems, you can also use the per diem upload procedure from SAP Note attachment. See SAP Note 308943.</p>
+<p><strong>The BMF circular dated November 12, 2001 contains the following information:  For countries that are not included in the notification, the per diem amount valid for Luxembourg is relevant; for overseas and foreign territories of a country that are not included, the per diem amount valid for the home country is relevant.</strong></p>
+<p><strong>Accordingly, the per diem for Luxembourg applies to the following countries</strong><br/>(country codes): Antarctica (AQ), Bahamas (BS), Bhutan (BT) ,Belize (BZ), Iraq (IQ), Kiribati (KI), the Comoros (KM), Liberia (LR), Nauru (NR), Solomon Islands (SB), Seychelles (SC), Somalia (SO), Swaziland (SZ), East Timor (TL), Tuvalu (TV), and Vanuatu (VU).</p>
+<p><strong>The following countries receive the per diems for the home country (home country as reference):</strong></p>
+<p><strong>Netherlands/Netherlands Antilles:</strong><br/>Aruba (AW) Bonaire (BQ), Curaçao (CW), and Sint Maarten (SX).</p>
+<p><strong>United Kingdom of Great Britain and Northern Ireland:</strong><br/>Anguilla (AI), Bermuda (BM), Cayman Islands (KY), Montserrat (MS), and St.Helena (SH).</p>
+<p><strong>France:</strong><br/>French Guiana (GF), Guadeloupe (GP), Martinique (MQ), New Caledonia (NC), Reunion (RE), and Mayotte (YT).</p>
+<p><strong>United States of America (USA): </strong>Guam (GU) and Puerto Rico (PR).</p>
+<p><strong>Denmark: </strong>Faroe Islands (FO) and Greenland (GL).</p>
+<p> </p>
+<p>Therefore, due to the change in the per diems for meals and accommodation for the <strong>United Kingdom of Great Britain and Northern Ireland</strong>, the per diems for the following countries have also changed: <strong>Anguilla (AI), Bermuda (BM), Cayman Islands (KY), Montserrat (MS), and St.Helena (SH).</strong></p>
+<p>A new country/region combination is valuated in the BMF circular. Use transaction SM30 for the table V_T706O (IMG: Define Trip Areas) to create the following new entry: <strong>(trip country code) ZA, (region) JOHAN (trip country)</strong> <strong>So. Africa, Johannesburg</strong>.</p>
+<p>Use the report RPR_UPDATE_PER_DIEMS_FROM_FILE to import the files: First, update the country table T706O. The further sequence when importing the files is arbitrary. The TXT.file names already provide information about the relevant table (T706o012016, T706u012016, T706v012016/table, trip provision variant, year).</p>
+<p>All files are grouped together in the zip file T706ouv012016.ZIP attached to this SAP Note.</p>
+<p> </p></div></div></div></div>

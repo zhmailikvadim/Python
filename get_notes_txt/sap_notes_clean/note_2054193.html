@@ -1,0 +1,103 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="OrderThresholdFreeGiftPromotionProblems-Issue2.AnExceptionisThrownwhenUpdatingCart">An exception is thrown when updating cart:</p>
+<div class="table-responsive" id="__html1"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<pre class="code-java">"org.springframework.web.util.NestedServletException: Request processing failed; nested exception is item 8796093349932 no longer valid (was removed): object no longer valid
+org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:894)
+org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:789)
+javax.servlet.http.HttpServlet.service(HttpServlet.java:637)
+javax.servlet.http.HttpServlet.service(HttpServlet.java:717)
+org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:311)
+org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:116)
+org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:83)
+org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:323)
+org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:113)</pre>
+</td>
+</tr>
+</tbody>
+</table></div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Extension Promotions</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Set up a threshold free gift promotion (on the hybris Management Console).<br/><br/></li>
+<li><span style="line-height: 1.4285;">In the storefront (on Accelerator), add some products to reach the threshold for the free gift promotion.</span><br/><br/></li>
+<li>Do one of the following steps:</li>
+<ul>
+<li><span style="line-height: 1.4285;">Go to checkout. You can see that the free gift product was added. Now update the number of gift products to 1 (which is not how a promotion should be added), click update, then the exception appears.</span><br/><strong><span style="line-height: 1.4285;">OR</span></strong></li>
+<li>Add items to the cart, check out and log in.<br/><strong>OR</strong></li>
+<li>Remove or reduce the amount of products in the cart (not the FREE GIFT), so that the promotion criteria is no longer met.</li>
+</ul>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><a href="https://jira.hybris.com/browse/PRO-144" target="_blank">https://jira.hybris.com/browse/PRO-144</a></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>If possible, update to Platform Version 5.0.x because these problems were fixed then. <span style="line-height: 1.4285;">If it is not possible to update, then use the workaround below from the fix. </span><span style="line-height: 1.4285;">This requires extending the <strong>de.hybris.platform.promotions.impl.DefaultPromotionsService</strong> and overriding both methods: </span></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<div class="container" title="Hint: double-click to select code">
+<div class="line number1 index0 alt2"><code class="java plain">PromotionOrderResults updatePromotions(</code><code class="java keyword">final</code> <code class="java plain">Collection&lt;PromotionGroupModel&gt; promotionGroups,</code><code class="java keyword">final</code> <code class="java plain">AbstractOrderModel order) </code></div>
+<div class="line number2 index1 alt1"><code class="java plain">PromotionOrderResults updatePromotions(</code><code class="java keyword">final</code> <code class="java plain">Collection&lt;PromotionGroupModel&gt; promotionGroups,</code></div>
+<div class="line number3 index2 alt2"><code class="java spaces">            </code><code class="java keyword">final</code> <code class="java plain">AbstractOrderModel order, </code><code class="java keyword">final</code> <code class="java keyword">boolean</code> <code class="java plain">evaluateRestrictions, </code><code class="java keyword">final</code> <code class="java plain">AutoApplyMode productPromotionMode,</code></div>
+<div class="line number4 index3 alt1"><code class="java spaces">            </code><code class="java keyword">final</code> <code class="java plain">AutoApplyMode orderPromotionMode, </code><code class="java keyword">final</code> <code class="java plain">Date date)</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table></div>
+<ol>
+<li><span style="line-height: 1.4285;">Let's assume that class </span><span style="line-height: 1.4285;"><strong>MyPromotionsService</strong> extends </span><span style="line-height: 1.4285;"><strong>DefaultPromotionsService.</strong> The </span><span style="line-height: 1.4285;">implementation</span><span style="line-height: 1.4285;"> would look like the example below:</span></li>
+</ol>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>de.hybris.platform.promotions.impl.MyPromotionsService</strong></td>
+</tr>
+<tr>
+<td>
+<div class="container" title="Hint: double-click to select code">
+<div class="line number1 index0 alt2"><code class="java keyword">public</code> <code class="java keyword">class</code> <code class="java plain">MyPromotionsService </code><code class="java keyword">extends</code> <code class="java plain">DefaultPromotionsService </code><code class="java keyword">implements</code> <code class="java plain">PromotionsService</code></div>
+<div class="line number2 index1 alt1"><code class="java plain">{</code></div>
+<div class="line number3 index2 alt2"><code class="java spaces">    </code><code class="java color1">@Override</code></div>
+<div class="line number4 index3 alt1"><code class="java spaces">    </code><code class="java keyword">public</code> <code class="java plain">PromotionOrderResults updatePromotions(</code><code class="java keyword">final</code> <code class="java plain">Collection&lt;PromotionGroupModel&gt; promotionGroups,</code></div>
+<div class="line number5 index4 alt2"><code class="java spaces">            </code><code class="java keyword">final</code> <code class="java plain">AbstractOrderModel order)</code></div>
+<div class="line number6 index5 alt1"><code class="java spaces">    </code><code class="java plain">{</code></div>
+<div class="line number7 index6 alt2"><code class="java spaces">        </code><code class="java keyword">final</code> <code class="java plain">PromotionOrderResults result = getPromotionsManager().updatePromotions(</code></div>
+<div class="line number8 index7 alt1"><code class="java spaces">                </code><code class="java plain">getModelService().getAllSources(promotionGroups, </code><code class="java keyword">new</code> <code class="java plain">ArrayList&lt;PromotionGroup&gt;()), getOrder(order));</code></div>
+<div class="line number9 index8 alt2"> </div>
+<div class="line number10 index9 alt1"><code class="java spaces">        </code><code class="java plain">getModelService().refresh(order);</code></div>
+<div class="line number11 index10 alt2"><code class="java spaces">        </code><code class="java keyword">return</code> <code class="java plain">result;</code></div>
+<div class="line number12 index11 alt1"><code class="java spaces">    </code><code class="java plain">}</code></div>
+<div class="line number13 index12 alt2"> </div>
+<div class="line number14 index13 alt1"><code class="java spaces">    </code><code class="java color1">@Override</code></div>
+<div class="line number15 index14 alt2"><code class="java spaces">    </code><code class="java keyword">public</code> <code class="java plain">PromotionOrderResults updatePromotions(</code><code class="java keyword">final</code> <code class="java plain">Collection&lt;PromotionGroupModel&gt; promotionGroups,</code></div>
+<div class="line number16 index15 alt1"><code class="java spaces">            </code><code class="java keyword">final</code> <code class="java plain">AbstractOrderModel order, </code><code class="java keyword">final</code> <code class="java keyword">boolean</code> <code class="java plain">evaluateRestrictions, </code><code class="java keyword">final</code> <code class="java plain">AutoApplyMode productPromotionMode,</code></div>
+<div class="line number17 index16 alt2"><code class="java spaces">            </code><code class="java keyword">final</code> <code class="java plain">AutoApplyMode orderPromotionMode, </code><code class="java keyword">final</code> <code class="java plain">Date date)</code></div>
+<div class="line number18 index17 alt1"><code class="java spaces">    </code><code class="java plain">{</code></div>
+<div class="line number19 index18 alt2"><code class="java spaces">        </code><code class="java keyword">final</code> <code class="java plain">PromotionOrderResults result = getPromotionsManager().updatePromotions(getSessionContext(),</code></div>
+<div class="line number20 index19 alt1"><code class="java spaces">                </code><code class="java plain">getModelService().getAllSources(promotionGroups, </code><code class="java keyword">new</code> <code class="java plain">ArrayList&lt;PromotionGroup&gt;()), getOrder(order),</code></div>
+<div class="line number21 index20 alt2"><code class="java spaces">                </code><code class="java plain">evaluateRestrictions, productPromotionMode, orderPromotionMode, date);</code></div>
+<div class="line number22 index21 alt1"> </div>
+<div class="line number23 index22 alt2"><code class="java spaces">        </code><code class="java plain">getModelService().refresh(order);</code></div>
+<div class="line number24 index23 alt1"><code class="java spaces">        </code><code class="java keyword">return</code> <code class="java plain">result;</code></div>
+<div class="line number25 index24 alt2"><code class="java spaces">    </code><code class="java plain">}</code></div>
+<div class="line number26 index25 alt1"><code class="java plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p style="padding-left: 30px;">2. <span style="line-height: 1.4285;">Then add the bean definition to your extension's <strong>spring.xml</strong>:</span></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>&lt;custom_extension&gt;-spring.xml</strong></td>
+</tr>
+<tr>
+<td>
+<div class="container" title="Hint: double-click to select code">
+<div class="line number1 index0 alt2"><code class="java plain">&lt;alias alias=</code><code class="java string">"promotionsService"</code> <code class="java plain">name=</code><code class="java string">"defaultPromotionsService"</code> <code class="java plain">/&gt;</code></div>
+<div class="line number2 index1 alt1"><code class="java spaces">    </code><code class="java plain">&lt;bean id=</code><code class="java string">"defaultPromotionsService"</code> <code class="java keyword">class</code><code class="java plain">=</code><code class="java string">"de.hybris.platform.promotions.impl.MyPromotionsService"</code></div>
+<div class="line number3 index2 alt2"><code class="java spaces">        </code><code class="java plain">parent=</code><code class="java string">"abstractPromotionsService"</code> <code class="java plain">scope=</code><code class="java string">"tenant"</code><code class="java plain">&gt;</code></div>
+<div class="line number4 index3 alt1"><code class="java spaces">    </code><code class="java plain">&lt;/bean&gt;</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Note</strong>: This is just one way to accomplish what you need, you will need to test this *thoroughly* to make sure it suits your needs.</p></div></div></div></div>

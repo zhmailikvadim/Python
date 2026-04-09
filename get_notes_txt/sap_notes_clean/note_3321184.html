@@ -1,0 +1,286 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Block selection and Copy to Clipboard are implemented by default for each C-Table control that is embedded in a WebDynpro application.</p>
+<p>The C-Table Block Selection allows the user to easily copy any selected area of a C-Table to the clipboard. The copied data can then be pasted into any other application such as a text editor, spreadsheet, or email application.</p>
+<p>Blocks can be selected in several ways which are described in note <a href="/notes/3164952" target="_blank">3164952</a>.</p>
+<p>Selected cells are clearly highligted.</p>
+<p class="paragraph">When the end user presses the standard operating system 'Copy to Clipboard' key combination (e.g. [Ctrl]+[C] in Microsoft Windows), the values of the currently selected table cells are retrieved from the back-end system and concatenated into a long string that is copied to the clipboard. ​The copied values are concatenated into a long string separated by the HorizontalTab character. A new line is created with the Linefeed character.</p>
+<p>The Copy to Clipboard implementation is text-based. This means that the content of each selected cell is copied as text, regardless of whether the cell contains a character or a numeric value. Even for a graphical representation, meaningful text is copied.</p>
+<p class="paragraph">The following general rules apply:</p>
+<ul>
+<li>Copy the text shown in a table.</li>
+<li>Copy only the text if there is an image and text.</li>
+<li>Copy image tooltip or description or filename if only an image is displayed in the cell.</li>
+<li>Always copy plain text without formatting.</li>
+<li>Copy a meaningful value of a graphical Cell Editor.</li>
+<li>If there are several cell editors in a cell, copy the value for each cell editor and concatenate their text values separated by commas.</li>
+</ul>
+<p><br/>The following gives an overview on what is copied per Cell Editor:</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td valign="top" width="194">
+<p><strong>Cell Editor</strong></p>
+</td>
+<td valign="top" width="406">
+<p><strong>Value copied</strong></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>Button</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The button text is copied.<br/> If no button text is displayed, the button image tooltip/filename is copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>Caption</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The text is copied.<br/> If no text is displayed, the image tooltip/filename is copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>Checkbox</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The checked state is copied and represented by a Unicode symbol font.<br/> In addition the text is copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>CheckboxTriState</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The checked state is copied and represented by a Unicode symbol font.<br/> In addition the text is copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>Drop</strong><strong>d</strong><strong>own</strong><strong>ByIndex</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The selected item text is copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>Drop</strong><strong>d</strong><strong>ownByKey</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The selected item text is copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>DropdownListBox</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The selected item text is copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>FileDownload</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The text is copied.<br/> If no text is displayed, the image tooltip/filename is copied.<br/> The actual file of the FileDownload is not copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>FileUpload</strong></p>
+</td>
+<td valign="top" width="406">
+<p>Not supported</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>FormattedTextView</strong></p>
+<p> </p>
+</td>
+<td valign="top" width="406">
+<p>Just plain text is copied. All HTML markups as well as any control characters are removed.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>GraphicalValueComparison</strong></p>
+</td>
+<td valign="top" width="406">
+<p>If available the marker value, the max value, and the text is copied in the format: <br/> marker value / max value  text</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>Image</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The image tooltip is copied.<br/> If not available the image filename is copied instead.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>InputField</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The value is copied as text.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>LinkToAction</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The link text is copied.<br/> If no link text is displayed, the image tooltip/filename is copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>LinkToUrl</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The link text is copied (the referenced URL is not copied).<br/> If no link text is displayed, the image tooltip/filename is copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>ProgressIndicator</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The display value is copied.<br/> If no display value is shown, then the percent value is copied as text.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>RadioButton</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The checked state is copied and represented by a Unicode symbol font.<br/> In addition the text is copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>RatingIndicator</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The rating value and the max value are copied in the following format:<br/> rating value/max value *</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>TextEdit</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The plain text is copied. All control characters are removed.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>TextView</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The text is copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>ThresholdSlider</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The value showing the position of the slide is copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>ToggleButton</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The button text is copied.<br/> If no text is available the image tooltip/filename is copied. The toggle state is not included.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Dependent on the table cell type, additional information might be displayed in the selected table cell:</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 603px; height: 110px;">
+<tbody>
+<tr>
+<td valign="top" width="194">
+<p><strong>Cell Type</strong></p>
+</td>
+<td valign="top" width="406">
+<p><strong>Value copied</strong></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>Symbol Cell</strong></p>
+</td>
+<td valign="top" width="406">
+<p>Symbol is also copied as Unicode symbol font.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>Hierarchical Cell</strong></p>
+</td>
+<td valign="top" width="406">
+<p>Hierarchy state icon and the hierarchy level indentation is also copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>MultiEditor Cell</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The value of each cell editor is copied and separated by comma.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Special features of the C-Table are also supported:</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 603px; height: 110px;">
+<tbody>
+<tr>
+<td valign="top" width="194">
+<p><strong>Cell Type</strong></p>
+</td>
+<td valign="top" width="406">
+<p><strong>Value copied</strong></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>Fixed Rows</strong></p>
+</td>
+<td valign="top" width="406">
+<p>The contents of fixed rows are also copied.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>Merged Cells</strong></p>
+</td>
+<td valign="top" width="406">
+<p>Cells in a row that are next to each other can be merged.<br/>Only the content of the leftmost cell is copied. The contents of the merged cells is copied as blank.</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="194">
+<p><strong>Grouped Cells</strong></p>
+</td>
+<td valign="top" width="406">
+<p>Cells in a column that are next to each other can be grouped.<br/>The content of a grouped cell is copied as blank.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>WebDynpro ABAP, CTable control, block selection, copy to clipboard, &lt;CTRL&gt;&lt;C&gt;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>A WebDynpro application is using a Client Table (C-Table) control. The C-Table control does not have implemented an application specific Copy to Clipboard functionality, but is suing the WebDynpro default implementation.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Consider the given information.</p></div></div></div></div>

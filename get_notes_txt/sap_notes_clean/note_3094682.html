@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">System copy of AS ABAP System failed in <em>testDatabaseConnection</em> phase - using 70SWPM10SP Software Provisioning Manager (SAP Note: <a href="https://me.sap.com/notes/1680045" target="_blank">1680045</a>).</p>
+<p>The logfiles contain the error entries: (/&lt;sapinst_instdir&gt;/.../sapinst_dev.log.log and R3load.exe.log):</p>
+<p><em>sapinst_dev.log:</em></p>
+<p><em>...</em></p>
+<p><em>ERROR &lt;timestamp&gt;  (&lt;user&gt;) (startInstallation) [CSiStepExecute.cpp:1104] id=controller.stepExecuted errno=FCO-00011 CSiStepExecute::execute()</em><br/><em>The step testDatabaseConnection with step key |NW_Export|ind|ind|ind|ind|0|0|NW_ABAP_Export_Dialog|ind|ind|ind|ind|abapUnload|0|NW_ABAP_Export|ind|ind|ind|ind|2|0|testDatabaseConnection was executed with status ERROR (Last error reported by the step: Process call '/.../sapinst_instdir/NW7##/LM/COPY/ORA/EXP/CENTRAL/AS-ABAP/EXP/R3load -testconnect' exits with error code 12. For details see log file(s) R3load.exe.log).</em></p>
+<p><em>R3load.exe.log:</em></p>
+<p><em>/.../sapinst_instdir/NW7##/LM/COPY/ORA/EXP/CENTRAL/AS-ABAP/EXP/R3load -testconnect</em></p>
+<p><em>...</em></p>
+<p><em>A1EEGEN 000 (DBS) db_connect failed with rc = 256 'failed to connect to the database'</em><br/><em>A1EEGEN 000 (DBS) DbSlErrorMsg rc = 29 'connect failed without SQL error'</em><br/><em>A1EEGEN 027 Exit code: "12"</em></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>All SAP system based on NW 7.0# (&lt;NW 7.40)</p>
+<p>70SWPM10SP - Software Provisioning Manager 1.0</p>
+<p>Oracle 11g and higher</p>
+<p>AnyDB</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The most recent version of SWPM  contains a shipped LOADTOOLS.SAR (with 7.53 R3load), which will be extracted into the sapinst_instdir and used by SWPM Tool.</p>
+<p>7.4 R3load (and higher like 7.53) requires configured SSFS for AnyDB - except DB2 (DB6)</p>
+<p>SSFS is not set in AS ABAP SAP Systems with lower kernel than 7.40 as standard connection method, because it's mandatory only as of Kernel 7.40.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Setup Secure connection of AS ABAP - <a href="https://me.sap.com/notes/1639578" target="_blank">1639578</a>  - SSFS as password store for primary database connect <a href="/notes/1639578" target="_blank" title="1639578  - SSFS as password store for primary database connect"><br/></a></p>
+<p>follow: the SAP Note <a href="https://me.sap.com/notes/1622837" target="_blank">1622837</a></p>
+<p>and use Oracle Client 12.1 for Oracle 10g/11g DB together with ABAP SSFS.</p>
+<p>(ABAP SSFS requires the written SAP Kernel version as least, it's recommended to use always the latest supported one)</p>
+<p>- <em>The extracted R3Tools should be not changed in the sapinst_instdir, because the latest SWPM tool contains always the latest shipped R3Tools from LOADTOOLS.SAR</em>  -</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>LOADTOOLS.SAR, 7.53, R3load, RC12, DB connection, R3load -testconnection, dbrc=29, rc = 29</p></div></div></div></div>

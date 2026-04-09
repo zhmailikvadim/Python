@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">All the BOE Servers except Central Management Server, Adaptive Processing Server and WebApplication Container Server doesn’t start after applying patch to update BOE to 4.2 SP04.</p>
+<p>All BOE server doen't start after enabling SSL in SIA</p>
+<p>In Non-windows Platform, FIPS must be enabled if SSL is enabled at SIA</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SIA, SSL, CORBA, BI4.2 SP04, Servers failing, SAP Business Objects, FIPS, SSL in SIA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>On Non-Windows Platform , BOE requires FIPS to be enabled if SSL is configured for BOE Servers in SIA (CORBA).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>In 4.2SP04  for non-windows platforms (Linux,AIX,Solaris) if you want to configure (CORBA) SIA SSL, make sure your servers are running in FIPS mode.</p>
+<p><strong>Details:</strong></p>
+<p>For a full build 4.2SP04 installation FIPS will be enabled by default.</p>
+<p>But in case:</p>
+<p>If you are doing a patch update from 4.1 SPx to 4.2 SP04 or if previously you have disabled FIPS manually, in such a case you should enable FIPS beafore enabling SSL in SIA (CORBA)</p>
+<p><strong>Steps to enable FIPS</strong></p>
+<ul>
+<li>Navigate to &lt;InstallDir&gt;/sap_bobj</li>
+<li>Run ./stopservers</li>
+<li>Open ccm.config file</li>
+<li>Add   the text '-fips' from the SIA Node property list</li>
+<li>Run ./startservers</li>
+</ul>
+<p>Note: For windows platform CORBA SSL can still work in non FIPS mode as well</p>
+<p>.</p></div></div></div></div>

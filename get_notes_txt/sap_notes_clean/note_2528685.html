@@ -1,0 +1,78 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="WordSection1" id="__html1">
+<ul>
+<li>Creating a Rep Agent Instance<br/> </li>
+<li>Ran ra_admin.sh (on Unix) or ra_admin.bat (on Windows) interactively and received the following errors:<br/> </li>
+<ul>
+<li><strong>Request upgrading instance &lt;sa&gt; from a previous minor version release.<br/></strong><strong>ERROR:  No verifiable instance &lt;sa&gt; exists in directory &lt;/sybase/rao211/RAX-15_5&gt;.<br/></strong><strong>ERROR:  Failed to upgrade instance &lt;sa&gt; in directory &lt;/sybase/rao211/RAX-15_5&gt;.<br/></strong><strong>Reason: No verifiable instance &lt;sa&gt; exists in directory &lt;/sybase/rao211/RAX-15_5&gt;..</strong></li>
+</ul>
+</ul>
+</div>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Replication Server Option (RSO) 15.7.1<br/> </li>
+<li>SAP Sybase Replication Server 15.7, heterogeneous edition</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Load Rep Agent for Oracle (RAO) in a Linux platform<br/> </li>
+<li>
+<div>Go to $SYBASE/RAX-15_5/bin <br/> </div>
+</li>
+<li>
+<div>ra_admin.sh -cmyrao -p12345 <span style="color: #ff0000;">-usa</span>-toracle</div>
+</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>The wrong syntax was used to run 'ra_admin'<br/> </li>
+<li>The 'ra_admin' option,  <strong>'-u', </strong>was used incorrectly to identify the user but instead that option is intended to signify an upgade  <br/> </li>
+<li>The syntax that triggered the error: ra_admin -c &lt;instance&gt; -p &lt;port_n umber&gt;, -t &lt;type&gt;, <span style="color: #ff0000;">-u</span> &lt;<span style="color: #ff0000;">admin_user</span>&gt; -pwd &lt;password&gt;</li>
+<ul> </ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>
+<p>Issue $SYBASE/RAX-15_5/bin/<strong>ra_admin.sh -h[elp] </strong>to list all options for ra_admin:</p>
+</li>
+<ul>
+<li>
+<p>    -c                                     Creates a Replication Agent instance with name &lt;instance&gt;.</p>
+<p>    -p &lt;port&gt;                          is the socket port for the administration connection.</p>
+<p>    -t &lt;type&gt;                          is the type of database RepAgent will connect to. One of: oracle, oraclexs, ibmudb, mssql</p>
+<p>                                            If you are not copying an instance, then you must provide the -t &lt;type&gt; option.</p>
+<p>    -f &lt;exist_inst&gt;                  is the existing instance from which to copy a configuration file.  PDS parameters and port number are not duplicated.</p>
+<p>     &lt;user id&gt;                         is an <strong>admin user </strong>of a Replication Agent instance.</p>
+<p>    -pwd &lt;password&gt;             is the password of the admin user.</p>
+<p>    -vr &lt;resource&gt;                 Validates resource file contents without creating instance.</p>
+<p>    -r  &lt;resource&gt;                  Creates instance based on resource file contents.</p>
+<p>    -v &lt;instance&gt;                   Verifies a Replication Agent instance with name &lt;instance&gt;.</p>
+<p>    -d &lt;instance&gt;                   Deletes a Replication Agent instance with name &lt;instance&gt; if not currently running.</p>
+<p>    <strong>-u</strong> &lt;source_dir&gt;                <strong>Upgrades</strong> all verifiable Replication Agent instances of a previous major release from the source directory</p>
+<p>        &lt;source_dir&gt;                 to the product installation directory.</p>
+<p>        &lt;source_instance_dir&gt;   Upgrades a verifiable Replication Agent instance of a previous major release from the instance directory</p>
+<p>        &lt;source_instance_dir&gt;   to the product installation directory.</p>
+<p>        all                                 Upgrades all verifiable Replication Agent instances of a previous minor release in the product installation directory.</p>
+<p>        &lt;instance_name&gt; | instance=&lt;instance_name&gt;</p>
+<p>                                            Upgrades a single verifiable Replication Agent instance named &lt;instance_name&gt; of a previous minor release</p>
+<p>                                            in the product installation directory.</p>
+<p>   -k &lt;instance&gt;                    Clears the instance_rand configuration property for the Replication Agent instance with name &lt;instance&gt;.</p>
+<p>   -l                                       Lists all Replication Agent instances and if they are running.</p>
+<p>   -b                                      Displays the Replication Agent base directory.</p>
+<p>   -reset &lt;instance&gt; { -uid &lt;i&gt;user id&lt;/i&gt; -pwd &lt;i&gt;password&lt;/i&gt; }</p>
+<p>                                            Resets the administrator password for the instance with the name &lt;instance&gt;</p>
+<p>   -h[elp]                               Displays this usage message.</p>
+<p>  <span style="color: #ff0000;">-uid</span></p>
+</li>
+</ul>
+<li>
+<p>Rerun ra_admin.sh with the correct option:</p>
+</li>
+<ul>
+<li>
+<p>ra_admin.sh -c &lt;instance&gt; -p &lt;port_number&gt;, -t &lt;type&gt;, <span style="color: #ff0000;">-uid</span>&lt;<span style="color: #ff0000;">admin_user</span>&gt; -pwd &lt;password&gt;</p>
+</li>
+</ul>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Initialize Rep Agent, RepAgent, RAO, RAM, RAU</p></div></div></div></div>

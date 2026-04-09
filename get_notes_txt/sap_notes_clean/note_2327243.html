@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">After data migration to SAP S/4HANA Finance, table ACDOCA contains wrong Debit/Credit indicators for negative posting items migrated from BSEG.</p>
+<p>Affected ACDOCA items have MIG_SOURCE = 'F' and BSTAT = space. The related BSEG item has XNEGP = 'X' indicating a negative posting. The value of ACDOCA-DRCRK is identical to BSEG-SHKZG, but it should be opposite:</p>
+<ul>
+<li>For a BSEG item with XNEGP = 'X' and SHKZG = 'S', ACDOCA-DRCRK should be 'H', although the ACDOCA-amounts are positive</li>
+<li>For a BSEG item with XNEGP = 'X' and SHKZG = 'H', ACDOCA-DRCRK should be 'S', although the ACDOCA amounts are negative</li>
+<li>For normal BSEG items with XNEGP = space, ACDOCA-DRCRK is identical to BSEG-SHKZG (for ACDOCA-MIG_SOURCE = 'F')</li>
+</ul>
+<p>ACDOCA items migrated from NewG/L (MIG_SOURCE = 'F') are not affected as the Debit/Credit indicator is taken from FAGLFLEXA in that case.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the correction instructions.</p>
+<p>Execute report FINS_MIG_UJ_MAPPING_GENERATE to re-generate ZCL_FINS_MIG_UJ_HDB_GENERATED.</p>
+<p>Repeat the line item migration as described in note 2138644. In case migration is already finished, apply the correction report of note 2327300 to fix the affected ACDOCA records.</p></div></div></div></div>

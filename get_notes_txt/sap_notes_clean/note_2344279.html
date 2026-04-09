@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">It is not possible to create confirmation for a service PO in SUS when PO has account assignment U. System gives error message SE518 "No account assignment exists for service line &amp;"</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>Materials Management (MM)</li>
+<li>SAP R/3</li>
+<li>SAP R/3 Enterprise 4.7</li>
+<li>SAP ERP Central Component</li>
+<li>SAP ERP</li>
+<li>SAP enhancement package for SAP ERP</li>
+<li>SAP enhancement package for SAP ERP, version for SAP HANA</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>1. Create service PO with account assignment U.</p>
+<p>2. It will be extracted to an XML and sent to SUS system.</p>
+<p>3. Do a confirmation in SUS system for that PO. </p>
+<p>4. When the XML is processed to create the SES in the ERP system SE 518 error message is raised.  </p>
+<p> </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>SUS imports only basic information about PO's, account assignment is not imported. When you create a confirmation for the PO in SUS no account assignment information will be included in the XML as this information is not available on SUS side. The account assignment will be pulled from the ERP PO during SES creation in the ERP system. Creating SES for such a PO will result in an error message because the system will be not able to determine account assignment details from the PO during XML processing. Error message SE518 "No account assignment exists for service line &amp;" is raised.  During SES creation account assignment is <strong>mandatory (even when account assignment U is also an option in the drop down menu in ml81n)</strong>. This is because FI document will be created when SES is approved and GR 101 is created and for it G/L account, cost center etc. are needed.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Basically there are three options to avoid such problematic situation.</p>
+<ul>
+<li>Do not use PO-s with account assignment U for service PO's</li>
+<li>Do not process PO's with SUS which have account assignment U. (You can also exclude these PO's from the extractor so they will not be transferred to SUS)</li>
+<li>Set a predefined account assignment and fill to <strong>bapi_entrysheet_create</strong> after confirmation is arrived to ERP.</li>
+</ul>
+<p>Last two solutions need custom development which needs to be tested.</p>
+<p> </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>ServiceAcknowledgementERPConfirmation_Out, SRM, SE 518, account assignemnt, u, SUS, SES, Leistungserfassung</p></div></div></div></div>

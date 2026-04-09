@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">CBTA recording stops at the login screen of the System Under Test.</p>
+<p><strong>Investigation.zip reports the following error:</strong></p>
+<p>ERROR | MainThread          | TestCreationWizardRecordingStep    | Unable to start the recording!</p>
+<p>or</p>
+<p>ERROR   : Thread01 (MainThread) : GuiScriptingControl : AuthenticateUser method: <strong>Unable to login into the system.</strong>System.Runtime.InteropServices.COMException (0x80010105): The server threw an exception. (Exception from HRESULT: 0x80010105 (<strong>RPC_E_SERVERFAULT</strong>))<br/>at System.RuntimeType.ForwardCallToInvokeMember(String memberName, BindingFlags flags, Object target, Int32[] aWrapperTypes, MessageData&amp; msgData)<br/>at SAPFEWSELib.ISapSessionTarget.get_ActiveWindow()<br/>at GuiScripting.Spy.GuiScriptingControl.AuthenticateUser(GuiSession gSession, SapGuiCredentials cred)</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Solution Manager 7.2</li>
+<li>Component Based Testing and Automation (CBTA).</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Navigate to TCE (Test Script) and edit.</li>
+<li>Launch CBTA to record the script which stops at the login screen of the System Under Test (SUT).</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Issue related to to Scripting parameters in the System Under Test (SUT).</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Please validate the system parameters in <strong>RZ11</strong> is set with following values:<br/>+ sapgui/nwbc_scripting: is * to<strong> <strong>FALSE</strong></strong><br/>+ sapgui/user_scripting: is * to <strong>TRUE</strong><br/>+ sapgui/user_scripting_disable_recording: is * to <strong>FALSE</strong><br/>+ sapgui/user_scripting_force_notification: is * to <strong>FALSE</strong><br/>+ sapgui/user_scripting_per_user: is * to <strong>FALSE</strong><br/>+ sapgui/user_scripting_set_readonly: is * to <strong>FALSE</strong></li>
+</ol><ol>
+<li>In order to make a permanant change, you need to makesure the values are set via RZ10,<br/>- Start transaction <strong>RZ10</strong><br/>- For Profile, select <strong>Default</strong><br/>- Select <strong>Extended Maintenance</strong>, click on <strong>Change</strong>.<br/>- Click <strong>Parameter</strong>.<br/>-
+<div style="display: inline !important;">Type Parameter name <strong>&lt;parameter_name&gt;<br/>- </strong></div>
+Type Parameter value <strong>&lt;parameter_value&gt;<br/>- </strong>Click on Green Arrow where you will be prompted to Save the changes in profile.<br/>- Select 'YES' when prompted to activate the profile.<strong><br/></strong></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id=""><a href="https://me.sap.com/notes/2449139" target="_blank">2449139 - How to resolve common "CBTA Unable to Record" issues</a></p>
+<p><a href="https://me.sap.com/notes/2629909" target="_blank">2629909 - Component-Based Test Automation: Resolving Unable to record issues - Guided Answers</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>sapgui scripting, Unable to start the recording, parameters, recording</p></div></div></div></div>

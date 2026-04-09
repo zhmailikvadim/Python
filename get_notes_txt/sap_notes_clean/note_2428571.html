@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">An update of a marketing document does not trigger the Approval process. This despite the <em>Active when Updating Documents </em>checkbox being selected in the <em>Approval Templates - Setup</em> window.</p><h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3><p><strong>Prerequisites:</strong></p>
+<p>Under <em>Administration → Approval Procedures → Approval Templates</em>:</p>
+<ol>
+<li>You have created an Approval Template for Purchase Order where the <em>Active</em> and the <em>Active when Updating Documents</em> checkboxes are selected.</li>
+<li>Approval Term is based on user queries.</li>
+</ol>
+<ul>
+<ul>
+<li> Example:  Select DISTINCT 'TRUE' from OPOR Where $[OPOR.Confirmed] = 'Y'</li>
+</ul>
+</ul>
+<p> <strong>Scenario:</strong> </p>
+<ol>
+<li>On the <em>Logistics</em> tab, create a Purchase Order with the <em>Approved</em> option deselected. At this stage the Approval process is not launched.</li>
+<li>Reopen the Purchase Order added in step 1, select the <em>Approved</em> option on the <em>Logistics</em> tab and <em>Update</em> the document. </li>
+</ol>
+<p><strong>Expected behavior:</strong> </p>
+<p>The Approval process is triggered when the document is updated.</p>
+<p><strong>Actual behavior:</strong> </p>
+<p>The Approval process is not triggered. </p>
+<p><strong>Note</strong>: The Approval process is triggered on the Purchase Order with the <em>Approved</em> option selected on the <em>Logistics</em> tab, when the document is in Add mode. Similar behavior also occurs in the Sales Order level.</p><h3 class="section" data-toc-skip="" id="Solution">Solution</h3><p><span>This behavior can no longer be reproduced in the version SAP Business One 9.3 PL0.</span></p></div></div></div></div>

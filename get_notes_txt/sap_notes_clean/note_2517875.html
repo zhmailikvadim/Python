@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You run the <strong>Generate Leave Quota Compensation </strong>(HKRULQC0) report to generate leave quota compensation record (generation type being By Record) for multiple employees. You click the Transfer pushbutton in the ALV list to generate records for <strong>Time Quota Compensation </strong>(IT0416). The generation result is incorrect when both of the following criteria are met:</p>
+<ul>
+<li>At least one of the employees has more than one leave quota record which uses the same compensation method.</li>
+<li>Part of the leave quota records can't be generated in infotype 0416.</li>
+</ul>
+<p>For example, there are two employees, employee A and employee B.</p>
+<p>They both have two records with the same compensation method 2000. The absence quota types in the two records are 21 and 22.</p>
+<p>After you click "Transfer" button to generate the record in infotype 0416, it works fine for Employee A: the record with absence quota type 21 can be generated; the record with absence quota type 22 can't be generated.</p>
+<p>The generation result for employee B is wrong: the record with absence quota type 21 can't be generated successfully. The subsequent jobs are affected.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>HKRULQC0, PROPOSED_VALUES</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is a program error. The relevant table parameter is not cleared.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the HR Support Package or correction instructions in this SAP Note.</p></div></div></div></div>

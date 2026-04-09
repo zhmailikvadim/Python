@@ -1,0 +1,41 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Customers who use HANA Smart Data Quality(SDQ) for Address Validation in DQM for SAP and use the STR_SUPPL1, STR_SUPPL2, STR_SUPPL3, or LOCATION fields for address data may experience unwanted data changes.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Background:</strong> The ADRC/BUPA address model provides two lines above and two lines below the "Address Line".   These would typically be used for special delivery instructions.   For example, the ficticous address below uses two lines above and two lines below.</p>
+<p><strong>Example:</strong></p>
+<p>Example Company Name</p>
+<p>Quality Dept</p>
+<p>ATTN: Quality Manager</p>
+<p>1324 Street Name</p>
+<p>Any City, XX, 12345-1234</p>
+<p>Please deliver to the loading dock</p>
+<p>37.423021, -122.083739</p>
+<p>DQM for SAP uses the following default field mappings for the HANA SDQ task configurations delivered with the product.</p>
+<p>STR_SUPPL1 would have the value of 'Quality Dept' in the example above.   The STR_SUPPL1 field isn't mapped to a transform output field.  This results in the input value passed through to output.</p>
+<p>STR_SUPPL2 woudl have the value of 'ATTN: Quality Manager' in the example above.   The STR_SUPPL2 field is mapped to the ADDR_REMAINDER_EXTRA_PMB_FULL transform output field.  The Global Address Engine concatenates the extra data provided and returns it in this transform output.   The length of the STR_SUPPL2 field is 40 characters.   Data loss may occur if the extra data is more than 40 characters long.</p>
+<p>The STR_SUPPL3 field would contain ''Please deliver to the loading dock'.   The STR_SUPPL3 field is mapped to the STD_ADDR_POINT_OF_REF1_2 transform output field.   This transform output would contain any point of reference data for the address.   This field is 40 characters long.  Data loss may occur if the extra data is more than 40 characters long.</p>
+<p>The LOCATION field would contain '37.423021, -122.083739' in the example above.   The LOCATION field isn't mapped to a transform output field.   This results in the input value passed through to output.</p>
+<p><strong>Reasoning:  </strong>The reasoning behind the default mapping is it is unusual to use all 4 extra info fields.   Passing the values of STR_SUPPL1 and LOCATION through allows customers to enter data and have it be unaffected by the Global Address Engine.   Mapping STR_SUPPL2 is mapped to ADDR_REMAINDER_EXTRA_PMB_FULL to try to avoid data loss in case customers do use more than one extra info field.   Mapping STR_SUPPL3 to STD_ADDR_POINT_OF_REF1_2 provides a place for Point of Reference information, which is important for delivery in some countries.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Customers can update the transform output field mapping in the SDQ tasks used by DQM for SAP.  Please see the '<strong>Update Mapping Process</strong>' below for details on how to change the mapping.</p>
+<p><strong>Potential Change 1:</strong>  Customers who are confident the STR_SUPPL* and LOCATION fields don't contain any address data needed by Global Address Cleanse to validate the address could remove the values in the 'TRANSFORM_OUTPUT' field for these records.   This would result in the input values being passed through without being changed by Global Address Cleanse.</p>
+<p><strong>Potential Change 2: </strong>Customers who experience data loss during the concatendation of the extra data into STR_SUPPL2 could map STR_SUPPL1 to the ADDR_EXTRA_FULL transform output and STR_SUPPL2 to ADDR_REMAINDER_EXTRA_FULL.  This would result in the extra data being split over two fields instead of 1.</p>
+<p><strong>Potential Change 3: </strong>Customers who would like to add custom logic to field the extra data could implement the /FLDQ/SPOT1_TRANS_PV_POST enhancement spot and or the /FLDQ/SPOT1_TRANS_PV_PRE enhancement spot.</p>
+<p><strong>Update Mapping Process: </strong>Follow the steps below to update the transform output field mappings.  <strong>Please note</strong>: Implementing note 3548266 is necessary to see the ADDR_EXTRA_FULL and ADDR_REMAINDER_EXTRA_FULL transform outputs in the list for possible transform outputs.</p>
+<ol>
+<li>Maintain the SIMDQ_OUTP_MAP table in SM30.</li>
+<li>Limit the data shown to a single task.
+<ul>
+<li>Select 'By Contents' from the 'Selection' menu.</li>
+<li>Check the box by 'Service ID' and select the Apply button.</li>
+<li>Enter the service ID for the task you want to update and select the Apply button.Limit the data shown to a single task.</li>
+</ul>
+</li>
+<li>Update the values in the TRANSFORM_OUTPUT field and select the Save button</li>
+<li>Update the SIMDQ_TASK_UPDT table.   This will cause the task to be updated the next time it is run.
+<ul>
+<li>Maintain the SIMDQ_TASK_UPDT table in SM30</li>
+<li>Select the UPDATE_DEFINITION checkbox for the appropriate task and select the Save button.</li>
+</ul>
+</li>
+</ol></div></div></div></div>

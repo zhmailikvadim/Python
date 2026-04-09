@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">To comply with General Data Protection Regulation (GDPR) policy, personal data should be processed lawfully, transparently, and for a specific purpose.</p>
+<p>Once that purpose is fulfilled and the data is no longer required, it should be deleted.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>GDPR, User-Related Data, Background Process, Delete User-Related Data from WIP/ODS, Aging</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>User ID is stored in some SAP ME database tables. Also User ID is used for Labor logging and it is treated as personal data.</p>
+<p>To comply with GDPR, automatic data deletion mechanism is required so that data gets automatically erased after a retention period is reached.</p>
+<div class="WordSection1">
+<p>Until the retention period is reached information needs to be available for traceability requirements, A&amp;D or medical FDA requirements.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The solution is provided in the form of a code change.</p>
+<p>A new background process (Delete User-Related Data from WIP/ODS) is implemented to delete user-related data after the retention period (WIP/ODS Retention Period) is reached.</p>
+<p>User-related data includes the following:</p>
+<ol>
+<li>Any records in WIP and ODS schemas containing User ID reference (USER_ID or USER_BO).</li>
+<li>SAP ME user records if the following conditions are met:</li>
+</ol>
+<ul>
+<ul>
+<li>Corresponding SAP NetWeaver UME record is deleted.</li>
+<li>There are no records in ACTIVITY_LOG and AR_ACTIVITY_LOG tables created during the retention period and containing this User ID.  </li>
+</ul>
+</ul>
+<p>The background process can be enabled and maintained only at Global (*) site by users with administrators permissions.</p>
+<p>By default, the retention period is set to 30 years (10950 days) in a new ODS rule (<strong>WIP/ODS Retention Period</strong>). It can be maintained only at Global (*) site.</p>
+<p><strong>NOTE:</strong> To make the rule available, execute CTC tasks "SAP ME Configuration for Upgrade" or do reload initial data on created sites.</p>
+<p><span style="text-decoration: underline;"><strong>CAUTION: Do not make the retention period too short. It will cause data inconsistency. </strong></span>See recommendations section for details.</p>
+<p><strong>Recommendations</strong>:</p>
+<ul>
+<li>Backup your databases regularly.</li>
+<li>Archive your data regularly. </li>
+<li>Make archiving period shorter than WIP/ODS retention period.</li>
+</ul>
+<p><strong>Impact</strong></p>
+<p>The code change made to address the symptom above may impact the following:</p>
+<ul>
+<li>Background Process Execution</li>
+<li>ODS Rule Maintenance </li>
+<li>Production and Master data containing User ID information</li>
+</ul>
+<p>Database records with User ID will be deleted, but related (child) records can remain untouched, as they don't have User ID reference.Typically, the child records share the same creation date or are dated within a small number of days while they are Work In Progress. Records containing a user ID are transactional not master data. <br/>Providing the customer sets the deletion threshold to be greater than the oldest needed record plus a small buffer margin, data integrity of all actively used / reported records will be fully maintained. <br/>Even if a small number of records very close to the cut point become disassociated with deleted related records it will not have any impact on records not at the margin, so risk is minimal providing the parameter is set correctly.</p>
+<p>Labor Logging Personal data is movied to ODS storage by ODS Labor Log background job and then will be deleted by Delete User-Related Data from WIP/ODS background job.</p>
+<p> </p></div></div></div></div>

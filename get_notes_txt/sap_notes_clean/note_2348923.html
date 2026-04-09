@@ -1,0 +1,152 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This SAP Note contains information about restrictions and recommendations for the usage of</p>
+<ul>
+<li><a href="#SAPGUI_HTML" target="_self">SAP GUI for HTML and Browser Usage</a></li>
+<li><a href="#Fiori_Launchpad" target="_self">Fiori Launchpad</a></li>
+<li>SAP Themes (additionally see SAP Notes <a href="/notes/710719" target="_blank">710719</a> and <a href="/notes/2540597" target="_blank">2540597</a>)</li>
+<ul>
+<li><a href="#Belize" target="_self">SAP Belize</a></li>
+<li><a href="#SAP-Theme_Quartz" target="_self">SAP Quartz</a></li>
+<li><a href="#Horizon" target="_self">SAP Horizon</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="#SAP_BC" target="_self">SAP Business Client</a></li>
+</ul>
+<p>in the context of Extended Warehouse Management functionality. Moreover, it contains some recommendations to ensure a better usability during usage.</p>
+<p>In addition to that it provides some <a href="#Add_Info" target="_self">Additional UI Related Information</a></p>
+<ul>
+<li>Setup information for the usage of the Fiori Launchpad</li>
+<li>Support of Enterprise Search in the context of warehouse management</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP S/4HANA, SAP Belize, SAP Quartz, SAP Horizon, Fiori3.0,  Fiori 3, "<em>SAP Fiori: the user experience of SAP S/4HANA</em>"</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Availability of SAP themes in SAP S/4HANA. The Fiori Launchpad is the intended entry point for business users.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong><a name="SAPGUI_HTML" target="_blank"></a>SAP GUI for HTML and Browser Usage</strong></p>
+<p>If you are using the browser to run Extended Warehouse Management transactions, the transactions are rendered in SAP GUI for HTML. Therefore, all limitations for SAP GUI for HTML apply. For additional information, see SAP Note <a href="/notes/314568" target="_blank">314568</a>. This is especially the case, if you use the Fiori Launchpad with the browser, but the same applies to the usage of the HTML version of the Business Client.</p>
+<p>Those general limitations have consequences during the usage of Extended Warehouse Management functionality, especially the ones mentioned below in more detail:</p>
+<p><span style="text-decoration: underline;">Use of SET/GET Parameters</span></p>
+<p style="padding-left: 30px;">The usage of SET/GET parameters is limited. Therefore, it is strongly recommended to set the following user parameters in your user master data:</p>
+<ul>
+<li>parameter /SCWM/LGN <em>Warehouse Number</em> with your favorite warehouse number</li>
+<li>parameter /SCWM/MON <em>Monitor</em> with the monitor you want to use, for example 'SAP'</li>
+</ul>
+<p style="padding-left: 30px;">to improve the user experience during usage. If you have not maintained the user parameters, it can happen that you are forced to enter the warehouse number and/or the monitor again and again upon transaction launch, or you might encounter issues upon navigation from one to another transaction.</p>
+<p style="padding-left: 30px;">Additionally check SAP Note <a href="/notes/3381077" target="_blank">3381077</a> that improves the behavior of SET/GET.</p>
+<p><span style="text-decoration: underline;">Use of Drag&amp;Drop</span></p>
+<p style="padding-left: 30px;">The usage of Drag&amp;Drop has some restrictions, for example the drag from a list cell. Therefore, the following transactions have restricted usability. However, all functions can be executed without the necessity to make use of Drag&amp;Drop.</p>
+<ul>
+<li>/SCWM/DCONS <em>Deconsolidation in Goods Receipt</em></li>
+<li>/SCWM/PACK <em>Packing - General</em></li>
+</ul>
+<p style="padding-left: 30px;">This restriction only applies to releases &lt;= S/4HANA OP 2020.</p>
+<p><span style="text-decoration: underline;">Copy Content to the Clipboard</span></p>
+<p style="padding-left: 30px;">In some cases, it is not possible to copy content to the clipboard as in SAP GUI for Windows. See SAP Note <a href="/notes/314568" target="_blank">314568</a> for more details for your software version.</p>
+<p><span style="text-decoration: underline;">Use of STARTING NEW TASK</span></p>
+<p style="padding-left: 30px;">The ABAP statement STARTING NEW TASK to open a User Interface in a new session is not supported using the browser. Consequently, the application in a browser behaves differently from running the application in Business Client or SAP GUI. For example:</p>
+<ul>
+<li>The navigation from transaction /SCWM/MON <em>Warehouse Management Monitor </em>to other User Interfaces is always done in-place and does not open a new session</li>
+<li>The navigation from Extended Warehouse Management User Interfaces to transaction /SCWM/MON <em>Warehouse Management Monitor, </em>for example from transaction /SCWM/TODLV_I <em>Create Warehouse Tasks for Warehouse Requests - Putaway for Inbound Delivery</em> just to name one, is depending on the release either not possible or done in-place.</li>
+</ul>
+<p><span style="text-decoration: underline;">Use of Business Graphics</span></p>
+<p style="padding-left: 30px;">The use of business graphics in SAP GUI for HTML is not supported. This especially affects the following transactions:</p>
+<ul>
+<li>/SCWM/EGF <em>Warehouse Cockpit </em>cannot be used.</li>
+<li>/SCWM/EGF_CHART <em>Process Chart Template</em> cannot be used.</li>
+<li>/SCWM/GWL <em>Display Graphical Warehouse Layout</em> cannot be used.</li>
+<li>/SCWM/MEDI_AQTY <em>Merchandise Distribution - Maintain Quantity Adjustment (Flow-Through) </em>does not offer the statistics display. As the statistics display is only a different view on data which is already on the screen, functionality is not restricted.</li>
+<li>/SCWM/PL <em>Labor Management Planning and Simulation</em> does not offer the statistics display. As the statistics display is only a different view on data which is already on the screen, functionality is not restricted.</li>
+<li>/SCWM/MFS_ROUTES <em>Display Routes (Static)</em> cannot be used.</li>
+</ul>
+<p><span style="text-decoration: underline;">Use of Local File Selection Dialog</span></p>
+<p style="padding-left: 30px;">The file selection dialog is typically required in the file up- and download transactions, such as for example</p>
+<ul>
+<li>/SCWM/ISU <em>Stock Data Transfer, Initial Stock Upload</em></li>
+<li>/SCWM/PI_UPLOAD <em>Upload Storage Bins and Count Data</em></li>
+<li>/SCWM/IPU <em>Initial Data Transfer of Packaging Specification</em></li>
+<li>etc.</li>
+</ul>
+<p style="padding-left: 30px;">If running in the browser, it is required to first load the files to the web server. This requires some additional clicks for a local file upload in comparison to the usage with a local installed client, such as the SAP GUI or the Business Client Desktop Version. For additional information, see SAP Note <a href="/notes/300645" target="_blank">300645</a>.</p>
+<p><span style="text-decoration: underline;">Use of Graphical Screen Painter</span></p>
+<p style="padding-left: 30px;">The graphical screen painter is not supported in SAPGUI for HTML. Consequently, the transaction /SCWM/RFSCR <em>RF Screen Manager </em>has a reduced usability.</p>
+<p><span style="text-decoration: underline;">Automatic Scrolling</span></p>
+<p style="padding-left: 30px;">SAP GUI for HTML automatically scrolls back to the focused field upon Enter. Therefore you might encounter reduced usability in some cases. For example, if you scroll down to a lower section of a UI and then switch to a different tab on a tab control, this may cause the UI to scroll back up to the top. Note that this is a general SAP GUI for HTML behavior but might have more impact with the new themes SAP Belize and SAP Quartz due to the new metrics.</p>
+<p><span style="text-decoration: underline;">Use of Crystal Reports Viewer</span></p>
+<p style="padding-left: 30px;">The use of Crystal Reports Viewer is not supported in SAP GUI for HTML. Therefore, it is not possible to make use of the examples provided for the warehouse management monitor or to create own crystal report ALV variants (see SAP Note <a href="/notes/1353044" target="_blank">1353044</a> for more details).</p>
+<p><strong><a name="Fiori_Launchpad" target="_blank"></a>Fiori Launchpad</strong></p>
+<p>If you are using the Fiori Launchpad in a browser to run Extended Warehouse Management transactions all restrictions mentioned in <a href="#SAPGUI_HTML" target="_self">SAP GUI for HTML and Browser Usage</a> applies. See SAP Note <a href="/notes/2540597" target="_blank">2540597</a> for additional information about the restrictions for the usage of SAP GUI for HTML in the Fiori Launchpad.</p>
+<p>UI navigation, technically realized via launchpad configuration using transaction LPD_CUST, will display the called transaction outside the Fiori shell in a new session. This includes navigation in the following applications:</p>
+<ul>
+<li>Shipping Cockpit</li>
+<li>User Interfaces for Dock Appointment Scheduling</li>
+<li>User Interfaces for Transit Warehousing </li>
+<li>User Interfaces for Staging and Consumption in Production</li>
+</ul>
+<p>Moreover, navigation from side panels is not supported in the browser.</p>
+<p>If you are using one of the above applications, check if SAP Note <a href="/notes/3357308" target="_blank">3357308</a> applies to your release.</p>
+<p><strong><a name="Belize" target="_blank"></a>SAP Belize</strong></p>
+<p>Theme SAP Belize has been the first theme with some major deviations to all existing former themes. See SAP Notes <a href="/notes/2348661" target="_blank">2348661</a> and <a href="/notes/2328598" target="_blank">2328598</a> for more information. This has consequences for the use of the new design in the context of Extended Warehouse Management application such as:</p>
+<ul>
+<li>Scroll Bars</li>
+</ul>
+<p style="padding-left: 60px;">For some transactions, you might recognize more scroll bars in comparison to former themes. This might reduce the usability of some transactions such as /SCWM/GRPE and /SCWM/GRPI for <em>Goods Receipt Preparation</em>. This and the restriction as per SAP Note <a href="/notes/803582" target="_blank">803582</a> might as well lead to a reduced usability in transactions such as</p>
+<ul>
+<ul>
+<li><span lang="EN-US" style="font-size: 11pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">/SCWM/TO_DISP <em>Display Warehouse Task</em></span></li>
+<li><span lang="EN-US" style="font-size: 11pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">/SCWM/SGI <em>Pickup of Goods</em></span></li>
+</ul>
+</ul>
+<p style="padding-left: 60px;">with large tables and as well</p>
+<ul>
+<ul>
+<li><span lang="EN-US" style="font-size: 11pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">/SCWM/CORR <em>Maintain Correction Delivery</em></span></li>
+<li><span lang="EN-US" style="font-size: 11pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">/SCWM/GRWORK <em>Goods Receipt Workload</em></span></li>
+</ul>
+</ul>
+<p style="padding-left: 60px;">with single tables which are larger than the screen size.</p>
+<p style="padding-left: 60px;">To reduce this issue to a minimum, it is recommended to ensure that there is sufficient space for the UI to be displayed. This can be achieved by different means, for example by choosing an appropriate screen resolution, or by working in full screen mode, or by using the zoom function of the browser to adapt the displayed content to the available space.</p>
+<ul>
+<li>Form views in the warehouse monitor (transaction /SCWM/MON) are displayed as HTML-based form views and are not adjusted to the new theme SAP Belize. As a result, neither colors and font sizes are displayed according to the theme, nor are the labels right aligned. Starting with SAP S/4HANA 2022 On-Premise however, you can decide to display the form views as popups which enables a theme-specific display of the form view data. To use this option set indicator <em>Popup View </em>for your <em>Monitor</em> in Customizing for SCM Extended Warehouse Management under Extended Warehouse Management-&gt;Monitoring-&gt;Warehouse Management Monitor-&gt;Define Monitors.</li>
+</ul>
+<p>You can find further information on the theme SAP Belize, including access to cookbook, via SAP Note <a href="/notes/2348661" target="_blank">2348661</a>.</p>
+<p>Transactions and Web Dynpro applications contained in the following technical catalogs are supporting the new visual design with the usability restrictions explicitly mentioned in this SAP Note:</p>
+<ul>
+<li>SAP_TC_SCM_EWM_BE_APPS - available with SAP S/4HANA 1610</li>
+<li>SAP_TC_SCM_EWM_AD_BE_APPS and SAP_TC_SCM_EWM_S4_BE_APPS - available with SAP S/4HANA 1709</li>
+</ul>
+<p><strong><a name="SAP-Theme_Quartz" target="_blank"></a>SAP Quartz</strong></p>
+<p>Same restrictions apply as for theme SAP Belize. For more information on the availability and support of theme SAP Quartz and corresponding restrictions see SAP Note <a href="/notes/2773530" target="_blank">2773530</a> and SAP Note <a href="/notes/2814266" target="_blank">2814266</a>. See note <a href="/notes/2796898" target="_blank">2796898</a> for further information about the support of SAP Quartz using SAP GUI for Windows.</p>
+<p><strong><a name="Horizon" target="_blank"></a>SAP Horizon</strong></p>
+<p>Same restrictions apply as already described for SAP Belize and SAP Quartz apply.</p>
+<p><strong><a name="SAP_BC" target="_blank"></a>SAP Business Client </strong></p>
+<p>For prerequisites and restrictions for the use of SAP Business Client see one of the following SAP Notes depending on your release:</p>
+<ul>
+<li>SAP Note <a href="/notes/2227396" target="_blank">2227396</a> SAP Business Client 6.0</li>
+<li>SAP Note <a href="/notes/2928874" target="_blank">2928874</a> SAP Business Client 7.70</li>
+<li>SAP Note <a href="/notes/3220574" target="_blank">3220574</a> SAP Business Client 8.0</li>
+</ul>
+<p><strong><a name="Add_Info" target="_blank"></a>Additional UI Related Information</strong></p>
+<p><span style="text-decoration-line: underline;">Setup information for the usage of the Fiori Launchpad</span></p>
+<p>For information on basic settings for using SAP Fiori Launchpad, see</p>
+<ul>
+<li><em><a href="https://help.sap.com/viewer/S4HANA_1610_AdminGuide" target="_blank">Administration Guide to Implementation of SAP S/4HANA 1610 with SAP Best Practices</a></em></li>
+<li><em><a href="https://help.sap.com/viewer/S4HANA_1709_AdminGuide" target="_blank">Administration Guide to Implementation of SAP S/4HANA 1709 with SAP Best Practices</a></em></li>
+<li><em><a href="https://help.sap.com/viewer/S4HANA_1809_AdminGuide" target="_blank">Administration Guide to Implementation of SAP S/4HANA 1809 with SAP Best Practices</a></em></li>
+<li><em><a href="https://help.sap.com/viewer/S4HANA_1909_AdminGuide" target="_blank">Administration Guide to Implementation of SAP S/4HANA 1909 with SAP Best Practices</a></em></li>
+<li><em><a href="https://help.sap.com/viewer/S4HANA2020_AdminGuide" target="_blank">Administration Guide to Implementation of SAP S/4HANA 2020 with SAP Best Practices</a></em></li>
+<li><em><a href="https://help.sap.com/viewer/S4HANA2021_AdminGuide" target="_blank">Administration Guide to Implementation of SAP S/4HANA 2021 with SAP Best Practices</a></em></li>
+<li><em><a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/4cef93946a0b48ec89533b3c34443b85/17d958a88d244ee293aed687f9bfe37f.html?version=S4HANA2022&amp;language=en-US" target="_blank">Administration Guide to Implementation of SAP S/4HANA 2022 with SAP Best Practices</a></em></li>
+<li><em><a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/4cef93946a0b48ec89533b3c34443b85/17d958a88d244ee293aed687f9bfe37f.html?version=2023&amp;language=en-US" target="_blank">Administration Guide to Implementation of SAP S/4HANA 2023 with SAP Best Practices</a></em></li>
+<li><em><a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/4cef93946a0b48ec89533b3c34443b85/17d958a88d244ee293aed687f9bfe37f.html?version=2025&amp;language=en-US" target="_blank">Administration Guide to Implementation of SAP S/4HANA 2025 with SAP Best Practices</a></em></li>
+</ul>
+<p><em><em>Prerequisite Settings-&gt;<em>Carrying out Technical Setup.</em></em></em></p>
+<p><em></em>For information on business roles in the area of Extended Warehouse Management, see business configuration content for EWM in SAP S/4HANA available for download in the Best Practices Explorer.</p>
+<p>For information on how to enable the use of the user menu and the SAP Easy Access Menu in the Fiori Launchpad, see application help of the corresponding SAP Netweaver Platform or ABAP Platform releases, e.g. by <a href="https://help.sap.com/docs/SAP_NETWEAVER" target="_blank">https://help.sap.com/docs/SAP_NETWEAVER</a>.</p>
+<ul>
+<li>Select the corresponding SAP Netweaver Platform release, then choose <em>Application Help-&gt;SAP Netweaver Library<em>-&gt;Function Oriented View -&gt;<em>UI Technologies in SAP Netweaver-&gt;<em>SAP Fiori Launchpad-&gt;Setting Up the Launchpad Content-&gt;Enabling SAP Easy Access Menu for Launchpad.</em></em></em></em></li>
+<li>Select the corresponding SAP ABAP Platform release, then choose <em>UI Technologies-&gt;SAP Fiori Launchpad-&gt;Administration Guide-&gt;Setting Up the Launchpad Content-&gt;Integrating Remote Content-&gt;Integrating Applications from SAP Easy Access Menu.</em></li>
+</ul>
+<p><span style="text-decoration: underline;">Support of Enterprise Search in the context of warehouse management</span></p>
+<p>For information on Enterprise Search Models in S/4HANA On-Premise for Extended Warehouse Management, see SAP Note <a href="/notes/2794521" target="_blank">2794521</a> or SAP Note <a href="/notes/3148353" target="_blank">3148353</a> depending on your release.</p></div></div></div></div>

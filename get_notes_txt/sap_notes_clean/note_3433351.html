@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">Created the ESEF iXBRL instance and preview file</p>
+<p>Downloaded both files </p>
+<p><img class="img-responsive" height="546" src="https://itsm.services.sap/sys_attachment.do?sys_id=65a56f3ec3d4ce1086c6d78f050131bd" width="1252"/></p>
+<p></p>
+<p>Looking at the file sizes of these 2 files, the preview file is <span style="text-decoration: underline;">significantly</span> larger than the instance file. Why this big difference ?</p>
+<p></p>
+<p><img class="img-responsive" height="388" src="https://itsm.services.sap/sys_attachment.do?sys_id=a7d5a7bec3d4ce1086c6d78f05013199" width="1128"/></p>
+<p></p>
+<p><strong><span style="color: #e03e2d;">Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental </span></strong></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Disclosure Management 10.1</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>N/A</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The preview file consists of 2 parts</p>
+<p></p>
+<p>The first, is simply the instance file (as produced by Disclosure Management)</p>
+<p><img class="img-responsive" height="452" src="https://itsm.services.sap/sys_attachment.do?sys_id=e7366b72c318ce1086c6d78f05013108" width="1226"/></p>
+<p></p>
+<p>The 2nd part is created by the Workiva previewer plugin (which is embedded in Arelle - called by Disclosure Management when generating the preview)</p>
+<p>This references the java-script (ixbrlviewer.js) and then has the information for all tagged facts (i.e. descriptions in multiple languages, anchor information, LEI etc.)</p>
+<p><img class="img-responsive" height="592" src="https://itsm.services.sap/sys_attachment.do?sys_id=d7c6a736c318ce1086c6d78f05013172" width="1172"/></p>
+<p></p>
+<p>The section is marked by the comments</p>
+<p>&lt;!--BEGIN IXBRL VIEWER EXTENSIONS--&gt;</p>
+<p>..<br/>&lt;!--END IXBRL VIEWER EXTENSIONS--&gt;</p>
+<p></p>
+<p>If you delete the lines in between and save the file....</p>
+<p><img class="img-responsive" height="512" src="https://itsm.services.sap/sys_attachment.do?sys_id=84472bb6c318ce1086c6d78f050131f0" width="1175"/></p>
+<p></p>
+<p>.... you will see that the files are same (similar) size</p>
+<p><img class="img-responsive" height="355" src="https://itsm.services.sap/sys_attachment.do?sys_id=9d77273ac318ce1086c6d78f05013148" width="1094"/></p>
+<p></p>
+<p>Ultimately, this is not something Disclosure Management controls.</p>
+<p>Some factors that contribute:</p>
+<p>1) embedding images. These images will be repeated multiple times in the preview section</p>
+<p>Note: you will see lines like this</p>
+<p><span style="font-family: 'courier new', courier;"> "v": "\u003Cspan class=\"dmspan dmtext001\" style=\"font-size:10pt; color:#000f64; left:0pt; top:0pt; line-height:11.33pt;\"\u003E8 \u003C/span\u003E\u003Cdiv class=\"dmdiv\"\u003E\u003Cimg alt=\"[IMAGE]\" class=\"dmimg\" <strong>src=\"data:image/png;base64,i</strong>VBORw0KGgoAAAANSUhEUgAAClAAAA </span></p>
+<p></p>
+<p>2) use of (non standard) fonts</p>
+<p></p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Avoid including images in the tagged text blocks OR use the 'embed pictures'=No parameter</p>
+<p><img class="img-responsive" height="532" src="https://itsm.services.sap/sys_attachment.do?sys_id=a6a8e3b2c358ce1086c6d78f050131f2" width="1238"/></p></div></div></div></div>

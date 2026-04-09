@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li> Text rendering in exported PDF file is not the same as in the previous version of Crystal Reports</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Crystal Reports 2013</li>
+<li>SAP Crystal Reports 2016</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Export report in two versions of Crystal Reports from two different environments</li>
+<li>Observe results are not the same</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p id="">There are multiple potential causes:</p>
+<ol>
+<li>Fonts difference</li>
+<li>Text rendering dll - usp10.dll </li>
+<li>Printer Driver </li>
+<li>Exporting dll - crxf_pdf.dll</li>
+<li>Registry keys</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Compare the fonts used in the report and installed on the machines (C:/Windows/Fonts), see  <a href="/notes/2214614" target="_blank" title="2214614  - Incorrect font displayed when exporting a report to PDF format from Crystal Reports, and using an Open Type Font">2214614 - Incorrect font displayed when exporting a report to PDF format from Crystal Reports, and using an Open Type Font</a></li>
+<li>Open the report and go to Help &gt; About Crystal &gt; More info. Compare the versions of usp10.dll. Note if usp10.dll loaded from Windows location then not possible to replace, but if the usp10.dll loaded from SAP Business Objects folder then it is possible to replace usp10.dll. See: <a href="/notes/1853617" target="_blank" title="1853617  - Characters overlap when printing a report from Crystal Reports">1853617 - Characters overlap when printing a report from Crystal Reports</a></li>
+<li>Go to Page Setup and compare the printers associated with the report. See:   <a href="/notes/1835763" target="_blank" title="1835763  - Text truncates when exporting a report to PDF format from Crystal Reports">1835763 - Text truncates when exporting a report to PDF format from Crystal Reports</a></li>
+<li>Go to Help &gt; About Crystal &gt; More info and compare versions of crxf_pdf.dll. Note, replacing the .dll is not supported</li>
+<li>There are 4 registry keys in charge of Exporting to PDF. See: <a href="/notes/1835763" target="_blank" title="1835763  - Text truncates when exporting a report to PDF format from Crystal Reports">1835763 - Text truncates when exporting a report to PDF format from Crystal Reports</a>, <a href="/notes/2469456" target="_blank" title="2469456  - Incorrect characters in PDF export results, if the function urlDecode is used in Crystal Reports">2469456 - Incorrect characters in PDF export results, if the function urlDecode is used in Crystal Reports</a></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id="">  <a href="/notes/2165260" target="_blank" title="2165260  - List of Registry Keys used in Crystal Reports  *** Master KBA ***">2165260 - List of Registry Keys used in Crystal Reports *** Master KBA ***</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p id="">Adobe</p></div></div></div></div>

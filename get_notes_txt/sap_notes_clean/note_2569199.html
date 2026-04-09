@@ -1,0 +1,113 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>You are performing a dual stack split or a system copy using the Software Provisioning Manager (SWPM) tool</li>
+<li>During the export of the primary application server, the following error is encountered in the sapinst_dev.log:</li>
+</ul>
+<pre style="padding-left: 60px;">&lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; &lt;p&gt; An error occurred while processing option Dual-Stack Split &gt; IBM DB2 for Linux, UNIX, and Windows &gt; Keep Database &gt; Standard System or Distributed System &gt; Export Primary Application Server of Dual-Stack System</pre>
+<pre style="padding-left: 60px;">(Last error reported by the step: <strong>Execution of UTL tool '/usr/sap/&lt;SID&gt;/&lt;Instance&gt;/exe/sapjvm_&lt;version&gt;/bin/java -classpath /sapmnt/&lt;SID&gt;/global/sltools/sharedlib/sap.com~tc~bl~offline_launcher~impl.jar</strong> <br/>-showversion -Xmx256m com.sap.engine.offline.OfflineToolStart com.sap.sl.ut.manager.UtlMain /usr/sap/upgrade/&lt;SWPM DIR&gt;/COMMON/INSTALL/UTL:/usr/sap/&lt;SID&gt;/SYS/global/security/lib/tools/iaik_jce.jar:/usr/sap/&lt;SID&gt;/SYS/global/security/lib/tools/iaik_jsse.jar:<br/>/usr/sap/&lt;SID&gt;/SYS/global/security/lib/tools/iaik_smime.jar:/usr/sap/&lt;SID&gt;/SYS/global/security/lib/tools/iaik_ssl.jar:/usr/sap/&lt;SID&gt;/SYS/global/security/lib/tools/w3c_http.jar:/sapmnt/&lt;SID&gt;/global/sltools/sharedlib:/usr/sap/&lt;SID&gt;/SYS/global/db6/jdbc/db2jcc4.jar <br/>-export -type=keydb -expfile=usages_data_&lt;SID&gt;.xml -log=UTL_load_usages.log -sid=&lt;SID&gt; -dsn=jdbc/pool/&lt;SID&gt; -ssprops=/usr/sap/&lt;SID&gt;/SYS/global/security/data/SecStore.properties -ssk=/usr/sap/&lt;SID&gt;/SYS/global/security/data/SecStore.key'</pre>
+<pre style="padding-left: 60px;">aborts with return code 1.</pre>
+<pre style="padding-left: 60px;">Check 'UTL_load_usages.log' and '/tmp/sapinst_instdir/DSS/KeepDB/DB6/ExportPAS/UTL.java.log' for more information). You can now:</pre>
+<ul>
+<li>The UTL.java.log noted in the error above, contains the following error:</li>
+</ul>
+<pre style="padding-left: 60px;"><strong>Exception in thread "main" java.lang.NoClassDefFoundError: com/sap/engine/offline/OfflineToolStart</strong><br/>Caused by: java.lang.ClassNotFoundException: com.sap.engine.offline.OfflineToolStart <br/>  at java.net.URLClassLoader$1.run(URLClassLoader.java:281) <br/>  at java.security.AccessController.doPrivileged(Native Method) <br/>  at java.net.URLClassLoader.findClass(URLClassLoader.java:269) <br/>  at java.lang.ClassLoader.loadClass(ClassLoader.java:376) <br/>  at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:344) <br/>  at java.lang.ClassLoader.loadClass(ClassLoader.java:317)<br/>Could not find the main class: com.sap.engine.offline.OfflineToolStart.  Program will exit.</pre>
+<ul>
+<li>Below are other documents with similar error messages, but the scenario and solution is different:</li>
+<ul>
+<li><a href="https://me.sap.com/notes/1903663" target="_blank">1903663</a> - Java class is not found: com.sap.engine.offline.OfflineToolStart</li>
+<li><a href="https://me.sap.com/notes/1678319" target="_blank">1678319</a> - NoClassDefFoundError in step getUsageTypes during export of Distributed or HA environment</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>OS Independent</li>
+<li>DB Independent</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<div>Run the Software Provisioning Manager to perform a dual-stack split or a system copy</div>
+</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>The java class com.sap.engine.offline.OfflineToolStart contained in the JAR file sap.com~tc~bl~offline_launcher~impl.jar cannot be read.  Either the file is missing or there is insufficient permissions on the JAR file.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>At first, ensure that the used/started SWPM Service is for the exact release version of the source system Java stack. The Release and component version of NW AS Java stack can be checked using SAP KBA:<a href="https://me.sap.com/notes/1757810" target="_blank">1757810</a>.</p>
+<p>Different SWPM Tools for different NW AS Java stacks are reachable according the SAP Notes:</p>
+<p>for AS Java stack based on NW 7.1 and higher: <a href="https://me.sap.com/notes/1680045" target="_blank">1680045</a> - <a href="/notes/1680045" style="font-size: medium; font-family: arial, helvetica, sans-serif; white-space: normal; word-spacing: 0px; text-transform: none; font-weight: 400; font-style: normal; orphans: 2; widows: 2; letter-spacing: normal; background- text-indent: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px;" target="_blank" title="1680045  - Release Note for Software Provisioning Manager 1.0 (recommended: SWPM 1.0 SP30)"><span class="title" style="font-size: 1em; text-decoration: none; font-family: Arial, Helvetica, sans-serif; font-weight: bold;  font-style: normal;">Release Note for Software Provisioning Manager 1.0 (recommended: SWPM 1.0 SP30)</span></a></p>
+<p>for AS Java stack based on NW 7.0#: <a href="https://me.sap.com/notes/2595196" target="_blank">2595196</a> - <a href="/notes/2595196" style="font-size: medium; font-family: arial, helvetica, sans-serif; white-space: normal; word-spacing: 0px; text-transform: none; font-weight: 400; font-style: normal; orphans: 2; widows: 2; letter-spacing: normal; background- text-indent: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px;" target="_blank" title="2595196  - Release Note for *70JDS*.SAR of Software Provisioning Manager 1.0 - Covers No Longer Supported Java and Dual-Stack Options and Access to Guides for Software Provisioning Manager 1.0 Java and Dual Stack"><span class="title" style="font-size: 1em; text-decoration: none; font-family: Arial, Helvetica, sans-serif; font-weight: bold;  font-style: normal;">Release Note for *70JDS*.SAR of Software Provisioning Manager 1.0 - Covers No Longer Supported Java and Dual-Stack Options and Access to Guides for Software Provisioning Manager 1.0 Java and Dual Stack</span></a></p>
+<p> ---</p>
+<p>Note: All directory paths are taken from the sample error message in the symptom section</p>
+<ol>
+<li><span style="font-size: 14px;">In the command specified in the error message, make sure that the file/directory after “-classpath” exists</span></li>
+<ul>
+<li>For example:</li>
+</ul>
+<ol>
+<ul>
+<li>
+<pre>Execution of UTL tool ‘/usr/sap/&lt;SID&gt;/&lt;instance&gt;/exe/&lt;sapjvm version&gt;/bin/java -classpath<strong> /sapmnt/&lt;SID&gt;/global/sltools/sharedlib/</strong>sap.com~tc~bl~offline_launcher~impl.jar’</pre>
+</li>
+</ul>
+</ol>
+<li>If the file exists, then check the permissions as per KBA <a href="https://me.sap.com/notes/2096129" target="_blank">2096129</a> - Exception in thread "main" java.lang.NoClassDefFoundError: com/sap/engine/offline/OfflineToolStart</li>
+<li>If the file/directory does not exist, then the directory needs to be created and the files added.</li>
+<ul>
+<li>The file/directory is part of the archive delivered with:</li>
+</ul>
+<ol>
+<ul>
+<li>the JAVA DVD:  </li>
+<ul>
+<li>
+<pre>/&lt;java dvd location&gt;/DATA_UNITS/JAVA_J2EE_OSINDEP_J2EE_INST/&lt;J2EEINSTALL.SAR or J2EEINSTALL.SDA&gt;</pre>
+</li>
+</ul>
+<li>Or the SWPM tool: </li>
+<ul>
+<li>
+<pre><span>/&lt;swpm tool location&gt;/JAVA/&lt;NW version&gt;/J2EEINSTALL.SDA</span></pre>
+</li>
+</ul>
+</ul>
+</ol>
+<li>Copy the archive to the path after "-classpath" in the error</li>
+<ul>
+<li>For example: </li>
+</ul>
+<ol>
+<ul>
+<li>
+<pre>/sapmnt/&lt;SID&gt;/global/sltools/sharedlib</pre>
+</li>
+</ul>
+</ol>
+<li>Extract the contents of the archive to the folder path</li>
+<ul>
+<li>For J2EEINSTALL.SAR use SAPCAR.</li>
+</ul>
+<ol>
+<ul>
+<li>For example:</li>
+</ul>
+<ol>
+<ul>
+<li>
+<pre>SAPCAR -xvf J2EEINSTALL.SAR</pre>
+</li>
+</ul>
+</ol></ol>
+<ul>
+<li>For J2EEINSTALL.SDA use winzip or winrar</li>
+</ul>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li><a href="https://me.sap.com/notes/2096129" target="_blank">2096129</a> - Class not found: com/sap/engine/offline/OfflineToolStart - Error in SWPM</li>
+<li><a href="https://me.sap.com/notes/1903663" target="_blank">1903663</a> - Java class is not found: com.sap.engine.offline.OfflineToolStart</li>
+<li><a href="https://me.sap.com/notes/1678319" target="_blank">1678319</a> - NoClassDefFoundError in step getUsageTypes during export of Distributed or HA environment</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>virtual machine, JVM, create, tool, start, java, OfflineToolStart, sltools/sharedlib/sap.com~tc~bl~offline_launcher~impl.jar, J2EEINSTALL.SAR, UTL_load_usages.log</p></div></div></div></div>

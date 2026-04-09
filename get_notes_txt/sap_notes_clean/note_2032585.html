@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>In IDT connecting to ECC system and using abap func module to supply data to IDT Universe We have added a new table output on ECC abap side but IDT is not recognizing these changes.</li>
+<li>Refresh Structure on the data foundation does not detect new table in abap func module output.</li>
+<li>ABAP Function Modules do not update new columns</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP BusinessObjects Business Intelligence platform 4.x</li>
+<li>Information Design Tool (IDT)</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Create JCO Connection to SAP ECC ERP Data source</li>
+<li>The Data Source is an ABAP Function Module</li>
+<li>Create a  Multi-Source Data Foundation</li>
+<li>Generate a Business Layer and publish.</li>
+<li>Add a New field to the ABAP Function Module in ERP</li>
+<li>Retrieve the Unx Universe</li>
+<li>Select the Data Foundation</li>
+<li>go To Refresh Structure</li>
+<li>New objects are not detected.</li>
+<li>In the Connection select view data and new columns are visible.</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The Data Foundation is looking at the Cached universe properties. The Multi-source universe goes  to get the metadata from the BI platform, then to the federation engine and then to the ERP machine.  Whereas a Single Source universe does directly to the data source.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Perform a Stop and Start of the Adaptive Processing Server to clear the cache.</p></div></div></div></div>

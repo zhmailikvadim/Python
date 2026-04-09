@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You have used 1709 (or lower) release and had closed action tasks.</p>
+<p>As part of your upgrade to 1809 or 1909 release, the closed action tasks were migrated to the new task management. These tasks kept their original workflow templates.</p>
+<p>As part of the task migration, you run program R_EHFND_WFF_RESTART_PROCESSES with the <em>Migrate Planned Task Instances</em> option selected. However, it does not process the closed action tasks.</p>
+<p>After applying the corrections in this SAP Note, you can rerun the program with the <em>Migrate Planned Task Instances</em> option selected to complete the migration of such tasks.</p>
+<p>If you have custom workflow templates with custom steps for either tasks or actions, you need to add these custom steps to attributes MT_EXEC_STEP_TEMPLATE_RANGE (for custom steps executed by the task assignee) and/or MT_APPR_STEP_TEMPLATE_RANGE (for steps executed by the task approver) of class CL_EHFND_TASK_PLAN_MIGRATOR. You can do this via post-exit method for the constructor of the class.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Task Migration</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Reason: Program error.</p>
+<p>Prerequisites: The validity of the correction is maintained in the correction instructions.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The Support Packages that contain this correction are listed in the "Support Packages" section.<br/>Alternatively, you can implement the correction instructions of this SAP Note.</p></div></div></div></div>

@@ -1,0 +1,48 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Error during creation of DDIC sources of Open Hub Destination ZOHTEST</li>
+</ul>
+<p>          Message no. RSO435</p>
+<ul>
+<li>Error when activating Open Hub Destination ZOHTEST</li>
+</ul>
+<p>          Message no. RSO404</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Any Business Warehouse release, pre-SAPKW74001 on a non-HANA database platform.</li>
+<li>SAP Netweaver BW.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Create the Openhub destination in transaction RSA1, filling in all the required fields listed, including the 'create Transformation and DTP' flag<br/>(Please note that you need to fill <strong>BOTH</strong> the '<strong>Open Hub Destination</strong>' field and the '<strong>Description</strong>' field when creating the Openhub, failure to do this is enough to cause the above Activation errors).<br/><br/><img alt="Create Open Hub Destination.png" class="img-responsive" height="375" src="/documents/customerkba/i93audL6dCo0iJ-T3hx0d2Fnd22nv9MK1lWgXycE26Q" title="Create Open Hub Destination.png" width="652"/><br/><br/></li>
+<li>Save the Destination Type as 'Database Table', selecting the 'Technical Key' flag.<br/><br/><img alt="Save as Destination Type.png" class="img-responsive" height="362" src="/documents/customerkba/0YZYDMygpF_xtMojBvgsM5YyOQnqdmc17UKjpSWWjNM" title="Save as Destination Type.png" width="772"/><br/><br/></li>
+<li>Save the Destination and activate the Open Hub Destination.<br/><br/></li>
+<li>The first message box will not show any error.<br/><br/> <img alt="First message box.png" class="img-responsive" height="165" src="/documents/customerkba/IdxXXYDiVvIFk2BHSVLjZ0GJkW3ByUZ7h5SrBgaEvpM" title="First message box.png" width="593"/><br/><br/></li>
+<li>However, the second message box (log display) will show the following errors...<br/><br/><img alt="Log Display.png" class="img-responsive" height="96" src="/documents/customerkba/vXsxrq-hqez7QdCtiMQ_n55swi_xFSgbygEwBIj-hQ0" title="Log Display.png" width="462"/></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Cause A: This functionality, creation of an Open Hub destination of Destination Type 'Database Table' using the 'DB Connection' field, only works in BW 7.3 on a <strong>HANA database platform</strong>.</p>
+<p>Cause B: Any other reason that violates a database constrain.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>For cause A, there are two options:</p>
+<ol>
+<li>Upgrade to BW 7.4. This release allows you to create Openhub Destinations of the Destination Type 'Database Table' to all other standard database platforms.</li>
+<li>Set up a Third-Party Open Hub Destination on BW 7.x, please see the following link for details: <a href="http://help.sap.com/saphelp_nw70/helpdata/en/43/7a69d9f3897103e10000000a1553f7/frameset.htm" target="_blank">http://help.sap.com/saphelp_nw70/helpdata/en/43/7a69d9f3897103e10000000a1553f7/frameset.htm</a></li>
+</ol>
+<p>For cause B:</p>
+<ol>
+<li>Go to SE11 and search for the database table related to the OHD object;</li>
+<li>Open it and click on Check (this will reveal the error, but the final solution escapes the scope of this KBA). </li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>KBA <a href="https://me.sap.com/notes/2458652" target="_blank">2458652</a> - Error AD846 "Table &lt;name&gt; is too long (&gt;4030)" or "Table &lt;name&gt; is too long (&gt;4096)"</p>
+<ul>
+<li>Selecting Database Tables as Destinations: When on 7.31...</li>
+</ul>
+<p><a href="http://help.sap.com/saphelp_nw73ehp1/helpdata/en/4a/49592cea8b1c46e10000000a42189c/frameset.htm%20(http://" target="_blank">https://help.sap.com/saphelp_nw73ehp1/helpdata/en/4a/49592cea8b1c46e10000000a42189c/frameset.htm</a></p>
+<ul>
+<li>Selecting Database Tables as Destinations: When on 7.4...</li>
+</ul>
+<p><a href="http://help.sap.com/saphelp_nw74/helpdata/en/4a/49592cea8b1c46e10000000a42189c/content.htm?frameset=/en/4d/7d91f189ad4f95affc5cd52c860b98/frameset.htm&amp;current_toc=/en/a3/fe1140d72dc442e10000000a1550b0/plain.htm&amp;node_id=465" target="_blank">http://help.sap.com/saphelp_nw74/helpdata/en/4a/49592cea8b1c46e10000000a42189c/content.htm?frameset=/en/4d/7d91f189ad4f95affc5cd52c860b98/frameset.htm&amp;current_toc=/en/a3/fe1140d72dc442e10000000a1550b0/plain.htm&amp;node_id=465</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>RS_EXCEPTION000, Transport,  Export, Openhub file, Oracle Database,</p></div></div></div></div>

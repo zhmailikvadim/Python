@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">To perform an initial stock upload in SAP Extended Warehouse Management, you use a CSV file as the basis.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ISLS, Distribution, Intelligent Clinical Supply Management, Initial stock data transfer, /CTCO/ISU, ISU, /CTCO/R_INITIALSTOCKUPLOAD</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">You use SAP Intelligent Clinical Supply Management.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Attached to this SAP Note, you'll find a ZIP file containing several CSV files. You can use these files as templates for transferring stock data to a warehouse in transaction /CTCO/ISU.</p>
+<p>SAP transaction /CTCO/ISU lets you upload stock for Clinical Trial Products that are serialized with Medication Kit numbers. This transaction enhances the SAP standard transaction /SCWM/ISU. The file formats are still based on the SAP standard transaction /SCWM/ISU, with added features to enter Medication Kit numbers. Therefore, the requirements for the SAP standard transaction /SCWM/ISU also apply to transaction /CTCO/ISU and should be considered.</p>
+<p>Note the following:</p>
+<ul>
+<li>These files are templates that you need to adjust to fit your data. You can modify these files in a spreadsheet.</li>
+<li>There are several templates because different EWM versions may offer more fields for stock data transfer.</li>
+<li>Ensure that the file you upload matches your EWM system. Adjust the data format, including the number of fields, field sequence, data types, and maximum field lengths, to align with the structure /SCWM/S_STOCK_UPLOAD_EXT. You can view this structure in transaction SE11.</li>
+<li>Depending on your country settings, a CSV file may use different separators, such as a comma or semicolon. Your file editing software and the SAP system must use the same separator.</li>
+<li>We recommend checking the file's correctness with a small example before uploading all the data.</li>
+<li>Also, check the application help for transaction /CTCO/ISU.</li>
+<li>A new 'Item Category' = '9' (POSTYPE) is introduced to enable entry of Medication Kit numbers for Clinical Trial Products.</li>
+<li>The structure /SCWM/S_STOCK_UPLOAD_EXT has been enhanced with additional fields STUDY_ID and PROTOCOL_ID to record 'Study' and 'Protocol ID' information for Clinical Trial Products. You can enter Medication Kit Serial numbers using the field UII ('Unique Item Identifier').</li>
+<li>Transaction /CTCO/ISU can be used to upload stock of non-Clinical Trial Products that aren't serialized with Medication Kit numbers using the same file format attached in this note. Leave the ICSM-specific fields 'Study', 'Protocol ID', and 'Medication Kit Number' (UII) empty in this case. However, the file content and format must still conform to the specifications mandated by the underlying SAP transaction /SCWM/ISU.</li>
+<li>Please select the corresponding template based on your ICSM release.</li>
+</ul>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">ICSM release 2406 - S4HANA2022 FPS0 - ISLS300 FPS0</span></p>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">ICSM release 2411 - S4HANA2023 FPS1 - ISLS400 FPS0</span></p>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">ICSM release 2506 - S4HANA2023 FPS1 - ISLS400 FPS1</span></p>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">ICSM release 2511 - S4HANA2023 FPS1 - ISLS400 FPS2</span></p></div></div></div></div>

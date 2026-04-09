@@ -1,0 +1,87 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>IQ 16.2 installation process crashes when passing License file using PARTITION level sub-capacity licensing.</li><li>
+<pre>===============================================================================
+Installing...
+-------------
+ 
+[==================|==================|==================|==================]
+[------------------|------------------|------------------|------------------]
+#
+# A fatal error has been detected by the SAP Java Virtual Machine:
+#
+#  SIGSEGV (0xb) at pc=0x00007f352a04da85, pid=3886001, tid=3894715
+# accessing faulting address: 0x0000000000000000
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0.461) (build 8.1.106)
+# Java VM: SAP Java Server VM (8.1.106 11.0.28+000, Jul 10 2025 12:41:26 - 81_REL - optU - linux amd64 - 6 - bas2:343521 (mixed mode), tiered, compressed oops, parallel gc, linux-amd64)
+# Problematic frame:
+# C  [libsylapij.so+0x4da85]  bhMZW5k_cKLhY+0x2c (sp=0x00007f3547d20d90,pc=0x00007f352a04da85)
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h" (or dumping to /tmp/install.dir.3886001/core.3886001)
+#
+ 
+Native frames: (J=compiled Java code, j=interpreted, V=VM code (C/C++), v=VM code (generated), C=native code)
+C  [libsylapij.so+0x4da85]  bhMZW5k_cKLhY+0x2c (sp=0x00007f3547d20d90,pc=0x00007f352a04da85)
+C  [libsylapij.so+0x4dc83]  vUvXWGQld2+0xbb (sp=0x00007f3547d20de0,pc=0x00007f352a04dc83)
+C  [libsylapij.so+0x7937c]  rtzLynOH+0x5a6 (sp=0x00007f3547d210d0,pc=0x00007f352a07937c)
+C  [libsylapij.so+0x5428c]  gOJHp4gjww_+0x5d (sp=0x00007f3547d211e0,pc=0x00007f352a05428c)
+C  [libsylapij.so+0x54426]  zgDBNmURU8+0x76 (sp=0x00007f3547d21230,pc=0x00007f352a054426)
+C  [libsylapij.so+0x64956]  jcaKTWenTmEWPQfXtIC+0x50d (sp=0x00007f3547d21310,pc=0x00007f352a064956)
+C  [libsylapij.so+0x7f369]  gTMHZZBGmWEYp8Bs+0xce (sp=0x00007f3547d213d0,pc=0x00007f352a07f369)
+C  [libsylapij.so+0x80756]  npt_4PltaxEuN+0x1b8 (sp=0x00007f3547d21440,pc=0x00007f352a080756)
+C  [libsylapij.so+0x80bcd]  sGsPjGcLV6HjzfCHpSS+0x1ed (sp=0x00007f3547d214c0,pc=0x00007f352a080bcd)
+C  [libsylapij.so+0x81694]  zS6qx3B8r+0x3c4 (sp=0x00007f3547d21550,pc=0x00007f352a081694)
+C  [libsylapij.so+0x604cf]  zLbfwi+0x9a0 (sp=0x00007f3547d21680,pc=0x00007f352a0604cf)
+C  [libsylapij.so+0x4aabb]  Java_com_sybase_sylapi_SyLAPINative_nInit+0xea (sp=0x00007f3547d227c0,pc=0x00007f352a04aabb)
+j  com.sybase.sylapi.SyLAPINative.nInit(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/sybase/sylapi/SyLAPIListener;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V+0x0 (bcx=0x00007f352a4fdee0) (sp=0x00007f3547d22860,pc=0x00007f3530015c23)
+j  com.sybase.sylapi.SyLAPI.init(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/sybase/sylapi/SyLAPIListener;Ljava/lang/String;Ljava/lang/String;Ljava/util/Locale;Ljava/lang/String;)V - SyLAPI.java:112 (bcx=0x00007f352a4fb166) (sp=0x00007f3547d22910,pc=0x00007f353000c3c9)
+j  com.sybase.ia.sysam.SYSAMWriteInstallDateAction.writeInstallDate()Z+0x38 (bcx=0x00007f352840f958) (sp=0x00007f3547d229c8,pc=0x00007f353000c3c9)
+j  com.sybase.ia.sysam.SYSAMWriteInstallDateAction.install(Lcom/zerog/ia/api/pub/InstallerProxy;)V+0x36 (bcx=0x00007f352840f09e) (sp=0x00007f3547d22a78,pc=0x00007f353000ade6)
+j  com.zerog.ia.installer.actions.CustomAction.installSelf()Lcom/zerog/ia/installer/IAStatus;+0xbd (bcx=0x00007f352b8ac75d) (sp=0x00007f3547d22af8,pc=0x00007f353000c3c9)
+j  com.zerog.ia.installer.actions.PlugInAction.installSelf()Lcom/zerog/ia/installer/IAStatus;+0x5 (bcx=0x00007f352b8cf63d) (sp=0x00007f3547d22b60,pc=0x00007f353000bf90)
+j  com.zerog.ia.installer.AAMgrBase.an(Lcom/zerog/ia/installer/Action;)V+0x20 (bcx=0x00007f352a6756d0) (sp=0x00007f3547d22be0,pc=0x00007f353000bf90)
+j  com.zerog.ia.installer.ConsoleBasedAAMgr.ac(Lcom/zerog/ia/installer/InstallPiece;)V+0xf0 (bcx=0x00007f352a672b68) (sp=0x00007f3547d22c40,pc=0x00007f353000c3c9)
+j  com.zerog.ia.installer.AAMgrBase.am(Lcom/zerog/ia/installer/InstallPiece;)V+0x14 (bcx=0x00007f352a674edc) (sp=0x00007f3547d22cc0,pc=0x00007f353000c3c9)
+j  com.zerog.ia.installer.AAMgrBase.runNextInstallPiece()V+0x5 (bcx=0x00007f352a674e2d) (sp=0x00007f3547d22d38,pc=0x00007f353000c3c9)
+j  com.zerog.ia.installer.AAMgrBase.al(Lcom/zerog/ia/installer/InstallPiece;)Z+0x70 (bcx=0x00007f352a674d78) (sp=0x00007f3547d22db0,pc=0x00007f353000c3c9)
+j  com.zerog.ia.installer.ConsoleBasedAAMgr.ac(Lcom/zerog/ia/installer/InstallPiece;)V+0x2 (bcx=0x00007f352a672a7a) (sp=0x00007f3547d22e10,pc=0x00007f353000ade6)
+j  com.zerog.ia.installer.AAMgrBase.am(Lcom/zerog/ia/installer/InstallPiece;)V+0x14 (bcx=0x00007f352a674edc) (sp=0x00007f3547d22e78,pc=0x00007f353000c3c9)
+j  com.zerog.ia.installer.AAMgrBase.runNextInstallPiece()V+0x5 (bcx=0x00007f352a674e2d) (sp=0x00007f3547d22ef0,pc=0x00007f353000c3c9)
+j  com.zerog.ia.installer.ConsoleBasedAAMgr.ac(Lcom/zerog/ia/installer/InstallPiece;)V+0xf4 (bcx=0x00007f352a672b6c) (sp=0x00007f3547d22f68,pc=0x00007f353000c3c9)
+j  com.zerog.ia.installer.ConsoleBasedAAMgr.runPostInstall()V+0xa5 (bcx=0x00007f352a672375) (sp=0x00007f3547d22fc8,pc=0x00007f353000c3c9)
+j  com.zerog.ia.installer.LifeCycleManager.consoleInstallMain()V+0x398 (bcx=0x00007f352dccf5a8) (sp=0x00007f3547d23040,pc=0x00007f353000c3c9)
+j  com.zerog.ia.installer.LifeCycleManager.executeApplication([Ljava/lang/String;)V+0x7c (bcx=0x00007f352dccdbac) (sp=0x00007f3547d230b8,pc=0x00007f353000c3c9)
+j  com.zerog.ia.installer.Main.main([Ljava/lang/String;)V+0x11 (bcx=0x00007f352dcc3719) (sp=0x00007f3547d23128,pc=0x00007f353000c3c9)
+v  ~StubRoutines::call_stub (sp=0x00007f3547d231a8,pc=0x00007f3530000ce9)
+V  [libjvm.so+0xaa65bf]  JavaCalls::call_helper(JavaValue*, methodHandle const&amp;, JavaCallArguments*, Thread*)+0x2af (sp=0x00007f3547d23220,pc=0x00007f3546aa65bf)
+V  [libjvm.so+0xea4336]  invoke(InstanceKlass*, methodHandle const&amp;, Handle, bool, objArrayHandle, BasicType, objArrayHandle, bool, Thread*) [clone .constprop.143]+0x9e6 (sp=0x00007f3547d23310,pc=0x00007f3546ea4336)
+V  [libjvm.so+0xea4beb]  Reflection::invoke_method(oopDesc*, Handle, objArrayHandle, Thread*)+0xfb (sp=0x00007f3547d23590,pc=0x00007f3546ea4beb)
+V  [libjvm.so+0xaf662c]  JVM_InvokeMethod+0x10c (sp=0x00007f3547d23610,pc=0x00007f3546af662c)
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0x0 (bcx=0x00007f352dd5e7f0) (sp=0x00007f3547d23680,pc=0x00007f3530015c23)
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; - NativeMethodAccessorImpl.java:62 (bcx=0x00007f352dd5e654) (sp=0x00007f3547d236f8,pc=0x00007f353000bf90)
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; - DelegatingMethodAccessorImpl.java:43 (bcx=0x00007f352dd5ee76) (sp=0x00007f3547d23778,pc=0x00007f353000bf90)
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; - Method.java:498 (bcx=0x00007f352d854fe0) (sp=0x00007f3547d237f0,pc=0x00007f353000c0f8)
+j  com.zerog.lax.LAX.launch()V+0xf5 (bcx=0x00007f352dc1244d) (sp=0x00007f3547d23860,pc=0x00007f353000bf90)
+j  com.zerog.lax.LAX.main([Ljava/lang/String;)V+0x71 (bcx=0x00007f352dc12f09) (sp=0x00007f3547d238d8,pc=0x00007f353000c3c9)
+v  ~StubRoutines::call_stub (sp=0x00007f3547d23978,pc=0x00007f3530000ce9)
+V  [libjvm.so+0xaa65bf]  JavaCalls::call_helper(JavaValue*, methodHandle const&amp;, JavaCallArguments*, Thread*)+0x2af (sp=0x00007f3547d23a00,pc=0x00007f3546aa65bf)
+V  [libjvm.so+0xac64de]  jni_invoke_static(JNIEnv_*, JavaValue*, _jobject*, JNICallType, _jmethodID*, JNI_ArgumentPusher*, Thread*) [clone .isra.84] [clone .constprop.247]+0x2ee (sp=0x00007f3547d23af0,pc=0x00007f3546ac64de)
+V  [libjvm.so+0xac8841]  jni_CallStaticVoidMethod+0x161 (sp=0x00007f3547d23c50,pc=0x00007f3546ac8841)
+C  [libjli.so+0x8909]  JavaMain+0x6a9 (sp=0x00007f3547d23dd0,pc=0x00007f3547e08909)
+ 
+ 
+HiMemReport: not monitoring.
+# An error report with more information is generated,
+# it is saved as a file at this location:
+# /tmp/install.dir.3886001/hs_err_pid3886001.log
+#
+# If you would like to submit a bug report, please visit:
+#   <a href="https://support.sap.com/incident" rel="noopener noreferrer nofollow" target="_blank">https://support.sap.com/incident</a>
+# Please save the hs_err file(s) and the written core dump for further error analysis
+# See SAP note 1500116 for further information on collecting core dumps after SAPJVM crashes
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+Abort (core dumped)
+[i586363@ccus1gl0447 ebf31255]$</pre>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Sybase IQ</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p style="padding-left: 40px;">1) Generate a license for internal use using the License Tool on SAP support Portal for the above hostid (PARTITION-ID=xxxxxxxxxxxx).<br/> <br/>2) Set the following environment before starting IQ install &amp; use the license file generated.<br/> <br/>export SYBASE_SAM_CAPACITY=PARTITION</p>
+<p style="padding-left: 40px;">3) Install IQ 16.2</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The issue has been identified and logged under SAP CR <span>831687</span>. Its description reads, "<em>IQ 16.2 installation process crashes when passing License file</em>".</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>There is currently no target SAP IQ Service Pack scheduled for this issue (SAP CR <span>831687</span>). It has been assigned to our Product Group.</li><li>Please mark this KBA as a Favorite to be automatically notified when the CR status is changed.</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://me.sap.com/notes/2064101" rel="nofollow">SAP Note 2064101 - Information about logs and trace files - SAP IQ</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>sap iq 16.2, red hat enterprise linux 9.7, installation crash, license file error, hs_err_pid2406929.log, hs_err_pid2408060.log, i18nuni_LookupByKeyNum returned -469, sysam partition license, sap iq installation issue, sap iq server suite</p></div></div></div></div>

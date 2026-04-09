@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">A blank screen comes up and an error is displayed:</p>
+<p style="padding-left: 30px;">Error when printing: SYSTEM ERROR<br/>Message no. HRHAP00_DOCUMENT160</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP ERP 6.0, Enhancement Pack 4 (EHP 4)</li>
+<li>SAP ERP 6.0, EHP 5</li>
+<li>SAP ERP 6.0, EHP 6</li>
+<li>SAP ERP 6.0, EHP 7 (and higher)</li>
+</ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol>
+<li>Verify the correct Print Layout is selected for the template.</li>
+<ul>
+<li>Run transaction PHAP_TEMPLATE.</li>
+<li>Select the template with the issue.</li>
+<li>Select the Layout tab.</li>
+<li>Under Print Layout, verify the layout is correct for the appraisal type:</li>
+<ul>
+<li>PMP PDF - PMP appraisals</li>
+<li>Standard - Flexible appraisals</li>
+<li>Print Appraisal Documents: Old (with Smart Forms) - PMP appraisal Start Forms</li>
+</ul>
+</ul>
+<li>Verify the printer has been setup properly.</li>
+<ul>
+<li>Test with printer LOCL.</li>
+<li>For the printer with the error, go through the following steps:</li>
+<ul>
+<li>Run Transaction SE16.</li>
+<li>View table TSP03D.</li>
+<li>Enter the printer name.</li>
+<li>Make a note of the entry in the PATYPE field.  This is the Device Type Name.</li>
+<li>View table TSP0B.</li>
+<li>Enter the PATYPE.  The PATYPE needs to be setup for the printer to work proprly.</li>
+<li>If the PATYPE is not in the system, @SWIN will be used by default.  If this is also not setup, this will cause further problems.</li>
+</ul>
+</ul>
+</ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>grey, empty, printing</p></div></div></div></div>

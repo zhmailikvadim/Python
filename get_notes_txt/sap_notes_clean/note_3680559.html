@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">You are unable to start your local SAP Commerce environment, and the following error appears in the console:</p>
+<p>*** LICENSE VERIFICATION HAS FAILED! ***</p>
+<p>This occurs when the temporary unlimited DEV license has expired.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Commerce Cloud</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The temporary unlimited DEV license in SAP Commerce environments is designed for short-term usage and evaluation.</p>
+<ul><li>
+<p>A 30-day temporary license is issued automatically during installation.</p>
+</li><li>
+<p>After expiration, the license can be extended for an additional 90 days using the command-line license tool.</p>
+</li><li>
+<p>The maximum validity of a temporary license is 120 days (30 days + 90 days).</p>
+</li></ul>
+<p>Once this period ends, the license must be renewed or regenerated to restore system access.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To extend or generate a new temporary DEV license, follow the steps below:</p>
+<p>Open a terminal/command prompt in your SAP Commerce installation directory.</p>
+<p>Run the command-line license tool to generate a new 90-day license key:</p>
+<div>
+<div><code>ant licenseext
+</code></div>
+</div>
+<p>or</p>
+<div>
+<div><code>./license.sh -temp CPS_MSS
+</code></div>
+</div>
+<p>Restart your SAP Commerce server after the license renewal.</p>
+<h3 data-toc-skip="">Additional Information:</h3>
+<p>For detailed instructions, refer to the SAP Help documentation:</p>
+<p><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/8be4e0379b294fbabf36d26e7ca4169d/8bf6d934866910148d75c3670c88176f.html#regular-license" rel="noopener noreferrer nofollow" target="_blank">Regular License </a></p>
+<p><a href="https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/8be4e0379b294fbabf36d26e7ca4169d/8c49aad986691014afeea8e93299233a.html" rel="noopener noreferrer nofollow" target="_blank">Command Line License Tool </a></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>License Expiry</p></div></div></div></div>

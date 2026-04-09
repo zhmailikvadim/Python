@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">Using Apache reverse proxy with Kapsel application and SAP Mobile Platform 3.0.x.  When attempting to use AppUpdate plugin, URL has contains an extra 0 results in request failing with HTTP 404.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP Mobile Platform 3.0.x</li>
+<li>Kapsel SDK</li>
+<li>AppUpdate Plugin</li>
+<li>Apache reverse proxy</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Develope Kapsel Application that uses AppUpdate plugin</li>
+<li>Configure Apache reverse proxy for Kapsel Application to SAP Mobile Platform</li>
+<li>Attempt to run application using AppUpdate plugin and plugin generates URL with '0' in suffix, example: <a href="https://%3cinternet/">https://&lt;internet</a> hostname of reverseproxy&gt;:443/app/0/odata/lcm/v1/ListApps?sap-language=en forwards to <a href="https://pdirmmo.match.loca/" target="_blank">https://pdirmmo.match.local:8081/0/odata/lcm/v1/ListApps?sap-language=en</a></li>
+<li>
+<p>For this incoming URL starting with '0' the SAP Mobile Platform host responds with HTTP 404 (not found).</p>
+</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The extra 0 on the AppUpdate plugin is generated for support of Relay Server FarmID.  Relay Server 16.5.3 and greater is supported with SAP Mobile Platform 3.0 SP06 and above (See SAP Note 1904213). </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>There are a couple of solutions for this issue:</p>
+<ol>
+<li>Add code in the application to check for "0" and replace it with an empty string for AppUpdate plugin.</li>
+<li>Modify the reverse proxy to change the directory path.  Example, if currently have "app" for the suffix, create a second directory for the farm ID, example "app2".  Then the generated path will be  ProxyServer:port/app/app2/...</li>
+</ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><ul>
+<li>AppUpdate</li>
+<li>404</li>
+<li>Kapsel</li>
+<li>FarmID</li>
+</ul></div></div></div></div>

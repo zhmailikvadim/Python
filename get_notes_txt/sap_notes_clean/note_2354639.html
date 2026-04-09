@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">SAP Business One Service Manager is not starting and/or not responding when you click the settings button in <em>License Manager</em>.</p><h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3><div class="longtext" style="font-size: 100.01%;">
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Intel Security True Key Service is running and you open the SAP Business One Service Manager window.</li>
+<li>You click the Settings button for <em>License Manager</em>. </li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p><em>License Manager</em> settings window opens.</p>
+<p><strong>Actual behavior:</strong></p>
+<p>﻿SAP Business One Service Manager window hangs and is not responding. </p>
+</div>
+<p> </p><h3 class="section" data-toc-skip="" id="Solution">Solution</h3><ol>
+<li>Open <em>services.msc </em>and search for <em>Intel Security True Key Service</em>.</li>
+<li>Stop this service and try to open Service Manager again. <em>Intel Security True Key Service</em> runs on the port 30000, and because of this, <em>License Manager</em> settings cannot be open.</li>
+<ol style="list-style-type: none;">
+<li><img alt="intel_true_key.JPG" class="img-responsive" id="6CAE8B3EA1851ED6988FF9EEFC9A80C8" src="https://i7p.wdf.sap.corp/sap/support/sapnotes/public/services/embedded_image.htm?iv_key=012006153200001195782016&amp;iv_guid=6CAE8B3EA1851ED6988FF9EEFC9A80C8&amp;alt=2BCE4CB10DF674B172F4F3F7B32A284F4933B530318DF734378C3730B48A74CB74F3B308742F0C090ACD88F78E34F23375CFCF2928CCA9AC082EAFCC2F2EF2CF302C3789F7D1750C09514BCECFCFCE4C8DCF4BCC4DB5F575F4F4F3F57771F571F6F70B01B25D83D4120B0A722092A599504EB16D715E3E00" title="intel_true_key.JPG"/></li>
+</ol></ol>
+<p> </p>
+<p>In case if you want to use this service then apply this workaround<strong>.</strong></p>
+<p><strong>Workaround:</strong></p>
+<ol>
+<li>Stop the <em>Intel Security True Key Service</em> from the services.msc.</li>
+<li>Open <em>SAP Business One Service Manager <span style="font-size: 10pt; font-family: 'Cambria Math',serif; line-height: 106%; mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">→</span> Select License Manager</em> and click <em>Settings</em>.</li>
+<li>Change the port number from 30000 to something else for the License Manager, click <em>Set</em> and then <em>Connect</em>.</li>
+<li>Change the port for SLD service also from server.xml file in Tomcat folder. You can find the server.xml file here:</li>
+<ul>
+<li>for version 9.1 : "C:\Program Files (x86)\SAP\SAP Business One ServerTools\System Landscape Directory\tomcat\conf".</li>
+<li>for version 9.2 : "C:\Program Files (x86)\SAP\SAP Business One ServerTools\Common\tomcat\conf".</li>
+</ul>
+<li>Open the <em>Server.xml</em> file and search for the port number 30010, change the port to the same port you use in the License Manager +10 and save the file.</li>
+<li>Go to services.msc and restart the Service Landscape Directory (SLD) service.</li>
+<li>Now you can start your <em>Intel Security True Key Service </em>again and work with SAP Business One Service Manager.</li>
+</ol><h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3><p>SAP Business One, SAP B1, Intel Security True Key Service, McAfee etc.</p></div></div></div></div>

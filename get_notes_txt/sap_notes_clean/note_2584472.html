@@ -1,0 +1,49 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li> Execute R3trans -X from a Java stack system return following output:</li>
+</ul>
+<p style="padding-left: 60px;">This is R3trans version x.xx (release xxx - xx.xx.xx - xx:xx:xx ).<br/>unicode enabled version<br/>2EETW169 no connect possible: "DBMS = SYBASE --- "<br/>R3trans finished (0012).</p>
+<ul>
+<li>trans.log shows "uid=SAPSR3":</li>
+</ul>
+<p style="padding-left: 60px;">...<br/>4 ETW000 [ dev trc,00000] Connection 0 failed using DRIVER={Adaptive Server Enterprise};server=&lt;host_name&gt;;port=4901;<strong>uid=SAPSR3</strong>;db=&lt;SID&gt;;pwd=xxxxxxxx;TextSize=2147483647;CRC=0;FetchArraySize=1000;ReleaseLocksOnCursorClose=1;DynamicPrepare=1;QuotedIdentifier=1;UseCursor=2;homogeneousbatch=1;charset=utf8;EncryptPassword=1;EnableLOBLocator=0;app=R3 000 00 comm rd ODBC;logintimeout=3;ProtocolCapture=cap_p4397_comm_rd;supresstdscontroltokens=1;SuppressRowFormat=1;SuppressParamFormat=1;<br/>...</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Adaptive Server Enterprise (ASE) 16.0 for Business Suite</li>
+<li>SAP Adaptive Server Enterprise (ASE) 15.7 for Business Suite</li>
+<li>SAP NetWeaver (NW) - All versions</li>
+<li>SAP Business Warehouse (BW) - All versions</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>The value of "DB_CONNECT/DEFAULT_DB_USER" in Secure Storage is maintained as "SAPSR3" instead of "SAPSR3DB". </li>
+<li>The value of "DB_CONNECT/DEFAULT_DB_PASSWORD" in Secure Storage is maintained with SAPSR3's password instead of SAPSR3DB's password.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p><span style="font-size: 14px;">Connect to the host machine with &lt;sid&gt;adm login account and then use rsecssfx utility.<br/></span></p>
+<ul>
+<li> Check if current "DB_CONNECT/DEFAULT_DB_USER" is "SAPSR3DB" or not, using:</li>
+</ul>
+<p style="padding-left: 60px;">rsecssfx get DB_CONNECT/DEFAULT_DB_USER</p>
+<ul>
+<li>If the value of "DB_CONNECT/DEFAULT_DB_USER" is not "SAPSR3DB", then </li>
+<ul>
+<li>change it to "SAPSR3DB" using:</li>
+</ul>
+</ul>
+<p style="padding-left: 120px;">rsecssfx put DB_CONNECT/DEFAULT_DB_USER SAPSR3DB -plain</p>
+<ul>
+<ul>
+<li>change "DB_CONNECT/DEFAULT_DB_PASSWORD" to SAPSR3DB's password using: </li>
+</ul>
+</ul>
+<p style="padding-left: 120px;">rsecssfx put DB_CONNECT/DEFAULT_DB_PASSWORD &lt;password&gt;</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li><a href="https://me.sap.com/notes/2536366" target="_blank">2536366</a> - How to unlock secure stroage - SAP ASE</li>
+<li><a href="https://me.sap.com/notes/2090849" target="_blank">2090849</a> - R3trans -d is failing when run from a Java stack - SAP ASE for Business Suite</li>
+<li><a href="https://me.sap.com/notes/2274077" target="_blank">2274077</a> - Unable to logon to the SAP application - SAP ASE for Business Suite and SAP BW</li>
+<li><a href="https://me.sap.com/notes/2154997" target="_blank">2154997</a> - Migration of hdbuserstore entries to ABAP SSFS</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>rsecssfx, DB_CONNECT, DEFAULT_DB_USER, DEFAULT_DB_PASSWORD, SAPSR3, SAPSR3DB, 2EETW169, 0012, Java</p></div></div></div></div>

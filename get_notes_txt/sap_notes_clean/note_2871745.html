@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>
+<div>The following message together with a stack trace is reported in the ASE errorlog:</div>
+</li>
+</ul>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">﻿Invalid OAM page (OAMINVALID_1) stat 4: pageno=4720, sdes_stat=16, pstat=0x101, dbid=5, pptnid=-3604481, pindid=0, expected ptnid=-16580611﻿</span></p>
+<ul>
+<li>The stack trace includes functions:</li>
+</ul>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no"><em>﻿pg__objdeall_validate_obj</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>pg_ptndeall</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>closetable</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>close_range</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>s_cleanframe</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>clean_process     </em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>kill_proc         </em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>terminate_process </em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>quitfn</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>ussflush</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>senderror</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>ex_printmsg</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>ex__doprint</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>exc_callprint</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>th_sleep_on_lct</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>th__lct_alreadyhit</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>th_accounting</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>pg_th_reserve</em></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><em>pg__allocate_extents﻿</em></span></p>
+<p style="padding-left: 30px;">  <strong>Note:</strong> A complete stack trace is available under<em><strong> Attachments</strong></em>.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Adaptive Server Enterprise (ASE) 15.7 and 16.0</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The issue has been addressed under SAP<strong> CR 817535</strong>. Its description reads, "In rare circumstances, the message, 'Invalid OAM page (OAMINVALID_1) stat 4: pageno=&lt;value&gt;, sdes_stat=&lt;value&gt;, pstat=&lt;value&gt;, dbid=5, etc.", together with a stack trace that includes the modules 'th_accounting', 'th_sleep_on_lct' and ''terminate_process', may be printed in the SAP ASE error log when a SELECT query that requires a work table to be created is killed.".</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Upgrade ASE to a release where SAP<strong> CR 817535 </strong>is fixed:</p>
+<ul>
+<li>SAP ASE 15.7 SP141 or higher</li>
+<li>SAP ASE 16.0 SP02 PL09 or higher</li>
+<li>SAP ASE 16.0 SP03 PL07 or higher</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li>KBA <a href="https://me.sap.com/notes/2077419" target="_blank">2077419</a> - ASE <strong>15.x</strong> Release Schedule and CR list Information</li>
+<li>KBA <a href="https://me.sap.com/notes/2075653" target="_blank">2075653</a> - ASE <strong>16.0</strong> Release Schedule and CR list Information</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>CR817535, CR#817535, 817535, work table, worktable, kill</p></div></div></div></div>

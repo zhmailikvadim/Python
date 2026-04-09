@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You use claim settlement in CRM side and transfer it to ECC by Accounting Integration. And you want to know whether it can create a parking accounting document in ECC, instead of creating a posting accounting document directly.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Customer Relationship Management 7.0 and higher</li>
+<li>SAP enhancement package for SAP Customer Relationship Management</li>
+<li>SAP enhancement package for SAP CRM, version for SAP HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li> Approve the claim and execute the settlement in CRM side.</li>
+<li> Check the new created accounting document in ECC side.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Technically, the indicator to create a parking document is determined by the field DOC_STATUS to the structure DOCUMENTHEADER of BAPI_ACC_DOCUMENT_POST on ECC side. Currently there is no field DOC_STATUS and related logic to decide how to fill this field on CRM side. So this function is not supported in standard.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>The standard integration from CRM to ECC FI doesn't support creating a parking document.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>Please check note <a href="https://me.sap.com/notes/2092366" target="_blank">2092366</a> - Parking with BAPI_ACC_DOCUMENT_POST to get more details regarding creating a parking document function.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>TPM, Claim, Settlement, Parking document, ECC.</p></div></div></div></div>

@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">After SSL for system replication has been configured on the meta data channel according to the documentation, the secondary site Nameserver is unable to get meta data from the Nameserver of the primary system.<br/>In the trace files there are error messages like the following:</p>
+<p>[16502]{-1}[-1/-1] 2015-10-07 01:44:37.971729 e TrexNet<br/>Responder.cpp(01876) : can't accept: (ssl: internal error)</p>
+<p>OR</p>
+<p>no.300013  (Crypto/SSL/CommonCrypto/Engine.cpp:516)</p>
+<p>    SSL handshake failed: SSL error [536871970]: ???, General error: 0x20000422 | SAPCRYPTOLIB | SSL_accept</p>
+<p>SSL API error</p>
+<p>0xa060023c | SSL | ssl3_get_record</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>System Replication, SSL, Meta Data Channel</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The problem occurs on all revisions of HANA SP7, SP8 and SP9.<br/>As a prerequisite on primary and secondary site the following configuration parameter has already been set in global.ini as part of the SSL configuration:<br/><br/>[communication]<br/>ssl = on</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To make ssl communication on the meta data channel between primary and secondary site nameservers work properly, the following configuration parameters have to be in global.ini on primary and secondary site:</p>
+<p>[system_replication_communication]<br/>ssl = on</p>
+<p>[communication]<br/>ssl = on</p>
+<p>To enable SSL for data/log shipping connection also, the configuration parameter [system_replication_communication]/enable_ssl has to be set be set to <em>on</em>, <em>source</em> or <em>target</em> <br/>(please refer to the documentation for details).</p>
+<p>Please note, that starting from SP10 setting the parameter [system_replication_communication]/ssl is not required anymore.</p></div></div></div></div>

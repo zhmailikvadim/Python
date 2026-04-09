@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">Source control login issue in case of login via MII workbench.</p>
+<p id="__html0">Login to the source control fails in case of few special characters present in the password. same user is able to logon to Netweaver and also in NWDS but same password doesn't work in MII workbench source code login screen.</p>
+<p>Netweaver logs shows following error.</p>
+<p>Error while creating DiManager Instance<br/>[EXCEPTION]<br/>com.sap.di.sdic.exception.DiAuthenticationException: User credentials are invalid or user is denied access<br/>at com.sap.di.sdic.host.impl.SLDHostImpl.createSLDConnection(SLDHostImpl.java:138)</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>source control, login, mii workbench, password, special character</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This happens because of few special characters in the password which breaks the password in the login request</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>as a workaround for now, Please avoid below characters while creating a password for the source control user.</p>
+<p>These characters are : '&lt;', '&gt;', '&amp;', '"', '\'</p></div></div></div></div>

@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">You perform a bank deposit on point of sale register that totals more than 21 million and you notice that the total in the B3 TLOG record is incorrect.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html1">SAPPOS, Manager Code 232, overflow</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Upgrade SAP POS v2.3 to SP13 Build 1281 or later, or SP14 Build1321 or later</p>
+<p>Use POS.INI option MAXDEPOSITALLOWED=&lt;max amount per deposit&gt; to restrict maximum deposit amount allowed per deposit. This option must be less than 2147483647, since this is the maximum amount that can be stored for total deposit amount. This value must also include the decimal amount as well.</p>
+<p>For example, for a 20 million maximum you would use:</p>
+<p>MAXDEPOSITALLOWED=2000000000</p></div></div></div></div>

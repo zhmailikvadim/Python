@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">User wants to see only controls that have performance plan assigned in Manual Control Performance Results report.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP GRC Process Control 10.1</li>
+<li>SAP GRC Process Control 12.0</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p id="">1. Launch NWBC and navigate to Assessments work center.</p>
+<p>2. Open Manual Control Performance Results and check that the whole list of controls is displayed on the report.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p id=""> This is the standard report behavior.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>As explained on KBA <a href="/notes/2721254" target="_blank">2721254</a> - Difference between Manual Control Performance Details and Results reports, the standard behavior of the Manual Control Performance Results, is to show which controls have been performed in the, organization structure. This way, the whole control list that belongs to each organization is displayed and user can track this information.</p>
+<p>However, customer can customize the standard behavior by changing the walking strategy on the following way:</p>
+<p>1.Go to SPRO-&gt;Governance, Risk and Compliance-&gt;Reporting-&gt;Maintain Report Configuration</p>
+<p>2.Select Report GRPC_CTRL_PERF and navigate to Walking Strategy</p>
+<p>3.For Position 50, in column Store Node-&gt; change this to 'Do not Store'.</p>
+<p>4.Save the changes and re-run the report.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id=""><a href="/notes/2721254" target="_blank">2721254</a> - Difference between Manual Control Performance Details and Results reports</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p id=""> mcp, controls, Manual Control Performance Details and Results, report, customize.</p></div></div></div></div>

@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You execute Operation Activities / Serialized Products at Operation Activities. The operation's quantities do not get properly updated.</p>
+<p>The problem typically occurs if several actions are executed in a short period of time.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error:</p>
+<ul>
+<li>The Operations get updated via Confirmations that are posted in a background process which gets triggered when Operation Activities are executed.</li>
+<li>This background process may run into locking problems. In this case the background process waits and retries a predefined time.</li>
+<li>If the lock is gone and the background process can start after having waited, global buffers are not refreshed so that outdated data may be considered to calculate the confirmations.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> Implement the correction instruction.</p></div></div></div></div>

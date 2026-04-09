@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The user runs the closing step of the alternative valuation run.</p>
+<p>Transaction CKMLCPAVR <br/>=&gt; Specify a Costing Run <br/>=&gt; Tab strip:  Processing <br/>=&gt; Flow Step: Post Closing <br/>=&gt; Execute</p>
+<p>When the closing step is executed, a dump is raised at:</p>
+<p>Class:    CL_FINS_ACDOC_ML_UTIL<br/>Method: MOVE_CURRENCY_FIELDS<br/>Line:      90</p>
+<p></p>
+<p> *     Get LS_MLIT from Runtime Buffer<br/>      DATA(ls_mlit) = get_mlit_from_acdoc_item( is_acdoc_item ).<br/>      ASSERT ls_mlit IS NOT INITIAL.<br/><br/>*     get the right MLCR-line belonging to the ACDOCA line<br/>      READ TABLE lt_mlcr REFERENCE INTO DATA(lr_mlcr)<br/>           WITH KEY posnr = ls_mlit-posnr<br/>                    bdatj = is_acdoc_item-r_origin_accit-&gt;gjahr<br/>                    poper = is_acdoc_item-r_origin_accit-&gt;monat<br/>                    curtp = lv_curtp.<br/>      ASSERT sy-subrc = 0.    &lt;== Dump <br/><br/>*     Put the values from MLCR<br/>      lr_acdoc_item_curr-&gt;vstprs = lr_mlcr-&gt;stprs_old.<br/>      lr_acdoc_item_curr-&gt;vpeinh = lr_mlcr-&gt;peinh.</p>
+<p> </p>
+<p>Further places where a dump can be raised:</p>
+<p>When the AVR runs in background mode then a dump can also be raised at:</p>
+<p>Class:    CL_FINS_ACDOC_ML_UTIL<br/>Method: GET_MLPP_FROM_ACDOC_ITEM<br/>Line:      28</p>
+<p>*   Get the right MLPP from the Run-Time Buffer<br/>    get_mldoc_from_acdoc_item(<br/>      EXPORTING<br/>        is_acdoc_item = is_acdoc_item<br/>      IMPORTING<br/>        et_mlpp       = DATA(lt_mlpp) ).<br/>    READ TABLE lt_mlpp INTO rs_mlpp<br/>         WITH KEY posnr = ls_mlit-posnr<br/>                  bdatj = is_acdoc_item-gjahr<br/>                  poper = is_acdoc_item-monat.<br/>    ASSERT sy-subrc = 0.    &lt;== The Dump occurs here <br/>  ENDMETHOD.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CKMLCPAVR, No Delta Logic, AVR_POSTING_NO_DELTA, AVR</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the attached correction instruction</p></div></div></div></div>

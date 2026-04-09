@@ -1,0 +1,124 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0"></div>
+<div>
+<p>This SAP Note provides updates to ensure continued connectivity with the eSocial platform following the certificate update to a new security standard, in compliance with the eSocial Certificate Update regulation published by the Brazilian Government on December 11, 2025.</p>
+<p>The eSocial system is transitioning to certificates issued by the international Certification Authority, Sectigo, which impacts the communication channel between employers' systems and the eSocial platform.</p>
+</div>
+<div></div>
+<div></div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>eSocial; Certificate Update; Security Standard; Sectigo; TLS; HTTPS; Root Certificate; Intermediate Certificate; Sectigo Public Server Authentication Root R4; Sectigo Public Server Authentication CA OV R36</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p><em></em><span style="font-size: 14px;">The eSocial system requires an update to its security certificate standard to maintain secure HTTPS (TLS) connections. The new certificates are issued by Sectigo Certification Authority and must be installed in application servers' trust anchors to ensure continued connectivity with the eSocial platform.</span></p>
+<p>This legal change is mandatory and affects systems that communicate with eSocial.</p>
+<p><strong style="font-size: 14px;">Prerequisites</strong></p>
+<p>You follow the instructions of SAP Notes:</p>
+<ul>
+<li><a href="/notes/2514483" target="_blank">2514483</a><a href="/notes/%value" target="_blank"> - eSocial - SOA Manager - configuration of web service for communication to eSocial restricted production environment - web service delivery phase</a></li>
+<li><a href="/notes/2585709" target="_blank">2585709</a><a href="/notes/%value" target="_blank"> - eSocial - SOA Manager - configuration of web service for communication to eSocial production environment</a><span style="font-size: 14px;"> </span></li>
+</ul>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>SAP_HRCBR 6.04 (EhP6 and EhP7)</td>
+<td>HR SP J1</td>
+</tr>
+<tr>
+<td>SAP_HRCBR 6.08</td>
+<td>HR SP B9</td>
+</tr>
+<tr>
+<td>S4HCMCBR 1.00</td>
+<td>HR SP 08</td>
+</tr>
+<tr>
+<td>S4HCMCBR 1.01</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCMCBR 1.02</td>
+<td>HR SP 00</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</p>
+<p>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>From now on, the system supports the new eSocial security certificate standard using Sectigo Certification Authority certificates.</p>
+<p>To maintain successful HTTPS (TLS) connections with the eSocial platform, the following certificate chains must be installed in the application servers' trust anchors:</p>
+<p><strong>Root Certificate:</strong> Sectigo Public Server Authentication Root R4</p>
+<p><strong>Intermediate Certificate:</strong> Sectigo Public Server Authentication CA OV R36</p>
+<p>The certificate update is effective from:</p>
+<p>- <strong>January 12, 2026</strong> for the production restricted environment</p>
+<p>- <strong>June 2026</strong> for the production environment (specific date to be confirmed by authorities)</p>
+<p><strong>Manual Activities (also in the attachment)</strong></p>
+<p>The following manual activities must be performed by system administrators:</p>
+<ol>
+<li><span style="font-size: 14px;">Download the new Sectigo Certification Authority certificates as follows:</span></li>
+<ol>
+<li><strong style="font-size: 14px;">Root Certificate: Sectigo Public Server Authentication Root R4</strong></li>
+<ol>
+<li><span style="font-size: 14px;">Download URL: https://crt.sh/?d=4256644734</span></li>
+<li><span style="font-size: 14px;">File name: Sectigo Public Server Authentication Root R4.crt</span></li>
+</ol>
+<li><strong style="font-size: 14px;">Intermediate Certificate: Sectigo Public Server Authentication CA OV R36</strong></li>
+<ol>
+<li><span style="font-size: 14px;">Download URL: https://crt.sh/?d=4267304698</span></li>
+<li><span style="font-size: 14px;">File name: Sectigo Public Server Authentication CA OV R36.crt</span></li>
+</ol></ol></ol><ol start="2">
+<li><span style="font-size: 14px;">Update eSocial SSL certificates in </span><strong style="font-size: 14px;">Trust Manager</strong><span style="font-size: 14px;"> (STRUST) transaction:</span></li>
+<ol style="list-style-type: lower-alpha;">
+<li><span style="font-size: 14px;">Access the STRUST transaction.</span></li>
+<li><span style="font-size: 14px;">Select the <strong>eSocial SSL connection</strong> that you want to update.</span></li>
+<li><span style="font-size: 14px;">Remove the old certificates:</span></li>
+<ul>
+<li><span style="font-size: 14px;">Locate and remove the following certificates:</span></li>
+<li><span style="font-size: 14px;">CN=Autoridade Certificadora Raiz Brasileira</span></li>
+<li><span style="font-size: 14px;">CN=Autoridade Certificadora do SERPRO SSLv1</span></li>
+</ul>
+<li><span style="font-size: 14px;">Add the new certificates:</span></li>
+<ul>
+<li><span style="font-size: 14px;">Click on </span><strong style="font-size: 14px;">Certificado</strong><span style="font-size: 14px;"> → </span><strong style="font-size: 14px;">Importar</strong><span style="font-size: 14px;">.</span></li>
+<li><span style="font-size: 14px;">Select the new certificate file for the production or restricted environment service and confirm.</span></li>
+<li><span style="font-size: 14px;">Once imported, click on the </span><strong style="font-size: 14px;">Incluir na lis.certificados</strong><span style="font-size: 14px;"> button.</span></li>
+<li><span style="font-size: 14px;">Ensure the certificate now appears in the </span><strong style="font-size: 14px;">Lista de Certificado</strong><span style="font-size: 14px;"> field.</span></li>
+</ul>
+<li><span style="font-size: 14px;">Save your changes.</span></li>
+</ol></ol><ol start="3">
+<li><span style="font-size: 14px;">Test the connection with eSocial environment:</span></li>
+<ol style="list-style-type: lower-alpha;">
+<li><span style="font-size: 14px;">Access transaction SM59.</span></li>
+<li><span style="font-size: 14px;">Select the HTTP connection for eSocial.</span></li>
+<li><span style="font-size: 14px;">Click on </span><strong style="font-size: 14px;">Teste conexão</strong><span style="font-size: 14px;"> button to verify the certificate installation and connectivity with eSocial services.</span></li>
+</ol></ol>
+<p><strong>Note:</strong></p>
+<p>All steps should be performed in accordance with the instructions provided in SAP Notes <a href="/notes/2514483" target="_blank">2514483</a> and <a href="/notes/2585709" target="_blank">2585709</a>. Please ensure you review these SAP Notes thoroughly, especially the attached Digital_certificates_v4.pdf for more detailed guidance.</p>
+<p><strong>Log of changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Description of the change</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<div>January 19, 2026</div>
+</td>
+<td>Released for Customer</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Stay connected</strong></p>
+<ul>
+<li>To get an e-mail notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
+<li>To stay informed about legal changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">Regulatory Change Manager</a>.</li>
+<li>For documentation about Payroll Brazil, access the <a href="https://blogs.sap.com/tags/517106488272734260515465412269325/" target="_blank">Community</a>.</li>
+</ul></div></div></div></div>

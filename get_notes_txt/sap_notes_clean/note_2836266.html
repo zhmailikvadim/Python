@@ -1,0 +1,282 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Restriction for using SAP Integrated Business Planning 2002.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>IBP</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This note describes restrictions for the initial shipment of SAP IBP 2002 as well as for the support package stacks of SAP IBP 2002.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p class="longtext">You have to consider those restrictions when using IBP 2002. This note will be updated regularly. Updated sections or bullet points are prefixed with an asterisk '*'.</p>
+<p class="longtext"><strong>IBP for Demand Driven Replenishment</strong></p>
+<div class="longtext">
+<div class="longtext">
+<ul>
+<li>Scheduling agreements for DDRMP materials are not supported.</li>
+<li>The ddmrp operators do not support effectivity/validity dates for sources of supply master data.</li>
+<li>The ddmrp operators do not support UOM conversions directly on the average usage input key figure.</li>
+</ul>
+<p>Note: The following bullet points apply for the ECC Add-on for Demand Driven Replenishment.</p>
+<ul>
+<li>
+<p>Only the planning segments for net and gross planning (PLAAB 02 and PLAAB 04) are supported by the DDMRP functionality. Other planning segments are planned by the standard MRP. The DDMRP heuristic does not support functionalities which are added due to the activation of business functions. The creation of specific order types is not supported for the planning with schedule lines.</p>
+</li>
+</ul>
+<ul>
+<li>The DDMRP heuristic can only be executed for materials with MRP lot-sizing procedures with the following settings:</li>
+<ul>
+<li>The lot-sizing procedure in customizing is a static lot-sizing procedure</li>
+<li>The lot-size indicator is either “E” (lot-for-lot order quantity) or “F” (fixed lot size)  </li>
+</ul>
+<li>Demand-driven category will not be maintained by the heuristic, and supply elements are not integrated back to IBP if planned orders are also used for externally procured materials.</li>
+<li>When coverage is set to Optimized Coverage or Undercoverage, the supply elements are not fixed, and more than one lot needs to be created to fill up to the top of green, then a supply element with the previous lot size that should have been deleted may be kept. To prevent it, we recommend that you manually delete supply elements before running DDMRP planning for a material after lot size changes.</li>
+<li>Material discontinuation in MRP is not considered in demand-driven replenishment.</li>
+</ul>
+</div>
+<div class="longtext">
+<ul>
+<li>When executing DDMRP heuristic only with the Net Change flag, materials are not planned in the following cases:</li>
+<ul>
+<li>No Net Change flag from demand or master data is received.</li>
+<li>No planning file entry was written as demand elements did not change for the material.</li>
+</ul>
+</ul>
+</div>
+<div class="longtext">
+<ul>
+<li>Customizing of scope of planning is not supported. You can define scope in the transaction /IBP/EDD_RUN_MRP.</li>
+<li>Automated multi-level planning is currently not supported. All selected materials are planned on single-stage. You can define the scope of planning in the transaction /IBP/EDD_RUN_MRP.</li>
+<li>Element list in the transaction /IBP/EDD_ELEM_LIST does not display safety time.</li>
+<li>Purchase requisitions of type ZPLL must be converted to purchase orders before you can integrate data from SAP ECC to IBP.</li>
+</ul>
+<p class="longtext"><strong>Analytics and Alerts</strong></p>
+</div>
+<div class="longtext">
+<div class="longtext">
+<ul>
+<li>Analytics Advanced/Dashboards Advanced restrictions</li>
+<ul>
+<li>The Save As feature for charts can be triggered only on the main (top level) chart.</li>
+<li>Download to PDF/PNG/JPG isn’t available in the Analytics Advanced app.</li>
+<li>Repositioning of tiles on mobile devices is not supported in the Dashboards Advanced app.</li>
+<li>Group By as Series feature is supported with the following chart types: Bar, Column and Line, Combination, Dual Y-Axis Combination, Dual X-Axis Combination.</li>
+<li>When using the High Contrast Fiori themes, the available color palette is reduced.</li>
+</ul>
+<li>Custom Alerts restrictions</li>
+<ul>
+<li>Minimum Consecutive Period" and “Period before and after” features work only exclusively in Define and Subscribe to Custom Alerts app.</li>
+<li>Custom alerts are not synonymous with key figure alerts defined in the IBP Excel Add-In and they are not merged together.</li>
+<li>When navigating to Excel from the Monitor Custom Alerts app, if multiple alerts are selected, all combinations of attributes between the alerts will be displayed within the Excel planning view.</li>
+</ul>
+<li>Manage cases restrictions</li>
+<ul>
+<li>Tasks cannot be created within Manage Cases app.</li>
+</ul>
+</ul>
+<p class="longtext"><strong>Intelligent Visibility<br/></strong></p>
+<div class="longtext">
+<ul>
+<li>*The Intelligent visibility app does not support alerts </li>
+<ul>
+<li>*containing machine learning rules</li>
+<li>*based on scenarios</li>
+</ul>
+</ul>
+</div>
+</div>
+<p class="longtext"><strong>IBP Add-In for Microsoft Excel</strong></p>
+<div class="longtext">
+<ul>
+<li>EPM Sheet Options and EPM Report Editor</li>
+<ul>
+<li>The EPM Sheet Option settings that are supported by the IBP add-in for Microsoft Excel can be found on the Edit View -&gt; Sheet Options dialog. Please also refer to the application help for more information <a href="https://help.sap.com/viewer/b28ffdd739bf45678ef36c44e64652d7/1711/en-US/9b35d663fd814544abd4e0caaa31537d.html" target="_blank">here</a></li>
+<li>The additional EPM settings that can be found under “Advanced à EPM Sheet Options” are generally not supported, except for the ones under “Protection” tab.</li>
+<li>Specifically, do not use the following “EPM Sheet Options” within the IBP add-in for Microsoft Excel:</li>
+<ul>
+<li>General -&gt; Member Recognition -&gt; “Activate Member Recognition”</li>
+<li>Refresh -&gt; Refresh Options -&gt; “Refresh Data in the Whole File When Opening it”</li>
+</ul>
+<li>The IBP add-in for Microsoft Excel has restricted EPM Report Editor functionality. In particular, do not use the “EPM Report Editor” functionality and settings except for performing tasks such as changing the position of the report in the grid, adjusting the shift, or creating local members:</li>
+<ul>
+<li>EPM Report Editor -&gt; Tab: Layout -&gt; changing the position of the report in the grid, adjusting the shift</li>
+<li>EPM Report Editor -&gt; Tab: Local Member -&gt; change and define local members</li>
+</ul>
+</ul>
+</ul>
+<ul>
+<li>Alert Key Figures</li>
+<ul>
+<li>Alert key figures that are defined to be calculated at the request level are not supported.</li>
+<li>Alert key figures do not work with the sheet option “Rows: Remove Empty and Zero Values” in dialog Edit View à Sheet Options.</li>
+<li>Sharing planning views as favorites with other users or user groups that include alert key figures does not result in alert notifications in the recipients' alerts dashboard in the IBP add-in for Microsoft Excel.</li>
+<li>The alert dashboard does not determine the number of alerts for planning views if the planning view has multiple time levels.</li>
+</ul>
+</ul>
+<ul>
+<li>SAP Jam Integration</li>
+<ul>
+<li>SAP Jam Feeds cannot be viewed within the IBP add-in for Microsoft Excel. For this, the Collaboration app on the SAP Fiori Launchpad for SAP Integrated Business Planning or SAP Jam itself needs to be used.</li>
+<li>SAP Jam Tasks that are in status “In Progress” cannot be reported as “Completed” from the IBP add-in for Microsoft Excel. Please also refer to the application help for more information <a href="https://help.sap.com/viewer/b28ffdd739bf45678ef36c44e64652d7/1711/en-US/5c480acdb086403a993b55d3116f637d.html" target="_blank">here</a>   </li>
+</ul>
+</ul>
+<ul>
+<li>Miscellaneous</li>
+<ul>
+<li>*Attributes that are defined as target unit of measure or target currency, and in particular the descriptions of those, are not supported in a planning view if the planning view contains a fixing-enabled key figure which requires unit of measure conversion or currency conversion.</li>
+<li>The IBP Excel add-in does not support “Identity Provider (IdP) initiated logon” and “Proxy authentication with interactive authentication” to logon to the IBP system.</li>
+<li>If the user selects another workbook manually during a refresh (Refresh, Simulation, Refresh after Save), the corresponding planning notes are incorrectly written to the newly activated sheet or workbook.</li>
+<li>Permission filters and attribute permissions are only applied when the user opens planning views while logged on, e.g. as templates or favorites.</li>
+<li>Changing the order of the columns and rows in the data and attribute area of IBP Excel Planning Views by using native Microsoft Excel capabilities like for example “Sorting from Largest to Smallest” or “Custom Sort” is not supported. The usage can lead to data inconsistencies. It is recommended to only use SAP EPM capabilities for these tasks.</li>
+<li>Permission filters are relevant for manual changes in the IBP add-in for Microsoft Excel only. The system disregards permission filters when the change is done by a planning operator, or version copy, and so on. This also applies to creating new planning objects either via the “Add New Planning Objects” or “Master Data Workbook” capabilities. Please also refer to the application help for more information: <a href="https://help.sap.com/viewer/b28ffdd739bf45678ef36c44e64652d7/1802/en-US/0efd417e860945e28103892e8f3f924b.html" target="_blank">here</a></li>
+<li>If you add a new planning object to a planning view that contains conversion attributes or conversion-enabled key figures, you must specify only one value for the conversion-from attribute, or include the conversion-from attribute with only one value in a filter. If you do not specify a value for the conversion-from attribute, or if you select multiple values, the application creates a new planning object for multiple conversion-from attribute values, which could lead to inconsistencies.</li>
+<li>A user's role needs to have read or write permission on at least one of the key figures of a scenario for that scenario to be visible in the IBP add-in for Microsoft Excel.</li>
+<li>Storage time profile level must be set to the lowest granularity level of the assigned time profile when a planning area is defined although the application would allow different settings.</li>
+<li>If you are using key figures with aggregation mode ”Custom”, constellations can occur where an offline report won’t work.</li>
+<li>The determination of the value of time-based totals (custom aggregates) does not work for key figures which are based on an L-code implementation or on a complex configuration and which have an aggregation mode other than Sum, Max, Min, or Avg.</li>
+<li>Flexible time axis &amp; attribute-based totals: Simulation capabilities are only supported within one time level<strong>. </strong>You cannot run simulation jobs for multiple time levels in parallel. <br/>Please also refer to the application help for more information<em>: </em><a href="https://help.sap.com/viewer/b28ffdd739bf45678ef36c44e64652d7/1711/en-US/e62621624be245bbb5279c7e0195d2c0.html" target="_blank">here</a><em> </em><em>&amp; </em><a href="https://help.sap.com/viewer/b28ffdd739bf45678ef36c44e64652d7/1711/en-US/ebfe7dfea7a24ae19ed943cdd2291d8c.html" target="_blank">here</a></li>
+<li>Attribute values must be loaded without trailing spaces via data integration. If loaded otherwise, changed key figure values could get reset to original values in the IBP add-in for Microsoft Excel, or error messages would appear.</li>
+<li>Implication using the Change-History-Based Calculations: Adding any of the following attributes to the IBP Excel Add.In planning view makes it a read-only planning view: Changed By (S_CHANGEDBY), Change ID (TSCHANGEIDFR), Change ID To (TSCHANGEIDTO), Changed in Period (S_CHINPERIODID), Changed in Period Level (S_CHINPERIODIDx), Data Sharing Plan (S_DSPID), Data Sharing Arrangement (S_DSAID, and Data Sharing Event (S_DSEVENTID). <br/>It’s not possible to edit cells, run simulations, and use scenarios in such a planning view. More information can be found <a href="https://help.sap.com/viewer/ff510e6429c542149a9d086d16c6601d/1802/en-US/de8b03675b53481298a23036c64e21c6.html" target="_blank">here</a>.</li>
+<li>Fixing of key figure values is not displayed in the ʽPlanning Objects with Key Figure Data’ view in master data workbooks. If you change fixed key figure values values, fixing is automatically deleted.</li>
+<li>Fixing changes are not tracked by change history.</li>
+<li>It is not supported to create or display Planning Notes in a planning view that contain the attribute value (none) and a total for the same attribute. When creating planning notes on those cells the key figure values saved for the planning note might be incorrect. When displaying planning notes on those cells displayed Planning Notes might be incorrect.</li>
+</ul>
+</ul>
+</div>
+<p><strong>Exception Management</strong></p>
+<div class="longtext">
+<ul>
+<li>Receive Notifications and Emails for Custom Alerts: the new functionality of receiving of emails is not available in all data centers at the moment (from systems with “scmibp” in the main URL of the system (e.g. https://myXXXXXXX.scmibp.ondemand.com emails cannot be received). </li>
+</ul>
+<p><strong>Data Integration</strong></p>
+<ul>
+<li>For new customers starting with IBP1908 the write service from SAP Analytical Cloud (SAC) to IBP is not supported yet.</li>
+</ul>
+<ul>
+<li>From the Web UI, you can load data one file at a time, but you cannot load multiple files as a single batch.</li>
+<li>While a data integration process is running, users or roles should not be maintained.</li>
+<li>Ensure that values for the attributes in IBP do not contain any of the following characters:
+<ul>
+<li>Single quotes/apostrophe (')</li>
+<li>Double quotes (")</li>
+<li>Greater than symbol (&gt;)</li>
+<li>Less than symbol (&lt;)</li>
+<li>Carriage return (CR)</li>
+<li>Carriage return + line feed (CRLF)</li>
+<li>Semicolon (;)</li>
+<li>Empty line</li>
+<li>Tab</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Note: When data is loaded into IBP, it will allow quotes (“ “) in the Product Description when the description attribute is assigned to an attribute in Configuration.</p>
+<ul>
+<li>For order-based planning, periodic integration through OpenAPI is supported. The OpenAPI using SDI technology is released for usage with the SDI file adapter and ABAP adapter. Near-real time integration is not supported. Multiple sources can be integrated into individual planning areas. The integration of multiple sources into a common planning area is not supported.</li>
+<li>The following patches of the SDI Agent are not supported: HANA DP Agent 2.0 SP03 Patches 40 and 41.</li>
+<li>Key Figure data cannot be loaded for a planning level which has only time period attributes or no time period attribute.</li>
+<li>Attributes cannot have the same values spelled in different cases (upper, lower, title, mixed,etc). For example, the Product Family ‘Organic’ cannot be spelled as ‘ORGANIC’ for some product, ‘Organic’ for other products and ‘organic’ for yet another set of products. You should have one of the three values (‘Organic’,‘ORGANIC’ or ‘Organic’) consistently for all products that belong to the 'Organic' Product Family.</li>
+<li>When an entry is deleted from a master data type which has the following configuration
+<ul>
+<li>Master Data Type has multiple key fields,</li>
+<li>Each of the key field is a primary key of other master data type,</li>
+<li>An attribute of the master data type is marked as a mandatory field in the plan area then this entry in the characteristic value combination table for the plan area is not deleted.</li>
+</ul>
+</li>
+<li>In WEB UI downloading very large file reports (more than 60.000 records) is not possible</li>
+</ul>
+<p><strong>*OData Services</strong></p>
+<ul>
+<li>„Excel Template“ OData Service (which is part of communication scenario SAP_COM_0143) is limited to test purpose only</li>
+<ul>
+<li>Planning Template API currently does not support multi-sheet (only single sheet planning template is read and retrieved).</li>
+<li>Planning Template API currently does not support Real time and flex (only fixed time buckets in the planning template is supported).</li>
+<li>Planning template currently supports base version only (no multi-scenario and no multi-version).</li>
+<li>Comments, Value based filter and Alerts are not supported.</li>
+</ul>
+</ul>
+<p><strong>Configuration</strong></p>
+<ul>
+<li>For calculation expressions, the maximum number of supported input planning levels is 2. Use helper key figures to break down the calculation expressions if there are more than 2 input planning levels. For example, three inputs KF1(PL1,stored), KF2(PL2,stored), and KF3(PL3,stored) into a calculation are not supported, but inputs KF1(PL1,stored), KF2(PL1,calculated), and KF3(PL1,stored) are supported.</li>
+<li>Concurrent model activation is not supported.</li>
+<li>Copy Replace for snapshots and attributes as key figures behaves same as Copy Merge. Users need to manually remove the unused configuration of snapshots and attributes as key figures from the target planning area .</li>
+<li>The calculation graph display for a key figure does not show a complete graph when one of the input key figures has an attribute transformation.</li>
+<li>Changing the definition of a snapshot key figure (changing the input key figures, the time period settings, or the number of snapshots) is not supported.</li>
+<li>A virtual master data type cannot be built on another virtual master data type.</li>
+<li>The length of an attribute cannot be made shortened once master data types or planning areas that use the attribute have been activated.</li>
+<li>When using scenarios, the assignment of TIMESTAMP attributes to a planning area might cause issues. It is recommended to assign NVARCHAR attributes to a planning area instead of TIMESTAMP attributes.</li>
+<li>Snapshots of key figure values won’t include time-independent key figures.</li>
+<li>Snapshots cannot be defined for a key figure that includes a helper key figure with attribute transformation.</li>
+<li>Analytics and disaggregation use the display setting for the number of decimal places for a key figure, which you make in the Configuration app. However, calculation scenarios do not necessarily return the value of a key figure rounded to the number of decimal places specified in the display settings for the key figure.</li>
+</ul>
+<p><strong>Change History</strong></p>
+<ul>
+<li>If the Change History, Planning Area Enabled checkbox is selected, and later the user decides to unselect it, the previously recorded change history of the planning area will be deleted upon the next activation of the planning area.</li>
+<li>Change History for Snapshot Key Figures is not supported.</li>
+<li>Change History for End User Scenarios is not supported.</li>
+<li>Change History is allowed for planning areas for IO operators. However, IO operators do not update the change history when run.</li>
+</ul>
+<ul></ul>
+<p><strong>IBP for inventory</strong></p>
+<ul>
+<li>IBP for inventory granularity is fixed to week. The time profile must include week.</li>
+<li>Non-Stocking Push Logic via the Global Configuration NON_STOCKING_PUSH is not supported for multiple-sourcing of a non-stocking node.</li>
+</ul>
+<p><strong>Supply Chain Network Fiori Application<br/></strong></p>
+<ul>
+<li>Because the Supply Chain Network Fiori app visualizes supply networks, it works only with planning areas used by the following modules:</li>
+<ul>
+<li>IBP for sale and operations</li>
+<li>IBP for supply</li>
+<li>IBP for inventory</li>
+<li>IBP for response</li>
+<li>*IBP for demand driven replenishment</li>
+</ul>
+<li>The Unified Planning Area is supported</li>
+</ul>
+<p><strong>IBP for Demand</strong></p>
+<ul>
+<li>The Promotion Elimination pre-processing algorithm considers NPI (new product introduction) information only if it is running together with a Demand Sensing algorithm.</li>
+<li>When using standard planning areas (e.g., SAP1 and SAP6), attributes to be used for Demand Sensing are PRDID, LOCID, CUSTID. Users can customize their planning areas and run at different levels of Product, Location, and Customer attributes if they assign the according Identifier Business Meanings to their Master Data attributes they wish Demand Sensing to run on.</li>
+<li>Demand Sensing can be run only on Baseline Version</li>
+<li>Demand Sensing does not consider phasing out of products.</li>
+<li>The data sources which are used in the APO-DP to IBP integration do not support a delta-load. Hence it is not possible to load changed data only. If a frequent data transfer of parts of the planning area data is required, we recommend to define separate HCI tasks with respective filter criteria.</li>
+<li>The APO-DP to IBP integration does not cover the deletion or realignment of characteristics value combinations. This means that if a characteristics value combination was transferred to IBP and is afterwards deleted in APO DP (either directly or by realignment) the respective planning object will not be automatically deleted in IBP</li>
+<li>Due to performance reasons it is not recommended to add more than 150 forecasting steps to a single forecast model.</li>
+</ul>
+<p><strong>Data Disaggregation</strong></p>
+<ul>
+<li>*Attribute IDs with more than 30 characters cannot be used in filter conditions in processes using disaggregation.</li>
+<li>In processes using mass disaggregation, such as the IBPFORECAST or DISAGG planning operator, attributes with the data type ‘TIMESTAMP' must not be used in an aggregation level, as the root attribute of a key figure planning level, or in a disaggregation expression of the involved key figures.</li>
+<li>Rounding issues may occur in some cases in interactive disaggregation (simulation or interactive planning operator execution). In cases where rounding is supported, you cannot control the 'rest distribution'.</li>
+<li>If you use time disaggregation on key figure upload, dependent key figures have to be loaded sequentially in separate batches.</li>
+<li>*Key figures that have an external key figure quantity assigned to them (in the 'External Key Figure Qty' field in the Configuration app), can't be used as target key figures in the DISAGG operator.</li>
+</ul>
+<p><strong>Time Disaggregation of Key Figure Values to Non-Editable Periods</strong></p>
+<ul>
+<li>In general, disaggregation does not consider key figure editability settings in configuration. This means that disaggregation may also change periods that are not editable.<strong><br/></strong></li>
+<li>If a key figure value needs to be disaggregated by time in the IBP Excel add-in and at least one of the time periods on a detailed level is not editable, the change will be prevented by the system. For example, if a key figure is defined as editable for current and future periods and its values are stored on the level of technical week, the system will allow changes on the monthly level only if the current date is in the first calendar week of the current month.</li>
+</ul>
+<p><strong>Order-based Planning</strong></p>
+<ul>
+<li>It is not supported to create and delete version specific master data for external master data types via the excel client</li>
+<li>The process integration with Production Planning and Detailed Scheduling (PP/DS) in SAP SCM and in SAP S/4HANA is not supported.</li>
+<li>Advanced process order functionality is not supported in order-based planning. Further details can be found in the SAP note <a href="/notes/2680725" target="_blank">2680725</a>.</li>
+<li>Multiple Planning Areas can be used in order-based planning, but only the operative Planning Area(s) are directly integrated</li>
+<li>IBP OBP (release IBP2002, OpenAPI version up to 2002) doesn’t support Engineering Change Management for IBP PDS (BOM, Routing).</li>
+</ul>
+<p>     Further details on restrictions can be can be found in the SAP note <a href="/notes/2640432" target="_blank">2640432</a> - Details on Restrictions for SAP IBP Order-Based Planning</p>
+<p><strong>*Timeseries-based Supply Planning</strong></p>
+<ul>
+<li>*Aggregated constraints on production resource usage are not supported for normalized planning areas.</li>
+<li>*Aggregated constraints on transportation resource usage are not supported for normalized planning areas.</li>
+</ul>
+<p><strong>Unified Planning Area</strong></p>
+<ul>
+<li>There is additional information on Partial Copy functionality. Refer to note <a href="/notes/2408579" target="_blank">2408579</a>.</li>
+<li>SAPIBP1 does not support Means of Transport, Demand Category and integration to SAP Ariba. For SAP Ariba, the unified planning process utilizes SAP7.</li>
+</ul>
+<p><strong>Manage Product Lifecycle application</strong></p>
+<ul type="disc">
+<li>Product references are only taken into account by forecasting if the forecast level contains the product e.g. if forecast is done on product group level, no product references can be taken into account </li>
+</ul>
+<p> <strong><br/></strong></p>
+</div>
+</div></div></div></div></div>

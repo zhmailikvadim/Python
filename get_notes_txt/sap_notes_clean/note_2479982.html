@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>You create a follow up quotation from an opportunity and the price determination is not copied over</li>
+<li>In a follow up transaction the Price List, Price Group and Customer Group is blank / empty</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP Customer Relationship Management (CRM)</li>
+<li>SAP enhancement package for SAP CRM</li>
+<li>SAP enhancement package for SAP CRM, version for SAP HANA</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Create an Opportunity</li>
+<li>Create a follow up Quotation from this Opportunity</li>
+<li>Open the assignment block 'Price Details' in the Quotation</li>
+<li>Price List, Price Group and Customer Group is empty</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Price_list, Cust_group and Price_group are empty in the opportunity and so cannot be copied over to the follow up quotation.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>There are 2 steps to complete to resolve this issue:</p>
+<p>Step 1:</p>
+<ol>
+<li>Adjust the copy control settings from the opportunity's item category to the quotation's item category.</li>
+<li>Change the Copy Condition to "Do not copy" or "Only copy manual conditions".</li>
+</ol>
+<p>Step 2:</p>
+<ol>
+<li>Implement BADI CRM_COPY_BADI method PRICING to prevent the copy.</li>
+<li>Remove price_list, cust_group and price_group from input_field_names.</li>
+</ol></div></div></div></div>

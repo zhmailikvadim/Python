@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Due to a program error, it was possible in the past that an order-specific routing became inconsistent.</p>
+<p>When trying to delete the inconsistent order-specific routing, the deletion unsuccessfully terminates with an error message MESSAGE_TYPE_X_TEXT in program SAPLMPE_OAN_POSTS.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">MSFR7</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The following two SAP Notes are missing in the system:</p>
+<p>3207387 - Move order update to an earlier point in time during OSR release</p>
+<p>3216545 - Ignore deleted operations in the release procedure</p>
+<p>Due to the missing SAP Notes it was possible that the operation activity network layer of an order-specific routing was released by accident.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>First implement the SAP Notes 3207387 and 3216545, if not already done.</p>
+<p>Implement this SAP Note. This SAP Note provides the repair program MPE_RTGV_HF_REPAIR_OSR for an inconsistent order-specific routing.</p>
+<p>Execute program MPE_RTGV_HF_REPAIR_OSR in transaction SE38. Enter the Routing Group, Counter and Version of the order-specific routing.</p>
+<p>(Remark: When executing the program in test mode, no database updates are performed.)</p>
+<p>On the result screen you can see if the order-specific routing was successfully updated. Afterwards, it should be possible to delete the inconsistent order-specific routing.</p></div></div></div></div>

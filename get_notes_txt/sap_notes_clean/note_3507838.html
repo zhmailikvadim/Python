@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When recording the results of an Inspection lot and after entering all the inspection characteristics, the proposal valuation will not show up.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<ul>
+<li>SAP Asset Manager</li>
+<li>SAP Service and Asset Manager</li>
+<li>SAM</li>
+<li>SSAM</li>
+<li>Inspection Points</li>
+<li>Record Results</li>
+<li>Characteristics</li>
+<li>Inspection lost</li>
+<li>Valuation</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""><strong>Reason:</strong></p>
+<p>Word order information from the operation was not correctly defined at the binding. This information was required to show the valuation page</p>
+<p><strong>Prerequisites</strong>:</p>
+<ul>
+<li>BAS or Visual Studio Code with SAM MDK project</li>
+<li>`patch` command (available on BAS and macOS by default) via terminal or other patching utility</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The solution was to get the work order information from the current binding by default, but if not present, check the operation level read link.</p>
+<p>Download the attached <strong>3507838</strong>.patch file and save it in a known location, preferably adjacent to your SAM.mdkproject</p>
+<div class="longtext"><ol>
+<li>Open a terminal in the root of your SAM metadata (i.e. SAM.mdkproject/metadata or SAM.mdkproject/metadata/base.definitions)</li>
+<li>Run the command `<em>patch --no-backup-if-mismatch -p4 &lt; path/to/<strong>3507838</strong>.patch</em>` in the terminal. </li>
+<li>Verify the following files has been modified.</li>
+</ol>
+<ul>
+<li>patching file 'Pages/WorkOrders/Operations/WorkOrderOperationDetails.page'</li>
+<li>patching file 'Rules/InspectionCharacteristics/Update/InspectionCharacteristicsChangeSetOnSuccess.js'</li>
+<li>patching file 'Rules/InspectionCharacteristics/Update/InspectionCharacteristicsChangeSetOnSuccessEDT.js'</li>
+<li>patching file 'Rules/WorkOrders/Operations/InspectionPoints/InspectionPointCodeWithRead.js'</li>
+</ul>
+</div></div></div></div></div>

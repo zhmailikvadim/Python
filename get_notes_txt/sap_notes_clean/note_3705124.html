@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When SFTP sender adapter with chunk mode is used, the processed input files need to be archived to prevent the same files from being processed again as they remain in the input directory. The files will be archived within the archive directory on the SFTP server.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span style="font-size: 14px;">SFTP Sender, chunk mode, archive, SFTP server</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><br/>When the SFTP sender adapter with chunk mode is used, in the existing feature there is no option to archive the input files after processing. This causes due previously processed files are being reprocessed since they remain in the input directory.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Code changes have been made in the SFTP sender side processing to support archiving of files when chunk mode is used.</p>
+<p>Archiving can be done by setting the parameter in the Additional Parameters table in Advanced Tab: <strong><span style="font-size: 14px;">archiveChunkModeOnSFTPServerPath</span></strong><span style="font-size: 14px;"> to the archive directory path on the SFTP server</span><span style="font-size: 14px;">. The default value of the parameter is null. </span></p>
+<p><span style="font-size: 14px;">For example: </span></p>
+<p><span style="font-size: 14px;"><strong>Name:</strong> archiveChunkModeOnSFTPServerPath</span></p>
+<p><span style="font-size: 14px;"><strong>Value:</strong> ~/sftp/archive</span></p>
+<p><span style="font-size: 14px;">After setting this parameter to the correct archive directory path, the files will be successfully archived to the same path on the SFTP server after processing is completed.  </span></p>
+<p><span style="font-size: 14px;">To get this correction available in your Support package you need to apply the patch matching to your support package version as per the instructions in the NetWeaver Support Package Stack guide which can be found on the SAP Service Marketplace as described in SAP Note 952402.</span></p></div></div></div></div>

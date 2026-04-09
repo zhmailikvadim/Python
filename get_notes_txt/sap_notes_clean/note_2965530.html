@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Solr full index failed with below error:</p>
+<p>Indexer worker failed. Max number of retries in total has been reached","message":"Indexer worker failed. Max number of retries in total has been reached","name":"de.hybris.platform.solrfacetsearch.indexer.exceptions.IndexerException","cause":{"commonElementCount":20,"localizedMessage":"<strong>java.lang.StackOverflowError</strong>","message":"java.lang.StackOverflowError","name":"java.util.concurrent.ExecutionException","cause":{"commonElementCount":0,"name":"java.lang.StackOverflowError","extendedStackTrace":[{"class":"java.util.Collections$UnmodifiableCollection","method":"toArray","file":"Collections.java","line":1037,"exact":false,"location":"?","version":"?"},{"class":"java.util.ArrayList","method":"addAll","file":"ArrayList.java","line":701,"exact":false,"location":"?","version":"?"},{"class":"de.hybris.platform.category.impl.DefaultCategoryService","method":"<strong>getAllSupercategories</strong>","file":"DefaultCategoryService.java","line":371,"</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The StackOverflowError appears because getAllSupercategories() is getting called recursively until the stack gets filled up. This can happen if you have categories with circular references. For example you have set Category A as a subcategory of Category B, B a subcategory of C, and C a subcategory of A etc. Or you have set Category A as supercatogry of itself.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Check category structure and delete the circular reference.</p>
+<p>We could use below groovy script in hac to check if there's category set as mentioned.</p>
+<p>import de.hybris.platform.servicelayer.search.FlexibleSearchQuery</p>
+<p>import de.hybris.platform.category.impl.DefaultCategoryService</p>
+<p>import de.hybris.platform.category.model.CategoryModel</p>
+<p> </p>
+<p>DefaultCategoryService.metaClass.checkCyclic = { final CategoryModel category -&gt;</p>
+<p>    if (category == null) {</p>
+<p>        print "Parameter 'category' was null."</p>
+<p>    }</p>
+<p>    return checkCyclicInternal(category, new HashSet&lt;CategoryModel&gt;(Collections.singleton(category)))</p>
+<p>}</p>
+<p>DefaultCategoryService.metaClass.checkCyclicInternal = { final CategoryModel category, final Set&lt;CategoryModel&gt; controlSet -&gt;</p>
+<p>    final Collection&lt;CategoryModel&gt; superCategories = category.getSupercategories()</p>
+<p>    if (superCategories != null &amp;&amp; !superCategories.isEmpty()) {</p>
+<p>        for (final CategoryModel parent : superCategories) {</p>
+<p>            if (notVisited(parent, controlSet)) {</p>
+<p>                for (List&lt;CategoryModel&gt; _ : checkCyclicInternal(parent, controlSet)) {</p>
+<p>                }</p>
+<p>                markNotVisited(parent, controlSet)</p>
+<p>            }</p>
+<p>            else</p>
+<p>            {</p>
+<p>                println 'path cycle found for category: [' + category.getCode() + ']'</p>
+<p>            }</p>
+<p>        }</p>
+<p>   }</p>
+<p>}</p>
+<p>defaultFlexibleSearchService.search(new FlexibleSearchQuery("SELECT {PK} FROM {Category}")).getResult().each {</p>
+<p>    defaultCategoryService.checkCyclic(it)</p>
+<p>}</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>solr index, StackOverflowError, indexing StackOverflow, index StackOverflow, getSuperCategories, java.lang.StackOverflowError</p></div></div></div></div>

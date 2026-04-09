@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are using Notes Management in PP/DS and you want to highlight mass planning objects (orders/perations) in Detailed Planning Scheduling Board, for which text-notes were created/changed for the specified period of time.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>S/4HANA PP/DS, Detailed Planning Scheduling Board, Notes Management, /SAPAPO/CDPS0</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Please note the solution for S/4HANA 2023 FPS0 and S/4HANA 2023 FPS1 and higher releases will differ slightly.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The functionality of mass highlighting of planning objects (orders/operations) in /SAPAPO/CDPS0 will be available in the following path: Menu -&gt; Edit -&gt; Select -&gt; User-Defined.</p>
+<p>Please follow the below mentioned manual steps:</p>
+<p><span style="text-decoration: underline;"><em><strong>For S/4HANA 2023 FPS0 release</strong></em></span></p>
+<p>1.  first implement SAP Note 3445741 - Highlighting of objects in /SAPAPO/CDPS0 for which text-notes have been recently changed. Via this SAP Note CLAS /SAPAPO/CL_NM_DET_SCHD_PLNBRD will be delivered to the system.</p>
+<p>2. In transaction CMOD:</p>
+<ul>
+<li>create Enhancement Project</li>
+<li>assign Enhancement: "APOCDPS8"</li>
+<li>implement Enhancement Component: "EXIT_SAPLCDPSUSER_008" (below is the example of the ABAP code to highlight planning objects for which text-note were changed since last 24 hours)</li>
+</ul>
+<p>"Collection of Orders and Operations whose Notes were changed during the last specified hours<br/>NEW /sapapo/cl_nm_det_schd_plnbrd( )-&gt;get_ord_opr_with_changed_notes(<br/>EXPORTING<br/>is_period = VALUE #( start = i_start<br/>end = i_end )<br/>iv_hours_of_latest_changes = <strong>24</strong><br/>IMPORTING<br/>et_operation = e_oper_tab<br/>et_order = e_orders_tab<br/>et_bapi_return_info = DATA(lt_bapi_return_info) ).<br/>IF line_exists( lt_bapi_return_info[ type = 'E' ] ).<br/>"Error handling<br/>ENDIF.</p>
+<p>"Remove mark from all objects marked before calling current user action<br/>e_first_deselect_all = abap_true.</p>
+<ul>
+<li>activate Enhancement Component: "EXIT_SAPLCDPSUSER_008"</li>
+</ul>
+<p><em><strong>For S/4HANA 2023 FPS1 and higher releases </strong> CLAS /SAPAPO/CL_NM_DET_SCHD_PLN_BRD already delivered.</em></p>
+<p>1. In transaction CMOD:</p>
+<ul>
+<li>create Enhancement Project</li>
+<li>assign Enhancement: "APOCDPS8"</li>
+<li>implement Enhancement Component: "EXIT_SAPLCDPSUSER_008" (below is the example of the ABAP code to highlight planning objects for which text-note were changed since last 24 hours)</li>
+</ul>
+<p>"Collection of Orders and Operations whose Notes were changed during the last specified hours<br/>NEW /sapapo/cl_nm_det_schd_pln_brd( )-&gt;get_ord_opr_with_changed_notes(<br/>EXPORTING<br/>is_period = VALUE #( start = i_start<br/>end = i_end )<br/>iv_hours_of_latest_changes = <strong>24</strong><br/>IMPORTING<br/>et_operation = e_oper_tab<br/>et_order = e_orders_tab<br/>et_bapi_return_info = DATA(lt_bapi_return_info) ).<br/>IF line_exists( lt_bapi_return_info[ type = 'E' ] ).<br/>"Error handling<br/>ENDIF.</p>
+<p>"Remove mark from all objects marked before calling current user action<br/>e_first_deselect_all = abap_true.</p>
+<ul>
+<li>activate Enhancement Component: "EXIT_SAPLCDPSUSER_008"</li>
+</ul></div></div></div></div>

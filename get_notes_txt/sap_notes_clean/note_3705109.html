@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>A blank page is seen when logging in to BI Launchpad via Windows AD SSO</li>
+<li>The last HTTP request seen in a browser trace may be:<br/>http://&lt;Example&gt;/BOE/portal/2512141240/BIPCoreWeb/VintelaServlet</li>
+<li>In the BILP web application logs, the below error will be seen:<br/>
+<p>An error occurred while authentication filtering. while trying to invoke the method java.lang.Object.hashCode() of a null object loaded from local variable 's'<br/>java.lang.NullPointerException: while trying to invoke the method java.lang.Object.hashCode() of a null object loaded from local variable 's'<br/> at com.sap.tracelog.util.Anonymizer.hexHash(Anonymizer.java:11)<br/> at com.crystaldecisions.sdk.framework.internal.SessionMgr.getSession_aroundBody16(SessionMgr.java:1325)</p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>empty page, anonymizer, winad, nullpointer, blank page</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence (BI) Platform 4.3 SP04 patch 1500+, 4.3 SP05 patch 300+, BI 2025 patch 600+</li>
+<li>Windows</li>
+<li>Linux / Unix </li>
+</ul>
+<p><strong>Steps to Reproduce</strong></p>
+<ol>
+<li>Log in to BILP via Windows AD SSO</li>
+<li>Observe the errors mentioned in the symptoms</li>
+</ol>
+<p><strong>Cause</strong></p>
+<p>Tracelog Anonymization code fails when the logon fails. This issue will only occur when the logon would have failed anyway. It prevents the logon page from being shown again - the real reason logon failure must be investigated separately.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This issue is fixed in the patches listed in the “Support Packages &amp; Patches” section below.<br/> Due to different internal processes, the “Support Packages &amp; Patches” section of the SAP Note will be populated as below:</p>
+<ul>
+<li>for fixes delivered in “Support Packages”: immediately (even if the “Support Package” is planned to be released several months later),</li>
+<li>for fixes delivered in “Patches”: ONLY once the “Patch” is released AND available on SMP (not before)</li>
+</ul>
+<p>For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article 2144559 in References section.</p></div></div></div></div>

@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>You are using the Web Callback feature in SAP Contact Center and verified the Last Result in the "LIST OF CALLBACKS CREATED IN THE SYSTEM" is showing the status of "Connected", yet the callback is still active:<br/><img alt="CallBack2.JPG" class="img-responsive" height="201" src="/documents/customerkba/8ZsHaWLRR6XflGQCRt1Ph6yEJXbHREi6CYO3wIo-iCc" title="CallBack2.JPG" width="965"/></li>
+<li>Callback calls are redialing even when the call was originally connected before. Your expectation is that the callback should not redial</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Contact Center 7.0</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Make a test call to a queue <a href="https://wiki.scn.sap.com/wiki/x/CoE8Fg" target="_blank">configured to have a queue callback</a> or create a web callback request (see <a href="https://help.sap.com/viewer/7150e8a25a584a7c93a92adfa63045f6/7.0/en-US/c76d745386f2e047e10000000a441470.html" target="_blank">Configuring Web Callback</a>)</li>
+<li>Logon to CDT and to the CallBack queue configured</li>
+<li>Call is offered to the agent</li>
+<li>Agent picks accepts, then CDT dials out to the customer number</li>
+<li>Customer answers the call and hangs up</li>
+<li>After some time, the same call is alerted to the same or other agents serving that that CallBack queue</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul>
+<li>Missing configuration</li>
+<li>This is the standard behaviour when no CallBack Script has been attached to the CallBack Queue</li>
+</ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul>
+<li>Callback queues require a corresponding <span style="background-"><strong>mandatory Callback Script</strong></span></li>
+<li>Since a callback script is mandatory in the callback queue, <span style="background-"><strong>agents who use IP desk phones or serve in queues as external agents cannot log on to callback queues</strong></span>.</li>
+<li>This is true for WebCallback and Queue Callback features</li>
+<li><strong>To use the callback function in your system, please follow the steps outlined in the "<a href="https://help.sap.com/viewer/b382b7dce2774c9aafdfda69f740b975/7.0/en-US/5fa4746df9664dc28cb70eb27151f803.html" target="_blank">Queue Callback</a>" online help, under the "Configuration" sub-title:</strong><br/><br/><img alt="2017-05-02_17-52-10.jpg" class="img-responsive" src="/documents/customerkba/RYXfFaTNFrIjsRVWkfWjEeUmgWK2zlqfynsg5VpY-8o" title="2017-05-02_17-52-10.jpg"/><img alt="2.jpg" class="img-responsive" src="/documents/customerkba/JLUsC3FCvNUpEI09Yg6sFq9FD_mU1zwgaPnUCZ7FDDo" title="2.jpg"/></li>
+</ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul>
+<li>For other important Knowledge Base Articles and Notes please refer to Master Note <a href="/notes/1867297" target="_blank">1867297</a></li>
+<li><a href="https://me.sap.com/notes/2257534" target="_blank">2257534</a> - Successfully marked callbacks are being rescheduled</li>
+<li><a href="https://me.sap.com/notes/2465769" target="_blank">2465769</a> - Call Back Calls are not playing ringtones back to the CDT/Agent</li>
+<li>If further investigation is required, then please look at the following notes</li>
+<ul>
+<li><a href="/notes/1753539" target="_blank">1753539</a> - SAP BCM 7.0 &amp; SAP Contact Center 7.0 - Required information and logs for troubleshooting</li>
+<li><a href="/notes/1753607" target="_blank">1753607</a> - SAP Contact Center 7.0 - Server and client loglevels
+<script language="JavaScript" type="text/javascript"></script>
+</li>
+</ul>
+</ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>CCtr, SCC, CCI, CRM-CCI, SAP Business Communication Management 7, ringqueshort.wav, AUDIO[SPKR],  tonePlayer, CallBack, ring tone, ringtone, ringing tone, startRingback</p></div></div></div></div>

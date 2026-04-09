@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When user taps on the Open button under the context menu in Twitter section of the Design Studio Dashboard, it does not open the URL in SAP BI Mobile App 6.6.3</p>
+<p><span style="color: #ff0000;"><strong><em>“Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em></strong></span></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP BusinessObjects BI Platform 4.1 Support Pack 7 Version: 14.1.7.1853</li>
+<li>Design Studio Dashboard</li>
+<li>SAP BusinessObjects Mobile App 6.6.3</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Create a Design Studio Dashboard having Twitter links based on Rapid Mockup components.</li>
+<li>Login to SAP BI Mobile App 6.6.3 and open the Design Studio dashboard.</li>
+<li>Once the dashboard is open, tap ON the slider under the Twitter tab on the right side.</li>
+<li>Now, press and hold on any name under the Twitter section till the context menu pops up.</li>
+<li>Tap on the <strong>Open</strong> button.<br/>Observation: Ideally it should open the Twitter url or page within the SAP BI Mobile App (as seen in version 6.5.16) but post upgrade to SAP BI Mobile App 6.6.3, it does not open the Twitter url or page.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Please login to CMC and navigate to Applications -&gt; SAP BusinessObjects Mobile -&gt; Client Properties.</li>
+<li>Add the parameter: feature.enable.legacy.webview</li>
+<li>Set the value to "true".</li>
+<li>Click "Save and Close". <br/><br/><img alt="2017-07-14_11-20-40.jpg" class="img-responsive" height="418" src="/documents/customerkba/ecySQ2ekyy2rwBCriuEYXsuEDQT6jEa9fSHm1CrShMI" title="2017-07-14_11-20-40.jpg" width="927"/><br/><br/></li>
+<li>Log out of SAP BI Mobile App and log back in again. Perform the same workflow.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>SAPBO business objects BI 4.0 4.1 4.2 SAP BI Mobile App 6.5 Twitter url Rapid Mockup component Design Studio webview</p></div></div></div></div>

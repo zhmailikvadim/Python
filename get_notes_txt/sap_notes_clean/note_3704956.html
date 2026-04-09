@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">Activation of SAP Note <strong>3596394</strong> fails with error <em>“Data object <code>&lt;FS_MAPPING_ATTR&gt;</code> has no component <code>KEEP_IN_SYNC</code>”</em> in method <strong>UPDATE_CHG_NMBR_ATTRIBUTES</strong>.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html0">PLM-CR, ECN, Change Record, Integration of Change Management, 3578782, Keep In Sync, KEEP_IN_SYNC, 3596394, Activation Error, UPDATE_CHG_NMBR_ATTRIBUTES</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><span style="font-size: 14px;">Field "KEEP_IN_SYNC" is not delivered by SAP Note <strong>3596394</strong>. It is delivered by the backend changes in SAP Note <strong>3578782</strong>. </span><span style="font-size: 14px;">If SAP Note <strong>3578782</strong> is not implemented, the system does not contain the required structural enhancement, leading to the mentioned activation error.</span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Continue implementing the next SAP Note <strong>3578782 (Back End Changes) </strong>after encountering the mentioned error.</p>
+<p>Recommended procedure:</p>
+<ol>
+<li><span style="font-size: 14px;">Keep the implementation of SAP Note </span><strong style="font-size: 14px;">3596394</strong> in the state as it is.</li>
+<li><span style="font-size: 14px;">Start implementation of SAP Note </span><strong style="font-size: 14px;">3578782</strong>, you may still get activation error here.</li>
+<li><span style="font-size: 14px;">Keep the implementation of SAP Note 3578782 in the same state.</span></li>
+<li><span style="font-size: 14px;">Activate SAP Notes one-by-one.</span></li>
+<li><span style="font-size: 14px;">Go to transaction code SNOTE and select SAP Note </span><strong style="font-size: 14px;">3596394 </strong><span style="font-size: 14px;">and perform following steps using menu</span><strong style="font-size: 14px;"> SAP Note -&gt; Activate SAP Note.</strong></li>
+<li><span style="font-size: 14px;">After successful activation of SAP Note </span><strong style="font-size: 14px;">3596394</strong><span style="font-size: 14px;">, repeat the same step #5 for the remaining SAP Note </span><strong style="font-size: 14px;"><strong><strong>3578782 </strong></strong></strong><span style="font-size: 14px;">and activation of all objects should be successful.</span></li>
+</ol></div></div></div></div>

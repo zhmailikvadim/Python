@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The analytic engine transforms CDS metadata to (transient) BW metadata. The result of the transformation is buffered. But when using this metadata buffer, it has to be checked, if on the the used CDS view has been updated. This check might be time consuming, because of</p>
+<ul>
+<li>many selects on DB table DDNTT</li>
+<li>long runtime (some 100 milli seconds gross time) in method _GET_CURRENT_ODP_MD_TIMESTMP of class CL_RSRTS_METADATA_ODP</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CDS, CL_RSRTS_METADATA_ODP, buffer,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Check of changes of CDS view is not optimal</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li><span style="text-decoration: underline;"><strong>SAP BW 7.52</strong></span><br/>Implement Support Package 3 for SAP BW 7.52 (SAPK-75203INSAPBW) into your BW system. The Support Package will be available as soon as <strong>SAP Note 2613219 </strong>with the short text "SAPBWNews 7.52 BW ABAP SP3", which describes this Support Package in more detail, is released for customers.<br/><br/></li>
+<li><span style="text-decoration: underline;"><strong>SAP BW 7.53</strong></span><br/>Implement Support Package 1 for SAP BW 7.53 (SAPK-75301INSAPBW) into your BW system. The Support Package will be available as soon as <strong>SAP Note 2653494</strong> with the short text "SAPBWNews 7.53 BW ABAP SP1", which describes this Support Package in more detail, is released for customers.<br/><br/></li>
+</ul>
+<p>In urgent cases you can use the correction instructions.<br/><br/>Before you use the correction instructions, make sure that you check <strong>SAP Note 1668882 and SAP Note 2248091</strong> for transaction SNOTE.<br/><br/>This SAP Note might already be available before the Support Package is released. In this case, however, the short text still contains the term "preliminary version".</p></div></div></div></div>

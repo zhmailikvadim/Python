@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>CIF transfer of Purchase Orders fails with SYSFAIL error: SQL error 600 occurred when executing Native SQL.</li>
+<li>In ST22 there is a short dump DBIF_DSQL2_SQL_ERROR (CX_SY_NATIVE_SQL_ERROR)<br/>The error 600 occurred in the current database connection "LCA".<br/>Error Text of Database: "Work rolled back: OmsObjectNotFound: DbpError -28" <br/><br/></li>
+<li>In ST22 there is a short dump DBIF_DSQL2_SQL_ERROR (CX_SY_NATIVE_SQL_ERROR)<br/>SQL error 423 occurred while executing Native SQL.<br/>17843 in APS_ORDER_CHANGE# liveCache ERROR 17843 in APS_ORDER_CHANGE</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP ERP and SCM system</li>
+<li>Release independent</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Transfer a Purchase Order to APO.</li>
+<li>Check APO Product view. PO is missing or not updated.</li>
+<li>Check SMQ1/SMQ2 for SYSFAIL queue and/or ST22 for runtime error.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>Usually the error happens, because one PO item schedule line was changed more than 256 times within the same transaction. For instance this could happen, if there are created one or more deliveries for affected PO with a lot of batch split items.</li>
+<li>APO liveCache doesn't support it and result is the database error. At first LC returns an error -28002 (invalid OID) reporting the overflow. Afterwards an error -28814 (object not found) is raised. Furthermore it might happen, that in ST22 error messages from LC are not correctly displayed. You will see database error '-28' only.</li>
+<li>The liveCache error code 17843 indicates that the purchase document to be transferred is extremely large, which is why the liveCache can't process it (due to a given immutable technical restriction). Too many entires in IT_OUTPUTS or IT_SCHEDULE or IT_ACTIVITIES.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>Avoid more than 256 changes of the same PO item schedule line within the same transaction (Batch split is only typical example).</li>
+<li>If the error happens, then delete invalid queue and solve inconsistencies by deltareport.</li>
+<li>Unfortunately there is no technical solution available due to unwanted side effects. It has been verified already by development support.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>liveCache error 28, 28002, 28814, 1028002, 1028814</p></div></div></div></div>

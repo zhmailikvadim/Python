@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In JDK 17, empty townor street namefields appear blank in the back-office. After upgrading to Commerce Cloud JDK 21, these fields now display the text "null" when empty.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">N/A</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Root Cause: The system has two beans for addressLabelProvider:<br/>A platform-provided bean with the alias "addressLabelProvider".<br/>A bean defined in customersupportbackofficewith the bean id "addressLabelProvider".<br/>In JDK 17, Spring's bean resolution prioritized the alias, so the platform bean was used. In JDK 21, due to changes in Spring's bean searching algorithm, the bean with the matching ID now takes precedence. The backoffice-specific bean was not fully implemented, causing the "null" display issue.<br/>Solution: Remove the duplicate bean definition from customersupportbackoffice-backoffice-spring.xmlto restore the correct behavior.</p>
+<p>&lt;bean id="addressLabelProvider" class="de.hybris.platform.customersupportbackoffice.labelproviders.AddressLabelProvider" /&gt;</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Fix will be available in SAP Commerce Cloud Update Release 2211-jdk21.8</p></div></div></div></div>

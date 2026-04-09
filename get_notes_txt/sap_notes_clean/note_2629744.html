@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This SAP Note delivers the following corrections and enhancements for the German Company Pension Scheme (CPS):</p>
+<ol>
+<li><strong>Report RPCWPCD0 (<em>Pension Calculation</em>) and report RPCWPZD0 (<em>Actuarial Interface</em>)</strong></li>
+<ol style="list-style-type: lower-alpha;">
+<li><strong>Termination with error "Start or end date initial"</strong><br/>The program terminates and the system issues error message 5D 311 ("Start or end date initial"). There is no reference to the affected personnel number.<br/>To aid with troubleshooting, the personnel-number-related message 5D 334 ("Return code xx in RP_01C_TIME_COMPUTE") is issued by the report RPCWPCD0 or RPCWPZD0 when this error occurs.<br/> </li>
+<li><strong>Function module RP_01C_BAV_ERROR_ROUTINE</strong><br/>In customer enhancements, you can use the function module RP_01C_BAV_ERROR_ROUTINE to return the master program (parameter E54_EPROG) and the error routine (parameter E54_EFORM). Due to a program error, however, the system returns the error routine in E54_EPROG instead of the master program.<br/> </li>
+</ol>
+<li><strong>Pension equalization payment in the company pension scheme (CPS): Report RPCAVVD0 ("Determination Distribution Proposal")</strong></li>
+<ol style="list-style-type: lower-alpha;">
+<li>When the system determines the distribution proposal for a current pension (pension payment), it does not fill the internal table LT_BVAZR with logging data due to a program error.</li>
+</ol></ol>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Report RPCWPCD0<br/>Report RPCWPZD0</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This is delivered in an HR Support Package. As an advance correction, you can implement the attached correction instructions.</p></div></div></div></div>

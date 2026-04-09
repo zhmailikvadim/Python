@@ -1,0 +1,50 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This KBA will suggest tuning steps to improve run times of the Batch Risk Analysis, repository object sync, etc, assuming the user violations table GRACUSERPRMVL is very large and is impacting performance.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP GRC Access Control 10.0 / 10.1 / 12.0</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>1) Table GRACUSERPRMVL</p>
+<ul>
+<li>Check table GRACUSERPRMVL in tcode SE16. This table holds all risks for all users executed in Batch Risk Analysis. See how long does it take for the screen to return the results after clicking "Number of Entries", the expected return time should be a couple of seconds. Very large number of entries in this table affects negatively and directly the performance of Batch Risk Analysis job.<br/> </li>
+<li>Check if this table is impacting performance by executing a Runtime Analysis of report GRAC_BATCH_RISK_ANALYSIS, or GRAC_OBJECT_ROLEREP_USER_SYNC (User Sync), via tcode SAT. Below example shows that we have performance impact when reading from GRACUSERPRMVL:<br/> </li>
+</ul>
+<p style="padding-left: 30px;"> <img alt="sat.PNG" class="img-responsive" src="/documents/customerkba/oYuM4KtLcSU7azAp9zDyMdUuoy6p1ZgBX8dzpK3-CC8" title="sat.PNG"/></p>
+<p>2) Risk Analysis parameters in SPRO</p>
+<ul>
+<li>Parameter 1023 may be set to various types such as 02, 03, 04, 05. Recommendation is to narrow this down to Permission level only (02) - as true representation of risk, and leave other options for end users to make their selections in reporting.<br/> </li>
+<li>Parameter 1030 could also be switched to NO, and users can manually triggered this option if they need it in reporting too.<br/> </li>
+<li>Parameter 1031 could be set to YES, and navigate to NWBC&gt;Setup&gt;Critical Access Rules to maintain critical roles and profiles such as SAP_ALL and SAP_NEW (plus whatever roles and profiles that contain all authorizations) so they are not analyzed.<br/> </li>
+</ul>
+<p>Suggested action plan to improve performance</p>
+<p>After realizing table GRACUSERPRMVL is impacting the performance (1), and adjusting the parameters as recommend (2), you may perform the steps below:</p>
+<ol>
+<li>Clear out the violations data by running the new utility <strong>GRAC_DELETE_VIOLATION_DATA</strong> (the new report to delete violation data is delivered by Note <a href="/notes/2440851" target="_blank">2440851</a>)</li>
+<li>Perform the "Update DB statistics" task with the help of your Database Administrator, and make sure this task is scheduled to run after every batch risk analysis job</li>
+<li>Rerun batch risk analysis to repopulate violation tables assuming new parameters values tuned.</li>
+</ol>
+<p>In case a dump occurs when executing the deletion report, please see Note <a href="/notes/2168653" target="_blank">2168653</a> - Batch Risk Analysis Deadlock Dump DBIF_RSQL_SQL_ERROR.</p>
+<p> </p>
+<div class="table-responsive"><table border="0" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr valign="top">
+<td><img alt="best_practice.PNG" class="img-responsive" src="/documents/customerkba/pqLic_Hocb3NJnVBhiwUUdoZqtC6_-I0HJsyvm-BWAE" title="best_practice.PNG"/></td>
+<td>
+<p>This article is focused on table GRACUSERPRMVL, and it can be easily applied to other tables populated in batch risk analysis:</p>
+<p>GRACCRITILVL<br/>GRACHROBJACTVL<br/>GRACHROBJCRPVL<br/>GRACHROBJPRMVL<br/>GRACPROFILEACTVL<br/>GRACPROFILECRPVL<br/>GRACPROFILEPRMVL<br/>GRACROLEACTVL<br/>GRACROLECMPLVL<br/>GRACROLECRPVL<br/>GRACROLEORGLVL<br/>GRACROLEPRMVL<br/>GRACUSERACTVL<br/>GRACUSERCRPVL<br/>GRACUSERPRMVL</p>
+</td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>tuning, dump, time out, stuck, bra, sod risk analysis, user level, execution time, millhion, entries, se16, very long time, huge time, exclude, risk analysis, adhoc, ad-hoc, off-line, offline, gracrlprmvl, gracroleprmvl, gracuseractvl, GRACUSERPRMVL, all risks, Batch Risk Analysis, Number of Entries, very large, huge, performance, GRAC_BATCH_RISK_ANALYSIS, SAT,  1023, Permission level, 1030, 1031, Critical Access Rules, critical roles, critical profiles, improve, GRAC_DELETE_ACCESS_RULES, Delete Violation data for Physical and Cross Systems, DB Update statistics, violation, rule deletion, 2168653, Deadlock, Dump, DBIF_RSQL_SQL_ERROR, TSV_TNEW_PAGE_ALLOC_FAILED, SAPSQL_STMNT_TOO_LARGE, SYSTEM NO ROLL, memory GRAC_DELETE_VIOLATION_DATA, database size</p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable" style="width: 1245px; border-spacing: 0px; border-collapse: collapse; min-width: 750px;  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; text-align: center;">
+<tbody class="MuiTableBody-root">
+<tr class="MuiTableRow-root jss75" style=" outline: 0px; vertical-align: middle; font-family: '72', '72full', Arial, Helvetica, sans-serif; background-">
+<td class="MuiTableCell-root MuiTableCell-body jss74 MuiTableCell-alignLeft MuiTableCell-sizeSmall" style="font-size: 12.5px; text-align: left; font-family: Arial, Helvetica, sans-serif; line-height: 1.43;  white-space-collapse: preserve; border-right: 0.3px solid grey; overflow-wrap: break-word; padding: 5px 3px !important; width: fit-content !important; border-bottom: 0.3px solid grey !important; letter-spacing: 0px !important;">database size</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div>

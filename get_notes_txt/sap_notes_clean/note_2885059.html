@@ -1,0 +1,44 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1"><strong>Issue 1:</strong> In the Payment Information section for users - above the fields loaded from the Country Specific Payment Information Detail Object the Object itself is referenced.<br/><br/><em><strong>and/or</strong></em><br/><br/><strong>Issue 2:</strong> When editing Payment Information for users where fields are loaded from a Country Specific Payment Information Object - the changes do not save and no error is thrown.<br/><br/></p>
+<p><span style="color: #ff0000;"><strong><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></strong></span></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP SuccessFactors Employee Central - Payment Information</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p><strong>Issue 1:</strong><br/><br/></p>
+<ul>
+<li>Go to Payment Information section for a user</li>
+<li>Click to edit</li>
+<li>Above the Country Specific fields you see reference to the fact they are Country Specific </li>
+</ul>
+<p><img alt="a.png" class="img-responsive" src="/documents/customerkba/dOzBdAttJet2t-B11MooyA00RRq34o8lxY25WonSc58" title="a.png"/></p>
+<p><strong>Issue 2:</strong><br/><br/></p>
+<ul>
+<li>Go to Payment Information section for a user where Country Specific Payment Information Detail fields are in use</li>
+<li>Click to edit</li>
+<li>Make a change to the data</li>
+<li>Click save</li>
+<li>Nothing happens</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The root cause of both these problems is the use of Conditions and Conditional Values on the Object Associations on the Payment Information Detail Object.<br/><br/>When Conditions and Conditional Values are maintianed on the Association it will force the Country Specific Payment Information Detail Object fields to be loaded resulting in reference to the Object.</p>
+<p><img alt="b.png" class="img-responsive" src="/documents/customerkba/9rKm21lD_V6adBP_0XkRcXFGgipPwU9fyffI-Un9sqg" title="b.png"/><br/><br/><strong>Issue 2</strong> - In addition to the above, the Country Specific fields which have have been forced loaded by the use of Conditions and Conditional Values have not been added to the Payment Information UI<br/><br/></p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p><strong>Issue 1: </strong></p>
+<ol>
+<li>Navigate to Configure Object Definitions -&gt; Object Definition -&gt; Payment Information Detail </li>
+<li>Take Action -&gt; Make Correction</li>
+<li>Scroll down to Asscociations</li>
+<li>Check the 'Details' of each association and remove both the Condition and Conditional Value(s) via trashcan</li>
+<li>Save</li>
+</ol>
+<p><strong>Issue 2 (after carrying out the steps outlined for Issue 1):</strong></p>
+<ol>
+<li>Navigate to Admin Center -&gt; Manage Configuration UI. Here select your Payment Information UI in use. <span style="text-decoration: underline;">Note:</span> <em>If you are not sure what UI is in use then you can check this via Configure People Profile</em></li>
+<li>On the UI, in the Details section, add a Field.</li>
+<li>Change value type to 'Resolver'</li>
+<li>Via the Value Type Resolver field map to the Country Specific field required</li>
+</ol>
+<p><img alt="c.png" class="img-responsive" src="/documents/customerkba/OSTFy2CtuBHbHZRbgWZQPbBYOgSZOxzzyW6XwgvwyzM" title="c.png"/></p>
+<p>5. OK and Save UI<br/>6. To ensure the field only appears for the relevant Country you then need to use a UI to hide and display the field. See below example. It is recommeded to set the UI Rule to trigger on onInitUI and onInsertUI as well as on the Bank Country Field.<br/><br/><img alt="d.png" class="img-responsive" src="/documents/customerkba/2HoODiYgIuKPnHs--tF1XwHu_lZMvSBNFSqCxxUo2Ps" title="d.png"/><br/><br/>For more information please refer to the following KBA: <a href="/notes/2305691" target="_blank" title="2305691  - Configuration for Country Specific Field in Payment Information UI">2305691 - Configuration for Country Specific Field in Payment Information UI</a><br/><br/><br/><strong>@Support</strong> - For issue 2 please see internal memo.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Payment, Information, Detail, UI, Profile, Country, Specific, Objects, Objects, Condition, Values, Values, Conditions, Conditional, Save, Nothing, Happens, Stays, Unchanged, Unsaved, Title, Label, Configuration, 6d29dfa7250ccd839e34deaedaf1ed1c8874bf58, RowId, shouldn't, be, Null</p></div></div></div></div>

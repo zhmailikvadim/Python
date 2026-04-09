@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">How to use Fiddler to collect HTTP and HTTPS traces.</p>
+<ul><li>SAP support requests a Fiddler trace.</li><li>Fiddler is a third-party troubleshooting tool that can trace web traffic activity (HTTP requests and responses). It can be downloaded for free from <a href="http://www.telerik.com/fiddler" rel="noopener noreferrer nofollow" target="_blank">http://www.telerik.com/fiddler</a></li><li>It can be used to get information on:
+<ul><li>The client web requests and web server responses</li><li>To capture the traffic being generated to the BI Platform.</li><li>The amount of time dedicated to backend processing vs. client-side processing.</li><li>The content of any errors returned from the web server.</li><li>To troubleshoot issues with SAP HANA HTTP connections.</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Lumira Designer 2.x</li><li>S/4HANA</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Download Fiddler from <a href="http://www.telerik.com/fiddler" rel="noopener noreferrer nofollow" target="_blank">http://www.telerik.com/fiddler</a> and install it on a machine which is on the same network as the computer where Lumira Designer is installed (usually installed directly on the same PC Lumira Designer).</li><li>Close all the applications on the machine to avoid capturing irrelevant information.</li><li>
+<p>Make sure Lumira Designer is closed, then open SapLumiraDesigner.ini and add the 4 +2 bold lines at the same position:</p>
+<p> jre/bin/SapLumiraDesignerVM.exe<br/><strong>-aadProxyHost<br/></strong><strong>localhost<br/></strong><strong>-aadProxyPort<br/></strong><strong>8888<br/></strong>-vmargs<br/>-XX:+HeapDumpOnOutOfMemoryError<br/>...<br/>-<a href="http://dsun.net/" rel="noopener noreferrer nofollow" target="_blank">Dsun.net</a>.client.defaultConnectTimeout=<a href="/notes/88000" rel="noopener noreferrer nofollow" target="_blank">88000<br/></a><strong>-Dhttp.proxyHost=localhost<br/></strong><strong>-Dhttp.proxyPort=8888<br/></strong>-Xmx4g</p>
+</li><li>Launch Fiddler and make sure that network capturing is active ("Capturing" must be displayed in the lower left corner of the Fiddler window).</li><li>For HTTPS traffic, the following must be done, otherwise fiddler will not see any of the content:
+<ol style="list-style-type: lower-alpha;"><li>Select Tools-&gt;Fiddler Options</li><li>Click the HTTPS tab</li><li>Ensure 'Capture HTTPS CONNECTs' and 'Decrypt HTTPS traffic' are checked</li><li>Click OK</li></ol>
+</li><li>Open Lumira Designer and the application where the issue occurs, then reproduce the scenario.</li><li>After the issue has been reproduced, go back to Fiddler, click the file menu and de-select "Capture Traffic".</li><li>Choose "File &gt; Save &gt; All Sessions..." from the Fiddler menu.</li><li>Zip the Fiddler trace file (.SAZ file) and forward it to SAP.<br/><span style="color: #e03e2d;">Note: The file needs to be zipped to be able to attach it to the case.</span></li></ol>
+<p></p>
+<div>
+<div id="__vbox0-__layout4-2">
+<div id="__data221">
+<div id="__html0-__layout4-2">
+<p><strong>**See the attached PDF for a quick reference guide and how-to. </strong></p>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div id="__vbox0-__layout4-3"></div>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Support Content: <a href="https://help.sap.com/docs/SUPPORT_CONTENT/cpm/3361874604.html" rel="noopener noreferrer nofollow" target="_blank">What is the Fiddler Tool?</a></p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><div>
+<div id="__section0">
+<div>
+<div id="__section0-innerGrid">
+<div>
+<div id="__layout4">
+<div>
+<div id="__vbox0-__layout4-4">
+<div id="__data225">
+<div id="__html0-__layout4-4">
+<p>Fiddler , Lumira , BIP , Platform ,  HTTP , HTTPS , capture , traffic , network , synchronization , document , restful , webservice </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div> </div>
+</div>
+</div>
+<p></p></div></div></div></div>

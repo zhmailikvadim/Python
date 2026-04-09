@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Do we need to take transaction log backups in ASE with HADR?   </li>
+<li>Can we turn on "trunc log on chkpt" in databases with HADR?</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Adaptive Server Enterprise (ASE) 16.0</li>
+<li>High Availability Disaster Recovery (HADR)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Setting the "trunc log on chkpt" database option to 'false' and taking transaction log backups is recommended for all non-temp databases in production systems where data loss has to be minimized. This is no different for databases under HADR. See <a href="https://help.sap.com/docs/SAP_ASE/efe56ad3cad0467d837c8ff1ac6ba75c/a6645e28bc2b1014b54b8815a64b87ba.html?version=16.0.3.0" target="_blank">SAP ASE 16.0 SP03 HADR User's Guide</a> where all databases have "trunc log on chkpt" set to "false".</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>truncate, checkpoint</p></div></div></div></div>

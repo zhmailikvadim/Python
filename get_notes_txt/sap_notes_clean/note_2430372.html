@@ -1,0 +1,41 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You use SAP Environmental Compliance 3.0 and edit tasks in the overview. You notice that some tasks no longer have any corresponding task templates.</p>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">﻿xEM, EC, SAP EC, EP, SAP EP, EEM﻿</span></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">﻿Emissionsmanagement, Einhaltung von Umweltschutzauflagen, Umweltleistung, Energiemanagement, Übersicht, Aufgabenvorlage﻿</span></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">﻿Emission Management, Environmental Compliance, Environmental Performance, Enterprise Energy Management, Dashboard, Task Template</span></p>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This symptom is caused by a program error.</p>
+<p>The task templates have been deleted, but the related tasks were not deleted.</p>
+<p>You use SAP Environmental Compliance 3.0 with a support package level or patch level lower than the level specified in the <em>Support Packages &amp; Patches</em> section.</p>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Download the complete solution for your support package level using the appropriate link in the <em>Support Packages &amp; Patches</em> section and implement it in your system. When you do this, apply the other required patches as well. For more information, see SAP Note <a href="/notes/1974464" target="_blank">1974464</a>.</p>
+<p><span style="text-decoration: underline;">Note:</span> Patches for<span class="SNO_DNT" style="float: none;" translate="no"><em> ﻿Env.Compl. Centr. Services 3.0﻿</em></span> require a server restart to become fully active.</p>
+<p><span style="text-decoration: underline;">Note:</span> Corrections have been provided in the interim that require manual tasks. Check the manual tasks of the following SAP Notes and carry them out if needed.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Current Support Package level</strong></td>
+<td><strong>SAP Notes</strong></td>
+</tr>
+<tr>
+<td>Support Package SP20</td>
+<td><a href="/notes/2297746" target="_blank">2297746</a>, <a href="/notes/2368673" target="_blank">2368673</a>, <a href="/notes/2370485" target="_blank">2370485</a>, <a href="/notes/2389521" target="_blank">2389521</a></td>
+</tr>
+<tr>
+<td>Support Package SP21</td>
+<td><a href="/notes/2297746" target="_blank">2297746</a>, <a href="/notes/2368673" target="_blank">2368673</a>, <a href="/notes/2370485" target="_blank">2370485</a></td>
+</tr>
+<tr>
+<td>Support Package SP22</td>
+<td><a href="/notes/2297746" target="_blank">2297746</a><a href="/notes/2368673" target="_blank">,</a> <a href="/notes/2370485" target="_blank">2370485</a></td>
+</tr>
+</tbody>
+</table></div>
+<p> </p>
+<p>Execute the new data migration "<span class="SNO_DNT" style="float: none;" translate="no">﻿Delete Tasks with deleted Templates</span>". This data migration deletes all tasks that have no valid task template. The log of the data migration lists all deletion actions.</p>
+<p>If the affected tasks are of the type "If another task is completed" (<span class="SNO_DNT" style="float: none;" translate="no">Workflow Tasks</span>) or of the type "When Parent Task Is Generated" (<span class="SNO_DNT" style="float: none;" translate="no">Sub-Tasks</span>), the data migration returns an error. You must then first manually delete all dependent tasks so that the migration can delete the tasks. Execute the data migration "<span class="SNO_DNT" style="float: none;" translate="no">﻿Delete Tasks with deleted Templates</span>﻿" again after you have deleted the dependent tasks.</p>
+<p> </p></div></div></div></div>

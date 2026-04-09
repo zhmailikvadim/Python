@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1"><span style="font-size: 14px;">In the DSN, you notice the following unexpected behavior: </span>an S21.G00.40.040 field is wrongly filled because of a retroactive contract deletion in retro, for a complete payroll period (one month).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DSN payroll calculation, RPLDSNF0, FCTT, bloc 40.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>This error is caused by the generation of technical entry 99xx in the CTT table where some data is replaced by the current data, and the data from the original deleted CTT entry isn't kept for this field S21.G00.40.040 ("Code risque accident du travail") </li>
+<li>Entry 99xx is triggered by a retroactive change of contracts.</li>
+<li>99xx is a technical entry created to trace the deletion of a CTT line, following changes in the validity of the contract period.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Since this error occurs during the generation of the CTT table (payroll execution), to fix the problem in the DSN declaration:</p>
+<ol>
+<li>Implement this SAP Note.  </li>
+<li>Run the payroll again.</li>
+</ol>
+<p>Implement the attached correction instructions or the corresponding HR-SP or <strong>CLC.</strong></p>
+<p>The correction enclosed within this SAP Note will be included in HR Support Packages referenced below. If you need the correction before the HRSP is available, you may apply the attached correction instructions.<br/>It should be emphasized however, that correction instructions are only a short-term solution, not a substitute for the Support Package.</p>
+<div id="gtx-trans" style="position: absolute; left: 356px; top: 127px;">
+<div class="gtx-trans-icon"></div>
+</div></div></div></div></div>

@@ -1,0 +1,53 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When a company runs <em>Perpetual Inventory</em> and the setting <em>Manage Item Cost per Warehouse</em> is not selected (in <em>Administration</em> <em>→</em> <em>System Initialization</em> <em>→</em> <em>Company Details</em> <em>→</em> <em>Basic Initialization</em> tab), the <em>Item Cost</em> calculation on transactions is based on all warehouses and should be equal in all warehouses at any given time. Therefore, when an <em>Inventory Revaluation</em> document (MRV) is added, it will affect inventory in all warehouses.</p>
+<p><strong>Remark:</strong> For items managed by the Serial/Batch valuation method (available from version 9.1), the batch or serial number cost will be always managed on the Company level, even if <em>Manage Item Cost per Warehouse</em> is selected in <em>Basic Initialization</em> tab.</p>
+<p>Therefore, when MRV is added:</p>
+<ul>
+<li>For the Moving Average (MAP) valuation method, it affects item inventory in all warehouses, no matter which warehouse is chosen in the document line. Also, MAP should be equal in all warehouses at any given time.</li>
+<li>For the Standard (STD) valuation method, it affects item inventory in all warehouses, no matter which warehouse is chosen in the document line. Also, the STD price should be equal in all warehouses at any given time.</li>
+<li>For items managed by serial or batch numbers and the Serial/Batch valuation method, inventory revaluation affects selected serial/batch cost in all warehouses, no matter which warehouse is chosen in the document line. Also the serial/batch cost price should be equal in all warehouses at any given time.</li>
+<li>For the FIFO valuation method, it affects selected FIFO layer open inventory.</li>
+</ul>
+<p><strong>When <em>Set G/L Accounts By</em> in Item Master Data is set to <em>Warehouse</em> or <em>Item</em> <em>Level</em>:</strong></p>
+<ol style="list-style-type: upper-alpha;">
+<li>The inventory transaction will be assigned to the warehouse chosen in the MRV line.</li>
+<li>The inventory transaction will be posted to the inventory account, linked to the warehouse chosen in the MRV line and set in the <em>Warehouses-Setup</em> or <em>Item Master Data</em> window, respectively.</li>
+<li>The transaction value will reflect the change in inventory value in all warehouses.</li>
+<li>In the Journal Entry, only the inventory account linked to the warehouse chosen in the MRV line will be posted. The posted amount will reflect the change in stock value in all warehouses (that is, the amount for value change in all warehouses will be posted to the same account, even though different accounts are linked to different warehouses).</li>
+</ol>
+<p><strong>When <em>Set G/L Accounts By</em> in Item Master Data is set to <em>Item Group</em>:</strong></p>
+<ol style="list-style-type: upper-alpha;">
+<li>The inventory transaction will be assigned to the warehouse chosen in the MRV line.</li>
+<li>The inventory transaction will be posted to the inventory account, linked to the item group to which the revaluated item belongs.</li>
+<li>The transaction value will reflect the change in stock value in all warehouses.</li>
+<li>In the Journal Entry, the inventory account linked to the relevant items group will be posted. The posted amount will reflect the change in stock value in all warehouses.</li>
+</ol>
+<p><strong>Example 1.</strong></p>
+<p><strong>Prerequisites</strong>: The <em>Manage Item Cost per Warehouse</em> setting is <strong>not selected</strong>.</p>
+<ol>
+<li>Item 'TEST' is managed by MAP and setting S<em>et G/L Accounts By</em> is set as <strong>Warehouse</strong>. Two warehouses, 01 and 02, are linked to the item. Inventory account 10001 is linked to warehouse 01, and inventory account 10002 is linked to warehouse 02. The current item cost price is 15, on-hand quantity in warehouse 01 is 10, and on-hand quantity in warehouse 02 is 20.</li>
+<li>Inventory Revaluation document for item 'TEST' is added to change the price. <em>Current Cost</em> 15, <em>New Cost</em> is 17 and <em>Warehouse</em> 01 is chosen in the MRV line.</li>
+</ol>
+<p><strong>Result</strong>:<br/>Inventory account 10001 is debited by amount 60=(17-15)*(10+20). The inventory transaction is assigned to warehouse 01.</p>
+<p><strong>Example 2:</strong></p>
+<p><strong>Prerequisites</strong>: The <em>Manage Item Cost per Warehouse</em> setting is <strong>not selected</strong>.</p>
+<ol>
+<li>Item 'TEST' is managed by MAP and setting S<em>et 'G/L Accounts By'</em> is set as <strong>Item Group</strong>. Item 'TEST' belongs to the item group <strong>Materials</strong>. Inventory account 10003 is linked to item group <strong>Materials</strong>. Two warehouses, 01 and 02 are linked to the item. The current item cost price is 15, on-hand in warehouse 01 is 10 and on-hand in warehouse 02 is 20.</li>
+<li>Inventory Revaluation document for item 'TEST' is added to change the price. <em>Current Cost</em> 15, <em>New Cost</em> is 17 and <em>Warehouse</em> 01 is chosen in the MRV line.</li>
+</ol>
+<p><strong>Result</strong>:<br/>Inventory account 10003 is debited by amount 60=(17-15)*(10+20). The inventory transaction is assigned to warehouse 01.</p>
+<p><strong>Example 3:</strong></p>
+<p><strong>Prerequisites</strong>: The <em>Manage Item Cost per Warehouse</em> setting is <strong>selected</strong>.</p>
+<ol>
+<li>Item 'TEST' is managed by batch numbers, valuation method is Serial/Batch and setting S<em>et 'G/L Accounts By'</em> is set as <strong>Warehouse</strong>. Two warehouses, 01 and 02 are linked to the item. Inventory account 10001 is linked to warehouse 01 and inventory account 10002 is linked to warehouse 02.</li>
+<li>Add a Goods Receipt for item 'TEST', Quantity 30, Price 15, Warehouse 01. Create a new batch B0001 of quantity 30 for this Goods Receipt document.</li>
+<li>Create an Inventory Transfer document from warehouse 01 to warehouse 02, item 'TEST', Quantity 20, and choose batch number B0001 for all 20 units. Remaining batch B0001 quantity in warehouse 01 is now 10, and in warehouse 02 it is 20, overall 30 units for the batch.</li>
+<li>Create an Inventory Revaluation document with item 'TEST', while warehouse 01 is chosen in the MRV line. Choose batch B0001 in the <em>Serials/Batches</em> table. Set <em>New Cost</em> to 17 for batch B0001.</li>
+</ol>
+<p><strong>Result</strong>:<br/>Inventory account 10001 is debited by amount 60=(17-15)*(10+20). That is, the inventory account used in the journal entry of the Goods Receipt is account 10001. The inventory transaction is assigned to warehouse 01.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">SAP Business One</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p id="">This is correct system behavior.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Stock Revaluation, Material Revaluation, Item Cost, Item Cost managed by company, Price system managed per company, Manage Item Cost, System behaviour, Cost by batch, Cost by Serial/Batch</p></div></div></div></div>

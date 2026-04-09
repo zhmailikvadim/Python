@@ -1,0 +1,62 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When a grid is configured within a nested table in the Questionnaire Painter, and a show/hide rule is configured for the grid and grid columns through Content Display Rule, the Content Display Rule is not respected when the screen is loaded.</p>
+<ul>
+<li>On initial load, the grid and grid columns will show.</li>
+<li>On save of screen, the grid container will show, but the grid columns and values will disappear. The values that have been saved in the grid are persisted to the database.</li>
+<li>On refresh of screen, the grid container, grid columns, and values which were previously saved will show.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>grid, showhide, show/hide, disappear, values, hidden, JSONScreenController</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Prerequisites:</strong></p>
+<p>A grid is configured within a nested table in a Questionnaire View for which a Show/Hide rule is configured for the grid and grid columns. Please follow the instructions below to configure if required.</p>
+<ol>
+<li>Find any Existing Screen in FS-QUO/FS-IPW, find the corresponding Screen in FS-PRO Product Configurator.</li>
+<ul>
+<li>Example: Sample Household Product, Household Policy Screen (Sample Household Product -&gt; User Interface -&gt; Data Capture -&gt; eApplication(Producer Policy eApp PQM30) -&gt; eApp Section (Policy Data) -&gt; eApp Screen (Household Policy).</li>
+</ul>
+<li>Open the Questionnaire Layout Painter by clicking the Screen Icon and Selecting "Edit". Find a corresponding Questionnaire Layout to modify.</li>
+<ul>
+<li>Example: HouseHold Policy View PQM30 in Sample Household Product -&gt; User Interface -&gt; Sample Household Policy Model View -&gt; Views -&gt; SAP Household Policy View.</li>
+</ul>
+<li>Find an existing Questionnaire to add a grid and 2 or more columns to.</li>
+<ul>
+<li>Example: Sample Household Product -&gt; User Interface -&gt; Sample Household Policy Model View -&gt; Questions -&gt; SAP Household Policy Questions.</li>
+</ul>
+<li>Open the Questionnaire Painter from the View and select the Questionnaire View to modify from the View Dropdown.</li>
+<ul>
+<li>Example: HouseHold Policy View PQM30.</li>
+</ul>
+<li>Add a new row to an existing Questionnaire View. In the new row insert a table with 1 column and 1 row. Within the new table, add a grid created from Step 3.</li>
+<li>Add a new row to an existing Questionnaire View. In the new row, insert a radio button for an arbitrary column where the length = 1.</li>
+<ul>
+<li>Example: ABDAPOLICY.ICC_CD</li>
+</ul>
+<li>Save and Build the Questionnaire View. Close the Questionnaire Painter.</li>
+<li>In the eApp Screen from Step 2, create or edit the Content Display Rule. Within buildShowString/buildHideString function, add the corresponding code:</li>
+<ul>
+<li>
+<p>buildHideString:<br/>IF ABDAPOLICY.ICC_CD = "0"<br/> HIDEReturnString = HIDEReturnString + "&lt;GRID_ID&gt;, &lt;COLUMN_ID1&gt;, &lt;COLUMN_ID2&gt;, etc"<br/> END IF</p>
+</li>
+<li>buildShowString:<br/>IF ABDAPOLICY.ICC_CD = "1"<br/>SHOWReturnString = SHOWReturnString + "&lt;GRID_ID&gt;, &lt;COLUMN_ID1&gt;, &lt;COLUMN_ID2&gt;, etc"<br/>END IF</li>
+</ul>
+<li>Save and Build the Rule.</li>
+<li>Publish and Deploy the Product.</li>
+</ol>
+<p><strong>Steps to Reproduce:</strong></p>
+<ol>
+<li>Log into FS-QUO/FS-IPW.</li>
+<li>Navigate to the eApp screen which was modified in pre-requisite.</li>
+<li>Click the new Radio Button to set the value to "Yes". The newly configured grid should show.</li>
+<li>Enter Data for the columns in the grid. Click Save on the Screen.</li>
+</ol>
+<p><strong>Actual Result: </strong>After the Save has completed, the grid container remains but the grid columns and column values disappear to show an empty grid.</p>
+<p><strong>Expected Result: </strong>After the Save has completed, the grid container, grid columns, grid values should persist on the screen.</p>
+<p><strong>Cause: </strong>The application code will parse the Questionnaire Metadata to grids within a Table -&gt; Row -&gt; Cell - &gt; Grid configuration. However, the code does not consider the case where a table can be configured within an existing table as a Table -&gt; Row -&gt; Cell -&gt; Table -&gt; Row -&gt; Cell -&gt; Grid.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Recursively find grids within nested Questionnaire Tables to ensure that all grids are identified regardless of how many nested tables are configured.</p>
+<p><strong>Files Changed in this correction:</strong></p>
+<p><strong>FS-PRO:</strong></p>
+<ul>
+<li>camilionlib/src/main/java/com/sap/fs/ps/eapp/screen/service/impl/ScreenServiceImpl.java</li>
+</ul></div></div></div></div>

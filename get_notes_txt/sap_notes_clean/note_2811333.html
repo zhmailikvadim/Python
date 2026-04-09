@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Using a license server</li>
+<li>Current licenses were updated on SAP Portal and a new licence (.lic) file was generated</li>
+<li>The reread of the licenses generates an error:<br/><br/><em>lmgrd reread<br/><br/></em>Reloading licenses for sybase license manager ... lmutil ...<br/>lmreread failed: Cannot connect to license server system. (-15,29) : SAP ASE</li>
+</ul>
+<ul>
+<li>SYBASE.log shows the following warning messages at the top of the log :<br/><br/>(lmgrd) Rereading license file... Requested from sybase@<em>hostname<br/>(lmgrd) WARNING: 2 license server systems specified in license file.<br/></em>(lmgrd) (an even number of server systems is probably a mistake.)<br/>(lmgrd) You may have duplicated a SERVER line by mistake<br/>(lmgrd) ...Finished rereading</li>
+</ul>
+<ul>
+<li>SYBASE.log shows the following warning messages at the end of the log :<br/><br/>(SYBASE) No features to serve, exiting<br/>(SYBASE) EXITING DUE TO SIGNAL 36 Exit reason 4<br/>(lmgrd) SYBASE exited with status 36 (No features to serve)<br/>(lmgrd) SYBASE daemon found no features. Please correct<br/>(lmgrd) license file and re-start daemons.<br/>(lmgrd) This may be due to the fact that you are using<br/>(lmgrd) a different license file from the one you expect.<br/>(lmgrd) Check to make sure that:<br/>(lmgrd) <em>&lt;path_to_lic_file&gt;.</em>lic<br/>(lmgrd) is the license file you want to use. </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Adaptive Server Enterprise (ASE) - all versions</li>
+<li>SYSAM</li>
+<ul>
+<li>License Cluster (3 node) setup</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>One of the SERVER lines in the .lic file is missing the port number at he end of the line. For example :</p>
+<p><strong>SERVER <em>hostname</em> <em>hostid</em></strong></p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Amend the SERVER line to add the correct port number at the end. The correct entry would be :</p>
+<p><strong>SERVER <em>hostname</em> <em>hostid  portnum</em></strong></p>
+<p>It may help to refer to previous (working) license file, they should be the same.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p id="">signal 36, status 36</p></div></div></div></div>

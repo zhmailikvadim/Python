@@ -1,0 +1,51 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1"><span style="color: #ff0000;"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em></span></p>
+<p>When using shortbreak in PDS, Planned Order is scheduled into far future.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Supply Chain Management (SCM)</li>
+<li>SAP Advanced Planning and Optimization (SCM-APO)</li>
+<li>SAP enhancement package for SAP Supply Chain Management</li>
+<li>SAP enhancement package for SAP SCM, version for SAP HANA</li>
+<li>SAP Supply Chain Managment Production Planning and Detailed Scheduling (SCM-APO-PPS) </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p><strong>1. T-cd /SAPAPO/RES01</strong></p>
+<p>Set Resource.</p>
+<p>Set "Productive Time in H" as 15.<br/>Set "Break Duration" as 01:00:00(1 Hour).</p>
+<p> <img alt="breakduration.PNG" class="img-responsive" src="/documents/customerkba/inxkQfhAbYBXV7StlL8QJI3Y2SyK7W3Bg88AvgCXJvk" title="breakduration.PNG"/></p>
+<p><strong>2. T-cd /SAPAPO/CURTO_SIMU </strong></p>
+<p>Set PDS.</p>
+<p>There are 2 Operations in this PDS.<br/>Each Operation has an Activities.</p>
+<p>Activity 001000000001P has "Base Qty" as 1, "Dur. (V)" as 3600(seconds) and "Shortbreak" as 3600(seconds).<br/>Activity 002000000002P has "Base Qty" as 1, "Dur. (V)" as 3600(seconds) and "Shortbreak" as 3600(seconds).</p>
+<p>This means that creating 1 quantity of Planned Order by exploding from this PDS will take 3600s(1 hour).</p>
+<p><img alt="shorbreak1.PNG" class="img-responsive" src="/documents/customerkba/1QtR6M34qldX3CbhjEDRIq9vJ-zQyceT_3pBXxN2KeY" title="shorbreak1.PNG"/></p>
+<p><img alt="shorbreak2.PNG" class="img-responsive" src="/documents/customerkba/1TE_FxQW7feaUiV2SgHx38N3L5WR8C86dqrbvnmJJVo" title="shorbreak2.PNG"/></p>
+<p><strong>3. T-cd /SAPAPO/REST02</strong></p>
+<p>Check the Timestream of Resource is ending at 20.12.2019</p>
+<p><img alt="timestream.PNG" class="img-responsive" src="/documents/customerkba/4fnVphKmQg0ElJc-fhdJ9VwHFBIQRzUrFf62wtGT5_s" title="timestream.PNG"/></p>
+<p><strong>4. T-cd /SAPAPO/RRP3</strong></p>
+<p>Right Case: Create a Planned Order with quantity 15 in Product View.</p>
+<p>When this Planned Order has 15 quantities, the Op 0010 will take 15 hours and the Op 0020 will take 15 hours as well.<br/>Since we set the "Productive Time in H" as 15 hours and the "Break Duration" as 01:00:00(1 Hour) in Resource, both 2 operations will start from 08:00:00 and end at 24:00:00. <br/>The Break duration of activity 001000000001P will be the "Break Duration" of resource, which is 1 hour.<br/>And this break duration is not more than the "Shortbreak" of PDS.</p>
+<p>Hence the Planned Order will be scheduled at predetermined date successfully.</p>
+<p><img alt="plordright1.PNG" class="img-responsive" src="/documents/customerkba/-_IAe9_Oyyvqhd5EqXK1uOqq5Djs0-vmYbq3c0aLPe8" title="plordright1.PNG"/></p>
+<p><img alt="plordright2.PNG" class="img-responsive" src="/documents/customerkba/KFVeLi9R7umd6J3cWLi2UeFOrazRPirBrhgQj5h9GOc" title="plordright2.PNG"/></p>
+<p><strong>5. T-cd /SAPAPO/RRP3</strong></p>
+<p>Wrong Case: Create a Planned Order with quantity 16 in Product View.</p>
+<p>When this Planned Order has 16 quantities, the Op 0010 will take 16 hours and the Op 0020 will take 16 hours as well.<br/>Since we set the "Productive Time in H" as 15 hours and the "Break Duration" as 01:00:00(1 Hour) in Resource, both 2 operations' activities will not fit in 1 day when searching for capacity in resource.<br/>The Break duration of activity 001000000001P will more than 1 hour.<br/>And this break duration is more than the "Shortbreak" of PDS.</p>
+<p>Hence the Planned Order will NOT be scheduled at predetermined date successfully.<br/>It will be scheduled at the end of Timestream.</p>
+<p><img alt="plordwrong1.PNG" class="img-responsive" src="/documents/customerkba/NL2lB9NT1yJA0ZvuKg7Jsqarwbvpz_dDSqfX67uwdnc" title="plordwrong1.PNG"/></p>
+<p><img alt="plordwrong2.PNG" class="img-responsive" src="/documents/customerkba/foyES603OoZ9tJC-hB_jNHS16cVbbun79mj2v_O5iHU" title="plordwrong2.PNG"/></p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The "Shortbreak" duration of activities in PDS is so small. So during the explosion of PDS for Planned Order the "Shortbreak" criterion can not be met. The Planned Order will be scheduled after the end of timestream.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Unless there is particular business requirement, otherwise SAP recommends you to set "Shortbreak" as default 999.999.999.</p>
+<p><img alt="default1.PNG" class="img-responsive" src="/documents/customerkba/CZa94JavmEnjdExvtuRMXkUMlRMuG3v08qWhbtVCUBc" title="default1.PNG"/><img alt="default2.PNG" class="img-responsive" src="/documents/customerkba/ZQqF8FIjCfE2GT50mnM8wecgjdp3a5IH6zjx_woA0hs" title="default2.PNG"/></p>
+<p>After that, the scheduling of Planned Order will not fail.</p>
+<p><img alt="right1.PNG" class="img-responsive" src="/documents/customerkba/Rtb_DbEIfaSR0eeSNnaNUgziAFBqddk_mwulgmTZQoE" title="right1.PNG"/><img alt="right2.PNG" class="img-responsive" src="/documents/customerkba/LzULlvgJDfQuSlcYjg0J7KiGQQkKxg-hQ00qyl8NxBs" title="right2.PNG"/></p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="https://me.sap.com/notes/397989" target="_blank">397989</a> - PP/DS: Scheduling (Documentation)</p>
+<p><a href="https://me.sap.com/notes/1841557" target="_blank">1841557</a> - Tips and Hints: PDS Transfer</p>
+<p><a href="https://me.sap.com/notes/1957695" target="_blank">1957695</a> - Purchase Requisitions are created too far into the future</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Shortbreak; PDS; Scheduling</p></div></div></div></div>

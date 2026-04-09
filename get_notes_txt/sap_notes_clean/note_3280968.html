@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are running the <strong>FMLA Workbench </strong>transaction (PTFMLA) for an employee who had a break in service. For example, an employee who has been first hired in 2005, fired in 2006, and re-hired in 2014. When calculating the seniority of the employee, in order to determine the eligibility for the FMLA Request, you expect the system to consider only the employment after the re-hiring action. However, the standard system always considers all employment period when calculating the seniority.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PTFMLA, T7US_FMLA_RULE, V_T7US_FMLA_RULE, SENIO_DT, SAPMPTFMLA, Seniority</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Correction of Legal Function</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>A new field has been added to the <strong>Definition of FMLA Rules </strong>table view V_T7US_FMLA_RULE, found in<strong> </strong>IMG activity in Payroll &gt; Payroll: USA &gt; Absences &gt; Family and Medical Leave Act &gt; FMLA Guidelines. The inclusion of this new field allows you to determine the start date that should be used to determine the seniority of a given employee.</p>
+<p>To use the new functionality, you need to perform the following steps:</p>
+<ul>
+<li>
+<div>In transaction SM30, maintain Table/View V_T548Y, and create a new Date Type to be used for Seniority Start date for FMLA. This is step is optional, as you can re-use and existing date type for that purpose.</div>
+</li>
+<li>In Transaction SM30, maintain Table/View V_T7US_FMLA_RULE. In the Date Type for Seniority field, maintain the date type created/re-used in the previous step</li>
+<li>For the desired employees, maintain the <strong>Date Specifications</strong> (0041) Infotype. Create a new entry for the date type created or re-used in the previous steps. Set the earliest date to be used to determine seniority in the Date Field. For the example described in the Sympton section, for example, that date could be 01/01/2014.</li>
+</ul>
+<p><strong>List of objects delivered by this SAP Note:</strong></p>
+<ul>
+<li>New Field SENIO_DT in table definition T7US_FMLA_RULE and view V_T7US_FMLA_RULE</li>
+</ul>
+<p>As general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install a solution earlier, use the Note Assistant to implement the correction instruction.</p>
+<p>You can find more information about the Note Assistant in SAP Service Marketplace, under service.sap.com/note-assistant.</p></div></div></div></div>

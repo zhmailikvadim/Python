@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are facing the BDOC error &gt;P080 'Validity of role MKK must not be restricted' while replicating a BP between two systems. This only occurs between a certain time e.g 5pm to 7pm.</p>
+<p>The KBA <a href="https://me.sap.com/notes/1902462" target="_blank">1902462 </a>- Error "validity of role MKK must not be restricted" during delta replication from CRM to ERP has already been consulted.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Customer Relationship Management (CRM)</li>
+<li>SAP enhancement package for SAP CRM</li>
+<li>SAP enhancement package for SAP CRM, version for SAP HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>You are replicating a BP from a CRM system to an ECC system</li>
+<li>The BP you are replicating has role MKK</li>
+<li>You have tried corrections in the note: <a href="https://me.sap.com/notes/2342596" target="_blank">2342596 </a>- Time zone issue for valid from time when adding a new role for a BP.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>The &gt;P080 error message is used in the class CL_IM_VKK_PARTNER_ROLES and method CHECK</li>
+<li>In the method there is a check of the MKK's Valid_From date with the current users' system date</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li> Go to transaction SU01</li>
+<li> Enter the name for your RFCUSER</li>
+<li> Check the timezone for this user</li>
+<li> If the timezone is blank, please match the timezone to both systems</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Role MKK, Validity MKK, &gt;P080, &gt;P 080, CL_IM_VKK_PARTNER_ROLES, RFCUSER</p></div></div></div></div>

@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In all member states of the EU, a labor costs census is to be carried out for the 2020 fiscal year. The labor costs census is the structural statistics on the costs of employment of employees. It compiles, in accordance with international standards, detailed information on all components of labor costs. Only a portion of the employers (sample) complete the survey. These employers explicitly receive letters from the relevant State Statistics Office. You only have to pay attention to this SAP Note if you are one of the selected employers.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>RPCEHFD0, labor costs census, BAdI HRPAYDE_EHAK, SAPscript form HR_DE_EHAK_2020</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Legal change</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>With the year-end legal change Support Package 2020/21, the <em>labor costs census 2020</em> (report RPCEHFD0<em>)</em> is revised. You can find the report in the menu under "Human Resources -&gt; Payroll -&gt; Europe -&gt; Germany -&gt; Subsequent Activities -&gt; Other Periods -&gt; Lists/statistics -&gt; Labor Costs Census.</p>
+<p>In the Implementation Guide, you can make the necessary Customizing settings under "Payroll: Germany -&gt; Reporting and Statistics -&gt; Labor Costs Census". There you will also find further information.</p>
+<p><strong> </strong></p>
+<p><strong>Changes</strong></p>
+<p>Not much has changed with regard to content since the labor costs census (LCC) 2016. Most numbers of the key figures of the labor costs census 2016 have remained the same, that is, if you already had to submit the labor costs census 2016, you will probably not have too much Customizing effort with the labor costs census 2020.</p>
+<p>Differences:</p>
+<ul>
+<li>One difference is with the<strong> key figures</strong>: In the LCC 2016, the <em>costs of vocational education and training</em> were key figure 161 and the <em>recruitment costs and occupational clothing provided by the employer</em> were key figure 162. You could specify these values using the cumulation wage types 01 EHAK E161/E162 in the view V_T596J. In the LCC 2020, these two items have swapped their key figures. Check whether you have specified these cumulation wage types and adjust this accordingly for the LCC 2020.<br/></li>
+<li>Another difference is in the selection of <strong>electronic transmission types</strong>. In 2016, the data was only transferred to the IDEV portal as a CSV file. In 2020, there is also the transfer by XML file to eSTATISTIC.core. However, the latter is not supported by the report RPCEHFD0.<br/></li>
+<li>The structure of the <strong>CSV file</strong> has changed slightly in 2020. For example, the house number must now be reported in a separate value for the address of the company division. In 2016, the house number was still contained in the "Street" field.</li>
+</ul>
+<p>The differences mainly affect forms, structures, and coding. The correction instructions in this SAP Note contain the following adjustments:</p>
+<ul>
+<li>Adjustments of <strong>report <em>RPCEHFD0</em></strong> and of the documentation.<br/></li>
+<li>The adjustments in the <strong>Implementation Guide</strong>.<br/> </li>
+<li>The new <strong>SAPscript form <em>HR_DE_EHAK_2020</em></strong>.<br/> </li>
+<li>The new cumulation wage types for the key figures of LCC 2020.</li>
+</ul>
+<p><strong> </strong></p>
+<p><strong>Comments</strong></p>
+<p>Before you import the Support Package, the report generates the LCC 2016 - even if you select the fiscal year 2020. After you import the Support Package, the report generates the LCC 2020 - even if you select the fiscal year 2016.</p>
+<p>All entries should refer to the <strong>calendar year 2020</strong>, that is, data from payroll is based on the period from 1/1/2020 to 12/31/2020. Only use the specifications of your alternative fiscal year (on the selection screen) for entries for which no calendar year specifications exist. This should end by March 31, 2021 and include 12 months. - These are specifications that are specified using <em>external data</em> (view V_T5D3R) or are specified in the <em>personnel area reporting</em> (view V_T596M).</p>
+<p>In the explanations for the questionnaire, some of the key figures of the LCC 2020 are explicitly addressed in connection with coronavirus, reduced hours compensation, or infection protection law.</p>
+<ul>
+<li>The <strong>gross earnings total</strong> (key figure 120) includes supplementary contributions paid by the employer for reduced hours compensation - regardless of whether contractually agreed (individual or collective agreement) or voluntarily paid. The reduced hours compensation of the federal employment agency and reimbursable payments for days of absence due to quarantine in accordance with the German Infection Protection Act (so-called "Due date items") do not belong to the gross earnings total. - For the cumulation wage type E120, this means that the reimbursable RHC benefits - for example, the "RHC benefit" (/692) - are deducted from the total gross amount (/10E).<br/></li>
+<li><strong>Special payments</strong> (key figure 121) also include one-time tax-exempt aids due to coronavirus. - For cumulation wage type E121, this means that the tax-exempt and SI-exempt share of the coronavirus premium (/50S) is added.<br/></li>
+<li>In addition <strong>to the allowances for sick pay and other benefits of the employer</strong> (key figure 152), contractually agreed (individual or collective agreement) employer supplementary amounts for reduced hours compensation must also be reported. However, voluntary supplementary contributions for reduced working hours do not belong to this and are only to be reported in the gross earnings total.</li>
+</ul>
+<p> </p>
+<p>Import the specified Support Package and compare the cumulation wage types (view V_T596J, subapplication 01 EHAK) in the customer client with the settings in the delivery client.</p></div></div></div></div>

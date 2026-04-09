@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Upgrade using Software Update Manager (SUM) fails with error "CONVT_NO_NUMBER".</p>
+<p>Error symptom noticed in two phases PREP_EXTENSION/EHP_INCLUSION &amp; PREP_EXTENSION/UPLOAD_FIRST with error logs below:</p>
+<p>EHP_INCLUSION.LOG:</p>
+<pre>1EETQ235 Call of function module "SPDA_DISASSEMBLE_QUEUE" by RFC failed (error-status "3")<br/>2EETQ360 RFC of "SPDA_DISASSEMBLE_QUEUE" failed:<br/>2EETQ361 code/exception : 3<br/>2EETQ362 key : CONVT_NO_NUMBER2EETQ399 ######## cannot be interpreted as a number</pre>
+<p>Or,</p>
+<p>In phase PREP_EXTENSION/UPLOAD_FIRST, UPLOADFIRST.LOG contains below error lines:</p>
+<pre>1EETQ235 Call of function module "SPDA_PREPARE_PATCH" by RFC failed (error-status "3")<br/>2EETQ360 RFC of "SPDA_PREPARE_PATCH" failed:<br/>2EETQ361 code/exception : 3<br/>2EETQ362 key : CONVT_NO_NUMBER<br/>2EETQ399 H<br/>2EETQ399 INFOV cannot be interpreted as a number<br/>4 ETQ010 Date &amp; Time:<br/>1EETQ399 Last error code set is: RFC system 'XXX' nr '0X' function 'SPDA_PREPARE_PATCH'<br/>1EETQ399 RFC failed with code 3<br/>1EETQ399Xkey CONVT_NO_NUMBER:<br/>1EETQ399XH<br/>1EETQ399XINFOV cannot be interpreted as a number<br/>1EETQ204 Upgrade phase "UPLOAD_FIRST" aborted with severe errors ("")</pre>
+<p>Generated ST22 dump:</p>
+<pre>Category ABAP programming error<br/>Runtime Errors CONVT_NO_NUMBER<br/>Except. CX_SY_CONVERSION_NO_NUMBER<br/>ABAP Program CL_SPDA_EPS_FILE_READER=======CP<br/>Application Component BC-UPG-OCS</pre>
+<pre></pre>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Software Update Manager (SUM)</li>
+<li>SAP Netweaver AS ABAP</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>SUM in phase PREP_EXTENSION/EHP_INCLUSION or UPLOAD_FIRST is retrieving and defining the queue from packages found in downlaods directory which is stuck due to issues while Upload/Check/Disassemble the package.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Follow below steps to solve the issue.</p>
+<p>1. Reset current SUM following steps from respective SUM guide.<br/>2. Take a backup of &lt;DIR_TRANS&gt;\EPS\in<br/>3. Remove all the files under &lt;DIR_TRANS&gt;\EPS\in<br/>4. Download only the packages that are needed for this upgrade.<br/>5. Extract a new SUM and start the upgrade from beginning.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id=""> For more information about upgrade/update troubleshooting, you can also refer to <a href="https://wiki.scn.sap.com/wiki/display/SL/System+Upgrade+And+Update" target="_blank">our System Upgrade and Update WIKI .</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>UPLOAD_FIRST, CL_SPDA_EPS_FILE_READER=======CP, SPDA_PREPARE_PATCH, SUM, DVD, Software Update Manager, upgrade, update, PREP_EXTENSION, PREP_EXTENSION/EHP_INCLUSION, EHP_INCLUSION, PREP_EXTENSION/UPLOAD_FIRST, upload, Check, Disassemble, package, EPS/in, DIR_TRANS, CONVT_NO_NUMBER, cannot be interpreted as a number, SPDA_DISASSEMBLE_QUEUE, error-status "3", code/exception : 3<br/><em><em></em></em></p></div></div></div></div>

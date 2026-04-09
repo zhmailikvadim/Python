@@ -1,0 +1,47 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Views which query uses a common table expression (CTE) should be dropped and created again when the underlying table has been recreated.</li>
+<li>SAP PowerDesigner only drops then recreates the table.</li>
+<li>If the view has not been created with a CTE, it drops the view and the table, then recreates the table and the view.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP PowerDesigner (PD) 16.6 SP02</li>
+<li>IBM DB2 Version 11 for z/OS</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Select <em>File &gt; New Model</em> to open the New Model dialog.</li>
+<li>Select <em>Physical Data Model</em> in the left-hand pane.</li>
+<li>Select <em>Physical</em> <em>Diagram</em> in the right-hand pane.</li>
+<li>Select <em>IBM DB2 Version 11 for z/OS</em> in the list DBMSs.</li>
+<li>Click <em>OK</em>.</li>
+<li>Click the <em>Table</em> tool from the toolbox to create one table <em>TABLE_1</em>.</li>
+<li>Double-click the table to edit it, click the <em>Columns</em> tab to create one column<em> COLUMN_1</em>, and click <em>OK</em>.</li>
+<li>Click the <em>View</em> tool from the toolbox to create one view <em>VIEW_1</em>.</li>
+<li>Double-click the view to edit it, click the <em>SQL Query</em> tab to enter the following code example:</li>
+</ol>
+<p style="padding-left: 60px;"><em>WITH CTE (COLUMN_1) AS</em><br/><em>   (SELECT COLUMN_1 FROM TABLE_1)</em><br/><em>SELECT COLUMN_1 FROM CTE</em></p>
+<ol start="10">
+<li>Click <em>OK</em>.</li>
+<li>Select <em>File &gt; Save As</em>, and select<em> Archived PDM (bin)</em> or<em> Archived PDM (xml)</em> in the Save As Type list.</li>
+<li>Type a file name, and click <em>Save</em>.</li>
+<li>Double-click the table to edit it, and click the <em>Columns</em> tab to add a second column COLUMN_2.</li>
+<li>Click <em>OK</em> to close the property sheet.</li>
+<li>Select <em>Database &gt; Apply Model Changes to Database</em>.</li>
+<li>Enter a destination directory and file name for the script file.</li>
+<li>Select the <em>Using an archive model</em> radio button to specify how PowerDesigner will determine the changes to apply.</li>
+<li>Click the <em>Select File</em> tool to browse to open the archived model saved at step 12.</li>
+<li>Select the <em>Always use create statements</em> option, and click <em>OK</em>.</li>
+<li>The Database Synchronization window displays the anticipated result. <br/><br/><img alt="KBA 2417033.png" class="img-responsive" src="/documents/customerkba/h_We3uPDExSJFPKuosS9FdVPtH4rI_RcI_F5863-V8M" title="KBA 2417033.png"/><br/><br/>Click <em>OK</em> to accept changes.</li>
+<li>Edit the generated file:</li>
+</ol>
+<p style="padding-left: 60px;"><em>--==============================================================</em><br/><em>-- DBMS name: IBM DB2 Version 11 for z/OS</em><br/><em>--==============================================================</em><br/><br/><em>drop table TABLE_1;</em><br/><br/><em>create table TABLE_1 (</em><br/><em>   COLUMN_1   CHAR(10),</em><br/><em>   COLUMN_2   CHAR(10)</em><br/><em>);</em></p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The issue has been identified and logged under<strong> CR 804995</strong>. Its description reads, "DB2: View with a CTE is not recreated when the underlying table is recreated".</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Upgrade to SAP PD 16.6 SP05 PL02 or higher where SAP <strong>CR 804995</strong> is fixed for IBM DB2 Version 11 for z/OS.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>KBA <a href="https://me.sap.com/notes/3434651" target="_blank">3434651</a> - A blank script is generated after modifying the CTE expression of a DB2 view</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>db2mvs, associated, sql, 804995, CR804995, CR#804995</p></div></div></div></div>

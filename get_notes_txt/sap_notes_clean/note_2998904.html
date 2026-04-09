@@ -1,0 +1,42 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">On a Windows platform, a Java agent and supporting software are installed on the customer’s system, and the Java agent is consumed by SAP Analytics Cloud to support the following features:</p>
+<div class="longtext">
+<div class="longtext">
+<div class="longtext">
+<ul>
+<li>Acquire data from On-Premise SAP BW systems</li>
+<li>Acquire data from On-Premise SAP BPC MS systems</li>
+<li>Acquire data from On-Premise SBOP 4.1 and 4.2 UNX Universe</li>
+<li>Acquire data from On-Premise SAP ERP Central Component 6.0</li>
+<li>Acquire data from On-Premise SAP HANA views</li>
+<li>Acquire data from On-Premise JDBC Datasources</li>
+<li>Acquire data from On-Premise File Server</li>
+<li>Export data to On-Premise File Server</li>
+</ul>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>With the 2021.1 release of SAP Analytics Cloud, SAP Analytics Cloud agent’s minimum version remains at 1.0.75, with the following exceptions:</li>
+<ul>
+<li>If you require data acquisition from SAP ERP / SQL Database, the minimum version is 1.0.99.</li>
+<li>If you require data acquisition from SAP Universe (UNX), the minimum version is 1.0.91.</li>
+<li>If you require data acquisition from SAP Business Warehouse (BW), the minimum version is 1.0.233.</li>
+<li>If you require data acquisition from an SAP HANA view, the minimum version is 1.0.235.</li>
+<li>If you require data acquisition from File Server, you need to upgrade to version 1.0.248.</li>
+<li><strong>Note</strong>: Although it is not required, you can upgrade to the agent version 1.0.303, no matter what data acquisition type you use. Do this to take advantage of updates made to SAP Analytics Cloud agent.</li>
+</ul>
+<li>Changes:</li>
+<ul>
+<li>Vulnerability upgrades</li>
+<li>Fixing timeout issue for BW</li>
+<li>Improving testing</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ol>
+<li>Download SAP Analytics Cloud Agent Simple Deployment Kit from <a href="https://launchpad.support.sap.com/#/softwarecenter" target="_blank">SAP Software Downloads</a>.</li>
+<li>Unzip the contents to your local file system, and follow the instructions in the README.txt included in the .zip, and the Post-Setup Guide available in the deployment folder.</li>
+<li>Please upgrade to this version at the earliest time as this version contains an improvement for better handling of large data volume for BW acquisitions, and please ensure that Tomcat has at least 4GB of memory. Please refer to this SAP Note to increase the agent Tomcat memory. <a href="/notes/2732879" target="_blank" title="2732879  - Tomcat Edit Service Configuration Tool for Tomcat7_SACAgent">2732879 - Tomcat Edit Service Configuration Tool for Tomcat7_SACAgent</a></li>
+</ol></div></div></div></div>

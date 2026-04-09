@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are running regular payroll for current period and payment amount for bank transfer (wage type /559) is rounded correctly as you expected. <br/>But if execute the payroll run with retroactive accounting of the previous period the rounded amount in /559 is different.   <br/><br/>For example, employee has been hired in 01 period with salary 104 000 RUB, rounding is customized to 100 RUB:<br/>...<br/>Payroll data in 03 period: <br/>/550 Statutory net pay    87.034,00<br/>/559 Bank transfer          87.100,00<br/>/560 Net pay                   87.104,00<br/>/56A Claim of company            4,00<br/>/56B Claim of company          70,00<br/><br/>Payroll data in 04 period:<br/>/550 Statutory net pay    87.035,00<br/>/559 Bank transfer          87.000,00   &lt;-- rounding is ok<br/>/560 Net pay                   87.039,00<br/>/56A Claim of company          39,00<br/>/56B Claim of company            4,00<br/><br/>Payroll data in 04 period with retro-accounting of 03 period:<br/>/550 Statutory net pay    87.035,00<br/>/559 Bank transfer          86.900,00    &lt;-- rounding is different<br/>/560 Net pay                   86.969,00<br/>/56A Claim of company          69,00<br/>/56B Claim of company            4,00</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PC00_M33_CALC HRUCALC0_CE RU0C /551 /552 RURND ORT_PERSON</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>
+<div>This SAP Note is relevant only for Russia and it affects only the Concurrent Employment (CE) localized payroll solution.</div>
+</li>
+<li>Value of rounding rule for bank transfers (processed in the payroll rule RU64) is specified in the feature 33RND.</li>
+<li>XNET, XRETR, RUPAY functions are used to evaluate final payments includes retro runs and generate BT_PERSON records. RUPAY function is responsible for rounding of bank transfers wage type /559 and generates /56A and /56B wage types.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>As a general rule, SAP recommends that you install a solution by applying a Support Package.</li>
+</ul>
+<ul>
+<li>However, if you need to install a solution earlier, you must carry out manual activities that are valid for your release.</li>
+</ul>
+<p> </p>
+<p><strong>Version History</strong><br/><br/>v.1 - Released for Customer</p></div></div></div></div>

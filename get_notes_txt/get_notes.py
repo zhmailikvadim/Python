@@ -1,22 +1,116 @@
 import time
 import os
+import random
+import pickle
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from bs4 import BeautifulSoup
 
-# Пути и значения
+# ---------- НАСТРОЙКИ ----------
 chromedriver_path = r"d:\Fiori\bot\chromedriver.exe"
 totp_url = "https://totp.danhersam.com/"
 target_url = "https://sappoint.ftp.sh:1443"
 secret_key = "XB3G3GIAB5SJV7DLRBPBLVPVLOHBTLR5"
 token_prefix = "243225"
 
+START_ID = 2000000
+END_ID = 3736846
+OUTPUT_DIR = "sap_notes_clean"
+TIMEOUT = 30
+REQUIRED_KEYWORD = "Symptom"
+
+PROGRESS_FILE = os.path.join(OUTPUT_DIR, "progress.pkl")
+
+def extract_note_content(html):
+    """Извлекает содержимое ноты из HTML страницы портала"""
+    soup = BeautifulSoup(html, 'html.parser')
+    content_div = soup.find('div', class_='longText')
+    if not content_div:
+        content_div = soup.find('div', {'id': '__layout4'})
+    if content_div:
+        return str(content_div)
+    return None
+
+def is_valid_note(content_html):
+    """Проверяет, содержит ли HTML ноты слово Symptom"""
+    if not content_html:
+        return False
+    return REQUIRED_KEYWORD.lower() in content_html.lower()
+
+def is_note_already_downloaded(note_id):
+    """Проверяет, существует ли уже файл для данного ID (с любым суффиксом)"""
+    filename_clean = os.path.join(OUTPUT_DIR, f"note_{note_id}.html")
+    filename_no_symptom = os.path.join(OUTPUT_DIR, f"note_{note_id}_no_symptom.html")
+    return os.path.exists(filename_clean) or os.path.exists(filename_no_symptom)
+
+def download_note(driver, note_id):
+    """Загружает страницу и сохраняет файл с соответствующим именем"""
+    url = f"{target_url}/#/Notes/{note_id}"
+    print(f"Переход к ноте {note_id}...")
+    driver.get(url)
+
+    try:
+        WebDriverWait(driver, TIMEOUT).until(
+            lambda d: len(d.find_element(By.TAG_NAME, "body").text.strip()) > 100
+        )
+    except Exception:
+        print(f"  Таймаут загрузки страницы для {note_id}")
+        return
+
+    time.sleep(3)
+
+    full_html = driver.page_source
+    clean_content = extract_note_content(full_html)
+
+    if not clean_content:
+        filename = os.path.join(OUTPUT_DIR, f"note_{note_id}_no_symptom.html")
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(f"<!-- No content extracted for note {note_id} -->\n{full_html}")
+        print(f"  Сохранён заглушка {filename}")
+        return
+
+    if is_valid_note(clean_content):
+        filename = os.path.join(OUTPUT_DIR, f"note_{note_id}.html")
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(clean_content)
+        size = os.path.getsize(filename)
+        print(f"  ✅ Сохранена нота {note_id} (содержит {REQUIRED_KEYWORD}) ({size} байт)")
+    else:
+        filename = os.path.join(OUTPUT_DIR, f"note_{note_id}_no_symptom.html")
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(clean_content)
+        size = os.path.getsize(filename)
+        print(f"  ⚠️ Нота {note_id} не содержит '{REQUIRED_KEYWORD}' – сохранена как {filename} ({size} байт)")
+
+def load_progress():
+    """Загружает список ID, которые ещё предстоит обработать"""
+    if os.path.exists(PROGRESS_FILE):
+        with open(PROGRESS_FILE, 'rb') as f:
+            remaining_ids = pickle.load(f)
+        print(f"Загружен прогресс: осталось {len(remaining_ids)} ID")
+        return remaining_ids
+    else:
+        # Генерируем все ID в диапазоне
+        all_ids = list(range(START_ID, END_ID + 1))
+        # Удаляем уже скачанные
+        remaining = [nid for nid in all_ids if not is_note_already_downloaded(nid)]
+        # Перемешиваем
+        random.shuffle(remaining)
+        print(f"Новый запуск: всего ID в диапазоне {len(all_ids)}, уже скачано {len(all_ids)-len(remaining)}, осталось {len(remaining)}")
+        return remaining
+
+def save_progress(remaining_ids):
+    """Сохраняет список оставшихся ID"""
+    with open(PROGRESS_FILE, 'wb') as f:
+        pickle.dump(remaining_ids, f)
 
 def run():
-    """Основная точка входа для бота"""
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
     chrome_options = Options()
     chrome_options.add_experimental_option("detach", True)
     chrome_options.add_argument('--ignore-certificate-errors')
@@ -27,47 +121,67 @@ def run():
     service = Service(chromedriver_path)
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
-
-START_ID = 3736846
-COUNT = 30
-OUTPUT_DIR = "selenium_notes"
-DELAY = 3  # секунды на загрузку страницы
-
-
-def setup_driver():
-    options = Options()
-    options.add_argument("--headless")  # убрать окно браузера
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    # Если нужен реальный браузер с отображением, закомментируйте headless
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-    return driver
-
-
-def download_note(driver, note_id):
-    url = f"https://sappoint.ftp.sh:1443/#/Notes/{note_id}"
-    print(f"Загрузка ID {note_id}...")
-    driver.get(url)
-    time.sleep(DELAY)  # ждём рендеринга
-    page_source = driver.page_source
-    filename = os.path.join(OUTPUT_DIR, f"note_{note_id}.html")
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(page_source)
-    print(f"[OK] Сохранён {filename}")
-    return True
-
-
-def main():
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-    driver = setup_driver()
     try:
-        for i in range(COUNT):
-            note_id = START_ID - i
+        # ---------- АВТОРИЗАЦИЯ ----------
+        print("🔐 Выполняем вход...")
+        driver.get(totp_url)
+        driver.maximize_window()
+        input_field = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "#app > div > div:nth-child(2) > div > input"))
+        )
+        input_field.clear()
+        input_field.send_keys(secret_key)
+        time.sleep(1)
+        copy_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "#clipboard-button > img"))
+        )
+        copy_button.click()
+        time.sleep(1)
+        token = driver.execute_script("return navigator.clipboard.readText();")
+        full_token = token_prefix + token
+        first_tab = driver.window_handles[0]
+        driver.execute_script("window.open('');")
+        driver.switch_to.window(driver.window_handles[1])
+        driver.get(target_url)
+        login_field = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "loginPage--userID-inner"))
+        )
+        login_field.send_keys("v.zhmajlik@beloil.by")
+        password_field = driver.find_element(By.ID, "loginPage--userPassword-inner")
+        password_field.send_keys("B4@$D!&y")
+        token_field = driver.find_element(By.ID, "loginPage--totp-inner")
+        token_field.clear()
+        token_field.send_keys(full_token)
+        login_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "#__button0-BDI-content"))
+        )
+        login_button.click()
+        driver.switch_to.window(first_tab)
+        driver.close()
+        time.sleep(10)
+        driver.switch_to.window(driver.window_handles[0])
+
+        # ---------- СКАЧИВАНИЕ В СЛУЧАЙНОМ ПОРЯДКЕ ----------
+        remaining_ids = load_progress()
+        total = len(remaining_ids)
+
+        for idx, note_id in enumerate(remaining_ids):
+            print(f"\n[{idx+1}/{total}] Обработка ID {note_id}")
             download_note(driver, note_id)
+            # Сохраняем прогресс после каждого ID (на случай прерывания)
+            save_progress(remaining_ids[idx+1:])
+            time.sleep(1)
+
+        print("\n🎉 Все ID в диапазоне обработаны!")
+        # Удаляем файл прогресса после успешного завершения
+        if os.path.exists(PROGRESS_FILE):
+            os.remove(PROGRESS_FILE)
+
+    except Exception as e:
+        print(f"Критическая ошибка: {e}")
+        driver.save_screenshot('fatal_error.png')
     finally:
         driver.quit()
-    print("Готово.")
-
 
 if __name__ == "__main__":
-    main()
+    run()

@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>While performing BW DAP (Data Archiving Process) to archive data to SAP IQ database, the job failed with the following errors reported in the SM37 log:   </li>
+</ul>
+<p style="padding-left: 60px;"><strong>[IQ Error SQL-131:42000][Sybase IQ]Syntax error near '(end of line)' on line 1</strong></p>
+<ul>
+<li>The related dev_w* trace file reports the offending SQL statement:</li>
+</ul>
+<p style="padding-left: 60px;">C ERROR: -1 in function ExecuteAndFlush (SQLExecDirect) [line <a href="/notes/15453" target="_blank">15453</a>]<br/>C (-131) [<a href="/notes/42000" target="_blank">42000</a>] [Sybase][ODBC Driver][Sybase IQ]Syntax error near '(end of line)' on line 1<br/>C DbSlExecute - Error 99 (dbcode -131) on DDLExecute<br/>C <strong>DbSlExecute - &lt;ALTER TABLE "&lt;table_name&gt;" MOVE PARTITION "PMAX" TO "" &gt;</strong><br/>C dbdssyb: DBSL99 SQL-131<br/>C [IQ Error SQL-131:<a href="/notes/42000" target="_blank">42000</a>][Sybase IQ]Syntax error near '(end of line)' on line 1<br/>B ***LOG BY2=&gt; sql error -131 performing EXE [dbds 670]<br/>B ***LOG BY0=&gt; [IQ Error SQL-131:<a href="/notes/42000" target="_blank">42000</a>][Sybase IQ]Syntax error near '(end of line)' on line 1 [dbds 670]<br/>L Begin of BtcSetFinalStepStatus: jobname=BI_ARCH-xxxxxxxx , jobcount=xxxxxxx</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP IQ 16.0</li>
+<li>SAP NetWeaver 7.5 (Business Warehouse)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p id="">The dbspace destination is missing in the "alter table ... move partitions ... " statement. No default dbspace has been assigned neither to the NLS connection parameter DEFAULT_DBSPACE nor to the PUBLIC IQ database option default_dbspace.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>Add the <strong>DEFAULT_DBSPACE</strong> option in the <strong>RSDANLCON</strong> connection setting (several parameters assignments have to be separated by a semicolon.): <br/><em>DEFAULT_DBSPACE=&lt;name of a write-enabled dbspace&gt;, e.g.DEFAULT_DBSPACE=USER0001". </em></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id=""><a href="https://www.sap.com/documents/2013/03/d2ff3a4c-577c-0010-82c7-eda71af511fa.html" target="_blank">First Guidance SAP NLS with IQ 16.x</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>NLS, IQ, partition, move, DEFAULT_DBSPACE, default_dbspace, dbspace</p></div></div></div></div>

@@ -1,0 +1,79 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">Cannot import extension package in SAP Business One Extension Manager after you upgrade from SAP Business One 9.0, version for SAP HANA to SAP Business One 9.1, version for SAP HANA.</p><h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3><p><strong>Scenario:</strong></p>
+<ol>
+<li>Upgrade company DB from SAP Business One 9.0, version for SAP HANA to SAP Business One 9.1, version for SAP HANA.</li>
+<li>Open SAP Business One Extension Manager and import your extension package.</li>
+</ol>
+<p><strong>Expected Result:</strong></p>
+<p>Upload extension package successfully.</p>
+<p><strong>Actual Result:</strong></p>
+<p>Cannot upload extension package. Error occurs: "System error; check log for details"</p>
+<p><strong>Note:</strong></p>
+<p>The issue cannot be reproduced if the company DB is created by SAP Business One 9.1, version for SAP HANA. </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Application error.</p><h3 class="section" data-toc-skip="" id="Solution">Solution</h3><p>SAP intends to provide patches in order to solve described problem.</p>
+<p>The section Reference to <strong>related Notes</strong> below will list the specific Patches when available.</p>
+<p>The corresponding <strong>Info</strong> file of Patches on SAP Service Marketplace will show the correction / SAP Note number also.</p>
+<p>Be aware that these references can only be set at Patch release date.</p>
+<p>SAP will deliver Patches only for selected Releases at its own discretion, based on the business impact and the complexity of the implementation.</p>
+<p><strong>Workaround:</strong></p>
+<ol>
+<li>Open SAP HANA studio and check if the table "EXTENSIONS" on Schema "SLDDATA" has any record.</li>
+<li>If no record, check whether the type of the "AUXILIARYPROPERTIES" column is "Text".</li>
+<li>If the type is "Text", run the following query string on the SQL console to drop and recreate table "EXTENSIONS", then check again if the type of the "AUXILIARYPROPERTIES" column is "CLOB".</li>
+<li>Once the type is "CLOB", reopen the extension manager and upload the extension package again.</li>
+</ol>
+<p><strong>DROP</strong> <strong>SEQUENCE</strong> SEQ_Extensions_Id;</p>
+<p><strong>DROP</strong> <strong>TABLE</strong> Extensions;</p>
+<p><strong>CREATE</strong> <strong>COLUMN</strong> <strong>TABLE</strong> Extensions(</p>
+<p>       Id <strong>int</strong> <strong>NOT</strong> <strong>NULL</strong>,</p>
+<p>       Name <strong>nvarchar</strong>(250) <strong>NOT</strong> <strong>NULL</strong>,</p>
+<p>       "Namespace" <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       "Version" <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       Vendor <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       "Type" <strong>nvarchar</strong>(250) <strong>NOT</strong> <strong>NULL</strong>,</p>
+<p>       "Group" <strong>char</strong>(1) <strong>NULL</strong>,</p>
+<p>       ExecutableFile <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       "Signature" <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       AutoAssign <strong>char</strong>(1) <strong>NULL</strong>,</p>
+<p>       ContactInformation <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       ForceFlag <strong>char</strong>(1) <strong>NULL</strong>,</p>
+<p>       InstallationPackage <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       InstallationParameters <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       InstallationParamsFile <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       InstallSignature <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       InstallationParamsFileSign <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       InstallEstimatedTime <strong>int</strong> <strong>NULL</strong>,</p>
+<p>       UpgradePackage <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       UpgradeParameters <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       UpgradeParamsFile <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       UpgradeSignature <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       UpgradeParamsFileSign <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       UpgradeEstimatedTime <strong>int</strong> <strong>NULL</strong>,</p>
+<p>       Uninstaller <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       UninstallationParameters <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       UninstallationParamsFile <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       UninstallSignature <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       UninstallationParamsFileSign <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       UninstallEstimatedTime <strong>int</strong> <strong>NULL</strong>,</p>
+<p>       SelfUpgrade <strong>char</strong>(1) <strong>NULL</strong>,</p>
+<p>       SilentInstall <strong>char</strong>(1) <strong>NULL</strong>,</p>
+<p>       SilentUpgrade <strong>char</strong>(1) <strong>NULL</strong>,</p>
+<p>       SilentUninstall <strong>char</strong>(1) <strong>NULL</strong>,</p>
+<p>       Visible <strong>char</strong>(1) <strong>NULL</strong>,</p>
+<p>       IsBuiltin <strong>char</strong>(1) <strong>NULL</strong>,</p>
+<p>       Path <strong>nvarchar</strong>(2000) <strong>NULL</strong>,</p>
+<p>       AuxiliaryProperties <strong>clob</strong> <strong>NULL</strong>,</p>
+<p>       BindingObject <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       Status <strong>char</strong>(1) <strong>NULL</strong>,</p>
+<p>       InstallationPackageStream <strong>BLOB</strong> <strong>NULL</strong>,</p>
+<p>       X64ExecutableFile <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       X64Signature <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       AddOnName <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       DatabaseType <strong>int</strong> <strong>NOT</strong> <strong>NULL</strong> <strong>DEFAULT</strong> 6,</p>
+<p>       XAppName <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       XAppDUName <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       ExecutableDir <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       X64ExecutableDir <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>  XAppVendor <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>  XAppPackageName <strong>nvarchar</strong>(250) <strong>NULL</strong>,</p>
+<p>       <strong>PRIMARY</strong> <strong>KEY</strong> (Id)</p>
+<p>);</p>
+<p><strong>CREATE</strong> <strong>SEQUENCE</strong> SEQ_Extensions_Id MINVALUE 1 INCREMENT <strong>BY</strong> 1 <strong>NO</strong> MAXVALUE;</p><h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3><p>extension manager, upload, extension package</p></div></div></div></div>

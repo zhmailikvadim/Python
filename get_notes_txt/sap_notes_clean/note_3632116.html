@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">On HDB, expert function <strong>List open db transactions</strong> (report <strong>/NZT/SHOW_DB_LOCKS_WP</strong>) runs very long and may time out. If it finishes, the output may have many identical lines.</p>
+<p>If, for example, a single transaction updates &lt;n&gt; rows of table &lt;a&gt;, then the output will include &lt;n&gt; lines with the same information, one line per row lock. However, there is no added value in listing all row locks held by a single transaction on a table.</p>
+<p>After implementing this note, the result set will only include one line per table and transaction. In the above example, there would one single row for table &lt;a&gt; in the result set.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">downtime minimization tool for SAP S/4HANA, NZDT</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Any of the following add-on support packages is installed in your system landscape:</p>
+<ul>
+<li>NZDT 1.0 SP02</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Required Action</strong></p>
+<p>In order for this note correction to be effective, the note must be implemented before:</p>
+<ul>
+<li>expert function <strong>List open db transactions</strong> (report <strong>/NZT/SHOW_DB_LOCKS_WP</strong>) is used.</li>
+</ul>
+<p>Implement the correction instructions in transaction SNOTE on the following systems of your system landscape:</p>
+<ul>
+<li>Sender system</li>
+<li>Receiver system</li>
+</ul></div></div></div></div>

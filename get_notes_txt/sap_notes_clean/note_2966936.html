@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">If you run report /UI5/UPD_ODATA_METADATA_CACHE, there are next error messages.</p>
+<p>     Service has errors: /sap/opu/odata/sap/FAR_CUSTOMER_LINE_ITEMS<br/>     An exception was raised</p>
+<p>     Service has errors: /sap/opu/odata/sap/MD_PRODUCT_OP_SRV/<br/>     An exception was raised</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>Fiori Launchpad</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>Run report /UI5/UPD_ODATA_METADATA_CACHE</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>These two service which raise exception has other OData services dependencies so they will not be accounted for Context token calculation.</p>
+<p>     1. FAR_CUSTOMER_LINE_ITEMS has dependency with FARP_VALUE_HELPS_SRV.<br/>     2. MD_PRODUCT_OP_SRV has dependency with LO_VCHCLF.</p>
+<p>If an OData service is extended by another OData service and an entry is present  table /IWBEP/L_MGW_MDE,  this exception is valid and can be ignored.</p>
+<p>If the OData service has  system alias other than LOCAL , you will have to check for the table in the backend system(System Alias-Double click and do a remote logon).</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>You can ignore these exceptions as they are valid and expected.</p></div></div></div></div>

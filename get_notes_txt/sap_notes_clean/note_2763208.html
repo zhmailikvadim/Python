@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are migrating price lists using the migration tool, however in the simulation step you receive the error:</p>
+<p>"The combination of context elements is not supported"</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Business ByDesign</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Go to the Business Configuration work center.</li>
+<li>Go to the Implementation Projects view.</li>
+<li>Click on Open Activity List.</li>
+<li>Search and open the activity Migration of Price Lists.</li>
+<li>Open the link Migrate Price Lists Using the Migration Tool.</li>
+<li>On the new screen, select the migration file and click Execute Migration.</li>
+<li>Select Execute Migration Step by Step.</li>
+<li>In the simulation step, the error "The combination of context elements is not supported" is shown.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>For the migration of price lists, certain fields should not be maintained in the template depending on the type of price list being imported (in some cases even if the field is marked as mandatory in the template)</p>
+<p>As example:</p>
+<ul>
+<li>For Price Lists for specific accounts, the Account ID field in the Items sheet should not be populated as it is filled in the General sheet.</li>
+<li>For Price Lists where specific product IDs are defined in the Items sheet of the template, the Product Category ID field in the Items sheet should not be populated.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Please adjust the template according to the type of price list being imported.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="https://help.sap.com/viewer/0635ec3491974ad988be05d6b1dcf734/2008/en-US/2da65ded722d1014b7a1ce13b9e189d3.html" target="_blank">Help Center Document: Configuration: Migration of Discount Lists</a></p>
+<p><a href="https://me.sap.com/notes/2030884" target="_blank">2030884 - Error "The combination of context elements is not supported" During Migration of Price List</a></p>
+<p><a href="https://me.sap.com/notes/2774933" target="_blank">2774933 - Error Message "The combination of context elements is not supported" During Migration of Price List</a></p>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Price Lists, Migration, Descriptions, Business Configuration, Error</p></div></div></div></div>

@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When login EDS portal with the correct username and password, you still see the error message "<em>Incorrect Username Or Password</em>".</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">You are working in an environment where Service Layer and Electronic Document Service are installed.</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p><strong>Prerequisites</strong>:</p>
+<p>You are using <em>Electronic Documents Service</em> (EDS).</p>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Open EDS portal.</li>
+<li>Enter the correct username and password.</li>
+<li>Click the "<em>Login</em>" button.</li>
+</ol>
+<p><strong>Actual Result</strong>:</p>
+<p>Logon to EDS fails and the error message "<em>Incorrect Username Or Password</em>" displays.</p>
+<p>Check the <em>SLClient-1.log</em> from EDS log folder and you can see one of the following error messages:</p>
+<p>"<em>System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.</em>"</p>
+<p>"<em>System.Security.Authentication.AuthenticationException: The remote certificate was rejected by the provided RemoteCertificateValidationCallback.</em>"</p>
+<p>"<em>NotTimeValid: certificate has expired</em>"</p>
+<p>"<em>The remote certificate has not been verified.</em>"</p>
+<p><strong><strong>Expected </strong>Result</strong>:</p>
+<p>Logon to EDS is successful.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The SLD certificate is not valid any more.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>To know more information about certificate, please check the B1 Admin guide, sections "<a href="https://help.sap.com/docs/SAP_BUSINESS_ONE_ADMIN_GUIDE_SQL/f6fb230cc90949d8b66586a39189992b/25698b924a4a49c299d603da313ea758.html?version=10.0_SP_2311&amp;q=Preparing+Certificates+for+HTTPS+Services" rel="noopener" target="_blank">Preparing Certificates for HTTPS Services</a>" and "<a href="https://help.sap.com/docs/SAP_BUSINESS_ONE_ADMIN_GUIDE_SQL/f6fb230cc90949d8b66586a39189992b/662a3544675c421c85b520fab83a01cc.html?version=10.0_SP_2311&amp;q=Security+Certificate+Verification+During+SSL+Communication%22" rel="noopener" target="_blank">Security Certificate Verification During SSL Communication</a>".</p>
+<p>To obtain a functional self-signed cert, please check SAP Note <a href="/notes/3537539" target="_blank">3537539 - SAP Business One requires a valid SSL certificate</a>.</p>
+<p>Use <em>Reconfiguration</em> option from Server Component <em>Setup</em> Wizard to update the SLD certificate.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>certificate, password, EDS, expired</p></div></div></div></div>

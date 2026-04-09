@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">During the execution of a periodic reposting, the error message "The initial value is not valid for characteristic &amp;" (GM094) appears in the log.</p>
+<p>Statistical orders or WBS elements are defined as receivers in the cycle, but account assignment objects of the type "Cost Center" are not used as senders or receivers in any cycle segment.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Transactions: KSW5, KSWB<br/>Program: ALxxyyyR</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The resolution of the statistical receiver double account assignment with statistical orders or statistical WBS elements requires the derivation of the actual cost center to be posted to as defined in the relevant master record. However, since no account assignment objects of the type "Cost Center" are used in the entire cycle, important internal data structures no longer contain the field "Cost Center". The check for the existence of the actual cost center to be posted to therefore takes place with the initial value, resulting in the aforementioned error message.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>Workaround,: Define the field "Cost Center" with a non-existent cost center in any segment - as a sender or receiver.</li>
+<li>
+<div class="Standardabsatz">To permanently correct the runtime behavior of the periodic reposting, please carry out the following customizing change:<br/><br/>Call transaction SM30 for the table/view V_T811I.<br/>Choose "No Restrictions" (default setting) for the data range and choose "Edit".<br/>On the next screen, choose the "Position" button to position the screen on the table entry relevant for your application.<br/><br/>Periodic reposting usage case (actual)<br/>Table CCSS<br/>Allocation P<br/>Actual/plan: I<br/>Field KOSTL<br/><br/>Periodic reposting usage case (actual)<br/>Table CCSS<br/>Allocation P<br/>Actual/plan: P<br/>Field KOSTL<br/><br/>Check that the system has positioned the cursor on the right entry and then double-click the line in question. <br/>On the screen that now appears, make the entry "C" for the "NSflag" field.<br/><br/>Save your change (the system asks you to specify a transport request) and restart the cycle.<p class="Standardabsatz">Note: You can transport this changed customizing to all required follow-on systems using the entered transport request.</p>
+</div>
+</li>
+</ul></div></div></div></div>

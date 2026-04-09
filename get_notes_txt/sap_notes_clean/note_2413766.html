@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Step "Activate BW Content for RCA" fails, and checking the job log of CCMS_BI_SETUP the following error occurs:<br/><br/>ERROR: Source system &lt;SID&gt;CLNT&lt;NNN&gt; is not active for this BW</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Solution Manager 7.2</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>t-code <strong>SOLMAN_SETUP</strong></li>
+<li>Mandatory Configuration</li>
+<li>Basic Configuration</li>
+<li>Configure Basic Functions</li>
+<li>Activate BW Content for RCA</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>BW Source System isn't activated. There should be many other errors as well, such as error when activating Datastore objects, or error activating element. <br/>However, the above error about Source System has to be resolved firstly as the important prerequisite.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Follow the steps below to activate the BW source system:<br/>t-code <strong>RSA1<br/></strong>-&gt;Source System<br/>-&gt;BW<br/>-&gt;&lt;SID&gt;CLNT&lt;NNN&gt;<br/>-&gt;right click on the line and select Activate<br/>-&gt;In the Replicate Metadata? dialog, select Replicate as Well.<br/>-&gt;In the following screens, confirm the default settings displayed on the screen.</li>
+<li>Double confirm the activation successful in t-code <strong>RSTCO_ADMIN</strong>. If the status is red, please click on the activate button and wait until the background job finishes. <br/><br/></li>
+<li>During the Source System activation in RSA1, if an error like "<strong>The RFC connection for destination &lt;SID&gt;CLNT&lt;NNN&gt;</strong> </li>
+<li>Go to SM59 -&gt; ABAP Connections -&gt; Double Click &lt;SID&gt;CLNT&lt;NNN&gt;</li>
+<li>Select Connection Test -&gt; if Successful</li>
+<li>Go to Utilities -&gt; Test -&gt; Authorization Test -&gt; if this fails with Error -&gt; Authorization for Trusted RFC between SAP Solution Manager and BW - System</li>
+<li>Check: <a href="https://help.sap.com/viewer/0043dbb640674d9bb916602fe2ec90e8/7.2.10/en-US/ecdab605f34a4322810572244150693e.html" target="_blank">Application-Specific Security Guide - Second Level User Role</a></li>
+<li>Re-run step "Actiavte BW Content for RCA".</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="https://me.sap.com/notes/2397339" target="_blank">2397339</a> - Wrong Status Check for BW Content Job<br/><a href="https://me.sap.com/notes/2374090" target="_blank">2374090</a> - SOLMAN_SETUP - BW Content Activation "ERROR: EC:2048" column store error<br/><a href="https://me.sap.com/notes/2350405" target="_blank">2350405</a> - Update of status for the activity “Activate BW Content for RCA”</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Activate BW Content for RCA, BW Activation, BW content not activated, CCMS_BI_SETUP, Source System Not Active, RSA1, Solman_setup, Basic Configuration, CCM, SV-SMG-INS-CFG-BSC, BW</p></div></div></div></div>

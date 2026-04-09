@@ -1,0 +1,48 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<p>T﻿he indexserver on the secondary site of a HANA System Replication environment crashes with a crash stack similar to these ones:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">----&gt; Pending exceptions (possible root cause) &lt;----</span><br/><span class="SNO_DNT" style="float: none;" translate="no">--- Pending assertion:</span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>exception [...]</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no">exception throw location:</span><br/><span class="SNO_DNT" style="float: none;" translate="no">0: <strong>FileAccess::SingleFile::open</strong>()</span><br/><span class="SNO_DNT" style="float: none;" translate="no">1: <strong>DataRecovery::LogSegment::enableDecryption</strong>(Crypto::FileEncryption::EncryptedFile*)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">2: DataRecovery::LogSegmentFactory::getSegmentFileHandleForRead(DataRecovery::LogSegment&amp;, unsigned long&amp;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">[...]﻿</span></p>
+<p style="padding-left: 30px;">or</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">----&gt; Pending exceptions (possible root cause) &lt;----</span><br/><span class="SNO_DNT" style="float: none;" translate="no">--- Pending assertion:</span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>exception [...]</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no">exception throw location:</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 0: <strong>FileAccess::SingleFile::close</strong>()</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 1: DataRecovery::DirectoryLogSegment::cleanupFreeSegment()</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 2: DataRecovery::LogSegment::decrementPendingIOCount(bool)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 3: DataRecovery::LogSegment::close(bool, bool)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">[...]﻿</span></p>
+<p>The <span class="SNO_DNT" style="float: none;" translate="no"><strong>﻿exception [...]﻿</strong></span> looks like those ones:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">﻿exception 1: no.2100002 (Basis/Diagnose/impl/FaultProtectionImpl.cpp) TID: 0000</span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>terminate was called﻿</strong></span></p>
+<p style="padding-left: 30px;">or</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">﻿exception 1: no.2000060 (Basis/IO/FileAccess/impl/SingleFile.cpp) TID: 0000</span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>Parallel open/close on file; $file$='&lt;root&gt;/logsegment_000_0000000X.dat'</strong> ((&lt;<em>closed|open</em>&gt;, mode= RW, access= rw-rw-r--, flags= ASYNC|DIRECT|LOCK|LAZY_OPEN, size= &lt;<em>-1|&lt;size&gt;</em>&gt;), [...]﻿</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">﻿signal 6, SIGABRT, SR, high availability, HA, HSR﻿</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 282753</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, a race condition may occur when accessing files if the log segment is encrypted. This, in turn, causes an indexserver crash with signal 6.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions of SPS00 - SPS04</li>
+<li>Revisions &lt;= 059.06 (SPS05)</li>
+<li>Revisions &lt;= 066.00 (SPS06)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>System Replication is active</li>
+</ul>
+<p style="padding-left: 30px;">AND</p>
+<ul>
+<li>Log encryption is active i.e. <span class="SNO_DNT" style="float: none;" translate="no"><em>﻿global.ini [database_initial_encryption] log_encryption</em></span> is set to true</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul></ul>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 059.07 (SPS05)</li>
+<li>Revisions &gt;= 067.00 (SPS06)</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul></div></div></div></div>

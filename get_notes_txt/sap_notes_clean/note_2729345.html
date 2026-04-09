@@ -1,0 +1,54 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">With SAP Notes 2706790/2715263 or the support packages described there, a parallelized form of update, which will be further developed in the future, is introduced in addition to the sequential update of CO line items that has been available previously. This consulting note describes the technical implementation, compares the two different update functions, and explains their effects in the form of an FAQ note. In addition, it describes how to activate this parallel update.</p>
+<p><strong>Technical implementation of the parallelized update</strong></p>
+<p>During the execution of the assessment, distribution, or periodic reposting of one or more cycles, the line items to be updated are stored in an internal table in the main memory at runtime. This table is further processed in partitions in order to generate CO documents from it and to pass these to the Accounting Interface (AC Interface) for checking and the creation of follow-on documents. The actual database update then takes place IN UPDATE TASK.</p>
+<p>If these AC Interface checks and updates are extremely time-consuming, the update step in the assessment, distribution, or periodic reposting also takes a long time.</p>
+<p>For SAP S/4HANA, a global customizing switch can be used to activate the parallel processing of the entire table: Sequentially, only individual update partitions are now generated. Then, in parallel and distributed to different work processes, the individual AC Interface checks take place using asynchronous RFC (aRFC) processing, including the creation of the follow-on documents and finally, IN UPDATE TASK, the actual database update. The results of the individual aRFC processings are collected at the end for the creation of the result lists (line items, messages of the individual update partitions, and so on).</p>
+<p>SAP Note 2715263 provides a parallel processing for the reversal run in addition to the aforementioned parallel cycle update.</p>
+<p><strong>Frequently asked questions (FAQ):</strong></p>
+<p>1. Error handling in the update</p>
+<p>In general, the cycle run will generate more line items than can be saved in one CO document. For this reason, more update partitions are formed than can be updated individually in the background. Each of these packages runs through various checks first: Internal checks in the allocation processor and the overall checks of the AC Interface.</p>
+<p>In the case of the sequential update logic, the update is terminated once an error state is detected. This means that only those update partitions that were formed before the detection of the error situation are updated in the database.</p>
+<p>In the case of the parallelized update, this can no longer be ensured due to the parallel working method. Each update partition is processed by a separate task and is updated after a successful check. If an error occurs in at least one processing package, the current package is not updated and the entire update process is later terminated with the new message "No update or only partial update performed due to an error" (GA2 700). However, the documents generated in the other parallel tasks where no error occurred are updated anyway.</p>
+<p>This situation during a parallel update is not new. Errors during sequential processing also mean that the cycle run is updated only partially. A subsequent reversal of the cycle always restores the original state. The difference from the sequential update is that more processing packages might be updated than previously.</p>
+<p>2. Due to the parallel way of working in separate tasks, the document numbers for the parallelized update logic might be retrieved from the number range object in greater leaps.</p>
+<p>3. The update logic can be changed for each cycle run/reversal run. In the case of problems with the used server group or general (performance, load) problems in the parallelized processing logic, you can therefore switch without problems from parallelized processing to the sequential type by not defining a server group in the cycle settings.</p>
+<p>4. Can the parallel update be used in production operation? At present, the parallel run is not yet generally released for production operation. It is possible only after consultation with AIS. This restriction is because AIS wants to ensure trouble-free use of the parallel run function through detailed prior analyses and successful tests and simulations.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Allocations, assessment, distribution, periodic reposting, segment rebook, reverse and rebook</p>
+<p>Inverse posting, reversal</p>
+<p>Message GA880 "Parallel update control active"<br/>             GA2700 "No update or only partial update performed due to an error"<br/>             SPTA003 "Error during parallel processing of object ... (see long text)"<br/>             GA2422 "Information about termination: ..., ..., ..., ..."</p>
+<p>Transactions: KSV5, KSU5, KSW5</p>
+<p>Parallel processing using asynchronous Remote Function Call (RFC)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong> Performance problems in AC Interface checks and follow-on documents</p>
+<p><strong>Prerequisite:</strong> SAP Notes 2706790 and 2715263 have been implemented—either via an import of the relevant support package or manual implementation of the relevant correction instructions.</p>
+<p><strong>Restrictions:</strong> The parallelization of the update will be further developed in the future. At present, the following restrictions apply in the current implementation:</p>
+<p>* Cycles of indirect activity allocation of the application CO-OM are not supported.</p>
+<p>* Only assessment/distribution/periodic reposting cycles of the application CO-OM are processed (that is, cycles that are started via transactions KSV5, KSU5, and KSW5).</p>
+<p>* Only ACTUAL cycles of the application CO-OM are processed (no plan distributions/assessments/periodic repostings).</p>
+<p>* The various segment rebook types (reverse/rebook scenarios) are not supported (both during the reversal as well as during the execution of the segment rebook).</p>
+<p>* Run groups are not supported (see also SAP Note 3448755)</p>
+<p>* See SAP Note 2706790 for the availability of the described parallel processing in the various software components.</p>
+<p>If the system detects that the cycles used violate these restrictions, it automatically switches to the previous update logic during cycle execution.</p>
+<p>In the case of a supported scenario, message GA880 "Parallel update control active" is issued in the log. You can therefore always use this message to determine whether or not the current run used the parallel processing mentioned above.</p>
+<p>If the parallel update is activated, the reversal run itself always takes place in parallel processing mode as described below. Message GA880 is not explicitly written in the log.</p>
+<p>Note about database selection: The parallel processing of the database selection in accordance with SAP Note 1796792 is not available in the current implementation if the update is parallelized; the system automatically reads the traffic figures without parallelization.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Activation of parallel update for CO-OM cycles</strong></p>
+<p><strong>1. Global client-dependent switch</strong></p>
+<p>To enable the use of the parallel update control, it must first be activated in the client:</p>
+<p>a.) If this function is to be made available for the first time in this client, the corresponding switch must first be created in the client. You only need to perform this step once in your client:</p>
+<p>Call transaction SE16N for the table T811FLAGS. Choose "Execute (F8)" to display all possible entries of this table. Choose "Create/Append Rows" and make the following entries:</p>
+<p>Table:  CCSS<br/>Field:      PARALLEL_POSTING</p>
+<p>First save this entry.</p>
+<p>In the "From value" column for this entry, you can then control whether the parallel update is active (enter the value X) or inactive (leave the field blank). Save the change.</p>
+<p>b.) The switch already exists in your system - you still have to activate the function:</p>
+<p>Call transaction SE16N for the table T811FLAGS. Choose "Execute (F8)" to display all possible entries of this table. Select the following entry:</p>
+<p>Table:  CCSS<br/>Field:      PARALLEL_POSTING</p>
+<p> In the "From value" column for this entry, you can now control whether the parallel update is active (enter the value X) or inactive (leave the field blank).</p>
+<p>Save the change.</p>
+<p><strong>2. Setting for each cycle run</strong></p>
+<p>The parallelized update is activated in principle with this client-dependent switch. However, when cycle processing is started using transaction KSV5, KSU5, or KSW5, you must also define the server group to be used for parallel processing in the settings. If no server group is defined, the normal sequential update logic or reversal logic is used for the current cycle run.</p>
+<p>Optionally, the number of work processes for parallel processing can be defined in the settings, too. If this field is empty, the system uses the default setting of "3".</p>
+<p>&gt;&gt;&gt;&gt;When you are in the settings, you can only choose a server group once you have the database selection method set to "Selection by segment". As the database part did not take a long time, this should also be done quickly.</p></div></div></div></div>

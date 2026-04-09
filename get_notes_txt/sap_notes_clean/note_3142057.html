@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">SNP PPM generated with missing activity/mode/component with SNP PPM generation with lot size report</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>/SAPAPO/PPM_CONV_PPDS2SNP_310</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>SNP buckets, to which simulation order generated at program runtime using PPDS PPM is apportioned to, are thanks to note 1706189 created only starting from simulation order start date, 00:00:00 local time. It can happen though that simulation order is scheduled by LiveCache to start earlier, as LiveCache schedules orders in UTC time, only. This can happen when local timezone is UTC minus x(1-12) hours.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>************************************************************************</p>
+<p>Implement this note only if note 1706189 was implemented in your system before.</p>
+<p>************************************************************************</p>
+<p>This note reverts changes from note 1706189. Simulation orders are scheduled forwards from Start of Generation Period date (in selection screen of /SAPAPO/PPM_CONV_PPDS2SNP_310) in UTC time, as was the standard design for years. PPDS source of supply used for SNP PPM generation must exist in the system on 00:00:00 (hh:mm:ss) of Start of Generation Period date in UTC time.</p>
+<p>Implement this note and regenerate affected SNP PPMs.</p></div></div></div></div>

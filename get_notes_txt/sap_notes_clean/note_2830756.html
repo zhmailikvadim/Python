@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The PTF check for SAP on IBM i indicates that a PTF group has an obsolete state even though the state is actually current. If the command CHKR3PTF is used, error message SAP0214 is displayed: "Old version of a Fixpack, product 5770SS1. Order PTF &lt;PTF identifier&gt;". For ABAP transactions DB4PTFCHK and DBACOCKPIT, the following is displayed for the status of the PTF group: "The PTF could not be found."</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>AS/400 OS/400 OS400 iSeries i5/OS Old version of a Fixpack SF99740 SF99704 SF99739 SF99730 SF99703 SF99729 SF99727 SF99720 SF99702 SF99719 SF99717</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is a programming error. If, in a system, the installation status of the PTF groups is displayed for more than one level (service attribute PTFGRPLVL has a value above 1), the PTF check investigates the PTF level only for one level of the PTF group in question. If this is not the highest level, the PTF is displayed as "not found".</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Check the PTF level with the operating system command WRKPTFGRP or implement the ILE patch levels assigned to this SAP Note.</p>
+<p> </p></div></div></div></div>

@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">After running MRP Live in transaction <strong>MD01N</strong>, the stock/requirements list is restricted to 100 materials, however, a larger number of materials were planned.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP ERP Version for SAP HANA</li>
+<li>S/4 HANA</li>
+<li>Material Requirements Planning - PP-MRP</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>1. Run MRP Live in transaction <strong>MD01N</strong> for a selection larger than 100 materials.</p>
+<p>2. After the planning is complete, select the <strong>'Stock/Requirements List'</strong> button.</p>
+<p><img alt="Untitled.png" class="img-responsive" src="/documents/customerkba/L4rNENRYKG-f9ta5X7Cb9yJHmHzpkFNLfYKOJe2qOJY" title="Untitled.png"/></p>
+<p>3.  You'll notice that the list will only display 100 materials.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>This system behavior was implemented within SAP Note <a href="https://me.sap.com/notes/1943856" target="_blank">1943856</a>.</p>
+<p>A restriction of 100 materials was added to the <strong>'Stock/Requirements List'</strong> from transaction <strong>MD01N</strong> in concern of performance, since it takes a long time to start up transaction <strong>MD07</strong> when a lot of materials are involved.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p><strong>This is the standard behavior of the system.</strong> The alternative is to enter transaction <strong>MD07</strong> directly with the suitable selection criteria.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>S4HANA, S4CORE, MD01N, MRP Live, stock, requirements, MD07, performance, restriction, stock requirement list, MD04</p></div></div></div></div>

@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The settlement of the new actual costing in Release S4HANA 16.10 generates an inconsistent cost component split of the price differences for some materials and activities (that is, activity types and business processes).<br/>The log of the CKMLCP step 'Preparation' contains the following warning messages:</p>
+<ul>
+<li>
+<div>CKMLLA-204: Split and price of cost elem./activity type &amp;1/&amp;2 not consistent</div>
+</li>
+<li>CKMLLA-205: Split and price of business process &amp;1 not consistent.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FCML4H; CCS; CKMLLA204; CKMLLA205, ACTCCS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>These messages are issued because the price data and cost component split data for the involved activities, which is imported from cost center accounting, does not match. Since the difference between the price and cost component split is below the tolerance threshold, however (see SAP Notes 880217 and 1089482), the cost component split for price from cost center accounting is saved anyway. <br/>During the transfer, however, the difference between the price and cost component split is not corrected, which makes the cost component split inconsistent in the material ledger. When the price variances are rolled up to the finished products, the cost component split of these materials becomes inconsistent as well.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections.</p></div></div></div></div>

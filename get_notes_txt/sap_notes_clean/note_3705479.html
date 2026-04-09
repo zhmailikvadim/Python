@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> You seek information which GTK+ toolkit library version is required when running the graphical '<span class="SNO_DNT" style="float: none;" translate="no">hdblcmgui</span>' or '<span class="SNO_DNT" style="float: none;" translate="no">hdbsetup</span>'.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">hdblcmgui, hdbsetup</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> When running '<span class="SNO_DNT" style="float: none;" translate="no">hdblcmgui</span>' or '<span class="SNO_DNT" style="float: none;" translate="no">hdbsetup</span>', you observe one of the following errors:</p>
+<p id="__html0"><span class="SNO_DNT" style="float: none;" translate="no">&gt; ./hdblcmgui</span><br/><span class="SNO_DNT" style="float: none;" translate="no">SAP HANA Installer Runtime Error:</span><br/><span class="SNO_DNT" style="float: none;" translate="no">perl compilation error (loading LCM::Gui::App::LCMGuiApp): cannot show splash screen: Can't load '/hana/shared/SID/hdblcm/instruntime/Wx.so' for module Wx: libgtk-x11-2.0.so.0: cannot open shared object file: No such file or directory at DynaLoader.pm line 206.</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> at SDB/Wx/Splash.pm line 45.</span><br/><span class="SNO_DNT" style="float: none;" translate="no">BEGIN failed--compilation aborted at SDB/Install/App/Gui.pm line 6.</span><br/><span class="SNO_DNT" style="float: none;" translate="no">BEGIN failed--compilation aborted at LCM/Gui/App/LCMGuiApp.pm line 6.</span></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">&gt; ./hdblcmgui</span><br/><span class="SNO_DNT" style="float: none;" translate="no">SAP HANA Installer Runtime Error:</span><br/><span class="SNO_DNT" style="float: none;" translate="no">perl compilation error (loading LCM::Gui::App::LCMGuiApp): </span><br/><span class="SNO_DNT" style="float: none;" translate="no">cannot show splash screen: Can't load '/hana/shared/SID/hdblcm/instruntime/Wx.so' for module Wx: libgtk-3.so.0: cannot open shared object file: No such file or directory at DynaLoader.pm line 206.</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> at SDB/Wx/Splash.pm line 45.</span><br/><span class="SNO_DNT" style="float: none;" translate="no">BEGIN failed--compilation aborted at SDB/Install/App/Gui.pm line 6.</span><br/><span class="SNO_DNT" style="float: none;" translate="no">BEGIN failed--compilation aborted at LCM/Gui/App/LCMGuiApp.pm line 6.</span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Those graphical tools require the GTK+ toolkit library in version 2 up to - and including - the following HANA revisions:</p>
+<ul>
+<li>HANA 2.0 SPS08 revision 88</li>
+<li>HANA 2.0 SPS07 revision 79.07</li>
+<li>HANA 2.0 SPS05 (any revision)</li>
+</ul>
+<p>Starting with the following HANA revisions, they require the GTK+ toolkit library in version 3:</p>
+<ul>
+<li>HANA 2.0 SPS08 revision 89</li>
+<li>HANA 2.0 SPS07 revision 79.08</li>
+</ul>
+<p>Please install an appropriate GTK+-library version:</p>
+<ul>
+<li>On RHEL-systems:<br/># <span class="SNO_DNT" style="float: none;" translate="no">yum install gtk</span>&lt;version&gt;<br/><br/></li>
+<li>On SLES-systems:<br/># <span class="SNO_DNT" style="float: none;" translate="no">zypper install libgtk-</span>&lt;version&gt;</li>
+</ul></div></div></div></div>

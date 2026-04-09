@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>In the Upgrade Management Tool (UMT), the 'Apply Time Filter' option is not applied for personal content such as that in user inboxes or personal folders - it is still shown on the Summary screen</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP BusinessObjects Business Intelligence Platform 4.2 (BI 4.2)</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Open the UMT</li>
+<li>Enter an SAP BusinessObjects Enterprise XI 3.x system</li>
+<li>Enter an SAP BusinessObjects Business Intelligence Platform 4.2 system</li>
+<li>Click 'Next'</li>
+<li>Select 'Apply Time Filter'</li>
+<li>Select the required time span</li>
+<li>Click 'Next'</li>
+</ol>
+<p>Content from the public folders is filtered correctly but personal content from outside the apply time filter is shown in the Summary page.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The personal content is calculated as a dependency of the users however content in the public folders is chosen explicitly on the object selection page</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>This is expected behaviour.</strong> </p>
+<p>Only content which is selected on the Object Selection page has the time filter applied.  Anything that is calculated as a dependency does not.<br/>Content from the Public Folder is automatically brought across when its parent folder is selected and will therefore be filtered as expected.  Personal content is brought across as a dependency of the user and therefore does not.</p>
+<p><strong>From the 'Help' in the UMT tool:</strong></p>
+<p>The filter selected in the <span><em>Select Filter</em> </span>page is applicable only for selecting the objects in the <span><em>Object Selection page</em></span>. However, this filter selection is not applicable for dependency calculation in the <span><em>Summary</em> </span>page.</p>
+<p>For example, perform the following:</p>
+<ol>
+<li>In <span><em>Select Filter</em> </span>page, select the object type as WebI report.</li>
+<li>In the <span><em>Object Selection</em> </span>page, select the WebI report, and choose the <em><span>Export this object and its dependencies</span></em>.</li>
+</ol>
+<p>Irrespective of the filter that you choose in the <span><em>Select Filter</em> </span>page, the <span><em>Summary</em> </span>page displays the universe and connection along with the WebI report. This is due to the dependency rule.</p></div></div></div></div>

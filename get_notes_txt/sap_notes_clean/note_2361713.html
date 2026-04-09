@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">System Monitoring Instance Local RFC Availability might report a false positive in some rare cases. i.e. although the system is available availability alerts are raised.<br/>This problem only occurs when RFC Ping authentication is used.</p>
+<p>When this occurs, the Diagnostics Agent logs contains the following error:</p>
+<p><br/> ##0#0#Error##Java###[SAPPingRfcCollector.executePing ] call ABAP function RFC_SYSTEM_INFO<br/>[EXCEPTION]<br/>{0}#1#java.lang.NullPointerException : while trying to invoke the method com.sap.mw.JCO$Repository.getFunctionTemplate( java.lang.String ) of a zero object loaded from field com.sap.abap.rfc.function .RfcFunction._repository of an object loaded from local variable 'this'<br/>at com.sap.abap.rfc.function .RfcFunction.execute ( RfcFunction.java:63 )<br/>at com.sap.smd .mai.model.collector .SAPPingRfcCollector.executePing( SAPPingRfcCollector.java:111 )<br/>...</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>RFC, Ping, Monitoring, SysMon, JCO, NullPointerException</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>A defect in the JCO client pool prevent from a proper reuse of the JCO connection.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Workaround to be considered is to configure the Ping to not use the authentication. If workaround cannot be applied for security purpose, then deploying the fix is required.</p>
+<p>Deploy the LM-SERVICE Software Component, mentioned in the "Support Packages &amp; Patches" section.<br/>Before proceeding with the deployment, pay attention to the general recommendations of SAP note 1483508.</p></div></div></div></div>

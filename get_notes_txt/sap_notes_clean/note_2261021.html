@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>
+<div>The webi report is based on a universe based on bex query (.UNV)</div>
+</li>
+<li>Two prompts are defined: One at universe level with @prompt and the second at webi query panel level as optional</li>
+<li>When running the report, if you do not provide a value for the optional prompt, the result is correct</li>
+<li>If you do provide a value for the optional prompt, the universe level prompt is disregarded resulting in incorrect results displayed</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>bex, bw, taken into consideration, variable, webintelligence, web intelligence</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>
+<div>SAP BusinessObjects BI4.1 SP5 patch9</div>
+</li>
+</ul>
+<p>WORKFLOW:</p>
+<ol>
+<li>Launch UDT</li>
+<li>Open the universe based on a bex query</li>
+<li>Create an @prompt on the 'Calendar month '</li>
+<li>Launch WRC or Bi Launchpad</li>
+<li>Create a report based on that universe</li>
+<li>Define a prompt in the query panel on another object such as 'Commercial Unit'</li>
+<li>Run the query</li>
+<li>In the prompt window, Select a value for 'Calendar month', leave the 'Commercial Unit' as blank</li>
+<li>Results are OK</li>
+<li>Refresh the report</li>
+<li>In the prompt window, select a value for both 'Calendar month' and 'Commercial Unit'</li>
+<li>Notice the results are incorrect, the 'calendar month' has not been taken into consideration</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>
+<div>This issue is currently under investigation by the development team</div>
+</li>
+</ul></div></div></div></div>

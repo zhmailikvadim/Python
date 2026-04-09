@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You have posted a Low-Value Asset (LVA) using procurement process already. Now you want to post additional acquisition costs for the LVA, by posting a new goods and service receipt for the same individual material.</p>
+<p>GSR is showing as unposted due to error message <strong><em>Subseq. Acquisition Not Permitted In </em><em>Calc.Proc </em></strong></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Business ByDesign</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>In the <em>General Ledger</em> work center, choose the <em>Closing Cockpit</em> view.</li>
+<li>Select the <em>Source Documents </em>subview.</li>
+<li>Show <em>Unposted</em> <em>Source</em> <em>Documents</em>.</li>
+<li>Select the not posted goods and services receipt document in question.</li>
+<li>Choose <em>View Business Transaction</em>, you can see the same error message: <strong><em>Subseq. Acquisition Not Permitted In Calc.Proc</em></strong></li>
+</ol>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The inital acquisition post has been created in a previous fiscal year than the new acqusition posting. By default Low-Value Assets are created with the depreciation method<em> L200 - Str.-line 20% LowValueAsset</em>.  Therefore low value assets are being fully depreciated in the fiscal year of their acquisition. Subsequent acquisitions can only be made within this fiscal year.</p>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>The ideal way would be to cancel the goods receipt and to not go ahead with the posting:</p>
+<ol>
+<li>Cancel the goods receipt.</li>
+<li>The cancellation document will also appear as unposted source document in the Source Documents view of the General Ledger workcenter.</li>
+<li>Highlight the cancellation and press Actions - View business transaction.</li>
+<li>In the next screen press Mark as Irrelevant.</li>
+<li>This will mark the goods receipt cancellation as well as its original as irrelevant for accounting</li>
+</ol>
+<p>If you need to go ahead with the posting you could change the depreciation method of the fixed asset temporarily, to, for example <em>L010 - Str.-line from acq.value to 0</em>. But this is not recommended.</p></div></div></div></div>

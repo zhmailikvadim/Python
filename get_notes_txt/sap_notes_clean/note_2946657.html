@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Triggering a consistent snapshot on AWS Instances results in "Create snapshot from volume failed: Tag (Name) is already defined in resource id &lt;volume id&gt;".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP LaMa, Enterprise Edition, AWS, Cloud, Snapshot, Volumes, Amazon Web Services, Instances, Tag, Name</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Triggering a consistent snapshot on AWS instances with volumes and the volumes contain tags with the Key "Name" is causing the snapshot process to fail.</p>
+<p>Examples:</p>
+<ul>
+<li>Volume has tag with key "Name".</li>
+<li>You have implemented the enterprise edition of SAP Landscape Management 3.0 SP 15 PL01 or lower</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>You have the following options:</p>
+<ul>
+<li>Implement SAP Landscape Management 3.0 SP15 Patch02.<br/>For more information about implementing support packages and patches, see <a href="https://help.sap.com/viewer/lama_instguide" rel="nofollow" target="_blank">https://help.sap.com/viewer/lama_instguide</a>.</li>
+<li>Workaround: Before triggering the consistent snapshot, remove the tag with key "Name" from all EBS volumes to snapshot in AWS.</li>
+</ul>
+<ol></ol>
+<p>Related Information</p>
+<ul>
+<li>For more information about the enterprise edition, see SAP Help Portal at <a class="external-link" href="http://help.sap.com/lama" rel="nofollow" target="_blank">http://help.sap.com/lama</a>.</li>
+</ul></div></div></div></div>

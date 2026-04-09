@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The following errors occurred during the calculation of the lost net amount in the fictitious runs SVE0 and SVE1:</p>
+<ul>
+<li>
+<div>Incorrect net amount for persons insured voluntarily and privately<br/><br/>For employees with voluntary and private health insurance, the net amount calculated in the wage types /6I1 (EEL Illness of Child Net Actual Payroll Wage Type) and /6I3 (EEL Illness of Child Net Fictitious) is too high. <br/>In each case, the wage types contain the amount for the wage type /55E (Statutory Net Amount in Accordance with Statement of Earnings Regulation). However, this wage type still contains the "employee's contribution" (that is, the difference between the contribution paid and the employer's allowance) for HI and CI, which results in a net amount that is too high (compared to the net amount for compulsorily insured persons).<br/><br/></div>
+</li>
+<li>SPF contribution amounts are missing.<br/><br/>When you create the wage types /6I1 and /6I3, the SPF contribution amounts (wage types /285, /287, /294, /29B, and /2R1) are deducted from the gross amount twice. As a result, the value for these wage types is too low because the total SPF contribution amount is missing.<br/><br/></li>
+<li>Employee association contributions are not taken into consideration.<br/><br/>The net wage types /6I1 and /6I3 still contain the employee association contributions /536, /537, and /538 (Bremen or Saarland). As a result, the net amount is too high. <br/><br/></li>
+<li>Employee contributions to the professionals pension are not taken into consideration.<br/><br/>The net wage types /6I1 and /6I3 still contain the employee contributions to the professionals pension. As a result, the net amount is too high.</li>
+</ul>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>Correction to the schemas DA05 (Universal Schema Notional Calculations) and DOFC (Universal Schema Notional Calculations Public Sector)<br/><br/>Call the rules DF31 and DF32 in the fictitious runs SVE0 and SVE1.<br/><br/></li>
+<li>Changed entries in the view V_T5D0I (Fictitious Run Control: Wage Type Assignment) for the fictitious runs SVE0 and SVE1<br/><br/>The net amount is determined from the wage type /550 (Statutory Net) instead of /55E (Statutory Net (EBeschV)).</li>
+</ul>
+<p> </p>
+<p>The corrections are delivered in an HR Support Package.<br/>See SAP Note 1232082 for the connection between the HR Support Package and the technical name specified in this SAP Note under "Support Packages".<br/><br/>You can implement an advance correction (see the manual correction instructions).</p>
+<p> </p>
+<p><strong>Required actions after importing the Support Package</strong></p>
+<p>The schemas DA05 and DOFC have been changed. If you have modified them, compare it with client 000.</p></div></div></div></div>

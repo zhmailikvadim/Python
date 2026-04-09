@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Support component does not exist when trying to configure Automatic case Creation<br/><br/><img alt="Default Settings.png" class="img-responsive" src="/documents/customerkba/iSFx7G3i9OXlqPom_ue86V3QOjb9jFEvFYChvt0RZ78" title="Default Settings.png"/></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Solution Manager 7.2</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Execute transaction solman_setup</li>
+<li>Select Application Operations</li>
+<li>Go to System Monitoring</li>
+<li>Select 2 Configure Infrastructure</li>
+<li>Go to Step 2.3 Default Settings</li>
+<li>Select incidents Tab and Edit mode</li>
+<li>Configure Automatic incident Creation "Active"</li>
+<li>Select Support Component e.g: SV-SMG-MON-SYS</li>
+<li>Error Message "Support Compnent does not exist"<br/><br/><img alt="Support Component does not exist.png" class="img-responsive" src="/documents/customerkba/HCfdhzBKNiLjzT_BZesR2uJ2D9CG2trR9aJ5dWLsj4Q" title="Support Component does not exist.png"/><br/><br/><br/>or</li>
+<li>Search: Support Component<br/>"No components exist!"<br/><br/><img alt="no components exist.png" class="img-responsive" src="/documents/customerkba/fASLFC6UwwPLTkbDBX6aJQRrmqVLW3FIRYo1PEjo1GQ" title="no components exist.png"/></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Missing entries in tables DSWPCSNCOMPTXT and DSWP_CSNCOMP where SAP component data is stored</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Check if job SM:GET CSN COMPONENTS is running in t-code SM37. <br/>It gets the application components from CSN, it is scheduled every week.</li>
+<li>If it is not, call transaction SE38</li>
+<li>Execute (F8) report DSWP_GET_CSN_COMPONENTS</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>KBA: <a href="https://me.sap.com/notes/2104380" target="_blank">2104380</a> - Empty result when using F4 on Component field while creating incident / SAP Collaboration AB in Solution Manager</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>SOLMAN, DSWPCSNCOMPTXT, DSWP_CSNCOMP, DSWP_GET_CSN_COMPONENTS, SM:GET CSN COMPONENTS</p></div></div></div></div>

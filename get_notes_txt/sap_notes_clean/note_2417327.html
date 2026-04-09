@@ -1,0 +1,118 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This SAP Note deals with Support Package 17 (SAPK-11017INSAPSLL) with corrections for SLL-LEG 110 (SAP GTS 11.0).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SLL-LEG, legal services, logistics services, SAP Global Trade Services, SAP GTS, customs server, global trade server, SAPK-11017INSAPSLL, sanctioned party list, SPL, export control, Legal Control Export, import control, Legal Control Import, Compliance Management, CoMa, Customs Management, CuMa, customs duty calculation, Automated Tariff and Local Customs Processing System of the German Customs Authorities, ATLAS, New Computerized Transit System, NCTS, assignment, mapping, risk management, RiMa, preference, restitution</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Support Package 17 with the corrections for SLL-LEG 110 is available on SAP Service Marketplace.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Support Package 17 is relevant for you if you have installed one of the following releases:</p>
+<ul>
+<li>The current release for SLL-LEG 110.<br/>Proceed as follows to import the support package SAPK-11017INSAPSLL:</li>
+</ul>
+<ol><ol>
+<li>Download the file SAPK-11017INSAPSLL.CA with the support package corrections.</li>
+</ol></ol>
+<p>This file is available on SAP Service Marketplace at <a href="https://support.sap.com/en/index.html?url_id=text-SMPHomepage-newsupportportal" target="_blank">https://support.sap.com/en/index.html?url_id=text-SMPHomepage-newsupportportal</a>.<br/>-&gt; My Support -&gt; Software Downloads -&gt; Types of Software -&gt; Support Packages &amp; Patches -&gt; Access downloads<br/>-&gt; By Category -&gt; SAP Solutions for Governance, Risk, and Compliance<br/>-&gt; SAP GLOBAL TRADE SERVICES<br/>-&gt; SAP GTS 11.0<br/>-&gt; Entry by Component<br/>-&gt; SLL-LEG -&gt; SAP SLL-LEG 11.0 -&gt; Support Packages/"Downloads" symbol<br/>-&gt; SAPK-11017INSAPSLL (SLL-LEG V1100: SP 0017)</p>
+<ol><ol start="2">
+<li>Before you import the support package for SLL-LEG, use transaction SPAM to check whether a new SPAM update is available. If a new SPAM update exists, you must import it. The SPAM updates are also available at: </li>
+</ol></ol>
+<p><a href="https://support.sap.com/en/index.html?url_id=text-SMPHomepage-newsupportportal" target="_blank">https://support.sap.com/en/index.html?url_id=text-SMPHomepage-newsupportportal</a></p>
+<p>Then navigate to:<br/>My Support -&gt; Software Downloads -&gt; Types of Software -&gt; Support Packages &amp; Patches -&gt; Access downloads<br/>-&gt; Search for support packages and patches with the following search term: SPAM<br/>-&gt; SAP SPAM/SAINT UPDATE 740</p>
+<ol><ol start="3">
+<li>You require at least SAP Kernel Patch Level 68 for production operation. The current kernel is available on SAP Service Marketplace at <a href="https://support.sap.com/en/index.html?url_id=text-SMPHomepage-newsupportportal" target="_blank">https://support.sap.com/en/index.html?url_id=text-SMPHomepage-newsupportportal</a>. To go there, proceed as follows:</li>
+</ol></ol>
+<p>Navigate to:<br/>-&gt; My Support -&gt; Software Downloads -&gt; Types of Software -&gt; Support Packages &amp; Patches -&gt; Access downloads<br/>-&gt; By Category -&gt; SAP Solutions for Governance, Risk, and Compliance<br/>-&gt; SAP GLOBAL TRADE SERVICES<br/>-&gt; SAP GTS 11.0<br/>-&gt; Required Components of other Product Versions<br/>-&gt; SLL-LEG and SLL_PI 6xx -&gt; SLL-LEG requires: SAP EHP1 for SAP NetWeaver 7.40 - Application Server ABAP</p>
+<ol><ol start="4">
+<li></li>
+</ol></ol>
+<p><strong><strong>Communication with other customs authorities</strong></strong></p>
+<p>If you use SAP Customs Management for communication with customs authorities and use SEEBURGER AG Business Integration Server (BIS) for electronic communication with the customs systems, message conversions and workflows must be installed on BIS.</p>
+<p>For further details, see SAP Note 1241609.</p>
+<p>Contact your consultant with regard to conversions in other supported countries.</p>
+<p> </p>
+<p>If you use processing with the customs server in the Netherlands, you have to use message conversions that were created after November 13, 2016 in the converter.</p>
+<p>For further information, see SAP Note 2386176 ("AGS3: Transfer of seals in change messages (SEQID)".</p>
+<ol><ol start="5">
+<li></li>
+</ol></ol>
+<p><strong>Preference management</strong></p>
+<p>If you issue customer-based long-term supplier’s declarations (transaction /SAPSLL/PRE_VDO_701) or re-issue them (transaction /SAPSLL/PRE_VDO_702), you have to convert your worklist for customer-based long-term supplier’s declarations (transaction /SAPSLL/PRE_WLO_001) so that you can continue to issue them. This applies only if a worklist exists when you import the support package. To do this, use the report <em>/SAPSLL/PRE_VDO_FILL_VDOWLV</em>, which is provided in Support Package 16.<em> </em>Alternatively,<em> </em>you can also proceed as described in SAP Note 2793346, section II, "Worklist for long-term vendor declarations for customer's purpose".<em> </em></p>
+<p>If you upgrade from an SAP GTS release lower than SAP GTS 10.0 to SAP GTS Release 10.1, you have to execute the program /SAPSLL/TPREFSK_CLONE using transaction SE38 after you import Support Package 01.</p>
+<p>Before you import the support package, ensure to the greatest extent possible that the majority of entries in the table /SAPSLL/PRFPMRP is archived with the archiving object PRFCALC.</p>
+<ol><ol start="6">
+<li></li>
+</ol></ol>
+<p><strong>Important</strong></p>
+<p>If you use sanctioned party list screening for employees, you must first import the support package and then copy the program z_ftoa_conv.txt provided with SAP Note 1683200 to a local program in your system and execute it. Otherwise, the existing assignments of your employees to the foreign trade organizational units can no longer be interpreted properly.</p>
+<p>Note that SAP Note 2513767 results in a bug that causes all SPL entities to be marked as changed after you upload the XML file. As a result, many false positive results for business partners that you manually released are generated again during a future SPL delta check. It is extremely time-consuming to check these again. Note this problem if you manually implement SAP Note 2513767 or an upgrade of the GTS system to the higher version GTS 11.0 with SP11 or SP12. The problem is corrected with SAP Note 2573362.</p>
+<ol><ol start="7">
+<li></li>
+</ol></ol>
+<p><strong>Standardization of transport data for US customs declarations</strong></p>
+<p>The use of the fields on the <strong>Transport</strong> tab has been standardized for US customs declarations. For more information, see SAP Note 2214185. Following the import of the support package, fill in the fields as described in this SAP Note so that the correct data is sent to the customs systems during outbound processing. Documents created earlier for which messages are still to be sent must be adjusted accordingly. Messages that have already been sent remain unchanged and are unaffected by the changes.</p>
+<ol><ol start="8">
+<li></li>
+</ol></ol>
+<p><strong>Depreciation of licenses, letters of credit, and securities</strong></p>
+<p>If you use the value depreciation or quantity depreciation for licenses or the value depreciation for letters of credit and securities, you must implement SAP Notes 2231154 and 2234114. Otherwise, incorrect depreciation posting runs or runtime errors may occur.</p>
+<p> </p>
+<p><strong>API for creating a customs bill of lading</strong></p>
+<p>a)</p>
+<p>Support Package 16 changes the interface of the API for creating customs bills of lading (name: /SAPSLL/API_6800_CFB_SYNCH). Refer to SAP Note <a href="/notes/2805640" target="_blank">2805640</a> for more details. It indicates that you have to execute the migration program Z_PZ_MIGRATE_VESSEL_NAME_CFB.</p>
+<p>Check customer-defined programs that call the API /SAPSLL/API_6800_CFB_SYNCH in SAP GTS or from an external system. Check customer-defined programs that use the structure /SAPSLL/API6800_HDR_CFB_S. The length of the field VESSEL_NAME is extended from 20 to 35 characters. Check whether your source code can handle the changed field length. Check any customer-specific implementations of the method CHANGE_INPUT_PARAMETERS of the interface /SAPSLL/IF_EX_BADI_CFB.</p>
+<p>b)</p>
+<p>Support Package 16 changes the interface of the API for creating customs bills of lading (name: /SAPSLL/API_6800_CFB_SYNCH). Refer to SAP Note <a href="/notes/2807400" target="_blank">2807400</a> for more details.</p>
+<p>Check customer-defined programs that call the API /SAPSLL/API_6800_CFB_SYNCH in SAP GTS or from an external system. Check customer-defined programs that use the structure /SAPSLL/API6800_HDR_CFB_S. The length of the following fields has been extended from 15 or 20 characters to 35 characters:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Name in API</strong></td>
+<td><strong>Data element</strong></td>
+<td><strong>Length previously</strong></td>
+<td><strong>Length now</strong></td>
+</tr>
+<tr>
+<td>SBOLNO</td>
+<td>/SAPSLL/SBOLNO</td>
+<td>20</td>
+<td>35</td>
+</tr>
+<tr>
+<td>BOLNO</td>
+<td>/SAPSLL/BOLNO</td>
+<td>20</td>
+<td>35</td>
+</tr>
+<tr>
+<td>MASTER_BOLNO</td>
+<td>/SAPSLL/MBOLNO</td>
+<td>20</td>
+<td>35</td>
+</tr>
+<tr>
+<td>AWBNO</td>
+<td>/SAPSLL/AWBNO</td>
+<td>15</td>
+<td>35</td>
+</tr>
+<tr>
+<td>MASTER_AWBNO</td>
+<td>/SAPSLL/MAWBNO</td>
+<td>15</td>
+<td>35</td>
+</tr>
+<tr>
+<td>TRUCK_NUMBER</td>
+<td>/SAPSLL/TRCKNO</td>
+<td>15</td>
+<td>35</td>
+</tr>
+</tbody>
+</table></div>
+<p>Check whether your source code works with the changed field lengths. Check any customer-specific implementations of the method CHANGE_INPUT_PARAMETERS of the interface /SAPSLL/IF_EX_BADI_CFB.</p>
+<p> </p>
+<p><strong>If you use the US FTZ solution, take the following into account:</strong></p>
+<p>This SP adds the fields "BOM Explosion Indicator Necessary" (/SAPSLL/BOMEX_R3, /SAPSLL/BOMEX) and "Prod. Ref. Number for BOM from Feeder System" (/SAPSLL/BOMRF_R3, /SAPSLL/BOMRF) to the API /SAPSLL/API_6800_CUWL_SYNCH (through SAP Note 2609653). In addition, implement SAP Note 2609654 in the feeder system. This SAP Note enables the transfer of goods receipts of finished products to SAP GTS. Note that you must set the new "Goods Receipt from Production (FTZ)" indicator for goods movements that constitute a goods receipt on the basis of a production order in the view /SAPSLL/V_TLER3B for the application level MM0C.</p>
+<p> </p>
+<p><strong>Classification distribution</strong></p>
+<p>If you distribute commodity codes to the feeder systems, see SAP Note <a href="/notes/2831295" target="_blank">2831295</a>. With Support Package 17, you can also distribute tariff numbers because the database has been enhanced for this purpose. After you import the Support Package, you must execute the program /SAPSLL/TCOTS_STCTS_EXC_SET using transaction SE38.</p></div></div></div></div>

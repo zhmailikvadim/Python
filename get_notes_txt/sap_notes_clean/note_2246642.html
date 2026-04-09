@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">- You can no longer access the SAP HANA XS Administration Tools.</p>
+<p>- Even the formlogin page is not loaded.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP HANA, SAP HANA XS, SAP HANA XS Admin, xs engine, formlogin</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>Due to a wrong configuration of logon methods for SAP standard content, content areas that should be accessible in a non authorized scope can't be loaded.</p>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>Runtime configuration has been adjusted manually</li>
+<li>In _SYS_XS.RUNTIME_CONFIGURATION you'll find entries different than {"authentication":null} for package_id = sap.hana.xs.formLogin</li>
+<li>In _SYS_XS.RUNTIME_CONFIGURATION you'll find entries different than {"authentication":null} for package_id = sap.ui5 or any the subpackages</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Revert back to the standard configuration by executing the following SQL statements:</p>
+<p>upsert _sys_xs.runtime_configuration values ('sap.hana.xs.admin','{"authentication":[{"method":"Form"},{"method":"Basic"}]}','SYSTEM',now()) where package_id = 'sap.hana.xs.admin';<br/>upsert _sys_xs.runtime_configuration values ('sap.hana.xs.formLogin','{"authentication":null}','SYSTEM',now()) where package_id = 'sap.hana.xs.formLogin';<br/>upsert _sys_xs.runtime_configuration values ('sap.ui5','{"authentication":null}','SYSTEM',now()) where package_id like 'sap.ui5%';</p>
+<p>Then restart the xs engine.</p>
+<p><strong> </strong></p></div></div></div></div>

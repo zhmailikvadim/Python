@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You use SAP NetWeaver Process Integration (Exchange Infrastructure) and use the component monitor to monitor ABAP components. The monitor overview displays an error in the "Self Test" column.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">﻿RSXMB_ARCHIVE_PLAN</span>, ABAP proxy, Integration Server, self-test</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>In the component monitor, you monitor ABAP components of the type "ABAP Proxy" or "Integration Server". An error is displayed in the "Self-Test" column of the component overview. The self-test details contain an error message.</p>
+<p style="padding-left: 30px;">The error message tells you that the program <span class="SNO_DNT" style="float: none;" translate="no">RSXMB_ARCHIVE_PLAN</span> has not been released as a periodic background job and that the recommended period is 1 day.</p>
+<p>The cause is the following entry which was delivered by mistake in the list of interfaces to be archived (transaction <span class="SNO_DNT" style="float: none;" translate="no">SXMB_ITFACTION</span>):</p>
+<div class="table-responsive"><table cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="padding-left: 30px;">
+<tbody style="padding-left: 30px;">
+<tr style="padding-left: 30px;">
+<td style="padding-left: 30px;">Interface:</td>
+<td style="padding-left: 30px;">AI_Person</td>
+</tr>
+<tr style="padding-left: 30px;">
+<td style="padding-left: 30px;">Namespace:</td>
+<td style="padding-left: 30px;"><a href="http://test.com/user_decision" target="_blank">http://test.com/user_decision</a></td>
+</tr>
+<tr style="padding-left: 30px;">
+<td style="padding-left: 30px;">Type:</td>
+<td style="padding-left: 30px;">O</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Call transaction <span class="SNO_DNT" style="float: none;" translate="no">SXMB_ITFACTION</span> and delete the entry from the list of interfaces to be archived.</p>
+<p>Alternatively, you can schedule the program <span class="SNO_DNT" style="float: none;" translate="no">RSXMB_ARCHIVE_PLAN</span> using transaction <span class="SNO_DNT" style="float: none;" translate="no"> SXMS_ADMI_ARCH</span>.</p></div></div></div></div>

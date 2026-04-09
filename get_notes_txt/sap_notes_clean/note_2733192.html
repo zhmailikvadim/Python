@@ -1,0 +1,52 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<p>A query using GROUPING SETS() with GROUPING() or GROUPING_ID() features returns unexpected results.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, GROUPING() and GROUPING_ID() using constant values can be interpreted incorrectly during the optimization phase at compile time. This may lead to unexpected query result.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 1:
+<ul>
+<li>Revisions 122.21 - 122.22 (SPS12)<br/><br/></li>
+</ul>
+</li>
+<li>SAP HANA 2:
+<ul>
+<li>Revision 024.07 (SPS02)</li>
+<li>Revisions 034.00 - 035.00 (SPS03)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>The query uses constant values for GROUPING() or GROUPING_ID() functions</li>
+<li>GROUPING SETS() and GROUPING(&lt;constant&gt;) or GROUPING_ID(&lt;constant&gt;) are used in the inner query of a nested query</li>
+<li>The query projects the GROUPING(&lt;constant&gt;) or GROUPING_ID(&lt;constant&gt;) columns from nested query to the outer query.<br/><br/>For example, the following query contains constants 1 and 2 for GROUPING() function, and projects G1, G2 from the inner select to the outer select:<br/>
+<p>SELECT T1.A, T1.C, GA, GB, <strong>G1, G2</strong> FROM <br/> ( SELECT A, SUM(C) AS C, GROUPING(A) AS GA, <strong>GROUPING(1) AS G1</strong> FROM T GROUP BY GROUPING SETS (A,1) ) AS T1,<br/> ( SELECT A, B, SUM(C) AS C, GROUPING(B) AS GB, <strong>GROUPING(2) AS G2</strong> FROM T GROUP BY GROUPING SETS (A,B,2) ) AS T2;</p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 1:
+<ul>
+<li>Revisions &gt;= 122.23 (SPS12)<br/><br/></li>
+</ul>
+</li>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 024.08 (SPS02)</li>
+<li>Revisions &gt;= 036.00 (SPS03)</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>There is no easy workaround without changing the query. You may consider using WITH clause to materialize the result for the inner part of the nested query and use the materialized result afterwards.<br/><br/>For example, for the given query described in pre-requisites, re-write the query as below:<br/>
+<p>WITH <br/>T1 AS ( SELECT A, SUM(C) AS C, GROUPING(A) AS GA, GROUPING(1) AS G1 FROM T GROUP BY GROUPING SETS (A,1) ),<br/>T2 AS ( SELECT A, B, SUM(C) AS C, GROUPING(B) AS GB, GROUPING(2) AS G2 FROM T GROUP BY GROUPING SETS (A,B,2) )<br/>SELECT T1.A, T1.C, GA, GB, G1, G2 FROM T1, T2;<strong> </strong></p>
+</li>
+</ul></div></div></div></div>

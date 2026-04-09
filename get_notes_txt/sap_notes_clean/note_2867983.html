@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">After a BPC upgrade (for example to SAP_BW 750 SP15), issues are encountered after running Data Manager package (using process chain /CPMB/IMPORT_MASTER or /CPMB/IMPORT_IOBJ_MASTER) to import master data in <strong>Update mode</strong>:</p>
+<ul>
+<li>an ABAP dump GETWA_NOT_ASSIGNED is generated in ST22 transaction</li>
+<li>the hierarchy information is cleared</li>
+<li>changes are noticed in the structure of a different hierarchy than the one that is imported through the package</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Business Planning and Consolidation 10.1, version for SAP NetWeaver</li>
+<li>SAP Business Planning and Consolidation 11.0, version for SAP BW/4HANA</li>
+<li>SAP Business Planning and Consolidation 11.1, version for SAP BW/4HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Log on to EPM Add-in</li>
+<li>In Data Manager, execute a package (using process chain /CPMB/IMPORT_MASTER or /CPMB/IMPORT_IOBJ_MASTER) to load master data in <strong>update mode</strong></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Implement the following Notes:</p>
+<ul>
+<li><a href="/notes/2801782" target="_blank">Note 2801782</a> (Fix error when import master data in update mode)</li>
+<li><a href="/notes/2814672" target="_blank">Note 2814672</a> (Hierarchy information is cleared in update mode)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>IMPORT_MASTER, IMPORT_IOBJ_MASTER, "update mode"</p></div></div></div></div>

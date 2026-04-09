@@ -1,0 +1,49 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Database error occurs when running a combined query in a Web Intelligence document based on hana universe having “END_SQL = LIMIT XX” parameter set</li>
+<li>Error message: The following database error occurred: SAP DBTech JDBC: [257] )at 206): sql syntax error: incorrect systax error near “Limit”: Line 14 col 1 (at pos 205). For more information about this error, please refter to SAP knowledge Base Articale 2054721 on the SAP Support Portal. (IES 10901) (Error: INF)</li>
+<li>Incorrect SQL generated when using combined query</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>wrong, statement, union, webi, webintelligence, ( ) brackets, parenthesis, missing</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence Platform 4.2 Support Package 03</li>
+<li>Hana  database</li>
+<li>Web Intelligence</li>
+</ul>
+<p><strong>Steps to Reproduce :</strong></p>
+<ol>
+<li>Logon to Information Design Tool (IDT)</li>
+<li>Create a <strong>JDBC</strong> connection to HANA DB and then create a single source data foundation</li>
+<li>Create a business layer based on it</li>
+<li>Click <strong>Parameters</strong> and then set <strong>END_SQL</strong> as "Limit &lt;number&gt;” (For example: Limit 100)</li>
+<li>Create a Web Intelligence document based on the universe</li>
+<li>Drag some objects to Result Query panel</li>
+<li>Check that, in the SQL, "Limit 100" was added to the end of the sql</li>
+<li>Run query</li>
+<li>The query successfully runs without any error</li>
+<li>Got to <strong>Query Panel</strong></li>
+<li>Click <strong>Add a combined query</strong> icon to add a combined query</li>
+<li>Run query</li>
+<ol style="list-style-type: none;">
+<li>&gt;&gt; Database error occurs</li>
+</ol>
+<li>Open the Query Script viewer, the SQL generated is as below:<br/>(<br/>SELECT<br/>Table__1."SHOP_NAME",<br/>Table__1."MANAGER"<br/>FROM<br/> "EFASHION"."OUTLET_LOOKUP"  Table__1<br/>UNION <br/>SELECT<br/> Table__1."SHOP_NAME",<br/> Table__1."MANAGER"<br/>FROM<br/> "EFASHION"."OUTLET_LOOKUP"  Table__1<br/>)<br/>Limit 100</li>
+<li>Select<strong> Use custom query script</strong>, edit the SQL as below<br/>----<br/>(<br/>SELECT<br/>Table__1."SHOP_NAME",<br/> Table__1."MANAGER"<br/>FROM<br/> "EFASHION"."OUTLET_LOOKUP"  Table__1)<br/>UNION <br/>(SELECT<br/> Table__1."SHOP_NAME",<br/> Table__1."MANAGER"<br/>FROM<br/> "EFASHION"."OUTLET_LOOKUP"  Table__1<br/>)<br/>Limit 100<br/>----</li>
+<li>Run query</li>
+<ol style="list-style-type: none;">
+<li>&gt;&gt; The query runs successfully this time</li>
+</ol></ol>
+<p><strong>Cause:</strong></p>
+<ul>
+<li>This issue is caused by a defect in the product.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This issue is fixed in the patches listed in the "Support Packages &amp; Patches" section below.<br/>The "Support Packages &amp; Patches" section will be populated with the relevant patch levels <strong>once they are released.</strong><br/>For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article 2144559 in References section.</p>
+<p><strong>Workaround</strong>: <strong> </strong></p>
+<ul>
+<li>Use custom query script</li>
+<li>Manually add the missing parenthesis in the SQL</li>
+</ul></div></div></div></div>

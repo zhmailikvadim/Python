@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Duplicated sort fields may cause pdf exporting failure in Crystal Reports for Eclipse</p>
+<p>Error message: A column has been specified more than once in the order by list. Columns in the order by list must be unique.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>duplicate, sort field, crystal reports for eclipse</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>1. create a crystal report in Crystal Reports designer, add several columns to detail section and sort on one of them (say column "A").</p>
+<p>2. add a Group on column "A", with group sorting (also on column "A").</p>
+<p>3. export the report to pdf in Crystal Reports for Eclipse, get below error:</p>
+<ul>
+<li>A column has been specified more than once in the order by list. Columns in the order by list must be unique.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Such duplicated "Sort Fields" is not supported in Crystal Reports for Eclipse.</p>
+<p>To fix the issue, please update your report in Crystal Reports designer:</p>
+<p>1. Remove one of the duplicated sorting on column "A" (Just keep one sorting on same column, in group section, or in detail section);<br/>2. Then save your report.<br/><br/></p></div></div></div></div>

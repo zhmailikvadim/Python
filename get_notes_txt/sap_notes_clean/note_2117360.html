@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Execution of DBCC LOG fails with error:<br/><br/><span class="SNO_DNT" style="float: none;" translate="no">1&gt;  dbcc log(4,-15)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">2&gt; go</span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>LOG SCAN DEFINITION:</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>        Database id : 4</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>        Backward scan: spid = 15</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>        Log operation type BEGINXACT (0)</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>        Forward scan: starting at beginning of log for all log records</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>        Find all qualifying log records.</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no"><strong>d_log(): xls_startscan() failed - XLS error -3: Invalid condition﻿</strong></span><br/><br/></li>
+<li>Second parameter passed as a negative spid value</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Adaptive Server Enterprise (ASE) 15.7</li>
+<li>SAP Adaptive Server Enterprise (ASE) 16.0</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>CR <a href="https://me.sap.com/notes/1904061" target="_blank">772605</a></p>
+<p>Description:<span class="SNO_DNT" style="float: none;" translate="no"> xls_startscan() failed - XLS error -3: Invalid condition</span>" may be reported when executing DBCC LOG to get the log records for a particular SAP ASE process id when passing -&lt;process ID&gt; as the second parameter value of this command.</p>
+<p>Fixed in:</p>
+<ul>
+<li>ASE 15.7 SP132</li>
+<li>ASE 15.7 SP133</li>
+<li>ASE 16.0 GA PL05</li>
+<li>ASE 16.0 SP01</li>
+<li>ASE 16.0 SP02</li>
+<li>ASE 16.0 CE SP01</li>
+</ul>
+<p>The d_log() routine is incorrectly setting internal bits for both a forward scan and a backward scan of the log.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Upgrade to version where CR 772605 is fixed.</p>
+<p>Workaround:</p>
+<p>Execute DBCC LOG with a negative number of log records.</p>
+<p style="padding-left: 30px;">For example:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">﻿dbcc log (dbid, -spid, 0, -1000000)﻿</span></p></div></div></div></div>

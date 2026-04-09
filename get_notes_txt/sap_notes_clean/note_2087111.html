@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">TTP1100-2. INVOIC Out: Proforma determination</p>
+<p>Default CIP2SAP implementation of proforma determination can deliver into SIDoc maximum first 15 proforma invoices: (3 proforma invoices pro RFF+AAB segment) x 5 maximum RFF segments.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CIP2SAP, SIDOC, INVOIC, TTP1100, TTP1100-2,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>TTP1100-2. INVOIC Out: Proforma determination</p>
+<p><strong>Reason</strong>: You need to implement own proforma determination in order to deliver different (from CIP2SAP standard) number of proforma invoices in RFF+AAB segments.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement correction instructions.</p>
+<p><strong>Solution</strong>: You need to implement the BAdI /SIE/SF_ED_BADI_INVOIC_SD_MM and in interface /SIE/SF_IF_BADI_INVOIC_SD_MM redefine method Y_FIND_PROFORMA_REF. Method have to return populated table PT_YYCOMRFF, where you have to add new entries with qualify AAB, as well as output parameter PV_PROFORMA_DEFINED that should be set into 'X' (means that proforma determination is redefined and CIP2SAP standard must not be executed).</p></div></div></div></div>

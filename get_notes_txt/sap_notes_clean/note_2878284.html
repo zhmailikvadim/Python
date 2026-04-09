@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">One of the following:</p>
+<p><a name="Symptom1" target="_blank"></a>﻿(Symptom 1)</p>
+<p style="padding-left: 30px;">You migrated your system to SAP HANA with the DMO option of SUM. As part of this procedure, pooled and clustered tables are converted to transparent tables. After the procedure, the HANA MiniChecks (see SAP Note <a href="/notes/1969700" target="_blank">1969700</a>) report that physical ABAP pool and cluster tables are not in the correct state (i.e. not empty).</p>
+<p><a name="Symptom2" target="_blank"></a>﻿(Symptom 2)</p>
+<p style="padding-left: 30px;">During a Pool-to-Pool conversion for a table TAB, Step 3 fails with runtime error ITAB_DUPLICATE_KEY. The problem occurs when an inactive version of the pool table TAB exists, which can be verified in SE11.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">ABAP DDIC depooling pool table</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program Error.</p>
+<p>The following applies to <a href="#Symptom1" target="_self">(Symptom 1)</a> only:</p>
+<p>Physical table pools are database tables that contain multiple logical tables. An example would be table ATAB (physical pool) that contains (logical) tables like SCIPE, SCIPT,... The ABAP application operates just on the logical tables and sees them as 'normal' tables.</p>
+<p>The concept of tables pools (and table clusters) is outdated and is removed from the ABAP DDIC beginning with SAP_BASIS 7.53. All logical tables are converted to 'normal' transparent tables. The same happens even in lower releases when a migration to SAP HANA via DMO (Database Migration Option) takes place.</p>
+<p>The process of converting a physical table pool into transparent tables is also called sometimes 'depooling'. Once the transparent tables are created and filled, the data must be deleted from the physical table pool because there it is not needed anymore. This deletion in the physical table pool does not happen if the depooling is performed with the DMO option of SUM (there are other methods for depooling).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Corrected with the support packages mentioned below. As an alternative, apply the attached correction instructions.</p>
+<p>The following applies to <a href="#Symptom2" target="_self">(Symptom 2)</a> only: after applying the correction, go back to SE14 and display the table. Consider selecting "Background" Processing type if the table is very large. Click on "Continue Adjustment".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">R_MIGOBJCLASSREL_PARA, KMAT_MIGR/60, conversion of generic articles and variants</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>For a certain number of the work processes available in the system for parallel processing of the report, the number of work processes available to the report for parallel processing is 0. As a result, no server group is transferred to the Framework for Parallel Processing, which ultimately leads to the error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement this SAP Note in your system.</p></div></div></div></div>

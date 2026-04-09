@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">During processing payment advise note for grid usage billing by transaction code INVMON, if aggregation documents are split, the logging is incomplete.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>US4G, Grid Usage Billing, Grid Usage, INVMON, PAN, Payment Advice Note, Logging, Incomplete, Aggregation Document, Posting Document</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Function Missing</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement following two actions for the solution:</p>
+<p id="">1. Implement the correction instruction in the SAP Note or import the higher version of Support Package.</p>
+<p>2. Open following configuration at IMG path: 'SAP Utilities' -&gt; 'Intercompany Data Exchange' -&gt; 'Bill and Payment Advice Note Processing' -&gt; 'Make Basic Settings', click structure 'Customer Action in Monitoring' and check if following entry exists:</p>
+<ul>
+<li>'Descr. Cust. Action': Display Complete Application Logs</li>
+<li>'FM Customer Action': /US4G/DISP_COMPLETE_APP_LOG</li>
+</ul>
+<p>If there is no such configuration entry, add one entry with 'Descr. Cust. Action' as 'Display Complete Application Logs' and 'FM Customer Action' as '/US4G/DISP_COMPLETE_APP_LOG'.</p>
+<p>After you apply above solution, you can run transaction INVMON, perform searching and you will arrive the searching result view. Then there will be the option 'Display Complete Application Logs' after you click the button 'Execute Action' in tab 'Bill Documents for Selected Bill Header'. The complete application log will be shown if you select this open.</p></div></div></div></div>

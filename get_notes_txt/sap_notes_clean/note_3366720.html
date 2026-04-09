@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">After BADI FTR_CUSTOMER_EXTENT(Open TR-TM: Customer Enhancement) defined and start transaction code TX01.</p>
+<p>Find that in the method: EVT_APPLICATION_START has been activated because the breakpoint stops in the debugger, but in the Method: EVT_TRANSACTION_SAVE_READY, debugging with a breakpoint does not stop at the target location and the Method itself is not called.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Treasury and Risk Management (TRM)</p>
+<ul><li>SAP R/3</li><li>SAP R/3 Enterprise </li><li>SAP ERP Central Component</li><li>SAP ERP</li><li>SAP enhancement package for SAP ERP</li><li>SAP enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA Finance</li><li>SAP S/4HANA</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Implement BADI FTR_CUSTOMER_EXTENT, and set a breakpoint to trigger Method: EVT_TRANSACTION_SAVE_READY.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Events such as EVT_TRANSACTION_SAVE_CHECK and EVT_TRANSACTION_SAVE_READY are only called if you have previously set up user-defined tab enhancements within EVT_APPLICATION_START.</p>
+<p>Therefore, you must add the following codes within your own implementation of EVT_APPLICATION_START, for example:</p>
+<p> CALL FUNCTION 'FTR_CUSTOM_BADI_SAMPLE_START'.</p>
+<p>EXPORTING</p>
+<p>pi_proxy_transaction = pi_proxy_transaction</p>
+<p>pi_proxy_messages = pi_proxy_messages</p>
+<p>pi_proxy_fcode = pi_proxy_fcode</p>
+<p>pi_proxy_fmod = pi_proxy_fmod</p>
+<p>pi_cust_transaction = pi_cust_transaction</p>
+<p>Changing</p>
+<p>pc_tab_badi_tabs = pc_tab_badi_tabs.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>EVT_TRANSACTION_SAVE_READY, FTR_CUSTOMER_EXTENT, FTR_CUSTOM_BADI_SAMPLE_START, TX01, EVT_TRANSACTION_SAVE_CHECK</p></div></div></div></div>

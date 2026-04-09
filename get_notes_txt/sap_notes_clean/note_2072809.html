@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Opening an outbound P4 connection consumes a lot of time. The default trace files show the following exception for different hosts:</p>
+<p>SystemMessageProcessor.openConnection() : Failed to open a connection to &lt;protocol&gt;:&lt;transport&gt;:&lt;host&gt;:&lt;port&gt;, reason: connection refused</p>
+<p>Cannot connect stub via connection profile &lt;transport&gt;:&lt;host&gt;:&lt;port&gt;. Exception: com.sap.engine.services.rmi_p4.P4IOException: <br/>java.io.IOException: Failed to open a connection to &lt;protocol&gt;:&lt;transport&gt;:&lt;host&gt;:&lt;port&gt;, reason: connection refused<br/> at com.sap.engine.services.cross.fca.SystemMessageProcessor.openConnection(SystemMessageProcessor.java:246)<br/> at com.sap.engine.services.cross.fca.FCAConnectorImpl.openConnection(FCAConnectorImpl.java:187)<br/> at com.sap.engine.services.rmi_p4.server.P4MessageProcessor.getConnection(P4MessageProcessor.java:83)<br/> at com.sap.engine.services.rmi_p4.server.P4ObjectBrokerServerImpl.getConnection(P4ObjectBrokerServerImpl.java:285)<br/> ...</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>RMI_P4, Multiple IP</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>When AS Java tries to connect a stub object through P4 based on the object's connection profiles, it iterates through all available profiles and tries with each one. Some connection profiles cannot be used for P4 connections because they include IP addresses which are not visible or available. In this case, the P4 call waits until a connection timeout refuses it and then AS Java proceeds with the next profile. Sometimes, there is an already existing P4 connection, but AS Java does not recognize it until iteration reaches the corresponding profile. In order to optimize the process of opening a P4 connection, we introduce a patch which checks if there's an already established connection to any of the available connection profiles and reuses it.</p>
+<p>This patch does not enhance the process of opening an initial connection. It speeds up the process of connection reuse.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>
+<div>Update your AS Java to a release where this optimization is introduced. See the SP Patch Level section for available downloads.</div>
+</li>
+</ul>
+<p>This field is relevant for both PBIK and P11d scenarios. The field is introduced via the SAP Note 2850097.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Zero EM</p>
+<p>IT0442</p>
+<p>Legal changes 2020-21</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Legal Change</p>
+<p>Pre-requisite notes are as follows.</p>
+<p>1. <a href="/notes/2852226" target="_blank" title="2852226  - PY-LOC-CC: Zero emission mileage (SAP_HRXXX) ACI">2852226 - PY-LOC-CC: Zero emission mileage (SAP_HRXXX) ACI </a></p>
+<p>2. <a href="/notes/2850097" target="_blank" title="2850097  - PY-LOC-CC: Zero emission mileage (SAP_HRXXX)">2850097 - PY-LOC-CC: Zero emission mileage (SAP_HRXXX) </a></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please refer to the attachment IT0442.pdf in the note 2850097, the details of where the new field appears have been shown there.</p>
+<p>The validations on the new field are as follows.</p>
+<p>1. This field will be hidden unless the begin date for the IT0442 - subtype COMP is greater than or equal to 06.04.2020.</p>
+<p>2. The field "Zero EM" is display only when the value of CO2 is greater than 50.</p>
+<p>3. The field "Zero EM" is editable if the value of CO2 is less than or equal to 50.</p>
+<p><strong>Solution Implementation</strong></p>
+<p>Implement the relevant SPs</p>
+<p>OR</p>
+<p>Kindly follow the instructions below in order if you wish to implement the changes manually:</p>
+<p>1. Implement the pre-requisite notes in order</p>
+<p>2. Implement the correction instructions attached to this note</p></div></div></div></div>

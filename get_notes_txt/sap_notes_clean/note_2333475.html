@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">ct_get_data() stops processing rows leading to rows missing from the result when a warning, such as one that is raised when an untranslatable character is encountered was received.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Sybase Software Developers Kit (SDK) 15.7 SP134, SP136</li>
+<li>SAP Software Developers Kit (SDK) for Adaptive Server Enterprise (ASE) 16.0 SP02 PL03</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li><em>$SYBASE/$SYBASE_OCS/sample/ctlibrary/csr_disp.c</em></li>
+<li>In the program, change the <em>CS_CURSOR_ROWS</em> to 1, instead of 10.<br/> </li>
+<ol style="list-style-type: none;">
+<li><em>retcode = ct_cursor(cmd, CS_CURSOR_ROWS, NULL, CS_UNUSED, NULL, CS_UNUSED, (CS_INT)1);</em></li>
+</ol></ol>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>FDS_EED token to result in stopping processing the rows, leading to rows missing from the resultset when a warning was received.</li>
+<li>The issue has been identified and logged under SAP <strong>CR 795291</strong>. Its description reads, "CTLIB: ct_get_data() stops processing rows leading to rows missing from the result set when a warning, such as one that is raised when an untranslatable character is encountered, was received".</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>This issue has been addressed in:</li>
+<ul>
+<li>SAP SDK for ASE 15.7 SP137 and higher</li>
+<li>SAP SDK for ASE 16.0 SP02 PL04 and higher</li>
+<li>SAP SDK for ASE 16.0 SP03 and higher</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Software Developer Kit, SDK, ASE, Adaptive Server Enterprise, CR, change record, report, request, Bug, ct-lib, ct-library, open client, character, data, missing, gone, stopped, warning, warn, fetch, cursor, untranslatable, CR#795291, CR795291, 795291</p></div></div></div></div>

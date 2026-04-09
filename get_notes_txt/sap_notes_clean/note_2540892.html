@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">If Pack/Unpack activity is used with activity rules AUTO_START_SFC and AUTO_COMPLETE_SFC set to YES, done quantity in shop order maintenance build status tab is incorrect after container is done and closed.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PK020, incorrect quantity</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The issue in the symptom is caused by incorrect code in Complete functionality that updates shop order done quantity (QTY). <br/>To reproduce the issue you should do this:</p>
+<ol>
+<li>create an operation in operation maintenance</li>
+<li>create a standard routing with this single operation</li>
+<li>create a material with lot size 1 and assign the routing to it</li>
+<li>in activity maintenance, modify PK020 to have activity rules: AUTO_START_SFC – YES AUTO_COMPLETE_SFC – YES</li>
+<li>create and release 12 SFCs (all with QTY 1) to the material. SFCs belong to the same shop order</li>
+<li>create a container in container maintenance with Max QTY 12</li>
+<li>with PK020 activity pack the recently released SFCs to the container</li>
+<li>click „Done and Close” to close the container</li>
+<li>in shop order maintenance, build status tab, see QTY 78 instead of QTY 12.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The code of Complete functionality that updates shop order done quantity was corrected to properly handle Pack/Unpack with SFC start/complete.</p>
+<p><strong>Impact</strong></p>
+<p>The code change done to address the symptom affecting functionality of Pack/Unpack and Complete functionalities.</p>
+<p> </p></div></div></div></div>

@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">An INVOIC SIDOC (FI or MRM) contains attachments and an error occurs within the attachment processing.</p>
+<p>If the SIDOC is reprocessed with YDR3 (Posting visible or invisible) after correcting the error, the attachments are stored correctly, but no invoice  document is created.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>C2SEDI, INVOIC IN Switch, INVOIC IN FI, INVOIC IN MRM, C2S8000032686, C2S 8000032686, Scanning Solution</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error reported with ticket 8000032686.</p>
+<p>Posting visible and invisible is done with a CALL TRANSACTION. If the attachments are stored correctly, a COMMIT WORK is done and the called transaction is stopped.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the correction instruction.</p>
+<p>The attachments are now processed before the CALL TRANSACTION. The COMMIT WORK that leads to the canellation will be avoided.</p>
+<p> </p>
+<p>The solution consists of the following notes:</p>
+<p>2620328 - YDR3: INVOIC IN FI SIDOCs with status 51 cannot be reprocessed if the attachments are not archived correctly before<br/><a href="/notes/2620427" target="_blank">2620427</a> - INVOIC IN Switch: New function module to encapsule PO reference determination functionality</p></div></div></div></div>

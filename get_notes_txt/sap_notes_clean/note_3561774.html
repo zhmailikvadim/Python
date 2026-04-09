@@ -1,0 +1,63 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This note contains information about SAP MII 15.5 SP02 release.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<div class="longtext">
+<p>SAP MII, MII 15.5 SP02, OEE, MII OEE, workbench.jar, workbench.zip, file upload restriction, MII 15.5 SP01 Release note, MII release note</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>SAP MII 15.5 SP02 release information , XMII, MII_ADMIN and MFG MII Content, OEE MII, OEE ERP INTERFACE 15.0, Catalog OData Services<strong><strong>, </strong></strong><span style="font-size: 10px;">MDO OData Services, </span><span style="font-size: 10px;">KPI OData Services</span></p>
+<div class="topic-width" id="topic">
+<div class="page concept - topic-topic concept-concept" id="loio88b1ff517bd47b38e10000000a445394">
+<div class="body conbody"></div>
+</div>
+</div>
+<p><span style="font-size: 10px;"> </span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP MII 15.5 SP02 contains following changes.</p>
+<ul class="ul" id="loio8a2275a1b29f49a29ab2f5cf6f988eb7__ul_nbn_ng2_r4b">
+<li class="li">SAP MII is moving from Odata4j to Olingo Library for odata interface generation. Impact areas are MII <a href="https://help.sap.com/docs/SAP_MANUFACTURING_INTEGRATION_AND_INTELLIGENCE/d70c3ac3566b41dd896cd7cecc94e14a/545aff512ec09b33e10000000a44538d.html?q=IlluminatorOdata" target="_blank">IlluminatorOdata Interface</a>, <a href="https://help.sap.com/docs/SAP_MANUFACTURING_INTEGRATION_AND_INTELLIGENCE/d70c3ac3566b41dd896cd7cecc94e14a/918a875792f25c08e10000000a441470.html?q=odata" target="_blank">Odata Modeller</a>, and all the OEE UI e.g. <a href="https://help.sap.com/docs/SAP_MANUFACTURING_INTEGRATION_AND_INTELLIGENCE/386f983a90564cc8bda9a53dffda9691/37b90710d498473a9e5e6701a8f5443e.html" target="_blank">OEE dashboard</a>, <a href="https://help.sap.com/docs/SAP_MANUFACTURING_INTEGRATION_AND_INTELLIGENCE/386f983a90564cc8bda9a53dffda9691/edf01e2da0b44193a276d5f7e3a5a6a1.html" target="_blank">Configuration for worker UIs</a>, <a href="https://help.sap.com/docs/SAP_MANUFACTURING_INTEGRATION_AND_INTELLIGENCE/386f983a90564cc8bda9a53dffda9691/a9810c56d46e8809e10000000a441470.html" target="_blank">Application Launchpad</a>. For Illuminator ODATA format change, kindly check the <a href="https://me.sap.com/notes/3594355" target="_blank">note 3594355</a> </li>
+<li class="li">Security related correction for GHAS and Check Max issues. </li>
+<li class="li">Applets executon in Microsoft Internet Explorer or Edge are no longer supported as per earlier communications note <a href="https://me.sap.com/notes/2440728" target="_blank">2440728 - MII Visualization Applets</a> and <a href="https://me.sap.com/notes/3181292" target="_blank">3181292 - End of mainstream support for MII applets</a>. If you are using applets then 1st move all those to UI5 based visualization objects and then upgrade to MII 15.5 SP02.</li>
+<li class="li">Addition of new stonger encryption algorithms i.e. AES-128, AES - 192 and AES - 256 in Security Services -&gt; Encryption. <span style="text-decoration: underline;"><em><strong>Please take the back up of all the configuration and projects before doing MII 15.5 SP02 upgrade due to change in Encryption algorithm. </strong></em></span></li>
+<li class="li">
+<p>Removal of EXIF data of pictures during uploaded unless a clear consent or other legal ground exist</p>
+</li>
+<li class="li">Additional system property to maintain the allowed CSP header in MII. Check the note <a href="https://me.sap.com/notes/3567906" target="_blank">3567906 - Content Security Policy addition as per product standard</a></li>
+<li class="li">
+<p>Additional system property as<strong> </strong>Remove Exif data from JPG/PNG file (REMOVE_EXIF_METADATA) to Controls the removal of EXIF data from the image when uploaded in SSCE or MII Workbench. Check this <a href="https://me.sap.com/notes/3566054" target="_blank">note 3566054 - Option to remove Exif data from uploaded pictures</a></p>
+</li>
+<li class="li">All corrections since MII 15.5 SP01 release.</li>
+</ul>
+<p>Here are some of the other important change done in lower releases which may have impact when moving to 15.5 SP02</p>
+<p><strong>Please check note <a href="https://me.sap.com/notes/2959802" target="_blank">2959802 - Remove User Attributes from PropertyAccessServlet</a> which will have impact on your custom development as some of the user session properties are removed due to security reasons.</strong></p>
+<p>Please take the latest Software archives for <strong>XMII, MII_ADMIN and MFG MII Content</strong> from Service Market Place for MII 15.5 SP02 to use the latest features.</p>
+<p><strong>Some general information </strong></p>
+<p>Please don't deploy <strong>MFG MII Content</strong> software archive on JAVA stack and <strong>OEE ERP INTERFACE 15.0</strong> on ABAP stack <strong>if you are not using OEE functionality of MII product.</strong></p>
+<div class="sapUxAPObjectPageSectionContainer">
+<div class="sapUiRespGrid sapUiRespGridMedia-Std-LargeDesktop sapUiRespGridHSpace1 sapUiRespGridVSpace1" id="__section1-innerGrid">
+<div class="sapUiRespGridSpanXL12 sapUiRespGridSpanL12 sapUiRespGridSpanM12 sapUiRespGridSpanS12" id="__section1-innerGrid-wrapperfor-__section0">
+<div class="sapUxAPObjectPageSubSection ui-helper-clearfix sapUiNoMargin" id="__section0">
+<div class="ui-helper-clearfix sapUxAPBlockContainer">
+<div class="sapUiRespGrid sapUiRespGridMedia-Std-LargeDesktop sapUiRespGridHSpace1 sapUiRespGridVSpace1" id="__section0-innerGrid">
+<div class="sapUiRespGridSpanXL12 sapUiRespGridSpanL12 sapUiRespGridSpanM12 sapUiRespGridSpanS12" id="__section0-innerGrid-wrapperfor-__layout7">
+<div class="sapUiVlt sapuiVlt sapMeNotesLongText" id="__layout7">
+<div class="sapUiVltCell sapuiVltCell">
+<div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" id="__vbox19">
+<div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data245">
+<p>To check OEE add on (OEE_ERP 150 component) compatibility with different S/4HANA releases, kindly check the note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2214409" target="_blank">2214409 </a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Also it is not mandatory to upgrade <strong>OEE ERP INTERFACE 15.0</strong> component if you are not using OEE functionality of MII while upgrading the JAVA component. If you are using OEE funtionality in MII then upgrading the <strong>OEE ERP INTERFACE 15.0 </strong>is important as it brings some of the correction done in latest SPs.</p>
+<p>For End of maintenance for MII 15.5, please check the following PAM link - <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://userapps.support.sap.com/sap/support/pam?hash=s%3DMII%26o%3Dmost_viewed%257Cdesc%26st%3Dl%26rpp%3D20%26page%3D1%26pvnr%3D73555000100900003849%26pt%3Dg%257Cd" target="_blank">SAP Manufacturing Integration and Intelligence 15.5 PAM Link</a><span style=" font-family: '72fallback', '72', '72full', Arial, Helvetica, sans-serif; font-size: 16px;"> </span></p>
+<p><span class="sapUxAPObjectPageHeaderIdentifierContainer" style="-webkit-tap-highlight- text-size-adjust: none; display: inline-block; line-height: 1.375rem; vertical-align: middle; width: 1175.33px; box-sizing: border-box; padding-top: 0px; padding-bottom: 0px; flex: 1 1 0%; margin-left: 3rem;  font-family: '72fallback', '72', '72full', Arial, Helvetica, sans-serif; font-size: 16px;"><span class="sapUxAPObjectPageHeaderTitleText sapUxAPObjectPageHeaderTitleTextWrappable" style="-webkit-tap-highlight- text-size-adjust: none;"> </span></span></p>
+<p><span class="sapUxAPObjectPageHeaderTitleText sapUxAPObjectPageHeaderTitleTextWrappable" style="-webkit-tap-highlight- text-size-adjust: none;"> </span></p>
+<p><span class="sapUxAPObjectPageHeaderTitleText sapUxAPObjectPageHeaderTitleTextWrappable" style="-webkit-tap-highlight- text-size-adjust: none;"> </span></p></div></div></div></div>

@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">Customer needs to register their OpenText software installations to SAP Solution Manager or Focus Run system via SLD registration process. </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Archiving and Document Access 16.2.10 or above (both SAP ERP and S/4)</p>
+<p>SAP Extended Enterprise Content Management 16.2.10 or above (both SAP ERP and S/4)</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>SAP supports the following OpenText software components using the SLD data supplier of Apache Tomcat. </p>
+<ul><li>OpenText Directory Service (OTDS)</li><li>OpenText ECM WebService</li><li>OpenText WebViewer</li></ul>
+<p></p>
+<p>Customers could perform the following steps to complete the registration: </p>
+<p>1. Install the Apache Tomcat Data Supplier according to SAP note 1508421</p>
+<p>2. Download the corresponding OpenText software metadata files from this KBA</p>
+<p>As the OpenText software components are defined in multiple SAP products, customer needs to determine which SAP product is the best candidate to register. There are 4 possible options:</p>
+<ul><li style="list-style-type: none;">
+<ul style="list-style-type: circle;"><li>SAP Archiving and Document Access by OpenText</li><li>SAP Archiving and Document Access by OpenText for SAP S/4HANA</li><li>SAP Extended Enterprise Content Management by OpenText</li><li>SAP Extended Enterprise Content Management by OpenText for SAP S/4HANA</li></ul>
+</li></ul>
+<p>If the OpenText system is used for both SAP Archiving and Document Access and SAP Extended Enterprise Content Management scenarios, choose SAP Extended Enterprise Content Management product. </p>
+<p>If the OpenText system is connected with both SAP ERP and SAP S/4HANA systems, choose SAP S/4HANA related product. </p>
+<p>3. Place the corresponding product release metadata files under the META-INF folder of the installed SLD Data Supplier application, e.g. D:\Program Files\Apache Software Foundation\Tomcat 9\webapps\sap.com~TomcatSLDDataSupplierWEB\META-INF</p>
+<p>4. Trigger the SLD Data Supplier. </p>
+<p>5. Verify the SLD registration result in LMDB. </p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SLD registration, TOMCAT, OpenText Directory Service, OpenText Image WebViewer, OpenText Extended ECM Webservices </p></div></div></div></div>

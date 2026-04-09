@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Searching for Recipes or Specifications on the PLM Web UI returns ASSERTION_FAILED dump in program /PLMB/CL_RCP_TOOLS</li>
+<li>Searching for Specifications or Recipes via transaction CG02 returns the ASSERTION_FAILED dump</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP ERP Recipe Development on PLM Web UI (PLM-WUI-RCP)</li>
+<li>SAP R/3</li>
+<li>SAP R/3 Enterprise</li>
+<li>SAP ERP Central Component</li>
+<li>SAP ERP</li>
+<li>SAP Enhancement package for SAP ERP</li>
+<li>SAP Enhancement package for SAP ERP, version for SAP HANA</li>
+<li>SAP S/4HANA, on-premise</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Start transaction CG02</li>
+<li>Try searching for Recipes or Specifications</li>
+<li>Dump occurs with the following details</li>
+</ol>
+<p>"ASSERTION_FAILED"<br/>"/PLMB/CL_RCP_TOOLS============CP" bzw. /PLMB/CL_RCP_TOOLS============CM01J<br/>"GET_RCP_CATEGORY"</p>
+<p>at line:<br/>ASSERT sy-subrc IS INITIAL</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>The Recipe Type of the Recipe or Specification you are searching for is already deleted from the system</li>
+<li>System is searching for Specifications or Recipes that have their Recipe Type deleted creates inconsistency</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>To correct the inconsistency, possible solutions include:</p>
+<ol>
+<li>
+<div>Create the recipe type again.</div>
+</li>
+<li>
+<div>Delete the recipes of this recipe type. Therefore you need to mark these recipes for deletion, see field DEL_IND of table /PLMB/RCP_RECIPE.</div>
+</li>
+<li>
+<div>Mark the recipes of this recipe type for archiving, see field ARCHIVE_IND, and for deletion, see field DEL_IND, of table /PLMB/RCP_RECIPE, and archive the recipes.</div>
+</li>
+</ol>
+<p>To set the mentioned indicator fields in table /PLMB/RCP_RECIPE you may use transaction SE16 or may create a small ABAP report that updates these fields.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>/PLMB/RCP_TY_GEN , DEL_IND , ARCHIVE_IND , CG02 , customizing , Die ASSERT-Bedingung wurde verletzt , /plmu/wda_sea_adv_search_oif , ls_rcp_type_cat , /PLMU/WDA_SEA_ADV_SEARCH_OIF</p></div></div></div></div>

@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When the currency in DPQS master data (/ACCGO/MAINT_DPQS) or Contract differs from the settlement currency, users have the option to negotiate the foreign exchange (FX) rate during the settlement process prior to release.<br/> The current Settlement Workcenter calculates the DPQS amounts on a new Settlement Proposal only. If FX rates are negotiated after generating the proposal or while modifying an existing settlement, the system applies the updated values directly to the calculated DPQS amounts.<br/> This results in inconsistencies when comparing the DPQS calculations between the Settlement Proposal after FX Negotiation and the DPQS adjusted Values obtained from simulation of the transaction /ACCGO/MAINT_DPQS.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ACM; Agricultural Contract Management; Settlement; FX Negotiation; DPQS; Settlement WorkCenter; /ACCGO/MAINT_DPQS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Settlement Work Center applies the Negotiated FX directly to the DPQS Amount Calculated when the Settlement was proposed, instead of applying the FX first to the Settlement Price and then using the revised price to re-calculate the DPQS.</p>
+<p>Please implement the below mentioned prerequisite notes in sequence mentioned below</p>
+<ol>
+<li>3340908 - ACM S/4H: Incorrect DPQS amount getting calculated after FX negotiation</li>
+<li>3339386 - ACM S/4H: Incorrect DPQS amount calculated in case of re-negotiated FX rate</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> Import the support package or implement the correction instruction.</p>
+<p>Steps to replicate the Issue before implementation of Note and Test the Solution after implementing the Note</p>
+<p>1. Generate a Contract in USD and attach a DPQS in another Currency (JPY preferably, special Currency)</p>
+<p>2. Create multiple LDCs in different Currencies (USD / JPY / CAD). This would generate multiple Settlements.</p>
+<p>3. Generate proposal for each LDC and in the FX Negotiation tab on Settlement Unit, re-negotiate the FX rates.</p>
+<p>4. Check the calculations and match the DPQS Adjustment amounts by Simulating the DPQS using T.Code /ACCGO/MAINT_DPQS</p>
+<p>After the Note implementation the DPQS Calculations should be consistent between the Settlement Proposal / Settlement Update (after FX Negotiations) and DPQS Simulation in T.Code /ACCGO/MAINT_DPQS.</p></div></div></div></div>

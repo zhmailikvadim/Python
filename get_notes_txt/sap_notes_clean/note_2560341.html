@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1" style="padding-left: 30px;">Configured CM anonymous access following note <a href="/notes/837898" target="_blank">837898</a> because there are resources that need to be accessed anonymously. Then found attachment of task (created using "Create Task" button in UWL list) from AdHocSystem can be accessed anonymously when use direct link of the attachment, which is not expected.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>EP Release Independent</li>
+<li>SAP NetWeaver</li>
+<li>SAP Composition Environment</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<div>Follow note <a href="/notes/837898" target="_blank">837898</a> to configure CM anonymous access.</div>
+</li>
+<li>Create task using "Create Task" button in UWL list and upload attachment to this task.</li>
+<li>Access attachment of the task via direct link like <a href="&lt;protocol&gt;://&lt;FQDN&gt;:&lt;port&gt;/irj/go/km/docs/workflow/40d1d9fd-80a6-3510-a3bd-c707a8c3aeb1/test.txt" target="_blank">&lt;protocol&gt;://&lt;FQDN&gt;:&lt;port&gt;/irj/go/km/docs/workflow/40d1d9fd-80a6-3510-a3bd-c707a8c3aeb1/test.txt</a></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>
+<div>CM Repository "workflow" has other value configured for "Security Manager" other than AclSecurityManager thus cause no way to adjust permission setting of "workflow" folder in "KM Content".</div>
+</li>
+<li>
+<div>Permission setting of "workflow" folder or sub folder / file is not correctly configured.</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p style="padding-left: 30px;">1. Make sure correct settings have been implemented following note <a href="/notes/837898" target="_blank">837898</a>.</p>
+<p style="padding-left: 30px;">2. Access <em>System Administration -&gt; System Configuration -&gt; Knowledge Management -&gt; Content Management -&gt; Repository Managers -&gt; CM Repository</em>, then click "workflow" and make sure "Security Manager:" has value <span>AclSecurityManager</span> configured. If it has other value configured, please change to AclSecurityManager and restart system to take change effect.</p>
+<p style="padding-left: 30px;"><img alt="workflow_repository.png" class="img-responsive" src="/documents/customerkba/J_Mvhew-vuMd4eGI-akyTF0p6clBkFMFaj4Uh03j07s" title="workflow_repository.png"/></p>
+<p style="padding-left: 30px;">3. Access <em>Content Administration -&gt; KM Content -&gt; root -&gt; workflow</em>, then choose menu <em>Folder -&gt; Details</em>. In the new popup window, please choose <em>Settings -&gt; Permissions</em>. Then in this page, please adjust the permission as you preferred. If you would like all sub folders and files inherit the same permission settings, please use button "Reset Child Permissions".</p>
+<p style="padding-left: 30px;"><img alt="change_permission_1.png" class="img-responsive" src="/documents/customerkba/zX_4GnkWOCYiviRIGSIYAXcuD4mbl6R6OGl1ocwvcwM" title="change_permission_1.png"/>   <img alt="change_permission_2.png" class="img-responsive" src="/documents/customerkba/eiXowxVdUMO2B8Jo5Yr2xkrJzqA7lVBnIUU_64AirWQ" title="change_permission_2.png"/></p>
+<p style="padding-left: 30px;"><img alt="change_permission_3.png" class="img-responsive" src="/documents/customerkba/0mXkXv_ydRddVEzhs98x8FLNYBgXYR6m4gbtpvR7I2M" title="change_permission_3.png"/></p>
+<p style="padding-left: 30px;">After above configuration, if access attachment again using direct link, it will show information as following. This is expected behavior. This means resource has been correctly protected against unauthorized users.</p>
+<p style="padding-left: 30px;"><img alt="403.png" class="img-responsive" src="/documents/customerkba/dglBoUtRAUrX-bLVUCdimWGC6uRadH7cLzKpNmwHyD0" title="403.png"/></p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p style="padding-left: 30px;"><a href="/notes/837898" target="_blank">837898 - How to configure anonymous CM access </a></p>
+<p style="padding-left: 30px;"><a href="/notes/2223758" target="_blank">2223758 - Direct Link to KM Content fails with Anonymous Access </a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>WorkflowAttachmentSecurityManager, universal worklist, 403, The requested operation is forbidden for this resource. You do not have the permissions required to access this resource,</p></div></div></div></div>

@@ -1,0 +1,239 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1"><span style="font-size: 14px;">During the execution of XCLA CL_XCLA_ACDOCA you encounter one of the following symptoms which are displayed in the log file.</span></p>
+<p><strong>A. Errors leading to a RED log entry or a runtime error, which always need a reprocessing/re-execution of the XCLA:</strong></p>
+<p><span style="font-size: 14px;">1. Message FINS_ACDOC_DB070: Package too large (read SAP note 2469999)</span></p>
+<p><span style="font-size: 14px;">2. The XCLA </span><span style="font-size: 14px;">terminates with an out-of-memory error</span></p>
+<p><span style="font-size: 14px;">3. The system reports a DBSQL_TABLE_UNKNOWN error for VXCLAACDOCA</span></p>
+<p><span style="font-size: 14px;">4. Message PU475: </span>Error in parallel XCLA execution</p>
+<p>5. Message PU470: Execution of XCLA CL_XCLA_ACDOCA canceled due to error</p>
+<p>6. Message PU471: Execution of package xxx of XCLA CL_XCLA_ACDOCA canceled</p>
+<p>7. Message SHDB_PFW302: Dispatcher Timeout: 'PackSel xxx' waited 900 sec for free WP</p>
+<p><span style="font-size: 14px;">8. Message UPGBA028: Database object does not exist on the database</span></p>
+<p><span style="font-size: 14px;">9. Message PU461: "CL_XCLA_ACDOCA" was already executed in a previous step</span></p>
+<p><strong>B. Info messages which should be checked individually <strong>and normally do not need any reprocessing/re-execution</strong>:</strong></p>
+<ul>
+<li>FINS_ACDOC_DB067: Project not found: "100"/"CS-00005"</li>
+<li>FINS_ACDOC_DB059: Not all project IDs have been assigned (read SAP note 2469999))</li>
+<li>FINS_ACDOC_DB061: Not all partner project IDs have been assigned (read SAP note 2469999))</li>
+<li>FINS_ACDOC_DB068: WBS element not found: 100/PZ016697122</li>
+<li>FINS_ACDOC_DB060: Not all partner WBS elements have been assigned (read SAP note 2469999)</li>
+<li>FINS_ACDOC_DB055: Asset class not updated for "100/0001/20094-2"</li>
+<li>FINS_ACDOC_DB069: Not all asset classes have been assigned (read SAP note 2469999)<strong><br/></strong></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CL_XCLA_ACDOCA, DC00000000, FINS_ACDOC_DB 070, BELNR, DOCLN, DC00000000, VXCLAACDOCA, DBSQL_TABLE_UNKNOWN, FINS_ACDOC_DB 055, FINS_ACDOC_DB069, FINS_ACDOC_DB 069, FINS_ACDOC_DB 076</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>In most cases the root cause for symptoms 1 -3 is an inefficient packaging by standard packaging field ACDOCA-BELNR which leads to too large packages for document numbers like e.g. DC00000000 (from CO migration) which can have several million lines.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>What does CL_XCLA_ACDOCA do?</strong></p>
+<p style="padding-left: 30px;">CL_XCLA_ACDOCA fills fields which have been newly added to ACDOCA in a certain release:</p>
+<ul>
+<li>S4CORE 102</li>
+<ul>
+<li>Fill PS_PSP_PNR (internal WBS element) from PS_POSID (external WBS element) or OBJNR (CO object number)</li>
+<li>Fill CO_MEGBTR/CO_MEFBTR/CO_MEINH from VMSL/VMFSL/RVUNIT</li>
+</ul>
+<li>S4CORE 103</li>
+<ul>
+<li>Fill ANLKL/KTOGR from ANLA-ANLKL/ANLA-KTOGR</li>
+<li>Fill PANL1/PANL2 from related ACDOCA-ANLN1/ANLN2 entries</li>
+<li>Fill PS_PRJ_PNR (internal Project) from PS_PSPID (external project)</li>
+<li>PPS_PSP_PNR (internal partner WBS element) from PPS_POSID (external partner WBS element) or PAROB1 (CO partner object number)</li>
+<li>Fill PPS_PRJ_PNR (internal partner project) from PPS_PSPID (external partner project)</li>
+</ul>
+</ul>
+<p><span style="font-size: 14px;">During this massively parallelized processing, errors or problems may occur which must be checked in the XCLA log file (which can be found via SE09 in the transport log of the request containing the XCLA CL_XCLA_ACDOCA or via execution of the program RCTS_DISP_AIM_LOG with parameter OBJNAME = CL_XCLA_ACDOCA). </span>Important info: If the XCLA log can't be found, please check this also on all other application servers (via transaction SM51)!</p>
+<p>Please note that only XCLA executions which lead to a RED log entry in the log file (pointing to a severe error) or a runtime error always need a reprocessing/re-execution of the XCLA.</p>
+<p>If there has been no red log entry or runtime error, there is most probably no need for reprocessing/re-execution of the XCLA.</p>
+<p>Another quite good method to find out whether there were errors during the execution (which need reprocessing/re-execution of the XCLA) is to search for the string 'error' in the log.</p>
+<p><strong>A. ERRORS leading to a RED log entry or a runtime error which needs reprocessing/re-execution:</strong></p>
+<p><br style="font-size: 14px;"/><strong><span style="font-size: 14px;">1. Message FINS_ACDOC_DB070 'Package too large (read SAP note 2469999)':</span></strong></p>
+<p><strong>1.1 Please implement the following notes in the TARGET release in case they are not contained in your system yet:</strong></p>
+<p>- 2586975: Out Of Memory Error / package too large / timeout for CL_XCLA_ACDOCA (only relevant for S4CORE102)</p>
+<p>- 2667721 - CL_XCLA_ACDOCA with new packaging (only relevant for S4CORE102)</p>
+<p>- 2995926 - XCLA CL_XCLA_ACDOCA: Message FINS_ACDOC_DB070: Package too large  (relevant for S4CORE102 - S4CORE105 SP00)</p>
+<p>- 2949279 - PFW: Workaround for failed AUTOCOMMIT OFF (only relevant for SAP_BASIS754 - SAP_BASIS755)</p>
+<p>- 2990959 - PFW: Improve Collector SQL-Performance (only relevant for SAP_BASIS754 - SAP_BASIS755)</p>
+<p>Info:</p>
+<p>If possible, please implement these notes in the <strong>target</strong> release/system before the XCLA CL_XCLA_ACDOCA is executed (by<strong> </strong>automatically incorporating these notes implementations e.g. from previous test systems into the SUM procedure) to avoid problems during the upgrade.</p>
+<p>Some info about implementing notes before/during the system update can be found in note 2207944: How to implement a SAP note during System update using SUM (ABAP only)</p>
+<p>In case of any questions/problems regarding the note implementation during the system update please contact SAP support on component BC-UPG-TLS-TLA.</p>
+<p><strong>1.2 Then do the following depending on the target release:</strong></p>
+<p><strong>1.2.1 Releases S4CORE102 - S4CORE103:</strong></p>
+<p>- Make sure that the only remaining error (which can not be ignored) is</p>
+<p style="padding-left: 30px;">2PEPU471 Execution of package "?" of XCLA "CL_XCLA_ACDOCA" canceled</p>
+<p style="padding-left: 30px;">A2PEFINS_ACDOC_DB 070 Package too large (read SAP note 2469999)</p>
+<p style="padding-left: 30px;">Note that as long as there are any other errors (which can not be ignored) in addition, the following actions may cause additional errors as the processing of outstanding regular documents turns into an inefficient direction. Typical errors which can be normally be ignored are e.g. FINS_ACDOC_DB 055 Asset class not updated for "100/0001/*-*" or FINS_ACDOC_DB 069 Not all asset classes have been assigned (read SAP note 2469999 - more info see below.</p>
+<p>- Add the following entry in T811FLAGS via SE16 in all clients where data for ACDOCA exist:</p>
+<p style="padding-left: 30px;">TAB: CL_XCLA_ACDOCA</p>
+<p style="padding-left: 30px;">FIELD: PACK_FIELD</p>
+<p style="padding-left: 30px;">VALMIN: DOCLN</p>
+<p style="padding-left: 30px;">By creating this entry in T811FLAGS, you force the system in the second run to build packages on ACDOCA-DOCLN (instead of standard field ACDOCA-BELNR) which will process the ACDOCA data which could not be processed in the first run (where the standard packaging by ACDOCA-BELNR was done).</p>
+<p>- Repeat the failed SUM phase. This will process the very large documents besides the "normal" ones.</p>
+<p>- If the alternative packaging by ACDOCA-DOCLN should not help, please change the entry in T811FLAGS via SE16 in all clients where data for ACDOCA exist:</p>
+<p style="padding-left: 30px;">TAB: CL_XCLA_ACDOCA</p>
+<p style="padding-left: 30px;">FIELD: PACK_FIELD</p>
+<p style="padding-left: 30px;">VALMIN: TIMESTAMP</p>
+<p style="padding-left: 30px;">Via this entry in T811FLAGS, you force the system in the third run to build packages on ACDOCA-TIMESTAMP which will process the ACDOCA data which could not be processed in the previous runs.</p>
+<p>- Repeat the failed SUM phase. This will process the very large documents which could not be processed in the previous runs.</p>
+<p>- If the alternative packaging by ACDOCA-TIMESTAMP should not help either, please create the following entry in T811FLAGS via SE16 in all clients where data for ACDOCA exist:</p>
+<p style="padding-left: 30px;">TAB: CL_XCLA_ACDOCA</p>
+<p style="padding-left: 30px;">FIELD: PACK_MAX_SIZE</p>
+<p style="padding-left: 30px;">VALMIN: 100000000</p>
+<p>Via this entry in T811FLAGS, the system allows packages up to 100 million records to process the ACDOCA data which could not be processed in the previous runs.</p>
+<p>- Repeat the failed SUM phase. This will process the very large remaining documents which could not be processed in the previous runs.</p>
+<p>- <strong>Once everything is ok, please remove the T811FLAGS entries mentioned above again, so that in a future upgrade to a higher release the standard packaging by ACDOCA-BELNR can be done as a first step.</strong></p>
+<p><strong>1.2.2 Release S4CORE104:</strong></p>
+<p>By newly implementing note 2995926 the problem might already be solved by starting the XCLA CL_XCLA_ACDOCA once more (especially in case you have a huge ACDOCA which is partitioned, see e.g. ST04).</p>
+<p>So please simply repeat the failed SUM phase.</p>
+<p>If the problem should not be solved, please proceed as described under 1.2.1 Releases S4CORE102 - S4CORE103.</p>
+<p><strong>1.2.3 Release S4CORE105 and higher:</strong></p>
+<p>By newly implementing note 2995926 the problem should already be solved by starting the XCLA CL_XCLA_ACDOCA once more, because the changes in S4CORE105 will lead to a much better (multidimensional) packaging.</p>
+<p>So please simply repeat the failed SUM phase.</p>
+<p><strong><span style="font-size: 14px;">2. The XCLA terminates with an out-of-memory error</span></strong></p>
+<p>see solution 1.</p>
+<p><br/><strong><span style="font-size: 14px;">3. The system reports a DBSQL_TABLE_UNKNOWN error for VXCLAACDOCA</span></strong></p>
+<p>see solution 1.</p>
+<p><strong>4. Message PU475: Error in parallel XCLA execution</strong></p>
+<p>This message only gives you the general info that there was an error. Please look for messages mentioned in this note before or after this message which might give you the real root cause for the error.</p>
+<p>Examples of messages before or after message PU475: Error in parallel XCLA execution:</p>
+<p>a)   PU519: XCLA 71.131: 71130 rows processed,   rows modified on DB (rollback)</p>
+<p>and some lines later:</p>
+<p>UPGBA031: Exception raised at CX_SHDB_PFW_EXCEPTION=========CP, CX_SHDB_PFW_EXCEPTION=========CM002</p>
+<p>These error messages are normally displayed because there are duplicate keys in ACDOCA (for key fields RCLNT, RLDNR, RBUKRS, GJAHR, BELNR, DOCLN) what should never be the case.</p>
+<p>To check and correct this problem, please do the following:</p>
+<p>Execute program FINS_XCLA_ACDOCA_DUPLICATES in 'Check' mode to check for ACDOCA duplicates.</p>
+<p>Possible root causes for duplicates are e.g.</p>
+<ul>
+<li>A previous XCLA run of a previous upgrade created corrupt records due to a bug in the XCLA framework - more info can be found in note 2661437</li>
+<li>The ACDOCA compression run created duplicates due to an error described in note 3232266 (records can be identified via ACDOCA-SGTXT which contains 'Compression*')</li>
+<li>Corrupt data have been imported/copied from another system/client</li>
+</ul>
+<p>Possible workaround in case program FINS_XCLA_ACDOCA_DUPLICATES should fail due to a memory error (because of a very high data volume in ACDOCA):</p>
+<p>You can also use the following SQL statement (by replacing 'xxxx' for each GJAHR) to check for duplicates:</p>
+<p>SELECT * FROM ( SELECT RCLNT , RLDNR , RBUKRS, GJAHR ,BELNR, DOCLN, COUNT(*) AS COUNT FROM ACDOCA GROUP BY RCLNT, RLDNR, RBUKRS, GJAHR, BELNR, DOCLN )<br/>WHERE GJAHR = 'xxxx' and COUNT &lt;&gt; '1'</p>
+<p>If corrupt records are found by the check program FINS_XCLA_ACDOCA_DUPLICATES, please execute it in 'Repair' mode in background (it may run for a while) to delete the corrupt records.</p>
+<p>Once the repair run has finished and deleted the corrupt records, please continue with the upgrade and restart XCLA CL_XCLA_ACDOCA again.</p>
+<p>If the XCLA fails again, there must still be ACDOCA duplicates in the system, which are normally caused by erroneous customer or correction programs or incorrect client/system copies/setup.</p>
+<p>Since in the SUM phase it is not so easy to find and correct these duplicates, we recommend to skip these errors for XCLA CL_XCLA_ACDOCA and proceed with the upgrade.</p>
+<p>In case you need the data to be corrected after the successful upgrade (please check whether this is really necessary for this system) please execute program FINS_ACDOC_UTIL_BELNR_UNIQUE in each client and come back to us with the results.</p>
+<p>We will then try to correct the duplicates according pilot note 2666674 and after successful correction restart XCLA CL_XCLA_ACDOCA manually as described below.</p>
+<p>In any case you should execute check programs FINS_XCLA_ACDOCA_DUPLICATES in 'Check' mode and FINS_ACDOC_UTIL_BELNR_UNIQUE (must be executed in each client) before upgrading your next system (with productive data) to check whether there are also duplicates which need to be corrected before the upgrade.</p>
+<div></div>
+<p><strong>5. Message PU470: Execution of XCLA CL_XCLA_ACDOCA canceled due to error</strong></p>
+<p>This message only gives you the general info that there was an error. Please look for messages mentioned in this note before or after this message which might give you the real root cause for the error.</p>
+<p><strong>6. Message PU471: Execution of package xxx of XCLA CL_XCLA_ACDOCA canceled</strong></p>
+<p>This message only gives you the general info that there was an error. Please look for messages mentioned in this note before or after this message which might give you the real root cause for the error.</p>
+<p><strong>7. Message SHDB_PFW302: Dispatcher Timeout: 'PackSel xxx' waited 900 sec for free WP</strong></p>
+<p>This error occurs if for one specific PFW package (PFW: HANA Performance FrameWork) no free work process could be found within the given time.</p>
+<p>Please check whether there are DB triggers (e.g. for SLT) defined on ACDOCA causing performance problems. If yes, please disable them (see also section 'Further important recommendations' below).</p>
+<p>Please reprocess/re-execute the XCLA.</p>
+<p>If the problem should occur again, there seems to be a general performance problem with HANA/PFW.</p>
+<p>In this case the root cause for the performance problems must be analyzed by component BC-DB-HDB-PFW (or HAN-DB-ENG).</p>
+<p><strong>8. Message UPGBA028: Database object does not exist on the database</strong></p>
+<p>This error occurs in case of problems with the enqueue server for which the root cause could not be found yet.</p>
+<p>Please reprocess/re-execute the XCLA.</p>
+<p>If the problem should occur again, the issue must be analyzed by component BC-DB-HDB-PFW.</p>
+<p><strong>9. Message PU461: "CL_XCLA_ACDOCA" was already executed in a previous step</strong></p>
+<p>If this error message is erroneously displayed (because actually the XCLA was not executed yet), please implement PFW note 3532300.</p>
+<p><strong>B. INFO messages which should be checked individually and normally do not need any reprocessing/re-execution:</strong></p>
+<p>The following info messages are displayed if some specific ACDOCA fields could not be filled, in most cases due to missing master data. Normally this is no severe problem since mostly those ACDOCA fields with missing master data are e.g. outdated data and not needed anymore.</p>
+<p>You can check the master data for these ACDOCA fields at least randomly to make sure that there is no major master data problem in your system.</p>
+<p>In the worst case those ACDOCA records concerned may not appear in reporting.</p>
+<ul>
+<li>FINS_ACDOC_DB067: Project not found: "100"/"CS-00005"</li>
+</ul>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">This info message is displayed when in project master table PROJ in client "100" for the (external) field PROJ-PSPID "CS-00005" no corresponding (internal) field PROJ-PSPNR could be found and therefore the corresponding (internal) ACDOCA fields PS_PRJ_PNR and/or PPS_PRJ_PNR (see next 2 messages) could not be filled. Most likely the project has been removed or renamed.</span></p>
+<ul>
+<li>FINS_ACDOC_DB059: Not all project IDs have been assigned (read SAP note 2469999)</li>
+</ul>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">Due to a missing entry in project master table PROJ (see message FINS_ACDOC_DB067 above), the (internal) field ACDOCA-PS_PRJ_PNR could not be filled from the (external) field ACDOCA-PS_PSPID.</span></p>
+<ul>
+<li>FINS_ACDOC_DB061: Not all partner project IDs have been assigned (read SAP note 2469999))</li>
+</ul>
+<p style="padding-left: 60px;">Due to a missing entry in project master table PROJ (see message FINS_ACDOC_DB067 above), the (internal) field ACDOCA-PPS_PRJ_PNR could not be filled from the (external) field ACDOCA-PPS_PSPID.</p>
+<ul>
+<li>FINS_ACDOC_DB068: WBS element not found: "100"/"PZ016697122"</li>
+</ul>
+<p style="padding-left: 60px;">If note 3055196 is not implemented yet in your system, please implement it and restart/re-execute the XCLA, then the message should not be displayed anymore.</p>
+<p style="padding-left: 60px;">If it still should be displayed:</p>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">This info message is displayed when in project master table PRPS in client "100" for the (external) field PRPS-POSID "PZ016697122" no corresponding (internal) field PRPS-PSPNR could be found and therefore the corresponding (internal) field ACDOCA-PPS_PSP_PNR (see next message) could not be filled from the (external) field ACDOCA-PPS_POSID. Most likely the WBS element has been removed or renamed.</span></p>
+<ul>
+<li>FINS_ACDOC_DB060: Not all partner WBS elements have been assigned (read SAP note 2469999))</li>
+</ul>
+<p style="padding-left: 60px;">If note 3055196 is not implemented yet in your system, please implement it and restart/re-execute the XCLA, then the message should not be displayed anymore.</p>
+<p style="padding-left: 60px;">If it still should be displayed:</p>
+<p style="padding-left: 60px;">Due to a missing entry in project master table PRPS (see message FINS_ACDOC_DB068 above), the (internal) field ACDOCA-PPS_PSP_PNR could not be filled from the (external) field ACDOCA-PPS_POSID.</p>
+<ul>
+<li>Message FINS_ACDOC_DB055: Asset class not updated for "100/0001/20094-2" (and FINS_ACDOC_DB069: Not all asset classes have been assigned (read SAP note 2469999))<strong> </strong></li>
+</ul>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">This means that in table ACDOCA there are records in client 100 for ACDOCA-RBUKRS "0001", ACDOCA-ANLN1 "20094" and ACDOCA-ANLN2 "2" where no corresponding record in master table ANLA exists and therefore field ACDOCA-ANLKL could not be filled.</span></p>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">Please note that messages like FINS_ACDOC_DB055: Asset class not updated for "100/0001/<strong>*</strong>-0" concerning migrated records with ACDOCA-ANLN1 = '<strong>*</strong>' can be ignored because these records are absolutely no problem - note 3052241 prevents the system from displaying these unnecessary messages.</span></p>
+<p>If you want to have the master data for these messages checked in detail, please contact the following components:</p>
+<ul>
+<li>Projects, WBS elements: Component PS-ST-OPR</li>
+<li>Assets: Component FI-AA-AA</li>
+</ul>
+<p><strong>C. Further important recommendations:</strong></p>
+<ul>
+<li>Please read SAP Note 2351294 - S/4HANA System Conversion / Upgrade: Measures to reduce technical downtime</li>
+<li>Try to repartition your ACDOCA as soon as an opportunity arises, especially before upcoming migrations/upgrades - more info can be found in note 2289491.</li>
+<li>
+<p>Please check for basis releases &gt;= SAP_BASIS 755 whether the coding changes of standard note <a href="/notes/3227915" target="_blank">3227915</a> are contained in your system, so that partition striping is active for all PFW applications. If not, please implement them to activate partition striping.</p>
+</li>
+<li>
+<p>To avoid massive performance problems, please check whether there are DB triggers (e.g. for SLT or customer defined triggers) defined on ACDOCA (via SQL command 'SELECT * FROM TRIGGERS WHERE SUBJECT_TABLE_NAME = 'ACDOCA'), which may lead ta longer runtime when updating/modifying ACDOCA records. If yes, please disable these DB triggers (see e.g. note 2755741).</p>
+</li>
+<li>In case there should be problems or errors in the SUM phase with XCLA CL_XCLA_ACDOCA, you can also start program RCTSXCLA for CL_XCLA_ACDOCA via transaction SE38 manually in the background after the relevant notes above have been implemented and the actions mentioned above have been performed. Please note that in this case the XCLA log file name to be analyzed can then be found at the very end of the batch job log, e.g. something like e.g. /usr/sap/trans_TST_S4H/ECC/log/XCLA_CL_XCLA_ACDOCA.TST. The content of this XCLA log file name can be displayed with program RSPUTPRT by copying the log file name to the selection parameter 'Full File Name (w/ Directory)'. Please note that the log file contains the logs of all RCTSXCLA executions - therefore please make sure that you analyze only the actual log entries and not e.g. the logs with the problems of the previous executions which have already been solved in the meantime. To analyze only the correct relevant log entries please expand the log file between the following log entries on the first display level which contain the <em>date and time in concatenated form</em>:</li>
+<ul>
+<li><span style="font-size: 14px;">Parallel execution of XCLA conversions started: <em>20210414160118</em></span></li>
+<li><span style="font-size: 14px;">Parallel execution of XCLA conversions ended: <em>20210415012903</em></span></li>
+</ul>
+<li><span style="font-size: 14px;">By starting RCTSXCLA for CL_XCLA_ACDOCA you can "validate", whether the notes/actions mentioned above have helped. Although RCTSXCLA for CL_XCLA_ACDOCA performs database updates on ACDOCA, the failed SUM phase for XCLA CL_XCLA_ACDOCA should be repeated which will be much faster since the ACDOCA data have already been processed before by RCTSXCLA for CL_XCLA_ACDOCA.</span></li>
+<li><span style="font-size: 14px;">In case you skipped the errors of CL_XCLA_ACDOCA during the SUM phase, you will have to start program RCTSXCLA for CL_XCLA_ACDOCA via transaction SE38 manually in the background after the upgrade has finished successfully. Please note that in this case the XCLA log file name to be analyzed can be found at the very end of the batch job log, e.g. something like e.g. /usr/sap/trans_TST_S4H/ECC/log/XCLA_CL_XCLA_ACDOCA.TST. Before starting program RCTSXCLA for CL_XCLA_ACDOCA manually after the upgrade, you must </span>create the following uncritical entry in table T811FLAGS via transaction SE16 to make the XCLA CL_XCLA_ACDOCA "think" that the current release is still the original source release (e.g. 102), otherwise the XCLA CL_XCLA_ACDOCA will do nothing:</li>
+<ul>
+<li>TAB        XCLA_ACDOCA</li>
+<li>FIELD     SOURCE_RELEASE</li>
+<li>VALMIN   102 (your original source release)</li>
+</ul>
+</ul>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">Without this entry, the </span>XCLA will do nothing - in this case there will be the following messages in the log:</p>
+<ul>
+<ul>
+<li>SHDB_PFW 507 Split of DB object "VXCLAACDOCA" results no packages</li>
+<li>SHDB_PFW 503 PackageStore build with "0" Packages from "TableSplitter"</li>
+</ul>
+<li>When starting RCTSXCLA for CL_XCLA_ACDOCA via transaction SE38 manually please make sure that the user has enough authorizations (e.g. for authorization object S_DEVELOP) for DDIC and DB tables activation, because during the execution of CL_XCLA_ACDOCA also DDIC views are generated on the fly.</li>
+<li>
+<p>CL_XCLA_ACDOCA can be executed multiple times as often as needed</p>
+</li>
+<li>
+<p>With every new execution the XCLA only processes those ACDOCA records which have not been successfully processed by the previous executions</p>
+</li>
+<li>Please delete the above T811FLAGS entry again after all ACDOCA records have been successfully processed</li>
+</ul>
+<p><strong>D. Analysis of unconverted ACDOCA records  </strong></p>
+<p><strong>The following SQL statement (which can be executed in the SQL editor in transaction DB02 or ST04) gives the number of unconverted ACDOCA records:</strong></p>
+<p>select count ( * ) from acdoca where</p>
+<p>( ( ( ( PS_PSPID &lt;&gt; '' AND  PS_PRJ_PNR = '00000000' )</p>
+<p>OR ( ( PPS_POSID &lt;&gt; '' AND PPS_PSP_PNR = '00000000' )</p>
+<p>OR ( PPS_PSPID &lt;&gt; '' AND PPS_PRJ_PNR = '00000000' ) ) )</p>
+<p>OR ( ( ANLN1 &lt;&gt; '' AND ANLKL = '' )</p>
+<p>OR ( MIG_SOURCE = '' AND (ANLN1 &lt;&gt; '' AND ( PANL1 = '' AND ( BSTAT = '' AND ( AWTYP &lt;&gt; 'AS91' AND (VORGN = 'AUUA' OR VORGN = 'AUUZ' OR VORGN = 'UMAB' OR VORGN = 'UMZU' OR VORGN = 'UMAI' OR VORGN = 'UMZI' ) ) ) ) ) ) ) )</p>
+<p>OR ( ( PS_POSID &lt;&gt; '' AND PS_PSP_PNR = '00000000' )</p>
+<p>OR ( ( OBJNR &lt;&gt; '' AND RVUNIT &lt;&gt; '' ) AND CO_MEINH = '' AND BTTYPE &lt;&gt; 'EBDP' and BTTYPE &lt;&gt; 'OSDP' and KTOSL &lt;&gt; 'BSX' ) ) )</p>
+<p><strong>The following SQL statement gives some detailed information about the <strong>unconverted ACDOCA records</strong>:</strong></p>
+<p>select</p>
+<p>rldnr, rbukrs, gjahr, belnr, docln, PS_POSID, PS_PSP_PNR, OBJNR, vmsl, vmfsl, RVUNIT, co_megbtr, co_mefbtr, CO_MEINH, PS_PSPID, PS_PRJ_PNR, PPS_POSID, PPS_PSP_PNR, PPS_PSPID, PPS_PRJ_PNR,</p>
+<p>ANLN1, ANLN2, ANLKL, KTOGR, PANL1, PANL2, fiscyearper, bttype, BSTAT, AWTYP, VORGN, MIG_SOURCE, TIMESTAMP</p>
+<p>from acdoca where</p>
+<p>( ( ( ( PS_PSPID &lt;&gt; '' AND PS_PRJ_PNR = '00000000' )</p>
+<p>OR ( ( PPS_POSID &lt;&gt; '' AND PPS_PSP_PNR = '00000000' )</p>
+<p>OR ( PPS_PSPID &lt;&gt; '' AND PPS_PRJ_PNR = '00000000' ) ) )</p>
+<p>OR ( ( ANLN1 &lt;&gt; '' AND ANLKL = '' )</p>
+<p>OR ( MIG_SOURCE = '' AND (ANLN1 &lt;&gt; '' AND ( PANL1 = '' AND ( BSTAT = '' AND ( AWTYP &lt;&gt; 'AS91' AND (VORGN = 'AUUA' OR VORGN = 'AUUZ' OR VORGN = 'UMAB' OR VORGN = 'UMZU' OR VORGN = 'UMAI' OR VORGN = 'UMZI' ) ) ) ) ) ) ) )</p>
+<p>OR ( ( PS_POSID &lt;&gt; '' AND PS_PSP_PNR = '00000000' )</p>
+<p>OR ( ( OBJNR &lt;&gt; '' AND RVUNIT &lt;&gt; '' ) AND CO_MEINH = '' AND BTTYPE &lt;&gt; 'EBDP' and BTTYPE &lt;&gt; 'OSDP' and KTOSL &lt;&gt; 'BSX' ) ) )</p>
+<p>order by TIMESTAMP DESC</p>
+<p><strong>E. Detailed analysis <strong>(by release) </strong>of <strong>unconverted ACDOCA records</strong></strong></p>
+<p>The SQL statements in attachment CL_XCLA_ACDOCA_ST04_SQL_102_103_107.txt can be used for a detailed analysis of unconverted ACDOCA records by release.</p></div></div></div></div>

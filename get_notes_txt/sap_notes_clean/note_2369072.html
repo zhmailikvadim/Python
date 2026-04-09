@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>If the data provider details are previously asked for, then Web Intelligence RESTful Web Service returns no data.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Webi, Raylight, webintelligence, dp, queryplan, dataprovider</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence Platform 4.1</li>
+<li>SAP BusinessObjects Business Intelligence Platform 4.2</li>
+</ul>
+<p><strong>Step To Reproduce:</strong></p>
+<ol>
+<li>Request the data of a Web Intelligence query through Web Intelligence RESTful Web Service. For example:</li>
+</ol>
+<p style="padding-left: 60px;">call:</p>
+<p style="padding-left: 90px;">[GET] raylight/v1/documents/9476/dataproviders/DP0/flows/0</p>
+<p style="padding-left: 90px;">Accept: text/xml</p>
+<p style="padding-left: 60px;">response:</p>
+<p style="padding-left: 90px;">&lt;DATA_PROVIDERS ...&gt; <br/>  &lt;DATA_PROVIDER ...&gt; <br/>    &lt;COLUMN ...&gt;  <br/>    ... <br/>    &lt;COLUMN ...&gt;  <br/>    &lt;ROW&gt; <br/>      &lt;CELL INDEX="0"&gt;Texas&lt;/CELL&gt;  <br/>      &lt;CELL INDEX="1"&gt;Houston&lt;/CELL&gt;  <br/>      &lt;CELL INDEX="2"&gt;e-Fashion Houston Leighton&lt;/CELL&gt; <br/>    &lt;/ROW&gt;  <br/>    ...<br/>    &lt;ROW&gt; <br/>      &lt;CELL INDEX="0"&gt;Texas&lt;/CELL&gt;  <br/>      &lt;CELL INDEX="1"&gt;Houston&lt;/CELL&gt;  <br/>      &lt;CELL INDEX="2"&gt;e-Fashion Houston&lt;/CELL&gt; <br/>    &lt;/ROW&gt; <br/>  &lt;/DATA_PROVIDER&gt; <br/>&lt;/DATA_PROVIDERS&gt;</p>
+<p style="padding-left: 60px;">&gt;&gt; See that data are correctly returned in the &lt;ROW&gt; elements.</p>
+<ol start="2">
+<li>Get this data provider details:</li>
+</ol>
+<p style="padding-left: 60px;">call:</p>
+<p style="padding-left: 90px;">[GET] raylight/v1/documents/9476/dataproviders/DP0</p>
+<p style="padding-left: 90px;">Accept: application/xml</p>
+<p style="padding-left: 60px;">response:</p>
+<p style="padding-left: 90px;">&lt;dataprovider ...&gt; <br/>  &lt;id&gt;DP0&lt;/id&gt;  <br/>  ... <br/>  &lt;query&gt;...&lt;/query&gt; <br/>&lt;/dataprovider&gt;</p>
+<ol start="3">
+<li>Do again the same call as in 1. :</li>
+</ol>
+<p style="padding-left: 60px;">call:</p>
+<p style="padding-left: 90px;">[GET] raylight/v1/documents/9476/dataproviders/DP0/flows/0</p>
+<p style="padding-left: 90px;">Accept: text/xml</p>
+<p style="padding-left: 60px;">response:</p>
+<p style="padding-left: 90px;">&lt;DATA_PROVIDERS ...&gt; <br/>  &lt;DATA_PROVIDER ...&gt; <br/>    &lt;COLUMN ...&gt;  <br/>    ... <br/>    &lt;COLUMN ...&gt;  <br/>  &lt;/DATA_PROVIDER&gt; <br/>&lt;/DATA_PROVIDERS&gt;</p>
+<p style="padding-left: 60px;">&gt;&gt; See that there are no more data.</p>
+<p><strong>Cause:</strong></p>
+<ul>
+<li>Querying the execution plan (computed through a separate call, but also through the data provider details as well), was resetting the data.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This issue is fixed in the patches listed in the "Support Packages &amp; Patches" section below.<br/>The "Support Packages &amp; Patches" section will be populated with the relevant patch levels <strong>once they are released.</strong><br/>For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article 2144559 in References section</p></div></div></div></div>

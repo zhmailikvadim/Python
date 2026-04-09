@@ -1,0 +1,120 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1"><strong>This SAP Note is relevant for the following roles: DSO, Supplier, and MOS.</strong></p>
+<p><span style="text-decoration: underline;">For IDXGL SP11 and SP12:</span></p>
+<p>The following objects only provide to select data by the Market Location (MaLo) installation. The Metering Location (MeLo) is missing:</p>
+<ul>
+<li>Transaction /IDXGL/TOU_ASSIGN</li>
+</ul>
+<ul>
+<li>Class /IDXGL/CL_TOU_FINDER</li>
+<ul>
+<li>Method /IDXGL/IF_TOU_FINDER~FIND_REG_BY_INSTL_OBIS</li>
+<li>Method /IDXGL/IF_TOU_READER~GET_ASSIGN_ALL_DEEP</li>
+</ul>
+</ul>
+<ul>
+<li>Class /IDXGL/CL_TOU_READER</li>
+<ul>
+<li>Method /IDXGL/IF_TOU_READER~GET_ASSIGN_REG_BY_INST</li>
+</ul>
+</ul>
+<p><span style="text-decoration: underline;">For IDXGL SP12:</span></p>
+<p>The note will fix potential syntax errors with regards to parameter IT_INSTALLATIONS_ME of the methods above.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Zählzeiten, Time-of-Use Definitions, ToUD, ZZD, DSO, SUP, MOS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Coding issue</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the SAP Note.</p>
+<p>If you find that after you have implemented the SAP Note, some field labels are missing in German, proceed as follows. The translations will be shipped with the next Support Packages. Please refer to the information on SAP Support Portal at <a href="https://support.sap.com/sp-stacks" target="_blank">https://support.sap.com/sp-stacks</a>.</p>
+<p>The affected transport objects are:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>PgID</strong></td>
+<td><strong>Object</strong></td>
+<td><strong>Name</strong></td>
+</tr>
+<tr>
+<td>R3TR</td>
+<td>DTEL</td>
+<td>/IDXGL/DE_TOU_INSTALLATION_MA</td>
+</tr>
+<tr>
+<td>R3TR</td>
+<td>DTEL</td>
+<td>/IDXGL/DE_TOU_INSTALLATION_ME</td>
+</tr>
+</tbody>
+</table></div>
+<p>Package: /IDXGL/METERING_TOU</p>
+<p>Software component: IDXGL</p>
+<p>Application component: IS-U-IDX</p>
+<p>If you want to enter the translations manually in advance, you can do so as follows:</p>
+<ol>
+<li>Call transaction SE63.</li>
+<li>In the command field (where you would normally enter a transaction code), enter DTEL and press ENTER.</li>
+<li>Enter the object name (see below) in the <em>Object Name</em> field. </li>
+<li>If required, change the source and/or target languages.</li>
+<li>Click <em>Edit</em>.</li>
+<li>Enter the translation in the text field below the source text.</li>
+<li>Click <em>Save</em> and <em>Back.</em></li>
+</ol>
+<p>Also see following SAP Notes:</p>
+<p>585116: Translation after installation of WebAS SP25<br/>110910: Deleting the language load</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Object Name</strong></td>
+<td><strong>English Source Text</strong></td>
+<td><strong>German Translation</strong></td>
+</tr>
+<tr>
+<td>/IDXGL/DE_TOU_INSTALLATION_MA</td>
+<td>MaLo Installation</td>
+<td>MaLo-Anlage</td>
+</tr>
+<tr>
+<td>/IDXGL/DE_TOU_INSTALLATION_ME</td>
+<td>MeLo Installation</td>
+<td>MeLo-Anlage</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Note:</strong></p>
+<p>Translations performed in a customer system may be overwritten in the following instances:</p>
+<ul>
+<li>If the object happens to be part of a future Support Package </li>
+<li>Upgrade to a new release </li>
+<li>Import of new language CDs from Support Releases</li>
+</ul>
+<p><strong>Transport of Translations Between Systems</strong></p>
+<p>Please transport the corrected translation object(s) to all relevant systems (transport of copies):</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>PgID</strong></td>
+<td><strong>Object Type</strong></td>
+<td><strong>Object Name</strong></td>
+</tr>
+<tr>
+<td>LANG</td>
+<td>DTED</td>
+<td>/IDXGL/DE_TOU_INSTALLATION_MA</td>
+</tr>
+<tr>
+<td>LANG</td>
+<td>DTED</td>
+<td>/IDXGL/DE_TOU_INSTALLATION_ME</td>
+</tr>
+</tbody>
+</table></div>
+<p>Or see one of the following SAP Notes:</p>
+<p>669505 (for customers on Basis 620 or 640)<br/>980626 (for customers on Basis 700 and higher)</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Auto line of business</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To correct the problem in advance, implement the source code corrections.</p></div></div></div></div>

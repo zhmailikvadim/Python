@@ -1,0 +1,72 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">When running multiple SQL statements where there are more than one SELECT with COMPUTE clause, error occurs:</p>
+<p style="padding-left: 60px;"><strong>Exception: System.ArgumentException: Item has already been added. Key in dictionary: '2' Key being added: '2'</strong></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Sybase Software Developers Kit (SDK) 15.7 SP133</li><li>Adaptive Server Enterprise ADO.NET Data Provider 4.0 Provider ( Sybase.AdoNet4.AseClient.dll ) 4.157.0.1330</li><li>SAP Adaptive Server Enterprise (ASE) 15.7</li><li>msdev 2012</li><li>C#</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>DDL is self-contained in the test</li><li>Test code used:<br/> 
+<ul style="list-style-type: none;"><li>
+<div style="padding-left: 30px;"><em>using System;</em><br/><em>using System.Collections.Generic;</em><br/><em>using System.Linq;</em><br/><em>using System.Text;</em><br/><em>using Sybase.Data.AseClient;</em><br/><em>using System.Data;</em><br/><em>using System.Reflection;</em><br/><em>using System.Configuration;</em></div>
+</li><li>
+<div style="padding-left: 30px;"><em>namespace SybaseDriverTest</em><br/><em>{</em></div>
+</li><li>
+<div style="padding-left: 60px;"><em>class Program</em><br/><em>{</em></div>
+</li><li>
+<div style="padding-left: 90px;"><em>static void Main(string[] args)</em><br/><em>{</em></div>
+</li><li>
+<div style="padding-left: 120px;"><em>Assembly assem = Assembly.GetCallingAssembly();</em><br/><em>Console.WriteLine("Hello from " + assem.FullName);</em></div>
+</li><li>
+<div style="padding-left: 120px;"><em>// Use app.config to get stuff</em><br/><em>string connStr = ConfigurationManager.ConnectionStrings["ASETest"].ConnectionString;</em></div>
+</li><li>
+<div style="padding-left: 120px;"><em>string strQuery =</em></div>
+</li><li>
+<div style="padding-left: 150px;"><em>"create table #temptable</em><br/><em>(charfield1 varchar(10) null,</em><br/><em>charfield2 varchar(10) null,</em><br/><em>floatfield1 float null,</em><br/><em>floatfield2 float null )</em></div>
+</li><li>
+<div style="padding-left: 150px;"><em>insert into #temptable values('A1', 'B1', 10, 10)</em><br/><em>insert into #temptable values('A2', 'B1', 10, 10)</em></div>
+</li><li>
+<div style="padding-left: 150px;"><em>select * from #temptable </em><br/><em>order by charfield1, charfield2</em><br/><em>compute sum(floatfield1) by charfield1</em><br/><em>compute sum(floatfield2) by charfield1, charfield2</em></div>
+</li><li>
+<div style="padding-left: 150px;"><em>select * from #temptable </em><br/><em>order by charfield1, charfield2 </em><br/><em>compute sum(floatfield1) by charfield1 </em><br/><em>compute sum(floatfield2) by charfield1, charfield2";</em></div>
+</li><li>
+<div style="padding-left: 120px;"><em>DataSet ds = new DataSet();</em></div>
+</li><li>
+<div style="padding-left: 120px;"><em>using (AseConnection con = new AseConnection(connStr))</em><br/><em>{</em></div>
+</li><li>
+<div style="padding-left: 150px;"><em>Console.WriteLine("ADO.NETProvider Version: " + AseConnection.DriverVersion);</em><br/><em>con.Open();</em></div>
+</li><li>
+<div style="padding-left: 150px;"><em>try</em><br/><em>{</em></div>
+</li><li>
+<div style="padding-left: 180px;"><em>using (AseCommand cmd = new AseCommand(strQuery, con))</em><br/><em>{</em></div>
+</li><li>
+<div style="padding-left: 210px;"><em>using (AseDataAdapter da = new AseDataAdapter(cmd))</em><br/><em>{</em></div>
+</li><li>
+<div style="padding-left: 240px;"><em>da.Fill(ds);</em></div>
+</li><li>
+<div style="padding-left: 210px;"><em>}</em></div>
+</li><li>
+<div style="padding-left: 180px;"><em>con.Close();</em></div>
+</li><li>
+<div style="padding-left: 180px;"><em>}</em></div>
+</li><li>
+<div style="padding-left: 150px;"><em>}</em></div>
+</li><li>
+<div style="padding-left: 150px;"><em>catch (Exception e)</em><br/><em>{</em></div>
+</li><li>
+<div style="padding-left: 150px;"><em>Console.WriteLine("Exception: " + e);</em></div>
+</li><li>
+<div style="padding-left: 150px;"><em>}</em></div>
+</li><li>
+<div style="padding-left: 120px;"><em>}</em></div>
+</li><li>
+<div style="padding-left: 90px;"><em>}</em></div>
+</li><li>
+<div style="padding-left: 60px;"><em>}</em></div>
+</li><li>
+<div style="padding-left: 30px;"><em>}</em></div>
+</li><li>
+<div style="padding-left: 30px;"> </div>
+</li></ul>
+</li><li>On Execution:<br/> 
+<ul style="list-style-type: none;"><li>
+<div style="padding-left: 30px;"><strong>Exception: System.ArgumentException: Item has already been added. Key in dictionary: '2' Key being added: '2'</strong></div>
+</li><li>
+<div style="padding-left: 60px;"><strong>at System.Collections.Hashtable.Insert(Object key, Object nvalue, Boolean add)</strong><br/><strong>at Sybase.Data.AseClient.AseDataReader.ReadAltName()</strong><br/><strong>at Sybase.Data.AseClient.AseDataReader.Perform_RetrieveHasNextRow()</strong><br/><strong>at Sybase.Data.AseClient.AseDataReader.Perform_Skip_Next()</strong><br/><strong>at Sybase.Data.AseClient.AseDataReader.RetrieveNextResult()</strong><br/><strong>at Sybase.Data.AseClient.AseDataReader.GetNextResult(Boolean isNeedProcessOutParams)</strong><br/><strong>at Sybase.Data.AseClient.AseDataReader.NextResult()</strong><br/><strong>at Sybase.Data.AseClient.AseDataReader.CloseUrsHandle()</strong><br/><strong>at Sybase.Data.AseClient.AseDataReader.Close()</strong><br/><strong>at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)</strong><br/><strong>at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)</strong><br/><strong>at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)</strong><br/><strong>at SybaseDriverTest.Program.Main(String[] args) in c:\...\Program.cs</strong></div>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Problem is related to executing more than one SELECT statement, each containing COMPUTE clause(s).</li><li>The issue has been identified and logged under SAP <strong>CR 786821</strong>. Its description reads, "When executing SQL statements where there are more than one SELECT with COMPUTE clause, error occurs: "System.ArgumentException: Item has already been added. Key in dictionary: '2'  Key being added: '2'".</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This issue has been addressed in:</p>
+<ul><li>SAP SDK 15.7 SP 136 and higher</li><li>SAP SDK 16.0 SP02 PL02 and higher</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>OCS, ADONET, 78682, CR#786821, CR786821</p>
+<p></p></div></div></div></div>

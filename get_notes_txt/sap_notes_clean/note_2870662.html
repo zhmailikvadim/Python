@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">There are 6 decimals represented in some of the fields of the <em>Stage Analysis</em> report despite the decimal settings.</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li><em>Project Management</em> is enabled in <em>Administration </em>→<em> System Initialization → Company Details </em>→<em> Basic Initialization.</em></li>
+<li>
+<div>In<em> Administration</em> → <em>System Initialization</em> → <em>General Settings → Display </em>tab, you have set decimal places for <em>Amounts</em> to 2.</div>
+</li>
+</ul>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Go to <em>Project Management</em> → <em>Project</em> and create a project of <em>Project Type: External</em>, as follows:</li>
+<ul>
+<li>Enter a <em>BP code</em> of Customer and Vendor type, respectively.</li>
+<li>Enter a name in the <em>Project Name</em> field of the header.</li>
+<li>Enter a <em>Financial Project</em>.</li>
+<li>Enter a date into the <em>Start Date</em> field of the header.</li>
+<li>On the <em>Stages</em> tab, enter one stage line with a valid <em>Start Date</em>.</li>
+<li>Choose <em>Add</em> to add the project.</li>
+</ul>
+<li>Create an <em>A/R Invoice</em> or <em>A/P Invoice</em> for the BP used in the created <em>Project</em> records as follows:</li>
+<ul>
+<li>Add the <em>Project</em> field on the row level, and choose the <em>Financial Project</em> used in step 1.</li>
+<li>Choose <em>Add</em> to create the documents.</li>
+</ul>
+<li>Go back to the <em>Project</em> record, and choose <em>Refresh Record</em> from the upper menu bar. Then proceed as follows:
+<ul>
+<li>Choose <em>Yes</em> to <em>Unassigned documents exist in the system. Do you want to assign them?</em></li>
+<li>In the <em>Document Assignment</em> window, assign the invoice to the <em>Stage</em>.</li>
+<li>Choose <em>Assign</em>.</li>
+<li>Highlight the <em>Stage</em> line.</li>
+<li>Expand the <em>Documents</em> section.</li>
+</ul>
+</li>
+<li>Run <em>Project Management</em> → <em>Project Reports</em> → <em>Stage Analysis</em> report.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>There are 2 decimals represented after the comma in all of the fields.</p>
+<p><strong>Actual behavior:</strong></p>
+<p>There are 6 decimals represented after the comma in the following fields: <em>Invoiced (A/R)</em>,<em> Total (A/R)</em>,<em> Total Variance</em>,<em> Accumulated Invoiced (A/R)</em>,<em> Accumulated Total (A/R)</em>,<em> Acc. Pot. Subproject Amount Total Variance</em>.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span>SAP intends to provide a patch or patches in order to solve the problem described. The section <strong>References </strong>below will list the specific patches once they become available, and the <strong>Related Info</strong> content of relevant patches in the SAP Support Portal will show this SAP Note. Be aware that these references can only be set at patch release date. SAP will deliver patches only for selected releases at its own discretion, based on the business impact and the complexity of the implementation.</span></p></div></div></div></div>

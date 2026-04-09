@@ -1,0 +1,40 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""><strong>Issue 1: </strong></p>
+<p id="__html1">While copy-creating an infotype 0220 record with retro active start date, there was an inconsistency between PA30 and PUIT_UI transactions. In PUIT_UI, above scenario display error message: "Retro Fund Code creation/change is not possible", but PA30 allows it.</p>
+<p><strong>Issue 2:</strong></p>
+<p>While creating a superannuation fund record retroactively from the initial screen of transaction code PA30, the record is created successfully.  Instead it should display the error message: "RETRO Fund Code change not possible".</p>
+<p><strong>Example:</strong></p>
+<p>Consider an employee whose payroll was run for the first period (01.07.2024 – 31.07.2024), with the payroll 'Accounted to' date of 31.07.2024. When we try to create a fund record effective from 01.07.2024 through the initial screen of PA30, it allows the creation, which is inconsistent.</p>
+<p>The expected behavior is that it should not allow the creation of the record and should instead display the error "RETRO Fund Code change not possible".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SUPER, IT0220, CL_HRPA_INFOTYPE_0220, PUIT_UI, PA30, ESS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong> Prerequisites (For ESS / HR RENEWAL Only):  </strong>SAP Notes 3529940 and 3603628 are the Prerequisite to apply this SAP Note.</p>
+<p> <strong>Reason for Versioning:</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>     1</td>
+<td>General Release</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Required code changes are done to resolve the issue mentioned in the 'Symptom' above.</p>
+<p>To get the code corrections immediately,</p>
+<ul>
+<li>Apply the correction instructions attached to this SAP Note.</li>
+</ul>
+<p> OR</p>
+<ul>
+<li>Apply the appropriate HR Support Package (HRSP) mentioned in the ‘Support Packages and Patches’ section of this SAP Note.</li>
+</ul>
+<p>As a general rule SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="nofollow" target="_blank">SAP Note Assistant</a></strong>.</p>
+<div class="WordSection1">
+<p><strong>It is important to read the latest information in the SAP Service Market Place (Select Node 'Australia')</strong></p>
+<p><strong> (<a href="https://support.sap.com/en/product/globalization/hcm-erp.html#section_1640081980" target="_blank">https://support.sap.com/en/product/globalization/hcm-erp.html#section_1640081980</a></strong><strong>)</strong></p>
+</div></div></div></div></div>

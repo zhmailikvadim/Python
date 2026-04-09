@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Your requirement is to upload data to the newly created <em>Extension field</em> of the <em>Contacts</em> associated with <em>Accounts</em>. On using the activity <em>Migration of Customers</em> to update the <em>Contacts</em>, you receive the below error:</p>
+<p><em>Update not possible; specified data for CUSTOMER-CONTACT_PERSON with key UUID-CONTENT = `XYZ` does not exist</em></p>
+<p>*XYZ represents the Account</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p><em>SAP Business ByDesign</em></p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Go to <em>Business Configuration</em> work center</li>
+<li>Select <em>Implementation Projects</em> view or <em>Overview</em></li>
+<li><em>Search</em> and <em>Open</em> the activity <em>Migration of Customers</em></li>
+<li>Choose <em>Migrate customers using the migration tool</em></li>
+<li><em>Execute Migration</em> for the respective <em>Migration file</em> with <em>Migration Mode Modify already existing records</em></li>
+<li>You receive the error message in the <em>Simulation</em> step </li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>This is the expected system behavior. <em>Modify Already Existing Records</em> or <em>Enhance Already Existing Records</em> is not supported to update the data of <em>Contacts</em>.</p>
+<p><em>Migration Mode Enhance already existing records</em> is not supported, as the <em>Contact</em> assigned to the <em>Account</em> is not enhanced but a new one with <em>Last Name</em> will be created instead.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>To upload data to the newly created <em>Extension field</em> of existing <em>Contacts</em> associated with <em>Accounts</em>, use <em>Mass Data Maintenance</em> work center.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p><em>CUSTOMER-CONTACT_PERSON, UUID-CONTENT, <em>Migration of Customers</em></em></p></div></div></div></div>

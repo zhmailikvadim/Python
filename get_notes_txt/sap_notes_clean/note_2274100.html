@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>We are getting an error when running 157 SP300 repserver -v :</li>
+</ul>
+<p style="padding-left: 30px;">sybase_gnutar –xf   REPSERVER1570300_0-20011161.TGZ</p>
+<p style="padding-left: 30px;"><span><em>va10n10058:/sybase_0058/sandbox2_REP/RS157.&gt; repserver -v</em></span><br/><span><em>Could not load program repserver:</em></span><br/><span><em>Symbol resolution failed for /sybase_0058/sandbox2_REP/RS157/REP-15_5/lib64/libsybcirs.so because:</em></span><br/><span><em>        Symbol ___strcmp64 (number 5) is not exported from dependent</em></span><br/><span><em>          module /usr/lib/libc.a[shr_64.o].</em></span><br/><span><em>        Symbol ___strcpy64 (number 9) is not exported from dependent</em></span><br/><span><em>          module /usr/lib/libc.a[shr_64.o].</em></span><br/><span><em>System error: Error 0</em></span><br/><span><em>Examine .loader section symbols with the 'dump -Tv' command.</em></span></p>
+<p> </p>
+<ul>
+<li>We are running on AIX:</li>
+</ul>
+<p style="padding-left: 30px;">va10n10058:/sybase_0058/sandbox2_REP/RS157.&gt; oslevel -s<br/>6100-09-04-1441</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p style="padding-left: 30px;">SAP Replication Server (RS) 15.7.1 SP 300</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p style="padding-left: 30px;">SRS 15.7.1 SP300  is being installed on an incorrect version of the AIX operating system.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul>
+<li>SRS 15.7.1 SP300 is the current major release of Replication Server and requires AIX OS 7.1.   </li>
+<li>See the 15.7.1 SP 300 <a href="http://help.sap.com/Download/Multimedia/zip-rs1571300/SAP_RS_Installation_Guide_Unix_en.pdf">Replication Installation Guide for Unix </a> and search for a 'System Requirements' link for AIX and other platforms:</li>
+</ul>
+<p style="padding-left: 30px;"><em> <span>AIX 7.1</span></em></p>
+<p style="padding-left: 30px;"><em><span>Before you install SAP Replication Server, install the IBM XL C/C++ Runtime for AIX and the SMP Runtime Libraries required for your version of AIX. Obtain the libraries from your IBM AIX operating system installation media.</span></em><br/><em><span>These libraries are also available from the IBM AIX Web site:</span></em></p>
+<ul style="padding-left: 30px;">
+<ul>
+<li><em><span>The IBM XL C/C++ Runtime for AIX is available on the Web site under “Latest updates for supported IBM C and C++ compilers.”</span></em></li>
+<li><em><span>The SMP Runtime Libraries for AIX are available on the Web site under “IBM XL C/C++ Enterprise Edition for AIX, Runtime Environment and Utilities.”</span></em></li>
+</ul>
+</ul>
+<p style="padding-left: 30px;"><strong>To verify that the libraries are installed, issue:</strong></p>
+<ul>
+<li>
+<div style="padding-left: 30px;">source $SYBASE/SYBASE.csh</div>
+</li>
+<li>
+<div style="padding-left: 30px;">cd $SYBASE/$SYBASE_REP/bin ldd ./repserver</div>
+</li>
+</ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="http://help.sap.com/repserver1571300?current=repserver1571300">SAP Replication Server 15.7.1 SP 300 Manuals</a></p>
+<p> </p></div></div></div></div>

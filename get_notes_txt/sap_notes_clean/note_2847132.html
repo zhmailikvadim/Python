@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>CPI-DS Tasks that consume REST web services. By transporting these services into the productive environment of CPI-DS, you are unable to change the services endpoint.</li>
+<li>You have already changed the associated Datastore to use a new WADL file containing the correct address but the job still fails.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">SAP Cloud Platform Integration for data services</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>When a datastore is promoted, the metadata stays the same regardless of further changes to the datastore. Part of that metadata is the endpoint URL for the REST service.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Instead of updating the endpoint URL, change the Dynamic Base URL. This datastore parameter is specifically designed for runtime adjustments.</p>
+<p></p>
+<p>In <a href="https://help.sap.com/viewer/dab65b1584e04026a132a06a711e3f5a/Cloud/en-US/f9481aa4175c4bbbadcf9ee87d31a0f7.html" target="_blank">documentation</a>:</p>
+<ul>
+<li>Dynamic Base URL: The base URL comprised of the protocol, server name, port number, and path of the service that listens to RESTful web service requests.You can obtain this information from the WADL file under the element resource and attribute base. This is useful when you have multiple servers serving the same resources and you want to dynamically create the URL during the call.</li>
+</ul>
+<p>When you mouse over this field in the datastore, the description is more clear:</p>
+<ul>
+<li>If the base URL is different from the one defined in WADL. Note: The URL is only processed at runtime.</li>
+</ul></div></div></div></div>

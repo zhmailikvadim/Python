@@ -1,0 +1,52 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>No prompt is played when call is reaching IVR</li>
+<li>The following messages appear at logs:</li>
+<ul>
+<li><strong>CEM:</strong>WRN&gt; FILE_PLAY failed in MRS : {'INFO': '<strong>NO_MRS_SLOT</strong>', '_CMD': 'PLAY_FILE', '_EVT': 'FILE_PLAYED', 'FileName': 'C:\\Users\...\\Welcome message.wav', '_DATA': 'ERROR', 'CALL_ID': '3A0B94A5BEBAFE459696F90667260CBD', '_PEER_ID': 'CallDispatcher:XXXX_VU'}</li>
+<li><strong>CallDispatcher: </strong>Cannot handle MRS command, since no slot reserved for MRS gw {540C45FF-88E7-4DBD-A903-0AA985BC13D7}</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Contact Center 7.0</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>Perform a call to an IVR number</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>Missing configuration at Media Routing Server (MRS) or module linkage</li>
+<li>Not enough MRS slots configured for prompts</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Ensure that the custom prompt file format is correct as per KBA <a href="https://me.sap.com/notes/2911443" target="_blank">2911443</a></li>
+<li>Follow the "<a href="https://help.sap.com/viewer/b382b7dce2774c9aafdfda69f740b975/7.0/en-US/2803264178ae417b86477000b0bfa333.html?q=Linking%20Media%20Routing%20Server%20(MRS)%20to%20Other%20Modules" target="_blank">Linking Media Routing Server (MRS) to Other Modules</a>" configurations for System Configuration (SC)</li>
+<li>Increase "<a href="https://help.sap.com/viewer/49a5b06978054bcbb4135724a25eda06/7.0/en-US/c5460249fba641fea3d7529b58cb2192.html?q=Maximum%20Number%20of%20Simultaneous%20Prompts" target="_blank">Maximum Number of Simultaneous Prompts</a><span style="font-style: italic;">" field. </span></li>
+<ul>
+<li>Check "<a href="https://help.sap.com/doc/62973836bf5840f4ae694d1c819db614/7.0/en-US/SAP_CCtr_Introductory_Training_System_Configurator_FP16.pdf" target="_blank">SAP Contact Center introductory training - part 2</a>" document (pages 31-35)</li>
+</ul>
+<li>Reset Virtual Units where the Media Routing Server "MRS" and  Call Dispatcher "CD" are running</li>
+<li>If after the above changes you still get the same errors in the logs, then check the RTP Packet Length variables</li>
+<ol>
+<li>Connect to the Infrastructure Administrator</li>
+<li>Connect to the desired HAC instance</li>
+<li>Navigate to the Virtual Unit (VU) where the Call Dispatcher is installed (do this from the Virtual Unit Level)</li>
+<li>Check the <a href="https://help.sap.com/viewer/49a5b06978054bcbb4135724a25eda06/7.0/en-US/771381c8b7744635bb3591864d90fcbd.html?q=Variables%20for%20Call%20Dispatcher" target="_blank">Variables for Call Dispatcher</a> block and ensure the RTP Packet Length in MS is set correctly</li>
+<ul>
+<li>The default value should be 20 or 30 ms</li>
+<li>You need to ensure this matches the same value defined at your Gateway</li>
+<li>Check the "<a class="ng-binding" href="https://help.sap.com/doc/ac999edfd6244108b88612d437addaca/7.0/en-US/SAP_CCtr_Introductory_Training_Infrastructure_Administrator_FP16.pdf" target="_blank">SAP Contact Center Introductory Training IA</a>" for more</li>
+</ul>
+</ol></ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li>For other important Knowledge Base Articles and SAP Notes please refer to Master SAP Note <a href="/notes/1867297" target="_blank">1867297</a></li>
+<li>If further investigation is required, then please look at the following SAP Notes</li>
+<ul>
+<li><a href="/notes/1753539" target="_blank">1753539</a> - SAP BCM 7.0 &amp; SAP Contact Center 7.0 - Required information and logs for troubleshooting</li>
+<li><a href="/notes/1753607" target="_blank">1753607</a> - SAP Contact Center 7.0 - Server and client loglevels
+<script language="JavaScript" type="text/javascript"></script>
+</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>CCtr, SCC, CCI, CRM-CCI, SAP Business Communication Management 7 MRS NO_MRS_SLOT slot IVR prompt</p></div></div></div></div>

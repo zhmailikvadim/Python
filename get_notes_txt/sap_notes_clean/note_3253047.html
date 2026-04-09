@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">There is an extra 0 being generated in the XML file for the phone number between the DDI (Direct-Dial-in) and phone itself for Slovenia based-countries</p>
+<p>This could be an intergration scenario for example S/4 HANA</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id=""> SAP Business ByDesign</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Telephone number is broken down in parts which is leading to wrong phone/mobile number for shipping Intercompany Sales Order</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>In ByDesign you have a formatted telephone number for example it shows as  +386 28838193 (this is displayed on the screen). But, internally the telephone number is broken down in parts. This is broken down to the following components:</p>
+<p>Country Dialing Code: 386</p>
+<p>Subscriber ID: 028838193</p>
+<p>The Suscriber ID shows a leading "0", as this is the rule for Slovenia.</p>
+<p>Locally the telephone number starts with 01 or so for the area code.</p>
+<p>For dialling from abroad (and calculating the formatted international format of the telephone number, the rule is to remove the first "0" (so called trunk digit).</p>
+<p>If there is no entry or an initial entry, the telephone number in S/4 HANA will be constructed differently than in ByDesign and therefore show the "0".</p>
+<p><em>The formatting in S/4 Hana follows the same way as in ByDesign:</em></p>
+<p>Country Dialing code + Subscriber ID. From the subscriber ID the trunk digit is cut.</p>
+<p>386 + 028838193 =&gt; the 0 should be cut.</p>
+<p> In the Business Configuration settings supports the first "0"  that needs to be removed when calling from abroad and the country dialling code will be added: 386</p>
+<p>So the formatted number will look like:+386 28838193</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id=""><a href="https://en.wikipedia.org/wiki/Telephone_numbers_in_Slovenia" target="_blank">Telephone_numbers_in_Slovenia</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Slovenia ,Formatting in S/4 Hana ,Telephone Number ,Intercompany Sales Order ,DDI , subscriber ID</p></div></div></div></div>

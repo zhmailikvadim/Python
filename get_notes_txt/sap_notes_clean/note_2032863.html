@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">If you set the parameter SAVE_OTF_SPOOL using the report RSTXPDF3, the PDF conversion process terminates with an error.<br/><br/>The error tells you that the formatting used does not support a specific page format. (TD465)</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SCREEN, INCH12, TD 465, RABAX_CALLING_RABAX, MESSAGE_TYPE_X</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This problem occurs if the PDF converter tries to process OTF files that are not actually valid. The OTF data contains a page format and a device type that are not compatible (the page format does not exist in the device type).</p>
+<p>The problem occurs, for example, if the OTF data was generated from a SAPscript form and the parameter DEVICE = OTF_MEM was set for the call of the function module OPEN_FORM. In this case, the device type SCREEN is entered into the OTF data, and this does not contain any page formats.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached correction instructions or import the relevant Support Package.</p>
+<p>Activate the option SAVE_OTF_SPOOL only for troubleshooting. Do not set it permanently. See also SAP Note <a href="/notes/924752" target="_blank">924752</a>.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Installation of the Note is only required if it serves as a prerequisite. Correction Instructions do not affect any existing functionality.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please implement the attached Correction Instructions or the mentioned Support Package.</p></div></div></div></div>

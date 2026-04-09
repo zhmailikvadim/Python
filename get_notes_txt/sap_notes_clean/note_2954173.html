@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Business role considered for provisioning in access request even if, role is in process of methodology without complete or approved.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">Access Control</p>
+<ul>
+<li>Access Request</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Business role versioning not activated</p>
+<p>Data in database table GRACROLERELACTV and GRACBRMVERSEXC were empty, which means versioning is not working and not considered, hence irrespective of state of Business role, it will be considered for provisioning in access request form.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Execute program GRAC_SETUP_BRM_ACT_VERSN_TABLE from TCODE SE38</p>
+<p>FYI - The above mentioned program should run only once and this program will process the data set up for existing business roles and get them ready for usage with versions. Once executed this report entries would be filled with versioned Business role and new roles which will be set to complete state.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>4016 not considered</p></div></div></div></div>

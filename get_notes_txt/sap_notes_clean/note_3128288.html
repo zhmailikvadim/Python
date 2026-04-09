@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<p>An unnecessary variance rounding of 0.01 is calculated and posted on production order closing if you are working with high amounts.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>
+<div class="WordSection1">Create two new items: a parent (moving average valuation method) and a component.</div>
+</li>
+<li>
+<div class="WordSection1">Add a goods receipt: component, <em>Quantity</em> 1, <em>Unit Price =</em> 5,358,383.99.</div>
+</li>
+<li>
+<div class="WordSection1">Add a production order: <em>Special </em>production order, parent <em>Planned Quantity</em> = 28,814.40; component <em>Planned Quantity</em> = 1, <em>Manual</em> issue method. Set the production order to <em>Released</em>.</div>
+</li>
+<li>Add an issue for production: component <em>Quantity</em> = 1 (full quantity).</li>
+<li>Add a receipt from production: parent <span><em>Quantity = </em><span>28,814.40</span> (full quantity).</span></li>
+<li><span>Set the production order to <em>Closed</em> and click <em>Journal Entry Preview</em> in the toolbar.</span></li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p><span>No variance is calculated and posted.</span></p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>A variance of 0.01 is calculated on the journal entry between the inventory account and WIP inventory variance account.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p id="">System Limitation</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This behviour is a system limitation.</p></div></div></div></div>

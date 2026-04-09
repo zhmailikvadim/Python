@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>After restoring the domainlog.db and .log file.</li>
+<li>SMP Server log :</li>
+</ul>
+<p>2015-12-18 09:29:10.748 WARN MMS main [com.sybase.sup.admin.audit.dao.AuditDao]<br/>[] [] Exception occur when log the audit data:<br/><strong>com.sybase.jdbc4.jdbc.SybSQLException: SQL Anywhere Error -141: Table 'audit_record' not found</strong><br/> at com.sybase.jdbc4.tds.Tds.processEed(Tds.java:4084)</p>
+<p>com.sybase.jdbc4.jdbc.SybBatchUpdateException: JZ0BE:<br/>BatchUpdateException: Error occurred while executing batch statement:</p>
+<p>SQL Anywhere Error -143: Column 'errorMessage' not found<br/>SQL Anywhere Error -143: Column 'syncgroupId' not found<br/>SQL Anywhere Error -141: Table 'mms_syncgroup_time_info' not found</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP Mobile Platform 2.3 SP06</li>
+</ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul>
+<li>The audit_record table is for a new feature in SMP 2.3 SP05, the table will be created during SMP 2.3 SP05 upgrade, if you replaced *.db and *.log with the files saved from a previous version, for example SMP 2.3 SP04, then you will encounter this table missing issue after file replacement.</li>
+</ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul>
+<li>C:\SAP\MobilePlatform\Servers\UnwiredServer\config\upgrade-monitordb-tables-asa.sql</li>
+</ul>
+<p>The SQL to upgrade the monitordb is saved in this file, you can run it in dbisql.exe ( Interactive SQL ) against the monitordb, this SQL will check if the required table exists or not, if not, it will create the table accordingly.</p>
+<ul>
+<li>C:\SAP\MobilePlatform\Servers\UnwiredServer\config\upgrade-domainlogging-tables-asa.sql</li>
+</ul>
+<p>If you also replaced domainlogdb.db and domainlogdb.log from an old version of SMP, also run upgrade-domainlogging-tables-asa.sql against domainlogdb in dbisql.exe.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>audit_record table, SMP upgrade, dbisql, upgrade-monitordb-tables-asa.sql, upgrade, monitordb, <br/>table missing, upgrade-domainlogging-tables-asa.sql, domainlogdb</p></div></div></div></div>

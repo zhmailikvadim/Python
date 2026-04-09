@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>Installed Work Manager 6.1 and connected to ECC6.0 EhP7 with ISU extension</li>
+<li>During ISU work order fetch, the following error was seen in the Work Manager logs:
+<p><strong>CX_SY_NO_HANDLER:An exception of type 'CX_SY_DYN_CALL_PARAM_MISSING'.</strong></p>
+</li>
+</ul>
+<p>~~~~~~~~~~~Error~~~~~~~~~~~~~~~~~~~~</p>
+<p><img alt="3.png" class="img-responsive" src="/documents/customerkba/plDQY3zPAxP8K3RuUHHIsCFBOkW8A9Jyuyn5nGDvwLc" title="3.png"/></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP ERP 6.0</li>
+<li>SAP Work Manager 6.1</li>
+</ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul>
+<li>Traced the issue to the calling function module ISU_MAM_READ_MREAD_LIMITS</li>
+<li>This is in /SMISU/CL_BTX_WORKORDER_DO-&gt;FILL_MREAD_TABLES. The function module call is missing parameter X_MASSREAD.</li>
+<li>The EhP2/IS-UT SP6 system and the function module ISM_MAM_READ_MREAD_LIMITS does not have the additional parameter X_MASSREAD (not marked as optional)</li>
+</ul>
+<p><img alt="2.png" class="img-responsive" src="/documents/customerkba/zBDcMILrMiY76lweWBiiBMb7j9CNJ3VWkGOVnCfGrAA" title="2.png"/></p>
+<p><img alt="2.png" class="img-responsive" src="/documents/customerkba/zBDcMILrMiY76lweWBiiBMb7j9CNJ3VWkGOVnCfGrAA" title="2.png"/></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>An SAP note was created to resolve this issue. See - SAP Note: 2046464 (under References).</p></div></div></div></div>

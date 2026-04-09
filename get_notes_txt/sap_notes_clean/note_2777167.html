@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Entries in the table TQSS1_AVE are not taken into account for a transport using the corresponding IMG activity 'Maintain Settings at Plant Level' and are therefore not automatically transferred to the target system.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>IMG activity 'Maintain Settings at Plant Level', SIMG_CFMENUOLQSOQS1, Customer Connect, CustConn, TQSS1, V_TQSS1, TQSS1_AVE, transport job, transport request, transport, customizing job</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The table TQSS1_AVE introduced via Customer Connect (SAP Note 2161987) does not have a connection to the transport function of the IMG activity 'Maintain Settings at Plant Level'.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The solution uses corresponding events for the view V_TQSS1 to connect the transport functionality for the entries in the table TQSS1_AVE on a plant-dependent basis during the execution of the menu function 'Table Entries -&gt; Transport' in the IMG activity 'Maintain Settings at Plant Level'.</p>
+<p>In this case, a generic key is entered into the corresponding transport job as a substitute for the entries for a plant in the table TQSS1_AVE. Example:</p>
+<ul>
+<li>
+<div>System client: 100</div>
+</li>
+<li>
+<div>Plant: 1000</div>
+</li>
+<li>
+<div>Inspection type: 02</div>
+</li>
+</ul>
+<p>The following generic entry would be derived in the transport job for the table TQSS1_AVE:</p>
+<p>'<strong>100100002*</strong>'.</p>
+<p>The '*' represents the following key components.</p>
+<p>As a result of this generic key, the system landscape affected by the transport behaves as follows:</p>
+<p> </p>
+<ul>
+<li><strong>Transport of new or changed TQSS1_AVE table entries</strong>: In the source system, all existing TQSS1_AVE entries are entered automatically on the basis of the generic key and are transported to the target system.</li>
+</ul>
+<p> </p>
+<ul>
+<li><strong>Transport of deleted TQSS1_AVE table entries</strong>: TQSS1_AVE table entries deleted in the source system are not entered on the basis of the generic key. Since the TQSS1_AVE entries that still exist in the target system then have no corresponding entry in the source system, these entries are also deleted automatically in the target system when the transport takes place.</li>
+</ul>
+<p> </p>
+<p>Note: In general, only the data of the current plant is entered into the transport job for V_TQSS1 and TQSS1_AVE when you save in the IMG activity 'Maintain Settings at Plant Level'. For a new plant, the IMG activity 'Maintain Settings at Plant Level' must be called again. This is standard behavior that cannot be changed due to the generated standard functionality.</p></div></div></div></div>

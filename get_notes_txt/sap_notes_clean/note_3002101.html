@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Views are loaded successfully but don't go to replication phase automatically</li>
+<li>Load Statistics shows all portions of the view are loaded, but it still shows in Initial Load in Process part</li>
+<li>View is loaded successfully but it's not listed in Load Statistics</li>
+<li>Data Transfer monitor shows the view is in initial load phase</li>
+<li>Data Transfer monitor doesn't list the view</li>
+<li>Master controller job keeps canceling due to a dump:<br/>
+<p>Category ABAP programming error<br/>Runtime Errors UNCAUGHT_EXCEPTION<br/>Except. CX_DMC_RFC_CONNECTION<br/>ABAP Program CL_IUUC_DB_CONN_RCV===========CP<br/>Application Component CA-EUR<br/>Date and Time 18.06.2020 04:24:03</p>
+<p>Short Text<br/>An exception has occurred that was not caught.</p>
+<p>What happened?<br/>Exception 'CX_DMC_RFC_CONNECTION' was raised, but it was not caught anywhere</p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">SAP Landscape Transformation replication server</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p id="">The Replication Master Controller Jobs try to read the DDIC Information of the view ZMKDBW_IMPMKTPL. Therefore the RFC Function Module "DD_VIEW_GET" is used, but this Function Call ends with an SYSTEM_ERROR, because the UCON-Framework rejects the execution. Because Function Module DD_VIEW_GET is missing in the Logging Phase of the UCON activation.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Please register the Function Module "DD_VIEW_GET" in the UCON Framework in SLT. You can find the UCON documentation here: <a href="https://help.sap.com/viewer/1ca554ffe75a4d44a7bb882b5454236f/7.5.6/en-US/ab35e1c69f744d69a4fcf4ca93284e0c.html" target="_blank">https://help.sap.com/viewer/1ca554ffe75a4d44a7bb882b5454236f/7.5.6/en-US/ab35e1c69f744d69a4fcf4ca93284e0c.html</a></p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id=""><a href="/notes/3058353" target="_blank">3058353 - Register all SLT function modules locally in UCON</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>SLT, view, load, replication, CX_DMC_RFC_CONNECTION</p></div></div></div></div>

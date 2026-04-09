@@ -1,0 +1,81 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Applications running on the WebCUIF use certain OData Services to support the features</p>
+<ul>
+<li>Process Flow</li>
+<li>Core Data Service (CDS) - based value helps</li>
+<li>Attachments</li>
+<li>Output Control</li>
+<li>Situations Handling</li>
+</ul>
+<p>You are running an application in Service Management (e.g. Manage Service Orders) and you expect the above features to work properly. However, you might observe a blank assignment block or the feature is not available or the related function is without an effect.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SICF, /IWFND/MAINT_SERVICE, PFCG</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>One or more of the following reasons might be the cause for the observed symptom</p>
+<ul>
+<li>The relevant HTTP Service (SICF) of the feature is not activated</li>
+<li>There is no Backend Service for the UI5 OData Service defined in the Gateway Client</li>
+<li>The corresponding ICF Node for the UI5 OData Service is not activated in the Gateway Client</li>
+<li>A System Alias is not defined for the UI5 OData Service in the Gateway Client</li>
+<li>Your backend user is lacking authorizations which are necessary to run the feature properly</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="text-decoration-line: underline;">Activation of HTTP Services and Definition of Backend Services for OData Services</span></p>
+<p>There are two options to activate the HTTP Services and define the Backend Services for the OData Services</p>
+<p><span style="text-decoration: underline;">First Option</span>: Activate the HTTP Services and define and activate OData Services by Task List</p>
+<p style="padding-left: 30px;">Follow the steps that are described in SAP Help Portal in page <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/22bbe89ef68b4d0e98d05f0d56a7f6c8/92ed0a55f1983d6ae10000000a44176d.html" target="_blank">https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/22bbe89ef68b4d0e98d05f0d56a7f6c8/92ed0a55f1983d6ae10000000a44176d.html</a></p>
+<p><span style="text-decoration: underline;">Second Option</span>: Activate the HTTP Services and define and activate OData Services manually in transactions SICF and "/IWFND/MAINT_SERVICE"</p>
+<p style="padding-left: 30px;"><span style="text-decoration: underline;"><span style="font-size: 14px;">Activate HTTP Services in transaction SICF:</span></span></p>
+<ul>
+<li>Process Flow and Core Data Service (CDS) - based value helps: CRMS4_SERV_ORDER_CONF_MANAGE_SRV</li>
+<li>Attachments: CV_ATTACHMENT_SRV</li>
+<li>Output Control: CA_OC_OUTPUT_REQUEST_SRV</li>
+<li>Situations Handling: C_SITNINSTANCETP_CDS</li>
+</ul>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">For each HTTP Service perform the following steps:</span></p>
+<ul>
+<li>Start transaction "SICF" (Define Services)</li>
+<li>Enter the name of HTTP Service in field "Service Name"</li>
+<li>Hit F8</li>
+<li>In the menu select "Service/Host--&gt;Activate"</li>
+</ul>
+<p style="padding-left: 30px;"><span style="text-decoration: underline;"><span style="font-size: 14px;">Define Ba</span><span style="font-size: 14px;">ckend Services for the OData Services</span></span></p>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">For each Backend Service perform the following steps: </span></p>
+<ul>
+<li>Start transaction "/IWFND/MAINT_SERVICE" (Activate and Maintain Services)</li>
+<li>Click button "Add Service"</li>
+<li>In field "System Alias" select the right value from the Input help, i.e. select the system where the OData Service will be called</li>
+<li>Enter the name of the Backend Service in field "Technical Service Name"</li>
+<li>Click button "Get Services"</li>
+<li>In the result list, select the Backend Service and click button "Add Selected Services"</li>
+<li>In the popup screen "Add Service" provide the necessary details and click button "Enter"</li>
+<li>An information message is shown that the Service was created and its metadata was loaded successfully</li>
+<li>Click button "Enter"</li>
+<li>The Backend is removed from the Result List</li>
+<li>Navigate back to the Service Catalog Overview Screen and select the just created Service</li>
+<li>In section "ICF nodes" click button "ICF node--&gt;Activate"</li>
+<li>Select a package and hit enter</li>
+<li>As a result the status shows a green traffic light indicating that the ICF node has been activated</li>
+<li>In section "System Aliases" check that the settings are correct</li>
+</ul>
+<p><span style="text-decoration-line: underline;">Assign the relevant OData Services to one of the PFCG roles that are assigned to your backend user</span></p>
+<ul style="font-size: 14px;">
+<li style="font-size: 14px;"><span style="font-size: 14px;">Start transaction "PFCG" (Role Maintenance)</span></li>
+<li style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;">In field "Role" enter a PFCG role that is assigned to the users that are using applications using the above mentioned features</span></span></li>
+<li style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;">Click button "Change"</span></span></li>
+<li style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;">In tab "Menu" in section "Hierarchy" select node "Role Menu"</span></span></span></li>
+<li style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;">On button "Insert Node" click the Dropdown Menu and select "Authorization Default"</span></span></span></span></li>
+<li style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;">In the popup window in field "Authorization Default" select the value "SAP Gateway Business Suite Enablement - Service"</span></span></span></span></span></li>
+<li style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;"><span style="font-size: 14px;">Enter the following TADIR Services into the table view:</span></span></span></span></span></span></li>
+<ul style="font-size: 14px;">
+<li><span style="font-size: 14px;">Process Flow and Core Data Service (CDS) - based value helps: "CRMS4_SERV_ORDER_CONF_MANAGE_SRV   0001"</span></li>
+<li>Attachments: "CV_ATTACHMENT_SRV                  0001"</li>
+<li>Output Control: "CA_OC_OUTPUT_REQUEST_SRV           0001"</li>
+<li>Situations Handling: "C_SITNINSTANCETP_CDS               0001"</li>
+</ul>
+<li>Click button "Apply"</li>
+<li>Navigate to tab "Authorizations"</li>
+<li>Click on button "Change Authorization Data" or on button "Expert Mode for Profile Generation" and provide the authorization values for the newly added authorization objects</li>
+<li>Click button "Generate" to generate the Authorization Profile</li>
+</ul>
+<p> </p></div></div></div></div>

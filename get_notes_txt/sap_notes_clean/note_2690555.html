@@ -1,0 +1,105 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Installation of Support Packs for Vistex V/4 1709 Solutions (Vistex V/4 Solutions are IA, PAC, DMP and DMR) on S/4HANA On-Premise 1709 system.  Technical Add-on component names involved are V4CORE, V4IA, V4PAC, V4DMP, V4DMR.  The customer system may contain all the Add-ons or a subset of the Add-ons.</p>
+<p>This SAP Note provides the support pack installation instructions for the following Vistex V/4 1709 solutions.</p>
+<ul>
+<li>SAP Incentive Administration for S/4HANA by Vistex (IA) helps manage, track, and analyze your incentive programs</li>
+<li>SAP Paybacks and Chargebacks for S/4HANA by Vistex (PAC) provides End-to-end management of agreements, contracts and pricing for all your claim processes – from initiation to validation, settlement and analysis</li>
+<li>SAP Promotions and Agreements for S/4HANA by Vistex, a combination of both SAP Incentive Administration by Vistex (IA) and SAP Paybacks and Chargebacks by Vistex (PAC)</li>
+<li>SAP Data Maintenance - Pricing for S/4HANA by Vistex (DMP) manages complex pricing challenges with ease and reliability – covering everything from agreement initiation to analytics for buy- and sell-side pricing</li>
+<li>SAP Data Maintenance - Resources for S/4HANA by Vistex (DMR) streamlines the maintenance of material, customer, and vendor master data</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Paybacks and Chargebacks, Incentives and Paybacks Module, Incentives Administration, Data Maintenance Pricing, Price Maintenance, Data Maintenance Resources, Vistex software, SAINT, SPAM, SUM, Maintenance Planner, Install, Installation, Upgrade, Migration, Support Package, Support Packs, IRMIPM, IRMGLB, IRMEPM, V/4 1709 Add-ons, 1709, V/4, V4, V/4HANA, V4CORE, V4IA, V4PAC, V4DMP, V4DMR, S/4, S4HANA, S4 HANA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Vistex Add-on Support Packages implement corrections for errors that are contained in the Vistex V/4 1709 sooftware, plus new functionality.</p>
+<p>*** This SAP Note is updated on a regular basis. Therefore, make sure that you obtain the latest version of the SAP Note before you start the installation ***</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><br/>CONTENTS</p>
+<ol dir="ltr">
+<li>Change history</li>
+<li>High level summary of installation steps</li>
+<li>General</li>
+<ol style="list-style-type: lower-alpha;">
+<li>Downloading add-on Support Packages</li>
+<li>SPAM update</li>
+<li>Support Package import</li>
+<li>Support Package Correction import</li>
+</ol>
+<li>
+<div>Delivery dates</div>
+</li>
+<li>
+<div>Problems importing the add-on Support Packages</div>
+</li>
+<li>
+<div>Post-processing after importing the add-on Support Packages</div>
+</li>
+<li>
+<div>Language support</div>
+</li>
+</ol>
+<p style="padding-left: 30px;"><br/><br/><br/><strong>1.  Change history</strong><br/><br/><span style="text-decoration: underline;">Date </span>              <span style="text-decoration: underline;">Topic</span>                       <span style="text-decoration: underline;">Sh</span><span style="text-decoration: underline;">ort description </span><br/>9/05/2018                                     Initial creation</p>
+<p style="padding-left: 30px;"><br/><strong>2.  High level summary of installation steps</strong></p>
+<p style="padding-left: 60px;">a)  Download the add-on Support Package files</p>
+<p style="padding-left: 60px;">b)  Unpack the downloaded add-on Support Packages onto SAP transport directory</p>
+<p style="padding-left: 60px;">c)  Download and install the latest "tp" and "R3trans" transport tools from SAP Service Marketplace (optional, but recommended by SAP)</p>
+<p style="padding-left: 60px;">d)  Apply the latest SPAM version available at SAP Service Marketplace (recommended by SAP)</p>
+<p style="padding-left: 60px;">e)  Load packages in SPAM:  from the initial menu of SPAM in client 000, follow the menu path "Support Package" --&gt;  "Load Packages"  --&gt; "From application server"</p>
+<p style="padding-left: 60px;">f) Verify settings in SPAM: from the initial menu of SPAM, follow the menu path "Extras" --&gt; "Settings" and on the Import Tab, make sure the option "Never" is set for the "ABAP/Screen Generation" setting</p>
+<p style="padding-left: 60px;">g)  Install all add-ons V/4 1709 Support Packages in a single queue using SPAM transaction code in client 000</p>
+<p style="padding-left: 60px;">h)  Perform post-processing steps</p>
+<p style="padding-left: 60px;">*** NOTE ***  If this is a new V/4 1709 installation or an SAP migration which includes Vistex software, the support packages will be included via Maintenance Planner and therefore only the post-processing steps from this note need to be performed.</p>
+<p><br/><br/><br/><strong>3.  General</strong></p>
+<p dir="ltr" style="padding-left: 30px;">a. Downloading add-on Support Packages</p>
+<p dir="ltr" style="padding-left: 30px;">V4CORE and V4VUI are common add-ons required for all V/4 1709 solutions mentioned below, additionally you also require at least one of the following add-ons for the IA, PAC, DMR and DMP solutions depending on your license agreement.</p>
+<p style="padding-left: 30px;">The V4VUI add-on can be installed either on the S/4HANA 1709 OP back-end system for embedded scenario <em><span style="text-decoration: underline;">or</span></em> on a separate SAP Gateway/Frontend server based on SAP NW 7.52 for central HUB Deployment scenario.  Install the V4VUI support package(s) on the same system where the Add-on V4VUI is installed.</p>
+<p style="padding-left: 30px;"><span style="text-decoration: underline;">Solution</span>                                                            <span style="text-decoration: underline;">Add-on name</span></p>
+<p style="padding-left: 30px;">SAP Incentive Administration (IA)                        V4IA</p>
+<p style="padding-left: 30px;">SAP Paybacks and Chargebacks (PAC)                  V4PAC</p>
+<p style="padding-left: 30px;">SAP Data Maintenance Resources (DMR)               V4DMR</p>
+<p style="padding-left: 30px;">SAP Data Maintenance Pricing (DMP)                    V4DMP</p>
+<p style="padding-left: 30px;">The V/4 1709 Add-on installation packages are available at the software download web site</p>
+<p style="padding-left: 30px;"><a href="https://support.sap.com/en/my-support/software-downloads.html" target="_blank">https://support.sap.com/en/my-support/software-downloads.html</a></p>
+<p style="padding-left: 30px;">Download the required Add-on support packages related to the V/4 1709 components already installed in the system (e.g. V4CORE, V4IA, V4PAC, V4DMP, V4DMR, V4VUI).  The support packs are available as .PAT files.</p>
+<p style="padding-left: 30px;">-Log on as user<br/>&lt;sid&gt;adm  on UNIX<br/>&lt;SID&gt;OFR  on AS/400<br/>&lt;SID&gt;adm  on Windows<br/><br/>-Switch to the &lt;DIR_EPS_ROOT&gt; directory of your ERP system (usually<br/>/usr/sap/trans/EPS). The &lt;DIR_EPS_ROOT&gt; directory is displayed after you execute the RSPFPAR report on DIR_EPS_ROOT.<br/><br/>-Switch to the higher-level &lt;DIR_EPS_ROOT&gt; directory.<br/><br/>-Unpack any CAR archive files using the SAPCAR statement.  For example:<br/>SAPCAR -xvf /&lt;CD_DIR&gt;/DATA/K-60E01INIRMGLB.CAR.   on UNIX<br/>SAPCAR -xvf /QOPT/&lt;VOLID&gt;/DATA/K-60E01INIRMGLB.CAR.   on AS/400<br/>SAPCAR -xvf &lt;CD_DRIVE&gt;:\DATA\ K-60E01INIRMGLB.CAR.  on Windows<br/><br/>The support pack files with file extensions of .PAT should now be in the &lt;DIR_EPS_ROOT&gt;/in directory.<br/><br/><br/>b. SPAM update<br/>Import the latest SPAM update BEFORE DOWNLOADING and importing the add-on Support Package.<br/><br/><br/>c. Support Package Import<br/>The Support Packages are imported using transaction SPAM. Refer to the corresponding online documentation.  If the add-on component is already installed, follow the step below to apply the available support pack(s) using SPAM.  However, if this is a new installation or SAP migration, the support packages will be included via Maintenance Planner.<br/><br/>-Prior to applying Support Packages, please ensure that you set the option "Never" for the "ABAP/Screen Generation" in the "import queue" settings of SPAM tool in client 000.<br/><br/>-Install Support Packages for all V/4 1709 Add-on components in the same queue.</p>
+<p style="padding-left: 30px;">Any known issues that occur during installation are documented under Step 6. Problems importing the Add-on Support Packages.</p>
+<p style="padding-left: 30px;"> <br/><br/><br/><strong>4. Delivery dates</strong></p>
+<p style="padding-left: 30px;"><br/><span style="text-decoration: underline;">Title</span>                     <span style="text-decoration: underline;">Package Name</span>                 <span style="text-decoration: underline;">Month of Delivery</span><br/><br/>Support Pack 1    SAPK-17001INV4CORE      September 2018<br/>                          SAPK-17001INV4VUI <br/>                          SAPK-17001INV4IA <br/>                          SAPK-17001INV4PAC <br/>                          SAPK-17001INV4DMP <br/>                          SAPK-17001INV4DMR</p>
+<p style="padding-left: 30px;"><strong>5.  Problems importing the add-on Support Packages</strong></p>
+<p style="padding-left: 30px;">There are currently no known issues when installing the V/4 1709 Add-on support packages.</p>
+<p style="padding-left: 30px;">If an issue occurs, open an incident with SAP Support using component BC-UPG-ADDON.</p>
+<p style="padding-left: 30px;"><strong> 6.  Post-processing after importing the add-on Support Packages</strong><br/><br/><span style="text-decoration: underline;">V4CORE Support Package 1</span><br/><br/><strong>Install the following SAP Notes</strong></p>
+<p style="padding-left: 30px;">2697676 V4 1709 SP1 - V4CORE Collective Mandatory Note - 1</p>
+<p style="padding-left: 30px;">2699043 V4 1709 SP1 - V4CORE Collective Mandatory Note - 2</p>
+<p style="padding-left: 30px;">2699367 V4 1709 SP1 - V4CORE Collective Mandatory Note - 3</p>
+<p style="padding-left: 30px;">2699843 V4 1709 SP1 - V4CORE Collective Mandatory Note - 4</p>
+<p style="padding-left: 30px;">2699789 V4 1709 SP1 - V4CORE Collective Mandatory Note - 5<br/><br/>2697652 V4 1709 SP1 - V4CORE Collective Mandatory Note - 6</p>
+<p style="padding-left: 30px;">2698807 V4 1709 SP1 - V4CORE Collective Mandatory Note - 7</p>
+<p style="padding-left: 30px;">2699498 V4 1709 SP1 - V4CORE Collective Mandatory Note - 8</p>
+<p style="padding-left: 30px;">2698743 V4 1709 SP1 - V4CORE Collective Mandatory Note - 9</p>
+<p style="padding-left: 30px;">2699049 V4 1709 SP1 - V4CORE Collective Mandatory Note - 10</p>
+<p style="padding-left: 30px;">2697683 V4 1709 SP1 - V4CORE Collective Mandatory Note - 11</p>
+<p style="padding-left: 30px;">2711785 V4 1709 SP1 - V4CORE Collective Mandatory Note - 12</p>
+<p style="padding-left: 30px;">2712162 V4 1709 SP1 - V4CORE Collective Mandatory Note - 13</p>
+<p style="padding-left: 30px;">2711637 V4 1709 SP1 - V4CORE Collective Mandatory Note - 14</p>
+<p style="padding-left: 30px;">2712192 V4 1709 SP1 - V4CORE Collective Mandatory Note - 15</p>
+<p style="padding-left: 30px;">2711683 V4 1709 SP1 - V4CORE Collective Mandatory Note - 16</p>
+<p style="padding-left: 30px;">2679291 V4 1709 SP1 - V4CORE Collective Mandatory Note - 17</p>
+<p style="padding-left: 30px;">2700767 V4 1709 SP1 - V4CORE Collective Mandatory Note - 18</p>
+<p style="padding-left: 30px;">2700840 V4 1709 SP1 - V4CORE Collective Mandatory Note - 19</p>
+<p style="padding-left: 30px;">2706364 V4 1709 SP1 - V4CORE Collective Mandatory Note - 20</p>
+<p style="padding-left: 30px;">2711944 V4 1709 SP1 - V4CORE Collective Mandatory Note - 21</p>
+<p style="padding-left: 30px;">2712061 V4 1709 SP1 - V4CORE Collective Mandatory Note - 22</p>
+<p style="padding-left: 30px;">2717898 V4 1709 SP1 - V4CORE Collective Mandatory Note - 23</p>
+<p style="padding-left: 30px;">2717891 V4 1709 SP1 - V4CORE Collective Mandatory Note - 24<br/><br/>2717870 V4 1709 SP1 - V4CORE Collective Mandatory Note - 25</p>
+<p style="padding-left: 30px;">2781968 V4 - Pools -&gt; Item tab is not updating</p>
+<p style="padding-left: 30px;"><strong>Execute the following conversion programs.  They do not need to be executed if this is a new installation. </strong></p>
+<p style="padding-left: 30px;">/IRM/GPR_ESP6_GENE_REQ_TABLE   <br/>/IRM/GPR_ESP6_CONV_REQ_DATA    (be sure to execute /IRM/GPR_ESP6_GENE_REQ_TABLE first)<br/>/IRM/IPMXPD_ESP6_UI_DATA_CONV<br/>/IRM/IPMXP_ESP6_UI_DATA_CONV<br/>/IRM/GBP_CONFIG_V2_CONV<br/>/IRM/GBP_V2_CONV  (be sure to execute /IRM/GBP_CONFIG_V2_CONV first)<br/>/IRM/GSTAT_V2_CONV<br/>/IRM/GCLE_V4_SP1_CTYP_FLG_CONV</p>
+<p>/IRM/EPKU_ESP6_ATI_INCONS_REMV <br/>/IRM/EPLI_ESP6_ATI_INCONS_REMV <br/>/IRM/EPPD_ESP6_ATI_INCONS_REMV</p>
+<p style="padding-left: 30px;"><br/><br/><br/><span style="text-decoration: underline;"><span style="text-decoration: underline;">V4VUI Support Package 1</span><br/><br/></span>Currently no post-processing is necessary.</p>
+<p style="padding-left: 30px;"><span style="text-decoration: underline;"><span style="text-decoration: underline;">V4IA Support Package 1</span><br/><br/></span>Currently no post-processing is necessary.</p>
+<p style="padding-left: 30px;"><span style="text-decoration: underline;"><span style="text-decoration: underline;">V4PAC Support Package 1</span><br/><br/></span>Currently no post-processing is necessary.</p>
+<p style="padding-left: 30px;"><span style="text-decoration: underline;"><span style="text-decoration: underline;">V4DMP Support Package 1</span><br/><br/></span>Currently no post-processing is necessary.</p>
+<p style="padding-left: 30px;"> <span style="text-decoration: underline;"><span style="text-decoration: underline;">V4DMR Support Package 1</span><br/><br/></span>Currently no post-processing is necessary.</p>
+<p dir="ltr" style="padding-left: 30px;"><strong>7. Language Support</strong></p>
+<p dir="ltr" style="padding-left: 30px;">V/4 1709 is delivered in English.  No other languages are available at this time.</p></div></div></div></div>

@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In DMS work flow status shows in external link (eg. <a href="http://www.youtube.com/" target="_blank">www.youtube.com</a>) video upload and approval show as State Undefined. Below screen appears:</p>
+<p><img alt="Workflow_Status.JPG" class="img-responsive" src="/documents/customerkba/HzL8FwqmGfIPTcbkx33Dh4pUe69Fp0T6XNDKJ46hLoo" title="Workflow_Status.JPG"/></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>EP Release Independent</li>
+<li>SAP NetWeaver</li>
+<li>SAP Composition Environment</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>This is working as per the design. The approval process when enabled is only valid for actual content within KM. If you create a link (both internal or external), the link itself cannot be made part of the approval process. Only actual content, i.e. documents can be read by the process and return a workflow state. </li>
+<li>Just to be clear, links cannot be included as part of the approval process, only the documents to which they are linked may be. External content outside of KM cannot be included as part of the approval process either. The KM approval process is exclusive to actual documents stored within KM. Links which cannot be approved or rejected will show 'state undefined'. This is correct.</li>
+<li>For example, if you create an internal link to a document within KM (an internal link) - you have the option to access either the 'details' or 'details for link'. The 'details for link will return 'state undefined' whereas the 'details' will show the current state of the actual document itself (if the approval process is enabled for it). For an external link such as <a href="http://www.youtube.com/" target="_blank">www.youtube.com</a> , the resource is not within KM so it cannot provide the 'details' and 'details for link' options. Instead, you can only see the details for the actual link. As think cannot be part of the approval process, it will not have a 'state' so it will return 'state undefined'. </li>
+</ol>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Enterprise Portal 7.0, EP 7.0, Enterprise Portal 7.01, EP 7.01, Enterprise Portal 7.02, EP 7.02, Enterprise Portal 7.03, EP 7.03, Enterprise Portal 7.1, EP 7.1, Enterprise Portal 7.2, EP 7.2, Enterprise Portal 7.30, EP 7.30, Enterprise Portal 7.31, EP 7.31, Enterprise Portal 7.40, EP 7.4, Enterprise Portal 7.50, EP 7.5, KM, Knowledge Management, External Link, State Undefined, Workflow, Status</p></div></div></div></div>

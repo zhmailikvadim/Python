@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>You are performing an upgrade using the Software Update Manager (SUM) in the first system in your landscape</li>
+<li>In the SUM phase ACT_TRANS or ACT_UPG, you are prompted to perform the SPDD adjustments</li>
+<li>After performing the adjustments, you wish to assign a transport and mark it as an adjustment transport for the subsequent systems</li>
+</ul>
+<pre style="padding-left: 60px;">Utilities --&gt; Assign Transport</pre>
+<pre style="padding-left: 60px;">For which Software Logistics tool do you want to flag a modification adjustment transport?</pre>
+<pre style="padding-left: 60px;">Support Package Manager/Add-on Installation Tool (--&gt;"OCS") or Upgrade/Enhancement Package Installer (--&gt;"Upgrade")</pre>
+<pre style="padding-left: 60px;"><strong>--&gt; You choose Upgrade</strong></pre>
+<ul>
+<li>You notice that the SAP_ADJUST is not assigned under SAP_CTS_PROJECT for the transport request as is the case during a SPAM/SAINT update</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>This is normal behavior. The SUM upgrade uses a different mechanism for flagging the adjustment requests than the SPAM/SAINT. In case you choose upgrade in the pop-up above, then the transport request is added to the umodauto.lst but no SAP_ADJUST is assigned to it. In the case of SPAM/SAINT updates, the SAP_CTS_PROJECT SAP_ADJUST is assigned.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>1- There is no action required. Please verify if the transport number is added to the &lt;path&gt;/SUM/abap/bin/umodauto.lst file, then it will be automatically picked by the SUM upgrade in the subsequent system.</p>
+<p>2- If the system is under ChaRM control, then the Transport Organizer will not let you release the SPDD request without a SAP Project entered.  ChaRM makes SAP_CTS_PROJECT and SAP_TMWFLOW mandatory attributes in every transport request. Therefore, in such cases, it is recommended to enter SAP_ADJUST as CTS project in your SPDD request.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="/notes/1970888" target="_blank">1970888</a> - How To: SPDD/SPAU handling during the Update/Upgrade<br/><a href="/notes/2732844" target="_blank">2732844</a> - SPDD: SAP_ADJUST is not assigned under SAP_CTS_PROJECT</p></div></div></div></div>

@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Error message FAGL_SFWC001 is raised when you start FAGL_FCV. The error says that Business Function FIN_GL_ERR_CORR is not activated.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Financial Accounting (FI)</li>
+<li>SAP S/4HANA FINANCE 1605</li>
+<li>SAP S/4HANA, on-premise edition 1511</li>
+<li>SAP S/4HANA 1610</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>As you can see in the application help for report FAGL_FCV, one of the prerequisites is that business functions FIN_GL_ERR_CORR and FIN_GL_ERR_CORR_SUSP are activated.</p>
+<p>In this version of the software, ECS is used to process the postings of the foreign currency remeasurement. That is, the business function ECS (FIN_GL_ERR_CORR) has to be activated and configured to run this report. ECS is required, since it supports the new currency types available in the General Ledger. Batch input does not support the new currency types (only the FI currencies).<br/><br/>In previous versions, batch input was used in the case of errors. If there were no errors, the remeasurement report could make the postings directly.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>You can review these business functions in transaction code SFW5 and activate them if required.<br/>Please refer to the following KBA in case you need help:</p>
+<p><a href="https://me.sap.com/notes/1641394" target="_blank">1641394</a> - SFW5: How-to activate Business Function</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>You can also consider the SAP Notes:</p>
+<p><a href="https://me.sap.com/notes/2406270" target="_blank">2406270</a>  FAGL_FCV: Batch Input for FI-Currencies</p>
+<p><a href="https://me.sap.com/notes/2310858" target="_blank">2310858</a>  Foreign Currency Remeasurement: No Batch Input</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>FAGL_SFWC001, FAGL_FCV, FIN_GL_ERR_CORR, ECS, Batch input, Batch input Mappe, SM35, ECS, Fehler, Fremdwährungsbewertung, Business Function FIN_GL_ERR_CORR erforderlich, Error Correction and Suspense Accounting, FIN_GL_ERR_CORR_SUSP</p>
+<p> </p></div></div></div></div>

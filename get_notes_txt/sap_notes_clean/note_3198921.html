@@ -1,0 +1,56 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="WordSection1" id="__html1">
+<div class="WordSection1">
+<p>******************************************************************************************************************************************************************************************************************<br/>WARNING: This is an SAP Tax Declaration Framework (SAP TDF) Note. If you do not have SAP TDF installed in your system, this SAP Note does not apply to you. SAP TDF requires a specific license.<br/>******************************************************************************************************************************************************************************************************************</p>
+<p>This SAP Note provides you with changes in HANA calculation views and ABAP code to address the following issues:</p>
+<p><strong>ECD</strong></p>
+<ul>
+<li>The values for functional currency are not considered in <strong>I155</strong> and <strong>I355</strong> filters causing missing lines in the SPED output.</li>
+</ul>
+</div>
+<div class="WordSection1"><span style="font-size: 14px;"><strong>EFD ICMS IPI</strong></span></div>
+<div class="WordSection1">
+<ul>
+<li><span style="font-size: 14px;"><strong>K100</strong> register is reported even when you do not have any information to be reported in block <strong>K</strong>.  </span></li>
+</ul>
+<p><strong>EFD Contribuições</strong></p>
+<ul>
+<li><strong>PCO_0120</strong> register cannot be reported for January - November.</li>
+</ul>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>TDF, Brazil, SPED, ECD, EFD ICMS IPI, EFD Contribuições.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is relevant only for Brazil.</p>
+<p>You have implemented SAP Note <a class="external-link" href="/notes/3198840" rel="nofollow" target="_blank">3198840</a>.</p>
+<p>You have upgraded your system to SAP TDF Support Package 16.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After implementing this SAP Note, the system will be updated as follows:</p>
+<p><strong>ECD</strong></p>
+<ul>
+<li>Values for <strong>CA_VL_SLD_INI_AUX</strong>, <strong>CA_VL_DEB_AUX_FINAL</strong>, <strong>CA_VL_CRED_AUX_FINAL</strong> fields in <strong>EFD_I155</strong> Calculation View and <strong>VL_CTA_AUX</strong> field in <strong>EFD_I355</strong> calculation view will be considered in corresponding filters.</li>
+</ul>
+<p><strong>EFD ICMS IPI</strong></p>
+<ul>
+<li>The<strong> K100</strong> register will be generated only if any other register in block <strong>K</strong> was generated.</li>
+</ul>
+<p><strong>EFD Contribuições</strong></p>
+<ul>
+<li>The<strong> PCO_0120</strong> register will allow reporting different months than December.</li>
+</ul>
+<p>As a general rule, SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in SAP Support Portal, under <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>. Note that documentation, transactions, and customizing activities are only delivered via Support Package.</p>
+<div class="table-responsive"><table border="1" cellpadding="2" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Version</td>
+<td>Date</td>
+<td>Reason</td>
+</tr>
+<tr>
+<td>1</td>
+<td>06/05/2022</td>
+<td>Released Note</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div>

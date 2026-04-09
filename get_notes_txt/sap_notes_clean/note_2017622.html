@@ -1,0 +1,40 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<p>You are requested to enable and provide ODBC Traces for troubleshooting Smart Data Access issues in SAP HANA to a remote DB2 database.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Federation; DB2CLI;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>In order to further analyze a reported issue for a SDA setup, ODBC traces of the communication between HANA and the remote DB2 database are required.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Follow the steps below to enable ODBC traces on OS level:</p>
+<p><span style="text-decoration: underline;"><em>Enable DB2 CLI ODBC Trace</em></span></p>
+<ol>
+<li>Locate the <span class="SNO_DNT" style="float: none;" translate="no">db2cli.ini</span> file, by default located inside the <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;adm</span> home directory.</li>
+<li>Open the <span class="SNO_DNT" style="float: none;" translate="no">db2cli.ini</span> file in a plain text editor as <span class="SNO_DNT" style="float: none;" translate="no">&lt;sid&gt;adm</span>.</li>
+<li>Add the following section to the db2cli.ini file or, if the <span class="SNO_DNT" style="float: none;" translate="no">[COMMON]</span> section exists, append the CLI<span class="SNO_DNT" style="float: none;" translate="no"> trace </span>keywords in the following example:</li>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">﻿[COMMON]</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">Trace=1</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">TracePathName=path</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">TraceComm=1</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">TraceFlush=1</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">TraceTimeStamp=1﻿</span></li>
+</ul>
+<li>Restart HANA DB to make the change effective.</li>
+<li>Reproduce the issue.</li>
+</ol>
+<p> </p>
+<p><span style="text-decoration: underline;"><em>Disable <em>DB2 CLI </em>ODBC Trace</em></span></p>
+<p>To disable the ODBC traces, set the parameter "<em><span class="SNO_DNT" style="float: none;" translate="no">﻿Trace</span>" </em>back to "0" inside <span class="SNO_DNT" style="float: none;" translate="no">db2cli.ini</span> and restart HANA DB afterwards.</p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">﻿[COMMON]</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">Trace=0﻿</span></li>
+</ul>
+<p><span style="font-size: 14px;"> </span></p>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li>HANA DB restart is required</li>
+<li>Further details can be found here: <a href="https://www.ibm.com/docs/en/db2/9.7?topic=traces-tracing-cli-driver-by-using-db2cliini-file" target="_blank">Tracing the CLI driver by using the db2cli.ini file</a></li>
+</ul></div></div></div></div>

@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">User has a SAPUI5 application and they wish to use device camera to capture images on Android, iOS, and Windows with Fiori Client and browser.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAPUI5 1.38.16</li>
+<li>iOS iPad and iPhone</li>
+<li>Android tablet and phone</li>
+<li>Windows desktop and tablet</li>
+<li>Fiori Client</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>1.  The Fiori Client on iOS and Android uses the Cordova camera plugin to capture images from the camera.  See details at:</p>
+<p><a href="https://blogs.sap.com/2017/02/08/appendix-e-non-kapsel-plugins/" target="_blank">https://blogs.sap.com/2017/02/08/appendix-e-non-kapsel-plugins/</a></p>
+<p>2.  On the browser, the issue is the Microsoft x-ms-webview.  SAPUI5 natively does not provide camera functionality and that has to be provided by the plugins of the Kapsel (Fiori Client) and Cordova browser.  The webview of the iOS (UIWebview) and Android (Crosswalk) works with the Cordova Camera plugin that accesses the camera.  On Windows this can be done in Chrome/Edge/Firefox browser via a HTML Tags.  You can review this at the following page that demonstrates how to create screen shots with html5 “video” tag.</p>
+<p><a href="https://www.kirupa.com/html5/accessing_your_webcam_in_html5.htm" target="_blank">https://www.kirupa.com/html5/accessing_your_webcam_in_html5.htm</a></p>
+<p>This works fine in Edge, Firefox, and Chrome.  This does not work on Internet Explorer and in Fiori Client since they use the Microsoft x-ms-webview as x-ms-webview which doesn’t support these tag.  Logically, a user could possibly use deep links to call the browser (ie Chrome), take a picture, store locally, and return to Fiori Client, but this could pose security risks.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<ul>
+<li>SAPUI5</li>
+<li>Camera</li>
+<li>windows</li>
+<li>iOS</li>
+<li>Android</li>
+<li>x-ms-webview</li>
+</ul></div></div></div></div>

@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>ASE errorlog reports infected with signal 11 sequence</li>
+<li>In the module <strong>GaGenericArray::_GaGetPtr<br/><br/></strong>Current process .. infected with signal 11 (SIGSEGV)<br/>Address .. (void**GaGenericArray::_GaGetPtr(int&amp;,GaArrayBlock*&amp;)</li>
+</ul>
+<ul>
+<li>Followed by a stack trace which includes modules<br/><br/>GaGenericArray::_GaGetPtr<br/>CgpPop*PopMergeJoin<br/>CgpPop*PopNlJoin<br/>CgpPop*PopAppendUnionAll<br/>CgpPop*PopEmit</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Adaptive Server Enterprise (ASE) 15.7</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>Instances reported have been against early releases of ASE 15.7 (ESD#1 - ESD#3) with no reports in current and supported releases. </li>
+<li>The issue has been identified and logged under SAP <strong><strong>CR 713445:</strong></strong><br/>"A signal 11 at address GaGenericArray::_GaGetPtr can be seen from a select statement which performs a join multiple tables with a a derived table.".</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>There is currently no target SAP ASE Service Pack scheduled for SAP<strong> CR 713445 </strong>. Subscribe to this KBA to be automatically notified when SAP<strong> CR 713445</strong> is fixed.<br/><br/></li>
+<li>It looks like <strong>CR 713445</strong> is resolved in a higher 15.7 releases and does not affect more current releases (from ASE 15.7 SP50 &amp; SP100 upwards).</li>
+</ul>
+<p>Workaround</p>
+<ul>
+<li>While there is no particular pattern identified that causes this stacktrace, minor changes to the query or execution methods can prevent it :</li>
+<ul>
+<li>change an AND for a 'like' clause</li>
+<li>reduce IN list</li>
+<li>set merge_join off</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>SAP KBA <a href="https://me.sap.com/notes/1904061" target="_blank">1904061</a> for how to check the current status of an ASE CR (Change Request).</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>CR713445, CR#713445, 713445, SEGV, segmentation, storage, access, violation, fault, segfault, kisignal, stacktrace, GaGenericArray::_GaGetPtr , GaGenericArray  , GaGetPtr</p></div></div></div></div>

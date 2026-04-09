@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3559837&amp;TargetLanguage=EN&amp;Component=XX-PART-ACM&amp;SourceLanguage=DE&amp;Priority=06&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3559837/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3559837/D</a>.</span></div></div><div id="__html1"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>You use SAP ACM, the drug order overview and the universal prescription to manage and issue electronic medication orders.</p>
+<ul>
+<li>In the medication order overview, you want to use quick filters with a few clicks to see which prescription requests for parenteral preparations have been received or in which electronic orders the signature is pending.</li>
+<li>In the ePrescription order data record, you want to specify a batch number and an expiration date.</li>
+<li>With document category version 3 of the universal prescription you wish to assign electronic orders to a pharmacy.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p id="">KIM ePrescription, AMVO</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p id="">Functionality enhancement</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>This SAP Note provides the following function enhancements:</p>
+<ol>
+<li><strong>Quick Filter in the Drug Order Overview<br/><br/></strong>The following quick filters are available in the drug order overview:<br/><br/></li>
+<ul>
+<li>My Open Prescription Requests: When you select this filter, the list of orders is filtered to orders that are still to be signed and that have been received using KIM. In addition, the EmR of the logged-on user is transferred to the selection parameters, provided this is not already defined. If an OU is stored in the selection parameters, this is removed so that all his or her open prescription requests are displayed to the user.<br/><br/></li>
+<li>Open prescription requests of the OU: When this filter is selected, the list of orders is filtered to orders still to be signed that were received using KIM. In addition, the OU from the view from which the order overview was called is transferred into the selection parameters. If an EmR is previously defined in the selection parameters, this is removed so that all open prescription requests are displayed to the user.<br/><br/></li>
+<li>Open E-orders: When this filter is selected, the list of orders is filtered to orders still to be signed. As a result, the system displays the orders pending for signature to the user.<br/><br/></li>
+</ul>
+<li><strong>Specification of batch number and expiration date in ePrescription order data record<br/><br/></strong>In the universal prescription document category version 3, you can enter the batch number and the expiry date of an order for an ePrescription-enabled order in the detail area.<br/><br/></li>
+<li><strong>Assignment of ePrescriptions to a pharmacy<br/><br/></strong>You can use the version of the universal prescription to determine the redemption route for an ePrescription-enabled order. The standard for each order entered is "Patient". By clicking in the field of the relevant order column, you can use a dialog to change the redemption route. You have the following options for selecting alternative redemption routes:<br/><br/></li>
+<ul>
+<li>Assignment</li>
+<li>Direct Assignment</li>
+</ul>
+</ol>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">You must enter a KIM e-mail address for the redemption routes Assignment and Direct Assignment. You can enter the KIM mail address as free text. To support the entry of the KIM mail address, the search in the directory service of the TI (VZD) is possible. You can use the search criteria to search for KIM mail addresses in the VZD. The results are displayed at the bottom of the dialog. Similarly, you can select a KIM mail address from the Recent tab.<br/><br/></span>If you choose Assignment or Direct Assignment, the system sends the corresponding ePrescription to the selected recipient using KIM. When the direct assignment redemption route is selected, the patient is deprived of further decision-making authority over the order. The order is then placed in the TI with the workflow type 169.</p>
+<p style="padding-left: 30px;">Please note: When and whether an assignment or direct assignment of ePrescriptions is legally permitted cannot be checked by the software. It is up to the ordering person whether an assignment/direct assignment is allowed in the current pension context.</p>
+<p><strong>The following adjustments must be made or checked in the Reference IMG:</strong></p>
+<p>Define the LDAP server for the search in the VZD in Customizing under:</p>
+<p><em>SAP Healthcare - Industry-Specific Components for Hospitals -&gt; SAP Ambulatory Care Management -&gt; Treatment -&gt; Outpatient Clinic Forms -&gt; Electronic Outpatient Clinic Forms -&gt; Configure Electronic Prescription</em>.</p>
+<p>You can enter OU-related entries for an institution. If you enter several OUs, you must select an LDAP server for each OU.</p>
+<p>The functions are available with the specified Support Packages.</p></div></div></div></div></div>

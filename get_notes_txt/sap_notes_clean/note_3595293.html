@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">An export ends with return code 0008. The export log shows the following error message:</p>
+<p>2EETW000 error in key analysis of table ... - key '...' is longer than MAX_KEY_LG:172</p>
+<p>As a consequence, the export of the concerned table entry is refused.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error occurs when the key of the affected table is longer than 172 characters, and the key is specified in table E071K_STR.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>As of R3trans version 21.08.25, R3trans is able to deal with such oversized keys by automatically converting them to generic selections. This improvement is provided for the following kernel releases:</p>
+<ul>
+<li>kernel release 918 and higher: from the beginning</li>
+<li>kernel release 917 as of patch level 2.</li>
+<li>kernel release 916 as of patch level 64.</li>
+<li>kernel release 915 as of patch level 27.</li>
+<li>kernel release 914 as of patch level 42.</li>
+<li>kernel release 793 as of patch level 325.</li>
+</ul>
+<p>As a workaround, you can manually change the transport request by changing these selections to generic selections, then repeat the export.</p></div></div></div></div>

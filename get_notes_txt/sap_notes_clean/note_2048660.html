@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>Navigate to the Import functionality in the Enterprise Portal</li>
+<li>Observer a runtime error -<br/><br/>Error: Exception ID:xx:xx_xx/xx/xx_xxxx_xxxxxxxxx<br/>[EXCEPTION]<br/>com.sapportals.portal.prt.component.PortalComponentException: Error in service call of JSP Resource <br/>Application name : com.sap.portal.pcd.admintools.import <br/>Component : pcd:portal_content/administrator/super_admin/super_admin_role/com.sap.portal.system_administration/com.sap.portal.system_admin_ws/com.sap.portal.transport/<span class="scayt-misspell"><span class="scayt-misspell"><span class="scayt-misspell">com.sap.portal.transport</span></span></span>_packages/com.sap.portal.import <br/>Component class : com.sapportals.portal.transport.ui.ImportComponent ...<br/><br/>... Caused by: com.sapportals.portal.prt.runtime.PortalRuntimeException: Error while running compiled JSP ...<br/><br/>... Caused by: java.lang.ClassCastException: Cannot cast class com.sapportals.portal.transport.ui.ImportPreviewBean (loader WCE_PRIVATE_CL_sap.com/<span class="scayt-misspell"><span class="scayt-misspell"><span class="scayt-misspell"><span class="scayt-misspell">com.sap.portal.pcd.admintools.import</span></span></span></span>@com.sap.engine.boot.loader.ResourceMultiParentClassLoader<br/>  </li>
+</ul>
+<p> </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP NetWeaver 7.3</li>
+<li>SAP enhancement package 1 for SAP NetWeaver 7.3</li>
+<li>SAP NetWeaver 7.4</li>
+<li>SAP Netweaver 7.5</li>
+<li>Reported case was in SAP NetWeaver Enterprise Portal 7.40</li>
+<li>May occur in other releases</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Call the Enterprise Portal as the System Administrator</li>
+<li>Navigate to System Administration -&gt; Transport -&gt; transport Packages -&gt; Import</li>
+<li>A runtime error appears on-screen</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul>
+<li>The import service has encountered some issues or has stopped responding</li>
+<li>In the reported case restarting the import service resolved the issue</li>
+</ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol>
+<li>Call the NetWeaver Administrator (NWA) as the administrator user</li>
+<li>Navigate to Configuration -&gt; Start &amp; Stop &gt; Java Applications</li>
+<li>Copy and paste 'com.sap.portal.pcd.admintools.import' into the field beside the funnel<br/><br/><img alt="Restart service.JPG" class="img-responsive" src="/documents/customerkba/A5e1r9JseTWkNFXldDwbn0E7OeUpixadYVXwfXAQa9U" title="Restart service.JPG"/></li>
+<li>Press Enter</li>
+<li>Highlight 'com.sap.portal.pcd.admintools.import'</li>
+<li>Click on 'Restart'</li>
+<li>Navigate to the Import functionality again<br/><br/><img alt="Working again.JPG" class="img-responsive" src="/documents/customerkba/aYLMbRx9j_qdk7T98STa2Fz56-ToyYNpr0E8T9sftEE" title="Working again.JPG"/></li>
+</ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Runtime error when navigating to Import in the System Administration role, Enterprise Portal 7.30, EP 7.30, Enterprise Portal 7.31, EP 7.31, Enterprise Portal 7.40, EP 7.4, Enterprise Portal 7.50, EP 7.5</p></div></div></div></div>

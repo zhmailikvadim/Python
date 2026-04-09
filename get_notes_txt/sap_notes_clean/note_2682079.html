@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In order to use the new FIN data model "0G", after following the instruction in SAP standard document <a href="https://help.sap.com/saphelp_mdg80/helpdata/en/c2/ba2f5598a43f6ae10000000a44176d/frameset.htm" target="_blank">Deleting Data Model 0F</a> to delete the active version of data model "0F", you have encountered error "Deletion run completed with errors"(Message no. USMD5000) after running Transaction "MDG_DELETE_MODEL" for data model "0F".</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>
+<div>SAP Master Data Governance 8.0</div>
+</li>
+<li>SAP Master Data Governance 9.0</li>
+<li>SAP Master Data Governance 9.1</li>
+<li>SAP Master Data Governance 9.2</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<div>Run Transaction MDG_DELETE_MODEL on SAP GUI.</div>
+</li>
+<li>Enter Data Model "0F" and Execute.</li>
+<li>Error message "Deletion run completed with errors"(Message no. USMD0005) is shown in a popup.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ol>
+<li>
+<div>Switch "FIN_MDM_CORE_SFWS_EHP5" is not activated yet.</div>
+</li>
+<li>Cross Client object change is not allowed for the present Client.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>
+<div>Please refer to KBA "<a href="https://me.sap.com/notes/2475099" target="_blank">2475099</a> - Switch FIN_MDM_CORE_SFWS_EHP5 is inactive" to make sure corresponding Business Functions are activated, so that the mentioned switch will be activated also.</div>
+</li>
+<li>Please run Transaction "SCC4" on your system and select the corresponding Client where you want to delete data model "0F", go to the detail view and change the value of field "Cross-client Object Changes" as "Changes to Repository and cross-client customizing allowed".</li>
+<li>If the above mentioned solution cannot fix your problem, please check and debug in report USMD_DELETE_DATA_MODEL. This will help you to narrow down the problem.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li>
+<div>SAP Note <a href="https://me.sap.com/notes/1456270" target="_blank">1456270</a> - Upgrade from business funct. FIN_MDM_ACC to MDG_FOUNDATION.</div>
+</li>
+<li><a href="https://help.sap.com/viewer/product/SAP_MASTER_DATA_GOVERNANCE/" target="_blank">Master Data Governance</a> for Financials.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>0F, 0G, MDG_DELETE_MODEL, USMD_DELETE_DATA_MODEL, USMD0005</p></div></div></div></div>

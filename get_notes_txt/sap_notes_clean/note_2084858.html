@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You define a job to delete planning version values with a TSCOPY variant. Due to missing authorization the job might fall into an endless loop and create millions of liveCache locks. If the executing user has no authorization (authorization object: C_APO_FUN, function: C_ZRO) the job should be cancelled with an error message. If deletion of the plannig version values fails TSCOPY should release the lock.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>/SAPAPO/RTSCOPY, C_APO_FUN, C_ZRO, LC lock</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>TSCOPY is executed in background by a user who has no authorization for function C_ZRO, and LC lock is active for the planning area.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement this correction.</p></div></div></div></div>

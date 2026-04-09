@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">For a Third Party Posting program RPURMP00 remittance rule, more than one HR accumulator has been created. The expectation is that after the first accumulator has triggered, any subsequent accumulators will continue to be available and are recognized as valid to be triggered. The actual result is that after the first accumulator triggers successfully, any subsequent accumulators are ignored.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>HR renewal </li>
+<li>SAP S/4HANA </li>
+<li>SAP ERP  </li>
+<li>SAP SuccessFactors Employee Central Payroll </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>Use transaction code SE38 to create a Third-Party Remittance Posting run (program RPURMP00) that has two or more accumulators for a remittance rule. For example,</p>
+<p>HR Accumulator 1:  Positive amounts $0 to $99,999.99   = remit semi-weekly</p>
+<p>HR Accumulator 2:  Positive amounts $100,000 and over = remit next business day</p>
+<p>If/when the first accumulator criteria is met and triggered successfully, any and all subsequent accumulators are ignored.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>HR Accumulators are used in the system to use the Remittance Rule when the criteria of the accumulator is met. They were not intended to be used in multiple scenarios for the same rule.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>PC00_M99_URMP, RPURMP00, Third Party Remittance, Posting, remittance rule, accumulator, V_T51RH, V_T51RD</p></div></div></div></div>

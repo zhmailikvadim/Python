@@ -1,0 +1,67 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You want to install SAP HANA platform in a virtualized environment using “Red Hat Virtualization” - KVM virtual machines</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>KVM, RedHat, Kernel-based Virtual Machine, Red Hat Virtualization, RHV, virtualized</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>With the release of SAP HANA 2.0 SPS 05, SAP announced support for SAP HANA platform running on Red Hat Virtualization RHV 4.4.</p>
+<p>The term “Red Hat KVM” in that SAP Note refers to the Red Hat KVM hypervisor based on "qemu-kvm-5.1.0-21.module+el8.3.1+10464+8ad18d1a" as part of RHV 4.4. This support statement is based on the compatibility of the Red Hat KVM hypervisor based on "qemu-kvm-5.1.0-21.module+el8.3.1+10464+8ad18d1a". Red Hat is responsible for maintaining the compatibility.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP and Red Hat will jointly support SAP HANA Platform 2.0 SPS 05 (and later releases) virtualized on RHV 4.4 in production adhering to the SLAs defined in the customer support contracts. If a reported problem is a known SAP HANA issue with a validated fix, SAP support will recommend the appropriate fix directly to the customer. For all other issues, the customer will be referred within SAP’s OSS system to Red Hat for support. Red Hat now owns the issue and, as needed, Red Hat will involve HANA HW/OS partner and/or SAP to troubleshoot the issue. If the issue cannot be isolated to an individual component and can be reproduced in a virtual lab environment, then Red Hat, Inc. will reproduce on a Bare Metal environment. Any further SAP Support will be given on Bare Metal implementations only. It is therefore essential to establish a process to reproduce SAP HANA system on a certified Bare Metal system to ensure support.</p>
+<p>Supported Scenarios:</p>
+<ul>
+<li>Single and multiple SAP HANA virtual machines on a dedicated SAP HANA certified server are supported. 1 VM may span over 1,2 or 4 sockets.</li>
+<li>The maximum size of a virtual SAP HANA instance is limited by the maximum size of a virtual machine on RHV 4.4, 6 TB of memory for Intel Cascade- or Cooper Lake. The minimum size of a SAP HANA instance in a virtual machine on RHV 4.4 is 8 physical cores and 128GB. A SAP HANA instance / virtual machine is sized according to the existing SAP HANA sizing guidelines and Red Hat recommendations.</li>
+<li>SAP HANA certified 1, 2 and 4 socket Intel Cascade- or Cooper Lake processor "TDIv5 model", in scale up configurations.</li>
+<li>Live Migration capabilities (up to 6 TB VM):</li>
+<ul>
+<li>Supported when using SAP HANA on Red Hat KVM in combination with NFS storage.</li>
+<li>Supported when using SAP HANA on Red Hat KVM with Fibre Channel LUN passthrough storage.</li>
+<li>We have seen performance impacts in high load situations. Therefore the recommendation is to use Live Migration only in "off peak hours" with the lowest load on the system.</li>
+</ul>
+<li>High Availablity</li>
+<ul>
+<li>RHV High Availability is not supported</li>
+<li>Solutions based on <a href="https://access.redhat.com/articles/4079981" target="_blank">Red Hat HA solutions for SAP</a> are supported.</li>
+</ul>
+<li>Not supported:</li>
+<ul>
+<li>Scale out configurations are not supported</li>
+<li>8-socket SAP HANA certified hardware configurations are not supported</li>
+</ul>
+</ul>
+<p>Information on Performance:</p>
+<ul>
+<li>In general, the setting of parameter kvm.nx_huge_pages has an impact on performance. Before setting this parameter, please refer to <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/8.4_release_notes/kernel_parameters_changes" target="_blank">Chapter 5. Important changes to external kernel parameters</a>.</li>
+<li>Hyperthreading was enabled in this scenario</li>
+<li>All deviations below are additive dependent on the use case</li>
+<li>Performance deviations for virtualization as measured on Intel Cascade Lake (Bare Metal vs. Single VM):</li>
+<ul>
+<li>kvm.nx_huge_pages = OFF</li>
+<ul>
+<li>The measured performance deviation for OLTP or mixed OLTP/OLAP workload is below 10%.</li>
+<li>The measured performance deviation for OLAP workload is below 6%.</li>
+</ul>
+<li>kvm.nx_huge_pages = ON</li>
+<ul>
+<li>During performance analysis with standard workload conducted by Red Hat, most of the test cases stayed within the defined KPI of 10% performance degradation compared to bare metal. However, there are low-level performance tests in the test suite exercising various HANA kernel components that exhibit a performance degradation of more than 10%. This also indicates that there are particular scenarios which might not be suited for SAP HANA on RHV 4.4 with kvm.nx_huge_pages = ON; especially those workloads generating high resource utilization, which must be considered when sizing SAP HANA instance in a Red Hat KVM virtual machine. Thorough test of configurations for all workload conditions are highly recommended.</li>
+</ul>
+</ul>
+</ul>
+<p>Information on configuration:</p>
+<ul>
+<li>A correct host-, hypervisor-, virtual machine- and guest configuration is crucial to run SAP HANA on KVM. Customer configure, optimize and size the KVM solution for the usage of SAP HANA on adequate infrastructure according to the SAP HANA workload and expected KPIs. A correct placement of the VM running SAP HANA on host system, timing management, CPU properties, memory-, storage- and network configuration should have a special focus when planning and configuring KVM solutions. Configuration and overall setup must comply under all circumstances with current version of the "SAP HANA on Red Hat Virtualization: Best Practices Deployment Guide " [1]. Configurations which are not setup according to this best practice guide are considered as unsupported from SAP.</li>
+<li>The vCPUs of a single VM must be pinned to physical cores, so the CPU cores of a socket get exclusively used by only one VM. However, a single VM may span more than one socket.</li>
+<li>CPU and Memory overcommitting must not be used.</li>
+<li>The setup is according to Netapps Best Practices Guide for SAP HANA. In detail this means that a VM has two 10 Gigabit Ethernet links to the the Netapp Filer. Make sure the mountpoints /hana/data and /hana/log use each a dedicated NIC with SRIOV and a dedicated IP subnet. Additionally implement Netapps recommendations such as 9k Jumbo frames and read and write window sizes of 1M. It’s up to the customers workload requirement if network ports can be shared across VMs.</li>
+<li>Information about <a href="https://me.sap.com/notes/2737837" target="_blank">TSX</a> can be found in <a href="https://me.sap.com/notes/2777782" target="_blank">SAP Note 2777782</a>.</li>
+</ul>
+<p>Additional information:</p>
+<ul>
+<li>To qualify for support customer must have a valid support entitlement (subscription) for the used Red Hat virtualization and OS solutions.</li>
+<li>SAP HANA Tailored Datacenter Integration (TDI) delivery method is supported for SAP HANA platform on Red Hat KVM. The SAP HANA installation was done by an SAP certified engineer, qualified as "SAP Certified Technology Specialist - SAP HANA Installation" [2] on SAP HANA certified hardware and successfully verified with the SAP HANA hardware configuration check tool [3].</li>
+<li>There must be support statements from both the hardware vendor and the virtualization vendor so that a combination is supported for virtualized SAP HANA platform.</li>
+<li>Red Hat Enterprise Linux (RHEL) 8 is the supported operating system when virtualized. Only supported OS versions must be used according to SAP Note 2235581. OS must be certified for Red Hat KVM. Due to different scope and test coverage during corresponding validation activities, the underlying server must be certified for corresponding operating system, however.</li>
+<li>SAP may close the ticket if issue cannot be rebuilt on Bare Metal or the workload of particular scenarios might not be suited for SAP HANA on Red Hat KVM. Therefore, the customer must have a virtual to physical migration process in place.</li>
+</ul>
+<p>This note will be continuously updated with the latest support information without further notice.</p>
+<p>[1] <a href="https://access.redhat.com/articles/4448131" target="_blank">https://access.redhat.com/articles/4448131</a><br/>[2] <a href="https://training.sap.com/shop/certification/" target="_blank">https://training.sap.com/shop/certification/</a><br/>[3] <a href="https://scn.sap.com/docs/DOC-63140" target="_blank">https://scn.sap.com/docs/DOC-63140</a></p></div></div></div></div>

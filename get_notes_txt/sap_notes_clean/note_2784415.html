@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You have created follow-up Purchase Orders against the Purchase Request, you are expecting the status of Purchase Request turns into "Purchase Order Created". However, it is still in status "No Follow-up".</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p><span style="font-size: 16px; text-decoration: none; font-family: arial,helvetica,sans-serif; font-variant: normal; white-space: normal; word-spacing: 0px; text-transform: none; float: none; font-weight: 400;  font-style: normal; text-align: left; orphans: 2; display: inline !important; letter-spacing: normal; background- text-indent: 0px; -webkit-text-stroke-width: 0px;">SAP Business ByDesign</span></p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Go to Purchase Requests and Orders work center.</li>
+<li>Go to Purchase Requests view.</li>
+<li>Open the affected Purchase Request, you will find the status of Purchase Request is "No Follow-up".</li>
+<li>However, if you navigate to document flow tab, you can see the follow-up Purchase Order has already been created and sent.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The status of Purchase Request item is set to  'Purchase Order Created' after the complete quantity in Purchase Request is consumed into Purchase Order(s).</p>
+<p>If the Purchase Request is partially ordered, it will show the status "No Follow-up".</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>This is a designed behavior. If the status is set to 'Purchase Order Created' on partially ordered Purchase Request, then the Purchase Request item which still has quantity yet to be consumed will no more appear in 'Open Purchase Requests' query and the corresponding 'Create Purchase Order' task will also be not active. Hence, system designed in this way.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Purchase Request status, Purchase Order created, No Follow-up</p></div></div></div></div>

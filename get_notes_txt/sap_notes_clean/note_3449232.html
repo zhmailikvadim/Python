@@ -1,0 +1,160 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You use the function for valuation of real estate contracts. It is unclear how the conversion date is determined for the conversion of the valuation currency into the first local currency or into the second and third local currency.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">RECEEP, CTRULE, WWERT, CTRATE, KURSF, right of use asset, exchange rate</p>
+<p>SAP contract, IFRS 16, US-GAAP ASC 842, leasing, right of use, leasing liability, contract valuation, IFRS, International Financial Reporting Standards, US GAAP, RE-FX, real estate</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">See also SAP Note 2474141</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="text-decoration: underline;"><strong style="font-size: 14px;">Conversion into first local currency:</strong></span></p>
+<p>The valuation posting (RECEEP) posts in the valuation currency, which corresponds to the currency of the assigned conditions. This may differ from the company code currency. For technical reasons, only the asset documents (RoU documents) are included in the first local currency. Therefore, the RoU posting in local currency and the liability posting in the valuation currency are posted in two separate documents.</p>
+<p>﻿The translation of the valuation currency into the first local currency is generally carried out in RE-FX on the basis of the <strong>currency translation rule</strong> . The currency translation rule is defined in the contract in the posting term section "Posting Parameters". The currency translation rule must always be the same for a valuation rule, in particular also for time slices of the posting term.</p>
+<p>In Customizing for the currency translation rule, the exchange rate type (e.g. 'M') and the starting date for the currency translation can be stored.</p>
+<p>The following settings are relevant in the context of valuation:</p>
+<p>CFGEN 'Generation of Valuation Cash Flow' - used to create the valuation cash flow</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 459px; height: 153px;">
+<tbody>
+<tr>
+<td>
+<p>DBERBIS</p>
+</td>
+<td>End of Calculation Period</td>
+</tr>
+<tr>
+<td>DBERVON </td>
+<td>Start of Calculation Period</td>
+</tr>
+<tr>
+<td>DUEDATE </td>
+<td>Due date</td>
+</tr>
+<tr>
+<td>SYSTEMDATE </td>
+<td>Current Date</td>
+</tr>
+</tbody>
+</table></div>
+<p>REEP 'Valuation Posting' - used within the framework of the posting</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 460px; height: 99px;">
+<tbody>
+<tr>
+<td>
+<p>DOCDATE</p>
+</td>
+<td>Document Date</td>
+</tr>
+<tr>
+<td>PSTNGDATE </td>
+<td>Posting Date</td>
+</tr>
+<tr>
+<td>DUEDATE </td>
+<td>Due date</td>
+</tr>
+<tr>
+<td>SYSTEMDATE </td>
+<td>
+<p>Current Date</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Depending on the combination, a different exchange rate can be determined for the display of planned records (for example, for setting CFGEN conversion date = current date) than for the posting (for example, with setting REEP conversion date = posting date). The exchange rate is determined on the conversion date using the defined exchange rate type from table TCURR. The conversion date is stored in the FI document in the field Conversion Date (BKPF-WWERT) and the exchange rate in the field BKPF-KURSF.<br/><br/></p>
+<p>In addition to the REEP transaction, the following settings also exist for the posting of subsequent receivables or credit memos:</p>
+<p>REEPCRMEMO 'Credit Valuation Posting'</p>
+<p>REEPFUP          'Valuation Posting Subsequent Receivable'</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p>DOCDATE</p>
+</td>
+<td>Document Date</td>
+</tr>
+<tr>
+<td>PSTNGDATE </td>
+<td>Posting Date</td>
+</tr>
+<tr>
+<td>DUEDATE </td>
+<td>Due date</td>
+</tr>
+<tr>
+<td>SYSTEMDATE </td>
+<td>
+<p>Current Date</p>
+</td>
+</tr>
+<tr>
+<td>REQDATE</td>
+<td>
+<p>Calculated Conv.Date Foll-Up Posting.</p>
+</td>
+</tr>
+<tr>
+<td>ACTDATE </td>
+<td>
+<p>ACTDATE Conv.Date Foll-Up Posting</p>
+</td>
+</tr>
+<tr>
+<td>DBERVON</td>
+<td>
+<p>Start of Calculation Period</p>
+</td>
+</tr>
+<tr>
+<td>DBERBIS</td>
+<td>End of Calculation Period</td>
+</tr>
+</tbody>
+</table></div>
+<p>REQDATE and ACTDATE refer to the original posting for which the credit memo or subsequent receivable has been generated. If required, this can be translated using the exchange rate of the original posting.</p>
+<p><span style="text-decoration: underline;"><strong style="font-size: 14px;">Conversion to the 2nd/3rd local currency (for example, group currency):</strong></span></p>
+<p>For the conversion to 2nd/ 3rd local currency, the following settings are available in FI:</p>
+<p>Financial Accounting -&gt; Financial Accounting Global Settings -&gt; Company Code -&gt; Parallel Currencies -&gt; Define Additional Local Currencies</p>
+<p><strong>Currency Type:</strong> for example, 30 Group Currency or 40 Hard Currency</p>
+<p><strong>Valuation</strong> , for example, 1 Group Valuation (this has nothing to do with the valuation in RE-FX)</p>
+<p><strong>Exchange rate type</strong> , for example: M</p>
+<p><strong>Base currency for currency conversion</strong>:</p>
+<p>1 Conversion based on the transaction currency</p>
+<p>2 Conversion based on the first local currency</p>
+<p><strong>Conversion Date Type</strong>:</p>
+<p>1 Document Date (BKPF-BLDAT)</p>
+<p>2 Posting Date (BKPF-BUDAT)</p>
+<p>3 Conversion Date (BKPF-WWERT)</p>
+<p>﻿The conversion of the valuation currency into the 2nd/3rd local currency is generally <strong>not</strong> executed in RE-FX. However, there are the following exceptions for which the conversion is carried out in the valuation context.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 815px; height: 102px;">
+<tbody>
+<tr>
+<td>CFTYPE</td>
+<td>Posting Procedure</td>
+<td>Transaction</td>
+</tr>
+<tr>
+<td>1</td>
+<td>REAA</td>
+<td>Asset transaction (for reduction, complete retirement, sublet (CEG, CEH)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>RETP</td>
+<td>Only for sublet (CEG, CEH)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>READ</td>
+<td>Depreciation only in the case of direct balance sheet postings (without asset integration)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The conversion as part of the valuation posting takes place in the BAdI BADI_REEX_FI_BAPI, implementation BADI_REEX_FI_BAPI_REEP_LC23, class CL_DEF_IM_REEX_FI_BAPI_REEP_23.</p>
+<p>For example, during the conversion of depreciation, the system does not determine the exchange rate from table TCURR, but calculates a mixed exchange rate that ensures that the total depreciation in all currencies matches the total of the asset transactions.</p>
+<p><span style="text-decoration: underline;"><strong style="font-size: 14px;">BAdIs in the context of currency conversion:</strong></span></p>
+<p><strong>BADI_RECA_CURRENCY_TRANSLATION</strong> This BAdI only refers to the conversion to 1st local currency.</p>
+<p>Methods:</p>
+<p>TRANSLATE_CURRENCY_BY_OBJNR Object-specific currency conversion<br/> TRANSLATE_CURRENCY_EVAL_PSTNG Currency conversion valuation posting</p>
+<p><strong>BADI_REEX_FI_BAPI</strong>  This BAdI can be used for conversion into other local currencies (see also standard class CL_DEF_IM_REEX_FI_BAPI_REEP_23).</p>
+<p>Method:</p>
+<p>BAPIDOC_MODIFY</p>
+<h3 data-toc-skip=""></h3></div></div></div></div>

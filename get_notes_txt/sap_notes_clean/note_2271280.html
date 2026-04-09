@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">Enduser gets following error *sometimes* while connecting to IQ.<br/>-------------<br/>(-102) [08004] [Sybase][ODBC Driver][SQL Anywhere]<span>Database server connection limit exceeded</span><br/>Connection 0 failed using DRIVER={SQL Anywhere 12}; CommLinks=tcpip(HOST=...;ServerPort=..);uid=dba;DatabaseName=SAPIQ</p>
+<p>***LOG BY2=&gt; sql error -102 performing CON [dbds 1143]<br/>***LOG BY0=&gt; [<span>IQ Error SQL-102:08004</span>][SQL Anywhere]Database server connection limit exceeded [dbds 1143]<br/>***LOG BY1=&gt; sql error -102 [dbacds 1823]<br/>-------------<br/><br/>IQ .cfg file has -gm 100 so IQ is configured for 100 connections.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP IQ 16 SP08+</li>
+<li>Any Platform</li>
+</ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The majority of IQ connections were from Solution manager via a user called SOLMAN_DBA and they are idle.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul>
+<li>Temporary workaround</li>
+<ul>
+<li>Enduser had high -ti value in SAPIQDB.cfg.</li>
+<li>With high -ti value like 4400 ( which is more than 70+ hours )<br/>Following may be happen</li>
+<ul>
+<li>Solution manager connection ( user SOLMAN_DBA ) comes in</li>
+<li>Does some work but not disconnect. leaves it upto IQ to cleanup based on idle timeout.</li>
+<li>Since this values is high, all such connections simply stay there even if they are not truly doing anything.</li>
+<li>At some point of time, there may be 100 such connections based on how many connections were there is last 70+ hours<br/>If they were &lt; 100 , you will not see this problem, If they were near 100, you will see the problem.</li>
+</ul>
+<li>In this scenario, SOLMAN_DBA created 4 connections every 6-7 minutes, so setting -ti to 60 helped working around the problem temporarilly<br/><br/></li>
+</ul>
+<li>It was further discovered that applying following dbsl patch brought solution manager connections under control<br/>
+<p>721_EXT build</p>
+<p>dbsybslib.dll patch info<br/>SAP patchlevel 0<br/>SAP patchno 520<br/>Last SYBASE DBSL patchlevel 0<br/>Last SYBASE DBSL patchno 520<br/>Last SYBASE DBSL patchcomment SYB: DBSQL_DBCNT_MISSMATCH (2182795)<br/>Driver: SQL Anywhere Driver release: 16.00.1215<br/>dbs/syb/cache_size: 2000</p>
+</li>
+<li>To subscribe to this KBA , please check steps in KBA <a href="/notes/2171560" target="_blank">2171560</a></li>
+</ul>
+<p> </p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="http://help.sap.com/saphelp_iq1610_iqutil/helpdata/en/3b/ce5f246c5f1014955bc1cc1b9e228e/frameset.htm" target="_blank">idle timeout</a><br/><br/></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SOLMAN_DBA ; timeout ; -ti ; "IQ Error SQL-102:08004"</p></div></div></div></div>

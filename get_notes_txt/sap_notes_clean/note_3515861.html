@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When executing report /SAPAPO/TS_BATCH_RUN, the output list does not display all the logs: for every object processed, not all the executed macros are listed.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Batch run, duplicated macro, MacroBuilder, language, sm37, spool,</p>
+<p>transaction /sapapo/advm, /sapapo/mc8e (planning job), /sapapo/mc8t (job activity)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The report is being executed for macros. The error in the spool log is due to different macros in the job activity that have the same macro description.</p>
+<p>This is because in the macrobook, there are two different macros saved with the same name for a given logon language. This is incorrect.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="font-size: 14px;">1. Create two text messages as per the manual pre-implementation attached.</span><br/><span style="font-size: 14px;">2. Implement the attached correction instruction.</span></p>
+<p><span style="font-size: 14px;">To repair the problem:</span></p>
+<p>-&gt; For the existing macrobooks, enter MacroBuilder and change the macro name for one of the duplicated macros used in the planning job's activity. Then check in the job, that the macros have now different names.</p>
+<p>-&gt; For the new macros maintained after implementation of the present correction, it won't be possible to exit the MacroBuilder if there are two macros with the same name.</p></div></div></div></div>

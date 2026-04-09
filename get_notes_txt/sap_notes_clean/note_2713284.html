@@ -1,0 +1,85 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">SQLDriverConnect() / SQLDriverConnectW() may not set DATABASE parameter to OutConnectionString.</p>
+<ul>
+<li>This problem may occur when InConnectionString of SQLDriverConnect() / SQLDriverConnectW() does not contain DATABASE parameter.</li>
+<li>From ASE ODBC Driver 15.7 SP133 and 16.0 SP00 PL05, this problem occurs for all data source names (DSNs).</li>
+<li>From ASE ODBC Driver 15.7 SP140 and 16.0 SP03 PL02, this problem only occurs if data source names (DSNs) contain "db", for example, "dbsource" or "xdbsystem".</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>
+<div>SAP Software Developer Kit (SDK) 15.7 SP133 or later</div>
+</li>
+<li>
+<div>SAP Adaptive Server Enterprise (ASE) Software Develope Kit (SDK) 16.0 SP00 PL05 or later</div>
+</li>
+<li>
+<div>Adaptive Server Enterprise ODBC Driver by Sybase</div>
+</li>
+<li>
+<div>Microsoft Windows x86 (32-bit)</div>
+</li>
+<li>
+<div>Microsoft Windows x64 (64-bit)</div>
+</li>
+<ul>
+<li>
+<div>Win 7/8/10, 2008/2008 R2, 2012/2012 R2</div>
+</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Create a new data source using ASE ODBC driver via ODBC Administrator (32bit) with the following information.<br/>The DSN needs to contain "db".</li>
+</ol>
+<p style="padding-left: 60px;">Data source name : xdbsystem<br/>Server name : &lt;Host name where your ASE is running&gt;<br/>Server port : &lt;ASE port number&gt;<br/>Database name : &lt;database name&gt;<br/>Login ID : &lt;user name&gt;</p>
+<ol start="2">
+<li>Download "Microsoft Data Access Components (MDAC) 2.8 Software Development Kit" and install it.</li>
+<li>Run C:\Program Files (x86)\Microsoft Data Access SDK 2.8\Tools\x86\odbct32w.exe.</li>
+<li>Change "Argument Display Length" in Buffer Lengths tab.</li>
+</ol>
+<p style="padding-left: 60px;">Choose "Tools" -&gt; "Options...".<br/>Select "Buffer Lengths" tab.<br/>Change "Argument Display Length" to 200.<br/>Click "OK" button.</p>
+<ol start="5">
+<li>Allocate environment handle</li>
+</ol>
+<p style="padding-left: 60px;">Choose "Env" -&gt; "SQLAllocHandle" from menu bar.<br/>Select "SQL_HANDLE_ENV=1 (3.0)" as Handle Type<br/>Click "OK" button.</p>
+<ol start="6">
+<li>Set environment attribute to specify ODBC version</li>
+</ol>
+<p style="padding-left: 60px;">Choose "Attr" -&gt; "SQLSetEnvAttr" from menu bar.<br/>You don't have to modify any parameter.<br/>Click "OK" button.</p>
+<ol start="7">
+<li>Allocate connection handle</li>
+</ol>
+<p style="padding-left: 60px;">Choose "Env" -&gt; "SQLAllocHandle" from menu bar.<br/>Select "SQL_HANDLE_DBC=2 (3.0)" as Handle Type.<br/>Click "OK" button.</p>
+<ol start="8">
+<li>Connect</li>
+</ol>
+<p style="padding-left: 60px;">Choose "Connect" -&gt; "SQLDriverConnect" from menu bar.<br/>Choose "&lt;empty string&gt;" as InConnectionString.<br/>Choose "SQL_DRIVER_COMPLETE=1 (1.0)" as DriverCompletion.<br/>Click "OK" button.</p>
+<p style="padding-left: 60px;">A dialog box to select a data source will appear. Choose the DSN "xdbsystem", and click "OK" button.<br/>Then, a dialog box to input the required information for the DSN will appear. Input a password, and click "OK" button.</p>
+<ol start="9">
+<li>Check if SQLDriverConnect() succeeds with SQL_SUCCESS_WITH_INFO and OutConnectionString does not contain DATABASE parameter.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>
+<div>The issue has been identified and logged under SAP <strong>CR 817256</strong>. It's description reads, "SQLDriverConnect() and SQLDriverConnectW() with SQL_DRIVER_COMPLETE may not set DATABASE parameter to OutConnectionString if data source names include "db" in its name."</div>
+</li>
+<li>
+<div>OutConnectionString is set a pointer to a buffer for the completed connection string. Upon successful connection to the target data source, ODBC Driver should set the completed connection string to this buffer.</div>
+</li>
+<li>
+<div>Microsoft Access and Excel rely on the value of OutConnectionString returned from SQLDriverConnectW(), so you may unexpectedly see one or more dialog boxes to input required information for a DSN because of missing DATABASE parameter.</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>There is currently no target SAP SDK Service Pack scheduled for this issue (SAP <strong>CR 817256</strong>). It is being reviewed by our Product Group. Please mark this KBA as a Favorite to be automatically notified when the CR is fixed.</li>
+<li>Workaround:</li>
+<ul>
+<li>Use SAP SDK 15.7 SP130 or SDK 16.0 SP00 PL04.</li>
+<li>Rename DSNs so that they don't contain "db" in their names.</li>
+<li>Explictly specify DATABASE parameter in InConnectionString when calling SQLDriverConnect() or SQLDriverConnectW() if possible.</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>SQLDriverConnect, SQLDriverConnectW, SQL_DRIVER_COMPLETE, OutConnectionString, DATABASE, 817256, #817256</p></div></div></div></div>

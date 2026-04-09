@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>Installed SMP 3.0 SP4<br/>Using Oracle as a custom Persistence Database.</li>
+<li>Everything works as expected, but large amount of database connections are being made to this remote custom ( Oracle11 ) database.</li>
+<li>These connections seem to do nothing but as they occur more than once every second the amount is huge.</li>
+<li>See below for an example of the logfile.</li>
+<li>Please note that the OS user SMPServiceUser is created manually before the installation of SMP using the Sybase instructions in the install docs ( or help pages ).</li>
+<li>What can be done about this ?</li>
+<li>Example of the logfile :</li>
+</ul>
+<p>Thu Nov 06 15:02:48 2014<br/>06-NOV-2014 15:02:48 * (CONNECT_DATA=(CID=(PROGRAM=JDBC Thin Client)<br/>(HOST=__jdbc__)(USER=smpServiceUser))(SERVICE_NAME=T1SM)(CID=<br/>(PROGRAM=JDBC Thin Client)(HOST=__jdbc__)(USER=smpServiceUser))) *<br/>(ADDRESS=(PROTOCOL=tcp)(HOST=10.xx.6.xx)(PORT=58288)) * establish *<br/>T1SM * 0</p>
+<p>06-NOV-2014 15:02:48 * (CONNECT_DATA=(CID=(PROGRAM=JDBC Thin Client)<br/>(HOST=__jdbc__)(USER=smpServiceUser))(SERVICE_NAME=T1SM)(CID=<br/>(PROGRAM=JDBC Thin Client)(HOST=__jdbc__)(USER=smpServiceUser))) *<br/>(ADDRESS=(PROTOCOL=tcp)(HOST=10.xx.6.xx)(PORT=58289)) * establish *<br/>T1SM * 0</p>
+<p>06-NOV-2014 15:02:49 * (CONNECT_DATA=(CID=(PROGRAM=JDBC Thin Client)<br/>(HOST=__jdbc__)(USER=smpServiceUser))(SERVICE_NAME=T1SM)(CID=<br/>(PROGRAM=JDBC Thin Client)(HOST=__jdbc__)(USER=smpServiceUser))) *<br/>(ADDRESS=(PROTOCOL=tcp)(HOST=10.xx.6.xx)(PORT=58294)) * establish *<br/>T1SM * 0</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SMP 3.0 SP4, SAP Mobile Platform</li>
+<li>Oracle 11</li>
+</ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul>
+<li>This works as designed for the cluster sync / live check purposes.</li>
+<li>SMP Engineering implemented clustering in SMP 3.0 SP03.<br/>The state of the cluster nodes is stored in the database.<br/> </li>
+<li>They tested the performance of this implementation and did not notice any issues.<br/>Also, we are not aware of any resource leaks with this implementation.</li>
+</ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul>
+<li>This has been resolved in the SMP 3.0 SP05 Release of SMP Server<br/>and you will not see this issue anymore.</li>
+</ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SMP, SAP Mobile Platform, Oracle, connection, cluster, sync</p></div></div></div></div>

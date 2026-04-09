@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The correspondent business scenario, from the technical point of view, requires an SAP Analytics Cloud Story to be built.<br/>It is wanted to use GEO map with Custom Choropleth layer in order to leverage from the benefiits of creating Self-Created Region Characteristics with Self-Uploaded Shapes, that are origanized in Self-Defined hierarchical Arrangement of the Regions.<br/><br/>In case of customer shapes, the main source of Geo data is the shapes itselfs, that have been created in for example ArcGIS. The shapes are needed to be uploaded to the Business Document Service (BDS). it is needed to be done transaction RSDIOBJGISMAINT.</p>
+<p>Shapedata comes in (at least) triples:</p>
+<p>Region.<strong>dbf</strong>: DBase file contains a table with Attributes describing Regions<br/>Region.<strong>shp</strong>: Shapefile containing all geographic Shapes<br/>Region.<strong>shx</strong>: Link between Shape and DBase File<br/><br/>All the transformations and geographical calculations happen in HANA. So for processing the SPATIAL engine of HANA is used, this means that to have a good perfromance, we want all the GEO data in GEO format, so HANA can work with it right away. Therefore after the shapes are uploaded to the Business Document Service, the Geo data is still needed to be transformed to the HANA Spatial format by selecting option "Update Geotable used during reporting". During the update process, error occurs:</p>
+<p>Error Update Task for geotable cancelled due to errors.<br/>Information Shapefile ga_test_shape_ga_nav1.shp has been loaded.<br/><strong>Error invalid column name: &lt;"nav.attr."&gt;: line 1 col 8 (at pos 7)</strong><br/><strong>Error Reading from .dbf file failed due to missing fields.</strong></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Analytics Cloud 2020.7 and upwords</li>
+<li>SAP BW/4HANA 2.0 SP4</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>1., Go to the BW Modeling Tools and select one of the navigation attribute of your Geo Characteristic that is in Geo Type 2 (Shapes).<br/>2., Select Actual Upload Shapes. Execution redirects to SAPGUI(Transaction RSDIOBJGISMAINT)<br/>3., Click go and upload the shp, dbf and shx files<br/>4., Select Action „Update Geotable“<br/>=&gt; Error occurs</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>DBase File (.dbf) needs to be enhanced by Field containing corresponding characteristic values. (or more if compounded).<br/>Field Names need to be Name of Characteristic. The error occurs, because the DBase File misses the used navigation attribute name and therefore the shapes are not mapped to certain characteristic members of the navgation attribute.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>It‘s possible to download the char. values in DBase File Format via Geo Action „Geodata Download(everyth.)“ in the BW Modeling Tools. It is possible to edit the file with Microsoft Access (available through MS Office 365).</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li><a href="https://blogs.sap.com/2017/11/08/enable-bw-direct-live-connections-in-sac/" target="_blank">Enable BW Direct Live Connections in SAC</a></li>
+<li><a href="https://blogs.sap.com/2017/11/28/sap-analytics-cloud-live-data-connection-to-sap-bw4hana-using-cors-and-sso/" target="_blank">SAP Analytics Cloud: Live Data Connection to SAP BW/4HANA Using CORS and SSO</a></li>
+<li><a href="/notes/2788384" target="_blank">Unsupported Features with SAP BW, SAP S/4HANA and SAP BPC Embedded Model Live Connections in SAC</a></li>
+<li><a href="/notes/2715030" target="_blank">Considerations when using SAP BW and SAP S/4HANA Live Connections in SAC</a></li>
+<li><a href="/notes/2541557" target="_blank">Support further SAP Analytics Cloud BW features below NW BW 7.50 SP16, BW/4 2.0 SP4 or S/4 1909</a></li>
+</ul>
+<ul>
+<li><a href=" https://launchpad.support.sap.com/#/notes/2907987" target="_blank">2907987 - BW-Live spatial error: exception 1601801: PROJ.4 transformation error: latitude or longitude exceeded limits at "st_transform" function</a></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>dBase, dbf, attribute</p></div></div></div></div>

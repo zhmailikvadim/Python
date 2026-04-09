@@ -1,0 +1,152 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You have installed SAP Product Lifecycle Costing 4.0 SP10 or newer and you want to access the views provided by the product, using either SAP Analytics for Office Client or SAP Analytics Cloud.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<h3 data-toc-skip="">Cause</h3>
+<p>By default, the XSAHAA application is bound to its own container and UAA services. To enable access to PLC analytical content, XSAHAA must be explicitly bound to the PLC database and UAA services and configured accordingly.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<h3 data-toc-skip="">Environment</h3>
+<ul>
+<li>
+<p>SAP HANA XS Advanced (XSA)</p>
+</li>
+<li>
+<p>Product Lifecycle Costing (PLC)</p>
+</li>
+<li>
+<p>SAP HANA Analytics Adapter (XSAHAA), on-premise</p>
+</li>
+<li>
+<p>SAP Analytics Cloud and/or SAP Analysis for Microsoft Office</p>
+</li>
+</ul>
+<h3 data-toc-skip=""></h3>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong style="font-size: 14px;">Prerequisites</strong></p>
+<ul>
+<li>A <strong>SAP Product Lifecycle Costing </strong>backend is already deployed and running in an <strong>SAP HANA XS Advanced space</strong></li>
+<li>Access to:</li>
+<ul>
+<li>XSA Cockpit</li>
+<li>XS CLI (optional)</li>
+</ul>
+<li>Required PLC service instances exist:</li>
+<ul>
+<li>xsac-plc-db-service</li>
+<li>xsac-plc-uaa-service</li>
+</ul>
+</ul>
+<p><span style="text-decoration: underline;"><strong style="font-size: 14px;">Scenario: Initial Installation</strong></span></p>
+<p><strong style="font-size: 14px;">Step 1:</strong><span style="font-size: 14px;"> Download the XSAHAA installation package</span></p>
+<ul>
+<li>Open the SAP HANA tools page: <a href="https://tools.hana.ondemand.com/#hanatools" target="_new">https://tools.hana.ondemand.com/#hanatools</a></li>
+<li>Navigate to <strong>Analytics adapter for SAP HANA extended application services, advanced model</strong></li>
+<li>Download the file: <strong>xsahaa-onprem-x.x.x-*.zip</strong></li>
+</ul>
+<p><strong>Step 2:</strong> Install XSAHAA in the PLC space</p>
+<ul style="font-size: 14px;">
+<li>Install the ZIP file in the <strong>same XSA space where PLC is deployed</strong>, using one of the following methods:</li>
+<ul>
+<li>XS CLI: xs install &lt;zip-file-name&gt;</li>
+<li>XSA Cockpit → <strong>Product Installer</strong></li>
+</ul>
+</ul>
+<p><strong>Step 3:</strong> Bind PLC services to the xsahaa-java application</p>
+<ul>
+<li>Open <strong>XSA Cockpit</strong></li>
+<li>Navigate to the <strong>PLC installation space</strong></li>
+<li>Choose <strong>Service Instances</strong></li>
+<li>Bind the following services to the <strong>xsahaa-java</strong> application:</li>
+<ul>
+<li>xsac-plc-db-service</li>
+<li>xsac-plc-uaa-service</li>
+</ul>
+</ul>
+<p><strong>Step 4:</strong> Remove default XSAHAA bindings</p>
+<ul>
+<li>Select the <strong>xsahaa-java</strong> application</li>
+<li>Open <strong>Service Bindings</strong></li>
+<li>Unbind the following services:</li>
+<ul>
+<li>xsahaa-container</li>
+<li>xsahaa-uaa</li>
+</ul>
+</ul>
+<p><strong>Step 5:</strong> Maintain user-provided variables for xsahaa-java</p>
+<ul>
+<li>Select <strong>xsahaa-java</strong></li>
+<li>Open <strong>User-Provided Variables</strong></li>
+<li>Create or update the following 4 entries:</li>
+</ul>
+<blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">JBP_CONFIG_RESOURCE_CONFIGURATION</blockquote>
+<ul style="font-size: 14px;">
+<ul>
+<li>KEY: <strong>JBP_CONFIG_RESOURCE_CONFIGURATION</strong></li>
+<li>VALUE: <strong>['tomcat/webapps/ROOT/META-INF/context.xml': {'xsahaa-hdi-container': 'xsac-plc-db-service'}]</strong></li>
+</ul>
+</ul>
+<blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">USE_NAMED_USER</blockquote>
+<ul style="font-size: 14px;">
+<ul>
+<li>KEY: <strong>USE_NAMED_USER</strong></li>
+<li>VALUE: <strong>false</strong></li>
+</ul>
+</ul>
+<blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">MTA_SERVICES</blockquote>
+<ul style="font-size: 14px;">
+<ul>
+<li>KEY: <strong>MTA_SERVICES</strong></li>
+<li>VALUE: <strong>[ "xsac-plc-db-service", "xsac-plc-uaa-service" ]</strong></li>
+</ul>
+</ul>
+<blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">PERSONALIZE_JWT</blockquote>
+<ul style="font-size: 14px;">
+<ul>
+<li>KEY: <strong>PERSONALIZE_JWT</strong></li>
+<li>VALUE: <strong>true<br/></strong></li>
+</ul>
+</ul>
+<p><strong style="font-size: 14px;">Step 6:</strong><span style="font-size: 14px;"> Restage xsahaa-java</span></p>
+<ul>
+<li>Open the <strong>Overview</strong> section</li>
+<li>Choose <strong>Restage</strong></li>
+<li>Restart the application after restaging is completed</li>
+</ul>
+<p><strong>Step 7:</strong> Obtain the xsahaa-java application route</p>
+<ul>
+<li>After the application is running, copy the <strong>application route</strong> of xsahaa-java</li>
+<li>The route is required in the next configuration step</li>
+</ul>
+<p><strong>Step 8:</strong> Configure destination in xsac-plc-web</p>
+<ul>
+<li>Navigate to the <strong>PLC installation space</strong></li>
+<li>Select the <strong>xsac-plc-web</strong> application</li>
+<li>Open <strong>User-Provided Variables</strong></li>
+<li>Edit the existing destinations entry and locate the following destination:<br/><br/>{<br/>     "forwardAuthToken": true,<br/>     "name": "xsac-plc-xsahaa-destination",<br/>     "timeout": 1200000,<br/>     "url": "http://localhost:65535"<br/>}<br/><br/></li>
+<li><span style="font-size: 14px;">Replace the value of the url property with the </span><strong style="font-size: 14px;">xsahaa-java application route</strong></li>
+<li>Save the changes</li>
+</ul>
+<p><strong>Step 9:</strong> Restage xsac-plc-web</p>
+<ul>
+<li>Open the <strong>Overview</strong> section</li>
+<li>Choose <strong>Restage</strong></li>
+<li>Restart the application after restaging is completed</li>
+</ul>
+<p><strong>Validation</strong></p>
+<ul>
+<li>Log on to <strong>SAP Analytics Cloud</strong> or <strong>SAP Analysis for Microsoft Office</strong></li>
+<li>Create a connection to the PLC system</li>
+<li>Verify that PLC analytical views are available and can be queried successfully</li>
+</ul>
+<p><strong>Troubleshooting</strong></p>
+<ul>
+<li>If HTTP <strong>404</strong> errors occur when accessing the xsahaa-java application: <br/>Perform an additional <strong>restage and restart</strong> of the application</li>
+</ul>
+<p><strong>Additional Information</strong></p>
+<ul>
+<li>Ensure that all PLC services are in <strong>RUNNING</strong> state</li>
+<li>Ensure that no additional bindings to default XSAHAA containers remain</li>
+<li>JWT personalization must be enabled for proper user context propagation</li>
+</ul>
+<p><span style="text-decoration: underline;"><strong>Scenario: PLC Update with Existing XSAHAA Installation</strong></span></p>
+<p>When PLC is updated in an environment where XSAHAA is already installed, the initial XSAHAA configuration remains unchanged. However, the binding between PLC and XSAHAA is terminated during the upgrade process.</p>
+<p><strong>Resolution:</strong> Re-execute <strong>Step 8</strong> and <strong>Step 9</strong> from the <strong>"Initial Installation" section</strong> to restore the PLC-to-XSAHAA binding.</p></div></div></div></div>

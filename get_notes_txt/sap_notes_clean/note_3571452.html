@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Column profile task fails after S/4HANA is upgraded from 2022 to 2023.</li>
+<li>[E] 2025-02-10 15:11:17.589 [TaskUtility][pool-6-thread-1] java.lang.NullPointerException: while trying to invoke the method java.lang.String.length() of a null object loaded from local variable 'str'</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""><strong>Keywords</strong></p>
+<p>IS, S/4HANA upgrade, profile task, NullPointerException, 'str'</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""><strong>Environment</strong></p>
+<ul>
+<li>Information Steward version 14.3.3.263</li>
+<li>SAP S/4HANA 2023 FPS01</li>
+</ul>
+<p><strong>Reproducing the Issue</strong></p>
+<ol>
+<li>Upgrade S/4HANA from 2022 to 2023</li>
+<li>Create a new IS connection with S/4HANA 2023</li>
+<li>Import tables from the new S/4HANA connection into IS -&gt; DI</li>
+<li>Create a column profile task with the imported table.</li>
+<li>Run task fails.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This issue arises only after updating the connection server details through the ConnectionUpdateUtility available in the <strong>SAP KBA: 2592327 - How to change a connection in Linux - Information Steward 4.x</strong><br/>This issue has been fixed and available with <strong>SAP KBA: 2592327</strong> with lastest version of ConnectionUpdateUtilility.</p></div></div></div></div>

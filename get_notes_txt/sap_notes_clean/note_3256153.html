@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In SM21 error similiar  to.</p>
+<pre>e=28 semget(3004439,20,2016) (28: No space left on device)</pre>
+<p>Also can see SM21 error.</p>
+<pre>Maximum number of permitted terminal connections reached.</pre>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">SAP on SUN Solaris.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Problem with SUN kernel parameters.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Try these parameters.</p>
+<p>project.max-shm-ids=(priv,1024,deny)</p>
+<p>set semsys:seminfo_semmni=1024</p>
+<p>Make sure the project is defined for all the instances not just one.</p>
+<p>Check note.</p>
+<p><a href="/notes/724713" rel="noopener noreferrer nofollow noopener noreferrer" target="_blank">724713</a> - Parameter Settings for Oracle Solaris 10 and above</p>
+<p>See also...</p>
+<p><a href="https://wiki.scn.sap.com/wiki/pages/viewpage.action?pageId=375030464" rel="noopener noreferrer nofollow noopener noreferrer" target="_blank">https://wiki.scn.sap.com/wiki/pages/viewpage.action?pageId=375030464</a></p>
+<p> </p>
+<p>In some case, the error still happens after parameter change, please do the following<br/>- completely stop the SAP instance<br/>- stop the sapstartsrv processes as well<br/>- verify that no process are running with &lt;sid&gt;adm (ie: ps -ef | grep &lt;sid&gt;adm)<br/>- login again with &lt;sid&gt;adm<br/>- start the sapstartsrv<br/>- start the SAP instance</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="https://me.sap.com/notes/1827960" target="_blank">Some ways to restart SAP Start Service (sapstartsrv process)</a></p>
+<p>From &lt;https://me.sap.com/notes/1827960&gt;</p>
+<p><br/><a href="https://help.sap.com/doc/saphelp_nw73ehp1/7.31.19/en-US/47/1d6feeff6e0d46e10000000a155369/content.htm?no_cache=true" target="_blank">Stopping an SAP System Instance</a></p>
+<p>From &lt;https://help.sap.com/doc/saphelp_nw73ehp1/7.31.19/en-US/47/1d6feeff6e0d46e10000000a155369/content.htm?no_cache=true&gt;</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Shmget; 28 no space left on device; SUN; e=28 semget; set semsys.</p>
+<pre></pre></div></div></div></div>

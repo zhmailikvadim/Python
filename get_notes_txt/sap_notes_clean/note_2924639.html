@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In the <em>InventoryTransactionDocumentsFact</em> view, the <em>FinancialPeriod</em> data is using <em>CreateDate</em> of the transactions to determine the attributes.</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<p><strong>Scenario:</strong></p>
+<p>You are using the <em>InventoryTransactionDocumentsFact</em> view.</p>
+<p><strong>Expected behavior:</strong></p>
+<p><span>The <em>FinancialPeriod</em> data is using <em>DocDate</em> of the transactions to determine the attributes.</span></p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>The <em>FinancialPeriod</em> data is using <em>CreateDate</em> of the transactions to determine the attributes.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or <span>feature packages</span> to solve the problem described. The section <strong>References </strong>below lists the relevant <span>feature packages</span> once they become available, and the <strong>Related</strong> <strong>Info</strong> content of relevant <span>feature packages</span> available in the SAP Support Portal, show this SAP Note. Be aware that these references can only be set at <span>feature package</span> release date. SAP delivers <span>feature packages</span> only for selected releases at its own discretion, based on the business impact and the complexity of the implementation.</p>
+<p><strong>Workaround:</strong></p>
+<p>1. In the SAP HANA Studio, navigate to <em>sap\&lt;companydb&gt;\stock\Calculation Views\InventoryTransactionDocumentsFact</em>, and double-click the entry.</p>
+<p>2. In the <em>Scenario </em>panel, which displays a tree structure of the calculation view, click the <em>Join_6</em> node.</p>
+<p>3. Go to the <em>Details</em> panel, which displays a list of table fields of the OILM table, find the <em>DocDate</em> field and click the grey icon before it. The icon then becomes orange.</p>
+<p>4. Go back to the <em>Scenario</em> panel, click the <em>Projection_5</em> node. Then in the <em>Details</em> panel, which displays the fields exposed in Join_6, click the icon before the <em>DocDate</em> field as in step 3.</p>
+<p>5. Go to the <em>Output</em> panel, double-click <em>Expression</em> under the <em>Filters</em> folder. It will open a dialog.</p>
+<p>6. In <em>Expression Editor</em>, replace <em>CreateDate</em> with <em>DocDate.</em> After that, the formula will be <span style="text-decoration: underline;">"DocDate" &gt;="F_RefDate" and "DocDate" &lt;="T_RefDate".</span> Click <em>OK.</em></p>
+<p>7<em>. </em>Click<em> Save and Activate.</em></p></div></div></div></div>

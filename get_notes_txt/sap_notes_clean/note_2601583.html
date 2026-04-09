@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>You want to edit/delete the details of an Person in the system.</li>
+<li>You cannot find the related details in any application transaction to do so (e.g. customer, vendor, plant, etc.)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP NetWeaver </li>
+<li>Release Independent</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Transaction SADP (Contact person addr.maint. init.scr.) is available to carry out direct maintenance on an Person address</li>
+<li>First goto table ADRP and using the Person number or First/last Name (or other related details) of the entry you need to change, find the person group (field "PERS GROUP") of the entry and also take note of some of the person details. These details maybe needed to narrow the selection if multiple entries are found.<br/><br/><img alt="SADP 1.png" class="img-responsive" src="/documents/customerkba/BRAwcUNE84flZhZl1v24vpwuFvrwuTbt7m6FIotJaV8" title="SADP 1.png"/><br/><br/></li>
+<li>In trasaction SADP enter the Person goup into the left box and hit enter:<br/><br/><img alt="SADP.png" class="img-responsive" src="/documents/customerkba/5TTUahXc7WaqCuPEMQEURAzpqz6_Uy1tSPddo8Q3SU4" title="SADP.png"/><br/><br/></li>
+<li>Then on the next screen extend the Selection options and enter the first/last name (and/or any other details that will find the Person) from ADRP to find the entry, if you know the related address number this can be entered at the bottom to restrict the selection. If there are multiple entries found then a pop-up will be displayed (as seen below) with the different Person options that can be selected:<br/><br/><img alt="SADP 2.png" class="img-responsive" src="/documents/customerkba/nSf573Z76So5Q9M34y1oEqaZ5ya9Nd6mLIccLAzUAsU" title="SADP 2.png"/><br/><br/></li>
+<li>Once you have selected the entry you require, the entry can be edited using the Change button or the entry deleted using the Delete Selection (Dustbin) button.</li>
+<li>The following message "Address can only be maintained in primary object; indicator in table TSAD8 - Message no. AM121" maybe thrown when attempting to edit/delete the address.<br/><br/><img alt="SADP 3.png" class="img-responsive" src="/documents/customerkba/zR4zuTY5m1LKi-9Bs9gginxtX8E0qmsJNzytT_RHS8Q" title="SADP 3.png"/><br/><br/></li>
+<li>To resolve this message, goto transaction SM30, enter table TSAD8, and using then Maintain button select the flag "Direct maintenance" for Person group of the Person you are attemping to change, then save this change.</li>
+<li>If the entry you require to be edited cannot be found using transaction SADP, please attempt to use transaction SADQ (again you will have to first enter the person group) which is for private address maintenance. Here you can enter the Address and Person numbers aswell as details about the entry:<br/><br/><img alt="SADQ.png" class="img-responsive" src="/documents/customerkba/1hDeo91YhB4rsde8HIN-RntVQjaC47PG0I0N8xGpeOg" title="SADQ.png"/></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="https://me.sap.com/notes/2596806" target="_blank">2596806</a> - How to directly change address details using only address number</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>TSAD8, AM121, SADP, SADQ</p></div></div></div></div>

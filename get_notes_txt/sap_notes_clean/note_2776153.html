@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Analysis Office is not active/visible in Excel when opening a report of type "Microsoft Excel" from BI Launchpad/CMC using Internet Explorer browser.</p>
+<p>In the AO traces (recorded by following instructions of SAP note <a href="https://me.sap.com/notes/2129389" target="_blank">2129389</a>), we can see the entries below:<br/>---------------------------<br/>RequestComAddInAutomationService called.<br/>Application.UserControl: False<br/>SupportEmbeddedMode.Value: False<br/><strong>COF Startup is getting cancelled (SetStartupCancelled)</strong><br/>---------------------------</p>
+<p>The issue does not occur when using other browsers or when opening the report of type "Analysis Workbook" from BI Launchpad/CMC.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">SAP BusinessObjects Analysis, edition for Microsoft Office<br/>SAP BusinessObjects Business Intelligence Platform</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Go to BI Launchpad or CMC in browser Internet Explorer;</li>
+<li>Open an Analysis Office report of type "Microsoft Excel"; </li>
+<li>Confirm that the report will open in Excel but Analysis Office will not be activated/visible.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>When opening an Excel file from Internet Explorer, Excel is trying to open the file in embedded mode (also called automated mode).</p>
+<p>Microsoft does not support Add-ins if the MS Office is running in embedded mode. This is why the add-in is not activating.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>By default, Analysis Office is not supported when MS Office is running in embedded mode.</p>
+<h3 data-toc-skip="">Solution 1</h3>
+<p>Settings <strong>SupportEmbeddedMode</strong> and <strong>SupportAutomatedOffice</strong> can be changed to TRUE (see SAP note <a href="https://me.sap.com/notes/2083067" target="_blank">2083067</a>). <br/>Refer to chapters "Settings for the Analysis Add-in" and "UtilitiesConfiguration" in the Administrator Guide of AO in <a href="https://help.sap.com/viewer/product/SAP_BUSINESSOBJECTS_ANALYSIS_OFFICE/2.8.3.0/en-US" target="_blank">SAP Help Portal </a>.</p>
+<h3 data-toc-skip="">Solution 2</h3>
+<p>Convert the reports stored in BI Launchadp/CMC from "Microsoft Excel" to "Analysis Workbook", referring to SAP note <a href="https://me.sap.com/notes/1888567" target="_blank">1888567</a>.</p>
+<h3 data-toc-skip="">Workaround</h3>
+<p>As a workaround, a different browser can be used instead of Internet Explorer.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>disabled, not visible, activating, deactivated, ribbon, available, bip, boe, server, platform</p></div></div></div></div>

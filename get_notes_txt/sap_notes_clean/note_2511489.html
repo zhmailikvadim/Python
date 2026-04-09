@@ -1,0 +1,216 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>You experience poor performance (unresponsive pages, refresh quality, slowness, sluggishness, waiting, performance is very slow, ...) using SAP Analytics Cloud (SAC).</li>
+<li>How can I improve my SAC story performance?</li>
+<li>You perceive that the SAC application is slow to access.</li>
+<li>You may also see these messages:</li>
+<ul>
+<li>Performance Optimization Tip</li>
+<ul>
+<li>Your story is looking great, but it has a lot of process-heavy widgets! That can really affect your story's performance.</li>
+<li>You could improve performance by using different widgets or by reducing the number of process-heavy widgets on a page. Learn More</li>
+</ul>
+<li>The data cannot be displayed because the query returned too many records. Please try filtering your data.</li>
+<li>Os dados não podem ser exibidos porque a consulta retornou registros demais. Tente com filtragem de dados.</li>
+<li>No se pueden visualizar los datos porque la consulta ha devuelto demasiados registros. Pruebe a filtrar sus datos.</li>
+<li>Die Daten können nicht angezeigt werden, da die Abfrage zu viele Datensätze zurückgegeben hat. Versuchen Sie, Ihre Daten zu filtern.</li>
+</ul>
+<li>Watch our <a href="https://event.on24.com/wcc/r/3344624/9B85CAF4A865D92D4C6319FE0077AF51/2768380?partnerref=KBA" target="_blank">SAP Analytics Cloud Performance Best Practices</a> webinar series!</li>
+<li><em><strong>Performance Statistics</strong> now available in the content network. See <strong><a href="https://blogs.sap.com/2020/11/17/sac-q3-2020/#performancestats" target="_blank">Administration &amp; Infrastructure: Performance Statistics</a></strong><br/></em></li>
+<ul>
+<li>Blog: <a href="https://blogs.sap.com/2021/11/19/sap-analytics-cloud-administration-cockpit/" target="_blank">Administration Cockpit</a></li>
+<li>Blog: <a href="https://blogs.sap.com/?p=1251366" target="_blank">Performance Analysis Tool</a></li>
+<li>Blog: <a href="https://blogs.sap.com/?p=1237239" target="_blank">Network Statistics</a></li>
+<li>Blog: <a href="https://blogs.sap.com/2020/09/24/performance-statistics-and-analysis/" target="_blank">Performance Statistics and Analysis</a>.</li>
+<li>Blog: <a href="https://blogs.sap.com/2020/07/21/sap-analytics-cloud-backend-runtime-analysis-and-statistics/" target="_blank">Backend Runtime Analysis and Statistics</a></li>
+<li>Blog: <a href="https://blogs.sap.com/2021/04/13/sap-analytics-cloud-data-action-performance-statistics-and-analysis/" target="_blank">Data Action Performance Statistics and Analysis</a></li>
+<li>Blog: <a href="https://blogs.sap.com/2022/10/14/sap-analytics-cloud-private-versions-statistics-and-analysis/" target="_blank">Private Versions Statistics and Analysis</a></li>
+<li>Blog: <a href="https://blogs.sap.com/2023/03/31/sap-analytics-cloud-usage-statistics-system-overview/" target="_blank">Usage Statistics (System Overview)</a></li>
+<li>Blog: <a href="https://blogs.sap.com/2023/04/24/sap-analytics-cloud-performance-measurement/" target="_blank">Performance Measurement</a></li>
+<li>Blog: <a href="https://blogs.sap.com/2023/03/31/sap-analytics-cloud-system-overview/" target="_blank">System Overview</a></li>
+<li>Blog: <a href="https://blogs.sap.com/2022/07/29/sap-analytics-cloud-backend-query-analysis/" target="_blank">Widget Analysis</a></li>
+<li>Blog: <a href="https://blogs.sap.com/2021/08/12/webinar-series-performance-best-practices-and-troubleshooting-tips-for-sap-analytics-cloud/" target="_blank">Webinar Series: Performance best practices and troubleshooting tips for SAP Analytics Cloud</a></li>
+</ul>
+<li>Take advantage of <em><span style="text-decoration: underline;"><strong>optimized view mode</strong></span></em> (OVM). See <a href="https://blogs.sap.com/2021/07/26/experience-performance-and-usability-improvements-with-sap-analytics-cloud-stories/" target="_blank">Experience Performance and Usability Improvements with SAP Analytics Cloud Stories</a> (blog) and <a href="https://event.on24.com/wcc/r/3749630/F6DB4E8B2BB17D6838939D05824AB8A3" target="_blank">webinar</a>.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Analytics Cloud (Enterprise)</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>There are multiple reasons why performance may be affected. This collective Knowledge Base Article (KBA) describes how to collect more information, how to test your network, browser, stories, data actions and apps (applications written with SAC's application designer) and provides further resources to help overcome performance issues.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>The overall performance of SAP Analytics Cloud (SAC) is mainly determined by the three components - <strong>client time (frontend), network time and the SAP Analytics Cloud service time (backend)</strong>:</p>
+<ul>
+<li>The performance of the <strong>frontend</strong> (client time) is affected by other applications running on your computer. If you have other CPU intensive applications/processes like video conferencing software running in parallel, that will have an impact on other CPU-intensive calculations in SAC like rendering of multiple thousands of cells in a table.</li>
+<li>The performance on the <strong>network</strong> is similarly affected by other applications consuming the bandwidth and by some other potential issues over the network caused by VPN, firewalls, bad internet service provider connections, etc.</li>
+<li>Regarding the <strong>backend </strong>(SAP Analytics Cloud service time), there is a finite amount of hardware available and multiple concurrent users triggering expensive computations in parallel will slow down processing and have a perceived effect of the overall performance of the system.</li>
+<li>By using our <a href="https://blogs.sap.com/2021/01/08/sap-analytics-cloud-performance-analysis-tool/" target="_blank">Performance Analysis tool</a>, you can identify the problematic parts of your scenario and see how much time is spent in which component (<strong>frontend, network, backend</strong>).</li>
+<li>
+<div>To understand the end-to-end time you're perceiving on the client side as well as any instabilities in the overall time or the differences between the different users, you need to check all three pieces and everything affecting them.</div>
+</li>
+<ul>
+<li><strong>Note:</strong> This tool only traces the performance of stories, data actions and apps (applications written with SAC's application designer).</li>
+<li>Other activities and navigation actions such as opening the SAC modeler, etc. are not traced.</li>
+</ul>
+<li>If you have a story, data action or app where the performance is not optimal, run it more than once and check the results in the performance analysis tool to see where the time is spent and compare it for different user sessions, time stamps and systems (production system, test system, QA system, etc.), if needed, taking the above points under consideration.</li>
+</ul>
+<p><img alt="End_to_End_Response_Time.png" class="img-responsive" src="/documents/customerkba/gyA_DwSzGFRmKGS7GnHPU4HkciKEJ20xbDfv7Exox2I" title="End_to_End_Response_Time.png"/></p>
+<p class="header2">Troubleshooting steps (<span style="text-decoration: underline;">reproduce, isolate and document</span>)</p>
+<ol>
+<li>Review and analyze your scenario using the <strong><a href="https://blogs.sap.com/2021/01/08/sap-analytics-cloud-performance-analysis-tool" target="_blank">Performance Analysis tool</a></strong> (This content helps analyze a single story, data action or analytic application).</li>
+<li>Follow the steps in the <strong><a href="https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/6ae71d6ad2eb4622b0ef9feef61efba4.html#use-the-performance-decision-tree" target="_blank">Performance Decision Tree</a></strong> to find resources that will help resolve performance issues.</li>
+<li>Reproduce the problem (is the issue reproducible?):</li>
+<ol style="list-style-type: lower-roman;">
+<li>on more than one user’s machine (notebook, mobile device)?</li>
+<li>on the same notebook on a different network?</li>
+<li>on another story with the same connection?</li>
+<li>with a different user login?</li>
+<li>with both Google Chrome and Microsoft Edge?</li>
+<li>after clearing the browser cache (<strong>Ctrl</strong> + <strong>Shift</strong> + <strong>Delete </strong> / clear browsing data)?</li>
+</ol>
+<li>Isolate the source:</li>
+<ol style="list-style-type: lower-roman;">
+<li>When did the problem start happening? If it worked before, what changed?  If it has always been slow, isolate and simplify the story.</li>
+<li>If at all possible, reproduce the issue on a responsive layout story, with a single analytic model using data acquired into SAC.</li>
+</ol>
+<li>Document clear reproduction steps when a performance issue occurs.</li>
+</ol>
+<p class="header2">Browser (client)</p>
+<ul>
+<li>Ensure that no third-party proxies or other applications are forcing the client (browser) to use the <strong>HTTP 1.1</strong> protocol instead of the <strong>HTTP 2</strong> protocol see KBA <a href="https://me.sap.com/notes/3056467" target="_blank">3056467</a>.</li>
+<li>Perform the same action with a different computer. Your computer may be affected by domain policies, browser settings or specific configurations for your user account.</li>
+<li>Check if other users in your location also experience the same problem.</li>
+<li>Confirm that correct client software and client configuration requirements at <a href="https://help.sap.com/doc/00f68c2e08b941f081002fd3691d86a7/release/en-US/11b4e5ff76eb4747bc255d7037be1f01.html" target="_blank">System Requirements and Technical Prerequisites</a>.</li>
+<li>Enable "<strong>High Performance</strong>" power plan of your computer's power option plan. See KBA <a href="https://me.sap.com/notes/2327454" target="_blank">2327454 - Low performance occurs in tables</a>.</li>
+</ul>
+<p class="header2">Network</p>
+<p>Your network connection has a significant influence on your experience.</p>
+<p>Steps to test your network:</p>
+<ol>
+<li>Click the System (i) &gt; Performance &gt; Measurement Tool </li>
+<li>Click Run Client Test.</li>
+<li>Click Run Network Test.</li>
+<li>Take a screen shot of the results.</li>
+</ol>
+<p style="padding-left: 30px;"><img alt="Measurement Tool.png" class="img-responsive" height="753" src="/documents/customerkba/e6Fhjcl_LpJNnYV7qsHvXvOnIDkU9dWKtVb1imeSmOA" title="Measurement Tool.png" width="632"/></p>
+<ul>
+<li><strong>Wireless:</strong> We all love wireless but it is not as fast as Gigabit ethernet and other network adapters.</li>
+<li><strong>Reverse proxy:</strong> Are you using a reverse proxy to access SAP Analytics Cloud? If so, verify that the behavior also happens when you connect to the public SAC URL and access the sample/demonstration stories (Sample - Revenue Analysis).</li>
+<li><strong>Internet connection:</strong> Test network latency from your network to <em><strong>SAP Analytics Cloud</strong></em>. <span style="color: #ff0000;"><strong>Warning!</strong> </span><strong>This is only an estimate</strong>. Go to the <a href="https://cct.sde.cloud.sap/" target="_blank"><strong>Network Performance</strong> <strong>Measurement Tool</strong></a><strong> </strong>and test the network bandwidth and latency or use the internet speed test Web site of your choice and simulate a connection to the location where your SAP Analytics Cloud data center is located.</li>
+<ul>
+<li>See this link for further details on the <strong><a href="https://www.sap.com/about/trust-center/data-center.html" target="_blank">SAP Cloud Trust Center - Data Center Locations</a></strong>.</li>
+</ul>
+<li><strong>VPN: </strong>Using VPNs may affect performance as you may be tunneling requests to SAP Analytics Cloud via your VPN connection. You can compare the performance when connected directly to your network. If you notice a significant improvement, contact your VPN / IT administrator.</li>
+<li><strong>Latency:</strong> Latency is measured in milliseconds (ms). It describes the time it takes from the starting request until the response arrives. A good latency is a ping rate within a low milliseconds range. Latency describes the amount of delay on a network or Internet connection. Low latency implies that there are no or almost no delays. High latency implies that there are many delays. One of the main aims of improving performance is to reduce latency.</li>
+</ul>
+<p class="header2">Stories (Canvas / Responsive / Grid pages)</p>
+<ul>
+<li><strong><strong><strong><strong>Quick win</strong>:</strong></strong></strong> Review the sections in the <strong><a href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/bf77843031e04ce6b6e721e67ccadeaf.html" target="_blank">Optimize Your Story's Performance</a></strong> on the SAP Help Portal.</li>
+<li><strong><strong>Quick win</strong>:</strong> <em><em>Best Practice Performance Tips for Story Designers</em></em> (in design mode) have now been added during story design processes. See the <a href="https://blogs.sap.com/2021/11/08/whats-new-in-sap-analytics-cloud-and-sap-digital-boardroom-q4-2021/#26" target="_blank">following</a> for more information.</li>
+<li><strong>Quick win:</strong> Enable Optimized View Mode to improve the performance of stories (in certain scenarios) and provides usability improvements. See <a class="Hyperlink BCX8 SCXW174304795" href="https://blogs.sap.com/2021/07/26/experience-performance-and-usability-improvements-with-sap-analytics-cloud-stories/" rel="noreferrer noopener" target="_blank">here</a>, and <a class="Hyperlink BCX8 SCXW174304795" href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/1f0e3adc73384dbb8b1ae05e5753155b.html" target="_blank">here</a>.</li>
+<li><strong>Quick win: </strong>Re-save the story to take advantage of incremental improvements since the last update of your system.</li>
+<li><strong>Quick win: </strong>In the model preferences under Data and Performance, toggle on “<strong>Optimize Story Building Performance</strong>”. This prevents automatic refreshing of data during story design.</li>
+<li><strong>Simplify story:</strong> Use canvas style stories to your advantage. </li>
+<ul>
+<li>If you do not need to display too many charts / widgets at once, split charts and table across different tabs (canvas) so they are not loaded at once.</li>
+<li>Review the <strong><a href="https://www.sap.com/documents/2022/01/5e49ac93-127e-0010-bca6-c68f7e60039b.html" target="_blank">Data Visualization Handbook</a> </strong>for design tips and best practices.</li>
+<li>Minimize usage of restricted measures and use calculated rows/columns (in-cell / in-grid) instead. See KBA <a href="https://me.sap.com/notes/2673776" target="_blank">2673776</a> and <a href="https://help.sap.com/doc/00f68c2e08b941f081002fd3691d86a7/latest/en-US/1c58c140816f408ebcae3705fe12898f.html" target="_blank">Adding Calculated Rows and Columns in a Table</a>.</li>
+<li><strong>Limit</strong> results with <strong>Top N</strong> (server side) but <span style="text-decoration: underline;"><em><strong>AVOID</strong></em> </span>the <span style="text-decoration: underline;"><strong>Auto</strong></span> Top N (client side) feature. See <a href="https://blogs.sap.com/2018/07/03/whats-new-in-sap-analytics-cloud-and-sap-digital-boardroom-release-2018.12/#_Top_N_improvements" target="_blank">Top N improvements</a> and <a href="https://help.sap.com/doc/00f68c2e08b941f081002fd3691d86a7/release/en-US/32f1e29e85604bdb83605f2e24050543.html" target="_blank">Filtering Data by Rank</a>.</li>
+</ul>
+<li><strong>Chart optimizations:</strong> Avoid charts with a large number of data points (&gt;500).</li>
+<li><strong>Table optimizations:</strong> Leverage Explorer instead of using large tables.</li>
+<li><strong>Images:</strong> Resize SVG and PNG files to decrease download times of these files.</li>
+<li><strong>Linked analytics:</strong> Linking too many charts will trigger updating their values every time the selection or filter changes.</li>
+<li><strong>Settings:</strong> Take advantage of Progressive Chart Rendering. See article <a href="https://me.sap.com/notes/2604574" target="_blank">2604574</a> for further information.</li>
+<li><strong>Blending: </strong>Use the "Exclude descendents" option if hierarchies have identical structure &amp; ensure filtering uses currently selected members only (See <a href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/5e46baa7575f47cfab8fba9b98f51fbf.html" target="_blank">link dimensions</a>).</li>
+<li><strong>Geo maps / Geospatial: </strong>See KBA <a href="https://me.sap.com/notes/2676310" target="_blank">2676310</a> - Story with geo map loading slowly in SAP Analytics Cloud (SAC) and <a href="https://www.sapanalytics.cloud/resources-performance-best-practices/#geo" target="_blank">geospatial best practices</a>.</li>
+<li>Review the following blog for some further tips and advice: <a href="https://blogs.sap.com/2021/10/04/best-practices-for-performance/" target="_blank">Best Practices for Performance</a>.</li>
+</ul>
+<p class="header2">Analytics Designer / Analytic Apps</p>
+<ul>
+<li><a href="https://d.dam.sap.com/a/3Y16uka/SAPAnalyticsCloud_AnalyticsDesigner_DeveloperHandbook.pdf" target="_blank">Performance best practices from <em><strong>Chapter 14</strong> </em>of Developer Handbook</a></li>
+<li><a href="https://blogs.sap.com/2021/03/10/performance-best-practices-for-sap-analytics-cloud-analytics-designer/" target="_blank">Performance Best Practices for SAP Analytics Cloud, Analytics Designer</a></li>
+<li><a href="https://me.sap.com/notes/2946271" target="_blank">2946271 - Performance hints for SAP Analytics Cloud Analytics Designer applications</a></li>
+</ul>
+<p class="header2">Live Data versus imported data (acquired models)</p>
+<ul>
+<ul>
+<li>If you are using a live data connection, the web browser requests data directly from the source (backend / server) system. You can verify with your Basis or systems administrator on how to test the performance of live connections by using the following <a href="https://ga.support.sap.com/dtp/viewer/#/tree/1776/actions/23008" target="_blank">Master Guided Answer : Performance Problems for SAP systems</a> and the following resources below:</li>
+<li>Compare performance of other stories that use an acquired (import) model. Use the <a href="https://www.sapanalytics.cloud/videos/exploring-best-run-juice-sample-story/" target="_blank">sample story</a>: <em><strong>Sample - Revenue Analysis</strong></em>, for example.</li>
+<li>For<strong> SAP BW</strong> and <strong>SAP BW/4HANA</strong> live connections:</li>
+<ul>
+<li>See <em>attached</em> document: <em><strong>How to optimize performance for on-premise SAP BW / BW/4HANA Live connectivity</strong></em> and review <strong><a href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/1e09f137d7944df78c8f2a83635981cb.html" target="_blank">Performance Optimization (Specifics for SAP BW)</a></strong> features.</li>
+<li>SAP Analytics Cloud – SAP BW live connection best practices: Click <a class="Hyperlink SCXW261507470 BCX8" href="https://blog.asug.com/hubfs/2019%20AC%20Slide%20Decks%20Tuesday/ASUG82501%20-%20Integrating%20SAP%20Analytics%20Cloud%20with%20SAP%20Business%20Warehouse%20Best%20Practices.pdf" rel="noreferrer noopener" target="_blank">here</a> </li>
+<li>How to enable HTTP/2 to support multi-processing in SAP Analytics Cloud: Click <a class="Hyperlink SCXW261785809 BCX8" href="https://help.sap.com/doc/saphelp_nw751abap/7.51.0/en-US/c7/b46000a76445f489e86f4c5814c7e8/content.htm?no_cache=true" rel="noreferrer noopener" target="_blank">here</a> </li>
+<li>See article <a href="https://me.sap.com/notes/2245483" target="_blank">2245483</a> – Long runtime for input help – read mode M</li>
+<li>See article <a href="https://me.sap.com/notes/2572550" target="_blank">2572550</a> - OLAP effort too large; add filter or remove drill down characteristic </li>
+<li>See article <a href="https://me.sap.com/notes/2715030" target="_blank">2715030</a> - Considerations when using SAP BW and SAP S/4HANA Live Connections in SAC</li>
+</ul>
+<li>For <strong>SAP HANA live data connections:</strong></li>
+<ul>
+<li>SAP HANA performance analysis for the view: Click <a class="Hyperlink SCXW25517533 BCX8" href="https://help.sap.com/viewer/fc5ace7a367c434190a8047881f92ed8/2.0.00/en-US/a80bf987c7144d3dbcd9f9bfd3de7530.html" rel="noreferrer noopener" target="_blank">here</a> </li>
+<li>Hide in SAP HANA unnecessary dimension or measures: Click <a class="Hyperlink SCXW220268772 BCX8" href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/d5e543fa8cef465a9797ee74c3dc270e.html?q=Hide%20dimension" rel="noreferrer noopener" target="_blank">here</a> </li>
+<li>See article <a href="https://me.sap.com/notes/2591655" target="_blank">2591655</a> and the section <a href="https://help.sap.com/viewer/bed8c14f9f024763b0777aa72b5436f6/2.0.05/en-US/b7447d4bf69a4697bacc96c7b79c18e1.html" target="_blank">Troubleshooting Multi-Dimensional Services Queries</a> in the <a href="https://help.sap.com/viewer/product/SAP_HANA_PLATFORM/latest/en-US" target="_blank">SAP HANA Platform online help</a>.</li>
+<li>See article <a href="https://me.sap.com/notes/2670064" target="_blank">2670064</a> - FAQ: SAP HANA Multi-Dimensional Services (MDS) </li>
+<li>See article <a href="https://me.sap.com/notes/2550833" target="_blank">2550833</a> - HANA build-in procedure: EXECUTE_Analytical Engine </li>
+<li>See article <a href="https://me.sap.com/notes/2223597" target="_blank">2223597</a> - Implicit SQL optimization of SAP HANA Calculation Views</li>
+<li><a href="https://help.sap.com/doc/e344ef1295b6433e88fe084c0768e1cd/latest/en-US/SAP_HANA_Troubleshooting_and_Performance_Analysis_Guide_en.pdf" target="_blank">SAP HANA <strong>Troubleshooting</strong> and <strong>Performance Analysis Guide</strong></a></li>
+</ul>
+<li><strong><em>New! </em></strong><a href="https://ga.support.sap.com/dtp/viewer/#/tree/1776/actions/23008" target="_blank">Guided Answer: <strong>Performance Problems for SAP systems</strong></a></li>
+</ul>
+</ul>
+<p class="header2">Data Actions and Planning Features (in Planning models)</p>
+<ul>
+<li>Reduce the calculation scope as much as possible.</li>
+<li>Avoid unnecessary <em><strong>FOREACH</strong> </em>loops.</li>
+<li>Follow the <a href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/766b9da1890d431ca29927daee4811b4.html" target="_blank">General Rules</a> and <a href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/fa558b0ff273475c8f3cfa0053a5d89e.html" target="_blank">Best Practices tips for Performance</a> in the <a href="https://help.sap.com/viewer/product/SAP_ANALYTICS_CLOUD/release/en-US" target="_blank">SAP Help portal</a>.</li>
+<li>See <a href="https://me.sap.com/notes/2855559" target="_blank"><strong>2855559</strong> - Checkpoints: Performance issue related to SAP Analytics Cloud (SAC) for Planning features and functions</a>.</li>
+<li><a href="https://blogs.sap.com/2021/04/13/sap-analytics-cloud-data-action-performance-statistics-and-analysis/" target="_blank">SAP Analytics Cloud Data Action Performance Statistics and Analysis</a>.</li>
+<li>Optimize planning models using the planning area (See <a href="https://blogs.sap.com/2021/11/23/introduction-to-the-planning-area-optimization-for-sap-analytics-cloud/" target="_blank">blog</a>).</li>
+</ul>
+<p class="header2">Capturing Performance Information in Google Chrome</p>
+<ul>
+<li>If you have tested all the previous steps and still experience performance problems, please conduct the following so that SAP Product Support can investigate further:</li>
+<ul>
+<li>Capture a HAR file using the Network tab in Google Chrome Developer Tools. See article <a href="https://me.sap.com/notes/2280022" target="_blank">2280022</a> - How to collect HTTP archive files (HAR) files.</li>
+<li>Capture a performance trace using the Performance tab in Google Chrome Developer Tools. See article <a href="https://me.sap.com/notes/2413393" target="_blank">2413393</a> for further information.</li>
+<li>Google Chrome Performance Analysis Reference: Click <a class="Hyperlink SCXW252920053 BCX8" href="https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference" rel="noreferrer noopener" target="_blank">here</a>. </li>
+<li>Review article <a href="https://me.sap.com/notes/2630653" target="_blank">2630653</a> - How to Troubleshoot and Trace SAP Analytics Cloud connecting to on-premise / acquired / imported data.</li>
+</ul>
+</ul>
+<p class="header2">SAP Analytics Cloud Performance Analysis Tool and Administration Cockpit</p>
+<ul>
+<li>Review the <a href="https://blogs.sap.com/2021/01/08/sap-analytics-cloud-performance-analysis-tool/" target="_blank"><strong>Performance Analysis Tool</strong></a> for performance metrics for your service. For example, comparing performance of various objects, and their impact on overall performance.</li>
+<li>The <a href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/82ebd71cf1064064b8df82797f4a259d.html" target="_blank">SAP Analytics Cloud – Administration Cockpit</a> is now available. See this <a href="https://blogs.sap.com/2021/11/19/sap-analytics-cloud-administration-cockpit/" target="_blank">blog</a> for further information.</li>
+</ul>
+<p class="header2">Cloud availability center and data center status</p>
+<ul>
+<li>The <a href="https://me.sap.com/systemsprovisioning/availability" target="_blank">SAP for Me &gt; Systems &amp; Provisioning &gt; Availability</a> offers a personalized dashboard with at-a-glance visibility into cloud product availability. Accurate, up-to-date information into the status of your cloud products, critical information, maintenance updates, notifications, all in one place. Read more about it <a href="https://support.sap.com/content/s4m/help/systems.html" target="_blank">here</a>.</li>
+<li>See <a href="https://www.sap.com/about/trust-center/cloud-service-status.html?overlaySolutionId=ACE367&amp;productName=SAP+Analytics+Cloud&amp;overlayDataCenterId=D10" target="_blank">SAP Analytics Cloud - Cloud Service Status</a>.<a href="https://sapcp.statuspage.io" target="_blank"><br/></a></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li><a href="https://me.sap.com/notes/3504357" target="_blank">3504357 - Hot Features and Issues in 2024 QRC3 Update of SAP Analytics Cloud(SAC) - Hub KBA</a></li>
+<li><a href="https://event.on24.com/wcc/r/3158494/175F757DE72FD075359D1390C0F35BA5/2378951?partnerref=kba" target="_blank">The Ultimate Deep Dive into SAP Analytics Cloud Story and Data Analytics</a> webinar series</li>
+<li><a href="https://me.sap.com/notes/2327454" target="_blank">2327454 - Low performance occurs in tables / grid and other areas of SAP Analytics Cloud</a></li>
+<li><a href="https://me.sap.com/notes/2699872" target="_blank">2699872 - How to improve performance in the SAP Analytics Cloud (SAC) app for iOS</a></li>
+<li><a href="https://community.sap.com/topics/cloud-analytics/best-practices-troubleshooting" target="_blank">SAP Analytics Cloud best practices community topic page</a></li>
+<li><a href="https://me.sap.com/notes/2673776" target="_blank">2673776 - Restricted measures in the Cross calculations dimension causes poor performance in SAP Analytics Cloud</a></li>
+<li><a href="https://me.sap.com/notes/2591655" target="_blank">2591655 - Performance analysis when using SAP HANA Live Data Connections in SAP Analytics Cloud *** Collective KBA ***</a></li>
+<li><a href="https://me.sap.com/notes/2569847" target="_blank"><strong>2569847</strong> - Where can you find <strong>SAC user assistance (help) </strong><strong>to use, configure, and operate it more effectively?</strong></a></li>
+<li>Have a <strong>question</strong>? <a href="https://answers.sap.com/questions/ask.html?primaryTagId=67838200100800006884" target="_blank"><strong>Ask </strong>it here and let our amazing <strong>SAP community</strong> help!</a> <strong>Or</strong> <strong><a href="https://answers.sap.com/tags/67838200100800006884" target="_blank">reply and share your knowledge!</a></strong></li>
+<li><a href="https://me.sap.com/notes/2487011" target="_blank"><strong>2487011</strong> - What <strong>information</strong> do I need to <strong>provide</strong> when <strong>opening</strong> an <strong>case</strong> for SAP Analytics Cloud?</a></li>
+<li>Search for <em><strong>SAP Analytics Cloud content</strong> </em>using Google or Bing:</li>
+<ul>
+<li><a href="https://me.sap.com/servicessupport/search#?q=SAP%20Analytics%20Cloud%20OR%20SAC&amp;tab=All" target="_blank">https://me.sap.com/servicessupport/search#?q=SAP%20Analytics%20Cloud%20OR%20SAC&amp;tab=All</a></li>
+<li><a href="https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fuserapps.support.sap.com+SAP+Analytics+Cloud" target="_blank">https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fuserapps.support.sap.com+SAP+Analytics+Cloud</a></li>
+<li><a href="https://www.bing.com/search?q=site%3Ahttps%3A%2F%2Fuserapps.support.sap.com+SAP+Analytics+Cloud" target="_blank">https://www.bing.com/search?q=site%3Ahttps%3A%2F%2Fuserapps.support.sap.com+SAP+Analytics+Cloud</a></li>
+<li><strong>Note:</strong> Add relevant <em><strong>text or warning/error messages</strong></em> to the text search field to filter results.</li>
+</ul>
+<li><a href="https://help.sap.com/viewer/2d7115b0e0aa4f78bfd9c06fdc1fe4f6/release/en-US" target="_blank">SAP Analytics Cloud Connection Guide</a></li>
+<li><a href="https://community.sap.com/topics/cloud-analytics/getting-started" target="_blank">Getting Started with SAP Analytics Cloud Expert Community page</a></li>
+<li><a href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/837228942b504eeeb75efee930727914.html" target="_blank">SAP Analytics Cloud Get More Help and SAP Support</a></li>
+<li><strong>Need More Help? </strong><a href="https://support.sap.com/en/contact-us.html" target="_blank">Contact Support</a> or <a href='https://launchpad.support.sap.com/#/solutions/notesv2/?q=&amp;sortBy=date&amp;sortOrder=desc&amp;filters=[[{"attribute":"themk","operator":"EQ","low":"LOD-ANA*","high":""}]]' target="_blank">visit the solution finder today!</a></li>
+</ul>
+<p><strong><span>Your feedback is important to help us improve our knowledge base.<br/></span></strong></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>slow, performance, speed, C4A, BOC, SAC, AnalyticsCloud, Analytics Cloud, SAP BusinessObjects Cloud, network connection, bandwidth, SAP Cloud for Planning, sc4p, c4p, cforp, cloudforplanning, EPM-ODS, Cloud for Analytics, Cloud4Analytics, CloudforAnalytics, Cloud 4 Planning, BOC, SAPBusinessObjectsCloud, BusinessObjectsCloud, BOBJcloud, BOCloud., SAC, SAP AC, Cloud-Analytics, CloudAnalytics, SAPCloudAnalytics, slower, Performance problem, stopped, slow, slowness, hangs, hanging, Cross calculation, sac bp performance sap kba, Performance, system slowness, latency, DC issue, data centre, data center, system slow, system performance, SAC performance issues on planning model, We are encountering Unresposive page pages, Unresposives, waiting issues, unresponsive, processing time, very, very slow, processing time, unproductive, Slowness upload, terrible impact, loading, sac, sac, sap analytics cloud planning, sap analytics cloud training, sap analytics cloud tutorial, user assistance, ua, helpdocs, help information, "sac online help", sap analytics cloud help, sap analytics cloud user guide pdf, sap analytics cloud architecture, sap analytics cloud tutorial, sap analytics cloud connections, sap analytics cloud architecture pdf, learning sap analytics cloud pdf, More accessible documentation on your products and more community resources, SAC Tenant Performance Issues, EPM, SAP Cloud for Planning, sc4p, c4p, cforp, cloudforplanning, Cloud for Planning, EPM-ODS, Cloud for Analytics, C4P, Cloud4Analytics, CloudforAnalytics, Cloud 4 Planning, HCP, C4A, BOC, SAPBusinessObjectsCloud, BusinessObjectsCloud, BOBJ, BOBJcloud, BOCloud., BICloud, BO Cloud, connecting, conecting, conectando, conexão, modelo, SBOC, SAC, troubleshooting, overview, sap sac, sac, sap analytics cloud planning, sap analytics cloud training, sap analytics cloud tutorial, sac, ua, help, analytics help, support, c4a, boc, analyticscloud, case, troubleshooting, faq, sac faq, sac help, sap analytics cloud documentation, guides, sac support, sap analytics cloud support, ac, SAP Cloud for Planning, sc4p, c4p, cforp, cloudforplanning, Cloud for Analytics, Cloud4Analytics, CloudforAnalytics, Cloud 4 Planning, BOC, SAPBusinessObjectsCloud, BusinessObjectsCloud, BOBJcloud, BOCloud., SAC, SAP AC, Cloud-Analytics, CloudAnalytics, SAPCloudAnalytics,Error, Issue, System, Data, User, Unable, Access, Connection, Sac, Connector, Live, Acquisition, Up, Set, setup, Model, BW, Connect, Story, Tenant, Import, Failed, Using, Working, SAML, SSO, sapanalyticscloud, sap analytical cloud, sap analytical cloud, SAC, ヘルプ, Hilfe zu, Ayuda para, Ajuda para, sap sac, sac, sap analytics cloud planning, sap analytics cloud training, sap analytics cloud tutorial, planning, sac, Analytics Cloud Onpremis install, SAP analytics cloud, SAP BW, stories, geo, story, Analytics designer, sap analyst cloud, <a href="https://hcs.cloud.sap" rel="noopener" target="_blank">https://hcs.cloud.sap</a>, <a href="https://hanacloudservices.cloud.sap" rel="noopener" target="_blank">https://hanacloudservices.cloud.sap</a>, <a href="https://cloudanalytics.accounts.ondemand.com/" rel="noopener" target="_blank">https://cloudanalytics.accounts.ondemand.com</a>, <a href="https://hanacloudservices-us.accounts.ondemand.com" rel="noopener" target="_blank">https://hanacloudservices-us.accounts.ondemand.com</a>, <a href="https://www.sap.com" rel="noopener" target="_blank">https://www.sap.com</a>, <a href="https://help.sap.com/" rel="noopener" target="_blank">https://help.sap.com</a>, sap analytics cloud, analytics cloud, cloud analytics, analytics, sac, sap analytics cloud for planning, fp&amp;a, collaborative planning, enterprise planning, extended planning, xP&amp;A, extended planning and analysis, financial planning and analysis, connected planning, integrated planning, workforce planning, headcount planning, allocations, value driver tree, VDT, data action, predictive forecasting, smart predict, planning applications, planning model, advanced formulas, strategic planning, Profit and Loss Planning, P&amp;L planning, bottom-up planning, top-down planning, currency conversion, version management, fp&amp;a, predictive analytics, operational plan(s)(ning), financial planning and analysis, planning tools, integrated business planning, xp&amp;a, integrated planning, collaborative planning, planning model (s), connected planning, enterprise planning, budgeting and forecasting software, enterprise planning, planning and forecasting, planning budgeting and forecasting, planning and analysis, enterprise planning software, financial planning and forecasting, sap analytics cloud planning, predictive planning, driver based models, what if planning, enterprise planning cloud, cloud fp&amp;a, Enterprise Planning, Planning, analysis, budgeting, and prediction in one solution, Embedded business intelligence and predictive analytics, Integration with SAP S/4HANA, Very slow performance when running financial planning stories in SAC. data analysis, data analytics, machine learning, financial planning, business analytics,</p></div></div></div></div>

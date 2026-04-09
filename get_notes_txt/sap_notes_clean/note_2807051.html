@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The sort order is changed after refreshing the Live Office upgrading from XI 3.1 to BI 4.2 SP06 due to the Duplicate Rows options picked.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>LO, XI 3.1, Upgrade, 3.1, 4.2, err@239, sort, order, Live office, Liveoffice, duplicate rows</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence Platform (BI) 4.2 Support Package 06 (SP06)</li>
+<li>SAP Liveoffice</li>
+</ul>
+<p><strong>Steps to Reproduce</strong></p>
+<ol>
+<li>Upgrade the universe and connection from XI 3.1 SP06 to BI 4.2 SP06.</li>
+<li>Open the Excel with Liveoffice object.</li>
+<li>Refresh the Liveoffice query.<br/>=&gt;The "#err@239 [0]" is displayed and sort order is changed. But create new Liveoffice object in the BI 4.2 SP06, there is no such issue.<br/>In BI 4.2 SP 07 Patch 200, the "#err@239 [0]" is gone,but the sort order issue still happen.</li>
+<li>Edit the query, click show the option dialog<br/>=&gt;Retrieve Duplicate Rows is enabled and picked. Duplicate Rows Aggregation is disabled and picked.</li>
+</ol>
+<p><strong>Cause</strong></p>
+<ul>
+<li>The "#err@239 [0]" issue has been fixed by note 2657271 in BI 4.2 Patch6.1.</li>
+<li>The sort order is caused by the query option "Retrieve Duplicate Rows".<br/>In BI 4.2 SP04, We changed one behavior that "Retrieve Duplicate Rows" and "Duplicate Rows Aggregation" are independent and they won't be checked by default.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="font-size: 14px;">1.</span> The option "Duplicate Rows Aggregation" is enabled in the patches listed in the "Support Packages &amp; Patches" section below.</p>
+<p style="padding-left: 30px;">Due to different internal processes, the "Support Packages &amp; Patches" section of the SAP Note will be populated as below:</p>
+<p style="padding-left: 30px;">               - for fixes delivered in "Support Packages": immediately (even if the "Support Package" is planned to be released several months later)</p>
+<p style="padding-left: 30px;">               - for fixes delivered in "Patches":  ONLY once the "Patch" is released AND available on SMP (not before)</p>
+<p style="padding-left: 30px;">For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article 2144559 in References section.</p>
+<p>2. After applying the patches, unpick the "Retrieve Duplicate Rows" and "Duplicate Rows Aggregation" options to get the same sort.</p></div></div></div></div>

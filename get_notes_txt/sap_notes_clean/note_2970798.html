@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This SAP Note contains technical corrections to improve the performance of eSocial event <strong>S-1210 - Pagamentos de Rendimentos do Trabalho</strong> (Labor Income Payments).</p>
+<p>The performance is improved when you try to generate an S-1210 event for an employee, but the <strong>S-1200 Remuneração de trabalhador vinculado ao Regime Geral de Previd. Social</strong> (Employee remuneration from Social Security General Regime) event has not been generated yet.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>eSocial; S-1200; S-1210; 1200; 1210; remuneration; payroll receipt;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The system was performing a complete search on T7BREFD_PYRCPT, even though there was no S-1200 saved on T7BREFD_EVENT for the employee.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The system now identifies that there is no saved S-1200 event for the employee and if doesn't perform a search on T7BREFD_PYRCPT .</p>
+<p>The changes described in this SAP Note will be included in an HR Support Package, as indicated in section <strong>Support Packages</strong>.</p>
+<p>The Support Package includes the following objects:</p>
+<ul>
+<li>Changes in the following includes:</li>
+<ul>
+<li>RP_PAYBR_INC_PAY_CDEF0</li>
+<li>RP_PAYBR_INC_PAY_CIMP0</li>
+</ul>
+</ul>
+<div class="longtext">
+<p>As a general rule, SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in SAP Support Portal, under <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="nofollow" target="_blank">SAP Note Assistant</a>.</p>
+<p><strong>Versioning:</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>September 18, 2020</td>
+<td>Released for customer</td>
+</tr>
+</tbody>
+</table></div>
+</div></div></div></div></div>

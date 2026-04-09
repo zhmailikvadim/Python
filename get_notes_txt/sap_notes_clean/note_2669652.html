@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Wingding font is ignored when a Web Intelligence document is exported to PDF.</li>
+<li>Issue only from BI Launchpad.</li>
+<li>No issue in Web Intelligence Rich Client</li>
+<li>Issue with specific RHEL versions, no issue if we use RHEL 6.4</li>
+<li>Below error message captured in traces:<br/><strong>FindPhysicalFont  Font not Found(wingding.ttf) in Path :/home/boeuser/BI42/sap_bobj/enterprise_xi40/linux_x64//fonts/ttf/:/home/boeuser/BI42/sap_bobj/enterprise_xi40/linux_x86/crpe/fonts/:/home/boeuser/BI42/sap_bobj/enterprise_xi40/linux_x64/crpe/fonts/:/usr/lib/X11/fonts/TTF/:/usr/share/fonts/ja/TrueType/:/usr/share/fonts/ko/TrueType/:/usr/share/fonts/zh_CN/TrueType/:/usr/share/fonts/zh_TW/TrueType/ [kresovlefontname.cpp;225]</strong> </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>webi, webintelligence</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>SAP BusinessObject Business Intelligence 4.2 Support Package 05</li>
+<li>BI Launchpad</li>
+<li>RHEL7.2</li>
+</ul>
+<p><strong>Steps to Reproduce:</strong></p>
+<ol>
+<li>Setup an environment with Wingding font configured</li>
+<li>Create a Web Intelligence document</li>
+<li>Choose “No Data Source”</li>
+<li>Select the report header which is currently displaying ”Report 1”</li>
+<li>Set the font to Wingding</li>
+<li>Export the Web Intelligence document to PDF format</li>
+<li>Open the PDF</li>
+<ol style="list-style-type: none;">
+<li>&gt;&gt; It still displays text as “Report 1”</li>
+</ol></ol>
+<p><strong>Cause:</strong></p>
+<ul>
+<li>Wingding font is not installed on the Linux server</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Make sure that the font wingdings.ttf is installed on your Linux box, for that please install the Microsoft font package.<br/>Make sure that PHYSICAL attribute of FONTATTRIBUTE tag in fontalias.xml is equal to the name of the font file on your disk.<br/>Restart the WebIntelligenceProcessingServer</p></div></div></div></div>

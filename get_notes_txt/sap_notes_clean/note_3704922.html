@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The configurable message "Insufficient authorization in corresponding sales order" (message types V/032 and V/048) cannot be configured successfully.</p>
+<p>One or more of the following issues occur:</p>
+<ul>
+<li>Application area V/ cannot be entered in the maintenance view for system messages.</li>
+<li>The message type is not visible or selectable during configuration.</li>
+<li>The message is not triggered during delivery processing, even though it is maintained.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The configurable message is technically evaluated during delivery/shipping processing.<br/><br/> Only message types that are classified as delivery/shipping messages are considered by the system. Message types that are maintained solely for payment card processing (application area V/) do not fulfill the required selection criteria and are therefore ignored.<br/><br/><strong>Prerequisites</strong><br/><br/> To use configurable messages V/032 and V/048, the message types must be configured as delivery/shipping system messages. The message type must use message control version L.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Configure the message types as follows:</p>
+<ul>
+<li>Maintain message types in table T160M
+<ul>
+<li>Use transaction SM30 to maintain table T160M.</li>
+<li>Create or adjust the entries for message types V/032 and V/048.</li>
+<li>Ensure the message types are classified as delivery/shipping messages.</li>
+<li>Set the message control version L.</li>
+</ul>
+</li>
+<li>Maintain message characteristics in Customizing
+<ul>
+<li>Go to<br/> Logistics Execution → Shipping → System Modifications → Specify Characteristics for System Messages → Define the message types of system messages</li>
+<li>Verify that the message types are active and have the required output behavior (for example, warning or error).</li>
+</ul>
+</li>
+<li>Verify configuration
+<ul>
+<li>After maintaining table T160M, the entries become available for further maintenance.</li>
+<li>The configurable message is evaluated correctly during delivery processing once the prerequisite is fulfilled.</li>
+</ul>
+</li>
+</ul></div></div></div></div>

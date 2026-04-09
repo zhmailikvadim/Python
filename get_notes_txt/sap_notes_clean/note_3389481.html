@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In SAP MII, you have developed transactions that you have previously called using the MII destination system in SAP Plant Connectivity. However, the MII destination system is marked as obsolete. You have therefore replaced the MII destination system with a REST Web service call via the universal Web service destination system in accordance with the <a href="https://help.sap.com/docs/SAP_PLANT_CONNECTIVITY/c90214be0d934ebdb6f3bce29c63c0ff/69a287c775234c6aa469cbbb88af9899.html?locale=en-US" target="_blank">documentation in the application help</a>. You fill the inbound parameter of the Web service from the special output expression <em>~NotificationOutputInXmlFormat</em>.</p>
+<p>However, at runtime, the transaction call fails. In the log of the agent instance whose notification you want to call the Web service, the system issues the following error message: ArgumentException: Cannot have ']]&gt;' inside an XML CDATA block.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>MII transaction, XML, GET, POST, REST</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Restrictions of the Web service protocol used.</p>
+<p>The documentation describes the REST service call as a GET method. The parameters of the Web service are written to the URL at runtime. For large notifications, the size limit for the URL can be exceeded.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>For the Web service call in the universal Web service destination system, use the POST method instead of the GET method proposed in the documentation. To call MII transactions using a Web service, proceed as follows:</p>
+<ul>
+<li>
+<p>When creating the universal Web service destination system, select the description type <em>No Service Description</em>.</p>
+</li>
+<li>
+<p>In the Endpoint URI field, insert the URI as follows:<br/><br/>https://&lt;server name&gt;:&lt;port&gt;/XMII/Runner</p>
+</li>
+<li>
+<p>On the <em>Security Settings</em> tab, select the appropriate authentication parameters.</p>
+</li>
+<li>On the <em>Operation Configuration -&gt; Request Message Configuration</em> tab page, change the method from GET to POST.<br/><br/>IsAsync=false&amp;Persistence=NEVER&amp;Transaction=&lt;folder path&gt;/&lt;transaction name&gt;&amp;inXML={inXML}&amp;Session=false&amp;content-type=application/x-www-form-urlencoded<br/><br/>Here, the assumption was made that the inbound parameter of the transaction is called <em>inXML</em> and is filled from the Web service input variable with the same name. Names in curly brackets are interpreted as input variables of the Web service and can be filled dynamically at runtime. If, for example, you do not want to determine the transaction name until runtime, you must write ...&amp;Transaction={inTransaction}&amp;... in the template. The system then generates the <em>inTransaction</em>input variable, which you must fill with the transaction name at runtime.</li>
+</ul>
+<ul>
+<li>On the <em>Operation Configuration -&gt; Extended Configuration</em> tab page, in the <em>Request Settings</em> or <em>Response settings</em> screen area, change the <em>MIME format</em> to <em>xml</em> and the <em>content type</em> to <em>application/x-www-form-urlencoded</em>.</li>
+</ul>
+<p>After these changes, the parameters become part of the user data of the Web service call. As a result, they are no longer subject to the size restrictions for the URL.</p>
+<p>It is possible that the service call in MII creates an error message in the system log because the content type <em>application/x-www-form-urlencoded </em>is not supported. In this case, you must allow this content type using the following command:</p>
+<p style="padding-left: 30px;">https://&lt;server&gt;:&lt;port&gt;/XMII/Illuminator?Service=Admin&amp;Mode=AddContentType&amp;ResourceContentType=application/x-www-form-urlencoded</p>
+<p>If you run multiple MII servers in a cluster with load balancing, this command must be executed for each server in the cluster. If the error message still appears in the system log, clear the cache for the content types:</p>
+<p style="padding-left: 30px;">https://&lt;server&gt;:&lt;port&gt;/XMII/Illuminator?Service=Admin&amp;Mode=ResetContentTypeCache</p></div></div></div></div>

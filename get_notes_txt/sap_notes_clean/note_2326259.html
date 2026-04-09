@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You execute one or more master data consistency checks in transaction RSRV for the time characteristic 0FISCPER. The checks fail with the following error:</p>
+<ul>
+<li>
+<div>Syntax error in GP_ERR_RSDMDTMPLCHECK, row 1,031 (-&gt; long text)</div>
+</li>
+<li>Characteristic 0FISCPER: Error when generating check program with template RSDMD_CHECKINC</li>
+<li>Unknown column name "FISCVARNT"</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The master data checks are incorrectly enabled for time characteristics. Following the implementation of this SAP Note, time characteristics are not permitted for the master data consistency checks.</p>
+<p>As an alternative to implementing this SAP Note, you can import the following Support Package:</p>
+<p> </p>
+<ul>
+<li><strong><span style="text-decoration: underline;">SAP BW 7.50</span></strong><br/>Import Support Package 5 for SAP BW 7.50 (SAPK-75005INSAPBW) into your BW system. The Support Package is available once <strong>SAP Note 2318815</strong> ("SAPBWNews NW BW 7.50 ABAP SP5"), which describes this SP in more detail, has been released for customers.</li>
+</ul>
+<p> </p>
+<p>In urgent cases, you can implement the correction instructions as an advance correction.</p>
+<p><strong>You must first read SAP Notes 1668882 and 2248091, which provide information about transaction SNOTE.</strong></p>
+<p>To provide information in advance, the SAP Note(s) specified above might already be available before the Support Package is released. In this case, however, the short text of the SAP Note still contains the term "preliminary version".</p></div></div></div></div>

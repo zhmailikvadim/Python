@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">After a release upgrade,  for a Portuguese Company Code, in the productive system,  subsequent entries on table SIPT_VBRK (and/or SIPT_BKPF) do not have a digital signature .</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div style="font-size: 100.01%;">
+<p>SAP_APPL all releases.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Digital signature was already working in a productive environment.</li>
+<li>The SAP productive system has been upgraded to a higher version.</li>
+<li>The entries at tables SIPT_VBRK and SIPT_BKPF of documents created after the upgrade don´t have a digital signature.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Each SAP release has a different PSE file.</p>
+<p>There are checks  that detect if the PSE file uploaded is the right one or not for productive systems.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>After the upgrade:</p>
+<p> </p>
+<ol>
+<li>The new Product Data of the SAP system has to be properly entered in the SAP Service MarketPlace. (This is the way to notify SAP that the system is now on a higher release). Do not keep obsolete data.</li>
+<li>Then, the  productive encryption certificate for the current SID, has to be downloaded from the SAP Service Marketplace.</li>
+<li>Report SIPT_SAFT_STORE_PSE has to be run with transaction SE38  to upload the new PSE file (obtained in previous step) in the productive system.</li>
+<li>Run reports SIPT_INTERVAL_SIGN_SD, and/or  to SIPT_INTERVAL_SIGN_FI (also with transaction SE38)  to  generate the missing digital signatures.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>The path to download the encryption certificate has changed in the Service Market Place: Note <a href="https://me.sap.com/notes/2151028" target="_blank">2151028</a> released on April 2015 with the current path.</p>
+<p>Note <a href="https://me.sap.com/notes/172481" target="_blank">172481</a> is a collective one that covers System data maintenance topics. (There is a special SAP component called XX-SER-FORME)</p>
+<p><br/>Note <a href="https://me.sap.com/notes/1822433" target="_blank">1822433</a>  "1S309 SSF kernel error: invalid parameter" outlined the need for the new PSE file after some upgrade.</p>
+<p>Notes <a href="https://me.sap.com/notes/1829604" target="_blank">1829604</a> and <a href="https://me.sap.com/notes/1829640" target="_blank">1829640</a> explain other causes for having documents on tables SIPT_VBRK and SIPT_BKPF without a digital signature for all kind of systems (productive or not) not related to the upgrade.</p>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Digital Signature stopped working after a release upgrade in productive environment for a Portuguese Company Code, encryption certificate, PSE file, legal requirement, SIPT_SAFT_STORE_PSE, SIPT_INTERVAL_SIGN_SD, SIPT_INTERVAL_SIGN_FI, 1S309, SIPT_VBRK, SIPT_BKPF Portugal localization, country settings, Country versions</p></div></div></div></div>

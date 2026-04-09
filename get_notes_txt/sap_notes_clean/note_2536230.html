@@ -1,0 +1,59 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Uninstallation of the add-on SAP Access Control 5.3 for the component VIRSANH using transaction SAINT.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAINT, Software Component VIRSANH 530_700, VIRSANH 530_710, VIRSANH 530_731</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You need to uninstall the add-on SAP Access Control</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<p>This SAP Note is updated regularly. Make sure you have the current version of this SAP Note before you start the uninstall process.<br/><br/>Contents<br/>  1. Change history<br/>  2. Prerequisites for uninstalling the add-on<br/>  3. Manual preparation steps before uninstalling<br/>  4. Uninstalling the add-on with SAINT<br/><br/>1. Change history<br/><br/>Date             Short Description<br/>22/09/2017 <strong> </strong> SAP Note released for VIRSANH 530_nnn</p>
+<p>2. Prerequisites for uninstalling the add-on<br/>Obtain the following SAP Notes before you begin the installation.</p>
+<ul>
+<li>Note <a href="/notes/70228" target="_blank">70228</a>: Add-ons: Conditions and upgrade planning</li>
+<li>Note <a href="/notes/2011192" target="_blank">2011192</a>: Uninstalling ABAP add-ons</li>
+</ul>
+<p>Release your transports for the SAP Note implementation to avoid locks during the uninstallation.</p>
+<p>Import the latest update of SPAM/SAINT (at least SPAM version 66).</p>
+<p>Make sure that the latest available <em>Attribute Change Package (ACP)</em> of the software component version is installed in the system.</p>
+<p><br/>3. Manual preparation steps before uninstalling</p>
+<ol style="list-style-type: lower-alpha;">
+<li>With the uninstallation of the add-on, the application and transactional data listed below is deleted. Data in deleted database tables is lost as long as you do not save it before the add-on uninstallation.  </li>
+<li>
+<p>The usage of coding from above listed software components in local coding will stop the add-on uninstallation. Use the add-on piece list to see in detail which development objects will be deleted. To do so, you can open the <em>Installation and Support Package Directory</em> via <em>Goto</em> from the <em>Add-On Installation Tool</em> (transaction SAINT). Select the OCS package VIRSANH and open the object lists for the piece lists below.<br/>You can use report RS_ABAP_SOURCE_SCAN to search for the usage of string /VIRSAin local objects (package $TMP). Check if the results found are related to this add-on.</p>
+</li>
+<li>
+<p>Remove all user assignments for GRC roles with transaction PFCG.</p>
+</li>
+<li>Remove the usage of the following check tables assigned to authorization field of the authorization objects.</li>
+<ol>
+<li>The tables are listed as following:</li>
+<ol>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">/VIRSA/BUSSPROC</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">/VIRSA/FUNCTION</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">/VIRSA/ORGRULES</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">/VIRSA/RISKS</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">/VIRSA/ZAUTH</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">/VIRSA/ZBUSUNIT</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">/VIRSA/ZFFAUTH</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">/VIRSA/ZMITREF</span></li>
+</ol>
+<li>The above tables have been used as check table for authorization fields of the below listed authorization objects. Please call SU20 for each field which is used in the following authorization objects,  remove the check table or switch to the option “Using Search Help of Data Element”. Save the field changes. Then run the where-used for these tables again to check if there are some others objects which use them. If you found further usage, please remove the usages as well.</li>
+<ol>
+<li>ZVFAT_0001</li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVFAT_0002</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0001</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0002</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0003</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0004</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0005</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0006</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0007</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0008</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0009</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0010</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0011</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0012</span></li>
+<li><span style="font-size: 10.0pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">ZVRAT_0013</span></li>
+</ol></ol></ol>
+<p><br/>4. Uninstalling the add-on with SAINT<br/>You can use the Add-On Installation Tool to uninstall add-ons. Deletion of some add-ons is only possible if certain prerequisites apply, however.<br/><br/>Prerequisites<br/>You are logged on to client 000.<br/>You have entered transaction code SAINT to start the <em>Add-On Installation Tool</em>.<br/>The add-on you want to delete is displayed in the tab page of components that can be uninstalled.<br/>Your system is configured correctly and you have imported the latest update of SPAM/SAINT.<br/>You have read this SAP Note carefully and have followed the instructions.<br/>Procedure</p>
+<ol>1. Choose the tab page for components that can be uninstalled.</ol><ol>2. From the list, select the add-on that you want to uninstall.</ol><ol>3. Choose Start to start the uninstall process.</ol><ol>4. A confirmation prompt describes potential dangers of uninstallation and refers to an SAP Note with additional important information. Be sure to read this SAP Note and follow its instructions.</ol><ol>5. If you have read the SAP Note and followed its instructions, choose "Yes". To display the SAP Note, choose "Display". To cancel the uninstall process, choose "Cancel".</ol><ol>6. After you start the uninstall process, the Add-On Installation Tool runs a predefined sequence of phases. Should an error occur in any of these phases, the uninstall process is stopped and the error is described to the extent possible. Once you have corrected the problem, you can choose "Continue" to continue the uninstall process.</ol><ol>7. At first, the Add-On Installation Tool performs preparation and check steps. If the errors cannot be corrected during these phases, you can choose "Back" to stop and reset the uninstall process. In later phases, when the system has already made changes and deletions, a reset is no longer possible and the system issues an appropriate error message. In this case, you have to correct any errors and then complete the uninstall process.</ol><ol>8. Once the add-on has been uninstalled successfully, you can choose "Logs" to see the import logs or choose "Exit" to complete the uninstall process.</ol></div></div></div></div></div>

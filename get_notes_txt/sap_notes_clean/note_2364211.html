@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When you use the search help H_T528B ("Help View for Positions") to select a position or a work station, a very long runtime is required in the application until the search help is visible.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>H_T528B, T528T, PLANS, HR_T528B_F4_EXIT, SELECT</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Prerequisite:</p>
+<ul>
+<li>The two tables T528B and T528T contain a very large number of entries (more than 1,000,000 entries).</li>
+</ul>
+<p>Reason:</p>
+<p>There is a program error.</p>
+<p>Under certain circumstances, the system imports all position texts from the table T528T when processing the search help. If a very large number of entries exist in the table T528T, this causes a significant increase in the runtime.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The correction from this SAP Note ensures that only the required position texts are read from the database. In addition, the selection is restricted to a maximum of 5,000 entries to be displayed.</p>
+<p> </p>
+<p>Import the relevant HR Support Package into your system.</p>
+<p>To implement an advance correction, implement the attached correction instructions.</p></div></div></div></div>

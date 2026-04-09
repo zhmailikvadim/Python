@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">During the upgrade using the Software Update Manager (SUM), the update stops in phase EU_CLONE_CRE_SHDVIEWS.</p>
+<p><strong>SAPupConsole.log</strong>:</p>
+<pre>Severe error(s) occurred in phase</pre>
+<pre>MAIN_SHDINST/SUBMOD_SHDALIASCRE/SUBMOD_SHDVIEWCRE/EU_CLONE_CRE_SHDVIEWS!</pre>
+<pre>Last error code set:<br/>3 error during parallel execution of processes, check 'R3LDCALLPRP.ELG' for<br/>details<br/>6 processes failed, check 'R3LDCALLPRP.*' for details</pre>
+<p><strong><br/>R3LDCALLPRP.ELG</strong>:</p>
+<pre>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br/>ANALYSIS OF LOG FILE 'N:\abap\SUM\abap\shdviews\SHDVIEWS_PRP00001_IMP.LOG'<br/>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br/>ERROR: Found pattern "R3load....: job completed" 0 times, but expected 1!<br/>Analyze the log file for further error messages or program abort.</pre>
+<p><strong><br/>SHDVIEWS_PRP00001_IMP.LOG</strong>:</p>
+<pre>N:\&lt;SUM path&gt;\SUM\abap\exe\R3load.EXE: START OF LOG: 20170618185934</pre>
+<pre>N:\&lt;SUM path&gt;\SUM\abap\exe\R3load.EXE: sccsid @(#) $Id: //bas/722_STACK/src/R3ld/R3load/R3ldmain.c#2 $ SAP<br/>N:\&lt;SUM path&gt;\SUM\abap\exe\R3load.EXE: version R7.20/V1.6 [UNICODE]<br/>Compiled Mar 29 2017 21:58:44<br/>patchinfo (patches.h): (0.225) R3load aborts during a Unicode conversion (note 2423239)<br/>process id XXXX<br/>N:\&lt;SUM path&gt;\SUM\abap\exe\R3load.EXE -ctf I N:\&lt;SUM path&gt;\SUM\abap\shdviews\SHDVIEWS_PRP00001_IMP.STR N:\&lt;SUM path&gt;\SUM\abap\shdviews\DDLORA_LRG.TPL N:\&lt;SUM path&gt;\SUM\abap\shdviews\SHDVIEWS_PRP00001_IMP.TSK ORA -l N:\&lt;SUM path&gt;\SUM\abap\shdviews\SHDVIEWS_PRP00001_IMP.LOG</pre>
+<pre>(PRC) INFO: working directory "N:\abap\SUM\abap\tmp"</pre>
+<pre><br/>(RTF) ########## WARNING ###########<br/> Without ORDER BY PRIMARY KEY the exported data may be unusable for some databases</pre>
+<pre>(TPL) ERROR: unknown template variable "tablespace"</pre>
+<pre>N:\&lt;SUM path&gt;\SUM\abap\exe\R3load.EXE: job finished with 1 error(s)<br/>N:\&lt;SUM path&gt;\SUM\abap\exe\R3load.EXE: END OF LOG: 20170618185934</pre>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Update the Kernel to the latest patch levels</li>
+<li>Check that the folder &lt;SUM path&gt;\SUM\abap\shdviews has the appropriate permissions</li>
+<li>Rerun the phase</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>A Kernel package was used in N:\&lt;SUM path&gt;\SUM\abap\exe\ that is for a different Operating System or Database then your system is running on.</p>
+<p>Check that the package you downloaded from Launchpad.</p>
+<p>Example:<br/>SAPEXEDB_300-70000602.SAR is for SQL database<br/>SAPEXEDB_300-70000601.SAR is for Oracle database</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Replace the kernel with the correct Kernel version and release for your Operating System and Database</li>
+<li>Repeat the phase in SUM</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="/notes/19466" target="_blank">19466</a> - Downloading SAP kernel patches</p></div></div></div></div>

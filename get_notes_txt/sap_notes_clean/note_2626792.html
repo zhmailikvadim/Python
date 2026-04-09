@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You created a Complete Data Backup with SAP HANA 2.0. You recovered SAP HANA Database using the SQL statement <em>RECOVER DATA [FOR &lt;database_name&gt;]{...}</em>. After the recovery finished successfully, there is a wrong timestamp displayed in backup.log file.</p>
+<ul>
+<li>backup.log entry from complete data <strong>backup</strong>:</li>
+</ul>
+<p style="padding-left: 30px;">INFO    BACKUP   SAVE DATA started<br/>INFO    BACKUP   to  backint: /usr/sap/SID/SYS/global/hdb/backint/DB_SID/backup_SID_YYYY_MM_DD_hh_mm_ss_databackup_0_1<br/>INFO    BACKUP   to  backint: /usr/sap/SID/SYS/global/hdb/backint/DB_SID/backup_SID_YYYY_MM_DD_hh_mm_ss_databackup_2_1<br/>INFO    BACKUP   SAVE DATA finished successfully</p>
+<ul>
+<li>backup.log entry from <strong>recover data</strong>:</li>
+</ul>
+<p style="padding-left: 30px;">INFO    RECOVERY command: RECOVER DATA FOR SID USING BACKINT ('/usr/sap/SID/SYS/global/hdb/backint/DB_SID/backup_SID_YYYY_DD_MM_hh_mm_ss')  CLEAR LOG<br/>INFO    RECOVERY using backup catalog &lt;xxx&gt; from file /usr/sap/&lt;SID&gt;/HDB/backup/log/DB_SID/log_backup_0_0_0_0.xxx<br/>INFO    RECOVERY RECOVER DATA finished successfully, reached timestamp <strong>0001-01-01T00:00:00+03:00</strong>, reached log position xxx</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP HANA Recover, Recovery</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, when recovering data without log replay, a wrong timestamp will be recorded in the backup.log file <span lang="EN-US" style="font-size: 12pt; font-family: 'Calibri',sans-serif;  mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">.</span></p>
+<p><strong>Prerequisites:</strong></p>
+<p>You are performing a RECOVER DATA as <em>RECOVER DATA [FOR &lt;database_name&gt;]{...}</em>.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2.0 database:</li>
+<ul>
+<li>Revisions of SPS00 - SPS01</li>
+<li>Revisions &lt;= 024.00 (SPS02)</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA database Revisions:</p>
+<ul>
+<li>SAP HANA 2.0 database:</li>
+<ul>
+<li>Revisions &gt;= 024.01 (SPS02)</li>
+<li>or higher<br/><br/></li>
+</ul>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<p>Since the recover process itself is running without issues, you can ignore the wrong timestamp entry.</p></div></div></div></div>

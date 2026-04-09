@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Null value in SFC_STEP.QTY_COMPLETE_PENDING. When trying to assign such SFCs to a new routing/operation via Change Production or RMA order the following error appears: nested exception is: java.lang.NullPointerException: while trying to invoke the method java.math.BigDecimal.compareTo(java.math.BigDecimal) of a null object loaded from local variable 'qtyCompletePending'.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Qty Complete Pending, Archive, Unarchive</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>If SFC was archived in ME version prior to 5.0, it may have QTY_COMPLETE_PENDING=NULL in table AR_SFC_STEP in archive schema and unarchiving of such SFC will lead to null value in WIP schema as well.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The following SQL Script should be executed:</p>
+<p>Oracle WIP:</p>
+<p>UPDATE SFC_STEP SET QTY_COMPLETE_PENDING='0' where QTY_COMPLETE_PENDING is null;<br/>COMMIT;</p>
+<p>Oracle ODS:</p>
+<p>UPDATE AR_SFC_STEP SET QTY_COMPLETE_PENDING='0' where QTY_COMPLETE_PENDING is null;<br/>COMMIT;</p>
+<p>SQL Server WIP:</p>
+<p>UPDATE SFC_STEP SET QTY_COMPLETE_PENDING='0' where QTY_COMPLETE_PENDING is null<br/>go</p>
+<p>SQL Server ODS:</p>
+<p>UPDATE AR_SFC_STEP SET QTY_COMPLETE_PENDING='0' where QTY_COMPLETE_PENDING is null<br/>go</p></div></div></div></div>

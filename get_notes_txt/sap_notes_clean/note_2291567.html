@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">In SAP Customer Checkout monitor, you find the receipt is <em>Released </em>with a Doc ID. However, you cannot find the document in SAP Business One.</p><h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3><p><strong>Scenario:</strong></p>
+<ol>
+<li>Cashier creates a Receipt in SAP Customer Checkout.</li>
+<li>In the SAP Customer Checkout Monitor, you see that the Receipt has status <em>Released</em> and an ID is present in the column <em>B1 Doc ID.</em></li>
+<li>User searches for the Receipt in SAP Business One using the B1 Doc ID, but the receipt is not found in SAP Business One.</li>
+</ol>
+<p><strong>Expected Behavior:</strong></p>
+<p>In the SAP Customer Checkout Monitor, the receipt is seen with status <em>Inconsistent</em> and an error message detailing what caused the receipt to be rejected by SAP Business One is displayed in SAP Customer Checkout Monitor.</p>
+<p><strong>Actual Behavior:</strong></p>
+<p>This behavior occurs only if the Receipt creation in SAP Business One was rejected in the B1i transaction commit phase. In the SAP Customer Checkout Monitor, the receipt is seen with status <em>Released</em> and B1 Doc ID is present.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>If an exception is raised during a B1i transaction commit phase, the DI calls are rolled back, but the calls to SAP Customer Checkout Monitor Database are not rolled back. When an issue is found during a commit phase, the Error handler for the SAP Customer Checkout integration package is not called. Integration framework implements the 2PC (2-phase-commit) protocol and it allows individual error handling steps to be defined that are called in case of errors. In case of errors that occur in the second phase (the commit phase) however, those error handling steps are not called, but default error handling is applied.</p><h3 class="section" data-toc-skip="" id="Solution">Solution</h3><p><strong><strong>Integration framework version 1.22.5 and higher include the correction.</strong></strong></p>
+<p><strong>Workaround for integration framework version 1.22.2, 1.22.3, and 1.22.4:</strong></p>
+<ol>
+<li>Follow the steps mentioned in the SAP Note <span class="title"><a href="/notes/2292409" target="_blank">2292409</a>. </span>This will update the B1if framework so that the scenario specific error handler will be called.</li>
+<li>Now you must upgrade Integration scenario package sap.CustomerCheckout and  sap.CustomerCheckoUI  to version 3.0.15 or higher.</li>
+<ol style="list-style-type: lower-alpha;">
+<li>If you are running the Release 1.0 SP03 or Release 2.0 SP00 of SAP Customer Checkout, take the integration scenario package from the SAP Note <a href="/notes/2163033" target="_blank">2163033</a>.</li>
+</ol></ol>
+<p>     </p>
+<p><span>    </span></p></div></div></div></div>

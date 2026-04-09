@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1" style="padding-left: 30px;">Number of LCMBIAR file and the size of collective LCMBIAR file continues to grow every time we export the job for the same objects.</p>
+<p style="padding-left: 30px;">Issue is observerd in exporting the 2nd and 3rd job (for dependent objects and primary objects respectively) by using LCM CLI.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p style="padding-left: 30px;">SAP BusinessObjects Business Intelligence Platform 4.1</p>
+<p style="padding-left: 30px;">SAP BusinessObjects Business Intelligence platform 4.2</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<p>Create an LCM Job (properties file) to Export the LCMBIAR file by using LCM CLI. (when doing a full promotion)</p>
+</li>
+<li>
+<p>Once the Export LCMBIAR file is completed, you can see the .lcmbiar file gets created by that LCM job in the given location.  (the one you mentioned in the export ".properties" file)</p>
+</li>
+<li>
+<p>Move all the lcmbiar file to destination and import it and it end by with some error message.</p>
+</li>
+<li>
+<p>Re-export the same jobs with same properties file and this time the number of lcmbiar get increase hence the size get increased.</p>
+</li>
+<li>
+<p>Also, in export and import lcmbiar scenario, LCMBIAR file get generate in FILESTORE location. please refer KBA <a href="/notes/2201163" target="_blank" title="2201163  - LCMBIAR files are not removed from File store after deleting related LCM jobs">2201163 - LCMBIAR files are not removed from File store after deleting related LCM jobs</a></p>
+</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>Hot backup is enabled</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>Disable the hot backup and do a clean export and import again. </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="/notes/2201163" target="_blank" title="2201163  - LCMBIAR files are not removed from File store after deleting related LCM jobs">2201163 - LCMBIAR files are not removed from File store after deleting related LCM jobs</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>lcmbiar, lcm, cli, size, number, bi, 4.1, 4.2, biar, increase</p></div></div></div></div>

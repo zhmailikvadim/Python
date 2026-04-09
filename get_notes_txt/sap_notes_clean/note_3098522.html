@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Email notifications are configured for newly created defects or damaged test case work items.<br/>In the manual test execution Web Dynpro, such email notifications are then sent as soon as the creation dialog of the new defect or damaged test case work item ends.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Solution Manager 7.2, all Support Packages</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol start="1">
+<li>Using transaction ‘SMARTFORMS’ create a new smartform SMF informing potential defect processors about the creation of a new defect.</li>
+<li>Using the ABAP workbench create a processing class PCL inheriting from class CL_SF_PROCESSING_PPF with a processing method PMTD having the same signature as method EXEC_SMART_FORM of class CL_SF_PROCESSING_PPF. The method implementation needs to provide all the information needed by the smartform to be sent.</li>
+<li>In the SAP Reference IMG, run the activity ‘Define Action Profiles and Actions’ (SAP Solution Manager Implementation Guide -&gt; Customer Relationship Management -&gt; Basic Functions -&gt;Actions -&gt; Actions in Transactions -&gt; Change Actions and Conditions -&gt; Define Action Profiles and Actions). Select the action profile ‘SMIN_STD’ maintained in the configuration of the transaction type ‘SMIN’ and navigate to the action definitions. Create a new action record SMDT_MAIL_2_PROC_NEW of processing type ‘Smart Forms Mail’ and enter the following mail settings: Form name = ‘SMF’ (from point 1 above), Processing Class = ‘PCL’ (from point 2 above), Processing Method = ‘PMTD’ (from point 2 above) and Archive Mode = ‘Mail Only’. Save your changes.</li>
+<li>In the SAP Reference IMG, run the activity ‘Define Conditions’ (SAP Solution Manager Implementation Guide -&gt; Customer Relationship Management -&gt; Basic Functions -&gt;Actions -&gt; Actions in Transactions -&gt; Change Actions and Conditions -&gt; Define Conditions).</li>
+<li>Select the action profile ‘SMIN_STD’ maintained in the transaction type ‘SMIN’ of the defect by double clicking on it and choose and the email notification action SMDT_MAIL_2_PROC_NEW (see point 3 above).</li>
+<li>In the details of the action conditions choose the ‘Overview’ tab and select the following settings: Scheduling Condition = ‘Schedule Automatically’, Time of Processing = ‘Processing when Saving Document’.</li>
+<li>On the  ‘Schedule Condition’ tab, create a new condition with Name = ‘New Defect’ and body ‘ &amp;CRM Service Request.User Status&amp;  = E0001SMIN0001’ corresponding to the initial status ‘NEW’  ( user status ID ‘E0001’)  of status profile ‘SMIN0001’ of  transaction type ‘SMIN’ )Save your changes.</li>
+<li>In the manual test case execution Web Dynpro application create a new defect. Do not press the save button.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p id="">technical limitation</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>This behavior is a known limitation that cannot be resolved.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Manual test execution Web Dynpro application, defect, email notification, smartform, CRM post processing framework, action, condition.</p></div></div></div></div>

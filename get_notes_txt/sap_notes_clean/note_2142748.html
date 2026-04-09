@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You have questions about the integration of SAP ERP with Ariba Network, using the Ariba Network Integration 1.0 for SAP Business Suite add-on.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Ariba Network Integration, cXML, SAP ERP add-on</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP note collects FAQs and common issues.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong><span style="text-decoration: underline;">FAQ Note for Buyers:</span></strong></p>
+<p><strong>1. cXML OrderRequest_Out:</strong></p>
+<p><strong><em>1.1 Deviant ordering address for vendor</em></strong></p>
+<p style="padding-left: 30px;">Q: An SAP ERP purchase order is created that contains a different ordering address for the vendor. Why is this ordering address not included in the cXML OrderRequest as the VendorSiteID.</p>
+<p style="padding-left: 30px;">A: In the SAP standard, the SAP ERP add-on does not map the ordering address to the VendorSiteID. You have to add it using the BAdI method MAP_BUS2012_TO_ORDR_OUT. Since the &lt;Identity&gt; element has a generic xsd:any structure, the &lt;IDReference&gt; element has to be created manually. A sample implementation is attached to this note.</p>
+<p><strong><em>1.2 Ariba Network Add-on working with Ariba Downstream</em></strong></p>
+<p style="padding-left: 30px;">Q: Do I have to take any action if Ariba Downstream is used to create purchase orders?</p>
+<p style="padding-left: 30px;">A: Yes, you do. You have to adapt the classification code mapping in a BAdI. The reason is that Ariba Downstream sends the technical classification code to SAP ERP. The SAP ERP add-on maps the human-readable name of the classification code to the Ariba Network, which then performs a check against the technical code used by Ariba Downstream. To ensure this mapping works, you have to adapt it using BAdI method MAP_BUS2012_TO_ORDR_OUT. A sample implementation is attached to this note.</p>
+<p style="padding-left: 30px;">Ariba Downstream does not support the human-readable code; this cannot be changed for compatibility reasons.</p>
+<p><strong>2. cXML ConfirmationRequest_In:</strong></p>
+<p><strong><em>2.1 Confirmation Request rejection indicator</em></strong></p>
+<p style="padding-left: 30px;">Q: In SAP ERP, a cXML ConfirmationRequest with type "reject" has been received and successfully processed, but the purchase order item does not reflect the rejection. What do I have to do?</p>
+<p style="padding-left: 30px;">A: If your SAP ERP system is on a support package level that is lower than listed in SAP Note 1890715, implement the note in your SAP ERP system.</p>
+<p><strong>3. cXML InvoiceDetailRequest_In:</strong></p>
+<p><strong><em>3.1 Invoice number length limit</em></strong></p>
+<p style="padding-left: 30px;">Q: A cXML InvoiceDetailRequest has been received in SAP ERP, but cannot be processed. It produces error ARBFND_FRW 040 ("Cannot move &lt;IV ID&gt; to data element XBLNR1 with maximum length 000016"). What is the issue?</p>
+<p style="padding-left: 30px;">A: Invoices with an invoice number longer than 16 characters cannot be processed in SAP ERP due to the fact that the field "Reference" (XBLNR) is restricted to this length.</p>
+<p><strong><em>3.2 Tax rate mapping</em></strong></p>
+<p style="padding-left: 30px;">Q: The tax codes I see in SAP ERP do not match the entries I made in Customizing activity “<em>Incoming Invoice: Map Tax Codes for Logistics Invoice Verification</em>” to map cXML tax rates to SAP ERP tax codes. What is the issue?</p>
+<p style="padding-left: 30px;">A: The add-on takes the tax rate from the cXML file, strips away all trailing zeroes, and then compares the value to the values stored in the Customizing activity. This means that in the Customizing activity you must not enter values with trailing zeroes – even if your cXML contains a rate with trailing zeroes. An entry with trailing zeroes cannot be mapped. – Please check your Customizing settings.</p>
+<p style="padding-left: 30px;">=&gt; Example: cXML tax rate: 16.00% =&gt; Enter in customizing for ‘Tax Rate in cXML’: 16</p>
+<p><strong><em>3.3 Invoicing party on invoice is different from invoicing party on referenced purchase order</em></strong></p>
+<p style="padding-left: 30px;">Q: On the purchase order header, an invoicing party was maintained under 'Partners' that is different from the one specified in the incoming invoice from Ariba Network. Why is the invoicing party from the purchase order ignored when incoming invoices from Ariba Network are posted in SAP ERP, and the invoicing party from the Ariba Network invoice is used instead? This behavior is different from transaction MIRO, where the invoicing party is automatically populated with the value maintained in the purchase order header.</p>
+<p style="padding-left: 30px;">A: In transaction MIRO, users post invoices manually and can verify if the invoicing party taken from the purchase order is the right one to use. If not, the users can adjust the invoicing party. <br/>Incoming invoices from Ariba Network, on the other hand, can be posted automatically. Using the invoicing party from the purchase order automatically could mean that it differs from the invoicing party requested by the supplier.</p>
+<p style="padding-left: 30px;">A similar situation would occur if an invoice from Ariba Network references several purchase orders at the same time. If different invoicing parties exist on these purchase orders, it is unclear which invoicing party should be used.</p>
+<p style="padding-left: 30px;">In the SAP standard, the invoicing party from the purchase order is therefore not used automatically. But you can implement BADI method IF_ARBERP_BADI_INB_MAP~INVC_INV_PARTY_DETERMINATION to determine the invoicing party so that it meets your requirements.</p>
+<p style="padding-left: 30px;">As of ARBERPI1 600 SP10, a sample implementation for this BADI method is provided.</p>
+<p style="padding-left: 30px;"><strong><em>3.4 Support for subsequent credits and debits</em></strong></p>
+<p style="padding-left: 30px;">Q: Are subsequent credits and debits supported?</p>
+<p style="padding-left: 30px;">A: Currently, we do not provide support for subsequent credits and debits out of the box.</p>
+<p><strong>4. cXML InvoiceDetailRequest_Out:</strong></p>
+<p><strong><em>4.1 CC-Invoice IDs</em></strong></p>
+<p style="padding-left: 30px;">CC invoice IDs must be unique at a given point in time. Duplicated CC invoice IDs that can occur under certain circumstances (for example, buyer-initiated MM CC invoices created by ERS) can cause follow-up processes such as payments to fail.</p>
+<p style="padding-left: 30px;">=&gt; SAP Note  2180426 is available to ensure that CC invoice IDs are not duplicated. Please refer to the note for a more detailed explanation of the changes.</p>
+<p><strong>5. cXML ServiceEntryRequest_In:</strong></p>
+<p><em><strong>5.1 Account assignment for service lines:</strong></em></p>
+<p style="padding-left: 30px;">Q: A cXML ServiceEntryRequest has been received in SAP ERP, but cannot be processed. It produces error SE518 (“No account assignment exists for service line 0000000010”). What is the issue?</p>
+<p style="padding-left: 30px;">A: The system could not find the account assignment information it needs for the service line. This can occur if the purchase order item which is referenced by the service entry sheet has the account assignment category ‘U’ (unknown). The service entry sheet has to be created manually in SAP ERP, and the account assignment category ‘U’ cannot be used.</p></div></div></div></div>

@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You want to use the 'Mass Change' functionality of one of the Line Item Browsers (FAGLL03H, FBL5H, FBL1H) and note <a href="/notes/2450963" target="_blank">2450963</a> is already installed. However, applying changes is unfeasible for a high number of records due to poor perfomance.</p>
+<p>This note describes how to set up parallel processing of the mass change using asynchronous RFC modules.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">FI_ITEMS_MASS_CHANGE FI_ITEMS_MASS_CHANGE_CALL FI_ITEMS_MASS_CHANGE_RFC_CALL FBL5H FAGLL03H FBL1H MASS_CHANGE FAGL_LIB_PIVB</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Poor performance of mass change call.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="text-decoration: underline;"><strong>Requirements</strong></span></p>
+<ul>
+<li>2450963 - Line Item Browsers: PIVB</li>
+<li>3025355 - FI Line Item Browser: DDIC Objects for Mass Change Call</li>
+<li>3025989 - FI Line Item Browser: Code Changes for Mass Change Call</li>
+<li>3034497 - CALL TRANSACTION USING is aborted abnormally in asynchronous RFC sessions triggered from WebGUI</li>
+</ul>
+<p>Note 3034497 is only required when the mass change aRFC call is used via WebGui frontend applications. If the note is not installed aRFC calls fail without prompting any error message. The user is informed that the mass change was run successful despite no changes being appplied.</p>
+<p><span style="text-decoration: underline;"><strong>Setup</strong></span></p>
+<p>The aRFC processing of the mass change call can be adjusted with the following parameters in table <em>FAGL_SETTINGS</em>:</p>
+<ul>
+<li><em>MASS_CHANGE_NUM_TASK</em>: Determines the maximum number of dialog work processes that can be used for a single mass change. When <em>MASS_CHANGE_NUM_TASK</em> is less than 1 usual sequential processing instead of parallel aRFC is performed.</li>
+<li><em>MASS_CHANGE_SERV_GRP</em>: Defines the server group destination. When no server group is specified the default server group <em>parallel_generators</em> (delivered by SAP) is used.   </li>
+<li><em>MASS_CHANGE_PAC_SIZE</em>: Controls the number of records processed in each task. See section 'Package Size Calculation' for more information.</li>
+</ul>
+<p><strong>Caution:</strong> When configuring the server group and maximum number of work processes keep in mind that ill-conceived settings can lead to performance issues in the whole system. These parameters are not user dependent. With multiple users at the same time the number of work processes/system resources used up by the mass change might become unreasonable. You have to thouroughly test these settings in an adequate test scenario before applying this in a production environment.</p>
+<p><span style="text-decoration: underline;"><strong>Package Size Calculation</strong></span></p>
+<p>The parameter <em>MASS_CHANGE_PAC_SIZE </em>controls the number of records that is send to each individual task. But single documents must not be split into different work packages. Thus, work packages are created on basis of the number of records per company code/fiscal year/document number instead of single line items. An optimization is performed to<em> </em>distribute all line items as evenly as possible onto the number of tasks provided via <em>MASS_CHANGE_NUM_TASK. </em>However, there might be single documents with more line items than defined in <em>MASS_CHANGE_PAC_SIZE </em>causing poor performance. When <em>MASS_CHANGE_PAC_SIZE </em>is not defined (value in<em> FAGL_SETTINGS</em> is initial) a default value of 100 is used.</p>
+<p><span style="text-decoration: underline;"><strong>Application Log</strong></span></p>
+<p>If any number of records wasn't changed successfully an application log is created. This log directly comes up after the mass change call has finished. For each record that wasn't changed two lines are created in the log:</p>
+<ol>
+<li>The first line specifies the exact document in the form of 'company code/fiscal year/document number'.</li>
+<li>The second line shows the error message for the specified document.</li>
+</ol>
+<p>For later review it's also saved and can be found via transaction SLG1. To search for application logs created by the mass change call you can use object 'FI_LIB' and/or subobject 'FI_LIB_MC'.</p></div></div></div></div>

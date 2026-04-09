@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>You followed the "Configuration files and database server startup options" example from <a href="http://dcx.sap.com/index.html#sa160/en/dbadmin/configuration-files-running.html" target="_blank">DCX</a>.</li>
+<li>The server doesn't start and returns the following error pop-up<br/><img alt="2016-12-30_10-47-44.png" class="img-responsive" src="/documents/customerkba/hyFKg_7vZr4GRmc61AwzkhduxRlFVXuZGS3x5HDdrRk" title="2016-12-30_10-47-44.png"/><br/><br/></li>
+<li>Server console reports the following:
+<pre> </pre>
+</li>
+</ul>
+<pre>I. 04/12 14:58:07. SQL Anywhere Personal Server Version 16.0.0.2754 <br/>I. 04/12 14:58:07. Advanced Edition<br/>I. 04/12 14:58:07. <br/>I. 04/12 14:58:07. Copyright © 2017 SAP SE or an SAP affiliate company.<br/>I. 04/12 14:58:07. All rights reserved.<br/>I. 04/12 14:58:07. Use of this software is governed by the SAP Software Use Rights Agreement.<br/>I. 04/12 14:58:07. Refer to http://www.sap.com/about/agreements.html.<br/>I. 04/12 14:58:07. <br/>I. 04/12 14:58:07. Connection limit (Personal Server): 10<br/>I. 04/12 14:58:07. Processors detected: 1 (containing 4 logical processors)<br/>I. 04/12 14:58:07. Processor limit (Personal Server): 1<br/>I. 04/12 14:58:07. Maximum number of processors the server will use: 1 physical processor(s), 2 core(s)<br/>I. 04/12 14:58:07. This server is licensed to:<br/>I. 04/12 14:58:07. SAP<br/>I. 04/12 14:58:07. SAP IT<br/>I. 04/12 14:58:07. Running Windows 10 Build 17134 on X86_64<br/>I. 04/12 14:58:07. Server built for X86_64 processor architecture<br/>I. 04/12 14:58:07. 25284K of memory used for caching<br/>I. 04/12 14:58:07. Minimum cache size: 25284K, maximum cache size: 14917588K<br/>I. 04/12 14:58:07. Using a maximum page size of 2048 bytes<br/>I. 04/12 14:58:07. Multiprogramming level: 20<br/>E. 04/12 14:58:07. Cannot access "%SQLANY16%\demo.db": file does not exist<br/>I. 04/12 14:58:08. Database server shutdown due to startup error<br/>I. 04/12 14:58:11. Database server stopped at Fri Apr 12 2019 14:58<br/>I. 04/12 14:59:59. SQL Anywhere Network Server Version 16.0.0.2754 <br/>I. 04/12 14:59:59. Developer edition, not licensed for deployment.<br/>I. 04/12 14:59:59. <br/>I. 04/12 14:59:59. Copyright © 2017 SAP SE or an SAP affiliate company.<br/>I. 04/12 14:59:59. All rights reserved.<br/>I. 04/12 14:59:59. Use of this software is governed by the SAP Software Use Rights Agreement.<br/>I. 04/12 14:59:59. Refer to http://www.sap.com/about/agreements.html.<br/>I. 04/12 14:59:59. <br/>I. 04/12 14:59:59. Connection limit (licensed seats): 3<br/>I. 04/12 14:59:59. Processors detected: 1 (containing 4 logical processors)<br/>I. 04/12 14:59:59. Maximum number of processors the server will use: 1 physical processor(s), 2 core(s)<br/>I. 04/12 14:59:59. This server is licensed to:<br/>I. 04/12 14:59:59. SAP<br/>I. 04/12 14:59:59. SAP IT<br/>I. 04/12 14:59:59. Running Windows 10 Build 17134 on X86_64<br/>I. 04/12 14:59:59. Server built for X86_64 processor architecture<br/>I. 04/12 14:59:59. 25284K of memory used for caching<br/>I. 04/12 14:59:59. Minimum cache size: 25284K, maximum cache size: 14917588K<br/>I. 04/12 14:59:59. Using a maximum page size of 2048 bytes<br/>I. 04/12 14:59:59. Multiprogramming level: minimum:4, current:20, maximum:80<br/>I. 04/12 14:59:59. Automatic tuning of multiprogramming level is enabled<br/>E. 04/12 14:59:59. Cannot access "%SQLANY16%\demo.db": file does not exist<br/>I. 04/12 15:00:03. Database server shutdown due to startup error<br/>I. 04/12 15:00:05. Database server stopped at Fri Apr 12 2019 15:00</pre>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP SQL Anywhere</li>
+<li>Microsoft Windows </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Use a SQL Anywhere environment %SQLANY16% in a configuration file "sample.cfg" to start a server<br/>
+<pre id="preA"># Configuration file for server Elora
+-n Elora
+-c 10M
+"%SQLANY16%\demo.db"</pre>
+</li>
+<li>Run dbsrv16 @sample.cfg</li>
+<li>You see the error: Cannot access "%SQLANY16%\demo.db": File does not exist<br/> </li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>Environment variables do not translate to their actual paths in configuration file</li>
+<li>Therefore, SQL Anywhere is using path that does not exist</li>
+<li>Additionally, the correct environment variable would have been %SQLANYSAMP16%</li>
+<li>The version 16 <a href="http://dcx.sap.com/index.html#sa160/en/dbadmin/configuration-files-running.html" target="_blank">DCX example</a> shows an incorrect usage</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>Since environment variables are not supported for configuration files, use direct path instead</li>
+<li>The DCX example will be fixed (Version 17 DCX is correct)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>Configuration files and database server startup options:</p>
+<ul>
+<li><a href="http://dcx.sap.com/index.html#sa160/en/dbadmin/configuration-files-running.html" target="_blank">Version 16</a></li>
+<li><a href="http://dcx.sap.com/index.html#sqla170/en/html/812ff2226ce210148114f7c370ed9fd5.html" target="_blank">Version 17</a></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>anyhwere, ASA, dcx, incorrect, example, sample, config, text, translate, translation, convert, conversion</p></div></div></div></div>

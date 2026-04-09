@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are unable to upload to the bank the payment file of type: ISO20022 because, when downloading the file, some fields such as ''NbOfTxs'' is missing and the bank rejects the file.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Business ByDesign</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Go to the Liquidity Management work center.</li>
+<li>Go to the File Management view.</li>
+<li>Select the Outbound File sub view.</li>
+<li>Show All Outbound Files and search for the ID: <strong>XXX</strong> (XXX stands for the ID of the file).</li>
+<li>Download the file.</li>
+</ol>
+<p>The file format is <strong>ISO20022</strong> payment format. The file type is <strong>Pain.001.001.03</strong></p>
+<p>The file is missing the field <strong>'NbOfTxs'</strong> on <strong>'PmtInf'</strong> level.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>In the current release, for ISO20022, SAP has only offered the generic country-independent implementation.</p>
+<p>In this generic country-independent implementation, for the ISO20022 format, file type: pain.001.001.03, the fields <strong>&lt;NbOfTxs&gt;,</strong> as well as fields <strong>&lt;CtrlSum&gt;</strong> and <strong>&lt;PmtTpInf&gt;</strong> on <strong>&lt;PmtInf&gt;</strong> level are not mandatory and have not been implemented by SAP.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>This is the normal system behavior.</p>
+<p>For ISO20022 format, file type: pain.001.001.03, the fields: &lt;NbOfTxs&gt;, &lt;CtrlSum&gt; and &lt;PmtTpInf&gt; have only been offered on GroupHeader <strong>&lt;GrpHdr&gt;</strong> level.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Payment File Format ISO20022, Payment File Fields, Format de Fichier de Paiement ISO20022.</p></div></div></div></div>

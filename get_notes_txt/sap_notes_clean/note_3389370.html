@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<div class="longtext">
+<p>You create a sales order with an item, then update it with a second one. When you check the values of the <span><em>CUSplit</em> field in the RDR1 table, it has <span>value </span><em>NULL</em> for the second item, which is invalid.</span></p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisite:</strong></p>
+<p>You are using SAP Business One or <span>SAP Business One, version for SAP HANA, 10.0 Feature Package <span>2102 or higher.</span></span></p>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>
+<div class="WordSection1"><span>Create a sales order with an item.</span></div>
+</li>
+<li>
+<div class="WordSection1">Update the <span>sales order </span>with a second <span>item</span>.</div>
+</li>
+<li><span>Check the </span><span><em>CUSplit</em> field in the RDR1 table through a query (<em>select "CUSplit", * from RDR1 where "DocEntry" = x</em>).</span></li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p><span>The </span><span><em>CUSplit</em> field in the RDR1 table has <span>value </span><em>N </em>for the second <span>item</span>. The valid values for the field are <em>N</em> <span>and <em>Y</em>,</span> depending on the <em>Freight Type</em> setting.</span></p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p><span>The </span><span><em>CUSplit</em> field in the RDR1 table has <span>value </span><em>NULL </em>for the second <span>item</span>, which is invalid.</span></p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p id=""></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p>RDR1, POR1</p></div></div></div></div>

@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Message FAA_POST075 occurred in CJ88 settlement</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Simple Finance</li>
+<li>S/4 HANA Finance</li>
+<li>S/4 HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Create a project with investment measure Asset Under Constructure (AUC) using parallel currency areas</li>
+<li>Post down payment and clear down payment in different periods which have different exchange rate</li>
+<li>In the AUC, lead area 01 has no down payment but down payment remains in parallel currency area </li>
+<li>When executing CJ88 with process type 'Full settlement', message FAA_POST 075 issues saying 'Settlement not possible: Down payments on 000090000127 0000 not cleared'</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The reason for message FAA_POST 075 is described in SAP Note <a href="/notes/35309" target="_blank">35309</a> .</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Please follow below steps to fix the issue. afterwards, you can execute CJ88 successfully:</p>
+<p>1) Ensure SAP Note <a href="https://me.sap.com/notes/2710743" target="_blank">2710743</a> implemented in your system<br/>2) Refer to SAP Note <a href="/notes/2773431" target="_blank" title="2773431  - ABCOL - correction of currency differences in dependent depreciation areas">2773431</a> and post a manual adjustment to write off the down payment in the parallel currency areas where down payment remain<br/>3) Execute CJ88 with process type 'Full settlement'</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>SAP Note <a href="/notes/35309" target="_blank">35309</a> - Final settlement for investment measure: Error message AA341, FAA_POST075, and AW605 for down payments</p>
+<p>SAP Note <a href="https://me.sap.com/notes/2710743" target="_blank">2710743</a> - AK005 when posting revaluations/write-ups to an AuC</p>
+<p>SAP Note <a href="/notes/2773431" target="_blank" title="2773431  - ABCOL - correction of currency differences in dependent depreciation areas">2773431</a>-  ABCOL - correction of currency differences in dependent depreciation areas</p>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>KO88, KO8G, CJ88, CJ8G, FBA6, FBA7, F-47, F-48, F-54, investment measure, <span style="font-size: 13px; font-family: Arial, Helvetica, sans-serif; white-space: normal; word-spacing: 0px; text-transform: none; float: none; font-weight: 400;  font-style: normal; orphans: 2; widows: 2; display: inline !important; letter-spacing: normal; background- text-indent: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-">F5903, <span style="font-size: 13px; font-family: Arial, Helvetica, sans-serif; white-space: normal; word-spacing: 0px; text-transform: none; float: none; font-weight: 400;  font-style: normal; orphans: 2; widows: 2; display: inline !important; letter-spacing: normal; background- text-indent: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-">F5 903, FAA_POST075, FAA_POST 075, final asset, parallel valuation</span></span></p></div></div></div></div>

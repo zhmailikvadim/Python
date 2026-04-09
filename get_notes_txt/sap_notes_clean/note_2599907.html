@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Rendering issue in Portal when launching a transaction iView (ITS / WebGUI) using custom theme. Issues after Backend upgrade.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Enterprise Portal </li>
+<li>SAP NetWeaver Application Server Java</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Logon to Portal </li>
+<li>Navigate to a transaction iView(ITS /WebGUI)</li>
+<li>You will see rendering issues.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Test the results unchecking the checkbox for property "Handover Portal Stylesheet" or "Handover Stylesheet"<br/><br/></li>
+<li>There are cases when another application in Portal is launching the transaction<br/>E.g.: UWL item launching a transaction iView(webgui) - In this case check the "Handover Portal Stylesheet" for following iView in the portal content)<br/>"Portal Users/Standard Portal Users/Universal Worklist/UWL - Launch SAP Transaction" see also SAP note <a href="https://me.sap.com/notes/1725729" target="_blank">1725729</a> - Transaction issue in SAP GUI for HTML (WebGUI) using UWL<br/><br/></li>
+<li>Many Custom themes are not supported for ITS/WebGUI, please check following SAP notes from ITS:</li>
+</ol>
+<ul>
+<li><a href="https://me.sap.com/notes/314568" target="_blank">314568</a> - SAP GUI for HTML functionality / Limitations / Sp. Behaviour</li>
+<li><a href="https://me.sap.com/notes/2124106" target="_blank">2124106</a> - Themes for Unified Rendering based UI technologies (Web Dynpro ABAP/Java, BSP, SAPGUI for HTML, BI, JSF)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li> See also SAP note <a href="https://me.sap.com/notes/1446099" target="_blank">1446099</a> - Application (Web Dynpro or ITS) is not displayed in customer theme.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>ITS WebGUI transaction tcode style sheet update upgrade backend unified rendering UR behavior</p></div></div></div></div>

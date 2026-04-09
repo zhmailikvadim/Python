@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The application class CL_RSM_TEAM_ATTRIB_FOR_CUR_USR and method GET_TEAM_ATTRIBS_OF_CURR_USR have the most expensive SQL statements. SQL statement generated from class above is not optimized and takes long execution time.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CA-GTF-RM, Responsibility Management, Procurement, Current user, if_rsm_team_attrib_for_cur_usr~get_team_attribs_of_curr_usr, cl_rsm_team_attrib_for_cur_usr, performance, AMDP, CL_RSM_SUB_TEAM_OF_ALL_LEVEL=&gt;GET_SUB_TEAM_OF_ALL_LEVEL</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>It takes long execution time due to too many loops running in "CL_RSM_SUB_TEAM_OF_ALL_LEVEL=&gt;GET_SUB_TEAM_OF_ALL_LEVEL". The SELECT FROM "PSUBTEAM" executing internally in the function is taking most of the time.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please implement the correction instruction.</p></div></div></div></div>

@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>No site change is possible after logon to SAP ME.</li>
+<li>List of sites available is empty.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>
+<div>SAP Manufacturing Execution (MFG-ME)</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Logon to NetWeaver Administrator (NWA).</li>
+<li>Create/copy a user, add a default site for it and save.</li>
+<li>Logon to SAP ME with this user.</li>
+<li>Add it to the proper user group at User Maintenance and save.</li>
+<li>Try to change site - there is no site to change for.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The user should be assigned to a user group by site_admin user, not by the user itself.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>
+<div>Logon to SAP ME with site_admin.</div>
+</li>
+<li>Go to User Maintenance, retrieve the user created/copied.</li>
+<li>Assign it to the proper user group and save.</li>
+<li>Logout with site_admin and logon with the user mentioned.</li>
+<li>The sites available will be visible for the affected user and site switch is possible.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>visiprise, site_admin, logon, site, user group, MFG-ME, default</p></div></div></div></div>

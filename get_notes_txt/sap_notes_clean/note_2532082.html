@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Current process infected with signal 11 with stack trace containing some of the following functions:</li>
+</ul>
+<p style="padding-left: 30px;"><em>LeScrContext::updCacheStat</em><br/><em>1cOLeSemiInsScrOpK_LeOpClose6MrnHExeCtxt__nKLeRetnCode</em><br/><em>LeRetnCode LeOperator::LeOpClose</em><br/><em>LeRetnCode LeEmitSndOp::_LeOpClose</em><br/><em>LeRetnCode LeOperator::LeOpClose</em><br/><em>LePlanClose</em><br/><em>exec_lava</em><br/><em>curs_clean</em><br/><em>curs_close</em><br/><em>css_deallocate</em><br/><em>lava_last_chance_cleanup</em></p>
+<ul>
+<li>
+<div>In some situations the Error 701 may be reported before the stack trace.</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>
+<div>SAP Adaptive Server Enterprise (ASE) 15.0.3</div>
+</li>
+<li>
+<div>SAP Adaptive Server Enterprise (ASE) 15.5 GA to 15.5 ESD #3</div>
+</li>
+<li>
+<div>SAP Adaptive Server Enterprise (ASE) 15.7 GA</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The issue has been identified and logged under <strong>SAP CR 657271</strong>. Its description reads, "A 701 error, "There is not enough procedure cache to run this procedure, trigger, or SQL batch. Retry later, or ask your SA to reconfigure ASE with more procedure cache", may be reported followed by a stacktrace involving LeScrContext::updCacheStat when a query tries to acquire the cursor cache".</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li><strong>SAP CR 657271</strong> is fixed in:</li>
+<ul>
+<li>SAP ASE 15.5 ESD #4</li>
+<li>SAP ASE 15.7 ESD #1 and higher</li>
+</ul>
+<li><strong>Workaround</strong>: Increase the Procedure Cache.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li>
+<div><a href="https://help.sap.com/viewer/91d32d977a174c68829880bc020fc352/16.0.3.1/en-US/a99c5e3ebc2b1014aa9495b26b9b2798.html" target="_blank">Procedure Cache Sizing</a></div>
+</li>
+<li><a href="/notes/0002085516" target="_blank">2085516</a> - Targeted CR List for ASE 15.5 ESD#4 -SAP ASE</li>
+<li><a href="/notes/0002081522" target="_blank">2081522</a> - Targeted CR List for ASE 15.7 ESD#1 - SAP ASE</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>CR657271, 657271, CR#657271, spid active, not enough procedure cache, proc cache, cursor cache, SEGV, segmentation, storage, access, violation, fault, segfault, kisignal, stacktrace,  stack, registers</p></div></div></div></div>

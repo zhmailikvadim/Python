@@ -1,0 +1,92 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are using the API interface for consumption by production material request instead of the standard UI interfaces. You create your own function which implements the example code that can be found in the documentation of interface /SCWM/IF_API_MFG_CONSUMPTION with or without your extensions. If you are using this, you can face with the following issues:</p>
+<p>-The GI document flow link is not written to the PMR item</p>
+<p>-Due to the missing document flow entry, the consumption reversal is not possible</p>
+<p>-Due to the missing document flow entry, the double consumption is possible</p>
+<p>This example code contains a part which must be owerwritten to avoid this kind of faults as the correction -in the solution part- showes you.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PMR, consumption, API, API interface, production material request, Production Material Request</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The sample code for usage of interface contains incomplete part.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="text-decoration: underline;"><strong>Original code part in the example documentation:</strong></span></p>
+<p><tt>lo_mfg_cons-&gt;post_consumption( EXPORTING iv_whno       = p_whno</tt></p>
+<p><tt>                                          iv_mfg_order  = p_mo</tt></p>
+<p><tt>                                          it_items_cons = lt_item_cons</tt></p>
+<p><tt>                                IMPORTING eo_message    = lo_message</tt></p>
+<p><tt>                                          ev_gmdoc      = lv_gmdoc ).</tt></p>
+<p><tt>* add messages if any</tt></p>
+<p><tt>IF lo_message IS BOUND.</tt></p>
+<p><tt>  IF lo_message-&gt;check( ) = abap_true.</tt></p>
+<p><tt>    lv_error_occured = abap_true.</tt></p>
+<p><tt>  ENDIF.</tt></p>
+<p><tt>  lo_message-&gt;get_messages( IMPORTING et_bapiret = lt_return ).</tt></p>
+<p><tt>  APPEND LINES OF lt_return TO lt_return_all.</tt></p>
+<p><tt>ENDIF.</tt></p>
+<p><tt>* did errors occurs? Or is this only a testrun? if no, then save</tt></p>
+<p><tt>IF lv_error_occured = abap_false AND</tt></p>
+<p><tt>   p_test           = abap_false.</tt></p>
+<p><tt>  CLEAR lo_message.</tt></p>
+<p><tt>* call SAVE and also immediately request to do the commit work</tt><br/><tt>* (in case of errors * during save this .</tt><br/><tt>* will then also do a rollback and CLEANUP).</tt></p>
+<p><tt>  lo_mfg_cons-&gt;save( EXPORTING iv_commit  = abap_true</tt></p>
+<p><tt>                     IMPORTING eo_message = lo_message ).</tt></p>
+<p><tt>* add messages</tt></p>
+<p><tt>  IF lo_message IS BOUND.</tt></p>
+<p><tt>    IF lo_message-&gt;check( ) = abap_true.</tt></p>
+<p><tt>      lv_error_occured = abap_true.</tt></p>
+<p><tt>    ENDIF.</tt></p>
+<p><tt>    lo_message-&gt;get_messages( IMPORTING et_bapiret = lt_return ).</tt></p>
+<p><tt>    APPEND LINES OF lt_return TO lt_return_all.</tt></p>
+<p><tt>  ENDIF.</tt></p>
+<p><tt>ELSE.</tt></p>
+<p><tt>* if errors during consumption API call or a testrun, rollback and clear buffers</tt></p>
+<p><tt>  ROLLBACK WORK.</tt></p>
+<p><tt>  /scwm/cl_tm=&gt;cleanup( ).</tt></p>
+<p><tt>  IF lv_error_occured = abap_true.</tt></p>
+<p><tt>    CLEAR lv_gmdoc.</tt></p>
+<p><tt>  ENDIF.</tt></p>
+<p><tt>ENDIF.</tt></p>
+<p> </p>
+<p><span style="text-decoration: underline;"><strong>New, corrected code part:</strong></span></p>
+<p><tt>lo_mfg_cons-&gt;post_consumption( EXPORTING iv_whno       = p_whno</tt></p>
+<p><tt>                                          iv_mfg_order  = p_mo</tt></p>
+<p><tt>                                          it_items_cons = lt_item_cons</tt></p>
+<p><tt>                                IMPORTING eo_message    = lo_message</tt></p>
+<p><tt>                                          ev_gmdoc      = lv_gmdoc ).</tt></p>
+<p><tt>* add messages if any</tt></p>
+<p><tt>IF lo_message IS BOUND.</tt></p>
+<p><tt>  IF lo_message-&gt;check( ) = abap_true.</tt></p>
+<p><tt>    lv_error_occured = abap_true.</tt></p>
+<p><strong>       ROLLBACK WORK.</strong></p>
+<p>      <strong>/scwm/cl_tm=&gt;cleanup( ).</strong></p>
+<p>      <strong>CLEAR lv_gmdoc.</strong></p>
+<p><tt>  ENDIF.</tt></p>
+<p><tt>  lo_message-&gt;get_messages( IMPORTI</tt><tt>NG et_bapiret = lt_return ).</tt></p>
+<p><tt>  APPEND LINES OF lt_return TO lt_return_all.</tt></p>
+<p><tt>ENDIF.</tt></p>
+<p><tt>* did errors occurs? Or is this only a testrun? if no, then save</tt></p>
+<p><tt>IF lv_error_occured = abap_false AND</tt></p>
+<p><tt>   p_test           = abap_false.</tt></p>
+<p><tt>  CLEAR lo_message.</tt></p>
+<p><tt>* call SAVE and also immediately request to do the commit work</tt><br/><tt>* (in case of errors * during save this .</tt><br/><tt>* will then also do a rollback and CLEANUP).</tt></p>
+<p><tt>  lo_mfg_cons-&gt;save( EXPORTING iv_commit  = abap_true</tt></p>
+<p><tt>                     IMPORTING eo_message = lo_message ).</tt></p>
+<p><tt>* add messages</tt></p>
+<p><tt>  IF lo_message IS BOUND.</tt></p>
+<p><tt>    IF lo_message-&gt;check( ) = abap_true.</tt></p>
+<p><tt>      lv_error_occured = abap_true.</tt></p>
+<p><strong>          ROLLBACK WORK.</strong></p>
+<p>         <strong>/scwm/cl_tm=&gt;cleanup( ).</strong></p>
+<p>         <strong>CLEAR lv_gmdoc.</strong></p>
+<p><tt>    ENDIF.</tt></p>
+<p><tt>    lo_message-&gt;get_messages( IMPORTING et_bapiret = lt_return ).</tt></p>
+<p><tt>    APPEND LINES OF lt_return TO lt_return_all.</tt></p>
+<p><tt>  ENDIF.</tt></p>
+<p><tt>ELSE.</tt></p>
+<p><tt>* if errors during consumption API call or a testrun, rollback and clear buffers</tt></p>
+<p><tt>  ROLLBACK WORK.</tt></p>
+<p><tt>  /scwm/cl_tm=&gt;cleanup( ).</tt></p>
+<p><tt>  IF lv_error_occured = abap_true.</tt></p>
+<p><tt>    CLEAR lv_gmdoc.</tt></p>
+<p><tt>  ENDIF.</tt></p>
+<p><tt>ENDIF.</tt></p></div></div></div></div>

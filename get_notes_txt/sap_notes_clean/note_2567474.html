@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In some early ECC release, JSON serializer could not be used due to basis component missing. In this case, built-in XML serializer will be used instead.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please implement this note to resovle this issue. This Note applies for Central Finance source system.</p>
+<p class="p1">For example:</p>
+<p class="p1">Settlement date is 01.01.2005. On this date you run settlement for the period between 31.12.2004 and 01.01.2005. In this case, the following will be considered:</p>
+<p class="p1">1. Number of days will be based on the date on which interest is calculated, which in this case is 365, as the date is 01.01.2005. Previously, system would have taken the number of days in the previous year. Since the previous year (2004) was a leap year, system would have taken 366 days as the number of days.</p>
+<p class="p1">2 The balance for interest calculation will be the incoming balance as of 01.01.2005 (no change from the previous calculation method)</p>
+<p class="p1">3. Rate of interest applicable will be the rate as of 31.12.2004 (no change from the previous method)</p>
+<p class="p1">Note that the interest calculation method should be act/acty (ISDA)</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Leap Year, Russia, Interest Calculation, Act/ActY (ISDA), Accrual, Time Deposit</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Bug Fix. Kindly refer to Note No. -  2162434. Prerequisites :- <strong>Deimplement the Note No. - 2368181</strong> if already implemented, before proceeding with this note.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> Import the relevant Support Package. Use the transaction SNOTE to implement the correction instructions in advance.</p></div></div></div></div>

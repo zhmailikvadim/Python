@@ -1,0 +1,54 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p align="left" dir="ltr" id="__html1" style="padding-left: 30px;">After installation of SAP BusinessObjects Business Intelligence platform 4.2, when user login to CMC and navigate to Events, under 'User Notification Events' to create a new user notification events option is not visible as well as icon to create a new user notification events is not visible.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul dir="ltr">
+<li>
+<div align="left">SAP BusinessObjects Business Intelligence platform 4.2</div>
+</li>
+<li>
+<div align="left">Windows server</div>
+</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol dir="ltr">
+<li>
+<div align="left">Install BI platform 4.2 SP02.</div>
+</li>
+<li>
+<div align="left">Login to CMC as Administrator.</div>
+</li>
+<li>
+<div align="left">Open Events Select "User Notification Events".</div>
+</li>
+<li>
+<div align="left">Right Click "User Notification Events" --&gt;New.</div>
+</li>
+<li>
+<div align="left">The option to create new event is not visible.</div>
+</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p align="left" dir="ltr" style="padding-left: 30px;">The DFO 'BusinessObjects_ClientAction_NotificationEvent_Create_dfo.xml' is missing/corrupted in the CMS database.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol dir="ltr">
+<li>
+<div align="left">Navigate to &lt;&lt;Installation directory of Business Objects&gt;&gt;\SAP BusinessObjects Enterprise XI 4.0\dfo and backup the file 'BusinessObjects_ClientAction_NotificationEvent_Create_dfo.xml'.</div>
+</li>
+<li>
+<div align="left">Download the DFO cleanup utility which is attached to the KBA or using the KBA:-<a href="/notes/2145849" target="_blank"><span style="font-size: medium; font-family: Calibri,Japanese Gothic;"><span><span><span lang="EN">2145849 - HOWTO: Cleanup default objects (DFOs) from the CMS repository </span></span></span></span></a></div>
+</li>
+<li>
+<div align="left">Open the command prompt and navigate to the folder where you have kept the DFO cleanup utility and run the below command.</div>
+</li>
+<li>
+<div align="left">Dfocleanup.bat -f BusinessObjects_ClientAction_NotificationEvent_Create_dfo.xml -c localhost</div>
+</li>
+<li>Provide administrator credentials and allow the tool to cleanup the dfo file.</li>
+<li>
+<div align="left">Stop the Server Intelligent Agent (SIA).</div>
+</li>
+<li>
+<div align="left">Place the 'BusinessObjects_ClientAction_NotificationEvent_Create_dfo.xml' in the &lt;Install dir of BI&gt;\enterprise xi 4.0\packages folder.</div>
+</li>
+<li>
+<div align="left">Restart SIA.</div>
+</li>
+<li>
+<div align="left">Clear the cache of the 'Web Application server'.</div>
+</li>
+<li>
+<div align="left">Restart the 'Web Application Server'.</div>
+</li>
+</ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p style="padding-left: 30px;"><a href="/notes/2145849" target="_blank"><span class="title">2145849 - HOWTO: Cleanup default objects (DFOs) from the CMS repository</span> </a></p>
+<p> </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p style="padding-left: 30px;">User notification event,BusinessObjects_ClientAction_NotificationEvent_Create_dfo.xml, DFO cleanup,</p></div></div></div></div>

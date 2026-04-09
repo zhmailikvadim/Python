@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You use the dunning program (F150), interest program (FINT, FINTAP, RFDZIS00_PDF, RFKZIS00_PDF), or FI correspondence with printing technique PDF and e-mail dispatch. <br/>You have programmed that e-mails are to be signed: c_finaa-mail_sign = 'X'.</p>
+<p>The following symptoms occur:</p>
+<ul>
+<li>The e-mails are sent successfully, but are not signed.</li>
+<li>The system issues an inexplicable message, for example, BL208: "No log found in the database" </li>
+<li>During live dunning printout, the dunning data is not updated. You notice this as follows:</li>
+<ul>
+<li>In the status of the dunning run, the number of printed dunning notices does not match the number of dunning notices to be sent.</li>
+<li>In the master record of the business partner, "Last Dunning Notice" and "Dunning Level" have not been updated.</li>
+<li>In the dunned documents, "Last Dunning Notice" and "Dunning Level" have not been updated.</li>
+<li>The dunning notice is not contained in the dunning history of the business partners. </li>
+</ul>
+</ul>
+<p><span style="font-size: 14px;">You expect message MSINT602: "No signatures for mails possible in this system" and the successful sending of the e-mail without a signature. The dunning data must be updated during live print.</span></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FINT, FINTAP, RFDZIS00_PDF, RFKZIS00_PDF, SAPF130D_PDF, SAPF130K_PDF, PRINT_DUNNING_NOTICE_PDF, J_1HKORD, J_3RFKORDR2_A, J_3RF_CORRINV_A, J_3RF_INV_A, RFKORDJ1, RFKORDJ2, RFKORDJ3, RFKORDJ4, RFKORDP1, RFKORDP2, RFKORDP3, RFKORD00_PDF, RFKORD10_PDF, RFKORD11_PDF, RFKORD40_PDF, RFKORD50_PDF, RFKORD70_PDF, RFKORD80_PDF, RPFIKZ_VATINV, FIKZ_GET_INVOICE_XML, 00002310, F150, FI_SEND_PDF, FI_SEND_PDF_IN_BUNDLE, TD600, TD602</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error occurs if it was impossible to sign e-mails in the system (Lc_sendreq-&gt;Set_sign( 'X' ).in SEND_ONE).</p>
+<p>Program error: The routine SEND_ONE from the include LSEND_PDFF01 returns an error message in ls_message, even though the e-mail is sent successfully (without signature).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Source code corrections</p>
+<ul>
+<li>An item data is inserted into DBM order without pressing ENTER</li>
+<li>Any usage of function keys (Back, Exit, Cancel, Document Overview, Action Log, Status Overview etc.) will trigger event ITEM_NEW which in fact inserts an item into DBM order</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>/DBM/ORDER01, /DBM/ORDER02, ITEM_NEW</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply correction instructions</p></div></div></div></div>

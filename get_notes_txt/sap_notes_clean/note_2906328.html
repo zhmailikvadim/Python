@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You want to enforce special patient visiting regulations in your hospital: Patients in your hospital may only be visited by their relatives in exceptional cases.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Patient visit rules, COVID-19, ISH_NPRV_RNLPFOR3, RNLPFOR3, public list.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Consulting.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>With the solution proposed here, you can indicate in the public list that visitors are allowed for patients who are marked accordingly using a case classification. The proposed solution is intended as a suggestion and can be adapted to meet customer-specific requirements.</p>
+<p>Preparation in the system:</p>
+<ul>
+<li>Create a customer-specific case classification. (IMG: Industry Solution Hospital -&gt; Patient Management -&gt; Cases -&gt; Define Case Classification Categories/Define Case Classification Types; the case classification 'PF'/'BE' is used in the example coding)</li>
+<li>Use transaction SE11 to add a field (type CHAR, length 1) to the structure ISH_PUBLICLIST_ALV with an APPEND. The example coding uses the field name 'XXVISALLOW'.</li>
+<li>In transaction SE19, create an implementation for the BAdI ISH_NPRV_RNLPFOR3. Copy the ABAP coding from the attachment to the method IF_EX_ISH_NRPV_RNLPFOR3~MODIFY.</li>
+<li>Add the new field 'XXVISALLOW' to your ALV display variants.</li>
+</ul>
+<p>Usage:</p>
+<ul>
+<li>Enter the customer-specific case classification for patients who can be visited. (Example: 'PF'/'BE')</li>
+<li>In the public list, an 'X' is displayed in the customer-specific column for patients who have this case classification.</li>
+<li>The security guard uses the content of the column to decide whether the visitor can be let through.</li>
+</ul></div></div></div></div>

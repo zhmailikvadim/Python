@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are creating bank credit advices via web service ManageBankAdviceIn with reference to existing invoice in the system, however the automatic clearing between invoice and bank advice does not happen. Instead, the advice becomes an open item in the customer account monitor.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Business ByDesign</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Go to Receivables work center.</li>
+<li>Go to Customer Accounts view.</li>
+<li>Open the concerned customer account monitor.</li>
+</ol>
+<p>You'll see that the advice created via web service remains as an open item.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>One of the reasons why the automatic clearing does not happen is that the request XML has been made with the Initiator Invoice Request tag (&lt;PaymentTransactionInitiatorInvoiceReference&gt;) for the invoice, which refers to Invoice ID field in the bank advice screen, being an external reference ID. Hence, the automatic clearing does not happen.</p>
+<p>The Invoice ID field can be seen in the References section in the bank advice.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>In order for the automatic clearing to be possible, you need to create the bank advice with the Document ID filled as reference. In the XML request, add the &lt;PaymentTransactionDestinatedInvoiceReference&gt; being the internal reference for the invoice you wish to clear, which is the Document ID.</p>
+<p>The resulting payload file shall have both the &lt;PaymentTransactionInitiatorInvoiceReference&gt; and &lt;PaymentTransactionDestinatedInvoiceReference&gt; with the corresponding external reference ID and document ID.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>ManageBankAdviceIn; bank credit advice</p></div></div></div></div>

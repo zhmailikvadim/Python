@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Deleting an Inspection Plan using transaction QSR6 is giving a log message saying:</p>
+<p>CV 537: "Task list &amp;2 &amp;1 (type &amp;2) is still used in inspection lots"</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP ERP Quality Management (QM)</li>
+<li>SAP R/3</li>
+<li>SAP R/3 Enterprise</li>
+<li>SAP ERP Central Component</li>
+<li>SAP ERP</li>
+<li>SAP Enhancement package for SAP ERP</li>
+<li>SAP Enhancement package for SAP ERP, version for SAP HANA</li>
+<li>SAP S/4HANA, on-premise</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>If an inspection plan has been used in an inspection lot; even though the UD (usage decision) was made, the inspection plan will not be deleted.<br/>Only after all inspection lots that used the inspection plan are archived, the inspection plan can be deleted.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p><span style="background-">To </span>be able to delete the task list make sure of the following:</p>
+<ol>
+<li>There are no open inspection lots related to the task list.</li>
+<li>All related inspection lots should be archived before deleting the task list.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>For more information on how to archive an inspection lot:</p>
+<p>SAP Help: <a href="https://help.sap.com/doc/610ab753128eb44ce10000000a174cb4/3.6/en-US/f809b753128eb44ce10000000a174cb4.html" rel="noopener" target="_blank">Archiving Inspection Lots (QM-IM)<br/></a>SAP Knowledge Base Article (KBA): <a href="https://me.sap.com/notes/2140819" target="_blank">2140819</a> - FAQ: Archiving Inspection Lots - Archiving Object QM_CONTROL</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>ca98, inspection plan, PLMK, PLKO, task list, prueflos, QM-IM, QALS, MAPL, CV537, CHECK_PLAN_BEFORE_DELETE, SAPLCPRE, LCPREU02, CP_PLAN_ARCHIVE_OBJECT, LCPREU01, PP-BD-RTG</p></div></div></div></div>

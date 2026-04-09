@@ -1,0 +1,54 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Release Restriction Note for SAP Predictive Analytics 2.1</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>BI-RA-PA</p>
+<ul>
+<li><strong>Open-Source R and Expert Analytics</strong>
+<ul>
+<li>If you have configured the application with an existing R installation and you want to install the latest R version using the “Install and Configure R” option from the application, restart the application and install R before working with analyses.</li>
+<li>You cannot use date columns as strings in the data that is passed to the custom R component. Therefore, we recommended to filter the date column from the dataset or use the <em>as.date </em>function in R script.</li>
+</ul>
+</li>
+<li><strong>Creation and Execution of Analyses in Expert Analytics</strong>
+<ul>
+<li>While creating an analysis, you cannot drag and add a component between two connected components. Instead, you need to select the connector between the two connected components and double-click the required component in the component list.</li>
+<li>If you try to rerun a CSV Writer component without selecting the <em>Overwrite, if exists</em> option, you will see the successful execution message instead of execution failure. However, the analysis is not executed in the backend if there are no changes to the properties of the CSV Writer component. You need to go back and select the <em>Overwrite, if exists</em> option and run the analysis again.</li>
+</ul>
+</li>
+<li><strong>Publishing stories</strong> built using predictive datasets to SAP Lumira Cloud is not supported.</li>
+<li><strong>Changes made in Prepare and Compose tabs</strong> of Expert Analytics
+<ul>
+<li>If you apply filter or sort conditions, or create a new calculated measure in the <em>Prepare </em>or <em>Compose </em>tabs, the corresponding changes are not retained in the <em>Predict </em>tab.</li>
+</ul>
+</li>
+<li>When <strong>running an analysis using an Auto algorithm</strong>, an error occurs if there are column names in your data containing a forward slash "/". To work around this, change the column names in the Prepare room by replacing the forward slash "/" with an underscore "_" before running the analysis.</li>
+<li>When <strong>exporting a SAP Automated Predictive Library (APL) model as a stored procedure, </strong>the first character of the model name cannot be a number.</li>
+<li><strong>Visualization issues</strong> occur with online R component. For more information, see SAP Note: <a href="/notes/2129066" target="_blank">2129066</a></li>
+<li><strong>Expert Analytics can hang at splash screen</strong> without errors. For more information, see SAP Note: <a href="/notes/2129068" target="_blank">2129068</a></li>
+<li><strong>Unsupported columns in table types</strong></li>
+<ul>
+<li>Processing of data may fail while using Predictive Analysis Library (PAL) components in Expert Analytics since the Application Function Library (AFL) does not support certain columns in table types.</li>
+<li>
+<p>The following are the supported CSTYPE (column store type)/SQLTYPE/DIMENSION combinations from AFL:</p>
+</li>
+<ul>
+<li>"INT" / "INTEGER"</li>
+<li>"FIXED8_19_0" / "BIGINT" ("FIXED8_19_0" means fixed with 8 bytes and 19 digits)</li>
+<li>"DOUBLE" / "DOUBLE"</li>
+<li>"STRING" / "CLOB"</li>
+<li>"STRING" / "NCLOB"</li>
+<li>"STRING" / "VARCHAR" / ...</li>
+<li>"STRING" / "NVARCHAR" / ...</li>
+<li>"DAYDATE" / "DATE"</li>
+<li>"SECONDTIME" / "TIME"</li>
+<li>"LONGDATE" / "TIMESTAMP"</li>
+<li>"SECONDDATE" / "SECONDDATE"</li>
+</ul>
+<li><strong>Note:</strong> Not all of these columns may be supported with PAL. For more information, see the PAL documentation at <a href="http://help.sap.com/hana_platform/" target="_blank">http://help.sap.com/hana_one/</a> <em>-&gt; SAP HANA Predictive Analysis Library (PAL) Reference.</em></li>
+</ul>
+<li>Note: <strong>Online and offline auto algorithms</strong> provide similar functions, but are not identical and may generate different models.</li>
+<li><strong>Data manipulation functions are not supported</strong> when using Spark SQL in Data Manager module of SAP Predictive Analytics.</li>
+<li>Problems occur when <strong>accessing HANA analytical views with SAP Predictive Analytics (Automated Analytics)</strong>. For more information, see SAP Note: <a href="/notes/2128272" target="_blank">2128272</a></li>
+<li>Restrictions exist when <strong>using SAP Predictive Analytics (Expert Analytics) with HANA SPS09</strong>. For more information, see SAP Note: <a href="/notes/2128915" target="_blank">2128915</a></li>
+<li>In Expert Analytics, <strong>HANA CHAID algorithm performance</strong> is inversely proportionate to the number of distinct values for categorical features in the training dataset. As a result, when using Expert Analytics, if you do not find the performance of CHAID optimal for your use case, it is recommended to use other decision tree algorithms such as HANA C4.5. <strong>Note:</strong> Additional configurable parameters will be exposed in a future release of Expert Analytics to allow a threshold parameter that will help stop merging of categories beyond a specified threshold. This will allow use of CHAID algorithm with all kinds of datasets.</li>
+</ul></div></div></div></div>

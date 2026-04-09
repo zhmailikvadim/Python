@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You generate a <strong>raw report</strong> (Document Type <strong>SBR</strong>) using WWI and when you open the report using transactions <strong>CG50</strong>/<strong>CG54</strong>, the values of Parameter Report Symbols such as EHS_RPRVN1 and EHS_RPRVN2 (Report version) are correctly displayed.</p>
+<p>However, when you open the same raw report using DMS transactions such as <strong>CV03N</strong>/<strong>CV04N</strong>, you observe that <span style="text-decoration: underline;">the values of the Parameter Report Symbols are not displayed</span>. Instead the code of the Report Symbols is displayed.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP ERP</li>
+<li>SAP ERP Central Component</li>
+<li>SAP Enhancement package for SAP ERP</li>
+<li>SAP ERP Environment, Health and Safety (EHS)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>In transactions <strong>CG50</strong>/<strong>CG54</strong>, you see the raw report plus the currently valid parameter values which the system determines (expansion time: 20 Symbol value is application-dependent) using the Function Module <strong>C12O_PARAMETER_VALUES_SELECT_N</strong>.</p>
+<p>The Function Module <strong>C12O_PARAMETER_VALUES_SELECT_N</strong> is not called when the raw report is displayed using the DMS transactions, that is why the values of parameter symbols such as EHS_RPRVN1 and EHS_RPRVN2 are not displayed.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>This is the Standard behavior of the system.</p>
+<p>For SBR reports, the symbols of symbol types Specification and Descriptor are expanded. All other symbols (<strong>symbol type Parameter</strong>) for the report refer to data in other SAP components and are only expanded in the second generation stage from which the final report (Document Type SBE) results.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>Refer to the SAP Help documentation about SBR Reports for more information: <a href="https://help.sap.com/viewer/c4e98fcb44e74814b58b61aefc1b1fcb/6.17.17/en-US/2960c4535cdeb44ce10000000a174cb4.html" target="_blank">Report SBR</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>EHS, EH&amp;S, WWI Report, Report Generation, Parameter Symbols, CG02, Report Version, document, Expansion time, application-dependent</p></div></div></div></div>

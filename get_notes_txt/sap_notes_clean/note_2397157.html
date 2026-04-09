@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">How to identify the FP index is a nbit or flat FP index ?</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP IQ 16</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>As part of the post-migration process, all FP indexes should be rebuilt into NBit using sp_iqrebuildindex(). Customer would like to know how many are rebuilt after the process ?</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>Use "sp_iqcolumnmetadata" and see 'Style' column</li>
+</ul>
+<p>         Syntax =&gt;    sp_iqcolumnmetadata &lt;[ table.name [, owner-name ] ]&gt;</p>
+<ul>
+<li>This query list all the flat FP indexes:<br/><br/>select U.name,table_name,index_name, iqc.cardinality<br/>from  sysidx I1,  sysiqidx I2, systab T, sysusers U, SYSIDXCOL  c,SYSIQTABCOL iqc<br/>where T.table_id = I1.table_id<br/>and T.table_id = c.table_id<br/>and c.index_id =  I1.index_id<br/>and iqc.table_id = T.table_id<br/>and iqc.column_id = c.column_id<br/>and iqc.is_nbit = 'F' /* flat FP */<br/>and  (I2.table_id=I1.table_id and I2.index_id = I1.index_id)<br/>and  T.creator = U.suid<br/>and  I2.index_type = 'FP'<br/>ORDER BY U.name;</li>
+<li>This query list all the nbit FP indexes:<br/><br/>select U.name,table_name,index_name, iqc.cardinality<br/>from  sysidx I1,  sysiqidx I2, systab T, sysusers U, SYSIDXCOL  c,SYSIQTABCOL iqc<br/>where T.table_id = I1.table_id<br/>and T.table_id = c.table_id<br/>and c.index_id =  I1.index_id<br/>and iqc.table_id = T.table_id<br/>and iqc.column_id = c.column_id<br/>and iqc.is_nbit = 'T' /* nbit FP */<br/>and  (I2.table_id=I1.table_id and I2.index_id = I1.index_id)<br/>and  T.creator = U.suid<br/>and  I2.index_type = 'FP'<br/>ORDER BY U.name;</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>NBit FP, sp_iqcolumnmetadata,</p></div></div></div></div>

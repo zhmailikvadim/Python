@@ -1,0 +1,198 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You use SAP HANA as a database for Contract Accounts Receivable and Payable Vertragskontokorrent (FI-CA). This may have a negative effect on the performance of some processes. In particular, this may be the case for customer-specific developments or enhancements (for example, if you have customer-specific definitions of FI-CA events).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FP-PERF, HANA, SAP HANA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You use SAP HANA as a database.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Performance optimizations for FI-CA on SAP HANA</strong></p>
+<p>As of SAP Enhancement Package 7 for SAP ERP 6.0, SP 02 and SP 03, you can improve the performance of a large number of Contract Accounts Receivable and Payable processes. To do so, in Customizing, you must activate optimizations for the database accesses for column-oriented main memory databases such as SAP HANA:</p>
+<p>In the Implementation Guide (IMG) of Contract Accounts Receivable and Payable under "Technical Settings -&gt; Activate Optimizations for Database Access", activate the optimization IDs. The following optimizations are available:</p>
+<div class="table-responsive"><table border="1" cellpadding="1" cellspacing="1" class="table table-bordered table-striped col-resizeable" style="width: 519px;"><colgroup><col width="178"/> <col width="183"/> <col width="158"/></colgroup>
+<tbody>
+<tr>
+<td class="xl64" height="19" width="178"><strong>Process </strong></td>
+<td class="xl65" width="183"><strong>Transaction code</strong></td>
+<td class="xl65" width="158"><strong>Optimization ID</strong></td>
+</tr>
+<tr>
+<td class="xl63" height="19">Payment lot</td>
+<td>FP05</td>
+<td>0001, 0002</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Cash Journal Evaluation</td>
+<td>FPCJR</td>
+<td>0004</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Payment run</td>
+<td>FPY1</td>
+<td>0010, 0011, 0012, 0020, V010</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Automatic Clearing </td>
+<td>FPMA</td>
+<td>0020</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Dunning proposal run </td>
+<td>FPVA</td>
+<td>0020, 0030, 0031, 0032 , 0033</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Dunning activity run</td>
+<td>FPVB</td>
+<td>0035, 0036</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Correspondence Printing</td>
+<td>FPCOPARA</td>
+<td>0040, 0041, 0042, 0043</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Open item list</td>
+<td>FPO1/FPO4</td>
+<td>0050</td>
+</tr>
+<tr>
+<td class="xl63" colspan="2" height="19">All item-relevant posting processes (for example, FPY1, VYSPA) </td>
+<td>0060</td>
+</tr>
+<tr>
+<td class="xl63" height="19">CO-PA transfer </td>
+<td>FPG3M</td>
+<td>0070</td>
+</tr>
+<tr>
+<td class="xl63" height="19">G/L document check</td>
+<td>FPG2</td>
+<td>0071</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Check totals records</td>
+<td>FPT1</td>
+<td>0072</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Check CO-PA document </td>
+<td>FPG7, FPG7M</td>
+<td>0073</td>
+</tr>
+<tr>
+<td class="xl63" height="19"> Release to collection agency</td>
+<td>FP03M</td>
+<td>0079, 0082</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Submit to Collection Agency </td>
+<td>FP03DM</td>
+<td>0083</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Information to collection agency </td>
+<td>FPCI</td>
+<td>0084</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Mass write off</td>
+<td>FP04M</td>
+<td>0080, 0081</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Interest Run</td>
+<td>FPINT1</td>
+<td>0085, 0086</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Revenue distribution </td>
+<td>FP60M</td>
+<td>0087, 0088</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Post revenue distribution </td>
+<td>FP60PM</td>
+<td>0089, 0090</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Requests </td>
+<td>FKKORD1/2/3</td>
+<td>0095</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Credit clarification </td>
+<td>FPCRPO_DET</td>
+<td>0100</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Invoicing </td>
+<td>FKKINV_MA</td>
+<td>0550, 0580</td>
+</tr>
+<tr>
+<td class="xl63" colspan="2" height="19">PS-CD transfer of billing document</td>
+<td>P001</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Account balance (only IS-U and IS-T)</td>
+<td>FPL9</td>
+<td>R001, T001</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Create IS-U bill</td>
+<td>EA26</td>
+<td>R480</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Insurance invoices</td>
+<td>VYCOV004 </td>
+<td>V015</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Debit position </td>
+<td>VYSPA</td>
+<td>V020</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Payment plan transfer</td>
+<td>Function module ISCD_SCPOS_MAINTAIN</td>
+<td>V030</td>
+</tr>
+<tr>
+<td class="xl63" height="19">FS-CD dunning proposal</td>
+<td>VPVA</td>
+<td>0020, 0030, 0031, 0032 , 0033, V040, V041</td>
+</tr>
+<tr>
+<td class="xl63" height="19">FS-CD dunning activities</td>
+<td>VPVB</td>
+<td>0035, 0036, V045</td>
+</tr>
+<tr>
+<td class="xl63" height="19">Broker report</td>
+<td>IBR50</td>
+<td>V055</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, see the following release notes:</p>
+<ul>
+<li>FICA_607_2_PERFOPT (for SP 02)</li>
+<li>FICA_607_3_PERFOPT (for SP 03)</li>
+</ul>
+<p>Note that not every activation of an optimization ID may lead to a performance improvement for your settings and data in the productive system.</p>
+<p><strong>Performance optimizations for FI-CA in S/4HANA</strong></p>
+<p>All optimizations for FI-CA on SAP HANA are active as standard in S/4HANA. However, you can switch off individual optimizations in the Implementation Guide for Contract Accounts Receivable and Payable under "Technical Settings -&gt; Deactivate Optimizations for Database Access", if required.</p>
+<p><strong>Optimization </strong><strong>of customer-specific definitions of FI-CA events</strong></p>
+<p>SP 03 provides the new FI-CA event 1820 for customer-specific developments for FI-CA events in mass activities:</p>
+<p>Event 1820 executes preparatory selections prior to the processing of each interval in the mass activity framework. By default, no processing is provided at this point. However, you can define an installation-specific module here.</p>
+<p>Example:</p>
+<p>In the interval module of a mass activity, there are selections on customer objects. The mass activity is a SAP standard implementation for the interval module. For an optimization of the data selection, in event 1820, fill the buffer for the selection that is performed subsequently in the interval module.</p>
+<p>Typically, the parallel processing object (I_BASICS-RUNKEY-OBJECT) is determined for this. A suitable mass read module can be called for this object for the current interval limits (I_LOW, I_HIGH) that writes the read data in a buffer. The single accesses that subsequently occur in the interval module can then read from this buffer.</p>
+<p><strong>Secondary indexes for SAP HANA database </strong></p>
+<p>For extensive tables with columns that contain many different values, single-column secondary indexes on the SAP HANA database can lead to performance improvements. For more information about this, especially about secondary indexes for tables in FI-CA, see SAP Note 2160560.</p>
+<p><strong>Conversion of tables to row store for SAP HANA database</strong></p>
+<p>By default, all tables in the SAP HANA database are set to column store. However, the conversion of dedicated tables to row store can bring performance improvements for SAP HANA database if the system performs a high number of INSERT, DELETE, or UPDATE operations on these tables. For additional information about the affected tables in FI-CA, see SAP Note 2160838.</p>
+<p><strong>Additional optimizations of customer-specific developments</strong></p>
+<p>For general performance recommendations for customers, go to: <span style="text-decoration: underline;"><a href="http://service.sap.com/performance" target="_blank">http://service.sap.com/performance</a></span></p>
+<p>On the left side, navigate to "Performance -&gt; Resources -&gt; Best Practices for ABAP Performance". This displays a list of documents, in particular "Performance Do’s and Don’ts ABAP". While this document does not contain any SAP HANA-specific recommendations, it does contain recommendations that are still valid for SAP HANA.</p></div></div></div></div>

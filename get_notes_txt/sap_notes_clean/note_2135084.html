@@ -1,0 +1,89 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When you create a purchase order, several items are created. During pricing, rebate conditions are determined for several purchase order items.</p>
+<p>In subsequent settlement, however, a statistical update of business volume data is performed only for the first purchase order item.</p>
+<p>In the detailed statement for the rebate agreement, the system issues the following error message for the relevant purchase order items:</p>
+<p>MN 565 - Updating for purchasing document &amp;, item &amp;, incomplete (delivery schedule)</p>
+<p> </p>
+<p>This note contains additional corrections for SAP Note 2040794.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ME21, ME21N, volume-based rebate MEB8, detailed statement, komv, document condition, volume-based rebate MN565</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>There is a program error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the source code changes in your system as described in the correction instructions, or import the current Support Package.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Webi, Web intelligence, IDT, unx, dfx, print, export</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence Platform 4.3</li>
+<li>Information Design Tool</li>
+<li>Web Intelligence</li>
+</ul>
+<p><strong>Steps to reproduce:</strong></p>
+<ol>
+<li>Launch Information Design Tool and create a local project.</li>
+<li>Add a relational connection, and create a data foundation.</li>
+<li>In data foundation, go to Parameters and List of Values.</li>
+<li>Create a List of Value object</li>
+<li>Create a Parameter object, assign the list of value and then check the option "Select only from list"</li>
+<li>Save and close the data foundation.</li>
+<li>Right click and export it to PDF format. </li>
+<li>Select all items and perform the export.</li>
+<ol style="list-style-type: none;">
+<li><strong>&gt;&gt;  "Select only from list" as False is always wrong.</strong></li>
+</ol></ol>
+<p><strong>Cause:</strong></p>
+<ul>
+<li>This issue is caused by a defect in the product</li>
+.</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>
+<p>This issue is fixed in the patches listed in the "Support Packages &amp; Patches" section below.<br/>Due to different internal processes, the "Support Packages &amp; Patches" section of the SAP Note will be populated as below:</p>
+<ul>
+<li>for fixes delivered in "Support Packages": immediately (even if the "Support Package" is planned to be released several months later)</li>
+<li>for fixes delivered in "Patches": <strong>ONLY </strong>once the "Patch" is released <strong>AND </strong>available on SMP (not before)</li>
+</ul>
+<p>For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article <a href="/notes/2144559" target="_blank">2144559</a> in References section.</p>
+</li>
+</ul>
+<p>These additional duties can become relevant for goods that already have another additional duty rate in place. This leads to the consequence that the duty calculation in SAP GTS needs to handle two or multiple additional duties on the line item.</p>
+<p>This SAP Nnote provides an overview about the single parts of the solution how these circumstances have to be treated when submitting your declaration to the customs system US ACE.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Calculation, additional duty, additional duties, USA, chapter 99, additional tariff number, section 301, B7，IEEPA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Missing functionality</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please follow the customizing guide first and then implement the listed SAP Notes in sequence to enable the feature. Please note that the customizing guide uses the example of requiring a second additional duty for your reference. If you need a third or more additional duties, please repeat the process you followed for the second one, except for step 2.</p>
+<p>1. Define internal duty type for the second additional duty</p>
+<p style="padding-left: 30px;">1.1 Go to IMG path: Global Trade Services --&gt; Customs Management --&gt; Calculation of Customs Duty --&gt; Define Type of Customs Duty</p>
+<p style="padding-left: 30px;">1.2 Select duty type "B105" and copy as 'Z105'</p>
+<p style="padding-left: 30px;">1.3 Save data</p>
+<p><span style="font-size: 14px;">2. </span>Define external duty type “USB013”</p>
+<p style="padding-left: 30px;">2.1 Go to IMG path: Global Trade Services --&gt; Customs Management --&gt; Customs Code Lists --&gt; Maintain Customs Code Lists for Legal Regulation</p>
+<p style="padding-left: 30px;">2.2 Choose your legal regulation for US, e.g. ACE, and execute</p>
+<p style="padding-left: 30px;">2.3 Select Customs Code Lists as "Duty Definition" from the dropdown list and click "Maintain" button</p>
+<p style="padding-left: 30px;">2.4 Create new duty type "USB013" and description as "Additional Duty"</p>
+<p style="padding-left: 30px;">2.5 Save data</p>
+<p>3. Map internal duty types "B105" and "Z105" to external duty type “USB013”</p>
+<p style="padding-left: 30px;">3.1 Go to IMG path: Global Trade Services --&gt; Customs Management --&gt; Customs Code Lists --&gt; Maintain Customs Code Lists for Legal Regulation</p>
+<p style="padding-left: 30px;">3.2 Choose your legal regulation for US, e.g. ACE, and execute</p>
+<p style="padding-left: 30px;">3.3 Select Customs Code Lists as "Duty Mapping" from the dropdown list and click "Maintain" button</p>
+<p style="padding-left: 30px;">3.4 Create new mapping:</p>
+<p style="padding-left: 60px;">Ext. Duty Type       Duty Type</p>
+<p style="padding-left: 60px;">USB013                 B105</p>
+<p style="padding-left: 60px;">USB013                 Z105</p>
+<p style="padding-left: 30px;">3.5 Save data</p>
+<p><span style="font-size: 14px;">4. Prepare Classification Master Data - Maintain Customs Duty Rates</span></p>
+<ul>
+<li><span style="font-size: 14px;">If you are using GTS 11.0, please define the duty rate for the second tariff number for duty type "Z105" via T-code /SAPSLL/TLC_CUSB</span></li>
+<li><span style="font-size: 14px;">If you are using GTS edition for HANA, please define the duty rate for the second tariff number for duty type "Z105" in the App "Manage Duty Rates" from launchpad.</span></li>
+</ul>
+<p><span style="font-size: 14px;">5. Apply following notes in sequence</span></p>
+<ol style="list-style-type: lower-roman;">
+<li><a href="/notes/3578219" target="_blank" title="3578219  - US ACE: Enable the second additional tariff number for 'Additional Duty' calculation - DDIC part">3578219 - US ACE: Enable the second additional tariff number for 'Additional Duty' calculation - DDIC part</a></li>
+<li><a href="/notes/3578218" target="_blank" title="3578218  - US ACE: Enable the second additional tariff number for 'Additional Duty' calculation">3578218 - US ACE: Enable the second additional tariff number for 'Additional Duty' calculation</a></li>
+</ol></div></div></div></div>

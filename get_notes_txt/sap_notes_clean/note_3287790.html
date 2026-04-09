@@ -1,0 +1,58 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You run the <strong>Cálculo de nómina española</strong> (RPCALCE0) report with <strong>Visualizar fomrulario RH</strong> checked for any period of 2023. The <strong>Equidad intergeneracional trabajador </strong>(/3N0) wage type is beign shown at the payslip and its amount is being doubled summed in the total deductions amount.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>&amp;CALC - PC00_M04_CALC</p>
+<p>Intergenerational Equity Mechanism Contribution, HR Forms, payslip, RPCEDTE0.</p>
+<p>For more information, see SAP Note <a href="/notes/1071282" target="_blank">1071282</a> - <em>CONSULT: List of tags for Spain notes.</em></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This issue is a side effect caused by the solution delivered by the SAP Note <a href="/notes/3277435" target="_blank">3277435</a> - <em>CALC: Intergenerational Equity Mechanism contribution</em>.</p>
+<p>The wage type creation of SAP Note <a href="/notes/3277435" target="_blank">3277435</a> has copied unexpected table entries of <strong>Asignación claves concepto nómina a CC-nómina acumulación</strong> (T596I)<strong> </strong>or <strong>Asignación CC-nóminas a CC-nóm.acumulación (tab.clientes) </strong>(T596J)<strong> </strong>tables.</p>
+<p><em></em>﻿<strong>Note:</strong></p>
+<p>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you should implement them due to technical reasons.</p>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="2" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>6.08</td>
+<td>HR SP 89</td>
+</tr>
+<tr>
+<td>6.04</td>
+<td>HR SP G1</td>
+</tr>
+<tr>
+<td>6.00</td>
+<td>HR SP J5</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, click on <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The customizing of T596I or T596J tables must not have any entry related to the wage type /3N0. The evaluation class value of evaluation class 2 of /3N0 wage type entry of the <strong>Clases de tratamiento, acumulaciones y clases de evaluación</strong> (V_512W_D) table view has changed to zero.</p>
+<p><strong>Note: </strong></p>
+<p>During the piloting phase, this SAP Note may be updated and versioned depending on the feedback from pilot customers. After this SAP Note has its status changed to <em>Released for Customer</em>, it will not be changed anymore, unless there is a specific situation that demands it. In this case, a reason for the change will be mentioned in the SAP Note.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p>January 6, 2023</p>
+</td>
+<td>
+<p>Released for Customer</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a> to get an e-mail notification in case this SAP Note is updated, or access this <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">link</a> for further information.</p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, apply the manual activity.</p>
+<p>You can find more information about the SAP Note Assistant in SAP Support Portal, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a></strong>.</p></div></div></div></div>

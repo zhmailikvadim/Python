@@ -1,0 +1,53 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">ADO.NET Provider is not listed in the assembly/GAC</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Adaptive Server Enterprise (ASE) Software Developer Kit (SDK) 16.0</li>
+<li>Adaptive Server Enterprise <abbr title="A D O">ADO</abbr>.<acronym title="net">NET</acronym> Data Provider 16.0</li>
+<ul>
+<li>3.5 Provider (Sybase.AdoNet35.AseClient.dll)</li>
+<li>4.0 Provider (Sybase.AdoNet4.AseClient.dll)</li>
+</ul>
+<li>Windows x64 (64-bit)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ul>
+<li>Install SDK for SAP ASE 16.0</li>
+<ul>
+<li>Sybase.AdoNet35.AseClient.dll look for the provider under C:\windows\assembly</li>
+<li>Sybase.AdoNet4.AseClient.dll look in C:\windows\Microsoft.NET\assembly\GAC_MSIL\Sybase.AdoNet4.AseClient</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>The SDK 16.0 installer script for the patches inadvertently wasn't checking prerequisites for the 3.5, 4.0 and higher .NET Framework and therefore didn't register.</li>
+<li>The issue has been identified and logged under SAP <strong>CR 780635</strong>. Its description reads, "Installer doesn't register ADO.NET Provider".</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>This issue has been addressed in:</li>
+<ul>
+<li>SDK for SAP ASE 16.0 SP01 PL01 and higher</li>
+</ul>
+<li>Workaround:</li>
+<ul>
+<li>Run as administrator open command shell and change to the %SYBASE%\DataAccess\ADONET\dll directory and run these commands:</li>
+<li>For Sybase.AdoNet35.AseClient:</li>
+<ul>
+<li>AseGacUtility35 /i Sybase.AdoNet35.AseClient.dll</li>
+<li>Do same for policies if you use them</li>
+<li>AdoNetRegistrar35</li>
+<li>Repeat the same under the DataAccess64\ADONET\dll directory</li>
+</ul>
+<li>For Sybase.AdoNet4.AseClient:</li>
+<ul>
+<li>AseGacUtility4 /i Sybase.AdoNet4.AseClient.dll</li>
+<li>Do same for policies if you use them</li>
+<li>AdoNetRegistrar4</li>
+<li>Repeat the same under the DataAccess64\ADONET\dll directory</li>
+</ul>
+<li>To complete the step so you have DDEX ability in Visual Studio (ADO.NET intergrated in the studio) please refer to KBA 1920705 to complete that registration</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>"Software Developer Kit", "Adaptive Server Enterprise", DBLIB, dblib, CTLIB, ctlib, OCS, registrar</p></div></div></div></div>

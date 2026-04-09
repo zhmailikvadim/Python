@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Due to a hardware defect, the netCCS GmbH had to move the server for use of the Schufa compact credit report. Currently, the old server is still running, but can fail at any time and is therefore deactivated on 09/16/2016. To ensure that the Schufa compact credit report can still be used as of this point in time, the tasks described below are required. We recommend that you execute the work earlier if possible.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CGsprint, Schufa, natural person credit report, B2B, B2C, Business Line, netCCS, correction, error, web service</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is valid for the component CGSSB, Version 130_700, patch level 9 and version 220_702, patch level 3.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Adjustments in CGsprint:</p>
+<ul>
+<li>
+<div>For CGSSB, Version 130_700, import the attached transport request AO6K902729 (fiel name CGSSB_AO6K902729.SAR).</div>
+</li>
+<li>
+<div>For CGSSB, Version 220_702, import the attached transport request KV5K904050 (file name CGSSB_KV5K904050.SAR) instead.</div>
+</li>
+</ul>
+<p>Import of the SSL certificate and firewall release:</p>
+<ul>
+<li>Import the attached SSL certificate to the communicating SAP system (file name  <a href="http://www.soasystems.de.crt/" target="_blank">www.soasystems.de.crt</a>). You must import the certificate in transaction STRUST to the PSE file "SSL Client (Standard)". Subsequently, use the menu option "Goto" in transaction SMICM for a "soft shutdown" of the ICM.</li>
+<li>Set up a firewall/proxy release to enable the SAP system to send queries to the target address <a href="https://www.soasystems.de/" target="_blank">https://www.soasystems.de:443</a>. You can remove the release for the old address <a href="https://h2230340.stratoserver.net/" target="_blank">https://h2230340.stratoserver.net:443</a>. When you do this, note that the new address uses a self-signed certficate.</li>
+</ul>
+<p>The problem is solved as of CGSSB, Version 130_700, patch level 10 and CGSSB, Version 220_702, patch level 4.</p></div></div></div></div>

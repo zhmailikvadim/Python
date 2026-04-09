@@ -1,0 +1,50 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<p>A service with persistency like nameserver, indexserver or xsengine crashes on the System Replication target site with a callstack similar to the below one:</p>
+<p style="padding-left: 30px;">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)<br/>----&gt; Pending exceptions (possible root cause) &lt;----<br/>exception 1: no.1000000 (DataAccess/DataRecovery/impl/LogSegment.cpp)<br/> <strong>Gap between used segment size ? and buffer pos in segment ?</strong>; $condition$=segPos == m_pInfo-&gt;m_UsedSegmentSize; ...<br/>exception throw location:<br/> 1: <strong>DataRecovery::LogSegment::triggerIO</strong>(DataRecovery::LogBuffer&amp;) at LogSegment.cpp (libhdbdataaccess.so)<br/> 2: DataRecovery::LogPartition::startIO(DataRecovery::LogBuffer&amp;) at LogPartition.cpp (libhdbdataaccess.so)<br/> 3: DataRecovery::LogPartition::segmentCreated(DataRecovery::LogSegment&amp;, DataRecovery::LogBuffer&amp;) at LogPartition.cpp (libhdbdataaccess.so)<br/> 4: DataRecovery::LogSegmentDirectory::finishIO(DataRecovery::LogSegmentDirectoryPage&amp;) at LogSegmentDirectory.cpp (libhdbdataaccess.so)<br/> 5: DataRecovery::LogSegmentDirectory::dataWritten(FileAccess::FileCallback::Status const&amp;) at LogSegmentDirectory.cpp (libhdbdataaccess.so)<br/> 6: FileAccess::LocalFileIOControlBlock::finalizeTransfer() at LocalFileCallback.cpp (libhdbbasis.so)<br/> 7: FileAccess::LocalFileCompletionThread::run(void*&amp;) at LocalFileCompletionThread.cpp (libhdbbasis.so)<br/> 8: Execution::Thread::staticMainImp(void**) at Thread.cpp (libhdbbasis.so)<br/> 9: Execution::Thread::staticMain(void*) at ThreadMain.cpp (libhdbbasis.so)</p>
+<p>After the first crash occurred, the affected service automatically restarts. On every subsequent startup the service crashes with a callstack similar to the following one:</p>
+<p style="padding-left: 30px;">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)<br/>----&gt; Pending exceptions (possible root cause) &lt;----<br/>exception 1: no.1000000 (DataAccess/DataRecovery/impl/LogSegment.cpp)<br/> <strong>Duplicate log segment ID in new segment LogSegment</strong>[...]<br/>exception throw location:<br/> 1: <strong>DataRecovery::LogSegmentManager::processQueue</strong>() at LogSegment.cpp (libhdbdataaccess.so)<br/> 2: DataRecovery::LogSegmentManager::queryRestartSegments(ltt::vector&lt;DataRecovery::LogSegment*&gt;&amp;, unsigned long) at LogSegment.cpp (libhdbdataaccess.so)<br/> 3: DataRecovery::LogSegmentManager::verify() at LogSegment.cpp (libhdbdataaccess.so)<br/> 4: DataRecovery::LoggerImpl::LoggerImpl(ltt::allocator&amp;, DataRecovery::LoggerFactory const&amp;, Diagnose::StatisticsData*, Configuration::ConfigurationHandler&amp;, DataAccess::DuplicateTIDChecker&amp;, DataAccess::Savepoint*, ltt::smartptr_handle&lt;DataAccess::LogShippingHandler&gt;, bool, bool, bool, bool, bool, bool, ltt::guid const&amp;, ltt::guid const&amp;) at LoggerImpl.cpp (libhdbdataaccess.so)<br/> 5: DataRecovery::LoggerFactory::createLogger(DataAccess::PersistenceManager&amp;, bool, bool, bool) at LoggerImpl.cpp (libhdbdataaccess.so)<br/> 6: DataAccess::PersistenceManagerImpl::createLogger(bool, bool) at PersistenceManagerImpl.cpp (libhdbdataaccess.so)<br/> 7: DataAccess::LogBufferHandlerImpl::createLogger(bool, bool) at DisasterRecoveryLogBufferHandlerImpl.cpp (libhdbdataaccess.so)<br/> 8: DataAccess::DisasterRecoverySecondaryHandlerImpl::createLogger(bool) at DisasterRecoverySecondaryImpl.cpp (libhdbdataaccess.so)<br/> 9: DataAccess::ReplicationProtocolSecondaryHandler::connect(char const*, int) at DisasterRecoveryProtocol.cpp (libhdbdataaccess.so)<br/> ...</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">HA, logreplay, logreplay_readaccess, delta_datashipping, Active/Active, enable_full_sync</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, the System Replication target site did not handle log segments correctly if encryption was enabled and the log segment size was configured differently between the different System Replication sites.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2.0 database:
+<ul>
+<li>Revisions of SPS00</li>
+<li>Revisions of SPS01</li>
+<li>Revisions &lt;= 024.00 (SPS02)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>SAP HANA System Replication is used in any operation mode (see SAP HANA Administration Guide).<br/><br/></li>
+<li>Log encryption is enabled (see System View M_ENCRYPTION_OVERVIEW).<br/><br/></li>
+<li>Different log segment sizes are configured on the System Replication sites with the configuration parameter:<br/>global.ini/&lt;service&gt;.ini<br/>[persistence]<br/>log_segment_size_mb</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA database Revisions:</p>
+<ul>
+<li>SAP HANA 2.0 database:
+<ul>
+<li>Revisions &gt;= 024.01 (SPS02)</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>As a workaround, you can align the log segment size in the different System Replication sites.<br/>The parameter below should have the same value, both in <em>global.ini</em> and in all <em>&lt;service&gt;.ini</em> files, in all System Replication sites:<br/><br/>[persistence]<br/>log_segment_size_mb<br/><br/></li>
+<li>If you adjust a configuration value, please make sure to perform a reconfiguration of the database where the configuration value was changed using the "hdbnsutil -reconfig" OS command.<br/><br/></li>
+<li>If you are currently affected by this issue, adjust the log segment as described above and re-register for SAP HANA System Replication.<br/>Follow the registration steps for the System Replication Target Site as described in the "Setting Up SAP HANA System Replication" in the SAP HANA Administration Guide. A regular registration without using the <em>--force_full_replica</em> option is sufficient.</li>
+</ul>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li>When performing the registration as part of the workaround, usually only the redo logs have to be shipped over.<br/>In case that the log retention is disabled, or the maximum retention size was reached before the workaround was applied, SAP HANA will automatically perform a full data shipment after re-registering.<br/><br/></li>
+<li>If you are using the full sync option, the primary site will be blocked in case you encounter the issue described here.</li>
+</ul></div></div></div></div>

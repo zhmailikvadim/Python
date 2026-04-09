@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are using "db6util ... -lock2key" to record lock waits and to resolve a lock name to key values of a table. This does not work if the target table of the row lock is a column-organized table.</p>
+<p>Older db6util versions may return an SQL error in this case.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DB6 UDB LUW RID RID_BIT TSNID BLU Acceleration</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>On row-oriented tables, the table function MON_FORMAT_LOCK_NAME can be used to retrieve the TABSCHEMA, TABNAME, DATA_PARTITION_ID, PAGEID, and ROWID from a given row lock name.  This information can be used to calculate the RID of the locked row. After this, a "SELECT ... FROM TABSCHEMA.TABNAME WHERE RID( TABNAME ) = ?" statement can be used to retrieve the locked key values.</p>
+<p>The same does not work on column-organized tables. On a column-organized table, MON_FORMAT_LOCK_NAME only returns the TABSCHEMA, TABNAME, and TSNID from a given row lock name. Currently, there is no way to use the TSNID in a SELECT to retrieve the locked key values.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To avoid an SQL error, use a current version of db6util:</p>
+<p>db6util PL 23</p>
+<p>patch text: "DB6: row locks on BLU tables cannot be translated to key values"</p>
+<p> </p></div></div></div></div>

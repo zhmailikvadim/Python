@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">A goods movement with special stock indicator E/F or Q/R is entered. The special stock valuation indicator differs in E from F or Q from R. Both should be in sync correspondingly.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">M7242, M7-242, M7 242, SOBKZ, MSSA-KZBWS, MSSQ-KZBWS, MATDOC_EXTRACT-KZBWS,</span> subcon, sales order stocks, project stock</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p class="p1">Reason: Program error<br/>Prerequisites:</p>
+<p class="p1">Recursive subcontracting (A&amp;D subcontracting) is used in the process (special stock F or R).</p>
+<ol>
+<li>A goods receipt for any of the special stock combination E/F or Q/R was made. The stock got consumed (stock was made to zero again).</li>
+<li class="li1">The special stock valuation indicator (KZBWS) in the sales order or project was changed.</li>
+<li class="li1">A goods receipt was entered for E/F or Q/R which was not yet used in 1).</li>
+<li class="li1">The goods receipt in 3) took the current KZBWS from the sales order/project instead the already existing one from the material master from the prior posting 1).</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p class="p1">Implement the attached corrections or import the relevant Support Package.</p></div></div></div></div>

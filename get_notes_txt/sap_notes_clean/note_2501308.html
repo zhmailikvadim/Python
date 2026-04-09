@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Images in BW BEx web reports are exported to PDF though the requirement is not to export the images to PDF.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Business Warehouse 7.31 Support Pack 19</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Execute a BW BEx Web Application containing images.</li>
+<li>Click on Export to PDF button.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Go to transaction SE38.</li>
+<li>Enter the program name SAP_RSADMIN_MAINTAIN and execute.</li>
+<li>Then you will get "Maintenance of Table RSADMIN" where choose the radio button "INSERT" and enter the object "RSWR_EXPORT_INTERNAL_ITEM" and value "FALSE".</li>
+<li>Click on "Execute" button.</li>
+<li>Restart the Java server to see the changes in the portal.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>RSWR_EXPORT_INTERNAL_ITEM, RSADMIN, image, Export to PDF, BW BEx reports</p></div></div></div></div>

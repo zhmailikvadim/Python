@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Error: "com.crystaldecisions.sdk.exception.SDKException$PluginNotFoundAtCMS: The Enterpise plug-in does not exist in the CMS (FWM 02017)" while running a .jsp file</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP BusinessObjects Business Intelligence Platform 4.2</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Try to run any .jsp file which contains this snippet of code:</li>
+</ol>
+<p><em> final String BO_AUTH_TYPE = "Enterprise";</em></p>
+<p><em>enterpriseSession = CrystalEnterprise.getSessionMgr().logon(BO_USER_NAME, BO_PASSWORD, BO_CMS_NAME, BO_AUTH_TYPE);</em></p>
+<ol start="2">
+<li>Error message "com.crystaldecisions.sdk.exception.SDKException$PluginNotFoundAtCMS: The Enterpise plug-in does not exist in the CMS (FWM 02017)" appears.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The error message is caused by the wrong Plugin name "Enterprise" assigned to the string  “BO_AUTH_TYPE”.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Change the Plugin name from "Enterprise" to "secEnterprise" in “BO_AUTH_TYPE”.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Enterprise, secEnterprise, bi4, bi 4, Errorcom, FWM 02017, jsp, SDKException$PluginNotFoundAtCMS, plugin, not found, cms.</p></div></div></div></div>

@@ -1,0 +1,238 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This is the Release Note for SAP HANA 2 SPS07 Revision 077.00 (2.00.077.00).</p>
+<p>It is released for customers since 26th of March, 2024.</p>
+<p>For further information on the <a href="#ReleaseStrategy" target="_self">Release Strategy</a>, <a href="#DownloadingMedia" target="_self">Downloading Media</a>, <a href="#InstallationUpgrade" target="_self">Installation/Upgrade</a>, <a href="#SupportedPlattforms" target="_self">Supported Platforms</a> and <a href="#GeneralRemarks" target="_self">General Remarks</a>, please refer to the sources below.</p>
+<p style="background-">The initial version of the installation media for revision 2.00.077.00 have been packed incorrectly. <br/><br/>If updating or installing an instance fails with below errors, you are using the incorrectly packed version of the installation media. <br/>To resolve this, please download the new, correctly packed installation media and retry.<br/><br/><em>Update fails at </em><br/><em>INFO: Extracting krb5/lib/libcom_err.so</em><br/><em>INFO: file info: mode = 0777, size = 0 bytes</em><br/><em>ERR : Failed to get checksum of symlink 'krb5/lib/libcom_err.so' from '&lt;path&gt;'</em><br/><em>ERR : Extraction of package "Krb5 Runtime" failed</em><br/><em>ERR : installation of package Krb5 Runtime failed</em><br/><em>ERR : Cannot update package Krb5 Runtime</em></p>
+<p><a name="ReleaseStrategy" target="_blank"></a>Release Strategy:</p>
+<ul>
+<li>SAP Note <a href="/notes/2380229" target="_blank">2380229</a> - SAP HANA Platform 2.0 - Central Note</li>
+<li>SAP Note <a href="/notes/3198680" target="_blank">3198680</a> - SAP HANA Platform 2.0 SPS 07 - Release Note</li>
+<li>SAP Note <a href="/notes/2941449" target="_blank">2941449</a> - SAP HANA Client 2.0 Releases</li>
+<li>SAP Note <a href="/notes/2378962" target="_blank">2378962</a> - SAP HANA 2.0 Revision and Maintenance Strategy document on SAP Software Download Center for an overview regarding the SAP HANA revision and maintenance strategy.<br/><br/></li>
+</ul>
+<p><a name="DownloadingMedia" target="_blank"></a>Downloading Media:</p>
+<ul>
+<li>In the <a href="https://support.sap.com/swdc" target="_blank">SAP Software Download Center</a> you find media required to install a new SAP HANA system or upgrade an existing one.<br/>Please note that <strong><span style="text-decoration: underline;">all</span> </strong>SAP HANA media on <a href="https://support.sap.com/swdc" target="_blank">SAP Software Download Center</a> are a self-contained full installation media - this applies for the media available in section <em>Installations &amp; Upgrades</em> as well as for the media available in section <em>Support Packages &amp; Patches</em>.<br/><br/>Section <em>Installations &amp; Upgrades </em>only contains media for the very first revision of an SPS.<br/>Section <em>Support Packages &amp; Patches</em> only contains the latest revision of an SPS.<br/><br/>It is <strong><span style="text-decoration: underline;">strongly recommended</span></strong> to use the most recent revision of an SPS, to avoid running into issues which are already known and fixed.<br/>Therefore, by default, please refer to section <em>Support Packages &amp; Patches</em> to download media for all components of SAP HANA for an installation/upgrade.<br/><br/>See chapter "<a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/eb3777d5495d46c5b2fa773206bbfb46/d41dee64bb57101490ffc61557863c06.html?locale=en-US" target="_blank">Software Download</a>" in the <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/eb3777d5495d46c5b2fa773206bbfb46/116743577e504d3291e9061fd6fe82bf.html?locale=en-US" target="_blank">SAP_HANA_Master_Guide</a> for the path to the media.<br/><br/></li>
+</ul>
+<p><a name="InstallationUpgrade" target="_blank"></a>Installation/Upgrade</p>
+<ul>
+<li>To successfully upgrade from SAP HANA 1 you need to follow the mandatory steps in SAP Note <a href="/notes/2372809" target="_blank">2372809</a> as:</li>
+<ul>
+<li>The metadata persistence layout has changed and</li>
+<li>An older column store persistence format has been deprecated and is not supported anymore and</li>
+<li>Multitenant Database Containers (MDC) have become default as the only operation mode. See SAP Note <a href="/notes/2423367" target="_blank">2423367</a> for details<br/><br/></li>
+</ul>
+<li>See <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM?locale=en-US" target="_blank">https://help.sap.com/viewer/product/SAP_HANA_PLATFORM/2.0.04/en-US</a> --&gt; <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/eb3777d5495d46c5b2fa773206bbfb46/116743577e504d3291e9061fd6fe82bf.html?locale=en-US" target="_blank">SAP_HANA_Master_Guide</a>, Version 2.0 SPS 07, chapters:</li>
+<ul>
+<li><em>Updating an SAP HANA System Landscape</em></li>
+<li><em>Prerequisites</em> and <em>Update Process<br/></em> </li>
+</ul>
+<li>From a technical perspecive, upgrading to a higher revision within the same SPS is the same as upgrading to a higher SPS or release.<br/>In all cases, the prerequisite for an upgrade is that every fix included in the source revision is also part of the target revision. <br/><strong>Some Revisions of a lower SPS are not allowed to upgrade to a revison of a higher SPS, as they contain more fixes in comparison.<br/></strong>Please check SAP Note <a href="/notes/1948334" target="_blank">1948334</a> for supported upgrade paths for SAP HANA, to ensure that the direct upgrade from your source revision is supported. <br/><br/></li>
+<li>In case of problems with dropping global temporary tables please check SAP Note <a href="/notes/2503043" target="_blank">2503043</a>.</li>
+<li>For a troubleshooting guide for the SAP HANA Lifecycle Management Tool hdblcm, please see SAP Note <a href="/notes/2078425" target="_blank">2078425</a>. </li>
+</ul>
+<ol style="list-style-type: upper-alpha;"></ol>
+<p>    For more information please refer to the items below:</p>
+<ul>
+<li>Please see SAP Note <a href="/notes/2399995" target="_blank">2399995</a> - Hardware requirement for SAP HANA 2.0.</li>
+<li>For an overview of supported operating systems releases, see SAP Note <a href="/notes/2235581" target="_blank">2235581</a> and the <em>SAP HANA OS Release Support Matrix </em>which is attached to it.</li>
+<li>For a list of additionally required operating system software packages, see SAP Note <a href="/notes/3216146" target="_blank">3216146</a>.</li>
+<li>Please see further information in the SAP HANA Product Availability Matrix - <a href="https://apps.support.sap.com/sap(bD1kZSZjPTAwMQ==)/support/pam/pam.html?smpsrv=https%3a%2f%2fwebsmp201.sap-ag.de#ts=2&amp;s=hana%202&amp;o=most_viewed%7Cdesc&amp;st=l&amp;rpp=20&amp;page=1&amp;pvnr=73554900100900001301&amp;pt=g%7Cd" target="_blank">SAP HANA PAM</a>.<br/><br/></li>
+</ul>
+<p><a name="GeneralRemarks" target="_blank"></a>General Remarks:</p>
+<ul>
+<li>If you are using SAP Web Dispatcher as HTTP load balancer, additional configuration is required - please see SAP Note <a href="/notes/2146931" target="_blank" title="2146931  - Web Dispatcher - XSSRV - Initialization fails because access to topology information is forbidden">2146931</a>.</li>
+<li>If you have scheduled a periodic database backup job with the DBA Planning Calendar (DB13) in a revision &lt;= SAP HANA 2 SPS00, you might need to re-schedule the job after the upgrade. See SAP Note <a href="/notes/2452552" target="_blank">2452552</a> for details.</li>
+<li>Attaching a debugger to HANA is only possible with installation of a special debug symbol build. In the unlikely event of requiring to debug HANA on your local system, debug symbol builds for all released revisions can be requested by creating an incident as it is not available for download by default.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>Running the installation and the upgrade is only supported on a validated SAP HANA appliance and SAP HANA Tailored Datacenter Integration setup. </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>If you upgrade from a lower SAP HANA SPS, it is recommended to upgrade the components like HANA Studio, HANA Modeler, SLT, DS and the SAP HANA client (see <a href="/notes/1906576" target="_blank">1906576</a>) to the latest available revision.</strong></p>
+<p>If you update the SAP Kernel version, please check the PAM – Technical Release Information – for the compatible SAP Kernel version. This SAP Kernel version also includes a compatible DBSL version.</p>
+<p><strong>Documentation</strong></p>
+<ul>
+<li>See SAP Help Portal at <a href="https://help.sap.com/viewer/product/SAP_HANA_PLATFORM/2.0.07/en-US" target="_blank">https://help.sap.com/viewer/product/SAP_HANA_PLATFORM/2.0.07/en-US/</a> for the complete SAP HANA 2 SPS07 product documentation set.</li>
+<li>The <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/de855a01ee2248dfb139088793f8802a/550f3966082c4cc4a495d001bc607a05.html" target="_blank">SAP HANA 2.0 SPS 07 Feature Scope Description</a> describes which features are available for the editions and options of SAP HANA.<em><br/></em></li>
+</ul>
+<p><strong>Issues solved with this revision:</strong></p>
+<h3 data-toc-skip="">BW/OLAP</h3>
+<ul>
+<li>[Issue number 313680] Reduced the possibility of VAS (Virtual Address Space) fragmentation.</li>
+</ul>
+<h3 data-toc-skip="">Database Client</h3>
+<ul>
+<li>[Issue number 317356] Fixed an issue that caused connections to HANA to run out of file handles in the SAP HANA JDBC driver.<br/>See SAP Note <a class="bz_bug_link" href="/notes/3414382" target="_blank" title="SAP Note 3414382">3414382</a> for details.</li>
+</ul>
+<h3 data-toc-skip="">Data Provisioning</h3>
+<ul>
+<li>[Issue number 317679] Fixed an issue that prevented the virtual table extraction column set from being updated by "alter virtual table … refresh definition".<br/>See SAP Note <a href="/notes/3421116" target="_blank">3421116</a> for details.</li>
+</ul>
+<h3 data-toc-skip="">HDI/BAS</h3>
+<ul>
+<li>[Issue number 317224] Fixed an issue that caused the indexserver to crash during the deployment of a table change in HDI, resulting in a callstack error resembling "0: Metadata::ObjectInfo::handleNameQuotes(char const*, char, bool) 1: Metadata::ObjectInfo::handleNameWithQuotes(char const*, bool) 2: ptime::Catalog::handle_generated_column(Execution::Context&amp;".</li>
+</ul>
+<h3 data-toc-skip="">High Availability</h3>
+<ul>
+<li>[Issue number 307009] Fixed an issue that may cause an indexserver crash during takeover at "ptime::qo_size_estimation::is_remote_table".</li>
+</ul>
+<ul>
+<li>[Issue number 311975] Fixed an issue where a failover could be effectively aborted if the former coordinator reintegrated itself as a standby in the candidates while the failover was in progress.</li>
+</ul>
+<ul>
+<li>[Issue number 316446] Fixed an issue that may have triggered the error message "Persistence volume 'x:x' not initialized via system replication" during a takeover on the secondary site.</li>
+</ul>
+<ul>
+<li>[Issue number 317527] Fixed an issue that caused admission control to become disabled after a near-zero-downtime operation (upgrade without restart) or a takeover to a replica.</li>
+</ul>
+<h3 data-toc-skip="">MDX</h3>
+<ul>
+<li>[Issue number 291636] Fixed an issue which led to an indexserver crash on "Hierarchies::HierarchyBlob::Hierarchy::deserialize".<br/>See SAP Note <a class="bz_bug_link" href="/notes/3245381" target="_blank" title="SAP Note 3245381">3245381</a> for details.</li>
+</ul>
+<h3 data-toc-skip="">Security</h3>
+<ul>
+<li>[Issue number 310349] Fixed an issue with a recovery of the LSS keystore that could have failed with the following error message: "Cannot acquire protection handle. Error 0x in module 'CMS_' with message: 'Key not found'".</li>
+</ul>
+<h3 data-toc-skip="">Smart Data Access</h3>
+<ul>
+<li>[Issue number 294056] Fixed an issue that may cause a query on a virtual table to fail with the error message: "E FederationExecut FederationQueryExecutor.cpp(00874) : The following assertion failed: true == hasValidStat()
+<p>true = true<br/> hasValidStat() = false<br/>Federation query statistics is not initialized"</p>
+</li>
+</ul>
+<h3 data-toc-skip="">Smart Data Integration</h3>
+<ul>
+<li>[Issue number 320122] Fixed an issue that caused ODATA calls to execute Any Join on Remote Table as OUTER Join.<br/>See SAP Note <a class="bz_bug_link" href="/notes/3437956" target="_blank" title="SAP Note 3437956">3437956</a> for details.</li>
+</ul>
+<ul>
+<li>[Issue number 320173] Fixed an issue that may cause unexpected results when a varbinary parameter was provided as a bind variable.<br/>See SAP Note <a class="bz_bug_link" href="/notes/3428818" target="_blank" title="SAP Note 3428818">3428818</a> for details.</li>
+</ul>
+<h3 data-toc-skip="">Supportability</h3>
+<ul>
+<li>[Issue number 319301] Fixed an issue that caused the SITE_ID column to be missing in _SYS_STATISTICS.HOST_SQL_PLAN_CACHE and  _SYS_STATISTICS.HOST_SQL_PLAN_CACHE_OVERVIEW.</li>
+</ul>
+<h3 data-toc-skip="">Text Search</h3>
+<ul>
+<li>[Issue number 302921] Fixed an issue that caused an SQL query using the SCORE function to fail with the error message "transaction rolled back by an internal error: Assertion failed: ((((freestylerIt != freestylerMap.end()))) == true); lhs: 0; rhs: 1; message: ScoreId &lt;id&gt; was not found in freestylerMap of size 0".</li>
+</ul>
+<h3 data-toc-skip="">General</h3>
+<ul>
+<li>[Issue number 290146] Fixed an issue that caused a savepoint to be blocked in "TransactionManager::TidCidTable::truncat" when there were many entries.</li>
+</ul>
+<ul>
+<li>[Issue number 312279] Fixed an issue that caused a query failure during a REMOTE SCAN operation when multiple virtual tables were involved in a JOIN operation, resulting in the error message "The number of MAT_ROWID_ON_C2C_CONV in dic_vals cannot exceed 1 &lt;...&gt;".</li>
+</ul>
+<ul>
+<li>[Issue number 312705] Fixed an issue that may lead to the error message "Delta base snapshot is not available for delta visibility search", for queries where dynamic result cache is considered.<br/>See SAP Note <a class="bz_bug_link" href="/notes/3412398" target="_blank" title="SAP Note 3412398">3412398</a> for details.</li>
+</ul>
+<ul>
+<li>[Issue number 314338] Fixed an issue that caused a HEX-executed query to fail with the following application error "SQL message: invalid table name" on a scale-out HANA system.<br/>See SAP Note <a class="bz_bug_link" href="/notes/3430537" target="_blank" title="SAP Note 3430537">3430537</a> for details.</li>
+</ul>
+<ul>
+<li>[Issue number 315768] Fixed an issue that may cause hanging threads in the "TRN Request[&lt;numbers&gt;] JobScheduler" thread method.</li>
+</ul>
+<ul>
+<li>[Issue number 316021] Fixed an issue that caused performance degradation and resulted in threads running in Exclusive Lock when enabling the capturing of abstract SQL plans.<br/>See SAP Note <a class="bz_bug_link" href="/notes/3416813" target="_blank" title="SAP Note 3416813">3416813</a> for details.</li>
+</ul>
+<ul>
+<li>[Issue number 316081] Fixed an issue that caused a query to fail with the error: "SAP DBTech JDBC: [267]: specified length too long for its datatype: the identifier "UUID"".</li>
+</ul>
+<ul>
+<li>[Issue number 316300] Fixed an issue that may cause table inconsistencies and indexserver crashes with "exception 1: no ....(CSAccessor/Dml/DmlExecutor.cpp:905) TID: ...
+<p>AttributeEngine call failed on [&lt;schema_name&gt;:&lt;table_name&gt; (t &lt;table_oid&gt;)] because of error [..] : [NULL found for $trexexternalkey$ (primary key)]" after a table with $trexexternalkey$ with type INVERTED VALUE got copied by create table &lt;table_name_new&gt; like &lt;table_name&gt; with data.</p>
+</li>
+</ul>
+<ul>
+<li>[Issue number 316781] Fixed an issue that could cause excessive memory consumption when executing searches from the 'M_CS_TABLES' monitoring view.<br/>See SAP Note <a class="bz_bug_link" href="/notes/3434490" target="_blank" title="SAP Note 3434490">3434490</a> for details.</li>
+</ul>
+<ul>
+<li>[Issue number 317027] Fixed an issue that caused an indexserver crash during the collection of runtimedump, resulting in a crashstack resembling the following:
+<p>"0: strlen<br/>1: ltt::exception::define_argument<br/>2: (anonymous namespace)::defineStringParam<br/>3: ltt::operator&lt;&lt;<br/>4: ptime::BLocator::ptr<br/>5: ptime::BLocator::read<br/>6: ptime::operator&lt;&lt;<br/>7: ptime::Query::QueryRuntimeTextCallBack::printParameterValue"</p>
+</li>
+</ul>
+<ul>
+<li>[Issue number 317387] Fixed an issue that allowed null values to be inserted into a not null column of a HANA Global Temporary Table during a procedure call.</li>
+</ul>
+<ul>
+<li>[Issue number 317477] Fixed an issue that could lead to a memory leak on the allocator 'Pool/LockManager' when transactions acquired more than 2 billion row locks.<br/>See SAP Note <a href="/notes/3433536" target="_blank">3433536</a> for details.</li>
+</ul>
+<ul>
+<li>[Issue number 317543] Fixed an issue that caused a segfault in hdbnsutil during the early startup phase due to a timer recalibration failure.</li>
+</ul>
+<ul>
+<li>[Issue number 317548] Fixed an issue that caused the indexserver to crash when executing a built-in procedure to validate expressions triggered during BIMC view query execution with PlanTrace activated.<br/>See SAP Note <a class="bz_bug_link" href="/notes/3430125" target="_blank" title="SAP Note 3430125">3430125</a> for details.</li>
+</ul>
+<ul>
+<li>[Issue number 318047] Fixed an issue that caused the validity check to fail for a disabled trigger when using the configuration parameter 'multistore_feature_toggle' or the 'NO_USE_HUP_PLAN' hint.</li>
+</ul>
+<ul>
+<li>[Issue number 318166] Fixed an issue that caused online table partitioning to fail with the error message "Search result size limit exceeded: [total number of table records]".<br/>See SAP Note <a class="bz_bug_link" href="/notes/3416673" target="_blank" title="SAP Note 3416673">3416673</a> for details.</li>
+</ul>
+<ul>
+<li>[Issue number 318359] Fixed an issue that caused an indexserver crash due to a stack overflow at: "ptime::qo_size_estimation::fill_expr_histogram".</li>
+</ul>
+<ul>
+<li>[Issue number 318628] Fixed an issue that may cause a query failure when executed using the HEX engine, including HashRangeJoin, resulting in the error message:
+<p>" e hex CGOperator.cpp(00174) : Assertion failed: ((((ins.second))) == true); lhs: 0; rhs: 1; message: Expression: relId_1000093.relColId_10000000<br/> e hex basic_assure.cpp(00021) : <br/>... hex::tracing::trace_callstack_self"</p>
+</li>
+</ul>
+<ul>
+<li>[Issue number 319104] Fixed an issue that caused high memory usage on the allocator 'Pool/ReplicationLogReceiverAllocator' when utilizing remote table replication.</li>
+</ul>
+<ul>
+<li>[Issue number 319169] Fixed an issue that caused a lengthy runtime of the critical phase in savepoint.</li>
+</ul>
+<ul>
+<li>[Issue number 319256] Fixed an issue in Attribute Engine where a discontinued method was incorrectly being called for predicate objects.</li>
+</ul>
+<ul>
+<li>[Issue number 319258] Fixed an issue that caused the HANA ResourceContainer to shrink all memory resources, even when a small amount of resource shrinking would have been sufficient.</li>
+</ul>
+<ul>
+<li>[Issue number 319480] Fixed an issue that showed -1 values to appear in 'M_LOAD_HISTORY_HOST' due to incorrectly stored data in the nameserver_history.trc.<br/>See SAP Note <a class="bz_bug_link" href="/notes/3435639" target="_blank" title="SAP Note 3435639">3435639</a> for details.</li>
+</ul>
+<ul>
+<li>[Issue number 319487] Fixed an issue where the initial measurement of CPU load during session startup was not updated, potentially resulting in non-SYSTEM users being unable to execute queries due to admission control queue wait timeout errors or admission control failing to protect against CPU overload based on the queue_cpu_threshold measurement.</li>
+</ul>
+<ul>
+<li>[Issue number 319560] Fixed an issue that may cause an indexserver crash at "TRexConfig::CalcEngine::Attribute::getAttrType()" due to access to invalid attributes from certain query entries.<br/>See SAP Note <a class="bz_bug_link" href="/notes/3434517" target="_blank" title="SAP Note 3434517">3434517</a> for details.</li>
+</ul>
+<ul>
+<li>[Issue number 317142] Fixed an issue where automatic data volume reclaims got cancelled due to savepoints.</li>
+</ul>
+<ul>
+<li>[Issue number 311868] Fixed an issue in SQL Optimizer that could have led to query failures with the following error message: "SAP DBTech JDBC: [264]: invalid datatype: greatest() has the wrong number of arguments."</li>
+</ul>
+<ul>
+<li>[Issue number 321451] Fixed an issue that caused the HEX engine to return an empty result set when performing currency conversion.</li>
+</ul>
+<ul>
+<li>[Issue number 318648] Fixed an issue which may cause high CPU consumption on "expr::types::DatsTimsToTstmp" when calling function dats_tims_to_tstmp.</li>
+</ul>
+<ul>
+<li>[Issue number 313583] Fixed an issue that caused an overall system performance degradation and blocked savepoint when creating a primary key on a table with paged attributes.</li>
+</ul>
+<ul>
+<li>[Issue number 312872] Fixed an issue that caused a query execution failure in JE with the error: "[23057] Internal error during join: invalid input;".</li>
+</ul>
+<ul>
+<li>[Issue number 315207] Fixed an issue that caused deadlock for distributed HEX query with threads stuck on "hex::dist::TrexNetDxchgSendRequest" when a shared subplan was used by the SQL optimizer.</li>
+</ul>
+<ul>
+<li>[Issue number 315415] Fixed an issue that could lead to inconsistent persistence when persistency encryption is disabled.</li>
+</ul>
+<ul>
+<li>[Issue number 316932] Fixed an issue that could previously cause a batch delete request with duplicate entries to trigger an error when executed on a table configured with Asynchronous Table Replication:
+<p>DMLLogReplayer::handleDMLReplicationByLog failed - exception 6010102: RowPos xxxxxxxx (of RowID xxxxxxxxxxx) in fragment xx of TableName='schema:table' (tableOID=xxxxx), ContainerID=&lt;hex code&gt; is already marked as deleted.</p>
+</li>
+<li>[Issue number 313591] Fixed an issue in the InA/MDS query processing that could result in the error "e ceQo  ceQOBuilder.cpp() : qo_Exp for attribute '&lt;restricted_measure&gt;' for RuntimeInput '&lt;node_name&gt;' of RuntimeNode '&lt;node_name&gt;' not found" appearing in the indexserver trace.</li>
+</ul>
+<ul>
+<li>[Issue number 318217] Fixed an issue that occurred during the HEX query compilation of a query involving remote tables, where the following error message appeared in the indexserver trace: Row_Engine OutputSpecCollector.cc(xxx): exception xxx: solution cache is missing, exp=(x, x), op=HEX TABLE SCAN...</li>
+</ul>
+<ul>
+<li>[Issue number 310443] Fixed an issue that caused the indexserver to crash on "TransactionManager::ConsistentView::isGCBlocker" when performing a distributed HEX query.<br/><br/></li>
+<li>Issue number 328895] Fixed an issue that could cause the system to become unresponsive during prolonged memory reclaim processes when 16kB pages defragmentation is ongoing.<br/>See SAP Note <a href="/notes/3665521" target="_blank">3665521</a> for details.</li>
+</ul>
+<ul></ul></div></div></div></div>

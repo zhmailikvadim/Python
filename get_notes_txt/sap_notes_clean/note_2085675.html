@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>On the material list of a production order or process order, you replace a material component with a phantom assembly. When you do this, the bill of material of the phantom assembly is not exploded.<br/>If you add the phantom assembly as a new component however, the bil of material is exploded.</li>
+<li>On the component overview of a production order or the material list of a process order, you enter a material component for which the special procurement key 50 (phantom assembly) is defined in the material master. The bill of material explosion is terminated on the dialog box that is displayed. The system issues message CO 223:<br/>"A valid bill of material could not be found for material [material number]"<br/>A normal reservation should therefore be created. Instead, the system sets the "Phantom Assembly" indicator and the indicator for the backflush is not determined.</li>
+<li>If you add a phantom assembly in a network and confirm that it is relevant to procurement (dialog box), the system does not actually create any requirements.</li>
+<li>If you add a phantom assembly in an EAM order, the system does not determine any planned costs or requirements, which is incorrect.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CO01, CO02, production order, COR1, COR2, process order, CJ20N, CN22, IW31, IW32, maintenance order, service order<br/>Phantom assembly, phantom, dummy, dummy assembly, RESB-DUMPS, backflushing indicator, RESB-RGEKZ, special procurement type 50, special procurement key, SOBSL, bill of material explosion, C2 223, C2223, 223 (C2)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This program error can be noticed only after you have implemented SAP Note 2026989.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the source code corrections as described in the correction instructions.</p></div></div></div></div>

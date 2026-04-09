@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">After you implement SAP Note <a href="/notes/2920873" target="_blank">2920873</a> or import the relevant support packages (or CLCs), the central wage type /2ZT is no longer generated.</p>
+<p>This affects the following:</p>
+<p id="">Release 608 support package 86 and subsequent releases/support packages</p>
+<p>Release 604 support package 158 and subsequent releases/support packages</p>
+<p>Release 600 support package 192 and subsequent releases/support packages</p>
+<p>A claim is almost always created in the subsequent months subject to SI after an employee leaves with SI obligation.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">ASV00 U</p>
+<p>UEKV</p>
+<p>Payment in lieu of unused leave</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>SAP Note <a href="/notes/2920873" target="_blank">2920873</a> was originally published for a BVA-specific correction.</p>
+<p><strong>However, some of the manual tasks</strong> for this SAP Note are generally relevant for the function ASV00 U and also have an effect for persons insured by the Austrian health insurance fund (ÖGK).</p>
+<p>The SVX branch in the HR feature ASV01 is necessary because - while SI contributions are simulated for the subsequent months under ASV00 - the last simulation step 9999 for ASV01 is called with the parameter SVX.</p>
+<p>This was necessary for a BVA-specific enhancement. In general, however, the last simulation step is not the last step of the SI calculation in the schema.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Note the manual activity for adjusting the HR feature ASV01 in SAP Note <a href="/notes/2920873" target="_blank">2920873</a> (for ÖGK as well). Check whether this adjustment is active in your system.</p>
+<p>If this HR feature ASV01 was changed by the customer, you must implement the delivered corrections manually in the customer client.</p>
+<p><strong>Relevant excerpt from the manual adjustment in SAP Note</strong> <a href="/notes/2920873" target="_blank">2920873</a> <strong>for your information:</strong></p>
+<p class="Standardabsatz"><em>Transaction SE11: P03_AMODE (call context for characteristics)</em></p>
+<p class="Standardabsatz">Create the following value for the domain P03_AMODE:</p>
+<p class="Standardabsatz">SVX - Simulation Under ASV00</p>
+<p class="Standardabsatz"><em>Transaction PE03: ASV01</em></p>
+<p class="Standardabsatz">Add the following specification to the decision tree:</p>
+<p class="Standardabsatz">AMODE = SVX -&gt; Return value = 900</p>
+<p class="Standardabsatz">DSAPZS</p>
+<p class="Standardabsatz">SVF DAMODE</p>
+<p class="Standardabsatz">SVF SVX&amp;ASV01=900,</p>
+<p class="Standardabsatz">...</p>
+<p class="Standardabsatz">*** DAMODE</p>
+<p class="Standardabsatz">*** SVX&amp;ASV01=900</p>
+<p> </p></div></div></div></div>

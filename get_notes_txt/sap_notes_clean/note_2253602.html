@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>The status of the Purchase Order is shown as "Created" on Step 4 of Sourcing Cockpit, even if the Purchase Order has failed to be created in the back-end system.</li>
+<li>The Document Number isn't displayed as a link, even if switch SRM_701_LINK_TO_ERP is active.</li>
+<li>System shows zero in column Total Value.</li>
+</ul>
+<p style="padding-left: 60px;"><img alt="pic1_without_PII.PNG" class="img-responsive" src="/documents/customerkba/pSQNQr63_FtOY5YQCXBclchtfU3CQM7-oadsAaho4qA" title="pic1_without_PII.PNG"/></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Supplier Relationship Management (SRM) 7.0 and higher</li>
+<li>SAP enhancement package for SAP Supplier Relationship Management</li>
+<li>Classic scenario with SOA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>On Step 1 in Sourcing Cockpit search for a Shopping Cart that belongs to Classic scenario</li>
+<li>Create a PO draft for this Shopping Cart on Step 2</li>
+<li>Click "Process All Draft" or "Process Selected Drafts" button on Step 3</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>By that time you reach Step 4 of SOCO, the PO in back-end system may or may not have been created. The reason for this is that the PO creation via SOA is asynchronous and depends on also queuing mechanism of the system. For example the XML could have been scheduled or the xml confirmation from backend would not have been reached to SRM. Because of this it would not be possible to wait for the system to fetch the details from the back-end system. Therefore from Sourcing cockpit, when Purchaser triggers the backend PO creation and an XML is generated that means the PO creation process has been initiated from SRM. Hence it shows the status as "Created". Since the process in asynchronous, it is beyond control to check whether the generated XML has been successfully processed or not. Because of this reason it is also not possible to display the PO from Step 4, therefore the Document Number is not displayed as link. Moreover it is also not possible to gathered the Total Value of the PO.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>The system works as per SAP SRM standard design.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>EBP, SRMSTD, REFRESH, /SAPSRM/CL_CH_WD_DOM_SOCO_GAF4, ls_created_obj-status_description = 'Created'(019)., SOA, asynchronous</p></div></div></div></div>

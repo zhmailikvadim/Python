@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>sp_iqcheckdb report no error.</li>
+<li>IQ message log report the following messages when <strong>modifying objects</strong>:<br/><br/></li>
+<ul>
+<li><span>[bmp-trace-tout][rpbid] tid:140695968622336 bmp:0x7f53c265e3c8 lbn:784284 next-lbn:784288 pbn:201589250 nb: compr?1 updateNext?0</span><br/><br/></li>
+<li><span><strong>Warning, s_bufpartition::GetCleanPage is retrying to avert a potential deadlock</strong>, retry=1, tid=140695989229312 </span><br/><br/></li>
+<li><span><strong>Warning: s_blockmap is throwing while user locked. bmp:0x7f53c2624dc8 lockRefCount:1</strong> created from:slib/s_csort.cxx:3249 locked from:slib/s_blockmap.cxx:1341</span><br/><span>** Informational stack trace from Diagnostic Stacktrace in s_blockmap::ThrowError for user locked blockmap</span><br/><span>** at slib/s_blockmap.cxx:13295 on thread 140696013534976 (TID 2327)</span><br/><span>**</span><br/><span>** Error from IQ connection: SA connHandle: 1885 SA connID: 19 IQ connID: 0000028782 User: report_user</span><br/><span>** IQ Version: SAP IQ/16.1.020/12537/P/sp02.15</span><br/><span>s_blockmap::ThrowError</span><br/><span>s_blockmap::Create</span><br/><span>hc_run::NewBuffer</span><br/><span>hc_frun::NextLoc</span><br/><span>hs_csortInsertPkg::NextLoc</span><br/><span>hs_csort::Insert</span><br/><span>dfo_cOrderByParaIn::ExecWork</span><br/><span>workAllocator::DoWork </span></li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP 16.0 </li>
+<li>SAPIQ 16.1 SP02 PL15 and above</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The issue has been identified and logged under SAP <strong>CR 819864</strong>. Its description reads,"IQ 16.1 sp02 pl15, GetCleanPage is retrying to avert a potential deadlock"</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>Upgrade to where CR 819864 is fixed:</li>
+<ul>
+<li>SAP IQ 16.0 SP11 PL27 and above</li>
+<li>SAP IQ 16.1 SP03 PL09 and above</li>
+<li>SAP IQ 16.1 SP04 PL05 and above<br/>
+<pre></pre>
+</li>
+</ul>
+<li>Set both options below to disable the deadlock avoidance mechanism. <br/>The deadlock would occurred in IQ server for the same set of workload. <br/>Server restart is required for change to take effect.<br/><br/><em><span>SET OPTION PUBLIC.CORE_Options151 = 'ON'; </span></em><br/><em><span>SET OPTION PUBLIC.CORE_Options155 = 'OFF ';<br/><br/></span></em></li>
+<li>
+<p>The deadlock avoidance gear has been made more robust after analyzing various scenarios that were encountered in the field.<br/> The new settings are required to prevent a number of possible of deadlocks.<br/> The warning messages are expected and intended in a proper functioning system.</p>
+If the deadlock issue can be reproduced, they should collect the stack traces for further analysis.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li>KBA <a href="https://me.sap.com/notes/2716055" target="_blank">2716055</a> - sp_iqcheckdb verify cause IQ_SYSTEM_TEMP full and error s_bufpartition::GetCleanPage is retrying to avert a potential deadlock</li>
+<li>KBA <a href="/notes/1850330" target="_blank">1850330</a> - How to rate an SAP Knowledge Based Article (KBA)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>bmp-trace-tout , s_bufpartition::GetCleanPage , deadlock , s_blockmap::Create</p></div></div></div></div>

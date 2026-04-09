@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When extracting with Datasource 0CRM_CATEGORIZATION_HIER, field FIELDNM is empty in Node segment. This can cause errors in BW system.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul style="font-size: 16px; font-family: arial, helvetica, sans-serif; white-space: normal; word-spacing: 0px; text-transform: none; font-weight: 400;  font-style: normal; orphans: 2; widows: 2; letter-spacing: normal; background- text-indent: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-">
+<li>SAP Customer Relationship Management 7.0 and higher</li>
+<li>SAP enhancement package for SAP Customer Relationship Management</li>
+<li>SAP enhancement package for SAP CRM, version for SAP HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol style="font-size: 16px; font-family: arial, helvetica, sans-serif; white-space: normal; word-spacing: 0px; text-transform: none; font-weight: 400;  font-style: normal; orphans: 2; widows: 2; letter-spacing: normal; background- text-indent: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-">
+<li>Go to T-code RSA3</li>
+<li>Enter Datasource 0CRM_CATEGORIZATION_HIER and HIENM</li>
+<li>Click Extraction</li>
+<li>Go to Node Segment. Field FIELDNM is empty<br/> <img alt="KBA.png" class="img-responsive" src="/documents/customerkba/HALTEeu_h-mqLmMrJmA42nQokW4sFRLIbunM41toxMo" title="KBA.png"/></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>FIELDNM gets cleared in the form routine CALL_HIER_CUSTOMER_FUNCTION_30</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Please implement Note <a href="https://me.sap.com/notes/1997720" target="_blank">1997720</a> in your CRM system</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>CALL_HIER_CUSTOMER_FUNCTION_30, CL_RSSH_HIERARCHY_BASE, MESSAGE_TYPE_X</p></div></div></div></div>

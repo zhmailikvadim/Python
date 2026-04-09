@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>Attempting to launch the Object Wizard from the contextual menu of the Data Source Explorer</li>
+<li>Using the Agentry Connector Studio Eclipse plug-in</li>
+<li>The Object Wizard silently fails to launch</li>
+<li>No error message appears, but the Object Wizard does not appear</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP Mobile Platform SDK 2.3 (Agentry)</li>
+<li>SAP Mobile Platform SDK 3.0 (Agentry)</li>
+<li>Agentry 6.x.x.x (Editor Plugin)</li>
+<li>Eclipse SDK IDE (Version 3.7.x - Indigo)</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Create a new system connection</li>
+<ul>
+<li>From the Project Explorer, right-click "System Connections" and select Add System Connection &gt; SQL Database</li>
+<li>No specific values need to be entered</li>
+</ul>
+<li>Delete the newly created system connection</li>
+<li>Open the Data Source Explorer in Eclipse (Window &gt; View &gt; Data Source Explorer)</li>
+<li>Expand the Database Connections directory</li>
+<li>Connect to an existing data source (Right-click &gt; Connect)</li>
+<li>Navigate to the "Tables" directory</li>
+<li>Right-click one of the database tables</li>
+<li>Select "Agentry: Connector Studio &gt; Object Wizard"</li>
+<li>The contextual menu closes, and the Object Wizard does not appear</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul>
+<li>A defect in the editor prevents the wizard from launching under specific circumstances</li>
+<li>If a System Connection is located in the Trash Bin, the wizard will fail to launch</li>
+</ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>From the Agentry Editor Plugin in Eclipse:</p>
+<ol>
+<li>Under the "Window" drop-down menu, select "Show View" &gt; "Trash Bin"</li>
+<li>Locate any object with the type "SQL System Connection"</li>
+<li>Right-click each object and select "Remove Selected Definition"</li>
+</ol>
+<p> </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>smp, SQL System Connection, Data Source Explorer, Agentry Editor</p></div></div></div></div>

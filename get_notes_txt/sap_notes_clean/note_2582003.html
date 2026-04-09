@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You have deleted the master data and you want to load the InfoObject again. The loading of InfoObject fails with error R7105 'The object name is not allowed to be empty'</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>R7105, Delete master data, RSNDI_MD_DELETE</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Code needs to be adapted to changes to CHAVL after note 2098968</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>In the Start Routine of transformation TRCS 0RT_WRF_TDLOCAS_ATTR_DEL -&gt; IOBJ 0RT_TDLOCAS,</p>
+<p>in the data declaration</p>
+<p>   CONSTANTS: lc_iobjnm TYPE rsiobjnm VALUE '0RT_TDLOCAS',<br/>             lc_tabval(16) VALUE '/BI0/PPLANT'.</p>
+<p>Add constants, so the code looks as following</p>
+<p> CONSTANTS: lc_iobjnm TYPE rsiobjnm VALUE '0RT_TDLOCAS',<br/>             lc_asort TYPE rsiobjnm VALUE '0RT_ASORT',<br/>             lc_date TYPE rsiobjnm VALUE '0RT_DATEF',<br/>             lc_tabval(16) VALUE '/BI0/PPLANT'.</p>
+<p>In the data declaration</p>
+<p> DATA: lv_key TYPE rsndi_s_chavl-value.</p>
+<p>Add variable so the code looks as following</p>
+<p>   DATA: lv_key TYPE rsndi_s_chavl-value,<br/>        lv_record_no    TYPE int4 VALUE 1.</p>
+<p>inside the Loop of</p>
+<p>   LOOP AT DATA_PACKAGE INTO ls_DATA_PACKAGE.<br/>    ls_del_data-value    = ls_DATA_PACKAGE-rt_asort.<br/>    ls_del_data-value+10 = ls_DATA_PACKAGE-rt_datef.<br/>    ls_del_data-value+18 = ls_DATA_PACKAGE-rt_tdlocas.<br/>    APPEND ls_del_data TO lt_del_data.<br/>  ENDLOOP.</p>
+<p> </p>
+<p>Add the statements so the code looks as following</p>
+<p></p>
+<p> LOOP AT DATA_PACKAGE INTO ls_DATA_PACKAGE.<br/>    ls_del_data-record_no = lv_record_no.<br/>    ls_del_data-iobjnm    = lc_asort.<br/>    ls_del_data-value    = ls_DATA_PACKAGE-rt_asort.<br/>    APPEND ls_del_data TO lt_del_data.<br/><br/>    ls_del_data-record_no = lv_record_no.<br/>    ls_del_data-iobjnm    = lc_iobjnm.<br/>    ls_del_data-value = ls_DATA_PACKAGE-rt_tdlocas.<br/>    APPEND ls_del_data TO lt_del_data.<br/><br/>    ls_del_data-record_no = lv_record_no.<br/>    ls_del_data-iobjnm    = lc_date.<br/>    ls_del_data-value = ls_DATA_PACKAGE-rt_datef.<br/>    APPEND ls_del_data TO lt_del_data.<br/><br/>    lv_record_no = lv_record_no + 1.<br/>  ENDLOOP.</p>
+<p>Alternately, upgrade to the latest support package and install the Transformation again.</p></div></div></div></div>

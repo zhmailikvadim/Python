@@ -1,0 +1,40 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Using the RESTful Web Service to copy a Web Intelligence document, a "[1]" might be wrongly added to the name of the copy if it shares the first characters of another document (even if the name in its entirety is different).</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Webi, webintelligence, Raylight, numbering, bracket</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""><strong>Environment</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence Platform 4.2 Support Package 07</li>
+<li>Web Intelligence </li>
+<li>Raylight</li>
+</ul>
+<p><strong>Reproducing the Issue</strong></p>
+<ol>
+<li>Pick a Web Intelligence document you want to copy, for example "<strong>My document (Original)</strong>" whose id is 1234.</li>
+<li>Copy it using Web Intelligence RESTful Web Service by choosing a destination name which is a leading substring of the original one:</li>
+</ol>
+<p style="padding-left: 60px;">call:</p>
+<p style="padding-left: 90px;">[POST] raylight/v1/documents?sourceId=1234</p>
+<p style="padding-left: 90px;">Accept: application/xml</p>
+<p style="padding-left: 60px;">request body:</p>
+<p style="padding-left: 90px;">&lt;document&gt;<br/>    &lt;name&gt;<strong>My document</strong>&lt;/name&gt;<br/>&lt;/document&gt;</p>
+<p style="padding-left: 60px;">response body:</p>
+<p style="padding-left: 90px;">&lt;success&gt; <br/>    &lt;message&gt;The resource of type "Document" with identifier "5678" has been successfully created.&lt;/message&gt; <br/>    &lt;id&gt;5678&lt;/id&gt; <br/>&lt;/success&gt;</p>
+<ol start="3">
+<li>Get the details of the newly created Web Intelligence document:</li>
+</ol>
+<p style="padding-left: 60px;">call:</p>
+<p style="padding-left: 90px;">[GET] raylight/v1/documents/5678</p>
+<p style="padding-left: 90px;">Accept: application/xml</p>
+<p style="padding-left: 60px;">response body:</p>
+<p style="padding-left: 90px;">&lt;document&gt; <br/>    &lt;id&gt;5678&lt;/id&gt; <br/>    ... <br/>    &lt;name&gt;<strong>My document[1]</strong>&lt;/name&gt; <br/>    ... <br/>&lt;/document&gt;</p>
+<p style="padding-left: 60px;">&gt;&gt; "<strong>[1]</strong>" has been appended to the user chosen name even if no "My document" Web Intelligence document exists in the same folder.</p>
+<p><strong>Cause</strong></p>
+<ul>
+<li>This issue is caused by a defect in the product.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">This issue is fixed in the patches listed in the "Support Packages &amp; Patches" section below.<br/>Due to different internal processes, the "Support Packages &amp; Patches" section of the SAP Note will be populated as below:<br/>                - for fixes delivered in "Support Packages": immediately (even if the "Support Package" is planned to be released several months later)<br/>                - for fixes delivered in "Patches": <strong>ONLY </strong>once the "Patch" is released <strong>AND </strong>available on SMP (not before)<br/>For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article 2144559 in References section.</p></div></div></div></div>

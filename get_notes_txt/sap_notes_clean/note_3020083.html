@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You have a Non-Hana database system and some of your table accesses to database table USMD_PP_CD are very slow. Such table accesses happen at different MDG applications (e.g. at the display of change documents, the archiving of change requests or the deletion of change requests).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>USMD_PP_CD, archiving object USMD_CR</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Technically, ABAP select statements at table USMD_PP_CD using only the change request as selection condition in the where clause, do not access via a primary index. For such table accesses a secondary index is created via this note. Such an index is automatically created at SAP Hana databes systems which is the reason that the index must only be created for Non-Hana database systems.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Perform the manual activity of this note or implement the respective support package.</p></div></div></div></div>

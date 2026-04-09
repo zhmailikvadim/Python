@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">An Approver can approve or reject his or her own request using the SAP Fiori Access Approver app in violation of End User Personalization settings. The problem only exists when using the SAP Fiori app .</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Approver approves  or rejects own request, End User Personalization for stage, EUP, Stage Configuration,  Approve/Reject own requests, SAP Fiori Approver app</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The SAP Fior app ignore the <em>Approve/Reject Own Requests</em> in End User Personalization.</p>
+<p>Companies can decide whether to allow approvers to approve or reject their own requests. This decision is set in Customizing as follows:</p>
+<ol>
+<li>From the <em>SAP Reference IMG , choose Governance, Risk, and Compliance -&gt; Access Control -&gt; User Provisioning -&gt; Maintain End User Personalization</em>.</li>
+<li>Under <em>Maintain EUP Fields</em>, make an entry in the field <em>Approve/Reject Own Requests. </em>The Visible setting is No:</li>
+<ul>
+<li><strong>USER</strong>  (or field is blank) - During request approval, if the <em>User ID</em> on the access request = the Login ID of the approver, the system issues an error message.</li>
+<li><strong>USER AND REQUESTOR</strong> - During request approval, if the <em>User ID </em><strong>or</strong> the <em>Requestor ID</em> on the access request = the Login ID of the approver, the system issues an error message.</li>
+</ul>
+<li>If the Visible setting is Yes: the system makes no validation checks</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The SAP Fiori Access Approver app abides by the Stage configuration settings in End User Personalization. To resolve the problem, implement the note.</p></div></div></div></div>

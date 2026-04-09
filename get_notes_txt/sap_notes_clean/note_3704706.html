@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p>When you try to add an A/P invoice based on landed costs, the following error message appears:</p>
+<p><em>"Costs or Customs amount exceeds sum total of Costs or Customs Balance Due in all based landed costs; account code 1795"</em></p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Create a non-inventory Item 'p1'. In the <em>Item Master Data, </em>clear the<span> </span><em>'Inventory Item'</em><span> checkbox</span>. Set <em>G/L Accounts By</em> to 'Warehouse'. In the <em>Warehouses Setup,</em> set <em>Expense Account</em> to 3400.</li>
+<li>Go to <em>Administration → Setup → Purchasing → Landed Costs</em> and select an existing landed cost. Set <em>Landed Costs Alloc. Account</em> to 1795.</li>
+<li>Go to <em>Administration → Setup → Inventory → Customs Groups. S</em>et <em>Customs Allocation Account</em> to 1795 (same as in Landed Costs) and <em>Customs Expense Account</em> to 3400 (same as in <em>Warehouses Setup Expense Account</em>).</li>
+<li>Go to <em>Purchasing - A/P → Goods Receipt PO</em>, select <em>vendor</em> V10000, add <em>item</em> 'p1', set necessary item line fields, and choose <em>Add</em>.</li>
+<li>Go to <em>Purchasing - A/P → Landed Costs</em>, set <em>Vendor</em> to V10000 and <em>Broker</em> to V1010. Choose <em>Copy From → Goods Receipt PO</em>, and select the goods receipt PO created in step 4.</li>
+<li>Set <em>Customs Value</em> on the line to 20.</li>
+<li>On the <em>Costs</em> tab, select the landed cost maintained in step 2. Set <em>Amount</em> to 15, and choose <em>Add</em>.</li>
+<li>Go to <em>Purchasing - A/P → A/P Invoice. </em>Set <em>Vendor</em> to V1010, choose <em>Copy From → Landed Costs</em>, select the landed costs you created, and choose <em>Add</em>.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The system adds the A/P invoice successfully.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>The system displays an error message <em>"Costs or Customs amount exceeds sum total of Costs or Customs Balance Due in all based landed costs; account code 1795".</em></p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p></div></div></div></div>

@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Shop Order Schedule Report does not display data when Shop Order Specific Routing used.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Shop Order with order specific Routing.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Steps to reproduce:</p>
+<p>1)  Send ProductionOrderUpdateRequest with &lt;meint:erpOrderType&gt;MAKE_TO_ORDER&lt;/meint:erpOrderType&gt;.</p>
+<p>2)  In ME, go to Shop Order Report - retrieve that shop order, and select Shop Order Schedule Report.</p>
+<p>Actual Result: Message 'Your query returned no data'.</p>
+<p>Expected Result: Shop  Order Schedule shows steps, scheduled start/complete times for each routing step.</p>
+<p>The issue occures because scheduling information is not updated with correct routing type for shop order specific routings (type 'H').</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The source code has been corrected to update Routing type for scheduling records if it detected as Order Specific.</p>
+<p><strong>Impact</strong>: Web service ERPProductionOrderService.</p></div></div></div></div>

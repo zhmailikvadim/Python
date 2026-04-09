@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<div class="longtext">
+<p>While updating the <em>Capitalization</em> document, an error occurs: <em>Field cannot be updated (ODBC -1029)</em>.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisites:</strong></p>
+<p>Go to <em>Administration → System Initialization → Company Details → <span class="ph uicontrol">Basic Initialization</span></em><span> tab and <span>select the </span><em><span class="ph uicontrol">Enable Fixed Assets</span></em><span> checkbox.</span></span></p>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Using SAP Business One client, create a fixed asset item as 'FA01'.</li>
+<li>Use the following DI API code to create an <em>A/P Invoice</em> having the fixed asset item 'FA01' on rows:<br/>
+<p><span>SAPbobsCOM.Documents oAPInvoices = (SAPbobsCOM.Documents)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oPurchaseInvoices);</span><br/><span>oAPInvoices.CardCode = "V10000";</span><br/><span>oAPInvoices.Comments = "Added via DI";</span><br/><span>oAPInvoices.DocDate = new DateTime(2025, 11, 11);</span><br/><span>oAPInvoices.Lines.ItemCode = "FA01";</span><br/><span>oAPInvoices.Lines.UnitPrice = 134;</span><br/><span>int AddAPInvoice = oAPInvoices.Add();</span></p>
+</li>
+<li><span>After the <em>A/P Invoice</em> is successfully added, the system automatically generates a <em>Capitalization</em> document.</span></li>
+<li><span>Using SAP Business One client, open the generated <em>Capitalization</em> document and attempt to update the value in the <em>Remarks</em> field for its rows.</span></li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The <em>Capitalization</em> document is updated successfully.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>An error occurs: <em>Field cannot be updated (ODBC -1029)</em>.</p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p></div></div></div></div>

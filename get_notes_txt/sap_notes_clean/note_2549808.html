@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This Note provides details of the Flexible account Grouping and Account Group Change functionalities in SAP S/4HANA.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Definition</strong></p>
+<p><span style="font-size: 14px;">The account group is a classifying feature within customer and supplier master records. When you create a master data record, an account group is assigned to the Customer or Supplier record as per the Customizing (TBD001/TBC001). You can also use the following features to handle account group assignments for master data records: </span></p>
+<ul>
+<li><strong>Flexible Account Group</strong> - A feature that enables you to choose a different account group during master data record creation.</li>
+<li><strong>Account Group Change</strong> - A feature that enables you to change the account group after the initial creation of master data based on user authoriazation.</li>
+</ul>
+<p><strong>Use</strong></p>
+<p>You can choose account groups via Customer Master and Supplier Master Fiori apps and transaction BP.</p>
+<ul>
+<li>When you choose an account group during the creation of master data record, it determines:</li>
+<ul>
+<li>
+<p>which number range the customer/supplier account number should be.</p>
+</li>
+<li>
+<p>whether the number is assigned by the user or by system.</p>
+</li>
+<li>
+<p>which specifications are necessary or possible in the master record.</p>
+</li>
+</ul>
+<li>When you enable <em>Flexible Account Grouping</em>, and choose a different account group while creation of a master data record:</li>
+<ul>
+<li>The number range assignments get overwritten by the new account group.<br/><br/></li>
+</ul>
+<li>When the <em>Same Number</em> option is enabled along with <em>Flexible Account Grouping</em>: </li>
+<ul>
+<li>Customer/Supplier number wont be taken directly from the BP number, it must be explicitly provided by the user (in case of external numbering). This is because account group can be changed by using the <em>Flexible Account Grouping </em>functionality.<br/><br/></li>
+</ul>
+<li>When you choose a different account group after the creation of a master data record <em>(account group change)</em>:</li>
+<ul>
+<li>The system verifies whether account group changes are possible with the current user authorization and proceeds.</li>
+</ul>
+</ul>
+<p><strong>Structure</strong></p>
+<p>You can enable the <em>Flexible Account Grouping</em> feature by selecting the relevant check box using the following Customizing activity:</p>
+<ul>
+<li><em>For Customer</em>: Cross Application Components &gt; Master Data Synchronization &gt; Customer/Vendor Itegration &gt; Business Partner Settings &gt; Settings for Customer Integration &gt; Field Assignment for Customer Integration &gt; Assign Keys &gt; Define Number Assignments for Direction BP to Customer<br/><br/></li>
+<li><em>For Supplier</em>: Cross Application Components &gt; Master Data Synchronization &gt; Customer/Vendor Itegration &gt; Business Partner Settings &gt; Settings for Vendor Integration &gt; Field Assignment for Vendor Integration &gt; Assign Keys &gt; Define Number Assignment for Direction BP to Vendor.</li>
+</ul></div></div></div></div>

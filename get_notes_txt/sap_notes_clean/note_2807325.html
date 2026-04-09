@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Create a virtual table from a remote source created using OracleLogreaderAdapter, the char and varchar2 datatype column lengths are doubled. Nchar types are not affected.</li>
+<li>Ex: If Oracle has CHAR(6),  in HANA Virtual table the data type is VARCHAR(12)<br/>HANA characterset is UTF-8</li>
+<li>NLS_CHARACTERSET      WE8MSWIN1252<br/>NLS_CHARACTERSET      WE8ISO8859P15<br/>NLS_NCHAR_CHARACTERSET     AL16UTF16</li>
+<li>There is spaces added at the end of every field if the field length is not the same as length of the column definition<br/>For example: If you define CHAR(5), but the data you insert is 'DDD', 'DDD  ' with 2 space added at the end of the value</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">SAP HANA Smart Data Integration</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>With single byte charset like WE8DEC/WE8MSWIN1252, the size of varchar type in HANA need to double its original size in Oracle, because single byte char converts to 2 bytes char of HANA charset.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Update remote source configuration, set "Always map character types to unicode" to true</li>
+<li>Recreate virtual table, the column length will not be doubled, for the spaces added at the end of the field, this is expected behavior for Oracle</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>You may apply a 2 byte characterset with NLS_CHARACTERSET as described in <a href="https://docs.oracle.com/database/121/NLSPG/ch3globenv.htm#GUID-6475CA50-6476-4559-AD87-35D431276B20" target="_blank">Oracle's documentation</a>.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>sdi, column, size, length, dobule, Oracle, OracleLogReaderAdapter</p></div></div></div></div>

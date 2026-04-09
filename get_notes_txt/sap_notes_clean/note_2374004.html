@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">The Configuration &lt;Extractor Detail&gt; extractors are failing with the error:</p>
+<ul>
+<li><strong>Authentication did not succeed.</strong></li>
+</ul>
+<p>The following picture shows an exanple of affected extractor:</p>
+<p><strong><img alt="Authentication.png" class="img-responsive" src="/documents/customerkba/JwGo1FaCRECVIzPYa_LPcYd3Mob0iLueAHSykhr8M7s" title="Authentication.png"/></strong></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>Solution Manager 7.10 and 7.20</li>
+<li>SAP Solution Manager Diagnostics</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>The Configuration Extractors (CCDB extractors) are executed automatically once per day. The extractors can be found in the CCDB as follows:</p>
+<ol>
+<li>Transaction CCDB;</li>
+<li>Technical Systems tab;</li>
+<li>Select affected/target system;</li>
+<li>Check column 'Failed Extractors'</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>There is a problem with the SM_COLL user, which is the user used to collect the data.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The error <strong>Authentication did not succeed </strong>indicates an authentication issue with user SM_COLL_&lt;Solman_SID&gt; which is used to collect the information from the JAVA managed system. The steps to fix the issue are:</p>
+<p>1) Go to step 'Maintain Users' of the Managed System Configuration;<br/>2) Update the user's password and roles using the Managed System Configuration step.</p>
+<p>Ensure thatthe user SM_COLL_&lt;Solman_SID&gt; exists with the recommended roles and that its password is correct.</p>
+<p><strong>NOTE: </strong>Do NOT use the flag <strong>'Accept manually created user without checking role assignments' </strong>to simply turn the user status green. When this flag is selected the user is not checked at all and it might lead to an erroneous information about the user status. The flag must be used only if one is sure that the user/password provided are indeed correct.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>CCDB </p>
+<p>Authentication</p>
+<p>Succeed</p>
+<p>Extractor</p>
+<p>CTC</p>
+<p> </p></div></div></div></div>

@@ -1,0 +1,42 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Error loading tiles in launchpad designer</li>
+<li>Tiles not displayed in launchpad designer<br/><img alt="fig2.PNG" class="img-responsive" height="369" src="/documents/customerkba/z-pbouj8hDDG8kwO-3gbA-2TQOFWoq-xwRkInPoWwsw" title="fig2.PNG" width="968"/></li>
+<li>Tiles are visible in the CONF layer but not the CUST layer.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>
+<div>SAP NetWeaver 7.5</div>
+</li>
+<li>SAP S/4 Hana</li>
+<li>SAP Fiori 1.0 or higher</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Log into Fiori launchpad designer</li>
+<li>Navigate to a Catalog e.g. - SAP_SD_BC_SALES_ANLYTS_OP</li>
+<li>Observe the error, i.e.-<br/><img alt="fig1.PNG" class="img-responsive" height="527" src="/documents/customerkba/AYpXJQp4zuWJuA74Sdv-FTo9_HAT8R69mPsek1o5kB4" title="fig1.PNG" width="979"/></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Catalogs might be outdated or corrupted and have lost the reference</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Go to the configuration layer by providing the parameter scope=CONF on your designer URL i.e https://&lt;hostname:port&gt;/sap/bc/ui5_ui5/sap/arsrvc_upb_admn/main.html?scope=CONF# </li>
+<li>Look for the same Catalog and confirm that all tiles load successfully without any issue</li>
+<li>Navigate back to the customization layer by removing the parameter scope=CONF in the URL</li>
+<li>Delete tiles which do not load or delete the entire Catalog</li>
+<li>Automatically, new tiles or Catalogs will appear by the replication from the configuration layer</li>
+</ol>
+<p><span style="font-size: 14px;"><strong>Note</strong>: </span></p>
+<ul>
+<li>If the same issue is observed in the configuration layer, then the tile or catalog is removed by SAP</li>
+<li>This only applies for SAP delivered Catalogs because remote Catalogs are not available in the configuration layer </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li><a href="/notes/2545729" target="_blank">2545729</a> - Error loading tiles in Fiori launchpad Designer</li>
+<li><a href="/notes/2269272" target="_blank">2269272</a> - "Reference Lost" Error for FLP Tiles after applying new UI component version</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>error loading tiles in launchpad designer, tile display , Catalogs outdated, Fiori , reference lost, /n/ui2/lpd_cust, HTTP request failed, Resource chip not found, /sap/opu/odata/UI2/PAGE_BUILDER_PERS/Chips, missing</p></div></div></div></div>

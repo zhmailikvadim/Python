@@ -1,0 +1,42 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This Note introduces enhancements to the Approval Hub headers and action controls. The implementation ensures comprehensive workflow support across all scenarios, including single and bulk manual postings, business transactions, and contract adjustment approvals.</p>
+<p>Previous Issue<br/>Previously, the logic governing the Approve, Reject, and Reassign actions was static and designed exclusively for Manual Postings (MP) and Business Transactions (BT). This limited flexibility led to functional issues in Contract Flow approval processes, where the existing action logic did not align with contract-specific workflows.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This update introduces a fully configurable action framework for the Approval Hub. By leveraging the /FC1/AH_CAT_PROC table, actions and header definitions can now be customized within the customer namespace.</p>
+<p id="">As a result, the Approval Hub is no longer restricted to static, hard-coded logic. This eliminates the dependency on future standard SAP Notes for action adjustments and enables flexible support for additional approval scenarios, including Contract Flow processes, while granting customers greater operational autonomy.</p>
+<p>This update introduces a fully configurable action framework for the Approval Hub. By leveraging the /CatProcConfig table, actions and header definitions can now be customized within the customer namespace.<br/>As a result, the Approval Hub is no longer restricted to static, hard-coded logic. This eliminates the dependency on future standard SAP Notes for action adjustments and enables flexible support for additional approval scenarios, including Contract Flow processes, while granting customers greater operational autonomy.</p>
+<p><strong>Enhanced Features of Worklist:</strong></p>
+<h3 data-toc-skip="" style="margin: 0in;">Current Behavior</h3>
+<p>Currently, when an approver is assigned to an item at any approval level, the posting appears in the approver’s <strong>My Items</strong> worklist, regardless of whether the workflow has actually reached that level.<br/> As a result, approvers may see items in their worklist even when no action is currently required from them.</p>
+<h3 data-toc-skip="">Improved Behavior</h3>
+<p>With this enhancement, the visibility of items in the <strong>Approval Worklist</strong> is aligned with the actual workflow status.</p>
+<p>Non-Partial Approval</p>
+<p>For non-partial approval scenarios:</p>
+<ul type="disc">
+<li>A posting appears in an approver’s <strong>My Items</strong> <strong>only when the workflow reaches that approver’s level</strong>.</li>
+<li>Once an approver completes their action, the item is automatically removed from their <strong>My Items</strong> list.</li>
+</ul>
+<p>Partial Approval</p>
+<p>For partial approval scenarios:</p>
+<ul type="disc">
+<li>A posting appears in an approver’s <strong>My Items</strong> when <strong>any document within the group requires action</strong> from that approver.</li>
+<li>Multiple approvers may see the same group in their worklists if actions are pending at different approval levels for different documents.</li>
+</ul>
+<div class="MsoNormal"></div>
+<h3 data-toc-skip="">Example</h3>
+<p>Consider a group containing <strong>5 documents</strong> with <strong>3 approval levels</strong>:</p>
+<ul type="disc">
+<li><strong>Approver 1</strong> approves <strong>Document 1</strong>.</li>
+<li>The remaining <strong>4 documents</strong> still require <strong>Approver 1’s</strong> approval, while <strong>Document 1</strong> now requires <strong>Approver 2’s</strong>approval.</li>
+</ul>
+<p><strong>Resulting Worklist Visibility:</strong></p>
+<ul type="disc">
+<li>The item appears in <strong>Approver 1 – My Items</strong> (action pending on 4 documents).</li>
+<li>The item also appears in <strong>Approver 2 – My Items</strong> (action pending on 1 document).</li>
+</ul>
+<p>Once <strong>Approver 2</strong> approves <strong>Document 1</strong>:</p>
+<ul type="disc">
+<li>The item appears in <strong>Approver 3 – My Items</strong>.</li>
+<li>The item is removed from <strong>Approver 2 – My Items</strong>, as no further action is pending for that approver within the group.</li>
+</ul>
+<div class="MsoNormal"></div></div></div></div></div>

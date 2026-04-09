@@ -1,0 +1,69 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">Couldn't add a Bank info to an existed BP with i_businesspartnertp_3 </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>S/4HANA Cloud</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>configuration issue</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li><strong>Create BP with one bank record</strong></li></ol>
+<p><strong> </strong></p>
+<p>DATA create_partner TYPE TABLE FOR CREATE I_BusinessPartnerTP_3.</p>
+<p>create_partner = VALUE #( (</p>
+<p>                          %cid = 'bp1'</p>
+<p>                           BusinessPartnerCategory = 1</p>
+<p>                           %control-BusinessPartnerCategory = if_abap_behv=&gt;mk-on</p>
+<p>                           BusinessPartnerGrouping = '0001'</p>
+<p>                           %control-BusinessPartnerGrouping = if_abap_behv=&gt;mk-on</p>
+<p>                           FirstName = 'xxxx'</p>
+<p>                           %control-FirstName = if_abap_behv=&gt;mk-on</p>
+<p>                           LastName  = 'xxxxx'</p>
+<p>                           %control-LastName = if_abap_behv=&gt;mk-on</p>
+<p>                           SearchTerm1 = 'BP3_TESTING'</p>
+<p>                           %control-SearchTerm1 = if_abap_behv=&gt;mk-on</p>
+<p>                            ) ).</p>
+<p> </p>
+<p>MODIFY ENTITIES OF i_businesspartnertp_3</p>
+<p>    ENTITY BusinessPartner</p>
+<p>        CREATE FROM create_partner</p>
+<p>        CREATE BY \_BusinessPartnerBank</p>
+<p>        SET FIELDS WITH VALUE #( (</p>
+<p>                                             %cid_ref = 'bp1'</p>
+<p>                                             %target = VALUE #(</p>
+<p>                                                (</p>
+<p>                                                %cid = 'bp1_1'</p>
+<p>                                                BankIdentification = '0001'</p>
+<p>                                                BankCountryKey = 'DE'</p>
+<p>                                                BankNumber = '10000000'</p>
+<p>                                                IBAN = '123456710'</p>
+<p>                                                )</p>
+<p>                                                              )</p>
+<p>                                            ) )</p>
+<p>MAPPED DATA(mapped)</p>
+<p>    REPORTED DATA(reported)</p>
+<p>    FAILED DATA(failed).</p>
+<p>COMMIT ENTITIES</p>
+<p>RESPONSE OF i_businesspartnertp_3</p>
+<p>     FAILED DATA(failed_commit)</p>
+<p>     REPORTED DATA(reported_commit).</p>
+<p><strong>2.Add one more bank into existing BP</strong></p>
+<p><strong> </strong></p>
+<p>MODIFY ENTITIES OF i_businesspartnertp_3 ENTITY BusinessPartner</p>
+<p> </p>
+<p>        CREATE BY \_businesspartnerbank</p>
+<p>        FROM VALUE #( ( BusinessPartner = '0000605941'</p>
+<p>                                            %target = VALUE #(</p>
+<p>                                                (</p>
+<p>                                                %cid = 'bank1'</p>
+<p>                                                BusinessPartner = '0000605941'</p>
+<p>                                                %control-BusinessPartner = if_abap_behv=&gt;mk-on</p>
+<p>                                                BankIdentification = '0002'</p>
+<p>                                                %control-BankIdentification = if_abap_behv=&gt;mk-on</p>
+<p>                                                BankCountryKey = 'DE'</p>
+<p>                                                %control-BankCountryKey = if_abap_behv=&gt;mk-on</p>
+<p>                                                BankNumber = '1000000xx'</p>
+<p>                                                %control-BankNumber = if_abap_behv=&gt;mk-on</p>
+<p>                                                IBAN = '1234561xx'</p>
+<p>                                                %control-IBAN = if_abap_behv=&gt;mk-on</p>
+<p>                                                )</p>
+<p>                                                              )</p>
+<p>                                            ) )</p>
+<p>MAPPED DATA(mapped)</p>
+<p>    REPORTED DATA(reported)</p>
+<p>    FAILED DATA(failed).</p>
+<p> </p>
+<p>COMMIT ENTITIES RESPONSE OF i_businesspartnertp_3</p>
+<p>FAILED data(failed_commit)</p>
+<p>REPORTED DATA(reported_commit).</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Bank info, i_businesspartnertp_3, business partner</p></div></div></div></div>

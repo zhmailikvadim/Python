@@ -1,0 +1,113 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When running <strong>Cálculo de nómina española</strong> (RPCALCE0) report on the<strong> Pagas Extras (cálculo parte de derecho) </strong>(SPA) payroll function for an employee with hiring date set on <strong>Datos de Fecha</strong> (0041) infotype different than the Hiring event date from <strong>Medidas</strong> (0000) infotype,  SPA wrongly generates the number of days for <strong>Indemnización finiquitos</strong> (M717) and <strong>Ind. despido improcedente</strong> (M719) wage types.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>&amp;CALC; (further information see note 1071282)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The issue is caused by a program error.<br/>The <strong>Datos de Fecha</strong> for a date type relevant for the T530C configuration was not considered.</p>
+<p><br/>The following Support Package level is the minimum prerequisite:<br/><br/></p>
+<div class="table-responsive"><table border="2" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>4.70</td>
+<td>HR SP E8</td>
+</tr>
+</tbody>
+</table></div>
+<p>(For more information, click on "R/3 HR Support Package Schedule" in www.service.sap.com/ocs-schedules.)</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Corrections to source code of RPCSPAE5 include have been provided to solve this issue.<em></em></p>
+<p>From now on whenever the employee has an date on 0041 infotype, that is also configured to M717/M719, and this date is different than the entry date on <strong>Medidas</strong> (0000) infotype, it will be calculated the M717 and M719 according to the criteria of SAP Note 1711630.<em></em></p>
+<p>Example:</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td valign="top" width="132">
+<p>Date of law change<br/>(example)</p>
+</td>
+<td valign="top" width="132">
+<p>Hire date<br/>(on <strong>Datos de Fecha</strong>)</p>
+</td>
+<td valign="top" width="105">
+<p>Month/year for payroll</p>
+</td>
+<td valign="top" width="115">
+<p style="padding-left: 30px;">M717</p>
+</td>
+<td valign="top" width="97">
+<p style="padding-left: 30px;">M719</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="132">
+<p>12.02.2012</p>
+</td>
+<td valign="top" width="132">
+<p>12.02.2011</p>
+</td>
+<td valign="top" width="105">
+<p>01/2012</p>
+</td>
+<td valign="top" width="115">
+<p>365</p>
+</td>
+<td valign="top" width="97">
+<p>0</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="132">
+<p>12.02.2012</p>
+</td>
+<td valign="top" width="132">
+<p>12.02.2013</p>
+</td>
+<td valign="top" width="105">
+<p>02/2015</p>
+</td>
+<td valign="top" width="115">
+<p>0</p>
+</td>
+<td valign="top" width="97">
+<p>1.142</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="132">
+<p>12.02.2012</p>
+</td>
+<td valign="top" width="132">
+<p>12.02.2011</p>
+</td>
+<td valign="top" width="105">
+<p>02/2015</p>
+</td>
+<td valign="top" width="115">
+<p>365</p>
+</td>
+<td valign="top" width="97">
+<p>1.142</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p> </p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td colspan="2">VERSIONING</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Released</td>
+</tr>
+</tbody>
+</table></div>
+<p>As general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, proceed as follows:</p>
+<ol>
+<li>Use Note Assistant (SNOTE) to implement the correction instructions</li>
+</ol>
+<p>You can find more information about the Note Assistant in SAP Service Marketplace, under service.sap.com/note-assistant.<br/><br/><br/>To avoid problems with retroactivity the changes were sheltered with the protect correction 'NOTE' '2145905' on table T5F99VD. For further information see note 515323.</p></div></div></div></div>

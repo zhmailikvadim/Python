@@ -1,0 +1,40 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>A custom form is defined in a model extension for PdPDM.Column and is used to replace the General tab in the property sheet of the metaclass.</li>
+<li>Editing any column it does not display the customized General tab, but the one defined in the DBMS resource file under Profile\Column\Forms\General.</li>
+<li>The target DBMS is ORACLE Version 12c.</li>
+<li>It does not happen if the target DBMS is ORACLE Version 11g.</li>
+</ul>
+<p><span style="color: #ff0000;"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em></span></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP PowerDesigner (PD) 16.6</li>
+<li>ORACLE Version 12c</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Select <strong>File &gt; New Model</strong> to open the New Model dialog.</li>
+<li>Select <strong>Physical Data Model</strong> in the left-hand pane.</li>
+<li>Select <strong>Physical Diagram</strong> in the right-hand pane.</li>
+<li>Select <strong>ORACLE Version 12c</strong> in the list DBMSs.</li>
+<li>Click <strong>OK</strong>.</li>
+<li>Select <strong>Model &gt; Extensions</strong> to open the List of Extensions.</li>
+<li>Click the <strong>Add a Row</strong> tool and enter a name for the new extension file.</li>
+<li>Click the <strong>Properties</strong> tool to open the new extension file in the Resource Editor.</li>
+<li>Right-click the <strong>Profile</strong> category and select <strong>Add Metaclasses</strong>.</li>
+<li>Select <strong>Column</strong> and click <strong>OK</strong> to close the Metaclass Selection dialog.</li>
+<li>Right-click the<strong> Profile\Column</strong> category, and select <strong>New &gt; Form</strong>.</li>
+<li>Choose <strong>Replace General Tab</strong> in the list of types, and customize the form.<br/><br/><br/><img alt="KBA 2324732_1.png" class="img-responsive" src="/documents/customerkba/-Vp7ZKu1AcWy0LJYMmmQa18_2PwP7qa-kYuaFiA89xo" title="KBA 2324732_1.png"/><br/><br/><br/></li>
+<li>Click <strong>OK</strong> to close the model extension.</li>
+<li>Click <strong>OK</strong> to close the list of extensions.</li>
+<li>Click the <strong>Table</strong> tool from the toolbox to create one table.</li>
+<li>Double-click the table to edit it and click the <strong>Columns</strong> tab.</li>
+<li>Click the <strong>Insert a Row</strong> or <strong>Add a Row</strong> tool to create a column.</li>
+<li>Click the <strong>Properties</strong> tool to open the property sheet.<br/><br/><img alt="KBA 2324732_2.png" class="img-responsive" src="/documents/customerkba/G_D2BXGXYTVDjeWUQ1gXuEi_rnve4FD3YDnViucewl4" title="KBA 2324732_2.png"/></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The issue has been identified and logged under <strong>CR 799328</strong>.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p><strong>CR 799328</strong> has been solved in SAP PowerDesigner 16.6 SP00 PL02.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>XEM, XDB, ORA12C, ORA11GR1, 799328, CR799328</p></div></div></div></div>

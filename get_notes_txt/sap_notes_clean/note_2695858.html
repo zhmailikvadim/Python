@@ -1,0 +1,44 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>
+<div>Accounting integration between a Project Management project and a Project System project fails.</div>
+</li>
+<li>Transaction COCPCPR (Controlling Cockpit) shows error message "Object PSP-Element XXX could not be changed" (Message no. CNIF_PI018).</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Portfolio and Project Management (PPM)</li>
+<li>SAP Portfolio and Project Management for SAP S/4HANA (PPM)</li>
+<li>SAP Portfolio and Project Management in SAP S/4HANA (PPM)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<div>Accounting integration between Project Management and Project System is set up on your system and works.</div>
+</li>
+<li>
+<div>Your PPM project has status replicated and transferred to PS.</div>
+</li>
+<li>
+<div>You carry out some change in the PPM project and save the project.</div>
+</li>
+<li>
+<div>You notice that accounting integration for this project fails.</div>
+</li>
+<li>
+<div>You check transaction COCPCPR to identify the cause of the failed integration. Here you can see that error message "Object PSP-Element XXX could not be changed" is shown for your project. This error message however is generic and does not inform you of the root cause.</div>
+</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>
+<div>One possible reason for this system behaviour is that the duration of some project element (e.g. task) which should be replicated to Project System is too long and causes a program overflow during scheduling in Project System.</div>
+</li>
+<li>
+<div>The underlying restriction and root cause is on Project System (PS) side, as the issue occurs within the processing of the BAPI to update the PS project. The limitation concerning the duration of PS projects reflects a fundamental restriction in ERP, which concerns not only PS, and which is documented e.g. in SAP note <a href="https://me.sap.com/notes/49257" target="_blank">49257</a>. The restriction can easily be seen by e.g. manually setting a finish date past year 2048 for a project in transaction CJ20N: this will lead to an error message CJ012 "Finish date must be earlier than 19.01.2048".</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Ensure that the project elements in the PPM project (e.g. tasks, roles, phases) do not have durations which exceed the aforementioned limitation (i.e. the finish date of which is past year 2048). Afterwards schedule the project before saving it.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>CNIF_PI 018, Date is not defined in factory calendar, not transferred, BAPI_BUS2054_CHANGE_MULTI, element_not_changed, Fabrikskalender</p></div></div></div></div>

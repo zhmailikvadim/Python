@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Runtime Error ASSERTION_FAILED is raised when running CALCULATE CONTRACT LIABILITIES AND ASSETS (Program B)</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Revenue Accounting (RA).</li>
+<li>Financial Accounting (FI).</li>
+<li>SAP ERP Central Component.</li>
+<li>SAP ERP.</li>
+<li>SAP enhancement package for SAP ERP.</li>
+<li>SAP enhancement package for SAP ERP, version for SAP HANA.</li>
+<li>SAP S/4HANA. </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li><span style="font-size: 14px;">Execute program </span><span style="font-size: 14px;">CALCULATE CONTRACT LIABILITIES AND ASSETS (PROGRAM B) - T-Code: FARR_LIABILITY_CALC and dump is generated&gt;</span></li>
+</ol>
+<p>Runtime Errors: ASSERTION_FAILED<br/>ABAP Program: CL_FARR_CALC_LIAB_ASSET=======CP</p>
+<p>Information on where terminated<br/> The termination occurred in ABAP program or include<br/> "CL_FARR_CALC_LIAB_ASSET=======CP", in<br/> "IF_FARR_CALC_LIAB_ASSET~CALC_LIAB_ASSET_POSTED_ON_CONT". The<br/> main program was "RBANK_PROC_START".</p>
+<p>In the source code, the termination point is in line 74 of program or<br/> include "CL_FARR_CALC_LIAB_ASSET=======CM009".<br/> Program "CL_FARR_CALC_LIAB_ASSET=======CP" was started as a background job.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p id="">The dump is caused by missing customizing.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Please follow these steps to add the missing customizing:</p>
+<ol>
+<li>Run transaction FARR_IMG</li>
+<li>Run the activity Revenue Accounting Contracts -&gt; Configure Accounting Principle-specific Settings</li>
+<li>Set up Contract Balance Presentation (column called Presentat.). Select suitable option for you (either Unbilled Receivable/Deferred Revenue or Contract Liability/Contract Asset).</li>
+<li>Save the customizing</li>
+<li>Run the contract asset/liability calculation again.</li>
+</ol>
+<p>The asset/liability should be calculated without dump</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>CALCULATE CONTRACT LIABILITIES AND ASSETS, Program B, Dump, Runtime Error,  ASSERTION_FAILED, CL_FARR_CALC_LIAB_ASSET, FARR_LIABILITY_CALC, CALC_LIAB_ASSET_POSTED_ON_CONT</p></div></div></div></div>

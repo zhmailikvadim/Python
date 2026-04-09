@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When sale order settlement is executed with background job for program RKO7VA88, it fails with error message BL252:</p>
+<p> "Message number 999999 reached. Log is full"</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Financial Accounting (FI)</li>
+<li>Controlling (CO)</li>
+<li>SAP R/3</li>
+<li>SAP R/3 Enterprise 4.7</li>
+<li>SAP ERP Central Component</li>
+<li>SAP ERP</li>
+<li>SAP enhancement package for SAP ERP</li>
+<li>SAP enhancement package for SAP ERP, version for SAP HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Execute SE38 with Program RKO7VA88;</li>
+<li>Input "Controlling Area" and Continue;</li>
+<li>Input the relevant parameters and then choose menu: Program-&gt; Execute in Background;</li>
+<li>In T-code: SM37, it is observed that the job exeucted in step 3 has status 'Canceled';</li>
+<li>Error message BL252 is found in the 'Job log' at the bottom.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>This is a technical restriction to have not more than 999.999 messages filled into the system log.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>T-code SLG2 should be used to delete old log messages. (See SAP Note <a href="https://me.sap.com/notes/195157" target="_blank">195157</a> Application log: Deletion of logs）</li>
+<li>For unnecessary customizable information messages, it can be suppressed in T-code OBA5 &gt; Application area "KD".</li>
+<li>Set the flag ‘Check transaction data’ in the selection screen of settlement report RKO7VA88. This will extremely reduce the number of error message KD205. (See SAP Note <a href="https://me.sap.com/notes/197561" target="_blank">197561</a>)</li>
+</ol></div></div></div></div>

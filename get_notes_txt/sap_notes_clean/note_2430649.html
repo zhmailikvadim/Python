@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>ASE tables having roundrobin partition scheme shows data skew.</li>
+<li>Need to remove the data skew and rebalance the partitions.</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Adaptive Server Enterprise (ASE)</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Use one of the following options:</p>
+<p>Option 1: Re-partition the table using the ALTER TABLE command:</p>
+<ol>
+<li>alter table &lt;tablename&gt; partition by roundrobin 1</li>
+<li>alter table &lt;tablename&gt; partition by roundrobin &lt;number_of_partitions&gt;</li>
+</ol>
+<p>Option 2: Create and drop a clustered index on the table. </p>
+<p>Option 3: Re-create the table using the SELECT INTO command:</p>
+<ol>
+<li>select * into &lt;temp_tablename&gt; from &lt;tablename&gt;</li>
+<li>drop table &lt;tablename&gt;</li>
+<li>select * into &lt;tablename&gt; partition by roundrobin &lt;number_of_partitions&gt; from &lt;temp_tablename&gt;</li>
+</ol>
+<p>Option 4: Reload the data into the table using the BCP utility:</p>
+<ol>
+<li>bcp out the table data to a file</li>
+<li>truncate the table</li>
+<li>decide the from and to range of the datafile for different partitions so that rows are more or less equally divided</li>
+<li>bcp in with slice number and first and last row from the data file for the partition decided in the above step</li>
+</ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>alter, re-partition, repartition, create, recreate, bcp, load, reload, clustered, index</p></div></div></div></div>

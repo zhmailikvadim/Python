@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li><span>The list of all audit events includes "Truncation of Audit Table" as event 58</span></li>
+<li><span>However, no audit logs are generated for this option even when it is configured.</span></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Adaptive Server Enterprise (ASE)</li>
+<li>Auditing</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>Configure ASE to audit event 58.</p>
+<p>Execute either of the following commands that perform audit table truncation and note that no audit record was generated for event 58</p>
+<ul>
+<li>1&gt; truncate table sysaudits_01<br/>2&gt; go</li>
+<li>1&gt; sp_configure "current audit table",2,'with truncate'<br/>2&gt; go</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p class="longtext" style="font-size: 100.01%;">The issue has been identified and logged under SAP <strong>CR 640973</strong>. Its description reads, "No audit records are produced for audit event 58 when it is configured and an audit table is truncated."</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>CR 640973 is fixed in:</p>
+<ul>
+<li><span style="font-size: 14.0014px;">SAP ASE 16.0 SP03 PL07</span> </li>
+</ul>
+<p>Workaround:</p>
+<ul>
+<li>Audit table truncation can be tracked as a generic truncate table operation via event id 64.</li>
+</ul>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p><em> </em>Sybase, ASEServer, SAPASE, dataserver, auditing, audit table, truncate, audit event 58, truncation of audit table</p></div></div></div></div>

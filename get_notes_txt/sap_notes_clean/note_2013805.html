@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>
+<div>Unable to publish documents created in the version of Web Intelligence Rich Client installed via the BI launch pad if Auditing Set Events is not enabled in the Central Management Console (CMC).</div>
+</li>
+<li>While Saving to the corporate server, an error message appears:</li>
+<ul style="list-style-type: none;">
+<li>Could not save the document to the repository for the following reason: [repo_proxy 17]</li>
+<li></li>
+<li>SessionFacade::sendAuditEvents - (com.crystaldecisions.sdk.exception.SDKException$EventTypeDisabled:Event Type1008 is disabled (FWM 02073)) [repo_bridge -BridgeSessionFacade::sendAuditEvents] (WIS 30567)”</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Web Intelligence Rich Client, publishing</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Steps to Reproduce:</strong></p>
+<ol>
+<li>Log into the CMC.</li>
+<li>Go to “Auditing”.</li>
+<li>Slide the slider to either Custom or Minimal under “Set Events”.<br/>Note: If setting to custom, uncheck “Save” option.</li>
+<li>Click Save and log out of the CMC.</li>
+<li>Login to the Web Intelligence Rich Client installed via the BI launch pad.<br/>Note: The issue does not occur in Web Intelligence Rich Client installed via the SAP BI Platform CD.<br/>This Issue occurs with all users once the Save option is removed, including the Administrator.</li>
+<li>Create or open a document.</li>
+<li>Attempt to save to it to the corporate server, either to My Favorites or Public Folder).<br/>The following error message appears:</li>
+<ol style="list-style-type: none;">
+<li>Could not save the document to the repository for the following reason: [repo_proxy 17]</li>
+<li></li>
+<li>SessionFacade::sendAuditEvents -<br/>(com.crystaldecisions.sdk.exception.SDKException$EventTypeDisabled:Event Type1008 is disabled (FWM 02073)) [repo_bridge -<br/>BridgeSessionFacade::sendAuditEvents] (WIS 30567)</li>
+<li></li>
+</ol>
+<li>Log into the BI launch pad or Import documents via Web Intelligence Rich Client, and see that the report was saved, despite the error message.</li>
+</ol>
+<p>The reason for the undesired behavior is an error in the audit event management.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Update your BI Platform Server and Client installations to an Support Package, Patch or Release where the issue is fixed.</p>
+<p>See the Support Packages &amp; Patch section for details and available patches.</p></div></div></div></div>

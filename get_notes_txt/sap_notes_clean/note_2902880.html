@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The sample Customizing delivered in client 000 has the following shortcomings:</p>
+<ol>
+<li>Until now, the ELM WHT return could be mapped only for one of the two example enterprises using the sample Customizing.</li>
+<li>The example values for enterprise numbers have an invalid structure.</li>
+<li>The location in the example entry for the work center does not match the postal code. </li>
+</ol>
+<p> </p>
+<p style="padding-left: 30px;"><strong>Update on 10/20/2020:<br/></strong>After you import the HR Support Package specified in this SAP Note, the system may issue the error message "No wages found - notification cannot be created" when you create the WHT notification (see "Solution" section).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Payroll Switzerland<br/>Uniform wage notification procedure (ELM)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Sample Customizing</p>
+<p>The changes affect only the sample Customizing in client 000. This means that you do not need these changes for productive use.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Import the HR Support Package specified for your release to update the sample Customizing in client 000.</p>
+<p><span style="text-decoration: underline;">Content of the change:</span></p>
+<ol>
+<li>Sample Customizing for the WHT return with the example enterprise 0002 (additional payroll units (view <span class="SNO_DNT" style="float: none;" translate="no">V_T5C2Q</span>), institutions (view <span class="SNO_DNT" style="float: none;" translate="no">T5C52</span>), adjustment of characteristic <span class="SNO_DNT" style="float: none;" translate="no">CHFID</span> and assignment to enterprise (view <span class="SNO_DNT" style="float: none;" translate="no">V_T5C51</span>)).</li>
+<li>Formally valid values for enterprise numbers of the example enterprises 0001 and 0002 (view <span class="SNO_DNT" style="float: none;" translate="no">V_T5CSL</span>).</li>
+<li>A location matching the postal code in the sample entry for the work center (view <span class="SNO_DNT" style="float: none;" translate="no">V_T5CSW</span>).</li>
+</ol>
+<p> </p>
+<p style="padding-left: 30px;"><strong>Update on 10/20/2020:<br/></strong>If you have not created a customer-specific working version of the characteristic <span class="SNO_DNT" style="float: none;" translate="no">CHFID</span> before importing the HR Support Package during the setup of the WHT notification, but you have used the standard version productively, the delivered adjustment of the decision tree of the standard characteristic becomes effective in your system after you import the HR Support Package. <br/>In general, this causes unwanted changes in the assignment of employees to payroll units and consequently, the error message mentioned in the "Symptom" when creating the WHT notification: In this case, create a working version or modified version of the characteristic after importing the HR Support Package (or, if possible, earlier) and adjust the decision tree to meet your requirements. Creating a working version protects the decision tree adjusted to your requirements against overwriting or undesired effects after importing future HR Support Packages, since these only overwrite the standard version but not your working version. See also the documentation "<a href="https://help.sap.com/viewer/c6c3ffd90792427a9fee1a19df5b0925/LATEST/de-DE/f1a0e2539c70424de10000000a174cb4.html" target="_blank">Environment of characteristic maintenance</a>".</p></div></div></div></div>

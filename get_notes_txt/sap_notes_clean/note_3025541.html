@@ -1,0 +1,171 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The country version Switzerland currently supports ELM (standardized wage notification procedure) for ELM Version 4.0 only.<br/>You require information about the content and availability of the planned changes for ELM Version 5.0.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Payroll Switzerland<br/>Employee Central Payroll (ECP) / SAP SuccessFactors<br/>Standardized wage notification procedure (ELM)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note provides information about the planning and delivery of the program changes required to transfer wage data in accordance with the new Version 5.0 of the uniform wage notification procedure (ELM) in the HCM country version Switzerland.</p>
+<p>This SAP Note is currently relevant for you only if you want to find out about the changes planned in the future.</p>
+<p><span style="text-decoration: underline;"><span style="text-decoration: underline;">Details:</span></span></p>
+<p>As of today (March 8, 2021), you do not need to take any urgent action: Swissdec is planning on being able to receive productive wage notifications in accordance with Version 5.0 only as of 2022 at the earliest. From this date onward, it is intending to allow parallel operation with the currently supported Version 4.0 for a transition period. Swissdec is planning for the final version of the complete specification required for certification (including certification test cases) to be available as of Q2/2021 at the earliest.</p>
+<p>As a customer, you will still be able to perform a transfer using Version 4.0 after the formal validity period of the existing ELM 4.0 product certification for SAP has expired<strong><sup>1</sup></strong>. In consultation with Swissdec, instead of working toward recertification of the old standard 4.0, we are aiming to provide a new development and achieve certification for Version 5.0 as a next step.</p>
+<p>We are planning to continually update this SAP Note with details of changes/further developments in the planning and partial delivery of (possibly testable but not productively usable) updates until a certified and productively usable status is achieved.</p>
+<p style="padding-left: 30px;"><strong>Update on 2/21/2022:</strong></p>
+<p style="padding-left: 30px;">The complete specification required for certification, including certification test cases for ELM V5.0, is finally available in the final version in accordance with information from swissdec dated February 4, 2022. <br/>We are currently planning to sign the certification agreement with swissdec in the first half of 2022 with the aim of completing the certification for ELM 5.0 by the end of Q2/2023, so that you can implement and test <strong>probably as of Q3/2023</strong>, and report productively with ELM 5.0 as of January 1, 2024.<br/>This planning can stilll shift in both directions, depending on the general resource situation/certification availability at swissdec, our implementation progress, and any other changing framework conditions, such as short-term legal changes.<br/><br/></p>
+<p style="padding-left: 30px;"><strong><sup>1</sup>Update on 1/16/2023:</strong></p>
+<p style="padding-left: 30px;">According to the swissdec news article <em>"Deactivation of ELM V4.0"</em> dated 1/13/2023, swissdec plans to discontinue the receiving capability for ELM Version 4.0 in the <br/>future:</p>
+<ul>
+<ul>
+<li><em><span style="font-size: 14px;">"12/31/2025 is the last possible date for an ELM 4.0 transfer of withholding tax accounting"</span></em></li>
+<li><em><span style="font-size: 14px;">  6/30/2026 is the last possible date for an ELM 4.0 transfer of all other domains"</span></em></li>
+</ul>
+</ul>
+<p style="padding-left: 60px;">[see: <a href="https://www.swissdec.ch/blog/standards-11/abschaltung-elm-v4-0-1" target="_blank">https://www.swissdec.ch/blog/standards-11/abschaltung-elm-v4-0-1</a>].</p>
+<p style="padding-left: 30px;">As of the deactivation of ELM 4.0 at the latest, you must implement the planned program changes for the new version ELM 5.0 so that you can continue to send electronic notifications to the relevant domains by means of ELM. <br/><br/></p>
+<p style="padding-left: 30px;"><br/><strong>Update on 8/29/2023:</strong><br/><br/></p>
+<ul>
+<li>The SAP HCM localization Switzerland has been <strong>ELM 5 certified since calendar week 34/2023</strong> (onPremise and Cloud products (EC, ECPay)).<br/>This formally entitles you to participate in the ELM 5.0 wage notification procedure with the SAP software.</li>
+<li>With related SAP Note <a href="/notes/3367097" target="_blank">3367097</a>, you receive the electronic <strong>ELM 5.0 transmitter certificate</strong> issued by swissdec for SAP.<br/>This also enables you technically (together with the other extensive program changes) to send a correctly signed ELM 5.0 notification (as well as status requests, result requests, and responses to dialog requests) to the distributor and to decrypt the received responses.<br/>SAP Note <a href="/notes/3353448" target="_blank" title="3353448 - ELM 5.0: Partial delivery/B2A - additional standard configuration for document type 0005">3353448</a> contains rudimentary information about how to configure the transmitter in advance.</li>
+<li>With the previously published ELM 5.0 SAP Notes, you mainly receive the status used for the certification tests.<br/>The list of SAP Notes in the "Solution" section under "Previous Partial Deliveries" has also been enhanced with this SAP Note update. </li>
+<li>However, we still expect post-implementation steps/subsequent deliveries:</li>
+<ul>
+<li>This week (CW35, 2023), swissdec plans updates to the wage standard description ELM 5.0, which may still require <strong>subsequent deliveries</strong> (in particular, in the areas of cross-border employees, wage statements, and concurrent employment).</li>
+<li>We are currently working on an <strong>update of the Implementation Guide</strong> with a separate new chapter for ELM 5.0, which you can use to set up ELM 5.0 completely (planned SAP Note number: 3276736). We plan to provide you with the next <strong>HR Sync Package</strong> at the <strong>latest</strong> (planned availability according to <span class="SNO_DNT" style="float: none;" translate="no"><a href="http://support.sap.com/hrsp" target="_blank">HR SP Schedule</a></span>: <strong>11/9/2023</strong>).</li>
+</ul>
+<li><strong>We therefore generally recommend that you schedule the import of the next HR Sync Package and then configure ELM 5.0 using the implementation guide that will then be available.</strong><br/> <br/>Due to the scope and incomplete documentation, we do not recommend that you make use of the theoretical option to implement and set up ELM 5.0 with SAP Notes. However, if you want to test in advance, you should use a current HR Support Package so that most of the ELM 5.0 SAP Notes are already contained. You must also expect that you may have to identify missing Customizing entries and master data using the explanations in the SAP Note texts (or even using the debugger) as long as the IMG is not yet complete (that is, only possible for technically very experienced persons). <br/><br/></li>
+<li>Note on <span class="SNO_DNT" style="float: none;" translate="no">"Minor-Version"</span> ELM 5.1: As described in the document "<em>Addition to Guidelines for Wage Standard CH (ELM) Version 5.1</em>" of <a href="https://www.swissdec.ch/elm" target="_blank">swissdec</a>, the difference to the <span class="SNO_DNT" style="float: none;" translate="no">"Major-Version"</span> ELM 5.0 or ELM 5 with regard to the electronic notification consists only in two additional fields in the annual notification of the domain AHV/ALV ("AHV Payroll"). These fields are to be transferred for the first time as of 1/1/2024 and are related to the revision "<span class="SNO_DNT" style="float: none;" translate="no">AHV21</span>": <br/><br/><ul>
+<li>AHV Basis (XML tag <span class="SNO_DNT" style="float: none;" translate="no">&lt;AHV-AVS-BaseSalary&gt;</span>)</li>
+<li>Information that the exemption amount was waived (XML tag <span class="SNO_DNT" style="float: none;" translate="no">&lt;WaiveOfPensionDeduct&gt;</span>)</li>
+</ul><br/>We are planning to deliver this adjustment (among other changes required as of 2024 as part of AHV21, in particular: Payroll) with the year-end legal change 2023/24 (see SAP Note <a href="/notes/3310430" target="_blank">3310430</a>). <br/>Note the following: For <span class="SNO_DNT" style="float: none;" translate="no">Minor-</span>versions as opposed to <span class="SNO_DNT" style="float: none;" translate="no">Major-</span>versions, swissdec provides only for tests of the new features, but not for a new complete certification (also see the document "<em>Concept Release Process for Standards</em>" of swissdec).<br/>In particular, the transmitter certificate that has been technically set up and used for signature and decryption for ELM 5.0 remains the same, as well as the transmitted certificate number for all Minor releases of ELM 5.0 (including ELM 5.1).<br/><br/></li>
+</ul>
+<p style="padding-left: 30px;"><strong>Update on 11/22/2023:<br/><br/></strong>The program changes for Version 5.1 / AHV21 and final enhancements to the Implementation Guide for ELM 5 will be contained in the HR Support Package for the year-end legal change Switzerland 2023/2024 (see List of HR Support Packages in the "Symptom" section of SAP Note <a href="/notes/3310430" target="_blank">3310430</a>).<br/><br/>The new Implementation Guide for ELM 5 is available only by HR Support Package:</p>
+<ul>
+<ul>
+<li>The HR Sync Package specified in SAP Note <a href="/notes/3276736" target="_blank">3276736</a> (available as of 11/9/2023) contains most of the program changes and a version of the ELM 5 IMG that is already sufficiently complete for configuration.</li>
+<li>In addition to the year-end legal change, the HR Support Package specified in SAP Note <a href="/notes/3310430" target="_blank">3310430</a> (expected to be available as of 12/7/2023) contains other program changes required to start with ELM 5.1 (for AHV21, for example) and slight improvements to the ELM 5 IMG for customers who already use ELM 4.0 (such as additional comments if you can skip an IMG step for ELM 5 if ELM 4.0 is already configured).</li>
+</ul>
+</ul>
+<p style="padding-left: 30px;">For simple configuration of ELM 5, we therefore recommend that you import at least the HR Sync Package specified in SAP Note <a href="/notes/3276736" target="_blank">3276736</a> (better still, import the subsequent HR Support Package in accordance with SAP Note <a href="/notes/3310430" target="_blank">3310430</a>) and then use the new ELM 5 IMG to set it up. (Path: "<em>Payroll: Switzerland -&gt; Communication with Authorities (B2A) -&gt; Uniform Wage Notification Procedures (ELM 5.0)</em>"): <br/>If you import only up to the HR Sync Package, use transaction SNOTE to implement at least the program changes for ELM 5 contained in the subsequent package.<br/><br/>It may also be technically possible to use lower HR Support Package levels for ELM 5, but due to the scope of the SAP Notes to be implemented then, this is not recommended and there are related restrictions (no IMG, missing optional elements for usability such as ALV layouts) and potentially technical problems during the implementation of this SAP Note.<br/><br/>We plan to link later SAP Notes as part of maintenance for ELM 5 to this SAP Note as a reference.</p>
+<p style="padding-left: 30px;">Consulting note <a href="/notes/3392567" target="_blank">3392567</a> ("ELM 5.0: Upgrade ELM 4.0 to ELM 5.x - Description of Changes") contains an overview of the changes between ELM 4.0 and ELM 5 from a functional point of view.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong><span style="text-decoration: underline;">Planned content</span></strong></p>
+<p>Certification of ELM 5.0 and required changes and enhancements in the system as of and including SAP_HR 6.04.<br/>For SAP_HR 6.00 or lower, an update to at least SAP_HR 6.04 is required (see SAP Note <a href="/notes/2955338" target="_blank">2955338</a>).</p>
+<p>We expect the following changes<span style="text-decoration: underline;">:</span></p>
+<ul>
+<ul>
+<li>B2A Manager: New document category for ELM 5.0 with updated process control </li>
+<li>Adjustments in the transmitter to enable transfers also to be made in accordance with the technical specification for ELM 5.0.</li>
+<li>New function to enable "dialog messages" to be swapped with the end recipients during the notification process.</li>
+<li>Extensive adjustments and enhancements to master data, Customizing, payroll, data retrieval, and XML generation for the following domains:</li>
+<ul>
+<li>AHV/ALV</li>
+<li>UVG</li>
+<li>KTG</li>
+<li>UVGZ</li>
+<li>FAK</li>
+<li>LAW/tax</li>
+<li>WHT</li>
+<li>Cross-border employees (new domain as of ELM 5.0)</li>
+<li>Statistics</li>
+</ul>
+</ul>
+</ul>
+<p style="padding-left: 60px;">Comments:</p>
+<ul>
+<ul>
+<ul>
+<li>
+<div>﻿As before, the domain BVG is not supported with ELM 5.0.</div>
+</li>
+<li>The new guidelines and specifications for ELM 5.0 can be viewed at <a href="http://www.swissdec.ch/" target="_blank">www.swissdec.ch</a>.</li>
+</ul>
+</ul>
+</ul>
+<p><strong><span style="text-decoration: underline;"><span style="text-decoration: underline;"><strong>Partial deliveries to date</strong></span></span></strong></p>
+<ul>
+<li><a href="/notes/2906976" target="_blank">2906976</a><strong> - QST21/ELM 5.0: Harmonized withholding tax calculation according to month or year model (2021)</strong><br/>This composite SAP Note for the WHT calculation in accordance with ELM 5.0 contains the relevant partial deliveries under the related SAP Notes. The adjustment of the WHT calculation in accordance with the specifications for ELM 5.0 as of 1/1/2021 is largely completed. <br/>Note the following: As before, the WHT notification is still reported in accordance with ELM 4.0. Only when the ELM 5.0 certification is completed will a WHT notification be possible in accordance with the specification for ELM 5.0. </li>
+<li><a href="/notes/2833344" target="_blank">2833344</a> - <strong>ELM 5.0: Partial delivery/B2A - Creating a process with the new document type '0005' (ELM 5.0)<br/></strong>[Update from 7/2/2021]<br/><a href="/notes/3075706" target="_blank">3075706</a>-<strong>ELM 5.0: Partial delivery/cross-domain adjustment of data retrieval - selection screen of the data extractor</strong><br/>[Update from 8/11/2021]</li>
+<li><a href="/notes/3063059" target="_blank">3063059</a> - <strong>ELM 5.0: Partial Delivery/BFS (Statistics) - ABAP Dictionary, Part I</strong><br/>[Update from 9/17/2021]</li>
+<li><a href="/notes/3074002" target="_blank">3074002</a> - <strong>ELM 5.0: Partial Delivery/BFS (Statistics) - ABAP Dictionary, Part I</strong><br/>[Update from 9/17/2021]</li>
+<li><a href="/notes/3098336" target="_blank">3098336</a>-<strong>ELM 5.0: Partial delivery/BFS (statistics) - Customizing of educational establishment types</strong><br/>[Update from 10/4/2021]</li>
+<li><a href="/notes/3088678" target="_blank">3088678</a>-<strong>ELM 5.0: Partial delivery/B2A - new ABAP-OO classes for ELM 5.0 B2A documents and for generating XML</strong><br/>[Update from 10/18/2021]</li>
+<li><a href="/notes/3100793" target="_blank">3100793</a>-<strong>ELM 5.0: Partial delivery / AHV/ALV - New infotype 3441 for distribution of negative wages</strong><br/>[Update from 11/22/2021]</li>
+<li><a href="/notes/3109221" target="_blank">3109221</a> <strong>- ELM 5.0: Partial delivery/BFS (statistics) and other corrections (part 1)</strong><br/>[Update from 11/22/2021]</li>
+<li><a href="/notes/3123834" target="_blank">3123834</a>-<strong>ELM 5.0: Partial delivery / AHV/ALV - data retrieval and wage notification</strong><br/>[Update from 12/16/2021]</li>
+<li><a href="/notes/3126444" target="_blank">3126444</a> - <strong>ELM 5.0: Partial delivery/QSG (cross-border employees) - IT0038</strong><br/>[Update from 1/5/2022]</li>
+<li><a href="/notes/3123175" target="_blank">3123175</a> - <strong>ELM 5.0: Partial delivery/QSG (cross-border employees) - ABAP Dictionary, part I</strong><br/>[Update from 1/5/2022]</li>
+<li><a href="/notes/3134468" target="_blank">3134468</a> - <strong>ELM 5.0: Partial delivery/QSG (cross-border employees) - DAQ, BAdI, part I</strong><br/>[Update from 1/5/2022]</li>
+<li><a href="/notes/3138282" target="_blank">3138282</a>-<strong>ELM 5.0: Partial delivery/AHV/ALV - archiving objects for infotype 3441</strong><br/>[Update from 2/2/2022]</li>
+<li><a href="/notes/3140634" target="_blank">3140634</a><strong> - ELM 5.0: Partial delivery / AHV/ALV – documentation<br/></strong>[Update from 2/4/2022]</li>
+<li><a href="/notes/3147895" target="_blank">3147895</a><strong> - ELM 5.0: Partial delivery/WHT (withholding tax) - ABAP Dictionary, part I<br/></strong>[Update from 4/4/2022]</li>
+<li><a href="/notes/3150381" target="_blank">3150381</a><strong> - ELM 5.0: Partial delivery/WHT (withholding tax) - DAQ, part I<br/></strong>[Update from 4/4/2022]</li>
+<li><a href="/notes/3167025" target="_blank">3167025</a><strong> - HFQST: HRFORMS WHT accounting (PDF), adjustment to selection screen<br/></strong>[Update from 4/4/2022]</li>
+<li><a href="/notes/3171024" target="_blank">3171024</a> <strong>- ELM 5.0: Partial delivery/all domains: Report residence status of person<br/></strong>[Update from 4/25/2022]<strong><br/></strong></li>
+<li><a href="/notes/3185776" target="_blank">3185776</a> <strong>- ELM 5.0: Partial delivery/WHT (withholding tax) - transfer weekly place of residence</strong><br/>[Update from 4/25/2022]</li>
+<li><a href="/notes/3199767" target="_blank">3199767</a>-<strong>ELM 5.0: Partial delivery/WHT (withholding tax) - DAQ, part II</strong><br/>[Update from 9/23/2022]</li>
+<li><a href="/notes/3221409" target="_blank">3221409</a>-<strong>ELM 5.0: Partial delivery/WHT - predefined categories, irregular work (unsteady)</strong><br/>[Update from 9/23/2022]</li>
+<li><a href="/notes/3235273" target="_blank">3235273</a>-<strong>ELM 5.0: Enhancement of payroll table WHTM (FAMDT)</strong><br/>[Update from 9/23/2022]</li>
+<li><a href="/notes/3227034" target="_blank">3227034</a>-<strong>ELM 5.0: Partial delivery/BFS (statistics) and other corrections (part 2)</strong><br/>[Update from 9/23/2022]</li>
+<li><a href="/notes/3243333" target="_blank">3243333</a>-<strong>ELM 5.0: WHT Confirmation for Employees (HRFORM), ABAP Dictionary</strong><br/>[Update from 9/23/2022]</li>
+<li><a href="/notes/3190203" target="_blank">3190203</a>-<strong>ELM 5.0: WHT confirmation for employees (HRFORM), initital delivery</strong><br/>[Update from 9/23/2022]</li>
+<li><a href="/notes/3218583" target="_blank">3218583</a> - <strong>QST21/ELM 5.0: Payments after leaving with change of tax situation (IT0038)</strong><br/>[Update from 9/23/2022]</li>
+<li><a href="/notes/3213675" target="_blank">3213675</a> - <strong>ELM 5.0 (QSG): Cross-border employee warnings for maintenance of IT0038</strong><br/>[Update from 9/23/2022]</li>
+<li><a href="/notes/3220657" target="_blank">3220657</a> - <strong>QST21/ELM 5.0: Preassignment of working days CH for mid-month leaving (/3B3)</strong><br/>[Update from 9/23/2022]</li>
+<li><a href="/notes/3216890" target="_blank">3216890</a> - <strong>QST21/ELM 5.0: Outflows (/A08) in non-taxable periods (QSTPF = "0" or "1")</strong><br/>[Update from 9/23/2022]</li>
+<li><a href="/notes/3216536" target="_blank">3216536</a> - <strong>QST21/ELM 5.0: Capacity utilization level is too high by a factor of 1000 for further employment (wage type /3A3)</strong><br/>[Update from 9/23/2022]</li>
+<li><a href="/notes/3239582" target="_blank">3239582</a> - <strong>QST21/ELM 5.0: WHT notification (ELM) for working days in Switzerland after leaving (wage type /3B8)</strong><br/>[Update from 9/23/2022]</li>
+<li><a href="/notes/3226062" target="_blank">3226062</a>-<strong>ELM 5.0: HR Renewal QSG (Cross-Border Employees) - IT0038</strong><br/>[Update from 12/20/2022]</li>
+<li><a href="/notes/3235265" target="_blank">3235265</a> - <strong>ABAP Dictionary delivery for SAP Note 3235264 (ELM 5.0 dialog messages)</strong><br/>[Update from 12/20/2022]</li>
+<li><a href="/notes/3235264" target="_blank">3235264</a>-<strong>ELM 5.0: Partial delivery / Dialog messages (1)</strong><br/>[Update from 12/20/2022]</li>
+<li><a href="/notes/3234264" target="_blank">3234264</a>-<strong>ELM 5.0: Partial delivery/LAW (wage statement) - ABAP Dictionary, part I</strong><br/>[Update from 12/20/2022]</li>
+<li><a href="/notes/3261715" target="_blank">3261715</a>-<strong>ELM 5.0: Partial delivery / Dialog messages (2)</strong><br/>[Update from 12/20/2022]</li>
+<li><a href="/notes/3276056" target="_blank">3276056</a>-<strong>ELM 5.0: Partial delivery/LAW (wage statement) - ABAP Dictionary, part 2</strong><br/>[Update from 12/20/2022]</li>
+<li><a href="/notes/3281508" target="_blank">3281508</a>-<strong>ELM 5.0: Partial delivery / AHV/ALV - data retrieval and wage notification (2)</strong><br/>[Update from 12/20/2022]</li>
+<li><a href="/notes/3257526" target="_blank">3257526</a>-<strong>ELM 5.0: Partial delivery/LAW (wage statement), part I</strong><br/>[Update from 12/20/2022]</li>
+<li><a href="/notes/3281408" target="_blank">3281408</a>-<strong>ELM 5.0: Partial delivery / Dialog messages (3)</strong><br/>[Update from 3/6/2023]</li>
+<li><a href="/notes/3278936" target="_blank">3278936</a>-<strong>ELM 5.0: Partial delivery/FAK (monthly) - DAQ, part I</strong><br/>[Update from 3/6/2023]</li>
+<li><a href="/notes/3293792" target="_blank">3293792</a>-<strong>ELM 5.0: Partial delivery (BFS, WHT), monthly notifications, part 2</strong><br/>[Update from 3/6/2023]</li>
+<li><a href="/notes/3116731" target="_blank">3116731</a>-<strong>ELM 5.0: Supplement to ELM certification for annual notifications with time-based delimitation</strong><br/>[Update from 3/6/2023]</li>
+<li><a href="/notes/3278671" target="_blank">3278671</a>-<strong>ELM 5.0: Partial delivery/FAK (yearly/monthly) - ABAP Dictionary, part I</strong><br/>[Update from 3/6/2023]<br/><br/></li>
+</ul>
+<p style="padding-left: 30px;"><span style="text-decoration: underline;"><span style="font-size: 14px;">Update on 8/29/2023:</span></span></p>
+<ul>
+<li><a href="/notes/3147305" target="_blank">3147305</a>-<strong>ELM 5.0: Documentation enhancements (including IMG)</strong></li>
+<li><a href="/notes/3300074" target="_blank">3300074</a> - <strong>QST21/ELM 5.0: Negative one-time payments entered retroactively as of 2023</strong></li>
+<li><a href="/notes/3283660" target="_blank">3283660</a>-<strong>ELM 5.0: Partial delivery/LAW (wage statement), part 2</strong></li>
+<li><a href="/notes/3305874" target="_blank">3305874</a>-<strong>ELM 5.0: Partial delivery in preparation for ELM 5.0 (work center / lessons)</strong></li>
+<li><a href="/notes/3301197" target="_blank">3301197</a>-<strong>ELM 5.0: Partial Delivery/WHT (Withholding Tax) - get and display results</strong></li>
+<li><a href="/notes/3323726" target="_blank">3323726</a> - <strong>QST21/ELM 5.0: Aperiodic payments in inactive period without retroactive accounting</strong></li>
+<li><a href="/notes/3325719" target="_blank">3325719</a> - <strong>QST21/ELM 5.0: Incorrect withholding tax percentage in Geneva (GE)</strong></li>
+<li><a href="/notes/3324120" target="_blank">3324120</a> - <strong>QST21/ELM 5.0: Retrospective change to other employment (wage type /3A3)</strong></li>
+<li><a href="/notes/3319904" target="_blank">3319904</a>-<strong>ELM 5.0: WHT cross-border employee notification FR/IT (HRFORM), initial delivery</strong></li>
+<li><a href="/notes/3136680" target="_blank">3136680</a>-<strong>ELM 5.0: Partial delivery/QSG (cross-border employee) - documentation, part 1</strong></li>
+<li><a href="/notes/3324812" target="_blank">3324812</a>-<strong>ELM 5.0: Partial delivery/BFS (statistics) - retrieve and display results</strong></li>
+<li><a href="/notes/3324292" target="_blank">3324292</a>-<strong>ELM 5.0: Postprocessing for monthly and annual reports, part 1</strong></li>
+<li><a href="/notes/3340407" target="_blank">3340407</a> - <strong>HR-CH: Various corrections (employer statement, infotype 3394, ELM 5.0 Customizing for cross-border employees)</strong></li>
+<li><a href="/notes/3320934" target="_blank">3320934</a>-<strong>ELM 5.0: Partial delivery/LAW (wage statement), part 3</strong></li>
+<li><a href="/notes/3307050" target="_blank">3307050</a>-<strong>ELM 5.0: Mid-month leavings/re-entries (annual report)</strong></li>
+<li><a href="/notes/3347773" target="_blank">3347773</a>-<strong>ELM 5.0: WHT confirmation for employee, manual post-implementation steps I</strong></li>
+<li><a href="/notes/3357438" target="_blank">3357438</a>-<strong>ELM 5.0: Partial delivery/transmitter - adjustment of product/certificate selection and display of statistics result</strong></li>
+<li><a href="/notes/3343466" target="_blank">3343466</a>-<strong>ELM 5.0: Post-implementation steps for LAW (wage statement), part 1</strong></li>
+<li><a href="/notes/3363669" target="_blank">3363669</a>-<strong>ELM 5.0: Error message instead of runtime error if work center cannot be determined</strong></li>
+<li><a href="/notes/3364746" target="_blank">3364746</a>-<strong>ELM 5.0: Post-implementation steps for LAW (wage statement), part 2</strong></li>
+<li><a href="/notes/3123864" target="_blank">3123864</a>-<strong>ELM 5.0: Partial delivery/AHV/ALV/LAW - support of HR Renewal for infotype 3441</strong></li>
+<li><a href="/notes/3276807" target="_blank">3276807</a>-<strong>ELM 5.0: Partial delivery/LAW (wage statement) - new subtype LAW ("Wage Statement") for infotype 3441</strong></li>
+<li><a href="/notes/3353448" target="_blank">3353448</a>-<strong>ELM 5.0: Partial delivery/B2A - additional standard configuration for document type 0005</strong></li>
+<li><a href="/notes/3367097" target="_blank">3367097</a>-<strong>ELM 5.0: Partial delivery/transmitter - delivery of SAP ELM 5.0 transmitter certificate<br/><br/></strong></li>
+</ul>
+<p style="padding-left: 30px;"><span style="text-decoration: underline;">Update on 11/22/2023 <br/></span>This is the last update to the "Partial Deliveries" section.<br/> The initial delivery for ELM 5 for productive use as of 2024 is now complete. <br/>Later corrections for ELM 5 may still be linked as references to this SAP Note, but are no longer explicitly listed here.<span style="text-decoration: underline;"><br/></span></p>
+<ul>
+<li><a href="/notes/3276736" target="_blank">3276736</a> - <strong>ELM 5.0 System Documentation: Update of the Implementation Guide</strong></li>
+<li><a href="/notes/3401996" target="_blank">3401996</a> - <strong>ELM 5.0 System Documentation: Further Adjustments to the Implementation Guide</strong></li>
+<li><a href="/notes/3371710" target="_blank">3371710</a>-<strong>ELM 5.0: Post-implementation steps for LAW (wage statement), part 3</strong></li>
+<li><a href="/notes/3390525" target="_blank">3390525</a>-<strong>ELM 5.0: Post-implementation steps for LAW (wage statement), part 4</strong></li>
+<li><a href="/notes/3332680" target="_blank">3332680</a>-<strong>ELM 5.0: BAdI for WHT confirmation and cross border notification (HRFORMS)</strong></li>
+<li><a href="/notes/3372732" target="_blank">3372732</a>-<strong>ELM 5.0: QSG, Postprocessing for Cross-Border Employees Italy - IT0038</strong></li>
+<li><a href="/notes/3312458" target="_blank">3312458</a>-<strong>ELM 5.0: Partial delivery/transmitter - local XML schema validation</strong></li>
+<li><a href="/notes/3385216" target="_blank">3385216</a> - <strong>QST21/ELM 5.0: Inflow of deferred periodic payments in period without wage</strong></li>
+<li><a href="/notes/3389807" target="_blank">3389807</a> - <strong>ELM 5.1/AHV21 - additional fields in ELM 5 annual notification of domain AHV/ALV as of 2024</strong></li>
+<li><a href="/notes/3398984" target="_blank">3398984</a> - <strong>ELM 5.1/AHV21 - Possible transfer problems / incorrect value "0.00" instead of "1.0" in "schemaVersion" attribute</strong></li>
+<li><a href="/notes/3392567" target="_blank">3392567</a>-<strong>ELM 5.0: Upgrade of ELM 4.0 to ELM 5.x - description of changes<br/><br/><br/></strong></li>
+</ul>
+<p><span class="SNO_DNT" style="text-decoration: underline; float: none;" translate="no"><strong>Disclaimer</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no">This message outlines our general product direction and should not be relied on in making a purchase decision. This message is not subject to your license agreement or any other agreement with SAP. SAP has no obligation to pursue any course of business outlined in this message or to develop or release any functionality mentioned in this message. This message and SAP's strategy and possible future developments are subject to change and may be changed by SAP at any time for any reason without notice. The information in this message is provided without a warranty of any kind, either express or implied, including but not limited to, the implied warranties of merchantability, fitness for a particular purpose, or non-infringement. SAP assumes no responsibility for errors or omissions in this message, except if such damages were caused by SAP intentionally or grossly negligent.</span></p></div></div></div></div>

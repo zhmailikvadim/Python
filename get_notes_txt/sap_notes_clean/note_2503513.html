@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>During system copy for Netweaver 7.0X version, there are following error in sapinst_dev.log:<br/>
+<pre>Warning: Warning during command execution:<strong>No archive file exists for development component 'DocumentServicesSupportFiles'/'com.adobe'/'Adobe Systems'/'802.&lt;Timestamp&gt;'/'0'. Cannot pack this archive. </strong></pre>
+<pre>Missing archives may lead to errors after the packed SDM installation has been extracted later.</pre>
+<pre>Info: This SDM installation has been packed to D:\2017XXXXX\JAVA\SDM\SDMKIT.JAR</pre>
+<pre>To unpack this installation again, extract D:\2017XXXXX\JAVA\SDM\SDMKIT.JAR and invoke the SDM command install with parameter extractpackedinst=true</pre>
+<pre>Executed, but finished with warning(s). Return code: 2</pre>
+<pre>Error: Executed, but finished with warning(s). Return code: 2</pre>
+</li>
+<li>You can also find same error in log sdmlog&lt;Timestamp&gt;.log from usr\sap\&lt;SID&gt;\&lt;Instance&gt;\SDM\program\log\</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP NetWeaver 7.0</li>
+<li>SAP enhancement package 1 for SAP NetWeaver 7.0</li>
+<li>SAP enhancement package 2 for SAP NetWeaver 7.0</li>
+<li>SAP enhancement package 3 for SAP NetWeaver 7.0</li>
+</ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The root cause of the issue is "<strong>No archive file exists for development component 'DocumentServicesSupportFiles'/'com.adobe'/'Adobe Systems'/'802.&lt;Timestamp&gt;'/'0'. Cannot pack this archive. </strong>it means there is no such deployment file in the SDM repository, the missing deployment file is for component 'com.adobe'  and the location of the file should be:</p>
+<pre>\usr\sap\&lt;SID&gt;\&lt;Instance&gt;\SDM\root\origin\<strong>com.adobe</strong>\<strong>DocumentServicesSupportFiles</strong>\<strong>Adobe Systems</strong>\<strong>0</strong>\<strong>802.&lt;Timestamp&gt;</strong></pre>
+<p>The location can be easily found per the deployment component name in the error log. From above example, the component name is 'DocumentServicesSupportFiles'/'com.adobe'/'Adobe Systems'/'802.&lt;Timestamp&gt;'/'0',  so the location should be "\usr\sap\&lt;SID&gt;\&lt;Instance&gt;\SDM\root\origin\com.adobe\DocumentServicesSupportFiles\Adobe Systems\0\802.&lt;Timestamp&gt;".</p>
+<p><strong>Above is one example for failed component, if you have different application in the error log, use the similar way to find the location.</strong></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul>
+<li>If you have another system which has exact same version and you can find the missing SDA file in the following location from that system, easily it can be copied to the current system to continue upgrade activity.</li>
+</ul>
+<pre> \usr\sap\&lt;SID&gt;\&lt;Instance&gt;\SDM\root\origin\com.adobe\DocumentServicesSupportFiles\Adobe Systems\0\802.&lt;Timestamp&gt;</pre>
+<ul>
+<li>If there is no another system which has same version and could find the missing file, check solution in note <a href="/notes/0000762882" id="C55_W169_V170_solutions_table[1].numm" target="_blank" title="762882">762882 </a>to download the SCA file from service Marketplace and extract the missing file from SCA file.</li>
+</ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>No archive file exists, upgrade, SDM, system copy</p></div></div></div></div>

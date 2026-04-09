@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When you process multiple invoice revenue accounting items (RAIs) in one period, if one invoice RAI has error, other invoice RAIs that belong to other contracts also fail in processing.</p>
+<p>Here is an example:</p>
+<ol>
+<li>Create contract 1 with a performance obligation 1 (POB 1) and contract 2 with POB 2. Both POBs have the quantity of 3 units.</li>
+<li>Post goods issues for 1 unit of POB 1 and POB 2 respectively.</li>
+<li>In POB Detail UI, do some changes to make validation result of POB 1 error.</li>
+<li>Issue the invoice for POB 1 and POB 2 and change the invoice price for both POBs.</li>
+</ol>
+<p>After step 4, invoice RAIs fail in processing.</p>
+<p>This is incorrect. The invoice RAI for POB 1 fails due to error validation result. But invoice RAI for POB 2 should not have failed in the RAI processing.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FARR, Revenue Accounting, Invoice</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is because mo_msg_handler in the class CL_FARR_INVOICE_MGMT is not initialized when the system calls the method IF_FARR_CONTRACT_INVOICE~PROCESS_INVOICE of class CL_FARR_CONTRACT_MGMT. The error messages of the former contracts in mo_msg_handler affect the latter contract. The latter contract therefore is marked as a failed contract.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply this note.</p></div></div></div></div>

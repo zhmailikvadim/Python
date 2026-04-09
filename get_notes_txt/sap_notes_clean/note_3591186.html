@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The conversion readiness check for SAP GTS, edition for SAP HANA reports the following error for check ID number 06:</p>
+<p><em>A product is classified several times for the same numbering scheme at the same validity start date</em></p>
+<p>The data model in SAP GTS, edition for SAP HANA uses the date (SAP data type DATS) instead of a time stamp as in earlier versions of SAP GTS to map the validity start date and validity end date of a product classification.</p>
+<p>The invalid change to the system time zone during live operation, or the direct writing of product classifications using customer-specific programs have created time stamps that lead to errors during the technical upgrade to SAP GTS, edition for SAP HANA because different time stamps can lead to an identical validity start date during a conversion to a date.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP GTS readiness check, /SAPSLL/READINESS_CHK_V8000, check ID #06, /SAPSLL/PRCTS, /SAPSLL/PRCTSC</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Create a local report or a report in your namespace, and copy the program source code that is attached to this SAP Note. Insert the program code below the report statement into your report.</p>
+<p>The report handles classifications for a product of the same numbering scheme with the same validity start date as follows:</p>
+<ul>
+<li>The classification with an earlier valid-to date is deleted; the classification with the longer valid-to date is retained. This is independent of whether the numbers of the two classifications differ or when the classification was created.</li>
+<li>For classifications whose valid-to dates are identical but have different numbers, the classification that was last created is retained. The classification created earlier is deleted. <br/> If the classifications were created at the same time, the report does not make any changes, and you must decide yourself which classification can be deleted. You make this decision manually by editing the classification in the product master.</li>
+<li>For classifications whose valid-to dates are identical and also use the same number, the duplicates are deleted.</li>
+</ul>
+<p>Carefully check whether the rules mentioned above can be used as a solution for your company. Execute the report only then, and ideally first in simulation mode, which you can activate on the selection screen of the report. Executing the report in an update run results in the immediate deletion of affected classifications.</p>
+<p>You can also use the information that the report outputs on the selection list to manually correct the product classifications by editing the product master.</p></div></div></div></div>

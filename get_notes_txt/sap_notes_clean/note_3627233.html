@@ -1,0 +1,42 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>When trying to schedule any document in BILP (BI Launchpad) after upgrade to BI 2025, the following error is seen:<br/>RWS 00070 Internal Server Error<br/><br/></li>
+<li>In the BILP Web application logs, searching for 'scheduleform' reveals the following exception:<br/>General exception caught<br/>java.lang.ClassCastException: class com.crystaldecisions.sdk.occa.infostore.internal.InfoObject cannot be cast to class com.crystaldecisions.sdk.occa.infostore.IDestinationPlugin (com.crystaldecisions.sdk.occa.infostore.internal.InfoObject and com.crystaldecisions.sdk.occa.infostore.IDestinationPlugin are in unnamed module of loader org.eclipse.osgi.internal.loader.EquinoxClassLoader @5f09d87a)<br/>at com.sap.bip.rs.publication.DestinationUtil.initPluginObjects(DestinationUtil.java:108)<br/>at com.sap.bip.rs.publication.DestinationUtil.&lt;init&gt;(DestinationUtil.java:92)<br/>at com.sap.bip.rs.caf.processor.ScheduleDestinationsProcessor.read(ScheduleDestinationsProcessor.java:142) <br/><br/></li>
+<li>In Central Management Console (CMC), when clicking on the Destination tab, the following error may be seen:<br/>The argument has an invalid value CrystalEnterprise.StreamWork (FWM 02024)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence (BI) Platform 2025</li>
+<li>Windows</li>
+<li>Linux / Unix </li>
+</ul>
+<p><strong>Steps to Reproduce</strong></p>
+<ol>
+<li>Upgrade to BI 2025</li>
+<li>Open BILP</li>
+<li>Navigate to a document</li>
+<li>Right-click -&gt; Schedule</li>
+<li>Observe the RWS 00070 error is seen</li>
+</ol>
+<p><strong>Cause</strong></p>
+<p>Deprecated components (specifically CrystalEnterprise.Streamwork destination plugin) were not removed properly during the installation.</p>
+<p>This may occur more frequently in very large (CMS DB size) environments</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The issue has been forwarded to development for further investigation</p>
+<p><strong>Workaround</strong></p>
+<p>First - try to run a repair which will rerun the commands to remove the content:<br/><a href="/notes/2468513" target="_blank">2468513</a> - Repairing the BI Platform [Best Practices]</p>
+<p>If the repair doesn't work, follow the below:</p>
+<ul>
+<li><strong>ALWAYS</strong> ENSURE YOU HAVE A FULL WORKING BACKUP OF YOUR CMS REPOSITORY BEFORE DELETING DEFAULT OBJECTS (DFOs)</li>
+</ul>
+<ol>
+<li>Download attached DFOCleanup script onto the system</li>
+<li>Open a command line in the directory containing the script</li>
+<li>Run the following commands:<br/><br/><strong>Windows:</strong><br/><em><em>DfoCleanUp.bat -c &lt;CMSName:Port&gt; -p &lt;AdministratorPassword&gt; -cuid AZOfPrN8IT5Fr1rODnpGT6Q<br/><em>DfoCleanUp.bat -c &lt;CMSName:Port&gt; -p &lt;AdministratorPassword&gt; -cuid AT.xjxqMgjlPpEBvBlUOAhs</em><br/><em>DfoCleanUp.bat -c &lt;CMSName:Port&gt; -p &lt;AdministratorPassword&gt; -cuid ATmZqy1fNIBAlOO5qgNaSWE<br/></em></em></em><em><em>DfoCleanUp.bat -c &lt;CMSName:Port&gt; -p &lt;AdministratorPassword&gt; -cuid ARb7jByTWddPsGf0jSexBgw</em><br/><em>DfoCleanUp.bat -c &lt;CMSName:Port&gt; -p &lt;AdministratorPassword&gt; -cuid AUQAptxEqPhJkaLOEvsD1Wo<br/><br/></em></em><strong>Linux / Unix:</strong><br/><em>DfoCleanUp.sh -c &lt;CMSName:Port&gt; -p &lt;AdministratorPassword&gt; -cuid <em>AZOfPrN8IT5Fr1rODnpGT6Q</em><br/><em>DfoCleanUp.sh -c &lt;CMSName:Port&gt; -p &lt;AdministratorPassword&gt; -cuid <em>AT.xjxqMgjlPpEBvBlUOAhs</em></em><br/><em>DfoCleanUp.sh -c &lt;CMSName:Port&gt; -p &lt;AdministratorPassword&gt; -cuid <em>ATmZqy1fNIBAlOO5qgNaSWE</em></em><br/><em>DfoCleanUp.sh -c &lt;CMSName:Port&gt; -p &lt;AdministratorPassword&gt; -cuid <em>ARb7jByTWddPsGf0jSexBgw</em></em><br/><em>DfoCleanUp.sh </em></em><em><em>-c &lt;CMSName:Port&gt; -p &lt;AdministratorPassword&gt; -cuid <em>AUQAptxEqPhJkaLOEvsD1Wo</em><br/><br/></em></em></li>
+<li>Restart the SIA &amp; Tomcat</li>
+<li>Log in to CMC -&gt; Servers</li>
+<li>Right click the AJS and click destinations</li>
+<li>The destinations should be loaded properly<br/>In some rare cases, it may be necessary to create a new AJS (not duplicate / clone), since sometimes the links to the Streamwork plugin can be stored in the AJS itself<br/>If this is the case, be sure to copy the command line and configuration properties from the existing AJS to the new one</li>
+</ol>
+<p><strong>Note</strong>: If the issue still occurs after the above, ensure in CMC -&gt; Users and groups that the 'Administrator' user has object ID 12, and run a repair following the best practices:<br/><a href="https://me.sap.com/notes/2468513" target="_blank">2468513 </a>- Repairing the BI Platform [Best Practices]</p></div></div></div></div>

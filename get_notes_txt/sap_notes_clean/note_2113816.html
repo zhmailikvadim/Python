@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This note includes few UI corrections for TM collaboration Portal.</p>
+<ol>
+<li>When doing a mass Accept for RFQs, only the RFQs already bound to the RFQ-Table are correctly taken over into the backend batch call. Example:100 RFQs are open and shall me accepted in one single batch call. You start the portal, display the RFQs in the table view but do not scroll in the table in advance of accepting them. Nevertheless, you click on the "Select All" button and then on button "Accept". <br/>The RFQ table has only the first 28 RFQs already bound and it knows that overall there are 100 RFQs to be accepted. Only the bound RFQs are taken over correctly into the Accept batch call. For the remaining RFQs, it will add always the RFQ in the first line of the table (i.e. the same RFQ is then listed in the batch call multiple times).The portal executes this batch Accept and creates 100 Quotations (which is ok on the first glance). But: It creates a single quotation for the first 28 (the bound RFQs) but 73 additional ones for the same RFQ in the first table line (which is not ok and not correct). It behavors the same to other areas with mass operation enabled, e.g. Accept multiple invoices</li>
+<li>The value of search field in table(professinal view) is not taken over to the detail(casual) view automatically.</li>
+<li>The 'Delete Filter' button is enabled even the content of table is not loaded completely.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Collaboration Portal; Mass Operation</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Programming Error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached source code corrections or install the corresponding support package.</p></div></div></div></div>

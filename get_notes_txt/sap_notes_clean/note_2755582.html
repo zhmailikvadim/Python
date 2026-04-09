@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Creation or Activation of an archiving process (DAP) for an aDSO fails with error message:</p>
+<p><em>Error in structuring definition for archiving object BWXXX</em><br/><em>Message no. RSARCH154</em></p>
+<p><em>Error when activating Data Archiving Process XXX</em><br/><em>Message no. RSO404</em></p>
+<p><em>Could not activate data archiving process</em><br/><em>Message no. RSDA506</em></p>
+<p> <img alt="KBA_ARC.PNG" class="img-responsive" height="142" src="/documents/customerkba/OwmHb4DTUitwRV709eykicwu-WoGi_s3DRyHGNpFTXM" title="KBA_ARC.PNG" width="453"/></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>
+<div>BW/4HANA</div>
+</li>
+<li>
+<div>SAP NetWeaver</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>In transaction RSDANLCON no nearline connection has been defined. Therefore, the system tries to create a DAP as ADK, which is not support for aDSOs, only NLS is supported.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Define a nearline connection in transaction RSDANLCON.</p>
+<p>Further information on how to set up a NLS connection can be found in the online documentation: <a href="https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/4a2c7993e460351ce10000000a42189b.html?version=1.0.7" target="_blank">Creating Near-Line Storage Connections</a><a href="https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/4a2c7993e460351ce10000000a42189b.html?version=1.0.7" target="_blank"><br/></a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>RSARCH154;</p></div></div></div></div>

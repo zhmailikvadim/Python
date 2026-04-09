@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Error MMPUR_SPROC022 - 'Invoice Receipt' for items with Product Type Group 'Service' - is displayed when flagging the Free-Of-Charge flag within non-physical / Service POs.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Materials Management (MM)</li>
+<li>SAP S/4HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Transaction <strong>ME21N: </strong>Create PO.</li>
+<li>Enter PR number or vendor, material and Org data.</li>
+<li>Check / flag the 'Free-Of-Charge' option.</li>
+<li>Try to Save, or use the 'Check' option.</li>
+<li>Error MMPUR_SPROC022 is returned. </li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The term and logic of 'Free-of-Charge' relates only to shippable / physical items that can be delivered and GR'd, so this does not apply to Service Procurement (as there are no items 'issued' as such).  Due to the nature of the Service PO structure (and the Service Materials being non-physical in nature) , the option to write off / zero items can only be done in later steps (for example, Invoicing, or any process 'after' the PO process).</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>The 'Free-of-Charge' flag / option is only for Material item POs - they are not supported in Service Procurement.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="https://me.sap.com/notes/634395" target="_blank">634395</a> FAQ: Purchase orders in the service</p>
+<p><em>3. <strong>Question:</strong></em></p>
+<p><em>Is it possible to select service items as <strong>'free'</strong> in a purchase order?</em></p>
+<p><em><strong>Answer:</strong></em></p>
+<p><em>No, this function is not available.</em></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>free goods, Lean SES, Free of Charge, ekpo-producttype, service_product, enhanced limit,</p></div></div></div></div>

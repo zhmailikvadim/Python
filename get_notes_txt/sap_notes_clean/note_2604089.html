@@ -1,0 +1,51 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are creating a dashboard and you would like to set up a connection between the various report views. However the field you would like to use for a connection is not listed.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Cloud for Customer</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<div>Go to the Analysis work center, view Dashboard.</div>
+</li>
+<li>
+<div>Click New button.</div>
+</li>
+<li>
+<div>Type a Name.</div>
+</li>
+<li>
+<div>Click OK button.</div>
+</li>
+<li>
+<div>In the right panel, under All Reports, select the needed report views.</div>
+</li>
+<li>
+<div>Drag and drop the selected reports to the available squares.</div>
+</li>
+<li>
+<div>Select between the available Report Selections for each Report View.</div>
+</li>
+<li>
+<div>To create connections between the Dashboards, click Define Connections button.</div>
+</li>
+<li>
+<div>Select the source dashboard for building the connection.</div>
+</li>
+<li>
+<div>Drag and drop the source dashboard to the target dashboard.</div>
+</li>
+<li>
+<div>In the new screen the field you want to use to define the connections is not available.</div>
+</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>There are several possible causes for this behaviour:</p>
+<p>A) The field you are looking for is not saved in the report view that is used as a source for the navigation.</p>
+<p>B) The field you are looking for is a master data reference field, i.e. it is not part of the data source directly but was added via the Add Fields button and drilling down into one of the objects. Such fields can usually be identified easily because they show the master data object in brackets. For example, the field Address (Account) shows the address coming from the Account master data.</p>
+<p>C) The field you are looking for is added via Add Fields instead of the Report Wizard.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>A) A field must be added and saved to the report view which is the source of the connection. Adding a field to the target view is optional.</p>
+<p>B) Master data reference fields cannot be used for dashboard connections. If such a field is urgently needed for your dashboard connection, please check if you can create a custom data source which contains the master data data source. This would mean that all fields are directly part of this data source and can be used for dashboard connections.</p>
+<p>C) For custom reports please edit the report via the Report Wizard and add the field in step 3. For standard reports please create a report copy and add the field in step 3.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>dashboard connection, characteristic missing, field not listed, connection missing, connections, RUI, set up connections</p></div></div></div></div>

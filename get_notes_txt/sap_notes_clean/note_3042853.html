@@ -1,0 +1,67 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Restrictions related to using the SAP Build Work Zone, standard edition as a central entry point for the SAP S/4HANA On-Premise releases.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Restrictions, SAP Build Work Zone, SAP Launchpad Service, standard edition, Central Fiori Launchpad, cFLP, central entry point, SAP S/4HANA 1610, SAP S/4HANA 1709, SAP S/4HANA 1809, SAP S/4HANA 1909, SAP S/4HANA 2020, SAP S/4HANA 2021, SAP S/4HANA 2022, SAP S/4HANA 2023, S/4HANA Cloud Private Edition</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Restrictions related to using the SAP Build Work Zone, standard edition as a central entry point for the following SAP S/4HANA On-Premise or SAP S/4HANA Cloud Private Edition.</p>
+<p>The integration of SAP Build Work Zone, standard edition with SAP S/4HANA based on Content Federation requires Fiori Frontend Server 6.0 with a minimum SP04. For more information, see SAP Help Portal: <a href="https://help.sap.com/viewer/8c8e1958338140699bd4811b37b82ece/Cloud/en-US/fa46cc3ffdb048e9bbadafb2429480d9.html" target="_blank">Federation of Remote Content Providers</a></p>
+<p><strong>Note:</strong> Check this note for updates on a regular basis.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Integration with SAP Build Work Zone, standard edition is available starting with SAP S/4HANA On-Premise 1809 with using exposure version 1.</p>
+<p>There is a exposure version 2 available to expose the content from SAP S/4HANA On-Premise for the integration with SAP Build Work Zone, standard edition. Exposed apps via using exposure version 2 are launched from SAP Build Work Zone in a standalone (new tab) mode within the shell of SAP S/4HANA launchpad, see details in Note 3345119 - <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3345119" target="_blank">Expose launchpad content to SAP BTP - Exposure version 2</a>.</p>
+<p><strong>General Restrictions:</strong></p>
+<ul>
+<li>Integration with the SAP Build Work Zone, standard edition is not available for SAP S/4HANA On-Premise 1511.</li>
+<li>The integration of SAP Build Work Zone, standard edition with S/4HANA versions 1610 and 1709 are only released for test and evaluation purposes.</li>
+<li>SAP Build Work Zone, standard edition is no full equivalent of the SAP Fiori launchpad of SAP S/4HANA On-Premise. Its not expected to have all available features in SAP S/4HANA launchpad to be also in SAP Build Work Zone launchpad. For example, below features in S/4HANA launchpad are not supported when using SAP Build Work Zone, standard edition:
+<ul>
+<ul>
+<li>My Home </li>
+<li>Cards created from S/4HANA can not be directly consumed in SAP Build Work Zone launchpad</li>
+<li>Personalizing the Navigation Bar to pin and reorder the spaces</li>
+<li>Merging Launchpad Spaces or Pages</li>
+</ul>
+</ul>
+</li>
+</ul>
+<p><strong>Detailed Limitations:</strong></p>
+<ul style="padding-left: 30px;">
+<li>Setup and Administration:</li>
+<ul>
+<li>Mass exposure on SAP S/4HANA side is not recommended due to content size limitations in SAP Build Work Zone.</li>
+<li>Notifications functionality will not work in 1809 release as it needs SAP_GWFND component 7.54 SP06 and above. For more info refer Note: <a href="/notes/3200288" target="_blank">3200288</a></li>
+<li>My Inbox integration is supported as of UI5 Patch version</li>
+<ul>
+<li><span style="font-size: 14px;">SAPUI5 1.84.16 for SAP Fiori Front-End Server 2020</span></li>
+<li><span style="font-size: 14px;">SAPUI5 1.71.40 for SAP Fiori Front-End Server 6.0 SP04</span></li>
+</ul>
+</ul>
+<li>General Usage and End User Limitations:</li>
+<ul>
+<li>The merged Spaces or Pages in SAP S/4HANA launchpad are not merged in SAP Build Work Zone launchpad.</li>
+<li>Content from different S/4HANA systems is not merged in SAP Build Work Zone: multiple groups, spaces, pages and apps with identical names might occur.</li>
+<li>Sorting orders of Spaces or Pages in SAP S/4HANA launchpad might not be reflected in SAP Build Work Zone launchpad.</li>
+</ul>
+<li>Usage and End User Limitations related to exposure version 1:</li>
+<ul>
+<li>Built-in support for ticket creation and support related information is not supported when using exposure version 1.</li>
+<li>SAP CoPilot / CAI integration is not supported when using exposure version 1.</li>
+<li>Integrating Microsoft Teams (Share: Microsoft Teams) provided in the app is not supported when using exposure version 1.</li>
+<li><a href="https://help.sap.com/viewer/2a6c8aab9c1649f9829dd9ff2cec2486/Fiori%20Tech%202.0%20(NW%207.52_FES%204.0%20SP01)%20Ship/en-US/b1327b54e847e530e10000000a44538d.html" target="_blank">Contact Support</a> is not supported when using exposure version 1.</li>
+<li>SAP Analytics Cloud based apps are not supported when using exposure version 1.</li>
+<li>Remote apps (Apps of type URL or URLT) which are integrated into SAP S/4HANA will be opened in a new browser tab/window in SAP S/4HANA shell or other product shell when using exposure version 1.</li>
+<li>SAP GUI apps which are embedding Advanced Variant Configuration (AVC) or Advanced Available-to-Promise (ATP) Fiori components are not supported when using exposure version 1, for example "Create Sales Orders - VA01".</li>
+</ul>
+<li><span style="font-size: 14px;">Usage and End User Limitations related to exposure version 2:</span></li>
+<ul>
+<li>Apps exposed via exposure version 2 are launched from SAP Build Work Zone in a standalone (new tab) mode within the shell of SAP S/4HANA launchpad. Therefore the full capabilites from S/4HANA launchpad (e.g. Built-in support, SAP CoPilot, user default paramters) are supported when using exposure version 2.</li>
+<li>Factsheets apps can be exposed via exposure version 2 with implementing Note <a href="https://me.sap.com/notes/3517657" target="_blank">3517657</a>.</li>
+<li>Apps without transaction codes maintained are not exposed with version 2, refering Note <a href="https://me.sap.com/notes/3345119" target="_blank">3345119</a>.</li>
+<li>Fiori Apps shipped with Software Components UIHR002 (HCM apps), UIMDG001 (Master Data Governance), and UITRV001 (Travel Management) are not supported when using exposure version 2.</li>
+</ul>
+</ul>
+<p><span style="font-size: 14px;"> </span></p>
+<p style="padding-left: 30px;"><strong>Additional Information:</strong></p>
+<ul>
+<li>SAP Build Work Zone, standard edition, <a href="https://help.sap.com/viewer/8c8e1958338140699bd4811b37b82ece/Cloud/en-US/8cf196a5a8544c309086619df29595b1.html" target="_blank">Restrictions: General</a></li>
+</ul></div></div></div></div>

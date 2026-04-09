@@ -1,0 +1,85 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are looking for patches for your SAP Mobile Documents server.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Mobile Docs, MCM, Bridge, sync</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>For more information about how to update your server, see <em><a href="http://help.sap.com/saphelp_mdocs10/helpdata/en/08/023dd4d02b43b290f2f1bae9c77142/content.htm?frameset=/en/ae/dbc4c48eec417681d9e7cc72cb7eb6/frameset.htm&amp;current_toc=/en/69/ec44f07b34409a8b65005f51315f1a/plain.htm&amp;node_id=18" target="_blank">Installing and Updating the SAP Mobile Documents Server</a>.</em></p>
+<p>The following SAP Notes describe the required patch levels for the the underlying AS Java component necessary to run SAP Mobile Documents:</p>
+<ul>
+<li>Patch Level for AS Java: Note 1818538</li>
+<li>Kernel Patch Level: Note 1815995</li>
+</ul>
+<p>Update your installation to the patch levels mentioned in these SAP Notes.</p>
+<p><strong>Version 1.0 SP6</strong></p>
+<p><strong>Patch 1</strong></p>
+<ul>
+<li>Contains a new job that deletes expired public links automatically.</li>
+</ul>
+<p><strong>Patch 0</strong></p>
+<p>Released to customer. See the Release Notes for details</p>
+<ul>
+<li>On premise: http://help.sap.com/saphelp_mdocs10/helpdata/en/8d/54be833f574692b91d8aa3bde7046c/content.htm</li>
+</ul>
+<p><strong>Version 1.0 SP5</strong></p>
+<p><strong><strong>Patch 1</strong></strong></p>
+<ul>
+<li>Added the objectId as return parameter in the ABAP Connector. </li>
+<li>Fixed a problem during the onbording, it could happen that a user got the rootfolder of the repository assigned as home folder.</li>
+<li>Prevented that the deletion of a user with the option to delete his data also, could delete the whole repository.</li>
+</ul>
+<p><strong><strong>Patch 0</strong></strong></p>
+<p>Released to customer. See the Release Notes for details</p>
+<ul>
+<li>Cloud version: http://help.sap.com/saphelp_mdocs10/helpdata/en/5b/3a62798e4841c1b1638af017d870ce/content.htm </li>
+<li>On premise: http://help.sap.com/saphelp_mdocs10/helpdata/en/cc/69bf2108654605abf2fe403ad28e2e/content.htm </li>
+</ul>
+<p><strong>Version 1.0 SP4<br/></strong></p>
+<p><strong>Patch 5</strong></p>
+<ul>
+<li>Fixed a bug in the getRendition method of the ABAP connector.</li>
+</ul>
+<p><strong>Patch 4 </strong></p>
+<ul>
+<li>Fixed bug in the allowable action calculation.</li>
+</ul>
+<p><strong>Patch 3</strong></p>
+<ul>
+<li>Improved performance for calculation of allowable actions.</li>
+</ul>
+<p><strong>Patch 2</strong></p>
+<ul>
+<li>Enhanced performance fetching the children of a folder within KM repositories.</li>
+<li>Improved handling of cross-site request forgery (CSRF) tokens in the admin UI for newer browsers (Chrome, Firefox, IE10+). Tokens are now sent via an HTTP header instead of the URL. </li>
+</ul>
+<p><strong>Patch 1<br/></strong></p>
+<ul>
+<li>Fixed a bug in the encoding of public link passwords. The problem occurred for passwords that contain characters, which are not supported by the default character set of the platform.</li>
+</ul>
+<p><strong>Patch 0<br/></strong>Released to customer. See the Release Notes for details.<br/>Cloud version: <a href="http://help.sap.com/saphelp_mdocs10/helpdata/en/f1/574f1ad86b4f7599a5704e002e4d35/frameset.htm" target="_blank">http://help.sap.com/saphelp_mdocs10/helpdata/en/f1/574f1ad86b4f7599a5704e002e4d35/frameset.htm</a><br/>On premise:<a href="http://help.sap.com/saphelp_mdocs10/helpdata/en/50/18c2510de84dcb90d3e12a620731fe/frameset.htm" target="_blank">http://help.sap.com/saphelp_mdocs10/helpdata/en/50/18c2510de84dcb90d3e12a620731fe/frameset.htm</a> <strong><br/></strong></p>
+<p><strong><br/>Version 1.0 SP3</strong></p>
+<p><strong><strong>Patch 4</strong></strong></p>
+<ul>
+<li>Introduced a fix, which solves issues during creation of a public link in an on-premise setup. The root cause of the issue is based in the KM connector and prevents from assigning an anonymous group to the target share, which is needed to allow public access.</li>
+<li>Upgraded OpenCMIS version to overcome problems with the cookie handling.</li>
+</ul>
+<p><strong>Patch 3</strong></p>
+<ul>
+<li>Introduced a new config value for the connection configuration, which allows to set the maximum number of results for a search. To set the configuration, add the following parameter during the connection configuration in the SAP Mobile Documents Admin UI: com.sap.mcm.QueryMaxItems=&lt;max num. of Results&gt;</li>
+<li>Fixed a bug in the JCo connection handling, which causes the connection to fail if a user performs multiple operations in parallel.</li>
+</ul>
+<p><strong>Patch 2</strong><br/>Fixed a bug when files in a SharePoint repository are marked for sync but deleted on the repository which lead to an error in the iOS client.</p>
+<p><strong>Patch 1</strong><br/>Provided a workaround to make SharePoint queries work.</p>
+<p><strong>Patch 0</strong><br/>Released to customer. See Release Notes for details.<br/>Cloud version: <a href="http://help.sap.com/saphelp_mdocs10/helpdata/en/b5/0d372199a64677afe2cc0247aa356d/frameset.htm" target="_blank">http://help.sap.com/saphelp_mdocs10/helpdata/en/b5/0d372199a64677afe2cc0247aa356d/frameset.htm</a><br/>On premise:<a href="http://help.sap.com/saphelp_mdocs10/helpdata/en/f6/a65eb751384cb9920755a7e941c2da/frameset.htm" target="_blank">http://help.sap.com/saphelp_mdocs10/helpdata/en/f6/a65eb751384cb9920755a7e941c2da/frameset.htm</a></p>
+<p><strong>Version 1.0 SP2</strong></p>
+<p>Patch 4<br/>Fixed a bug that prevented file uploads in the sharing UI with Microsoft Internet Explorer. Fixed a bug in the admin UI that lead to JavaScript errors when saving settings.</p>
+<p>Patch 3<br/>Fixed a cross-site scripting (XSS) vulnerability in the Web browser. Improved SharePoint compatibility for users with read-only permissions. Fixed a bug where the Web client does not display the <em>Create Folder</em> and <em>Upload Document</em> buttons in a SharePoint repository.</p>
+<p>Patch 2<br/>Improved compatibility with SharePoint 2010 and SharePoint 2013.</p>
+<p>Patch 1<br/>Increased the file size limitation to a maximum of 50 GB. Improved IE9 support. Fixed a bug that lead to wrong statistics.</p>
+<p>Patch 0<br/>Released to customer.</p>
+<p>If you update the MCMBRIDGE software component to SP2, the Software Update Manager will report a deployment exception. This is due to an internal component refactoring; if you choose <em>Repeat step from point of failure</em> and choose <em>Continue</em>, the update should complete successfully. Restart your application server after the patch is installed.</p>
+<p>If you receive HTTP error 500 after this restart, then restart the SAP Mobile Documents <strong>application only</strong> (com.sap.mcm.server.nw) in SAP NetWeaver Administrator.</p>
+<p><strong>Version 1.0 SP1</strong></p>
+<p>Patch 3 - MCMBRIDGE01_3-20010299.SCA<br/>Fixed an incompatibility issues with SAPUI5 that caused an error when uploading files using Internet Explorer.</p>
+<p>Patch 2 <br/>Fixed a bug which prevented the configuration of on premise publishing on a new on-premise installation.<br/><br/>Patch 1<br/>Fixed a bug in the published documents configuration that prevented switching from on-premise publishing to on demand and vice versa.</p>
+<p><strong>Version 1.0 SP0</strong></p>
+<p>Patch 1 - MCMBRIDGE00_1-20010299.SCA<br/>Configuration of Root URI is not reflected in the iPad. Download and apply patch 1. Make sure to also update your iPad app to version 1.0.3.</p></div></div></div></div>

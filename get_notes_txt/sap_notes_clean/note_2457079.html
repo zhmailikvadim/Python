@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">While trying to remove a certain JVM parameter in Config Tool, following error popup appeares:</p>
+<p><span><em>"Cannot validate jvm parameters - java process cannot start; Exit code: [1]; output of the process [Error...]"</em></span></p>
+<p><img alt="JVM_Parameter.png" class="img-responsive" src="/documents/customerkba/7KmusTAAW3w8wNXyJ3Gv1Z20gPkFJtQGwN3q8xYUPDk" title="JVM_Parameter.png"/></p>
+<p>Certain JVM parameter should be removed due to emergency case (eg AS Java startup issue).</p>
+<p>Steps 1-3 of KBA <a href="https://me.sap.com/notes/1775485" target="_blank">1775485</a> have been executed without success. Due to some reasons JVM upgrade is not possible at that time either. Workaround is needed.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP NetWeaver</li>
+<li>Release Indepedent</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>Open Config Tool -&gt; Navigate to "VM Parameters" -&gt; try to remove desired parameter</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>When the java VM parameter is added/modified in the Configtool, the tool tries to validate this new/modified parameter by running a java process and using the new/modified parameter on it.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul style="text-align: left;">
+<li>As a workaround you can disable the relevant parameter:<br/>
+<p>Open Oflline Config Editor -&gt; press "Edit" (pencil button with glasses) -&gt; press "Yes" -&gt; navigate to the affected Porpertysheet where the JVM parameter is present (e.g. cluster_config -&gt; instances - ID&lt;XXXXX&gt; -&gt; cfg -&gt; jvm_params -&gt; Propertysheet additional) -&gt; double click on the Propertysheet -&gt; choose the rlevant JVM parameter and double click on it -&gt; check "Show Meta Attributes" -&gt; check "Disabled" -&gt; Apply custom:<br/>   <br/><img alt="Agent_Disable.png" class="img-responsive" src="/documents/customerkba/_hormms8k2B27wmNPZQUuYNLZVvFllK6QslzF1egcbY" title="Agent_Disable.png"/></p>
+<p>Then restart the application server to validate changes.</p>
+</li>
+<li>If it is required the relevant parameter to be removed try the following workaround:</li>
+</ul>
+<ol><ol>
+<li>Disable the bootstrap configuration as per the SAP Note <a href="https://me.sap.com/notes/710663" target="_blank">710663</a>. Use the "skip" option. This will prevent your changes to be overwritten.</li>
+<li>Restart AS Java in order to validate boostrap.properties settings.</li>
+<li>Remove the desired parameters from the ..LocalDrive\usr\sap\&lt;SID&gt;\&lt;instnr&gt;\j2ee\cluster\instance.properties file. Before you save the file make a backup from this instance.properties file. Then save the file.</li>
+<li>Instead of disabling them now remove the JVM parameters from Configtool and save the settings.</li>
+<li>Restart the Java cluster again in order to validate instance.properties file and Configtool.</li>
+</ol></ol>
+<p><strong>Important note: </strong></p>
+<p><strong>If this workaround is used then none of the AS Java files in the filesystem will be updated to the fresh ones that are in the DB. This could lead to inconsistences. For example, when a patch is applied to the main instance, it will not be replicated to the other instances. Even if another patch is applied, and after some time boostrap is enabled. In this case the applications will be working with a different logic in the cluster. This could cause a series of failures, including startup, or p2p communication between the server nodes. Knowing these vulnerabilities do not use this as permanent solution. </strong></p>
+<ul>
+<li>Permanent solution:</li>
+</ul>
+<p style="padding-left: 60px;">After setting back the bottstrap.properties to default value the problem might reoccure again. Therefore the <strong>JVM has to be updated to the latest available patch</strong>.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Bootsrap, JVM parameters, Config Tool, ConfigTool, Synchronization, bootstrap.properties, validate, Exit code 1, Exit code: [1], error, Cannot validate jvm parameters, Cannot remove jvm parameters, Wily, agent library, instance.properties, offline config editor, startup, startup fails, remove, disable JVM parameters, disable, skip, emergency case</p></div></div></div></div>

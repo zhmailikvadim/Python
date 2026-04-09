@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>You require the ENVID (envelope identifier) to be set when sending messages from the SAP system</li>
+<li>The ENVID esmtp-keyword of the SMTP MAIL command is used to specify an "envelope identifier" to be transmitted along with the message and included in any DSNs issued for any of the recipients named in this SMTP transaction. The purpose of the envelope identifier is to allow the sender of a message to identify the transaction for which the DSN was issued.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP NetWeaver</li>
+<li>Release Independent</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>The ENVID attribute is already present when a message is sent from the SAP system.</li>
+<li>Please note that the ENVID attribute is not present in the message header (MIME) when sending from SAP system, as per RFC standard 3461 ENVID should be set in MAIL command. </li>
+<li>If you capture the SAPconnect trace (<a href="https://me.sap.com/notes/1639935" target="_blank">1639935</a>) and/or SMICM trace (<a href="https://me.sap.com/notes/2351619" target="_blank">2351619</a>) you will see that the ENVID attribute is present</li>
+<li>Screenshot of the SAPconnect trace from internal system showing ENVID:<br/><br/><img alt="SAPconnect.png" class="img-responsive" src="/documents/customerkba/wuLEm1zQBnfAmsDkTfT_8SnNbikp1R8mLvqJhRkgvLw" title="SAPconnect.png"/><br/><br/></li>
+<li>Screenshot of the SMICM trace from internal system showing ENVID (Please note that the ICM will only add the ENVID if the SMTP server supports DSN (Delivery Status Notification). In the screenshot below you can see that the mail server here does support DSN which we can tell from <strong>reply = 250 DSN#</strong>):<br/><br/><img alt="ICM.png" class="img-responsive" src="/documents/customerkba/-5GY_h_WSVdF3QmMjHZWkT35WrSMOkbAlEq4qLXXGBY" title="ICM.png"/></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="https://tools.ietf.org/html/rfc3461" target="_blank">RFC3461</a> - SMTP service extension for DSN</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>ENVID,envelope identifier,ENVID attribute</p></div></div></div></div>

@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Entries of the Security Audit Log show the transaction code 'S000' along with the program 'SAPMSSY1' for events of type AUK and AU5 (e.g. successfull RFC calls). However, note 2191612 defines that (quote), 'The "Transaction Code" and "Program" fields are filled in accordance with the trigger location of an event in ABAP NetWeaver. This means that the calling context is logged during a preliminary check of the accessibility of a resource.'</p>
+<p>In cases of events of type AUK and AU5, the field "transaction code" is without meaning as an RFC call is handled by the modules of module-pool SAPMSSY1. Thus, the correction delivered with this note makes sure that the "transaction code" field is empty for log entries of type AU5/AUK written by the SAP kernel.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAL</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Programming error in the kernel.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This correction is delivered with the kernel archives:</p>
+<ul>
+<li>hotfix - update the disp+work package of the kernel of your system to at least the patch level given in this note.</li>
+<li>SP Stack Kernel - files ﻿SAPEXE.SAR and SAPEXEDB.SAR  ﻿﻿</li>
+</ul>
+<p>The correction is contained in all patch levels that are <strong>equal to or higher</strong> than the patch level listed in the "<strong>Support Package Patches</strong>" section of this Note for the desired kernel release.<br/>If there is no entry, the patch is not yet delivered. The patch level will be added automatically when the patch is available for download. You can <strong>subscribe</strong> to this SAP Note to get informed when it is updated.</p>
+<p>Follow the <strong>SAP recommendations</strong> on how to patch the SAP kernel:</p>
+<ol>
+<li>Apply the <strong>latest SP Stack Kernel</strong> if it already contains the correction. For the list of current SP Stack Kernels, see SAP Note <a href="/notes/2083594" target="_blank">﻿2083594﻿</a>.</li>
+<li>Apply the <strong>hotfix</strong> only if you are experiencing a serious error that is <strong>not yet</strong> corrected by the latest SP Stack Kernel. </li>
+<li>Review the <strong>regression note </strong>for the required patch level before installing the kernel patch. For details, see SAP Note <a href="/notes/1802333" target="_blank">﻿1802333﻿</a>.</li>
+<li>For instructions on how to download and install kernel patches, see SAP Note <a href="/notes/19466" target="_blank">﻿19466﻿</a>.</li>
+</ol>
+<p>The paper <a href="https://support.sap.com/deployment-strategies-kernel-abap.pdf" rel="noopener noreferrer" tabindex="-1" target="_blank" title="https://support.sap.com/deployment-strategies-kernel-abap.pdf">﻿Update Strategy for the Kernel of the Application Server ABAP in On Premise Landscapes﻿</a> provides detailed information on the SAP recommendations.</p></div></div></div></div>

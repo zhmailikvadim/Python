@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>in tempdb, the table is created with dml_logging = minimal, object_attr() returns dml_logging as full.</li>
+<li>1&gt; create table t(a int) with dml_logging=minimal<br/>2&gt; go<br/><br/>1&gt; dmltest<br/>2&gt; go<br/>                                db_durability<br/>         db_dml_logging<br/>         tab_dml_logging                                                                                                                                     <br/>------------------------------ ------------------------------<br/>utdb                           no_recovery<br/>         minimal<br/>         full                                                                                                                                                <br/>1 row affected)<br/><br/>-----------<br/>          86<br/><br/>(1 row affected)<br/>Operating on the table 't', database 'utdb' (owner ID 1) in 'full' logging mode<br/>by user ID 1.<br/>Operating on the table 't', database 'utdb' (owner ID 1) in 'full' logging mode<br/>by user ID 1.<br/><br/>-----------<br/>         236<br/><br/>(1 row affected)</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP Adaptive Server Enterprise (ASE)</li>
+<li>Dataserver</li>
+</ul>
+<p> </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This issue has been addressed under SAP CR 762262. Its description reads, "ALTER DATABASE set durability no_recover does not show "enhanced performance" status in sp_helpdb output."</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul>
+<li>SAP CR 762262 is fixed in:</li>
+<ul>
+<li>SAP ASE 15.7 SP133</li>
+<li>SAP ASE 16.0 SP01 PL02</li>
+<li>SAP ASE 16.0 SP02<br/><br/></li>
+</ul>
+<li>Workaround:</li>
+<ul>
+<li>when creating a user defined tempdb, specify "with durability=no_recovery, dml_logging=minimal"<br/>for example:<br/>1&gt; create table t(a int) with durability=no_recovery, dml_logging=minimal<br/>2&gt; go</li>
+</ul>
+</ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>alter database, tempdb, dml_logging=minimal, object_attr(), dml_logging = full, CR762262, CR#762262, 762262</p></div></div></div></div>

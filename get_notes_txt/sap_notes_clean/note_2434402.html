@@ -1,0 +1,73 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Attempting to start the coordinator gets an error regarding a device in IQ_SYSTEM_TEMP, possibly as the result of a hardware failure on the device hosting the dbfile. An error similar to this may occur:</p>
+<pre><em>DBSPAWN ERROR:  -82 Unable to start specified database: autostarting database failed</em></pre>
+<pre><em>Error: I/O Error on file /IQ_devlink/IQ_TEMP3_rdsk-- (hos_bio.cxx 775)</em></pre>
+<pre><em>I/O Error on file /IQ_devlink/IQ_TEMP3_rdsk-- (hos_bio.cxx 775)</em></pre>
+<pre><em>Database server shutdown due to startup error</em></pre>
+<pre><em>Database server stopped at [DATETIME]</em></pre>
+<pre><em>Error: I/O Error on file [PATH TO TEMP STORE DEVICE]</em></pre>
+<pre><em>I/O Error on file [PATH TO TEMP STORE DEVICE]</em></pre>
+<pre><em>Server failed to start</em></pre>
+<div class="longtext">
+<div class="WordSection1">
+<p><span style="color: #ff0000;"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em></span></p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP IQ 16.1</li>
+<li>SAP IQ 16.0</li>
+<li>SAP IQ 15.4</li>
+<li>SAP Sybase IQ 15.2</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>Attempt to start a Coordinator server with one of the devices underlying a temp store dbfile unavailable.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>A Coordinator requries all temp store devices to be available to start.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>To replace a damaged dbfile, start the server with -iqnotemp, drop the file, restart the server, and add the dbfile in the coordinator.</p>
+<ol>
+<li class="stepexpand">Use the -iqnotemp, -iqmpx_ov 1 and -iqmpx_sn 1parameter to start the database.
+<div class="info">The only temporary file operation allowed on a database while running with -iqnotemp is to drop one or more of the temporary file definitions.<br/><br/></div>
+</li>
+<li class="stepexpand">Drop the last file in IQ_SYSTEM_TEMP:
+<div class="info">
+<pre class="codeblock">ALTER DBSPACE IQ_SYSTEM_TEMP DROP FILE filename</pre>
+</div>
+</li>
+<li class="stepexpand">Stop the database.<br/><br/>IF THERE ARE STILL MORE GOOD IQ_SYSTEM_TEMP DBFILES ON THE SERVER THEN PERFORM THIS STEP:</li>
+<li class="stepexpand">Restart the Coordinator normally and add more IQ_TEMP_STORE dbfiles as required.  The situation is now resolved.<br/><br/>IF YOU DROPPPED THE LAST IQ_SYSTEM_TEMP DBFILE THEN CONTINUE WITH THESE STEPS:</li>
+<li class="stepexpand">Start the database in single-node mode with no files to empty the checkpoint log:
+<div class="info">
+<pre class="codeblock">start_iq @params.cfg mpxtest.db -iqmpx_ov 1
+-iqmpx_sn 1 -n mpxnode_c</pre>
+</div>
+</li>
+<li class="stepexpand">Add a “dummy” dbfile to the coordinator. You will need to drop this file and add it again in coordinator mode, because files added in single-node mode have a null server ID; they are owned by the coordinator instead of the server that added the file. To add more space to IQ_SYSTEM_MAIN with a new file on a raw device, use syntax like the following:
+<div class="table-responsive"><table border="1" cellpadding="4" cellspacing="0" class="table table-bordered table-striped col-resizeable" frame="hsides" rules="rows" summary="">
+<thead>
+<tr><th colspan="1" id="d814e42-option" rowspan="1" valign="bottom">Platform</th><th colspan="1" id="d814e42-desc" rowspan="1" valign="bottom">Syntax</th></tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" headers="d814e42-option" id="d814e49" rowspan="1" valign="top"><strong>UNIX</strong></td>
+<td colspan="1" headers="d814e42-desc d814e49" rowspan="1" valign="top">
+<div class="p">
+<pre class="codeblock">ALTER DBSPACE IQ_SYSTEM_TEMP ADD FILE tempfile
+'/dev/rdsk/c4t600A0B80005A7F5D0000024'</pre>
+where tempfile is the logical or chosen logical name of the new dbfile.</div>
+</td>
+</tr>
+<tr>
+<td colspan="1" headers="d814e42-option" id="d814e57" rowspan="1" valign="top"><strong>Windows</strong></td>
+<td colspan="1" headers="d814e42-desc d814e57" rowspan="1" valign="top">
+<pre class="codeblock">ALTER DBSPACE IQ_SYSTEM_TEMP ADD FILE
+tempfile '\\.\PhysicalDrive3'</pre>
+</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+<li class="stepexpand">Stop and restart the server.<br/><br/></li>
+<li class="stepexpand">Drop the dummy file.</li>
+</ol></div></div></div></div>

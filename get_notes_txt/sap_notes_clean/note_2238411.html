@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You find it's impossible to add users to an environment - after you've added the users and you find the users disappear from the Security-&gt;Users screen on BPC Web Administration. It's not possible to assign users to team or profile either.</p>
+<p>On the ABAP server side, the report UJE_VERIFY_SECURITY seems to be completely broken. If you run report UJE_VERIFY_SECURITY_DATA to check security data, it always says that "You are not authorized to maintain authorizations". But in fact this is not true because the BPC service user is assigned to role SAP_BPC_SERVICE and the user who is running UJE_VERIFY_SECURITY_DATA has SAP_ALL authorization. The report may also complain that "Agr ZBPC_XYZ has incorrect value". If you use transaction PFCG to check the mentioned role, you may find the authorizations tab page is flagged with red icon, and the status of the authorization profile is "No authorization data exists". If you continue to run report UJE_VERIFY_SECURITY_DATA with option "Fix security data if has error", it will say that the role is fixed. But when you run it again to check security data, it will even report that the role does not exist.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PFCG_ORGFIELD_CREATE, $RSINFOAREA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is because you've activated the "Organizational levels" popup for transaction PFCG. For example, you may have defined field RSINFOAREA as organizational level field.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Perform the actions below to fix the issue:</p>
+<ul>
+<li>
+<div>Apply the program correction instructions of this SAP Note, or upgrade to the corresponding Support Package, and</div>
+</li>
+<li>Assign one more authorization to the BPC service user: S_USER_VAL (AUTH_FIELD:*; AUTH_VALUE:*; OBJECT:$ORGVALUE$). This authorization can be tailored to more specific authorizations based on your real situation, see SAP Note <a href="/notes/495282" target="_blank">495282</a>.</li>
+</ul>
+<p> </p></div></div></div></div>

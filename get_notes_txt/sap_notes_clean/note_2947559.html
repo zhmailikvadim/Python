@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In the Optimizer Explanation Tool (accessible from transaction RCCF_LOG – see SAP note <a href="https://me.sap.com/notes/1769077" target="_blank">1769077</a>) you may observe for the entry <em>Result &gt; Solution Details &gt; Progress</em>, that the final <em>Total Costs</em> is larger than a preceding interim solution of the VSR run.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Transportation Management 9.X</p>
+<p>S/4HANA embedded TM</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The symptom is caused by a so-called post-optimization which is done after the main optimization when time is over. The post-optimization is designed to quickly polish the solution found in the main optimization.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>There are some constraints (listed below) which are not considered during the main optimization so that the main optimization can focus on the shortest routes which are in time.  These constraints are normally not controlled by costs.</p>
+<p>The solution found in the main optimization may violate these constraints. The violation check and repair are left to the post-optimization. The repair may deteriorate routing and/or scheduling cost or even unplan some Freight Units.</p>
+<p>In detail, the constraints and their impacts are:</p>
+<ol>
+<li><strong>Loading FUs in LIFO order (Last In First Out)</strong>: If a Freight Order does not fulfill LIFO, the post-optimization performs intra-stop sorting of pickups or deliveries according to LIFO of their corresponding acts. This may increase earliness or lateness costs if loading durations are set per requirement document or by conditions, not “Based on Rules”.<br/><br/></li>
+<li><strong>Minimum target utilization of Means of Transport</strong>: If a Freight Order is below the minimum target utilization after main optimization, the post-optimization tries to shift it to a smaller vehicle or to re-plan the freight onto other Freight Orders. This may lead to larger routing and/or scheduling cost. If shifting or re-planning Freight Units is not possible and the minimum target utilization is specified as “hard constraint”, the post-optimization even un-plans the remaining Freight Units. This causes large non-delivery cost which will increase total planning costs significantly.<br/><br/></li>
+<li><strong>Package Unit with multiple distribution stops</strong>: For Package Units with multiple distribution stops it may happen, that the main optimization’s solution fails to deliver all parts of a Package Unit. In that (rather exceptional) case, the post-optimization must un-plan the Package Unit again because partial delivery is not allowed. This causes an increase of non-delivery costs.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>SAP Note <a href="/notes/1769077" target="_blank" title="1769077  - Explanation of optimization result">1769077 - Explanation of optimization result</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>VSR optimizer, RCC_LOG, higher costs</p></div></div></div></div>

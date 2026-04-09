@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You have a PO Claim Check scenario where you  use SCPMergingBean. When incoming the payloads have XML prolog, the PI messages fail with MAPPING_ERROR with an exception message similar to:<br/>com.sap.aii.utilxi.misc.api.BaseRuntimeException: The processing instruction target matching "[xX][mM][lL]" is not allowed.<br/>at com.sap.aii.mappingtool.tf7.rt.xparser.MTSaxHandler.run(MTSaxHandler.java:259)</p>
+<p>You can see in the monitors that the (large) input payload for the mapping has XML prolog.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>"[xX][mM][lL]" is not allowed, Claim Check, SCP, SCPMergingBean</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The issue is caused by a program logic error in SCP application in PI.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The issue is resolved by source code correction. Apply the patch corresponding to your PI/PO versions and SP level as per the "Support Packages &amp; Patches" section of this note.</p></div></div></div></div>

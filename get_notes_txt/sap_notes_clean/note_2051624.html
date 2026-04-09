@@ -1,0 +1,50 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>Error "data acquisition has failed. (HDB 00101)". This happens after all the data has been downloaded and after step "finalyzing".</li>
+<li>Exception caught while expanding DBSpace in log file.</li>
+<li>Following errors are also captured in the log file:</li>
+</ul>
+<p>- <em>2014/08/01 11:10:13.027000|==|S| | 7100|  44| |||||||||||||||[com.sap.hilo.common.hana.AbstractHanaDBHelper]<strong>SAP DBTech JDBC: [257] (at 8): sql syntax error: aggregation with ALL/DISTINCT supports up to 1 argument: line 1 col 8 (at pos 8)</strong></em></p>
+<p><em>2014/08/01 11:24:50.542000|&gt;&gt;|S| | 7100|  60| |||||||||||||||[com.sap.hilo.engine.sybase.SybaseDBSpaceMonitor]<strong>Exception caught while expanding DBSpace</strong></em></p>
+<p><strong><em>java.sql.SQLException: [Sybase][ODBC Driver][Sybase IQ]Filename does not exist. File: C:\Users</em></strong></p>
+<p><strong><em>u13232\AppData\Local\SAP\Lumira\DataBase\hilomain2.iq</em></strong></p>
+<p> </p>
+<p>Then:</p>
+<p><em>- 2014/08/01 11:24:50.544000|&gt;&gt;|S| | 7100|  60| |||||||||||||||[java.lang.Class]</em></p>
+<p><strong><em>*** SQLException caught ***SQLState: HY000</em></strong></p>
+<p><strong><em>Message:  [Sybase][ODBC Driver][Sybase IQ]You have run out of space in IQ_SYSTEM_MAIN DBSpace. </em></strong></p>
+<p><strong><em>-- (s_blockmap.cxx 4723) </em></strong></p>
+<p><strong><em>Vendor:   -1009170</em></strong></p>
+<p><em> </em></p>
+<p><em>- 2014/08/01 11:24:50.544000|&gt;&gt;|S| | 7100|  60| |||||||||||||||[com.sap.hilo.engine.sybase.SybaseDBHelper]</em></p>
+<p><em>java.sql.SQLException: [<strong>Sybase][ODBC Driver][Sybase IQ]You have run out of space in IQ_SYSTEM_MAIN DBSpace</strong>.</em></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>Lumira 1.x</li>
+<li>Supported HANA online</li>
+</ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The computer's disk swap is maxed out.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Try this to increase the cache size by modifying:</p>
+<p> </p>
+<p>C:\Users\&lt;user&gt;\AppData\Local\SAP\Lumira\DataBase\params.cfg to</p>
+<p> </p>
+<p>-c<strong> 2048m</strong></p>
+<p>-gc 20</p>
+<p>-gd all</p>
+<p>-gl all</p>
+<p>-gm 100</p>
+<p>-gp 4096</p>
+<p>-ti 4400</p>
+<p>-iqtc <strong>2048</strong></p>
+<p>-iqmc <strong>2048</strong></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Default was:</p>
+<p>-c<strong> 1024m</strong></p>
+<p>-gc 20</p>
+<p>-gd all</p>
+<p>-gl all</p>
+<p>-gm 100</p>
+<p>-gp 4096</p>
+<p>-ti 4400</p>
+<p>-iqtc <strong>500</strong></p>
+<p>-iqmc<strong> 500</strong></p>
+<p> </p>
+<p> </p>
+<p>Make sure you close and restart Lumira Desktop after the change. Then you will probably see the hilomain2.iq file being created.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>HDB_00101</p></div></div></div></div>

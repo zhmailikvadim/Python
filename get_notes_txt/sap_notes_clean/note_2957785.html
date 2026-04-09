@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Create a replication definition and received error 15476<br/> <span><em>create database replication definition DS_DB_repdef</em></span><br/><span><em>with primary at DS.DB </em></span><br/><span><em>replicate ddl </em></span><br/><span><em>go</em> </span><br/><strong>Msg 15476, Level 12, State 0: Server 'RS': Log transfer from 'DS.DB' is OFF.</strong> <br/><strong>Cannot create database replication definition for this database.</strong></li>
+<li>The database connection DS.DB was added as replicate</li>
+<li>Goal is to replicate data out of DS.DB</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Replication Server (SRS) all versions</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>To change the replicate database connection to be  a primary database, the following steps are needed:</p>
+<ol>
+<li>Turn on log transfer on the connection in replication server<br/> <br/><em><span>alter connection to DS.DB set log transfer to on<br/>go<br/> </span></em></li>
+<li><em></em><span><span>Submit rs_install_primary.sql against the primary database<br/> <br/></span></span><em><span>isql -Usa -S&lt;primary_ASE&gt; -Pxxxx -D&lt;DB&gt; -i $SYBASE/$SYBASE_REP/scripts/rs_install_primary.sql -o output.txt<br/> </span></em></li>
+<li>Verify that the script execution is successful in output.txt file.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Primary database, MSA</p></div></div></div></div>

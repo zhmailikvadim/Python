@@ -1,0 +1,40 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When copying a network from a standard network in CJ20N, a <strong>temporary CUOBJ number</strong> is incorrectly saved in table <strong>AFKO</strong>.</p>
+<p><strong>Steps to reproduce:</strong></p>
+<ol>
+<li>
+<p>There are two configurable standard networks : <strong>Standard Network 1</strong> and <strong>Standard Network 2</strong>.</p>
+</li>
+<li>
+<p><strong>Standard Network 1</strong> contains a milestone with functions that trigger the creation of another subnetwork using <strong>Standard Network 2</strong> as a template.</p>
+</li>
+<li>
+<p>In <strong>CJ20N</strong>, create a new operative network using the <strong>Copy Network</strong> function and select <strong>Standard Network 1</strong> as the template.</p>
+<ul>
+<li>
+<p>All activities and milestones are copied.</p>
+</li>
+<li>
+<p>This also triggers the creation of a subnetwork based on <strong>Standard Network 2</strong>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Save the network.</p>
+<ul>
+<li>
+<p>For <strong>Operative Network 1</strong>, the CUOBJ is saved correctly in <strong>AFKO</strong>.</p>
+</li>
+<li>
+<p>However, for the <strong>subnetwork (Standard Network 2)</strong>, the CUOBJ is saved with a <strong>temporary number (9999…1)</strong>.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>The subnetwork CUOBJ is saved with a temporary number, which is incorrect.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">AFKO, CUOBJ, MLST,CAUFV, SAPLCNMS, LCNMSF28</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Program error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the note corrections.</p></div></div></div></div>

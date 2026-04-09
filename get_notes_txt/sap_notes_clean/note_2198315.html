@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This SAP Note describes two independent errors when writing the PXA work process trace:</p>
+<p>1.) The work process trace contains the following lines: "A PXA: mprotect (unprotect) failed with error: 12 (address: (nil); length: 1000)"</p>
+<p>2.) During the initialization of the PXA cache, there is a core dump, and the work process trace contains the following call stack (example for Linux):</p>
+<p>             ....</p>
+<p style="padding-left: 60px;">&lt;signal handler called&gt; [0x7f6c5459d850]<br/>(initPxaCache(unsigned char)+0x137)[0x1cd9257]<br/>(ab_pbinit()+0xbfd)[0x1ce0ead]<br/>(ab_init+0x177)[0x77efc9]</p>
+<p>            ....</p>
+<p>            There are no further entries for the cause of the core dump.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PXA guard page, PXA memory protection, PXA initialization, PXA cache initialization</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Regarding 1.): When you remove the protection of the PXA guard page, the system does not check correctly whether the memory protection is active.</p>
+<p>Regarding 2.): If the requested memory cannot be provided during the initialization of the PXA, the aforementioned core occurs.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the specified kernel correction. The patch comment is as follows:</p>
+<p>"Improvements to the PXA work process trace".</p></div></div></div></div>

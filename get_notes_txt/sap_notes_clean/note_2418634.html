@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Your system has a secondary SAP HANA node continuously supplied with all data posted on the primary SAP HANA node using a technique called log replay. You want to direct some of the workload related to analytical transactions to the secondary HANA system, in order to relieve pressure on the CPUs of the primary SAP HANA node.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Performance active/active</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Your system has a secondary SAP HANA node, usually installed as part of the high-availability strategy. Technically you are using SAP HANA system replication using the logreplay_readaccess mode (<a href="http://help.sap.com/hana/SAP_HANA_Administration_Guide_en.pdf" target="_blank">http://help.sap.com/hana/SAP_HANA_Administration_Guide_en.pdf</a>).</p>
+<p>Note that SAP HANA 2 is required to use the described feature.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>As of SAP HANA 2, there is an option to free up CPU resources by using a secondary SAP HANA node. SAP HANA allows transactions to read data not only from the primary SAP HANA node, but also from a secondary SAP HANA node. The secondary SAP HANA node is continuously supplied with all data posted on the primary SAP HANA node using a technique called log replay. The data on the secondary SAP HANA node has a delay of typically a few seconds compared to the primary SAP HANA node, depending on the current workload and other factors.</p>
+<p>For analytical transactions that only require read access, reading from the secondary SAP HANA node is a good alternative. It leaves more free CPU resources on the primary SAP HANA node to ensure smooth transactional processing.</p>
+<p>With SAP S/4HANA 1709 following transactions and programs have been enabled for read access from the secondary SAP HANA node:</p>
+<ul>
+<li>Reports RFBILA00, RFSSLD00, RFSUSA00, RFSUSA00_NACC</li>
+<li>Transaction FAGLB03</li>
+<li>FAGLFLEXT-based drilldown reports (Transaction FGI0, Report Type 002)</li>
+</ul>
+<p>Note that this feature merely enables the read access from the secondary SAP HANA node. The database finally decides, if the query will be executed on the primary or on the secondary SAP HANA node. Routing of queries to the secondary SAP HANA node can be switched off via SAP HANA ini parameters.</p>
+<p>For information on analytical apps that are enabled for this option, see SAP Note 2405182.</p>
+<p> </p></div></div></div></div>

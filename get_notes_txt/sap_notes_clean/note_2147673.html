@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">You have created automatic payment run, which generated payment proposals for internally-initiated payments and you observe that even those open items which are not yet due were picked in the proposals</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Go to<em> Receivables </em>work center</li>
+<li>Go to <em>Automatic Payments</em> view</li>
+<li>Show<em> All Payment Proposals</em></li>
+<li>Select the<em> Payment ID</em> XYZ, and choose <em>Edit</em></li>
+<li><em>Click </em>on <em>Open items </em>tab</li>
+</ol>
+<p>You will observe that payment which are not yet due for this run and due for the next payment run also got picked in the proposal</p>
+<p> </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>These Payment Runs are for Receivables and are meant to create incoming payments. When the system considers open items that would result in incoming payments,it will try to pay them as early as possible. So, even though the item is not overdue yet, the payment run considers these and creates payments.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>In case you want to delay the creation of these payments, then you need to maintain required number of <em>Grace Days</em> in Business Configuration then these items that not yet overdue will not be picked up by the system.</p>
+<ol>
+<li>Go the <em>Business Configuration </em>work center and navigate to<em> Fine Tuning</em></li>
+<li>Choose the activity <em>Payment Strategies </em>and click on <em>Edit payment strategies</em></li>
+<li><em></em>Maintain <em>Grace Days </em>and other settings</li>
+<li><em>Save</em> and <em>Close</em></li>
+<li><em></em>Click on <em>Assign Payment Strategy to Company/Customer/Supplier</em> and assign the<em> payment strategy</em> to your <em>customer</em> in question.</li>
+</ol>
+<p> </p></div></div></div></div>

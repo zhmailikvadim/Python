@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">When system calculates the total Ordered Qty in the Inventory Status Report, it only rounds the quantity after summing up all the Ordered Quantity rows instead of rounding quantity for every row and summing up the rounded values. This might cause an incorrect total Ordered Qty to be displayed in the report. The also occurs for the Committed Quantity.</p><h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3><p><strong>Scenario:</strong></p>
+<ol>
+<li>Decimal places setting for quantities is 2 in the <em>General Settings &gt; Display tab</em>.</li>
+<li>Create new item <em>NewItem</em>, define <em>Items per Purchase Unit</em> 10.76 under <em>Purchasing Data</em> tab in <em>Item Master Data</em>.</li>
+<li>Create one Purchase Order for <em>NewItem</em>, document quantity is 1140.48.</li>
+<li>Create another Purchase Order for <em>NewItem</em>, with qty 207.36.</li>
+<li>Open the <em>Inventory Status Report</em> for this item. Double-click the row to see the detailed list of relevant documents and note that the first purchase order has Ordered Qty 12271.56 and the second has Ordered Qty 2231.19.                        </li>
+</ol>
+<p><strong>Expected Behavior:</strong></p>
+<ul>
+<li>Inventory Status Report should show total Ordered Qty 14502.75 (=12271.56+2231.19)</li>
+<li>System should calculate it as sum(round(tblDoc.OpenQty * tbldoc.NumPerMsr), (SELECT QTYDEC FROM OADM))</li>
+</ul>
+<p><strong>Actual Behavior:</strong></p>
+<ul>
+<li>Inventory Status Report shows total Ordered Qty 14502.76.</li>
+<li>System calculates it as round(sum(tblDoc.OpenQty * tbldoc.NumPerMsr), (SELECT QTYDEC FROM OADM))</li>
+</ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Future Version Candidate (FVC)</p><h3 class="section" data-toc-skip="" id="Solution">Solution</h3><p><span>Correction of system behaviour is not feasible in the currently supported versions of SAP Business One. The error has been recorded and is a candidate to be fixed in a future version.</span></p><h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3><p>ordered quantity, committed quantity, stock status report, rounding, rounded, value, subtotal, final total</p></div></div></div></div>

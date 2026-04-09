@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">WorkOrder Details &gt; Operation Card &gt; Overflow menu &gt; Record Time - Workorder, Operation and Work center fields are editable</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<ul id="__html28">
+<li>SAP Service and Asset Manager</li>
+<li>SAM</li>
+<li>SSAM</li>
+<li>Record Time</li>
+<li>Add Time</li>
+<li>CATS</li>
+<li>Operation Card</li>
+<li>Overflow Menu</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>Record Time from operation card was referring to Time sheets library used for Home &gt;Time Sheets &gt; Add, which caused issue in processing non editable fields.</p>
+<p><strong>Prerequisites</strong>:</p>
+<ul>
+<li> BAS or Visual Studio Code with SAM MDK project</li>
+<li>`<em>patch</em>` command (available on BAS and macOS by default) via terminal or other patching utility</li>
+<li>Read the <a class="external-link" href="https://community.sap.com/t5/enterprise-resource-planning-blogs-by-sap/how-to-apply-metadata-patch-in-sap-service-and-asset-manager/ba-p/13801041" rel="nofollow" target="_blank">guidelines</a> on how to apply the patch and read the appendix section if you receive any error</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>ObjectCardTimeCreate has been updated to use TimeSheetEntryCreateForWONav action.</p>
+<p>To apply the patch, download the attached 3552069(YYMM).patch file and save it in a known location, preferably adjacent to your SAM.mdkproject<br/>YYMM represents product release version.</p>
+<p>If you are on Windows, see SAP Note <a class="external-link" href="/notes/3533879" rel="nofollow" target="_blank">3533879</a> for how to install a .patch file in Windows. If you are on Mac/Web(BAS), follow the steps below:</p>
+<ol>
+<li>Open a terminal in the root of your SAM metadata (i.e. SAM.mdkproject/metadata or SAM.mdkproject/metadata/base.definitions)</li>
+<li>Run the terminal command `<em>patch --no-backup-if-mismatch -p4 &lt; path/to/3552069(YYMM)</em><em>.patch</em>`.</li>
+<li>Validate that changes have been applied to the following files:</li>
+</ol>
+<ul>
+<ul>
+<li>modified file 'Rules/OverviewPage/MyWorkSection/ObjectCardTimeCreate.js'</li>
+</ul>
+</ul>
+<p><span style="font-size: 14px;"> </span></p></div></div></div></div>

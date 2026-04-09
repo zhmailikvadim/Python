@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You use the integration between FS-PM and the SAP Claims Management system FS-CM.</p>
+<p>In FS-CM, you call transaction ICLEMC01 for creating a claim bundle.</p>
+<p>However, the system does not display all coverages that exist in FS-PM.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Basis line of business<br/>Claim bundle<br/>/PM0/ABT_CM_FIND_COVERAGES<br/>/PM0/ABT_CM_POLICY_DETAILS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Enhancement</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>For an advance correction, implement the source code corrections.</p>
+<p>When you execute transaction ICLEMC01, the FS-CM system calls both of the FS-PM function modules /PM0/ABT_CM_POLICY_DETAILS and /PM0/ABT_CM_FIND_COVERAGES for retrieving information.</p>
+<p>With this SAP Note, the optional importing parameter IV_EFFECTIVE_DT (effective date) is added to these two FS-PM function modules.</p>
+<p>If you fill this parameter in your customer-specific implementation, the system executes this information retrieval for the transferred effective date.</p>
+<p>Otherwise, it executes it for the current date (default value = SY-DATUM).</p></div></div></div></div>

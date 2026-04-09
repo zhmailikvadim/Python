@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In a marketing document, the line total does not match price after discount by quantity.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">SAP Business One</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p id=""><strong>Scenario:</strong></p>
+<p>In a marketing document set as unit price 45.68, quantity 30, discount 66.67%</p>
+<p><strong>Actual result:</strong></p>
+<p>Price after discount 15.23 / <em>Total (LC)</em> 456.75</p>
+<p><strong>Expected result:</strong></p>
+<p>Price after discount 15.23 / <em>Total (LC)</em> 456.90 (<em>Price After Discount</em> 15.23 by <em>Quantity</em> 30)</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p id="">This is the correct system behavior.</p>
+<p>As explained in the how to guide <strong>How to Work with Gross Prices</strong>, the net total before discount is calculated first, followed by the calculation of the price after discount.</p>
+<p> </p>
+<p>Unit Price 45.68 * quantity 30 = 1370.40 - Net total before discount</p>
+<p>1370.40 * (100-66.67)/100 = 456.75432 rounded to <strong>456.75</strong> - Total after discount / line total  / Total (LC)<strong><br/></strong></p>
+<p>devided by quantity 30 = 15.225 rounded to 15.23 - Price after discount</p>
+<p><em> </em></p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id="">How to guide <strong><a href="https://help.sap.com/doc/3a435df795b84a4abd7e6525ccc020ae/9.3/en-US/How%20to%20Work%20with%20Gross%20Prices.pdf" target="_blank">How to Work with Gross Prices</a></strong></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>invoice, sales order, purchase order.</p></div></div></div></div>

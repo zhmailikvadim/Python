@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Universe filters used in Web Intelligence Document return duplicates in the results</li>
+<li>Using Query Filters built directly on Dimensions work as expected</li>
+<li>Issue is observed with BAPI Universe</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p style="padding-left: 30px;">webi,web intelligence,BAPI,filters,OR,universe,unv,duplicate</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>
+<div>SAP BusinessObjects Business Intelligence Platform 4.2</div>
+</li>
+<li>Web Intelligence (Webi)</li>
+<li>BAPI Universe</li>
+</ul>
+<p><strong>Steps To Reproduce:</strong></p>
+<ol>
+<li>Create a SAP BW Query with 2  Customer-Exit Variables that are used to extract data of a particular dimension from last day</li>
+<li>Create an UNV universe based on the BW Query and create 2 predefined filters for the variables.</li>
+<li>Create a Web Intelligence Document based on a the universe and create a Query with the 2 filters from universe using “OR” condition  </li>
+<li>The data extracted is duplicated</li>
+<li>Create a similar Query in Web Intelligence and this time apply filter on objects using OR condition instead of using universe filters</li>
+<li>The data extracted is not duplicated</li>
+</ol>
+<p><strong> </strong></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Currently issue is limitation in BAPI universes. This issue occures when combined query operation on dynamic filters.</p></div></div></div></div>

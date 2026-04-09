@@ -1,0 +1,41 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Create one WebI document contains more than 2 queries in the WebI, make sure at least two queries need more than 7 minutes to run</li>
+<li>Error show after running the queries in 3-tier WebI rich client</li>
+<li>Error message: An internal error occurred while calling 'processDPCommandsEx' API. (Error: ERR_WIS_30270)(WIS 30270)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>three, 3, regression, upgrade, migrate, webi, webintelligence,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence Platform 4.2 (BI4.2)</li>
+<li>Web Intelligence (WebI)</li>
+</ul>
+<p><strong>Steps To Reproduce:</strong></p>
+<ol start="1">
+<li>Create a WebI document based on any universe connecting to oracle database.</li>
+<li>Select an object as result object.</li>
+<li>Open query script viewer.</li>
+<li>Check <strong>Use custom query script</strong>.<br/> Input below SQL<br/> SELECT<br/>   time_sleep(420)<br/> FROM<br/>  DUAL</li>
+<li>Add a new query. Input below SQL<br/> Input below SQL<br/> SELECT<br/>   time_sleep(420)<br/> FROM<br/>  DUAL</li>
+<li>Add one more new query. Input below SQL<br/> Input below SQL<br/> SELECT<br/>   time_sleep(240)<br/> FROM<br/>  DUAL</li>
+<li>Save the WebI document.</li>
+<li>Open it in 3-tier WebI rich client (See KBA 1320280 about how to launch 3-tier WebI rich client).</li>
+<li>Refresh query.<br/> =&gt; "An internal error occurred while calling 'processDPCommandsEx' API. (Error: ERR_WIS_30270) (WIS 30270)” error shows.</li>
+</ol>
+<p><strong>Cause:</strong></p>
+<p>In 3-tier (Zabo) Mode, the Webi Rich Client establishes an HTTP connection between itself and the installed application server (ie Tomcat), which will contacts the connection server, on the server side in case of refresh. The connection server hosts all connections to databases, involved in the refreshing of documents.</p>
+<p>A possible issue with a such architecture is to have to maintain http connections, in an opened state, which is a problem for windows. To avoid http timeout issue, we have implemented an asynchronous mode which avoid to keep the http connection opened all the time of the refresh. It is configure through a special setting in the “wsk_bridge.xml” file. In this case, WebI Rich Client, when you do a big refresh, will ask to the application server to keep the connection opened between itself and the connection server, as long as the refresh is not ended. WebI rich Client will ask every 3 minutes if the refresh is ended to the app server, and between each “ask”, will close the http connection which avoid http timeout issue.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ol start="1">
+<li>Backup and edit wsk_bridge.xml in<br/>
+<p>&lt;BO install dir&gt;\SAP BusinessObjects\tomcat\work\Catalina\localhost\BOE\eclipse\plugins\webpath.AnalyticalReporting\web\WEB-INF\classes</p>
+<p>And in</p>
+<p>&lt;BO install dir&gt;\SAP BusinessObjects\tomcat\webapps\BOE\WEB-INF\eclipse\plugins\webpath.AnalyticalReporting\web\WEB-INF\classes</p>
+</li>
+<li>Find string "&lt;bridge name="HTTPRepositoryJob"&gt;".</li>
+<li>Find string "&lt;/bridge&gt;", which corresponds end tag to the element found at step 2.</li>
+<li>Insert "&lt;async_methods&gt;" element like below.<br/><br/>&lt;bridge name="HTTPRepositoryJob"&gt;<br/>        &lt;impl type="java" class="com.sap.connectivity.cs.remoting.http.bridge.RepositoryJobImpl" /&gt;<br/>        &lt;impl type="COM"  class="BusinessObjects.CSBridge.HttpRepositoryJob.1" /&gt;<br/>        &lt;async_methods&gt;<br/>                &lt;async_method name="Call" enable="yes" /&gt;<br/>        &lt;/async_methods&gt;<br/>&lt;/bridge&gt;<br/><br/></li>
+<li>Save the file and restart the application server.</li>
+</ol></div></div></div></div>

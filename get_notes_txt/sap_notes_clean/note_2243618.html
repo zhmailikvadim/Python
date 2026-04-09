@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">----------------------------------------------------------------------------------------------<br/>SAP EM scenario adjustment for S4Hana MATNR with length 40<br/>----------------------------------------------------------------------------------------------</p>
+<p>With SAP S/4HANA, the length of Material Number (MATNR) data elements changed from 18 to 40 characters. To enable this change in SAP Event Management (SAP EM), existing customers migrating to SAP S/4HANA must consider the following areas:</p>
+<ul>
+<li>Info and Control Parameters</li>
+<li>System Parameters</li>
+<li>Alert Framework</li>
+<li>Extraction Function Modules</li>
+<li>Business Warehouse (BW) Integration</li>
+</ul>
+<p>As the interface from any supported SAP application to SAP Event Management is a generic interface which supports parameters in the application interface:</p>
+<ul>
+<li>Control Parameter length 200 in the application interface -&gt; length 60 chars in SAP EM</li>
+<li>Info Parameter length 200 in the application interface -&gt; length 255 chars in SAP EM</li>
+</ul>
+<p>Control parameters from the application interface can be converted into system parameters within SAP EM. As system parameters always refer to an extension table in SAP EM which exists in the DDIC, you must ensure that these parameters are not reduced in length.</p>
+<p>In the following sections we provide guidance on what needs to be checked if you have developed your own custom visibility processes.</p>
+<p>Currently, the only visibility processes affected are those in which the following parameter is used:</p>
+<p>-    Material Number (MATNR): length 18 -&gt; 40 characters</p>
+<p> </p>
+<p>You find a guide which helps you to identify the areas in the corresponding visibility scenario in the SAP Community Network: <a href="https://scn.sap.com/docs/DOC-69771" target="_blank">https://scn.sap.com/docs/DOC-69771</a></p>
+<p>Please also check SAP Note 2238445 - Integration of Supply Chain Execution Platform Applications to SAP S/4HANA, on-premise edition</p>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>MATNR, S4HANA, Material Number length 40, Compatibility Mode, BW extraction</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Ensure that you have implemented note 2193232 or installed the corresponding support package. Then use the guide (<a href="https://scn.sap.com/docs/DOC-69771" target="_blank">https://scn.sap.com/docs/DOC-69771</a>) to check if you have to adapt your custom tracking scenarios as described in the guide.</p></div></div></div></div>

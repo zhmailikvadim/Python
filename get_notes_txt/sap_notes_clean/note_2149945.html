@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Deprovisioning of roles via User Access Review(UAR) is not working for any backend systems.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP GRC Access Control 10.0</p>
+<ul>
+<li>GRCFND_A V1000 SP16</li>
+<li>User Access Review (UAR)</li>
+<li>Access Request Administration (ARQ)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>1. Generate UAR Requests with the UAR Generation Job for the respective connectors.</p>
+<p>2. Reviewer performes UAR and marks assignments to be removed.</p>
+<p>3. Removals fail in the backend systems.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Role removal was not handled correctly.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Please have your ABAPer apply these two corrections related to role removal post SP16.</p>
+<p><a href="/notes/2098610" target="_blank">2098610</a> - UAR: Roles marked for removal in UAR request not deprovisioned at the end of request</p>
+<p><a href="/notes/2126311" target="_blank">2126311</a> - UAM: Inconsistent provisioning if removal and assignment of business roles having common technical role in same request</p>
+<p><a href="/notes/2057482" target="_blank">2057482</a> - Actions taken in UAR request are not getting saved for roles having same name and different system</p>
+<p>That should resolve the issue. If you still face an issue, kindly create an case under the GRC-SAC-UAR Component.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="/notes/1732931" target="_blank">1732931</a> - Synchronization jobs that are needed to run to generate UAR requests</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>role removal</p></div></div></div></div>

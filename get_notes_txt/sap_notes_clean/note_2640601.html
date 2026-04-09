@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When using 100% quality inspection with multiple steps in a routing, the system incorrectly changes SFC to Complete Pending status at quality inspection step when 'DISPLAY_PLUGIN_100QI' rule is set to 'NO'. The issue is occurs in standard Work Center and Work Center Touch pods.</p>
+<p><strong>Steps to Reproduce:</strong></p>
+<ol>
+<li>Configure SAP ME for 100% Quality Inspection. (See Integration of Quality Inspection Lot section in SAP ME online help.)</li>
+<li>In SAP ME Activity Maintenance for activity QM030, set 'DISPLAY_PLUGIN_100QI' rule to 'NO'.</li>
+<li>Configure ECC production order having 2 step routing with 100% sampling and data collection occurring at each routing step. Send to SAP ME.</li>
+<li>Release the production order in SAP ME.</li>
+<li>In Work Center pod, start SFC at first operation.</li>
+<li>Click Quality Inpection button.</li>
+</ol>
+<p>Expected:</p>
+<ul>
+<li>The SFC remains in Active status and data can be collected.</li>
+<li>The SFC can be processed at the second step in the routing.</li>
+</ul>
+<p>Actual:</p>
+<ul>
+<li>The system hangs momentarily then places the SFC in Complete Pending status and data cannot be collected.</li>
+<li>The SFC cannot be processed at the second step in the routing.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAPMEINT, ECC, 100% quality inspection, QM030</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Programming error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The fix is implemented in a form of code change. To apply the solution, deploy the latest patch version of SAPMECORE component. <br/> <br/> <strong>Impact</strong> <br/> <br/> The code change done to address the symptom above is in the SAPMECORE component and isolated to InpspectionLotPlugin and CompletePluginGUIService modules.</p></div></div></div></div>

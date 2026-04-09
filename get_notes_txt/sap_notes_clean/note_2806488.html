@@ -1,0 +1,46 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<p>Updating any field in marketing documents causes the error "<em>Source file does not exist  , '\'  [Message 3721-1]</em>"</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<p><strong>Prerequisites:</strong></p>
+<p>You have completed the following steps:</p>
+<ol>
+<li>Go to <em>Administration </em><span><em>→ </em><span><em>System Initialization → </em><span><em>General Settings </em><span><em>→ Path</em> tab, and enter a valid <em>Attachment</em> path.</span></span></span></span></li>
+<li><span><span><span><span><span>Go to <em>Administration </em></span><span><em>→ System Initialization </em><span><em>→ Print Preferences </em><span><em>→ General</em> tab, and select<span> the following checkboxes: </span></span></span></span></span></span></span></span></li>
+<ul>
+<li><span><span><span><span><span><span><span><span><em>When Adding Marketing Document</em></span></span></span></span></span></span></span></span></li>
+<li><span><span><span><span><span><span><span><span><em>Use Attachments Folder as Default Path to Export PDF</em></span></span></span></span></span></span></span></span></li>
+<li><span><span><span><span><span><span><span><span><em>Attach Exported PDF to Marketing Document</em>.</span></span></span></span></span></span></span></span></li>
+</ul>
+<li><span><span><span><span><span><span><span><span><span>Go to <em>Administration </em></span><span><em>→ System Initialization → Print Preferences </em><span><em>→ Per Document</em> tab <span>and select <em>Sales Order;</em> then select<span> the <em>Export to PDF</em> checkbox.</span></span></span></span></span></span></span></span></span></span></span></span></li>
+<li><span><span><span><span><span><span><span><span><span><span><span><span><span>Go to <em>Administration → Setup → General → Report and Layout Manager</em>. </span></span></span></span></span></span></span></span></span></span></span></span></span></li>
+<ol style="list-style-type: lower-alpha;">
+<li><span><span><span><span><span><span><span><span><span><span><span><span><span>On the <em>List</em> tab, go to <em>Sales - A/R → Sales Order → Sales Order (Items)</em>. </span></span></span></span></span></span></span></span></span></span></span></span></span></li>
+<li><span><span><span><span><span><span><span><span><span><span><span><span><span>Go to the <em>Printing Seqs</em> tab and create a new sequence with <strong>at least 2 layouts </strong>(either PLD or Crystal Reports). </span></span></span></span></span></span></span></span></span></span></span></span></span></li>
+<li><span><span><span><span><span><span><span><span><span><span><span><span><span>Set this sequence as default for the <em>Sales Order</em> document.</span></span></span></span></span></span></span></span></span></span></span></span></span></li>
+</ol></ol>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>
+<div class="WordSection1"><span>Open a <em>Sales Order</em>, specify customer and item details, and do not attach any file on the <em>Attachments</em> tab. Click the <em>Add</em> button.</span></div>
+</li>
+<li><span><span>In the message box that opens with the message "<em>You cannot change this document after you have added it. Continue</em>?", click the <em>YES</em> button.</span></span></li>
+<li>Browse to the created order and check the <em>Attachments</em> folder.</li>
+<li><span><span>Try to update any field in the order.</span></span></li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p><span>Step 3 - The PDF is attached on the <em>Attachments</em> tab. </span></p>
+<p><span>Step 4 - The <em>Sales Order</em> is updated successfully.</span></p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>Step 3 - The PDF is not attached.</p>
+<p><span>Step 4 - The <em>Sales Order</em> is not updated and an error appears:  "<em>Source file does not exist , '\'  [Message 3721-1]</em>".</span></p>
+<p><strong>NOTE:</strong></p>
+<p>The issue happens with different document types.</p>
+<p>If only one layout is used for the document, there is no issue.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a patch or patches to solve the problem described. The section <strong>References </strong>below will list the relevant patches once they become available, and the <strong>Related</strong> <strong>Info</strong> content of relevant patches available in the SAP Support Portal will show this SAP Note. Be aware that these references can only be set at patch release date. SAP delivers patches only for selected releases at its own discretion, based on the business impact and the complexity of the implementation.</p></div></div></div></div>

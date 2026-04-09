@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are unable to perform the Manual Posting - Partial Transfer of Individual Material due to the error Posting not possible; acq. cost of indiv. mat. less than transf. amnt.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Business ByDesign.</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<div>Go to the Fixed Assets work center.</div>
+</li>
+<li>Under Fixed Assets select Fixed Assets View.</li>
+<li>Select the Asset &gt; Manual Posting &gt; Partial Transfer of Individual Material.</li>
+<li>Fill all mandatory fields and click post.</li>
+</ol>
+<p>Error message: Posting not possible; acq. cost of indiv. mat. less than transf. amnt.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>This error appears when the book value of the asset is less than the amount that you entered for the partial transfer as on the date of your partial transfer amount.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>For instance if you have selected a posting date of DDMMYY, you need to check on this particular date what is the net value of the asset and based on that you need to adjust the posting date in the Manual Posting - Partial Transfer of Individual Material accordingly.</p>
+<ol>
+<li>
+<div>Go to the Fixed Assets work center.</div>
+</li>
+<li>Reports &gt; Lists &gt; Fixed Assets - Line Items.</li>
+<li>Fill the required details for your source assets and click Go.</li>
+<li>To view the Results &gt; Show Settings &gt; Characteristics and For Characteristic Settings &gt; Select: Fixed Asset Class for Result Row, select &gt; Show.</li>
+</ol>
+<p>With this you can see the type of the transaction posting and the balance of the asset.</p>
+<p>For example: on DDMMYY due to the business transaction type &lt;Transfer of Current-Year Acq Costs&gt; the result is zero but on the date DD1MMYY due to the business transaction type &lt;Goods Receipt from Supplier&gt; there is some balance which has come into the asset.</p>
+<p>The system gives the error if the posting date is DDMMYY because of the zero net book value and if the posting date is DD1MMYY the system does not give the error because there is some book value which can be used for the Manual Posting - Partial Transfer of Individual Material.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Partial transfer of individual material, Posting not possible; acq. cost of indiv. mat. less than transf. amnt.</p></div></div></div></div>

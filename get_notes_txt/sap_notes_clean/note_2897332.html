@@ -1,0 +1,44 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Is there an option to upgrade HANA version to 2.0 in BTP(Business Technology Platform) / SAP Cloud Platform?</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Cloud Platform</li>
+<li>NEO</li>
+<li>BTP</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>SAP HANA 1.0 reaches end-of-maintenance in June 2021, which also affects the SAP HANA systems based on SAP HANA 1.0 running in the SAP Cloud Platform Neo environment.<br/>EPM-MDS plugin must be installed right after HANA2.0 upgrade on NEO for live connectivity to work. Here is a blog that can walk you through it: <a href="https://blogs.sap.com/2021/04/23/sap-analytics-cloud-connection-to-hana2-on-btp-neo/" target="_blank">SAP Analytics cloud connection to HANA2 on BTP Neo</a></p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>The current available HANA Version on NEO platform is 1.00.122.29.<br/>Update Database Systems:<br/><br/><a href="https://help.sap.com/viewer/d4790b2de2f4429db6f3dff54e4d7b3a/Cloud/en-US/93f9728df6c842d1aed4bcab3ecd44c1.html" target="_blank">https://help.sap.com/viewer/d4790b2de2f4429db6f3dff54e4d7b3a/Cloud/en-US/93f9728df6c842d1aed4bcab3ecd44c1.html</a><a href="https://help.sap.com/viewer/d4790b2de2f4429db6f3dff54e4d7b3a/Cloud/en-US/1bdc4e9fa82e4964994cc074df7419e7.html" target="_blank"><br/><br/></a>Work with SAP HANA 1.0<br/>Work with SAP HANA tenant and single-container database systems and SAP HANA version 1.0.</li>
+<li>
+<p>As a first milestone release towards this goal, we are pleased to announce the <a href="https://help.sap.com/doc/43b304f99a8145809c78f292bfc0bc58/Cloud/en-US/98bf747111574187a7c76f8ced51cfeb.html?sel4=Neo&amp;to=2020-12-17&amp;sel1=SAP%20HANA%20Service&amp;sel3=New" target="_blank">availability</a> of <strong>SAP HANA version 2.0 on the Neo environment</strong>.</p>
+<p>You will now be able to provision new SAP HANA 2.0 systems</p>
+</li>
+<li><a href="https://blogs.sap.com/2020/12/22/sap-hana-2.0-welcome-to-sap-cloud-platform-neo-environment/" target="_blank">SAP HANA 2.0: Welcome to SAP Cloud Platform, Neo environment</a></li>
+<li>
+<p>The target platform will be HANA 2 SPS5 and the minimal supported version is HANA 1.00.122.29+<br/>Also a SDC-2-MDC migration will be necessary for the update. This is self-service for customer, will be enabled first as <a href="https://help.sap.com/viewer/ea72206b834e4ace9cd834feed6c0e09/Cloud/en-US/722a4755da7f4b7e9929be8f15af0f1b.html#loiob7af89ba49504c5997d409f49cc5d3ae" target="_blank">Beta Feature</a>.</p>
+</li>
+<li>It is now also possible to upgrade 32Gb tee shirt size to HANA 2.0, this can be prepared by the Operations team as part of the OS migration to <strong>SLES 12 SP 5.</strong></li>
+<li>
+<p><a href="https://me.sap.com/notes/2960608" target="_blank">2960608</a> - Converting SAP HANA XS to SAP HANA MDC in the SAP Cloud Platform, Neo Environment<br/><strong><a href="https://me.sap.com/notes/2946614" target="_blank">2946614</a> - End-of-Maintenance of SAP HANA 1.0 on SAP Cloud Platform</strong></p>
+</li>
+<li>
+<p>As of the release of SAP Cloud Platform on January 14, 2021, SAP HANA 2.0 is available for update in the Neo environment and the conversion is generally available, which allows customers to do the following:</p>
+</li>
+<ul>
+<li><strong>Customers running tenant database ("MDC")</strong> <strong>systems </strong>that are running on <strong>SLES 12 SP 5</strong> can update their SAP HANA 1.0 systems to SAP HANA 2.0 using the <strong>Update</strong> functionality in the SAP Cloud Platform cockpit.</li>
+<li><strong>Customers running single-container ("XS") systems </strong>can convert their systems into MDC systems. After the conversion, they will be able to update their SAP HANA 1.0 systems to 2.0 using the Update functionality in the SAP Cloud Platform cockpit. </li>
+</ul>
+<li><a href="https://me.sap.com/notes/2469025" target="_blank">2469025</a> - How-To: Upgrading to SAP HANA 2.0</li>
+<li>EPM-MDS plugin must be installed right after HANA2.0 upgrade on NEO for live connectivity to work. Here is a blog that can walk you through it: <a href="https://blogs.sap.com/2021/04/23/sap-analytics-cloud-connection-to-hana2-on-btp-neo/" target="_blank">SAP Analytics cloud connection to HANA2 on BTP Neo</a>​​​​​​​</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>HANA 2.0 is currently available for SAP Cloud Platform on Cloud Foundry/AWS.</p>
+<ol>
+<li>SAP HANA Service in the AWS Environment<br/><a href="https://help.sap.com/viewer/d4790b2de2f4429db6f3dff54e4d7b3a/Cloud/en-US/f6567e3b7334403b9b275426fbe4fb04.html" target="_blank">https://help.sap.com/viewer/d4790b2de2f4429db6f3dff54e4d7b3a/Cloud/en-US/f6567e3b7334403b9b275426fbe4fb04.html<br/></a>Moving from NEO HANA 1.0 to Cloud Foundry/AWS HANA 2.0 can be done in Self Service.<br/>Please consider that it is not possible to move data from the existing to the new provisioned system in the CF environment.</li>
+<li><a href="https://blogs.sap.com/2020/09/01/hana-2.0-coming-soon-to-sap-cloud-platform-neo-environment/ " target="_blank">hana-2.0-coming-soon-to-sap-cloud-platform-neo-environment/</a></li>
+<li>Post upgrade step <a href="https://me.sap.com/notes/2536153" target="_blank">2536153</a> - Failed to connect to system with Live Connection to SAP HANA 2.0 in SAP Analytics Cloud<br/>Install the SAP HANA EPM-MDS plug-in per the <a href="https://help.sap.com/viewer/2c1988d620e04368aa4103bf26f17727/latest/en-US/2abc315bca394fce93bfbc0d090d41de.html" target="_blank">SAP HANA 2.0 documentation</a>.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>update, scp, hcp, BTP, neo</p></div></div></div></div>

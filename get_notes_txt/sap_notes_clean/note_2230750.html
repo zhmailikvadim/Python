@@ -1,0 +1,41 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>
+<div>Search is not available to end users with "An error occurred while searching: Index is not ready. Please try again later (PSS 01004). (PSS 01004)"</div>
+</li>
+<li>
+<div>Documents are not retrieved on search even index files are available</div>
+</li>
+<li>
+<div>The size of Lucene Index Engine folder (&lt;InstallDir&gt;\SAP BusinessObjects Enterprise XI 4.0\Data\PlatformSearchData\Lucene Index Engine) grows excessively (e.g. 50GB, 100GB, 200GB)</div>
+</li>
+<li>
+<div>Number of Indexed Documents value in Platform Search Application Properties page in Central Management Console stays at 0</div>
+</li>
+<li>Using Luke <span style="text-decoration: underline;"><strong>in read-only</strong></span> (3rd party tool available on the web) to read the Lucene Index files shows that the Administrator and User kind are in the top ranking objects in the Overview tab (see attached screenshot in Attachments section)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Lucene Index, Platform Search, Search, Folder Size, PSS 01004</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence Platform 4.1 (BI 4.1)</li>
+</ul>
+<p><strong>Cause:</strong></p>
+<p>It has been identified that User and UserGroup kind of objects can be referenced thousands of times into the Lucene Index Engine, and this causes inability to index, unforeseen growth of the Lucene Index, and unavailability of the Search in BI LaunchPad.</p>
+<p>Duplication of Lucene docs happens not only for User and UserGroup infoObjects but also for all other infoObjects that have Multi-lingual property bag.</p>
+<p>In such cases, for each supported locale which is present in Multi-Lingual (ML) property bag, a separate Lucene doc is created during indexing that infoObject.</p>
+<p>When such infoObjects are updated (for example, parent containing that infoObject has its name changed), its corresponding Lucene docs are not  updated or deleted.</p>
+<p>Instead, new Lucene docs are created and inserted to master index. Over a period of time and after lots of updates to the same infoObject, it's end up creating multitude of redundant Lucene docs.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p style="font: 16px/normal Arial, Helvetica, sans-serif;  text-transform: none; text-indent: 0px; letter-spacing: normal; word-spacing: 0px; white-space: normal; widows: 1; font-size-adjust: none; font-stretch: normal; background- -webkit-text-stroke-width: 0px;">This issue is fixed in the patches listed in the "Support Packages &amp; Patches" section below.</p>
+<p style="font: 16px/normal Arial, Helvetica, sans-serif;  text-transform: none; text-indent: 0px; letter-spacing: normal; word-spacing: 0px; white-space: normal; widows: 1; font-size-adjust: none; font-stretch: normal; background- -webkit-text-stroke-width: 0px;">The "Support Packages &amp; Patches" section will be populated with the relevant patch levels once they are released.</p>
+<p style="font: 16px/normal Arial, Helvetica, sans-serif;  text-transform: none; text-indent: 0px; letter-spacing: normal; word-spacing: 0px; white-space: normal; widows: 1; font-size-adjust: none; font-stretch: normal; background- -webkit-text-stroke-width: 0px;">For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article 2144559 in References section.</p>
+<p style="font: 16px/normal Arial, Helvetica, sans-serif;  text-transform: none; text-indent: 0px; letter-spacing: normal; word-spacing: 0px; white-space: normal; widows: 1; font-size-adjust: none; font-stretch: normal; background- -webkit-text-stroke-width: 0px;"><strong>Workaround</strong></p>
+<p style="font: 16px/normal Arial, Helvetica, sans-serif;  text-transform: none; text-indent: 0px; letter-spacing: normal; word-spacing: 0px; white-space: normal; widows: 1; font-size-adjust: none; font-stretch: normal; background- -webkit-text-stroke-width: 0px;">As the fix is not currently available for release at the time this note is published, in order to solve the problem, customers are advised to:</p>
+<ol>
+<li>
+<div style="font: 16px/normal Arial, Helvetica, sans-serif;  text-transform: none; text-indent: 0px; letter-spacing: normal; word-spacing: 0px; white-space: normal; widows: 1; font-size-adjust: none; font-stretch: normal; background- -webkit-text-stroke-width: 0px;">Implement the fix provided in SAP Note <a href="/notes/2235653" target="_blank">2235653</a> and disable users and groups indexing</div>
+</li>
+<li>Rebuild the index via Central Management Content &gt; Applications &gt; Platform Search</li>
+</ol></div></div></div></div>

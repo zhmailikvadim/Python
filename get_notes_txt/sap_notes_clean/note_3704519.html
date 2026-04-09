@@ -1,0 +1,229 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>This announcement contains information about the legal change for Bank Payments, published on 22 November 2025 by the Nordic Payment Council and Swedish Banking Association. These organizations represent the Swedish banks and the file format settings for swedish payments that SAP and its customers must adhere to. </p>
+</div>
+<div>
+<p>The following changes will be made by all Swedish banks, and banks with Swedish subsidiaries offering payment transactions through the Swedish banking network.  The legal change is mandatory. The effective date is November 15, 2026.​ </p>
+</div>
+<div> </div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The following payment services will no longer be offered by the banks: </p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="width: 617px; height: 321.406px;"><tbody><tr role="row" style="height: 83.5625px;"><td role="rowheader" style="width: 290.312px; height: 83.5625px;">
+<div>
+<div>
+<p>Bankgiro Inbetalningar (Including Image files) </p>
+</div>
+</div>
+</td><td role="columnheader" style="width: 145.531px; height: 83.5625px;">
+<div>
+<div>
+<p>RFFOSE_A </p>
+</div>
+</div>
+</td><td role="columnheader" style="width: 138.812px; height: 83.5625px;">
+<div>
+<div>
+<p>Payment Medium (Sweden) Autogiro (Direct Debit) for Sweden </p>
+</div>
+</div>
+</td></tr><tr role="row" style="height: 61.3438px;"><td role="rowheader" style="width: 290.312px; height: 61.3438px;">
+<div>
+<div>
+<p>Bankgiro service Leverantörsbetalningar (Supplier payments) </p>
+</div>
+<div>
+<p> </p>
+</div>
+</div>
+</td><td style="width: 145.531px; height: 61.3438px;">
+<div>
+<div>
+<p>RFFOSE_B </p>
+</div>
+<div>
+<p> </p>
+</div>
+</div>
+</td><td style="width: 138.812px; height: 61.3438px;">
+<div>
+<div>
+<p>Payment Medium (Sweden) Domestic Vendor via Bankgiro </p>
+</div>
+</div>
+</td></tr><tr role="row" style="height: 94.5625px;"><td role="rowheader" style="width: 290.312px; height: 94.5625px;">
+<div>
+<div>
+<p>Bankgiro service Leverantörsbetalningar (Supplier payments) </p>
+</div>
+<div>
+<p> </p>
+</div>
+</div>
+</td><td style="width: 145.531px; height: 94.5625px;">
+<div>
+<div>
+<p>RFFOSE_H </p>
+</div>
+</div>
+</td><td style="width: 138.812px; height: 94.5625px;">
+<div>
+<div>
+<p>Payment Medium (Sweden)  </p>
+</div>
+<div>
+<p>Foreign Vendor via Bankgiro </p>
+</div>
+</div>
+</td></tr><tr role="row" style="height: 81.9375px;"><td role="rowheader" style="width: 290.312px; height: 81.9375px;">
+<div>
+<div>
+<p>Postgiro Värdeavi (Money order) </p>
+</div>
+<div>
+<p> </p>
+</div>
+</div>
+</td><td style="width: 145.531px; height: 81.9375px;">
+<div>
+<div>
+<p>RFFOSE_P </p>
+</div>
+<div>
+<p> </p>
+</div>
+</div>
+</td><td style="width: 138.812px; height: 81.9375px;">
+<div>
+<div>
+<p>Payment Medium (Sweden) Domestic Vendor Postgiro </p>
+</div>
+</div>
+</td></tr></tbody></table></div>
+<p> </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>This means if you are currently using such a format, you need to transition to the new file formats provided by SAP, configure and implement these file formats </p>
+</div>
+<div>
+<p>All outgoing payments for salaries or to make vendor payments/customer refunds via an SAP S4 HANA public cloud, private cloud or ECC system must use the ISO 20022 formats. This includes bankgiro format SE_BANKGIROT which follows the ISO 20022 format. They can be found in DMEEX configuration t-code at the following location. </p>
+</div>
+<div>
+<p><a href="https://help.sap.com/docs/SAP_ERP/d61ca73102e14c2cb06407bbe6d115f1/4c0bc5536a51204be10000000a174cb4.html?q=sweden+payment" rel="noopener noreferrer nofollow" target="_blank">Forms and Payment Medium Formats | SAP Help Portal</a> <br/><br/></p>
+<div>
+<p>ISO 20022 compliant formats </p>
+</div>
+<div>
+<p>SAP Best practice file formats for Sweden are available here that are compliant with ISO20022 and the latest Swedish banking requirements. <br/><br/>In S/4 HANA, transaction DMEEX:</p>
+</div>
+<div>
+<div>
+<div aria-hidden="true" id="{e2d86c9d-5ccc-4e83-8145-a28144abe148}{47}"></div>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="width: 444px; height: 227.656px;"><tbody><tr role="row" style="height: 39.0469px;"><td role="rowheader" style="width: 151.406px; height: 39.0469px;">
+<div>
+<div>
+<p>SE_A_AUTOGIRO </p>
+</div>
+</div>
+</td><td role="columnheader" style="width: 417.547px; height: 39.0469px;">
+<div>
+<div>
+<p>Autogiro (Direct Debit) for Sweden </p>
+</div>
+</div>
+</td></tr><tr role="row" style="height: 39.0469px;"><td role="rowheader" style="width: 151.406px; height: 39.0469px;">
+<div>
+<div>
+<p>SE_BANKGIROT </p>
+</div>
+</div>
+</td><td style="width: 417.547px; height: 39.0469px;">
+<div>
+<div>
+<p>Domestic Bank Transfers BANKGIROT Sweden </p>
+</div>
+</div>
+</td></tr><tr role="row" style="height: 37.3906px;"><td role="rowheader" style="width: 151.406px; height: 37.3906px;">
+<div>
+<div>
+<p>SE_CGI_XML_CT </p>
+</div>
+</div>
+</td><td style="width: 417.547px; height: 37.3906px;">
+<div>
+<div>
+<p>ISO20022 Credit Transfer Sweden </p>
+</div>
+</div>
+</td></tr><tr role="row" style="height: 37.3906px;"><td role="rowheader" style="width: 151.406px; height: 37.3906px;">
+<div>
+<div>
+<p>SE_CGI_XML_CT_V9 </p>
+</div>
+</div>
+</td><td style="width: 417.547px; height: 37.3906px;">
+<div>
+<div>
+<p>ISO20022 Credit Transfer Sweden version 9 </p>
+</div>
+</div>
+</td></tr><tr role="row" style="height: 37.3906px;"><td role="rowheader" style="width: 151.406px; height: 37.3906px;">
+<div>
+<div>
+<p>SE_CGI_XML_DD </p>
+</div>
+</div>
+</td><td style="width: 417.547px; height: 37.3906px;">
+<div>
+<div>
+<p>ISO20022 Direct Debit Sweden </p>
+</div>
+</div>
+</td></tr><tr role="row" style="height: 37.3906px;"><td role="rowheader" style="width: 151.406px; height: 37.3906px;">
+<div>
+<div>
+<p>SE_UTLI_SISU </p>
+</div>
+</div>
+</td><td style="width: 417.547px; height: 37.3906px;">
+<div>
+<div>
+<p>Foreign payments Sweden </p>
+</div>
+</div>
+</td></tr></tbody></table></div>
+</div>
+</div>
+<p>In ERP, transaction DMEE:<br/><br/></p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="width: 444px; height: 227.656px;"><tbody><tr role="row" style="height: 39.0469px;"><td role="rowheader" style="width: 151.406px; height: 39.0469px;">
+<div>
+<div>
+<p>SE_A_AUTOGIRO </p>
+</div>
+</div>
+</td><td role="columnheader" style="width: 417.547px; height: 39.0469px;">
+<div>
+<div>
+<p>Autogiro (Direct Debit) for Sweden </p>
+</div>
+</div>
+</td></tr><tr role="row" style="height: 39.0469px;"><td role="rowheader" style="width: 151.406px; height: 39.0469px;">
+<div>
+<div>
+<p>SE_BANKGIROT </p>
+</div>
+</div>
+</td><td style="width: 417.547px; height: 39.0469px;">
+<div>
+<div>
+<p>Domestic Bank Transfers BANKGIROT Sweden </p>
+</div>
+</div>
+</td></tr><tr role="row" style="height: 37.3906px;"><td role="rowheader" style="width: 151.406px; height: 37.3906px;">CGI_XML_CT</td><td style="width: 417.547px; height: 37.3906px;">ISO20022 Credit Transfer</td></tr><tr role="row" style="height: 37.3906px;"><td role="rowheader" style="width: 151.406px; height: 37.3906px;">CGI_XML_CT_V9</td><td style="width: 417.547px; height: 37.3906px;">ISO20022 Credit Transfer version 9 </td></tr><tr role="row" style="height: 37.3906px;"><td role="rowheader" style="width: 151.406px; height: 37.3906px;">
+<div>
+<div>
+<p>SE_UTLI_SISU </p>
+</div>
+</div>
+</td><td style="width: 417.547px; height: 37.3906px;">
+<div>
+<div>
+<p>Foreign payments Sweden </p>
+</div>
+</div>
+</td></tr></tbody></table></div>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://help.sap.com/docs/SAP_ERP/d61ca73102e14c2cb06407bbe6d115f1/4c0bc5536a51204be10000000a174cb4.html?q=sweden+payment" rel="noopener noreferrer nofollow" target="_blank">Forms and Payment Medium Formats | SAP Help Portal</a><br/><br/><a href="https://me.sap.com/notes/2784858" rel="noopener noreferrer nofollow" target="_blank">2784858</a> Collective information note: CGI_CT, CGI_DD based on the DMEEX engine<br/><a href="https://me.sap.com/notes/2568348" rel="noopener noreferrer nofollow" target="_blank">2568348</a> RFFO: Obsolete Reports<br/><a href="https://me.sap.com/notes/1704031" rel="noopener noreferrer nofollow" target="_blank">1704031</a> FI:Replacement of the RFFO* reports with the DMEE trees<br/><a href="https://me.sap.com/notes/2168072" rel="noopener noreferrer nofollow" target="_blank">2168072</a> Collective note for payment formats: SE_A_AUTOGIRO<br/><a href="https://me.sap.com/notes/2168074" rel="noopener noreferrer nofollow" target="_blank">2168074</a>  Collective note for payment formats: SE_BANKGIROT<br/><a href="https://me.sap.com/notes/2168086" rel="noopener noreferrer nofollow" target="_blank">2168086</a> Collective note for payment formats: SE_UTLI_SISU<br/><a href="https://me.sap.com/notes/2682253" rel="noopener noreferrer nofollow" target="_blank">2682253</a> Payment Formats supported in Release S/4HANA 1809 On-Premise<br/><a href="https://me.sap.com/notes/3142719" rel="noopener noreferrer nofollow" target="_blank">3142719</a> DMEEX - error message when trying to download DMEE tree<br/><a href="https://me.sap.com/notes/3625135" rel="noopener noreferrer nofollow" target="_blank">3625135</a> - S4TWL - Deprecation of DMEE Payment Medium Formats<br/><a href="https://me.sap.com/notes/2253571" rel="noopener noreferrer nofollow" target="_blank">2253571</a> - Collective information note: CGI_XML_CT, CGI_XML_DD extended with BAdI enhancement</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Sweden, Bank file format, Swedish, Swedish Banking Association, <span style="list-style-type: disc;">Nordic Payment Council, ISO 20022, Schwedisch,</span> </p></div></div></div></div>

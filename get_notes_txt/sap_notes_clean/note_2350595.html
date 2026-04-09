@@ -1,0 +1,46 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">/SCMTMS/SFM_OPT: x appears as a message when you optimize with the <br/>CS optimizer.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Carrier Selection, optimizer</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>A CS optimizer of a newer release (for example, csopsvr 10.0) that raises additional messages was imported in downport mode under an older SAP TM release (for example, TM 8.0). In occasional cases of emergency, a new message may also have been added between the Support Packages of a release, provided that this was urgently required as part of the process and notifications.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP recommends to install at least Transportation Management Service Pack. If this is not possible for some reason, the follwing correction has to be done manually.<br/><br/>Call Transaction SE91.<br/>Display the message classes /SCMTMS/SFM_OPT.<br/>Select the corresponding message x.<br/>Maintain the selected message (F8).<br/>Enter the message short text (see below for the text).<br/>The message is self-explanatory.<br/>Save your changes.<br/><br/>A list of all messages is provided below (number:short text). All status messages of all preceding releases are automatically included in higher releases.</p>
+<ul>
+<li>001 No carriers sent for optimization</li>
+<li>003 No RFQ items sent for optimization</li>
+<li>004 No responses sent for optimization</li>
+<li>005 Optimizer time limit is &amp;1 seconds; time limit must be positive</li>
+<li>010 Cap. of RFQ item &amp;2 in dim. &amp;4 for carrier &amp;1 is below min. cap. of &amp;3</li>
+<li>013 Minimum target share for carrier &amp;1 is &amp;3; must be between 0% and 100%</li>
+<li>014 Maximum target share for carrier &amp;1 is &amp;3; must be between 0% and 100%</li>
+<li>015 Minimum target share &amp;3 for carrier &amp;1 is greater than maximum share</li>
+<li>020 Rates from carrier &amp;1 for RFQ item &amp;2 invalid; rates must be positive</li>
+<li>022 Requested capacity &amp;2 of RFQ item &amp;1 must be greater than zero</li>
+<li>023 RFQ item &amp;1 invalid; non-delivery costs &amp;2 must be greater than zero</li>
+<li>028 Inconsistencies in capacity restriction for carrier &amp;1</li>
+<li>029 Capacity of RFQ item &amp;2 in dimension &amp;4 for carrier &amp;1 is invalid</li>
+<li>032 Inconsistencies in capacity restrictions</li>
+<li>033 No responses for freight agreement RFQ item &amp;1</li>
+<li>034 Inconsistencies in capacity restrictions</li>
+<li>035 Sum of minimum target shares cannot be greater than 100%</li>
+<li>038 Inconsistencies in target share &amp;1</li>
+<li>039 Inconsistencies in capacity restrictions</li>
+<li>043 Non-delivery costs of RFQ item &amp;1 cannot be zero</li>
+<li>046 Enter a quantity for dimension &amp;2 of RFQ item &amp;1</li>
+<li>047 Enter a quantity for dimension &amp;2 of RFQ item &amp;1</li>
+<li>048 Performance critical number of continuous moves reached</li>
+<li>049 RFQ item &amp;1: Min. no. of carriers (&amp;2) higher than no. of carriers (&amp;3)</li>
+<li>050 RFQ item &amp;1: Max. no. of carriers (&amp;2) higher than no. of carriers (&amp;3)</li>
+<li>051 Item &amp;1: Min. no. of carriers (&amp;2) higher than max. no. of carriers (&amp;3)</li>
+<li>099 Calling &amp;1 for not supported application &amp;2, only supporting &amp;3</li>
+<li>600 Error during consistency checks; contact technical support</li>
+<li>801 Starting optimizer run</li>
+<li>802 Loading parameters</li>
+<li>803 Loading planning data</li>
+<li>804 Checking consistency</li>
+<li>811 Writing results</li>
+<li>812 Finishing optimizer run</li>
+<li>820 Starting optimizer</li>
+<li>999 Calling &amp;1 for not supported application &amp;2, only supporting &amp;3</li>
+</ul></div></div></div></div>

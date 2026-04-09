@@ -1,0 +1,187 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The pricing result of an order item contains conditions that use the maximum condition value functionality.<br/>This item also has a billing plan. Billing takes place for a date in the billing plan.<br/>The net value (NETWR) of the generated billing item corresponds to the value to be billed.<br/>The tax (MWSBP) for the generated billing item has also been calculated correctly.</p>
+<p>However, the condition values (KWERT) of the individual conditions in the billing item do not correspond to expectations.<br/>They do not correspond to the condition values of the order item scaled with the factor "Value to be billed / net value of order item".<br/>The condition values of the conditions that use the maximum condition value functionality are null.<br/>The condition values of the other conditions have been scaled with the factor "Value to be billed / (net value of order item minus condition values of conditions included in the net value that use the maximum condition value functionality)".<br/><br/>The incorrect behavior does not occur if the maximum condition value has already been reached for the conditions that use the maximum condition value functionality (KMXWR = 'X').<br/><br/><br/><strong>Example</strong></p>
+<p><br/>Pricing result for order item:</p>
+<div class="table-responsive"><table border="0" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Condition</td>
+<td>KWERT</td>
+<td>Currency</td>
+<td>Comment</td>
+</tr>
+<tr>
+<td>Price</td>
+<td> 960.00</td>
+<td> EUR</td>
+<td> </td>
+</tr>
+<tr>
+<td>Surcharge</td>
+<td> 140.00</td>
+<td> EUR </td>
+<td> </td>
+</tr>
+<tr>
+<td>Discount A</td>
+<td>-200.00</td>
+<td> EUR </td>
+<td>(with maximum condition value, KMXWR = 'Y')</td>
+</tr>
+<tr>
+<td>Discount B</td>
+<td>-100.00</td>
+<td> EUR </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>Net value (NETWR)</strong></td>
+<td> 800.00</td>
+<td> EUR </td>
+<td>(total of active non-statistical conditions)</td>
+</tr>
+<tr>
+<td><strong>Tax 19% (MWSBP)</strong></td>
+<td> 152.00</td>
+<td> EUR </td>
+<td>(calculated from NETWR)</td>
+</tr>
+<tr>
+<td>Statistical condition 1</td>
+<td> 600.00</td>
+<td> EUR </td>
+<td> </td>
+</tr>
+<tr>
+<td>Statistical condition 2</td>
+<td> 600.00</td>
+<td> EUR </td>
+<td>(with maximum condition value, KMXWR = 'Y')</td>
+</tr>
+</tbody>
+</table></div>
+<p><br/>The value of the billing plan date to be billed is EUR 200.00.<br/>Based on the scaling factor of EUR 200.00 / EUR 800 = EUR 0.25, the following pricing result is expected for the billing item:</p>
+<div class="table-responsive"><table border="0" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Condition</td>
+<td>KWERT</td>
+<td>Currency</td>
+<td>Note</td>
+</tr>
+<tr>
+<td>Price</td>
+<td> 240.00</td>
+<td> EUR</td>
+<td>= EUR 960.00 * 0.25 and fixed with KSTEU = 'E'</td>
+</tr>
+<tr>
+<td>Surcharge</td>
+<td>35.00</td>
+<td> EUR </td>
+<td>= EUR 140.00 * 0.25 and fixed with KSTEU = 'E'</td>
+</tr>
+<tr>
+<td>Discount A</td>
+<td>-50.00</td>
+<td> EUR </td>
+<td>= EUR -200.00 * 0.25 and fixed with KSTEU = 'E'</td>
+</tr>
+<tr>
+<td>Discount B</td>
+<td>-25.00</td>
+<td> EUR </td>
+<td>= EUR -100.00 * 0.25 and fixed with KSTEU = 'E'</td>
+</tr>
+<tr>
+<td><strong>Net value (NETWR)</strong></td>
+<td> 200.00</td>
+<td> EUR </td>
+<td>(total of active non-statistical conditions)</td>
+</tr>
+<tr>
+<td><strong>Tax 19% (MWSBP)</strong></td>
+<td>38.00</td>
+<td> EUR </td>
+<td>(KSTEU = 'D', calculated from NETWR)</td>
+</tr>
+<tr>
+<td>Statistical condition 1</td>
+<td> 150.00</td>
+<td> EUR </td>
+<td>= EUR 600.00 * 0.25 and fixed with KSTEU = 'E'</td>
+</tr>
+<tr>
+<td>Statistical condition 2</td>
+<td> 150.00</td>
+<td> EUR </td>
+<td>= EUR 600.00 * 0.25 and fixed with KSTEU = 'E'</td>
+</tr>
+</tbody>
+</table></div>
+<p><br/>The system incorrectly returns the following pricing result:</p>
+<div class="table-responsive"><table border="0" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Condition</td>
+<td>KWERT</td>
+<td>Currency</td>
+<td>Note</td>
+</tr>
+<tr>
+<td>Price</td>
+<td> 192.00</td>
+<td> EUR</td>
+<td>= EUR 960.00 * 0.2 and fixed with KSTEU = 'E'</td>
+</tr>
+<tr>
+<td>Surcharge</td>
+<td>28.00</td>
+<td> EUR </td>
+<td>= EUR 140.00 * 0.2 and fixed with KSTEU = 'E'</td>
+</tr>
+<tr>
+<td>Discount A</td>
+<td>0.00</td>
+<td> EUR </td>
+<td>= EUR 0.00 * 0.2 and fixed with KSTEU = 'E'</td>
+</tr>
+<tr>
+<td>Discount B</td>
+<td>-20.00</td>
+<td> EUR </td>
+<td>= EUR -100.00 * 0.2 and fixed with KSTEU = 'E'</td>
+</tr>
+<tr>
+<td><strong>Net value (NETWR)</strong></td>
+<td> 200.00</td>
+<td> EUR </td>
+<td>(total of active non-statistical conditions)</td>
+</tr>
+<tr>
+<td><strong>Tax 19% (MWSBP)</strong></td>
+<td>38.00</td>
+<td> EUR </td>
+<td>(KSTEU = 'D', calculated from net value)</td>
+</tr>
+<tr>
+<td>Statistical condition 1</td>
+<td> 120.00</td>
+<td> EUR </td>
+<td>= EUR 600.00 * 0.2 and fixed with KSTEU = 'E'</td>
+</tr>
+<tr>
+<td>Statistical condition 2</td>
+<td>0.00</td>
+<td> EUR </td>
+<td>= EUR 0.00 * 0.2 and fixed with KSTEU = 'E'</td>
+</tr>
+</tbody>
+</table></div>
+<p>In the copy process, the conditions with the maximum condition value "Discount A" and "Statistical condition 2" were set to zero. As a result, the net value of the order item (EUR 1,000) and thus the scaling factor (EUR 200.00 / EUR 1,000.00 = EUR 0.2) were calculated incorrectly.<br/><br/></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Billing plan, maximum condition value,<br/>AMOUNT, AMOUNT_RULE, KOUPD, KMXWR, KMXAW,<br/>PRICING_COPY<br/><br/></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>(1) Conditions that use the maximum condition value functionality are copied to the internal table TKOMV in the copy process (function module PRICING_COPY) with fixing KSTEU = 'E' if the maximum condition value has already been reached (KMXWR = 'X') and they have not already been fixed (KSTEU NA 'EFH'). This is necessary so that the limitation is not lost in the generated billing document as a result of a revaluation (see SAP Note 615370 Section C).<br/>If the maximum condition value has not yet been reached (KMXWR = 'Y') and the condition value is not fixed (KSTEU NA 'EF'), the condition value is set to zero and transferred to TKOMV without fixing. The subsequent revaluation of the condition in the generated billing document calculates the condition value correctly again.<br/><br/>(2) In the case of the billing of a billing plan date, the system additionally calculates the net value in the function module PRICING_COPY based on the TKOMV condition values. All condition values transferred to the internal table TKOMV (except taxes) are then scaled with the factor "Value to be billed / calculated net value of order item" and fixed with KSTEU = 'E'. <br/>Conditions with KMXWR = 'Y' already have a condition value of zero after (1). Due to the initial condition value, they can no longer receive the correct condition value due to scaling. If such conditions are also relevant for the net value, the net value is also calculated incorrectly, which means that the condition values of other conditions are also scaled incorrectly.<br/><br/></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>If the copy process is carried out for the billing of a billing plan date, the condition values of conditions that use the maximum condition value functionality must not be set to zero.<br/><br/>Implement the attached changes in the source code.</p></div></div></div></div>

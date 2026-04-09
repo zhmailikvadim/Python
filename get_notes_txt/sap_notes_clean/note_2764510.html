@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">DB2 Version 11, RSU level is greater than RSU1612(NFM):</p>
+<ol>
+<li>With LTMCFG parameter DataSharingOption=None, and without DataSharingMember parameter in LTMCFG, Replication Agent fails to start.</li>
+<li>With Parameter DataSharingOption=Single in LTMCFG, Replication Agent fails to start.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><strong>Environment:</strong></p>
+<p>SAP HANA SDI 2.0 SP03 Patch 6 (SDI DB2 Mainframe Adapter Version 2.3.6)</p>
+<p>SAP HANA SDI 2.0 SP04 (SDI DB2 Mainframe adapter Version 2.4.0)</p>
+<p><strong>Steps to reproduce:</strong></p>
+<p>There are two possible scenarios:</p>
+<ol>
+<li>In a non-Datasharing environment, set DataSharingOption=None and comment out DataSharingMember in LTMCFG parameter for DB2 version 11, RSU level is greater than RSU1612 and start the Replication Agent.</li>
+<li>In a Datasharing environment, set DataSharingOption=Single and DataSharingMember=&lt;Db2 Subsystem name&gt; in LTMCFG parameter for DB2 version 11, RSU level is greater than RSU1612 and start the Replication Agent.</li>
+</ol>
+<p><strong>Workaround:</strong></p>
+<p>In a non-Datasharing environment, set DataSharingOption=None and DataSharingMember=&lt;DB2 subsystem name&gt; parameters in LTMCFG, and start the Replication Agent.</p>
+<p>In a Datasharing environment, set DataSharingOption=Multi, comment out DataSharingMember parameter in LTMCFG and start the Replication Agent.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The development team is investigating this known issue.</p></div></div></div></div>

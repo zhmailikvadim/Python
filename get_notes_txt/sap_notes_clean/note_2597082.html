@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>
+<div>During an upgrade, ASE hits a timeslice at address "read"</div>
+</li>
+<li>
+<div>With a stack trace including module dmpld__read_dump_record</div>
+</li>
+<li>ASE log records of note are:</li>
+</ul>
+<pre style="padding-left: 30px;">2018/01/22 <strong>17:13:07.78</strong>  The dump history file '/opt/sybase/ASE-16_0/dumphist' is being updated from version '1.0' to version '1.1'. The previous file will be renamed as ....</pre>
+<pre style="padding-left: 30px;">2018/01/22<strong> 17:14:48.00  timeslice</strong> -1002, current process infected at 0x7f8ef20947fd (<strong>read</strong>+0x2d)</pre>
+<p style="padding-left: 30px;">with a stacktrace including functions:</p>
+<pre style="padding-left: 30px;">(null)+0x7f8ef2095850()<br/>ufread<br/>ufgets<br/><strong>dmpld__read_dump_record</strong></pre>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Adaptive Server Enterprise (ASE) 15.7 &amp; 16.0</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>The timeslice is linked to the upgrade of the dumphist file</li>
+<ul>
+<li>The timeslice is 100 seconds after dump history file message (100.2 seconds = 1002 clock ticks as reported by the "timeslice -1002")</li>
+<li>The dmpld__read_dump_record function is for reading the dumphist file.</li>
+</ul>
+<li>ASE is making a call on the OS to read the dumphist file.</li>
+<li>This call does not return within the maximum time ASE allows (cpu grace time) and ASE terminated this process with timeslice.</li>
+<li>The cause of this error is outside of the ASE domain, as the OS can't complete the ASE request to access the file.</li>
+<ul>
+<li>Most likely there is a (temporary) glitch regarding the dumphist file.</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>There are no effects known from this issue, so it can be ignored.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>KBA <a href="https://me.sap.com/notes/2520873" target="_blank">2520873</a> - Cannot find dump history file, need to know where and how it is created - SAP ASE</p></div></div></div></div>

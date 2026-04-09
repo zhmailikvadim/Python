@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>The web intelligence document is based on UNX which is using Java connector (JCO) -&gt; SAP ERP connection. </li>
+<li>The connection is not using Save Language, so the PVL language is used.</li>
+<li>The issue happens when Preferred Viewing Locale (PVL) is set as <strong>Japan (Japanese)</strong>, refresh the webi with a special prompt value, error occurs as <br/><strong>The following database error occurred: [Data Federator Driver] [Server] [Connector 'connection name'] ConnectionServer has reported an Exception: String index out of range: 3. For information about this error, please refer to SAP Knowledge Base Article 2054721 on the SAP Support Portal. (IES 10901)</strong></li>
+<li>No issue if PVL is set as English (United States) even with the same prompt value</li>
+<li>Even for PVL is <strong>Japan (Japanese)</strong>, the issue is only happening for some special prompt value only. Using other prompt value it can also work.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>webi, webintelligence, refresh, ERP, JCo</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence Platform 4.2 Support Package 04</li>
+<li>Web Intelligence</li>
+</ul>
+<p><strong>Steps to reproduce:</strong></p>
+<ol>
+<li>Log on to BI launch pad.</li>
+<li>Open the problematic WebI document.</li>
+<li>Refresh and input the prompt value to run query.</li>
+<li>It fails with error<strong> : </strong>[Data Federator Driver] [Server] [Connector 'connection name'] ConnectionServer has reported an Exception: String index out of range: 3</li>
+</ol>
+<p><strong>Cause:</strong></p>
+<ul>
+<li>This issue is caused by a defect in the product.</li>
+<li>It turned out that the issue is not related to PVL (Preferred Viewing Locale).</li>
+<li>The issue is caused by the position of '/' character which means EOF (End Of File) in the data of SAP system.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>This issue is fixed in the patches listed in the "Support Packages &amp; Patches" section below.<br/>Due to different internal processes, the "Support Packages &amp; Patches" section of the SAP Note will be populated as below:<br/>                - for fixes delivered in "Support Packages": immediately (even if the "Support Package" is planned to be released several months later)<br/>                - for fixes delivered in "Patches":  <strong>ONLY</strong> once the "Patch" is released <strong>AND</strong> available on SMP (not before)<br/>For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article 2144559 in References section.</li>
+</ul></div></div></div></div>

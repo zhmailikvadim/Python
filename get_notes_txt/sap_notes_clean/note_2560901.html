@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>You would like to disable page locking on a table to improve concurency</li>
+<li>You would like to avoid deadlocks on data pages</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Netweaver running SQL Server - all supported version.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>Inserts are taking long time</li>
+<li>Concurency problems</li>
+<li>Deadlocks</li>
+<li>Performance problems due to blocking</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Solution 1 using Microsoft Management Studio :</p>
+<ol>
+<li>Expand your <em>&lt;Database&gt; -&gt; 'Tables'</em> tree</li>
+<li>Find a specific table</li>
+<li>Expand indexes</li>
+<li>Right click on an index and choose 'Properties'</li>
+<li>Select <em>'Options'</em></li>
+<li>Uncheck <em>'Use page locks when accessing the index'</em></li>
+<li>Repeat for all indexes</li>
+</ol>
+<p>Solution 2 using 'Query':</p>
+<ol>
+<li>In Microsoft Management Studio open a 'New Query' window</li>
+<li>Make sure to be connected to your database as database administrator.</li>
+<li>Run following : EXEC sp_indexoption &lt;table&gt;, &lt;option&gt; , &lt;true|false&gt; e.g. :<br/>
+<pre><em>EXEC sp_indexoption [REPOLOAD], "DisAllowPageLocks", "TRUE"</em></pre>
+</li>
+</ol>
+<p style="padding-left: 30px;">Note : This change can be done while database is use. When table is in use server may return e.g.:<br/>"Lock request time out period exceeded. (Microsoft SQL Server, Error: 1222)" error.<br/>When this happens, just retry the same operation later when table is in use (not locked).</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>poor performance, insert , slow, update, locks, concurency,deadlock</p></div></div></div></div>

@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are trying to create a custom query in the sales organization object value selector field, but you are not able to save it.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Cloud for Customer</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<div>Go to the <em>Sales</em> work center</div>
+</li>
+<li>Go to the <em>Sales Quotes</em> or <em>Sales Orders </em>view</li>
+<li>Select <em>New</em></li>
+<li>Go to the field <em>Sales Organization</em> and open the object value selector</li>
+<li>In the sales organization popup, select S<em>how Advanced Filter</em></li>
+<li>Formulate the query with the available fields</li>
+<li>Select <em>Save Query</em></li>
+</ol>
+<p><em></em>You will see that the query created is not saved.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Sales area determination for sales quotes is enabled in scoping.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Sales area determination business option allows the user to add through the selection of the sales organization, its corresponding distribution channel and division valid for the account and the employee. <br/>It will be defaulted if the sales area matches from the employee and the account. <br/>If multiple matching assignments exist, the user can select the appropriate one. <br/>If an employee is not assigned to a sales area, the determination will consider account’s sales data only</p>
+<p>So while it is enabled, user cannot limit the sales organization and the same can be verified by following the steps below</p>
+<ol>
+<li>Go to the <em>Business Configuration</em> work center</li>
+<li>Go to the <em>I</em><em>mplementation Projects</em> view</li>
+<li>Identify the relevant project and select it</li>
+<li>Select <em>Edit Project Scope</em></li>
+<li>Navigate to step 4, Questions, using the guided activity</li>
+<li>Select the element <em>Sales</em></li>
+<li>Go to the sub element <span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" id="statictextXUlxhcK9EqQAYedON_sQ8IW_608-col0-row4" style="direction: inherit;" title="Customer Care"><em>New Business</em> and select <em><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" id="statictextXUlxhcK9EqQAYedON_sQ8IW_608-col0-row6" style="direction: inherit;" title="Service Request Management">Sales Quotes</span></em></span></li>
+<li><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Customer Care"><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Service Request Management">Under</span><em><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Service Request Management"> Questions for Sales Quotes, </span></em><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Service Request Management">find <em>Sales Area Determination for Sales Quotes</em></span></span></li>
+</ol>
+<p><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Customer Care"><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Service Request Management"><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Customer Care"><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Service Request Management">Here you will see that the question, "</span></span><em><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Customer Care"><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Service Request Management"><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100" id="statictextnSxsydamyKkfZJ5FAbFE_sW_1402-col0-row8" style="direction: inherit;" title="Do you want to enable users to default and specify, per sales quote, a predetermined combination of sales org., distribution channel and division?">Do you want to enable users to default and specify, per sales quote, a predetermined combination of sales org., distribution channel and division?"</span><em> </em></span></span></em><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Customer Care"><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Service Request Management">is</span></span><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Customer Care"><span class="sapUiTv sapUiTvAlignLeft sapclient-StaticText-wrapping saplsui-maxwidth100 saplsui-widthauto" style="direction: inherit;" title="Service Request Management"> in scope.</span></span></span></span></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>custom query, create, failure, save failed, sales area determination, scoping, organization, quotes,</p></div></div></div></div>

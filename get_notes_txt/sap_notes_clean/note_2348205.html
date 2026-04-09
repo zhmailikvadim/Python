@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1"><span style="white-space: normal; word-spacing: 0px; text-transform: none; float: none;  font: 14px/20px Arial, sans-serif; widows: 1; display: inline !important; letter-spacing: normal; background- text-indent: 0px; -webkit-text-stroke-width: 0px;">The customer ran a LoadRunner simulation and encountered the aforementioned LockTimeoutException.</span></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PA7.3, AS5.2, AuthoritySuite, ProductAuthority</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Steps to Reproduce:</strong></p>
+<p> Run a LoadRunner simulation for 136 users.</p>
+<p>Actual Result: The simulation is generating the LockTimeoutException in the log file.</p>
+<p>Expected Result: No LockTimeoutException generated in the log file.</p>
+<p><strong>Cause:</strong></p>
+<p>The Spring Web Flow is trying to acquire a lock that is being impeded by undetermined cause, most probably because a thread is locking the database.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Allow the time to wait to acquire the lock to be slightly higher to be sure.</p>
+<p><span style="text-decoration: underline;"><strong>Validity</strong></span></p>
+<p>This document is valid for:</p>
+<ul>
+<li>ProductAuthority 7.3</li>
+</ul>
+<p><span style="text-decoration: underline;"><strong>Support Packages &amp; Patches</strong></span></p>
+<ul>
+<li>ProductAuthority 7.3.14</li>
+</ul></div></div></div></div>

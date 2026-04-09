@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">While adjusting SPAU or SPDD, objects that no longer exist are displayed.</p>
+<p>When try to adjust them it is not possible since the object is already deleted.</p>
+<p><span style="color: #ff0000;"><strong><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></strong></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP NetWeaver all versions.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The tab 'Deleted' in SPAU/SPDD is showing deleted objects which have been modified by the customer. Usually customers can delete the modification logs, especially for deleted objects to confirm that they have been taken care of. </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>It is possible to delete the old modification logs by transaction SE95_UTIL.</p>
+<ol><li>Select "Delete modification logs" and execute (F8).</li></ol>
+<p><img alt="" class="img-responsive" height="223" src="/documents/customerkba/ttM7vz_8HkcHE_5vCW8bnR6dZZ7UFKB3Uvu_cYNbSKk" width="529"/></p>
+<p>It is possible to restrict the search in the selection conditions or execute without using any condition.</p>
+<p>The "Include in Transport Request" option should always be selected. Only if the objects are exported in a transport request, can the information that the modification logs were deleted be transferred into another system.</p>
+<p>But if deleted objects are proxy ones (SPRX), it should not be flagged in transport request.</p>
+<p><img alt="" class="img-responsive" height="265" src="/documents/customerkba/LlGJ_9B3P--1EZd4_QVh5xKl-Tazj_Z5Ihjncks-x9Q" width="534"/></p>
+<p>Look for the affected objects.</p>
+<p>2. Select the entry and press button "Delete modification log"(Trash icon).</p>
+<p><img alt="" class="img-responsive" height="397" src="/documents/customerkba/nKktP9Q8_mT0Rt9XgyLiluiVzxCF2ZuL8MNnwk5k7DY" width="611"/></p>
+<p>There will be a pop up window as below.</p>
+<p>3. Click Yes.</p>
+<p><img alt="" class="img-responsive" src="/documents/customerkba/a-D56IDrhEoieOnDosl0zV-p-4nplTUoKxAL5PJfR2M"/></p>
+<p>4. Create a new request or fill in request number to delete modification logs.</p>
+<p><img alt="" class="img-responsive" src="/documents/customerkba/kSj_V7RrafQr0im9jdY32M2lZ04fejvEEvz12w2O4t8"/></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>SAP Note <a href="https://me.sap.com/notes/1848606" rel="noopener noreferrer nofollow" target="_blank">1848606</a> - SE95_UTIL: Deleting modification logs</li><li>SAP Note <a href="https://me.sap.com/notes/328680" rel="noopener noreferrer nofollow" target="_blank">328680</a> - SE95_UTIL: Utility programs modification browser</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SE95_UTIL, SPAU, SPDD, modification logs, deleted object.</p>
+<p></p></div></div></div></div>

@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Content that works user to work in the legacy user interface is not communicating or loading with Course Home enabled.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">SAP SuccessFactors Learning</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>Lauching content that contains window.top calls can lead to these issue's.</p>
+<ol>
+<li>Press F12 on your keyboard to open your developer tools.</li>
+<li>Launch the content with the issue.</li>
+<li>Navigate to the "Console Tab" on developer tools. If you see the error "Blocked a frame with origin "" from accessing a cross-origin frame."</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The root cause for this defect is the same for all content types: a cross-domain violation caused by accessing the BizX common header window.</p>
+<p><img alt="CourseHome windows top.PNG" class="img-responsive" src="/documents/customerkba/Kk8APcvkV_OvEwd1r8r_6jRByEehQ0xC61-_532rCaY" title="CourseHome windows top.PNG"/></p>
+<p>In order to record the completion of a SCORM-type content, the LMS integrating the content (in this case, Learning) must make available a JavaScript SCORM API. As recommended by SCORM guidelines, Learning attaches this API to the parent window of the content (the "LMS" window in the image above).</p>
+<p>To locate the LMS API, the SCORM content executes a search algorithm on the current window hierarchy. In the case of EON content, the search algorithm, which is implemented by content providers, attempts to check the BizX Common Header window before the LMS window.</p>
+<p>Because the BizX Common Header is located on a different domain from both LMS and the SCORM content windows, browser cross-domain security restrictions are violated as soon as window access is attempted, and the search algorithm is immediately terminated before finding the LMS API. Without the LMS API, the content is unable to communicate with Learning, so no status changes can be recorded.</p>
+<p><strong>Why does <span style="background-">it </span>occur only on Course Home?</strong></p>
+<p>The issue is being noticed by customers because Course Home embeds the content directly in the page, at the bottom of the window hierarchy, as opposed to the legacy item details page, which opens content in a new window. The usage of a separate window hierarchy on the legacy details page means that users will not see this issue there.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p><strong>Recommendations for Content Providers</strong></p>
+<p>Although the following is the root cause of the issue example, the cross-domain access violation, is the same, the implementations of the content differ. Therefore, recommendation example will be presented here but please note this will not cover every content type or file as they vary from content to content.</p>
+<p><strong>Example issue:</strong></p>
+<p>The content's API search algorithm does not follow SCORM guidelines. SCORM guidelines recommend that content check for the API on the first iteration of the search algorithm. Please see the <span style="text-decoration: underline;"><a href="https://scorm.com/scorm-explained/technical-scorm/run-time/api-discovery-algorithms/" target="_blank">SCORM API Discovery Guidelines</a></span>. In addtion, <span style="text-decoration: underline;"><a href="https://scorm.com/blog/why-cant-my-content-find-the-scorm-api/" target="_blank">this article</a></span> may assist the content developer in writing their discovery algorithm. Instead of checking for the API on the first available window, the content recurses into the second parent window before making any API checks. See <em>/static/core/library/course/course.js</em>. The search algorithm begins by calling <em>lookupScormApi</em>. It then calls <em>getScormApi</em> with the first parent, which in turns calls <em>getScormAPIRecursive</em> on the next parent:// search API in parent:var scormAPI = this.getScormAPIRecursive( objRootWin.parent, version );</p>
+<p>Instead, this could become:</p>
+<p>// search API in parent:</p>
+<p>var scormAPI = this.getScormAPIRecursive( objRootWin, version );  // Check the root window first. The LMS API will be located there.</p>
+<p><strong>Workaround: </strong>By configuring the content to be opened in a new window, rather than inline on the same page, this issue will no longer occur.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<div class="longtext">
+<p><a href="/notes/2560044" target="_blank">2560044</a> - Course Home view is not loading for all items</p>
+<p><a href="/notes/2692689" target="_blank">2692689</a> - Course Home - Unable to start content</p>
+<p><a href="/notes/2692574" target="_blank">2692574</a> - Course Home - SCORM content reloads when opening and closing content menu</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>learning, scorm 2004, course home, lms, add new content, object, package, navigation, Console Tab, Blocked a frame with origin, from accessing a cross-origin frame</p></div></div></div></div>

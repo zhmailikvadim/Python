@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1"><span style="font-size: 14px; font-family: 'Benton Sans', Arial, sans-serif; white-space: normal; word-spacing: 0px; text-transform: none; float: none; font-weight: 400; font-style: normal; orphans: 2; widows: 2; display: inline !important; letter-spacing: normal; background- text-indent: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-">The <a href="https://help.sap.com/viewer/d0a0a7cb51dc40529bfcac724dd05796/7.5.latest/en-US/48cea362e206035be10000000a42189b.html" target="_blank">access control using Assigned Users </a>is maintained when configuring the Communication Component in the Integration Directory. </span>When transporting Communication Component objects which have user info defined under tab Assigned Users in source system, it's observed that the user info is missing post transport in target system.</p>
+<p><img alt="Before.jpg" class="img-responsive" src="/documents/customerkba/75ilyPOOLFWp_QRUpW06i3hCYEGURAW9rw5Lb5VMkbI" title="Before.jpg"/></p>
+<p><img alt="After.jpg" class="img-responsive" src="/documents/customerkba/ALSlheYC79rR2y9KmVePxHeAZ6LFLST2vXkG88Mlesk" title="After.jpg"/></p>
+<p><span style="color: #ff0000;"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental</em>.</span></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>PI Release Independent</li>
+<li>SAP NetWeaver</li>
+<li>SAP Process Integration</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Maintain user info under tab Assigned Users in Communication Component</li>
+<li>Transport Communication Component from source system to target system</li>
+<li>Check user info under tab Assigned Users in target system</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>This is as per the design of Integration Directory objects, for example:</p>
+<ul>
+<li><strong>Communication Channels</strong> do not carry the URL and login information post transport as described in SAP KBA <a href="https://me.sap.com/notes/1595705" target="_blank">1595705</a> - PI Communication Channel parameters removed after transport.</li>
+<li><strong>Communication Components </strong>do not carry the user information after transporting from source system to target system.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Manually update Assigned Users with required information after successful transport.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>SAP KBA <a href="https://me.sap.com/notes/1595705" target="_blank">1595705</a> - PI Communication Channel parameters removed after transport</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>transport, Assigned Users, Integration Builder, user information, communication channel, business system, source system, target system, Process Integration 7.0, PI 7.0, PI 7.01, PI 7.02, Process Integration 7.10, PI 7.10, Process Integration 7.11, PI 7.11, Process Integration 7.30, PI 7.30, Process Integration 7.31, PI 7.31, Process Orchestration 7.40, PI 7.40, PO 7.40, Process Orchestration 7.50, PI 7.50, PO 7.50, NetWeaver, XI</p></div></div></div></div>

@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1"><li>Changing the POB's Transaction price to negative from positive or vice versa triggers an error message FARR_MSG_CUSTOM042 or FARR_MSG_CUSTOM043</li><li>Processing the negative transaction price in FARR_RAI_MON triggers an error message FARR_CONTR_LIFECYCLE001.</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Revenue Accounting (RA).</li><li>Financial Accounting (FI).</li><li>SAP ERP Central Component.</li><li>SAP ERP.</li><li>SAP enhancement package for SAP ERP.</li><li>SAP enhancement package for SAP ERP, version for SAP HANA.</li><li>SAP S/4HANA.</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>When the transaction price on a Performance Obligation (POB) could is changed from positive to negative value and vice versa, then an error message FARR_MSG_CUSTOM042 or FARR_MSG_CUSTOM043 is raised.
+<p>FARR_MSG_CUSTOM042-Transaction price of perf. oblig. &amp;1 cannot change from pos. to neg.</p>
+<p>FARR_MSG_CUSTOM043-Transaction price of perf. oblig. &amp;1 cannot change from neg. to pos.</p>
+</li><li>While processing a Revenue Accounting Item (RAI) in FARR_RAI_MON, an error message  FARR_CONTR_LIFECYCLE001- "XNEGATIVE_ITEM from '' to X is not permitted" is raised.
+<p>FARR_CONTR_LIFECYCLE001:Changing &amp;1 (field &amp;4) from '&amp;2' to '&amp;3' is not permitted.</p>
+</li></ol>
+<p></p>
+<ol></ol>
+<p></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The error is caused by the system not permitting the change of the transaction price from positive to negative value and vice versa.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Set the message type for the following messages to I (Information), W (Warning), or S (Success) to bypass the error:</p>
+<ul><li>
+<p>FARR_MSG_CUSTOM042</p>
+</li><li>
+<p>FARR_MSG_CUSTOM043</p>
+</li></ul>
+<p><span style="text-decoration: underline;">Steps to follow:</span></p>
+<ul><li>
+<p>Navigate to the following path:<br/>Go to Transaction Code FARR_IMG → Revenue Accounting → Revenue Accounting Contracts → Change Messages Control</p>
+</li><li>
+<p>Refer to the following SAP Knowledge Base Article (KBA) for detailed instructions:<br/>KBA <a href="https://me.sap.com/notes/0002512661" rel="noopener noreferrer nofollow" target="_blank">0002512661 </a>- Error: FARR_MSG_CUSTOM*</p>
+<p>This article explains:</p>
+<ul><li>
+<p>How to add these messages to the configuration table</p>
+</li><li>
+<p>How to change the message type from Error to Warning</p>
+</li></ul>
+</li></ul>
+<p>If the requirement is to allow both positive and negative values:</p>
+<ul><li>
+<p>Leave the XNEGATIVE_FLAG field blank</p>
+</li><li>
+<p>Set the relevant FARR_MSG_CUSTOM message type to Success</p>
+</li></ul>
+<p>Note:<br/>SAP strongly recommends testing all configuration changes thoroughly in a non-production environment before transporting them to the production system.</p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Note <a href="https://me.sap.com/notes/3042837" rel="noopener noreferrer nofollow" target="_blank">3042837 </a>- Allow negative item with zero amount</p>
+<p>SAP Note <a href="https://me.sap.com/notes/3045670" rel="noopener noreferrer nofollow" target="_blank">3045670 </a>- Change message to customizable message</p>
+<p>KBA <a href="https://me.sap.com/notes/0002512661" rel="noopener noreferrer nofollow" target="_blank">0002512661 </a>- Error: FARR_MSG_CUSTOM*</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP S/4HANA, Revenue Accounting, Transaction Price, Negative Value, Positive Value, FARR_MSG_CUSTOM, XNEGATIVE_ITEM, RAI, Error, Warning, 042,043,FARR_CONTR_LIFECYCLE, 082</p></div></div></div></div>

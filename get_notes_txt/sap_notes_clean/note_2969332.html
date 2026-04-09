@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are using SAP Asset Manager. Any status update posted from mobile client incorrectly triggers the execution of reverse mobile status synchronization logic, which should be executed only if status update is made from SAP GUI or third party programs.</p>
+<p>The issue only occurs if mobile status or confirmation oMDO class handler (e.g. /MERP/CL_PM_MOBILE_STATUS_OD, /MERP/CL_PM_CONFIRMATION_OD ) has '/MERP/CL_CORE_OMDO_HNDLER_BASE' defined as super class.</p>
+<p>oMDO class handler uses '/MFND/CL_CORE_OMDO_HNDLER_BASE' as super class will not see this issue.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Mobile Status, Confirmation, super class,  /SMERP/CL_PM_MBLSTATUS_TOOLS, IS_CALLED_FROM_MOBILE,  S4MOBADDON-2891</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Programming Errors</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement attached corrections with this note</p></div></div></div></div>

@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You want to restrict the user authorization to create a purchase requisition to only a specific storage location.</p>
+<p>To do that you set the object <strong>M_BANF_LGO</strong> via PFCG but it is not working.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Materials Management (MM)</li>
+<li>SAP ERP Central Component</li>
+<li>SAP ERP</li>
+<li>SAP enhancement package for SAP ERP</li>
+<li>SAP enhancement package for SAP ERP, version for SAP HANA</li>
+<li>SAP S/4HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>As an example, a user works on storage location 123. So he can create purchase requisition only for storage location 123.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Although the authorization object <strong>M_BANF_LGO</strong> (storage location in purchase requisition) exists, but this is only checked in the IS-DFS (Industry-Spec. Comp. Defense Forces and Public Security). See Note <a href="/notes/770961" target="_blank">770961</a> about this.</p>
+<p>The storage location authorization objects are not checked in the standard enjoy purchase requisition transactions. Check Note <a href="/notes/751129" target="_blank">751129</a> for the list of objects checked.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>In order to check the storage location, you need to use the Badi <strong>ME_PROCESS_REQ_CUST</strong> for a custom check.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>ECC, M_BANF_LGO, STORAGE LOCATION, PR, PREQ, ME51N, ME52N, ME53N, AUTHORIZATION, RESTRICT</p></div></div></div></div>

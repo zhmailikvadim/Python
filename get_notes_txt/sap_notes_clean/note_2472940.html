@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">How do you setup SDK Python with Kerberos using a DSN connectionstring?</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Sybase Software Developer Kit (SDK) 15.7</li>
+<li>SAP Adaptive Server Enterprise (ASE) Software Developer Kit (SDK) 16.0</li>
+<li>SAP Adaptive Server Enterprise (ASE) 15.7</li>
+<li>SAP Adaptive Server Enterprise (ASE) 16.0</li>
+<li>Open Client Client-Library</li>
+<li>Adaptive Server Enterprise extension module for Python</li>
+<li>ctlibrary</li>
+<li>Python</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Go to your SDK client install<br/><strong>cd $SYBASE</strong><br/><br/></li>
+<li>Set Sybase environment variables<br/><strong>source SYBASE.csh</strong><br/><br/></li>
+<li>Check your python version<br/><strong>python -version</strong><br/>Python 3.4.4 (default, Mar 13 2017, 10:21:15)<br/>[GCC 4.4.7 20120313 (Red Hat 4.4.7-17)] on linux<br/><br/></li>
+<li>Set PYTHONPATH environment variable for your specific python version<br/><strong>setenv PYTHONPATH $SYBASE/$SYBASE_OCS/python/python34_64r/lib</strong><br/><br/></li>
+<li>Go to your python application<br/><strong>cd $SYBASE/$SYBASE_OCS/sample/python</strong><br/><br/></li>
+<li>Modify python application's connectionstring<br/><strong>conn = sybpydb.connect(dsn='SecurityMechanism=csfkrb5;Kerberos=serverPrinicpal@REALM;MutualAuthentication=true')</strong><br/><br/>Note: kerberos is equal to your server / service princpal name. By default this is your ASE name. If it isn't your ASE name it will be the same as your RUN_asename file -k option<br/>$SYBASE/$SYBASE_ASE/bin/diagserver \<br/>-sasename \<br/>-i$SYBASE \<br/>-N$SYBASE/$SYBASE_ASE/sysam/asename.properties \<br/>-d$SYBASE/data/master.dat \<br/>-e$SYBASE/$SYBASE_ASE/install/asename.log \<br/>-c$SYBASE/$SYBASE_ASE/asename.cfg \<br/>-M$SYBASE/$SYBASE_ASE \<br/><strong>-kkrbPrincipal@REALM</strong><br/><br/></li>
+<li>Generate the user credential<br/><strong>kinit krbuser@REALM</strong><br/><br/></li>
+<li>Set DSQUERY environment variable to your ASE interface name<br/><strong>setenv DSQUERY asename</strong><br/><br/></li>
+<li>Run the application<br/><strong>python firstapp.py</strong></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>python, py, how, guide, fail, kerberos, mit, active directory, ad, help, properties, parameters, data source name, krb, setup,</p></div></div></div></div>

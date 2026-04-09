@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1" style="padding-left: 30px;">After upgarding or full installation of BI 4.2 Sp5, the automation framework do not start.</p>
+<p style="padding-left: 30px;">Logs has following details:</p>
+<p style="padding-left: 30px;"><span style="color: #ff0000;"><strong>com.sap.bong.wfmanager.Activator||E:\Program Files (x86)\SAP BusinessObjects\AdminConsole\Automation Framework\custom\cms_certificate\TrustedPrincipal.conf (The system cannot find the file specified)</strong></span></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p style="padding-left: 30px;">Business Objects Enterprise 4.2 SP05</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p style="padding-left: 30px;">1. Make all the configurations as per the BI Admin console configuration guide :</p>
+<p style="padding-left: 30px;"><a href="https://help.sap.com/viewer/55dcdd714f614d1ca77af92b79ff5e44/4.2.5/en-US/3aee30f0473d4cb8a9f8667fb2b43d8b.html" target="_blank">https://help.sap.com/viewer/55dcdd714f614d1ca77af92b79ff5e44/4.2.5/en-US/3aee30f0473d4cb8a9f8667fb2b43d8b.html</a></p>
+<p style="padding-left: 30px;">2. start the Automation framework and BI agent from the Central configuration manager</p>
+<p style="padding-left: 30px;">3 .Check after sometime, Automation framework has stopped.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p style="padding-left: 30px;">TrustedPrincipal.conf was not accessible or incorrect.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p style="padding-left: 30px;">1. Stop the  ActiveMQ instance (broker) if it is running. To stop ActiveMQ instance (broker) simply close the command prompt using which you launched the ActiveMQ broker. [ refer document <a href="https://help.sap.com/viewer/55dcdd714f614d1ca77af92b79ff5e44/4.2.5/en-US/1457a6755883432d9efd27ba4984b1f9.html" target="_blank">https://help.sap.com/viewer/55dcdd714f614d1ca77af92b79ff5e44/4.2.5/en-US/1457a6755883432d9efd27ba4984b1f9.html</a> - section Starting Automation Framework Services- point 2. to start ActiveMQ Broker]</p>
+<p style="padding-left: 30px;">2. Log into the CMC</p>
+<p style="padding-left: 30px;">3. Navigate to Authentication - Enable the trusted authentication (If it is not enabled earlier)</p>
+<p style="padding-left: 30px;">4. If you have already enabled Trusted authentification - Create new shared secret file and download it</p>
+<p style="padding-left: 30px;">5. Save it to the below location : &lt;Install Dir&gt;\Program Files (x86)\SAP BusinessObjects\AdminConsole\Automation Framework\custom\cms_certificate</p>
+<p style="padding-left: 30px;">6. Also check if the secret path mentioned in the file wfmanager.properties id correctly pointed to the cmc_properties location.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p style="padding-left: 30px;">Automation Framework , Automation Framework immediately stops , <strong>TrustedPrincipal.conf,default, template, missing, BI, admin, Console, BIadminconsole</strong></p></div></div></div></div>

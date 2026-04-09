@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>In the e.g. Monitor Subcontracting Documents app, the user clicks a purchase order to see the details, but the browser changes from Fiori to WEBGUI. If you click Back button, the browser remains in the WEBGUI application.</li>
+<li>This can also happen when trying to navigate back to other apps like Manage Material Coverage app.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Materials Management</li>
+<li>SAP Fiori</li>
+<li>SAP S/4HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Open any Fiori app related to Purchase Order</li>
+<li>Display any PO</li>
+<li>The system redirects the user to the Advanced app</li>
+<li>Click Back Button</li>
+<li>It does not return to the Fiori app</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>When the user clicks the purchase order, the system tries to open it in the Manage Purchase Orders app (1º navigation). If the purchase order contains unsupported features, the system will automatically redirect from the Manage Purchase Orders app to the Display Purchase Order - Advanced app (2º navigation).</p>
+<p>When the user clicks Back button, the system will redirect to the previous app (i.e. Manage Purchase Orders), not the Monitor Subcontracting Documents app. So the navigation will remain in this loop.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>To fix this issue, follow the resolution steps mentioned in the KBA below to disable the 'in-place' navigation: <br/>KBA <a href="https://me.sap.com/notes/2403527" target="_blank">2403527</a> - Force WebGUI/WebDynpro apps to open in same window when launching from Fiori Launchpad</p>
+<p>After the parameter has been set (and all caches have been cleared), the purchase order detail view should open a new browser tab. <br/>To navigate back to the original App e.g. Monitor Subcontracting Documents app, it's sufficient just to close this new additional tab. It's not possible to navigate back to original App e.g. Monitor Subcontracting Documents app within this new tab.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Fiori, purchase, order, requisition, advanced, back, button, FLP, return, screen, webgui, web, gui, monitor, display, remain, manage, Display Purchase Order, Advanced, app, NAVIGATION_GUI_INPLACE,  /n/UI2/FLP_CUS_CONF, F3095</p></div></div></div></div>

@@ -1,0 +1,51 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You have a subaccount in the Cloud Foundry environment of SAP Business Technology Platform. You want to programmatically access the XSUAA configuration using a technical OAuth 2.0 client. An example for this is an integration with SCIM for integrating an identity management system.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>xsuaa SCIM apiaccess API role role collection trust</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>API integration to the xsuaa configuration settings</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The Authorization and Trust Management (XSUAA) service provides the apiaccess plan. The apiaccess service plan creates an OAuth 2.0 client when a service instance is created. Using service keys, even applications outside the SAP Business Technology Platform can access the APIs of the Authorization and Trust Management service.</p>
+<p><strong>Prequisites for using the apiaccess plan</strong></p>
+<p>The apiaccess plan creates OAuth 2.0 clients that include all scopes required to access the XSUAA APIs. The scopes are as follows:</p>
+<ul>
+<li>xs_authorization.read</li>
+<li>xs_authorization.write</li>
+<li>xs_user.read</li>
+<li>xs_user.write</li>
+<li>xs_idp.read</li>
+<li>xs_idp.write</li>
+</ul>
+<p>The prerequisite for the service instance creation is that the corresponding platform user also owns these scopes. This is the case if a platform user is an administrator in the corresponding subaccount (in which the service instance should be created), meaning that this user has the role "User &amp; Role Administrator". Check in the Subaccount view in the cockpit (&lt;subaccount_level&gt; -&gt; Security -&gt; Administrators).</p>
+<p>Note that you do not need to pass any parameters (like the xs-security.json) during the service instance creation (any input is ignored). After the service instance creation, the OAuth 2.0 client's credentials can be retrieved using a service key. Furthermore, any services instance created by this plan cannot be subscribed.</p>
+<p><strong>1. Creating a service key using the cf command line tool</strong></p>
+<p># Log in to the Cloud Foundry environment and navigate to a space in your subaccount.</p>
+<p><em>cf target -o &lt;cf_org&gt; -s &lt;cf_space&gt;</em></p>
+<p># Create a service instance using the apiaccess plan.</p>
+<p><em>cf create-service xsuaa apiaccess myaccess</em></p>
+<p># Create a service key to gain access to the credentials of the newly created OAuth 2.0 client.</p>
+<p><em>cf create-service-key myaccess myaccess-sk</em></p>
+<p># Show the service key with the credentials.</p>
+<p><em>cf service-key myaccess myaccess-sk</em></p>
+<p>#Example output of the service key:</p>
+<p>{</p>
+<p>"apiurl": "https://api.authentication.&lt;landscape&gt;.ondemand.com",<br/>"clientid": "sb-some-id!a1",<br/>"clientsecret": "my-secret",<br/>"identityzone": "my-subdomain",<br/>"identityzoneid": "8264f3de-8362-edae-9a68-9812c23875f5",<br/>"sburl": "https://internal-xsuaa.authentication.&lt;landscape&gt;.ondemand.com",<br/>"tenantid": "8264f3de-8362-edae-9a68-9812c23875f5",<br/>"tenantmode": "dedicated",<br/>"uaadomain": "authentication.&lt;landscape&gt;.ondemand.com",<br/>"url": "https://my-subdomain.authentication.&lt;landscape&gt;.ondemand.com",<br/>"verificationkey": "-----BEGIN PUBLIC KEY-----&lt;some-public-key&gt;-----END PUBLIC KEY-----",<br/>"xsappname": "some-id!a1"<br/>}</p>
+<p><strong>2. Retrieve an access token using the new OAuth 2.0 client</strong></p>
+<p>To retrieve a token containing the scopes mentioned above, send a POST request containing the URL and credentials from the binding to the xsuaa.</p>
+<p>You need the values of clientid, clientsecret, and url from the service key to build the request to the xsuaa. Example:</p>
+<p><em>curl -X POST \</em><br/><em>https://my-subdomain.authentication.eu10.hana.ondemand.com/oauth/token \</em><br/><em>-H 'Accept: application/json' \</em><br/><em>-H 'Content-Type: application/x-www-form-urlencoded' \</em><br/><em>--data 'client_id=sb-some-id!a1&amp;client_secret=my-secret&amp;grant_type=client_credentials&amp;response_type=token'</em></p>
+<p>Example response:</p>
+<p>{</p>
+<p>"access_token":"&lt;token-value&gt;",</p>
+<p>"token_type":"bearer",</p>
+<p>"expires_in":99999,</p>
+<p>"scope":"xs_authorization.read, xs_authorization write, xs_user.read, xs_user.write, xs_idp.read, xs_idp.write",</p>
+<p>"jti":"&lt;some-value&gt;"</p>
+<p>}</p>
+<p>You can use this access token to access endpoints using the apiurl + endpoint suffix contained in the service key. Example:</p>
+<p><em>curl -X POST \</em><br/><em>https://api.authentication.eu10.hana.ondemand.com/sap/rest/authorization/v2/apps/roles \</em><br/><em>-H 'Authorization: bearer &lt;token-value&gt;' \</em><br/><em>-H 'Content-Type: application/json' \</em><br/><em>-d '&lt;data required by endpoint&gt;'</em></p>
+<p>SCIM endpoints:</p>
+<p><em><em>curl -X POST \</em><br/><em>https://api.authentication.eu10.hana.ondemand.com/Users \</em><br/><em>-H 'Authorization: bearer &lt;token-value&gt;' \</em><br/><em>-H 'Content-Type: application/json' \</em><br/><em>-d '&lt;data required by endpoint&gt;'</em></em></p>
+<p><em><em><em>curl -X POST \</em><br/><em>https://api.authentication.eu10.hana.ondemand.com/Groups \</em><br/><em>-H 'Authorization: bearer &lt;token-value&gt;' \</em><br/><em>-H 'Content-Type: application/json' \</em><br/><em>-d '&lt;data required by endpoint&gt;'</em></em></em></p>
+<p><em><em><em></em></em></em>Note: In the SCIM API, role collections are represented as SCIM groups. To manage role collection assignments to users, use the /Groups endpoint and update the list of assigned users accordingly.</p>
+<p>SCIM specification: <a href="http://www.simplecloud.info/" target="_blank">http://www.simplecloud.info/</a></p></div></div></div></div>

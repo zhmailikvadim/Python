@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">1.Deploy SAP ME 15.0.3.</p>
+<p>2.Execute CTC wizard for migration from 15.0.0 to 15.0.3</p>
+<p>DC functionality is not working , error : nested exception is: com.microsoft.sqlserver.jdbc.SQLServerException: Invalid column name 'ROUTER_SEQUENCE'.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Invalid column name 'ROUTER_SEQUENCE'</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Add ALTER TABLE PARAMETRIC ADD ROUTER_SEQUENCE numeric(38,0) to migration from 15.0.0 to 15.0.3.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Add ROUTER_SEQUENCE column:</p>
+<p>build/assembly/database/impl/src/main/resources/dbscripts/upgrade/oracle/upgrade150to150.3.0/ods/EXE_102_ARC_alter_tables_150_to_150.3.0.sql      build/assembly/database/impl/src/main/resources/dbscripts/upgrade/oracle/upgrade150to150.3.0/wip/EXE_101_WIP_alter_tables_150_to_150.3.0.sql</p>
+<p>Delete ROUTER_SEQUENCE  column :</p>
+<p>build/assembly/database/impl/src/main/resources/dbscripts/upgrade/oracle/upgrade61to150/ods/EXE_102_ARC_alter_tables_6.1_to_15.0.sql        build/assembly/database/impl/src/main/resources/dbscripts/upgrade/oracle/upgrade61to150/wip/EXE_101_WIP_alter_tables_6.1_to_15.0.sql        build/assembly/database/impl/src/main/resources/dbscripts/upgrade/oracle/upgrade61to614/ods/EXE_102_ARC_alter_tables_6.1_to_6.14.sql      build/assembly/database/impl/src/main/resources/dbscripts/upgrade/oracle/upgrade61to614/wip/EXE_101_WIP_alter_tables_6.1_to_6.14.sql</p>
+<p>Add ROUTER_SEQUENCE column:</p>
+<p>build/assembly/database/impl/src/main/resources/dbscripts/upgrade/sqlserver/upgrade150to150.3.0/ods/EXE_102_ARC_alter_tables_150_to_150.3.0.sql        build/assembly/database/impl/src/main/resources/dbscripts/upgrade/sqlserver/upgrade150to150.3.0/wip/WIP_alter_tables_150_to_150.3.0.sql</p>
+<p>Delete ROUTER_SEQUENCE  column :</p>
+<p>build/assembly/database/impl/src/main/resources/dbscripts/upgrade/sqlserver/upgrade61to150/ods/EXE_102_ARC_alter_tables_6.1_to_15.0.sql        build/assembly/database/impl/src/main/resources/dbscripts/upgrade/sqlserver/upgrade61to150/wip/WIP_alter_tables_6.1_to_15.0.sql</p>
+<p>build/assembly/database/impl/src/main/resources/dbscripts/upgrade/sqlserver/upgrade61to614/ods/EXE_102_ARC_alter_tables_6.1_to_6.14.sql <br/>build/assembly/database/impl/src/main/resources/dbscripts/upgrade/sqlserver/upgrade61to614/wip/WIP_alter_tables_6.1_to_6.14.sql</p></div></div></div></div>

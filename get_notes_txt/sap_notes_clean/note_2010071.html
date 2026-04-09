@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">After upgrading, you get a NoSuchMethodError exception thrown by your custom action's references to the XMLDataType class.  This class is exposed by the BLS SDK package for custom action development.  The affected methods here are:</p>
+<p>public com.sun.org.apache.xpath.internal.objects.XObject evalWithError(String sXPath) throws Exception;</p>
+<p>public com.sun.org.apache.xpath.internal.objects.XObject eval(String sXPath);</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The cause for this that MII uses the Xalan library for XML processing in the SP5 service pack, as opposed to using default Oracle/Sun JDK classes.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>There are two solutions here.  There will be a 14.0 SP5 patch to revert this change and restore the original method signature.  The eval and evalWithError methods will be deprecated.  You can wait for this patch (see the related notes), or you can implement the following steps.</p>
+<p>-------------------</p>
+<p>To update your code to use the Xalan objects, make sure the Xalan.jar is available to the classpath of the action.  Also, update your references and import the Xalan versions of these classes.</p>
+<p>Old package/class:</p>
+<p><strong>import</strong> com.sun.org.apache.xpath.internal.CachedXPathAPI;</p>
+<p><strong>import</strong> com.sun.org.apache.xpath.internal.objects.XObject;</p>
+<p>New package/class:</p>
+<p><strong>import</strong> org.apache.xpath.CachedXPathAPI;</p>
+<p><strong>import</strong> org.apache.xpath.objects.XObject;</p>
+<p> </p></div></div></div></div>

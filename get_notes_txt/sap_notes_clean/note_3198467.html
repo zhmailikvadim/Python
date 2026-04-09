@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">After GR to an inbound delivery with HU's, you try to make a goods receipt cancellation with MIGO to a non HU managed storage location in the sense of note 1384533. Yout get a dump with message VL616 ("&amp; &amp; have already been packed. Quantity cannot be changed").</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">MB_POST_GOODS_MOVEMENT, VL616, MESSAGE_TYPE_X, SAPLMBWL</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The problem occurs only if the CWM switch is activated. System tries to update CW quantity from HU's when delivery document flow is updated from GR.</p>
+<p>This leads to a common check of delivery items. If there is an inconsistency, e.g. packed quantity is bigger than delivery quantity, error VL636 is processed.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the attached coding correction.</p></div></div></div></div>

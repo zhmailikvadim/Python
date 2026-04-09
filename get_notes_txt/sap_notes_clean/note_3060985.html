@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<p>Once a batch/serial managed item is used as a component of a production order, the item cannot be removed from the item master data, even if it is deleted from the production order.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Create a new item (item A) and set <em>Manage Item by </em>to<em> Batches </em>or<em> Serial Numbers.</em></li>
+<li>Open an existing production order in which the <em>Status</em> field is <em>Planned</em> or <em>Released.</em></li>
+<li>Add item A as one of the components and choose <em>Update.</em></li>
+<li>Right-click the row of item A and choose <em>Delete Row</em>, <span>then choose </span><em>Update.</em><span><br/></span></li>
+<li>Open item A, right-click and choose <em>Remove. </em>The system displays the following message: "<em>Removal of an item cannot be reversed. Do you want to continue?</em>". Choose <em>OK.</em></li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p><span>Item A is deleted successfully.</span></p>
+<p><span><span>No record is generated in the OITL table from step 2 and step 3.</span></span></p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>The following error message is displayed: <em>You cannot remove item; linked transactions exist.</em></p>
+<p>Two records are <span>generated</span> in the OITL table from step 2 and step 3.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p><span>System limitation</span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span>This is a system limitation.</span></p>
+<p><span style="text-decoration: underline;"><strong>Workaround:</strong></span></p>
+<p>Set such items as <em>Inactive </em>(<em>Item Master Data → General Tab</em>).</p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p id="">stock management</p></div></div></div></div>

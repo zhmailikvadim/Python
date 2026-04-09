@@ -1,0 +1,49 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are running the <strong>Cálculo de nómina española</strong> (RPCALCE0) report for an employee that has both the <strong>BI cuenta ajena</strong> (/151) and the <strong>BI consejeros</strong> (/153) wage types. The tax percentage being applied to the /153 wage type might be wrong if the tax percentage calculated by the <strong>Datos fiscales</strong> (0062) infotype is higher than the tax percentage customized for key <strong>Consejeros y Administradores </strong>(E) in the <strong>Claves y subclaves de percepción</strong> (V_T5E41) view.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>&amp;CALC; IRPF (for more information, see SAP Note 1071282)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The tax percentage defined for key E in the V_T5E41 view should be applied to the /153 wage type.<br/><br/>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="2" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>6.08</td>
+<td>HR SP 13</td>
+</tr>
+<tr>
+<td>6.04</td>
+<td>HR SP 85</td>
+</tr>
+<tr>
+<td>6.00</td>
+<td>HR SP B9</td>
+</tr>
+</tbody>
+</table></div>
+<p>(For more information, click on "HR Support Packages Schedule" in support.sap.com/maintenance-schedule)</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Corrections to source code of HR_E_READ_TAX_PERCENTAGE function module have been provided to solve this issue.</p>
+<p>From now on the tax percentage applied to the /153 wage type will always respect the customizing from the V_T5E41 view, unless the <strong>Clave percep.</strong> (CPER1) field from 0062 infotype has value <strong>Consejeros y administradores</strong> (E) and the tax percentage was manually set.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>September 06, 2016</td>
+<td>Released for customers</td>
+</tr>
+</tbody>
+</table></div>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, proceed as follows:</p>
+<ol>
+<li>Use Note Assistant (SNOTE) to implement the correction instructions.</li>
+</ol>
+<p>You can find more information about the Note Assistant in SAP Service Marketplace, under service.sap.com/note-assistant.</p></div></div></div></div>

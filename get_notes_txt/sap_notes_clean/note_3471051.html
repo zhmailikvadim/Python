@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When generating an xml or exporting an electronic report an error occurs:<em> Cannot call electronic file manager. Contact technical support.FD.Runtime.FlowRunTimeException: @3: Input data size too big. Size limit is 0 bytes</em></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">SAP Business One</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p><strong>Prerequisites:</strong></p>
+<p>You are working with electronic documents.</p>
+<p><strong>Scenario:</strong></p>
+<p>You are generating an xml or exporting an electronic report.</p>
+<p><strong>Expected behavior:</strong></p>
+<p>Message appears: <em>Operation completed successfully</em></p>
+<p><strong>Actual behavior:</strong></p>
+<p>Error appears: <em>Cannot call electronic file manager. Contact technical support.FD.Runtime.FlowRunTimeException: @3: Input data size too big. Size limit is 0 bytes</em></p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>This is correct system behavior. The user has two options:</p>
+<p>Login into SAP Business One using Run as Administrator.</p>
+<p>OR</p>
+<ol>
+<li>Go to the path 'C:\Program Files\SAP\SAP Business One'.</li>
+<li>Check the default value for  'key="MaxInputFileSize" value="100000000".</li>
+<li>If the max value is the correct one</li>
+<ol>
+<li>Remove the folder</li>
+<li>Shut down SAP Business One </li>
+<li>Enter SAP Business One using Run as Administrator.</li>
+</ol></ol></div></div></div></div>

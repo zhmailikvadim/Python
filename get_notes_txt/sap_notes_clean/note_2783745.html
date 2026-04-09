@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This KBA explains following behavior:<br/>In SOLDOC you have Test Cases - Test Documents with Status RELEASED - but when you create a Test Plan by selecting the option "Only Released Documents allowed" under Settings tab, the Test Case Hierarchy shows empty.<img alt="1.png" class="img-responsive" src="/documents/customerkba/H21_8-Ktsig_eu__iFnEmpSfCBI0o7wz2unGxagoA7g" title="1.png"/></p>
+<p>Test Plan creation:</p>
+<p><img alt="TP.png" class="img-responsive" height="323" src="/documents/customerkba/Y19W1ac2LbWGYJ_QSjEEbqt98npJ9usffqt2snGcU7Y" title="TP.png" width="559"/></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Solution Manager 7.2</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>SM_Workcenter - Test Suite - Test Plan Management - Create new Test Plan - choose "Only Released Documents allowed"</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Document Status not marked as "Released"</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>select the Test Case - Test Document in Soldoc, check the Status and Technical Name - in this example the status is "RELEASED" (technical name <strong>0RELEASED</strong>).<br/>you need to make sure that the status is marked as "Released" in view V_SMDDOCSTATE<br/>go to SM30 View V_SMDDOCSTATE<br/>the status should have the Released flag</p>
+<p><img alt="2.png" class="img-responsive" src="/documents/customerkba/dTGLjgcLfsU_sWP0K7thMerrDXLNEBjbe9VtxDjWSIc" title="2.png"/></p>
+<p>Afterwards generate Test Case Hierarchy again.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><strong>Guided Procedure under SOLMAN_SETUP - Process Management - Customize Document Handling - Define Values for Documents</strong></p>
+<p><strong><br/></strong>SAP Help Portal <a href="https://help.sap.com/viewer/60943adf3ff44893b62c568bb8a87d17/7.2.09/en-US/bc883d17f5314648878b7695e6eca2c1.html?q=Document%20Status" target="_blank">https://help.sap.com/viewer/60943adf3ff44893b62c568bb8a87d17/7.2.09/en-US/bc883d17f5314648878b7695e6eca2c1.html?q=Document%20Status</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Test case hierarchy, released, freigegeben, testfall, generierung, test suite, test plan, empty, test document, test dokument, status, nur,</p></div></div></div></div>

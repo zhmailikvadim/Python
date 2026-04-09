@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>A wrong ALV-List is displayed.</li>
+<li>The layout appears not to work correctly or as you wish based on your sort variant or your selection parameters when executing an asset report. </li>
+<li>You observe that the output in the layout does not show the result that you wish and expect.</li>
+<li>When displaying a report output you believe that the ALV-List layout is "incorrect" or faulty.</li>
+<li>For example, a new sort variant may show unexpected and inexplicable results.</li>
+<li>This system behaviour can be observed in any asset report where a specific layout is expected but is not reflected in the report output.</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>Financial Accounting (FI)</li>
+<li>Asset Accounting (FI-AA)</li>
+<li>SAP R/3 4.6C</li>
+<li>SAP R/3 Enterprise 4.7</li>
+<li>SAP ERP Central Component</li>
+<li>SAP ERP</li>
+<li>SAP enhancement package for SAP ERP</li>
+<li>SAP enhancement package for SAP ERP, version for SAP HANA</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Go to any asset accounting report.</li>
+<li>Enter all your parameters including any sort variant etc. in the selection screen of the report.</li>
+<li>Execute the report. </li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Firstly take note that there are two options for Layout-Settings, that a user can avail from.</p>
+<p>In List Viewer (ALV) we have the following two Layout-Settings: </p>
+<ol>
+<li>General accessable ALV-Layouts (for all Users): these ALV-Layouts always start <span style="text-decoration: underline;">with prefix</span> „/“. From this List you can define a "Default" ALV-Layout. In that case this defaulted ALV-Layout will alwasy be pulled for the ALV-List; <em>the exception to the rule is</em>, if a <em>Display Variant</em> (field name VARIANT) is explicitly entered in the selection screen of a report, such as for example in report RABEST_ALV01.</li>
+<li>ALV-Layout only for a specific User: here, every User can create their own ALV-Layout. These ALV-Layouts start <span style="text-decoration: underline;">without prefix</span> „/“. The user then can from their own ALV-Layouts define a "Default" ALV-Layout. However, in this case, the defaulted ALV-Layout is valid for the authorized User only. Other Users cannot see this self-created List of ALV-Layouts.</li>
+</ol>
+<p>A note on the side: a user-specific default ALV-Layout will always take precedence over the general default ALV-Layout.</p>
+<p>The root cause of the problem <span style="text-decoration: underline;">in this example</span> is the default setting for a general accessable ALV-Layout: you find that the indicator "Initial Layout Flag" (field "DS") is set for a layout and as a result the system ignores any settings in a new sort version.</p>
+<p><img alt="Layout Management_DS Flag_F1 Help.JPG" class="img-responsive" height="251" src="/documents/customerkba/A_QE6DLXlhPzZsFZsXA9mCSVLDlENdsibtnontN_afc" title="Layout Management_DS Flag_F1 Help.JPG" width="942"/></p>
+<p>Always remember: if a default entry layout is defined in the SAP List Viewer (general or user-specific), then the system will ALWAYS select the default entry layout in the ALV-List regardless what sort variant or selection parameters you have selected in the selection entry screen in an asset report.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol>
+<li>Execute the asset report with your selection parameters, which could be a new sort variant for example. If the layout is not as you expect, then....</li>
+<li>Check the settings for your ALV List (List Viewer) in the report after you execute it.</li>
+<li>Go to: Menu path:<br/>-&gt; Settings -&gt; Layout -&gt; Layout managment</li>
+</ol>
+<p><img alt="Layout Management.JPG" class="img-responsive" src="/documents/customerkba/lPWpnkOXaIVgOLU1m5mufylhVNKw34HaZigOKXoHzo4" title="Layout Management.JPG"/></p>
+<p>     4.   If you have set the indicator "initial layout flag" for a layout then you must <strong>remove the indicator in field "DS"</strong> in the list viewer. For further information check the F1 Help for this indicator.</p>
+<p><strong>Remember:</strong> as long as an "intial layout flag" (= default setting) for any of the standard or your own layouts is set, the system will ignore any parameter settings in the selection screen, including a specific layout in a new sort variant for example. <strong>Only if no default ALV-Layout is selected will the parameters in the initial screen of the report be pulled and be displayed accurately.</strong></p>
+<p>Always ensure that no intial default layout exists to dictate an unexpected layout. Only exception to this rule is where you have explicitly entered a display variant in the selection entry screen of the report.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Customizing, T-code, TCode, ALVLayout, pre-fix, Asset Balance, Asset History Sheet, SE38, AR01, S_ALR_87011963, S_ALR_87011964, RABEST_ALV01, RAGITT_ALV01, RABEWG_ALV01, RAZUGA_ALV01, RAABGA_ALV01, RAUMBU_ALV01,</p>
+<p>SAP_APPL, EA-APPL, SAP_FIN, EA-FIN, ECC 5.0, ECC 6.0, ERP 2004, ERP 2005, EHP, 46C, 470, 500, 600, 602, 603, 604, 605, 606, 616, 617, 618, 700, etc.</p></div></div></div></div>

@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Open Client application using text blob calls ct_send_data()</li>
+<li>Application errors with:<br/>CT-Library error: Number(50) Layer(4) Origin(2) Severity(6): ct_send_data(): protocol specific layer: internal Client Library error: There is an internal tds layer error. An error was returned from the server while processing an internal tds stream.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Sybase Software Developer Kit (SDK) 15.7</li>
+<li>SAP Adaptive Server Enterprise (ASE) Software Developer Kit (SDK) 16.0</li>
+<li>Open Client Client-Library</li>
+<li>ctlibrary</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>$SYBASE/$SYBASE_OCS/sample/ctlibrary/getsend.c</li>
+<li>Modify file's create and insert statements.</li>
+<li>create table %s (i1 int, t text null, f float, i2 int)</li>
+<li>insert %s values (35, null, 20.3, 50)</li>
+<li>source $SYBASE/SYBASE.csh</li>
+<li>setenv SYBPLATFORM linux</li>
+<li>setenv DSQUERY &lt;asename&gt;</li>
+<li>make getsend</li>
+<li>./getsend</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>textptr from the ct_data_info() select is null</li>
+<li>There are no check by the Open Client code for a null value</li>
+<li>The issue has been identified and logged under SAP <strong>CR 814842</strong>. Its description reads, "Open Client blob causes internal client library error calling ct_send_data()".</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>There is currently no target SAP SDK Service Pack scheduled for this issue (SAP<strong> CR 814842)</strong>. It is being reviewed by our Product Group. Please mark this KBA as a Favorite to be automatically notified when the CR status has changed.</li>
+<li>Modify code to make sure ct_data_info() is set from a select statement before updating a blob with ct_send_data(). See getsend.c sample code.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>lob, blob, text, image, call, update, refresh, debug, setup, written, row, data, information, info, getsend, sample,</p></div></div></div></div>

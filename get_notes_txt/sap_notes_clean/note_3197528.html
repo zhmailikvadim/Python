@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The error below occurs when trying to start Analysis Office:<br/>------------------------------------------<br/><strong>The remote procedure call failed. (Exception from HRESULT: 0x800706BE)</strong><br/>------------------------------------------</p>
+<p>The entries below can be found in AO traces (refer to SAP Note <a href="https://me.sap.com/notes/2129389" target="_blank">2129389</a>):<br/>------------------------------------------<br/>General .NET Exception [aa3e-cbf1-f8]:<br/>BiXllFunctions registration failed. Path: C:\Program Files (x86)\SAP BusinessObjects\Office AddIn\Plugins\AnalysisOffice\BiXLLFunctions.dll<br/>at com.sap.ip.bi.pioneer.excel.main.EaOfficeAddin.Startup()</p>
+<p>System.Runtime.InteropServices.COMException (0x800706BE): The remote procedure call failed. (Exception from HRESULT: 0x800706BE)<br/> bei Com.Sap.Cof.Interfaces.COM.ISapCofComObject.ActivatePlugin(String iPluginName)<br/> bei Com.Sap.Cof.Launcher.OfficeGetterHelper.ActivatePlugin(ISapCofComObject comObject, String pluginId)<br/> bei Com.Sap.Cof.Launcher.OfficeGetterHelper.ActivatePlugin(ICOMAddIn pioneerAddIn, Boolean analysisPlugin, Boolean epmPlugin)<br/> bei Com.Sap.Cof.Launcher.LauncherApplication.StartApplication(OfficeGetterHelper officeGetterHelper, IOfficeApplication&amp; officeApplication, ICOMAddIn&amp; comAddIn, Boolean&amp; officeIsReused)<br/> bei Com.Sap.Cof.Launcher.LauncherApplication.StartApplicationAndCallCOM(OfficeGetterHelper officeGetterHelper)<br/> bei Com.Sap.Cof.Launcher.Launcher.Main(String[] args)<br/>------------------------------------------</p>
+<p><span style="color: #ff0000;"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em></span></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">SAP Analysis for Microsoft Office</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Try to start Analysis Office;</li>
+<li>The error is shown and AO is not started;</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The Excel version is not supported or Visual Basic for Applications (VBA) is disabled. VBA is a prerequisite for running AO.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>Make sure that the Excel version installed in the machine is a supported version according to Microsoft's page <a href="https://docs.microsoft.com/en-us/officeupdates/update-history-microsoft365-apps-by-date" target="_blank">Update history for Microsoft 365 Apps (listed by date)</a>. The Excel version can be found via Excel -&gt; File -&gt; Account as shown below:<br/>
+<p><img alt="Excel version.png" class="img-responsive" src="/documents/customerkba/-DdRTMRRga0qEInjE9ElxSaJuzS4sPGjQt7vYYId7m0" title="Excel version.png"/></p>
+</li>
+<li>There are several ways that VBA might be disabled. See this page from <a href="https://learn.microsoft.com/en-us/previous-versions/office/troubleshoot/office-developer/turn-off-visual-basic-for-application" target="_blank">Microsoft Learn</a>. VBA enablement can be checked in the Developer ribbon of Excel. The Visual Basic button has to be enabled:<br/><img alt="DeveloperRibbon.png" class="img-responsive" height="127" src="/documents/customerkba/WKavMD0Ma-GsnuPMy_cXyreGJe30ZtYefKPvC91jlvI" title="DeveloperRibbon.png" width="579"/></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id=""> <a href="https://learn.microsoft.com/en-us/previous-versions/office/troubleshoot/office-developer/turn-off-visual-basic-for-application" target="_blank">Microsoft Learn</a> page about enabling/disabling VBA</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p id="">0x800706BE, aa3e-cbf1-f8, 365</p></div></div></div></div>

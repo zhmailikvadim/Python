@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Message: "bgRFC Inbound Destination &amp;QD_EQ_LOCAL&amp; does not exist and cannot be edited" when accessing app F1873 in Fiori</li>
+<li>Error: Failed to create "bgRFC Inbound Destination &amp;QD_EQ_LOCAL&amp; does not exist and cannot be edited" when train a Predictive model in Fiori</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>S/4HANA 1809 onPrem</li>
+<li>S/4HANA 1909 onPrem</li>
+<li>F1873 (Predictive Scenario)</li>
+<li>Predictive Analytics Integrator (PAi)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li> Logon to S/4 Fiori Launch Pad.</li>
+<li>Click to open app Predictive Models.</li>
+<li>Open any of the listed Predictive Scenarios.</li>
+<li>Choose the Model and click <strong>Train</strong>.</li>
+<li>Observe Failed to create "bgRFC Inbound Destination &amp;QD_EQ_LOCAL&amp; does not exist and cannot be edited" error message displayed.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>bgRFC Inbound Destination is not defined.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Define Inbound Destination with name QD_EQ_LOCAL and associate prefix EQQD.</p>
+<p><a href="https://help.sap.com/doc/6b11678926d3409bbfea8897cb34d10f/1909.000/en-US/INST_OP1909.pdf" target="_blank">Installation Guide for SAP S/4HANA 1909</a> - 7.10.2 Setting up the bgRFC Queue</p>
+<p>And, need to check if all setting in "7.10 Follow-Up Activities for Predictive Analytics integrator" has been implemented.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id=""><a href="https://help.sap.com/doc/6b11678926d3409bbfea8897cb34d10f/1909.000/en-US/INST_OP1909.pdf" target="_blank">Installation Guide for SAP S/4HANA 1909</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>PAi, APL, automated, bgRFC, SBGRFCCONF, train model, training model</p></div></div></div></div>

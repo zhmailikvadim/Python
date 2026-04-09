@@ -1,0 +1,41 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Your HANA database crashes with the following stack:</p>
+<p style="padding-left: 30px;">qo3::OptimizerImpl::estimateItab(...)          <br/>qo3::OptimizerImpl::estimateTerm(...)          <br/>qo3::OptimizerImpl::estimateTree(...)          <br/>qo3::OptimizerImpl::estimate(...)              <br/>qo3::OptimizerImpl::evaluate(...)              <br/>qo3::Optimizer::evaluate(...)                  <br/>qo3::Optimizer::evaluate(...)                  <br/>TRexAPI::Search::OptimizerImpl::evaluate(...)  <br/>TRexAPI::LocalSearchImpl::doSearch(...)        <br/>TRexAPI::SearchAPI::search(...)</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP HANA DB, Crash, Composite OOM</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>Due to programming error there was a crash in fallback because an internal object is in an invalid state.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 1.0 database:</li>
+<ul>
+<li>Revisions of SPS07 - SPS11</li>
+<li>Revisions &lt;= 122.08 (SPS12)<br/><br/></li>
+</ul>
+<li>SAP HANA 2.0 database:</li>
+<ul>
+<li>Revisions &lt;= 002.00 (SPS00)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>There was no particular case for this crash because the issue is caused by internal transaction.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA database Revisions:</p>
+<ul>
+<li>SAP HANA 1.0 database:</li>
+<ul>
+<li>Revisions &gt;= 122.09 (SPS12) or higher<br/><br/></li>
+</ul>
+<li>SAP HANA 2.0 database:</li>
+<ul>
+<li>Revisions &gt;= 002.01 (SPS00) or higher</li>
+</ul>
+</ul>
+<p><strong><span style="font-size: 14px;">Workaround:</span></strong></p>
+<ul>
+<li>NONE</li>
+</ul>
+<p> </p></div></div></div></div>

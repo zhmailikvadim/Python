@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">You are running a system installation of AS Java High-Availability First Cluster Node.<br/>Installatino is failing during setPermissionsFS with following error:</p>
+<p><br/>-------------------------------------<br/>[...]<br/>File system export (share) sapmnt does not exist.<br/>Failed action:  with parameters <br/>Error number 2310 error type WIN32_ERROR<br/>[...]<br/>-------------------------------------</p>
+<div id="gtx-trans" style="position: absolute; left: 455px; top: -14px;">
+<div class="gtx-trans-icon"> </div>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>AS Java High-Availability systems on Windows Server</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The reason for the mismatch in the sapmnt directory is an override of the profile parameter SAPGLOBALHOST during Initialization of the SCS instance in the dialog phase.</p>
+<p></p>
+<p>Within the sapinst_dev log, You can see that the property <strong>SAPGLOBALHOST </strong> is set several times to your virtualhost.   </p>
+<p>sapinst tries to get the Fileshare “sapmnt” from your virtualhost (\\&lt;virtualhost &gt;\sapmnt) but sapmnt is located on the server sapglobalhost (<a target="_blank">\\sapglobalhost\sapmnt</a>):</p>
+<p></p>
+<p><em>NWInstall.prototype.setPermissionsFS = function(sharePath) {</em></p>
+<p><em>// […]</em></p>
+<p><em>var globalHost = this.getProfile().resolveExtended("SAPGLOBALHOST").value();</em></p>
+<p><em>// […]</em></p>
+<p><em>var share = mgt.getFSExportHost(globalHost, "sapmnt");</em></p>
+<p><em>if (share == undefined) {</em></p>
+<p><em>       installer.writeTrace("mf trace: couldn't get share info");</em></p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The issue has been already identified and fixed in the newest  verson of SWPM10. </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SWPM</p></div></div></div></div>

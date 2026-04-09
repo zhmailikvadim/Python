@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">During loading to a DSO, serialization effects occur in the table RSDVENQUEUE.</p>
+<p>As a result, parallel loading processes are executed one after the other and the load performance is significantly reduced.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DataStore Object (advanced), ADSO, NCUM, non-cumulative, non-cumulatives, validity table</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>To update the validity table, a lock is set on the table RSDVENQUEUE. This lock is released again with the next commit. Since the lock occurs before the actual update of the DSO table, the lock is held for an extremely long time.</p>
+<p>As a result of this change, the lock (and the update of the validity table) is executed only following writing to the inbound queue. This means that the lock is held for only a short period of time and parallel write processes are not serialized as heavily.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li><strong>SAP BW/4HANA 2.0</strong></li>
+<li>Import Support Package 11 for SAP BW/4HANA 2.0 (SAPK-20011INDW4CORE) into your BW system. The support package is available once <strong><strong>SAP Note 3105028</strong></strong> ("SAPBWNews SAP BW/4HANA 2.0 SP11"), which describes this SP in more detail, has been released for customers.<br/><br/></li>
+<li><span style="text-decoration: underline;"><strong>SAP BW/4HANA 2021</strong></span><br/>Import Support Package 01 for SAP BW/4HANA 2021 (SAPK-30001INDW4CORE) into your BW system. The support package is available once <strong>SAP Note 3092812</strong> ("SAPBWNews SAP BW/4HANA 2021 SP01"), which describes this SP in more detail, has been released for customers.<br/><br/></li>
+</ul>
+<p>In urgent cases, you can implement the correction instructions as an advance correction.</p>
+<p><strong>You must first read SAP Notes 1668882 and 2248091, which provide information about transaction SNOTE.</strong></p>
+<p>To provide information in advance, the SAP Note(s) specified above might already be available before the support package is released. In this case, however, the short text of the SAP Note still contains the term "preliminary version".</p></div></div></div></div>

@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The retro calculation logic in payroll function HKCON is not as expected when meets below conditions:</p>
+<ul>
+<li>Base wage type with PCL70 = 2 is used as MPF or ORSO contribution base(when retro, base difference will be brought forward);</li>
+</ul>
+<ul>
+<li>There's an off-cycle correction run after main run in one payroll period(e.g April 2025).</li>
+</ul>
+<ul>
+<li>In the next payroll period there's a retro to previous period (e.g Retro to April in May).</li>
+</ul>
+<p><br/>In this case , in payroll function HKCON of retro period of April main run, contribution amount are directly retrieved from ORT to IT.  This calculation logic is inconsistent with other retro calculation logic. When you have customizing rules after HKCON which changes the contribution amount, this logic may cause the incorrect result.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> HKCON; Retro</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is a correction of legal function.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the Support Package or implement the corresponding correction instructions.</p></div></div></div></div>

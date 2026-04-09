@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<p>During the shutdown of the NameServer a crash occurs. The crash stack can vary depending on the cause, but usually contains TRexAPI::TREXIndexServer::shutdown() or TrexThreads::ThreadManager::shutdown() at a lower position on the stack:</p>
+<p>For example:</p>
+<p style="padding-left: 30px;">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)<br/>----&gt; Pending exceptions (possible root cause) &lt;----<br/>--- Pending assertion:<br/>exception 1: no.2010046 (Basis/Synchronization/impl/ReadWriteLock.cpp:402) TID: 41115<br/> Error in RWLock destructor: locked unexpected; $condition$=firstVal.m_RawData.hi == 0 &amp;&amp; firstVal.m_RawData.lo == 0 &amp;&amp; s_pInvalidContextPtr == lastOwner; $context$=no owner; $m_pOwner$=0x0000000000000000; $name$=RWLock[TREXNameServer.cpp:347]@0x00007f3f04cd6188: NameServer::TREXNameServer::TREXNameServer; $lock.hi$=0x1; $lock.lo$=0x100000000<br/>exception throw location:<br/> 1: 0x00007f3edeffc2eb in Synchronization::ReadWriteLock::~ReadWriteLock()+0x1f7 at ReadWriteLock.cpp:396 (libhdbbasis.so)<br/> 2: 0x00007f3f04ccf4b1 in NameServer::TREXNameServer::~TREXNameServer()+0x370 at TREXNameServer.cpp:706 (libhdbns.so)<br/> 3: 0x000055d1d034d9c0 in ltt::impl::RefCountImpl&lt;NameServer::TREXNameServer, ltt::default_deleter&gt;::destroy(ltt::allocator&amp;)+0x20 at shared_ptr.hpp:256 (hdbnameserver)<br/> 4: 0x000055d1d036dfad in ltt::impl::RefCountBase::own_decrement()+0x19 at shared_ptr.hpp:210 (hdbnameserver)<br/> 5: 0x000055d1d035d9dd in <strong>TRexAPI::TREXIndexServer::shutdown()</strong>+0x299 at shared_ptr.hpp:396 (<strong>hdbnameserver</strong>)</p>
+<p>There may also be an entry in the NameServer trace file making reference to this note:</p>
+<p style="padding-left: 30px;">[000000]{-1}[-1/-1] 0000-00-00 00:00:00.000000 e NameServer TREXNameServer.cpp(03526) : LocalWatchDog thread not finished in time. Deleting it anyway to force termination -&gt; Nameserver might crash (for more details see SAP Note 2822907)</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>During the shutdown of the nameserver, different tasks need to be performed like closing pending network connections or canceling running threads. If one of these tasks cannot be completed, the nameserver crashes intentionally in order to complete the shutdown.</p>
+<p>For example, if a nameserver thread is currently establishing a network connection and the network is very slow, cancelling the thread might fail since it currently is in a wait state. Therefore, the nameserver performs an intended crash, in order to avoid a hanging situation.</p>
+<p><strong>Prerequisites:</strong></p>
+<ol>
+<li><span style="font-size: 14px;">The nameserver is in the process of shutdown </span></li>
+<li>Something is blocking the normal shutdown process</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This crash works as designed - it is required in order to complete the shutdown procedure in cases where tasks, that are required for shutdown, are hanging.</p></div></div></div></div>

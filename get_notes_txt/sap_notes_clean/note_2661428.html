@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Unexpected result returned while using wildcard characters "*" or "+" in the HIGH(Upper limit) filed of "Range" or "Exclude Range".</p>
+<p>("+" masks a single character, "*" masks any character string)</p>
+<p>Take SE16 as an example:</p>
+<p>Want to get following documents from table BKPF:</p>
+<p> <img alt="1.PNG" class="img-responsive" src="/documents/customerkba/h5TyCRJo98jloPPYYC77OxFPFDYtI4_V4xXtYXtA5K0" title="1.PNG"/></p>
+<p> Input 000000004* - 000000005* on the selection screen:</p>
+<p><img alt="2.PNG" class="img-responsive" src="/documents/customerkba/wn75lFT3NDfiux5tlR5ThuClV-C3Av8hq5CNCqj8-74" title="2.PNG"/></p>
+<p>  But only 0000000040 - 0000000049 returned:</p>
+<p><img alt="3.PNG" class="img-responsive" src="/documents/customerkba/Dl5FdmsinIhYUVrJvI5sE1U0Q4OTntjkvwkvaK45aHo" title="3.PNG"/></p>
+<p><span style="color: #ff0000;"><strong><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></strong></span></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>ABAP system</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>Using wildcard characters "*" or "+" in the HIGH(Upper limit) filed of "Range" or "Exclude Range".</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Wildcard characters can not be used for RANGE selection.</p>
+<p>This information can also be found in the online help:<br/><a href="https://help.sap.com/docs/SAP_NETWEAVER_731_BW_ABAP/f68e489816e043f1add91d69a6842931/4a43c4f85a503f04e10000000a421937.html" target="_blank">Classic Dynpro Programming</a></p>
+<p>"If high is filled, you can use BT (BeTween) and NB (Not Between). These<br/>operators correspond to BETWEEN and NOT BETWEEN that are used to check<br/>if a field belongs to a range. You cannot use wildcard characters."</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>It is a standard behaviour.</p>
+<p>DO NOT use wildcard characters in RANGE, instead, ALWAYS use fixed value.</p>
+<p>Workaround (NOT recommanded):</p>
+<p>In the example, the above entry 000000005Z can be used:</p>
+<p><img alt="4.PNG" class="img-responsive" src="/documents/customerkba/JMoAb0Skju6Q_alqBlk-NHUPvcz_RAF11g3rZ_5c1qc" title="4.PNG"/></p>
+<p><img alt="5.PNG" class="img-responsive" src="/documents/customerkba/1NEvum77c6ONTc3_VvEsikSUuoGPnKww6qTHEF6XYOI" title="5.PNG"/></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>select options, range table, wildcard, SE16</p></div></div></div></div>

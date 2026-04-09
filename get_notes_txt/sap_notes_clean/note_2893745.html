@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">create database mydb on mydb_dev1 = 5 log on mydb_dev2 = 5 with durability="at_shutdown"</p>
+<p>After reboot, databases are receiving:</p>
+<p><span class="SNO_DNT" style="float: none;" translate="no"><strong>﻿Error: 624, Severity: 21, State: 1</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no">Adaptive Server failed to retrieve a row via its RID in database 'mydb' because the requested RID has a higher number than the last RID on the page. Rid pageid =XXXX; row num = XXX. Page pointer = 0x0xXXX, pageno = XX, status = 0x1, ptnid = 8, indexid = 0, level = 0, pnextrno = 8.</span></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no"><strong>Error: 926, Severity: 14, State: 1</strong></span><br/><span class="SNO_DNT" style="float: none;" translate="no">Database 'mydb' cannot be opened. An earlier attempt at recovery marked it 'suspect'. Check the ASE errorlog for information as to the cause.</span><br/><br/></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Adaptive Server Enterprise 16.0</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>An abnormal shutdown of a server on a database created with "at_shutdown" will cause databases to receive errors.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>The errors are expected behavior - See <a href="https://help.sap.com/viewer/a1237e466dba417da6f0e5504cf9fb83/latest/en-US/abbf3e7ebc2b10148302ea7290e117c1.html?q=at_shutdown" target="_blank">Durability Levels</a> for details.</p>
+<p>Work around:</p>
+<ul>
+<li>Create the database with durability=full.<br/>or</li>
+<li>Rebuild the databases when an abnormal shutdown is performed.</li>
+</ul></div></div></div></div>

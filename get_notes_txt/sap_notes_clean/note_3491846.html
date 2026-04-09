@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">When you run GL account balance transactions, such as FAGLB03, FS10N there is below dump happens:</p>
+<p>----------------------------------------------------------------------------</p>
+<p>Category ABAP programming error</p>
+<p>Runtime Errors RAISE_EXCEPTION</p>
+<p>ABAP Program FAGL_ACCOUNT_BALANCE</p>
+<p>Application Component FI-GL</p>
+<p></p>
+<p> </p>
+<p>A RAISE statement in program "CL_ABAP_TYPEDESCR=============CP" has raised</p>
+<p>exception condition "TYPE_NOT_FOUND".</p>
+<p>ABAP Variable Value (Char.) V0 ACDOCA-COST_ELEM<br/>----------------------------------------------------------------------------</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Financial Accounting (FI)</li><li>SAP enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA Finance</li><li>SAP S/4HANA</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Execute transaction FAGLB03.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The dump is caused by your additional field COST_ELEM in the following IMG path:</p>
+<p>=======================</p>
+<p>Financial Accounting</p>
+<p>  General Ledger Accounting</p>
+<p>    Information System</p>
+<p>      Define Balance Display<br/>=======================</p>
+<p> </p>
+<p>The COST_ELEM is with the S/4HANA NOT a field anymore that can be used in the balance display,</p>
+<p>as this field was merged with the G/L account (CO and FI use the same table to store the data).</p>
+<p>Therefore this value must be removed in the related above IMG path.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>FD10N, FK10N, CI_COBL, DDIC_TYPE_INCONSISTENCY, ACDOCA, FAGL_ACCOUNT_BALANCE, RAISE_EXCEPTION</p></div></div></div></div>

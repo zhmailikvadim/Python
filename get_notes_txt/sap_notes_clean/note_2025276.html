@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li><em>Following error appears while creating a WebI report based on Excel file (.xls or .xlsx) with Range Name selection:<br/>"An error has occurred from the server. Unable to create or update the Excel personal data provider: an error occured while retrieving the data sampling. (IES 10881)"</em></li>
+<li><em></em>It works fine if range name is not selected.</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP BusinessObjects Business Intelligence BI 4.0</li>
+<li>SAP BusinessObjects Business Intelligence BI 4.1</li>
+<li>Web Intelligence Rich Client</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Open WebIntelligence Rich Client.</li>
+<li>Create new Web Intelligence document selecting Excel as data source.</li>
+<li>Select the .xls or .xlsx file you wish to use for the data source.</li>
+<li>On field Selection, select Range Name.</li>
+<li>Select a range and click ok. The following error appears- <em>"An error has occurred from the server. Unable to create or update the Excel personal data provider: an error occured while retrieving the data sampling. (IES 10881)"</em></li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The Excel sheet name contains a space. Example: "My Sheet".</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul>
+<li>Rename the excel sheet and remove the space or replace it with some other character like underscore.</li>
+<li>Example: Rename "My Sheet" to "My_Sheet" or "MySheet".</li>
+</ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>an error occured while retrieving the data sampling. (IES 10881);Excel; Range Names; error; rich client</p></div></div></div></div>

@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li><span>ASE errorlog reports signal 11 stack trace in module kpsched():<br/></span><strong><span> <br/><span class="SNO_DNT" style="float: none;" translate="no">Current process (0x2d002d) infected with signal 11 (SIGSEGV)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">Address 0x0000000000a9fcc8 (kpsched+0x351)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">kechkfault: engine #: scheduler infected with signal 11 (SIGSEGV)</span></span></strong><span class="SNO_DNT" style="float: none;" translate="no"> </span><br/> </li>
+<li><span>Spid 0 (internal scheduler process) dies, crashing </span>ASE abruptly:<strong><br/></strong></li>
+</ul>
+<p style="padding-left: 30px;"><strong style="font-size: 14px;"> <span class="SNO_DNT" style="float: none;" translate="no"> ueshutdown: exiting</span><br/><span class="SNO_DNT" style="float: none;" translate="no">  Abnormal exit detected - ﻿</span></strong></p>
+<ul>
+<li><span><span>The stack trace will include all or most of the following modules:</span></span> <br/> <br/><span class="SNO_DNT" style="float: none;" translate="no">keipanic</span><br/><span class="SNO_DNT" style="float: none;" translate="no">kechkfault</span><br/><span class="SNO_DNT" style="float: none;" translate="no">kisignal</span><br/><span class="SNO_DNT" style="float: none;" translate="no">kpsched</span><br/><span class="SNO_DNT" style="float: none;" translate="no">kpstartproc﻿</span></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Adaptive Server Enterprise (ASE)</li>
+<li>With kernel mode = process</li>
+<ul>
+<li>Version 15.5 or earlier only had 'process mode'</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>This issue is very rare. It can be seen when switching a runnable process between engines and one of the engines hits a signal 11. It is only seen in process mode.<br/><br/>Note:</p>
+<ul>
+<li>All releases that only have process kernel mode (15.5 or earlier) are now 'end of life' - see KBA <a href="https://me.sap.com/notes/3504083" target="_blank">3504083</a>.</li>
+<li>From ASE 15.7, threaded kernel mode is the default and SAP recommended way to run</li>
+</ul>
+<p>There is a CR open to track this issue, <strong>CR 768663</strong>.  Its description reads:<br/>"In rare circumstances the signal 11 might occur when try to Switch to running a new process in ASE when running in 'process mode' ".</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>There are no plans to address CR 768663, as the issue only affects 'end of life' versions or running ASE in a non-default and not recommended way.</p>
+<ul>
+<li>When using ASE 15.5 or earlier:</li>
+<ul>
+<li>Upgrade a current and supported release using 'threaded mode' : ASE 15.7 or higher<br/><br/></li>
+</ul>
+<li>When using a current and supported release (15.7 or 16.0):</li>
+<ul>
+<li>Use the recommended <strong>'threaded'</strong> mode</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li>SAP KBA<a href="https://me.sap.com/notes/1904061" target="_blank"> 1904061 </a>for how to access a Change Request (CR) by its number.</li>
+<li>SAP Note 3504083 <a class="urLnk" href="/notes/3504083" id="DEFAULT_GR_C_refs_2_4" rel="opener" tabindex="0" target="_blank">EoMM Information for SAP Adaptive Server Enterprise</a></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Sybase, crash, abort, failed, CR768663</p></div></div></div></div>

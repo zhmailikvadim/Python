@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>In an MDF workflow, a mandatory picklist field (Employee Declaration) is selected.</p>
+</li><li>
+<p>The workflow does not display the selected value in the Workflow Details page.</p>
+</li><li>
+<p>Users are unable to proceed or verify the value, even though the field is required.</p>
+</li><li>
+<p>Issue may appear only in certain language settings.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP SuccessFactors HCM Suite</li><li>Metadata Framework (MDF)</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Navigate to Admin Center → Picklist Center.</p>
+</li><li>
+<p>Open the relevant picklist and maintain a picklist value with a translation only in English (United Kingdom).</p>
+</li><li>
+<p>Do not maintain any translation for English (United States) for this picklist value.</p>
+</li><li>
+<p>Navigate to Configure Object Definitions and open the required custom MDF object.</p>
+</li><li>
+<p>Assign the above picklist to a field in the custom MDF object and save the configuration.</p>
+</li><li>
+<p>Configure a workflow for this MDF object and ensure the workflow is active.</p>
+</li><li>
+<p>Log in as a user whose language is set to English (United States).</p>
+</li><li>
+<p>Create or update a record for the custom MDF object and select the picklist value created in Step 2.</p>
+</li><li>
+<p>Submit the record so that the workflow is triggered.</p>
+</li><li>
+<p>Log in as the workflow approver (with language set to US English) and open the workflow approval request.</p>
+</li><li>
+<p>Observe that the picklist field value is not displayed in the workflow approval screen.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The en_US translation for the selected value was not maintained.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>Ensure that translations are maintained for all picklist values in the required system languages.</li><li>Verify that the picklist values contain a valid translation for English (US) (en_US) or any active language used in the instance. Once the missing translation is maintained, the selected picklist value will display correctly in the workflow details.</li><li>Align the instance and user language settings with the maintained translations to ensure consistent display behavior.</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>KBA : <a href="https://me.sap.com/notes/3666031/E" rel="noopener noreferrer nofollow" target="_blank">3666031 - Custom MDF fields that are visible in the Employee Profile cannot be seen in Workflow Approval Page or Manage Data</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>workflow details, custom object, US_ENGLISH translation, language setting, required fields, employee declaration, workflow approval, SAP SuccessFactors, MDF fields, missing value, language configuration</p></div></div></div></div>

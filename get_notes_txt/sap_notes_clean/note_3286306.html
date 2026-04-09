@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are viewing the Ticket History data source (SEODSRQHHB) or a report based on it. You are reviewing changes done to specific tickets. For example, let us take the "Status" characteristic. You add the fields Status, Start Date and End Date to the view.</p>
+<p>You can see the different status of the ticket with the corresponding time stamps, however you may also see the same status for different time stamps, for example status A for 01.01.2022 to 10.01.2022 and then again status A from 10.01.2022 until now. You are wondering why there are separate entries even though the status was not changed on Jan 10th.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Cloud for Customer</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The characteristics "Start Date" and "End Date" are not based on the "Status" of each ticket or any attribute of the ticket specifically. Instead, such fields collect the timestamp of each change made in ticket, working more as a "validity info".</p>
+<p>Repeated lines like this usually refer to another change that was made to a different ticket attribute at the same time.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>In our example outlined above, there was another change of this ticket on Jan 10th (for example the ticket priority). Since the status was not changed, the data source will show a change time stamp but the same status as before.</p>
+<p>This is the correct behavior for this data source.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p id="">ticket history, duplicate entries, wrong content, wrong data, missing, data source, business analytics, reporting, redundant entries</p></div></div></div></div>

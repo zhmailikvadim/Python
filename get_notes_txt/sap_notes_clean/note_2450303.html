@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>The last version of the SYB SAP BW Correction Collection is implemented on your system.</li>
+<li>Compression job is terminating returning "Report RSCOMP1 ended with errors RSM1 798 E" on SM37 log:</li>
+</ul>
+<p style="padding-left: 60px;">02.04.2017 21:39:05 Collapse terminated: Data target &lt;infocube&gt;, from to 67615 RSM 747 S<br/>02.04.2017 21:39:06 Report RSCOMP1 ended with errors RSM1 798 E<br/>02.04.2017 21:39:06 Job cancelled after system exception ERROR_MESSAGE 00 564 A</p>
+<ul>
+<li>Checking the related work process file , error SQL1105 is returned:</li>
+</ul>
+<p style="padding-left: 60px;">C Sun Apr 02 21:37:14 2017<br/>C ERROR: -1 in function ExeNormalModify (execute) [line 25682]<br/><strong>C (1105) [ZZZZZ] [SAP][ASE ODBC Driver][Adaptive Server Enterprise]Can't allocate space for objec</strong><br/><strong>C t 'syslogs' in database '&lt;SID&gt;' because '<span style="text-decoration: underline;">logsegment</span>' segment is full/has no free e</strong><br/><strong>C xtents. If you ran out of space in syslogs, dump the transaction log. Otherwise,</strong><br/><strong>C use ALTER DATABASE to increase the size of the segment.</strong><br/>C<br/>C ERROR: -1 in function ExeNormalModify (execute) [line 25682]<br/>C (7412) [ZZZZZ] [SAP][ASE ODBC Driver][Adaptive Server Enterprise]Space available in the log seg<br/>C ment has fallen critically low in database '&lt;SID&gt;'. All future modifications to t<br/>C his database will be aborted until the log is successfully dumped and space beco<br/>C mes available.<br/>C<br/>C sql statement is ==&gt; insert into "&lt;E table&gt;" ( ..... ) from "&lt;E Tabe&gt;" where ....<br/>....... " plan ' (use optgoal sap_olap) (use fac<br/>C t_table F) (use ins_by_bulk on) '</p>
+<p style="padding-left: 60px;">C /* R3:CL_SQL_STATEMENT==============CP:1103 T</p>
+<p style="padding-left: 60px;">C :&lt;E table&gt; M:500 */<br/>C<br/>C transaction aborted by server<br/>M *** WARNING =&gt; big time diff 2746384513 [1879782507 331199724] for stamp STAT_INSERT, correct ???<br/>C dbdssyb: DBSL99 SQL7412<br/><strong>C [ASE Error SQL1105][SAP][ASE ODBC Driver][Adaptive Server Enterprise]Can't allocate space for object 'syslogs' in database '&lt;SID&gt;'</strong><br/>C [ASE Error SQL7412][SAP][ASE ODBC Driver][Adaptive Server Enterprise]Space available in the log segment has fallen critically low<br/>C</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Adaptive Server Enterprise (ASE) 16.0 for Business Suite</li>
+<li>SAP Business Warehouse - All versions </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Transaction log of the &lt;SID&gt; database is full.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>You need to increase the segment log of your &lt;SID&gt; database. Please refer to SAP KBA <a href="https://me.sap.com/notes/1931223" target="_blank">1931223</a> - Error SQL1105 "Can't allocate space for object..." - SAP ASE for Business Suite</li>
+<li>If the issue persist after a consequent increase of the segment log, it might be possible that table is not partitioned and it is very big. You might need to consider partitioning of E table. Please read this SAP Note <a href="https://me.sap.com/notes/2187579" target="_blank">2187579</a> - SYB: Pros and cons of physical partitioning of fact tables , item "<strong>Partitioning of E fact tables"</strong>.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li>SAP Note <a href="/notes/1605169" target="_blank">1605169</a> - SYB: SAP BW 7.02 Correction Collection</li>
+<li>SAP Note <a href="/notes/1608417" target="_blank">1608417</a> - SYB: SAP BW 7.30 Correction Collection</li>
+<li>SAP Note <a href="/notes/1616726" target="_blank">1616726</a> - SYB: SAP BW 7.31 Correction Collection</li>
+<li>SAP Note <a href="/notes/1821924" target="_blank">1821924</a> - SYB: SAP BW 7.40 Correction Collection</li>
+<li>SAP Note <a href="/notes/2193724" target="_blank">2193724</a> - SYB: SAP BW 7.50 / 7.51 Correction Collection</li>
+<li>SAP Note <a href="/notes/2103636" target="_blank">2103636</a> - SYB: Adaptions for SAP ASE 16.0 SP01 PL01</li>
+<li>SAP Note <a href="/notes/1680803" target="_blank">1680803</a> - SYB: SAP Adaptive Server Enterprise - Best Practice for SAP Business Suite and SAP BW<em>.</em></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>SQL1105, 1105, compression, partitioning, RSCOMP1</p></div></div></div></div>

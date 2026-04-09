@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>LMDB Data Supplier completeness check shows missing ABAPInstanceKernel</li>
+<li>The registration of the ABAPInstanceKernel is not working, although you receive "sent successful" after executing the sldreg command</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Managed System Operating System: Windows</li>
+<li>SAP Solution Manager</li>
+<li>Focused Run </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Check the related windows system in LMDB which shows ABAPInstanceKernel missing</li>
+<li>Check the related windows system in SLD (via -&gt; Adminitration -&gt; Maintenance -&gt; CIM Classes -&gt; Supplied Elements [SLD version &gt;= 7.1]) and check whether ABAPInstanceKernel information are not available there (for more information check KBA <a href="https://me.sap.com/notes/2225446" target="_blank">2225446 </a>- "ABAPInstanceKernel Data Supplier is shown as incomplete in LMDB")</li>
+<li>On OS level perform the steps mentioned under "Reason and Prerequistes" from SAP Note <a href="https://me.sap.com/notes/1419603" target="_blank">1419603</a> - "Missing ABAP SAP Central Services (ASCS) instance in SLD/LMDB"  (means no manual creation)</li>
+<li>On OS you cannot find files dev_sldregs and dev_sldregk in &lt;X&gt;:\usr\sap\&lt;SAPSID&gt;\SYS\global</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The problem is caused by linux binaries in &lt;X&gt;:\usr\sap\&lt;SID&gt;\&lt;Instance&gt;\exe</p>
+<p>sapstartsrv calls krnlreg and sldreg without adding the file suffix (exe). This means that if there is "…\exe\krnlreg" and  "…\exe\krnlreg.exe" in the directory, the OS will call the first one – which will fail due to incompatibility with the operating system</p>
+<p>This can happen due to linux kernel unzipped into the Windows folder.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Either remove or rename the two linux binary files (sldreg and krnlreg) and keep the 2 windows files. Afterwards follow again the steps described in SAP Note <a href="https://me.sap.com/notes/1419603" target="_blank">1419603</a> - "Missing ABAP SAP Central Services (ASCS) instance in SLD/LMDB" in section "Reason and Prerequistes" or KBA <a href="https://me.sap.com/notes/2225446" target="_blank">2225446</a> - "ABAPInstanceKernel Data Supplier is shown as incomplete in LMDB" and check SLD and LMDB again</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Managed System Configuration Prerequisites, ABAP, Kernel, Registration, SLD, LMDB,</p></div></div></div></div>

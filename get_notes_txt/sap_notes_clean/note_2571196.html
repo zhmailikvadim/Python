@@ -1,0 +1,86 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>
+<div>Your SAP Enterprise Inventory and Service-Level Optimization (EIS) run fails.</div>
+</li>
+<li>The EIS Application Log contains the following error: There are stocking points that have no parent node.</li>
+<li>You see the following message(s) in the EIS Alert Log: A stocking point does not have an incoming supply path or has multiple incoming supply paths from process points and other nodes. Please see the example Alert Log entry in the table below. Note that the Supply Chain Name and Details columns are for example only.  The Base Period and Stocking Point listed under the Details column will differ.  The Stocking Point contains the location ID, an underscore, and then the Item ID. </li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p>Description</p>
+</td>
+<td>
+<p>Supply Chain Name</p>
+</td>
+<td>
+<p>Scenario Name</p>
+</td>
+<td>
+<p>Status</p>
+</td>
+<td>
+<p>Severity</p>
+</td>
+<td>
+<p>Class</p>
+</td>
+<td>
+<p>Source</p>
+</td>
+<td>
+<p>Details</p>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<p>A stocking point does not have an incoming supply path <br/>or has multiple incoming supply paths from process points and other nodes.</p>
+</td>
+<td>
+<p>MYSUPPLYCHAIN</p>
+</td>
+<td>
+<p>Base Scenario not upgraded</p>
+</td>
+<td>
+<p>Pending</p>
+</td>
+<td>
+<p>Error</p>
+</td>
+<td>
+<p>Data Input</p>
+</td>
+<td>
+<p>Multistage Inventory Planning and Optimization</p>
+</td>
+<td>
+<p>Base Period: 19 NOV 2017 Stocking Point: LOCA_ITEMA</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Enterprise Inventory and Service-Level Optimization (EIS)</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>STG_SOURCING records are either incorrectly defined or missing for the item and location specified in the Alert Log.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Verify that STG_SOURCING data exists for the item ID and location ID reported in the Alert log in the Stocking Point field.</li>
+<li>Check if the sourcing records for the item ID and location ID have been rejected. </li>
+<ol style="list-style-type: lower-roman;">
+<li>To do this, you can either review the reject_log table entries for the inbound_gateway_queue_key or download the "Data Loading Errors" published report from the UI. Note that the published report is generated as a .csv file. It may be best to open this with a tool like Notepad rather than Excel.  The report can be large and Excel may not display all of the data.</li>
+<li>Check for an error description that states "STG_SOURCING_DATES ARE OUTSIDE THE DATA HORIZON." for the item ID and location ID.  If this is found, the sourcing record was rejected and no supply path will exist for this data in SOPS_GATEWAY or SOPS_MIPO.  This rejection occurs when the dates in the STG_SOURCING table are incorrect. </li>
+</ol>
+<li>Validate the STG_SOURCING dates.</li>
+<ol style="list-style-type: lower-roman;">
+<li>Verify that the from_date is earlier than the max valid date for your data horizon.<br/>The max valid date can be determined by running the following query in SOPS_GATEWAY:<br/>select max(valid_date) from stg_valid_dates;</li>
+<li>Verify that the to_date is greater than or equal to the base period.  The base period can be found on the Manage Scenario screen in the UI or the Inbound Gateway Queue. <strong>IMPORTANT:</strong> If the STG_SOURCING.TO_DATE shows as '99' in SQLPlus, view the 4 digit date to ensure it is not set to 1999.  If it is 1999, you must update it to a valid date.</li>
+</ol></ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>SAP KBA <a href="/notes/1937469" target="_blank">1937469</a> - MipoValidationException: Scenario is invalid - SAP EIS</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>MIPO, EIS, EIO, SmartOps, sourcing, optimization failed, issue with smartops job, Scenario is Invalid</p></div></div></div></div>

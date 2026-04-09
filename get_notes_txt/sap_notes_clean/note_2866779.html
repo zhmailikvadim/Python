@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<p>The indexserver service of SAP HANA crashes with a crash stack similar to the following:</p>
+<p style="padding-left: 30px;">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)<br/>----&gt; Pending exceptions (possible root cause) &lt;----<br/>exception 1: no.2000001 (Basis/IO/FileAccess/impl/SimpleFile.cpp:185)<br/> Generic file error; $condition$=INVALID_DIR_HANDLE != m_DirHandle; $message$=Invalid directory handle!<br/>exception throw location:<br/> 1: FileAccess::DirectoryIterator::DirectoryEntry::getFullName<br/> 2: ptime::PlanTracerImpl::loadMetadataFileCache<br/> 3: ptime::BuiltinProcedure_PLANVIZ_ACTION::loadPlanTraceMetadata<br/> 4: ptime::BuiltinProcedure_PLANVIZ_ACTION::execute<br/> [...]</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, the indexserver tries to access an empty plan trace.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions of SPS00 - SPS02</li>
+<li>Revisions &lt;= 037.01 (SPS03)</li>
+<li>Revisions &lt;= 041.00 (SPS04)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>The plan trace is loaded. This may also happen implicitly, e.g. when the tenant overview in HANA Cockpit is called. </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 037.02 (SPS03) </li>
+<li>Revisions &gt;= 042.00 (SPS04)</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>Disable the plan trace by setting the following configuration parameter:<br/><br/>ALTER SYSTEM ALTER CONFIGURATION ('global.ini', 'SYSTEM' ) SET ('performance_analyzer', 'plan_trace_enable') = 'false' WITH RECONFIGURE;<br/><br/><strong>Starting with HANA 2.0 SPS03 comments should be added:</strong><br/><br/>ALTER SYSTEM ALTER CONFIGURATION ('global.ini', 'SYSTEM' ) SET ('performance_analyzer', 'plan_trace_enable') = 'false' WITH RECONFIGURE COMMENT 'SAP Note 2866779. Plan trace can be enabled again after upgrade to a revision containing the fix';</li>
+</ul></div></div></div></div>

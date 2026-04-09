@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When first time user choose as Spreadsheet in Download option then very next screen Export As popup Screen appear and</p>
+<p>in that screen, user not able to select information in 'Format drop down' input option like 'Google Sheets' or 'Microsoft Excel'. etc.,</p>
+<p><strong> </strong></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> Vendor Type, File share, OData File share, Google Workspace, Google</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> Prerequisites note: 3220522 - For Release 757 and Software Component   SAP_BASIS</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>In this Export As Tab need to show as format like "GOOGLE' / MICROSOFT/ SAP "based on Repository name and find out respective Vendor Type and that vendor type information shows here.</p>
+<p>For showing this Vendor type information in file share OData property exposed as ("FileShareVendorType": "GOOGLE").</p>
+<p><strong>Example:</strong></p>
+<p>Transaction: GUITVH (Visual Harmonization Test App) → ALV Grid Tab → In Download Option as 'Spreadsheet' → Export AS Popup window --&gt; Format Drop Down need to select which Vendor type format on file will be downloaded like as follows.</p>
+<p><strong>Format (drop down input option):</strong></p>
+<p>1. Google Sheets</p>
+<p>2. Microsoft Excel. etc.,</p>
+<p><br/><span style="text-decoration: underline;"><strong>Limitation in Fileshare Layer:</strong></span></p>
+<ol>
+<li style="text-align: left;"> When first time user press Export to button then back end UI Team will execute OData call to get all fileshare Details, so that particular time File share ABAP Layer will get respective all fileshare repository vendor name and match with Enumeration to get respective Vendor type information will be stored into table CMIS_L_FS_EXTEN  (File Share Extension).</li>
+</ol>
+<p style="text-align: left;">                 UI Team make OData Call: /sap/opu/odata4/sap/ui_cmis_myfiles_04/srvd/sap/cmis_myfiles/0001/FileShares?$orderby=FileShare desc</p>
+<p style="text-align: left;">      2.   Now fileshare Transaction V_CMIS_l_FS will be synced with fileshare Extension Table  CMIS_L_FS_EXTEN  (File Share Extension)</p>
+<p style="text-align: left;">      3.  2nd time on-wards while press Export to button then user will get all the Fileshare information, so that UI Team can able to show format drop down input show as Google Sheet based on Vendor Type.</p>
+<p><span style="text-decoration: underline;"><strong>Prerequisites:</strong></span></p>
+<p style="text-align: left;"># Object list of non-supported objects for note 0003263479:<br/><br/># DOMD CMIS_FS_VEND_TYPE<br/># DTED CMIS_FS_VEND_TYPE<br/># TABD CMIS_L_FS_EXTEN<br/># TABT CMIS_L_FS_EXTEN</p>
+<p style="text-align: left;"><span style="text-decoration: underline;">Find below Steps need to be followed before process Correction Instructions:</span></p>
+<p style="text-align: left;"> 1. Download Attachment Report File: REPORT NOTE_3263479.txt</p>
+<p style="text-align: left;"> 2. log in into SAP System and Go to transaction: SE38</p>
+<p style="text-align: left;"> 3. Give program name as 'NOTE_3263479' and Create it.</p>
+<p style="text-align: left;"> 4. Give Title as ' NOTE_3263479' and Type as ' Executable Program' and save this program as local object or package.</p>
+<p style="text-align: left;"> 5. Activate the program and Execute it.</p>
+<p style="text-align: left;"> 6. Choose Test Run Option and execute also you can able to see Domain and Data element and Table are going to be Created in Simulation Log.</p>
+<p style="text-align: left;"> 7. Choose Update &amp; Activate Option and Save objects into TR for your Transport purpose also other system landscape movement as well.</p></div></div></div></div>

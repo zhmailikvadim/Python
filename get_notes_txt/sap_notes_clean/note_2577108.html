@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>
+<div>Memory leak in the SMP MBO server 3.0.13 and below versions.</div>
+</li>
+<li>The leak is caused by many instances of registering/unregistering devices.</li>
+<li>The leak is occurring in the obmo.exe component of the MBO server</li>
+<li>The leak may lead to the obmo process memory growing continuously over time up to a maximum of 4 GB.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>
+<div>SMP MBO server 2.3.x and 3.0.x on Windows OS</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<div>Applications that do frequent register/unregister of devices will see the obmo.exe process grow in memory usage if not restarted periodically.</div>
+</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Device registration information is stored in an internal array but is not removed from the array when the device is unregistered.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>
+<div>The internal code in obmo.exe has been fixed and will be in SMP MBO server 3.0.15 currently scheduled for release in March 2018.</div>
+</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>obmo memory leak device register unregister.</p></div></div></div></div>

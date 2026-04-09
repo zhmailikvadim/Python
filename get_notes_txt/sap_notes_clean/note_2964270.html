@@ -1,0 +1,88 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You want to install SAP Data Intelligence 3 on SUSE Container as a Service Platform 4.2 on premise.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Data Hub, SLES, Kubernetes, SUSE CaaSP, SUSE, Linux, Container, cri-o, SAP Data Hub, CaaSP, SLES for SAP, Data Intelligence, SAP Data Intelligence, SAP DI</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Installation of SAP Data Intelligence 3.0.4 (or greater) on SUSE Container as a Service Platform 4.2</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Planning SAP Data Intelligence 3 on SUSE Container as a Service Platform 4.2</p>
+<p>For a basic installation of SAP Data Intelligence 3 on SUSE CaaS Platform 4.2 (CaaSP 4.2), you will have to have a minimum</p>
+<p>    3 servers as Kubernetes master nodes, 64 GiB RAM, 150 GiB for root file system<br/>    4 servers as Kubernetes worker nodes, 64 GiB RAM, 150 GiB for root file system<br/>    1 management host (jump host), 16 GiB RAM, 200 GiB for root file system<br/>    The installation of SUSE CaaSP 4.2 requires a load balancer. A setup of a simple loadbalancer can be found in the SUSE CaaSP 4.2 deployment documentation.<br/>    You will need as well access to a local registry for storing the Docker images of SAP Data Intelligence.<br/>    You also need the access to a SUSE Enterprise Storage 5 (or higher) to provide the data store for SAP Data Intelligence 3.</p>
+<p> </p>
+<p>Preparation for SAP Data Intelligence 3 on SUSE Container as a Service Platform 4.2</p>
+<p>Make sure you have your SUSE subscription keys at hand for registering your installation of SUSE CaaS Platform 4.2.</p>
+<p>Registering your systems entitles you to get SUSE software updates and support.</p>
+<p>It is highly recommended to have a static IP setup for your SUSE CaaS Platform 4.2 installation.</p>
+<p>You have to provide a time source for your installation (ntp server).</p>
+<p> </p>
+<p>Installation of SUSE Container as a Service Platform 4.2</p>
+<p>1) Install SUSE Linux Enterprise Server 15 SP1 on all the nodes that should join the Kubernetes cluster</p>
+<p>    Follow the SUSE documentation for installing SUSE CaaS Platform 4.2: <a href="https://documentation.suse.com/suse-caasp/4.2/" target="_blank">https://documentation.suse.com/suse-caasp/4.2/</a><br/>    Especially follow <a href="https://documentation.suse.com/suse-caasp/4.2/html/caasp-deployment/_deployment_instructions.html#deployment.preparations" target="_blank">https://documentation.suse.com/suse-caasp/4.2/html/caasp-deployment/_deployment_instructions.html#deployment.preparations</a><br/>    Here the general preparations are described for deploying SUSE CaaS Platfom 4.2.<br/>    For the on-premise/bare-metal installation check out<br/>        <a href="https://documentation.suse.com/suse-caasp/4.2/html/caasp-deployment/_deployment_instructions.html#deployment_bare_metal" target="_blank">https://documentation.suse.com/suse-caasp/4.2/html/caasp-deployment/_deployment_instructions.html#deployment_bare_metal</a><br/>        <a href="https://documentation.suse.com/suse-caasp/4.2/html/caasp-deployment/_deployment_instructions.html#_deployment_on_existing_sles_installation" target="_blank">https://documentation.suse.com/suse-caasp/4.2/html/caasp-deployment/_deployment_instructions.html#_deployment_on_existing_sles_installation</a></p>
+<p>    Register your installations either during installation workflow or after the installation.</p>
+<p>        To do a registration it is necessary for your landscape to be able to connect to the internet in order to reach SUSE's Customer Center (SCC) <a href="https://scc.suse.com/" target="_blank">https://scc.suse.com</a></p>
+<p>2) Install a management host with SUSE Linux Enterprise Server 15 SP1</p>
+<p>    Install SUSE Linux Enterprise Server 15 SP1 by following the product documentation.<br/>    Register your installation and do not forget to add these software repositories:</p>
+<p>        sudo SUSEConnect -r CAASP_REGISTRATION_CODE<br/>        sudo SUSEConnect -p sle-module-containers/15.1/x86_64<br/>        sudo SUSEConnect -p caasp/4.0/x86_64 -r CAASP_REGISTRATION_CODE<br/>        sudo SUSEConnect -p sle-module-python2/15.1/x86_64</p>
+<p> </p>
+<p>    Install the required tool set for managing SUSE CaaS Platform 4<br/>        sudo zypper in -t pattern SUSE-CaaSP-Management</p>
+<p>    Install Docker, this is needed for installing SAP Data Intelligence 3<br/>        sudo zypper in docker</p>
+<p>    Install python-2.7 components needed for installing SAP Data Intelligence 3<br/>        sudo zypper in python2-pyOpenSSL<br/>        sudo zypper in python2-PyYAML</p>
+<p>3) If not already available, install a machine with SLES 15 SP1 as loadbalancer</p>
+<p>    Follow the instructions given in <a href="https://documentation.suse.com/suse-caasp/4.2/html/caasp-deployment/_deployment_instructions.html#deployment.preparations" target="_blank">https://documentation.suse.com/suse-caasp/4.2/html/caasp-deployment/_deployment_instructions.html#deployment.preparations</a> to configure a machine as loadbalancer.</p>
+<p>4) Create the Kubernetes cluster:</p>
+<p>    Log into your management host as root and execute the commands to create the SUSE CaaSP 4 Kubernetes cluster.<br/>    Make sure to have ssh-agent running with respective keys to access the cluster nodes.<br/>    Initialise the cluster:<br/>    skuba cluster init --control-plane &lt;LB IP/FQDN&gt; my-cluster<br/>    First master node and cluster bootstrap:<br/>    cd my-cluster<br/>    skuba node bootstrap --target &lt;IP/FQDN&gt; &lt;NODE NAME&gt;<br/>    Additonal master nodes:<br/>    skuba node join --role master  --target &lt;IP/FQDN&gt; &lt;NODE NAME&gt;<br/>    Worker nodes:<br/>    skuba node join --role worker--target &lt;IP/FQDN&gt; &lt;NODE NAME&gt;<br/>    Check status of the newly created kubernetes cluster:<br/>    skuba cluster status</p>
+<p> For more information see the official SUSE CaaS Platform 4.2 documentation: <a href="https://documentation.suse.com/suse-caasp/4.2/" target="_blank">https://documentation.suse.com/suse-caasp/4.2/</a></p>
+<p>5) Preparations for SAP Data Intelligence 3</p>
+<p>     If not stated otherwise the commands and actions below have to be performed on the management host ("jump host")</p>
+<p> 5.1)   Install ceph-common and xfsprogs on all SUSE CaaS Platform 4.2 Kubernetes nodes to make use of storage classes based on SUSE Enterprise Storage<br/>        zypper in ceph-common xfsprogs<br/>    <br/>  5.2)   Edit /etc/crio/crio.conf on all Kubernetes nodes:<br/>           set<br/>           pids_limit = 4096<br/>           Edit /etc/containers/registry.conf on all Kubernetes nodes:<br/>          Create entry for your secure local registry, e.g.:<br/>          [["FQDN_of_secure_registry:5000"]]<br/>          insecure = false<br/>          prefix = "FQDN_of_secure_registry:5000"<br/>          location = "FQDN_of_secure_registry:5000"</p>
+<p> 5.3) Re-load crio on all Kubernetes nodes:<br/>        systemctl restart crio<br/>    <br/> 5.4) Install python2 and python2-PyYAML on the management host:<br/>        If not already done, add the python2 module<br/>        SUSEConnect -p sle-module-python2/15.1/x86_64<br/>        zypper in python2-PyYAML<br/>        zypper in python2-pyOpenSSL<br/>        This installs python2-base, python2-PyYAML and python2-pyOpenSSL these are requirements for the installation of SAP Data Intelligence 3.</p>
+<p> 5.5) To easily use kubectl and helm on the management host, copy the cluster configuration file ~/my-cluster/admin.conf to ~/.kube/config<br/>        cp -av  ~/my-cluster/admin.conf  ~/.kube/config</p>
+<p> 5.6) Create namespace for installation of SAP Data Intelligence 3, e.g. run on the management host:<br/>        kubectl create namespace di304</p>
+<p> 5.7)  Create CEPH based storageClass and secrets for use with SAP Data Intelligence 3</p>
+<p>         On the management host create a file named storageclass.yaml, for example:<br/>        cat &lt;&lt;EOF &gt; storageclass.yaml<br/>        apiVersion: storage.k8s.io/v1<br/>        kind: StorageClass<br/>        metadata:<br/>        annotations:<br/>          storageclass.kubernetes.io/is-default-class: "true"<br/>         name: &lt;NAME OF STORAGECLASS&gt;<br/>         namespace: default<br/>       parameters:<br/>         adminId: &lt;ADMINID&gt;<br/>         adminSecretName: ceph-admin-secret<br/>         adminSecretNamespace:  default<br/>         imageFeatures: layering<br/>         imageFormat: "2"<br/>         monitors: &lt;IP OF CEPH MONITOR 1 &gt;:6789, &lt;IP OF CEPH MONITOR 2&gt;:6789, &lt;IP OF CEPH MONITOR 3&gt;:6789<br/>         pool: &lt;CHANGE TO YOUR CONVENIENCE&gt; <br/>         userId: &lt;USERID to access SES &gt;<br/>         userSecretName: ceph-user-secret<br/>       provisioner: kubernetes.io/rbd<br/>       reclaimPolicy: Delete<br/>       volumeBindingMode: Immediate<br/>    EOF</p>
+<p>   Run<br/>    kubectl create -f storageclass.yaml<br/>    to create the storage class.</p>
+<p>   Create the secret files for accessing the storage</p>
+<p>   Get the necessary userids and credentials from your storage administrator and create the secret files as shown by example:<br/>    Create the base64 encoded credentials:<br/>    export ADMINKEY=$(echo "&lt;userkey&gt;"  | base64)<br/>    export USERKEY=$(echo "&lt;adminkey&gt;" | base64)</p>
+<p>    cat &lt;&lt;EOF &gt;ceph-admin-secret.yaml<br/>    apiVersion: v1<br/>    kind: Secret<br/>    metadata:<br/>        name: ceph-admin-secret<br/>        namespace: &lt;NAMESPACE FOR DATAHUB&gt;<br/>    type: "kubernetes.io/rbd"<br/>    data:<br/>       key: $ADMINKEY<br/>    EOF</p>
+<p>    cat &lt;&lt;EOF&gt;ceph-user-secret.yaml<br/>    apiVersion: v1<br/>    kind: Secret<br/>    metadata:<br/>        name: ceph-user-secret<br/>        namespace: &lt;NAMESPACE FOR DATAHUB&gt;<br/>    type: "kubernetes.io/rbd"<br/>    data:<br/>       key: $USERKEY<br/>    EOF</p>
+<p>    kubectl create -f ceph-admin-secret.yaml<br/>    kubectl create -f ceph-user-secret.yaml</p>
+<p>5.8)  Adapt Pod Security Policy and Hostpath Mount Configurations</p>
+<p>        To edit the default pod security policy of your SUSE CaaS Platform cluster so that pods are able to mount to the "/" directory of the host, run the following command:<br/>        kubectl edit psp suse.caasp.psp.privileged<br/>        Change the pathPrefix in allowedHostPaths to /</p>
+<p>5.9) To let the service account create pods using the privileged mode, create the clusterrolebinding.yaml file using the following commands:</p>
+<p>cat &lt;&lt;EOF &gt; clusterrolebinding.yaml</p>
+<p>apiVersion: rbac.authorization.k8s.io/v1<br/>kind: ClusterRoleBinding<br/>metadata:<br/>  name: suse:caasp:psp:priviliged:default<br/>roleRef:<br/>  apiGroup: rbac.authorization.k8s.io<br/>  kind: ClusterRole<br/>  name: suse:caasp:psp:privileged<br/>subjects:<br/>- kind: ServiceAccount<br/>  name: default<br/>  namespace: XXX<br/>- kind: ServiceAccount<br/>  name: vora-vsystem-XXX<br/>  namespace: XXX<br/>- kind: ServiceAccount<br/>  name: vora-vsystem-XXX-vrep<br/>  namespace: XXX<br/>- kind: ServiceAccount<br/>  name: XXX-elasticsearch<br/>  namespace: XXX<br/>- kind: ServiceAccount<br/>  name: XXX-fluentd<br/>  namespace: XXX<br/>- kind: ServiceAccount<br/>  name: XXX-nodeexporter<br/>  namespace: XXX<br/>- kind: ServiceAccount<br/>  name: vora-vflow-server<br/>  namespace: XXX</p>
+<p>- kind: ServiceAccount<br/>  name: mlf-deployment-api<br/>  namespace: XXX</p>
+<p>EOF</p>
+<p>5.10) To insert the Kubernetes namespace that you are installing SAP Data Intelligence 3 into in the clusterrolebinding.yaml file, run the following commands:</p>
+<p>Note: Change &lt;your_namespace&gt; to the Kubernetes namespace.</p>
+<p>export NAMESPACE=&lt;your_namespace&gt;<br/>sed -i "s/XXX/${NAMESPACE}/g" clusterrolebinding.yaml</p>
+<p>5.11) In the same directory where you created the clusterrolebinding.yaml file, run the following command:</p>
+<p>kubectl apply -f clusterrolebinding.yaml</p>
+<p>        Run the following command:</p>
+<p>        kubectl edit clusterrolebinding system:node</p>
+<p>        Insert the following at the end of the file:</p>
+<p>        subjects:<br/>        - apiGroup: rbac.authorization.k8s.io<br/>          kind: Group<br/>          name: system:nodes</p>
+<p>    If the registry certificate is untrusted or self-signed, follow the steps below in order to create necessary Kubernetes secret with the certificates so that SAP Data Intelligence installation procedure can import it into SAP Data Intelligence Connection Manager.<br/>        Certificate chain should be saved into file named "cert" in PEM format.<br/>        export DI installation namespace into NAMESPACE environment variable.<br/>        Ensure that your file doesn't contain DOS-type line endings. To convert from DOS-type line endings, you may use the following commmands:</p>
+<p>                mv cert cert_with_carriage_return</p>
+<p>                tr -d '\r' &lt; cert_with_carriage_return &gt; cert</p>
+<p>        run "kubectl create secret generic cmcertificates --from-file=cert -n $NAMESPACE" command.</p>
+<p> NOTE: File name should be cert.</p>
+<p>6.    Installation of SAP Data Intelligence</p>
+<p>6.1.) Install SAP Data Intelligence according to <a href="https://help.sap.com/viewer/a8d90a56d61a49718ebcb5f65014bbe7/3.0.latest/en-US" target="_blank">Installation Guide for SAP Data Intelligence</a>. For CaaSP 4 specific configurations, check the items below.</p>
+<p>        Installation/Upgrade with SLC Bridge (SL Plugin):<br/>        Choose "Advanced Installation" for "Installation Type"<br/>        Choose "Configure container log path" for "Docker Container Log Path Configuration" <br/>        Set "Container Log Path" as "/var/log/containers"<br/>        Set "Enable Kaniko Usage" as yes<br/>        "-e diagnostic.fluentd.logDriverFormat=regexp -e vsystem.vRep.exportsMask=true" into "Additional Installation Parameters"</p>
+<p>6.2.) Expose SAP Data Intelligence System Management Externally</p>
+<p>After following the steps in the "Expose SAP Data Intelligence System Management Externally in On-Premises" section in the Installation Guide for SAP Data Intelligence, and installing ingress-nginx, the service account of nginx should be authorized.</p>
+<p>1. Get the name of the service account that is used by nginx-ingress:</p>
+<p>          kubectl -n &lt;your_namespace&gt; get serviceaccounts -lapp=nginx-ingress -o name</p>
+<p>2. Edit the clusterrolebinding that you created above, and add a new item into the list using the following command:</p>
+<p>         kubectl edit clusterrolebinding  suse:caasp:psp:priviliged:default</p>
+<p>           - kind: ServiceAccount<br/>             name: &lt;service_account_of_nginx_ingress&gt;<br/>             namespace: &lt;your_namespace&gt;</p>
+<p>7.) Uprgading from existing SAP Data Hub 2.7.x Installation on SUSE CaaSP 4.0 to SAP Data Intelligence 3.0 patch 4 and greater.</p>
+<p>First you need to upgrade to the latest version of SAP Data Intelligence 3 that is released for SUSE CaaSP 4.0, see <a href="/notes/2898735" target="_blank">SAP Note 2898735</a> and <a href="/notes/2871970" target="_blank">SAP Note <span class="sapUxAPObjectPageHeaderIdentifierContainer" id="__xmlview2--idObjectPageHeader-identifierLineContainer" style="width: 79.48%;">2871970</span> for details</a>.</p>
+<p>Make sure to read SAP Note https://launchpad.support.sap.com/#/notes/2908055</p>
+<p>The upgrade can only be done with SLC Bridge</p>
+<p>Choose "Expert Mode" during setup of the SLC Bridge to be able to select "nodePort" for the SLCBridge service.</p>
+<p>Add the ML ServiceAccount to ClusterRoleBinding <em><span style="font-size: 10.5pt; font-family: 'Arial',sans-serif;  background: #FAFAFA;">suse:caasp:psp:priviliged:default <br/><em><span lang="EN-GB" style="font-size: 10.5pt; font-family: 'Arial',sans-serif;  background: #FAFAFA;">- kind: ServiceAccount</span></em><em><span lang="EN-GB" style="font-size: 10.5pt; font-family: 'Arial',sans-serif;  background: #FAFAFA;"><br/><em><span style="font-family: 'Arial',sans-serif;">  name: mlf-deployment-api</span></em><br/><em><span style="font-family: 'Arial',sans-serif;">  namespace: XXX</span></em></span></em></span></em></p>
+<p>After successfull upgrade of SAP Data Hub 2.7.x to SAP Data Intelligence 3.0 patch 4, proceed with the upgrade of SUSE CaaSP 4.0 to SUSE CaaSP 4.2.</p>
+<p>Follow the update procedure described in <a href="https://documentation.suse.com/suse-caasp/4.2/single-html/caasp-admin/#_cluster_updates" target="_blank">SUSE CaaSP 4.2 Administration Guide</a>.</p>
+<p> </p></div></div></div></div>

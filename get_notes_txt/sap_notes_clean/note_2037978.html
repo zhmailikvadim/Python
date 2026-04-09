@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Short dump UNCAUGHT_EXCEPTION CX_CRM_GENIL_MODEL_ERROR when defining a FPM UIBB that uses a custom defined or enhanced MDG entity.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CL_CRM_GENIL_OBJ_MODEL, IF_GENIL_OBJ_MODEL, CL_MDG_BS_GUIBB_FORM, CL_MDG_BS_GUIBB_LIST,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Prerequisite 1: The entity contains a customer defined attribute of data type <strong>MANDT</strong></p>
+<p>Prerequisite 2: You are using the new BOL/GenIL based MDG UI.</p>
+<p>Reason: The MDG generic text assistant (class CL_USMD_GENERIC_GENIL_TEXT) tries to generate a text attribute for the client attribute but this fails due to missing coding.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>1. Apply the attached program correction</p>
+<p>2. Run program USMD_TXT_FLD_MAP_DELETE (with transaction SE38) and delete buffer table USMD_TXT_FLD_MAP for the MDG data model you are using. With the attached program correction the buffer table will be rebuilt automatically with the correct entries.</p></div></div></div></div>

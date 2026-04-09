@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The SOAP webservice authentication with credentials (username/password) can use two different methods:</p>
+<ul>
+<li>HTTP Authentication (using the parameters on <strong>headers</strong>)</li>
+<li>Body Authentication (sending the fields userName, password, and orgName inside the <strong>body</strong> content).</li>
+</ul>
+<p>Our guide documents both scenarios <a class="external-link" href="https://help.sap.com/docs/cloud-integration-for-data-services/web-services/logon?q=SOAP" rel="nofollow noopener" target="_blank" title="Follow link">here</a>.</p>
+<p>After the 2504 release, the SOAP logon operation using only HTTP Authentication (headers, with the body content blank) stopped working.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Cloud Integration for data services - 2504 server</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The issue occurred due to a code change.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The correction for this server issue is delivered in SAP Cloud Integration for data services version 2504 HF1 (1.0.11.56-HF1).</p>
+<p><span style="text-decoration: underline;"><strong>Workaround</strong></span></p>
+<p>Please continue using the HTTP header authentication as before, but instead of a blank body, pass the userName and password fields inside the body.</p>
+<p>Find the sample below in curl format:</p>
+<p>curl --location 'https://hcids.us3.hana.ondemand.com/DSoD/webservices?SOAPAction=logon' \<br/>--header 'SOAPAction: function=logon' \<br/>--header 'orgName: your_org_name' \<br/>--header 'dsodEnv: SANDBOX' \<br/>--header 'Content-Type: application/xml' \<br/>--header 'Authorization: ••••••' \<br/>--data '&lt;Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"&gt;<br/> &lt;Body&gt;<br/> &lt;logonRequest xmlns="http://webservices.dsod.sap.com/"&gt;<br/> &lt;<strong>userName</strong> xmlns=""&gt;<strong>A</strong>&lt;/<strong>userName</strong>&gt;<br/> &lt;<strong>password</strong> xmlns=""&gt;<strong>B</strong>&lt;/<strong>password</strong>&gt;<br/> &lt;/logonRequest&gt;<br/> &lt;/Body&gt;<br/>&lt;/Envelope&gt;'</p>
+<p>The values inside the fields <strong>userName</strong> and <strong>password</strong> can be random, meaning they do not need to be the correct credentials, like the sample above showing "A" and "B".</p></div></div></div></div>

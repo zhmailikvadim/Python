@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You executed the transaction FINS_MIG_MONITOR_RC4 as part of the migration to SAP Simple Finance 1503. The transaction shows errors "COSP_BAK differs from COSP in values" or "COSS_BAK differs from COSS in values". You want to analyze what is behind these error messages.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FINS_RECON 733 737 sFIN Migration of Balances</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Missing functionality</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ol>
+<li>
+<div>Use the SAP Note Assistant to implement the correction instructions.</div>
+</li>
+<li>Open the application log of a migration package, which shows errors FINS_RECON733 or FINS_RECON737. Double-click on the error message to show the long text. It contains the logical key of the erroneous totals record.</li>
+<li>Start the program FCO_MIG_DLT_EXPLAIN and copy the keys from the error message into the selection screen. Press F8 to execute the program.</li>
+<li>The program reads totals records from the tables COSP_BAK and COSS_BAK and the same records from the views COSP and COSS. The column SOURCE denotes the origin of the record. The resulting list is sorted by the logical key, so that in the error-free case there is always one record from the view (for example COSS) and the same record from the backup table (COSS_BAK). Amount and quantity fields are not displayed in columns per posting periods as persisted in the COSP_BAK/COSS_BAK, but in rows with a separate posting period column. Periods with all amount and quantity values equal to zero are not shown.</li>
+<li>Compare the amounts, the quantity fields and the additional attributes in the records coming from the backup tables COSP_BAK/COSS_BAK with the corresponding entries from the views COSP/COSS.</li>
+<li>Analyze further where the differences come from by looking directly into the source tables ACDOCA and COEP and comparing them with the backup tables COSP_BAK/COSS_BAK.</li>
+</ol></div></div></div></div>

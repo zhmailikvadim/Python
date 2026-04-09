@@ -1,0 +1,72 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The SAP NetWeaver Java application server startup fails with error code 2150 with ABAP user store.</p>
+<p>/usr/sap/&lt;SID&gt;/&lt;inst_nr&gt;/work/dev_server0:<br/><em></em></p>
+<p><span><em>ERROR =&gt; Java node 'server0' terminated with exit code 2150</em></span></p>
+<p>The reason of the startup is recorded in std_server0.out file:</p>
+<p>************************************<br/>CSN Component [BC-JAS-SEC-UME], DC Name [sap.com/com.sap.security.core.ume.service]<br/>com.sap.engine.frame.ServiceException: Start of UME service failed. Check help topic "Start of UME Service Failed". <br/>Technical details: com.sap.conn.jco.JCoException: (103) JCO_ERROR_LOGON_FAILURE: <br/><strong>Initialization of destination UMEBackendConnection failed: </strong><strong>Name or password is incorrect (repeat logon)</strong><br/>at com.sap.security.core.server.ume.service.UMEServiceFrame.start(UMEServiceFrame.java:463)</p>
+<p>************************************</p>
+<p><br/>Also, the below error can be populated:<br/><br/>************************************</p>
+<p>CSN Component [BC-JAS-SEC-UME], DC Name [sap.com/com.sap.security.core.ume.service]<br/>com.sap.engine.frame.ServiceException: Start of UME service failed. Check help topic "Start of UME Service Failed". Technical details: com.sap.conn.jco.JCoException: (103) JCO_ERROR_LOGON_FAILURE: <br/><br/><strong>Initialization of destination UMEBackendConnection failed: User is locked; notify the person responsible</strong></p>
+<p><br/>************************************</p>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP NetWeaver AS Java 7.1 and higher</li>
+<li>UME user store is ABAP.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>In the ABAP server change the communication user password and restart the Java server.</p>
+<p>The Java server security service startup fails with the above exception.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The communication user's logon credentials are invalid.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>In the ABAP system change the communication user password.</p>
+<p>Store the new password in UMEBackendConnection RFC destination.</p>
+<p>Steps:</p>
+<p>1. Start configtool.bat (Windows) or configtool.sh (Unix/Linux) as &lt;SID&gt;adm user from the folder /usr/sap/&lt;SID&gt;/&lt;inst_nr&gt;/j2ee/configtool.</p>
+<p>2. Press the button "switch to configuration editor mode".</p>
+<p style="padding-left: 30px;"><img alt="config000.png" class="img-responsive" src="/documents/customerkba/QSk82n6za3_80_jjbvVdsRz-gmmhaf-ASIoqUwtGxV4" title="config000.png"/></p>
+<p>3. Press the "edit" button and on the popup window press the "Yes" button.</p>
+<p style="padding-left: 30px;"><img alt="config001.png" class="img-responsive" src="/documents/customerkba/AC26_NL6Ed4zcaqxMTrg49ZVw4s1i1v9JlLfctOSU2U" title="config001.png"/></p>
+<p>4. Look for the ABAP server parameters:</p>
+<ul>
+<li>Expand node Configurations - Destinations - RFC</li>
+<li>Double click on the affected RFC destination reported by the exception, this time select the <strong>Propertysheet UMEBackendConnection</strong></li>
+<li>The upcoming window shows the RFC parameters of the UMEBackendConnection RFC destination</li>
+</ul>
+<p style="padding-left: 30px;"><img alt="config003.png" class="img-responsive" src="/documents/customerkba/WcY46by2HLhSZ8tiKRKlBltsScOklIMynQpYzLN_9Og" title="config003.png"/></p>
+<ul>
+<li>
+<div>Note the ABAP server logon parameters</div>
+</li>
+<ul>
+<li>jco.client.client - client where communication user must be maintained</li>
+<li>jco.client.user - communication user ID</li>
+<li>jco.client.ashost - host name of the ABAP server</li>
+<li>jco.client.sysnr - instance number</li>
+</ul>
+</ul>
+<p>5. In ABAP server change the communication user password</p>
+<ul>
+<li>Start SAPGui, logon to the ABAP server (host ABCDE000AS, client 001, instance number)</li>
+<li>Start SU01 transaction, search for communication user ID (SAPJSF), press Edit button (small pencil icon)</li>
+</ul>
+<p style="padding-left: 30px;"><img alt="config004.png" class="img-responsive" src="/documents/customerkba/78POxgx1nW_hJaVgaR4sEh9IzR-FV7kLoMOI089vE5M" title="config004.png"/></p>
+<p> </p>
+<ul>
+<li>Select "Logon Data" tab.</li>
+<li>Update the password in "New Password" and in "Repeat Password" fields.</li>
+<li>Save the changes by pressing the small floppy icon.</li>
+</ul>
+<p style="padding-left: 30px;">Note that password status is "Porductive Password".</p>
+<p style="padding-left: 30px;"><img alt="config005.png" class="img-responsive" src="/documents/customerkba/x_P8EUxEAOSHG21dVTxc_hNsyhkGioCRkJkbSrujA4I" title="config005.png"/></p>
+<p>6. Store the new passwod in configtool for the RFC destination.</p>
+<ul>
+<li>
+<div>Double click on jco.client.passwd field. In the popup windows enter new password in custom-value field, press button "Apply custom".</div>
+</li>
+</ul>
+<p style="padding-left: 30px;"><img alt="config006.png" class="img-responsive" src="/documents/customerkba/zmYeK9rRLCGzjSfsjCbRGafluh9xrzJmIOGa16KdI0U" title="config006.png"/></p>
+<p>7. Start the Java application server.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>UMEBackendConnection, ServiceException, UME security service, Exit code 2150, RfcGetException, 2542513</p></div></div></div></div>

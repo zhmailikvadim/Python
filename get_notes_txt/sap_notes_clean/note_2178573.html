@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p dir="ltr" id="__html1">With Release 7.0, assumed fields were added to the account dialog in the Basic System (treaty, section, accounting year, and accounting period). However, only the assumed treaty and the assumed section are ready for input for retrocession treaties, inward posting year and period are only displayed.</p>
+<p dir="ltr">The fields for inward posting year and period can be made ready for input using the BAdI method /MSG/R_A_ADDON_BADI~FIELD_MODIFICATION_1120. If you make only entries in the two fields for inward posting year and/or period, these are lost.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FS-RI</p>
+<p>Assumed fields</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p dir="ltr"><strong>History:</strong></p>
+<p>6/11/2015: New<br/><br/>Implement the source code corrections.<br/>Support Package SAPK-70006INMSG corrects the problem.</p>
+<p dir="ltr"><strong>Solution and technical effects:</strong></p>
+<p dir="ltr">The system behavior was adjusted in such a way that user entries in the two fields for inward posting period and/or year are retained.</p>
+<p>Note that after you open the fields using the BAdI method, you must ensure that this data is not overwritten by a default value in the standard system. For this, the BAdI method /MSG/R_A_ADDON_BADI~PREALLOCATE_ASSUMED_FIELDS already exists.</p>
+<p dir="ltr"><strong>Manual tasks:</strong></p>
+<p>There are none.</p></div></div></div></div>

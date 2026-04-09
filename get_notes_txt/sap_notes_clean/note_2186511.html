@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The handling of different archiving objects is inconsistent. This SAP Note is part of a series of SAP Notes for optimizing data archiving across different applications and concerns the archiving object QM_QMEL. For more information about this, see SAP Note 577847.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Archiving, ADK, transaction SARA, archiving object QM_QMEL, maximum size in MB, commit counter, RQARCQMV, RQARCQMA, Customizing settings QM_QMEL IRM_CHECK_CUST, Information Lifecycle Management, ILM, ILM object QM_QMEL, termination_flag, suspension</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>a. Time reference fields and condition fields of the ILM object for the archiving object QM_QMEL in IRM Customizing are insufficiently defined and assigned.</p>
+<p>b. The write program of the archiving object QM_QMEL does not support the suspension concept. This means that the write phase of an archiving run for the object QM_QMEL cannot be suspended.<br/></p>
+<p>c. The maximum size in MB does not correspond to the standard recommendations.</p>
+<p>d. No binding selection block for restrictions exists in the write program RQARCQMA and the preprocessing program RQARCQMV.</p>
+<p>e. For QM_QMEL, hints are entered in AOBJ Customizing.</p>
+<p>See SAP Note 577847.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>a. Time reference fields and condition fields of the ILM object for the archiving object QM_QMEL in IRM Customizing are correctly defined and assigned.</p>
+<p>b. If you want to use the function described, proceed as follows:             <br/>    1. Implement the attached source code corrections in the program RQARCQMA.<br/>    2. With transaction AOBJ for the archiving object QM_QMEL, set the indicator that allows suspensions.</p>
+<p>c. As a result of the corrections, in the Customizing (transaction AOBJ) for the archiving object QM_QMEL, the maximum number of data objects is set to the default value 0, the commit counter is set to 1, and they are transferred in the case of new deliveries.<br/></p>
+<p>d. The selection block for restrictions in the write program RQARCQMA and the preprocessing program RQARCQMV is enhanced.</p>
+<p>e. The hints for QM_QMEL are removed from AOBJ Customizing.</p>
+<p> </p></div></div></div></div>

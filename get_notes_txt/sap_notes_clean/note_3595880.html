@@ -1,0 +1,182 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The following symptom is identified when you run the <strong>HR-PT: gerador do processamento da folha de pagamento</strong> (RPCALCP0) report:</p>
+<ul>
+<li>You run a retrocalculation for a period in a previous year and there is a payroll period split in January of the year for which you are triggering the calculation. While recalculating the payroll periods, the <strong>Nº atribuição variável</strong> (V0ZNR) of the wage types that propagate the differences from previous years to the in-period is increased twice during the split January periods, leading to reporting inconsistencies as the reference year for the adjustment is one year prior to what it should be. </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><strong>Transaction:</strong> PC00_M19_CALC</p>
+<p>(for more information, see SAP Note <a href="/notes/2197631" target="_blank">2197631</a>)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p>This issue is caused by the <strong>Regra de cálculo para pessoal</strong> (PR06) rule because it is not prepared to correctly propagate previous years adjustments in case of payroll split in January.</p>
+<p><strong>Prerequisite</strong></p>
+<p>The following Support Package (SP) level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr><th>Release</th><th>Support Package</th></tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 07</td>
+</tr>
+<tr>
+<td>SAP_HR 6.00</td>
+<td>HR SP M4</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04</td>
+<td>HR SP J0</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP B8</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>From now on, the PR06 rule is modified so that it increases the V0ZNR only in the first partial period of the split payroll result of January.</p>
+<p style="padding-left: 30px;"><strong>Example:</strong></p>
+<p style="padding-left: 30px;">Proceed with the following steps to reproduce the symptom mentioned in this SAP Note.</p>
+<p style="padding-left: 30px;"><strong>Description</strong></p>
+<p style="padding-left: 30px;"><em>CALC: Retroactive changes for previous year run in January of following year with payroll split in January. </em></p>
+<p style="padding-left: 30px;"><strong>Preparation/Background</strong></p>
+<p style="padding-left: 30px;"><em>1. Hire an employee on 01/01/2024 with salary EUR 2000.</em></p>
+<p style="padding-left: 30px;"><em><em>2. Change employer <em>starting from January 15th 2025 </em>to trigger a payroll split.  </em></em></p>
+<p style="padding-left: 30px;"><em><em>3. Run payroll until 01/2025.</em></em></p>
+<p style="padding-left: 30px;"><em><em>4. Change employee's salary to EUR 3000 starting from 12/2024.</em></em></p>
+<p style="padding-left: 30px;"><strong>Execution</strong></p>
+<p style="padding-left: 30px;"><em>1. Execute payroll for 02/2025 with retroactive accounting to 12/2024. </em></p>
+<p style="padding-left: 30px;"><strong>Result</strong></p>
+<p style="padding-left: 30px;"><em>After the execution of step 1, the following wage types must be generated</em></p>
+<p style="padding-left: 30px;"><em>1. In the result table of 12/2024:</em></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Wage type</td>
+<td>Amount (EUR)</td>
+</tr>
+<tr>
+<td>/106</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>/A06</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table></div>
+<p style="padding-left: 30px;"><em>2. In the result table of the first split of 01/2025:</em></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Wage type</td>
+<td>Amount (EUR)</td>
+<td>V0ZNR</td>
+</tr>
+<tr>
+<td>/106</td>
+<td>1304.35</td>
+<td> </td>
+</tr>
+<tr>
+<td>/Z06</td>
+<td>1000</td>
+<td>01</td>
+</tr>
+</tbody>
+</table></div>
+<p style="padding-left: 30px;"><em>3. In the result table of the second split of 01/2025:</em></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Wage type</td>
+<td>Amount (EUR)</td>
+<td>V0ZNR</td>
+</tr>
+<tr>
+<td>/106</td>
+<td>1695.65</td>
+<td> </td>
+</tr>
+<tr>
+<td>/Z06</td>
+<td>1000</td>
+<td>01</td>
+</tr>
+</tbody>
+</table></div>
+<p style="padding-left: 30px;"><em>4. In the result table of 02/2025:</em></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 251px; height: 74px;">
+<tbody>
+<tr>
+<td>Wage type</td>
+<td>Amount (EUR)</td>
+<td>V0ZNR</td>
+</tr>
+<tr>
+<td>/106</td>
+<td>3000</td>
+<td> </td>
+</tr>
+<tr>
+<td>/107</td>
+<td>1000</td>
+<td>01</td>
+</tr>
+</tbody>
+</table></div>
+<p style="padding-left: 30px;"><br/>Note: These are the expected results once the SAP Note is installed.</p>
+<p><strong>VERSIONING</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong> </td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>May 23, 2025</td>
+<td>Released for Customer</td>
+</tr>
+<tr>
+<td>3</td>
+<td>June 04, 2025</td>
+<td>Content of PR06.txt attachment updated. Please, reapply step 1.1 from Manual Instructions pdf if it does not match the screenshots from step 1.2.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>June 18, 2025</td>
+<td>Description updated. No need to reapply the correction instructions.</td>
+</tr>
+</tbody>
+</table></div>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package (SP). However, if you need to install a solution earlier, proceed as follows:</p>
+<ol>1. Apply the manual activity.</ol>
+<p><strong>Stay informed</strong></p>
+<ul>
+<li>To get an email notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a> or access this <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">link</a> for further information;</li>
+<li>For Legal Changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">Regulatory Change Manager</a>;</li>
+<li>For documentation about Payroll Portugal, access the <a href="https://help.sap.com/docs/ERP_HCM/7fc707b2f5784b5793399cfb4261fba3/383de153038a424de10000000a174cb4.html?locale=en-US&amp;version=6.18.latest" target="_blank">Help Portal</a>;</li>
+<li>For information about the Note Assistant, access the <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Support Portal</a>;</li>
+<li>For information about Support Package Schedules, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</li>
+</ul>
+<p><strong>Disclaimers</strong></p>
+<p>By clicking an external hyperlink YOU AGREE that unless expressly stated otherwise in your agreements with SAP:</p>
+<ul>
+<li>The content of the associated website and any other external websites is not content provided by or on behalf of SAP, nor is it otherwise under SAP's control;</li>
+<li>The fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the contents and information provided on such websites;</li>
+<li>SAP does not give any representation regarding the quality, safety, suitability, accuracy or reliability of any external website or any of the information, content, and materials provided thereon;</li>
+<li>You visit those external websites entirely at your own risk. SAP shall not be directly or indirectly responsible or liable for any damage or loss caused or alleged to be caused by or in connection with your use of or reliance on any content, goods or services available on or through any such linked website.</li>
+</ul>
+<div class="longtext">
+<p><strong>Good to know</strong></p>
+<ul>
+<li>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</li>
+<li>During the piloting phase, this SAP Note is available only for pilot testing. Even though SAP has performed the internal functional tests, it is possible that tests in customers’ environments reveal issues not captured during the functional tests, being necessary to update the solution and version this SAP Note. After this SAP Note has its status updated to “Released for Customer”, it will be changed only if there is a very specific situation that demands an update, and the reason for it will be added in the log of changes.</li>
+</ul>
+</div>
+<p><link/></p></div></div></div></div>

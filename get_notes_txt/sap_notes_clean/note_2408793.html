@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The field GENFLAG gets set to X in table TADIR when creating an annotation model in Annotation Models via Service Reference (Type 3) in Service Builder.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Annotation via referenced service, SEGW, Service Builder, Annotation Model</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The field GENFLAG gets set to X (GENFLAG = X) in table TADIR for annotation model; this indicates that the objects generated cannot be changed/entered in a Transort Request. GENFLAG has to be blank for an annotation model to be transportable.</p>
+<p>For new Type 3 ( Annotation models via service reference) projects created via Service Builder, the GENFLAG is set to blank.</p>
+<p>For existing projects, follow the below steps to reset the flag:</p>
+<p>      a) Navigate to transaction '/IWBEP/REG_VOCAN'.</p>
+<p>      b) Find the annotation model for which the value for GENFLAG field needs to be reset</p>
+<p>      c) Delete the annotation model in the same transaction</p>
+<p>      d) Re-create the annotation model via the same transaction '/IWBEP/REG_VOCAN' ( do not re-generate through service builder, as it will still retain the same value )</p>
+<p>      e) Check the entry in the TADIR table.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the note.</p></div></div></div></div>

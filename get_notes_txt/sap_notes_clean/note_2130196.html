@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Invoice amount get doubled on Performance Obligation Structure UI when you take the following steps:</p>
+<p>1. Create a contract with time-based performance obligation.</p>
+<p>2. Create an invoice in one period.</p>
+<p>3. Run program <em>Revenue Posting Run</em> in the period.</p>
+<p>4. Do some contract change to make revenue changed in this period again, and run program <em>Revenue Posting Run</em> in the period again.</p>
+<p>5. Run program <em>Calculate Time-Based Revenue</em> in the period.</p>
+<p>6. Suspend the contract and then unsuspend it.</p>
+<p>As a result, the invoice amount is doubled.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Revenue Accounting, Performance Obligation Structure UI, Calculate Time-Based Revenue</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>If customer run program <em>Revenue Posting Run</em> before running program <em>Calculate Time-Based Revenue</em>, some contracts change will cause invoice amount doubled on Performance Obligation Structure UI.</p>
+<p>It is caused by program error. Program <em>Calculate Time-Based Revenue</em> wrongly deletes the closed reconciliation key entries in table FARR_D_DEFITEM. In fact, the program only needs to request a new open reconciliation key to transfer the revenue.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply this note</p></div></div></div></div>

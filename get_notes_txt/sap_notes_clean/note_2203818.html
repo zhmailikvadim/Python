@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">After execution of ODSProductionLogETL and ODSNonconformanceETL scripts, records in ODS_TIME_DIM table are inconsistent:</p>
+<ul>
+<li>Some records of GRANULARITY = SHIFT have NULL value in ODS_PRODUCTION_SHIFT and ODS_DAY_CLASS columns. Some of these records have GMT_BEGIN_DATE_TIME = GMT_END_DATE_TIME, and ODS_BEGIN_DATE_TIME = ODS_END_DATE_TIME.</li>
+<li>PRODUCTION_LOG records of production shifts that span the midnight (for exmaple, 22:00-06:00) sometimes show 2 records - the first is 22:00-00:00 and the second is 00:00-06:00, but sometimes they show 3 records - 22:00-00:00, 00:00-06:00 and 22:00-06:00. However, it is expected to be just one record of 20:00-06:00.</li>
+<li>Some records in ODS_TIME_DIM of GRANULARITY = SHIFT that have NULL value for the ODS_PRODUCTION_SHIFT and ODS_DAY_CLASS whereas the respective records in ODS_PRODUCTION_LOG table have DAY_CLASS and PRODUCTION_SHIFT columns filled in correctly.</li>
+<li>Some records in ODS_TIME_DIM of GRANULARITY = SHIFT that have NULL value for the ODS_PRODUCTION_SHIFT and ODS_DAY_CLASS whereas the respective records in ODS_NC_DATA table have DAY_CLASS and PRODUCTION_SHIFT columns filled in correctly.</li>
+<li>When Summer time is in effect, WIP.PRODUCTION_DATE.PRODUCTION_DATE value is one hour less than it should be.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP ME Scripts, ODS processing</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The root cause is that some scenarios were not covered by the original design.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The fix is implemented in a form of code change. See Manual Activity section for additional instructions.</p></div></div></div></div>

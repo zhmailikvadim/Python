@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">An investment measure (order or WBS element) has been created which has an asset under construction (AUC) assigned. Although an AUC has been assigned to the investment measure and the status AUC is set when releaseing the investment measure, there is no distribution rule available with the settlement type AUC available in the settlement rule. There is no distribution rule in the settlement rule available at all, although the AUC distribution rule is expected to be available by default.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>Controlling (CO)<br/>SAP ERP <br/>SAP Enhancement package for SAP ERP<br/>SAP Enhancement package for SAP ERP, version for SAP HANA<br/>SAP S/4HANA<br/>SAP S/4HANA Finance</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>System design. The AUC distribution rule will be available in the settlement rule only <strong>after the first settlement has been executed</strong>. As soon as the first settlement to AUC has been performed, the AUC distribution rule will be set with the relevant dates filled (first used, last used, etc.)</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>The fact that the AUC distribution rule will only be available in the settlement rule after the first settlement is executed is a fact that cannot be changed. If you need to see the AUC which is assigned to the investment measure, you can proceed as follows:</p>
+<ul>
+<li>For <strong>orders</strong>: In transaction KO03 follow the menu path: Extras -&gt; Asset under Construction</li>
+<li>For <strong>WBS elements</strong>: In the CJ20N project builder select the relevant WBS element and follow the menu path: Edit -&gt; WBS Element -&gt; Investment programs -&gt; Asset under construction.<br/>If transaction CJ03 is used, the AUC can be displayed with a double click to the relevant WBS element and the use of the button "Asset under construction". Alternatively, after selecting the WBS element in transaction CJ03 with following the menu path "Extras -&gt; Asset under construction", the AUC can be reached as well.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Abrechnungsvorschrift, COBRA, CJ01, CJ02, CJ03, KO01, KO02, AIB, Anlage in Bau</p></div></div></div></div>

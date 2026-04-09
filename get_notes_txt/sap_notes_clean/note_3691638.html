@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Legal change according to ESMA Level II Validations: Trade ID validations</p>
+<p>You use the New Correspondence Framework for Financial Transactions and import SWIFT MT300 messages for your FX transactions. You observe that even invalid Trade IDs are imported and stored in your FX transactions (after matching).</p>
+<p>With note 2215269 a new BAdI was introduced (BADI_TLR_TRADE_ID_CHECK), see further details there.</p>
+<p>This validation interface is now called from the automatic correspondence import functions as well. If you want the same behaviour (Error or Warning message) as for other processes you only need to check/adjust your customizable messages (see note 2215269).</p>
+<ul>
+<li>Issuing an error message prevents the import of the Trade ID to your financial transactions, but does not influence the matching process itself.</li>
+<li>Issuing a warning message imports even invalid Trade ID to your financial transactions and does not influence the matching process as well.</li>
+</ul>
+<p>If you want to establish a different behaviour for correspondence processes than for other functions you may need to implement your own BAdI implementation class in order to implement a different message handling if parameter IV_CORRESPONDENCE_MODE is set ('X').</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>TARO trade repository<br/>ESMA European Securities and Markets Authority<br/>EMIR European Market Infrastructure Regulation</p>
+<p>Level 2 Validations</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Legal change.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the correction instructions or the appropriate Support Packages.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SP06, PERSONAS-9987, PERSONAS30-10276</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement this note</p></div></div></div></div>

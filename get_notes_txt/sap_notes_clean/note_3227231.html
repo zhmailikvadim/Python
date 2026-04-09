@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In the ABAP system log (SM21), the system writes the following error:</p>
+<ul>
+<li>Database error 258 at OPC &gt; insufficient privilege: Not authorized</li>
+</ul>
+<p>Or, in German:</p>
+<ul>
+<li>Database error 258 at OPC &gt; insufficient privilege: Not authorized</li>
+</ul>
+<p>The work process trace contains an SQL statement that tries to read from the SAP HANA object "_SYS_REPO"."ACTIVE_OBJECT".</p>
+<p>This error message occurs only for systems that use the SAP HANA database and in which the software component SAP_BW is in use. This concerns the creation of metadata for operational data providers (ODPs). This creation of metadata can be started via different actions; for example, when you start the Data Warehousing Workbench (RSA1) or when you model an Open ODS view.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Open ODS view, ODP, operational data provider</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The system issues the error message due to a missing authorization of the SAP&lt;SID&gt; database users in the SAP HANA database. When the metadata is set up, the time stamp is read. This only involves a performance optimization, so if an error occurs, the time stamps are read from the SAP HANA repository, which takes a little big longer. If you want to use this performance optimization, you should grant read authorization for the following object to the SAP&lt;SID&gt; database user: "_SYS_REPO"."ACTIVE_OBJECT".</p>
+<p>With SAP Note 2111563, this behavior was improved so that fewer accesses to this object are required.</p></div></div></div></div>

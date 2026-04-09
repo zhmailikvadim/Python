@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The Employee Central (EC) Payroll system is unable to calculate leave liability projections.</p>
+<p><span style="text-decoration: underline;">All Customers ( using EC Payroll, as well as using on-premise solution ) will see the following new objects :</span></p>
+<p>BADI -&gt; HR_AU_ECP_LEAVEPROVISIONS (Available in release SAP_HRCAU 608 , 604, 600 and EA-HRCAU 608).</p>
+<p>BADI Implementation HR_AU_ECP_LEAVEPROVISIONS_IMPL (Available in EA-HRCAU 608).</p>
+<p>Table HRSFEC_T5QLM (Available in EA-HRCAU 608)</p>
+<p><span style="text-decoration: underline;">However, the BADI implementation is activated only for customers using EC Payroll solution. </span></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>QLVP, QLVPR</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The Employee Central system is the leading system for time management. The Employee Central Payroll system was not equipped to perform the leave liability calculations, as all leave relevant data was not available to ECP. All leave balance data will now be sent to ECP system and stored here in IT 2010. ECP System has been enhanced to access this data, and process leave liability projections in payroll.</p>
+<p>This enhancement will not impact the existing business logic, and hence customers not using EC payroll will not be affected by it.</p>
+<p>Version 2: Missing Attachments added - 1) ECP AU Leave Provisions - Flow.doc</p>
+<p>                                                           2) Model Wagetypes.doc</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Leave liabilities calculcation has now been enabled for the private sector payroll solution. Customers not using EC Payroll will not be impacted by changes in this note.</p>
+<p>EC is the leading system for time management. All time snapshots are sent to ECP, and leave balances (entitlements and accruals) are now stored in IT 2010. Payroll has been enhanced to bypass running time simulation, so as to fetch all quota balances from IT 2010 instead. Leave liability calculations are performed using these balances.</p>
+<p>Process flow:</p>
+<p>Refer attached document - ECP AU Leave Provisions - Flow.doc</p>
+<p>In order to achieve the above, <span style="text-decoration: underline;">following new objects have been created:</span></p>
+<p><strong>BADI Definition HR_AU_ECP_LEAVEPROVISIONS:</strong> This BADI allows for overriding the quota balances retrieved from time simulation in ECP system.</p>
+<p><strong>BADI Implementation HR_AU_ECP_LEAVEPROVISIONS_IMPL:</strong> This is the implementation of above BADI, but is only invoked when the business function for SFEC (HCM_SFEC_TDEC2HR) is activated.</p>
+<p><strong>Table HRSFEC_T5QLM :</strong> This is a customizing table, that maps quota types to wagetypes. EC does calendar runs, and sends leave balances to ECP, which eventually are stored in IT 2010, in the form of wagetypes. These wagetypes need to be mapped to corresponding quota types in ECP. ECP system has quota configuration available in V_T556A. The required mapping is done in <strong>V_HRSFEC_T5QLM</strong> (View for table HRSFEC_T5QLM).</p>
+<p><strong>Model wagetypes : </strong>NA60 (Accruals for Quota type 60 - Annual Leave) and NE60 (Entitlements for Quota type 60 - Annual Leave) have been created. Refer attached document(Model Wagetypes.doc) for wagetype configurations. Similarly two wagetypes need to be created for every quota type in ECP.</p>
+<p><strong>New IMG node : </strong>Payroll -&gt; Payroll Australia -&gt; Leave Provisions and Payments (Leave Quotas) -&gt; Leave Provisions -&gt; <strong>Map EC Leave Balance Info to ECP Wage Types. </strong>This new node opens up view V_HRSFEC_T5QLM, that allows for mapping quota types in ECP to corresponding wagetypes that store leave balances in IT 2010.</p>
+<p><span style="text-decoration: underline;">Some existing objects needed to be modified:</span></p>
+<p><strong>Include program RPCLPVQ1 :</strong> Has code for time simulation that is invoked from within Payroll. This needs to be overridden for ECP customers, and so BADI call introduced here.</p>
+<p>Apply the appropriate support package (HRSP). There are no correction instructions attached to this note. The only way to get all relevant changes is by applying the relevant HRSP.</p></div></div></div></div>

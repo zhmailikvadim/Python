@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Importing a delivery unit fails, and a variation of the following error message is logged in the error log file:</p>
+<p>"[Activation][8] Table import target table cannot be found. Table import target table cannot be found."</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP NetWeaver</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<div>Open SAP HANA Application Lifecycle Management</div>
+</li>
+<li>Click the <em>Products</em> tab</li>
+<li><em></em>Click the <em>Delivery Units</em> tab</li>
+<li>Click <em>Import</em></li>
+<li>Select the desired Delivery Unit for import</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Delivery Units (DU) are transportable objects used for content delivery and the server receiving the import needs to have the pre-requisite components installed already.</p>
+<p>DUs do not create tables, but rather populate a table with data. Since the table does not exist, the above error message is thrown and the DU is not imported successfully.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Install the application the DU's content is for and then import the DU. The table will be created from the installation of the application, and the DU will then appropriately populate the table.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>For more information regarding error messages for import errors, reference the following Help Center document:</p>
+<p><a href="https://help.sap.com/viewer/b3d0daf2a98e49ada00bf31b7ca7a42e/2.0.01/en-US/2e9be6a7d35e47ada215c6d3d2dd635f.html" target="_blank">Table-Import Configuration Error Messages</a></p></div></div></div></div>

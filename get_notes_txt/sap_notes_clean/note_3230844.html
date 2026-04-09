@@ -1,0 +1,346 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">This SAP Note informs you about all restrictions in this release.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html1">Release restrictions, SAP S/4HANA 2022, SAP S/4HANA 2022 FPS01</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<div class="longtext">
+<p>This SAP Note provides information about the restrictions that exist for the SAP S/4HANA 2022 release.</p>
+<p>For general release information on SAP S/4HANA 2022 refer to SAP Note <a href="/notes/3145277" target="_blank">3145277</a>.</p>
+<p><strong><strong>Note</strong>:</strong> This SAP Note is subject to change. Check this SAP Note for changes on a regular basis. All important changes are documented in section "Important Changes after Release of SAP S/4HANA 2022".</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>General Restrictions:</strong></p>
+<ul>
+<li>In SAP S/4HANA the maximum length of the material number has been extended to 40 characters. Long material number-related restrictions are described in SAP Note <a href="/notes/2233100" target="_blank">2233100</a>.</li>
+<li>In SAP S/4HANA currency amount fields with a field length between 9-22 including 2 decimals have been extended to 23 digits including 2 decimals. Related restrictions are described in SAP Note <a href="/notes/2601956" target="_blank">2601956</a>.</li>
+<li>The extensibility framework is currently not integrated in the privacy by default functionality of S/4HANA. Please be aware, when you use this functionality for processing of personal data you might also need to provide this integration as part of your enhancements.</li>
+<li>The released information for add-ons can be found in SAP Note <a href="/notes/2214409" target="_blank">2214409</a>.</li>
+<li>The attached Business Functions are not released with SAP S/4HANA 2022.       </li>
+<ul>
+<li>It is not permitted to switch them on, even if it is technically possible (see <a href="https://userapps.support.sap.com/sap/support/sapnotes/public/services/attachment.htm?iv_key=002075125900001163362022&amp;iv_guid=0090FAAA5DF81EED92904252534F0BEB&amp;alt=2BCE4CB10DF674B172F4F3F7B32A284F4933B334368EF734378C3730B4AA48F22CF58E0A0E320EF24BCB30374ACEF6F20ED0D54D2EAC30362CF32D8EF2F64CC9C92A0ACAF7D7750C09514BCECFCFCE4C8DCF4BCC4DB5F575F4F4F3F57771F571F6F70B01B25D83D4120B0A722092A599504EB16D715E3E00" target="_blank">attachment</a>). Additional information regarding Always-Off and Always-On Business Functions can be found in SAP Notes <a href="/notes/2240359" target="_blank">2240359</a> and <a href="/notes/2240360" target="_blank">2240360</a>.</li>
+<li>If a Business Function was switched on in the start release system, but defined as always off in SAP S/4HANA, then a system conversion is not yet possible with this release at that current point in time.</li>
+<li>If a Business Function was switched off in the start release system, but defined as always on in the target release, then the Business Function will be automatically activated during the conversion</li>
+</ul>
+<li>Restrictions for ABAP Platform 2022 as part of SAP S/4HANA 2022 are described in SAP Note <a href="/notes/3225504" target="_blank">3225504</a>.<a href="/notes/2794219" target="_blank"><br/></a></li>
+<li>Restrictions for Java components as part of SAP S/4HANA 2022 are described in SAP Note <a href="/notes/3225521" target="_blank">3225521</a>.</li>
+<li>For CoPilot skills available with S/4HANA 2022 and related restrictions refer to SAP Note <a href="/notes/3224632" target="_blank">3224632</a>.</li>
+<li>Restrictions apply to the usage of the CDS View Replication functionality; for details refer to SAP Note <a href="/notes/2977657" target="_blank">2977657</a>.</li>
+</ul>
+<p><strong>Conversion Restrictions:</strong></p>
+<p>Restrictions for system conversions to SAP S/4HANA 2022:</p>
+<ul>
+<li>The conversion from source releases below SAP ERP 6.0 EHP 5 (SAP_APPL 605) is supported for systems containing vendors with assigned contact but you need to ensure to update to the following minimum SP levels upfront.<br/>In addition, you need to implement corrective SAP Note <a href="/notes/2383051" target="_blank">2383051</a> and further corrections into the system. For this purpose, please get in contact with SAP via customer incident on component AP-MD-BF-SYN.<br/>The minimum SP levels are: </li>
+</ul>
+<ol>
+<ul><ol>
+<li>SAP ERP 6.0 SP22</li>
+<li>EHP2 FOR SAP ERP 6.0 SP10</li>
+<li>EHP3 FOR SAP ERP 6.0 SP09</li>
+<li>EHP4 to EHP8 FOR SAP ERP 6.0 No minimum SP required.</li>
+</ol></ul>
+</ol>
+<p style="padding-left: 30px;">   This is not relevant for systems which do not have vendors with assigned contacts. You can also verify for existence of records in table KNVK where LIFNR has non-initial values (KNVK-LIFNR &lt;&gt; ‘’).</p>
+<ul>
+<li>Restrictions in conversions for DIMP-LAMA: see SAP Note <a href="/notes/2384347" target="_blank">2384347</a>.</li>
+<li>The following add-ons cannot be converted to SAP S/4HANA 2022 in one step but require an intermediate upgrade step:</li>
+<ul>
+<li>The Israeli Annexing Transport solution (see SAP Note <a href="/notes/2298073" target="_blank">2298073</a> for more details)</li>
+<li>SRM_SERVER 550/SRM_PLUS 550 (see SAP Note <a href="/notes/2251946" target="_blank">2251946</a> for more details)</li>
+<li>SAP Financial Closing cockpit 1.0 (see SAP Note <a href="/notes/2513315" target="_blank">2513315</a> for more details)</li>
+<li>SAP Revenue Accounting and Reporting 1.0, 1.1, 1.2 (see SAP Note <a href="/notes/3214045" target="_blank">3214045</a> for more details)</li>
+</ul>
+<li>For restrictions concerning Cost Of Goods Manufactured (COGM) please see SAP Note <a href="/notes/2270414" target="_blank">2270414</a>.</li>
+<li>For restrictions concerning New Inventory Management Data Model, see SAP Note <a href="/notes/2493434" target="_blank">2493434</a>.</li>
+</ul>
+<p><strong>Performance Restrictions:</strong></p>
+<ul>
+<li>Performance restrictions for SAP S/4HANA 2022 can be found in SAP Note <a href="/notes/3254104" target="_blank">3254104</a>.</li>
+</ul>
+<p><strong>Core Solution Restrictions:</strong></p>
+<ul>
+<li>Restrictions related to Responsibility Management: You as data controller are responsible for ensuring that the data used in responsibility definitions in teams are managed in accordance with any applicable legal requirements or business needs, such as data protection legislation or data life cycle requirements. Responsibility definitions in the Fiori app "Manage Teams and Responsibilities" are currently not integrated in privacy by default functionality. Therefore, the responsibility definitions in teams should not be used for the processing of personal data if this processing falls under any applicable data protection legislation.</li>
+<li>Information regarding Fiori application 'Manage Product Master' (Master Data Maintenance – Product Master): in the Fiori application Manage Product Master for valuation and supply planning you must maintain field values of length less than nine for price fields. This is the field length that is supported until the S/4HANA 2021 release. The system will not process the values in these fields in case you specify a value that is nine or more than nine digits.</li>
+<li>Restrictions for "Multiple Address Handling in SD Documents Using SAP Business Partner" are described in SAP Note <a href="/notes/3081750" target="_blank">3081750</a>.</li>
+<li>For Procurement / app Manage Supplier Confirmations the following restrictions apply:</li>
+<ul>
+<li>Only documents of type NB (standard purchase order) or direct copies with the same settings as NB are supported.</li>
+<li>Only the item categories Standard (blank) and E (Enhanced Limit) or direct copies with the same settings can be selected.</li>
+<li>The Manage Supplier Confirmations app cannot be used for the intercompany stock transfer process.</li>
+</ul>
+<li>Since SAP S/4HANA 2021 FPS2, in Plant Maintenance Order/Work Order a new functionality was added, which allows end users to activate mandatory checks on component fields via the configuration (SPRO: Plant Maintenance and Customer Service -&gt; Maintenance and Service Orders -&gt; EAM Message Control). With this end users get info/warning/error messages if certain fields are not maintained (Storage Location, Goods Recipient, Unloading Point, Recipient Location and Quantity). The issuing of messages does not work for components added to the PMO through a tasklist, an API or the order copy functionality.</li>
+</ul>
+<ul>
+<li>Further area-specific restrictions for SAP S/4HANA 2022 are described in the following SAP Notes:</li>
+</ul>
+<div>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td width="311">
+<p><strong>Area</strong></p>
+</td>
+<td width="123">
+<p><strong>Restriction SAP Note(s)</strong></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>Master Data Governance</p>
+</td>
+<td width="123">
+<p><a href="/notes/3225098" target="_blank">3225098</a><br/><a href="/notes/3220117" target="_blank">3220117</a><br/><a href="/notes/3219945" target="_blank">3219945</a><br/><a href="/notes/3081750" target="_blank">3081750</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>Finance</p>
+<p>Predictive Accounting</p>
+<p>Advanced Valuation in Financial Accounting</p>
+</td>
+<td width="123">
+<p><a href="/notes/3224682" target="_blank">3224682</a><br/><br/><a href="/notes/3223551" target="_blank">3223551</a></p>
+<p><a href="https://i7p.wdf.sap.corp/sap(bD1lbiZjPTAwMQ==)/bc/bsp/sno/ui_entry/entry.htm?param=69765F6D6F64653D3030312669765F7361706E6F7465735F6E756D6265723D3332353038313226" target="_blank">3250812</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>BRIM</p>
+</td>
+<td width="123">
+<p><a href="/notes/2351374" target="_blank">2351374</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>Sales</p>
+</td>
+<td width="123">
+<p><a href="/notes/3103459" target="_blank">3103459<br/></a><a href="/notes/3226683" target="_blank">3226683<br/></a><a href="/notes/3226658" target="_blank">3226658<br/></a><a href="/notes/3216882" target="_blank">3216882</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>Service</p>
+</td>
+<td width="123">
+<p><a href="/notes/3263001" target="_blank">3263001</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>Sourcing and Procurement</p>
+</td>
+<td width="123">
+<p><a href="/notes/3226677" target="_blank">3226677<br/></a><a href="/notes/3234357" target="_blank">3234357<br/></a><a href="/notes/3244652" target="_blank">3244652<br/></a><a href="/notes/3251353" target="_blank">3251353<br/></a><a href="/notes/3244356" target="_blank">3244356</a><a href="/notes/3251353" target="_blank"><br/></a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>SAP Product Costing</p>
+</td>
+<td width="123">
+<p><a href="/notes/2618359" target="_blank">2618359</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>Enterprise Asset Management - EAM</p>
+</td>
+<td width="123">
+<p><a href="/notes/3233684" target="_blank">3233684<br/></a><a href="/notes/3248716" target="_blank">3248716<br/></a><a href="/notes/3258630" target="_blank">3258630</a><a href="/notes/3233684" target="_blank"><br/></a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>LoB Supply Chain - TM<br/>LoB Supply Chain - PP/DS                        LoB Supply Chain - EWM</p>
+</td>
+<td width="123">
+<p><a href="/notes/3232331" target="_blank">3232331<br/></a><a href="/notes/3211529" target="_blank">3211529</a>, <a href="/notes/3230401" target="_blank">3230401</a>, <a href="/notes/3163478" target="_blank">3163478</a><br/><a href="/notes/3218673" target="_blank">3218673</a>, <a href="/notes/3218648" target="_blank">3218648</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>advanced Available-to-Promise (aATP)</p>
+</td>
+<td width="123">
+<p><a href="/notes/3205013" target="_blank">3205013</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>Intrastat</p>
+</td>
+<td width="123">
+<p><a href="/notes/3224626" target="_blank">3224626</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>Globalization</p>
+</td>
+<td width="123">
+<p><a href="/notes/3107606" target="_blank">3107606</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>Best Practices Content Framework</p>
+</td>
+<td width="123">
+<p><a href="/notes/2801944" target="_blank">2801944</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>Migration Cockpit</p>
+</td>
+<td width="123">
+<p><a href="/notes/2974038" target="_blank">2974038</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>Extended Service Parts Planning (eSPP)</p>
+</td>
+<td width="123">
+<p><a href="/notes/3225917" target="_blank">3225917</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">Project Manufacturing Management and Optimization</td>
+<td width="123">
+<p><a href="/notes/3222363" target="_blank">3222363</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">Just-in-time Supply to Production (JIT S2P) </td>
+<td width="123">
+<p><a href="/notes/3232673" target="_blank">3232673</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">Commodity Management</td>
+<td width="123">
+<p><a href="/notes/3229543" target="_blank">3229543</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">Maintenance Service</td>
+<td width="123">
+<p><a href="/notes/3209741" target="_blank">3209741</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">
+<p>Extended Production Engineering and Operations (PEO)</p>
+<p>Shop Floor Execution</p>
+</td>
+<td width="123">
+<p><a href="/notes/3104750" target="_blank">3104750</a></p>
+<p><a href="/notes/3123485" target="_blank">3123485</a></p>
+</td>
+</tr>
+<tr>
+<td width="311">Last Mile Distribution</td>
+<td width="123">
+<p><a href="/notes/3207163" target="_blank">3207163</a></p>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div></div>
+<div>
+<p><strong>Industry Solution Restrictions:</strong></p>
+</div>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td nowrap="nowrap" valign="bottom" width="325">
+<p><strong>Industry</strong></p>
+</td>
+<td nowrap="nowrap" valign="bottom" width="159">
+<p><strong>Restriction SAP Note(s)</strong></p>
+</td>
+</tr>
+<tr>
+<td nowrap="nowrap" valign="bottom" width="325">
+<p>Aerospace &amp; Defense (A&amp;D)</p>
+</td>
+<td nowrap="nowrap" valign="bottom" width="159">
+<p><a href="/notes/3246460" target="_blank">3246460</a></p>
+</td>
+</tr>
+<tr>
+<td nowrap="nowrap" valign="bottom" width="325">
+<p>Automotive</p>
+</td>
+<td nowrap="nowrap" valign="bottom" width="159">
+<p><a href="/notes/3246440" target="_blank">3246440</a></p>
+</td>
+</tr>
+<tr>
+<td nowrap="nowrap" valign="bottom" width="325">
+<p>Agricultural Contract Management</p>
+</td>
+<td nowrap="nowrap" valign="bottom" width="159">
+<p><a href="/notes/3299885" target="_blank">3299885</a></p>
+</td>
+</tr>
+<tr>
+<td nowrap="nowrap" valign="bottom" width="325">
+<p>Banking</p>
+</td>
+<td nowrap="nowrap" valign="bottom" width="159">
+<p><a href="/notes/3255427" target="_blank">3255427</a></p>
+</td>
+</tr>
+<tr>
+<td nowrap="nowrap" valign="bottom" width="325">
+<p>Defense and Security</p>
+</td>
+<td nowrap="nowrap" valign="bottom" width="159">
+<p><a href="/notes/3227086" target="_blank">3233839<br/>3227086<br/></a></p>
+</td>
+</tr>
+<tr>
+<td nowrap="nowrap" valign="bottom" width="325">
+<p>Mill Products</p>
+</td>
+<td nowrap="nowrap" valign="bottom" width="159">
+<p><a href="/notes/3104342" target="_blank">3104342</a></p>
+</td>
+</tr>
+<tr>
+<td nowrap="nowrap" valign="bottom" width="325">
+<p>Public Sector</p>
+</td>
+<td nowrap="nowrap" valign="bottom" width="159">
+<p><a href="/notes/3225552" target="_blank">3225552</a><br/><a href="/notes/3228518" target="_blank">3228518</a></p>
+</td>
+</tr>
+<tr>
+<td nowrap="nowrap" valign="bottom" width="325">
+<p>Retail &amp; Fashion</p>
+</td>
+<td nowrap="nowrap" valign="bottom" width="159">
+<p><a href="/notes/3228180" target="_blank">3228180</a><br/><a href="/notes/3228626" target="_blank">3228626</a><br/><a href="/notes/3163478" target="_blank">3163478<br/></a><a href="/notes/3255413" target="_blank">3255413</a></p>
+</td>
+</tr>
+<tr>
+<td nowrap="nowrap" valign="bottom" width="325">
+<p>Consumer Products</p>
+</td>
+<td nowrap="nowrap" valign="bottom" width="159">
+<p><a href="/notes/2957430" target="_blank">2957430</a></p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong> </strong></p>
+<p><strong>Important Changes after Release of SAP S/4HANA 2022:</strong></p>
+<p><span lang="EN-US" style="font-size: 11.0pt; font-family: 'Calibri',sans-serif; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">[2022-12-23] Added reference to SAP Note <a href="/notes/3244356" target="_blank">3244356</a> on restrictions for Item Hierarchies in Purchase Orders.</span></p>
+<p><span lang="EN-US" style="font-size: 11.0pt; font-family: 'Calibri',sans-serif; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">[2023-02-13] Restriction SAP Note <a href="/notes/3299885" target="_blank">3299885</a> related to ACM is added to with FPS01.</span></p>
+<p><span lang="EN-US" style="font-size: 11.0pt; font-family: 'Calibri',sans-serif; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">[2023-03-07] Restriction SAP Note <a href="/notes/3263001" target="_blank">3263001</a> added for FPS01.</span></p>
+<p><span lang="EN-US" style="font-size: 11.0pt; font-family: 'Calibri',sans-serif; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">[2023- 07-25] Restriction SAP Note <a href="/notes/3357085" target="_blank">3357085</a> added for FPS02 and relevant for all releases.</span></p>
+<p>[2024-07-25] The minimum SP level of SAP ERP 6.0 to run a conversion to SAP S/4HANA has been increased from SP20 to SP22</p></div></div></div></div>

@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1"><span>The </span><em>Avail. to Release </em><span>field in the <em>Pick Pack and Production Manager</em></span><em> </em><span>window is not updated correctly for an <em>Assembly BoM</em> (<em>Bill of Materials</em>), if the <span>warehouse was changed in the <em>Sales Order.</em></span></span></p>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<p><strong>Prerequisites:</strong></p>
+<p>1<strong>. </strong>Create two items: AA - sales item and BB - inventory item.</p>
+<p>2. Go to <em>Production→ Bill of Materials </em>and<em> c</em>reate <em>Assembly BoM</em> AA with component BB in warehouse 01, quantity 1.</p>
+<p><strong>Scenario:</strong></p>
+<p>1.<strong> </strong>Create a <em>Goods Receipt</em> for item BB with two lines: the first for warehouse 01, quantity 4 and the second for warehouse 02, quantity 4.</p>
+<p>2.<strong> </strong>Go to <em>Sales - A/R</em>→  <em>Sales Order</em> and create a new <em>Sales Order</em> with item AA and with quantity 2. Before adding the document, update the warehouse to 02.</p>
+<p>As a result, the following message appears: <em>Do you want to set this warehouse for component items as well? Choose "No" to keep the component items' default warehouses defined in the BoM.</em></p>
+<p>Press Yes and add the document.</p>
+<p>As a result, the committed quantity of the item BB is updated correctly in warehouse 02.</p>
+<p>3.<strong> </strong>Go to the <em>Inventory</em>→ <em>Pick and Pack</em>→ <em>Pick Pack and Production Manager</em> and choose the <em>Sales Order</em> you created and press Ok.</p>
+<p>4. Mark the line of the <em>Sales Order</em> and press 1 in the column To Release. You can see that the <em>Avail. to Release</em> quantity is 4.</p>
+<p>Click the <em>Release to Pick List</em> button and generate the pick list.</p>
+<p>5. In the <em>Pick Pack and Production Manager </em>window → under <em>Open</em> tab, Check the <em>Avail. to Release</em> quantity.</p>
+<p><strong>Expected behavior:</strong></p>
+<p>The <em>Avail. to Release</em><span> quantity</span><span><em> </em>is updated to 3.</span></p>
+<p><strong>Actual behavior:</strong></p>
+<p>The <em>Avail. to Release</em> quantity is 4.</p>
+<p>If you answer No to the question - <em>Do you want to set this warehouse for component items as well? Choose "No" to keep the component items' default warehouses defined in the BoM</em> from and the <em>warehouse, </em>the <em>Avail. </em><em>to Release</em> <em>Quantity </em>﻿is updated correct.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>System Limitation</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This is a system limitation.</p>
+<p><strong>Workaround:</strong></p>
+<p>As a workaround, you can use a <em>Sales BoM</em> instead. The difference is that the <em>Assembly BoM</em> displays the parent item in pick lists, while the <em>Sales BoM</em> displays component items in pick lists. As a result, the quantity in <em>Avail. to Pick </em>is correct for the <em>Sales BoM</em> component.</p></div></div></div></div>

@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When trying to start ./DPAgentService start the following error appears:</p>
+<p>/DPAgentService: /lib64/libstdc++.so.6: version `CXXABI_1.3.9' not found (required by ./DPAgentService)</p>
+<p>./DPAgentService: /lib64/libstdc++.so.6: version `CXXABI_1.3.9' not found (required by ./DPAgentService</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Ennvironment:</strong></p>
+<ul>
+<li>Linux Redhat 6.5, 7.4 and 7.6</li>
+<li>SDI Agent 2.4.0.0</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>First install the following package:</p>
+<ol>
+<li>yum install compat-sap-c++-6</li>
+</ol>
+<p>Then follow the next steps to link the symbolic link to the package that was just installed.</p>
+<ol>
+<li>cd /lib64</li>
+<li>ls -l libstd* - to show what the current library is linked to</li>
+<li>ls -l /opt/rh/SAP/lib64 - so if you see that it is pointing to an older version then please remove it by following step 4.</li>
+<li>sudo rm libstdc++.so.6 - to remove the old file</li>
+<li>sudo ln -s /opt/rh/SAP/lib64/compat-sap-c++-6.3.1.so libstdc++.so.6 - to create the new symbolic link to point to the compat sap</li>
+</ol></div></div></div></div>

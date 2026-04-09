@@ -1,0 +1,474 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are using or implementing SAP S/4HANA 1809. This SAP Note describes information that is especially relevant if you upgrade from an SAP ERP EHP release or an SAP S/4 HANA Finance release. Note: Additional information is also available in other Release Information Notes for Fiori Applications and for special business topics (these are partly referenced here as well).</p>
+<p>This SAP Note also provies restriction information at the time of release to customer (RTC) for <strong>SAP S/4HANA OP 1809</strong>.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SFIN, on-premise, OP, S/4HANA on-premise</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>See below.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Restrictions Relevant for Finance in SAP S/4HANA 1809</strong></p>
+<p><strong>General</strong></p>
+<p style="padding-left: 30px;">For the following topics, see these SAP Notes:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Topic</strong></td>
+<td><strong>SAP Note</strong></td>
+</tr>
+<tr>
+<td><span lang="EN-US" style="font-size: 13.5pt; font-family: 'Arial',sans-serif; line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: DE; mso-bidi-language: AR-SA;">BW data sources that are no longer supported</span></td>
+<td>2270133</td>
+</tr>
+<tr>
+<td><span lang="EN-US" style="font-size: 13.5pt; font-family: 'Arial',sans-serif; line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: DE; mso-bidi-language: AR-SA;">Parallel valuation for activity based costing</span></td>
+<td>2270414</td>
+</tr>
+<tr>
+<td><span lang="EN-US" style="font-size: 13.5pt; font-family: 'Arial',sans-serif; line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: DE; mso-bidi-language: AR-SA;">Reference and simulation costing</span></td>
+<td>2349294</td>
+</tr>
+<tr>
+<td><span lang="EN-US" style="font-size: 13.5pt; font-family: 'Arial',sans-serif; line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: DE; mso-bidi-language: AR-SA;">Summarization hierarchies in Controlling</span></td>
+<td>2349282</td>
+</tr>
+<tr>
+<td><span lang="EN-US" style="font-size: 13.5pt; font-family: 'Arial',sans-serif; line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: DE; mso-bidi-language: AR-SA;">Replaced transaction codes and programs</span></td>
+<td>2270335</td>
+</tr>
+<tr>
+<td><span lang="EN-US" style="font-size: 13.5pt; font-family: 'Arial',sans-serif; line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: DE; mso-bidi-language: AR-SA;">Closing Cockpit with S/4HANA</span></td>
+<td>2332547</td>
+</tr>
+<tr>
+<td><span lang="EN-US" style="font-size: 13.5pt; font-family: 'Arial',sans-serif; line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: DE; mso-bidi-language: AR-SA;">Availability of general cost objects and cost object hierarchies</span></td>
+<td>2270411</td>
+</tr>
+<tr>
+<td><span lang="EN-US" style="font-size: 13.5pt; font-family: 'Arial',sans-serif; line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: DE; mso-bidi-language: AR-SA;">Handling of historical data (cold store) in SAP Fiori apps</span></td>
+<td>
+<ul>
+<li>2058320</li>
+<li>2452160</li>
+<li>2452198</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><span lang="EN-US" style="font-size: 13.5pt; font-family: 'Arial',sans-serif; line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: DE; mso-bidi-language: AR-SA;">Amount Field Length Extension </span></td>
+<td>
+<p>2628654</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>EC-CS</strong></p>
+<p style="padding-left: 30px;">The consolidation solution EC-CS can be used for external (statutory) rendering of accounts as well as internal (management) reporting [1]. For the consolidation solution EC-CS, you can no longer define a custom characteristic using the MATNR data element or domain (or any derived value). If you are already using a custom characteristic based on the MATNR data element or domain, you cannot upgrade to SAP S/4HANA. Appropriate transition pre-checks are in place to give you the opportunity to check such a situation already at start release.</p>
+<p><strong>CO</strong></p>
+<ul>
+<li>The <em>Production Cost Analysis</em> (F1780) app supports a maximum of 16 cost component groups in the <em>Cost Component Group</em> overview screen, and cost component assignment for “Cost Comp. Grp 1” only. The app supports Legal Valuation only. Extensibility is not supported.</li>
+<li>The Work Center View of the <em>Production Cost Analysis</em> (F1780) app includes production orders and process orders only. This view doesn’t support overhead costs for production order at work center/operation level.</li>
+<li>In Event-Based Revenue Recognition, only project-based sales processes (professional services scenario) are supported. The Revenue Recognition app only supports single-level projects.</li>
+<li>In Event-Based Revenue Recognition for Projects/ Professional Services, target revenue calculations are not supported.</li>
+<li>In Professional Services, origin profit centers are not derived.</li>
+<li>For Sales from Stock processes, event-based Revenue Recognition is not released.</li>
+<li>The <em>Manage Internal Orders</em> app only supports one asset under construction (AUC) per investment order. You can navigate to the AUC after release and save this investment order. The app does not support multiple AUCs for one investment order. </li>
+</ul>
+<p><strong>Finance Fiori Apps that are not supported in SAP S/4HANA 1809</strong></p>
+<p>The following SAP Fiori Apps are included in <strong>SP00 of UIAPFI70 600 </strong>but cannot be used with Finance in SAP S/4HANA 1809. <br/>Instead use the corresponding alternative Fiori application as listed below:</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td class="xl65" height="38" width="172"><strong>Fiori ID</strong></td>
+<td class="xl65" width="483"><strong>Fiori App Name</strong></td>
+<td class="xl65" width="158"><strong>App Type</strong></td>
+<td class="xl65" width="551"><strong>Corresponding Fiori App ID </strong><br/><strong>for Finance in SAP S/4HANA 1809</strong></td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F1620</td>
+<td class="xl66" width="483">Activity Type </td>
+<td class="xl66" width="158">Fact Sheet</td>
+<td class="xl66" width="551">F1717</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F1622</td>
+<td class="xl66" width="483">Controlling Document </td>
+<td class="xl66" width="158">Fact Sheet</td>
+<td class="xl66" width="551">F1720</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F1623</td>
+<td class="xl66" width="483">Cost Center</td>
+<td class="xl66" width="158">Fact Sheet</td>
+<td class="xl66" width="551">F1721</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F1624</td>
+<td class="xl66" width="483">Cost Center Group </td>
+<td class="xl66" width="158">Fact Sheet</td>
+<td class="xl66" width="551">F1722</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F1626</td>
+<td class="xl66" width="483">Fixed Asset </td>
+<td class="xl66" width="158">Fact Sheet</td>
+<td class="xl66" width="551">F1684</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F1627</td>
+<td class="xl66" width="483">G/L Account </td>
+<td class="xl66" width="158">Fact Sheet</td>
+<td class="xl66" width="551">F0731A</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F1628</td>
+<td class="xl66" width="483">Journal Entry</td>
+<td class="xl66" width="158">Fact Sheet</td>
+<td class="xl66" width="551">F0717</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F1631</td>
+<td class="xl66" width="483">Internal Order </td>
+<td class="xl66" width="158">Fact Sheet</td>
+<td class="xl66" width="551">F1729</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F1632</td>
+<td class="xl66" width="483">Profit Center </td>
+<td class="xl66" width="158">Fact Sheet</td>
+<td class="xl66" width="551">F1730</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F1634</td>
+<td class="xl66" width="483">Statistical Key Figure</td>
+<td class="xl66" width="158">Fact Sheet</td>
+<td class="xl66" width="551">F1731</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0694</td>
+<td class="xl66" width="483">Aging Analysis</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F1733</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0514</td>
+<td class="xl66" width="483">Bank Statement Monitor</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F1734</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0685</td>
+<td class="xl66" width="483">Cash Discount Forecast</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F1735</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0686</td>
+<td class="xl66" width="483">Cash Discount Utilization</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F1736</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0747</td>
+<td class="xl66" width="483">Days Payable Outstanding Analysis</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F1740</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0594</td>
+<td class="xl66" width="483">Future Payables</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F1743</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0748</td>
+<td class="xl66" width="483">Invoice Processing Time</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F1745</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0687</td>
+<td class="xl66" width="483">Overdue Payables</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F1746</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0597</td>
+<td class="xl66" width="483">Overdue Receivables</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F1747</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0855</td>
+<td class="xl66" width="483">Vendor Payment Analysis (Manual and Automatic Payments)</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F1749 (Supplier Payment Analysis (Manual and Automatic Payments))</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0772</td>
+<td class="xl66" width="483">Vendor Payment Analysis (Open Payments)</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F1750 (Supplier Payment Analysis (Open Payments))</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0515</td>
+<td class="xl66" width="483">Bank Risk</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F0515A</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0517</td>
+<td class="xl66" width="483">Deficit Cash Pool</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F0517A</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0512</td>
+<td class="xl66" width="483">Liquidity Forecast</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">F0512A</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0513</p>
+</td>
+<td class="xl66" width="483">Actual Cash Flow / Cash Flow Analysis</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F0513A</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0731</p>
+</td>
+<td class="xl66" width="483">Manage G/L Account Master</td>
+<td class="xl66" width="158">Transactional</td>
+<td class="xl66" width="551">
+<p>F0731A</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0763</p>
+</td>
+<td class="xl66" width="483">Display Chart of Accounts</td>
+<td class="xl66" width="158">Transactional</td>
+<td class="xl66" width="551">
+<p>F0763A</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0958</p>
+</td>
+<td class="xl66" width="483">P&amp;L - Actuals</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F0945</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0959</p>
+</td>
+<td class="xl66" width="483">Profit Centers - Actuals</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F0944</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0960</p>
+</td>
+<td class="xl66" width="483">Market Segments - Actuals</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F0943</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0961</p>
+</td>
+<td class="xl66" width="483">Projects - Actuals</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F0942</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0963</p>
+</td>
+<td class="xl66" width="483">Cost Centers - Actuals</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F0940</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F1582A</p>
+</td>
+<td class="xl66" width="483">Sales Orders - Actuals</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F1582</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F1583A</p>
+</td>
+<td class="xl66" width="483">Functional Areas - Actuals</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F1583</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F1710</p>
+</td>
+<td class="xl66" width="483">P&amp;L Plan / Actuals</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F0927</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0603</p>
+</td>
+<td class="xl66" width="483">Days Sales Outstanding</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F1741</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0604</p>
+</td>
+<td class="xl66" width="483">Future Receivables</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F1744</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0605</p>
+</td>
+<td class="xl66" width="483">Days Beyond Terms</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F1739</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0607</p>
+</td>
+<td class="xl66" width="483">Dunning Level Distribution</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F1742</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0746</p>
+</td>
+<td class="xl66" width="483">Total Receivables</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F1748</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0606</p>
+</td>
+<td class="xl66" width="483">Open Disputes</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F1752</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0608</p>
+</td>
+<td class="xl66" width="483">Credit Limit Utilization</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F1751</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0609</p>
+</td>
+<td class="xl66" width="483">Promises to Pay</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F1753</p>
+</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">
+<p>F0745</p>
+</td>
+<td class="xl66" width="483">
+<p>Collection Progress</p>
+</td>
+<td class="xl66" width="158">Analytical</td>
+<td class="xl66" width="551">
+<p>F1738</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following SAP Fiori Apps are included in <strong>SP00 of UIAPFI70 600 </strong>but cannot be used with Finance in SAP S/4HANA 1809:</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td class="xl65" height="20" width="172"><strong>Fiori ID</strong></td>
+<td class="xl65" width="483"><strong>Fiori App Name</strong></td>
+<td class="xl65" width="158"><strong>App Type</strong></td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0839</td>
+<td class="xl66" width="483">Margin Analysis</td>
+<td class="xl66" width="158">Analytical</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0828  </td>
+<td class="xl66" width="483">Gross-to-Net Sales</td>
+<td class="xl66" width="158">CFO KPI</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0826</td>
+<td class="xl66" width="483">Revenue</td>
+<td class="xl66" width="158">CFO KPI</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0825</td>
+<td class="xl66" width="483">Net Sales</td>
+<td class="xl66" width="158">CFO KPI</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0824 </td>
+<td class="xl66" width="483">Gross Margin</td>
+<td class="xl66" width="158">CFO KPI</td>
+</tr>
+<tr>
+<td class="xl66" height="20" width="172">F0823 </td>
+<td class="xl66" width="483">Net Margin</td>
+<td class="xl66" width="158">CFO KPI</td>
+</tr>
+</tbody>
+</table></div>
+<p> For <em>Net Margin Results</em> (F0194) and <em>Profit Analysis </em>(F0684), please see the information in SAP Note 2127080.</p></div></div></div></div>

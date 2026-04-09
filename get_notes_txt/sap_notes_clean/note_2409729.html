@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">When processing a dimension, the following error is displayed in the BPC Admin Client:</p>
+<p>Server Time Out</p>
+<p>Upon inspecting the tblLogs table, here is no specific error recorded and only the following entries are displayed:</p>
+<p>SystemName: CommonService </p>
+<p>JobName: GetStatusMessage</p>
+<p>The messages are similar to the one below:</p>
+<p>Client: &lt;param name='ClientID'&gt;&lt;ClientID&gt;06bd5f2d-c6de-459e-93c4-72e6cdce6d9c&lt;/ClientID&gt;&lt;/param&gt;<br/>Return: &lt;NewDataSet&gt;<br/> &lt;Table1&gt;<br/> &lt;clientID&gt;06bd5f2d-c6de-459e-93c4-72e6cdce6d9c&lt;/clientID&gt;<br/> &lt;messageType&gt;5&lt;/messageType&gt;<br/> &lt;/Table1&gt;<br/>&lt;/NewDataSet&gt;</p>
+<p> </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP Business Planning and Consolidation version 10.x for Microsoft</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul>
+<li>Launch the BPC Admin Client.</li>
+<li>Select a dimension.</li>
+<li>Select Process Dimension.</li>
+</ul>
+<p>The error message is displayed after approximatively 80 seconds or so.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The private memory limit of the IIS Application Pool associated with the /SAP/BPC application has a configured value larger than zero (default) and that value is smaller than the amount of memory consumed by the applications associated with the application pool.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Configure the Private Memory Limit setting of the associated application pool to either zero or a value large enough as to prevent IIS from recycling the application pool during nomal use.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>application pool, http timeout</p></div></div></div></div>

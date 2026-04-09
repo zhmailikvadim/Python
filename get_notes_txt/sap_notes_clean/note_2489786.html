@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>
+<div>Incorrect behavior after choose Stay on the page when clicking close button of browser in Web Intelligence Editing page.</div>
+</li>
+<li>After choosing "Stay on the page" option in the dialog, though browser window remains, the session seems to be deleted abnormally.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Webi, session, print, export, edit, stay, leave, page, close, exit, stay on the page, IE 11</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>
+<div>SAP BusinessObjects Business Intelligence Platform BI4.2 SP03</div>
+</li>
+</ul>
+<p><strong>Step to reproduce:</strong></p>
+<ul>
+<li>Scenario 1, this scenario is reproducible in All kinds of browser.</li>
+</ul>
+<ol>
+<li>Log on to BI launch pad in Internet explorer 11.</li>
+<li>Edit a Web Intelligence document in Web Intelligence HTML interface.</li>
+<li>Do some changes like adding a cell, change the table size.</li>
+<li>Click the close button of Internet explorer browser.</li>
+<li>An warning message comes to let user select to really leave the page or stay on the page, here choose stay on the page.</li>
+<li>Wait for 1-2 minutes, click <strong>Print</strong> button. Notice nothing happens.</li>
+<li>Click the <strong>Export</strong> button, error occurs as <strong>Invalid session. Please close your browser and log on again. (WIH 00013)</strong><br/><br/>If do the above workflow in Web Intelligence Applet interface mode, after click <strong>Export</strong> button, similar session error occurs as:<br/><strong>com.businessobjects.sdk.core.CoreException: com.crystaldecisions.sdk.exception.SDKException$OCAFramework: Unable to reconnect to the CMS &lt;CMS:PORT&gt;. The session has been logged off or has expired. (FWM 01002)</strong></li>
+</ol>
+<ul>
+<li>Scenario 2, this scenario is only reproducible in IE (Internet Explorer) browser.</li>
+</ul>
+<ol>
+<li>Log on to BI launch pad in Internet explorer 11.</li>
+<li>Edit a Web Intelligence document in Web Intelligence HTML interface.</li>
+<li>Do some changes like adding a cell, change the table size.</li>
+<li>Click the close button of Internet explorer browser.</li>
+<li>An warning message comes to let user select to really leave the page or stay on the page, here choose stay on the page.</li>
+<li>Different as the scenario 1, here <strong>immediately</strong> click <strong>Print</strong> button.  Notice that the warning message comes again to let user select to really leave the page or stay on the page even here user didn't select to close the page.</li>
+<li>In the 6th step, <strong>immediately</strong> click <strong>Export</strong> button, choose format and click OK to perform export. Notice that the warning message comes again to let user select to really leave the page or stay on the page even here user didn't select to close the page.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This issue is fixed in the patches listed in the "Support Packages &amp; Patches" section below.</p>
+<p>The "Support Packages &amp; Patches" section will be populated with the relevant patch levels once they are released.</p>
+<p>For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article 2144559 in References section.</p></div></div></div></div>

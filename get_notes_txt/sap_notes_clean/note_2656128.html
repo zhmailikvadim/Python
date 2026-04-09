@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>A service named SYSAM is running in the background under (services.msc) provided by Flexera Software LLC in a production application server to support SAP PowerDesigner. Currently it's running in the list of services locally without any association with service account. Can the service can be configured with service account?</li>
+<li>Try to find a way such that we can assign a service account to SYSAM process</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>
+<div>Windows 10 edition</div>
+</li>
+<li>
+<div>Window 8 edition</div>
+</li>
+<li>
+<div>Window 7 edition</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Use the SC command to assign a service account. SC refers to Service Control.</p>
+<p>Example:</p>
+<ol>
+<li>
+<div>Open DOS prompt in "Run as Administrator"</div>
+</li>
+<li>
+<div>type: sc  config SYSAM type=own obj="support\john" password="1234"</div>
+</li>
+</ol>
+<ul>
+<li>
+<div>What this does is assign an exising account (<strong>domain</strong> is support, <strong>user</strong> is john, <strong>password</strong> is 1234) to process named SYSAM.</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>SYSAM</p></div></div></div></div>

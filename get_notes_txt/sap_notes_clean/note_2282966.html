@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">The SAP Business One 9.2 PL01 installation does not copy files for XcelsiusPortal, RFQ, CustomerCheckout and Mobile dashboard in Scenario_Supplements and the scenario features either do not work correctly, or do not work at all.</p><h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3><p><strong>Scenario:</strong><br/>With SAP Business One  9.2 PL01, you install the integration component (integration framework).</p>
+<p><strong>Expected Behavior:</strong><br/>The intstallation copies the information of XcelsiusPortal, RFQ, CustomerCheckout and Mobile dashboard file scenario packages to the target system.</p>
+<p><strong>Actual Result:</strong><br/>Files are missing for the XcelsiusPortal, RFQ, CustomerCheckout and Mobile dashboard scenario packages.</p>
+<p> </p><h3 class="section" data-toc-skip="" id="Solution">Solution</h3><p><strong>Temporary workaround:</strong></p>
+<ol>
+<li>Create the <em>Program </em>folder in <em>..\Packages\B1 Integration Component\Technology</em>.</li>
+<li>In the <em>Program</em> folder, create the <em>ExternalContent</em> folder.</li>
+<li>Before installation, copy the complete <em>Scenario_Supplements </em>folder from <em>..\Packages\B1 Integration Component\Technology\Content" to "..\Packages\B1 Integration Component\Technology\Program\ExternalContent</em>.</li>
+<li>Install the <em>Integration Component</em>.</li>
+</ol>
+<p> The issue does not occur when installing SAP Business One 9.2 PL00 and PL02 and higher PLs.</p></div></div></div></div>

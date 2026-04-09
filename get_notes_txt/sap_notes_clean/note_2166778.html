@@ -1,0 +1,52 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>
+<div>All schedules are running 1 hour later than normal time</div>
+</li>
+<li>
+<div>Server time and instance time has a difference of 1 hour</div>
+</li>
+<li>
+<div>Schedule gets delayed due to the time difference</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>export TZ, EST+5EDT, 1 hour later</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>
+<div>SAP Business Intelligence BI 4.1 SP04</div>
+</li>
+<li>SAP Business Intelligence BI 4.1 SP05</li>
+<li>Redhat Linux 6</li>
+</ul>
+<p><strong>Steps to Reproduce:</strong></p>
+<ol>
+<li>Login to a Linux environment running BI 4.1 SP04 or SP05 using Putty session</li>
+<li>Set the time zone on the server using folloiwng command:<br/><strong>export TZ='EST+5EDT,M3.2.0/2,M11.1.0/2'</strong></li>
+<li>Run the following command to check if the TZ has been set properly:<br/><strong>env | grep TZ</strong></li>
+<li>Restart Tomcat and SIA</li>
+<li>Once both Tomcat and SIA has started, login to BI Launchpad or CMC and check that the preference is set to Local to web server</li>
+<li>Go to Report Samples &gt; Feature Samples folder</li>
+<li>Right click on Drilldown report and click Schedule</li>
+<li>Go to Recurrence and select Once</li>
+<li>Run Date command on the Putty session and you will find that the instance time shown in Recurrence is 1 hour late.</li>
+<li>For e.g. If current time on server is 7am instance time shows 6am</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>
+<div><strong>Workaround:</strong></div>
+</li>
+<li>Change the Current Time Zone under Locales and Time Zones in BILaunchpad or CMC Preferences to <strong>"(GMT-5:00,DST)Eastern Time US &amp; Canada"</strong></li>
+<li>Logout and Login to BI Launchpad or CMC</li>
+<li>Schedule the report again and it will show correct time</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<div class="longtext">
+<p>Preparation for the implementation of SAP Notes 2352831 and 2356142.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Use the correction instructions to implement the report NOTE_2380897.</p></div></div></div></div>

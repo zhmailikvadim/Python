@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In the standard system as currently delivered, you run the <strong>Year End Reporting, Canada<em> </em></strong>(RPCYERK0) in background mode after the application of SAP Note <a href="/notes/3037569" target="_blank">3037569</a> with the <strong>Display output log</strong> parameter active and the program takes much longer to finish.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Year End Reporting, RPCYERK0, log, background.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You have applied SAP Note <a href="/notes/3037569" target="_blank">3037569</a>.</p>
+<p>To display the complete information, according to SAP Note <a href="/notes/3037569" target="_blank">3037569</a>, the system needs to read and print much more information than before, thus degrading performance in this scenario.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>From now on, it is possible to configure the behavior of SAP Note <a href="/notes/3037569" target="_blank">3037569</a>.</p>
+<p>In the <strong>Customer values for configuration options </strong>(V_T5F99K2) view you can now use the following configuration option:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Configuration option</td>
+<td>Description</td>
+</tr>
+<tr>
+<td>YEWTL</td>
+<td>YEAR END - WAGE TYPE CALCULATION ON LOG </td>
+</tr>
+</tbody>
+</table></div>
+<p>This configuration option has the following values:</p>
+<ul>
+<li><strong>ON</strong> - the system executes the behavior as described in SAP Note <a href="/notes/3037569" target="_blank">3037569</a>. In this case please be aware that the performance for mass execution is much lower.</li>
+<li><strong>OFF</strong> - the system generates the output log as before the application of SAP Note <strong>3037569</strong>. This is the default configuration. In case no configuration exists in the V_T5F99K2 view the system behaves as OFF. </li>
+</ul>
+<p>﻿﻿As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, proceed as follows:</p>
+<ol>
+<li>Use Note Assistant (SNOTE) to implement the correction instructions.</li>
+<li>Apply the manual post-implementation steps.﻿﻿</li>
+</ol>
+<p>You can find more information about the Note Assistant in SAP.com, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a></strong>.</p>
+<p>Note that documentation, transactions, and Customizing activities are delivered via Support Package only.</p></div></div></div></div>

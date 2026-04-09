@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When at the log in page, and appending the url with ?cid= to force to connect to a cluster, if your URL is constructed incorrectly, it is not validated until AFTER you enter the user ID and password.  So you will get a valid login page, but you will not be able to login.</p>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>For example:</p>
+<p><a href="http://sapsourcing:55000/sourcing/fsenterprise/portal/login/?cid=internal.SAP" target="_blank">http://SAPSourcing:55000/sourcing/fsenterprise/portal/login/?cid=internal.SAP</a></p>
+<p>The above looks correct, but there is an extra "/" after login.  This will take you to a valid log in page, but will not work when you attempt to log in.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p><a href="http://sapsourcing:55000/sourcing/fsenterprise/portal/login?cid=internal.SAP" target="_blank">http://SAPSourcing:55000/sourcing/fsenterprise/portal/login?cid=internal.SAP</a></p>
+<p>Make sure that the URL is constructed correctly.  The above shows a properly constructed URL.</p></div></div></div></div>

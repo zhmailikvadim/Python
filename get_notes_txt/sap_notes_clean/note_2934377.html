@@ -1,0 +1,40 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are using HR as distributed SAP component (ALE - Application Link Enabling) and one of the following symptoms is observed:</p>
+<p><strong><strong>Symptom 1</strong><br/></strong></p>
+<p>You run the <strong>International Payment Medium - Check (with check management) </strong>(PC00_M10_FFOC) transaction / (RFFOUS_C) report or the <strong>Payment Medium USA - Transfers/Bank Direct Debits in ACH Format</strong> (RFFOUS_T) report, and the 3PR acknowledgment on HR side is not performed.</p>
+<p><strong>Symptom 2</strong></p>
+<p>You run the <strong>Reconciliation of Remittance Posting Items</strong> (PC00_M99_URMR) transaction / (RPURMR00) report with one the following checkboxes selected: <em>Check already posted items</em>, or <em>Correct already posted items</em>, and the following short dump is raised:</p>
+<ul>
+<li>Category: ABAP Programming Error</li>
+<li>Runtime Errors: RAISE_EXCEPTION</li>
+<li>ABAP Program: SAPLHRCA_THIRD_PART</li>
+</ul>
+<p><strong>Symptom 3</strong></p>
+<p>You run <strong>Reconciliation of </strong><strong>Remittance Posting Items</strong> (PC00_M99_URMR) transaction / (RPURMR00) report with one or both of the following checkboxes selected: <em>Correct stopped status</em>, or <em>Correct already posted items</em>. However, the items are not updated as expected.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>F110, PC00_M99_URMR, RPURMR00, PC00_M10_FFOC, RFFOUS_C, RFFOUS_T, CL_HRPAYNA_EXTERNAL_SERVICES, CL_HRPAYNA_3PR_FI_ITEMS_FIND, FI_DOC_TPR_ITEMS_FIND_RFC, RP_REMITTANCE_ACKNOWLEDGEMENT, HRCA_GET_FI_DOC_ITEMS, HRCA_UPDATE_FI_DOC_ITEMS_DUEDT, HR3PRNA 215, HR3PRNA 216, HR3PRNA 217, HR3PRNA 218, BUS6006</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong><strong>Reason for Symptom 1</strong><br/></strong></p>
+<p>To inform HR that the payments were done, FI payment reports call HR function module RP_REMITTANCE_ACKNOWLEDGEMENT, via RFC, to perform the 3PR payment acknowledge.</p>
+<p>The HR function module RP_REMITTANCE_ACKNOWLEDGEMENT also calls back FI, to request documentation information. This request uses the RFC provided for method AcctngEmplyeePaybles.post (BUS6006).</p>
+<p>As of SAP Note <a href="/notes/2748294" target="_blank">2748294</a>, when no RFC destination is maintained for BUS6006, the RP_REMITTANCE_ACKNOWLEDGEMENT started producing a short dump in the method GET_UNIQUE_RECEIVER of class CL_HRPAYNA_3PR_RFC_VALIDATIONS.</p>
+<p><strong>Reason <strong><strong>for Symptom </strong></strong>2</strong></p>
+<p>The problem is caused by an incorrect handling of the exceptions raised by the function modules HRCA_GET_FI_DOC_ITEMS and HRCA_UPDATE_FI_DOC_ITEMS_DUEDT, when one of the following exceptions happens:</p>
+<ul class="p-rich_text_list p-rich_text_list__bullet">
+<li>The HR payee has no due date.</li>
+<li>No company code was given.</li>
+<li>More than one receiving system has been specified for a BAPI.</li>
+<li>No RFC destination could be determined for a method call in a logical system.</li>
+<li>You are not authorized to display accounting docs in the remote system.</li>
+</ul>
+<p><strong>Reason <strong><strong>for Symptom </strong></strong>3</strong></p>
+<p>The problem is caused by the incorrect handling of exceptions in the method FI_DOC_TPR_ITEMS_FIND_RFC of class CL_HRPAYNA_3PR_FI_ITEMS_FIND.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>In order to allow 3PR acknowledge remittance process to reach FI, it is required to have method AcctngEmplyeePaybles.post (BUS6006) configured in Display ALE Customizing (transaction SALE). But to properly handle scenarios where the configuration is missing, the source code was corrected and new messages were delivered to enhance the error description in case of exceptions.</p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, proceed as follows:</p>
+<ol>
+<li>Apply the manual pre-implementation steps.</li>
+<li>Use Note Assistant (SNOTE) to implement the correction instructions.</li>
+</ol>
+<p>You can find more information about the Note Assistant in SAP.com, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a></strong>.</p>
+<p>Note that documentation, transactions, and Customizing activities are delivered via Support Package only.</p></div></div></div></div>

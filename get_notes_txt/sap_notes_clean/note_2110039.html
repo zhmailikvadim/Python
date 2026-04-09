@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>System tables <em>sysprocesses</em> and/or <em>syslogshold s</em>how a process (<em>spid</em>) executing a 'dump database' or 'dump tran' command with the '$sysdams_clr 'transaction name (<em>tran_name</em>) or<br/> </li>
+<li>The ASE errorlog reports the folliowing error:</li>
+</ul>
+<p style="padding-left: 60px;"><strong>Error: 6918 Severity: 21, State: 2</strong><br/><strong>The SYSDAMS page that stores the state of page 0 in database '&lt;dbname&gt;' could not be found.</strong><br/><strong>The option 'allow incremental dumps' will be disabled because ASE cannot continue recording page modifications. Please contact Sybase Technical Support.</strong></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Adaptive Server Enterprise (ASE) 15.7 and 16.0</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>This issue has been address by SAP<strong> CR 760159</strong>. Its description reads: <em>The 6918 error, "The SYSDAMS page that stores the state of page # in database '&lt;dbname&gt;' could not be found. The option 'allow incremental dumps' will be disabled because SAP ASE cannot continue recording page modifications", can be raised if the table SYSDAMS gets the very first extent of an allocation unit allocated .</em></p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>Upgrade ASE to a release where SAP <strong>CR 760159</strong> is fixed:</li>
+<ul>
+<li>ASE 15.7 SP130 or higher</li>
+<li>ASE 16 GA PL02 or higher </li>
+<li>ASE 16 SP01 or higher </li>
+</ul>
+<li>After upgrading, run the following commands in each database experiencing the problem to rebuild the sysdams table:<br/><strong>dbcc traceon(3604)</strong><br/><strong>go</strong><br/><strong>dbcc dam(database_name,’drop’)</strong><br/><strong>go</strong><br/><strong>dbcc dam(database_name,’create’)</strong><br/><strong>go</strong><br/> </li>
+<li><span style="text-decoration: underline;">Workaround</span><strong>:  </strong>There is a potential workaround which is not straight forward or recommended at this time when releases with the fix are available. If upgrading is not feasible in the short term, please request the workaround steps from SAP Product Support via an case.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>SAP KBA <a href="https://me.sap.com/notes/1904061" target="_blank">1904061</a> for how to check the current status of an ASE CR (Change Request).</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>760159, CR 760159, extent, allocation, unit</p></div></div></div></div>

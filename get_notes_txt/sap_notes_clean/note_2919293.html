@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You hit an known issue described in APAR <a href="https://www.ibm.com/support/pages/node/4772145" target="_blank">IT27940</a> (for Db2 11.1) or APAR IT31823 (for Db2 10.5).</p>
+<p>You can not update the fix pack right now, and want to know how to temporarily turn off auto reorg for ITC tables.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP on IBM Db2 for Linux, UNIX, and Windows</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Enter the web browser-based DBA Cockpit.<br/><br/>* Make sure you use web browser-based dbacockpit. SAPGUI dbacockpit does not have this function.<br/><br/><br/></li>
+<li>Configuration =&gt; Automatic Maintenance =&gt; Tab "Automatic Reorg" =&gt; Configure<br/><br/><img alt="auto reorg.jpg" class="img-responsive" height="323" src="/documents/customerkba/JP5LHE1VkZNwC4lPbyaeYTQLlnmDfItpOhJeX8crmn0" title="auto reorg.jpg" width="850"/><br/><br/><br/></li>
+<li> Step 7 "Reorg" =&gt; Tick out "Reclaim Size for MDC/ITC Tables" =&gt; Continue =&gt; Execute (in next screen)<br/><br/><img alt="auto reorg2.jpg" class="img-responsive" height="435" src="/documents/customerkba/hh84p_c-SROZrcHK6-_cWPVmRDFc-L1xBP17moft2D4" title="auto reorg2.jpg" width="755"/><br/><br/></li>
+</ol>
+<p>Please be noted that this is <span style="color: #ff0000;">only a temporary workaround. </span><span style="color: #ff0000;">You still need to apply the fixpack which includes the fix as soon as possible.</span></p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><a href="https://me.sap.com/notes/975352" target="_blank">975352</a> - DB6: Configuring DB2 Auto Reorg for Space Reclamation and Index Cleanup</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>auto reorg, exclude, turn off, ITC</p></div></div></div></div>

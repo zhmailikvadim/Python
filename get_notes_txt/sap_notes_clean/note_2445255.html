@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">For Campaign Automation, and for a workflow that uses task TS14007952 "Send Target Group to Channel" steps are executed as a background job. Job name is always the same (eg. "Target Group to Channel").</p>
+<p>Job numbers are created in table "TBTCO" using Job name. Jobs can be cleared out using report "RSBTCDEL2". As a result, it is possible to have a job number that was already used by a campaign automation. This causes the system to raise errors indicating that the job number is already used.</p>
+<p>Message class: CRM_MKTTGGRP_EXP<br/>Message number: 304<br/>Message: "Job with name &amp;1 and number &amp;2 already exists"</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>TBTCO, RSBTCDEL2, CRMD_MKTTG_JOB, Batch Job, Job Name, Campaign Execution, Campaign Automation, BUS2010022, EXECUTE.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is caused by program error.</p>
+<p>In release CRM 700 and earlier, method cl_crm_mktpl_functions=&gt;export_tggrp is called that uses old design logic in BOR object BUS2010022, method EXECUTE.</p>
+<p>Design change to make the Job name unique by appending the timestamp to the job name.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached correction instructions or import the specified Support Package.</p></div></div></div></div>

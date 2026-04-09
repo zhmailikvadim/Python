@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The sequenced files transferred from the primary server to the backup server appear to be transferred, and then applied, in no particular order.<br/>In some cases this results in a discrepancy between the master data on the primary and backup servers. For example, if the full PLU data is applied after the cross-reference data, then the cross-reference data will be wiped-out. <br/>This symptom can be also observed when synchronizing the product data between the primary server and a local PLU database at the register.</p>
+<p>The files are expected to be processed in the same order in which they were generated on a primary server.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PLU, backup server, local PLU, product data synchronization, data synchronization mechanism, TRACKPLUUPDATES, TRACKDOWNLOADUPDATES, MAX_SEQ_TXN_UPDATES</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This issue occurs in POS 2.3 SP8 and in the earlier releases.</p>
+<p>The backup server is updated by applying the sequenced files that are transferred from the primary server. These sequenced files (for example - plutxn.001, plutxn.002, ...) originate from the corresponding ascii files downloaded from a head office. They are saved in the 'txnsave' folder and are transferred from there to the backup server, or to the registers with a local PLU database, during the data synchronization process.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Fixed in POS 2.3 SP9.</p>
+<p>Corrected the sorting function, so that the files are processed in a correct order.</p></div></div></div></div>

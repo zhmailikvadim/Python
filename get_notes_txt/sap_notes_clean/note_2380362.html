@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">The Registration of Innovaphone SIP phones fails when TLS is used.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Contact Center</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul>
+<li>Your business organization requires the usage of Transport LayerSecurity (TLS) between SAP Contact Center and Innovaphone SIP phones.</li>
+<li>The server certificate or issuer of it must be trusted by the phone.</li>
+<li>The host name in the server certificate must match the SIP Proxy name.</li>
+</ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>NA</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul style="list-style-type: square;">
+<li>If neither the issuer of the server certificate or the server certificate itself is trusted by the phone then the TLS handshake will fail and the following error message will be written to the SIP Bridge log file:</li>
+<ul>
+<li>ERR&gt; SecureContext::ServerHandshake: AccecptSecurityContext failed due to error [0x80090325]</li>
+<li>The phone's ‘admin web’ will show the untrusted certificates it has received. Select the respective certificate and allow the phone to now trust it.</li>
+</ul>
+<li>If the server certificate is trusted by the phone either by the issuer or by itself but the configured SIP Proxy value does not match the host name in the certificate (e.g. the certificate contains a DNS name and SIP Proxy field contains an IP-address) then the following error message will be written to the SIP Bridge log file:</li>
+<ul>
+<li>ERR&gt; SecureContext::Decrypt: DecryptMessage failed due to SEC_I_CONTEXT_EXPIRED</li>
+</ul>
+<li>You must configure the SIP Proxy field to match the host name in the certificate. If needed, a local DNS A record can be configured on the phone using the web admin pages.</li>
+</ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul>
+<li>For other important Knowledge Base Articles and Notes please refer to Master Note <a href="/notes/1867297" target="_blank">1867297</a></li>
+<li>If further investigation is required, then please look at the following notes</li>
+<ul>
+<li><a href="/notes/1753539" target="_blank">1753539</a> - SAP BCM 7.0 &amp; SAP Contact Center 7.0 - Required information and logs for troubleshooting</li>
+<li><a href="/notes/1753607" target="_blank">1753607</a> - SAP Contact Center 7.0 - Server and client loglevels
+<script language="JavaScript" type="text/javascript"></script>
+</li>
+</ul>
+</ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>CCtr, SCC, CCI, CRM-CCI, SAP Business Communication Management 7, Configure TLS Innovaphone SIP phones</p></div></div></div></div>

@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Message IH047 raised when branching to completion confirmations in IW32/IW33</li>
+<li>"No object were selected" is raised when trying to view completion confirmations in work orders</li>
+<li>In IW32/IW33 message IH047 raised in menu path Extras -&gt; Documents for Order -&gt; Completion Confirmations</li>
+<li>No completion confirmations found in IW32/IW33 although they exist in IW42</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP ERP Plant Maintenance (PM)</li>
+<li>SAP R/3</li>
+<li>SAP R/3 Enterprise</li>
+<li>SAP ERP Central Component</li>
+<li>SAP ERP</li>
+<li>SAP Enhancement package for SAP ERP</li>
+<li>SAP Enhancement package for SAP ERP, version for SAP HANA</li>
+<li>SAP S/4HANA, on-premise</li>
+<li>SAP S/4HANA Cloud Private Edition</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Enter order number in IW32/IW33</li>
+<li>Choose menu path Extras -&gt; Documents for Order -&gt; Completion Confirmations</li>
+<li>Message IH047 "No objects were selected" is raised</li>
+<li>Check IW43 - Confirmations exist but are not shown in IW32/IW33</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>When the system tries to access the confirmation documents, an authorisation check is carried out on object I_IWERK. However, in transaction SU22 it can be seen that for transaction IW47, object I_IWERK is set to 'Do No Check'. Whereas for transaction IW32/IW33 the object is set to 'Check' and hence different behaviours occur within IW32/IW33 and IW47.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>This is standard system behaviour and will not be changed. However the following can be done to adjust the behaviour:</p>
+<p>If you want IW32/IW33 to behave as IW47 behaves:</p>
+<ul>
+<li>Give the users corresponding authorization for authorization object I_IWERK (parameters TCODE and IWERK)</li>
+<li>Deactivate authorization check I_IWERK for "calling" transaction IW32/33. This can be done via transaction SU23. Adjustments of transaction SU23 (customer specific) have higher priority as adjustments of transaction SU22 (SAP standard)</li>
+</ul>
+<p>If you want IW47 to behave as IW32/IW33 behaves:</p>
+<ul>
+<li>Activate authorization check I_IWERK for "calling" transaction IW47. This can be done via transaction SU23. Adjustments of transaction SU23 (customer specific) have higher priority as adjustments  of transaction SU22 (SAP standard)
+<p> </p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>IW43, PM order confirmation, work order, maintenance order, display confirmations, IW32, IW33, authorisation object, authorisation check,  AUTHORITY-CHECK OBJECT 'I_IWERK'</p></div></div></div></div>

@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This SAP Note describes new switchable authorization checks for RFC function modules in the IBAN maintenance.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SACF, RFC, authorization, IBAN, TIBAN</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Remote calls to RFC function modules are protected by checks on the authorization object S_RFC. Authorizations for S_RFC must be limited to the required minimum authorizations for all users to ensure system security. Many RFC function modules can be sufficiently protected using S_RFC authorization checks. These RFC function modules often do not perform additional functional authorization checks. Please see SAP Note 2008727 for further information on RFC Security.</p>
+<p>It was identified that S_RFC authorization checks might not be sufficient to ensure secure execution for RFC function modules covered by this SAP Note. Activate new switchable authorization checks and update corresponding roles if these RFC function modules are included in S_RFC authorizations in your system.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>New switchable authorization checks have been implemented. The checks are delivered inactive to ensure compatibility with your running processes. The checks can be activated in transaction SACF as described in attached manual correction instruction.</p>
+<p><strong>New authorization scenario</strong></p>
+<p>CA_TIBAN - Switchable authorization check for remote access to the table TIBAN</p>
+<p>The BAPI modules in the function group 1013 do access the table TIBAN. In the SAP standard these modules are being used in the ALE distribution scenario for IBAN. Switching this authority check on, the users related to the ALE distribution have to get the new authority, as well as any users needing to call the BAPI modules in a custom application.</p>
+<p><strong>Affected RFC function modules</strong></p>
+<p>BAPI_IBAN_CHANGE<br/>BAPI_IBAN_CREATE<br/>BAPI_IBAN_GETDETAIL<br/>BAPI_IBAN_SAVEREPLICA</p>
+<p><strong>Implementation of the switchable authorization check</strong></p>
+<p>The switchable authorization scenario and the switchable authorization checks are provided via Support Package.  They can be technically pre-implemented via below correction instructions. After technical implementation via Support Package or correction instructions the checks remain inactive until manual activation.</p>
+<p><strong>Activation of the switchable authorization check</strong></p>
+<p>Follow the post-processing activities below after technical implementation to activate the authorization checks.</p></div></div></div></div>

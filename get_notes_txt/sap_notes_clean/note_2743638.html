@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>When creating a new Monitoring Watch in 4.2 SP06+, a Boolean Expression containing a parenthesis (bracket) can not be used. If a bracket is used, and the Boolean expression is refreshed, the Formula is deleted / disappears, and the message 'Please Enter a Formula' appears.<br/><br/>eg: <br/><strong>The following boolean expression works:</strong><br/>&lt;HOST&gt;.CentralManagementServer$'Auditing Thread Last Polling Cycle Duration _seconds_'&gt;1800 || &lt;HOST&gt;.CentralManagementServer$'Average Query Response Time Since Startup _msec_'&gt;750 &amp;&amp; &lt;HOST&gt;.CentralManagementServer$'Average Commit Response Time Since Startup _msec_'&gt;750 || &lt;HOST&gt;.CentralManagementServer$'Number of Sessions Established by All Users'&gt;400 || &lt;HOST&gt;.CentralManagementServer$'Current Number of Auditing Events in the Queue'&gt;500<br/><br/><strong>The following Boolean expression does not work:</strong><br/>&lt;HOST&gt;.CentralManagementServer$'Auditing Thread Last Polling Cycle Duration _seconds_'&gt;1800 || <strong>(</strong>&lt;HOST&gt;.CentralManagementServer$'Average Query Response Time Since Startup _msec_'&gt;750 &amp;&amp; &lt;HOST&gt;.CentralManagementServer$'Average Commit Response Time Since Startup _msec_'&gt;750<strong>)</strong> || &lt;HOST&gt;.CentralManagementServer$'Number of Sessions Established by All Users'&gt;400 || &lt;HOST&gt;.CentralManagementServer$'Current Number of Auditing Events in the Queue'&gt;500</li>
+</ul>
+<ul>
+<li>When viewing a monitoring watch in Central Management Console (CMC) -&gt; Monitoring -&gt; Watchlist -&gt; &lt;WATCH&gt; -&gt; &lt;Metric&gt; -&gt; switch from 'Live' to 'History' -&gt; Choose any date, the following error message appears:<br/>Start date must be greater than end date<br/>This error occurs no matter what date is selected.</li>
+<li>
+<p>When viewing a monitoring watch in Central Management Console (CMC) -&gt; Monitoring -&gt; Watchlist -&gt; &lt;WATCH&gt; -&gt; &lt;Metric&gt; -&gt; switch from 'Live' to 'History' -&gt; Choose a date earlier than the end date, the following error message appears:<br/>Date cannot be greater than today's date<br/>An earlier date was selected, but the date was switched from DD.MM.YYYY to MM.DD.YYYY after selecting, eg selecting 12th February 2019 (12.02.2019), results in the date becoming 02.12.2019 (2nd December 2019).</p>
+</li>
+<li>In Central Management Console (CMC) -&gt; Monitoring -&gt; Watchlist clicking on "+" (Create New Watch), doesn't navigate to Create watch wizard in Japanese and Chinese languages.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment</strong></p>
+<ul>
+<li>SAP BusinessObjects Business Intelligence Platform 4.2 SP06+</li>
+<li>Monitoring</li>
+<li>Windows</li>
+<li>Linux / Unix </li>
+</ul>
+<p><strong>Steps to Reproduce</strong></p>
+<ol>
+<li>Login to Central Management Console (CMC)</li>
+<li>Navigate to Monitoring -&gt; Watchlist</li>
+<li>Select to CentralManagementServerWatch (Example)</li>
+<li>While viewing graph data of any metrics of a watch switching to "History" of graph data and trying to select "Start date" and "End date" doesn't take the values selected from Date picker appropriately.</li>
+<li>Click on Edit</li>
+<li>Click on Step2</li>
+<li>Click on refresh icon next “Boolean Expression”</li>
+<li>Enter a Boolean expression with parenthesis then refresh. It disappears.</li>
+<li>Trying to create a new watch from Monitoring -&gt; Watchlist -&gt; "+" (Create New Watch) doesn't navigate to Create watch wizard in Japanese and Chinese languages.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This issue is or will be fixed in the patches listed in the "Support Packages &amp; Patches" section below.<br/>The "Support Packages &amp; Patches" section will be populated with the relevant patch levels once they are released.<br/>For Business Intelligence Platform maintenance schedule and strategy see the Knowledge Base Article 2144559 in References section.</p></div></div></div></div>

@@ -1,0 +1,130 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>You want to configure your own Identity Provider (IdP) to use with SAP Analytics Cloud (SAC).</li>
+<li>Start here: <a href="https://community.sap.com/topics/cloud-analytics/administration#authentication" target="_blank">SAP Analytics Cloud administration community topic page - Authentication</a>.</li>
+<li>Locked out? See <a href="https://me.sap.com/notes/2908073" target="_blank">2908073 - How to use the IdP Admin Tool to make changes to IdP Configuration in SAP Analytics Cloud when no access is available to the tenant</a>.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Analytics Cloud</li>
+<li>SAML 2.0 Identity Provider</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li><a href="#SAML" target="_self">Understanding SAML</a>.</li>
+<li><a href="#steps" target="_self">Steps to configure SAML SSO</a>.</li>
+<li><a href="#ADFS" target="_self">How to configure SAP Analytics Cloud SAML SSO using AD FS (Active Directory Federation Services)</a>.</li>
+<li><a href="#Azure" target="_self">How to configure SAP Analytics Cloud SAML SSO using Azure Active Directory</a>.</li>
+<li><a href="#Mistakes" target="_self">Typical Mistakes</a>.</li>
+<li><a href="#Troubleshooting" target="_self">Troubleshooting</a>. See <a href="https://me.sap.com/notes/2487567" target="_blank">2487567</a>.</li>
+<li><a href="#FAQ" target="_self">FAQ</a>.</li>
+</ol>
+<p class="header2"><a name="SAML" target="_blank"></a>﻿Understanding SAML</p>
+<p>Security Assertion Markup Language (SAML) is an open-standard data format for exchanging authentication and authorization data between parties. We can see the three parties involved and a very simplified exchange in the following picture:</p>
+<p><span style=" font-family: BentonSans, Arial, Helvetica, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background- text-decoration-style: initial; text-decoration- display: inline !important; float: none;"><img alt="SAML_Simplified.png" class="img-responsive" src="/documents/customerkba/yC38qdqOsMVci1QY2EwInJ3jiPWe2tiVPXyBZeqRwb8" title="SAML_Simplified.png"/></span></p>
+<p>SAP Analytics Cloud is the service provider. The browser will attempt to get access to the software and will be redirected to a third party Identity Provider that will be responsible to authenticate the user.</p>
+<p>The good news is that SAML is the native method used. When you get your system URL and logon to SAP Analytics Cloud for first time, you are redirected to <a href="https://cloudplatform.sap.com/capabilities/security/cloud-identity.html" target="_blank">SAP Cloud Platform Identity Authentication service</a> (<a href="https://cloudanalytics.accounts.ondemand.com/" target="_blank">https://cloudanalytics.accounts.ondemand.com</a>). This is the <strong>default</strong> SAML Identity Provider (IDP).</p>
+<p><strong>Hints:</strong></p>
+<ol>
+<li>You can logon to the SAC default IDP profile page to review your information at the following URL:<br/><a href="https://cloudanalytics.accounts.ondemand.com/" target="_blank">https://cloudanalytics.accounts.ondemand.com</a></li>
+<li>You can check the user’s details, including the groups mapped, by accessing the following URL:<br/><em>https://&lt;system_name&gt;.authentication.&lt;landscape_region&gt;.hana.ondemand.com/config?action=who&amp;details=true</em></li>
+</ol>
+<p style="margin: 0px 0px 12px; padding: 0px; border: 0px; font-size: 14px;  word-wrap: break-word; line-height: 1.8; font-family: BentonSans, Arial, Helvetica, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background- text-decoration-style: initial; text-decoration-"><a name="steps" style=" font-size: 18px; font-weight: bold; background- font-family: Verdana, Arial, Helvetica, sans-serif;" target="_blank"></a><span style=" font-size: 18px; font-weight: bold; font-family: Verdana, Arial, Helvetica, sans-serif;">﻿Steps to configure SAML in SAP Analytics Cloud</span></p>
+<p>To configure a custom SAML 2.0 Identity Provider (IDP) with SAP Analytics Cloud, you need to follow the self-service tool in the main menu:</p>
+<p><strong>System &gt; Administration &gt; Security</strong> (tab)</p>
+<p>Follow the complete steps in the SAP Analytics Cloud Help, section <a href="https://help.sap.com/doc/00f68c2e08b941f081002fd3691d86a7/release/en-US/3651184dad944aa2b361ad029a7a8cae.html" target="_blank">Enabling SAML Single Sign-On (SSO)</a>.</p>
+<p>If you want to follow a step-by-step process with Microsoft Active Directory Federation Services (ADFS / AD FS), see article <a href="https://me.sap.com/notes/2487116" target="_blank">2487116.</a></p>
+<p class="header2"><a name="ADFS" target="_blank"></a>﻿How to configure SAP Analytics Cloud SAML SSO using AD FS (Active Directory Federation Services)</p>
+<ul>
+<li>For steps on how to configure SAP Analytics Cloud SAML SSO using AD FS see KBA <a href="https://me.sap.com/notes/2487116" target="_blank">2487116</a>. </li>
+</ul>
+<p class="header2"><a name="Azure" target="_blank"></a>﻿How to configure SAP Analytics Cloud SAML SSO using Azure Active Directory</p>
+<ul>
+<li>For steps on how to configure SAP Analytics Cloud SAML SSO using Azure Active Directory see KBA <a href="https://me.sap.com/notes/2571892" target="_blank">2571892</a>.</li>
+</ul>
+<p class="header2"><a name="Mistakes" style="background-" target="_blank"></a>﻿Typical Mistakes</p>
+<p><strong>Modifying the SAP Analytics Cloud Metadata</strong>.</p>
+<ul>
+<li>You only need to import the XML file to your SAML Identity Provider.</li>
+<li>You may be tempted to manually modify the confusing entries like this to your own location:<br/>Location="https://authn.us1.hana.ondemand.com/saml2/sp/slo/baa999ddf/baa999ddf</li>
+<li><em><strong>Do not change it.</strong></em></li>
+</ul>
+<p><strong>Incorrect NameID tag returned.</strong></p>
+<ul>
+<li>Your Identity Provider does not make the transformations as expected and returns something incorrect:<br/><span class="token tag" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; "><span class="token punctuation" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; ">&lt;NameID <span class="token attr-name" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; ">Format</span><span class="token attr-value" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; "><span class="token punctuation" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; ">=</span><span class="token punctuation" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; ">"</span>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified<span class="token punctuation" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; ">"</span></span><span class="token punctuation" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; ">&gt;</span></span></span><span style=" font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background- text-decoration-style: initial; text-decoration- display: inline !important; float: none;">My phone number</span><span class="token tag" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px;  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background- text-decoration-style: initial; text-decoration-"><span class="token tag" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; "><span class="token punctuation" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; ">&lt;/</span>NameID</span><span class="token punctuation" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; ">&gt;</span></span></li>
+<li>The value returned has to match the attribute to map: User ID, e-mail etc.</li>
+<li>For more information, please see the <a href="/notes/2487567" target="_blank">KBA 2487567 - Troubleshooting SAML assertions when configuring SAML SSO in SAP Analytics Cloud</a></li>
+</ul>
+<p><strong>Verify Account button fails.</strong></p>
+<ul>
+<li>The <em><strong>Verify Account</strong></em> step should be done in a completely new browsing session, we recommend using Incognito mode (Google Chrome) or InPrivate mode (Microsoft Edge) as this serves as a new browsing session.</li>
+<li>Please make sure an existing Incognito window is not already open and that the User has not already authenticated in SAC using a different logon token, as this may cause the <em>Verify Account</em> step to be successful even if SAML is not configured correctly.</li>
+</ul>
+<p><a name="Troubleshooting" style="font-size: 18px; font-weight: bold; background-" target="_blank"></a><span style="font-size: 18px; font-weight: bold;">﻿Troubleshooting</span></p>
+<ul>
+<li>We recommend installing a SAML add-on/plug-in to examine SAML assertions (i.e. <a href="https://chrome.google.com/webstore/detail/saml-chrome-panel/paijfdbeoenhembfhkhllainmocckace?hl=en" target="_blank">SAML Chrome Panel</a>).
+<ul>
+<li>Additionally, you can use the Google Chrome Developer Tools Network trace, to look at encoded SAML Responses.</li>
+</ul>
+</li>
+<li>See <a href="https://me.sap.com/notes/2487567" target="_blank">2487567</a> which contains a step-by-step troubleshooting guide.</li>
+</ul>
+<p class="header2"><a name="FAQ" target="_blank"></a>﻿FAQ</p>
+<ul>
+<li><strong>Q: Can I use the current SAP Cloud Identity used by SAP Analytics Cloud in any of the other SAP Cloud Applications?</strong></li>
+</ul>
+<p style="padding-left: 30px;">A: No. You can purchase your own system of <a href="https://cloudplatform.sap.com/capabilities/security/cloud-identity.html" target="_blank">SAP Cloud Identity</a> and use it to authenticate against all your applications.</p>
+<ul>
+<li><strong>Q: Do I need a reverse proxy if my SAML IdP is not in the cloud and can only be accessed from my network?</strong></li>
+</ul>
+<p style="padding-left: 30px;">A: No. As long as your browser can access both sites: SAC and IdP, everything should work as expected.</p>
+<ul>
+<li><strong>Q: Can I use the same SAML IDP in HANA, S/4HANA and other SAP applications?</strong></li>
+</ul>
+<p style="padding-left: 30px;">A: Yes, in fact you should. If you have S/4HANA Cloud edition, follow these steps to use the same SAP Cloud Identity in SAC. See <a href="https://me.sap.com/notes/2518900" target="_blank">2518900</a>.</p>
+<ul>
+<li><strong>Q: Are there other options to have SSO in SAP Analytics Cloud?</strong></li>
+</ul>
+<p style="padding-left: 30px;">A: Currently, you can only authenticate in SAP Analytics Cloud using SAML. However, you can have SSO to HANA using a Live Direct Connection (CORS) having two different authentication methods: SAML for SAC and another for HANA, as long as your browser supports both.</p>
+<ul>
+<li><strong>Q: Can I use more than one Idp?</strong></li>
+</ul>
+<p style="padding-left: 30px;">A: Currently, you can use one IdP with SAP Analytics Cloud at a time. i.e. When switching from the default Cloud IdP to a custom SSO IdP, it will only be possible to authenticate via your custom IdP until this option is changed to the default IdP.</p>
+<ul>
+<li><strong>Q: Can I make changes to my IdP configuration even if I am locked out of my SAC tenant?</strong></li>
+</ul>
+<p style="padding-left: 30px;">A: Yes! With the Identity Provider Administrator Tool, you can update metadata, and even revert back to the Default Cloud IdP as a System Owner, even when you are unable to log in to SAP Analytics Cloud. For more information, see <a href="https://me.sap.com/notes/2908073" target="_blank">2908073 - How to revert the IdP used by SAP Analytics Cloud when no access is available to the tenant</a>.</p>
+<p><span style="text-decoration: underline;"><strong>Note that SAP Product Support can only help you with product issues and defects related to SAP Analytics Cloud.</strong></span><br/><strong>If your SAML IDP is not returning a correct assertion, contact your SAML IDP vendor to troubleshoot transformations and authorizations.</strong></p>
+<ul>
+<li>See <a href="https://me.sap.com/notes/2706322" target="_blank">2706322 </a><a href="https://me.sap.com/notes/2706322" target="_blank">- What is Support – What is Consulting: Cloud Solutions</a>.</li>
+</ul>
+<p class="header2"><a name="Other" target="_blank"></a>﻿Other information</p>
+<ul>
+<li>If you are trying to set up SAML to authenticate your current SAP Analytics Cloud to SAP Cloud Platform and you are not interested in created your own Identity Provider, follow this blog:<a href="https://blogs.sap.com/2016/11/27/sap-businessobjects-cloud-live-data-connection-to-sap-hcp-with-sso-simple-urls/" target="_blank"> SAP Analytics Cloud: Live Data Connection to SAP HCP With SSO (Simple URLs)</a>.</li>
+<li>For specific steps configuring a reverse proxy with Apache, follow the steps indicated in the article <a href="https://me.sap.com/notes/2358559" target="_blank">2358559</a> - Authenticating to SAP Analytics Cloud via SAP Cloud Identity breaks Apache Reverse Proxy.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li><a href="https://me.sap.com/notes/2761068" target="_blank">2761068 - Error: Login fails with StatusCode in ResponseMessage != OK; please refer to the database trace for more information in SAP Analytics Cloud (SAC)</a></li>
+<li><a href="https://community.sap.com/topics/cloud-analytics/administration#authentication" target="_blank">SAP Analytics Cloud administration community topic page - Authentication</a>.</li>
+<li><a href="https://community.sap.com/topics/cloud-analytics/administration" target="_blank">SAP Analytics Cloud administration community topic page</a></li>
+<li><a href="https://me.sap.com/notes/2487567" target="_blank">2487567</a> - Troubleshooting SAML assertions when configuring SAML SSO in SAP Analytics Cloud</li>
+<li><a href="https://blogs.sap.com/2017/07/13/saml-authentication-in-sap-analytics-cloud/" target="_blank">SAML authentication in SAP Analytics Cloud</a> blog</li>
+<li><a href="https://me.sap.com/notes/2487116" target="_blank"><strong>2487116</strong> - How to configure SAP Analytics Cloud SAML SSO using AD FS (Active Directory Federation Services)</a></li>
+<li><a href="https://apps.support.sap.com/sap/support/knowledge/public/en/2569847" target="_blank"><strong>2569847</strong> - Where can you find <strong>SAC user assistance (help) </strong><strong>to use, configure, and operate it more effectively?</strong></a></li>
+<li>Have a <strong>question</strong>? <a href="https://answers.sap.com/questions/ask.html?primaryTagId=67838200100800006884" target="_blank"><strong>Ask </strong>it here and let our amazing <strong>SAP community</strong> help!</a> <strong>Or</strong> <strong><a href="https://answers.sap.com/tags/67838200100800006884" target="_blank">reply and share your knowledge!</a></strong></li>
+<li><a href="https://me.sap.com/notes/2487011" target="_blank"><strong>2487011</strong> - What <strong>information</strong> do I need to <strong>provide</strong> when <strong>opening</strong> an case for SAP Analytics Cloud?</a></li>
+<li>Search for SAP Analytics Cloud content using Google or Bing:</li>
+<ul>
+<li><a href="https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fuserapps.support.sap.com+SAP+Analytics+Cloud" target="_blank">https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fuserapps.support.sap.com+SAP+Analytics+Cloud</a></li>
+<li><a href="https://www.bing.com/search?q=site%3Ahttps%3A%2F%2Fuserapps.support.sap.com+SAP+Analytics+Cloud" target="_blank">https://www.bing.com/search?q=site%3Ahttps%3A%2F%2Fuserapps.support.sap.com+SAP+Analytics+Cloud</a></li>
+<li><strong>Note:</strong> Add any relevant <em><strong>text, keywords, warning messages or error messages</strong></em> to the text search field to filter the results.</li>
+</ul>
+<li><a href="https://help.sap.com/viewer/2d7115b0e0aa4f78bfd9c06fdc1fe4f6/release/en-US" target="_blank">SAP Analytics Cloud Connection Guide</a></li>
+<li><a href="https://community.sap.com/topics/cloud-analytics/getting-started" target="_blank">Getting Started with SAP Analytics Cloud Expert Community page</a></li>
+<li><a href="https://help.sap.com/viewer/00f68c2e08b941f081002fd3691d86a7/release/en-US/837228942b504eeeb75efee930727914.html" target="_blank">SAP Analytics Cloud Get More Help and SAP Support</a></li>
+<li><strong>Need More Help? </strong><a href="https://support.sap.com/en/contact-us.html" target="_blank">Contact Support</a> or <a href='https://launchpad.support.sap.com/#/solutions/notesv2/?q=&amp;sortBy=date&amp;sortOrder=desc&amp;filters=[[{"attribute":"themk","operator":"EQ","low":"LOD-ANA*","high":""}]]' target="_blank">visit the solution finder today!</a></li>
+</ul>
+<p><strong><span>Your feedback is important to help us improve our knowledge base.<br/></span></strong></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>SAML, SSO, IdP, SAP Cloud for Planning, sc4p, c4p, cforp, cloudforplanning, Cloud for Planning, EPM-ODS, Cloud for Analytics, C4P, Cloud4Analytics, CloudforAnalytics, Cloud 4 Planning, HCP, C4A, BOC, SAPBusinessObjectsCloud, BusinessObjectsCloud, BOBJ, BOBJcloud, BOCloud., BICloud, BO Cloud, Verify account fails in SAC while configuring IdP, SAP Analytics cloud SSO - SAML issue, Error with SSO-SAML config, SAML login is not working, [AUT] SSO blocks logon, Changed SAML attribute assertion on SAC, Issue Setting up Single Sign-on with OKTA for SAP Analytics for Cloud, SapAnaliticsCloud [AUT] SSO/SAML for SAC using our corporate IDP, [AUT] ID is automatically switches to upper case and SAML authentication fails [AUT] SAML Mapping OR Condition Not Working, IDP reset, 'StatusCode in ResponseMessage != OK' when logging with SAML2, 'StatusCode in ResponseMessage != OK' when logging with SAML2, New IdP setup for SAP Analytic Cloud, SAC to IDPproblems, Unable to verify account, SAML Config: Switching currently setup User Attribute( Email to UserID), Login Error - Fail to login to SAP Analytics Cloud, sso, singlesignon signon, authenticate, sac, ua, help, analytics help, support, c4a, boc, analyticscloud, case, troubleshooting, faq, sac faq, sac help, sap analytics cloud documentation, guides, sac support, sap analytics cloud support, ac, SAP Cloud for Planning, sc4p, c4p, cforp, cloudforplanning, Cloud for Analytics, Cloud4Analytics, CloudforAnalytics, Cloud 4 Planning, BOC, SAPBusinessObjectsCloud, BusinessObjectsCloud, BOBJcloud, BOCloud., SAC, SAP AC, Cloud-Analytics, CloudAnalytics, SAPCloudAnalytics,Error, Issue, System, Data, User, Unable, Access, Connection, Sac, Connector, Live, Acquisition, Up, Set, setup, Model, BW, Connect, Story, Tenant, Import, Failed, Using, Working, SAML, SSO, sapanalyticscloud, sap analytical cloud, sap analytical cloud, SAC, ヘルプ, Hilfe zu, Ayuda para, Ajuda para, sap sac, sac, sap analytics cloud planning, sap analytics cloud training, sap analytics cloud tutorial, user assistance, ua, helpdocs, help information, "sac online help", sap analytics cloud help, sap analytics cloud user guide pdf, sap analytics cloud architecture, sap analytics cloud tutorial, sap analytics cloud connections, sap analytics cloud architecture pdf, learning sap analytics cloud pdf, More accessible documentation on your products and more community resources, What does SAP recommend you do before you access SAP Analytics Cloud for the first time?, What are the three main components pillars of SAP Analytics Cloud?, How do I access SAP Analytics Cloud, How do I use SAP Analytics Cloud?, What is the use of SAP analytics Cloud?, What are the main components of SAP Analytics Cloud? predictive analytics (analysis), data analysis (analytics) tools, analytics tools, sap analytics cloud, data literacy, advanced analytics, data democratization analytics software, real time analytics, self service analytics, advanced data analytics, analytics as a service, analytics cloud / cloud analytics, saas analytics, cloud bi, enterprise planning, cloud data analytics, cloud based analytics, analytics cloud platform, modern analytics, real time analysis, cloud analytics solution(s), what is sap analytics cloud, cloud analytics tools, analytics in the cloud, cloud analytics software, data analysis, data analytics, financial planning, EPM, SAP Cloud for Planning, sc4p, c4p, cforp, cloudforplanning, Cloud for Planning, EPM-ODS, Cloud for Analytics, C4P, Cloud4Analytics, CloudforAnalytics, Cloud 4 Planning, HCP, C4A, BOC, SAPBusinessObjectsCloud, BusinessObjectsCloud, BOBJ, BOBJcloud, BOCloud., BICloud, BO Cloud, connecting, conecting, conectando, conexão, modelo, SBOC, SAC, troubleshooting, overview, sap sac, sac, sap analytics cloud planning, sap analytics cloud training, sap analytics cloud tutorial, sac, ua, help, analytics help, support, c4a, boc, analyticscloud, case, troubleshooting, faq, sac faq, sac help, sap analytics cloud documentation, guides, sac support, sap analytics cloud support, ac, SAP Cloud for Planning, sc4p, c4p, cforp, cloudforplanning, Cloud for Analytics, Cloud4Analytics, CloudforAnalytics, Cloud 4 Planning, BOC, SAPBusinessObjectsCloud, BusinessObjectsCloud, BOBJcloud, BOCloud., SAC, SAP AC, Cloud-Analytics, CloudAnalytics, SAPCloudAnalytics,Error, Issue, System, Data, User, Unable, Access, Connection, Sac, Connector, Live, Acquisition, Up, Set, setup, Model, BW, Connect, Story, Tenant, Import, Failed, Using, Working, SAML, SSO, sapanalyticscloud, sap analytical cloud, sap analytical cloud, SAC, ヘルプ, Hilfe zu, Ayuda para, Ajuda para, sap sac, sac, sap analytics cloud planning, sap analytics cloud training, sap analytics cloud tutorial, planning, sac, Analytics Cloud Onpremis install, SAP analytics cloud, SAP BW, stories, geo, story, Analytics designer, sap analyst cloud, <a href="https://hcs.cloud.sap/" rel="noopener" target="_blank">https://hcs.cloud.sap</a>, <a href="https://hanacloudservices.cloud.sap/" rel="noopener" target="_blank">https://hanacloudservices.cloud.sap</a>, <a href="https://cloudanalytics.accounts.ondemand.com/" rel="noopener" target="_blank">https://cloudanalytics.accounts.ondemand.com</a>, <a href="https://hanacloudservices-us.accounts.ondemand.com/" rel="noopener" target="_blank">https://hanacloudservices-us.accounts.ondemand.com</a>, <a href="https://www.sap.com/" rel="noopener" target="_blank">https://www.sap.com</a>, <a href="https://help.sap.com/" rel="noopener" target="_blank">https://help.sap.com</a>, sap analytics cloud, analytics cloud, cloud analytics, analytics, sac, sap analytics cloud for planning, fp&amp;a, collaborative planning, enterprise planning, extended planning, xP&amp;A, extended planning and analysis, financial planning and analysis, connected planning, integrated planning, workforce planning, headcount planning, allocations, value driver tree, VDT, data action, predictive forecasting, smart predict, planning applications, planning model, advanced formulas, strategic planning, Profit and Loss Planning, P&amp;L planning, bottom-up planning, top-down planning, currency conversion, version management, fp&amp;a, predictive analytics, operational plan(s)(ning), financial planning and analysis, planning tools, integrated business planning, xp&amp;a, integrated planning, collaborative planning, planning model (s), connected planning, enterprise planning, budgeting and forecasting software, enterprise planning, planning and forecasting, planning budgeting and forecasting, planning and analysis, enterprise planning software, financial planning and forecasting, sap analytics cloud planning, predictive planning, driver based models, what if planning, enterprise planning cloud, cloud fp&amp;a, Enterprise Planning, Planning, analysis, budgeting, and prediction in one solution, Embedded business intelligence and predictive analytics, Integration with SAP S/4HANA, what if planning, enterprise planning cloud, cloud fp&amp;a, Enterprise Planning, Planning, analysis, budgeting, and prediction in one solution, Embedded business intelligence and predictive analytics, Integration with SAP S/4HANA, How long does it take to learn SAP Analytics Cloud?, How do I connect SAP Analytics Cloud to Hana?, How do you plan in SAP Analytics Cloud?, What is SAP Cloud analytics? sachelp sachelp sac help sap, sac getting started kba trainings</p></div></div></div></div>

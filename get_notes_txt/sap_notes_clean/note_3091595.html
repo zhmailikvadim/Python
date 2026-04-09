@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">Running Landing Page, you realize that icons are missing in some lanes, like Search.<br/>For example, if an employee is searched, you'll get an error on HTTPWatch/F12 trace regarding 'Person.gif':</p>
+<p><img alt="search.jpg" class="img-responsive" height="561" src="/documents/customerkba/C3w0W2QXwA52myLnS6mwz810nA2pXpJe6rO96pumkAo" title="search.jpg" width="1220"/></p>
+<p>Trace errors:</p>
+<ol>
+<li>404 error<br/><img alt="person error.jpg" class="img-responsive" height="17" src="/documents/customerkba/HNDRYeurbqCFWwZvAcJ7lZQ2oeZs4e-f5h1Ra6ETgrY" title="person error.jpg" width="754"/></li>
+<li>403 error<br/><img alt="114.png" class="img-responsive" height="13" src="/documents/customerkba/salURfD9ZfwmzgWzG8amIDi_91r2d8JT-vodmhVvj90" title="114.png" width="541"/></li>
+</ol><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>Human Capital Management (HCM)</li>
+<li>
+<div class="longtext" style="font-size: 100.01%;">HR Renewal </div>
+</li>
+<li>
+<div class="longtext" style="font-size: 100.01%;">SAP enhancement package 6 for SAP ERP 6.0</div>
+</li>
+<li>
+<div class="longtext" style="font-size: 100.01%;">SAP enhancement package 7 for SAP ERP 6.0</div>
+</li>
+<li>
+<div class="longtext" style="font-size: 100.01%;">SAP enhancement package 6 for SAP ERP 6.0, version for SAP HANA</div>
+</li>
+<li>
+<div class="longtext" style="font-size: 100.01%;">SAP enhancement package 8 for SAP ERP 6.0</div>
+</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Landing page is opened using an url similar to the following one:<br/>http://[hostname:port]/sap/bc/ui5_ui5/sap/arsrvc_suite_pb/main.html?page=SPB_LANDING_PAGE<br/>OR<br/>http://[hostname:port]/sap/bc/ui5_ui5/sap/arsrvc_suite_pb/main.html?page=HR_SELFSERVICES</li>
+<li>If you open any lane with images, like Search, you can check that images aren´t displayed.</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Relevant PAO business functions or services aren´t activated on the system.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol>
+<li>Please make sure that business functions from HCM_PAO_CI_1 to HCM_PAO_CI_9 are activated on your system.</li>
+<li>If business functions are already activated on your system, please confirm that icon paths haven´t been changed on launchpad role HRPAO, instance ACTIONS.<br/>You could find standard icon paths on your client 000, tcode LPD_CUST: "/sap/public/HRRenewal/PB/OrgUnit_32.png", "/sap/public/HRRenewal/PB/Person_32.png", and etc..</li>
+<li>Please make sure the services in the trace is activated in Tcode SICF, like service HRRenewal in this example(403 error in trace).</li>
+</ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Help documentation about business function <a href="https://help.sap.com/erp_hcm_ias2_2015_03/helpdata/en/f7/298055f3eb7e43e10000000a4450e5/frameset.htm" target="_blank">HCM_PAO_CI_09</a>.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SICF, BF, Business Function,HCM_PAO_CI_1,HCM_PAO_CI_2,HCM_PAO_CI_3,HCM_PAO_CI_4,HCM_PAO_CI_5,HCM_PAO_CI_6,HCM_PAO_CI_7,HCM_PAO_CI_8,HCM_PAO_CI_9, Client 000</p></div></div></div></div>

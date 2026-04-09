@@ -1,0 +1,59 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The Check Project Inconsistency button in Gateway Service Builder (SEGW) results with the following warning messages:</p>
+<ul>
+<li>Project '&lt;ProjectName&gt;' has been checked; check warnings</li>
+<ul>
+<li>Model binding</li>
+<ul>
+<li><strong>Potential loss of data; ABAP type is more restrictive</strong></li>
+<li><strong>Valid type mapping; not precise, but best possible</strong></li>
+<li><strong>Conversion error possible; ABAP type is more restrictive</strong></li>
+</ul>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">SAP Gateway (SAP_GWFND)</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Call t-code SEGW</li>
+<li>Open a Project</li>
+<li>Select the project name</li>
+<li>Click on the button Check Project Consistency</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>An OData service uses EDM types and not ABAP types for Entity Properties. These types have to be matched/mapped in SAP Gateway.<br/>To check the possible mismatches the developer can use the Check Project Inconsistency button in the Gateway Service Builder (SEGW) transaction.</p>
+<p>"Exact correlations between ABAP types and EDM types are not always possible due to their individual facets and the automatic determination of a corresponding ABAP or EDM type might not be a perfect match." To see more: <a href="https://help.sap.com/doc/saphelp_gateway20sp12/2.0/en-US/d2/6d93525a324d27e10000000a441470/frameset.htm" target="_blank">Mappings and the ABAP Type Editor<br/></a></p>
+<p>These warnings might indicate serious future issues, therefore resolving them is an important task of the developer.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Expand the Model Binding.</li>
+<li>Double click on the given message entry (it'll open the given entity set's property table in SEGW and select the entry which the message is about).</li>
+<li>Further expand the message entry which you double clicked on and the check the suggestion.</li>
+<li>In the property table there's a column ABAP Type Editor, click on the button of that column in the selected row.</li>
+<li>Follow the suggestions of the message<strong>, if they're indeed valid and require maintenance. This detail belongs to the business logic therefore it has to be known by the developer of the project as it might depend on the future use cases of the service.</strong>
+<ul>
+<li>For example:
+<ul>
+<li>the first message says: "Potential loss of data; ABAP type is more restrictive".</li>
+<li>by expanding it, suggestions like the following can come: Map instead to the data element 'TIMESTAMP (PACKED[15,0])'.</li>
+<li>by clicking on the ABAP Type Editor button of the given property from the given type the types and facets are visible.</li>
+<li>By following the suggestions the values have to be changed to TIMESTAMP PACKED with length 15,0.</li>
+<li>To do that there are multiple approaches:</li>
+</ul>
+<ol>
+<li>Set the Determination Mode to Determination by Runtime Object Generator.</li>
+<li>If only the given OData service is using this data source then change the data element itself directly.</li>
+<li>Create custom conversion exits (see in the Conversion SAP Blogs in the See Also section of this KBA).</li>
+</ol></li>
+</ul>
+</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li><a href="https://blogs.sap.com/2016/10/21/conversions-sap-gateway-foundation-part-1/" target="_blank">Conversions in SAP Gateway Foundation – Part 1</a></li>
+<li><a href="https://blogs.sap.com/2017/01/23/conversions-in-sap-gateway-foundation-part-2/" target="_blank">Conversions in SAP Gateway Foundation – Part 2</a></li>
+<li><a href="https://blogs.sap.com/2017/01/05/date-and-time-in-sap-gateway-foundation/" target="_blank">Date and Time in SAP Gateway Foundation</a></li>
+<li><a href="https://help.sap.com/doc/saphelp_gateway20sp12/2.0/en-US/d2/6d93525a324d27e10000000a441470/frameset.htm" target="_blank">Mappings and the ABAP Type Editor</a></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>sap gateway, odata, service, binding, bind, binds, mapping, map, maps, mapped, matching, match, matched, matches, mismatching, mismatch, mismatched, mismatches, conversion, conversion_exit, converting, convert, converted, converts, consistencies, types, edm, abap</p></div></div></div></div>

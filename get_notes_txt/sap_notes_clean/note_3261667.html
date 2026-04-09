@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The function module G_GLU1_ITEMIZE_AMOUNTS splits table lines with very high amounts into multiple lines with a maximum amount of 9999999999999 (thirteen digits).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>G_GLU1_ITEMIZE_AMOUNTS , TSV_TNEW_PAGE_ALLOC_FAILED , memory overflow , GLU1</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After applying this note, the function module G_GLU1_ITEMIZE_AMOUNTS has a new optional parameter called "max_value" Type P.</p>
+<p>If you supply this parameter, you can change the maximum amount for the split. Please note that the parameter can't be smaller than '99999999.99' (ten digits).</p>
+<p> </p>
+<p>However, if you choose a small maximum amount, it is very likely that you will face the following dump:</p>
+<p style="padding-left: 30px;">Category Resource Shortage<br/>Runtime Errors TSV_TNEW_PAGE_ALLOC_FAILED</p>
+<p style="padding-left: 30px;">Short Text<br/>No more memory available to add rows to an internal table.</p>
+<p>In this case, you need to increase the parameter "max_value".</p></div></div></div></div>

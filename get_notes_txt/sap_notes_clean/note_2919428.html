@@ -1,0 +1,55 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The following symptoms can be observed:</p>
+<ol>
+<li>com.sap.me.production$SfcStartService#startSfc – this API method has slow running SQL query from RESOURCE_TYPE_RESOURCE table.</li>
+<li>com.sap.me.production$CreateSfcService#createSfc - For each created SFC it's checked if there are standards defined in scheduling standards configuration for combinations of the Material, Routing and Operation, and if found then Earned Standards are initialized with these values. </li>
+<li>com.sap.me.production$CreateSfcService#createSfc - “Create SFC on the fly” business logic locks SHOP_ORDER table just to validate that it is still enough quantity in shop order to create passed SFC with provided quantity.</li>
+<li>com.sap.me.demand$ShopOrderService#releaseShopOrder - For each created SFC it's checked if there are standards defined in scheduling standards configuration for combinations of the Material, Routing and Operation, and if found then Earned Standards are initialized with these values.</li>
+<li>com.sap.me.production$SfcCompleteService#completeSfc – this method should be extended with new properties to allow skip not used logic during SFC Complete.</li>
+<li>SFCRoutingCompleteWorker#getSfcStepData, SFCRoutingCompleteWorker#isSfcInCompletePending – these methods use LIKE operator to search in SFC_STEP.OPERATION_BO column, which can be very expensive from DB perspective on large data tables.</li>
+<li>com.sap.me.datacollection$DataCollectionService#logSfcDcGroups – LogSfcDCGroupRequest request was extended with stepId property to avoid DB read to find step ID value needed for activity log functionality</li>
+<li>com.sap.me.datacollection$DataCollectionService#logSfcDcGroups was optimized to use more optimal API - readSfc method was replaced with sfcStateService.findProcessLotRefByMemberRef</li>
+<li>com.sap.me.production$SfcDataService#collectSfcData was optimized to use more optimal API - readSfc method was replaced with sfcStateService.findSfcDataByRef</li>
+<li>Added TIMING traces to Start functionality</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PAPI, optimization, performance</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Some performance improvements can be implemented for the methods listed in Symptom section.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Code changes were done to improve the performance of the listed above methods.</p>
+<ol>
+<li>Query was changed to select only one record from RESOURCE_TYPE_RESOURCE table for provided resource and resource type.</li>
+<li><strong>skipEarnedStandardsInitialization</strong> optional property was added to CreateSfcRequest request object to control earned standard initialization. Default value is “false”.</li>
+<li><strong>disableShopOrderSelectForUpdate</strong> optional property was added to CreateSfcRequest request object to control lock on SHOP_ORDER table. Default value is “false”.</li>
+<li><strong>skipEarnedStandardsInitialization</strong> optional property was added to ReleaseShopOrderRequest request object to control earned standard initialization. Default value is “false”.</li>
+<li>Extended CompleteSfcRequest request object with new optional properties:</li>
+</ol>
+<ul>
+<li><strong>disableShopOrderQtyDoneIncrease</strong> = true/false. Default value is “false”, will preserve the existing behavior.</li>
+<li><strong>disableInspection </strong>= true/false. Default value is “false”, will preserve the existing behavior.</li>
+</ul>
+<ol start="6">
+<li>Replace LIKE operator with “=” for these two methods.</li>
+<li>LogSfcDCGroupRequest request was extended with optional <strong>stepId</strong> property to avoid DB read to find step ID value needed for activity log functionality</li>
+</ol>
+<p>More details and usage examples can be found in the attached PDF file.</p>
+<p> </p>
+<p><strong>Installation</strong>:</p>
+<ul>
+<li>Deploy SAPMECORE with latest changes to NW AS.</li>
+<li>Import SAPMECORE to NWDI SC</li>
+</ul>
+<p> </p>
+<p><strong>Impact</strong>:</p>
+<p>Performance of the following methods:</p>
+<ul>
+<li>com.sap.me.production$SfcStartService#startSfc</li>
+<li>com.sap.me.production$CreateSfcService#createSfc</li>
+<li>com.sap.me.demand$ShopOrderService#releaseShopOrder</li>
+<li>com.sap.me.production$SfcCompleteService#completeSfc</li>
+<li>SFCRoutingCompleteWorker#getSfcStepData</li>
+<li>SFCRoutingCompleteWorker#isSfcInCompletePending</li>
+<li>com.sap.me.datacollection$DataCollectionService#logSfcDcGroups</li>
+<li>com.sap.me.production$SfcDataService#collectSfcData</li>
+</ul></div></div></div></div>
