@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Implement this SAP Note that integrates the BAdI definition FI_PL_KSEF_INVOICE into DRC Private Cloud Report PL_SAFT_KR_PD.</p>
+<p>The implemented logic for searching for the KSeF number for a given customer invoice is as follows: The report will try to get the number stored in the ODN number. The report primarily searches for KSeF numbers stored using the official document numbering (ODN) framework.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Poland, PL, Poland SAFT Report, PL SAFT Report, JPK_KR_PD, KSeF BAdI, ODN, DRC, FI_PL_KSEF_INVOICE, PL_SAFT_KR_PD</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This note is relevant for Polish SAFT Private Cloud only.<br/>This note aims to implement the KSeF BAdI integration specifically for the PL_SAFT_KR_PD report DRC Private Cloud.<br/>SAP Note 3689699 must be implemented as a prerequisite.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Additional logic added in CL_SAFT_KR_PD_KSEF-&gt;GET_KSEF_NUMBERS</p>
+<p>Enhancement spot: FI_PL_KSEF_INVOICE</p>
+<p>There is one method: IF_EX_FI_PL_KSEF_INVOICE—&gt;GET_KSEF_INVOICE<br/>There will be no standard solution provided, therefore the customer is to implement the retrieval logic if needed.<br/>This is a fallback logic in case ODN did not contain the KSeF ODN —&gt; if ODN is empty —&gt; BAdI.</p>
+<p>If the number is not stored in ODN, and the customer implements BAdI FI_PL_KSEF_INVOICE, the BAdI method GET_KSEF_INVOICE will be called. This method will allow the generation of the KSeF number based on the customer logic.</p></div></div></div></div>

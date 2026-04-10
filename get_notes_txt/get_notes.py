@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 import pyotp  # для генерации TOTP
 
 # ---------- НАСТРОЙКИ ----------
-chromedriver_path = r"d:\Fiori\bot\chromedriver.exe"
+chromedriver_path = r"d:\Fiori\Python\chromedriver.exe"
 target_url = "https://sappoint.ftp.sh:1443"
 secret_key = "XB3G3GIAB5SJV7DLRBPBLVPVLOHBTLR5"
 token_prefix = "243225"
