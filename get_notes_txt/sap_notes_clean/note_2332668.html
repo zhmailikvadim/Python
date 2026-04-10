@@ -1,0 +1,49 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>Upon upgrading to SP15 or higher, MDM communication with iOS devices is lost</li>
+<li>The following error is observed in the Afaria Message Log: "APN0017: Enqueue request failure, undefined certificate thumbprint: PushType=MDM, Client=&lt;UDID&gt;"</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP Afaria 7.0 SP15 or later</li>
+<li>iOS devices</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Upgrade a working Afaria 7.0 SP14 or earlier system to SP15 or later.</li>
+<li>Attempt to send an outbound notification such a Lock to an iOS device. The device does not lock, and the error mentioned under Symptom is seen in the logs.</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul>
+<li>In SP6, two new fields were added to the database table A_IPHONE_SETTINGS: MDMPushCertThumbprint and AppPushCertThumbprint. This was done to avoid conflicts when the APNS certifcates for Mobile Device Management and/or for Custom-Signed Afaria Application where renewed without deleting the old version of the certificate.</li>
+<li>In SP15, a new feature, APNS Queuing was introduced to streamliine outbound notifications to iOS devices.</li>
+<li>Occasionally, on upgrading to SP6 or later, the above database values are not populated in the database. APNS queuing depends upon A_IPHONE_SETTINGS.MDMPushCertThumbprint.</li>
+</ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul>
+<li>Reinstall the APNS Push Certificate (for Mobile Device Management) and the APNS Push Certificate  (for Custom-Signed Afaria Application) if applicable.</li>
+<li>If there is a problem in the UI with reinstalling the certificates, please follow these instructions to update the database manually:</li>
+<ul>
+<li>Using Powershell:</li>
+<ol>
+<li>From a command prompt, type "powershell".</li>
+<li>Enter the following lines: <br/>$Thumbprint = (Get-ChildItem -Path Cert:\LocalMachine\My | Where-Object {$_.Subject -match "APSP:"}).Thumbprint;<br/>Write-Host -Object "$Thumbprint";<br/>Right-click in the command window and choose Mark.</li>
+<li>Left-click, hold and drag to select the thumbprint returned.</li>
+<li>Right-click again to copy the thumbprint to the clipboard.</li>
+<li>In the SQL Server Management Studio (SQL Server) or Interactive SQL (SQL Anywhere) run the following query:<br/>    UPDATE A_IPHONE_SETTINGS<br/>    SET MDMPushCertThumbprint = '&lt;thumbprint&gt;'<br/>     WHERE TenantID = &lt;tenantid&gt;<br/>Paste the thumbprint in place of &lt;thumbprint&gt;. If you only have one tenant, the WHERE clause can be omitted.<br/>In the case of SQL Anywhere, follow this with:<br/>    commit;</li>
+<li>If you have an APNS Push Certificate (for Custom-Signed Afaria Application) defined, and the certificate information continues to display incorrectly, enter the following lines in the command prompt:<br/>$Thumbprint = (Get-ChildItem -Path Cert:\LocalMachine\My | Where-Object {$_.Subject -match "Apple Production IOS Push Services:"}).Thumbprint;<br/>Write-Host -Object "$Thumbprint";</li>
+<li>Left-click, hold and drag to select the thumbprint returned.</li>
+<li>Right-click again to copy the thumbprint to the clipboard.<br/><img alt="Powershell.PNG" class="img-responsive" src="/documents/customerkba/S1qAhvNB2spIlrPbh3RMGa1zIvyIcHm1OAnb7Zo1mZw" title="Powershell.PNG"/></li>
+<li>In the SQL Server Management Studio (SQL Server) or Interactive SQL (SQL Anywhere) run the following query:<br/>     UPDATE A_IPHONE_SETTINGS <br/>     SET AppPushCertThumbprint = '&lt;thumbprint&gt;'<br/>     WHERE TenantID = &lt;tenantid&gt;<br/>Paste the thumbprint in place of &lt;thumbprint&gt;. If you only have one tenant, the WHERE clause can be omitted.<br/>In the case of SQL Anywhere, follow this with:<br/>     commit;</li>
+<li>Restart the Afaria server.<br/><br/></li>
+</ol>
+<li>Using MMC:</li>
+</ul>
+</ul>
+<ol><ol><ol>
+<li>Open the Microsoft Management Console by typing "mmc" in the Run box or a command prompt.</li>
+<li>File -&gt; Add/Remove Snap-in</li>
+<li>Select Certificates and click Add</li>
+<li>Select Computer Account and click Next</li>
+<li>Select Local Computer Account and click Finish, then click OK.</li>
+<li>Expand the folder Certificates (Local Computer) -&gt; Personal -&gt; Certificates</li>
+<li>Locate the certificate that corresponds to the APNS certificate in iOS Notifications. Be sure to match both the name and the expiry date.</li>
+<li>Double-click on the certificate.</li>
+<li>Under "Details" select Thumbprint.</li>
+<li>Copy the 40-character thumbprint to a text editor.<br/><img alt="Thumbprint.PNG" class="img-responsive" src="/documents/customerkba/hJPn7i-RvM9WRGQsz4sx56gVthDLq0yeWBo3Lnk34wM" title="Thumbprint.PNG"/></li>
+<li>Remove the spaces and copy the resulting string to the clipboard.</li>
+<li>In the SQL Server Management Studio (SQL Server) or Interactive SQL (SQL Anywhere) run the following query:<br/>     UPDATE A_IPHONE_SETTINGS <br/>     SET MDMPushCertThumbprint = '&lt;thumbprint&gt;'<br/>     WHERE TenantID = &lt;tenantid&gt;<br/>If you only have one tenant, the WHERE clause can be omitted.<br/><img alt="Update Thumbprint.PNG" class="img-responsive" src="/documents/customerkba/G6Xd3UrFvPlEDsRStZeKFUMHBhZ3J8eYMBxhCE1-S8g" title="Update Thumbprint.PNG"/></li>
+<li>If you have an APNS Push Certificate (for Custom-Signed Afaria Application) defined, and the certificate information continues to display incorrectly, it may be necessary to repeat steps 7-11 for the App Push certificate and run the following SQL query:<br/>     UPDATE A_IPHONE_SETTINGS <br/>     SET AppPushCertThumbprint = '&lt;thumbprint&gt;'<br/>     WHERE TenantID = &lt;tenantid&gt;<br/>If you only have one tenant, the WHERE clause can be omitted.</li>
+<li>Restart the Afaria server.</li>
+</ol></ol></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/2296638" target="_blank"><span class="title">MDM Push certificate blank and cannot be updated</span></a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>MDM, APNS, APSP, queuing, certificate, thumbprint, upgrade, update, ipod, iphone, ipad</p></div></div></div></div>

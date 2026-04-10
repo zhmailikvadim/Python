@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">An Offline OData client is sending a request (in its default JSON format) and it expects to receive the response in pages (server side paging/ server driven paging), however the SAP Gateway doesn't send back any delta token. The same scenario is working with XML format.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Mobile Platform (SMP) SDK 3.1 - Native SDK - Offline OData libraries</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>By default SMP SDK is sending the request in JSON format, despite the SAP Gateway is able to send back the token in JSON there might be an issue on its side as well.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol style="list-style-type: upper-roman;">
+<li><span style="text-decoration: underline;"><strong>Add the below lines to the Offline Store properties:</strong></span></li>
+</ol><address class="prettyprint lang-abap prettyprinted">var properties = {</address><address class="prettyprint lang-abap prettyprinted">...</address><address class="prettyprint lang-abap prettyprinted">"customHeaders":</address><address class="prettyprint lang-abap prettyprinted">{<br/>"Content-Type" : "application/xml",<br/>"accept": "application/xml"<br/>}</address><address class="prettyprint lang-abap prettyprinted">},</address><address class="prettyprint lang-abap prettyprinted">var store = sap.OData.createOfflineStore(properties);</address><address class="prettyprint lang-abap prettyprinted">...</address><ol start="2" style="list-style-type: upper-roman;">
+<li><span style="text-decoration: underline;"><strong>Define the issue on the SAP Gateway side</strong></span></li>
+</ol>
+<p>SAP Gateway is able to return response in JSON format, however there can be an issue with it. Checking the response writing methods on the Gateway side might help narrowing down the issue. SAP Gateway Support can help with the root cause determining if such an issue raises.</p>
+<address class="prettyprint lang-abap prettyprinted"></address>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id=""><a href="https://help.sap.com/doc/cff001ab416a4ab59f1af751b210e0ed/3.0.13/en-US/jsdoc/sap.OData.html" target="_blank">Namespace: OData</a></p>
+<p><a href="https://answers.sap.com/questions/12717361/odata-offline-delta-download-refresh.html" target="_blank">OData Offline Delta Download (Refresh)</a></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>json, offline, odata, sdk, gw, opu, sap_gwfnd, iw_bep, iw_fnd, iw_cor, xml</p></div></div></div></div>

@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You run a non-belgian company code with a (perhaps among others) belgian tax identification number. You want to create a (belgian) VAT return declaration for the belgian tax authorities.<br/>In the declaration, the wrong country (code) is used in a certain field of the output file. The belgian tax authorities only except the value 'BE', independent of where your company is located .</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>RFUMSV00, FOTV, VAT return</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The country (code) is taken from the company address, instead of the declaration itself. <br/>Anyway, the format is used for Belgium only, and BE is the only value which is appropriate. So, a constant can be used in the corresponding DMEE trees.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The correction will be delivered via support packages. For preliniary correction perform the following manual corrections.</p>
+<p>Start transaction DMEE and do the following changes for the three DMEE trees listed (if they exist in your system).</p>
+<p>UMS3/BE_EVAT_RET_XML: <br/>Mark the node 'VATSENDING - DECLARER - COUNTRY'.<br/>On the Attributes Tab, change the Mapping Procedure to 'Constant'. Then, on the Source Tab, enter the Constant 'BE' (without any ', just BE).</p>
+<p>UMS3/BE_FOTV_RET_XML: <br/>Mark the node 'ns2:VATConsignment - ns2:VATDeclaration - ns2:Declarant - CountryCode'<br/>On the Attributes Tab, change the Mapping Procedure to 'Constant'. Then, on the Source Tab, enter the Constant 'BE' (without any ', just BE).</p>
+<p>UMS3/BE_FOTV_SPEC_RET:<br/>Mark the node 'ns2:VAT629Consignment - ns2:VAT629Declaration - ns2:Declarant - CountryCode'.<br/>On the Attributes Tab, change the Mapping Procedure to 'Constant'. Then, on the Source Tab, enter the Constant 'BE' (without any ', just BE).</p></div></div></div></div>

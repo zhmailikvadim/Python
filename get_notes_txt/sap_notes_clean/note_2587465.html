@@ -1,0 +1,60 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<p>You are using HANA System Replication in operation mode delta_datashipping and observe that the delta data shipment frequency decreases.</p>
+<p>Additionally, in a trace of a service with a big persistence, like indexserver, you notice a long time gap between the following trace lines:<br/>[0000]{-1}[-1/-1] 0000-00-00 00:00:00.000000 i PersistenceManag PersistentSpaceImpl.cpp : loadContainerDirectories - done.<br/>[0000]{-1}[-1/-1] 0000-00-00 00:00:00.000000 i Logger LoggerImpl.cpp : primaryBackupFinished(0x00000000000)</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>HSR</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>Due to a unfavorable implementation of page checks after a delta data shipment arrived on the secondary site, shipped pages were unnecessarily read from disk.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 1.0 database:
+<ul>
+<li>Revisions of SPS07 - SPS11</li>
+<li>Revisions &lt;= 122.09 (SPS12)<br/><br/></li>
+</ul>
+</li>
+<li>SAP HANA 2.0 database:
+<ul>
+<li>Revisions &lt;= 002.01 (SPS00)</li>
+<li>Revisions &lt;= 011.00 (SPS00)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>You are using SAP HANA System Replication with operation mode delta_datashipping.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA database Revisions:</p>
+<ul>
+<li>SAP HANA 1.0 database:</li>
+<ul>
+<li>Revisions &gt;= 122.10 (SPS12)</li>
+<li>or higher</li>
+</ul>
+<li>SAP HANA 2.0 database:
+<ul>
+<li>Revisions &gt;= 002.02 (SPS00)</li>
+<li>Revisions &gt;= 012.00 (SPS01) </li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p>and</p>
+<p>set the following internal configuration parameter on all sites and restart the secondary site afterwards:</p>
+<p>global.ini<br/>[system_replication]<br/>enable_cache_pages_for_preload_version_check = true</p>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>If possible, you can consider to switch your operation mode to logreplay. Please be informed, that on older Revisions you might encounter a hanging logreplay on secondary site. For details please refer to SAP Note <a href="/notes/2425682" target="_blank">2425682</a>.</li>
+</ul>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li>Enabling the page cache for the preload version check on secondary site using the previously described configuration parameter can yield to a higher memory consumption on secondary site.</li>
+<li>The issue described in this SAP Note does not affect the data consistency of the secondary site.</li>
+</ul>
+<p><strong>Disclaimer</strong></p>
+<p>The SAP HANA configuration parameter [system_replication] enable_cache_pages_for_preload_version_check is an internal parameter and may only be used in the context of this SAP Note. Using such a parameter requires that the SAP HANA system has the revision specified in the SAP Note, the described error situation has occurred. Using internal parameters outside of this given scope is not supported.</p></div></div></div></div>

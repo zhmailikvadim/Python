@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">After upgrade of a NetWeaver BW system to SAP_BW 7.50 SP04 or higher, you notice errors with Open ODS Views during query execution, or when activating a Composite Provider that hasOpen ODS Views as PartProvider. The Open ODS View has integer-like Keyfigures with SUM-aggregation.</p>
+<p>The error message when activating a Composite Provider is similar to: "Error: Datatype fixed18.0(8) of &lt;attrbute_name&gt; does not match datatype double(8) of attribute &lt;attribute_name&gt; in node &lt;node_name&gt;".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Open ODS View</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The Data Type Mapping for integer-like keyfigures with SUM-aggregation has been changed with 7.50 SP04. In older releases, the ABAP Type FLTP has been used, which corresponds to HANA Column Store Type double. With the introduction of the ABAP Type INT8, the mapping has been changed to BIGINT (HANA Column Store Type: fixed(18,0).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The Calculation Scenarios of Open ODS Views need to be recreated. There are two options:</p>
+<ol>
+<li>Report RSDDB_INDEX_CREATE_MASS with option "Create Views for all (FBPA) Open ODS Views" and uncheck option "Skip object if it already exists". Then the CalculationScenarios/ColumnViews of all Open ODS Views will be recreated.</li>
+<li>Report RSDDB_LOGINDEX_CREATE can be used to recreate the CalculationScenario/ColumnViews for single InfoProviders.</li>
+</ol>
+<p>If the Open ODS Views are consumed within Composite Providers, then the Composite Providers should be re-activated afterwards.</p></div></div></div></div>

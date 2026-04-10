@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>The implementation of this SAP Note has no impact on your existing functionality.</li>
+<li>This SAP Note delivers changes that are usually treated as manual activities within SNOTE (for example, packages, ABAP dictionary objects, message classes).</li>
+<li>After you implement this SAP Note, implement the primary SAP Note <a href="/notes/2409434" target="_blank">2409434</a>.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Transportation Management, TM Russian Localization, GU-12, GU-27, GU-27-U-VC, GU-38A, GU-29-U-VC, SMGS, Request, Waybill, ETRAN.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>The above mentioned symptoms appear in your system.</li>
+<li>This SAP Note is relevant only for Russian Federation.</li>
+<li>TMRU 100 SP03 must be installed</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Use transaction SNOTE to implement the attached correction instructions <strong>before</strong> you implement primary SAP Note <a href="/notes/2409434" target="_blank">2409434</a>. By doing so, report NOTE_2409419 will be installed in your system.</p>
+<ol>
+<li>Since report /TMRU/NOTE_2409419 has been developed to be executed in English only, we recommend that you log on in English.</li>
+<li>In transaction SA38, select report /TMRU/NOTE_2409419 and select “Execute”.</li>
+<li>Select "TESTRUN" and execute the report.</li>
+<li>Check the Simulation Log and ensure that all the messages have a green traffic light. If there are any warnings and/or error messages that you cannot solve yourself, create a customer incident under the component TM-LOC-RU.</li>
+<li>Go back (choose "Back" or F3), select "UPDATE &amp; ACTIVATE", and execute the report again.</li>
+<li>The system prompts you to either activate your objects online or in batch mode. The online mode is recommended as this enables you to see any activation issues immediately. Use the batch mode option only if activation in online mode fails with a time-out.</li>
+<li>Optional: Go back (choose "Back" or F3), select "GENVIEW", and generate maintenance dialogs.</li>
+<li>Within the Change Log, the system displays a list of all objects processed. Ensure that all the displayed messages are warnings or information messages. If there are any warnings and/or error messages that you cannot solve yourself, create a customer incident under the  component TM-LOC-RU. If you have selected to activate the objects in batch mode (see step 6), check the activation log of the job as explained in the message text of the Detailed Log.</li>
+<li>Optional: Go back (choose "Back" or F3), select "SHOWLOGS", and execute the report again.</li>
+<li>Select the node with the last execution log (according to the date and time) and ensure that there are only information messages (green traffic lights). If there are any warnings and/or error messages that you cannot solve yourself, create a customer incident under the  component TM-LOC-RU.</li>
+<li>If any inactive objects are detected during the release of your transports, execute the "UPDATE &amp; ACTIVATE" step again.</li>
+</ol>
+<div> </div>
+<div> </div></div></div></div></div>

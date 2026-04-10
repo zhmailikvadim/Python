@@ -1,0 +1,123 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Transaction KO8G is executed to perform a settlement, for example, to a production order, but the system displays the error message KD233. However, the same process works fine in KO88.<br/><br/> <img alt="KD233.PNG" class="img-responsive" src="/documents/customerkba/T1RTGKl0KElHLe2FUdcBblyCqk5Oz0eAw6HjLYPuVsw" title="KD233.PNG"/></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Financial Accounting (FI)</li>
+<li>Controlling (CO)</li>
+<li>SAP R/3</li>
+<li>SAP R/3 Enterprise 4.7</li>
+<li>SAP ERP Central Component</li>
+<li>SAP ERP</li>
+<li>SAP enhancement package for SAP ERP</li>
+<li>SAP enhancement package for SAP ERP, version for SAP HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>&lt;Execute&gt; the settlement proccess via KO8G.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The reason is that Transaction KO8G does not allow processing of orders category 4 and 10. This is because KO8G is a transaction made for massive processing of internal orders.<br/><br/>For example, is informed a order range from 1000 to 2000, KO8G will ONLY select orders within that range that are indeed internal orders and not the production orders in that range. <br/>In case there is no internal orders in the informed range the system should trigger the Error Message KD233.<br/><br/>Single processing in KO88 is possible for Production Orders, because the system will assume that the user actually wants to process the Production Order that he entered.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Since the transaction CO88 is made for Production Orders. If more restricted selection criteria are required (e.g., at the level of single order numbers), the program RKO7CO88 is recommended for use in the background via Transaction SE38.<br/>For RKO7CO88 a selection variant can be saved, and it behaves similar to transaction CO88, but with more restricted selection.<br/><br/>See below others settlement transactions:<br/><br/></p>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 797px;"><colgroup> <col width="177"/> <col width="234"/> <col width="212"/> <col width="174"/></colgroup>
+<tbody>
+<tr>
+<td class="oa1" height="32" width="177"></td>
+<td class="oa2" width="234"></td>
+<td class="oa2" width="212"></td>
+<td class="oa3" width="174"></td>
+</tr>
+<tr>
+<td class="oa4" height="67" width="177">
+<p>Internal Order</p>
+</td>
+<td class="oa5" width="234">
+<p>KO88  (Single Actuals)<br/>KO9E (Single Plan)</p>
+</td>
+<td class="oa5" width="212">
+<p>KO8G  (Collective. Actuals) <br/>KO9G  (Collective Plan)</p>
+</td>
+<td class="oa6" width="174">
+<p>CO-OM-OPA-F</p>
+</td>
+</tr>
+<tr>
+<td class="oa4" height="67" width="177">
+<p>Project <br/>WBS-Element</p>
+</td>
+<td class="oa5" width="234">
+<p>CJ88  (Single. Actuals)<br/>CJ9E  (Single Plan)</p>
+</td>
+<td class="oa5" width="212">
+<p>CJ8G  (Collective Actuals)<br/>CJ9G  (Collective Plan)</p>
+</td>
+<td class="oa6" width="174">
+<p>PS-COS-PER-SE<br/>CO-OM-OPA-F</p>
+</td>
+</tr>
+<tr>
+<td class="oa4" height="67" width="177">
+<p>Sales Order</p>
+</td>
+<td class="oa5" width="234">
+<p>VA88<br/><br/></p>
+</td>
+<td class="oa5" width="212"></td>
+<td class="oa6" width="174">
+<p>CO-PC-OBJ-MTO<br/>SD-SLS-GF-CO</p>
+</td>
+</tr>
+<tr>
+<td class="oa4" height="67" width="177">
+<p>Production Order</p>
+</td>
+<td class="oa5" width="234">
+<p>CO88<br/><br/></p>
+</td>
+<td class="oa5" width="212"></td>
+<td class="oa6" width="174">
+<p>CO-PC-OBJ-PER</p>
+</td>
+</tr>
+<tr>
+<td class="oa4" height="67" width="177">
+<p>Investment Order Project</p>
+</td>
+<td class="oa5" width="234">
+<p>KO88 / CJ88  (Single Actuals)<br/>KOB5 / CJIC  (Single Actuals)</p>
+</td>
+<td class="oa5" width="212"></td>
+<td class="oa6" width="174">
+<p>IM-FA-IE</p>
+</td>
+</tr>
+<tr>
+<td class="oa4" height="67" width="177">
+<p>Assets</p>
+</td>
+<td class="oa5" width="234">
+<p>AIBU<br/>AIAB</p>
+</td>
+<td class="oa5" width="212"></td>
+<td class="oa6" width="174">
+<p>FI-AA<br/>IM-FA</p>
+</td>
+</tr>
+<tr>
+<td class="oa4" height="67" width="177">
+<p>Cost Objects</p>
+</td>
+<td class="oa5" width="234">
+<p>KK88  (Single Actuals)<br/>KK87  (Product cost collector)</p>
+</td>
+<td class="oa5" width="212">
+<p>KK89  (Collective Actuals)</p>
+</td>
+<td class="oa6" width="174">
+<p>CO-PC-OBJ-PER</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p id="">SAP Note:<a href="https://me.sap.com/notes/3165638" target="_blank"> 3165638</a> - Single settlement: Message KD233 No settlement for this sender</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>KO8G, KO88, KD 233, Orders, Different, Others, Kind, Type</p></div></div></div></div>

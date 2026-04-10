@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Msg 2116 when creating a trigger that selects text or image columns from the inserted or deleted trigger tables.</p>
+<p style="padding-left: 30px;"><strong>Msg: 2116, Level: 16, State: 1</strong><br/><strong>CREATE TRIGGER failed because selecting from a TEXT, IMAGE, UNITEXT or off-row Java datatype column of the inserted or deleted table is not supported.</strong></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Sybase Adaptive Server Enterprise (ASE) 15.5</li>
+<li>SAP Adaptive Server Enterprise (ASE) 15.7</li>
+<li>SAP Adaptive Server Enterprise (ASE) 16.0</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>1.  create table table_text_propagation_test (id int identity not null, a varchar(255) null, txt text null)<br/>     go</p>
+<p>2.  create table table_text_propagation_test_dest (id int identity not null, a varchar(255) null, txt text null)<br/>     go</p>
+<p>3.  create trigger i_table_text_propagation_test on table_text_propagation_test for insert as<br/>     insert into table_text_propagation_test_dest (a, txt) select a, txt from inserted<br/>     go</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Starting with ASE 15.0.3 ESD 4, 15.5 ESD 2, and 15.7, ASE started raising error 2116 if the code for a CREATE TRIGGER attempted to reference a LOB (text, image, unitext) column from the trigger's <em>inserted</em> or <em>deleted</em> tables.  Selecting text or image data from the inserted/deleted pseudotables in triggers has never been supported;   the documentation has always stated that it cannot be done although ASE hasn't previously enforced the restriction.  For more details, see <a href="https://wiki.scn.sap.com/wiki/display/SYBASE/ASE+Error+2116" target="_blank">https://wiki.scn.sap.com/wiki/display/SYBASE/ASE+Error+2116</a></p>
+<p>Booting ASE with traceflag 1716 (put -T1716 in the dataserver parameter list in the RUN_SERVER file) will give  the same behavior as pre-15.0.3 ESD 4 versions (including the errors and incorrect results when selecting text values from the <em><strong>deleted</strong></em> pseudotable).</p>
+<p>Feature request CR <a href="https://me.sap.com/notes/1904061" target="_blank">593730</a> is open to add support for selecting text and image columns from the inserted and deleted tables in triggers.<br/>This functionality was then added in 16.0 SP04 PL04 under CR 827694 when the "functionality group" sp_configure option is set on.<br/>CR 593730 remains open to allow it even when "functionality group" is not active.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>A Feature Request has been logged under FR 593730. The Feature Request will be considered in terms of future product development when considering possible new features in the next major release. Please note that the Feature Request may or may not be included depending on various factors.</p></div></div></div></div>

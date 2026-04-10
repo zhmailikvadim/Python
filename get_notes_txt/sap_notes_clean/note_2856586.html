@@ -1,0 +1,59 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<p>You notice that your indexserver crashes with the following callstack:</p>
+<p style="padding-left: 30px;">[CRASH_CONTEXT] Context info: (0000-00-00 00:00:00 000 Local)<br/>----&gt; Crashing context information &lt;----<br/>[...]<br/>Dump at QueryExecution: <br/>{<br/><strong>Join_hashed_disjunctive::do_fetch</strong><br/>Buffer id: XX<br/>Operator id: XX<br/>}<br/>[...]</p>
+<p style="padding-left: 30px;">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)<br/>----&gt; Symbolic stack backtrace &lt;----<br/> 0: __field__String <br/> 1: expr::Dispatcher&lt;&gt;::Dispatch() <br/> 2: expr::Invoker1&lt;expr::param::A, expr::param::R&gt;::Run() <br/> 3: expr::Invoker2&lt;expr::param::Q, expr::param::R, expr::param::R&gt;::Run() <br/> 4: expr::Dispatcher&lt;&gt;::Dispatch() <br/> 5: expr::Evaluator::DoRun() <br/> 6: ptime::JoinExpression::operator()<br/> 7: ptime::fill_result_buffer() <br/> 8: <strong>ptime::Join_hashed_disjunctive::do_fetch</strong>()<br/>[...]</p>
+<p style="padding-left: 30px;">[CRASH_STACK] Stacktrace of crash: (000-00-00 00:00:00 000 Local)<br/>----&gt; Symbolic stack backtrace &lt;----<br/> 0: __trex_field_IntegerNotNull__ + 0x16<br/> 1: expr::Dispatcher&lt;43&gt;::Dispatch(expr::Evaluator&amp;, expr::Expression const&amp;) + 0x5b<br/> 2: expr::Dispatcher&lt;7&gt;::Dispatch(expr::Evaluator&amp;, expr::Expression const&amp;) + 0x76<br/> 3: expr::Invoker2&lt;expr::param::Q, expr::param::R, expr::param::R&gt;::Run(expr::Evaluator&amp;, expr::Expression const&amp;) + 0xc1<br/> 4: expr::Invoker2&lt;expr::param::Q, expr::param::R, expr::param::R&gt;::Run(expr::Evaluator&amp;, expr::Expression const&amp;) + 0x65<br/> 5: expr::Evaluator::DoRun(expr::Expression const&amp;) + 0x46<br/> 6: ptime::JoinExpression::operator()<br/> 7: ptime::fill_result_buffer<br/> 8: <strong>ptime::Join_hashed_disjunctive::do_fetch</strong><br/> [...]</p>
+<p style="padding-left: 30px;">[CRASH_STACK] Stacktrace of crash: (000-00-00 00:00:00 000 Local)<br/>----&gt; Symbolic stack backtrace &lt;----<br/> 0: ptime::fill_result_buffer()<br/> 1: <strong>ptime::Join_hashed_disjunctive::do_fetch()</strong><br/> 2: ptime::Table::fetch()<br/> [...]</p>
+<p style="padding-left: 30px;">[CRASH_STACK] Stacktrace of crash: (000-00-00 00:00:00 000 Local)<br/>----&gt; Symbolic stack backtrace &lt;----<br/> 0: ptime::qef_hash&lt;ptime::JoinHashEntry&gt;::next()<br/> <strong>1: ptime::Join_hashed_disjunctive::do_fetch()</strong><br/> 2: ptime::Table::fetch()<br/> 3: ptime::SubtreeParallelJob()<br/> [...]<br/><br/></p>
+<p style="padding-left: 30px;">[CRASH_STACK] Stacktrace of crash: (0000-00-00 00:00:00 000 Local)<br/>----&gt; Symbolic stack backtrace &lt;----<br/> 0: __trex_field_NVarchar3__<br/> 1: expr::Dispatcher&lt;7&gt;::Dispatch()<br/> 2: expr::Invoker2&lt;expr::param::Q, expr::param::R, expr::param::R&gt;::Run()<br/> 3: expr::Invoker2&lt;expr::param::Q, expr::param::R, expr::param::R&gt;::Run()<br/> 4: expr::Evaluator::DoRun()<br/> 5: ptime::JoinExpression::operator()<br/> 6: ptime::fill_result_buffer()<br/> 7: <strong>ptime::Join_hashed_disjunctive::do_fetch</strong>()<br/> 8: ptime::Table::fetch()<br/> [...]</p>
+<p>Alternatively, you may have wrong results to a query involving row-store tables and the disjunctive join operator.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">SIGSEGV</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, fetching data from <em>disjunctive hash join</em> operator applied to multiple row-store tables can lead in rare cases to a crash or wrong results.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 1:</li>
+<ul>
+<li>Revisions &lt;=122.30 (SPS12)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>Execution plan of the statement contains operator DISJUNCTIVE HASH JOIN</li>
+<li>Tables used in the DISJUNCTIVE HASH JOIN operator are row-store tables (can be temporary tables of intermediate results)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 1:
+<ul>
+<li>Revisions &gt;= 122.31 (SPS12)<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>You may change the problematic query to avoid using OR operation in the join condition.<br/><br/></li>
+<li>You may use SQL hints, for example DISJ_JOIN_INTO_UNION, to influence the execution plan if Disjunctive Hash Join is applied to two tables only (see SAP Note <a href="/notes/2142945" target="_blank">2142945</a>).<br/><br/></li>
+<li>You may fully disable usage of <em>disjunctive hash join</em> operator by an online INI configuration:</li>
+</ul>
+<ol>
+<li><span style="font-size: 14px;">Disable Usage of Disjunctive Hash Join<br/>ALTER SYSTEM ALTER CONFIGURATION ('indexserver.ini', 'SYSTEM') SET ('sql', 'disjunctive_hash_join_enabled')= 'false' WITH RECONFIGURE;<br/><br/></span></li>
+<li><span style="font-size: 14px;">After disabling the usage of Disjunctive Hash Join, you have to invalidate the plan cache entry for the query causing the crash. <br/><br/></span></li>
+<ul>
+<li>Lookup the statement hash of the failing query. <br/>E.g. from the crashdump:<br/>Dump at QueryExecution: <br/>{<br/>Join_hashed_disjunctive::do_fetch<br/>Buffer id: x<br/>Operator id: x<br/>}<br/>ctx update transactionID: -1<br/>ctx transactionID : x<br/>ctx connectionID : x<br/>ctx logical connectionID: x<br/>ctx statementID : x<br/><strong>ctx statement hash : &lt;statementhash&gt;<br/></strong>ctx sqlusername : x<br/>ctx appusername : x<br/>[OK]</li>
+<li>
+<p>Lookup the plan_id of the query in the SQL Plan Cache using the statement hash in below command:<br/>SELECT plan_id FROM M_SQL_PLAN_CACHE WHERE STATEMENT_HASH = '&lt;statementhash&gt;';</p>
+</li>
+<li>
+<p>Invalidate plan_id from step 2 using below command:<br/>ALTER SYSTEM RECOMPILE SQL PLAN CACHE ENTRY &lt;plan_id&gt;;</p>
+</li>
+</ul>
+</ol>
+<p><strong>Disclaimer</strong></p>
+<p>The SAP HANA configuration parameter "[sql] disjunctive_hash_join_enabled" is an internal parameter and may only be used in the context of this SAP Note. Using such a parameter requires that the SAP HANA system has the revision specified in the SAP Note. Using internal parameters outside of this given scope is not supported. Please unset this parameter once you have upgraded to a revision containing the permanent solution.</p></div></div></div></div>

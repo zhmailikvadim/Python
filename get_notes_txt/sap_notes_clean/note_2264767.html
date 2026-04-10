@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">ASE may not eliminate partitions correctly when a composite key is used for table range partitioning.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Adaptive Server Enterprise (ASE) 16.0 SP02 PL01 but not limited</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>
+<p>Create a table:<em><br/>  <br/></em><strong>create table test (a int,b int) </strong></p>
+</li>
+<li>
+<p>Add range partitions:<em><br/><br/></em><strong>alter table test</strong><br/><strong>partition by range (a, b)</strong><br/><strong>(partition_1 values &lt;= (0, 4) on segment1,</strong><br/><strong>partition_2 values &lt;= (0, MAX) on segment1,</strong><br/><strong>partition_3 values &lt;= (1, 2) on segment1,</strong><br/><strong>partition_4 values &lt;= (1, MAX) on segment1</strong>)</p>
+</li>
+<li>
+<p>Insert one row of data per each partition<br/><strong><em><br/></em>insert into test values (0,1)</strong><br/><strong>insert into test values (0,5)</strong><br/><strong>insert into test values (1,1)</strong><br/><strong>insert into test values (1,3)</strong></p>
+</li>
+<li>To see the query plan for a query, use:<br/> <br/><strong>set showplan on</strong><br/> </li>
+<li>Select data coming from partition_1 and partition_2 only by running this query:<br/> <br/><strong>select * from test where a=0</strong></li>
+</ol>
+<pre>/* showplan output includes :</pre>
+<pre><br/>        STEP 1<br/>        The type of query is SELECT.<br/>        1 operator(s) under root<br/>       |ROOT:EMIT Operator (VA = 1)<br/>       |   |SCAN Operator (VA = 0)</pre>
+<pre>       |   |  FROM TABLE<br/>       |   |  test<br/>       |   | <span> <strong>[ Partitions Used: 3, Eliminated: 3]</strong>
+</span><br/>       |   |  [ Eliminated Partition ids : 4 5 6 ]<br/>       |   | <span> <strong>[ Used Partition ids : 1 2 3 ]</strong>
+</span><br/>       |   |  Table Scan.<br/>       |   |  Forward Scan<br/>       ......</pre>
+<pre> a           b<br/> ----------- -----------<br/>           0           1<br/>           0           5<br/>    <br/>*/</pre>
+<p style="padding-left: 30px;"><strong>NOTE: </strong><span>Partition 3 is used, although it should have been eliminated based on the where clause.</span></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul>
+<li>This issue has no impact on the actual result of the query, but only on the optimiser performing an unncecessary partition scan. This may potentially lead to non-optimal query performance, but not to the wrong set of rows being returned by ASE.<br/> </li>
+<li>This issue is addressed in SAP <strong>CR 794368</strong>. Its descrioption redas, "Incorrect table partition elimination when a composite key is used for table range partitioning".</li>
+</ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul>
+<li>
+<div class="WordSection1">There is currently no target Fix Pack or Service Pack scheduled for SAP <strong>CR 794368</strong>. It is being reviewed by our Product Group. Subscribe to this KBA to be automatically notified when SAP <strong>CR 794368</strong> is fixed.<br/>  </div>
+</li>
+<li>
+<div class="WordSection1"><span style="text-decoration: underline;">Workaround:</span> For the time being, the only known way to avoid this issue is to use single key range paritioning.</div>
+</li>
+</ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul>
+<li>SAP KBA <a href="https://me.sap.com/notes/2077419" target="_blank">2077419</a> - Targeted ASE 15.x Release Schedule and CR list Information</li>
+<li>SAP KBA <a href="https://me.sap.com/notes/2075653" target="_blank">2075653</a> - Targeted ASE 16.0 Release Schedule and CR list Information</li>
+<li>SAP KBA <a href="https://me.sap.com/notes/1904061" target="_blank">1904061</a> for how to check the current status of an ASE CR (Change Request).</li>
+</ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>794368, CR794368, non-optimal, query, performance</p></div></div></div></div>

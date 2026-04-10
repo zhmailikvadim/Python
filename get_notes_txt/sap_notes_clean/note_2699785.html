@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>HTML Interpretation on a field is not rendered correctly and is cut off when using a Style with the value "color:invalid".</li>
+<li>Only text up to the point where the Style attribute is set is visible. The remaining text is cut off and not rendered when using CR for Eclipse runtime.</li>
+<li>The HTML is correctly rendered in Crystal Reports 2016 and in BI 4.2 SDKs</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">export, html interpretation, truncated, render, cut off</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment</strong></p>
+<ul>
+<li>SAP Crystal Reports, version for Eclipse SP23</li>
+<li>crjava-runtime_12.2.224.zip</li>
+</ul>
+<p><br/><strong>Steps to Reproduce</strong></p>
+<ol>
+<li>Open SAP Crystal Reports 2016 designer</li>
+<li>Create a new report</li>
+<li>Create a formula field</li>
+<li>Using the Crystal Syntax introduce the following fromula : '&lt;h3&gt;hello&lt;span style="color:invalid"&gt;bluetest&lt;/span&gt;hello&lt;/h3&gt;'</li>
+<li>Drag and drop the new created formula into the report and set the Text interpretation into HTML Text</li>
+<li>Run the customer application in order to generate the new created the report</li>
+<li>Notice the span tag is not interpreted and we do only get the text result : hello The expected result is "hellobluetesthello"</li>
+</ol>
+<p><br/><strong>Cause</strong></p>
+<p>The values of color should be color_name(red), hex_number(#ff0000), rgb_number(rgb(255,0,0)), inherit.</p>
+<p>The root cause of this issue is that “invalid” isn't a correct value of color.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The behavior of SAP Crystal Reports 2016 Designer is inheriting color from parent element even the color value is illegal. We have aligned Crystal Reports for Eclipse SP24 with this SAP Crystal Reports 2016 behavior, but please note "color:invalid" is still not encouraged.</p>
+<p>To download the latest Support Packages of SAP Crystal Reports, version for Eclipse, visit:</p>
+<p><a href="https://www.crystalreports.com/crystal-reports-eclipse/" target="_blank">https://www.crystalreports.com/crystal-reports-eclipse/</a></p></div></div></div></div>

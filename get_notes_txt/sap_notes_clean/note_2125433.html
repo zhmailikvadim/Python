@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Report RPLDSNF0 is not working anymore after release PV2 of the DSN or after the implementation of note 2120783. An unexpected error interrupts the process of bloc S21.G00.30.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>There are two possibilities:</p>
+<ul>
+<li>Implement the attached correction instructions or the corresponding HR-SP or CLC.</li>
+<li>As an alternative you can make some entries in following tables:</li>
+<ul style="list-style-type: lower-alpha;">
+<li>In transaction SE16N, enter two new lines in table T5FDSNPADEF with following values</li>
+<ul>
+<li>Parameter 30_018_FIELD, text: Champ de l'infotype 0105 pour S21.G00.30.018</li>
+<li>Parameter 30_018_SUBTY, text: Subtype de l'infotype 0105 pour S21.G00.30.018</li>
+</ul>
+<li>In transaction SM30 enter two new lines for view V_T5FDSNPAVAL:</li>
+<ul>
+<li>Parameter 30_018_FIELD should have value USRID_LONG</li>
+<li>Parameter 30_018_SUBTY should have value FRMA</li>
+</ul>
+</ul>
+</ul></div></div></div></div>

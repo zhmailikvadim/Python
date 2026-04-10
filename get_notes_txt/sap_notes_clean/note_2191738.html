@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You get the error message FGL_PRE_CHECK 030 (Field ** of index table ** is missing in table **. See SAP Note 2191738) in the S/4HANA Pre-Transition Check for FIN, executed before the upgrade to S/4HANA.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FGL_PRE_CHECK030, BSIS, BSAS, BSIK, BSAK, BSID, BSAD, FAGLBSIS, FAGLBSAS.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong><span style="font-size: 14px;">Before the Technical Upgrade</span></strong></p>
+<ol>
+<li>Add each missing index table field to the table BKPF (if it is a header field) or to the table BSEG/BSEG_ADD (if it is a line item field).</li>
+<li>Develop and execute a program to fill these fields in BKPF/BSEG/BSEG_ADD from the index tables.</li>
+</ol>
+<p>If the field length of the index table field is greater than 10 characters, this procedure is only possible in case BSEG is not a cluster table anymore. In contrast to Transparent Tables, Cluster Tables restrict the field length to 10 characters.<br/>During technical upgrade BSEG is tranformed into a Tranparent Table. As the error message in the Pre-Transistion check is skippable, you can add the fields after the technical upgrade and follow the steps described in the following section.<br/>Steps to be performed in order to skip a check are described in the blog accessible via the first link in note 2399707. If error message is not skippable, corrections contained in note 2716937 are possibly not implemented in your system.</p>
+<p><strong>After the Technical Upgrade</strong></p>
+<p>If you skip the error in your ERP system before the technical upgrade, the new views (see below) cannot be activated since the necessary fields are not available in the underlying tables. In this case you need to perform the following steps:</p>
+<ol>
+<li>Add the missing index table fields to the table BKPF (if it is a header field) or to the table BSEG/BSEG_ADD (if it is a line item field).</li>
+<li>Manually activate the views BSIS, BSAS, BSIK, etc. that could not be activated as part of the technical upgrade.</li>
+<li>Develop and execute a program to fill these fields in BKPF/BSEG/BSEG_ADD from the *_BCK tables.</li>
+</ol>
+<p><strong>Background</strong></p>
+<p>The index tables BSIS, BSAS, BSIK etc. get renamed from BSIS_BCK, BSAS_BCK, BSIK_BCK etc. during upgrade.</p>
+<p>Tables BSIS, BSAS, BSIK etc. are then replaced with <span style="text-decoration: underline;">views</span> BSIS, BSAS, BSIK etc., also known as <em>compatibility views</em> or <em>equally-named views</em>.</p>
+<p>These views select data from tables BKPF/BSEG/BSEG_ADD. All fields added by the customer or partner to BSIS, BSAS, BSIK etc. must also exist in BKPF or BSEG/BSEG_ADD, otherwise it is not possible to create these views and the upgrade runs into errors.</p>
+<p>The step "<em>Develop and execute a program to fill these fields in BKPF/BSEG/BSEG_ADD</em>" of the solution proposal is necessary to prevent a data loss.</p></div></div></div></div>

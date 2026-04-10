@@ -1,0 +1,52 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>SAP Contact Center jobs stopped</li>
+<li>New statistics have not been processed</li>
+<li>Running a full OLAP process generates the error</li>
+<ul>
+<li>File system error: A string store or binary store with a compatibility level of '1050' is at the maximum file size of 4 gigabytes.</li>
+<li>To store additional strings, you can change the StringStoresCompatibilityLevel property of the associated dimension or distinct count measure to '1100' and reprocess.</li>
+<li>This option is only available on databases with a compatibility level of '1100' or higher. Physical file: \\?\C:\Program Files\Microsoft SQL Server\...</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Contact Center 7.0</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Connect to the Reporting server Analysis Services using MSSQL Management Studio</li>
+<li>Select the OLAP in question and run and Process</li>
+<li>Error is triggered after some time</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>
+<div>3rd party issue</div>
+</li>
+<li>Dimension attributes or partitions that exceed the 4 GB file size limit</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>
+<div>This issue is not an SAP Contact Center matter and needs to be addressed by the database provider.</div>
+</li>
+<li>Please check with your DBA and consult the following articles:</li>
+<ul>
+<li>"<a href="https://docs.microsoft.com/en-us/sql/analysis-services/multidimensional-models/configure-string-storage-for-dimensions-and-partitions" target="_blank">Configure String Storage for Dimensions and Partitions</a>"</li>
+<li>"<a href="https://docs.microsoft.com/en-us/sql/analysis-services/multidimensional-models/compatibility-level-of-a-multidimensional-database-analysis-services" target="_blank">Compatibility Level of a Multidimensional Database (Analysis Services)</a>"</li>
+</ul>
+<li><strong><span style=" background-">Make sure that proper backups of the databases are performed before making any changes and test in QA or Dev system before changing production</span></strong></li>
+<li>If the above does not solve the issue, please contact the provider for further assistance</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li>For other important Knowledge Base Articles and SAP Notes please refer to Master SAP Note <a href="/notes/1867297" target="_blank">1867297</a></li>
+<li>If further investigation is required, then please look at the following SAP Notes</li>
+<ul>
+<li><a href="/notes/1753539" target="_blank">1753539</a> - SAP BCM 7.0 &amp; SAP Contact Center 7.0 - Required information and logs for troubleshooting</li>
+<li><a href="/notes/1753607" target="_blank">1753607</a> - SAP Contact Center 7.0 - Server and client loglevels
+<script language="JavaScript" type="text/javascript"></script>
+</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>CCtr, SCC, CCI, CRM-CCI, SAP Business Communication Management 7, Contact Center, Telephony, e-mail, Chat, Communications, OLAP,</p></div></div></div></div>

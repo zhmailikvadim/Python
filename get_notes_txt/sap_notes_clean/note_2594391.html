@@ -1,0 +1,86 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>How is a report generated?</li>
+<li>
+<div>What is the order in which a report is processed in Crystal Reports?</div>
+</li>
+<li>
+<div>What is the multi-pass reporting flow used in Crystal Reports?</div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Crystal Reports 2016</li>
+<li>SAP Crystal Reports 2020</li>
+<li>SAP Crystal Reports 2025  </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>
+<div>When a report is refreshed, Crystal Reports uses multi-pass to generate the report.<br/> </div>
+</li>
+<li><strong>What is a pass?</strong><br/>A pass is a process that Crystal Reports uses each time the data is read or manipulated. Depending on the complexity of the report Crystal Reports may make 1, 2, or 3 passes over the data. This feature allows for complex reporting and formula manipulation.<br/>             <br/>  </li>
+<li>Below is the flow-chart of the pass used by Crystal Reports, with a brief explanation of what happen in each pass.<br/>    <br/><img alt="flow-chart-CrystalReports.jpg" class="img-responsive" src="/documents/customerkba/zm96PPzmiSImzaB4bmpVHOl05iwkBRzro7WxpZb-9XI" title="flow-chart-CrystalReports.jpg"/>  <br/>     <br/>      <br/>  </li>
+<li><strong>Pre-pass #1</strong><br/>  <br/>When previewing a report, the first elements to be evaluated are "constant" formulas. Constant formulas are those that have a constant value for the entire report. They do not change from record to record. <br/>   <br/>For example, 100* 30 would be a constant formula. Constant formulas are evaluated at the beginning of the print generation process and are never evaluated again. This process is known as "BeforeReadingRecords." If you were to place a constant formula field (i.e., 100*30) in the Details section, the result would be 3000 for each record displayed.<br/>       <br/>    <br/>    </li>
+<li><strong>Pass #1</strong><br/>
+<p class="p">After the "BeforeReadingRecords" process has taken place, Crystal Reports begins reading the database records. During the record reading process, the following will occur:</p>
+<ul class="ul" id="loio4775cbb16e041014910aba7db0e91070__ul_A915F49B405048CAA6DC227F953EE1E1">
+<li class="li">
+<p class="p">Record retrieval. Where possible record selection and sorting are pushed down to the database in this step.</p>
+</li>
+<li class="li">
+<p class="p">Evaluation of recurring formulas. These formulas are those that contain database fields but do not contain references to subtotals or summary information. This evaluation time is known as "WhileReadingRecords." Formulas that contain references to subtotals or summary information are processed in the second pass.</p>
+</li>
+<li class="li">
+<p class="p">Application of the record selection locally. If the record selection is too complex to be pushed down to the database, it is applied by Crystal Reports in this step.</p>
+</li>
+<li class="li" id="loio4775cbb16e041014910aba7db0e91070__li_5BCE69003CF44603AFC83A8B64BAFFAB">
+<p class="p">Application of the saved data record selection formulas. When records return to the report, they are further filtered through any existing saved data formulas.</p>
+</li>
+</ul>
+<ul class="ul" id="loio4775cbb16e041014910aba7db0e91070__ul_40DA6D1C47194EB2AB5EA96329EE45CC">
+<li class="li">
+<p class="p">Sorting, grouping, and totaling. In this step, Crystal Reports sorts the records, separates them into groups, and then calculates the subtotals and summaries needed for each group.</p>
+</li>
+<li class="li">
+<p class="p">Cross-Tab, chart, and map generation. Only Cross-Tabs, charts, and maps that are based entirely on database fields and recurring formulas are generated in Pass 1. If these objects include running totals and/or PrintTime formulas, they are generated in Pass 2.</p>
+</li>
+<li class="li" id="loio4775cbb16e041014910aba7db0e91070__li_8736CB8636064976A07F4939F4C65154">
+<p class="p">Storage of saved data. After the totaling process is complete, all of the records and totals are stored in memory and to temporary files. Crystal Reports does not read the database again, but instead uses this saved data during all subsequent processing.</p>
+</li>
+</ul>
+</li>
+<li><strong>Pre-pass #2</strong><br/>   <br/>During Pre-Pass 2, Crystal Reports orders the groups in the report for Top/Bottom N or Hierarchical Grouping. The records are not read in this process, instead Crystal Reports only looks at group instances from Pass 1, and takes the Top N as appropriate, or orders the groups based on the Hierarchical Grouping settings specified.<br/>   <br/>     <br/>   </li>
+<li><strong>Pass #2 </strong>
+<p class="p">Crystal Reports enters the second pass through the data to format pages. The pages are formatted on demand. This means that Crystal Reports will not format a page until it is requested by the user, or until it is required for the total page count in Pass 3.</p>
+<p class="p">During page formatting, Crystal Reports does the following:</p>
+<ul class="ul" id="loio4775d8fd6e041014910aba7db0e91070__ul_DF1651E807E0492494C8F0154045C363">
+<li class="li">
+<p class="p">Group selection formulas.</p>
+</li>
+<li class="li">
+<p class="p">Running totals.</p>
+</li>
+<li class="li">
+<p class="p">Calculation of formulas marked "WhilePrintingRecords."</p>
+<p class="p">These are formulas that contain references to subtotals or summary information, also known as "PrintTime" formulas. This evaluation time is known as "WhilePrintingRecords."</p>
+</li>
+<li class="li">
+<p class="p">Cross-Tabs, charts, and maps.</p>
+<p class="p">Cross-Tabs, charts, and maps that include running totals and/or PrintTime formulas, and charts that are based on Cross-Tabs are generated in Pass 2.</p>
+</li>
+<li class="li">
+<p class="p">OLAP grids.</p>
+</li>
+<li class="li">
+<p class="p">Subreports.</p>
+</li>
+<li class="li">
+<p class="p">Generation of Pages on Demand.</p>
+</li>
+</ul>
+     <br/>    </li>
+<li><strong>Pass #3</strong><br/>  <br/>This pass is only used when the total page number is used on the report. This means, the whole report needs to be generated, in order to be able to display the total page number on the report.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>CR, Flow-Chart, Evaluation Time Formula</p></div></div></div></div>

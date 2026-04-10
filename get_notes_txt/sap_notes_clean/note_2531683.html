@@ -1,0 +1,83 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>
+<div>Relay Server Outbound Enabler log shows:<br/><br/><strong>E. 2017-08-31 05:48:16.483-0300 &lt;Backend-0001&gt; OEE1045: System error [SYS0: no system error] while interrupting send with the back-end server for sidx=1026 socket=049bf630 sfp=abed40cf</strong></div>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>RSOE version 16 and above</li>
+<li>Relay Server version 16 and above</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The primary cause of error  'OEE_BACKEND_IO_SYS_ERROR' is connectivity problems to the backend-end server that lead to failed socket operations.<br/>Here are some examples:</p>
+<ol>
+<li>An async socket Send() operation has failed (to actually place the send bytes request).</li>
+<li>An async socket Receive() operation has failed (to actually place the receive bytes request).</li>
+<li>An async socket Receive() has completed but with error status.</li>
+<li>A pending async socket Receive() (after completing successfully at ‎‎#2) was interrupted.</li>
+<li>An async socket Send() has completed but with error status.</li>
+<li>A pending async socket Send() (after completing successfully at  #1) was interrupted.</li>
+<li>A pending async socket Close() came back with an error.</li>
+</ol>
+<p>It is also possible that an OEE_BACKEND_IO_SYS_ERROR could trigger an OEE_SESSION_ACCESS_FAILED.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>
+<div>Identify the root cause by whatever tools are available.  Once the root cause is understood a specific resolution can be found.</div>
+</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>Message description from the  SAP SQL Anywhere Doc (<a class="urLnk urVt1" href="http://dcx.sap.com/index.html#sqla170/en/html/80bff46e6ce21014871683bfe3d5289f.html" id="DEFAULT_GR_C_refs_1_4" target="_blank">Outbound Enabler error messages</a>) also listed in References section:<br/><span class="ph" style="outline-width: medium !important; outline-style: none !important; outline-"><span class="dcx_highlight_left" style="outline-width: medium !important; outline-style: none !important; outline- background-">OEE1045</span>: System error [SYS%1: %2] while %3 with the back-end server for sidx=%4 socket=%5 sfp=%6</span></p>
+<div class="body refbody" style="font-size: small; font-family: sans-serif; white-space: normal; word-spacing: 0px; text-transform: none; font-weight: normal;  outline-width: medium !important; font-style: normal; outline-style: none !important; orphans: 2; widows: 2; margin: 0px; letter-spacing: normal; outline- background- text-indent: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration- padding: 0px;">
+<div class="section" style="outline-width: medium !important; outline-style: none !important; margin: 0px; outline- padding: 0px;">
+<div class="tablenoborder" style="outline-width: medium !important; outline-style: none !important; margin: 0px; outline- padding: 0px;">
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" rules="all" style="font-size: 13px; border-collapse: collapse;  outline-width: medium !important; text-align: left; outline-style: none !important; border-spacing: 0px; margin: 12pt; outline- border: white 1px solid; padding: 0px;" summary=""><colgroup style="outline-width: medium !important; outline-style: none !important; outline-"> <col style="outline-width: medium !important; outline-style: none !important; outline-" width="50%"/> <col style="outline-width: medium !important; outline-style: none !important; outline-" width="50%"/></colgroup>
+<tbody style="outline-width: medium !important; outline-style: none !important; outline-">
+<tr style="vertical-align: top; margin-top: 6pt; outline-width: medium !important; text-align: left; outline-style: none !important; outline-">
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">Error code</td>
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">1045</td>
+</tr>
+<tr style="vertical-align: top; margin-top: 6pt; outline-width: medium !important; text-align: left; outline-style: none !important; outline-">
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">Error constant</td>
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">OEE_BACKEND_IO_SYS_ERROR</td>
+</tr>
+<tr style="vertical-align: top; margin-top: 6pt; outline-width: medium !important; text-align: left; outline-style: none !important; outline-">
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">Parameter 1</td>
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">System error code</td>
+</tr>
+<tr style="vertical-align: top; margin-top: 6pt; outline-width: medium !important; text-align: left; outline-style: none !important; outline-">
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">Parameter 2</td>
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">System error message</td>
+</tr>
+<tr style="vertical-align: top; margin-top: 6pt; outline-width: medium !important; text-align: left; outline-style: none !important; outline-">
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">Parameter 3</td>
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">The Outbound Enabler context where the I/O error occurred (for technical support)</td>
+</tr>
+<tr style="vertical-align: top; margin-top: 6pt; outline-width: medium !important; text-align: left; outline-style: none !important; outline-">
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">Parameter 4</td>
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">Session index (for technical support)</td>
+</tr>
+<tr style="vertical-align: top; margin-top: 6pt; outline-width: medium !important; text-align: left; outline-style: none !important; outline-">
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">Parameter 5</td>
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">Socket handle (for technical support)</td>
+</tr>
+<tr style="vertical-align: top; margin-top: 6pt; outline-width: medium !important; text-align: left; outline-style: none !important; outline-">
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">Parameter 6</td>
+<td style="font-size: small; font-family: 'Arial Unicode MS', Arial, sans-serif; vertical-align: top; background: #eeeeee; outline-width: medium !important; padding-bottom: 1pt; text-align: left; padding-top: 1pt; outline-style: none !important; padding-left: 6pt; margin: 0px; outline- padding-right: 6pt; border: white 2px solid;" valign="top">Session fingerprint (for technical support)</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="section" style="outline-width: medium !important; outline-style: none !important; margin: 0px; outline- padding: 0px;">
+<div class="section_title" style="font-size: 15px; font-weight: bold;  outline-width: medium !important; outline-style: none !important; margin: 10pt 0px 2pt; outline- padding: 0px;">Probable cause:</div>
+<div style="outline-width: medium !important; outline-style: none !important; margin: 0px; outline- padding: 0px;">
+<p style="font-size: 13px; outline-width: medium !important; outline-style: none !important; min-height: 1em; margin: 1ex 1ex 1ex 0px; outline- line-height: 20px; padding: 0px;">Use the system error information to resolve the issue. Contact your network administrator or technical support if you need assistance.</p>
+</div>
+</div>
+</div>
+<p> </p>
+<p><a href="/notes/2531598" target="_blank">2531598</a> - Understanding RSOE Message: OEE1051: The Outbound Enabler was unable to access the session</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>RS RSOE  OEE1045</p></div></div></div></div>

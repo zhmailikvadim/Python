@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The image control is not draggable although it is mapped to a valid dragSourceInfo control.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Web Dynpro Java, Web Dynpro ABAP, WDJ, WDA, SAP GUI for HTML, Unified Rendering, Lightspeed,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To fix this issue, please see the description for your basis framework:</p>
+<p>Important Remark: In case of using an Enterprise Portal with a custom theme it might be necessary to update the eppserv.sca (7.0x) or ep-basis.sca (&gt;= 7.1x)  (see note 1446099).</p>
+<p><strong>A) Web Dynpro ABAP:</strong></p>
+<p>See related note section for the corresponding ABAP note. Notes start in general with "Corrections for unified rendering ... &lt;release&gt;"</p>
+<p>If there is no ABAP note available it means the note is not release yet. The release date is in most cases end of the month. In this case, please re-check this note at a later point of time or contact SAP.</p>
+<p><strong>B) Web Dynpro JAVA:</strong></p>
+<p>The issue described above will be fixed by a rendering related Web Dynpro for Java patch. In section "SP Patch Level" you can find information, which patches contain the respective correction. Please install this patch or a newer one (Patches are always cumulative).</p>
+<p>If the section "SP Patch Level" is not available or the information about which patch contains the correction is missing, this means that this has not been determined, yet. In this case, please re-check this note at a later point of time.</p>
+<p>Downloading Web Dynpro for Java Patches All Web Dynpro for Java patches are available on SAP Service Marketplace. Note 330793 explains how to download patches from SAP Service Marketplace.</p>
+<p><span style="text-decoration: underline;">Release Specific:</span></p>
+<p><span style="text-decoration: underline;">NW04S/ NW 7.00:</span> <br/><br/>From Web Dynpro perspective, we recommend you to apply both SAPJTECHF.sca and SAPJTECHS.sca. So if any one of the archive is not mentioned in the 'SP Patch Level' tab, it is recommended to apply the same, which is available in the service market place.</p>
+<p>In addition, to avoid breaking dependencies between the rest of the Java core components, it is also advisable to patch the components mentioned in SAP KBA 1893013</p>
+<p>Deploy the sca's directly using JSPM. Please refer the link to the official documentation for JSPM: <a href="http://help.sap.com/saphelp_nw70/helpdata/EN/1f/c45b4211aac353e10000000a1550b0/frameset.htm" target="_blank">http://help.sap.com/saphelp_nw70/helpdata/EN/1f/c45b4211aac353e10000000a1550b0/frameset.htm</a><br/><br/><span style="text-decoration: underline;">NW 7.10 &amp; 7.11:</span> <br/><br/>The patch is included in the FRAMEWORK.SCA.</p>
+<p><span style="text-decoration: underline;">NW 7.20 and above:</span> <br/><br/>The patch is included in the AJAX-RUNTIME.SCA. We recommend to install the newest available patch level of the FRAMEWORK.sca and WDRUNTIME.sca.</p>
+<p>Deploy the sca’s directly using SUM. You can find its documentation in the SAP Service Marketplace at: <a href="http://service.sap.com/sltoolset" target="_blank">http://service.sap.com/sltoolset</a> -&gt; Software Logistics Toolset (latest version) -&gt; Software Update Manager (SUM).</p>
+<p>In addition, to avoid breaking dependencies between the rest of the Java core components, it is also advisable to patch the components mentioned in SAP KBA 1794179.</p>
+<p><strong>C) SAP GUI for HTML</strong></p>
+<p>The patch will be shipped with a new kernel version. See related note section for the corresponding SAP GUI for HTML note. If there is no SAP GUI for HTML (Kernel) note available it means the note is not release yet. In this case, please re-check this note at a later point of time or contact SAP.</p></div></div></div></div>

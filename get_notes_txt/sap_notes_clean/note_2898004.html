@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">A custom business role has been created and the Procurement business catalog SAP_MM_BC_PO_PROCESS_MC has been assigned, providing access to numerous functions related to Purchase Orders. However, when trying to display the output of a Purchase Order, the following error is encountered: "You are not authorized to perform this action. Message no. APOC_OR_MESSAGES053."</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p id="">SAP S/4HANA Cloud Public Edition</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Open APP Manage purchase Orders </li>
+<li>Search for the Purchase Order </li>
+<li>Select the Purchase Order</li>
+<li>Choose facet Output Management  </li>
+<li>Choose the Display Document ICON </li>
+<li>Error: 'You are not authorized to perform this action' is raised</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Missing role, to be able to handle Purchase Order output a user needs business Catalog SAP_MM_BC_PO_WIAPPROVE_PC or SAP_MM_BC_PO_MANAGE_PC in their role</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Add the business Catalog SAP_MM_BC_PO_WIAPPROVE_PC or SAP_MM_BC_PO_MANAGE_PC to the business role in the APP 'Maintain Business Roles'.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p id="">APOC_OR_MESSAGES053, M_BEST_BSA, CL_MM_PUR_PO_MAINTAIN_AUTH_PRV</p></div></div></div></div>

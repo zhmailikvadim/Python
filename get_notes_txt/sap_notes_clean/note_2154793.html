@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">Simple  <span>SELECT TOP number 'string' FROM TABLE ORDER BY COLUMN</span> could cause fatal abort on df_Table::SCIdxExistForOrderedLeaf</p>
+<p><span style="text-decoration: underline;"><strong>Excerpt of stack trace on Linux:</strong></span></p>
+<p> <br/>    **  Command text:  <br/><br/>select top 2000 <span style="background-"> <span style="color: #ff0000;">'a_string'</span>   </span>  from lineitem    order by l_orderkey</p>
+<p><br/><span style="color: #ff0000;"><strong>df_Table::SCIdxExistForOrderedLeaf</strong></span><br/>vp_OrderedProjection::Prepare<br/>vp_Cursor::PrepareProjection<br/>dfo_VerticalLeafCursor::PrepareProjection<br/>dfo_VerticalLeafCursor::PrepareChildrenAndProjection<br/>dfo_VerticalLeafCursor::PrepareOpus<br/>dfo::PrepareChildren<br/>dfo_RowLimit::PrepareOpus</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP IQ 16 any SP.</p>
+<p>This issue could be encountered on other IQ previous versions.</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Run on iqdemo</p>
+<ul>
+<li>This select top including a column in the select list run fine:</li>
+</ul>
+<p style="padding-left: 30px;"><span>select top 2000  l_orderkey  from lineitem order by l_orderkey;</span></p>
+<ul>
+<li>This select top on s string aborts:</li>
+</ul>
+<p style="padding-left: 30px;"><span>select top 2000 </span><span style="background-"> <span style="color: #ff0000;">'a_string'  </span></span><span>from lineitem order by l_orderkey;</span></p>
+<p> </p>
+<p> </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This issue has been addressed in <strong>SAP CR 782552.</strong></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="text-decoration: underline;">Upgrade </span>IQ to a release where <strong>SAP CR 782552 is fixed</strong></p>
+<ul>
+<li>IQ16 SP 8 PL 36 or higher</li>
+<li>IQ 16 SP10 PL 03 or higher</li>
+</ul>
+<p><span style="text-decoration: underline;">This workaround</span> can be used to disable the Ordered Leaf optimization:</p>
+<p>set temporary option dml_options2 = 16777216</p>
+<p>If necessary, set this option public, it wouldn't adversely affect the performance of most queries.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Select top, CR 782552, 782552, fatal abort, df_Table::SCIdxExistForOrderedLeaf, df_Table, SCIdxExistForOrderedLeaf,</p></div></div></div></div>

@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">All rows after a million rows are lost while generating a huge Web Intelligence report by a schedule in Microsoft Excel format</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP BusinessObjects BI Platform 4.x</li>
+<li><strong>Data Provider:</strong> Oracle Database 10g/11g</li>
+<li>Microsoft Office Excel 2010</li>
+<li>Microsoft Windows Server 2008 R2</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Log on to BI Launch Pad</li>
+<li>Right-click a huge Web Intelligence report, containing more than a million rows, select "Schedule"</li>
+<li>Select "Formats" tab, set "Microsoft Excel" checkmark</li>
+<li>Click Schedule</li>
+<li>Wait until the Web Intelligence report is complete</li>
+<li>Open the Excel Spreadsheet resulted</li>
+<li>See there are no rows after a million rows</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The root cause is under investigation</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>For workaround: </strong>（For BI versions before BI4.2 SP03）</p>
+<p>Configure on Adaptive Job Server to use .xls file format as follows:</p>
+<ol>
+<li>Log on to Central Management Console (CMC) as an Enterprise Administrator</li>
+<li>Go to Servers -&gt; Web Intelligence Services -&gt; Adaptive Job Server</li>
+<li>Right click on it and select "Destination"</li>
+<li>From the drop down box, Add File system destination</li>
+<li>Specify the directory location in <strong>"</strong>Directory<strong>"</strong> section</li>
+<li>Under "File name<strong>"</strong> option, Select the option "Use Specified File Name"add the Placeholder for "Title" and append it with .xls (this line will look like as %SI_NAME%.xls)</li>
+<li>Uncheck the option "Add file extension"</li>
+<li>Save and close</li>
+</ol>
+<p>Schedule the Web Intelligence report as follows:</p>
+<ol>
+<li>Log on to BI Launch Pad</li>
+<li>Find the report which you want to schedule, right click it</li>
+<li>Click on "Schedule"</li>
+<li>Select the format as "Microsoft Excel" in Format section</li>
+<li>In "Destinations" option</li>
+<li>Select the "File system" destination</li>
+<li>Check the option "Use Default Settings"</li>
+<li>Click on schedule</li>
+</ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>MS Excel, 2010, million, row, lost, data, lines, not presented, scheduling, WebI, xls, xlsx, AJS, Adaptive Job Server, ADAPT01718950</p></div></div></div></div>

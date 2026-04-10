@@ -1,0 +1,53 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ol id="__html1">
+<li>You are getting an error while trying to enter a value in the code field of a custom fine tuning activity: XX is not a Valid Value for this Field. Enter a Valid Value, where XX is a the code value entered in the field.</li>
+<li>The value you are trying to enter in any of the column in the custom fine-tuning activity is getting removed on Saving the activity, after entering a value.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Cloud Application Studio</li>
+<li>SAP Business Bydesign</li>
+<li>SAP Cloud for Customer</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<div>Login to frontend UI.</div>
+</li>
+<li>Navigate to Business Configuration work center.</li>
+<li>Select Implementation Projects view.</li>
+<li>Open the Activity list.</li>
+<li>Find and open the custom finetuning activity.</li>
+<li>Click on Add Row button to add a new value.</li>
+<li>When you enter a value in the code field, error appears.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>If the UI is modified by you and the CCTS type is set as code then you will not be able to add a new row from the fine tuning activity.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>
+<div>Login to SDK.</div>
+</li>
+<li>Open the relevant solution.</li>
+<li>Navigate to the BC view component of the fine tuning activity.</li>
+<li>Double click on the file to open it in the UI designer.</li>
+<li>Select the field where you have entered the value in the UI.</li>
+<li>Go to the properties tab and check the CCTS type which is maintained as code.</li>
+<li>Go to Data Modeling and select the content of the field i.e. Root - BC_SETS - Code- Content</li>
+<li>Change the CCTS type from Code to Text in the Properties</li>
+<li>Save and Activate.</li>
+<li>Deploy Business Configuration of the solution.</li>
+<li>You will be able to add rows.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>As a pre-requisite you can check the below KBA if all the settings are maintained properly or not:</p>
+<p><a href="https://me.sap.com/notes/2692866" target="_blank">2692866</a> - Unable to Find the Custom Fine Tuning Activity in the Implementation Project</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Enter a Valid Value</p>
+<p>Unable to add row</p>
+<p>Custom fine tuning activity not working</p>
+<p>Error while adding new row</p>
+<p>Value is not getting saved in custom finetuning activity</p>
+<p>Value is getting vanished on saving the custom finetuning activity</p>
+<p>unable to save values in custom BCO</p>
+<p>Not able to save values in custom BC SET</p></div></div></div></div>

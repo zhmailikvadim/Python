@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">During the the change of a material master with change number in MM12 but it leads to the shortdump in SAPLMALH because Data element "PSPNR" is not contained in "MARA".</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP ERP Logistics (LO)</li>
+<li>SAP R/3</li>
+<li>SAP R/3 Enterprise</li>
+<li>SAP ERP Central Component</li>
+<li>SAP ERP</li>
+<li>SAP Enhancement package for SAP ERP</li>
+<li>SAP Enhancement package for SAP ERP, version for SAP HANA</li>
+<li>SAP S/4HANA, on-premise</li>
+<li>SAP S/4HANA, cloud edition</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>GOTO Transaction MM12</li>
+<li>Enter a Material number</li>
+<li>Enter a Change number</li>
+<li>System dumps with a SYNTAX_ERROR </li>
+</ol>
+<p>         <img alt="235235345.png" class="img-responsive" src="/documents/customerkba/osfmwr-ppKe2zRte3H1NAEXar-abccrFsra59YL2qKc" title="235235345.png"/></p>
+<p>         <img alt="2352353452.png" class="img-responsive" height="177" src="/documents/customerkba/BkGzsv8PZWouVIfby3QfyzLZeIrdf48ct83G0FCyPRI" title="2352353452.png" width="701"/></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul>
+<li>Include LMALHARA has generated coding, which is created with the GENERATE program. </li>
+<li>Typically, this problem occurs when the customer appends customer-fields to the MARA table but the GENERATE program does not run after it.</li>
+</ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Please run this report GENERATE for table MARA, and then check the system behaviour again.</p>
+<ol>
+<li>GOTO SE38</li>
+<li>Enter program GENERATE</li>
+<li>Click display</li>
+<li>Execute</li>
+<li>Enter Table MARA</li>
+</ol>
+<p> </p></div></div></div></div>

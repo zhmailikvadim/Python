@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In ACT_UPG phase, the following error can be found:</p>
+<p>  <em>==</em></p>
+<p><em>  1EEDO519X"DDL Source" "BSAD_DDL" could not be activated</em><br/><em>  1EEDO519 "DDL Source" "BSAK_DDL" could not be activated</em><br/><em>  1EEDO519 "DDL Source" "BSAS_DDL" could not be activated</em><br/><em>  1EEDO519 "DDL Source" "BSIS_DDL" could not be activated</em><br/><em>  1EEDO519 "DDL Source" "FAGLBSAS_DDL" could not be activated</em><br/><em>  1EEDO519 "DDL Source" "FAGLBSIS_DDL" could not be activated</em></p>
+<p><em>  ==</em></p>
+<p><em>  Or Error:</em></p>
+<p><em>  ==</em></p>
+<p><em><span style="font-size: 10pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: SimSun; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;">  1EEMC705 Key fields are not together at the beginning of the view</span></em></p>
+<p><em><span style="font-size: 10pt; font-family: 'Arial',sans-serif; mso-fareast-font-family: SimSun; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;">   ===</span></em></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Basis 750 up to patch level 09</li>
+<li>SAP Basis 751 up to patch level 04</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>Repeat the phase.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>These all are CDS views. For all these kinds of views, all the key fields should be stored together at the beginning of the view.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Implement the correction instructions of SAP Note <a href="https://me.sap.com/notes/2474810" target="_blank">2474810</a> - ABAP CDS: view with UNION and preserved key.</p>
+<p>If SNOTE is locked, then implement the correction instruction "0020751259 0000073013" manually on the shadow instance.</p>
+<p>Repeat the phase afterwards.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>SAP Note <a href="https://me.sap.com/notes/2474810" target="_blank">2474810</a> - ABAP CDS: view with UNION and preserved key</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>BSAD_DDL,BSAK_DDL,BSAS_DDL,BSIS_DDL,ACT_UPG,SUM,Upgrade, 1EEMC705, Key fields are not together at the beginning of the view, CDS View.</p></div></div></div></div>

@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Your requirement is to import Tasks with status Completed using Data Workbench. But you are not able to proceed due to processing error:</p>
+<p>"The server has not found any resource matching the Data Services Request URI"</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p><span class="th-tx th-tx-value th-tx-nowrap" id="C26_W42_V44_V54_btcustomerh_spstack" style="width: 100%;" title="SAP CLOUD FOR CUSTOMER 1708 / 04">SAP Cloud For Customer</span></p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>
+<div>Go to Data Workbench workcenter</div>
+</li>
+<li>
+<div>Go to the Import  view</div>
+</li>
+<li>
+<div>Select the Object Task</div>
+</li>
+<li>Select Next and Import the required file</li>
+<li>Select Next</li>
+<li>In the Monitor tab, check for the respective Task ID to check the status of the Import</li>
+<li>The <em>Task</em> is <em>Finished</em> with <em>Errors</em></li>
+</ol>
+<p>When you click on the link to open the errors you see the above mentioned error.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>You are using the Error file to import the data which includes Processing Error field.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Use a fresh file/template without the Processing Error Message field and reimport.</p>
+<p>Or check below points:</p>
+<ul>
+<li>Are you trying Data Workbench Update scenario</li>
+<li>If it's Update , are you useing standard service</li>
+<li>If the records(ObjectID) available in file are already available in the system<br/><br/></li>
+</ul>
+<p>*In the case where Pdi is involved, please check to ensure the solution in question is scoped. If it is or is not please perform the following:</p>
+<p>1. Full solution activation</p>
+<p>2. Redeployment of Business Configuration.</p>
+<p>If this does not resolve the issue please raise an case.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Task, task collection,  Data Services Request URI, Pdi, AP-RC-BDS-WS</p></div></div></div></div>

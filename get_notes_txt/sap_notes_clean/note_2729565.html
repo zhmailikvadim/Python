@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">How to understand the use of the Maximum Storage Capacity Constraints feature for IBP for Inventory.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Integrated Business Planning (SCM-IBP)</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>First, make sure that the Global Configuration settings are correct and that the input key figures needed exist and are configured correctly.</li>
+<ul>
+<li>See the following Help page:  <a href="https://help.sap.com/viewer/feae3cea3cc549aaa9d9de7d363a83e6/latest/en-US/0d7c398a62a947728e9fa15bdb4fdc6c.html?q=maximum%20storage%20capacity" target="_blank">Inventory Optimization - Maximum Storage Capacity Constraints</a></li>
+</ul>
+<li>Before setting a value for the IOMAXINVENTORY key figure, please run both the Multi-stage Inventory Optimization (MSIO) and the Calculate Target Inventory Components (CTIC) functions to get a benchmark for the on-hand stock output key figures (IOAVGONHANDSTOCK, IOTARGETONHANDSTOCK).</li>
+</ul>
+<ul>
+<li>Some things to keep in mind when running the MSIO and CTIC functions in relation to Maximum Storage Capacity Constraints:</li>
+<ul>
+<li>The value of IOMAXINVENTORY is a soft constraint and therefore there are instances when IOMAXINVENTORY will not be considered.</li>
+<li>The algorithm will not respect a value input for IOMAXINVENTORY if PROPAGATEDDEMANDMEAN is a lot higher, independent of how high the MAXINVENTORYVIOLATIONCOSTRATE is.</li>
+<li>If the RECOMMENDEDSAFETYSTOCK is already 0, no value of IOMAXINVENTORY will have an impact on that node. </li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p><span style="font-size: 14px;">SAP Help - </span><a href="https://help.sap.com/viewer/feae3cea3cc549aaa9d9de7d363a83e6/latest/en-US/0d7c398a62a947728e9fa15bdb4fdc6c.html?q=maximum%20storage%20capacity" style="font-size: 14px;" target="_blank">Inventory Optimization - Maximum Storage Capacity Constraints</a><span style="font-size: 14px;">   </span></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>ibp, io, inventory, inv, maximum, max, storage, capacity, constraints, IOMAXINVENTORY, MAXINVENTORYVIOLATIONCOSTRATE, multistage, multi-stage, not, working, as, expected</p></div></div></div></div>

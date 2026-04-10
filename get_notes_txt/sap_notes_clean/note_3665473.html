@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">ABAP Dictionary mass activation during upgrade / SP-update via SUM (phase MAIN_SHDRUN/ACT_UPG ) uses only a maximum of 6 parallel processes.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>parallelization ACT_UPG</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The parallelization can be influenced by entries in table DDPAMSCTRL. The entry with SCENARIO = A is relevant for the upgrade only and is configured to use 6 parallel processes only.</p>
+<p>See SAP Note 3048182 for parallelization parameters in standard scenario (SCENARIO = P) .</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The new parametrization parameter will be deliverd with SP and via upcoming DDIC Fixbuffer which will be included in upgrade procedure automatically. In the meantime, please adjust the entry in DDPAMSCTRL in the shadow system via transaction SE16. The value of field MAXTASKS for scenario A should be set to 12.</p></div></div></div></div>

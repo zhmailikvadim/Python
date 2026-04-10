@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1"><span style="font-size: 14px;">Using Transaction CKMATCON to add a large number of records to a Selection List creates a performance issue when inserting and saving the records.</span></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>Controlling (CO)</li>
+<li>SAP R/3</li>
+<li>SAP R/3 Enterprise 4.7</li>
+<li>SAP ERP Central Component</li>
+<li>SAP ERP</li>
+<li>SAP enhancement package for SAP ERP</li>
+<li>SAP enhancement package for SAP ERP, version for SAP HANA.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Input the transaction code CKMATCON.</li>
+<li>Create List (F5).</li>
+<li>Add selection criteria - Material and plant.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The problem is caused by the fact when using transaction code CKMATCON, certain consistency checks are being performed for every line before the selection list can be saved. Transaction CKMATCON is not designed to handle large amounts of materials.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Use transaction CKMATSEL instead to create a selection list.</li>
+<li>Transaction CKMATSEL can be run in the background. </li>
+<li>It also allows you to upload a large list of materials.</li>
+<li>Transaction CKMATSEL uses a logical database Select which allows for a large number of materials.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>KBA <a href="https://me.sap.com/notes/1999472" target="_blank">1999472</a> CK40N - Costing Run. Material selection takes too long time</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Transaction CKMATSEL, Table KALAMATCON, ERP, MBEW.</p></div></div></div></div>

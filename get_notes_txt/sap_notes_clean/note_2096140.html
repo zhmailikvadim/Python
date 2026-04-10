@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">As of SCM 7.0 EhP 3 APO can be deployed in two ways: in SCM Server or on top of ERP via add-on.<br/><br/>This note provides information on planning with VC and CDP in the add-on deployment scenario.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Variant Configuration, Characteristic Dependent Planning, batches, APO-on-ERP, add-on</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To use planning with VC/CDP data in the APO add-on the following is required.</p>
+<ul>
+<li>Install APO SP07, or</li>
+<li>Install note 2047761 "APO on ERP: Support classes, characteristics, CDP and variant configuration"</li>
+</ul>
+<p><strong>Usage of VC in APO-on-ERP</strong></p>
+<p>When running in the add-on, CIF transfer for classification data of class type 300 is not required. APO directly reads class 300 related data from ERP.</p>
+<p>This leads to the following system behaviour when using VC-planning in the add-on deployment:</p>
+<ul>
+<li>CIF transfer for classification data in class type 300 is not required</li>
+<li>APO reads from ERP classification which is assigned to MARA </li>
+<li>The APO product master data transaction /SAPAPO/MAT1 does not show the VC relevant class assignments,  which can be viewed on the ERP material master.<br/>(ERP classification data is assigned via MARA whereas the APO product master display shows APO-assignments via /SAPAPO/MATKEY)</li>
+<li>Reference characteristics: <br/>unlike SCM Server, where CIF maps table fields for reference characteristics, APO-on-ERP requires a mapping of reference characteristics procedure code via BADI /SAPAPO/CURTO_CREATE</li>
+</ul>
+<p><br/><strong>Usage of CDP in APO-on-ERP</strong></p>
+<p>Prerequisite:<br/>To use planning with CDP (and batches) data in the APO add-on please activate the content of BC-set /SAPAPO/APO_ON_ERP_CDP. This will introduce customizing for APO classes 230 and 400.</p>
+<p>When running in the add-on, CIF transfer for classification data of class type 230 and 400 is  required. APO directly reads realted data from the APO-only classes of type 230 and 400.</p>
+<p>This leads to the following system behaviour when using CDP-planning in the add-on deployment:</p>
+<ul>
+<li>CIF transfer for classification data in class type 23/300 to type 230/400 is required</li>
+<li>APO reads from ERP classification which is assigned to /SAPAPO/MATKEY</li>
+<li>The product master data /SAPAPO/MAT1 shows the CDP relevant class assignments only, assignments to 23/300 can be viewed on the ERP material master.<br/>(ERP classification data is assigned via MARA whereas the APO product master display shows APO-assignments via /SAPAPO/MATKEY)</li>
+</ul></div></div></div></div>

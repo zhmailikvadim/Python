@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Database/device is filled even automatic expansion policies on segment/device had been set.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Adaptive Server Enterprise (ASE) 16.0 for Business Suite</li>
+<li>SAP Adaptive Server Enterprise (ASE) 15.7 for Business Suite</li>
+<li>SAP NetWeaver (NW) - All versions</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Automatic expansion policy on segment/device will not work without the expansion threshold on the segment in the target database.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Set the space expansion threshold by command:</p>
+<p>sp_dbextend 'set', 'threshold', &lt;dbname&gt;, &lt;segmentname&gt;, &lt;freespace&gt;<br/>go</p>
+<p>For example:</p>
+<p>sp_dbextend 'set', 'threshold', pubs2, logsegment, '100m'<br/>go</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li>KBA <a href="/notes/1945185" target="_blank">1945185</a> - How to expand a database automatically? - SAP ASE</li>
+<li><a href="https://help.sap.com/viewer/fbeb8a16c28d4140a01bd3b5821e0cd5/16.0.2.0/en-US/ab5c739dbc2b1014baf48b9818a2b2fd.html" target="_blank">Reference Manual: Procedures --&gt;sp_dbextend</a> </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>expand, automatically, sp_dbextend, list, threshold, thresh, logsegment, device, growby, default, auto-extend</p></div></div></div></div>

@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Customer reports following error while running the Lease Posting Run ID XYZ (XYZ represents Lease Posting Run ID)</p>
+<p>Error: Account determination missing for item type Historical Costs: Current Year.<br/>Error: Other valuation items related to lease contract AA cannot be processed (AA represents contract ID).</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Business Bydesign</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Go to the Lease Contract Management work center.</li>
+<li>Select the view Lease Contract Posting Run.</li>
+<li>Select the Run ID XYZ.</li>
+<li>Select the Processing Status "Error" under the Execution Details section.</li>
+<li>Click View.</li>
+<li>Go to the tab Messages.</li>
+</ol>
+<p>Error: Account determination missing for item type Historical Costs: Current Year.<br/>Error: Other valuation items related to lease contract ZZ cannot be processed.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>G/L account is missing in Historical Cost of the Account Determination Group of corresponding ROU Class ZZZ (ZZZ represents Right-of-Use Asset Class)</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>You need to identify the Account Determination Group from the related Right Of Use Asset.</p>
+<ol>
+<li>Open the contract AA.</li>
+<li>Go to the Leased Objects tab and identify the Right of Use Asset ID.</li>
+<li>Open the Right of Use Asset.</li>
+<li>Identify the Account Determination associated.</li>
+</ol>
+<p>Maintain the Historical Cost of the Account Determination Group:</p>
+<ol>
+<li>Go to the Business Configuration work center.</li>
+<li>Search and find the activity: Activity Charts of Accounts, Financial Reporting Structures, Account Determination.</li>
+<li>Select Fixed Assets under Account Determination.</li>
+<li>Select the correct Account Determination Profile.</li>
+<li>Go to the Historical Cost tab.</li>
+<li>Select Add Row button and Maintain a Historical Cost account for your Account Determination Group.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>IFRS16, Lease Posting Run, Historical Costs, Lease Type, Account Determination</p></div></div></div></div>

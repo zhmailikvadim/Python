@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">If a finished product to be determined has the procurement indicator 'Mixed Origin', the preference statement for this finished product is not determined in the calculation log. In some circumstances, the preferential country of origin is determined incorrectly in the product master.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Preference, preference determination, calculation logs, preference status</p>
+<p>Preference statement, preference indicator, PREKE, PREKC, PREKV, PURLA</p>
+<p>/SAPSLL/PRE_CAL_401, /SAPSLL/PRE_CALCULATE</p>
+<p>/SAPSLL/PRE_CAL_402, /SAPSLL/PRE_CALCULATE_SGL</p>
+<p>/SAPSLL/PRE_CAL_403, /SAPSLL/PRE_CALCULATE_RNG</p>
+<p>/SAPSLL/PRE_CAL_404, /SAPSLL/PRE_CALCULATE_LOG</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>As of SAP GTS Release 11.0 Support Package 16 (SP16), the preference statement (PREKE) is saved in the product master and calculation log.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>With SAP GTS Release 11.0 Support Package 16 (SP16), fields for the preference statement (PREKE), preference statement from the calculation (PREKC), and preference statement from the LTSD aggregation (PREKV) have been added to the calculation log for finished products. For a finished product with the procurement indicator 'Mixed Origin', this means that the preference statement (PREKE) is determined from preference statements of the preference determination and the LTSD aggregation using the worst case principle and is saved in the product master and calculation log.</p>
+<p>For products whose preference status was determined before SP16 or whose preference statement cannot be determined uniquely, the preference statement (PREKE) is not filled in the product master and calculation log and is therefore not displayed.</p>
+<p>Implement the corrections in accordance with the correction instructions.</p>
+<p><span style="text-decoration: underline;">Remark 1:</span></p>
+<p>The preference statement in the determination log is additional information.<br/>The preference statement for a finished product is displayed in the determination log at result level.</p>
+<p><span style="text-decoration: underline;">Remark 2:</span></p>
+<p>If you have assigned the same internal indicator to multiple preference statements in the IMG activity for defining a schema and assigning a preference statement for a schema, the preference statement cannot be uniquely determined via the preference determination. In this case, the BAdI /SAPSLL/BADI_PREF_IND_EXT, method PREF_IND_INT_TO_EXT, is called for the preference statement.</p>
+<p>If the BAdI is not implemented, the preference statement (PREKE) is not filled in the product master and calculation log.</p>
+<p><span style="text-decoration: underline;">Exception:</span> For the JEFTA agreement and a non-negative status, the preference statement (PREKE) is filled with 'X' in the product master and calculation log.</p>
+<p>If the BAdI does not return a valid preference statement, the preference statement (PREKE) is not filled in the product master and calculation log.</p></div></div></div></div>

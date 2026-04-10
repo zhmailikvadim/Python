@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">How to close the first Material Ledger period after S/4 HANA migration?</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul id="__html1">
+<li>Controlling (CO)</li>
+<li>S/4 HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Before S/4 HANA conversion, some material documents were posted during the migration period.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p><span style="color: #ff0000;"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em></span></p>
+<ul>
+<li>As of S/4HANA 1610, there is a new Actual Costing with simplified data model and calculation logic. </li>
+<li>A New ML costing cockpit has been designed with a new logic, different steps and different tables.</li>
+<li>Former tables (CKMLRUNPERIOD, CKMLRUNPLANT ..) have been replaced by table MLRUNLIST.<br/><br/><img alt="kba2654195.PNG" class="img-responsive" src="/documents/customerkba/PN7mRMHKRvufsu-zXqMVeX_kvkUQizaO765zbaPxjUs" title="kba2654195.PNG"/></li>
+<li>As a consequence, Costing runs created before migration can no longer be used as those are useless.</li>
+<li>Before system conversion is started, all Material Ledger costing runs, no matter if actual costing (transaction CKMLCP) or alternative valuation run (transaction CKMLCPAVR) need to be finished. Please see in note <a href="/notes/2354768" rel="noopener" target="_blank">2354768</a> topic ML Actual Costing Cockpit (Transaction CKMLCPAVR). </li>
+</ul>
+<p>If the migration date is 08/07/2018 (Date format DD/MM/YYYY):</p>
+<ul>
+<li>There should not be created any costing run for period 007/2018.</li>
+<li>Before executing the Conversion S/4 HANA,  all pending costing runs created in previous periods (last one for period 006/2018) should be closed.</li>
+<li>After executing the Conversion S/4 HANA: you can create costing runs in period 007/2018.<br/>The material documents posted in period 007/2018 before the migration (date 08/07/2018) will be processed in the costing run period 007/2018.<br/>Migration will create MLDOC entries for current period (007/2018) and all previous periods (based on old MLCD) back to 012/2016.<br/>When you start posting goods movements on S/4 HANA, additional MLDOC entries will be created, also in period 007/2018.<br/>New CKMLCP is based on MLDOC and it has all required data (data posted on old release as well as data posted in S/4HANA).</li>
+</ul>
+<p>You may find detailed explanations on this <a href="https://wiki.scn.sap.com/wiki/x/QyR7H" rel="nofollow" target="_blank">page</a>. <br/>Also see the notes:</p>
+<p><a href="/notes/2354768" rel="noopener" target="_blank">2354768</a> - S4TWL - Technical Changes in Material Ledger with Actual Costing<a href="https://me.sap.com/notes/2559509" target="_blank"><br/>2559509</a> - S/4 HANA 1610: New ML Costing Cockpit (AVR). Transaction CKMLCPAVR.<br/><a href="https://me.sap.com/notes/2558888" target="_blank">2558888</a> - S/4HANA 1610: Post Closing logic in Material Ledger / New Actual Costing</p></div></div></div></div>

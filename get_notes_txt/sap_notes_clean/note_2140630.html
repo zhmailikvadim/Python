@@ -1,0 +1,46 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>Formula missing.</li>
+<li>Unable to see formulas when creating an Alert.</li>
+<li>When creating a condition for an Alert in Crystal Reports, some of the report formulas are not listed.<br/>    <br/>     </li>
+<li><span>Note: Images and data in this SAP Knowledge Base Article are from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</span></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Crystal Reports 2016</li>
+<li>SAP Crystal Reports 2020</li>
+<li>SAP Crystal Reports 2025</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>In Crystal Reports, create a report based on any data source.</li>
+<li>Create a formula that uses variables or running total fields.</li>
+<li>Save the formula. For example, name the formula "My Formula"</li>
+<li>Create a new Alert on the report, and notice the formula is not listed to be used in the Alert Condition.</li>
+<ul style="list-style-type: none;">
+<li>4.1 Under the menu "Report", select "Alerts - Create or Modify Alerts..."</li>
+<li>4.2 In the "Create Alerts" window, to create a new alert, click "New..."</li>
+<li>4.3 In the "Create Alert" window, enter a name and a message for the alert.        </li>
+<li>4.4 Click on the "Condition..." button<br/>   <br/><img alt="Alert - 01.png" class="img-responsive" src="/documents/customerkba/l1puMn077_80RXfD_MJLhVlaFrNGvhuR-_ZH-ZSnZCE" title="Alert - 01.png"/>   <br/>   </li>
+<li>4.5 Notice in the Formula Workshop, it does not list the formula created on the report.<br/>   <br/><img alt="Formula_Missing.png" class="img-responsive" src="/documents/customerkba/Lr-h3rmYDkVDA-DKZjBY8n-xXSjIKrOmKje75OapS7o" title="Formula_Missing.png"/></li>
+</ul>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>Alerts condition can be created on summary, database fields, and parameters.</li>
+<li>Alerts condition cannot be created on second pass formulas, like formulas that uses shared variables, running totals,... and this is why the formula are not displayed in the list of available objects to use for the Alert conditions.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>To workaround this limitation, add a subreport, and pass the value of the second pass formula the subreport parameter. This will make the value available in the first pass in the subreport, and therefore the value can then be used in an Alert in the subreport. <br/>     </li>
+<li>Below are the generall steps on how to apply this workaround:<br/>      </li>
+<ol>
+<li>Add a subreport in the Report Footer section of the report.<br/>     </li>
+<li>Base the subreport off a database with a table that returns only one record.<br/>   </li>
+<li>In the subreport, create a parameter of the data type the formula on the main report output. ( Most likely a number )<br/>    </li>
+<li>In the main report, link the main report to the subreport parameter, on the formula that output the value you wanted to base the Alert on.<br/>     </li>
+<li>In the subreport, create an Alert, and base the condition on the value output by the subreport parameter. <br/>( Which actually contains the main report formula result )<br/>       </li>
+<li>Now, when refreshing the report, if the condition is met, it will display the Alert.    </li>
+</ol></ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Alerts, CR, missing</p></div></div></div></div>

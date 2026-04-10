@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>After server reboot, Adaptive Processing Server and Web Application Container Server are in failed state.</li>
+<li>APS and AJS are continuously generating core dumps and JVM logs when they get restarted.</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>SAP BusinessObjects Business Intelligence platform 4.x</li>
+<li>AIX</li>
+</ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul>
+<li>This issue is specific to AIX OS.</li>
+<li>The xLC (C/C++ runtime) level on AIX needs to be compatible with SAP kernel.</li>
+</ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This issue has been escalated to development for further investigation - please see SAP Note <a href="/notes/2278764" target="_blank">2278764</a> for further details</p>
+<p><strong>Workaround</strong></p>
+<ul>
+<li>Please review and verify the required xLC (C/C++ runtime) library level for AIX on KBA <a href="/notes/1780629" target="_blank">1780629</a>.</li>
+<li>Any xLC (C/C++ runtime) level higher than 12.1.0.4 will not be compatible with BOE 4.x.</li>
+<li>Downgrade it to 12.1.0.x accordingly.</li>
+</ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul>
+<li><a href="/notes/1780629" title="1780629  - AIX: Minimal OS Requirements for SAP Kernel"><span class="title">1780629 - AIX: Minimal OS Requirements for SAP Kernel</span> </a></li>
+<li><a href="/notes/2068737" title="2068737  - Adaptive Processing Server  &amp; Web Application Container Server Failed"><span class="title">2068737 - Adaptive Processing Server &amp; Web Application Container Server Failed</span> </a></li>
+</ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>APS, WACS, AdaptiveProcessingServer, WebApplicationContainerServer, failed, 4.1, 4.0, not starting</p></div></div></div></div>

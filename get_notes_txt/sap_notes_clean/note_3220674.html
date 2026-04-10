@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=2210494&amp;TargetLanguage=EN&amp;Component=BC-FES-ITS&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/2210494/D" style="color:var(--sapLinkColor);" target="_blank">/notes/2210494/D</a>.</span></div></div><div id="__html1"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>A tree control can react to right mouse clicks of the user with opening different context menus depending on where the user has positioned the mouse.</p>
+<p>If a tree control is reacting to right clicks on individual tree items this normaly results in an item context menu being displayed. In tree controls where multi selection is enabled for nodes and items we have a special case where right clicking an item in the tree is supposed to result in a node context menu opening - as long as at least one other tree node is already selected.</p>
+<p>In SAP GUI for HTML, the right click on an item unexpectedly results in an item context menu being requested which is a wrong behaviour in this particular multiselection case.</p>
+<p>The problem for example occurs in transaction ECH_MONI_SEL.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>Internet Transaction Server, ITS</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Program error</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>To resolve this issue please do the following:</p>
+<p>Determine the patch number of the SAPEXE SAR package with the highest patch number for your kernel version on the SAP Service Marketplace (SMP). If the SAPEXE patch number is higher than or equal to the highest patch level number you see in the section <strong><span class="urTxtEmph urVt1" style="white-space: nowrap;">Support Packages &amp; Patches</span></strong> of this SAP note for your SAP kernel version, you should download and install the SAPEXE SAR package. Otherwise, download and install the most recent DW.SAR archive.</p>
+<p>If there is no entry with the patch number yet, please re-check this SAP note at a later point in time. The patch number level will be added automatically once the corresponding patch is available on SAP Service Marketplace.</p>
+<p>You can find up to date information about the status of the patch delivery in the following SAP notes:</p>
+<p>SAP kernel 745: <a href="/notes/2199308" target="_blank">2199308</a></p>
+<p>SAP kernel 742: <a href="/notes/2098894" target="_blank">2098894</a></p>
+<p>SAP kernel 722: <a href="/notes/2198998" target="_blank">2198998</a></p>
+<p>SAP kernel 721: <a href="/notes/2199141" target="_blank">2199141</a></p>
+<p><strong>FAQ:</strong><br/><strong>Expected delivery dates of SAP kernel patches<br/></strong></p>
+<ul>
+<li>SAP Kernel patches are usually delivered weekly or bi-weekly on Friday depending on the release. From the patch level of latest delivered patch you can roughly conclude when the patch you need will become available.</li>
+</ul>
+<p><strong>Downloading SAP kernel patches</strong></p>
+<ul>
+<li>All patches are available in the Software Center on SAP Service Marketplace (<a href="http://service.sap.com/patches" target="_blank">http://service.sap.com/patches</a>). Detailed information on the exact location of the patches can be taken from note 563161. SAP Note 330793 explains how to download patches from SAP Service Marketplace.</li>
+</ul>
+<p><strong>Installation of SAP kernel patches</strong></p>
+<ul>
+<li>SAP Note 19466 explains how to install SAP kernel patches.</li>
+</ul></div></div></div></div></div>

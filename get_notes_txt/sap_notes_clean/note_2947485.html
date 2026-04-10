@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">The move-in reversal for an IS-U contract cannot be performed due to the error EMV 116 "Documents &amp;2 &amp;3 &amp;4 have not been reversed". The aforementioned documents are payments of cash security deposits.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>EC53; EC53E; cash security; payment of cash security deposit; EMV-116; 116(EMV); EMV 116; EMV116</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Cause:</strong></p>
+<p>The data constellation as described below was not taken into account in the function module 'ISU_MOVE_IN_ITEMS_CHECK’.<br/><br/><strong>Prerequisite:</strong></p>
+<p>The payments of cash security deposits have the origin "RT" (security payment transfer) and are already cleared (paid). The related cash security deposit has the status 98 (returned).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>You can implement the corrections as an advance correction. The correction is usually delivered with the relevant Support Package for the release specified.<br/><br/>This correction changes the system behavior. The°error message is now issued°as warning message EMV 116. Check using the information provided by the message EMV 116°whether a move-in reversal can be carried out nevertheless.</p>
+<p> </p></div></div></div></div>

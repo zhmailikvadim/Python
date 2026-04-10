@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are following the Post-manual steps described at the document 'Header texts for MX CFDI.pdf', adding the mentioned entries in the specificed Tables, but you are not able to save the entries.</p>
+<p>Error example: '“Enter a valid value” Message No. 0002'</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>Mexico CFDI version 3.3</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p><strong>1.</strong> Goto transaction SM30;<br/><strong>2.</strong> Enter the view name '<strong>IDMX_DI_VTXTID</strong>' or '<strong>IDMX_DI_VTXTIDFI</strong>' or '<strong>IDMX_DI_TXTOB</strong>';<br/><strong>3.</strong> Maintain one of the below values:</p>
+<p><br/><strong>CNF Confirmation Number</strong> VBBK YCNF<br/><strong>UUD UUID(Unique Identifier)</strong> VBBK YUUD<br/><strong>LGD Legend</strong> VBBK YLGD<br/><strong>PAC RFC of PAC</strong> VBBK YPAC</p>
+<p><strong>4.</strong> Save the entries.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p><strong>1. </strong>Go to Transaction '<strong>SE54</strong>' and Input the View name;</p>
+<p><strong>1.1.</strong> Select the option '<strong>Generated Objects</strong>' and press '<strong>Create/Change</strong>';</p>
+<p><strong>1.2.</strong> Select at the Header '<strong>Generated Objects</strong>' -&gt; '<strong>Change</strong>';</p>
+<p><strong>1.3. </strong>Click on '<strong>Expert Mode</strong>';</p>
+<p><strong>1.4. </strong>Select all checkboxes and regenerate the dialog.</p>
+<p><strong>2.</strong> Follow the first step and regenerate the table maintenance for the Views '<strong>IDMX_DI_VTXTID</strong>', '<strong>IDMX_DI_VTXTIDFI</strong>' and '<strong>IDMX_DI_TXTOB</strong>';</p>
+<p><strong>2.1.</strong> If necessary, use the attached screenshot as reference for the authorization group, function or package information from '<strong>IDMX_DI_VTXTID</strong>' and '<strong>IDMX_DI_VTXTIDFI</strong>'. As for '<strong>IDMX_DI_TXTOB</strong>' there is no need for this information, leave it blank.</p>
+<p><strong>3. </strong>Delete and reapply, from the start, the entries from the manual steps from the Document 'Header texts for MX CFDI.pdf'.</p>
+<p>===============================================================================================================</p>
+<p>PS: In some cases, after perform the above steps, a new abap dump will occurs, you should only follow the instructions below in case you receive the same abap dump :</p>
+<p>===============================================================================================================</p>
+<p>Category ABAP programming error</p>
+<p>Runtime Errors PERFORM_NOT_FOUND<br/>Except. CX_SY_DYN_CALL_ILLEGAL_FORM<br/>ABAP Program SAPLIDMX_DI_DET<br/>Application Component FI-LOC-SD-MX</p>
+<p>The current ABAP program "SAPLIDMX_DI_DET" had to be terminated because it found a  statement that could not be executed. |<br/> Either  Error in the SAP kernel | |<br/>The current ABAP program "SAPLIDMX_DI_DET" had to be terminated because the ABAP  processor detected a system error.</p>
+<p>----------------------------------------------------------------------------------------------------<br/>|Error analysis |<br/>| An exception has occurred which is explained in more detail below. The |<br/>| exception is assigned to class 'CX_SY_DYN_CALL_ILLEGAL_FORM' and was not |<br/>| caught in procedure |<br/>| "UPDATE_TAB" "(FORM)", nor was it propagated by a RAISING clause. |<br/>| Since the caller of the procedure could not have anticipated this |<br/>| exception, the current program was terminated. |<br/>| The reason for the exception is: |<br/>| Program "SAPLIDMX_DI_DET" is trying to execute an external PERFORM: routine |<br/>| "CHECK_TEXTID_FI " of |<br/>| program "SAPLIDMX_DI_DET ". |<br/>| This routine does not exist however. |<br/>| |<br/>| Possible reasons for this error occurring might be: |<br/>| |<br/>| 1.) Program "SAPLIDMX_DI_DET" or "SAPLIDMX_DI_DET " is |<br/>| currently being worked on in the system. Name |<br/>| "CHECK_TEXTID_FI " of the called routine might be incorrect (the |<br/>| name must be written |<br/>| in uppercase), or routine "CHECK_TEXTID_FI " might not have been |<br/>| implemented yet in |<br/>| program "SAPLIDMX_DI_DET ". |<br/>| |<br/>| 2.) If program SAPMSSY1 is involved in the runtime error, one of the |<br/>| function modules called via RFC is flagged as not being remote-enabled. |<br/>| (SE37 -&gt; Administration -&gt; Activate RFC Flag) |<br/>| |<br/>| 3.) There is an inconsistency in the system. The versions of programs |<br/>| "SAPLIDMX_DI_DET" and "SAPLIDMX_DI_DET " do not match. |<br/>----------------------------------------------------------------------------------------------------</p>
+<p>If this dump occurs in your system, then you should perform the following:</p>
+<p>Change the version of program 'SAPLIDMX_DI_DET' to the previous version.</p>
+<p>The error occurs because in some scenarios after regenerate the views a new version of SAPLIDMX_DI_DET will be generated.</p>
+<p>Using transaction SE38 go to the program 'SAPLIDMX_DI_DET', then select utilities &gt; Versions &gt; version managment and activate the previous version of the program 'SAPLIDMX_DI_DET'.</p>
+<p>You may check that the previous version contains include 'LIDMX_DI_DETF02' (and others) that are necessary to avoid this abap dump.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>IDMX_DI_VTXTID; IDMX_DI_VTXTID; IDMX_DI_VTXTIDFI; MX CFDI 3.3; Mexico; CFDI; 3.3; SM30; View; Table; Save; error; cannot save; can't save; CNF Confirmation Number; VBBK; YCNF; UUD UUID(Unique Identifier); VBBK; YUUD; LGD Legend; VBBK; YLGD; PAC RFC of PAC; VBBK; YPAC; IDMX; DI; VTX;<strong> </strong>IDMX_DI_TXTOB;</p></div></div></div></div>

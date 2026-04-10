@@ -1,0 +1,256 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="table-responsive" id="__html1"><table border="3" cellpadding="10" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p><strong>CAUTION</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<ul>
+<li><strong>Before implementing this maintenance version, consider the stricter validation on pricing logic carefully.</strong> See correction details and potential impacts in <a href="http://launchpad.support.sap.com/#/notes/2618936" target="_blank">SAP Note 2618936</a>. Plan additional preparations, tests, and data reconfiguration. In this document, see also the how-to information to simplify the deletion of personal data in <a href="#OBJECTSNAPSHOTS" target="_self">object snapshots</a>.</li>
+<li><strong>When updating SP 0 or replacing your release 4.1, make sure that you are aware of the supplementary procedures for creating mandatory tablespaces, filegroups, or segments in the back-end database.</strong> See details about <em><em><em>MONITORING_DATA</em></em></em> and <em><em><em>MONITORING_INDX </em></em></em>in the <a href="/notes/2587172" target="_blank">SAP Note 2587172 - Technical Implementation Note of SP 2</a> and the latest revisions of the technical guides.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>****************************************************************************</p>
+<p><strong>Delivery and Information Note of SP 2 for SAP Convergent Charging 5.0 (May 2018)</strong><br/>****************************************************************************</p>
+<p>This <em>SAP Note</em> is the <strong><em>Delivery and Information Note </em></strong><strong>for the new maintenance version of <a href="https://help.sap.com/cc50" target="_blank">SAP Convergent Charging release 5.0</a></strong> as a Support Package (SP) to implement in your SAP system landscape. The <em>SAP Document</em> contains <strong>delivery and content information</strong> to facilitate the <a href="/notes/2587172" target="_blank">technical implementation</a> of this delivered support package (SP). SAP Convergent Charging (SAP CC) is also known as <em>SAP Hybris Billing, charging</em>.</p>
+<p>This note is subject to change. Subscribe to it or add it to your favorites and check it on a regular basis. When available, consider the <em>Delivery and Information Note</em> documents that are available with more recent support packages of the SAP Convergent Charging (SAP CC) software as a complete version. Consider also all these documents when upgrading from the replaced release 4.1 of SAP CC.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Convergent Charging, SAP CC, software maintenance and innovation, support package, delivery information, technical implementation, installation project, upgrade project, SAP Hybris Billing</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>As an IT administrator or an IT consultant, you:</p>
+<ul>
+<li>want to implement the SAP CC 5.0 software product in your SAP system landscape to benefit from its convergent charging services: it is an <strong>initial installation</strong> to plan.</li>
+<li>have already implemented the SAP CC 5.0 software in your SAP system landscape and you want to maintain your SAP CC environment: it is a <strong>maintenance update</strong> to plan.</li>
+<li>have already implemented the replaced release 4.1 of SAP CC and you want to benefit from the newest release 5.0: it is an <strong>upgrade project</strong> to plan.</li>
+</ul>
+<p>Make sure that you have the latest revision of this <em>SAP product document</em> on SAP Support Portal.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This <em>Delivery and Information Note</em> document summarizes the <strong>content</strong> (<a href="#seeFEAT" target="_self">functional enhancements</a>, <a href="#seeCHANGES" target="_self">technical changes</a>, <a href="#seeCORRECTIONS" target="_self">corrections</a>) of this support package (SP) in the <a href="https://help.sap.com/cc50" target="_blank">release 5.0</a> of SAP Convergent Charging (SAP CC). Refer to the <em>Technical Implementation Note</em> document associated to this SP delivery: see <a href="/notes/2587172" target="_blank">SAP Note 2587172</a>.</p>
+<p>If you are note familiar with this main release, refer first to the original <a href="/notes/2380829" target="_blank">Release Information Note (RIN)</a>, the <a href="/notes/2440145" target="_blank">Release Restriction Note (RRN)</a>, and the initial <a href="#whats_new" target="_self">what's new information</a>. Then consider the <em>What's New</em> document and the <em>Delivery and Information Note</em> document delivered with each support package of SAP CC 5.0.</p>
+<p>In this <em>SAP Note</em>, you can read the following information topics:</p>
+<ul>
+<li><a href="#seeLASTMN" target="_self">Last-minute information</a></li>
+<li><a href="https://i7p.wdf.sap.corp/sap(bD1lbiZjPTAwMQ==)/bc/bsp/sno/ui/main.do#seeFEAT" target="_self">Functional enhancements in this Support Package (SP)</a></li>
+<li><a href="#seeCHANGES" target="_self">Technical changes in this SP</a></li>
+<li><a href="#seeCORRECTIONS" target="_self">Corrections</a> </li>
+<li><a href="#TechImplementation" target="_self">Technical implementation note</a></li>
+<li><a href="#Delta" target="_self">Release Notes/Delta Information</a></li>
+<li><a href="#whats_new" target="_self">What's new</a></li>
+<li><a href="#Download" target="_self">Download</a></li>
+<li><a href="#License" target="_self">Licenses</a></li>
+<li><a href="#Installation" target="_self">Initial installation of SAP CC 5.0</a></li>
+<li><a href="#Upgrade" target="_self">Upgrade from replaced SAP CC 4.1</a></li>
+<li><a href="#Maintenance" target="_self">Software maintenance of previous SP</a></li>
+<li><a href="#Documentation" target="_self">Product Documentation and User Assistance</a></li>
+<li><a href="#Restriction" target="_self">Release Restriction Note (RRN)</a></li>
+</ul>
+<p>Depending on your use context and fields of interest, consult the <em><a href="https://help.sap.com/doc/f38fbcecfd854dd2b4a1be053ba9e7a4/5.0/en-US/ig.pdf" target="_blank">SAP CC 5.0 Installation Guide</a></em>, <em><a href="https://help.sap.com/doc/92714a4b816644da872db2d63697bbfa/5.0/en-US/og.pdf" target="_blank">SAP CC 5.0 Operations Guide</a></em>, or the <em><a href="https://help.sap.com/doc/cde52ea034ca4d82a8032b9b92787cb5/5.0/en-US/ug.pdf" target="_blank">SAP CC 5.0 Upgrade Guide</a></em> for complete instructions in SAP Help Portal at: <a href="https://help.sap.com/cc50" target="_blank">https://help.sap.com/cc50</a>. To facilitate your user experience, just remember the URL (help.sap.com) and the <strong>quick link (cc50)</strong>.</p>
+<p> </p>
+<p><strong><a name="seeLASTMN" target="_blank"></a>Last-Minute Information</strong></p>
+<p>This <em>SAP product document</em> is revised regularly and may include last-minute information about <strong>alerts or hot fixes</strong>.</p>
+<div class="table-responsive"><table border="3" cellpadding="30" cellspacing="1" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p><strong>"Refer to the caution section at the top of this document.</strong></p>
+<p><strong>There is no other last-minute information to share."</strong></p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Additional last-minute information completes this document. Take a look at the <em>technical implementation notes</em> and at the <em>patch notes</em> delivered during the maintenance life of the SAP CC software. For each new version, refer to the corresponding note.</p>
+<p><strong>Enhancements in This <a name="seeFEAT" target="_blank"></a>Support Package (SP)</strong></p>
+<p>This SAP CC 5.0 SP 2 maintenance version provides you with the following enhancements. This <em>Delivery and Information Note</em> introduced the delivered features. Consider the <em>What's New in my SP</em> documentation for more information and user assistance. See these <em>SAP product documents</em> in <a href="http://help.sap.com/" target="_blank">SAP Help Portal</a> at: <a href="https://help.sap.com/cc50" target="_blank">https://help.sap.com/cc50</a>. In the overview page, display the <em>What's New</em> category.</p>
+<p>Architecture Improvements</p>
+<ul>
+<li>
+<p>SAP Convergent Charging now supports version 2.0 of the SAML standard for Web Services operations.</p>
+</li>
+<li>
+<p>SAP Convergent Charging now supports the MDC mode and high-availability (active-passive) feature for the SAP HANA databases.</p>
+</li>
+<li>SAP CC BART Server supports SSL keys longer than 1,024 bits. See <a href="/notes/2571919" target="_blank">SAP Note 2571919</a> for more information.</li>
+</ul>
+<p>Functional Improvements</p>
+<ul>
+<li>The 'Property Type Convertor' component is enhanced to ease string manipulations like retrieving a substring or computing the length of a string.</li>
+</ul>
+<p>Integration Improvements</p>
+<ul>
+<li>A new Web Service operation is available to cancel charging sessions in the system for error management purposes.</li>
+</ul>
+<p>Administration Improvements</p>
+<ul>
+<li>To facilitate your administrative tasks and technical operations, SAP CC Cockpit - your new web application - includes <a href="https://help.sap.com/doc/d847860d561a47568a936d5f3cbeb9da/5.0/en-US/cockpit/apps.html" target="_blank">some new apps</a> in its Launchpad.</li>
+</ul>
+<p>SAP CC Cockpit Improvements</p>
+<p><span style="font-size: 14px;">As of SP 2, <a href="https://help.sap.com/doc/d847860d561a47568a936d5f3cbeb9da/5.0/en-US/cockpit/index.html" target="_blank">SAP CC Cockpit application</a> provides you with new apps:</span></p>
+<ul>
+<li>With the app <em>Display System Status</em>, you verify the status and availability of a Core Server system in your SAP system landscape. You visualize and analyze the availability of each system instance. You verify some important information that facilitates your technical operations: instance versions, data partition distribution.</li>
+<li>With the app <em>Display Usage Metrics</em>, you visualize and analyze the system usage measurement of your SAP CC Core Server system quickly and efficiently. You audit the daily business traffic and the master data growth by comparing the recorded usage metrics. You verify the metrics that are incorporated in the SAP license reporting and auditing programs and you prepare your license auditing reports yearly.</li>
+<li>With the app <em>Display User Operations,</em> you can view the audit records of user operations and the related object changes.</li>
+</ul>
+<p><span style="font-size: 14px;">Now in the launchpad, the app tiles are organized by predefined categories (System Configuration, System Information, and Help).</span></p>
+<p><strong>Technical Changes <a name="seeCHANGES" target="_blank"></a>﻿in This Support Package (SP)</strong></p>
+<p>This SAP CC 5.0 SP 2 maintenance version provides you with the following changes described in this <em>Delivery and Information Note</em>. Consider also the <a href="#seeCORRECTIONS" target="_self">correction list</a> and <a href="#seeLASTMN" target="_self">last-minute information</a>.</p>
+<p>Core Database</p>
+<ul>
+<li>SAP HANA Multitenant Database Containers (MDC)</li>
+</ul>
+<p> </p>
+<p><strong>Corrections <a name="seeCORRECTIONS" target="_blank"></a>﻿in This Support Package (SP)</strong></p>
+<p>This SAP CC 5.0 SP 2 maintenance version provides you with the following corrections described in this <em>Delivery and Information Note</em>. Consider also the <a href="#seeCHANGES" target="_self">change list</a> and <a href="#seeLASTMN" target="_self">last-minute information</a>.</p>
+<p>Core Server</p>
+<ul>
+<li>BUG: Unable to set up long notification policy</li>
+<li><strong>FIX: Now long notification policy can be used</strong></li>
+</ul>
+<ul>
+<li>BUG: Cannot get the persistent value of notification policy parameters</li>
+<li><strong>FIX: User can now retrieve persistent value of notification policy parameters</strong></li>
+</ul>
+<ul>
+<li>BUG: ChargingContractAllowanceFind and ChargingSessionFind WS remove distributed counters from cache accidentally</li>
+<li><strong>FIX: Bug fixed</strong></li>
+</ul>
+<ul>
+<li>BUG: Shared allowances can be selected as normal allowances in a contributor contract</li>
+<li><strong>FIX: Bug fixed</strong></li>
+</ul>
+<ul>
+<li>BUG: Search Allowances operation removes the reservation of distributed counters</li>
+<li><strong>FIX: Bug fixed</strong></li>
+</ul>
+<ul>
+<li>BUG: Connection: response or request bigger than 1M cannot be sent</li>
+<li><strong>FIX: New parameter CONNECTION_MESSAGE_MAX_SIZE can be used to customize max size of message</strong></li>
+</ul>
+<ul>
+<li>BUG: An "IndexOutOfBoundsException" can be thrown when validating a "Range Table Introducer" component in a charge if the number of entries in the table "Mapping of Generated Properties" is lower than the number of output columns in the selected range table class.</li>
+<li><strong>FIX: Bug fixed</strong></li>
+</ul>
+<ul>
+<li>BUG: CIF - The cleanup process for data files triggered during rater/bulkloader startup does not filter data files according to the identifier of the instance. If several instances use the same directory for writing data files (which is not recommended, but is possible anyway), an instance can clean and rename data files currently being used by another instance.</li>
+<li><strong>FIX: Issue fixed</strong></li>
+</ul>
+<ul>
+<li>BUG: The input stream is sometimes not closed when an error occurs while opening a data file to cleanup (e.g. an empty data file with the <code>.gz</code> extension)</li>
+<li><strong>FIX: Bug fixed</strong></li>
+</ul>
+<ul>
+<li>BUG: Missing code of erroneous object in error stack when import fails</li>
+<li><strong>FIX: Code added now</strong></li>
+</ul>
+<ul>
+<li>BUG: GLAS License auditing report file in wrong format</li>
+<li><strong>FIX: formatting fixed</strong></li>
+</ul>
+<ul>
+<li>BUG: Expiration alerts for prepaid accounts do not take DST changes into account</li>
+<li><strong>FIX: Now DST changes is taken into account</strong></li>
+</ul>
+<ul>
+<li>BUG: Command line tools - No prompts for missing arguments when outputting to a file</li>
+<li><strong>FIX: Now prompt is displayed for missing arguments</strong></li>
+</ul>
+<p>Cockpit</p>
+<ul>
+<li>In Cockpit Launchpad, the app <em>Item Files Monitor</em> becomes the app <em>Analyze Item Files</em>.</li>
+</ul>
+<ul>
+<li>BUG: Cockpit: no support for multiple JDBC URIs</li>
+<li><strong>FIX: Now multiple JDBC URIs are supported</strong></li>
+</ul>
+<p>Core Tool</p>
+<ul>
+<li>BUG: Core Tool: error stack is not always fully displayed</li>
+<li><strong>FIX: Error stack is now fully displayed</strong></li>
+</ul>
+<p>It also includes the corrections previously available in <strong>patch level 5 of the previous support package (SAP CC 5.0 SP 1).</strong></p>
+<p>Depending on your <strong>already installed version</strong>, consider the correction lists that are relevant for your system landscapes:</p>
+<ul>
+<li><a href="/notes/2600823" target="_blank">Corrections in SAP CC 5.0 Support Package 1 Patch 5</a> (there is no patch level 4)</li>
+<li><a href="/notes/2580200" target="_blank">Corrections in SAP CC 5.0 Support Package 1 Patch 3</a></li>
+<li><a href="/notes/2566922" target="_blank">Corrections in SAP CC 5.0 Support Package 1 Patch 2</a></li>
+<li><a href="/notes/2557289" target="_blank">Corrections in SAP CC 5.0 Support Package 1 Patch 1</a></li>
+</ul>
+<p><strong><a name="TechImplementation" target="_blank"></a>﻿Technical Implementation Note</strong></p>
+<p>Refer to the <em>Technical Implementation Note</em> document associated to this SP delivery. See <a href="/notes/2587172" target="_blank">SAP Note 2587172</a>.</p>
+<p>Refer also to the patch notes associated to patch levels of the previous support package.</p>
+<p><strong>What's New in My SP</strong></p>
+<p>For each delivered maintenance version of SAP CC 5.0 and provided as a support package (SP), SAP provides you with the necessary <em>What's New in SPs</em> documents. See in SAP Help Portal at help.sap.com/cc50 about new or enhanced features in your support package.</p>
+<p>Useful <em>What's New</em> sections are available in the <em>SAP product documentation</em> and user assistance of SAP Convergent Charging.</p>
+<p><strong><a name="Download" target="_blank"></a>﻿Download</strong></p>
+<p>In SAP Support Portal, you can download the SAP CC software. Get the <a href="https://service.sap.com/~form/handler?_APP=00200682500000001943&amp;_EVENT=LIST&amp;EVENT=LIST&amp;ENR=73555000100900000307&amp;SWTYPSC=N&amp;PECCLSC=NONE&amp;V=INST&amp;TA=ACTUAL" target="_blank">complete version</a> and <a href="https://service.sap.com/~form/handler?_APP=00200682500000001943&amp;_EVENT=DISPHIER&amp;HEADER=Y&amp;FUNCTIONBAR=N&amp;EVENT=TREE&amp;NE=NAVIGATE&amp;ENR=73555000100900000307&amp;V=MAINT" target="_blank">available patches</a>.</p>
+<p><strong><a name="License" target="_blank"></a>﻿Licenses</strong></p>
+<p>In SAP Support Portal, you can <a href="https://support.sap.com/keys-systems-installations/keys.html" target="_blank">request some permanent license keys</a> for the SAP CC software.</p>
+<p><strong>Data Protection and Privacy: <a name="OBJECTSNAPSHOTS" target="_blank"></a>﻿How to Configure the Data Object Auditing Based on Snapshot Recording</strong></p>
+<p>To simplify the deletion of personal data, SAP recommends that you pay attention to the following technical information.</p>
+<p>In SAP Convergent Charging, end-customer data is implemented in Master Data as subscriber accounts and provider contracts. These concepts can be viewed as data containers into which an SAP CC user can store some end-customer information required for the charging process. As an SAP CC user, if you design and customize these containers to store some personal data, note that the <em>Data and Operation Auditing</em> functions of SAP CC may record these containers into the back-end database system as data object snapshots when some modify or delete operations are applied on them. It depends on your SAP CC system configuration, your security policy, and your data protectionand privacy legislation.</p>
+<p>When delete operations are performed on subscriber accounts and provider contracts, the containers are physically destroyed from the database systems and from the SAP CC systems. However, some object snapshot records can still persist in the audit data. For avoiding SAP CC to create audit snapshots for subscriber accounts and provider contracts, if they contain personal data, you can configure the system to stop the background auditing. As an SAP CC system administrator, disable the function (see the <a href="https://help.sap.com/doc/d847860d561a47568a936d5f3cbeb9da/5.0/en-US/core_paramref/AUDIT_OBJECT_ACTIVATION.html" target="_blank">AUDIT_OBJECT_ACTIVATION</a> system parameter) or change the <a href="https://help.sap.com/doc/d847860d561a47568a936d5f3cbeb9da/5.0/en-US/core_paramref/AUDIT_OBJECT_DOMAIN.html" target="_blank">AUDIT_OBJECT_DOMAIN</a> system parameter by removing the following audit domains: CUSTOMER and CUSTOMER_TABLE. The AUDIT_OBJECT_DOMAIN system parameter is available as of SAP CC 4.1 SP 2.</p>
+<p>For more user assistance and information, refer to the <a href="https://help.sap.com/doc/63947a33d393486b86a98c5d09f1e8bf/5.0/en-US/sg.pdf" target="_blank">SAP CC 5.0 Security Guide</a> about data protection and privacy, personal data, and sensitive personal data.</p>
+<p><strong><a name="Delta" target="_blank"></a>﻿Release Notes / Delta Information</strong></p>
+<p>For the <strong>initial shipment of a new main release</strong>, SAP provides you with a <em>Release Notes/Delta Information</em> document: <a href="https://help.sap.com/doc/0c2f181b53c3407ca5803a3cadb7ec6c/5.0/en-US/wnsp0.pdf" target="_blank">What's New in SAP CC 5.0 SP 0</a></p>
+<p>This <em>SAP document</em> describes the new or enhanced functional features available in the first delivered version of SAP CC 5.0. It completes the <a href="/notes/2380829" target="_blank">RIN</a> (Release Information Note) document.</p>
+<p>It is available in SAP Help Portal. Note that useful <em>What's New</em> sections are available in the <em>SAP product documentation</em> and user assistance.</p>
+<p>During the maintenance lifecycle, SAP provides you with useful <em>What's New in SPs </em>documents. See the list in this note or consult SAP Help Portal at help.sap.com/cc50.</p>
+<p><strong><a name="whats_new" target="_blank"></a>﻿What's New Information</strong></p>
+<p>What's new information is crucial for your daily activities.</p>
+<ul>
+<li>For all the maintenance versions (later SPs), SAP provides you with the necessary <em>What's New in SPs</em> documents in SAP Help Portal. Consult this product documentation in our user assistance to know the functional features:</li>
+</ul>
+<ul>
+<ul>
+<li><a href="https://help.sap.com/doc/1c461b150f4b4aa79d8da8837f16e5c3/5.0/en-US/wnsp2.pdf" target="_blank">What's New in SAP CC 5.0 SP 2</a></li>
+<li><a href="https://help.sap.com/doc/1e63c3f582774633b063d87b7322e70b/5.0/en-US/wnsp1.pdf" target="_blank">What's New in SAP CC 5.0 SP 1</a></li>
+<li><a href="https://help.sap.com/doc/0c2f181b53c3407ca5803a3cadb7ec6c/5.0/en-US/wnsp0.pdf" target="_blank">What's New in SAP CC 5.0 SP 0</a></li>
+</ul>
+<li>The product overview page in SAP Help Portal includes a <em>What's New</em> section that highlights the last news (alerts, software contents).</li>
+<li>Useful <em>What's New</em> sections are available in the <em>SAP product documentation</em> and user assistance of SAP CC. For example, view the <a href="https://help.sap.com/doc/d847860d561a47568a936d5f3cbeb9da/5.0/en-US/core_paramref/index.html#seeWHATSNEW" target="_blank">What's New section</a> of the <a href="https://help.sap.com/doc/d847860d561a47568a936d5f3cbeb9da/5.0/en-US/core_paramref/index.html" target="_blank">SAP CC 5.0 System Parameter Reference</a>.</li>
+<li>To complete this information, all the <em>SAP Notes</em> about software delivery and technical implementation may include some last-minute information topics to help you.</li>
+</ul>
+<p><strong><a name="Installation" target="_blank"></a>﻿Initial Installation of SAP CC 5.0</strong></p>
+<p>In case of an <strong>initial installation of SAP Convergent Charging 5.0</strong> in your SAP system landscape, you must use the complete medium delivered for this support package.</p>
+<p>This medium is an electronic DVD that contains all the needed material for the installation, including the installation tool (<em>SAPinst</em>).</p>
+<p>The installation must be performed according to the <em><a href="https://help.sap.com/doc/f38fbcecfd854dd2b4a1be053ba9e7a4/5.0/en-US/ig.pdf" target="_blank">SAP CC 5.0 Installation Guide</a></em> just as an initial installation.</p>
+<p>Consult the <a href="/notes/2440145" target="_blank">release restriction note</a>.</p>
+<p><strong><a name="Upgrade" target="_blank"></a>﻿Upgrade from Replaced SAP CC 4.1</strong></p>
+<p>In case of an <strong>upgrade from the previous main release</strong> of SAP Convergent Charging (SAP CC 4.1), prepare and plan your project by consulting the <em>Release Notes/Delta Information</em> and the <em>Master Guide</em> documents of this replaced release.</p>
+<p>Consult the <a href="/notes/2440145" target="_blank">release restriction note</a>.</p>
+<p>The upgrade must be performed according to the <em><a href="https://help.sap.com/doc/cde52ea034ca4d82a8032b9b92787cb5/5.0/en-US/ug.pdf" target="_blank">SAP CC 5.0 Upgrade Guide</a></em>.</p>
+<p><strong><a name="Maintenance" target="_blank"></a>﻿Software Maintenance (SP Update)</strong></p>
+<p>SAP delivers support packages (SPs) and patches to maintain your SAP CC 5.0 software optimally. You plan and operate the technical implementation in your SAP system landscapes.</p>
+<p>Do always verify the <strong>availability of patches</strong> by checking the existing patch notes attached to this <em>SAP Note</em> or by consulting the corresponding <a href="http://support.sap.com/notes" target="_blank">SAP Notes</a> in SAP Support Portal.</p>
+<p>In case of an <strong>update from a former SP</strong> to the current SP, consult the corresponding <em>Delivery and Information Note</em> documentation (see the <em>References</em> section).</p>
+<p>You can download the software in SAP Support Portal.</p>
+<ul>
+<li><a href="https://launchpad.support.sap.com/#/softwarecenter/template/products/_APP=00200682500000001943&amp;_EVENT=DISPHIER&amp;HEADER=Y&amp;FUNCTIONBAR=N&amp;EVENT=TREE&amp;NE=NAVIGATE&amp;ENR=73554900100900001514&amp;V=MAINT" target="_blank">Direct link</a></li>
+<li>Area: <a href="https://launchpad.support.sap.com/#/softwarecenter/support/index" target="_blank">Support Packages and Patches - Maintenance</a></li>
+<li>Software download center: <a href="https://support.sap.com/swdc" target="_blank">https://support.sap.com/swdc</a></li>
+</ul>
+<p><span style="font-size: 14px;"> </span></p>
+<p style="padding-left: 30px;"><strong>Note:</strong></p>
+<p style="padding-left: 30px;">When you download a support package or a patch in SAP Support Portal, please note that the software category 'CONVERGENT CHARGING' is renamed as of SAP CC 5.0 SP 0. Now the technical name is 'CORE SERVER' to facilitate your user experience.</p>
+<p><strong><a name="Documentation" target="_blank"></a>﻿Product Documentation and User Assistance</strong></p>
+<p>Consult the <em>SAP product documentation</em> and <a href="https://help.sap.com/doc/d847860d561a47568a936d5f3cbeb9da/5.0/en-US/index.html" target="_blank">user assistance</a> of <strong>SAP Convergent Charging 5.0 in SAP Help Portal</strong> at <a href="https://help.sap.com/cc50" target="_blank">https://help.sap.com/cc50</a> or use the following permanent page <a href="https://help.sap.com/viewer/product/SAP_CONVERGENT_CHARGING/5.0/en-US" target="_blank">https://help.sap.com/viewer/product/SAP_CONVERGENT_CHARGING/5.0/en-US</a> in the portal.</p>
+<p>Refer to the <em>Release Notes/Delta Information</em> document about the changes since the previous main release of SAP Convergent Charging. Refer to the <em>What's New in SPs</em> documents about changes between support packages of SAP CC 5.0.<br/><br/>Refer to the <em>SAP CC 5.0 Master Guide</em> about installable software units, system landscapes and business scenario. <br/><br/>Read the first sections of the <em>SAP CC 5.0 Application Help</em> to determine your services and functions of SAP CC and the installable units for your business.<br/><br/>Read the <em>SAP CC 5.0 Implementation and Configuration Guide</em> to determine the implementation activities and the integration tasks, the communication technical interfaces, the technology, or the APIs to be used (files, Java, Web Services, database).<br/><br/>Use the <em>SAP CC 5.0 Product Availability Matrix (PAM)</em> and the <em>SAP CC 4.0 Sizing Guidelines</em> to determine the best distribution options and rules for your SAP system landscape, considering performance, robustness, scalability and high availability.</p>
+<p><strong><a name="Restriction" target="_blank"></a>﻿Release Restriction Note Information</strong></p>
+<p>Consult the <em>Release Restriction Note (RRN)</em> document for more information and user assistance. See <a href="/notes/2440145" target="_blank">SAP Note 2249339</a>.</p>
+<p><strong><a name="References" target="_blank"></a>﻿References</strong></p>
+<p>After the publication of this <em>SAP Note</em>, the document is revised with newer references automatically. In your web browser, display the <em>SAP Note</em> and select the main tab:</p>
+<ul>
+<li>Software Components</li>
+<li>Support Package Patches</li>
+<li>References</li>
+</ul>
+<p>You see new patch levels, new notes, and new information topics.</p>
+<p>Go to <a href="https://support.sap.com/" target="_blank">SAP Support Portal</a> and <a href="https://help.sap.com/" target="_blank">SAP Help Portal</a>.</p>
+<div id="selenium-highlight"></div>
+<div id="selenium-highlight"></div>
+<div id="selenium-highlight"></div></div></div></div></div>

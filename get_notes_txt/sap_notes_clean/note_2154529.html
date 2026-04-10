@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">- Text alignment from a Crystal Report document is not properly displayed when viewed in SAP BI LaunchPad,<br/>- No problem when viewing the document directly within Crystal Designer 2013 or Crystal Report for Enterprise.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CR4E, CR</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Steps to duplicate</strong></p>
+<ol>
+<li>Log in to SAP Crystal Report 2013 or SAP Crystal Report for Enterprise,</li>
+<li>View a document containing many words spread on several lines,</li>
+<li>Make sure to select "Justify" for the text alignment of the content,</li>
+<li>Notice that the report is properly displayed.</li>
+<li>Log into SAP BI LaunchPad,</li>
+<li>Go to Preferences &gt; Crystal Reports &gt; and test the behavior with the Web view format,</li>
+<li>Notice that the text is not justified along the right edge.</li>
+</ol>
+<p><strong>Cause</strong></p>
+<p>When using the value "justify" for the "text-align" property, a "Display:Block" is added in the span html tags. Then, the first word on the line is properly along the left edge but the last word is not along the right edge.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The issue has been fixed in the patches listed in the "Support Packages &amp; Patches" section below.<br/>The "Support Packages &amp; Patches" section will be populated with the relevant patch levels once they are released.<br/>For Business Intelligence Platform maintenance schedule and strategy, see the Knowledge Base Article 2144559 in References section.</p></div></div></div></div>

@@ -1,0 +1,56 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html1">
+<p>You run Trial Balance for a specified branch and you choose to show opening balance. In some cases business partners are not displayed in the Trial Balance, despite they have postings from period prior to the report dates range.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<p><strong>Prerequisites:</strong></p>
+<p>You are working in a database where Multiple Branches is enabled (<em>Administration → System Initialization → Company Details → Basic Initialization</em>).</p>
+<p>You have defined few branches (<em>Administration → Setup → Financials → Branches</em>).</p>
+<p><strong>Scenario 1:</strong></p>
+<ol>
+<li><span style="font-size: 14px;">Business Partner <em>BP1</em> is created and assigned to <em>Branch 1</em> (<span><em>Business Partner</em> <em>→</em> <em>Business Partner</em></span></span><em style="font-size: 14px;"> Master Data <em>→ </em>General <em>→ </em>Branch Assignment</em><span style="font-size: 14px;">).</span></li>
+<li><span style="font-size: 14px;">BP1 has the following transaction:<br/>Journal entry (JE) 101, 31.12.2019, 500.00 <span>GBP</span>, JE line assigned to Branch 1.</span></li>
+<li><em style="font-size: 14px;">Go to Reports → Financial Reports → Financials → Trial Balance</em><span style="font-size: 14px;">, fill selection criteria as follows:<br/>- Select <em>BP</em> checkbox<br/>- <em>Date</em>: <em>Posting Date</em>, From: 01.01.2020, To: 31.12.2020<br/>- Don't select <em>Hide Zero Balanced Acct </em>checkbox<br/>- <span>Don't select </span><em>Hide Acct with No Postings <span>checkbox<br/>- Select Opening Balance for Period <em>checkbox</em><br/>- Select </span></em></span><em>OB from Start of Company Activity </em>radio button<br/>- Choose <em>Expended </em>button <em>→ </em>Select <em>Branch 1 </em>in<em> Branch </em>field and choose <em>OK</em>.</li>
+<li>Choose <em>OK</em> to execute the trail balance report.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>BP1 is displayed in the Trial Balance report showing open balance of 500.00 <span>GBP</span>.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>BP1 is not displayed in the Trial Balance report.</p>
+<p> </p>
+<p><strong>Scenario 2:</strong></p>
+<ol start="1">
+<li>Business Partner <em>BP2</em> is created and assigned to <em>Branch 2</em> (<em>Business Partner</em> <em>→</em> <em>Business Partner</em><em> Master Data <em>→ </em>General <em>→ </em>Branch Assignment</em>).</li>
+<li>BP1 has these transactions:<br/>Journal entry 201, 31.12.2019, 500.00 GBP, JE line assigned to Branch 2.<br/><span>Journal entry 202, 21.10.2020, 600.00 GBP, JE line assigned to Branch 2.</span></li>
+<li><em>Go to Reports → Financial Reports → Financials → Trial Balance</em>, fill selection criteria as follows:<br/>- Select <em>BP</em> checkbox<br/>- <em>Date</em>: <em>Posting Date</em>, From: 01.01.2020, To: 31.06.2020<br/>- Don't select <em>Hide Zero Balanced Acct </em>checkbox<br/>- Don't select <em>Hide Acct with No Postings checkbox<br/>- Select Opening Balance for Period <em>checkbox</em><br/>- Select </em><em>OB from Start of Company Activity </em>radio button<br/>- Choose <em>Expended </em>button <em>→ </em>Select <em>Branch 2 </em>in<em> Branch </em>field and choose <em>OK</em>.</li>
+<li>Choose <em>OK</em> to execute the trail balance report.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>BP2 is displayed in the Trial Balance report showing open balance of 500.00 GBP.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p><span>BP2 is not displayed in the Trial Balance report.</span></p>
+<p> </p>
+<p><strong>Scenario 3:</strong></p>
+<ol>
+<li>Business Partner <em>BP3</em> is created and assigned to <em>Branch 3</em> (<em>Business Partner</em> <em>→</em> <em>Business Partner</em><em> Master Data <em>→ </em>General <em>→ </em>Branch Assignment</em>).</li>
+<li>BP3 has these transactions:<br/>Journal entry 301, 31.12.2019, 500.00 GBP, JE line assigned to Branch 3.<br/>Journal entry 302, 15.01.2020, 700.00 GBP, JE line assigned to Branch 3.</li>
+<li><em>Go to Reports → Financial Reports → Financials → Trial Balance</em>, fill selection criteria as follows:<br/>- Select <em>BP</em> checkbox<br/>- <em>Date</em>: <em>Posting Date</em>, From: 01.07.2020, To: 31.12.2020<br/>- Don't select <em>Hide Zero Balanced Acct </em>checkbox<br/>- Don't select <em>Hide Acct with No Postings checkbox<br/><em>- Select Opening Balance for Period <em>checkbox<br/><em>- Select </em><em>OB from Start of Company Activity </em>radio button<br/>- Choose <em>Expended </em>button <em>→ </em>Select <em>Branch 3 </em>in<em> Branch </em>field and choose <em>OK</em>.</em></em></em></li>
+<li>Choose <em>OK</em> to execute the trail balance report.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>BP3 is displayed in the Trial Balance report showing open balance of 1200.00 GBP.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p><span>BP3 is not displayed in the Trial Balance report.</span></p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p class="urTxtH1">This is correct system behavior.</p>
+<div class="longtext">
+<p>When there are no BP transactions matching selection criteria / expand selection criteria in dates range selected for Trial Balance, BP will not be shown in the Trial Balance.</p>
+</div></div></div></div></div>

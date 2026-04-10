@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In CRM WebUI, unexpected dots appear in some input fields when using skins like 'Signature Design'(NOVA).</p>
+<p><img alt="dots 1.png" class="img-responsive" src="/documents/customerkba/danauBhkvoH34Js7xJL01uWq8YF1njHwHjGR1wCiHZw" title="dots 1.png"/></p>
+<p><img alt="dots 2.png" class="img-responsive" src="/documents/customerkba/gze3RFg6_vp5qLX-HhPysjDz1Yg7RUhCdOVRH40OYSA" title="dots 2.png"/></p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP enhancement package 1 for SAP CRM 7.0</li>
+<li>SAP enhancement package 3 for SAP CRM 7.0</li>
+<li>SAP enhancement package 4 for SAP CRM 7.0</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>This issue is seen in input fields in Edit mode. For example:</p>
+<ol>
+<li>Access a business role,</li>
+<li>Search and display an account,</li>
+<li>Edit an assignment block for example 'Tax Categories'.</li>
+</ol>
+<p>or:</p>
+<ol>
+<li>Access a business role,</li>
+<li>Create a sales order.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Implement <a href="https://me.sap.com/notes/2359132" target="_blank">SAP Note 2359132</a> - Introducing "box-sizing: border-box" in inputField and dropdownlistbox tags.</p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<p>After implementing the SAP Note, please read and follow the 'WARNING' part in this SAP Note 2359132 to make sure cache is cleared and new CSS content can be used.</p>
+<p>Also, if you have developed your own custom skin based upon the files this Note modifies, please propagate this Note modifications to your own skin, for that skin to be fixed as well.</p></div></div></div></div>

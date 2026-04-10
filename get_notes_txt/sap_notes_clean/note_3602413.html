@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">ODATA API 'API_PROCESS_ORDER_2_SRV' contains time value '24:00:00' which leads to import errors in receiving systems.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>24:00:00 is a valid value within SAP back-end system (see SAP Note 3028240).</p>
+<p>Nevertheless some external systems may prefer to receive</p>
+<ul>
+<li>'23:59:59' of same day </li>
+<li>'00:00:00' of next day </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>With this SAP Note you can activate the conversion of '24:00:00' within the outgoing SOAP message, the ODATA GET or the operations to create a production order through the OData API.</p>
+<p>To <strong>activate conversion</strong> start transaction S_ER9_52003822 or SM30 for table PPSOA_TIME_CONV and create a new entry for the relevant service.</p>
+<p>The F4 help for <em>service name</em> will show the list of services for which conversion is supported. You need to create an entry for service 'API_PROCESS_ORDER_2_SRV'</p>
+<p>The <em>field conversion mode</em> offers 3 options (the texts will only appear when you are logged on in English)</p>
+<ul>
+<li>" " -&gt; Keep 24:00 (default)</li>
+<li>"N" -&gt; Move to <strong>N</strong>ext Day 00:00:00</li>
+<li>"S" -&gt; Move to <strong>S</strong>ame Day 23:59:59</li>
+</ul></div></div></div></div>

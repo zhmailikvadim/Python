@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">Execute the T-code: FTR_EDIT, change the end term of interest rate instrument to extend it to future date, the cash flows of the deal did not update correctly as the modification.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>Financial Accounting (FI) </li>
+<li>SAP R/3 </li>
+<li>SAP R/3 Enterprise 4.7 </li>
+<li>SAP ERP Central Component </li>
+<li>SAP ERP </li>
+<li>SAP enhancement package for SAP ERP </li>
+<li>SAP enhancement package for SAP ERP, version for SAP HANA</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Create a transaction of interest rate instrument by T-code: FTR_CREATE, set the “Repayment structure”, “Repayment form” as “Final repayment”, and “Frequency” as “Manual input”;</li>
+<li>Save the transaction;</li>
+<li>Then edit the transaction of interest rate instrument by T-code: FTR_EDIT, modify the term of the deal to extend it a future date;</li>
+<li>Check the flows of the transaction, will find that they are not updated.</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><span>The issue is that the 'Frequency' in the 'Repayment Structure' has been saved as 'Manual input'. This means that the 'Repayment Structure' is never synchronized with the data from other parts. Everything is manually input and the system will never try to do so. </span></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol>
+<li>Execute T-code: FTR_EDIT then choose the deal;</li>
+<li>Click on ‘Change’ button;</li>
+<li>Change the 'Frequency' in the 'Repayment structure' back to 'At end of term', this will give the indication to the system that the repayment structure is not manually input anymore;</li>
+<li>Change the value in the field 'End' in the 'Term' section.</li>
+<li>It will update the 'End term' as well as 'Due Date' of final repayment, and the nominal interest flows will be also generated.</li>
+</ol></div></div></div></div>

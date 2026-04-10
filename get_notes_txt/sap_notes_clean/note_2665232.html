@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>You create a document with services Expense - Fixed price without actuals</li>
+<li>When you add the service in a new sales order you get the error message</li>
+</ul>
+<p>'Service product and item type code do not match.'<br/>'Check your service master data to ensure that you have not defined a service product with an item category group for expenses, or vice versa.'</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Business ByDesign</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Go To the Sales Order Workcenter.</li>
+<li>Go To the New Sales Order View.</li>
+<li>Fill out the mandatory data.</li>
+<li>Go to the items tab and choose a service expense -Fixed price without actuals.</li>
+</ol>
+<p>Now you see the error message:<br/>'Service product and item type code do not match. Check your service master data to ensure that you have not defined a service product with an item category group for expenses, or vice versa'</p>
+<ol>
+<li>Go to the Product and Service Portfolio work center.</li>
+<li>Select the Services view.</li>
+<li>Select All Services in the Show field.</li>
+<li>Select and Edit service ID: Service: ABC (represents the service ID)</li>
+<li>Go to the Sales Tab.</li>
+<li>In Item Group field you can see the actual value to Fixed price without actuals</li>
+<li>Go to General Tab.</li>
+</ol>
+<p>Here you can see that the expense field is not marked as expense in the service master data.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The error message occurs because the item type of the service is XFIX - Expense - fixed price without actuals, but the Expense flag is not ticked in the service master data. Once a service is saved it is not possible to mark a service product as an expense service any more.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>You have to create a new service with the marked expense field.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>Service, Service product, Item Code, Fixed price, Festpreis, Checkbox</p></div></div></div></div>

@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">GR confirmation or replacement from EWM leads to error message /SPE/INBVAL008: "PO items are partially TPOP".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>/SPE/INBVAL008, EKPO-PSTYP, TPOP, EWM</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Inbound deliveries are NOT created with SPM functionality (VL60, Idoc FM /SPE/IDOC_INPUT_DESADV1), but e.g. with classic transaction like VL31N. In this process, you can mix up PO items that are relevant for GR with TPOP items that are not relevant for GR within the same EWM warehouse. The TPOP items have been configured properly with a confirmation control key (no GR assignment) that leads to non-GR relevance (LIPS-NOWAB = X) and non-EWM relevance (LIPS-LFDEZ = X) in the inbound delivery. The other items are distributed to EWM and shall be posted GR.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the attached coding solution.</p></div></div></div></div>

@@ -1,0 +1,58 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> The configuration app/activity "Activate Features" cannot be found.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html1">Activate Features, Feature Toggles, Switch-Based Feature Toggles, Switch Framework, IMG-Activity, SSCUI.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>"Activate Features" is not a top-level Business App / Fiori App, but it is a so-called "Configuration App" or "Configuration Activity" made available inside the top-level apps "Manage Your Solution" or "Implementation Activities" or in SAP Central Business Configuration (CBC), depending on the system environment at hand. Therefore, "Activate Features" cannot be found via the search field on the top level of the Fiori Launch Pad.</p>
+<p>In addition, for "Activate Features" to become visible and launchable, your administrator must first assign a certain business catalog to the relevant business role (see below).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Firstly, please ensure that your administrator has assigned business catalog <strong>Feature Toggles - Configuration (SAP_CA_BC_IC_LND_FTG_PC)</strong> to the relevant business role, i.e. a business role assigned to the user who wants to use "Activate Features". The recommended default role template to use for this purpose is <strong>Configuration Expert - Business Process Configuration (BR_BPC_EXPERT)</strong>, but administrators may choose to structure roles differently.</p>
+<p>Secondly, please enter your business configuration environment, navigate to configuration activity "Activate Features" and launch it. The details here depend on your system environment:</p>
+<p><strong>a) S/4HANA Cloud (public edition): 3-System Landscape, CBC-managed</strong></p>
+<p>Launch the top-level app "Implementation Activities". You will be presented with a tree of configuration activities. Depending on the name of the root node, you can find "Activate Features" at the following location:</p>
+<p>Root node: SAP Business Configuration</p>
+<ul>
+<li>General Settings</li>
+<ul>
+<li>Cross-Application</li>
+<ul>
+<li>Activate New Features</li>
+<ul>
+<li>Activate Features</li>
+</ul>
+</ul>
+</ul>
+</ul>
+<p>Root node: SAP Customizing Implementation Guide</p>
+<ul>
+<li>ABAP Platform</li>
+<ul>
+<li>Application Server</li>
+<ul>
+<li>System Administration</li>
+<ul>
+<li>Activate Features</li>
+</ul>
+</ul>
+</ul>
+</ul>
+<p>If the root node does not have one of the above names or if you cannot find "Activate Features" at the given location, please check if you can switch to a different tree hierarchy by selecting "Menu &gt; Implementation Activities &gt; Change Hierarchy &gt; ..." from the main menu.</p>
+<p>NOTE: in this system environment also CBC will be available, as described in the following section b).</p>
+<p><strong>b) <strong>S/4HANA Cloud<strong> (public edition)</strong>: </strong>2-System Landscape, CBC-managed</strong></p>
+<p>Launch SAP Central Business Configuration (CBC) - Project Experience for your system. You will either see a tile called "Configure your Activities" or a tab called "Configuration Activities"; click tile/tab. You will now be presented with the so-called CBC Activity List. You will find "Activate Features" at the following location:</p>
+<ul>
+<li>General Settings</li>
+<ul>
+<li>Cross-Application</li>
+<ul>
+<li>Activate New Features</li>
+<ul>
+<li>Activate Features</li>
+</ul>
+</ul>
+</ul>
+</ul>
+<p><strong>c) <strong>S/4HANA Cloud<strong> (public edition)</strong>: </strong>2-System Landscape, SolBuilder-managed</strong></p>
+<p>Launch the top-level app "Manage Your Solution". Choose the Application Area "Application Platform and Infrastructure", then the sub area "General Settings", and finally the configuration item "Basic Settings". You will now be presented with a list of configuration steps. One of them will be "Activate Features". In the table line for "Activate Features" click the button "Configure" (to the far right).</p>
+<p><strong>d) <strong><strong>S/4HANA Cloud<strong> (private edition) / </strong></strong></strong>SAP Business Technology Platform (BTP) - ABAP Environment / On-Premise Systems</strong></p>
+<p>Follow the steps described under section a) above. Alternatively, you may use SAP GUI with transaction code SPRO or SIMG. This will also present a tree of configuration activities as described under a) above and also provides the option of changing the hierarchy via the main menu.</p></div></div></div></div>

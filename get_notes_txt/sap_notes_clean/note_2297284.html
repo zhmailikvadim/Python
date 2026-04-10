@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">A mass locking of all transactions codes are needed in order to fulfill a specific business requirement (e.g. the system is being audited, or it's needed to lock the system to end-users), but it is not possible.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>NetWeaver Release-independent</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>This is actually a system standard behavior, not an error.</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>SM01 is meant to be used to restrict access to specific transaction codes while changes in the system are being done. The massive lock is not permitted in SM01 as it can damage the system.</p>
+<p>If a mass lock is carried in all the transactions of a system, no one will be able to revert the process. In case an audition requires the system to not be used during a timeframe, there are other means to inform the users to not connect to the system.</p>
+<p>A better way to do such maintainance is to lock the users from login on the system in a timeframe. This can be done by:</p>
+<ul>
+<li>Locking the client;</li>
+<li>Locking users/group of users in SU01/SU10;</li>
+<li>Advising end users system won't be available during a timeframe;</li>
+</ul>
+<p>For more information, check with the Security team the best option that fits in your case.</p>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li>KBA <a href="https://i7p.wdf.sap.corp/sap(bD1lbiZjPTAwMQ==)/bc/bsp/sno/ui_entry/entry.htm?param=69765F6D6F64653D3030312669765F7361706E6F7465735F6E756D6265723D3232323130373826" target="_blank">2221078</a> - SM01 Lock/Unlock change logs</li>
+<li>SAP Note <a href="https://me.sap.com/notes/383106" target="_blank">383106</a> - User menus locked by SM01 can be used after logon</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>mass, massive, lock, locks, transaction, tcode, tcodes, SM01, audit, requirement, SU10, users, bulk changes, security, SU01, group, massively, check, team, basis</p></div></div></div></div>

@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="longtext" id="__html1">
+<p>When the ABAP statement <span class="SNO_DNT" style="float: none;" translate="no">SCAN ABAP-SOURCE</span> is called with both the addition <span class="SNO_DNT" style="float: none;" translate="no">WITH STRUCTURE</span> and the addition <span class="SNO_DNT" style="float: none;" translate="no">WITH LIST TOKENIZATION</span>, the structure may be incomplete if the scanned source has a SQL statement with a dynamic condition.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">KERNELCOR List token</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><em><br/></em>Error in the kernel when all 3 conditions a) <span class="SNO_DNT" style="float: none;" translate="no">WITH STRUCTURE</span> is requested, b) <span class="SNO_DNT" style="float: none;" translate="no">WITH LIST TOKENISATION</span> is requested and c) a SQL statement with a dynamic condition is scanned are met.</p>
+<p>Example for a problematic SQL statement:</p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">        SELECT * FROM foo WHERE (where_condition).</span><br/><br/></p>
+<p>Example for a problematic SCAN statement:</p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">        SCAN ABAP-SOURCE sourcetab</span><br/><span class="SNO_DNT" style="float: none;" translate="no">                INCLUDE PROGRAM FROM repo_name</span><br/><span class="SNO_DNT" style="float: none;" translate="no">                 WITH LIST TOKENIZATION "&lt;&lt;&lt;&lt;&lt;&lt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">                 WITH INCLUDES</span><br/><span class="SNO_DNT" style="float: none;" translate="no">                 TOKENS INTO tokens</span><br/><span class="SNO_DNT" style="float: none;" translate="no">                 STATEMENTS INTO statements</span><br/><span class="SNO_DNT" style="float: none;" translate="no">                 STRUCTURES INTO structures "&lt;&lt;&lt;&lt;&lt;&lt;</span><br/><span class="SNO_DNT" style="float: none;" translate="no">                 LEVELS INTO levels.</span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><em><br/></em>If the option WITH LIST TOKENISATION is not needed, you can remove the option.<br/><br/>otherwise, apply the attached kernel patch</p>
+<p>This correction is initially delivered with the kernel patch level listed in the <span class="SNO_DNT" style="float: none;" translate="no">"<strong>Support Package Patches</strong>"</span> section of this SAP Note. All subsequent kernel patch levels also contain the correction. Keep in mind that only the latest kernel patch level is available for download, however, it contains all previously delivered corrections. As a result, you can download and install the latest available kernel patch at any time to implement this correction.</p>
+<p>If there is no entry for the kernel patch level in the <span class="SNO_DNT" style="float: none;" translate="no">"<strong>Support Package Patches</strong>"</span> section, the patch is not yet available. The entry will be added upon the delivery of the correction. Please check this SAP Note to see if new patch level entries are added.</p>
+<p>This correction is delivered with the following kernel archives:</p>
+<ul>
+<li>hotfix - file dw.SAR<strong><br/></strong></li>
+</ul>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span> - files <span class="SNO_DNT" style="float: none;" translate="no">SAPEXE.SAR</span> and <span class="SNO_DNT" style="float: none;" translate="no">SAPEXEDB.SAR</span>  </li>
+</ul>
+<p>Follow the SAP recommendations on how to select and install the kernel patch:</p>
+<ol>
+<li>Apply the latest<strong> <span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span></strong> if it contains the correction (PL of correction is smaller or equal to the PL of the latest SP Stack Kernel). For the list of current SP Stack Kernels, see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Otherwise, the next <span class="SNO_DNT" style="float: none;" translate="no">SP Stack Kernel</span> will deliver the correction. Apply the <strong>hotfix </strong>only if you require the correction on short notice.</li>
+<li>The correction may not be available for kernel releases that are out of maintenance. Please upgrade to the corresponding downward compatible kernel (<strong>DCK</strong>), see SAP Note <a href="/notes/2083594" target="_blank">2083594</a> (SAP Kernel Versions and SAP Kernel Patch Levels).</li>
+<li>Review the <strong>regression note </strong>for the target patch level before installing the patch. For details, see SAP Note <a href="/notes/1802333" target="_blank">1802333</a> (Finding information about regressions in the SAP kernel).</li>
+<li>For instructions on how to download and install kernel patches, see SAP Note <a href="/notes/19466" target="_blank">19466</a> (Downloading SAP kernel patches).</li>
+</ol>
+<p>The paper <span class="SNO_DNT" style="float: none;" translate="no"><a href="https://support.sap.com/deployment-strategies-kernel-abap.pdf" rel="noopener noreferrer" tabindex="-1" target="_blank" title="https://support.sap.com/deployment-strategies-kernel-abap.pdf">Update Strategy for the Kernel of the Application Server ABAP in On Premise Landscapes</a></span> provides detailed SAP recommendations.</p></div></div></div></div>

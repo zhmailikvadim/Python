@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">For migrating to the target system S/4 HANA OP 1610, the class check is used. And the following message could return from the class execution.</p>
+<ul>
+<li>1. The check returns error message saying 'CLIENT: XXX, incompleted Transfer Stock data in staging tables cannot be migrated to S/4. Please finish the incompleted Transfer Stock tasks in Transfer Stock Fiori application.' </li>
+<li>2. The check returns error rmessage saying 'CLIENT: XXX, cannot clean up Transfer Stock data in staging tables before migrating to S/4. Please run the cleanup job to clean up the data in staging table.'</li>
+</ul>
+<p>For migrating to the target system S/4 HANA OP 1709, the simplified check is used. A few table checks are defined in transition DB and message could return by this tool when the pre-check step is executed.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>S4TC, EA-RETAIL, Transfer Stock, SAP_EA_RETAIL_FIO, Retail Store</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Transfer Stock: In S4HANA, the primary key of the table TRF_DOC_DETAILS has been changed. Old data in the table cannot be used anymore in S4HANA. To avoid data inconsistence we suggest to delete the data in the following tables TRF_DOC_HEAD, TRF_DOC_DETAILS, TRF_DOC_ERR_MSGS in source system before the migration or in target system after migration.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>For migrating to the target system S/4 HANA OP 1610, please do the following on source system:</p>
+<ul>
+<li>For symptom 1: Use Transfer Stock Fiori application to complete the Open/Rejected transfer stock documents by either submit the transfers or delete them.</li>
+<li>For symptom 2: Use the function module - RETAIL_ST_TS_CLEANUP_STAGE_TAB to clean up the staging tables of Transfer Stock at ERP Retail system.</li>
+</ul>
+<p>Note: you can dalso use any other tools to directly delete all the entries in the following tables - TRF_DOC_HEAD, TRF_DOC_DETAILS, TRF_DOC_ERR_MSGS instead of using the Fiori application or FM mentioned above.</p>
+<p>For migrating to the target system S/4 HANA OP 1709, please use the following steps on source system (before migration) or target system (after migration) to clean up the entries in the following tables - TRF_DOC_HEAD, TRF_DOC_DETAILS, TRF_DOC_ERR_MSGS:</p>
+<ul>
+<li>Step 1: Use Transfer Stock Fiori application to complete the Open/Rejected transfer stock documents by either submit the transfers or delete them.</li>
+<li>Step 2: Use the function module - RETAIL_ST_TS_CLEANUP_STAGE_TAB to clean up the staging tables of Transfer Stock at ERP Retail system.</li>
+</ul>
+<p>Note: you can dalso use any other tools to directly delete all the entries in the following tables - TRF_DOC_HEAD, TRF_DOC_DETAILS, TRF_DOC_ERR_MSGS instead of using the Fiori application or FM mentioned above.</p></div></div></div></div>

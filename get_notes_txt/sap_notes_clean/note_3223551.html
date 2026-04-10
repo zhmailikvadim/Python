@@ -1,0 +1,102 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">In SAP S/4HANA 2022 &amp; 2023, the following restrictions apply for predictive accounting:</p>
+<p><strong>Predictive Accounting for Sales Processes</strong></p>
+<ul>
+<li>Predictive accounting does not support sales orders that have a WBS element as the account assignment. <br/>Projects do not use standard price routines and costs or revenues will be incurred at a later point in time. <br/>When a billing document is created, the DIP profile determines the expense items and the related price information. <br/>As a result, a billing request is created, from which the billing document is generated. This means that, for example, the following business processes are not supported:</li>
+<ul>
+<li>Customer project management</li>
+<li>Project-based services<br/><br/></li>
+</ul>
+<li>Predictive Accounting doesn’t support the Advanced Intercompany Sales Process (Value Chain Category: ICSL) and the Advanced Intercompany Stock Transfer Process (Value Chain Category: ICST).<br/>For the Classic Intercompany Business process, the following restrictions apply:</li>
+</ul>
+<ul>
+<ul>
+<li>Predictive journal entries can only be correctly created for the following source documents:</li>
+<ul>
+<li>Goods issue issued by the delivering company code</li>
+<li>Customer invoice issued by the selling company code</li>
+</ul>
+<li>No predictive journal entries are created for the following source documents:</li>
+<ul>
+<li>Intercompany invoice issued by the delivering company code</li>
+<li>Intercompany supplier invoice issued by the selling company code<br/><br/></li>
+</ul>
+</ul>
+<li>For the “third-party direct shipment” business process (including drop shipments), predictions for the goods issues are not supported.<br/><br/></li>
+<li>Predictive accounting only processes the following SD document categories:</li>
+<ul>
+<li>C - Order</li>
+<li>H - Returns</li>
+<li>I - Order Without Charge</li>
+<li>K - Credit Memo Request</li>
+<li>L - Debit Memo Request<br/><br/></li>
+</ul>
+<li>Split valuation with batches of sales order items can only be simulated if the batch or at least the valuation type is entered in the sales order. The valuation type then provides an approximation for the material valuation.</li>
+</ul>
+<ul>
+<li>Predictive accounting doesn’t support changes to items in a sales order after a corresponding partial delivery or partial billing. Such a change prompts predictive accounting to fully simulate the sales order again, without considering the partial delivery or billing.
+<div class="ewa-rteLine">Exception: For sales orders <strong>with a billing plan</strong>, only open billing documents are simulated after a partial delivery or partial billing.</div>
+</li>
+</ul>
+<ul>
+<li>When you make supported changes to sales orders, predictive accounting adjusts the corresponding information in the prediction ledger accordingly. However, when you change the price of a material in its master data and the material is included in a sales order for which predictive journal entries are already available in the prediction ledger, predictive accounting does not adjust the information in the prediction ledger.</li>
+</ul>
+<ul>
+<li>Predictive accounting doesn’t support Maintenance Centric Service/Repair Orders or Corrective Maintenance Services. Therefore, Service Debit Memo Requests with reference to a service order or service contract aren’t supported. (DP90/DP91).</li>
+</ul>
+<ul>
+<li>Predictive accounting doesn’t support Contracts or references to Contracts. Therefore, Sales Orders with reference to a sales contract or trading contract aren’t supported.</li>
+</ul>
+<ul>
+<li>Predictive accounting reduces simulated invoices <strong>only if</strong> the actual invoice contains no more than one receivables line.
+<div class="ewa-rteLine">Exception: Multiple receivable lines are supported in the case of sales orders with payment terms for holdback/retainage or installments.</div>
+</li>
+</ul>
+<ul>
+<li>
+<div class="ewa-rteLine">
+<div class="ewa-rteLine">Predictive accounting doesn’t support material substitution.</div>
+<div class="ewa-rteLine">For example, material substitution isn’t supported when:</div>
+</div>
+<div class="ewa-rteLine">
+<ul>
+<li>An alternative material is used automatically when the originally ordered material is out of stock.</li>
+<li>When you replace a discontinued material with a new one to avoid selling discontinued materials to customers.</li>
+</ul>
+</div>
+</li>
+</ul>
+<ul>
+<li>
+<div class="ewa-rteLine">Predictive accounting doesn’t support SAP Catch Weight Management (SAP CWM).</div>
+<div class="ewa-rteLine">For example, a catch weight material is configured with a base unit of measure PC and has a conversion rule defined to KG. In this case predictive accounting is not able to perform a conversion of the quantities.</div>
+</li>
+</ul>
+<ul>
+<li>
+<div class="ewa-rteLine">Predictive accounting doesn’t support the business function of Billing in Contract Accounts Receivable and Payable (FI-CA).</div>
+</li>
+</ul>
+<ul>
+<li>Predictive accounting doesn’t support Advanced Return Management (ARM) and does not simulate subsequent credit memo requests within the same Sales Order.<br/>
+<div class="ewa-rteLine">Predictive Accounting only simulates the corresponding credit-/debit memo request in case a separate Sales Order has been created.</div>
+</li>
+</ul>
+<ul>
+<li>Predictive accounting doesn’t support Resource related billing (RRB).
+<div class="ewa-rteLine">When a sales order is flagged with RRB (DIP profile is maintained), no simulation will be triggered within Predictive Accounting (as the costs for this collector are zero).<br/>Predictive Accounting only simulates the corresponding credit-/debit memo request in case a separate Sales Order has been created.</div>
+</li>
+</ul>
+<p><strong>Predictive Accounting for Travel and Expense Management</strong></p>
+<ul>
+<li>Travel requests can contain items allocated to objects in different company codes (intercompany process). Predictive accounting does not support such travel request items that are created by users who do not have an employee number in the SAP Concur system. The employee number is needed to determine the employee's cost center.</li>
+</ul>
+<p><strong>Universal Parallel Accounting</strong></p>
+<ul>
+<li>Predictive accounting creates predictive journal entries in all available prediction ledgers. However, only the material master data information from the leading ledger is used for these predictive postings. For this reason, different material prices in non-leading ledgers are not reflected in predictive journal entries. For more information on universal parallel accounting, see SAP Note 3033604.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>predictive journal entry, predictive journal entries, sales order, goods issue, SD document categories SAP Concur integration, travel request, expense report, budget analysis, commitments, COOI, commitments management, commitment management</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Take these restrictions into consideration when setting up the processes to be analyzed by predictive accounting.</p>
+<p>For more information about predictive accounting, check the product assistance on the SAP Help Portal: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/5e23dc8fe9be4fd496f8ab556667ea05/c78ce92ab96346f7ab2722b79756ffc1.html" target="_blank">https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/5e23dc8fe9be4fd496f8ab556667ea05/c78ce92ab96346f7ab2722b79756ffc1.html</a></p></div></div></div></div>

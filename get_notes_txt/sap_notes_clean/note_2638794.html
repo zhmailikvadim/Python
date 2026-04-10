@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">This is additional note to SAP Notes EDAG - June 2018 to provide a generated maintenance view to disable finance tax reporting.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>RPCEDGV0, T7NOEDG_FTXOFF, V_T7NOEDG_FTXOFF</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>This SAP Note is relevant only for Norway (HRNO) </li>
+<li>HRSP SAPK-60831INSAPHRCNO, SAPK-604A3INSAPHRCNO, SAPK-600D6INSAPHRCNO (or newer)</li>
+<li>Prerequisites SAP Notes from previous SPs: <a href="/notes/2493370" target="_blank">2493370</a>, <a href="/notes/2509710" target="_blank">2509710</a>, <a href="/notes/2522547" target="_blank">2522547</a>, <a href="/notes/2509791" target="_blank">2509791</a>, <a href="/notes/2509792" target="_blank">2509792</a>, <a href="/notes/2524295" target="_blank">2524295</a>, <a href="/notes/2524296" target="_blank">2524296</a>, <a href="/notes/2524297" target="_blank">2524297</a>, <a href="/notes/2536506" target="_blank">2536506</a>, <a href="/notes/2552359" target="_blank">2552359</a>, <a href="/notes/2564716" target="_blank">2564716</a>, <a href="/notes/2571481" target="_blank">2571481</a>, <a href="/notes/2571482" target="_blank">2571482</a>, <a href="/notes/2573087" target="_blank">2573087</a>, <a href="/notes/2580652" target="_blank">2580652</a>, <a href="/notes/2585460" target="_blank">2585460</a>, <a href="/notes/2596543" target="_blank">2596543</a>, <a href="/notes/2596544" target="_blank">2596544</a>, <a href="/notes/2600558" target="_blank">2600558</a>, <a href="/notes/2596545" target="_blank">2596545</a>, <a href="/notes/2618586" target="_blank">2618586</a>, <a href="/notes/2608315" target="_blank">2608315</a>, <a href="/notes/2622193" target="_blank">2622193</a> must be implemented before this SAP Note</li>
+<li>
+<p>Prerequisite SAP Notes from current SP (must be implemented before this SAP Note): <a href="/notes/2647816" target="_blank">2647816</a>, <a href="/notes/2642128" target="_blank">2642128</a></p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This SAP Note provides a specific generated maintenance option for database view “V_T7NOEDG_FTXOFF”. Each customization must start on the first day of a month and end on the last day of a month (not in the middle). Only allowed value is ‘’ (FTX enabled) or ‘X’ (FTX disabled).</p>
+<p>The view customizes the table „T7NOEDG_FTXOFF“. This table contains, whether enterprise + business is responsible to report Finance tax via EDAG reporting. For such record, empty value can be set to allow finance tax reporting, or „X“ value to disable finance tax reporting. A record with empty „business“ field will be valid for all businesses in the enterprise, which does not have the specific record. If there is neither record for combination enterprise + business nor general record for enterprise, finance tax will be reported, because it is not disabled.</p>
+<p><strong>Implementation</strong></p>
+<ul>
+<li>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install a solution earlier, use the Note Assistant to implement the correction instruction. You can find more information about the Note Assistant in SAP Service Marketplace, under <strong>service.sap.com/note-assistant</strong>.</li>
+</ul>
+<ul>
+<li>Note that documentation, transactions, and Customizing activities are only delivered via Support Package.</li>
+</ul>
+<ul>
+<li>After implementing the correction instructions that are valid for your release, you must carry out manual activities.</li>
+</ul></div></div></div></div>

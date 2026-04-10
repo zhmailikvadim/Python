@@ -1,0 +1,339 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1"> </p>
+<p>With SAP S/4HANA release 2023 the newest release of the product SAP S/4HANA Supply Chain for Extended service parts planning (eSPP) is shipped.<br/>Extended Service Parts Planning is available in PCE (Private Cloud Edition).</p>
+<p>It allows planning and execution processes for service parts in one single logical system (embedded eSPP). You can also use Extended Service Parts Planning (eSPP) on a separate decentralized SAP S/4HANA system (side-by-side eSPP) with a connection to one or multiple backend systems (ECC systems and/or SAP S/4HANA systems).</p>
+<p>The major differences between the previous eSPP release (as part of SAP S/4HANA 2022) and the two deployment modes (embedded and decentralized eSPP) are described below.</p>
+<p>From a license perspective, eSPP differs from the Service Parts Planning (SPP) product on SAP SCM because it was set up as a completely new product. <br/>Functionally, both products are comparable, though. Innovations including for example new algorithms in Forecasting, Inventory Optimization enhancements, SAC integration, UI renovations and architectural simplifications are available in eSPP only.</p>
+<p>This note will list (major) differences between the two products, as well as new capabilities. Additionally, some general information on the product is given here as well. This note does not intend to explain any functions in detail. Please refer to the online documentation of the SAP S/4HANA system for more details.</p>
+<p>All statements in this note refer only to release S/4HANA 2023, not to any other release. In case SAP lifts restrictions described here with a later release, those changes will then be documented with the new release.</p>
+<p>Change history</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Version</td>
+<td>Date</td>
+<td>Remark</td>
+</tr>
+<tr>
+<td>2</td>
+<td><em>15.09.2023</em></td>
+<td>Initial version</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP S4HANA 2023, S4HANA 2023OP, OP2023</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Installation of SAP S/4HANA 2023</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="text-decoration: underline;"><strong>Availability</strong></span><br/>eSPP is available in the PCE (Private Cloud Edition) version of SAP S/4HANA 2023 (Technical component S4COREOP, Release 108).</p>
+<p><span style="text-decoration: underline;"><strong>Integration of eSPP with other components</strong></span></p>
+<ul>
+<li>Integration with SAP S/4HANA Logistics master data and transactional data<br/>eSPP is integrated with SAP S/4HANA master data and can access transactional data within the SAP S/4HANA system in transparent tables or in Live-Cache.<br/>No integration with external systems is required. It is possible to integrate data (e.g., Material Master data) from external systems via APIs.<br/><br/></li>
+<li>Instead of gATP, SAP S/4HANA contains advanced ATP (aATP)<br/>eSPP was adopted to using aATP instead of gATP. Please see below for descriptions of changes this brought for eSPP processes.<br/>For limitations and differences between gATP and aATP, check the application help of both solutions.<br/><br/></li>
+<li>Integration with SD<br/>You can automatically extract the relevant demand from SD tables to build the demand history for eSPP.<br/>As an option, you can also upload demand from other sources via Excel files or a SOAP service.<br/><br/></li>
+<li>Integration with SAP Analytics Cloud (SAC)<br/>As an optional component, you can use SAC to perform analytics in order to provide deep insights in eSPP requirements planning.<br/>Find more information on stories and models provided here: <a href="https://help.sap.com/viewer/42093f14b43c485fbe3adbbe81eff6c8/release/en-US/8484409637cc4d74b81faf7e2e29647f.html" target="_blank">Architecture and Abstract - SAP Help Portal</a><br/><br/></li>
+<li>Integration with the Supply Chain Algorithm Library (SCAL) to perform Multistage Inventory Planning<br/>As an optional component to perform multi-echelon safety stock optimization you can use the integration of eSPP with the SCAL library.<br/>This multi-echelon safety stock optimization algorithm is embedded in eSPP as of SAP S/4HANA release 2022. In this scenario, a new planning service that is tightly integrated with other eSPP processes performs the multi-echelon safety stock optimization. <br/>To install the SCAL library, follow the instructions described in note <a href="/notes/3307389" target="_blank">3307389</a>.<br/>As an alternative, you can use the integration of eSPP with IBP-I.<br/>Find more documentation on that scenario in note <a href="https://me.sap.com/notes/2940185" target="_blank">2940185</a>. As this option results in a higher integration effort and less coupled processes, we strongly recommend using the embedded approach which also has a larger scope of functionality.<br/><br/></li>
+<li>Integration with PAL (Predictive Analytics Library) procedures (to use additional Forecasting algorithms)<br/>eSPP uses Forecasting models in PAL procedures, which are not contained in the previous solution SPP.<br/>To use PAL procedures, you have to</li>
+<ul>
+<li>Install SAP HANA Platform 2.0 SPS 05</li>
+</ul>
+<ul>
+<li>Install the Application Function Library (AFL), which includes the PAL.<br/><br/><br/></li>
+</ul>
+</ul>
+<p><span style="text-decoration: underline;"><strong>Conceptual Differences of Decentralized eSPP on SAP S/4HANA compared to embedded eSPP in SAP S/4HANA</strong></span></p>
+<p>Some aspects of the simplified integration of embedded eSPP with other SAP S/4HANA applications of the same system &amp; client, as described below, are different in case of the decentralized eSPP on SAP S/4HANA due to the nature of a two-system landscape. Thus, regarding interfaces the decentralized eSPP on SAP S/4HANA is more similar to the Service Parts Planning (SPP) product on SAP SCM 7.0 (or lower versions thereof) than the embedded eSPP in SAP S/4HANA.</p>
+<p>The functional scope of the embedded version of eSPP does not differ from the decentralized eSPP.<br/>There is one exception to this: In the decentralized (side-by-side) eSPP, the ability to link to inbound deliveries in the shortage monitor is not yet available.</p>
+<p>There is a technical difference as well: In the decentralized scenario, eSPP reads sales order data from the Live-Cache. In the embedded scenario, eSPP reads sales order data directly from SD tables.</p>
+<p>Details on the side-by-side implementation of Extended Service Parts Planning are provided in SAP note <a href="https://me.sap.com/notes/3362987" target="_blank">3362987</a>.<br/><br/><br/></p>
+<p><span style="text-decoration: underline;"><strong>Conceptual Differences of embedded eSPP on SAP S/4HANA 2023 compared to SPP based on SCM 7.0 (EHP 4)</strong></span></p>
+<p><strong>Integration with BW:</strong></p>
+<p>As a major simplification, eSPP no longer requires an integration with BW.<br/>BW is technically still available internally in an SAP S/4HANA system, however SAP no longer ships content for it.<br/>Therefore, any SPP functionality relying on an internal BW system is either discontinued or is provided on a new technical foundation. See the following sections for details.</p>
+<p><strong>Integration via CIF:</strong></p>
+<p>SPP on SCM uses the Core Interface (CIF) for exchanging data (both master and operational data) with a connected (SAP) ERP system.<br/>eSPP follows the goal of reducing CIF usage as much as possible. For most ERP objects no CIF integration models are needed anymore.<br/>Instead the data is automatically made available for eSPP (i.e., represented in the LiveCache) if a material/product is flagged as relevant for eSPP usage.</p>
+<p>For a few object types this was not possible yet, though. For those objects integration models are still necessary.</p>
+<p>In the embedded eSPP, no integration models are needed for these operational objects:</p>
+<ul>
+<li>Stocks</li>
+<li>Sales Orders</li>
+<li>Planned Orders</li>
+<li>Production Orders</li>
+<li>Purchasing requisitions and Purchasing orders</li>
+<li>Schedule lines</li>
+<li>Inbound deliveries</li>
+</ul>
+<p>Instead, you only need to activate the relevant object types in Customizing (SPRO -&gt; Advanced Planning -&gt; Baisc Settings -&gt; Settings for Data Transfer).</p>
+<p>For master data objects in the embedded eSPP, the following integration models are not or no longer required:</p>
+<ul>
+<li>Product</li>
+<li>Product substitution master data + Customizing</li>
+<li>Plant</li>
+<li>Customer</li>
+<li>Vendor</li>
+<li>MRP Area</li>
+<li>BOM</li>
+</ul>
+<p>In the embedded eSPP, integration models are still needed for these operational objects:</p>
+<ul>
+<li>Info record</li>
+<li>Scheduling agreement</li>
+<li>Contract</li>
+</ul>
+<p><strong>Master data<br/></strong></p>
+<p><em>Material Master respectively Product Master</em></p>
+<ul>
+<li>Using a product in eSPP<br/>Materials that were created in SAP S/4HANA releases prior to 1610 have to be enabled for usage in eSPP in SAP S/4HANA. To do so, run report PRD_SCM_GUID_CONVERSION. For more information, check the report documentation.<br/>To enable eSPP-specific fields to be shown in SCM product master, run report /SAPAPO/SWITCH_ON_SPP_MD_FLD.<br/>In order to mark a product as 'to be used within eSPP', it is necessary to maintain the flag 'Extended SPP' in the maintenance transactions (transaction MM01 or MM02) on the tab 'Extended SPP'. Alternatively, this flag can be set in the Fiori App  “Manage Product Master Data”.<br/>If this flag is set, the product is available for eSPP, and any operational data (like orders) relating to this product will automatically start to integrate with the eSPP data stores, i.e. with LiveCache.<br/>In order to prevent that the MRP run will plan such products, set the field 'MRP Type' (on tab 'MRP 1') to e.g. 'ND' ('No Planning') or a similarly customized MRP type. Failing to do so will result in both MRP and eSPP planning the procurement of this product, with one always cancelling out the results of the other.<br/>Please pay attention to the fact that a product in a particular location can either be flagged for usage with eSPP, <strong>or</strong> for usage with Advanced Planning.<br/>To deactivate products for Extended SPP, use report /SAPAPO/ESPP_PLSTA_RESET. Note that it only considers products at plants with planning status "Marked for deactivation". You can use transaction MM02 or report /SAPAPO/ESPP_PLSTA_PHASEOUT to mark eSPP products for deactivation. Check the application help of eSPP for further <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/677f0a4e71d7487ebb70683014761789/0adf503d30214f5ea6a211791c096ab8.html?state=PRODUCTION&amp;version=2022.000" target="_blank">details</a>. Be aware that report /SAPAPO/ESPP_PLSTA_PHASEOUT is only available as of S/4HANA 2023FPS01 or via SAP note.</li>
+</ul>
+<ul>
+<li>Maintaining Master Data for an eSPP product<br/>Since release SAP S/4HANA 2021 the leading transaction for maintaining product master data is the Fiori app “Manage Product Master Data”.<br/>Alternatively, with the exception of most fields on MRP area level, product master data fields can be maintained as well in transactions MM01/MM02. Transaction /SAPAPO/MAT1 is no longer supported for maintaining eSPP-specific fields in the active version. You can still use transaction /SAPAPO/MAT1 to display details of existing products.</li>
+</ul>
+<p>Please pay attention to the following hints:</p>
+<ul>
+<li>The eSPP-specific fields for such location products can now be maintained via the standard mass maintenance transaction MASSD as well. Choose object type "ESPP_PROD"-eSPP product in TA MASSD.</li>
+<li>For maintaining (eSPP)-related product master data for MRP areas, you can use the existing mass maintenance reports for MRP areas (reports RMMDDIBE and RMMDDIBE02).</li>
+</ul>
+<p><em>Plant/Storage Location respectively Location</em></p>
+<ul>
+<li>New locations need to be created in the eSPP master data using report /SAPAPO/CREATE_LOCATION instead of CIFing them from the ERP side.</li>
+<li>MRP area<br/>MRP areas are made available for eSPP via the report /SAPAPO/CREATE_LOCATION as well.</li>
+</ul>
+<p><em>Customer and Supplier (Vendor)</em></p>
+<ul>
+<li>New customers and suppliers have to be created as Business Partners (location type 1021) with the corresponding role ‘Supplier’ respectively ‘Customer’. For this as well the report /SAPAPO/CREATE_LOCATION is used.</li>
+</ul>
+<p><em>Bill of Material (BOM)</em></p>
+<ul>
+<li>BOMs for eSPP are created based on Product Data Structures (PDS) via transaction CURTOADV_CREATE. It is not possible to create a BOM alone, instead a production version must be created as the basis.</li>
+</ul>
+<p><em>Interchangeability / Supersession</em><em><br/></em></p>
+<ul>
+<li>With release SAP S/4HANA 2020, eSPP switched to using the new Interchangeability solution developed by the aATP team. This new solution is based on a new and completely different data model and brings along a new UI. Therefore, any existing Interchangeability chains need to be created again, using the new solution and its UI. For more details on the new solution, please see its online documentation.</li>
+<li>Available Substitution types are:
+<ul>
+<li>1:1</li>
+<li>1:1 Partial (1:N with one set, where Product=Substitute)</li>
+<li>1:N (And/Or)</li>
+<li>N:1 (Or)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>The new solution does not support the types N:1 (AND) and M:N.</li>
+<li>You can use transaction /SAPAPO/SPPSUSEXPL and report /SAPAPO/SPP_PRODSUB_EXPL to get an eSPP view on product substitution master data. Since SAP S/4HANA 2023, you can also run consistency checks (e.g., indicating loops/ redundancies in supersessions) on the screen of report /SAPAPO/SPP_PRODSUB_EXPL.</li>
+<li>Find more details on the new eSPP product substitution in note <a href="/notes/2912293" target="_blank">2912293</a>.</li>
+</ul>
+<p><strong>eSPP planning processes</strong></p>
+<p><strong>Capture and Manage Demand (CPD)</strong></p>
+<p>Capture and Manage Demand is re-implemented without the usage of an internal BW system. Instead of using BW Extraction for new or changed demands, demand data collection is now provided by new PSM services and reports.<br/><br/>Besides storing the aggregated historical demands on the database, CPD supports with release SAP S/4HANA 2021 a virtual mode. If this mode is switched on, each demand history read access will go to the raw (individual) demands and perform the aggregation and (possibly necessary) realignments on the fly. In this scenario no (or fewer) realignments are necessary.<br/>The demand storage in transparent tables also allows easier maintenance of the demand history with upload and deletion reports. Since the SAP S/4HANA 2023 release, an option to mass adjust raw demand is available as well.<br/><br/>Identifying the stockholding location for an order is performed via the Bill of Distribution (BOD), or via customer specific code in a method prepared for a customer enhancement. <br/>eSPP considers the original "Ship to" location in SD Sales Orders, but also takes into account aATP location substitution to find the "Ship to" location.<br/><br/>In order to realign demand, there's only the (new) PSM Service SPP_DEMAND_ALIGNMENT_SRV needed, which takes care of all relevant recalculations. The new CPD architecture works without the administration of realignment steps.<br/><br/>See notes <a href="/notes/2878051" target="_blank">2878051</a> and <a href="/notes/2912255" target="_blank">2912255</a> for details on the simplified Capture and Manage Demand process.<br/><br/>With release SAP S/4HANA 2021 a new SOAP interface is provided, which can be used to feed historical demands into the CPD module. A corresponding sending interface is provided with this release as well. You can use this interface to import demand data from an ECC or SAP S/4HANA Execution system into a side-by-side Planning system. Please check note <a href="https://me.sap.com/notes/3362987" target="_blank">3362987</a> for more details.<br/>The same interface has the ability to load demand data from external sources (e.g. customers) into the standalone or side-by-side planning system (primarily to support retail-level planning in upcoming releases). For current information on planned innovations, see roadmaps.sap.com.</p>
+<p><em><strong> </strong></em></p>
+<p><strong>Forecasting</strong></p>
+<p>Since release 2021, the historical forecast is recalculated during the normal forecast execution. Therefore, the planning service for recalculation of forecast in the past is not needed anymore and is deactivated. The service can be activated again, if the flag ‘Use Forecast in the Past’ is set (Customizing: Extended Service Parts Planning --&gt; Forecasting --&gt; General Settings for Forecast).<br/><br/>Forecasting in general supports the same models and algorithms SPP supports with the additions stated in the next section.<br/>Leading Indicator forecast can be used on single parts level (removing the need to create an equipment BOM).</p>
+<p>You can use the new ability to upload and visualize any number of external time series and improve forecast quality by considering one or multiple external time series as an additional external predictor/ as additional predictors.<br/>On top of the SPP forecast models, there are the following additional new forecast models in eSPP:</p>
+<ul>
+<li>ARIMA (autoregressive integrated moving average) model / ARIMA seasonal model</li>
+<li>ARIMAX (autoregressive integrated moving average with external data) model / ARIMAX seasonal model<br/>(a machine learning model that takes one or multiple external time series into consideration which you can upload in addition to the historical usage of parts)</li>
+<li>GBDT (gradient boosting of decision trees) model <br/>(a machine learning model that takes one or multiple external time series into consideration which you can upload in addition to the historical usage of parts)</li>
+</ul>
+<p><strong>Inventory Planning</strong></p>
+<p>Inventory Planning in general works the same way as in SPP.<br/>Pricing scales in inventory planning are supported with a new concept.</p>
+<p>Release SAP S/4HANA 2022 offers the option to perform an embedded multi-echelon (multilevel) safety stock calculation (which includes the Reorder Point (ROP), the Economic Order Quantity (EOQ) and the Period of Demand (POD) or EOQ Period)), using the algorithm from Integrated Business Planning for Inventory (IBP-I). This can lead to lower safety stocks while retaining the same service level.<br/>In release SAP S/4HANA 2023, users get additional explanation on the composition of the safety stock.<br/><br/>With SAP S/4HANA 2021 the option to perform a multi-echelon safety stock calculation using the corresponding functionality from Integrated Business Planning for Inventory (IBP-I) initially became available. It requires to exchange data between eSPP in SAP S/4HANA and IBP-I via the CPI-DS interface. Check note <a href="/notes/2940185" target="_blank">2940185</a> for details on the configuration and data flows of the IBP-I integration. <br/>Note:<br/>SAP recommends to use the "embedded" approach, which contains enhanced development scope items.</p>
+<p>Please pay attention to the fact that the multi-stage safety stock calculation cannot be used if the product to be planned has a future BOD assigned in eSPP.</p>
+<p><strong>Distribution Requirements Planning (DRP)</strong></p>
+<p>The DRP planning algorithm was not changed.<br/>A new option to run DRP without consideration of "DS copy" data was added as part of SAP S/4HANA 2021.</p>
+<p><strong>Deployment</strong></p>
+<p>Deployment works the same way as in SPP for SCM.<br/>It performs an aATP check in eSPP instead of a gATP check.</p>
+<p><strong>Inventory Balancing</strong></p>
+<p>Inventory Balancing works the same way as in SPP for SCM.</p>
+<p><strong>Analytics</strong></p>
+<p>Since release SAP S/4HANA 2020, eSPP can be easily connected to the SAP Analytics Cloud (SAC). Analytics with SAP Analytics Cloud (SAC) can provide deep insights in eSPP requirements planning. The stories and models delivered with eSPP SAC content provide both overview and detailed data of eSPP raw demand and demand history, all eSPP forecasting key figures with their quantities, a comparison of raw demand with forecast quantities, and DRP results.<br/><br/>The displayed key figures are easily comparable and support eSPP planners in choosing effective planning parameters and meeting target service levels.<br/><br/>Please be aware, that SAP only provides the data connection (as a live data connection, not via an export into SAC), while the customer should create any dashboards they require based on this data. The provided stories serve as templates for customer specific stories.<br/><br/>As neither the internal BW system is supported anymore, nor SNC is available, the area of Analytics sees major restrictions.</p>
+<ul>
+<li>Available are these tools:
+<ul>
+<li>Inbound Monitor<br/>Results can be displayed in an external BW or in the Fiori Query Designer using the CDS query C_SRVCPARTSINBOUNDMONITORQ.</li>
+<li>Shortage Overview/Shortage Monitor<br/>Functionality is restricted due to the missing CRM and SNC systems. These transactions are now available in Fiori and in the classical SAPGUI (no longer in NWBC).</li>
+<li>Planners Worklist<br/>This transaction is now available in Fiori and in the classical SAPGUI (no longer in NWBC).</li>
+<li>SPP Cockpit<br/>This transaction is now available in Fiori and on the classical SAPGUI (no longer in NWBC).</li>
+<li>SPP Alert Monitor<br/>This transaction is now available in Fiori and on the classical SAPGUI (no longer in NWBC).<br/>Since the SAP S/4HANA 2023 release, a new option to "snooze" Alerts is available.<br/><br/></li>
+</ul>
+</li>
+</ul>
+<p><strong>Fiori Launchpad</strong></p>
+<p>The SAP Fiori Launchpad can be used as a starting point to access the SAP S/4HANA eSPP application.<br/><br/>All the main eSPP transactions including the Planning Service Manager can be called from the Fiori Launchpad. They are displayed with SAP GUI for HTML. The available transactions are based on standard eSPP business roles.<br/><br/>The SAP Fiori Launchpad integration is available since SAP S/4HANA 2020, FPS02, which became available for customers on May 25th, 2021.</p>
+<p><span style="text-decoration: underline;"><strong>Restrictions of embedded eSPP on SAP S/4HANA 2023 FPS0 compared to SPP based on <strong><strong>SCM 7.0 (EHP 4)</strong></strong></strong></span></p>
+<p><strong>Integration with SNC</strong></p>
+<ul>
+<li>There is no integration of eSPP with SNC</li>
+</ul>
+<p><strong>Forecasting</strong></p>
+<ul>
+<li>Third-Party-Order-Processing (TPOP) Forecast</li>
+</ul>
+<p><strong>Inventory Planning</strong></p>
+<ul>
+<li>The PSM Services “Cycle Counting Classification Code” and “Recommended Storage Quantity” are not available anymore.</li>
+</ul>
+<p><strong>Distribution Requirements Planning (DRP)</strong></p>
+<ul>
+<li>Due to the missing content in an internal BW, the following (BW-based) functions are not available:
+<ul>
+<li>Extraction of DRP snapshots (works only with an external BW system).</li>
+<li>In the DRP Approval transaction the functions regarding BW reporting of the DRP results.</li>
+<li>BW reporting of the DRP Approval results.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Deployment</strong></p>
+<ul>
+<li><em>Order Due List</em> is not available to control the priority in fair share processing.</li>
+</ul>
+<p><strong>Surplus and Obsolescence Planning</strong></p>
+<ul>
+<li>Surplus and Obsolescence Planning is not supported in eSPP.</li>
+</ul>
+<p><strong>Analytics</strong></p>
+<p><em>Not available are these tools:</em></p>
+<ul>
+<li>Product Details Screen (please see note <a href="/notes/2917941" target="_blank">2917941</a> for alternatives)</li>
+<li>Customer Worklist</li>
+<li>Supplier Worklist</li>
+<li>Supplier Delivery Performance Rating (SDPR)</li>
+<li>Service Fill/Loss Analysis</li>
+</ul>
+<p><strong>Simulation</strong></p>
+<ul>
+<li>The Simulation functions and transactions based on Models and Versions are technically available but are subject to major restrictions. Because the ERP side master data in SAP S/4HANA (like the Material Master) is not version dependent, and due to some other differences in the system architecture, a fully working Simulation based on Models and Versions (i.e., without side-effects into the operatively used data) cannot be guaranteed. Though some usage scenarios may work, SAP advises therefore against using this functionality.<em><br/></em></li>
+<li>Simulation in dialog transactions DRP matrix, Deployment, Forecast, and Inventory Planning is still working unchanged. </li>
+</ul>
+<p><strong>OEM-managed inventory (OEMMI)</strong></p>
+<ul>
+<li>OEM-managed inventory is not available.</li>
+</ul>
+<p>For updates on features (currently) not available in eSPP, please check the <a href="https://roadmaps.sap.com/board?BC=6EAE8B27FCC11ED892E91DA86AABA0CC&amp;range=CURRENT-LAST#Q4%202023" target="_blank">roadmap</a> of Extended Service Parts Planning on roadmaps.sap.com.</p>
+<p><span style="text-decoration: underline;"><strong><strong>New (or simplified) features of embedded eSPP on SAP S/4HANA 2023 compared to <strong>SPP based on <strong><strong>SCM 7.0 (EHP 4)</strong></strong></strong></strong></strong></span></p>
+<ul>
+<li>Architecture<br/>
+<ul>
+<li>Enablement of eSPP planning in a single logical SAP S/4HANA system/client</li>
+<li>Integration of NWBC (NetWeaver Business Client) functionality with SAP Fiori (removes need to install separate SAP Business Client to use cockpit transactions, such as planner´s worklist in service parts planning)</li>
+</ul>
+</li>
+<li>Master data and general functions<br/>
+<ul>
+<li>Combined material &amp; product master data in single SAP GUI transaction (check details for MRP area maintenance above) and Fiori app</li>
+<li>Mass maintenance option of product master data also for eSPP field</li>
+<li>Mass maintenance option reports for MRP areas</li>
+<li>Integration of eSPP with new (unified) SAP S/4HANA Product Substitution master data</li>
+<li>Use of "Migration Cockpit" to migrate data from SCM-SPP installations (find details in note <a href="/notes/2643483" target="_blank">2643483</a>) and use the ability to migrate demand from SCM-based SPP installations to an eSPP system based on SAP S/4HANA</li>
+<li>Enhancement of "Flexible Segmentation", which allows you to create product groups based on BADI input (check note <a href="https://me.sap.com/notes/3302797/E" target="_blank">3302797</a> for further explications).</li>
+</ul>
+</li>
+<li>Cross-application capabilities<br/>
+<ul>
+<li>Use of Supersession Service with non-existing eSPP location product master data (enabling "Flexible BOD" concept to work without restrictions)</li>
+<li>Fiori launchpad as an entry page for planners to eSPP transactions</li>
+<li>Ability to include MRP areas as location types into the planning network (BOD)</li>
+</ul>
+</li>
+<li>Demand Management<br/>
+<ul>
+<li>Capture Demand process using transparent S/4HANA tables instead of using the (internal) BI system</li>
+<li>Ability to upload demand via Excel from SD orders, stock transfer orders (STOs) and external demand to S/4HANA tables</li>
+<li>Ability to (selectively) delete historical demand via report from eSPP demand history</li>
+<li>Simplifications of Realignment (Single Planning Service for Realignment without need for administration of Realignment steps)</li>
+<li>Enhanced abilities in the UI to adjust demand (promotions, events,...) and report enabling mass adjustments of demand</li>
+<li>Report /SAPAPO/PDEM_RAWDEM_CHANGE to flexibly mass adjust raw demand data</li>
+<li>Ability to clear errors within Capture Demand process</li>
+<li>Mass adjustment to raw demand option</li>
+</ul>
+</li>
+<li>Inventory Planning<br/>
+<ul>
+<li>Multi-echelon inventory optimization</li>
+</ul>
+</li>
+<li>Forecasting<br/>
+<ul>
+<li>Advanced Ex-Post forecasting algorithm considering offset (removes the need for historical Forecast calculation)</li>
+<li>Simplification of parameter configuration &amp; maintenance in Forecast profiles (removes the need to set all parameters)</li>
+<li>Ability to upload external time series data into the TSDM storage via SOAP (XML) messages and use it as additional predictor in forecasting as well as ability to display external time series in "Interactive Forecasting" UI</li>
+<li>Leading Indicator Forecast model without the need for equipment BOM (Bill of material)</li>
+<li>New Forecast models:<br/>ARIMA (autoregressive integrated moving average) model / ARIMA seasonal model<br/>ARIMAX (autoregressive integrated moving average with external data) model / ARIMAX seasonal model<br/>GBDT (gradient boosting of decision trees) model with or without use of external predictors</li>
+</ul>
+</li>
+<li>DRP (Distribution Requirements Planning)<br/>
+<ul>
+<li>DRP calculation simplification: option to run DRP without consideration of "DS copy" data</li>
+</ul>
+</li>
+<li>Analytics<br/>
+<ul>
+<li>Integration of eSPP reporting transactions with Fiori launchpad and SAP easy access menu</li>
+<li>SAP Analytics Cloud integration</li>
+<li>Ability to "snooze" alerts in Alert Monitor</li>
+<li>Ability to link to inbound deliveries in the Shortage Monitor</li>
+</ul>
+</li>
+</ul>
+<p><strong><strong><span style="text-decoration: underline;">New features of eSPP on SAP S/4HANA 2023 compared to eSPP <strong>on SAP S/4HANA 2022</strong></span></strong></strong></p>
+<ul>
+<li>Master data and general functions</li>
+<ul>
+<li>Ability to maintain eSPP-related product master data for MRP areas using mass maintenance reports for MRP areas (RMMDDIBE and RMMDDIBE02)</li>
+<li>Ability to add product groups based on flexible segmentation of products</li>
+<li>Ability to run consistency checks within eSPP view of product substitution master data</li>
+<li>Migrate demand data from SCM system to SAP S/4HANA system</li>
+</ul>
+</ul>
+<ul>
+<li>Cross-application capabilities</li>
+<ul>
+<li>Support of MRP areas as locations in the planning network</li>
+</ul>
+<li>Demand Management:<br/>
+<ul>
+<li>Migration of demand data from SCM-based SPP to the new service parts planning solution</li>
+<li>Ability to clear demand errors in the demand capture process (allows to set the status "Processed with Errors" and to reprocess errors or skip them during processing)</li>
+<li>Flexible demand history adjustment (Report /SAPAPO/PDEM_RAWDEM_CHANGE allows to mass adjust raw demand data)</li>
+<li>Upon changing the demand history, changes are aggregated along the BOD</li>
+<li>Parallel processing of changes to sales orders with use of PSM service SPP_PDEM_CPD_SD_DELTACOPY_SRV</li>
+</ul>
+</li>
+<li>Inventory planning<br/>
+<ul>
+<li>Multistage Safety Stock calculation service calculates new explanatory key figures: Safety Stock Demand Variability share and Safety Stock Service Variability share.</li>
+</ul>
+</li>
+<li>Forecasting<br/>
+<ul>
+<li>Ability to maintain and visualize multiple external time series in "Interactive Forecasting" UI to enhance planning quality </li>
+<li>ARIMAX Forecasting model</li>
+</ul>
+</li>
+<li>DRP (Distribution Requirements Planning)<br/>
+<ul>
+<li>Repair or buy functionality</li>
+</ul>
+</li>
+<li>Analytics</li>
+<ul>
+<li>Ability to "snooze" alerts in Alert Monitor</li>
+</ul>
+</ul>
+<p><span style="text-decoration: underline;"><strong>Upgrading from older Releases to eSPP on SAP S/4HANA 2023</strong></span></p>
+<ul>
+<li><strong>Upgrading from SAP S/4HANA 2021 to SAP S/4HANA 2023 release</strong><br/>Processing of manual demand adjustments has been modified and enhanced in the 2022 release (and subsequent releases).<br/>To upgrade demand adjustment data, follow the instructions described in SAP note <a href="/notes/3170314" target="_blank">3170314</a>.<br/><br/></li>
+<li><strong>Upgrading from SAP S/4HANA 2020 to SAP S/4HANA 2023 release<br/></strong>In release SAP S/4HANA 2020, raw demand was stored in table /SAPAPO/RAWDEM.<br/>Since release SAP S/4HANA 2021, table /SAPAPO/RAWDEM is no longer used. Raw demand is instead stored in table /SAPAPO/RAWDML.<strong><br/><br/></strong></li>
+<li><strong>Upgrading from SAP S/4HANA 1909 to any later release<br/></strong>You can productively use eSPP since the SAP S/4HANA 2020 release.<br/>While most of eSPP´s application and customizing transactions are already part of the SAP S/4HANA 1909 system, the SAP S/4HANA 1909 system was only used for eSPP pilot projects and is not in general released for eSPP. <br/>There is no licensing material for this release, and there is no path for migration of eSPP data from a 1909 system to a SAP S/4HANA 2020 (or later) system. <br/>Therefore, we strongly recommend upgrading to SAP S/4HANA 2020 (or later) first before creating eSPP data in a system.</li>
+</ul>
+<p><span style="text-decoration: underline;"><strong>General Information</strong></span></p>
+<p>If you are upgrading from eSPP in SAP S/4HANA 2020 or from eSPP in SAP S/4HANA 2021, pay attention to the changes described above, and adjust your processes accordingly.</p>
+<p>If you are implementing eSPP coming from an SPP on SCM installation, pay attention to the differences described above, and adjust your processes accordingly.</p>
+<p>If you are implementing eSPP newly, pay attention to the restrictions described above when designing your processes.</p>
+<p>In order to avoid incorrect behavior of eSPP functionality in SAP S/4HANA create the following entry in database table /SAPAPO/PUB_CHK:</p>
+<ul>
+<li>MANDT: current client</li>
+<li>ACTIVE: - (Hyphen)</li>
+</ul>
+<p>Make sure that this entry is the only entry in the database table. Delete all other entries.</p>
+<p>Background information on the purpose of database table /SAPAPO/PUB_CHK is provided in the notes <a href="/notes/2609363" target="_blank">2609363</a> and <a href="/notes/2643483" target="_blank">2643483</a>. The performance optimization referred to there has to be switched off, which is done via the step described above.</p></div></div></div></div>

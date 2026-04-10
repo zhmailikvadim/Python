@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When you execute the background program "Carry Reserves Forward to Key Date", processing terminates and the system issues the error message "Error in function /MSG/R_A_CFWD_FIND_ALL_REC".</p>
+<p>The error occurs both in the Basic System and in Risk Manager when reserves are carried forward to the key date.</p>
+<p>The error does not occur when reserves are carried forward to the target year.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Reserves carried forward</p>
+<p>Carryforward</p>
+<p>/MSG/R_A_BATCH_CFWD_KEYDATE</p>
+<p>/MSG/R_A_BATCH_CFWD_KEYDATE_PP</p>
+<p>/MSG/H_FI_P_BATCH_OP_CL_RES_KD</p>
+<p>/MSG/R_A_CFWD_100PROZ_HANDLING</p>
+<p>/MSG/R_A_ABR</p>
+<p>860</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The following data constellation is available in the system:</p>
+<p>The 100% account to be carried forward, A1, and the SL adjustment posting to be carried forward, A2, have a different financial year:</p>
+<p>A1 in accounting/financial year = X / X - 1</p>
+<p>A2 in accounting/financial year X / X</p>
+<p>The reserves are carried forward to the key date that is in the target year X + 1.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p dir="ltr"><strong>History:</strong></p>
+<p dir="ltr">Version from February 11, 2019: New</p>
+<p dir="ltr">Implement the source code corrections.</p>
+<p dir="ltr">Support Package SAPK-70020INMSG / SAPK-80203INMSG / SAPK-80301INMSG corrects the problem.</p>
+<p dir="ltr"><strong>Solution:</strong></p>
+<p dir="ltr">The background program "Carry Reserves Forward to Key Date" now ends without any error messages and generates the expected accounts.</p>
+<p dir="ltr"><strong>Manual changes:</strong></p>
+<p dir="ltr">You do not have to perform any manual tasks.</p></div></div></div></div>

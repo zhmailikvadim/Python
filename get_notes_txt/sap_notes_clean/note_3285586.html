@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Payroll for December 2022 with pay date in January 2023 is calculated in HRK. As valid currency on a pay date of the salary is EUR, payslip should also display amounts in EUR.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">EURO changeover, payslip, EUR, HRK, alternative currency</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>EURO changeover in Croatia on January 1, 2023.</li>
+<li>Customer runs payroll for December 2022 in payroll currency HRK.</li>
+<li>Payslip for pay date in January 2023 should display amounts in EUR.</li>
+<li>This SAP Note is for information purposes only and cannot be implemented.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Problem appears only once and only at customers, who calculate payroll for 12/2022 in HRK. Complete solution for the problem is not provided by SAP out of the box. Using built-in payslip functionality "Alternative currency" as-is will take the exchange rate HRK -&gt; EUR from currency customizing (TCUR* tables), but on a start date of payroll period (01.12.2022). As Croatia is using variable exchange rate HRK -&gt; EUR until end of the year (fixed rate is enforced on 31.12.2022 with infinite validity), exchange rate will be incorrect for the aimed purpose.</p>
+<p>There are other tools and techniques, how to meet requirement described in the symptom. Three options are listed here.</p>
+<ol>
+<li>Create new payslip by copying existing one and set conversion module 'KE' on each field with amount.</li>
+<ul>
+<li>Amount in field with conversion module 'KE' will be converted from HRK to EUR, using fixed rate entered in T7HRRE table (key EURO_CONVERSION / FIXED_RATE).</li>
+</ul>
+<li>Temporarily set the exchange rate to fixed one.</li>
+<ul>
+<li>Set exchange rate in currency customizing to fixed rate on date 01.12.2022. Exchange rate type 'M' is the right one in most cases.</li>
+<li>Run the payslip program with option Alternative currency = EUR.</li>
+<li>Set fixed exchange rate only for the time of running the payslip program.</li>
+</ul>
+<li>Create new artificial currency</li>
+<ul>
+<li>In currency customizing, create new currency, which will have only one, fixed exchange rate on a date 01.12.2022.</li>
+<li>Run the payslip program with option Alternative currency = &lt;new currency&gt;.</li>
+</ul>
+</ol></div></div></div></div>

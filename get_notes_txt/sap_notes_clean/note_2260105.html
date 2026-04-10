@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1"><span>An incoming SAP Business One event triggers several scenario steps. The scenario steps are triggered not exactly once, but several times. </span></p><h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3><p><strong style="font-size: 10px;">Scenario:</strong></p>
+<ol>
+<li>In the integration framework, choose <em>Scenarios → Step Design</em> and create a scenario step.</li>
+<li>To create the inbound phase, click <em>Inbound</em> and then the <em>Channel</em> button.</li>
+<li>Enter the following:</li>
+<ol>
+<li>In the <em>Inbound Channel</em> field, select the <em>SAP Business One</em> option.</li>
+<li>In the <em>Process Mode</em> filed, select Asynchronous</li>
+<li>In the <em>Process Trigger</em> field, select <em>B1Event</em>.</li>
+<li>In the <span><em>Identification Method</em> field</span>, select <em>B1Event</em>.</li>
+<li>In the <em>Identifier</em> field, enter <em>2, 4, 17</em>.</li>
+<li><span>Enter all other required fields and save the settings</span>.</li>
+</ol>
+<li><span>Create a second scenario step.</span></li>
+<li>To create the inbound phase, click the <em>Inbound</em> and then the <em>Channel</em> button.</li>
+<li>Enter the following:</li>
+<ol>
+<li>In the <em>Inbound Channel</em> field, select the <em>SAP Business One</em> option.</li>
+<li>In the <em>Process Mode</em> field, select <em>Asynchronous</em>.</li>
+<li>In the <em>Process Trigger</em> field, select<em> B1Event</em>.</li>
+<li>In the <span><em>Identification Method</em> field</span>, select <em>B1Event</em>.</li>
+<li>In the Identifier field, enter <em>4</em>.</li>
+<li>Enter all other required fields and save your settings.</li>
+</ol>
+<li>To set up and activate the scenario package.</li>
+<li>To trigger a SAP Business One event, in SAP Business One, update an item master data record.</li>
+</ol>
+<p><strong>Expected Behavior:</strong></p>
+<p>The integration framework message log displays two messages: one is for the first scenario step, the other is for the second scenario step.</p>
+<p><strong>Actual Behavior:</strong></p>
+<p>The integration framework message log displays four messages: two are for the first scenario steps, the other two are for the second scenario step. </p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This is a program error.</p>
+<p> </p><h3 class="section" data-toc-skip="" id="Solution">Solution</h3><p><strong>Workaround:</strong></p>
+<ol>
+<li>Save the attached <em>B1iF_EventDispatcher.zip </em>to the machine where the integration framework is running.</li>
+<li>Log on to the integration framework, choose <em>Maintenance → ZIP Import, </em>select the zip file and choose<em> Submit.</em></li>
+</ol>
+<p>SAP intends to provide a patch or patches in order to solve the problem described. The section <strong>Reference to Related Notes</strong> below will list the specific patches once they become available. The corresponding <strong>Info</strong> file of the patches in SAP Service Marketplace will also show the SAP Note number. Be aware that these references can only be set at patch release date. SAP will deliver patches only for selected releases at its own discretion, based on the business impact and the complexity of the implementation.</p></div></div></div></div>

@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripError sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>A new version is in preparation...!</strong> <br/>The content for this document is being improved and a new version is in preparation but not released yet. Please be aware that you are viewing outdated data from the previous version in a restricted mode with limited functionality.  You will be automatically notified once the new version is ready and released. The restrictions are described in <a href="/notes/3453681" style="color:var(--sapLinkColor);" target="_blank">KBA 3453681</a>.</span></div></div><div id="__html1"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>You want to log read access to certain personal data.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Data privacy, data protection, sensitive data, RAL, SRALMANAGER, configurations, channels</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP note is relevant only if the application component FI-CA is being used. This is the case if one of the following Business Function Sets is active (see transaction SFW5):</p>
+<ul>
+<li>Utilities</li>
+<li>Insurance</li>
+<li>Contract A/R + A/P</li>
+<li>SAP Media</li>
+<li>Telco</li>
+<li>Industry Extension Public Sector</li>
+</ul>
+<p>In order to achieve read access logging of personal data you are required to use SAP Read Access Logging (RAL) as a framework (see SAP note <a href="/notes/2347271" target="_blank">2347271</a> for requirements).</p>
+<p>In addition to the technical framework, RAL content (log domains, logging purposes, recordings and/or configurations) which are used by RAL at runtime are required.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>With this note, SAP delivers example content for RAL in the application component FI-CA covering the channels SAPGUI Dynpro, RFC, SAP Gateway (oData/UI5/Fiori) and WebServices.</p>
+<p>The example content is based on legal definition of "special categories of personal data". This content is not necessarily complete and customer is requested to check if the example content covers their requirement. The content contains configurations for the following log domains:</p>
+<ul>
+<li>BANK for Bank Account Data</li>
+<li>CREDIT_CARD for Payment Card Data</li>
+<li>PROFILE for Creditworthiness Data </li>
+</ul>
+<p>See SAP note <a href="/notes/2363367" target="_blank">2363367</a> for details on how to import the RAL content. Import the attachment which fits to your current release.</p>
+<p>Additional information can be found in the <em>Contract Account Receivable and Payable Security Guide</em>:</p>
+<ul>
+<li><a href="http://help.sap.com/erp2005_ehp_08/helpdata/en/52/39d7531a4d444de10000000a174cb4/frameset.htm" target="_blank">Link for Business Suite </a></li>
+<li><a href="https://help.sap.com/doc/d7c2c95f2ed2402c9efa2f58f7c233ec/1809.000/en-US/SEC_OP1809.pdf " target="_blank">Link for S/4HANA</a></li>
+</ul></div></div></div></div></div>

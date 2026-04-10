@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You are using the DBA Cockpit with the database IBM DB2 for Linux, UNIX, and Windows and you have virtualized some empty tables using the function "Convert Empty Tables" on the "Virtual Tables" screen.</p>
+<p>When you run the consistency check provided by the DBA Cockpit screen "Diagnostics -&gt; Missing Tables and Indexes", you find that some secondary indexes of virtualized tables are listed in the folder named "Objects missing in the database".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DBACOCKPIT, DB02, ST04, Table Virtualization</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The problem is caused by a program error.</p>
+<p>The DB13 job performing the virtualization of tables fails to generate a CREATE INDEX statement for secondary indexes which are meant to be created only for specific database platforms.</p>
+<p>The symptom occurs for certain transparent tables of an SAP system connected to an IBM DB2 for Linux, UNIX, and Windows database. These tables have secondary indexes defined for some but not all database platforms in the data dictionary. This option occurs only very rarely.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The solution is shipped as part of the Support Package. Alternatively, you can implement the attached correction instruction. <br/><br/>If you have enconuntered this symptom, follow these instructions to overcome the problem:</p>
+<ol>
+<li>Make sure that the correction instructions attached to this SAP Note are implemented in your system.</li>
+<li>Materialize all virtual tables that are reported to have missing secondary indexes using the function "Materialize" on the "Virtual Tables" screen.</li>
+<li>Virtualize the tables again using the function "Convert Empty Tables" on the "Virtual Tables" screen.</li>
+</ol>
+<p>After this procedure, the missing secondary indexes for virtualized tables that were reported on the screen "Diagnostics -&gt; Missing Tables and Indexes" should disappear.</p>
+<p>Note that the ABAP report <span class="SNO_DNT" style="float: none;" translate="no">RSDB6_REPAIR_VIRTUAL_TABLES</span> described in SAP Note <a href="/notes/2186737" target="_blank">2186737</a> shares some of the behavior of the table virtualization DB13 job, which may lead to the same symptom. This report is also corrected with this present SAP Note.</p></div></div></div></div>

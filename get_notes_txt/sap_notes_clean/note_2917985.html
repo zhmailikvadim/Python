@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>C4C_CustomerAddress_REST_API REST Web Service</li>
+<li>Data Services (DS) job using RESTful Web Service will fail when more than 1 record is sent at a time. </li>
+<li>In DS 4.2 SP11, SP12 or SP13, the job fails with the following error:<br/>System Exception &lt;ACCESS_VIOLATION&gt; occurred. Process dump option is off. Process is not dumped.<br/>Call stack:<br/>0x0000000053F25DC4, XRow_data::cloneUtilCopy()+0068 byte(s)<br/>0x0000000053F25484, XRow_data::clone()+0084 byte(s)<br/>0x0000000053196E6D, JSON2NRDM::createNewRow()+0253 byte(s)<br/>0x000000005319494D, JSON2NRDM::Element()+1565 byte(s)<br/>0x0000000053197C87, jsonParser&lt;JSON2NRDM&gt;::processObjectOrArrayForNRDM()+0807 byte(s)<br/>0x00000000531978F6, jsonParser&lt;JSON2NRDM&gt;::parseForNRDM()+0342 byte(s)<br/>0x00000000531966AD, JSON2NRDM::convertJsonForAdapter()+0173 byte(s)<br/>0x0000000053E27637, XTran_restwebservice::formFunctionOutput()+1415 byte(s)<br/>0x0000000053E2CD33, XTran_restwebservice::getnext()+6307 byte(s)<br/>0x0000000053DB4FD8, XTran_eqcache&lt;XTran_eqcache_runtime_new&lt;std::multimap&lt;XRow_data_ptr_with_schema * __ptr64,XRow_data *<br/>__ptr64,lessThanForEquivCacheJoins,std::allocator&lt;XRow_data * __ptr64&gt;<br/>&gt;,std::_Tree_iterator&lt;std::_Tree_val&lt;std::_Tree_simple_types&lt;std::pair&lt;XRow_data_ptr_with_schema * __ptr64<br/>const,XRow_data *<br/>__ptr64&gt; &gt; &gt; &gt;,std::_Tree_const_iterator&lt;std::_Tree_val&lt;std::_Tree_simple_types&lt;std::pair&lt;XRow_data_ptr_with_schema * __ptr64<br/>const,XRow_data * __ptr64&gt; &gt; &gt; &gt; &gt; &gt;::execute()+0072 byte(s)<br/>0x0000000053F6E270, XTran_desc::execute()+0480 byte(s)<br/>0x0000000053D7D6E4, Rww_thread::main()+0148 byte(s)<br/>0x000000008353538F, RWThreadFunctionImp::run()+0127 byte(s)<br/>0x000000008352679E, RWRunnableImp::exec()+0270 byte(s)<br/>0x0000000083536B63, RWThreadImp::exec()+0051 byte(s)<br/>0x0000000083535649, RWThreadImp::~RWThreadImp()+0249 byte(s)<br/>0x0000000084EBBEED, crt_at_quick_exit()+0125 byte(s)<br/>0x000000008DA213D2, BaseThreadInitThunk()+0034 byte(s)<br/>0x000000008E1554F4, RtlUserThreadStart()+0052 byte(s)<br/>Registers:<br/>RAX=0000000000650063 RBX=00000000D91191C0 RCX=00000000D91191C0 RDX=00000000D9118F40 RSI=0000000000000001<br/>RDI=0000000000000000 RBP=0000000000000000 RSP=00000000DD6AD630 RIP=0000000053F25DC4 FLG=0000000000010206<br/>R8=00000000D9118F48 R9=00000000D91191C8 R10=00000000D90FFC70 R11=0000000000000000 R12=00000000D9118F48<br/>R13=00000000D91191C0 R14=0000000000000001 R15=00000000D91191C8<br/>Exception code: C0000005 ACCESS_VIOLATION<br/>Fault address: 00007FFF53F25DC4 01:0000000001254DC4 C:\Program Files (x86)\SAP BusinessObjects\Data Services\bin\acta.dll"</li>
+<li>Job will complete successfully when only 1 record is processed.</li>
+<li>In the Data Services 14.2 SP10 releases, the job fails with a BAD SYSTEM MESSAGE instead. </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><strong>Keywords</strong></p>
+<p>DS, REST, C4C, ACCESS_VIOLATION, JSON2NRDM</p>
+<p><strong>Environment</strong></p>
+<ul>
+<li>Data Services 14.2.10 Patch 4 and higher</li>
+<li>Windows and Linux job servers</li>
+</ul>
+<p><strong>Reproducing the Issue</strong></p>
+<ol>
+<li>Create a job that invokes a REST Web Services function with q request/respond in the JSON data.</li>
+<li>Send two records to the Web Service function call.  Job will fail with the error listed in the symptoms section.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The issue is caused due to a defect in Data Services for REST Web Services.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The correction is delivered in the release(s) listed in Support Packages &amp; Patches section of this SAP Note.</p></div></div></div></div>

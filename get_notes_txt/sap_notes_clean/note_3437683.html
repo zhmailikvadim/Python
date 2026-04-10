@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1">How to retrieve the Project Manager/Responsible person from Enterprise Projects</p>
+<p><span style="color: #e03e2d;"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em> </span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The following CDS views can be used to view resources assigned to the project (including Project Manager):</p>
+<p>I_EntProjectEntitlement</p>
+<p>I_EnterpriseProjectRole</p>
+<p>I_EnterpriseProjectTeamMember</p>
+<p>Use I_EntProjectEntitlement as the Primary Datasource and then Associated Data sources I_EnterpriseProjectRole &amp;</p>
+<p>I_EnterpriseProjectTeamMember. You can also use Associated Datasource I_EnterpriseProject if you want to see the Project ID.</p>
+<p></p>
+<p>Below are screenshots from an internal system showing the Data sources and the respective Joins:</p>
+<p></p>
+<p><img class="img-responsive" src="https://community.sap.com/legacyfs/online/storage/attachments/storage/7/attachments/2016477-image.png" style="height: auto;"/></p>
+<p></p>
+<p>I_EnterpriseProject Join:</p>
+<p></p>
+<p><img class="img-responsive" src="https://community.sap.com/legacyfs/online/storage/attachments/storage/7/attachments/2016479-image.png" style="height: auto;"/></p>
+<p></p>
+<p>I_EnterpriseProjectRole Join:</p>
+<p></p>
+<p><img class="img-responsive" src="https://community.sap.com/legacyfs/online/storage/attachments/storage/7/attachments/2016480-image.png" style="height: auto;"/></p>
+<p></p>
+<p>I_EnterpriseProjectTeamMember Join:</p>
+<p></p>
+<p><img class="img-responsive" src="https://community.sap.com/legacyfs/online/storage/attachments/storage/7/attachments/2016481-image.png" style="height: auto;"/></p>
+<p></p>
+<p>If you are only interested in Project Manager Role, you can filter on _I_EnterpriseProjectRole.ProjectRoleCategory = PM as shown below:</p>
+<p></p>
+<p><img class="img-responsive" src="https://community.sap.com/legacyfs/online/storage/attachments/storage/7/attachments/2016482-image.png" style="height: auto;"/></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Community Thread : <a href="https://answers.sap.com/questions/13460500/project-manager-field-projects.html" rel="noopener noreferrer nofollow" target="_blank">https://answers.sap.com/questions/13460500/project-manager-field-projects.html</a> </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Project Manager, Responsible Person, CDS view, EPPM Project, Project Control, Fetch, SAP S/4Hana Cloud.</p></div></div></div></div>

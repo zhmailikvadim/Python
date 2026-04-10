@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">You start the Update Secondary (US) transaction to reprocess old postings made on entangled Financial Positions (FPs) such as hedged products or FPs involved in a securities account transfer.<br/>On one of those linked FPs, an Asset and Liabilities (A/L) transfer occurred. Therefore you expect it to be regenerated with this new US run but unfortunately this is not the case, and consequently, your FP A/L status is now incorrect.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>/BA1/B1_US_SL - Update Secondary Business Transactions
+<script language="JavaScript" src="/sap/public/bc/ur/sap_secu.js" type="text/javascript"></script>
+</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Prerequisite: you have installed the note 2007083</p>
+<p>Reason: in case one of the entangled FPs has not been set for reprocessing with the transaction /BA1/B1_FP_TOUCH_SL, its calc_from date is set to the 31.12.9999 date by the US run. This infinite date setting prevents the invalidation of necessary FP characteristic versions, especially the version with the new A/L status.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached correction or corresponding support package.</p></div></div></div></div>

@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="OutlineElement Ltr SCXW94961818 BCX3" id="__html1">
+<p class="Paragraph SCXW94961818 BCX3">You want to withdraw a work item. Up to SP4, when you have withdrawn a work item, the assigned solution documentation was activated to the Production Branch. With SP5, a new behavior has been introduced that prevents the withdrawal of a work item which has changed solution documentation elements.</p>
+<p class="Paragraph SCXW94961818 BCX3"><img alt="1.png" class="img-responsive" src="/documents/customerkba/SbFlf4NR4ztP36QgoBBBEDH32E10xrtQivLk0AQICp0" title="1.png"/></p>
+<div class="OutlineElement Ltr BCX3 SCXW81131500">
+<p class="Paragraph SCXW81131500 BCX3"><span style="color: #ff0000;"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental. </em></span></p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<p>SAP Solution Manager 7.2, Focused Build ST-OST 05</p>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<p>Create a work item and change the assigned solution documentation, e.g. by uploading a technical design document. Now try to withdraw the work item.</p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<div class="OutlineElement Ltr BCX3 SCXW91917844">
+<p class="Paragraph SCXW91917844 BCX3">The activation of documentation to the production branch in case the work item is withdrawn doesn’t make sense from functional point of view.Therefore, it must be decided whether the changed solution documentation elements are either deleted or moved to another work item.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>Open the advanced view of your Work Item (e.g. by clicking on the title in the SAP UI5 application) in the CRM UI. Go to the Solution Documentation assignment block.</p>
+<p>1. You can identify the blocking solution documentation elements in the column ‘Change Status’ marked with ‘Changed’. Click on the button ‘Release Check’.</p>
+<p><img alt="2.png" class="img-responsive" src="/documents/customerkba/pBYJoOMmbJIZu7jNCEmAOgV1KQrKNbT707wAHASwAJE" title="2.png"/></p>
+<p>2. The solution documentation is opened. In the first screen, all elements of this work item are shown. To reduce the view to the required information click on the work item title:</p>
+<p><img alt="3.png" class="img-responsive" src="/documents/customerkba/7bqDxNS3UC9_F5zCZO_Vmaah0awCQV4EMVuxE2K0Hm8" title="3.png"/></p>
+<p>3. Now only the changed elements are shown. Right-click on the changed element(s) and decide what you want to do, Discard the changes or move them to another change document (only work items are listed where you are part of, e.g. as developer or tester). Please note: A discard could lead to a complete deletion of the Solution Documentation Element, therefore check also the help text in this <a href="https://help.sap.com/viewer/60943adf3ff44893b62c568bb8a87d17/LATEST/en-US/44f8c256f2076a15e10000000a441470.html" target="_blank">link</a>.</p>
+<p><img alt="4.png" class="img-responsive" src="/documents/customerkba/TYmmq1qxjX_A27r_J6pnLKD5GmWJG6e5DiAYqmASErw" title="4.png"/></p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<div class="OutlineElement Ltr SCXW26218069 BCX3">
+<p class="Paragraph SCXW26218069 BCX3">Focused Build, SAP Solution Manager, Work Item, Solution Documentation, changed, Withdraw, Withdrawal, Activation, Production Branch, Development Branch, Move, Discard</p>
+</div></div></div></div></div>

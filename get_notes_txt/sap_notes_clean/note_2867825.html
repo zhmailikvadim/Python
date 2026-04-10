@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Unable to over receive a quantity for a Purchase Order in the App F0843 'Post Goods Receipt for Purchasing Document' / 'Post Goods Receipt for Purchase Order'.</p>
+<p>Unable to over receive a quantity for a Process  Order in the App F6352  'Post Goods Receipt for Process Order'</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li><span style="font-size: 14px;">SAP FIORI for S/4HANA</span></li>
+<li>SAP ERP</li>
+<li>SAP enhancement package for SAP ERP</li>
+<li>SAP enhancement package for SAP ERP, version for SAP HANA</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Create a Purchase Order (PO) where the 'Unlimited' indicator is set OR an 'Over Delivery Tolerance' is set for the line item.</li>
+<li>Go to the app F0843 'Post Goods Receipt for Purchasing Document' / 'Post Goods Receipt for Purchase Order'.</li>
+<li>Enter the PO number.</li>
+<li>Post a goods receipt for the required quantity.</li>
+<li>Go back into the app - choose Settings, set the indicator 'Use 0 as default' - it does not allow you to post a Goods Receipt for more quantity.</li>
+</ol>
+<p>**************</p>
+<ol>
+<li>Create a Process Order where the 'Unlimited' indicator is set OR an 'Over Delivery Tolerance' is set for the line item.</li>
+<li>Go to the app F6352  'Post Goods Receipt for Process Order' </li>
+<li>Enter the Process Order number.</li>
+<li>Post a goods receipt for the required quantity.</li>
+<li>Go back into the app - choose Settings, set the indicator 'Use 0 as default' - it does not allow you to post a Goods Receipt for more quantity.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>Overdelivery and Unlimited Delivery are currently not supported by the app 'Post Receipt for Purchasing Document' / 'Post Goods Receipt for Process Order'</p>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<p>As a workaround you can use the webgui tile 'Post Goods Movement' or transaction MIGO in the backend.</p>
+<p>If using Post Goods Movement or MIGO, choose Settings &gt; Default Values, select 'Propose All Items' - the quantity is then open for input.</p>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p>FIORI, APP, Unlimited, Overdelivery, Tolerance,  Goods Receipt for Purchase Order, Post Goods Movement, Transaction, MIGO, Zero, Quantity, Use 0 as default, EKPO, UEBTO, UEBTK, F0843, Post Goods Receipt for Process Order', F6352</p></div></div></div></div>

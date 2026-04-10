@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When connected to the SAP SQL Anywhere or IQ database server and an incorrect month value of 0 was specified (for example, 1985/00/12), no error was diagnosed.</p>
+<p>A legal ISO 8601 ordinal date of the form YYYY-DDD such as 1985-102 was flagged in error. This date string represents 1985-04-12.</p>
+<p>A legal ISO 8601 time with fractional seconds but no minutes or hours/minutes such as T23.3 was interpreted incorrectly as 23:03:00.0 (it should be 23:00:00.3).</p>
+<p>These problems have been fixed.</p>
+<p>A date-time string of the format yyyymmddhhmmss (no spaces) is currently supported as an extension to ISO 8601.</p>
+<p>Now, date-time strings of the format yyyymmddhh or yyyymmddhhmm are supported as extensions.  Fractional seconds and time zone can be appended (for example, 201107260800-0500 and 2018112119.456+0100).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Fixed by Engineering Case 818214:<br/>SAP SQL Anywhere version 17.0 build 4941</p></div></div></div></div>

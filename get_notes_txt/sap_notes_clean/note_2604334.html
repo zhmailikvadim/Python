@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html1">
+<li>'View' Events are not captured for Design Studio Dashboards.</li>
+<li>'View' events (1002) can be seen generated and inserted in the Audit Database</li>
+<li>All other Supported event types can be audited.</li>
+<li>'Retrieve' Event can be noted in DB for each View action performed on Dashboard.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP BusinessObjects Design Studio</li>
+<li>SAP BusinessObjects Business Intelligence Platform 4.x</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>Confirm that 'view' event is Checked in Auditing Page.</li>
+<li>View a Design Studio Dashboard.</li>
+<li>Query the Audit Database to return all 'view' events.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>The following dfo associated with Design Studio are present in the 'Install Directory\SAP BusinessObjects\setup\packagestemp' and have not been pushed into the CMS Database:<br/>1. BusinessObjects_AuditEventInfo2_DesignStudio_dfo_frag.is.xml<br/>2. BusinessObjects_AuditEventInfo2_DesignStudio_dfo_frag.xml</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ol>
+<li>Take a backup of the folder &lt;install directory&gt;/SAP BusinessObjects Enterprise XI 4.0\packages</li>
+<li><strong>Stop</strong> the <strong>Server Intelligence Agent (SIA)</strong> on all nodes.</li>
+<li><strong>Copy</strong> the left over xml files from the <strong>&lt;Install Dir&gt;/setup/packagestemp to &lt;install directory&gt;/SAP BusinessObjects Enterprise XI 4.0\packages</strong></li>
+<li><strong>Start</strong> the <strong>SIA.</strong></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3>
+<p style="padding-left: 30px;">Design studio 1.6 bi 4.1 4.2 view retrieve audit event auditing BI 4.x BIP AD DS dashboard auditeventinfo2 dfo xml packages packagestemp</p></div></div></div></div>

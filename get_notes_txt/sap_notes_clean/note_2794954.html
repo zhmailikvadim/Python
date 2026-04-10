@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">When alter a replication definition using rs_send_repserver_cmd is not reflected in RSSD immediately.</p>
+<h3 class="section" data-toc-skip="" id="Environment">Environment</h3>
+<ul>
+<li>SAP Replication Server (SRS) 16.0</li>
+<li>SAP Replication Server (SRS) 15.7.1</li>
+<li>SAP Adaptive Server Enterprise (ASE)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3>
+<ol>
+<li>create a rep. definition<br/>create replication definition xx_def ...<br/>go<br/><br/></li>
+<li>alter xx_def using rs_send_repserver_cmd<br/><br/>exec rs_send_repserver_cmd 'alter replication definition "xx_def" ...'<br/>go<br/><br/></li>
+<li>check its status at RSSD<br/><br/>select c.colname,c.coltype,c.status,c.status&amp;0x08 from rs_columns c, rs_objects o where c.objid=o.objid and o.objname = 'xx_def'<br/>go</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<ul>
+<li>Most replication server commands run asynchronously so they don't be updated something changed to the RSSD immediately.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3>
+<ul>
+<li>After changing some things, check them with delay time</li>
+<li>Use a dummy table to check.<br/>-Just after changing some thing, insert a heartbeat data to a dummy table and then check whether it's replicated to target dummy table or not.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="See Also">See Also</h3>
+<ul>
+<li><a href="https://help.sap.com/viewer/075940003f1549159206fcc89d020515/16.0.3.7/en-US/fe6c080bbd1c1014b9b5f751062dd67c.html" target="_blank">alter replication definition</a></li>
+<li><a href="https://help.sap.com/viewer/075940003f1549159206fcc89d020515/16.0.3.7/en-US/feb3208ebd1c1014bd95fcd3e2a4f17a.html" target="_blank">rs_send_repserver_cmd</a></li>
+</ul></div></div></div></div>

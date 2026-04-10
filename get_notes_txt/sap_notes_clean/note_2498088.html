@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html1">
+<li>Transaction FD32 system shows a wrong or negative credit exposure for Media documents.</li>
+<li>Program RVKRED07 does not reorganize Advertizing Management orders.</li>
+</ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP for Media</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol>
+<li>Go into transaction FD32.</li>
+<li>Enter a customer and the credit control area.</li>
+<li>Goto 'Extras' and select 'Sales values'.</li>
+<li>negative values will be displayed.</li>
+</ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul>
+<li>In general a negative sales value may result from a cancellation invoice.</li>
+<li>Another possibility is the customizing setting regarding the Update Group. Actually, the open order value is reduced only if you have set Update Group 000012 for the corresponding credit control area.</li>
+</ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol>
+<li>Customizing Setting has to be checked regarding the Update Group in transaction OB45.<br/>Update group 00012 should be maintained for the credit control area.</li>
+<li>The values shall be deleted aid of deletion reports attach to this KBA.</li>
+<li>The values need to be reorganized by the following report:</li>
+<ul style="list-style-type: lower-alpha;">
+<li>RJ_JANEU - Reorganization of Order Data (AM)</li>
+<li>RJ_JFNEU - Reorganization of billing Data (AM)</li>
+</ul>
+</ol>
+<p><strong>Recommendations for shorter runtime:</strong> <br/>It is possible to delete the values for one or a set of business partners. In this case, the reports RJ_JANEU and RJ_FNEU may only run for the orders/billing documents of the specific business partner.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Futher general information can be found in:<br/>note:<a href="/notes/425523" target="_blank"> 435523</a><br/>note: <a href="/notes/550236" target="_blank">550236</a><br/>note: <a href="/notes/18613" target="_blank">18613</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>S066, S067, Anzeigenmanagement, Kreditfortschreibung, Neuaufbau, Kreditdaten, negative Werte, Kreditkonto, Business Partner</p></div></div></div></div>

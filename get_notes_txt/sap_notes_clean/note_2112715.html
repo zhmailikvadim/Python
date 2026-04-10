@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html1" style="padding-left: 30px;">Any other user except windows administartor is not able to launch Webi Rich client.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul>
+<li>
+<div style="text-align: left;"><span>SAP BusinessObjects Business Intelligence Platform 4.1</span></div>
+</li>
+<li>
+<div style="text-align: left;"><span>Windows OS</span></div>
+</li>
+</ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul style="text-align: left;">
+<li>Install Webi Rich client with administrative privilege.</li>
+<li>
+<div style="text-align: left;">No other user (non-administator) will able to launch Webi Rich Client</div>
+</li>
+<li>In log file, we get error message:-</li>
+</ul>
+<p style="text-align: left;"><em>An error occured while trying to lock the file :  C:\Users\Administrator\.businessobjects\.instance.lock </em></p>
+<p style="text-align: left;"><em>java.io.IOException: The system cannot find the path specified</em></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p style="padding-left: 30px;">User is unable to lock instance of webi rich client. </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol>
+<li>Open run dialog box.</li>
+<li>Type regedit and hit enter.</li>
+<li>Go to this location:-</li>
+<li>HKEY_LOCAL_MACHINE\Software\Wow6432Node\SAP BusinessObjects\Suite XI 4.0\defaultWebIntelligence\Richclient\JVMOptions.</li>
+<li>Add a new string value with "Next number" and value data -Duser.home=%homedrive%</li>
+</ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p style="padding-left: 30px;">Webi rich client crash, webi client lauch</p></div></div></div></div>

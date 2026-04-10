@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout9" data-sap-ui-render="" id="__layout9"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data142" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html1">Data Services job has a script that invokes SQL stored procedure to run a SQL job using the sql() function. When the job runs, it runs the stored procedure and the job on the SQL server successfully, but the following error is reported in the Data Services log:</p>
+<p>DBS-070401 ODBC data source error message for operation &lt;SQLExecute&gt;: &lt;[SAP BusinessObjects][ODBC 20101 driver][Microsoft SQL Server] Job '&lt;name of SQ Job&gt;' started successfully.&gt;.</p>
+<p>The error only occurs on the Linux box.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>Data Services: 4.2 SP14</li>
+<li>OS: Linux Redhat/SuSE running the job server</li>
+</ul>
+<p><strong>Steps to Reproduce:</strong></p>
+<p><span style="font-size: 14px;">Create a Data Services job and add a script. Call the following in the script:</span></p>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">sql('sql server datastore name&gt;', 'EXEC msdb.dbo.sp_start_job N\'syspolicy_purge_history\', @step_name =  N\'Erase Phantom System Health Records.\';');</span></p>
+<p><span style="font-size: 14px;">Note that msdb.dbo.sp_start_job - is a default MS SQL server stored procedure.</span><br/><span style="font-size: 14px;">In addition, syspolicy_purge_history is a default MS SQL job available under SQL Server Agent &gt; Jobs</span></p>
+<p>This issue is tracked in Corrective Measure 002075125800002837882020.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The root cause of this error was a mis-processing of the error code from the underlying Data Direct driver for SQL server.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">The correction is delivered in the releases listed in the Support Packages and Patches section of this SAP Note.</p></div></div></div></div>
