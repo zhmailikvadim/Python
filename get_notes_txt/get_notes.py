@@ -94,6 +94,7 @@ def download_note(driver, note_id):
         print(f"  ⚠️ Нота {note_id} не содержит '{REQUIRED_KEYWORD}' – пропущена")
         return False
 
+
 def run():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     cleanup_no_symptom_files()          # удаляем старые заглушки
@@ -160,6 +161,6 @@ def run():
         driver.quit()
 
 
-
 if __name__ == "__main__":
     run()
+    
