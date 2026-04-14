@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You write off a document manually in transaction FP04 or using mass write-off in transaction FP04M. The write-off ends with error message:</p>
+<p>KI 235 "Account &amp; requires an account assignment relevant to cost accounting"</p>
+<p>or</p>
+<p>KI 248 "Account &amp; requires a true account assignment relevant to cost accounting".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FP04, FP04M, FP-PAREA-1052, FP-PAREA-1053, FP-PAREA-P030, XCOAC = 1, FP-EVENT-5030, FKK_INHERIT_CO_ACC_ASSIGNMENTS, KI235, KI-235, 235(KI), KI248, KI-248, 248(KI)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This problem occurs due to a program error.</p>
+<p>The system inherits CO account assignments from the revenue or expense line of the written-off document. However, the system does not find the revenue or expense line because the tax jurisdiction code (field TXJCD) is not filled identically.</p>
+<p>Prerequisite:</p>
+<ul>
+<li>For the write-off or Mass write-off posting area 1052 or 1053 is set up in the way that the CO account assignment is inherited from the document that you write off</li>
+<li>For the document that you write off:</li>
+<ul>
+<li>It does not contain a tax code (field MWSKZ)</li>
+<li>The business partner item contains a tax jurisdiction code (field TXJCD)</li>
+<li>
+<p style="display: inline !important;">The G/L item does not contain a tax jurisdiction code (field TXJCD)</p>
+</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After implementing this SAP Note, the system correctly inherits CO account assignments from the revenue or expense line, regardless of whether the tax jurisdiction code is filled on the G/L items or not.</p>
+<p>Implement the attached SAP Note or the relevant Support Package.</p></div></div></div></div>

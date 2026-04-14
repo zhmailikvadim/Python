@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> During the YT archiving process, a dump with the following short text is generated: Exception condition "DATA_OBJECT_NOT_SAVED" triggered.</p>
+<p id="__html0">This issue is related to the presence of custom ILM policies for archiving objects.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>/SAPYL/CL_YT_A_ROOT-&gt;DO_ARCHIVATION, /SAPYL/YT_CHANGE_FIELD_ARCH</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The dump occurs during empty field Confirmed On timestamp processing for Cancelled YT. During archiving process there is an assignment set for Cancelled YT only: Confirmed On = Changed On.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement this SAP Note</p>
+<p>Run the report SE38 /SAPYL/YT_CHANGE_FIELD_ARCH before attempting to archive. It processes Confirmed On = Changed On for Yard Tasks, where archiving has been already started.</p></div></div></div></div>

@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">During mass release of settlement documents via transaction WAB_RELEASE, the system encounters a short dump (MESSAGE_TYPE_X) in program /TXINTF/SAPLHOOK_FI, causing termination of the settlement release process.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> SETI, TXINTF</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">While processing pricing data, field CS_KOMK-TRTYP remained empty despite being assigned from memory in program SAPLWLF1. Table T180 contained no corresponding entry, resulting in the transaction type not being populated. As this field is required for subsequent buffer validation, the process was skipped, leading to a runtime dump.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>A new configuration entry has been maintained in transaction SM30 under view V_T180 with the following values:</p>
+<p>Transaction Code (TCODE): WAB_RELEASE<br/>Program: SAPLWLF1<br/>Transaction Type: H<br/>Activity Category: V</p>
+<p>All other fields are left blank.</p>
+<p>Additionally, new validation logic has been introduced to support the mass release process. If the settlement document is being processed through the WAB_RELEASE transaction and the settlement document type is available, the system will automatically refer to the corresponding entry maintained in view V_T180 to derive the required transaction type.This ensures that the transaction type field is properly populated for subsequent validation steps, allowing the settlement release process to proceed without interruption.</p></div></div></div></div>

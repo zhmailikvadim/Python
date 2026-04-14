@@ -1,0 +1,43 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3729060&amp;TargetLanguage=EN&amp;Component=XX-CSC-AT-IS-H&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3729060/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3729060/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>This SAP Note contains the adjustments of the communication procedure ELDA (P321) to the organizational description for the data exchange with hospitals (KA), issue 11/2025, valid as of 5/1/2026.</p>
+<p>As of Version 4: The (prerequisite) SAP Note 3579061 has been added to the manual pre-implementation steps.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>KA-ORG version issue 11/2025, ELDA communication, P321, ELDA<br/>EVSNR (EEA insurance number), EKANR (card number) for EKVK data, ANFO, EKVK <br/>EREIG, ENTBDAT, foreigner clearing, subrogation/recovery</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Prerequisites:</p>
+<ul>
+<li>Country Version Austria (AT)</li>
+<li>Use of the communication procedure ELDA (P321)  </li>
+<li>SAP Note 3730468</li>
+</ul>
+<p>Reason:</p>
+<p><span style="font-size: 14px;">Legal change</span></p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the program changes and perform the manual tasks.<br/>You can implement this SAP Note at any time. The changes are not taken into account until the key date 5/1/2026.</p>
+<p>In particular, note the following changes:</p>
+<ul>
+<li>D.19. - EREIG (event type, admission notification)</li>
+</ul>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">The value <strong>7</strong> (AUVA Resumption) is no longer valid. If necessary, note this in a BAdI implementation or in the course of a conversion.</span></p>
+<ul>
+<li>E.4. - Admission notification</li>
+</ul>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">The Delivery Day field (ENTBDAT) becomes a reserve field. This information is no longer transferred. This field still has the type "numeric", which means that only zeros are transferred here.</span></p>
+<ul>
+<li>E.13. - Foreign clearing/subrogation/recovery confirmation</li>
+</ul>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">There is only one notification from the PPA agency to the state health fund and <strong>no</strong> more copy to the hospital.</span></p>
+<ul>
+<li>E.15. - EHIC data notification</li>
+<ul>
+<li><span style="font-size: 14px;">The EEA insurance number (field EVSNR) is no longer transferred if the field EFORM = ANFO. The information remains enterable.</span></li>
+<li><span style="font-size: 14px;">The following guidelines now apply to the card number of an existing European insurance card (field EKANR):</span></li>
+<ul>
+<li><span style="font-size: 14px;">If fewer than 20 characters are entered, they must be filled with leading zeros.</span></li>
+<li><span style="font-size: 14px;">Non-numeric characters contained in it must be replaced by 0 (zero). The system issues the new information NV 624 in the attachment to the EDI message.</span></li>
+<li><span style="font-size: 14px;">If the card number is garbled, use the EFORM "ANFO".</span></li>
+<li><span style="font-size: 14px;">If the card number is longer than 20 characters (not possible in the standard IS-H system), the leading characters must be truncated as far as necessary.</span></li>
+</ul>
+</ul>
+</ul>
+<p>You can find these and other changes in the document Organization Description KA (Data Exchange with Hospitals), issue 11/2025, on the homepage of the Austrian Social Insurance.</p></div></div></div></div></div>

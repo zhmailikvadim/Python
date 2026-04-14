@@ -1,0 +1,111 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>When critical business configuration changes are made in SAP S/4HANA Cloud Public Edition, Cross-Client Validation (CCV) checks are triggered to ensure consistency across test and production systems. However, when a parallel line is configured, the behavior of these validation checks differs based on where the changes originate:</p>
+<ul><li>Changes made in the customizing tenant (D.100) of the main line don't trigger CCV checks in the parallel test tenant (T.120).</li><li>Semantic Business Configuration Locks (SBCLs) aren't applied in the parallel line for critical business configuration changes made in the main line. Because CCV checks aren’t triggered, SBCLs can't be applied as a consequence.</li><li>As a result, rebasing may introduce inconsistencies in the parallel line, while the main line remains unaffected.</li><li>After rebasing, business processes in the parallel line may fail due to these configuration inconsistencies.</li></ul>
+<p>This behavior can lead to unexpected validation failures.</p>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP S/4HANA Cloud Public Edition</li><li>SAP Central Business Configuration</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<div>
+<p>The Cross-Client Validation (CCV) and Semantic Business Configuration Lock (SBCL) mechanisms behave differently depending on the origin of business configuration changes when a parallel line exists: </p>
+</div>
+<div>
+<ul><li>Business Configuration Changes in the Parallel Customizing Tenant (D.120)</li></ul>
+<ul style="list-style-type: circle;"><li>CCV checks are applied to the parallel test tenant (T.120) and to both the main line test (T.100) and production (P.100) tenants.</li><li>SBCL tokens are set only within the parallel line to prevent disruption in the main line .</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Business Configuration Changes in the Main Line Customizing Tenant (D.100) </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: circle;"><li>
+<p>CCV checks are NOT applied to the parallel test tenant (T.120).</p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: circle;"><li>
+<p>This design ensures the main line remains independent of the parallel line.</p>
+</li></ul>
+</div>
+</div>
+<div>
+<div>
+<ul style="list-style-type: circle;"><li>
+<p>However, this creates a risk of inconsistencies when rebasing changes to the parallel line.</p>
+</li><li>For example, rebasing a record deletion or G/L Account modification from the main line may conflict with existing configurations or active business processes in the parallel test tenant (T.120).</li></ul>
+</div>
+<div>
+<p>The root cause of potential conflicts is that the main line and parallel line can have asynchronous and independent business configuration changes. When critical changes from the main line are rebased to the parallel line, they may violate existing configurations or active business processes in the parallel line. For example, rebasing a record deletion from the main line may fail if that record is actively used in the parallel test tenant (T.120). </p>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>When applying critical business configuration changes in the main line that include CCV and SBCL mechanisms, ensure these changes can be successfully applied to the parallel line without causing inconsistencies. </p>
+</div>
+<div>
+<p>Before Making Critical Changes in the Main Line: </p>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Review whether the planned changes could conflict with existing configurations in the parallel line </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Verify that records targeted for deletion or modification are not actively used in parallel line business processes </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Assess the impact of G/L Account changes or other critical configuration modifications on parallel line operations </p>
+</li></ul>
+</div>
+<div>
+<p>After Rebasing Changes to the Parallel Line: </p>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Monitor for validation errors or inconsistencies in the parallel test tenant (T.120) </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Evaluate the impact of any detected inconsistencies on parallel line business processes </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>If significant conflicts arise, consider requesting another branch to set up a new parallel line. </p>
+</li></ul>
+</div>
+<div>
+<p>Coordination Strategy: </p>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Coordinate critical configuration changes across both main line and parallel line to minimize the risk of conflicts </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Communicate planned critical changes to teams working in both lines </p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>Where possible, align the timing of critical changes to reduce asynchronous configuration drift </p>
+</li></ul>
+</div>
+<div>
+<p>The standard CCV mechanism does not validate critical business configuration changes from the main line against the parallel test tenant (T.120). This is by design to maintain main line independence, but it means that inconsistencies may only be detected after rebasing occurs. There is no automated prevention mechanism for conflicts between main line and parallel line configurations. </p>
+</div>
+<div>
+<p>If rebasing critical changes results in unresolvable conflicts, you may need to request a new branch to restore consistency in the parallel line.</p>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><div>
+<p>For more information refer to below:</p>
+<p>SAP Help Portal - </p>
+<ul><li><a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/a630d57fc5004c6383e7a81efee7a8bb/0253f4ec37e24098a5d01ad5fd882e8c.html?version=LATEST&amp;locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Semantic Business Configuration Lock Token</a>.</li><li><a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/b249d650b15e4b3d9fc2077ee921abd0/fc96d99befab46ba907d516c738ddbf3.html?version=LATEST&amp;locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Simulation of Cross-Client Validation</a>.  </li><li><a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/ee9ee0ca4c3942068ea584d2f929b5b1/b4e9a1661cd44f9e8abd0254a8090cce.html?version=LATEST&amp;locale=en-US" rel="noopener noreferrer nofollow" target="_blank">Allow Deletion of Numbering Schemes of Types Commodity Codes, Customs Tariff Numbers, and Control Classes</a>. </li></ul>
+</div>
+<div>
+<p>KBA's - </p>
+<ul><li><a href="https://me.sap.com/notes/3708429/E" rel="noopener noreferrer nofollow" target="_blank">3708429</a> - How to execute Rebase in SAP Central Business Configuration. </li></ul>
+</div>
+<div>
+<ul><li><a href="https://me.sap.com/notes/3357225/E" rel="noopener noreferrer nofollow" target="_blank">3357225</a> - SSCUI 102622 Assign G/L Accounts locks entry - CTS_BCL060 S/4HANA Public Cloud Edition. </li></ul>
+</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Cross-Client Validation, CCV, Semantic Business Configuration Locks, SBCL, Parallel Line, Main Line, Rebase, Branch, G/L Accounts, Numbering Schemes, Validation.</p></div></div></div></div>

@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In certain scenarios, authorization checks implemented via BAdIs (<strong>DOCUMENT_AUTH01 / DOCUMENT_AUTH02</strong>) are not executed consistently when document originals are opened from SAP ECTR.</p>
+<p>This behavior can occur if customer logic relies on application-specific activities (for example 53 – Display application start) within these exits.</p>
+<p>Standard authorization checks for document originals are performed.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">CDESK_SRV_AUTH_CHECK, CDESK_SRV_GET_FILES, ACM , Activity 53, Acticity 52</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Function module <strong>CDESK_SRV_AUTH_CHECK</strong> differentiates between general document activities (for example 03 – Display document info) and application-related activities (for example 53 – Display application start).</p>
+<p>The BAdI methods are executed only for the general activity (lv_activity), while application-related activities (lv_activity_dok) are not passed to these exits.</p>
+<p>As a result, BAdI-specific logic that explicitly evaluates application activities may not be triggered in all use cases.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To allow consistent execution of customer exits in well-defined scenarios, the authorization check was adjusted in a controlled and backward-compatible way:</p>
+<ul>
+<li><strong>CDESK_SRV_AUTH_CHECK</strong> was enhanced to optionally execute BAdIs for application-related activities (52 / 53)</li>
+<li>A new input parameter IV_CHECK_BADI_APPL was introduced to control this behavior explicitly</li>
+<li>This parameter is set to true only in the context of opening document originals:</li>
+<ul>
+<li>CDESK_SRV_GET_FILE_URL</li>
+<li>CDESK_SRV_GET_FILES</li>
+</ul>
+</ul>
+<p>All other usages of CDESK_SRV_AUTH_CHECK remain unchanged, ensuring existing customer implementations are not affected.</p></div></div></div></div>

@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>You are using the ODBC adapter for ABAP (<span class="SNO_DNT" style="float: none;" translate="no">ABAPODBC</span>) to consume remote objects from an ABAP system and are encountering the following or a similar error:</p>
+<ul>
+<li><span class="SNO_DNT" style="float: none;" translate="no">Error: (dberror) [403]: internal error: Error opening the cursor for the remote database &lt;REMOTE_SOURCE_NAME&gt; [SAP][ODBCforABAP] (42000) [MESSAGE:GF8]The character ":" is not valid here. A blank may be missing or there may be too </span> <span class="SNO_DNT" style="float: none;" translate="no">many blanks.: line 1 col 24 in statement <em>&lt;QUERY&gt;</em></span></li>
+</ul>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SDA; Federation; HDI; colon; Virtual Table Name; ABAPODBC; ODBC adapter for ABAP</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 353487</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a limitation in ABAP special characters like colon "<span class="SNO_DNT" style="float: none;" translate="no">:</span>" cannot be used as virtual table name.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions &lt;= 89.01 (SPS08)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>When using the <span class="SNO_DNT" style="float: none;" translate="no">ABAPODBC</span> adapter to connect to an ABAP system via Smart Data Access</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<ul></ul>
+<p><strong>Workaround</strong></p>
+<p>Apply one of following workarounds:</p>
+<ul>
+<li><span style="text-decoration: underline;"><em>Virtual Table Naming:<br/><br/></em></span>Avoid including a colon (:) in virtual table names.</li>
+</ul>
+<ul>
+<li><span style="text-decoration: underline;"><em>HDI Environment:<br/><br/></em></span>When working in an HDI environment, manage virtual tables in a folder that does not enforce HDI namespaces. This helps prevent issues related to unsupported special characters, such as colons, in object names.</li>
+</ul>
+<p><strong> </strong></p></div></div></div></div>

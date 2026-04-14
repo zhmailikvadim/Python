@@ -1,0 +1,75 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0"><span style="font-size: 10pt;">You would like to understand whether your SAP Field Service Management account is compliant with the Superdomain migration and whether any action is required on your side.</span></p>
+<p><span style="font-size: 10pt;">SAP has announced the mandatory migration from legacy domains (<code>*.coresuite.com</code>, <code>*.coresystems.net</code>) to the new SAP FSM superdomains.</span></p>
+<p><span style="font-size: 10pt;">You are unsure if:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Your account is still using legacy domains</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Your integrations are still using legacy authentication methods</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">You <span style="font-family: verdana, geneva;">need </span>to take corrective action</span></p>
+</li></ul>
+<p style="font-size: 10pt;"><span style="font-size: 10pt;">Further details about the migration are available in the official documentation:</span></p>
+<ul><li style="font-size: 10pt;"><a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_product_announcements/sap-superdomain-for-fsm.html" rel="noopener noreferrer nofollow" target="_blank">Common Superdomain for SaaS Applications | SAP Help Portal</a></li></ul>
+<p style="font-size: 10pt;"></p>
+<p style="font-size: 10pt;"><span style="color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">SAP Field Service Management (FSM)</span></li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p><span style="font-size: 10pt;">Your account may still be using:</span></p>
+<ol><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Legacy Domains</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>*.coresuite.com</code></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>*.coresystems.net</code></span></p>
+</li></ul>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Legacy Authentication Methods</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>erpSecurityToken</code></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>accountPassword</code></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>userAccountPassword</code></span></p>
+</li></ul>
+</li></ol>
+<p><span style="font-size: 10pt;">If legacy domains or authentication methods are still being used, your account is affected by the Superdomain changes and requires migration.</span></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="font-family: verdana, geneva; font-size: 10pt;">You can easily verify whether action is required.</span></p>
+<h3 data-toc-skip=""><span style="text-decoration: underline; font-size: 10pt;"><span style="font-family: verdana, geneva;">Step 1 – Log in to FSM Admin</span></span></h3>
+<ul><li style="font-family: verdana, geneva; font-size: 10pt;">
+<p><span style="font-family: verdana, geneva; font-size: 10pt;">Log in as SUPERUSER</span></p>
+</li><li style="font-family: verdana, geneva; font-size: 10pt;">
+<p><span style="font-family: verdana, geneva; font-size: 10pt;">Open menu: "Legacy Domain &amp; Auth Usage Stats"</span></p>
+</li></ul>
+<p><span style="font-family: verdana, geneva; font-size: 10pt;">This page shows usage from the last 15 days.</span></p>
+<p><span style="font-family: verdana, geneva; font-size: 10pt;"><img class="img-responsive" src="/documents/customerkba/SmzLxaECVfQ2bUPCz9mfVWj3iKTZW4Xnak0-JNE-A6Q" style="border-width: 1px; border-style: solid;" width="650"/></span></p>
+<p><span style="font-family: verdana, geneva; font-size: 10pt;"><img class="img-responsive" src="/documents/customerkba/UEmUmMMqhQtLNuszTVg6hQQjobGeYqvw7IVGmZUoFJw" style="border-width: 1px; border-style: solid;" width="650"/></span></p>
+<p></p>
+<h3 data-toc-skip=""><span style="text-decoration: underline; font-size: 10pt;">Step 2 – Check Both Tables</span></h3>
+<h4 data-toc-skip=""><span style="font-size: 10pt;">A.) Legacy Domain Usage Stats</span></h4>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Shows usage of old domains (<code>*.coresuite.com</code>, <code>*.coresystems.net</code>)</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Displays up to 10 entries (URI + Source IP + latest timestamp)</span></p>
+</li></ul>
+<p><span style="font-size: 10pt;"><strong>If the table is empty</strong></span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">You are compliant</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">No action required</span></li></ul>
+<p><span style="font-size: 10pt;"><strong>If the table contains entries</strong></span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Old domains are still in use</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">You must migrate to the new FSM domains</span></li></ul>
+<p></p>
+<h4 data-toc-skip=""><span style="font-size: 10pt;">B.) Legacy Authentication Usage Stats</span></h4>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Shows usage of old authentication methods:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>erpSecurityToken</code></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>accountPassword</code></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>userAccountPassword</code></span></p>
+</li></ul>
+</li></ul>
+<p><span style="font-size: 10pt;"><strong>If the table is empty</strong></span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">You are compliant</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">No action required</span></li></ul>
+<p><span style="font-size: 10pt;"><strong>If the table contains entries</strong></span></p>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Legacy authentication is still used</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">You must migrate to OAuth2</span></li></ul>
+<p></p>
+<p><span style="font-size: 10pt;"><span style="text-decoration: underline;"><strong>Step 3 - Final Status Check </strong></span><strong></strong></span></p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; border: 1px solid rgb(0, 0, 0);"><thead><tr><th style="border-"><span style="font-size: 10pt;">Result</span></th><th style="border-"><span style="font-size: 10pt;">Action Required</span></th></tr></thead><tbody><tr><td style="border-"><span style="font-size: 10pt;">Both tables empty</span></td><td style="border-"><span style="font-size: 10pt;">✅ No</span></td></tr><tr><td style="border-"><span style="font-size: 10pt;">Domain table has entries</span></td><td style="border-"><span style="font-size: 10pt;">❗ Yes – Migrate domains</span></td></tr><tr><td style="border-"><span style="font-size: 10pt;">Auth table has entries</span></td><td style="border-"><span style="font-size: 10pt;">❗ Yes – Migrate to OAuth2</span></td></tr><tr><td style="border-"><span style="font-size: 10pt;">Both tables have entries</span></td><td style="border-"><span style="font-size: 10pt;">❗ Yes – Migrate domains &amp; OAuth2</span></td></tr></tbody></table></div>
+<p></p>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">Important</span></h3>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">The expected state is that <strong>both tables are empty</strong>.</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">If they are empty → Your account is compliant.</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">If you see any records → Action is required on your side.</span></li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Refer to:  <a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_product_announcements/sap-superdomain-for-fsm.html" rel="noopener noreferrer nofollow" target="_blank">Common Superdomain for SaaS Applications | SAP Help Portal</a> </span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Refer to:  <a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_integration_guidelines/oauth2-and-superdomain-migration.html" rel="noopener noreferrer nofollow" target="_blank">Migration to OAuth 2.0 and New Superdomain | SAP Help Portal</a> </span></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p><span style="font-size: 10pt;">SAP FSM, SAP Field Service Management, Superdomain migration, superdomain changes, coresuite.com, coresystems.net, legacy domain, legacy authentication, OAuth2 migration, OAuth 2.0, erpSecurityToken, accountPassword, userAccountPassword, FSM Admin, Legacy Domain Usage Stats, Legacy Authentication Usage Stats, SUPERUSER, domain compliance, FSM integration update, API migration, authentication upgrade, SAP FSM compliance check </span></p></div></div></div></div>

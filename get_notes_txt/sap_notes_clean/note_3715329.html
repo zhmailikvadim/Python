@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are using the transaction /US4G/UOP_TRIG_PROC to order TAF7 (RUC7) for a feed-in market location (MaLo). However, the sent ORDERS 17121 message contains the products for the consumption metering location (MeLo).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Rate-use-case 7, Tarifanwendungsfall 7</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The method /US4G/IF_BADI_MP_DSO~DETERMINE_MEASUREMENT_PRODUCT in the delivered BAdI implementation /US4G/CL_BADI_MP_DSO for BAdI /US4G/BADI_MP_DSO incorrectly determines the energy direction for the MeLo.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the SAP Note.</p>
+<p>It will change the logic of method /US4G/IF_BADI_MP_DSO~DETERMINE_MEASUREMENT_PRODUCT in /US4G/CL_BADI_MP_DSO so that the energy direction of the MaLo is used to determine the BDEW products for MaLo <span style="text-decoration: underline;">and</span> MeLo.</p></div></div></div></div>

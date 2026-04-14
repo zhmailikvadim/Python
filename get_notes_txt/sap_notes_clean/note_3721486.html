@@ -1,8 +1,12 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">You encounter problems with the area of <em>Analytics --&gt; Users --&gt; License Consumption</em> in the SAM4U tool in case you are licensed for an FUE metric. Instead of calculating the number of FUEs based on the Target Classification, it is based on the Current Classifications. Also the breakdown of use types contributing to the FUE count is based on the current classification instead of the target classification.</p>
+<p id="__html0">When you reverse a MeMi document whose billable item was calculated based on an old tax code configuration, the tax data of the reversal billable item is inconsistent with the original billable item if the tax code configuration has been updated.</p>
+<p>This issue is relevant for the market role: DSO.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p id="">Software Asset Management, SAM4U Tool, SAM4U, PCE, License Consumption</p>
+<p>MeMi Billing, Reversal MeMi Document, Billable Item, Tax Data Inconsistent, /IDXMM/CL_UTILITY, DETERMINE_BIT_TAX_DATA, DET_BIT_ORIG_BY_MEMI_DOC, Tax Code Configuration</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>You have installed SAP TCI Note 3646933 - SAM4U Solution | Fiori Application | V2 and other prerequisite corrections which are referenced in SAP Note 3646933.</p>
+<p>The error occurred because the system calculated the tax data of the reversal billable item based on the current tax code configuration instead of using the tax data from the original billable item.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id="">Implement this SAP Note to fix the above-mentioned issue.</p></div></div></div></div>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system ensures that the tax data of the reversal billable item remains consistent with the original billable item, even when the tax code configuration has been updated.</p>
+<p>If the incorrect reversal billable item hasn't been invoiced, you can reverse it and re-create the reversal billable item. If the incorrect reversal billable item has been invoiced, you need to reverse the invoice document first so that the posting document is also reversed. Then reverse the billable item and re-create the reversal billable item.</p>
+<p>You can verify the fix by reversing a MeMi document whose billable item was calculated based on an old tax code configuration after updating the tax code configuration. Check that the tax data of the reversal billable item is consistent with the original billable item.</p></div></div></div></div>

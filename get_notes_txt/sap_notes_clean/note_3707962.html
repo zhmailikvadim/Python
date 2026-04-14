@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">After repointing a Crystal Report from a UNV universe to a UNX universe and saving it to Business Objects Enterprise over the original report, the report displays references to both universes instead of exclusively referencing the UNX universe.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html0">Crystal Reports, retains UNV, repoiting UNX, UNX, UNV.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment:</strong></p>
+<ul>
+<li>SAP BusinessObjects BI Platform 4.3/2025</li>
+<li>Crystal Reports 2020/2025</li>
+</ul>
+<p><strong>Steps to Reproduce:</strong></p>
+<ol>
+<li><span style="font-size: 14px;">Start with a Crystal Reports 2020 report that uses a UNV universe as a source.</span></li>
+<li><span style="font-size: 14px;">Set the datasource location to point to the equivalent UNX universe.</span></li>
+<li><span style="font-size: 14px;">Save the repointed Crystal Report out to Business Objects Enterprise by overwriting the existing Crystal Report.</span></li>
+<li><span style="font-size: 14px;">Observe that the Crystal Report is still referencing the UNV universe as well as the UNX universe.</span></li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Currently there are two workaround to the situation.</p>
+<p><strong>Workaround 1:</strong></p>
+<p>Select the option "Save as" and create a new file instead of overwriting an existing one.</p>
+<p><strong>Workaround 2:</strong></p>
+<p>Run the sample sdk code attached, to clean up the properties after the overwriting.</p></div></div></div></div>

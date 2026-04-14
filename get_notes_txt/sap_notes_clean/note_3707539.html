@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">It is possible to save an S/4HANA Service business transaction without User Status even if it is assigned with a status profile in the customizing. This situation can occur, for example, when a user is authorized to Create a business transaction but is not authorized to Create/Change its statuses (authorization objects B_USERSTAT &amp; B_USERST_T).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Status Profile, Save, Missing Status, B_USERSTAT, B_USERST_T, DB inconsistency.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is a follow-up to Note <strong>3498719</strong>.</p>
+<p id="">The system should prevent users from saving an S/4HANA Service business transaction without a user status when a status profile is assigned in Customizing, in order to avoid database inconsistencies. If such transactions are saved, they cannot be edited or processed further.</p>
+<p>There is one exception: this restriction does not apply if the user statuses defined in the profile do not trigger any business transaction (that is, the <strong>Trans.</strong> column in the status profile is empty).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the attached correction instruction.</p></div></div></div></div>

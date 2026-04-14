@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3713328&amp;TargetLanguage=EN&amp;Component=XX-CSC-CH-IS-H&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3713328/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3713328/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>This SAP Note is relevant only for the country version Switzerland (CH).</p>
+<p>It contains the following enhancements and adjustments to TARDOC and the outpatient flat rates:</p>
+<ul>
+<li>Service rule C60 (ISH_CH_CHECK_AMBP_MAPPER) has been redesigned in such a way that changes made to physicians and time stamps for a LKAAT service do not lead to the cancellation of the corresponding TARDOC service, but to a targeted adjustment of physicians and time stamps for TARDOC service.</li>
+<li>For the service rule C61 (ISH_CH_CHECK_AMBP_INV_MAPPER), an additional query for the rule types C19SEC, C29SEC, and C34 is missing so that services that were created by these service rules are excluded from the "inverse mapping".</li>
+<li>In the future, the checks performed by service rule C19SEC (ISH_CH_CHECK_TARDOC_MAX) will only be performed for TARDOC services that were performed as of January 1, 2026. During the check for the unit 20 "Division and Day", the division is currently not determined correctly from the referenced main service. As a result, the system may issue an error message, even if the service with this unit 20 exists in another case of the same patient.</li>
+<li>Service rule C29SEC (ISH_CH_CHECK_TARDOC_MAX_GRP) does not yet take a cross-case check into account.</li>
+<li>Addition of consideration of benefit groups to the determination of the section code</li>
+<li>Enhancement of the report RNWCH_SEC_CHECK "IS-H CH: Check/Adjust Services for Existing SectionCode" with an update function so that incorrect or missing section codes for the service can be updated in accordance with the Customizing settings.</li>
+<li>Addition of the import parameters for case number and test run to the methods CALL_CASEMASTER and CALL_GROUPER of the BAdI ISH_CH_AMBP</li>
+<li>In the future, the CaseMaster will only be called when outpatient treatments are generated if patient encounters also exist. A transferred case without patient encounters currently leads to an error message by the CaseMaster.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>TARDOC, outpatient flat rates, outpatient plan, service rules, C60, C61, C19SEC, C29SEC, SAPLNWCH_AMBP, session, patient encounter, outpatient treatment, grouping</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Prerequisite:</p>
+<ul>
+<li>Country Version Switzerland (CH)</li>
+<li>3715369 - IS-H CH: Outpatient Flat Rates - Enhancements and Adjustments [6]</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p id=""> Implement the correction instructions and perform the manual post-implementation steps.</p></div></div></div></div></div>

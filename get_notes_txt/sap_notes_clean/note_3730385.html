@@ -1,0 +1,109 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">As described in SAP ONE Support Launchpad <a href="https://launchpad.support.sap.com/#/legalchangenotification" target="_blank">Notification of Legal Change</a> <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQEE-10045" target="_blank">Unified monthly employer report 2026 (JMHZ)<br/></a></p>
+<p>The functionality delivered in this SAP Note is currently under development. It is intended exclusively for customers registered as JMHZ pilot testers, or for the preview of features that may become available for productive use in the future.</p>
+<p>These updates are provided:</p>
+<ul>
+<li><strong>REGZEC (DM - data mining, CS - compose submission, PF - process feedback, SO - special operations, INIT - import of IDs to IT3457, XP - XML for ePortal)</strong></li>
+<ul>
+<li>
+<p>DM: The table V_T7CZPPD has been extended with the field "Continuous Operation". The logic for retrieving REGZEC data is now as follows:<br/>Continuous Operation (10407 cont) – AUS04 from IT0033: If no value is filled in IT0033, the value is taken from table V_T7CZPPD. If it is not set in this table either, the default value is set to 'N'.</p>
+</li>
+<li>
+<p>XP: New report HCZCJHR0_XP (transaction PC00_M18_JHR_XP) for creation of XML file for ePortal. This report will create XML file REGZEC with action A03 for employments which were active in Q1/2026 and which and which are not active from 1.4.2026. Output XML file should be used for upload on ePortal</p>
+</li>
+<li>Pilot and preview locks are removed<br/><br/></li>
+</ul>
+<li><strong><strong>MH<strong> (DM - data mining, CS - compose submission, WB - workbench)<br/><strong>Corrections that may cause that corrective individual forms will be created for already submitted periods are marked with code abbreviation (DIF )</strong></strong></strong></strong><strong><strong><br/></strong></strong></li>
+</ul>
+<ul>
+<ul>
+<li>
+<p>In section DME, attribute 10417 is filled with summary of attributes 10418, 10292, 10293, 10294, 10295, 10296 (this stays without change). But newly, these attributes 10418, 10292, 10293, 10294, 10295, 10296 should not be used to report details of those payments and therefore are set to zero. (DIF)</p>
+</li>
+<li>
+<p>After applying SAP Note 3727732, warnings appeared in the log: "In table T5T54, the municipality ... is assigned to multiple regions." The warning has been removed.</p>
+</li>
+<li>
+<p>In the ALV displaying individual forms, in the PRZ section, values in the attributes for work obstacles - elements 10471 and 10472 were not displayed.</p>
+</li>
+<li>
+<p>The documentation for table T5T04_03 incorrectly stated that the “best match” algorithm is implemented for the Absence Valuation Rule column (KLBEW). It meant that the program first tries to find a record with a matching KLBEW, and if not found, only then searches for a record without a value in the KLBEW field. The HCZCJHM0_DM program did not and does not work this way. The program counts with all records that have:</p>
+</li>
+<ul>
+<li>The same grouping of sub-personnel areas for types of absence/presence (MOABW)</li>
+<li>The same type of absence/presence (SUBTY)</li>
+<li>The same or empty absence valuation rule (KLBEW)</li>
+<li>Grouping of employees for absence evaluation (MODIF) - see next</li>
+</ul>
+<li>
+<p>When configuring table T5T04_03, the following parameters can be used:</p>
+</li>
+<ul>
+<li>Existing: JMH_POJ_ELDP/T5T04_03_MODIF_USED.<br/>Value X: When reading table T5T04_03, only records with the same absence modifier value (MODIF-MOD0A) will be selected. Other value or parameter not specified: the absence modifier value will be ignored.</li>
+<li>New: JMH_POJ_ELDP/T5T04_03_MODIF_BEST_MATCH<br/>Optional parameter that can be used if T5T04_03_MODIF_USED is set to X. If, when reading table T5T04_03 using the absence modifier (MODIF-MOD0A), no suitable record is found, the table will be read again without using the absence modifier.</li>
+</ul>
+<li>
+<p>When the HCZCJHM0_DM program finds a subtype of infotype 6 for the place of work, it tries to determine the place of work from it. If the program does not find the municipality name using the reference to T5T54, it compiles it from fields ORT-01 and ORT-02. The program - even in the case of successful compilation of the municipality name - reported an error. Now replaced with a warning only if the municipality name cannot be compiled.</p>
+</li>
+<li>
+<p>A new rule has been added that if attribute 10273 (number of hours worked in hazardous work) is higher than attribute 10268 (number of hours worked), attribute 10273 is reduced to the value of attribute 10268.</p>
+</li>
+<li>
+<p>For attributes 10328, 10329, 10330, 10337, 10338, 10339, 10340, 10341, mathematical rounding of values to whole crowns has been added (DIF)</p>
+</li>
+<li>
+<p>Logical checks 30, 281, 317, and 318 have been deactivated. Logical check 338 has been implemented.</p>
+</li>
+<li>
+<p>In section DME, attribute 10417 should be filled with summary of attributes 10418, 10292, 10293, 10294, 10295, 10296 (this stays without change). But newly, these attributes 10418, 10292, 10293, 10294, 10295, 10296 should not be used to report details of those payments and therefore are set to zero.</p>
+</li>
+<li>
+<p>Pilot and preview locks are removed</p>
+</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>HRCZ, JMHZ</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is relevant only for Czech Republic (HRCZ)</p>
+<p>HRSP SAPK-10127INS4HCM, SAPK-10040INS4HCM, SAPK-608F1INSAPHR, SAPK-604N2INHRCEE (or newer)</p>
+<p><strong>For implementation using the SAP Note Assistant, log in to SAP using the Czech (CS) language.</strong></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Source code changes were made to objects in the PC18_JMHZ package.</p>
+<p><strong>Implementation</strong></p>
+<div class="table-wrap">
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable">
+<thead>
+<tr>
+<td class="confluenceTd"><strong>Version</strong></td>
+<td class="confluenceTd">
+<p><strong>Date</strong></p>
+</td>
+<td class="confluenceTd">
+<p><strong>Reason</strong></p>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="confluenceTd">01</td>
+<td class="confluenceTd">
+<p>March 20, 2026</p>
+</td>
+<td class="confluenceTd">Released for Customer</td>
+</tr>
+<tr>
+<td class="confluenceTd">02</td>
+<td class="confluenceTd">
+<p>March 26, 2026</p>
+</td>
+<td class="confluenceTd">Added name of new report HCZCJHR0_XP</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="table-wrap"></div>
+<div class="table-wrap"><span style="font-size: 14px;">Import the Support Package specified for your release.</span></div>
+<p>As a general rule SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <span style="text-decoration: underline;"><strong><a class="external-link" href="https://support.sap.com/kb-incidents/notes/assistant.html" rel="nofollow" target="_blank">SAP Note Assistant</a>.</strong></span></p>
+<p>Note that documentation, transactions, and Customizing activities are only delivered via Support Package.</p>
+<p><strong>After implementing the correction instructions that are valid for your release, you must carry out manual activities.</strong></p></div></div></div></div>

@@ -1,15 +1,114 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">This SAP Note generates the required DDIC elements (and other bits) in your system before implementing SAP Note 3723731 and is only relevant to customers on SAP_HR Release 608, S4HCMCIE 100, S4HCMCIE 101 and S4HCMCIE 102.</p>
+<p id="__html0">This SAP Note provides enhancements to the existing Grouping Reason 'UKLE' that is required to be used by all customers that use the Multiple Employment (ME) Payroll solution in the United Kingdom (UK). The enhancements are optional until you experiences any issues with the existing Grouping Reason 'UKLE'.</p>
+<p>The enhancements are as follows;</p>
+<p>1) The 'UKLE' grouping values used by payroll areas (ABKRS) are generated at runtime (as they were previously), but are now stored in a database table (T5G_UKLE_GRPVL). The rules for defining the Grouping Value are as follows;</p>
+<p style="padding-left: 30px;">a) Payroll Areas that are not payroll relevant use an <strong>empty</strong> grouping value.</p>
+<p style="padding-left: 30px;">b) Payroll Areas that have no entry in T5G51 use an <strong>empty</strong> grouping value.</p>
+<p style="padding-left: 30px;">c) Any employees that are not live yet on the ME Payroll Solution (i.e. Feature 08MEL provides a Go Live date in the future) use an <strong>empty</strong> grouping value.</p>
+<p style="padding-left: 30px;">d) All other Payroll Areas are given an entry between <strong>0001</strong> and <strong>9999</strong>, but all Payroll Areas that have the <span style="text-decoration: underline;"><strong>same</strong></span> Period Parameters, Tax District and Tax Reference will use the same grouping value.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Component</strong></td>
+<td><strong>Key Field</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td>MANDT</td>
+<td>K</td>
+<td>Client</td>
+</tr>
+<tr>
+<td>ABKRS</td>
+<td>K</td>
+<td>Payroll Area</td>
+</tr>
+<tr>
+<td>GRPVL</td>
+<td> </td>
+<td>Grouping Value for Personnel Assignments</td>
+</tr>
+<tr>
+<td>PERMO</td>
+<td> </td>
+<td>Period Parameters</td>
+</tr>
+<tr>
+<td>TDNUM</td>
+<td> </td>
+<td>Tax district number</td>
+</tr>
+<tr>
+<td>TDREF</td>
+<td> </td>
+<td>Tax district indicator</td>
+</tr>
+</tbody>
+</table></div>
+<p><br/>2) The grouping reason class for UKLE has been modified to support the enhanced version of Grouping Reason 'UKLE';</p>
+<p style="padding-left: 30px;">CL_HRCCE_GPRULE_UK_LEGAL_EMPL</p>
+<p>3) The grouping reason update programs have been modified to support the enhanced version of Grouping Reason 'UKLE';</p>
+<p style="padding-left: 30px;">RPUGRPG0_GRPVL_0065 <br/>RPUGRPG0_GRPVL_0121</p>
+<p>4) A new update program has been provided to migrate existing 'UKLE' data in IT0065 and IT0121 to the enhanced version of Grouping Reason 'UKLE';</p>
+<p style="padding-left: 30px;">RPUFIXG0_UKLE</p>
+<p><span style="text-decoration: underline;"><strong>Activating the Enhancements to Grouping Reason 'UKLE'</strong></span></p>
+<p style="padding-left: 30px;"><span style="text-decoration: underline;">System Constants (T5GPBS_ALL</span>)</p>
+<p style="padding-left: 60px;">ME  UKLE  01.01.1800   31.12.9999                X = 'UKLE' Enh. (Note 3723731)</p>
+<p style="padding-left: 30px;"><span style="text-decoration: underline;">Non-Productive Systems Only</span></p>
+<p style="padding-left: 60px;">User Parameter: HR_GB_ME_UKLE<strong>                  </strong>HRGB: 'UKLE' Enhancements (Note 3723731)</p>
+<ul>
+<li>Set the user parameter  to X to test in a non-productive system (for just that user).</li>
+<li>Set the system constant to X to test in a non-productive system (for all users).</li>
+<li>Set the system constant to X to go live in your productive system (for all users).</li>
+</ul>
+<p style="display: inline !important;"><span style="text-decoration: underline;"><strong>Implementation</strong></span></p>
+<p style="padding-left: 30px;">1) Activate the enhancements (see 'Activation' above)</p>
+<p style="padding-left: 30px;">2) Customise your system (see 'Limitations' below)</p>
+<p style="padding-left: 30px;">3) Check that your ME data is consistent by running the ME Check program; RPLMESG1.</p>
+<p style="padding-left: 30px;">4) Run the grouping value update programs; RPUGRPG0_GRPVL_0065, RPUGRPG0_GRPVL_0069 and RPUGRPG0_GRPVL_0121.</p>
+<p style="padding-left: 30px;">5) Run the Data Sharing Fix program; RPUFIXG0_UKLE</p>
+<p style="padding-left: 30px;">6) Check that Data Sharing is now consistent by running the International Data Sharing program <span style="text-decoration: underline;">in test mode</span>; RPUFIXDS (taking care not to process infotype 0065, 0069, 0121)</p>
+<p style="padding-left: 30px;">7) Test your various business scenarios that use Data Sharing; Master Data, E-Filing, Payroll, Reporting.</p>
+<p><span style="text-decoration: underline;"><strong>Limitations (for GB Infotypes)</strong></span></p>
+<p>The enhancements to the Grouping Reason 'UKLE' are based on the following rules for 'Data Sharing' for GB infotypes (see list below), but from a "general" perspective, customers that previously used the Infotype Copy (i.e. T582A-CPRFN = ‘X’) should now use <strong>XMOL</strong>. But with the CAVEAT that, if the customer is implementing <strong>Employee Central Payroll</strong> (ECP), and the data is 'Replicated' from <strong>Employee Central</strong> (EC), then they should <em>generally</em> use <strong>XNON.</strong> If the customers were not previously using the Infotype Copy (i.e. T582A-CPRFN = ‘  ’) should now use <strong>XNON</strong>.</p>
+<ul>
+<li>0065 must use <strong>UKLE</strong></li>
+<li>0069 must use <strong>XNON</strong></li>
+<li>0121 must use <strong>UKLE</strong></li>
+</ul>
+<ul>
+<li>Infotype Views: Grouping Reason defined by International Infotype (provided in brackets)</li>
+</ul>
+<p style="padding-left: 60px;">3346 (0002)<br/>0648 (0008)<br/>0280 (0016)<br/>0281 (0045)<br/>3292 (0048)<br/>0998 (0077)</p>
+<ul>
+<li>'Employment' Infotypes (<strong>XNON</strong>): </li>
+</ul>
+<p style="padding-left: 60px;">0071, 0570, 0571, 0572, 0615, 0617, 0618, 0624, 0793, 0874, 3216, 3217, 3243, 3297</p>
+<ul>
+<li>'Person' Infotypes (<strong>XNON</strong>* or <strong>XMOL</strong>): </li>
+</ul>
+<p style="padding-left: 60px;">0086, 0088, 0614, 3215</p>
+<p style="padding-left: 60px;">* If you use XNON then data will have to be entered manually on all contracts.</p>
+<ul>
+<li>Other Infotypes (<strong>XNON</strong>*): </li>
+</ul>
+<p style="padding-left: 60px;">0070</p>
+<p style="padding-left: 60px;">* Normally, the data is only entered on the primary contract, but when the primary leaves, the court order will have to be moved to the new primary.</p>
+<ul>
+<li>OBSOLETE Infotypes:</li>
+</ul>
+<p style="padding-left: 60px;">0084, 0085, 0087, 0222, 0225, 0433, 0434, 0616, 0757</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p id="">UDO, DDIC Elements of SAP Note 3723731, NOTE_3723732, SAP_HR Release 608, S4HCMCIE 100, S4HCMCIE 101 and S4HCMCIE 102</p>
+<p>RPUFIXDS, UKLE, XMOL, XNON, T582A, T582G, Grouping Reason, Data Sharing, IT0065, IT0121</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p id="">DDIC Elements of SAP Note 3723731, SAP_HR Release 608, S4HCMCIE 100, S4HCMCIE 101 and S4HCMCIE 102.</p>
+<p>Continuous Improvement</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>This SAP Note generates the required DDIC elements in your system before implementing SAP Note 3723731. But how this SAP Note is applied is dependent on your SAP_BASIS release.</p>
-<p>The outcome of applying this SAP Note (and running the UDO program it creates) is dependent on your SAP_HR release and your SAP_BASIS release.</p>
-<p style="padding-left: 30px;">SAP_HR Release 608, S4HCMCIE 100, S4HCMCIE 101 and S4HCMCIE 102:</p>
-<p style="padding-left: 60px;">SAP_BASIS 702 SP18 (or higher)<br/>SAP_BASIS 731 SP18 (or higher)<br/>SAP_BASIS 740 SP15 (or higher)<br/>SAP_BASIS 750 SP02 (or higher)<br/>All Higher Releases of SAP_BASIS</p>
-<p style="padding-left: 60px;">Apply the aCI DDIC correction instructions in this SAP Note and the DDIC objects included in this SAP Note will be created automatically.</p>
-<p style="padding-left: 30px;">SAP_HR Release 608, S4HCMCIE 100, S4HCMCIE 101 and S4HCMCIE 102:</p>
-<p style="padding-left: 60px;">SAP_BASIS 702 SP17 (or lower)<br/>SAP_BASIS 731 SP17 (or lower)<br/>SAP_BASIS 740 SP14 (or lower)<br/>SAP_BASIS 750 SP01<br/>All Lower Releases of SAP_BASIS</p>
-<p style="padding-left: 60px;">Apply the correction instructions of this SAP Note, via SNOTE, to create the UDO program NOTE_3723732. Run the newly created report (NOTE_3723732) in Update mode, so that all the DDIC changes for SAP Note 3723731 are created and activated.</p></div></div></div></div>
+<p>EITHER</p>
+<p style="padding-left: 30px;">1) Apply the relevant HRSP</p>
+<p style="padding-left: 30px;">2) Activate the enhancements to the 'UKLE' solution (if appropriate) and follow the implementation guide</p>
+<p>OR</p>
+<p style="padding-left: 30px;">1) SAP_HR Release 608, S4HCMCIE 100, S4HCMCIE 101 and S4HCMCIE 102 releases: Apply the Correction Instructions of SAP Note 3723732 (and run the UDO program NOTE_3723732 in update mode - if you are not on a sufficiently high SAP_BASIS release the aCI-DDIC correction instructions are not applied automatically by SNOTE).</p>
+<p style="padding-left: 30px;">2) SAP_HR 604 release: Apply the Correction Instructions of SAP Note 3723733 (and run the UDO program NOTE_3723733 in update mode).</p>
+<p style="padding-left: 30px;">3) Apply the correction instructions attached to this SAP Note, via SNOTE.</p>
+<p style="padding-left: 30px;">4) EHP7 (SAP_HR 604 with EA_HR 607) and EHP8 (SAP_HR 608 with EA_HR 608) releases: Apply the Correction Instruction of SAP Note 3724962 - PY-GB: Grouping Reason UKLE: Enhancements (EHP Systems)</p>
+<p style="padding-left: 30px;">5) Activate the enhancements to the 'UKLE' solution (if appropriate) and follow the implementation guide</p></div></div></div></div>

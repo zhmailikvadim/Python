@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3713430&amp;TargetLanguage=EN&amp;Component=PY-AT&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3713430/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3713430/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>This SAP Note provides the form for the semiretirement registration (application) that is valid as of 1/1/2026 in statements.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>Semiretirement, AMS, Austrian Public Employment Service, General Pension Act (APG) Sec. 4 Para. 2</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Legal change for Payroll Austria</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>The correction is provided by HR Support Package (via CLC if necessary).<br/>You can implement an advance correction by using SNOTE to implement the automatic correction instructions and performing the manual activity (upload BC set and form).</p>
+<p><strong>Important additional information:</strong></p>
+<ul>
+<li>This SAP Note delivers only the registration form HR_AT_AMS_ATZN24 (ID 0328) for agreements with a start as of 2026.</li>
+<li>The form for the change notification of agreements as of 2026 is delivered at a later point in time. See: <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQWE-7601" target="_blank">https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQWE-7601</a></li>
+<ul>
+<li>Additional corrections that are relevant in special situations for the forms are also integrated into payroll there.</li>
+</ul>
+</ul>
+<p><strong><span style="font-size: 14px;">Outbound Delivery Details:</span></strong></p>
+<ul>
+<li>In the form, for point 5 (page 4), the monthly gross remuneration (1) was divided into two different fields 1A and 1B depending on the semiretirement model.</li>
+<ul>
+<li>1A: For continuous models, the new statement wage type ATUB is introduced and supplied with the wage type /TUG (additional benefits and overtime are <strong>not</strong> taken into account). Refer to SAP Note <a href="/notes/3718038" target="_blank">3718038</a>.</li>
+<li>1B: For block time models, the statement wage type ATOG and therefore the wage type /TOG are still supplied (consideration of additional benefits and overtime hours).</li>
+</ul>
+<li>In the infotype <em>Semiretirement A - Notification Supplements</em> (0662), the following new fields can be maintained:</li>
+<ul>
+<li>Pension key dates follow-up date (PSTDT)</li>
+<li>SR Agreement Subsequent Payment Date (ATVDT)</li>
+<li>Regular retirement pension key date (RAPST)</li>
+<li>Early retirement pension key date (VAPST)</li>
+<li>Heavy Labor Pension Key Date (SAPST)</li>
+</ul>
+<li>Corrections to the form compared to the form that was used for requests up to December 31, 2025:</li>
+<ul>
+<li>In the "Employer" field, the form of address stored in T536C is no longer printed.</li>
+<li>In the "Social Insurance Agency" field, the first part of the text from the view V_T5A1I_TR is now printed instead of (incorrect) the SI insurance body.</li>
+</ul>
+</ul></div></div></div></div></div>

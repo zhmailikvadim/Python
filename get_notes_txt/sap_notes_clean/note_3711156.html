@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><span style="font-size: 14px;">When Sales Order creation is canceled (in a stateful environment, e.g. in SAP GUI) and another Sales Order is directly created, it can happen that data of basic methods (e.g. PAL Quantity Assignments) is saved without a Sales Order number.</span></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">aATP; end of check handling; document number notifier; PAL; Quantity Assignments; Sales Order integration;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><span style="font-size: 14px;">The reason is that the Document Number notification is not forwarded to basic methods (like PAL) triggered in such a scenario.</span></p>
+<p>This is because the basic method controller used during save is only registered to the document number notifier when it is created.</p>
+<p>But, the document number notifier is re-created in each check (e.g. after cancel), while the basic method controller is created only once (in the stateful environment). Hence, it is not re-registered and the new document number notifier cannot forward the sales order number to the basic methods.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Apply the correction instructions for this note or upgrade to a SAP S/4HANA support package that contains this correction.</p></div></div></div></div>

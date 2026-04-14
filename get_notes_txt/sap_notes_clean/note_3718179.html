@@ -1,8 +1,167 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">You have implemented  note 3648269 and when simulate payroll from IT0008, see duplicated payslips.</p>
+<div id="__html0">
+<div></div>
+</div>
+<div>
+<div></div>
+</div>
+<div class="OutlineElement Ltr SCXW17404716 BCX8">
+<p>You run the <strong>HR-PT: Declaração Mensal de Remunerações</strong> (RPCMIDP0) report for an employee who has been terminated in the middle of current month and has retroactive payments to periods when they were eligible for the IRS Jovem benefit. The retroactive differences are incorrectly reported as income category A68 instead of A.</p>
+<div>
+<div>
+<div></div>
+</div>
+</div>
+<div>
+<div></div>
+</div>
+</div>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>Remuneration statement, HR form, HR forms, IT0008, function module HR_PAYROLL_TEST_PAYSLIP_SHOW</p>
+<div></div>
+<div>
+<p><strong>Transaction: </strong>PC00_M19_RPCMIDP0</p>
+</div>
+<div>
+<p>&amp;DMR (for more information, see SAP Note <a href="/notes/2197631" target="_blank">2197631</a>)</p>
+</div>
+<div>
+<p>IJOV</p>
+</div>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p id="">This is due a program error.</p>
+<div></div>
+<div>
+<div></div>
+<div>
+<p><strong>Reason</strong></p>
+<p>This issue is a side effect caused by the solution delivered by SAP Note <a href="/notes/3705771" target="_blank">3705771</a>.</p>
+<p>The system checks the employee's eligibility in the in-period to determine the income category. Even if the employee has been terminated in the middle of the month and therefore is partially active, the system considers the eligibility for the IRS Jovem benefit in the retroactive periods and the retroactive amounts are reported with the A68 category.</p>
+</div>
+</div>
+<div></div>
+<p><strong>Prerequisite</strong></p>
+<p>The following Support Package (SP) level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr><th>Release</th><th>Support Package</th></tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 05</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 18</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP C9</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04 (EhP6 and EhP7)</td>
+<td>HR SP K1</td>
+</tr>
+</tbody>
+</table></div>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id="">Implement the attached correction instructions or import the specified Support Package.</p></div></div></div></div>
+<div class="SCXW98177726 BCX8">
+<div class="OutlineElement Ltr SCXW98177726 BCX8">
+<div class="SCXW227182874 BCX8">
+<div class="OutlineElement Ltr SCXW227182874 BCX8">
+<div>
+<div>
+<p>From now on, in case the employee is active for at least one day in the in-period, the system considers the employee's eligibility in the in-period to determine the income category, not on the retroactive periods.</p>
+</div>
+<div>
+<p><strong>Example:</strong></p>
+</div>
+<div>
+<p>Proceed with the following steps to reproduce the symptom mentioned in this SAP Note.</p>
+</div>
+<div>
+<p><strong>Description:</strong></p>
+</div>
+<div>
+<p>DMR - Terminated employee with retroactive differences to month eligible to IRS Jovem.</p>
+</div>
+<div>
+<p><strong>Preparation/Background:</strong></p>
+<ol>
+<li>Hire an employee on January 01, 2025 with EUR 1,500.00.</li>
+<li>Ensure the IRS Jovem benefit is applied for this employee only until November.</li>
+<li>Fire the employee on December 15, 2025.</li>
+</ol>
+<p><strong>Procedure:</strong></p>
+<ol>
+<li>Run payroll until 11/2025.</li>
+<li>Increase the salary retroactive to EUR 2,000.00 starting from 11/2025.</li>
+<li>Run payroll for 12/2025.</li>
+<li>Run the RPCMIDP0 report with the following parameters:</li>
+</ol>
+<p style="padding-left: 30px;">Outro periodo: 12/2025<br/>Primeira declaração do ano: Sim<br/>Gerar declarações: Não</p>
+<p><strong>Result:</strong></p>
+<p>The retroactive differences from November are reported in the A category.</p>
+</div>
+</div>
+<p><strong>Versioning</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div></div>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong> </td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p>March 20, 2026</p>
+</td>
+<td>Released for customer</td>
+</tr>
+</tbody>
+</table></div>
+<div></div>
+<div>
+<div>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package (SP). However, if you need to install a solution earlier, use Note Assistant (SNOTE) to implement the correction instructions.</p>
+</div>
+<div>
+<p><strong>Stay Informed</strong></p>
+</div>
+</div>
+<ul>
+<li>To get an email notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" rel="noreferrer noopener" target="_blank">My SAP Notes &amp; KBAs</a> or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" rel="noreferrer noopener" target="_blank">online help</a> for further information.</li>
+<li>For legal changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" rel="noreferrer noopener" target="_blank">Regulatory Change Manager</a>.</li>
+<li>For documentation about Payroll Portugal, access the <a href="https://help.sap.com/docs/ERP_HCM/7fc707b2f5784b5793399cfb4261fba3/383de153038a424de10000000a174cb4.html?locale=en-US&amp;version=6.18.latest" rel="noreferrer noopener" target="_blank">Help Portal</a>.</li>
+<li>For information about the Note Assistant (SNOTE), access the <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="noreferrer noopener" target="_blank">SAP Support Portal</a>.</li>
+<li>For information about Support Package (SP) schedules, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" rel="noreferrer noopener" target="_blank">SAP ERP Human Capital Management – Support Package Schedules</a>. </li>
+</ul>
+<p><strong>Disclaimers</strong></p>
+<div>
+<div>
+<div>
+<p>By clicking an external hyperlink, you agree that, unless expressly stated otherwise, your agreement with SAP includes the following:</p>
+</div>
+<div>
+<ul>
+<li>The content of the associated website and any other external websites is not content provided by or on behalf of SAP, nor is it otherwise under SAP’s control.</li>
+<li>The fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the contents and information provided on such websites.</li>
+<li>SAP does not give any representation regarding the quality, safety, suitability, accuracy, or reliability of any external website or any of the information, content, and materials provided thereon.</li>
+<li>You visit those external websites entirely at your own risk. SAP shall not be directly or indirectly responsible or liable for any damage or loss caused or alleged to be caused by or in connection with your use or reliance on any content, goods, or services available on or through any such linked website. </li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>Good to Know</strong></p>
+<ul>
+<li>When you install an SAP Note, some prerequisites, which are SAP Notes that have already been released and that change the same context of the current one, might be required. Even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</li>
+<li>During the piloting phase, this SAP Note is available only for pilot testing. Even though SAP performs internal functional tests, it is possible that tests in a customer environment reveal issues not captured before, making it necessary to update the solution and version of this SAP Note. After this SAP Note has its status updated to "Released for Customer", it will only be changed if there is a very specific situation that demands an update, and the reason for it will be added to the log of changes. </li>
+</ul>
+<p><link/></p></div></div></div></div>

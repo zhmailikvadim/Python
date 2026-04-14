@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> When a change of settlement and a move-out occur on the same day, the settlement unit cannot be generated to the point of delivery (PoD) correctly. The system is expected to generate a one-day time slice for this special changed date because the new settlement unit starts at the beginning of the day and the settlement ends at the end of the same day.</p>
+<p id="__html0">This issue is relevant for all market roles.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> Settlement, EEDM11, /US4G/CL_IM_EH_EEDMSETTLUI, point of delivery, PoD, time slice, change of settlement, move-out, settlement unit</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> The error occurred because in method /US4G/CL_IM_EH_EEDMSETTLUI-ADJUST_SETTLUNIT_ASGMT_RECORDS line 55, if the changed date of the master data change (MDC) was equal to or less than the settlement end date, the system removed this record.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system generates the expected one-day time slice for this special changed date correctly. You can verify the fix by checking that the one-day time slice for the special changed date displays correctly when a change of settlement and a move-out occur on the same day.</p></div></div></div></div>

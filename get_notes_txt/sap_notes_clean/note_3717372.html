@@ -1,0 +1,113 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You need to implement a new tax box reporting structure in response to Romania’s VAT changes effective from January 2026.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Romania, VAT 300, legal change, RO_VAT_300, RO_VAT_300_V5, DRC, Document and Reporting Compliance</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This update follows a legal change valid from January 2026. This SAP Note is valid only for Romania.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">As a general rule, SAP recommends that you install this solution by applying a Support Package. However, if you need to install it earlier, use Note Assistant to implement the correction instructions.</p>
+<p><strong>Post-implementation Instructions:</strong></p>
+<p><strong>A. Copy already existing tax box structure (in case you already configured it in SAP Note <a href="/notes/3667668" target="_blank">3667668</a>):</strong></p>
+<p>  1. Copy the existing tax box structure in the view cluster VG_CUST in transaction <strong>SM34</strong>.</p>
+<ul>
+<li>Locate the tax box structure with Country/Region: <strong>RO</strong>, Tax Box Structure Type: <strong>5</strong> and Type Description: <strong>Romania VAT 300 Declaration - 08/2025</strong>.</li>
+<li>Make a copy of the structure with validity from <strong>01.01.2026</strong>.</li>
+</ul>
+<p>  2. Delete the nodes that are no longer used from the new tax box structure.</p>
+<ul>
+<li>List of obsolete nodes: <strong>R12_3_1</strong>, <strong>R12_3_2</strong>, <strong>R24_1</strong>, <strong>R24_2</strong>, <strong>R25_3_1</strong>, <strong>R25_3_2</strong>, <strong>R69_1</strong>, <strong>R69_2</strong>, <strong>R70_1</strong>, <strong>R70_2</strong>, <strong>R71_1</strong>, <strong>R71_2</strong>, <strong>R73_1</strong>, <strong>R73_2</strong>, <strong>R74_1</strong>, <strong>R74_2</strong>, <strong>R75_1</strong>, <strong>R75_2</strong>, <strong>R76_1</strong>, <strong>R76_2</strong>, <strong>R77_1</strong>, <strong>R77_2</strong></li>
+</ul>
+<p><strong><strong>      Note:</strong> </strong>Start from the <strong>Assignment of Tax Groups to Tax Boxes</strong> view. Continue with <strong>Tax Groups</strong> and <strong>Tax Boxes</strong> views. Save after maintaining each view.</p>
+<p>  3. Update tax box names in the <strong>Tax Boxes</strong> view.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 628px; height: 402px;">
+<tbody>
+<tr>
+<td><strong>Tax Box</strong></td>
+<td><strong>Old Name</strong></td>
+<td><strong>New Name</strong></td>
+</tr>
+<tr>
+<td>R25_1</td>
+<td>Line 27 base</td>
+<td>Line 26 base</td>
+</tr>
+<tr>
+<td>R25_2</td>
+<td>Line 27 VAT</td>
+<td>Line 26 VAT</td>
+</tr>
+<tr>
+<td>R25_1_1</td>
+<td>Line 27.1 base</td>
+<td>Line 26.1 base</td>
+</tr>
+<tr>
+<td>R25_1_2</td>
+<td>Line 27.1 VAT</td>
+<td>Line 26.1 VAT</td>
+</tr>
+<tr>
+<td>R25_2_1</td>
+<td>Line 27.2 base</td>
+<td>Line 26.2 base</td>
+</tr>
+<tr>
+<td>R25_2_2</td>
+<td>Line 27.2 VAT</td>
+<td>Line 26.2 VAT</td>
+</tr>
+<tr>
+<td>R26_1</td>
+<td>Line 30 base</td>
+<td>Line 29 base</td>
+</tr>
+<tr>
+<td>R26_1_1</td>
+<td>Line 30.1 base</td>
+<td>Line 29.1 base</td>
+</tr>
+<tr>
+<td>R28_2</td>
+<td>Line 32 VAT</td>
+<td>Line 31 VAT</td>
+</tr>
+<tr>
+<td>R29_2</td>
+<td>Line 33 VAT</td>
+<td>Line 32 VAT</td>
+</tr>
+<tr>
+<td>R30_1</td>
+<td>Line 34 base</td>
+<td>Line 33 base</td>
+</tr>
+<tr>
+<td>R30_2</td>
+<td>Line 34 VAT</td>
+<td>Line 33 VAT</td>
+</tr>
+<tr>
+<td>R31_2</td>
+<td>Line 35 VAT</td>
+<td>Line 34 VAT</td>
+</tr>
+<tr>
+<td>R43_2</td>
+<td>Line 28 VAT</td>
+<td>Line 27 VAT</td>
+</tr>
+<tr>
+<td>R44_2</td>
+<td>Line 29 VAT</td>
+<td>Line 28 VAT</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>B. Create new tax box structure from scratch (in case you did NOT configure it in SAP Note <a href="/notes/3667668" target="_blank">3667668</a> as a part of the previous legal change):</strong></p>
+<p>  1. Run transaction <strong>SM30</strong> for the view <strong>V_VG_TBS_CT.<br/></strong>    a. Select <strong>Edit<br/></strong>    b.<strong> </strong>Enter <strong>RO</strong> (Romania) in the Country field.<br/>    c. Click <strong>Apply</strong> to proceed.<br/>    d. On the initial screen, add a new entry for Romania.<br/><strong>      </strong>I.<strong>  Tax Box Structure Type</strong>: 5<br/><strong>      </strong>II.<strong> Name</strong>: Romania VAT 300 Declaration - 08/2025</p>
+<p>  2. Activate the BC set attached to this note to create a new Tax box reporting structure.</p>
+<p><strong>      Note:</strong> Ensure the BC Set provided with the SAP Note is correctly imported before activation.<br/><strong>      Note:</strong> For the BC Set upload, use package GLO_FIN_IS_VAT_RO.</p>
+<p>  3. Maintain the new tax box structure in the view cluster VG_CUST in transaction <strong>SM34</strong>.</p>
+<ul>
+<li>On the <strong>Tax Groups</strong> view, assign the correct tax codes and transaction types to the corresponding tax groups.</li>
+</ul></div></div></div></div>

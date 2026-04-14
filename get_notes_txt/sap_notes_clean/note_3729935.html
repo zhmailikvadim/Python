@@ -1,0 +1,42 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p>When updating a User-Defined Table (UDT) using the Data Interface (DI) API within a Global Transaction, the operation may fail with the following error if an unrelated document or master data is created in the SAP Business One client at the same time:</p>
+<p style="padding-left: 30px;"><em>"Another user or another operation modified data; to continue, open the window again (ODBC -2039)"</em></p>
+<p>If the DI API application uses the GetByXML operation and writes to log files, you notice that the UDT metadata may no longer be visible.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>A UDT of type <em>No Object</em> exists, with at least one User-Defined Field (UDF).</li>
+<li>The DI API application uses a Global Transaction (StartTransaction / EndTransaction).</li>
+<li>The DI API connection is established before any actions are performed in the SAP Business One client.</li>
+</ul>
+<p><strong>Scenario:</strong></p>
+<ol>
+<li>Launch the DI API application and connect to the database.</li>
+<li>Perform an update on the UDF within the UDT.</li>
+<li>Log in to the SAP Business One client and create a new document or master data.</li>
+<li>Using the DI API application, attempt to update the same UDT again.</li>
+</ol>
+<p><strong>Expected behavior:</strong></p>
+<p>The UDF is updated successfully every time, regardless of other operations in the SAP Business One client.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>Intermittently, the DI API update fails with the error:</p>
+<p style="padding-left: 30px;"><em>"Another user or another operation modified data; to continue, open the window again (ODBC -2039)"</em></p>
+<p><span>After this occurs, further updates on the UDT fail consistently.</span></p>
+<p>The DI API log files may also contain an additional error:</p>
+<p style="padding-left: 30px;"><em>"-3000: The logged-on user does not have permission to use this object"</em></p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p>concurrency, update collision, simultaneous update</p></div></div></div></div>

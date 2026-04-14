@@ -1,11 +1,176 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">This Note implements version <strong>106</strong> of program /SDF/HDB_SIZING. This is <strong>not the latest version</strong>. Check Note <a href="/notes/1872170" target="_blank">1872170</a> in order to identify the Note containing the most recent version. On top of of all corrections from previous versions, this Note adds the below functionalities and corrections to program /SDF/HDB_SIZING:</p>
+<p id="">In Slovenia, some legal reports have been redesigned by authorities in the last few years. SAP developed and delivered new programs for such redesigned reports. The old programs became unusable as they do not provide correct output. SAP doesn't provide support for these programs anymore and this fact must clearly be presented to customers.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>Suite on HANA, S/4HANA Sizing, DVM Workcenter, ZNEWHDB_SIZE,  /SDF/HDB_SIZING, Readiness Check</p>
+<p id="__html0">obsolete legal reports, REK-1, REK-2, REK-1A, BOL0, BOL1, DIP, M-4, ZAP-M</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Missing functionalities, program errors:</p>
 <ul>
-<li>Error MESSAGE_TYPE_X terminates the report when executing the report on HANA with versions 103, 104 and 105 after reading table VBFA.</li>
+<li> Some legal reports have been redesigned by authorities causing obsolescence of many SAP reports.</li>
 </ul>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id=""> Implement the code corrections with SNOTE.</p></div></div></div></div>
+<p>In below listed ABAP programs, following action is added:</p>
+<ol>
+<li>When user runs the program, popup window is displayed with the following text (or corresponding translation):<br/>"This program is obsolete and not supported by SAP anymore. Use &lt;program-name&gt;, transaction &lt;transaction-name&gt; instead."</li>
+<li>Program then runs as is, still giving to user an option to get data.</li>
+</ol>
+<p>Caution: These reports most likely display many incorrect data, some of them might even end-up with error. SAP gives no support for problems in these reports, user cases will be rejected. SAP also doesn't take any responsibility for potential damage or incorrect decisions based on data displayed with these reports. After some time (years), running these reports will be prevented or the code from these programs (all or selected ones) might even be removed. In the country menu (transaction PC62), these reports were moved to branches named "Obsolete" ("Zastarelo") in the tree structure.</p>
+<p>Here is the list of obsolete ABAP programs and their alternatives:</p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr><th class="confluenceTh">Program</th><th class="confluenceTh">Alternative<br/>Program name</th><th class="confluenceTh">Alternative<br/>transaction name</th></tr>
+<tr>
+<td class="confluenceTd">HSICRK11</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0 </td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICRK10_2007</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0 </td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICRK18</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICRK19</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICRK20</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICRK21</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICRK28</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICRK1A</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICRP13</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICRK1DP </td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICDIP0</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICCPL1</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICO1ZM_XML</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICO300_XML </td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICZAP1</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICO1ZM </td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICZAPL </td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICOBR1</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICO300</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICBOL0</td>
+<td class="confluenceTd">HSICBOL2</td>
+<td class="confluenceTd">PC00_M62_CBOL2 </td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICBOL1</td>
+<td class="confluenceTd">HSICBOL2</td>
+<td class="confluenceTd">PC00_M62_CBOL2</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICBT00</td>
+<td class="confluenceTd">HSICBT01</td>
+<td class="confluenceTd">PC00_M62_CBT01 </td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICBT10</td>
+<td class="confluenceTd">HSICBT11</td>
+<td class="confluenceTd">PC00_M62_CBT11 </td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICBT20</td>
+<td class="confluenceTd">HSICBT01</td>
+<td class="confluenceTd">PC00_M62_CBT01 </td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICEM40</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICEM41</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICEM42</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICEM43</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSICEU43</td>
+<td class="confluenceTd">HSICREK0</td>
+<td class="confluenceTd">PC00_M62_CREK0</td>
+</tr>
+<tr>
+<td class="confluenceTd">HSILM100</td>
+<td class="confluenceTd">HSICMFR0</td>
+<td class="confluenceTd">PC00_M62_CMFR0</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Implementation</strong></p>
+<ul>
+<li>Generally, SAP recommends that you install a solution by applying a Support Package. However, if you need to install a solution earlier, use the tool SAP Note Assistant (SNOTE) to implement automatic correction instruction from this SAP Note. For more information about the SAP Note Assistant see SAP Support Portal under SAP Note Assistant.</li>
+<li>Note that documentation, transactions, translation and some customizing activities are only delivered via Support Package. </li>
+</ul></div></div></div></div>

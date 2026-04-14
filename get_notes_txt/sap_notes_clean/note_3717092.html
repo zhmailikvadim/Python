@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Please note that this SAP note is intended for customers who have upgraded their S/4HANA system using the S4FND TCI note.</p>
+<p>Add form categories in the BTP SAP Dynamic Forms - Form Categories app and add corresponding mappings in the Form Definition Attribute Conditions in the MAIF configuration panel. If there are no entries in the Business Object Entity Condition table, the correct forms will be assigned to all sub-objects.</p>
+<p>For example, if a form definition has category customAttribute1 = 0010 (for work order operation number), and a work order has 3 operations, you will notice that the correct form is selected, but it is assigned to all 3 operations. This note will use the category value as a secondary filter so that only operation 0010 will get the form as expected.</p>
+<p>This enhancement will only work if you have enabled form definition caching by enabling "Use Template Cache" in the dynamic form agent settings in the MAIF configuration panel. When this setting is turned on, form definitions are referenced from a cache table on (this applies globally, including in SSAM requests). This cache table is updated via a background job: <a href="https://help.sap.com/docs/MAIF_PRIVATE/92785ddefbe44a049b8f21a3fd34039c/15fd1f11abd3405fb59eb899000f07e2.html#dynamic-forms-buffer-refresh-program" target="_blank">documentation</a></p>
+<p>This note also includes fixes for the following issues:</p>
+<ul>
+<li>If cached keys are used when requesting DynamicFormConfigFiles from SSAM, no data is returned and there are a series of 500 errors in the SLG1 logs due to missing RFC destination</li>
+<li>Event framework requires at least one status restriction ("Require * status") for the event to run</li>
+<li>When "Form Definition By Rule" Form Assignment is used, form categories matching logic is always called even if no category mapping configuration is active</li>
+<li>If translated form agent description exists in /SMFND/C_DFA01T and missing in /SMFND/YC_DFA01T, the standard config is not getting picked up in form explorer</li>
+<li>Form status is always shown in English in the form explorer</li>
+<li>Forms created via task list assignment no longer works after implementing SAP note 3700567</li>
+<li>UI issues in the configuration panel related to "Form Definition Attribute Conditions" including delete button visibility, and updating existing records</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">S4MOBADDON-8197, MAIF, SAP Dynamic Forms, Configuration Files, Event Framework, Task List, Translation, UI, Configuration Panel, TCI</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Product Enhancement + Programming Error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Please implement the attached correction instructions</p></div></div></div></div>

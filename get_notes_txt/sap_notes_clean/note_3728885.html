@@ -1,0 +1,50 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3728885&amp;TargetLanguage=EN&amp;Component=FS-RI-AC&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3728885/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3728885/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">When you calculate result-independent conditions, the system creates an account with an incorrect date of receipt.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p id="">EING_DAT</p>
+<p>/MSG/R_A2</p>
+<p>/MSG/H_FINA1</p>
+<p>/MSG/R_U2</p>
+<p>/MSG/R_AB2</p>
+<p>/MSG/H_BORD1</p>
+<p>/MSG/R_ABR_BATCH_PP</p>
+<p>/MSG/R_ABR_BATCH_ABR_PP</p>
+<p>/MSG/R_A_BATCH_TEILEN_FREIG_2</p>
+<p>/MSG/H_FI_P_BATCH_R2B</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>The total number of postings in the account exceeded the maximum number of postings entered for each account during the calculation.</li>
+<li>The user starts the calculation in the following dialog programs:</li>
+<ul>
+<li>
+<p>Accounting Dialog Basic System</p>
+</li>
+<li>
+<p>Risk Manager Account Dialog</p>
+</li>
+<li>
+<p>Bordereau Basic System</p>
+</li>
+<li>
+<p>Risk Manager Bordereau</p>
+</li>
+<li>Loss dialog at treaty or participation level</li>
+</ul>
+<li>The user starts the calculation with the following background programs:</li>
+<ul>
+<li>
+<p>Background program "Transfer from Risk Manager to Basic System" with activated start parameter "Calculate Accounts"</p>
+</li>
+<li>Background program "Split, Calculate, Release (Basic System)"</li>
+<li>
+<p>Background program "Split, Calculate, Release Parallel to Treaty (Basic System)"</p>
+</li>
+<li>Background program "Split, Calculate, Release Parallel to Acct. (Basic System)"</li>
+</ul>
+<li>The user starts the calculation on a day that differs from the creation date of the account.</li>
+</ul>
+<p><strong>This is because</strong> the system creates a new account during the calculation if it detects that the maximum number of postings has been exceeded. This account always receives the current date as the date of receipt, which does not correspond to the date of receipt of the calculated account.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p><strong>History:</strong><br/>March 13, 2026: New</p>
+<p><strong>Troubleshooting Description:</strong><br/>If the above prerequisites are met, the system transfers the date of receipt of the calculated account to the new account.</p></div></div></div></div></div>

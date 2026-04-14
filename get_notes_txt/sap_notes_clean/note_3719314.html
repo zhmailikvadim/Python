@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The issue related to delays in launching the configuration in ECC/CRM/S4 scenarios as observed in more detail.<br/>The primary cause appears to be that each instance maintains its own cache region. With the KB launch, only a few cache regions are refreshed, while others are not. As a result, the configuration launch does not consistently retrieve KB data from a refreshed cache region—leading to inconsistent performance. At times it loads quickly, and at other times slowly, as confirmed through the logs.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>KB LOADING, SSC</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To optimize performance and reduce latency during the loading process, we can consider the following points:</p>
+<ol>
+<li>Refine “/SLCE/*” or “/SLCC/*” calls<br/>Remove the conditional check for the CRM environment, since only “/SLCC/*” is required. This will eliminate an unnecessary environment-identification call.</li>
+<li>Enhance CFG_API_PERF_FIND_KB<br/>Modify this call to ensure that additional calls related to COMM_CFGPROF and COMM_CFGOCLASS can be removed.</li>
+<li>Fix the updateKnowledgebase API<br/>Ensure the latest KB version effective from the current date is selected and uploaded into the cache, especially when the KB name is provided as an input parameter.</li>
+</ol>
+<p>By using the approach described in point number 3, the customer can refresh the KB data across all cache regions by running a scheduled job (as outlined in SAP Note 2714406) during off‑peak hours.<br/>This ensures that the cache already contains updated KB data, resulting in improved configuration loading times.</p></div></div></div></div>

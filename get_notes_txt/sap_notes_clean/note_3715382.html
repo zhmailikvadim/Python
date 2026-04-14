@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Note <a href="/notes/1480677" target="_blank">1480677</a> introduced a less restrictive method how to allow users to copy jobs of other users. However, this method does not work if you want to reschedule a job of another user from transaction SM37.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Missing functionality</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After the implementation of this note (or the support packages mentioned herein), you can reschedule the job of another user if you have one of the following authorizations:</p>
+<p>a) S_BTCH_ADM, BTCADMIN = Y</p>
+<p>b) S_BTCH_JOB, JOBGROUP = &lt;job owner name&gt;, JOBACTION = 'MODI' (see note <a href="/notes/1623250" target="_blank">1623250</a>)</p>
+<p>c) S_BTCH_ADM, BTCADMIN = C<br/>AND<br/> S_BTCH_JOB, JOBGROUP  = &lt;job owner name&gt;, JOBACTION = PLAN</p></div></div></div></div>

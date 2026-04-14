@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the current integration process of Production Data Structures (PDS) into SAP Integrated Business Planning (IBP), resources with future validity dates are being filtered out. The original intention was to include only those resources that are valid "today" (at the time of integration) and exclude those with future validity. This approach was designed to prevent the calculation of resource consumption for resources that are not yet valid, as Order-Based Planning (OBP) does not adequately handle resource validities.</p>
+<p>Resources with future validity are also being excluded from future PDS when you are using BAdI implementation based on CIF_PDS_MAP_IBP_BCONS_SAMPLE.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">SAP Integrated Busniess Planning, RTI, CIF</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To ensure the correct integration of resources with future validity into SAP Integrated Business Planning (IBP) when you are using sample BAdI CIF_PDS_MAP_IBP_BCONS_SAMPLE, implement the relevant note or apply the corresponding support package.</p>
+<p>Resources will be integrated as well when the validity (valid-from date) of a PDS at the header level is set in the future (relative to the current date of integration). Resources should be transferred as part of the PDS if they meet the following conditions:</p>
+<ul>
+<li>The valid-from date of the resource is not later than the valid-from date of the PDS header.</li>
+<li>The valid-to date of the resource is not earlier than the valid-to date of the PDS header.</li>
+</ul></div></div></div></div>

@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the following processes, both the package ID and location bundle processes were triggered during the DSO change process:</p>
+<ul>
+<li><em>Start of Supply for Electricity (DSO View)</em> (DE_B_GPKE_DSO_SOS_REG)</li>
+<li><em>End of Supply for Electricity (DSO View)</em> (DE_B_GPKE_DSO_EOS)</li>
+<li><em>Start of Basic or Backup Supply for Electricity (DSO View)</em> (DE_B_GPKE_DSO_SBS)</li>
+<li><em>Start of Supply for Feed-In (DSO View)</em> (DE_B_MPES_DSO_SOS_REG)</li>
+</ul>
+<p>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>GPKE, package ID, location bundle, 55690, /US4G/BADI_MDC_LBS_TRIG, /US4G/CL_DEF_BADI_MDC_LBS_TRIG, DSO change process</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The system triggered both processes because the earlier logic was designed to do so.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system provides BAdI /US4G/BADI_MDC_LBS_TRIG, where you can implement custom logic to trigger the location bundle process (55690).</p>
+<p>You need to retrigger the process. You can verify the fix by implementing custom logic in the BAdI and checking that the location bundle process is triggered as expected.</p></div></div></div></div>

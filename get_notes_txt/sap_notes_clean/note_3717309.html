@@ -1,11 +1,22 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3717310&amp;TargetLanguage=EN&amp;Component=PY-DE-FP-E2&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3717310/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3717310/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p>When you execute the report <em>ELStAM Procedure: Transfer XML Data to ELStAM Table</em> (RPCE2SD0_IN), notifications are not assigned to the correct personnel number.</p>
-<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
-<ul>
-<li>Two personnel numbers exist in your system for an identification number.</li>
-<li>For one of the personnel numbers, the executing user has no authorization to read the infotypes or the Customizing of the LSTC is not maintained correctly.</li>
-</ul>
-<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
-<p>Implement the attached correction instructions or import the specified support package. After you import the HR Support Package or implement the correction instructions, you do not have to perform any further follow-on activities.</p>
-<p>After you implement the corrections, the system issues a corresponding error message in the output log in this case, depending on the error constellation.</p>
-<p>If this is a missing authorization, assign the required authorization to the executing user. With sufficient authorizations, a correct assignment can be made.</p></div></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are using both Product Compliance and Stewardship and the Product Compliance solution in the same system. You use the public API API_COMPANYSUBSTANCE to write company substance data that is provided by an external application. The creation of a company substance fails with an error saying the given internal number is not within the internal / external number range.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">CL_EHFND_API_SUBSTANCE; CHECK_INTERNAL_NUMBER; CM_EHFND_API_SUBST/034</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The creation of a company substance only considers the default external interval 0E of number range object ESN_SUBID. The creation of company substance data fails if you call the API and enter an internal number that matches a different external interval.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The number ranges configured in the Product Compliance and Stewardship customizing for Specification Types (TCG31) are considered and the creation of a company substance no longer fails.</p>
+<div id="highlighter--hover-tools" style="display: none;">
+<div id="highlighter--hover-tools--container">
+<div class="highlighter--icon highlighter--icon-copy" title="Copy"></div>
+<div class="highlighter--icon highlighter--icon-change-color" title="Change Color"></div>
+<div class="highlighter--icon highlighter--icon-delete" title="Delete"></div>
+</div>
+</div>
+<div id="highlighter--hover-tools" style="display: none;">
+<div id="highlighter--hover-tools--container">
+<div class="highlighter--icon highlighter--icon-copy" title="Copy"></div>
+<div class="highlighter--icon highlighter--icon-change-color" title="Change Color"></div>
+<div class="highlighter--icon highlighter--icon-delete" title="Delete"></div>
+</div>
+</div></div></div></div></div>

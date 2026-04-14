@@ -1,0 +1,56 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3723720&amp;TargetLanguage=EN&amp;Component=PY-DE-PS&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3723720/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3723720/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>The trade unions joined the collective bargaining association of German states (TdL) on the 14th February 2026 agreed on a table-effective increase in remuneration for the years 2026, 2027, and 2028.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Import the relevant Support Package and compare your Customizing with the SAP reference client 000.<br/><br/>You can also make the adjustments without importing the Support Package. You can use the Implementation Guide (IMG) in the area "Payroll Germany" -&gt; "Industries" -&gt; "Public Sector" -&gt; "Pay Scale Increases/Adjustments" as a help.<br/><br/>1.  Increase of table remunerations of TV-L</p>
+<p>The table remunerations (including the amounts from an individual interim or highest level and the table values for the pay grade groups 2 Ü, 13 Ü, and 15 Ü) are as follows:</p>
+<p>Increased:</p>
+<ul>
+<li>On the 1st April 2026 by 2.8 percent, at least 100 euros and</li>
+<li>On the 1st March 2027 by an additional 2.0 percent and</li>
+<li>On the 1st January 2028 by another 1.0 percent.</li>
+</ul>
+<p>The pay scale table remuneration in pay grade group 1 level 2 is increased differently as of the first January 2027 by another 2.0 percent.</p>
+<p><span style="font-size: 14px;">Pay scale table T510 has been updated for pay scale types 41, 42, and 46.</span></p>
+<p>2. Trainees</p>
+<p>The monthly training remuneration of the trainees according to TVA-L BBiG and after TVA-L care is increased as follows:</p>
+<ul>
+<li>On April 1, 2026, by EUR 60 and</li>
+<li>On March 1, 2027 by an additional EUR 60 and</li>
+<li>As of January 1, 2028 by an additional EUR 30</li>
+</ul>
+<p><span style="font-size: 14px;">Pay scale table T510 has been updated for pay scale types 41, 42, and 46 (employee subgroup grouping for collective agreement provision = 6 (trainees)).</span></p>
+<p>3. Adjustment of individual levels</p>
+<p>You can also use the report RPITRF01 to adjust the pay scale employees in an individual intermediate level or highest level correctly. To do this, in the table V_T510D for the pay scale types 41, 42, and 46, entries for the first April 2026, on the 1st March 2027 and on the 1st January 2028 as follows:</p>
+<ul>
+<li>On the 1st April 2026: Pay scale group ********, pay scale level **, wage type for comparison remuneration (template: OD0V), increase percentage 2.80, operation "&lt;", amount EUR 100.00</li>
+<li>On the 1st March 2027: Pay scale group ********, pay scale level **, wage type for comparison remuneration (model: OD0V), increase percentage 2.00, operation " ", amount EUR 0.00</li>
+<li>On the 1st January 2028: Pay scale group ********, pay scale level **, wage type for comparison remuneration (model: OD0V), increase percentage 1.00, operation " ", amount EUR 0.00</li>
+</ul>
+<p>4. Dynamic Modification of Assessment Basis</p>
+<p>Remuneration elements such as on-call duty remuneration or bonuses increase</p>
+<ul>
+<li>On April 1, 2026, by 2.54 percent and</li>
+<li>On the 1st March 2027 by another 1.8 percent and</li>
+<li>On the 1st January 2028 by another 0.9 percent</li>
+</ul>
+<p>Table T510C has been updated for pay scale types 41, 42, and 46 as follows:</p>
+<ul>
+<li>Grouping 3, start April 1, 2026, percentage1 102.540</li>
+<li>Grouping 3, start date 03/01/2027, percentage1 101.800</li>
+<li>Grouping 3, start 1/1/2028, percentage1 100.900</li>
+</ul>
+<p>5.  Comments</p>
+<ol>
+<li>The vested payment bonus for child-related remuneration elements increases</li>
+</ol>
+<ul>
+<li><span style="font-size: 14px;">On April 1, 2026, by 2.82 percent and</span></li>
+<li>On the 1st March 2027 by another 2 percent and</li>
+<li>As of January 1, 2028, by another 1 percent</li>
+</ul>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">This bonus is not updated in SAP sample Customizing. Delimit and adjust table T510QN.</span></p>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">2. For pay scale types 41, 42, and 46, the following bonuses are increased as of July 1, 2026:</span></p>
+<ul>
+<li><span style="font-size: 14px;">The bonus for regular rotating shift work (model wage type OD10) is increased to EUR 200 per month, the hourly rate (model wage type OD40) is increased to EUR 1.19 per hour.</span></li>
+<li><span style="font-size: 14px;">The bonus for regular shift work (model wage type OD11) is increased to EUR 100 per month, the hourly rate (model wage type OD42) is increased to EUR 0.60 per hour.<br/><br/>This bonus is not updated in SAP sample Customizing. Delimit and adjust table T510.<br/></span></li>
+</ul></div></div></div></div></div>

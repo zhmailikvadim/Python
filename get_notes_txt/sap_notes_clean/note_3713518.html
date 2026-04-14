@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The Revenue Transfer program (Program A) or the Contract Asset/Liability calculation program fails with the error FARR_CONTRACT_MAIN:308: Inv. Distri. Error on Contract &amp;1: Input &amp;2 &lt;&gt; Output &amp;3 on currency &amp;4 or related errors as FARR_CONTRACT_MAIN 309, 310, 320, 775.</p>
+<p> In most cases, this error catches rounding distortions—edge cases where complex distribution logic results in a minor mathematical mismatch between the input and output totals. Because SAP has already released numerous notes to address these specific edge cases, there is a high probability that a fix already exists for your scenario.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FARR_REV_TRANSFER</p>
+<p>FARR_LIABILITY_CALC</p>
+<p>FARR_CONTRACT_LIABILITY</p>
+<p>FARR_D_INV_FX_ED</p>
+<p>CL_FARR_DISTRIB_INV_BADI_IMPL</p>
+<p>FARR_CONTRACT_MAIN 775 308 309 310 320</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This error is triggered by a post-invoice distribution check designed to ensure data integrity. Its purpose is to verify that the total value of invoices remains consistent before and after the distribution process. If a discrepancy is detected, the system stops the process to prevent financial distortion.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> To resolve the error FARR_CONTRACT_MAIN:308, please follow this structured remediation process:</p>
+<ol>
+<li><strong>Implement Missing SAP Notes</strong><br/>Please implement all recommended SAP notes related to invoice distribution corresponding to your system release which are listed below. This ensures that any known mathematical edge case or rounding logic error is patched before you proceed with data correction.<br/><br/></li>
+<ol>
+<li>Release 130 (Software Component REVREC) - Notes 3476034, 3540775, 3632469, 3644730, 3677684</li>
+<li>Release 103 (Software Component S4CORE) - Notes 3476034, 3540775, 3632469, 3644730, 3677684</li>
+<li>Release 104 (Software Component S4CORE) - Notes 3476034, 3521996, 3540775, 3632469, 3644730, 3677684</li>
+<li>Release 105 (Software Component S4CORE) - Notes 3167003, 3367082, 3388088, 3476034, 3521996, 3540775, 3632469, 3644730, 3677684</li>
+<li>Release 106 (Software Component S4CORE) - Notes 3167003, 3199262, 3367082, 3388088, 3476034, 3521996, 3540775, 3632469, 3644730, 3664487, 3677684</li>
+<li>Release 107 (Software Component S4CORE) - Notes 3367082, 3388088, 3476034, 3521996, 3540775, 3632469, 3644730, 3677684</li>
+<li>Release 108 (Software Component S4CORE) - Notes 3476034, 3521996, 3540775, 3632469, 3644730, 3677684</li>
+<li>Release 109 (Software Component S4CORE) - Notes 3632469, 3644730, 3677684</li>
+</ol>
+<li><strong>Reset Calculated Invoice Distribution</strong><br/>Implement correction report ZFARR_CLEAR_INV_FX_ED included in the attachment of this note.<br/><br/>After installation, run this report only for the contracts which encountered the FARR_CONTRACT_MAIN error.<br/><br/>The program run should clears table FARR_INV_FX_ED and flag IS_CALCULATED in FARR_D_INVOICE.</li>
+<li><strong>Execute Program A (Revenue Transfer)</strong><br/>Execute the revenue transfer program (Program A) for the contracts reset in step 2. This will recalculate the revenue distribution on the reset data.</li>
+<li><strong>Execute Program B (Calculate Contract Liabilities and Assets)</strong><br/>Run the calculation of contract assets and liabilities (Program B) for the contracts transfered in step 3.</li>
+<li><strong>Ad-hoc Check</strong><br/>Before final posting, perform a quality check on the database level:</li>
+<ol>
+<li>Open table FARR_D_POSTING.</li>
+<li>Eeview the entries for a sample of the reprocessed contracts.</li>
+<li>Verification: Ensure there are no unexpected exchange rate differences or incorrect revenue rates.</li>
+</ol>
+<li><strong>Execute Program C</strong><br/>Once the data in the sub-ledger is verified and correct, execute the posting program to FI-GL (Program C) for the contracts processed in the previous steps.</li>
+</ol>
+<ul></ul></div></div></div></div>

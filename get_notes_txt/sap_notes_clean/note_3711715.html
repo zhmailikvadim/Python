@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When performing a status change in a Change Record (Change Notice), the process terminates with a runtime error.</p>
+<p>Typical error message:</p>
+<ul>
+<li>ASSERT condition was violated</li>
+<li>Component: PLM-CR</li>
+<li>Service ID: PLMI_CHANGE_RECORD_MANAGEMENT</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">PLM-42028, /DSCSAG/CL_OBSERVER, /DSCSAG/CL_EX_ECTR</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The status change processing is executed in a call stack that involves BOBF and RAP framework logic.</p>
+<p>In this context, explicit database commits or framework-incompatible operations can lead to inconsistent transactional states and assertion errors.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">In Change Record status actions, commit handling was aligned with RAP and SADL transaction management to avoid framework conflicts.</p></div></div></div></div>

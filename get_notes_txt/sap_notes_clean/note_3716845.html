@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">When determining the next valid time using the function module TSTR_GET_NEXT_VALID_TIME, the system may return an incorrect begin/end time or raise exception TSTREAM_NOT_LOADABLE. This can occur when the requested date is outside generated time‑stream years, when segments span multiple days (&gt;24 hours), or when calculating in negative/positive direction around year boundaries.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html0">TTSTR, TTSTRCOMPH, TSTRCOMPID, TSTR_COMPSGTAB</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The reason is a program error in the algorithm of TSTR_GET_NEXT_VALID_TIME:</p>
+<ul>
+<li>Segment durations were not reliably translated into absolute date/time for comparison.</li>
+</ul>
+<p>Prerequisites: A time stream with generated years stored with valid HANDLE in TTSTR/TTSTRCOMPH, and calls to TSTR_GET_NEXT_VALID_TIME. The input date is not among the generated years. In this edge case, we get an error isntead of returning the exisitng valid segment</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply attached Correction Instruction via SNOTE.</p>
+<p>The correction:</p>
+<ul>
+<li>Introduces internal segment structures to collect year‑wise segments and converts component offsets to absolute DATE/TIME using internal form for calulation.</li>
+<li>Selects available years by HANDLE, imports segment data, and evaluates segments based on IV_DIRECTION to find the correct next/previous point in time which is valid.</li>
+<li>The new logic never generates missing segments, it only returns existing segments based on the input requirements.</li>
+</ul></div></div></div></div>

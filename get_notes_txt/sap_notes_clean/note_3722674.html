@@ -1,10 +1,110 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">When you run the report /US4G/RP_MDR_PROCESS_TRIG to trigger the meter data request (MDR) process, the communication partner is not prefilled in the communication text.</p>
-<p>This issue is relevant for the market roles: DSO, SUP.</p>
+<p id="__html0">As described in the <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">Regulatory Change Manager</a> under <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQSE-15299" target="_blank">Update of family benefit amounts for 2026</a>, this SAP Note provides you with the relevant system changes to address the Additional Amount Calculation for Family Allowance presented in <em>Portaria n.º 60/2026/1</em>, published on February 5, 2026.</p>
+<p>For more information, also see <a href="https://diariodarepublica.pt/dr/detalhe/portaria/60-2026-1038101444" target="_blank">https://diariodarepublica.pt/dr/detalhe/portaria/60-2026-1038101444</a>. The website that can be accessed using this hyperlink is an external website which is not part of SAP's offering.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>/US4G/RP_MDR_PROCESS_TRIG, meter data request, MDR, communication text, communication partner, discdoc</p>
+<p><strong>Transaction:</strong> PC00_M19_CALC</p>
+<p>&amp;FA (for more information, see SAP Note <a href="/notes/2197631" target="_blank">2197631</a>)</p>
+<p>Majoração, Abono Família, IT0021</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p id=""> The error occurred because the functionality to prefill the communication partner in the communication text was not available.</p>
+<p><strong>Prerequisite</strong></p>
+<p>The following Support Package (SP) level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr><th>Release</th><th>Support Package</th></tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 06</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 19</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04</td>
+<td>HR SP K2</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP D0</td>
+</tr>
+</tbody>
+</table></div>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
-<p>After implementing this SAP Note, the system prefills the communication partner in the communication text when you run the report /US4G/RP_MDR_PROCESS_TRIG. You can verify the fix by running a test case for the MDR process and checking that the communication text contains a prefilled communication partner after creating the discdoc.</p></div></div></div></div>
+<p><span style="font-size: 14px;">As of January 1, 2026, the additional amount for numerous families is updated for each dependent in the </span><strong style="font-size: 14px;">Família/pessoa de referência</strong><span style="font-size: 14px;"> (0021) infotype who is between 12 and 36 months old.</span></p>
+<ul>
+<li>If the employee has one single eligible dependent for Family Allowance, the additional amount is not calculated.</li>
+<li>If the employee has two eligible dependents for Family Allowance, the additional amount is calculated according to the <strong>Escalão de Rendimentos Familiar</strong> (FISCA) field presented in the <strong>Tax PT</strong> (0331) infotype, as described below:</li>
+<ul>
+<li>First Family Income Scale (FISCA = 1): EUR 64,96</li>
+<li>Second Family Income Scale (FISCA = 2): EUR 57,64</li>
+<li>Third Family Income Scale (FISCA = 3): EUR 54,35</li>
+<li>Fourth Family Income Scale (FISCA = 4): EUR 39,28</li>
+</ul>
+<li>If the employee has three or more eligible dependents for Family Allowance, the additional amount is also calculated according to the FISCA field:</li>
+<ul>
+<li>First Family Income Scale (FISCA = 1): EUR 106,96</li>
+<li>Second Family Income Scale (FISCA = 2): EUR 92,32</li>
+<li>Third Family Income Scale (FISCA = 3): EUR 85,76</li>
+<li>Fourth Family Income Scale (FISCA = 4): EUR 55,70</li>
+</ul>
+<li>If the employee is in the Fifth Family Income Scale (FISCA = 5), the additional amount is not calculated for the dependent.</li>
+</ul>
+<p style="padding-left: 30px;"><strong>Example:</strong></p>
+<p style="padding-left: 30px;">Proceed with the following steps to reproduce the symptom mentioned in this SAP Note.</p>
+<p style="padding-left: 30px;"><strong>Description</strong></p>
+<p style="padding-left: 30px;">Family Allowance - Additional amount calculation for 2026</p>
+<p style="padding-left: 30px;"><strong>Preparation/Background</strong></p>
+<p style="padding-left: 30px;"><em>1. Hire an employee on 01/01/2026 in the Third Family Income Scale (FISCA = 3).</em></p>
+<p style="padding-left: 30px;"><em>2. Add a dependent born on 01/02/2023.</em></p>
+<p style="padding-left: 30px;"><em>3. Add another dependent born on 01/02/2023.</em></p>
+<p style="padding-left: 30px;"><em>4. Add a third dependent born on 01/10/2024.</em></p>
+<p style="padding-left: 30px;"><strong>Execution</strong></p>
+<p style="padding-left: 30px;"><em>1. Run payroll for 01/2026.</em></p>
+<p style="padding-left: 30px;"><strong>Result</strong></p>
+<p style="padding-left: 30px;"><em>1. In the <strong>Result Table</strong> (RT) table in the payroll log for period 01/2026, you will find the following:</em></p>
+<p style="padding-left: 60px;"><em>1.1. The <strong>Benefício para Filho</strong> (FA01) wage type with the amount of <em>EUR </em>644,97.</em></p>
+<p style="padding-left: 60px;"><em>1.2. The <strong>Abono monoparental</strong> (FA09) wage type with the amount of <em>EUR </em>322,50.</em></p>
+<p><strong>VERSIONING</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong> </td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>March 6, 2026</td>
+<td>Released for Customer</td>
+</tr>
+</tbody>
+</table></div>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package (SP). However, if you need to install a solution earlier, use Note Assistant (SNOTE) to implement the correction instructions.</p>
+<p><strong>Stay informed</strong></p>
+<ul>
+<li>To get an email notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a> or access this <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">link</a> for further information;</li>
+<li>For Legal Changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">Regulatory Change Manager</a>;</li>
+<li>For documentation about Payroll Portugal, access the <a href="https://help.sap.com/docs/ERP_HCM/7fc707b2f5784b5793399cfb4261fba3/383de153038a424de10000000a174cb4.html?locale=en-US&amp;version=6.18.latest" target="_blank">Help Portal</a>;</li>
+<li>For information about the Note Assistant, access the <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Support Portal</a>;</li>
+<li>For information about Support Package Schedules, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</li>
+</ul>
+<p><strong>Disclaimers</strong></p>
+<p>By clicking an external hyperlink YOU AGREE that unless expressly stated otherwise in your agreements with SAP:</p>
+<ul>
+<li>The content of the associated website and any other external websites is not content provided by or on behalf of SAP, nor is it otherwise under SAP's control;</li>
+<li>The fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the contents and information provided on such websites;</li>
+<li>SAP does not give any representation regarding the quality, safety, suitability, accuracy or reliability of any external website or any of the information, content, and materials provided thereon;</li>
+<li>You visit those external websites entirely at your own risk. SAP shall not be directly or indirectly responsible or liable for any damage or loss caused or alleged to be caused by or in connection with your use of or reliance on any content, goods or services available on or through any such linked website.</li>
+</ul>
+<div class="longtext">
+<p><strong>Good to know</strong></p>
+<ul>
+<li>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</li>
+<li>During the piloting phase, this SAP Note is available only for pilot testing. Even though SAP has performed the internal functional tests, it is possible that tests in customers’ environments reveal issues not captured during the functional tests, being necessary to update the solution and version this SAP Note. After this SAP Note has its status updated to “Released for Customer”, it will be changed only if there is a very specific situation that demands an update, and the reason for it will be added in the log of changes.</li>
+</ul>
+</div>
+<p><link/></p></div></div></div></div>

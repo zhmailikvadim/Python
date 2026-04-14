@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When pressing the "Apply" button in the footer of the overview page of the <em>Review Availability Check Result</em> UI, an ITAB_DUPLICATE_KEY runtime error occurs.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">ATP; aATP; RACR; Review Availability Check Result; ITAB_DUPLICATE_KEY; CL_ATP_CHKRR_RECHECK_ORCHESTORCP; CL_ATP_CHKRR_RECHECK_ORCHESTORCM003; RECHECK</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">This issue occurs if the following conditions are all met:</p>
+<ul>
+<li>At least three requirements are checked at once</li>
+<li>At least two of these requirements are checked without advanced ATP (but, for example, with global ATP)</li>
+<li>The confirmations of at least one requirement have been adjusted in RACR</li>
+</ul>
+<p>The reason for this problematic behavior is as follows: When applying changes from the <em>Review Availability Check Result</em> UI, an additional availability check is triggered to ensure consistency. Due to a programming error, also the requirements without advanced ATP are included in this additional availability check, leading to various problems including the runtime error described above.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Apply the correction instructions for this SAP Note or upgrade to an SAP S/4HANA support package that contains this correction.</p></div></div></div></div>

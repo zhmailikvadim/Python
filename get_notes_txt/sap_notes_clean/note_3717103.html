@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The G5 certificate rollout for Cloud Foundry landscapes is in progress and has already been completed in some regions.  Others regions were paused and are expected to resume in the coming weeks.  To see the current rollout status please refer to SAP Note <a class="fui-Link ___1q1shib f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fjoy568 figsok6 f1s184ao f1mk8lai fnbmjn9 f1o700av f13mvf36 f1cmlufx f9n3di6 f1ids18y f1tx3yz7 f1deo86v f1eh06m1 f1iescvh fhgqx19 f1olyrje f1p93eir f1nev41a f1h8hb77 f1lqvz6u f10aw75t fsle3fq f17ae5zn" href="https://me.sap.com/notes/0003566727" id="menurnfe" rel="noreferrer noopener" target="_blank" title="https://me.sap.com/notes/0003566727">3566727 - Root Certificate Replacement in the SAP BTP, Cloud Foundry Environment</a>.</p>
+<p>After the switch to the G5 certificate, MDK based applications may fail to initially connect with the error "The server URL you are trying to access is not reachable.  Use different connection settings or try again later".</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>iOS\iPadOS Devices</strong></p>
+<ul>
+<li>If the device is running iOS 18 or higher, the G5 certificates should already be supported and no changes to MDK clients should be necessary.</li>
+<li>If the device running an older iOS/iPadOS version can be updated, then updating to iOS/iPadOS 18 or higher is the best option.</li>
+<li>Older devices that cannot be updated to iOS 18 or higher can manually install the G5 certificate and trust it to add support for the G5 certificate.</li>
+<li>No MDK client updates should be required after adding the certificate to the device.</li>
+</ul>
+<p><strong>Android Devices</strong></p>
+<ul>
+<li>If the device is running Android 14 or higher, the G5 certificates should already be supported and no changes to MDK/SSAM clients should be necessary.</li>
+<li>If the device running an older version of Android can be updated to Android 14 or higher, then updating is the best option as no new MDK client version is needed after the device OS update.</li>
+<li>Older devices that cannot be updated to Android 14 or higher will need to use a newer MDK client version.
+<ul>
+<li>MDK 25.6.x and above have support for G5 already built into the MDK client.</li>
+<li>Upgrade your MDK based application to use MDK 25.6 or higher and create a new branded client and rollout to your devices.</li>
+<li>Newer MDK client versions work with both the existing G2 Certificate landscapes as well as the new G5 landscapes</li>
+</ul>
+</li>
+</ul>
+<p>Customers using an SAP application based on MDK, like SAP Service and Asset Manager, should contact the appropriate application support team for any specific upgrade questions.</p></div></div></div></div>

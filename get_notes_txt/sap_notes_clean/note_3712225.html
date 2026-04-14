@@ -1,18 +1,8 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">When you run the Certificate for LI/NHI payment (<strong>HTWLCE00</strong>) report and select the <strong>Group by Company Code</strong> field, the system groups data at the company code level.</p>
-<p>In this case, the fields <strong>Unified ID</strong> and <strong>Withholder</strong>, which are at the enterprise level, should be removed during grouping.</p>
-<p>This SAP Note provides the following enhancements when you select the <strong>Group by Company Code</strong> field:</p>
-<ul>
-<li>In the ALV output, the system removes the <strong>Unified ID</strong> field and replaces it with the <strong>Company Code</strong> field.</li>
-<li>In the LI/NHI forms, the system removes the <strong>Unit ID</strong> and <strong>Withholder</strong> fields.</li>
-</ul>
+<p id="__html0">When users pick a subprocess code besides '01' in step 1, step 2 does not show the expected header fields, even after refreshing or navigating.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p><span style="font-size: 14px;">PLCE0TW1, PLCE0TW2, Unit ID, Withholder</span></p>
+<p>Financial Control Adjustment Hub, subprocess selection issue, header fields missing.</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>This is an enhancement.</p>
+<p>This happens due to setup limits that only enable full fields for the default '01' subprocess; other codes need extra configuration and code adjustment. Requires access to Adjustment Hub app and basic customizing rights.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Do either of the following:</p>
-<ul>
-<li>Apply the relevant Support Package.</li>
-<li>Carry out the attached <strong>ManualSteps3712226.pdf </strong>and then implement the corresponding correction instructions.</li>
-</ul></div></div></div></div>
+<p id="">1. Implement the sap Note<br/>2. Update setup to include those fields for all subprocesses.<br/>3. Refresh the app cache and test again.<br/>4. Check SAP Notes for quick fixes matching this issue.</p></div></div></div></div>

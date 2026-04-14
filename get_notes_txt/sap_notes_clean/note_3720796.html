@@ -1,8 +1,93 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">You observe that on top of the violations the 'No violations' message is also displayed in the risk analysis result.</p>
+<p id="__html0">You run the <strong>Cálculo de nómina española</strong> (RPCALCE0) program for an artist employee with the <strong>Tipo de CCC </strong>(T5E08-TPCCC) field equal to '007' who has a difference between the<strong> Base de cotización de contingencias comunes</strong> (/342) and <strong>Base de cotización de contingencias de AT y EP</strong> (/343) wage types. However, the system incorrectly calculates the <strong>Contribución del trabajador a desempleo</strong> (/370) and <strong>Contribución de la empresa a desempleo</strong> (/371) wage types.</p>
+<p><strong>Example:   </strong></p>
+<p style="padding-left: 30px;">Proceed with the following steps to reproduce the symptom mentioned in this SAP Note.</p>
+<p style="padding-left: 30px;"><strong>Description</strong></p>
+<p style="padding-left: 30px;">Payroll run for an artist employee with a difference between the /342 and /343 wage types</p>
+<p style="padding-left: 30px;"><strong>Preparation/Background</strong></p>
+<ol>
+<li>Hire an artist employee.</li>
+<li>Configure the employee master data to present a difference between the /342 and /343 wage types.</li>
+</ol>
+<p style="padding-left: 30px;"><strong><span style="font-size: 14px;">Execution</span></strong></p>
+<p style="padding-left: 30px;">Run the RPCALCE0 program for this employee.</p>
+<p style="padding-left: 30px;"><strong>Result</strong></p>
+<p style="padding-left: 30px;">The system generates the /370 and /371 wage types using the /342 wage type amount.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p id="">GRC, 12.0, ARA, risk analysis, no violations</p>
+<p>&amp;CALC - PC00_M04_CALC;</p>
+<p>For more information, see SAP Note <a href="/notes/1071282" target="_blank">1071282</a> - <em>CONSULT: List of tags for Spain notes.</em></p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p id="">Bug</p>
+<p><strong>Reason</strong></p>
+<p>This issue is a side effect caused by the solution delivered by the SAP Note <a href="/notes/3473016" target="_blank">3473016</a> - <em>ARTISTAS: Incorrect unemployement quota calculated using the /343 wage type</em>.</p>
+<p>According to the Spanish Social Insurance, for artist employees the unemployment base represented by the /370 and /371 wage types must be calculated based on the /343 wage type, except if the /343 value falls below the minimum base of /342, in which case the minimum base value is used instead.</p>
+<p><strong>Prerequisites</strong></p>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="2" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 07</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 20</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP D1</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04 (EhP6 and EhP7) </td>
+<td>HR SP K3</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, access <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</p>
+<p><strong>Note:</strong></p>
+<p>When you implement an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context as the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them for technical reasons.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id="">Please implement the correction or the equivalent SP.</p></div></div></div></div>
+<p>From now on, the system calculates the /370 and /371 wage types for artist employees using the /343 wage type amount. However, if the /343 value falls below the minimum base of /342, the system uses that minimum base value instead.</p>
+<p><strong>Example:</strong></p>
+<p style="padding-left: 30px;">Following the steps from the example of the <strong>Symptom</strong> section.</p>
+<p style="padding-left: 30px;"><strong>Result</strong></p>
+<p style="padding-left: 30px;">The system generates the /370 and /371 wage types using the /343 wage type amount. If the /343 value is lower, the system uses the /342 minimum base.</p>
+<p><strong>Retroactivity:</strong></p>
+<p>To avoid problems with retroactivity, the changes were sheltered with the entry 'NOTE' '03720796' in the V_T5F99VD table view. <br/>For further information, see SAP Note <a href="/notes/515323" target="_blank">515323</a> - CONSULT.: Protección de correcciones.</p>
+<p><strong>Log of changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p>April 2, 2026</p>
+</td>
+<td>
+<p>Released for Customer</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Note:</strong></p>
+<p>During the piloting phase, this SAP Note may be updated and versioned depending on the feedback from pilot customers. After this SAP Note has its status changed to <em>Released for Customer</em>, it will not be changed anymore, unless there is a specific situation that demands it. In this case, a reason for the change will be mentioned in the SAP Note.</p>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, use Note Assistant (SNOTE) to implement the correction instructions.</p>
+<p>You can find more information about the SAP Note Assistant in SAP Support Portal, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a></strong>.</p>
+<p><strong>Stay connected</strong></p>
+<ul>
+<li>To get an e-mail notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
+<li>To stay informed about legal changes, access the <a href="https://launchpad.support.sap.com/#/legalchangenotification" target="_blank">Announcement of Legal Changes</a>.</li>
+<li>For documentation about Payroll Spain, access the <a href="https://blogs.sap.com/tags/306843521589030681976078829712463/" target="_blank">Help Portal</a>.</li>
+</ul></div></div></div></div>

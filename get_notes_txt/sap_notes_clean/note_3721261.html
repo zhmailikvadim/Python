@@ -1,11 +1,15 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<div id="__html0">
-<p>When you try to find a technical object in the Maintenance Notification Creation screen using the Basic Text Search, the response time can be slow if the list of technical objects is long.<br/>The technical object search uses multiple fields, including TechnicalObjectDescription and FunctionalLocationLabelName. Since these fields are calculated, they contribute to the slowness.</p>
-<p>This SAP Note enables the Metadata Extension for <code>C_TechObjFlatVH</code>. Within this extension, the fields included in the fuzzy search can be modified to improve performance.</p>
-</div>
+<p id="__html0">In Manage Force Elements the actions for Delete, Delete Plan and Delimit are enabled although they are not supported according to their planning status. In further an entry can be edited although its planning status does not allow any change.</p>
+<p>The inconsistent behaviour occurs in the facets of:</p>
+<ul>
+<li>Name</li>
+<li>Description</li>
+<li>Characteristics</li>
+<li>Readiness</li>
+</ul>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>C_TechObjFlatVH, MetadataExtension, TechnicalObjectDescription, FunctionalLocationLabelName, C_MaintWorkRequestOverviewTP,<br/>Fuzzy search, TechnicalObject</p>
+<p>S/4HANA Defense &amp; Security, Manage Force Elements, F4112, Name, Description, Characteristics, Readiness</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>The Technical Object value help responds slowly due to the use of calculated fields. By excluding these fields from the fuzzy search in the Metadata Extension, users can significantly improve the search performance.</p>
+<p id="">The system does not correctly control the availability of action buttons in the user interface.<br/> As a result, buttons are shown as active even when the action cannot be performed.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement this SAP Note.<br/>Then configure the Metadata Extension of C_TechObjFlatVH, to get better performance.<br/>If you set the <strong>fuzzinessThreshold</strong> to 1 the search will look for <strong>exact</strong> matching in the description, which can help with the performance.<br/>On the other hand, if you set the defaultSearchElement attribute to false, the <strong>fuzzy search will not include</strong> the annotated field in its generated query, which results in<strong> better performance</strong>. In addition, you can adjust the other parameters of the Search annotation to further optimize performance.<br/><br/></p></div></div></div></div>
+<p id=""> Implement the correction instruction.</p></div></div></div></div>

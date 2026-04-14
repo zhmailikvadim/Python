@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Start of Supply for Electricity (DSO View)" (DE_B_GPKE_DSO_SOS_REG), the process was stuck at step 0700 and did not continue in cases where POD_NOT_BLOCKED and step 0760 was not run as part of the process.</p>
+<p>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">GPKE, Start of Supply for Electricity, DE_B_GPKE_DSO_SOS_REG, step 0700, step 0760, step 0800, precondition 20, POD_NOT_BLOCKED, DTD E_0623, 2508</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because step 0800 "Trigger Embedded Process: DTD E_0623" had precondition 20 with the Mandatory status set as 'Yes'. This was incorrect, and the process did not continue in cases where step 0760 (precondition 20) was not sent.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system treats step 0760 as not a mandatory requirement for step 0800, and the process continues processing.</p>
+<p>Import the BC set /US4G/3_0_DSO_SP08_NOTE_3731082. You need to retest the process and ensure step 0800 is executed. You can verify the fix by retesting the scenario where the POD is not blocked and step 0760 is not required. The process should run step 0800, and the process execution should complete as expected.</p></div></div></div></div>

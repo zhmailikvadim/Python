@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<pre class="text-body" id="__html0">TSV_TNEW_PAGE_ALLOC_FAILED in SAPTUNE_GEN_BUFF_OBJTS_LCL</pre>
+<pre class="text-body"></pre>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<pre class="text-body">DATA=LT_GENERIC_REGIONS</pre>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The dump occurs inside of the call of FM SAPTUNE_GEN_BUFF_OBJTS_LCL.(eg: table DDFTX).<br/>Despite of recent optimalization of RSSTAT90 and relevant code used the dump still occurs<br/>The root cause is structure RSTBXOBUF64 (CHAR 900,internal length 1800) which allocate big portion of local memory.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Several scenarios are possible to avoid the dump:</p>
+<p>1/</p>
+<p>Implement attached correction instruction.</p>
+<p>2/<br/>upgrade to kernel 785 and SAP_BASIS 816 or higher.<br/>The fix contain new data type RSTBXOBUF64STR (SSTRING 900,internal length 8) that consume less memory and has been introduced for this purpose.<br/>3/ <br/>suppress of RSSTAT90 call in ST03.<br/>ST03&gt;Collector and Performance DB&gt;Performance monitor Collector&gt;Execution Times. Here suppress call of RSSTAT90</p>
+<p>4/<br/>Deactivation is possible via profile parameter rsdb/staton to "0". (extended table access statistics).</p>
+<p>Until the upgrade of kernel and SAP_BASIS there is only workarroud how to fix the current issue.</p></div></div></div></div>

@@ -1,11 +1,8 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">Schema VAP0 has naming and text for Norway but HCM localization field is "*".</p>
+<p id="__html0">After implementing referenced note <a href="/notes/2907475" target="_blank">2907475</a> (HR -&gt; BP: Tax number longer than 20 digits) if tax number is maintained in a different infotype than infotype 0002 and you trigger the employee to business partner synchronization with the report /SHCM/RH_SYNC_BUPA_EMPL_SINGLE or /SHCM/RH_SYNC_BUPA_FROM_EMPL, then the tax number will be stored in field 'TAXNUM' in table 'DFKKBPTAXNUM' if the tax number has a lengt lower equal to 20. But as you can see in referenced notes <a href="/notes/2014715" target="_blank">2014715</a> (Tax Number field extension in Master Data to occupy large Tax Number) and <a href="/notes/3643430" target="_blank">3643430</a> (Correction Program to Move Tax Number Data from TAXNUM to TAXNUMXL for Tax Categories ≥ 5) the tax numbers for tax categories 0 to 4 have to be stored in the field TAXNUM, whereas other tax categories (e.g. tax category 5 and above) have to be stored in the field TAXNUMXL.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>VAP0, HCM localization</p>
+<p id=""> TAXNUMXL, TAXNUM, /SHCM/RH_SYNC_BUPA_EMPL_SINGLE; /SHCM/RH_SYNC_BUPA_FROM_EMPL;</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>This SAP Note is relevant only for Norway.</p>
-<p>HRSP SAPK-10122INS4HCM, HRSP SAPK-10035INS4HCM, SAPK-608E6INSAPHR, SAPK-604L8INSAPHR(or newer)</p>
+<p>Programm error.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>In schema VAP0, HCM localization attribute changed to 20 (Norway).</p>
-<p>As a general rule SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <strong><a class="external-link" href="https://support.sap.com/kb-incidents/notes/assistant.html" rel="nofollow" target="_blank">SAP Note Assistant</a>.</strong></p>
-<p>Note that documentation, transactions, and Customizing activities are only delivered via Support Package.</p></div></div></div></div>
+<p>Implement the attached correction instructions or import the specified support package.</p></div></div></div></div>

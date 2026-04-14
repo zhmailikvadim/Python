@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">While using the TCode /PE1/AR_ORD2_DISPLAY to display archived Payment Orders, the following behaviour takes place after we open any desired archived payment order:</p>
+<ul>
+<li>After viewing the Clearing Area SLA from the archived Payment Order's References tab, when we press the back button, we get an error log window that states, payment order could not be read.</li>
+<li>On closing this error log window, when the PO_EXPERT screen is displayed, there are no Payment Order details displayed on the screen.</li>
+<li>Further, when we try to get out of this screen, there is a short dump that occurs.<br/><br/></li>
+</ul>
+<p>We can also observe the following behaviour across the Payment Items of the Archived Payment Order as well:</p>
+<ul>
+<li>After viewing the Clearing Area SLA from the Payment item's References tab or after viewing the Route details from the Clearing Information tab, when we press the back button, we get an error log window that states, payment order could not be read.</li>
+<li>On closing this error log window, when the PO_EXPERT screen is displayed, there are no Payment Order details displayed on the screen.</li>
+<li>Further, when we try to get out of this screen, there is a short dump that occurs.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Archived Orders, Clearing Area SLA, Route, TCode /PE1/AR_ORD2_DISPLAY, Short dump, DYNPRO_MSG_IN_HELP, Screen: Illegal message.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error. The correct data source is not used to retrieve the archived Payment Order details when we navigate from the PO_EXPERT Screen to the Clearing SLA Screen or Route Screen and then back. It tries to read the archived Payment Order from the database instead of reading it from archive. As this read will fail, it causes all the above mentioned issues.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the correction instruction attached to this SAP Note. Alternatively, you can import the referenced Support Package.</p></div></div></div></div>

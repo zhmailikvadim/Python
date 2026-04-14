@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Correct company code is not fetched for inbound SWIFT MT300 / MT320 in Treasury Correspondence in case there are multiple company codes for the same BIC / SWIFT Code. In such cases it is seen the inbound SWIFT contains tags 87(option A or D or J) and(or) tag 83(option A or J) that contains company code details like NAME , ADDRESS, BIC Code etc. The correct company code is not fetched since there is not enough data in SWIFT tags to indentify a unique company code.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>BADI_TCORF_FORMAT_MULTI_OPTION</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is a program error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>1. Implement the attached correction instructions provided in the SAP Note via SNOTE transaction.</p>
+<p>2. Once the above is done, create a custom implementation of BADI - BADI_TCORF_FORMAT_MULTI_OPTION.</p>
+<p>3. Develop a custom logic in method - IF_TCORF_BADI_FORMAT_MULTI~CHANGE_PAYLOAD to fetch the correct company code. Inside this method, importing parameter IO_MESSAGE contains the SWIFT file contents in structured format. Changing parameter CR_PAYLOAD contains derived SWIFT data in TCORY_CODATA format. Incorrect company code that is derived after execution of mapping rules, needs to be modified with correct company code in this changing parameter CR_PAYLOAD.</p>
+<p>4. You can make use of database tables TZBZ , T001 and others to develop a logic to fetch the correct company code from tags 87J and(or) 83J in the inbound SWIFT.</p>
+<p>5. Make sure the codebase in method IF_TCORF_BADI_FORMAT_MULTI~CHECK_CONTENT in standard implementation(EI_TCORI_SWIFT_FILE) of BADI is copied to the custom implementation of the same method as well.</p>
+<p>6. For the custom BADI implementation maintain suitable Filters Values as maintained for the standard implementation.</p></div></div></div></div>

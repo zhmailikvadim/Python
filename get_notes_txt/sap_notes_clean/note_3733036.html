@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">First, you perform component backflush in transaction MFBF. The components are not posted but recorded as backlog items.</p>
+<p>Then, you post the backlog items in transaction COGI or MF47.</p>
+<p>Finally, when you try to cancel the original document log of component backflush in transaction MF12, the system reacts with error message RM 070:<br/> "Error reading document log information &amp;".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>MFBF, repetitive manufacturing, backflush confirmation, backlog, postprocessing record, reversal, cancellation, MF47, COGI, MF12, RM070, RM 070, 070(RM)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The issue occurs in a specific scenario where no document log item (BLPP record) exists anymore after successful COGI processing.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached correction instructions.</p></div></div></div></div>

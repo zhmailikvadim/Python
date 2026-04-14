@@ -1,24 +1,14 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<div class="table-responsive" id="__html0"><table border="0" cellpadding="1" cellspacing="0" class="table table-bordered table-striped col-resizeable">
-<tbody>
-<tr>
-<td>Component:</td>
-<td>Foundation for EHS Management</td>
-</tr>
-<tr>
-<td>Module:</td>
-<td>Environmental Management</td>
-</tr>
-</tbody>
-</table></div>
-<p>Ranges in Environmental Limits are displayed as follows: &lt;lower_limit&gt; &lt;= &lt;subject&gt; &lt;= &lt;upper_limit&gt; &lt;unit&gt;</p>
-<p>If no subject is given, instead the dimension of the unit should be displayed.</p>
-<p>Example: 10 &lt;= Temperature &lt;= 20 °C</p>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>CL_EHFND_REQ_HELPER, GET_LIMIT_COMBINED_VALUE, GET_LIMITS_COMBINED_VALUES</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>The symptom occurs due to a program error.</p>
-<p>Prerequisites are available in the relevant correction instructions.</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>After implementing this SAP Note, the system determines the dimension of the unit to display if no subject is given.</p>
-<p>Alternatively, import either of the corresponding Support Packages for the component extension of SAP EHS Management or the Feature Packages Stacks for SAP S/4HANA.</p></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3712364&amp;TargetLanguage=EN&amp;Component=PY-DE-FP-E2&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3712364/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3712364/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>When you execute the report <em>ELStAM Procedure: Transfer XML Data to ELStAM Table - Distributed Reporting </em> (RPCE2SD0_IN_VR), the system issues the following error message:</p>
+<p style="padding-left: 30px;"><em>"No pers. no. for ID no. &lt;IDNR&gt; and ER tax no. &lt;AGSTNR&gt; on &lt;KEY DATE&gt;" </em> (HRPAYDEE2 408).</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<ul>
+<li>You have not selected the <em>Assignment Attempt in All RFCs </em> checkbox on the selection screen. </li>
+<li>There are several messages for the identification number in different systems/clients.</li>
+<li>For one of these systems/clients, you have not maintained the RFC destination on the selection screen. This could be because it is an obsolete system or client.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p>
+<p>After you implement the corrections, the assignment is correct again and takes into account only the RFC destinations maintained on the selection screen.</p>
+<p>You can use the report Manage ELStAM Data (RPCE2ZD0) to assign all unassigned basic <em>ELStAM </em> notifications.</p>
+<p>You can use RPCE2SD0_IN_VR with the checkbox <em>Reassign ELStAM PHI </em> to assign all unassigned PHI notifications.</p></div></div></div></div></div>

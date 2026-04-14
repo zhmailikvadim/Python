@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When an employee’s service anniversary coincides with the pay period end date, payroll treats the scenario as if the employee were terminating on that date. As a result, the system considers an incorrect accrual portion for leave liability, leading to an incorrect leave liability amount.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<ul>
+<li>Programs : HNZCALC0, HNZLLVL0, HNZCLV00</li>
+<li>Transactions : PC00_M43_CALC, PC00_M43_LLVL</li>
+<li>Function Modules : HR_CALC_QUOTA_PAYMENTS_NZ, HR_CALC_LEAVE_PAYMENTS_NZ</li>
+<li>Other terms : Entitlement, Accrual, Leave liability, New Zealand leave processing</li>
+</ul>
+<p><strong>Type of Object Change</strong><br/><br/>Workbench Objects - No<br/>Code - Yes<br/>Schema/Rules - No<br/>Wage Types - No<br/>Customizing Tables – No</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The system determines the gross amount using an incorrect LVAWE record, which leads to an incorrect accrual calculation.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">The code in function modules <em>HR_CALC_QUOTA_PAYMENTS_NZ</em> and <em>HR_CALC_LEAVE_PAYMENTS_NZ</em> has been enhanced to ensure the correct LVAWE record is selected for deriving the gross amount.</p>
+<p>The required code changes have been done to resolve the issue mentioned in 'Symptom' above.</p>
+<p>As a general rule, SAP recommends that you implement the support package specified for your release in the <em>Reference to Support Packages and Patches</em> section of this SAP Note. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the attached correction instructions. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank"><strong>SAP Note Assistant</strong></a>.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Version     </td>
+<td>Reason                    </td>
+</tr>
+<tr>
+<td>1</td>
+<td>Pilot Release</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Released for Customer</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div>

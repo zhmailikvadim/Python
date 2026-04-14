@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The following steps are executed in sequence in order for the inconsistency to be observed:</p>
+<p>1. A TPO exists in which VAS items have been determined from the FSH_VAS_SD for the key figures. The same VAS is transferred to the linked purchase order.</p>
+<p>2. FSH_VAS_RD is executed for the VAS redetermination on the linked purchase order and no VAS items are found from the condition tables. A deletion indicator is set for the VAS items in the linked purchase order. In the sales order, the VAS items are removed.</p>
+<p>3. FSH_VAS_RD is again executed now for the VAS redetermination on the sales order and valid VAS items are found from the condition tables. The same VAS items are then transferred to the purchase order, however instead of removing the deletion indicator, the same VAS items are inserted in to the purchase order VAS table.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Third party order, TPO, FSH_VASS_TL, FSH_VASM_TL, FSH_VAS_SD, FSH_VAS_MM, FSH_VAS_RD, FSH_VAS_SER, FSH_VAS_SUB_SER, FSH_VAS_DEL_IND.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""><strong>Reason:</strong></p>
+<p>Program error.</p>
+<p><strong>Prerequisites:</strong></p>
+<p>1. FSH_VAS_SD contains valid VAS items for the key figures and is determined correctly in the sales order.</p>
+<p>2. FSH_VAS_MM does not contain any valid VAS items for the same key figures of the purchase order.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the attached corrections.</p></div></div></div></div>

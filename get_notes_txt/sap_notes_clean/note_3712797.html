@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the Fiori app Find Maintenance Order Confirmation (F2174), the results table at the bottom includes the Date and Time fields "Actual Start" and "Actual End". Either field may appear blank, even though the confirmation has data stored.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Find Maintenance Order Confirmation, F2174, C_ObjPgMaintOrderConfirmation, 24:00:00, dats_tims_to_tstmp</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The Date (day) and Time are stored separately for the mentioned fields. CDS view C_ObjPgMaintOrderConfirmation merges date and time in to one single field. Time field sometimes stores 24:00:00 due to historical reasons, but the conversion function dats_tims_to_tstmp handles 24:00:00 as invalid. Hence the merged field shall be calculated in a more complex way for each field.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement this SAP Note.</p></div></div></div></div>

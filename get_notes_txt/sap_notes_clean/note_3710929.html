@@ -1,0 +1,87 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You run the <strong>Calculo nómina y vacaciones  ( CO )</strong> (HCOCALV0) report for an employee in the following scenario:</p>
+<ul>
+<li>Payroll has already been processed for the periods 11.2025 and 12.2025.</li>
+<li>A correction payroll has already been processed for period 12.2025 due to:</li>
+<ul>
+<li><strong>Incapacidad Gral Ambulato</strong> (0200) from November 29, 2025, to November 30, 2025, recorded in the <strong>Absentismos</strong> (2001) infotype.</li>
+<li><strong>Vacaciones</strong> (0100) from December 4, 2025, to December 21, 2025, recorded in the <strong>Absentismos</strong> (2001) infotype.</li>
+</ul>
+</ul>
+<ul>
+<li>This is another correction payroll for period 12.2025, due to <strong>Prorroga Incap.Gral.Ambul</strong> (0250) from December 1, 2025, to December 2, 2025, recorded in the <strong>Absentismos</strong> (2001) infotype.</li>
+</ul>
+<p>In the scenario described above, the system cannot find the original incapacity entry in the <strong>Histórico de Absentismos</strong> (COABS) table during the vacation simulation, causing the following error in the payroll log:<br/>"<em>Segun la fecha de novedad inicial, no existe la incapacidad original</em>".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>&amp;Absentismos - For further information, see SAP Note <a href="/notes/2189265" target="_blank">2189265</a> - CONSULT: List of tags for Colombia notes</p>
+<p>PC00_M38_CALV; CONAB;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p>This issue occurs because the original entry of the extended asbence does not yet exist in the COABS table.</p>
+<p><strong>Prerequisites</strong></p>
+<p>The following Support Package levels are the minimum prerequisites:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><em><strong>Release</strong></em></td>
+<td><em><strong>Support Package</strong></em></td>
+</tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 05</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 18</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP C9</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04 (EhP6 and EhP7)</td>
+<td>HR-CEE SP L0</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</p>
+<p>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>From now on, the system no longer triggers the error message in the scenario described above.</p>
+<p><strong>Log of changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 786px; height: 77px;">
+<tbody>
+<tr>
+<td><em><strong>Version</strong></em></td>
+<td><em><strong>Date</strong></em></td>
+<td><em><strong>Comments</strong></em></td>
+</tr>
+<tr>
+<td>3</td>
+<td>February 23, 2026</td>
+<td>Released for Customer</td>
+</tr>
+</tbody>
+</table></div>
+<p>During the piloting phase, this SAP Note may be updated and versioned depending on the feedback from pilot customers. After this SAP Note has its status changed to <em>Released for Customer</em>, it will not be changed anymore, unless there is a specific situation that demands it. In this case, a reason for the change will be mentioned in the SAP Note.</p>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, use the Note Assistant (SNOTE) to implement the correction instructions.</p>
+<p>For more information, access the <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
+<p><strong>More information</strong></p>
+<ul>
+<li>To get an e-mail notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
+<li>To stay informed about legal changes, access the <a href="https://launchpad.support.sap.com/#/legalchangenotification" target="_blank">Announcement of Legal Changes</a></li>
+<li>For documentation about Payroll Colombia, see <a href="https://help.sap.com/viewer/pycoen608" target="_blank">Payroll Colombia (PY-CO)</a></li>
+</ul>
+<p><strong>Disclaimers</strong></p>
+<p>By clicking on an external hyperlink YOU AGREE that, unless expressly stated otherwise in your agreements with SAP:</p>
+<ol>
+<li>The content of the linked website and any further external website is not content provided by or on behalf of SAP, nor it is under SAP's control.</li>
+<li>The fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the content and information provided in such websites.</li>
+<li>SAP does not give any representation regarding the quality, safety suitability, accuracy or reliability of any external website or any information, content and materials provided thereon.</li>
+<li>You visit those external websites entirely at your own risk. SAP must not be directly or indirectly responsible or liable for any damage or loss caused, or alleged to be caused by, or in connection with your use of, or reliance on any content, goods or services available on, or through any linked website.</li>
+</ol></div></div></div></div>

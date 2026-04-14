@@ -1,0 +1,125 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0" lang="en-US">Your application experiences connectivity issues with SQL Error Code</p>
+<p lang="en-US" style="padding-left: 30px;">-10709 <span class="SNO_DNT" style="float: none;" translate="no">'Connection failed'</span>  (<a href="https://me.sap.com/notes/3059060" target="_blank">3059060</a> - How-To Troubleshoot SQL Error -10709 'Connection failed' in an SAP HANA Landscape)</p>
+<p lang="en-US" style="padding-left: 30px;">-10807 <span class="SNO_DNT" style="float: none;" translate="no">'Connection down'</span>  (<a href="/notes/3117294" target="_blank">3117294</a> - How-To Troubleshoot SQL Error -10807 'Connection down' in an SAP HANA Landscape)</p>
+<p lang="en-US"> on your SAP HANA landscape.</p>
+<p lang="en-US"><strong>Disclaimer:</strong> The below information is meant to act as a guide only on how to approach and analyze packet captures within an SAP HANA landscape. For detailed and intricate analysis, you must consult your own networking team and network engineers.</p>
+<p lang="en-US">Please be aware that SAP Support assists customers only with resolving SAP HANA-related product errors.</p>
+<p lang="en-US">You can find further details in attached SAP Note <a href="/notes/83020" target="_blank">83020</a> - "What is consulting - What is support?".</p>
+<p lang="en-US">If you are a premium engagement customer, please contact your assigned SAP Technical Quality Manager (TQM) and ask for an Expertise on Demand (EoD) who will assist you to solve your case (SAP Note <a href="https://me.sap.com/notes/2651981" target="_blank">2651981</a>)</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>10709 ,10807</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The SQL errors are returned by all <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/ce5509c492af4a9f84ee519d5659f186.html" target="_blank">SAP HANA clients</a> based on the HANA <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/0c20691739094593855ece908b4a3cde.html" target="_blank">SQLDBC library</a> (e.g. SQLDBC, ADO.NET, Go (golang), Node.js, ODBC, ODBO/MDX, Python, Ruby).</p>
+<p>Possible components that can cause the error -10709 and -10807 are:</p>
+<ul>
+<li>Application server*:</li>
+</ul>
+<p>Application (1) --&gt; HANA SQLDBC driver from above (2) --&gt; <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/708e5fe0e44a4764a1b6b5ea549b88f4.html" target="_blank">SAP HANA User Store</a> (3)** --&gt; OS (Linux) (4)</p>
+<ul>
+<li>Communication layer:</li>
+</ul>
+<p>--&gt; Network devices (5): NAT Gateway, Firewall, Load balancer, Proxy, etc.</p>
+<ul>
+<li>HANA server:</li>
+</ul>
+<p>--&gt; OS (Linux) (6) --&gt; HANA instance (7)</p>
+<p> </p>
+<p>* A common type of application server using the HANA SQLDBC client is an SAP ABAP Platform (NetWeaver) or S/4 HANA application server</p>
+<p>** The use of the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/708e5fe0e44a4764a1b6b5ea549b88f4.html" target="_blank">SAP HANA User Store </a>(3) is optional</p>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>You are using a <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/0c20691739094593855ece908b4a3cde.html" target="_blank">SQLDBC library</a> based <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_HANA_CLIENT/f1b440ded6144a54ada97ff95dac7adf/ce5509c492af4a9f84ee519d5659f186.html" target="_blank">SAP HANA client</a> to connect your application to SAP HANA database (SAP note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3165810" target="_blank">3165810</a>)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p lang="en-US">Use <a href="https://en.wikipedia.org/wiki/Tcpdump" target="_blank">tcpdump</a> or <a href="https://en.wikipedia.org/wiki/Wireshark" target="_blank">Wireshark</a> to to capture TCP/IP and other packets being transmitted or received over a network to which the computer is attached.</p>
+<p lang="en-US">The procedure to determine the IP address of the HANA system is only valid if both servers are NOT separated by Network Address Translation (NAT).</p>
+<p lang="en-US" style="padding-left: 30px;">For your analysis of IP + TCP headers, the command can be as follows:</p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">sudo tcpdump -s 96 -W 10 -C 50 -n  -i any host a.a.a.a and host h.h.h.h and port &lt;HANA SQL Port&gt; -w /tmp/tcpdump.pcapng</span></p>
+<p lang="en-US" style="padding-left: 60px;">It is in the nature of connection errors that these errors often occur only sporadically. Therefore, it is important to record only the relevant packages and adjust their size to the purpose of the analysis.</p>
+<p lang="en-US" style="padding-left: 90px;"><span class="SNO_DNT" style="float: none;" translate="no">s</span> - Snapshot length in byte. If you do not set a value for 's', the entire package is captured.</p>
+<p lang="en-US" style="padding-left: 120px;"><span class="SNO_DNT" style="float: none;" translate="no">s 96</span> is enough for IP + TCP headers (minimal storage &amp; CPU cost)</p>
+<p lang="en-US" style="padding-left: 90px;"><span class="SNO_DNT" style="float: none;" translate="no">n</span> - Don’t convert addresses (i.e., host addresses, port numbers, etc.) to names</p>
+<p style="padding-left: 90px;"><span class="SNO_DNT" style="float: none;" translate="no">W</span> - Specifies how many output files tcpdump should keep when used together with</p>
+<p style="padding-left: 120px;"><span class="SNO_DNT" style="float: none;" translate="no">C</span> - rotate files by size in MB</p>
+<p style="padding-left: 120px;">W multiplied by C is the maximum amount of disk space in MB consumed by the tcpdump files. The above command requires up to 500 MB of disk space for the tcpdump files (10 files * 50 MB).</p>
+<p lang="en-US" style="padding-left: 90px;"><span class="SNO_DNT" style="float: none;" translate="no">w</span> - Write the raw packets to file rather than parsing and printing them out</p>
+<p lang="en-US" style="padding-left: 30px;">You will find the IP addresses and ports of the two affected servers in the error message of the client if both servers are NOT separated by Network Address Translation (NAT).</p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">Connection error between peer {a.a.a.a:&lt;Application Port&gt; -&gt; h.h.h.h:&lt;HANA SQL Port&gt;}</span></p>
+<p lang="en-US" style="padding-left: 60px;">Application server: <span class="SNO_DNT" style="float: none;" translate="no">a.a.a.a</span><br/>Application port: 5-digit number that can vary with each call</p>
+<p lang="en-US" style="padding-left: 60px;">HANA server: <span class="SNO_DNT" style="float: none;" translate="no">h.h.h.h</span><br/>HANA SQL Port: Static 5-Digit Number: <span class="SNO_DNT" style="float: none;" translate="no">pppp</span></p>
+<p lang="en-US" style="padding-left: 30px;">Example:</p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">Connection error between peer {100.104.244.100:20644 -&gt; 100.104.244.200:30041}</span></p>
+<p lang="en-US" style="padding-left: 60px;">Application server: <span class="SNO_DNT" style="float: none;" translate="no">100.104.244.100</span><br/>Application port: <span class="SNO_DNT" style="float: none;" translate="no">20644</span></p>
+<p lang="en-US" style="padding-left: 60px;">HANA server: <span class="SNO_DNT" style="float: none;" translate="no">100.104.244.200</span><br/>HANA SQL Port: <span class="SNO_DNT" style="float: none;" translate="no">30041</span></p>
+<p lang="en-US" style="padding-left: 30px;">For the example, the command is as follows:</p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">sudo tcpdump -s 96  -W 10 -C 50 -n -i any host 100.104.244.100 and host 100.104.244.200 and port 30041 -w /tmp/tcpdump.pcapng</span></p>
+<p lang="en-US" style="padding-left: 30px;">Collect tcp dumps from application server <span class="SNO_DNT" style="float: none;" translate="no">a.a.a.a</span> and HANA server <span class="SNO_DNT" style="float: none;" translate="no">h.h.h.h</span> at the same time.</p>
+<p lang="en-US"><strong>Example procedure:</strong> Collect tcp dumps from application server <span class="SNO_DNT" style="float: none;" translate="no">100.104.244.100 </span>and HANA server <span class="SNO_DNT" style="float: none;" translate="no">100.104.244.200</span> at the same time.</p>
+<ol>
+<li>Create a Word document containing a screenshot of every relevant step you do<br/><br/></li>
+<li>(Optional) Activate SAP HANA Client trace as described in SAP Note</li>
+</ol>
+<p lang="en-US" style="padding-left: 60px;"><a href="https://me.sap.com/notes/1993251" target="_blank">1993251</a> - Collecting A SQLDBC Trace.<br/><a href="/notes/1830876" target="_blank">1830876</a> - Creating SAP HANA JDBC Trace<br/><a href="/notes/1993254" target="_blank">1993254</a> - Collecting ODBC Trace</p>
+<p lang="en-US" style="padding-left: 60px;">Example for <span class="SNO_DNT" style="float: none;" translate="no">SAP HANA SQLDBC</span> client:</p>
+<p lang="en-US" style="padding-left: 60px;">Activate traces with the option to stop automatically if error <span class="SNO_DNT" style="float: none;" translate="no">-10709</span> or <span class="SNO_DNT" style="float: none;" translate="no">-10807</span> occurred.</p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">hdbsqldbc_cons TRACE FILENAME /tmp/SQLDBC_&lt;name&gt;%p.txt</span></p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">hdbsqldbc_cons TRACE DISTRIBUTION ON</span></p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">hdbsqldbc_cons TRACE PACKET OFF</span></p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">hdbsqldbc_cons TRACE SQL OFF</span></p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">hdbsqldbc_cons TRACE FLUSH ON</span></p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">hdbsqldbc_cons TRACE STOP ON ERROR -10709,-10807</span></p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">hdbsqldbc_cons TRACE DEBUG ON</span></p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">hdbsqldbc_cons SHOW ALL</span></p>
+<ol start="3">
+<li>Application server: Run the following command in Linux prompt as root user</li>
+</ol>
+<p lang="en-US" style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">sudo tcpdump -s 96 -W 10 -C 50 -n -i any host a.a.a.a and host h.h.h.h and port ppppp -w /tmp/tcpdump_application.pcapng</span></p>
+<p lang="en-US" style="padding-left: 30px;">Example:<span class="SNO_DNT" style="float: none;" translate="no"> sudo tcpdump -s 96 -W 10 -C 50 -n -i any host 100.104.244.100 and host 100.104.244.200 and port 30041 -w /tmp/tcpdump_application.pcapng</span></p>
+<ol start="4">
+<li>HANA server: Run the following command in Linux prompt as root user</li>
+</ol>
+<p lang="en-US" style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">sudo tcpdump -s 96 -W 10 -C 50 -n -i any host a.a.a.a and host h.h.h.h and port ppppp -w /tmp/tcpdump_application.pcapng</span></p>
+<p lang="en-US" style="padding-left: 30px;">Example: <span class="SNO_DNT" style="float: none;" translate="no">sudo tcpdump -s 96 -W 10 -C 50 -n -i any host 100.104.244.100 and host 100.104.244.200 and port 30041 -w /tmp/tcpdump_hana.pcapng</span></p>
+<ol start="5">
+<li>Wait for SQL errors like <span class="SNO_DNT" style="float: none;" translate="no">-10709</span> or <span class="SNO_DNT" style="float: none;" translate="no">-10807</span> to occur</li>
+</ol>
+<p lang="en-US" style="padding-left: 30px;">Example: <span class="SNO_DNT" style="float: none;" translate="no">Connection error between peer {100.104.244.100:20123 -&gt; 100.104.244.200:30041}</span></p>
+<ol start="7">
+<li>Stop 2., 3. and 4.<br/><br/></li>
+<li>Create a full system info dump (FSID) of the system DB and the affected tenant DB<br/><br/></li>
+<li>If you have been asked by us to do so, please provide us with the following:</li>
+</ol>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">a) The Word document containing screenshots of every relevant step you did</span></p>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">b) The captured tcpdump files:</span></p>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">tcpdump_hana.pcapng.*</span><br style="font-size: 14px;"/><span class="SNO_DNT" style="float: none;" translate="no">tcpdump_app.pcapng.*</span></p>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">c) The SAP HANA Client trace file (if captured)</span></p>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">/tmp/SQLDBC_&lt;name&gt;%p.txt</span></p>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">d) The HANA full system info dump from system DB and tenant DB</span></p>
+<p> </p>
+<p><strong>Start the analysis</strong></p>
+<ol>
+<li>Install <a href="https://www.wireshark.org/" target="_blank">Wireshark</a> on your local computer and open the files <span class="SNO_DNT" style="float: none;" translate="no">tcpdump_hana.pcapng.*</span> and <span class="SNO_DNT" style="float: none;" translate="no">tcpdump_app.pcapng.*</span>.<br/><br/></li>
+<li>Apply a filter on the <strong>application port</strong> from the latest error message</li>
+</ol>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">Connection error between peer {100.104.244.100:<strong>20123</strong> -&gt; 100.104.244.200:30041}</span></p>
+<p style="padding-left: 30px;">This results in Wireshark filter:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">tcp.port == <strong>20123</strong></span></p>
+<ol start="3">
+<li>As a result you get two lists of the same TCP/IP packets sent during the aborted session. One list for the <strong>application server</strong> and one for the <strong>HANA server.</strong></li>
+</ol>
+<p style="padding-left: 30px;">You will find comprehensive information on analysis with Wireshark in the <a href="https://www.wireshark.org/docs/wsug_html_chunked/" target="_blank">Wireshark User’s Guide</a>.</p>
+<p style="padding-left: 30px;">SAP Note <a href="https://me.sap.com/notes/1969914/E" target="_blank">1969914</a> - Packet scanning tutorial using wireshark</p>
+<p> </p>
+<p><strong>Collect tcpdump on a MS Windows server</strong></p>
+<p lang="en-US" style="padding-left: 30px;">On Windows Server, you can capture TCP traffic using <em><span class="SNO_DNT" style="float: none;" translate="no">pktmon</span> </em>(Packet Monitor), which is the native built-in tool available on Windows Server 2019, 2022, and Windows 10/11.</p>
+<p lang="en-US" style="padding-left: 30px;">Here's how to capture traffic between your two hosts:</p>
+<p lang="en-US" style="padding-left: 30px;">Step 1: Open an elevated Command Prompt or PowerShell Run as Administrator.</p>
+<p lang="en-US" style="padding-left: 30px;">Step 2: Create filters for the traffic</p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">pktmon filter add -i 100.104.244.100 -i 100.104.244.200 -p 30041</span></p>
+<p lang="en-US" style="padding-left: 30px;">Step 3: Start the packet capture of the first 128 bytes</p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">pktmon start --etw</span></p>
+<p lang="en-US" style="padding-left: 30px;">Step 4: Stop the capture</p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">pktmon stop</span></p>
+<p lang="en-US" style="padding-left: 30px;">Step 5: Convert the output to a Wireshark format</p>
+<p lang="en-US" style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">pktmon etl2pcap PktMon.etl -o tcpdump.pcapng</span></p></div></div></div></div>

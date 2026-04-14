@@ -1,0 +1,72 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You run the <strong>Informes de I.R.P.F.</strong> (RPC190E0) program for a large number of employees. However, you experience long processing times on infotype data retrieve of the <strong>Determinación de la duración de un contrato</strong> (HR_E_GET_CONTRACT_DURATION) function module.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>&amp;IRPF - PC00_M04_C190</p>
+<p>For more information, see SAP Note <a href="/notes/1071282" target="_blank">1071282</a> - <em>CONSULT: List of tags for Spain notes.</em></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Prerequisites</strong></p>
+<p>You have to apply the SAP Note SAP Note <a href="/notes/3712035" rel="noopener noreferrer" target="_blank">3712035</a> <em>- UTIL: Performance improvements for HR_E_GET_CONTRACT_DURATION </em>function module.</p>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="2" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 07</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 20</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP D1</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04 (EhP6 and EhP7) </td>
+<td>HR SP K3</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, click on <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</p>
+<p><strong>Note:</strong></p>
+<p>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you should implement them due to technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>From now on, the database tables for <strong>Medidas</strong> (IT0000), <strong>Elementos contrato</strong> (IT0016), <strong>Seguridad Social</strong> (IT0061) and <strong>Datos Fiscales</strong> (IT0062) infotypes are retrieved outside the HR_E_GET_CONTRACT_DURATION function module calls and passed as parameters to avoid unnecessary infotype readings throughout the program processing.</p>
+<p><strong>Log of changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p>April 6, 2026</p>
+</td>
+<td>
+<p>Released for Customer</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Note:</strong></p>
+<p>During the piloting phase, this SAP Note may be updated and versioned depending on the feedback from pilot customers. After this SAP Note has its status changed to <em>Released for Customer</em>, it will not be changed anymore, unless there is a specific situation that demands it. In this case, a reason for the change will be mentioned in the SAP Note.</p>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, use the Note Assistant (SNOTE) to implement the correction instructions.</p>
+<p>You can find more information about the SAP Note Assistant in SAP Support Portal, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a></strong>.</p>
+<p><strong>Stay connected</strong></p>
+<ul>
+<li>To get an e-mail notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
+<li>To stay informed about legal changes, access the <a href="https://launchpad.support.sap.com/#/legalchangenotification" target="_blank">Announcement of Legal Changes</a>.</li>
+<li>For documentation about Payroll Spain, access the <a href="https://blogs.sap.com/tags/306843521589030681976078829712463/" target="_blank">Help Portal</a>.</li>
+</ul></div></div></div></div>

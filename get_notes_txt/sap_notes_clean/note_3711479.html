@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When trying to generate eSocial event s-1010, you receive the error message "Nenhuma entrada na tabela T512W para XXXX", where XXXX is a wage type. <br/>When you check the table T512W, the entry is correctly created for the mentioned wage type.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<ul style="list-style-type: disc;"><li>
+<p>HR renewal<span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP S/4HANA<span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP ERP <span> </span></p>
+</li></ul>
+</div>
+<div>
+<ul style="list-style-type: disc;"><li>
+<p>SAP SuccessFactors Employee Central Payroll<span> </span></p>
+</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The error message "Nenhuma entrada na tabela T512W para XXXX" occurs when there is a delimitation in table T596J for the mentioned wage type that precedes the start date of the wage type in table T512W. </p>
+<p>This misalignment between the two tables is the root cause of the issue.  </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To resolve this issue, it is necessary to review and adjust the customizing settings to ensure that the entries in tables T596J and T512W are properly aligned. <br/>If a wage type is delimited in table T596J, the same wage type must exist in table T512W with an appropriate start date that matches the delimitation date in T596J. </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>V_T596J, V_512W_D, T512W, V_T596J, SOCN,  "Nenhuma entrada na tabela T512W para XXXX", PC00_M37_EFD_ER_GEN, RPC_PAYBR_EFD_ER_GENERATOR </p></div></div></div></div>

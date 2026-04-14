@@ -1,0 +1,556 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">As described in SAP ONE Support Launchpad – <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQSE-15551" target="_blank">Regulatory Change Manager</a>, this SAP Note provides you with the relevant system changes to address the new minimum contribution amounts, presented by the Orden PJC/297/2026, <em>de 30 de marzo, por la que se desarrollan las normas legales de cotización a la Seguridad Social, desempleo, protección por cese de actividad, Fondo de Garantía Salarial y formación profesional</em> published on March 31, 2026.</p>
+<p>For more information, see <a class="external-link" href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-7296" rel="nofollow noopener" target="_blank" title="Follow link">Orden PJC/297/2026</a> and <a class="external-link" href="https://www.seg-social.es/descarga/es/BNR%2005_2026" rel="nofollow noopener" target="_blank" title="Follow link">RED 5/2026</a>. Check the disclaimers section below regarding these external websites.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>&amp;COTIZACIONES;</p>
+<p>Cotización; Formación; Fogasa; Desempleo; Training; Unemployment; Fondo de garantía salarial;</p>
+<p>For more information, see SAP Note <a href="/notes/1071282" target="_blank">1071282</a> - <em>CONSULT: List of tags for Spain notes.</em></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Prerequisites</strong></p>
+<p>You have to implement the SAP Note <a href="/notes/3717025" target="_blank">3717025</a><em> - CALC: Update of MEI contribution quotas for fixed quota employees for 2026</em> as a prerequisite.</p>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="2" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 06</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 19</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP D0</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04 (EhP6 and EhP7) </td>
+<td>HR SP K2</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, access <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</p>
+<p><strong>Note:</strong></p>
+<p>When you implement an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context as the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them for technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The amounts delivered by this SAP Note are valid as of January 1st, 2026 onwards.</p>
+<p>The following views have been updated:</p>
+<ul>
+<li><strong>Bases de cotización por contingencias comunes</strong> (V_T5E43) view:</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>GrCot</strong></td>
+<td><strong>Un.</strong></td>
+<td><strong>Base min.</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Cotización mensual</td>
+<td>1.989,30</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Cotización mensual</td>
+<td>1.649,70</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Cotización mensual</td>
+<td>1.435,20</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Cotización mensual</td>
+<td>1.424,40</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Cotización mensual</td>
+<td>1.424,40</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Cotización mensual</td>
+<td>1.424,40</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Cotización mensual</td>
+<td>1.424,40</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Cotización mensual</td>
+<td>1.424,40</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Cotización diaria</td>
+<td>47,48</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Cotización mensual</td>
+<td>1.424,40</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Cotización diaria</td>
+<td>47,48</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Cotización mensual</td>
+<td>1.424,40</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Cotización diaria</td>
+<td>47,48</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Cotización mensual</td>
+<td>1.424,40</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Cotización diaria</td>
+<td>47,48</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Bases de cotización por contingencias de AT y EP</strong> (T5E44) table:</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>+</strong></td>
+<td><strong>Un.</strong></td>
+<td><strong>Base min.</strong></td>
+</tr>
+<tr>
+<td>17</td>
+<td>Cotización mensual</td>
+<td>1.424,40</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Cótización diaria</td>
+<td>47,48</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Cotización por horas</td>
+<td>8,58</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Cotización mensual</td>
+<td>1.424,40</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Cotización diaria</td>
+<td>47,48</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Cotización por horas</td>
+<td>8,58</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Bases mínimas para contratos a tiempo parcial</strong> (V_T5E50) view:</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>GrCot</strong></td>
+<td><strong>Mín./día</strong></td>
+<td><strong>Mín./hora</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>66,31</td>
+<td>11,98</td>
+</tr>
+<tr>
+<td>2</td>
+<td>54,99</td>
+<td>9,94</td>
+</tr>
+<tr>
+<td>3</td>
+<td>47,84</td>
+<td>8,65</td>
+</tr>
+<tr>
+<td>4</td>
+<td>47,48</td>
+<td>8,58</td>
+</tr>
+<tr>
+<td>5</td>
+<td>47,48</td>
+<td>8,58</td>
+</tr>
+<tr>
+<td>6</td>
+<td>47,48</td>
+<td>8,58</td>
+</tr>
+<tr>
+<td>7</td>
+<td>47,48</td>
+<td>8,58</td>
+</tr>
+<tr>
+<td>8</td>
+<td>47,48</td>
+<td>8,58</td>
+</tr>
+<tr>
+<td>9</td>
+<td>47,48</td>
+<td>8,58</td>
+</tr>
+<tr>
+<td>10</td>
+<td>47,48</td>
+<td>8,58</td>
+</tr>
+<tr>
+<td>11</td>
+<td>47,48</td>
+<td>8,58</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Constantes de nómina</strong> (V_T511P) view:</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Constante</strong></td>
+<td><strong>Constante liquid.</strong></td>
+<td><strong>Importe</strong></td>
+</tr>
+<tr>
+<td>FNRCC</td>
+<td>PFNR: cuota CC día de practica</td>
+<td>2,88</td>
+</tr>
+<tr>
+<td>FNRIT</td>
+<td>PFNR: cuota IT día de practica</td>
+<td>0,18</td>
+</tr>
+<tr>
+<td>FNRMC</td>
+<td>PFNR: cuota máxima mensual CC</td>
+<td>65,42</td>
+</tr>
+<tr>
+<td>FNRMI</td>
+<td>PFNR: cuota máxima mensual IT</td>
+<td>4,12</td>
+</tr>
+<tr>
+<td>FNRMM</td>
+<td>PFNR: cuota máxima mensual IMS</td>
+<td>3,83</td>
+</tr>
+<tr>
+<td>FNRMS</td>
+<td>PFNR:cuota IMS día de practica</td>
+<td>0,17</td>
+</tr>
+<tr>
+<td>E85CE</td>
+<td>C.Formac. CComunes Empresa</td>
+<td>57,72</td>
+</tr>
+<tr>
+<td>E85CT</td>
+<td>C.Formac. CComunes Trabajador</td>
+<td>11,51</td>
+</tr>
+<tr>
+<td>E85DE</td>
+<td>C.Formac. Desempleo Empresa</td>
+<td>78,34 </td>
+</tr>
+<tr>
+<td>E85DT</td>
+<td>C.Formac. Desempleo Trabajador</td>
+<td>22,08 </td>
+</tr>
+<tr>
+<td>E85FE</td>
+<td>C.Formac. FProfes. Empresa</td>
+<td>2,16 </td>
+</tr>
+<tr>
+<td>E85FG</td>
+<td>C.Formac. FGarSal. Empresa</td>
+<td>4,38</td>
+</tr>
+<tr>
+<td>E85FT</td>
+<td>C.Formac. FProfes. Trabajador</td>
+<td>0,28</td>
+</tr>
+<tr>
+<td>E85IL</td>
+<td>C.Formac. CP Empresa IT</td>
+<td>4,12 </td>
+</tr>
+<tr>
+<td>E85IM</td>
+<td>C.Formac. CP Empresa IMS</td>
+<td>3,83</td>
+</tr>
+<tr>
+<td>E85ME</td>
+<td>C.Formac. MEI Empresa</td>
+<td>10,68</td>
+</tr>
+<tr>
+<td>E85MT</td>
+<td>C.Formac. MEI Trabajador</td>
+<td>2,14 </td>
+</tr>
+<tr>
+<td>E87CE</td>
+<td>C.Aprend. CComunes Empresa</td>
+<td>57,72</td>
+</tr>
+<tr>
+<td>E87CT</td>
+<td>C.Aprend. CComunes Trabajador</td>
+<td>11,51</td>
+</tr>
+<tr>
+<td>E87FE</td>
+<td>C.Aprend. FProfes. Empresa</td>
+<td>2,16 </td>
+</tr>
+<tr>
+<td>E87FG</td>
+<td>C.Aprend. FGarSal. Empresa</td>
+<td>4,38</td>
+</tr>
+<tr>
+<td>E87FT</td>
+<td>C.Aprend. FProfes. Trabajador</td>
+<td>0,28</td>
+</tr>
+<tr>
+<td>E87IL</td>
+<td>C.Aprend. CP Empresa IT</td>
+<td>4,12 </td>
+</tr>
+<tr>
+<td>E87IM</td>
+<td>C.Aprend. CP Empresa IMS</td>
+<td>3,83</td>
+</tr>
+<tr>
+<td>E87ME</td>
+<td>C.Aprend. MEI Empresa</td>
+<td>10,68 </td>
+</tr>
+<tr>
+<td>E87MT</td>
+<td>C.Aprend. MEI Trabajador</td>
+<td>2,14 </td>
+</tr>
+<tr>
+<td>E97CE</td>
+<td>C.Aprend. CComunes Empresa</td>
+<td>57,72</td>
+</tr>
+<tr>
+<td>E97CT</td>
+<td>C.Aprend. CComunes Trabajador</td>
+<td>11,51</td>
+</tr>
+<tr>
+<td>E97FE</td>
+<td>C.Aprend. FProfes. Empresa</td>
+<td>2,16</td>
+</tr>
+<tr>
+<td>E97FG</td>
+<td>C.Aprend. FGarSal. Empresa</td>
+<td>4,38</td>
+</tr>
+<tr>
+<td>E97FT</td>
+<td>C.Aprend. FProfes. Trabajador</td>
+<td>0,28</td>
+</tr>
+<tr>
+<td>E97IL</td>
+<td>C.Aprend. CP Empresa IT</td>
+<td>4,12</td>
+</tr>
+<tr>
+<td>E97IM</td>
+<td>C.Aprend. CP Empresa IMS</td>
+<td>3,83 </td>
+</tr>
+<tr>
+<td>E97ME</td>
+<td>C.Aprend. MEI Empresa</td>
+<td>10,68 </td>
+</tr>
+<tr>
+<td>E97MT</td>
+<td>C.Aprend. MEI Trabajador</td>
+<td>2,14 </td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Topes de cotización en función de retribuciones íntegras</strong> (V_T5E4I) view</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>TPCCC</strong></td>
+<td><strong>Nro. Secuencia</strong></td>
+<td><strong>Retr. Íntegra</strong></td>
+<td><strong>B. Máx Diária</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td>1</td>
+<td>0,00</td>
+<td>340,00</td>
+</tr>
+<tr>
+<td>7</td>
+<td>2</td>
+<td>577,01</td>
+<td>428,00</td>
+</tr>
+<tr>
+<td>7</td>
+<td>3</td>
+<td>1.038,01</td>
+<td>511,00</td>
+</tr>
+<tr>
+<td>7</td>
+<td>4</td>
+<td>1.737,01</td>
+<td>678,60</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Topes de cotización en función de retribuciones íntegras</strong> (V_T5E4A)</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>TPCCC</strong></td>
+<td><strong>GrCot</strong></td>
+<td><strong>B. Mín. Diária</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td>1</td>
+<td>66,31</td>
+</tr>
+<tr>
+<td>7</td>
+<td>2</td>
+<td>54,99</td>
+</tr>
+<tr>
+<td>7</td>
+<td>3</td>
+<td>47,84</td>
+</tr>
+<tr>
+<td>7</td>
+<td>4</td>
+<td>47,48</td>
+</tr>
+<tr>
+<td>7</td>
+<td>5</td>
+<td>47,48</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7</td>
+<td>47,48</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Log of changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p>April 1st, 2026</p>
+</td>
+<td>
+<p>SAP Note <a href="/notes/3717025" target="_blank">3717025</a> as prerequisite. If you already installed this SAP Note correctly, no need to reimplement it.</p>
+</td>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p>March 31, 2026</p>
+</td>
+<td>
+<p>Released for Customer</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Note:</strong></p>
+<p>During the piloting phase, this SAP Note may be updated and versioned depending on the feedback from pilot customers. After this SAP Note has its status changed to <em>Released for Customer</em>, it will not be changed anymore, unless there is a specific situation that demands it. In this case, a reason for the change will be mentioned in the SAP Note.</p>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, proceed as follows:</p>
+<ol>
+<li>Use Note Assistant (SNOTE) to implement the correction instructions.</li>
+<li>Apply the manual post-implementation steps.</li>
+</ol>
+<p>You can find more information about the SAP Note Assistant in SAP Support Portal, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a></strong>.</p>
+<p><strong>Stay connected</strong></p>
+<ul>
+<li>To get an e-mail notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
+<li>To stay informed about legal changes, access the <a href="https://launchpad.support.sap.com/#/legalchangenotification" target="_blank">Announcement of Legal Changes</a>.</li>
+<li>For documentation about Payroll Spain, access the <a href="https://blogs.sap.com/tags/306843521589030681976078829712463/" target="_blank">Help Portal</a>.</li>
+</ul>
+<p><strong>Disclaimers</strong></p>
+<p>The website accessible through this hyperlink is an external website which is not part of SAP's offering. By accessing the hyperlink YOU AGREE that, unless expressly stated otherwise in your agreements with SAP:</p>
+<p style="padding-left: 30px;">1. The content of the linked website and any further external website is not content provided by or on behalf of SAP, nor it is under SAP's control.</p>
+<p style="padding-left: 30px;">2. The fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the content and information provided in such websites.</p>
+<p style="padding-left: 30px;">3. SAP does not give any representation regarding the quality, safety suitability, accuracy or reliability of any external website or any information, content and materials provided thereon.</p>
+<p style="padding-left: 30px;">4. You visit those external websites entirely at your own risk. SAP must not be directly or indirectly responsible or liable for any damage or loss caused, or alleged to be caused by, or in connection with your use of, or reliance on any content, goods or services available on, or through any linked website.</p></div></div></div></div>

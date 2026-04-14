@@ -1,0 +1,46 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Users assigned to onboarding tasks such as New Hire Data Review (NHDR) may experience one or more of the following:</p>
+<ul><li>
+<p>NHDR task card is visible on the homepage but cannot be accessed</p>
+</li><li>
+<p>Error appears when opening the task, such as: "<em>You do not have permission to access this page"</em></p>
+</li></ul>
+<ul><li>
+<p>Candidate is not visible on the Onboarding Dashboard</p>
+</li><li>
+<p>Expected candidates are not included in permission group active members</p>
+</li><li>
+<p>Permission group filters do not return expected candidates</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Onboarding</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Create a permission group using filters based on fields such as:</p>
+<ul><li>
+<p>Job Classification, Department or other fields used during onboarding initiation.</p>
+</li></ul>
+</li><li>
+<p>Assign the permission group as the target population for onboarding tasks.</p>
+</li><li>
+<p>Initiate onboarding for candidates.</p>
+</li><li>
+<p>Log in as a user belonging to the responsible group.</p>
+</li><li>
+<p>Observe that:</p>
+</li></ol>
+<ul><li>
+<p>The NHDR task card may appear on the homepage.</p>
+</li><li>
+<p>Attempting to access the task results in an access error.</p>
+</li><li>
+<p>The candidate is not visible on the Onboarding Dashboard.</p>
+</li><li>
+<p>The candidate is not included in permission group active members.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Permission group filters evaluate field values stored during onboarding initiation. If the required fields are not populated at the time tasks are assigned, the candidate will not be included in the target population.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Ensure that the fields used in permission group filters are correctly mapped and populated during onboarding initiation, so that the candidate is included in the target population before onboarding tasks such as NHDR are assigned.</p>
+<p>Verify the following:</p>
+<ul><li>
+<p>Ensure that the fields used for filtering (for example, Job Classification Code) are correctly mapped in Recruit-to-Hire Data Mapping before initiating onboarding.</p>
+</li><li>
+<p>Validate that the required field values are passed during onboarding initiation to ensure inclusion in the relevant permission groups.</p>
+</li><li>
+<p>Re-initiate impacted candidates after confirming that the correct mappings are in place.</p>
+</li><li>
+<p>Verify that candidates are visible under the assigned group in the Onboarding Dashboard and the NHDR task is accessible from the homepage or To-Do card after the correct mappings are implemented.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://me.sap.com/notes/0003239632" rel="noopener noreferrer nofollow" target="_blank">All users are visible on the Dashboard to a user, not just the direct reports – Onboarding (3239632)</a></li><li><a href="https://me.sap.com/notes/0003425003" rel="noopener noreferrer nofollow" target="_blank">All employees are visible in Dashboard Search even if the target population is “External Users” – Onboarding (3425003)</a></li><li><a href="https://me.sap.com/notes/0003196136" rel="noopener noreferrer nofollow" target="_blank">Onboarding Role-Based Permission – Main KBA (3196136)</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>dashboard visibility, NHDR task, To-Do list, Job Classification Code, Recruit-to-Hire mapping, permission group filter, SAP SuccessFactors Onboarding</p></div></div></div></div>

@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3728190&amp;TargetLanguage=EN&amp;Component=PY-AT&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3728190/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3728190/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>In the semiretirement forms (request for semiretirement or change form), the employer name or address of the employer from central address management is printed incorrectly.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>Employer, T536C, V_T536C</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>You use Payroll Austria and a current form for semiretirement.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>The correction is provided by HR Support Package (via CLC if necessary).<br/> You can implement an advance correction by implementing the automatic correction instructions using SNOTE.</p>
+<p><strong>Technical Details</strong></p>
+<p>After you implement this SAP Note, the system first checks whether the enhanced address information (NAME1, STRAS, ORT01, PSTLZ) is available from address management and - as technically named in T536C - transferred. If these are not available, the unstructured data is still transferred from the lines "LINE".</p>
+<p>For the request for semiretirement (using the example for 2026), this means:</p>
+<ul>
+<li>Field Employer in = NAME1</li>
+<li>Company Address field = STRAS, PSTLZ + ORT01. Note that the house number is added automatically by Address Management.</li>
+</ul>
+<p>For the change form (using the example for 2024, but also for 2026 in the future), this means:</p>
+<ul>
+<li>Field Employer in = NAME1</li>
+</ul>
+<p>If the enhanced address information is not available, the following applies across forms:</p>
+<ul>
+<li>Field Employer in = LINE1</li>
+<li>Company Address field = LINE2 + LINE3</li>
+</ul></div></div></div></div></div>

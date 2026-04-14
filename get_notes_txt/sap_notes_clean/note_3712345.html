@@ -1,10 +1,13 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="">You are using Employee Central Payroll with PTP employee replication.</p>
-<p id="__html0">One employee has a Higher Duty assignment where the Allowance Computation Basis is set to "Not Applicable".</p>
-<p>The replication fails with the error message "Currency of Higher duty &amp;1 and of Substantive &amp;2 must be the same."</p>
+<p id="__html0">You start RPCIPE00 or RPCIPE01 to create your payroll posting documents. <br/>The created documents are incorrect and show error: 'Personel Number invalid' (KI 211).</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>Higher Duty, IT0509, HRSFEC_HDREP 009</p>
+<p>STAPE, S4CLD, SF Userid, REF_WA_ID</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Program error.</p>
+<ol>
+<li>You are posting to an S/4 Public Cloud System, it means V_T77S0 switch S4CLD is set to 'X' and SOAMANAGER configuration is in place. </li>
+<li>You are using SAP Successfactors Employee Central and possibly Employee Central Payroll. Your Employees are created in SFSF EC and replicated to the payroll system. </li>
+<li>You are using account assignment type Q for posting with personal number and therefore set V_T77S0 switch STAPE to 'X' to get a valid PERNR on S/4 Public Cloud System. </li>
+<li>You are using BAdI BADI_HRPP_ACCOUNT_ASSIGNMENT to change the company code as company codes differ between payroll system and S/4 Public Cloud System. </li>
+</ol>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id="">Please implement the correction instruction via SNOTE.</p></div></div></div></div>
+<p>Implement the attached correction instruction to avoid the error.</p></div></div></div></div>

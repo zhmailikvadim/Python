@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3717285&amp;TargetLanguage=EN&amp;Component=FI-CA&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3717285/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3717285/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>In the mass activity "Forward Documents to FI-AR/AP" (transaction FPSL), the system issues error KE 109:</p>
+<ul>
+<li><span style="font-size: 14px;"> </span>"Characteristic value 'X' for characteristic 'Product' is not allowed"</li>
+</ul>
+<p><span style="font-size: 14px;">or</span></p>
+<ul>
+<li>"Characteristic value 'Y' for characteristic 'Contract' is not allowed".</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>FPSL, Accounts Receivable (FI-AR), Accounts Payable (FI-AP), AKTYP = SLTR, PAOBJNR, MATNR, FKK_SAMPLE_5210, bapi_map_copa, BAPIACKEC9, CHARACTER, PROD_NO_LONG, CUST_CHAR_VALUE_LONG, KE109, KE-109, 109(KE), BAPI_ACC_DOCUMENT_CHECK, BAPI_ACC_DOCUMENT_POST</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Cause<br/>The field length when transferring the characteristic values of a profitability segment to the document check or posting is limited to 18 digits. The transfer of a characteristic with more than 18 characters therefore leads to the error message.</p>
+<p>Prerequisites<br/>- The document to be forwarded contains a profitability segment as an assignment to a CO object.<br/>- The profitability segment contains an article or contract characteristic with more than 18 characters.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p>
+<p>In addition, implement SAP Note 3715703 if it is not already contained in the Support Package.</p></div></div></div></div></div>

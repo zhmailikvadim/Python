@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You run the <strong>EA or EC Annual Tax Report</strong> (RPCTEAL0_01) report and leave the <strong>Selection</strong> section on the selection screen as empty. You enter <strong>Payroll period</strong>, <strong>Employer's Reference No</strong>, and <strong>Year of EA Tax Assessment</strong>. It takes an extremely long time in running the report. And the process might be terminated by runtime error: <strong>time_out</strong>.</p>
+<p>After you've installed the SAP Note, the following error message occurs immediately:</p>
+<p><strong>Input Personnel Number or any other Selection Criteria at first!</strong></p>
+<p><strong>Version 2:</strong></p>
+<p>Add a new "<strong>without Printing Breakdown List</strong>" checkbox on the selection screen of EA report.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>EA or EC Annual Tax Report, RPCTEAL0_01, performance, 5L122, 14REP, dump, filter_empty_select, filter_molga, filter_empty_payroll, CP21, CP22A, TP3, 5L346</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is performance fine-tuning of EA report and has no impact on the output of this report.</p>
+<p>To run the report RPCTEAL0_01 as expected, you <strong>must</strong> enter parameters in one or more of the following fields in the <strong>Selection</strong> section on the selection screen:</p>
+<ul>
+<li>Personnel Number  </li>
+<li>Personnel Area</li>
+<li>Personnel Subarea</li>
+<li>Payroll Area</li>
+<li>Organizational Unit</li>
+</ul>
+<p>The report selects employees to be processed by the latest infotype record according to above inputs. Leaving the <strong>Selection</strong> section empty prevents the report from functioning as expected.</p>
+<p>The input of <strong>Employer's Reference No.</strong> field cannot work as selection criteria of employees because its filtering is based on the entire year’s payroll results.</p>
+<p>It is recommend to run EA report with small group of employees.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>You can apply HR Support Package or implement the correction instructions in this SAP Note and carry out the manual activities attached.</p></div></div></div></div>

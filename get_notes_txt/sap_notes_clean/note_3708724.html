@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When calling the BAPI /SPDGS/BAPI_PDA_CREATE, it is not possible to deactivate the COMMIT.<br/>This can lead to inconsistent data if multiple application steps must be executed within a single overarching logical unit of work, but the BAPI triggers an internal COMMIT prematurely.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">IS-MFM, CORE, PDA, COMMIT, /SPDGS/BAPI_PDA_CREATE, SAP Meat and Fish Management by msg.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The BAPI /SPDGS/BAPI_PDA_CREATE performs an unconditional COMMIT WORK internally.<br/>The interface provides a flag controlling the COMMIT behavior, but the flag is not evaluated during execution, resulting in the COMMIT always being executed regardless of the caller’s settings.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>History:</strong><br/>Note created on 28.01.2026.</p>
+<p><strong>Description of Correction:</strong><br/>The logic of /SPDGS/BAPI_PDA_CREATE is corrected so that the COMMIT‑control flag is properly evaluated.<br/>If the flag “no COMMIT” is set by the calling program, the BAPI no longer executes an internal COMMIT WORK.<br/>This ensures that the caller retains full control over the logical unit of work and can bundle several dependent operations safely before triggering the final COMMIT.</p>
+<p><strong>Functional Dependencies:</strong><br/>None.</p>
+<p><strong>Manual Changes:</strong><br/>No manual changes are required for end users.</p></div></div></div></div>

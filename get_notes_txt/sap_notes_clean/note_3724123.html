@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You configure an exception for a certain check result in the check group configuration. The system creates a corresponding exception document or clarification case after check execution. However, you cannot add the messages related to the check to the exception document or clarification case.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>APE, Check Messages, Exception, Clarification Case, BPEM</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The feature of adding messages from check execution to the exception is not supported in APE.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After implementing this SAP Note, the system supports adding messages from check execution to exception documents and clarification cases.</p>
+<p>Add the EXPORTING parameter ET_CHECK_MESSAGE TYPE /APE/T_CHECK_MESSAGE to your check method. For example:</p>
+<p>```<br/>METHODS your method<br/>    EXPORTING<br/>        et_check_result TYPE /ape/t_check_result<br/>        et_check_message TYPE /ape/t_check_message<br/>    RAISING<br/>        /ape/cx_exception.<br/>```</p>
+<p>If the check result is linked with an exception code in the check group configuration, the system adds the messages related to the check in the et_check_message to the exception.</p></div></div></div></div>

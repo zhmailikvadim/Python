@@ -1,0 +1,80 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">After upgrading the SAP Convergent Charging Core Server system to version 2025 FPS 1, customers may have questions about compatibility with <strong>existing Java SDK-based client applications that run on previous Java versions</strong>. These Java applications or connectors use and are compiled with the Java Software Development Kit (SDK) of SAP Convergent Charging.</p>
+<p>Specific scenarios include:<br/> - SDK client applications that are compiled and run on Java 17<br/> - Integration components that use SAP Convergent Charging Java Libraries, APIs, and SDKs - client classes (AsyncStatefulServiceClient, AsyncBatchServiceClient, etc.)<br/> - Partner systems that connect through the Message TCP or HTTP/HTTPS protocols<br/> - Questions about whether SDK recompilation or code changes are required</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAP Convergent Charging, SCC, Convergent Charging SDK, Core Server, SapMachine, Java compatibility, client-server compatibility, AsyncStatefulServiceClient, AsyncStatefulServiceClient, Message TCP, TLS compatibility, cross-version integration, FPS1</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>SAP Convergent Charging Core Server 2025 FPS 1 has been upgraded to SapMachine 25 (Java 25) to provide enhanced performance, security improvements, and long-term platform support.</p>
+<p>The Core Server system and SDK clients communicate via network-based protocols (Message TCP, HTTP/HTTPS), which are independent of the Java runtime version used by client applications. This architectural design ensures that bytecode compatibility between different Java versions is not a concern for SDK-to-Server communication.</p>
+<p><strong>Prerequisites:</strong></p>
+<p>For SDK client applications to connect successfully to Core Server 2025 FPS 1, the following requirements must be met:</p>
+<p>1. Java runtime: SDK client applications must run on a Java runtime version that is supported according to the Product Availability Matrix of SAP CC:</p>
+<p>- For SAP Convergent Charging versions from 2023 FPS 0 up to and including 2023 FPS 3: SapMachine 17</p>
+<p>- For SAP CC 2025 FPS 0: SapMachine 17</p>
+<p>- For SAP CC 2025 FPS 1 and higher: SapMachine 25</p>
+<p>- SDK client applications based on SDK versions earlier than SAP CC 2023 FPS 0 (which were supported only with SAP JVM 8) are not supported for connection to Core Server 2025 FPS 1.<br/>2. Network connectivity: SDK client applications must have standard network connectivity to the Core Server system (ports and firewall rules as per deployment configuration).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SDK client applications running on Java 17 or higher are fully compatible with SAP Convergent Charging Core Server 2025 FPS 1.</p>
+<p><strong>No Actions Required</strong></p>
+<p>Existing SDK-based client applications do not require any of the following:<br/> - Recompilation<br/> - Code changes<br/> - SDK version upgrades<br/> - Java runtime upgrades (if already using Java 17 or higher)</p>
+<p><strong>Technical Explanation</strong></p>
+<p>An SAP Convergent Charging SDK client application communicates with the Core Server system through wire protocols over TCP/IP networks. The Java bytecode version on the client side and server side operate independently:</p>
+<p>- Client side: SDK classes run in the client's JVM (for example, Java 17)<br/> - Server side: Core Server 2025 FPS 1 runs in its own JVM (Java 25)<br/> - Communication: Protocol-based message exchange (language- and version-agnostic)</p>
+<p>This is analogous to a web browser connecting to a web server—the client and server can run different software versions without compatibility issues.</p>
+<p><strong>Validation Steps</strong></p>
+<p>While no changes are required, SAP recommends standard integration testing:</p>
+<p>1. Deploy Core Server 2025 FPS 1 in a non-production environment.<br/> 2. Connect existing SDK-based client applications.<br/> 3. Verify successful connection and TLS handshake if used<br/> 4. Execute standard business operations.<br/> 5. Monitor logs for any security warnings.</p>
+<p><strong>Version Compatibility Matrix for SAP CC</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>SAP CC Core Server</strong></td>
+<td><strong>SAP CC SDK</strong></td>
+<td><strong>Java Runtime for SDK-Based Client Application</strong></td>
+<td><strong>Compatibility Status</strong></td>
+</tr>
+<tr>
+<td>
+<p>2025 FPS 1</p>
+<p>(SapMachine 25)</p>
+</td>
+<td>
+<p>2025 FPS 1  (SapMachine 25)</p>
+</td>
+<td>SapMachine 25</td>
+<td>✅ Fully Compatible</td>
+</tr>
+<tr>
+<td>2025 FPS 1</td>
+<td>
+<p>2025 FPS 0  (SapMachine 17)</p>
+</td>
+<td>SapMachine 17</td>
+<td>✅ Fully Compatible</td>
+</tr>
+<tr>
+<td>2025 FPS 1</td>
+<td>
+<p>2023 FPS 3  (SapMachine 17)</p>
+<p>2023 FPS 2  (SapMachine 17)</p>
+<p>2023 FPS 1  (SapMachine 17)</p>
+<p>2023 FPS 0  (SapMachine 17)</p>
+</td>
+<td>SapMachine 17</td>
+<td>✅ Fully Compatible</td>
+</tr>
+<tr>
+<td>2025 FPS 1</td>
+<td>
+<p>2022  (SAP JVM 8)</p>
+</td>
+<td>Lower than Java 17</td>
+<td>⚠️ Not Supported (Upgrade Required)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>For New Implementations</strong></p>
+<p>For new SDK client development, SAP recommends the following:<br/> - Use the latest SDK version available with Core Server 2025 FPS 1 to access new features.<br/> - Run client applications on Java 25 for optimal performance and support.<br/> - Follow current security best practices in the Integration Guide.</p>
+<p><strong>Additional Information</strong></p>
+<p>Refer to the SAP Convergent Charging documentation:<br/> - Integration Guide - Client SDK Implementation<br/> - Security Configuration Guide - TLS/SSL Settings<br/> - Release Notes 2025 FPS 1</p></div></div></div></div>

@@ -1,0 +1,67 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You run the <em><strong>Generación de notificaciones al IMSS</strong> (HMXCAFL0)</em> report for an employee that has a <em><strong>Datos IMSS</strong></em> <em>(IT0369)</em> infotype record with a start date less than the first <em><strong>Asignación organizativa</strong> (IT0001)</em> infotype record start date.</p>
+<p>In the scenario described above, the system does not process the employee.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>&amp;SEGSOCIAL - For further information, see SAP Note <a href="https://i7p.wdf.sap.corp/sap(bD1lbiZjPTAwMQ==)/bc/bsp/sno/ui_entry/entry.htm?param=69765F6D6F64653D3030312669765F7361706E6F7465735F6E756D6265723D3131373933363426" target="_blank">1179364</a> - CONSULT: List of tags for Mexico notes</p>
+<p>PC00_M32_CAFL0; IT0369; IT0000; IT0001;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p>This issue happens because the system wrongly skips the employee when trying to find a valid 0001 infotype record in the start date from the 0369 infotype.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><em><strong>Release</strong></em></td>
+<td><em><strong>Support Package</strong></em></td>
+</tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 05</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 18</td>
+</tr>
+<tr>
+<td>SAP_HR 608</td>
+<td>HR SP C9</td>
+</tr>
+<tr>
+<td>SAP_HR 604 (EhP6 e EhP7)</td>
+<td>HR SP K1</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</p>
+<p>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>From now on, the system processes the employee if the start date of Infotype 0369 is earlier than the start date of the employee’s first Infotype 0001.</p>
+<p><strong>Log of changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><em><strong>Version</strong></em></td>
+<td><em><strong>Date</strong></em></td>
+<td><em><strong>Release method</strong></em></td>
+<td><em><strong>Comments</strong></em></td>
+</tr>
+<tr>
+<td>3</td>
+<td>March 12, 2026</td>
+<td>Released for Customer.</td>
+<td>For more information, see <a href="https://itsm.services.sap/now/nav/ui/classic/params/target/kb_view.do%3Fsysparm_article%3DKB0774273" target="_blank">this KBA</a>.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, use the Note Assistant (SNOTE) to implement the correction instructions.</p>
+<p>For more information, access the <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
+<p style="display: inline !important;"><strong>More information</strong></p>
+<ul style="font-size: 14px;">
+<li>To receive e-mail notifications of updates to this SAP Note, visit <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
+<li>To stay informed about legal changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">Regulatory Change Manager</a></li>
+<li>For documentation about Payroll Mexico, see <a href="https://help.sap.com/viewer/pymxen608" target="_blank">Payroll Mexico (PY-MX)</a></li>
+</ul></div></div></div></div>

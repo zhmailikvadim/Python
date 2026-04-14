@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This Note enables customers to add <strong>custom disclaimers / attestations</strong> for different actions performed in the <strong>Approval Hub app</strong>. Whenever a user performs one of the following actions, customers can configure custom texts that are displayed in the <strong>confirmation popup</strong> for each action:</p>
+<ol start="1">
+<li><strong>Approve</strong></li>
+<li><strong>Reject</strong></li>
+</ol>
+<p>The texts can be maintained based on <strong>Category</strong>, <strong>Process</strong>, and <strong>Subprocess</strong>. In addition, different texts can be configured for different <strong>positions</strong> of the Approve and Reject actions.</p>
+<p>For example, separate disclaimer texts can be maintained for the <strong>Approve</strong> button on the <strong>Worklist page</strong> and on the <strong>Detail page</strong>, respectively.</p>
+<p><strong><span style="text-decoration: underline;">Customer Enhancement  Changes for moving from Step1 to Step2 </span></strong></p>
+<p>In class <strong>/FC1/BP_I_AH_ALL_MP</strong>, the BAdI implementation responsible for handling item changes has been modified in the <strong>UPDATE</strong> method.</p>
+<p>Previously, the BAdI method <strong>CHANGE_ITEM_DATA</strong> was invoked immediately before the database update of Manual Posting items. This method has now been <strong>removed</strong>.</p>
+<p>As a replacement, a new BAdI method <strong>ADD_ITEM_DATA</strong> has been introduced and is executed <strong>at the beginning of the UPDATE method</strong>. This method enables customers to implement their own logic to <strong>add items for a Single Manual Posting</strong> during the transition from <strong>Step 1 to Step 2</strong>. When implementing this method, customers must <strong>generate the Document ID for the items</strong> to allow further processing.</p>
+<p>If the <strong>ADD_ITEM_DATA</strong> BAdI method is implemented, customers should <strong>skip the standard logic</strong> that adds default items in Step 2 by setting the flag <strong>CV_SKIP_STANDARD</strong> within the <strong>ADD_ITEM_DATA</strong> method.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span style="font-size: 14px;">Financial Control, FCA App, Approval Hub</span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement this SAP note to enable attestation feature and Improved feature af Applications with bug Fixes.</p></div></div></div></div>

@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><br/>1. Field '<strong>Ultimate Destination</strong>' (/BEKA/UDU) on ASD Reference tab of Purchase Order is display-only and cannot be edited before sending SA1 message. This might be required for some scenarios.</p>
+<p>2. The value of the '<strong>Part Number (PNR)'</strong> field is swapped with the value of the '<strong>ManufactureR (MFC)'</strong> field in the '<strong>Manage Quotation Requests</strong>' app.</p>
+<p>3. When attempting to create a Purchase Requisition by clicking the '<strong>Create Purchase Requisition'</strong> button in the app '<strong>Manage Quotation Requests'</strong>, the system returns the error message <strong>E101(06)</strong> and the Purchase Requisition is not created.</p>
+<p>4. When sending multiple UNH segments in a single message, if the first segment has an error, it will get forwarded to the second segment, triggering an error on it.</p>
+<p><span style="font-size: 14px;">5. Answering messages </span>don't get displayed as a change message but get answered with a positive message automatically .</p>
+<p><span style="font-size: 14px;">6.Quantity update in SAP document doesn´t work for SD.</span></p>
+<p><span style="font-size: 14px;">7.Wrong recipient in ERRNLT</span></p>
+<p><span style="font-size: 14px;">8.SF1-messages with QTY:0 error</span></p>
+<p><span style="font-size: 14px;"> </span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><br/>1. Make '/BEKA/UDU' field (Ultimate Destination) on ASD Reference tab (screen 0200, '/BEKA/SAPLA_PO_SCREEN_ENH') editable via BAdI hook in 'change_screen' module before 'MODIFY SCREEN', replacing current display-only behavior.</p>
+<p>2.The fields descriptions have been corrected in the Metadata Extension, and from now on, they will be accurate.</p>
+<p>3. The supplier value passed to BAPI_PR_CREATE was adjusted to include leading zeros, and from now on this issue will no longer occur.</p>
+<p>4. Added CLEAR: ct_return in /BEKA/CL_A_AIF_INBOUND_MAP=&gt;PROCESS_INBOUND method, so the error from previous UNH segment wouldn't be forwarded to the next one.</p>
+<p>5. Removed the part that was setting to maint from AIF method /BEKA/IF_A_AIF_SPECIFIC~MAP_MESSAGE.</p>
+<p>6. Modified the quanitites of table vbep from /BEKA/SD_QT_FIELDS_SET , /BEKA/CL_A_ACT_CRT_SD_QUOT~CREATE_STANDARD_SALESQUOTATION , /BEKA/CL_IM_A_SD_SALES~UPDATE_QT_FIELDS , /BEKA/CL_IM_A_SD_SALES~IF_EX_BADI_SD_SALES~SAVE_DOCUMENT_PREPARE</p>
+<p>7. In method /BEKA/IF_A_ACTION_STEP~PROCESS class /BEKA/CL_A_ACT_SEND_ERRNLT:</p>
+<p>Line is added 'cs_output_message-asd_s2000m_outb-agency = ms_operation-agency.'</p>
+<p>8. A check is added in class: /BEKA/CL_A_AIF_INBOUND_MAP  method: OVERWRITE_PROPERTY that for SF1 message the QTY:0 should not return error.</p></div></div></div></div>

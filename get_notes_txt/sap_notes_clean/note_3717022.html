@@ -1,20 +1,119 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">The following payroll relevant corrections are delivered in this SAP Note:</p>
-<ul>
-<li>
-<p>Payroll calculations relevant corrections, valid from 2026.</p>
-</li>
-</ul>
-<p><em style="font-size: 14px;"><em>Details can be found in the attached summary.</em></em></p>
-<p><strong>Version information</strong></p>
-<p>Version 1: General availability</p>
+<ol id="__html0">
+<li>Improve misleading PCE log message for promotion validity check.</li>
+<li>Update Platform Dependencies.</li>
+<li>Transaction ID Mapping Logs Improved</li>
+<li>Move logging for division by zero in AbstractThresholdEligibilitySorter to silent mode</li>
+<li>Improved line item-related total discount proration</li>
+<li>Remove unnecessary sorting code for conflicting promotions</li>
+<li>Memory use improvements for large set of MHGs</li>
+<li>Improved performance of interval-related Mix and Match promotions</li>
+<li>Subsequent discount promotion with interval SITH eligibility and OR combined coupons is not applied</li>
+<li>Added missing checks for promotion manual trigger.</li>
+<li>Differences in the discount proration between sale and return transactions.</li>
+<li>Eligibility sorting</li>
+<li>Weighted items are considered incorrectly towards the system parameter calculationQuantityLimit</li>
+<li>Excessive discount share amount distribution corrected</li>
+<li>Virtual discount prevents the application of further promotion</li>
+<li>Incorrect mapping of line items from a ClientAPI request</li>
+<li>Corrected handling of negative external transaction-related modifier sequences</li>
+<li>Inconsistent behavior of fully priced promotions in case of externally applied discount</li>
+<li>Tx-related promotion doesn't consider external li-related modifiers</li>
+<li>Correction of handling a customer specific price that increases the price of a return item</li>
+<li>Promotion is not triggered after price increase by externally applied benefits</li>
+<li>External li-related points modifier without sequence doesn't prevent internal promotion to be applied.</li>
+<li>Extensibility: RebatePromotionConditionRuleSO customfield missing.</li>
+<li>Fixed Missing Coupon Modifier References</li>
+<li>Incorrect external modifier mapping in the ClientAPI response</li>
+<li>Tx-related external manual rule is not working as expected</li>
+<li>Corrected unexpectedly applied manually triggered promotion</li>
+<li>Fix missing ManualTriggerSequenceNumber in response</li>
+<li>Manual triggers that are referenced to external benefit are not registered to context.</li>
+</ol>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>R/3 HR CEE, Hungary, payroll 2026</p>
+<p id="">OPP, PPS</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>The prerequisite for the correction:<br/>HR-CEE/SAP_HR/S4HCM SP11/2025 - HR-CEE/SAP_HR/S4HCM SP02/2026<strong><br/></strong></p>
+<ol>
+<li>Improvement</li>
+<li>Improvement</li>
+<li>Improvement</li>
+<li>Improvement</li>
+<li>Improvement</li>
+<li>Improvement</li>
+<li>Improvement</li>
+<li>Improvement</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+<li>Bugfix</li>
+</ol>
+<p style="padding-left: 120px;"><span style="font-size: 14px;">
+<script language="JavaScript" src="/sap/public/bc/ur/sap_secu.js" type="text/javascript"></script>
+<br/><br/></span></p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>---------------------------------------------------------<br/><strong>Installation steps</strong><strong><br/></strong>---------------------------------------------------------</p>
-<p>The modifications consist of two parts:<br/>1. <em>Correction Instructions</em> (attached to SAP Note 3717028)<br/>2. <em>Correction Instructions</em> (attached to the current - 3717027 - SAP Note)<br/><br/><strong>1.</strong> Apply the <em>Correction Instructions</em> of SAP Note 3717028 with the <em>Note Assistant </em>(transaction SNOTE; more information on service.sap.com/note-assistant) and execute the further implementation steps in the SAP note.</p>
-<p><strong>IMPORTANT!<br/></strong>- Log on to the requested clients <strong>in HU language</strong> and run the newly created report in Update mode (in all requested clients): <strong>RPUUDOH0_MANDT</strong><strong>_3717028</strong><strong><br/></strong>(Depending on the SAP_BASIS release and SP level, SNOTE may handle the objects which the report tries to update. If so, running the report will display such objects as "Covered by SNOTE" and skip the object. In this case, SNOTE updates the relevant object.)<br/>- Make sure that the created or modified objects are all active.</p>
-<p><strong><strong><strong>2.</strong> </strong></strong>Apply the <em>Correction Instructions</em> of the current SAP Note (3717027) with the <em>Note Assistant </em>(transaction SNOTE; more information on service.sap.com/note-assistant).</p>
-<p>The modifications will also be delivered with the HR-CEE/SAP_HR/S4HCM SP03/2026 package (and the equivalent CLC package for Hungary).</p></div></div></div></div>
+<ol>
+<li>The logged information for invalid promotion in PCE has been improved. Given that the promotion can not be activated according to the master data settings as expected a debug level message is logged now instead of warnings. In addition the reported error message was improved to reflect what data field with which value was responsible for the invalidation. </li>
+<li>Update platform dependencies and GitLab definitions in the after_script for the logs zipping pattern.</li>
+<li>A TansactionID in the Client API request which is longer than the maximum permitted length will be truncated and the calculation will proceed. However previously an error was logged for unexpected length. The logging was improved to warning level instead of error, as no real error has occurred which would interrupt the calculation.</li>
+<li>Logging for division by zero in the AbstractThresholdEligibilitySorter has been moved to silent mode because it is expected situation when there are no triggering items. Warning message that occurred because of incorrect usage of SecureLogger has been fixed, as well.</li>
+<li>The total line item-related discount proration has been improved to apply the price derivation rule's rounding settings on all discount share values in case of distribution of excessive share amounts too.</li>
+<li>The code for sorting conflicting promotions contained fallback logic for use in case of two promotions with the same root eligibility identifiers. Since these identifiers must be unique in every promotion, the mentioned part of code was never used. This dead code was therefore removed.</li>
+<li>The memory consumption of the PCE calculation was optimized for the use case of having a large number of merchandise hierarchy groups processed by a single instance of the PCE.</li>
+<li>Performance of calculation of interval-related Mix and Match promotions with a logical AND combination of their rule matching items has been significantly improved. Previously, an internal bucket of transaction matching items collected for respective rule matching items was sorted in each interval, although the order has never changed. Now it's sorted only once, before processing the first interval. This improves performance especially in case of transaction matching items with high quantities.</li>
+<li>
+<p>Due to a bug in PCE, a subsequent discount promotion with an interval-related simple threshold eligibility logically AND combined with two or more mutually OR combined coupon eligibilities was not applied when the coupon consumption type codes were set to 00/CONSUME or 02/NOT_CONSUMED. This bug has been fixed. Additionally, coupon consumption in case of the consumption type code 00/CONSUME has been fixed so that the number of registered coupons controls the number of intervals that can be fulfilled by a promotion with subsequent discount. Previously, when subsequent discount has been defined, two such coupons registered made it possible to fulfill all intervals and the number of used coupons was always one. Since now, one coupon is necessary for each interval, same as when the rule does not define any subsequent discount.</p>
+</li>
+<li>Business error GKR-100506 is now returned when ManualTriggerSequenceNumber, ManualTriggerType or ManualTriggerValue is missing in the ClientAPI request. Business error GKR-100505 is now returned when ManualTriggerSequenceNumber is not unique in the context of the current line item.</li>
+<li>
+<p>Items for benefit proration should be always sorted ascending by their price, unless an applied promotion is transaction-related and the system parameter rebateShareMethod is set to STANDARD. However, in case of eligibility activation type for returns, return items for benefit proration should be sorted descending due to their negative prices. With this sorting logic, the order of corresponding items is exactly the same regardless of whether these are sold or return items and thus also potential proration correction is added to the same item(s). As a result, final transactions for sale and return without receipt are completely symmetrical if the same items are registered in both transactions and applied promotions are applicable for both sales and returns. Previously, sorting of items for position-related and transaction-related benefit proration was incorrect in case of eligibility activation type for returns. This could lead to small differences between corresponding sale and return transactions, although the total granted benefit was always the same. The sorting logic in all mentioned scenarios has now been fixed.</p>
+</li>
+<li>The processing of threshold eligibilities for rule application is done in a set order by eligibility type, then by threshold category (first non interval, then interval eligibilities). However in case of eligibilities of the same eligibility type and threshold sub type the order was not defined previously. A new EligibilitySorter extension point was introduced with a default sorting implementation to ensure predictable eligibility application order and to aim for maximizing the number of applicable eligibilities in an interval.</li>
+<li>Calculation of the overall item quantity has been corrected so that a decimal part of quantity of weighted items is considered as well. As a result, the actual overall item quantity of a ClientAPI request is checked against the system parameter calculationQuantityLimit.</li>
+<li>In case of the proration of line item-related total discounts which result in an excessive discount amount after proration, the excessive share amount must be distributed between items used by the current interval's calculation only. In case an item is only used for the interval with its partial available quantity, then only the used part may receive the discount share, meaning the maximum assignable discount share amount is equal to the calculation base amount of said part of the item - even if the total normalized item is worth more and even if the remainder of the item is then not used for any other calculation.</li>
+<li>Saving of trigger values in LineItemSummaryResult has been fixed in case there are considered values that are granted by virtual discount (promotion price derivation rule with discount method code for virtual discounts).</li>
+<li>Mapping of line items from the ClientAPI request format to the internal PCE data model has been corrected. Since now, target PriceModification and LoyaltyReward line items mapped from the source Discount and LoyaltyReward line items have the correct retailTransactionLineItemTypeCode value and they do no longer contain any SaleReturnLineItem objects. This correction of mapping does not change business logic in any way.</li>
+<li>The handling f externally applied transaction-related promotions which define a negative sequence has been corrected. After the fix there is no specific handling related to negative sequences, internal transaction-related promotions with higher sequences can be applied on top, other transaction-related internal promotions cannot.</li>
+<li>
+<div>
+<div>
+<p>Two bugs connected to fully priced promotions and externally applied discounts have been corrected in context of this issue. Previously, if a given transaction line item contained an externally applied retail price modifier providing non-zero monetary discount, then regular fully priced line item-related and result-related promotions were still applied by PCE on other not yet discounted line items, while fully priced transaction-related discounts were not applied at all. Since now, also the fully priced transaction-related promotions are applied on not yet discounted line items in the transaction, if there are any. Thanks to this change, behavior of all promotions is the same regardless of whether the modifier providing non-zero monetary discount on one line item was applied externally or internally by PCE.</p>
+<p>The second fix handles rare use cases where an externally applied retail price modifier providing non-zero monetary discount does not contain any applied quantity value. Previously, such modifier prevented further fully priced promotions on the whole transaction. Since now, such modifier only prevents fully priced promotions on the given line item, while other non-discounted line items in the transaction can still receive benefit from fully priced promotions applied by PCE.</p>
+</div>
+</div>
+</li>
+<li>A regular transaction-related promotion with a threshold eligibility did not consider an externally applied retail price modifiers coming from line item-related promotions. The bug has been fixed.</li>
+<li>The maximum possible item price calculation has been corrected for return items which have a customer specific price increase assigned. With the correction the possible price increase is also considered for eligibility evaluation, same as for sold items.</li>
+<li>PCE did not consider externally applied retail price modifiers that increase price during eligibility validation. This could lead to some promotions not being applied. The bug has been fixed.</li>
+<li>An externally applied frequent shopper points modifier with prorateFrom == null and without associated retail transaction price derivation rule is now considered as line item-related and prevents only line item-related promotions to be applied on top.</li>
+<li>Processing of promotion condition rules in GK context has been corrected so that XX custom fields that may be loaded from a DB are not lost and are available to custom extensions.</li>
+<li>Coupon modifier references are now correctly created for every coupon used in a non consumed way by an eligibility, even in case a previously applied eligibility already used the coupon in question with all available coupon count.</li>
+<li>Externally applied transaction-related modifier was mapped incorrectly in the ClientAPI response. The bug has been fixed.</li>
+<li>
+<div>
+<div>
+<p>The transaction-related manual trigger sequence addend is now added to the transaction-related condition sequence during condition validity check.</p>
+<p>If transaction-related external modifier doesn't have associated external price modification or loyalty reward line item and retail transaction price derivation rule, its sequence is considered as null and any line item or transaction-related database promotions can't be applied.</p>
+</div>
+</div>
+</li>
+<li>In case a single promotion was triggered by multiple manual triggers of the transaction (matching on both manual trigger type and value), then the promotion was applied for each trigger regardless of their calculation level. The issue has been fixed and thus line item level manual triggers may only trigger line item-related promotions, while transaction level triggers may only trigger transaction-related promotions.</li>
+<li>Fixed missing ManualTriggerSequenceNumber in FrequentShopperPointsModifier that has been granted by the transaction-related promotion price derivation rule.</li>
+<li>Any manual trigger which is associated with externally applied modifier is registered to context from now and can trigger any further internal promotion if its sequence is higher that a sum of externally applied manual promotion sequence and a manual trigger sequence addend. If a transaction with already applied manual promotion was suspended and recalculated again, the same manual promotion is not applied due to correct handling of the promotion sequence and manual trigger addend.</li>
+</ol></div></div></div></div>

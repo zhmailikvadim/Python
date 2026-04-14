@@ -1,0 +1,92 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0"><span style="font-size: 10pt;">There are one or more of the following errors in SAP systems, traces, or logs:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>received a fatal TLS certificate unknown alert message from the peer</code></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>ssslerr_no_context_yet</code></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">SSL handshake failures during RFC, HTTP, HTTPS, or ICM communication</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Connection termination without a clear application-level error</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">SSL-related short dumps or trace entries in dev_icm, dev_w*, SM21, or network traces</span></p>
+</li></ul>
+<p><span style="font-size: 10pt;">These errors often lead to confusion, as similar messages can appear across multiple components and communication scenarios.</span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP NetWeaver</li><li>SAP NetWeaver Application Server for SAP S/4HANA</li><li>ABAP PLATFORM - Application Server ABAP</li><li>Operating System independent</li><li>Database independent</li><li>ICM / SAP Web Dispatcher</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Certificate trust issues:</span>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">Server certificate is self-signed or signed by a CA that is not trusted by the peer</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Required CA certificates are missing from transaction STRUST</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Certificate chain is incomplete</span></li></ul>
+</li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Missing or inconsistent SSL configuration:</span>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">SSL client or server PSE not correctly assigned</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Incorrect SSL profile used in communication</span></li></ul>
+</li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Cross-component communication issues:</span>
+<ul><li style="font-size: 10pt;"><span style="font-size: 10pt;">The SAP system communicates with another system or via a SAP Web Dispatcher</span></li><li style="font-size: 10pt;"><span style="font-size: 10pt;">Each component has its own trust store and one side trusts the certificate, the other does not </span></li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><span style="font-size: 10pt;">TLS communication consists of two critical phases:</span></p>
+<ol><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Handshake phase</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The client and server negotiate encryption</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Certificates are exchanged and validated</span></p>
+</li></ul>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Data exchange phase</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Encrypted communication begins</span></p>
+</li></ul>
+</li></ol>
+<p><span style="font-size: 10pt;">The errors listed above occur before application data is exchanged, meaning:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">The problem is not caused by business logic</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">It is almost always related to certificate trust or SSL configuration</span></p>
+</li></ul>
+<p></p>
+<p><span style="font-size: 10pt;">Before opening a support case, verify the following: </span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Identify the communication direction</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Who is the client?</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Who is the server?</span></p>
+</li></ul>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Check certificate trust</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Is the server certificate signed by a CA that is trusted by the client?</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Is the full certificate chain available?</span></p>
+</li></ul>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Validate STRUST configuration</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Correct PSE type used</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">CA certificates imported</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Changes saved and distributed</span></p>
+</li></ul>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Review traces</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;"><code>dev_icm</code></span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Other work process traces that are involved in the communication scenario</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">SM21 system log</span></p>
+</li></ul>
+</li></ul>
+<p style="font-size: 10pt;"></p>
+<p><span style="font-size: 10pt;">If the issue persists after verifying:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Certificate trust</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">STRUST configuration</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Correct SSL profile usage</span></p>
+</li></ul>
+<p><span style="font-size: 10pt;">Then open a support case and include:</span></p>
+<ul><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Exact error message</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Communication direction</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Relevant trace excerpts</span></p>
+</li><li style="font-size: 10pt;">
+<p><span style="font-size: 10pt;">Certificate details (without sensitive private key data)</span></p>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>SAP Note - <a href="https://me.sap.com/notes/510007" rel="noopener noreferrer nofollow" target="_blank">510007</a> - Additional considerations about setting up SSL on Application Server ABAP</li><li>KBA - <a href="https://me.sap.com/notes/0002942034" rel="noopener noreferrer nofollow" target="_blank">2942034</a> - "received a fatal TLS certificate unknown alert message from the peer"</li><li>SAP Help: <a href="https://wiki.scn.sap.com/wiki/x/tIahG" rel="noopener noreferrer nofollow" target="_blank">Managing PSE files at the Web Dispatcher</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>received a fatal TLS certificate unknown alert message from the peer; ssslerr_no_context_yet; TLS handshake failed; SSL handshake failed; certificate unknown; certificate trust issue; SSL certificate trust, TLS certificate trust, STRUST, SSL PSE, ICM SSL, TLS cert error, SSL cert error, certificate not trusted, SSL handshake</p></div></div></div></div>

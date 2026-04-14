@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Transaction: O3URV_DOC</p>
+<p>Valuation document is rejecting with reason code 28B -'CA VOLUMES NOT FOUND FOR VL TRANSACTION KEY' in following scenario:</p>
+<ul>
+<li>Delivery network producing extracted carbon dioxide (CO2).</li>
+<li>Volumes are booked at CA level with allocation method 'Sales Point Originated'.</li>
+<li>Contract level allocation in Valuation.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<ul>
+<li><strong>General keywords:</strong> IS-Oil, Industry Solution, IS-OIL-PRA, Upstream Oil and Gas, Production and Revenue Accounting</li>
+<li><strong>Problem specific key words:</strong> EP207, Product code 207, extracted carbon dioxide, CO2, Reject reason 28B, Gaseous plant product, No Wet gas, Contract level scenario, Sales Point Originated</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error</p>
+<p>CO2 volumes are updated in the table OIU_SB_RNEWC while processing the Contractual Allocation, and this changes were implemented through SAP Note 2732999.</p>
+<p>In the current scenario, for the DN with only CO2 volumes (EP207), VL is unable to fetch the volumes from the table OIU_SB_RNEWC which leads to Zero Volume rejects.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached correction instructions to resolve the issue.</p></div></div></div></div>

@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Customers report that users with hybrid authentication profiles (social login + site password) receive 403007 Permission Denied errors when logging in via social providers (Facebook, Apple, Google) if the linked local password has expired.</p>
+<p>This prevents the application from retrieving account information (<code>getAccountInfo</code>) and triggers automatic logout by the SDK.</p>
+<p>Example Error Message:</p>
+<pre><code>errorCode: 403007
+errorMessage: "Permission Denied"</code></pre><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The SDK and backend enforce the site’s password expiration policy for all accounts with local passwords, including hybrid social accounts. Social login does not bypass the local password check in these SDK versions.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>
+<p>Backend Social Login Flow</p>
+<ul><li>
+<p>Authenticate users with the social provider token via your backend.</p>
+</li><li>
+<p>Call CDC REST API <code>accounts.socialLogin</code> directly.</p>
+</li><li>
+<p>Inspect the response for expired local passwords and route users to a password reset/change flow.</p>
+</li></ul>
+</li><li>
+<p>Adjust Password Policy</p>
+<ul><li>
+<p>Remove or extend password expiration for hybrid users if possible.</p>
+</li></ul>
+</li><li>
+<p>Passwordless / OTP Migration</p>
+<ul><li>
+<p>Convert hybrid users to passwordless or OTP flows to avoid local password validation.</p>
+</li></ul>
+</li></ol>
+<p>Proposed Feature Request:</p>
+<ul><li>
+<p>Add SDK support to allow social login to bypass expired local password checks, or provide a callback to intercept internal validation before logout.</p>
+</li></ul></div></div></div></div>

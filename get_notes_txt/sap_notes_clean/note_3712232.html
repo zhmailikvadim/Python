@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">During the execution of RDD* jobs (for example job RDDDIS0L), you find error message<span style="background-  font-style: italic;"><br/></span></p>
+<p><span class="SNO_DNT" style="float: none;" translate="no">BY2 Database error 100 at EXE</span></p>
+<p>in the kernel developer trace.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">HDB_DBSL_CHECK_SCALEOUT</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>With SAP Note <a href="/notes/3486167" target="_blank">3486167</a>, SAP HANA scale-out systems are better supported in the ABAP dictionary. Thus the ABAP Dictionary code has to determine, whether the system is a scale-out system. This action is done by calling a pseudo-procedure HDB_DBSL_CHECK_SCALEOUT, which in turn does a select on SYS.M_LANDSCAPE_HOST_CONFIGURATION. In case the system is not a scale-out system, no rows are returned from that select, which causes the <span class="SNO_DNT" style="float: none;" translate="no">BY2</span> trace error message. See also SAP KBA <a href="/notes/3604933" target="_blank">3604933</a>.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>You can safely ignore these error messages in trace.</p></div></div></div></div>

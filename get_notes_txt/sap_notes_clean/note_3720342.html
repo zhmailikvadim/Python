@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3720342&amp;TargetLanguage=EN&amp;Component=PY-DE-BA&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3720342/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3720342/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>When you execute the report <em>SI: Transfer to SI Procedures </em> (RP_PAYDE_B2A_SV_UNPACK), the system issues one of the following error messages for data packages with initial user data:</p>
+<ul>
+<li><strong>Without DB update</strong>: "<em>Confirmation of other errors: DATEIKZ= (&lt;DTART&gt;/&lt;BNRAG&gt;/&lt;BNRKK&gt;/000000), HRPAYDEB2A613, Unknown return type (SVRTY=) occurred. (The return types 1 to 5 are known.)</em>" (HRPAYDEB2A 613)<br/><br/></li>
+<li><strong>With DB update: </strong></li>
+<ul>
+<li><strong>"</strong><em>Quarantine due to alternative file number (&lt;DTART&gt;/&lt;BNRAG&gt;/&lt;BNRKK&gt;/000000): File number 000000 is not the next file number &lt;DATNR&gt;</em>" (HRPAYDEB2A 607)<br/><br/>or<br/><br/></li>
+<li>"<em>File sequence number &lt;DTART&gt;/&lt;BNRKK&gt;/&lt;DATNR&gt; for PA/PTB &lt;WERKS&gt;/&lt;BTRTL&gt; already processed</em>" (HRPAYDEB2A 006).</li>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>The retrieved data package does not contain any user data. Instead, an error confirmation with a return code that starts with "E", such as <em>E433 -</em> <em>file structure, is not recognizable or does not correspond to the specifications in the</em> PackageHeader.</p>
+<p>The reason for this is that the corresponding outbound notification could not be processed by the receiving office.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package. After you import the HR Support Package or implement the correction instructions, you do not have to perform any further follow-on activities.</p>
+<p>After you implement the corrections, the system issues a corresponding error message with a long text about how to solve the problem.</p></div></div></div></div></div>

@@ -1,0 +1,65 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3720484&amp;TargetLanguage=EN&amp;Component=HAN-DP-SDI&amp;SourceLanguage=ZH&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3720484/1" style="color:var(--sapLinkColor);" target="_blank">/notes/3720484/1</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="症状">Symptom</h3>
+<p><span style="font-size: 10px;">Often, you’ll find the row count in the target table is much higher than in the source table.</span></p>
+<div></div>
+<div></div>
+<h3 class="section" data-toc-skip="" id="原因和前提">Reasons and Prerequisites</h3>
+<div>
+<div>When you’ve ruled out replication latency as the cause of these disruptions.</div>
+<div>Tables in ECC often use CHAR as the primary key, but user input may be NULL, a single space, or multiple spaces.</div>
+<div>These differences are hard to spot visually, yet they can cause errors for UPDATE and DELETE operations based on the primary key in SAP HANA.</div>
+<div>because SAP HANA does not automatically trim extra spaces.</div>
+<div>To standardize the data, we introduced the following option to automatically trim data from the ECC tables so SQL comparisons are consistent.</div>
+<br/>
+<div>Trim the training spaces</div>
+<br/>
+<div>Set this parameter to True to trim training spaces from strings for both primary key and non-primary key columns. The default value is False.</div>
+<br/>
+<div>For example, “A 1” is trimmed to “ A 1”, and “ ” is trimmed to “”.</div>
+<br/>
+<div>Note:</div>
+<div>For transparent tables, only fully empty space is trimmed.</div>
+<br/><br/>
+<div>https://help.sap.com/docs/HANA_SMART_DATA_INTEGRATION/018757bb7f5c4700a8840976c8730f34/5efae2be23fd436d9746ab7241972fe1.html? locale=en-US&amp;state=PRODUCTION&amp;version=2.0_SPS08&amp;q=ssl</div>
+<br/>
+<div></div>
+</div>
+<h3 class="section" data-toc-skip="" id="解决方案">Solution</h3>
+<p><span style="font-size: 10px;"># You can check the remote source configuration in SAP HANA to confirm whether this parameter is set to true or false.</span></p>
+<p><span style="font-size: 10px;">select connection_info from remote_sources where remote_source_name='your_remote_source_name'</span></p>
+<p><span style="font-size: 10px;">To obtain the complete remote source description, please increase the "Limit for LOB columns (Bytes)" in the settings, for example, increase it to 10000.</span></p>
+<p><span style="font-size: 10px;">if you are using a web IDE, You can refer Settings -&gt; General -&gt; Limit for LOB columns (Bytes) to increase the limit.</span></p>
+<div>if you are using a SAP HANA Studio, You can refer to the Preferences -&gt; SAP HANA -&gt; Runtime -&gt; Result -&gt; Limit for LOB columns (Bytes) to increase the limit (Please select "Enable zoom of LOB columns" checkbox)</div>
+<p><span style="font-size: 10px;">Or you directly check the screenshot of the remote source configuration in SAP HANA Studio or Web IDE.</span></p>
+<p><span style="font-size: 10px;"># Verifying the missing (UPDATE/DELETE) operation**</span></p>
+<p><span style="font-size: 10px;">## For row count mismatch according to DELETE operation</span></p>
+<div>If such table is not a big table, you can perform the following sql to check who the row is missing according to the primary key:</div>
+<p><span style="font-size: 10px;">For example:</span></p>
+<div>hana sql</div>
+<div>SELECT y.*</div>
+<div>FROM "your_A522_target_table" y</div>
+<div>WHERE NOT EXISTS (</div>
+<div>SELECT 1</div>
+<div>FROM "your_A522_virtual_table" x</div>
+<div>WHERE x."MANDT" = y."MANDT" and x."KAPPL" = y."KAPPL" and x."KSCHL" = y."KSCHL" and x."MATNR" = y."MATNR" and x."KFRST" = y."KFRST" and x."DATBI" = y."DATBI"</div>
+<div>);</div>
+<div>```</div>
+<p><span style="font-size: 10px;">## For row data mismatch according to UPDATE operation</span></p>
+<div>Please execute the following check to verify whatever any primary key field contains **blank values** (spaces but not truly empty):</div>
+<p><span style="font-size: 10px;">sql</span></p>
+<div>SELECT your_primary_key_list</div>
+<div>FROM your_virtual_table_on_A522</div>
+<div>WHERE</div>
+<div>(TRIM(your_primarykey1) =''AND your_primarykey1 &lt;&gt;'')</div>
+<div>OR (TRIM(your_primarykey2) =''AND your_primarykey2 &lt;&gt;'')</div>
+<div>OR ...</div>
+<div>```</div>
+<p><span style="font-size: 10px;">Also, You check whether the remote source is using pk_only(primary key only), but capture_before_after_images is not set to true?</span></p>
+<div>If there are updates to the primary key columns (including column like MANDT,KAPPL etc), the DPAgent will not capture these changes, which can lead to data inconsistency in the target system.</div>
+<div>If you confirm these data mismatches are used by spaces in the primary key.</div>
+<div>Please consider setting the remote source parameter “Trim the training spaces” to true to avoid such issues after suspend the replication.</div>
+<p><span style="font-size: 10px;">If you change it from **false → true**,</span></p>
+<div>you must:</div>
+<p><span style="font-size: 10px;">1.**Empty the target table**,</span></p>
+<div>2.**Reload target table** from the source,</div>
+<div>3.**Restart replication**.</div>
+<p><span style="font-size: 10px;">This ensures consistent key handling without trailing-space mismatches.</span></p></div></div></div></div></div>

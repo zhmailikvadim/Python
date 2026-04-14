@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Customer Odata endpoint has the following table metadata:</p>
+<p>    &lt;EntityType Name="Documents"&gt;</p>
+<p>        &lt;Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/&gt;<br/>        &lt;Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/&gt;</p>
+<p>SQL SELECT ..., "createdAt", "modifiedAt", ... FROM "Documents" LIMIT 1000</p>
+<p>returns json response with Timestamp values<br/> "createdAt": "2025-03-11T14:47:13.741581800Z",<br/> "modifiedAt": "2023-07-04T08:21:28.777473400Z",</p>
+<p>DPAdapterSDK::AdapterException is thrown with error "Subsecond out of range while initializing timestamp".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>OData, ODataAdapter, SDK, exception, timestamp</p>
+<p><strong>Environment:</strong></p>
+<div class="longtext">
+<p>SAP HANA Cloud Edition CE 2025.40.10</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The JSON response for the Timestamp columns returned value with 9-digit subsecond<br/> "createdAt": "2025-03-11T14:47:13.741581800Z",<br/> "modifiedAt": "2023-07-04T08:21:28.777473400Z",</p>
+<p>DP AdapterSDK Timestamp data type expects subsecond value in range of 0-9999999. Both 741581800 and 777473400 are &gt; 9999999.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>As HANA Timestamp data type only supports fractional seconds with up to 7 digits (FF7), the DP AdapterSDK Timestamp data type will be updated to truncate subsecond values &gt; 9999999.</p>
+<p>The correction will be delivered and the release(s) will be listed in Support Packages &amp; Patches section of this SAP Note when available.</p>
+<p> </p></div></div></div></div>

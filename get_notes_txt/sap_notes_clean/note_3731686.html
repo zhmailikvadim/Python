@@ -1,0 +1,92 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In payroll function SKJVS results from Annual tax clearing (report HSKCDPRZ) are taken for payroll processing. This payroll function SKJVS should properly process all Annual tax clearing (RZD) results.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Payroll function SKJVS, Annual tax clearing, RZD, child bonus.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is relevant only for Slovakia (HRSK).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Payroll function SKJVS aligned to process Annual tax clearing results in payroll calculation as shown below.</p>
+<p>In general, these combinations can occur:</p>
+<p><strong>A) RZD finishes with overpayment (RZD row 22 &lt; 0) or RZD finishes with underpayment (row 22 &gt; 0) but deduction from PY is activated (P0257-TTFB401 = 'X')</strong></p>
+<p>Then, these wage types are written into payroll:<br/>/403 - value from row 22 of RZD<br/>/424 - value from row 9 - row 10<br/>/423 - value from row 7 - row 8<br/>/426 - value from row 15</p>
+<p> </p>
+<p><strong>B) RZD finishes with underpayment (row 22 &gt; 0) and deduction from PY is NOT activated (P0257-TTFB401 = '')</strong></p>
+<p>We calculate 'Positive RZD remainder' (tax bonus, employee premium, mortgage, unadjusted tax) as:</p>
+<ul>
+<li>Positive RZD remainder = row 11 + (if positive: (row 7 - row 8)) + (if positive: row 15) + row 20</li>
+</ul>
+<p>Then, if wage types /424, /423, /426 are POSITIVE, those are written into payroll in a same way as in case A). Also, wage type /413 is used instead of /403:<br/>/413 - value from row 22 of RZD<br/>/424 - value from row 9 - row 10<br/>/423 - value from row 7 - row 8<br/>/426 - value from row 15</p>
+<p>If /424, /423, /426 is negative, we first clear/compare it against Positive RZD remainder (from above). If Positive RZD remainder is higher than absolute value of e.g. /424, we keep /424 unchanged (keep full negative value) and just lower Positive RZD remainder by absolute value of /424. If the Positive RZD remainder is lower than absolute value of e.g. /424, we reduce /424 up to the remainer (and write into /424.AMT) and full (original) negative value we store into /424.RTE. Then, we lower Positive RZD remainder by used value and perform the same process with /423 and /426.</p>
+<p> </p>
+<p><strong>Example:</strong></p>
+<p>RZD has following results (and PY deduction is not applied: P0257-TTFB401 = ''):</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>r.22(a)</td>
+<td>1 218,23</td>
+<td>(underpayment)</td>
+</tr>
+<tr>
+<td>r.13</td>
+<td>-1 430,44</td>
+<td>(underpayment)</td>
+</tr>
+<tr>
+<td>r.7</td>
+<td>     -22,00</td>
+<td>(underpayment)</td>
+</tr>
+<tr>
+<td>r.15</td>
+<td>    200,00</td>
+<td>(overpayment)</td>
+</tr>
+<tr>
+<td>r.20</td>
+<td>      34,21</td>
+<td>(overpayment)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Positive RZD remainder = row 11 + (if positive: (row 7 - row 8)) + (if positive: row 15) + row 20 = 0 + 0 + 200 + 34,21 = <strong>234,21</strong></p>
+<p>Result in payroll calculation would be:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td> WT</td>
+<td>   Name</td>
+<td>    RTE</td>
+<td>    AMT</td>
+</tr>
+<tr>
+<td>/413</td>
+<td>Roč.zúčt.d.</td>
+<td> </td>
+<td>1 218,23</td>
+</tr>
+<tr>
+<td>/424</td>
+<td>Daň.bon.</td>
+<td>-1 430,44</td>
+<td>  -234,21 </td>
+</tr>
+<tr>
+<td>/423</td>
+<td>ZP</td>
+<td>    -22,00</td>
+<td>       0,00</td>
+</tr>
+<tr>
+<td>/426</td>
+<td>DB na zapl.ú.</td>
+<td> </td>
+<td>   200,00</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong> </strong></p>
+<p><strong>Implementation<br/></strong></p>
+<ul>
+<li>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install a solution earlier, use the Note Assistant to implement the correction instruction. You can find more information about the Note Assistant in SAP Service Marketplace, under <em><strong>service.sap.com/note-assistant</strong></em>. </li>
+</ul></div></div></div></div>

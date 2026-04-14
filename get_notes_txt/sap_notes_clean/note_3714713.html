@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>In scenarios where program <strong>LIPS_FUELLEN_WERK</strong> (include <strong>SAPFV50P</strong>) is executed, errors raised inside the routine are <strong>not propagated back to the caller</strong>.<br/>The system continues further processing even after a critical error occurs. This leads to:</p>
+<ul>
+<li><strong>Short dumps</strong></li>
+<li><strong>Missing application log entries</strong></li>
+<li>No meaningful error information for the user</li>
+</ul>
+</div>
+<div>
+<p>This makes it difficult for users to understand the root cause of the issue.</p>
+<p>Example error message not returned to the caller:<br/><strong>VL027 – Shipping from shipping point &amp; and plant &amp; is not possible.</strong></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><strong>GN_DELIVERY_CREATE, OUTBOUND_DELIVERY, NJIT, LE-SHP-GF</strong></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>A program error caused the SY‑SUBRC result of LIPS_FUELLEN_WERK to not be returned to the caller.<br/>Because the caller did not receive the error status, it continued processing instead of stopping, leading to runtime short dumps and missing or incomplete application logs.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the correction instructions attached to this SAP Note or Upgrade to the latest available release, where the corrected coding is already included.</p></div></div></div></div>

@@ -1,0 +1,137 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The note is to introduce <strong>'MM Data Browser'</strong> tool (Report <strong>MM_DATABRW</strong>).</p>
+<p>This tool <strong>eliminates the need to extract tables individually in separate SE16 sessions</strong> when working with Material Management purchasing and services data. It consolidates all related tables into a single, unified view, making them immediately available for analysis.</p>
+<p>While it does not modify data or resolve issues on its own, it speeds up investigations by presenting all relevant information for a given business document at a glance with just a few clicks. Its purpose is to streamline daily work and incident resolution in the MM area for materials and services documents.</p>
+<p>Business Documents currently covered by tool are: - Purchase Orders, Contracts, Purchase Requisitions, Service Entry Sheets, Good Receipts, Invoices.</p>
+<p><span style="text-decoration: underline;"><strong>Functionalities:-</strong></span></p>
+<ul>
+<li>Display data from several related tables relevant for analysis of issues for Purchase Orders, Contracts, Purchase Requisitions, Service Entry Sheets, Good Receipts and Invoices in one view.</li>
+<li>Navigating to the data of related business documents from Purcahse Order.</li>
+<li>Filter all the data for a particular item.</li>
+<li>In case of Service Procurement, filter all the data for a particular Service line.</li>
+<li>In case of hierarchical services, a click on a PACKNO will show the hierarchy of services under that node and all the associated data with one click.</li>
+</ul>
+<p><span style="text-decoration: underline;">Disclaimer</span>: No issues would be addressed on the report itself, as its a tool for analysis of issues and not a standard product.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>MM_DATABRW, Tool, Utility, Data Browser, Goods Receipt, GR, Service Entry Sheet, SES, Purchase Order, PO, Purchase Requisition PR, Contract, Invoice, Material Management, Service Procurement.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Prerequisites:</strong></p>
+<p>Authorizations needed : SE16 transaction, S_DEVELOP</p>
+<p>There is a need for analysis of database tables of MM area on a regular basis for customer incidents in the area of Material Management. The extraction of data manually from SE16 transactions consumes time and repetitive tasks for almost all incidents at several levels like Technical support team Development support team and customers.</p>
+<p>Extracting these data also results into session timeouts several times, resulting in redoing the entire process.</p>
+<p>The tool would be helpful to reduce the overall time for all the above scenarios to almost negligible, thus help in starting the actual analysis of the issues much faster.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Execute report MM_DATABRW</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><span style="text-decoration: underline;"><strong>Feature</strong></span></td>
+<td><strong><span style="text-decoration: underline;">Steps</span></strong></td>
+<td><strong><span style="text-decoration: underline;">Result</span></strong></td>
+</tr>
+<tr>
+<td>Data Display (Report Execution)</td>
+<td>
+<p>Select the Business Object (Purchase Order, Contract, Purchase Requisition, Service Entry Sheet)</p>
+<p>Enter the Document No. for the above selected object</p>
+<p>Execute</p>
+</td>
+<td>
+<p>All necessary table data is immediately displayed for all Items/Services</p>
+<p>Color Coding:</p>
+<p>Yellow  : Key Fields <br/>Orange : Other important fields for table relationships<br/>Green   : Fields from 'Highlight Columns' filled in selection screen.</p>
+</td>
+</tr>
+<tr>
+<td>Filter data for a Document Item</td>
+<td>
+<p>Click on a value in column EKPO-EBELP to filter data for Purchase Order / Contract.</p>
+<p>Click on a value in column EBAN-BNFPO to filter data for Purchase Requisition.</p>
+</td>
+<td>All the data displayed is only relevant for this particular item</td>
+</tr>
+<tr>
+<td>Filter data for Service Lines</td>
+<td>
+<p>Click on a value in column ESLL-PACKNO for Purchase Order / Contract / Service Entry Sheet / Purchase Requisition</p>
+</td>
+<td>
+<p>All the data displayed is only relevant for this particular service.</p>
+<p>If the PACKAGE is 'X' for the PACKNO, it will display data for the services that belongs to its SUB_PACKNO.</p>
+</td>
+</tr>
+<tr>
+<td>Navigate to SES/INV/GR from EKBE table.</td>
+<td>
+<p>Click on a value in column EKBE-BELNR or EKBE_MA-BELNR from any Business Object, where EKBE is displayed in the output.</p>
+</td>
+<td>The report will display all necessary table data for the corresponding GR / INV / SES</td>
+</tr>
+<tr>
+<td>
+<p>Other Selections: Display Tables</p>
+</td>
+<td>
+<p>Mention few relevant table names for the selected Business Object from the drop down. Example for Purchase Order type (EKBE ESLL EKPO)</p>
+</td>
+<td>Only the mentioned tables are displayed, in the same order as they typed.</td>
+</tr>
+<tr>
+<td>
+<p>Other Selections: Highlight Columns (Up to 3)</p>
+</td>
+<td>
+<p>You could type any columns names up to 3, belonging to any tables.</p>
+<p>Example: NETWR MENGE PACKNO</p>
+</td>
+<td>
+<p>The mentioned columns will start to display immediately after the Key columns, in the tables where they are present.</p>
+<p>They will be highlighted in a color different from other columns.</p>
+</td>
+</tr>
+<tr>
+<td>Other Selections: Rows displayed per table</td>
+<td>
+<p>Example: 20</p>
+</td>
+<td>
+<p>Maximum 20 rows of any table will be displayed on the screen.</p>
+<p>If 'Total rows fetched' is 45</p>
+<p>A clickable line "------&gt; show more 25 " will start appearing.</p>
+<p>On click of "------&gt; show more 25 "  the table will display all 45 rows.</p>
+</td>
+</tr>
+<tr>
+<td>Other Selections: Hide Field Names</td>
+<td>Checkbox</td>
+<td>
+<p>If checked, the field descriptions are hidden, only technical names are displayed for all tables</p>
+<p>If un-checked, both field descriptions and technical names are displayed for all tables.</p>
+</td>
+</tr>
+<tr>
+<td>Other Selections: Hide Empty columns</td>
+<td>Checkbox</td>
+<td>
+<p>If checked, all columns having no values for any row is hidden.</p>
+</td>
+</tr>
+<tr>
+<td>Other Selections: Hide Empty tables</td>
+<td>Checkbox</td>
+<td>
+<p>If checked, all tables having no rows is hidden.</p>
+</td>
+</tr>
+<tr>
+<td>Huge Data Handling</td>
+<td>Enter an item number for document to restrict the time taken for loading.</td>
+<td>On very huge data, a popup would appear that suggests to enter the Item Number in the initial screen.</td>
+</tr>
+<tr>
+<td>Suggestions</td>
+<td>Use Variants to save all Optional parameter selections for future.</td>
+<td> </td>
+</tr>
+</tbody>
+</table></div></div></div></div></div>

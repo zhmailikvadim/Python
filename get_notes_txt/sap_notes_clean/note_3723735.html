@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You have stocks with and without SLED in your warehouse. Selecting specifically stocks without SLED is possible with note 3310048, However, the same problem occurs for the Latest Delivery Date selection.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>LDD VFDAT S_LDD</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program Error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the code correction</p>
+<p>Please note that the correction might require your selection variants, as it does not automatically exclude the empty SLED. For instance if your selection is:</p>
+<p>Latest Delivery Date &lt;= Today</p>
+<p>Then, the empty VFDAT will fall into this selection. You could for instance change this selection to:</p>
+<p>Latest Delivery Date between 01.01.1900 and Today</p>
+<p>Alternatively, you may exclude the initial SLED (00.00.0000) in the select-options, if you want to keep the stocks with empty SLED unconsidered.</p></div></div></div></div>

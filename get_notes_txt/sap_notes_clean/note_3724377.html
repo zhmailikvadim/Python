@@ -1,8 +1,8 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">When you use integration scenarios between Transportation Management and Product Compliance in SAP S/4HANA, the system uses different interface structures for EDI data exchange for the different feature pack stacks for SAP S/4HANA 2025. As a result, data retrieval and processing of data from Product Compliance in Transportation Management processes do not follow a unified pattern across different feature stack packs.</p>
+<p id="__html0">When you try to add a constraint period or product in the object page view of app F4449 Define Flexible Constraints, you are presented with an error message about a malformed URI and nothing is changed.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>Transportation Management, Product Compliance, Electronic Data Interchange (EDI), Interface</p>
+<p>F4449, Define Flexible Constraints, pMRP, predictive MRP, material requirements planning, malformed URI, add period, add product</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>The system uses different interface patterns for EDI data exchange between Transportation Management and Product Compliance components, which leads to inconsistent integration behavior for the different service pack stacks for SAP S/4HANA 2025.</p>
+<p>The way the parameters for the OData call were being extracted was not robust enough.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>After implementing this SAP Note, the system uses harmonized interfaces for EDI calls between Transportation Management and Product Compliance. The IF_EHFND_TM_INTGR_COMP interface with the GET_EDI_STRUCTURE method and the IF_EHFND_PCLD_DAC interface with the READ_PCLD_DATA_BY_UUIDS method now provide consistent data structure handling across the service pack stacks.</p></div></div></div></div>
+<p>This SAP note makes the extraction of the parameters more robust.</p></div></div></div></div>

@@ -1,0 +1,52 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>When you manually move partitions, the partitions end up on a single <span class="SNO_DNT" style="float: none;" translate="no">NUMA</span> node of the target host.</p>
+<p>Whether you run <span class="SNO_DNT" style="float: none;" translate="no">ALTER TABLE &lt;TABLE_NAME&gt; MOVE PARTITION &lt;PARTITION_ID&gt; TO LOCATION '&lt;HOST:PORT&gt;';</span> or perform the move using administration tools, the moved partitions are placed on the same <span class="SNO_DNT" style="float: none;" translate="no">NUMA</span> node.</p>
+<p>You can confirm it by checking the <span class="SNO_DNT" style="float: none;" translate="no">NUMA_NODE_INDEX</span> column in the <span class="SNO_DNT" style="float: none;" translate="no">M_CS_COLUMNS</span> monitoring view.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>NUMA, Partition</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 356353</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, the metadata for the partition information does not update during the manual move of the partitions.</p>
+<p>Resulting in the manual movement of partitions to end up in the same <span class="SNO_DNT" style="float: none;" translate="no">NUMA</span> node.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS00 - SPS06</li>
+<li>Revisions &lt;= 079.09 (SPS07)</li>
+<li>Revisions &lt;= 089.01 (SPS08)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>The HANA system is a scale-out configuration.</li>
+<li>Partitions are moved between different hosts.</li>
+<li>The target host has 2 or more <span class="SNO_DNT" style="float: none;" translate="no">NUMA</span> nodes.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions of SPS07: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+</ul>
+</li>
+</ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>After alter/move is completed, unload and reload the table from memory.</li>
+</ul>
+<ul>
+<ul><ol>
+<li><span class="SNO_DNT" style="float: none;" translate="no">UNLOAD &lt;SCHEMA&gt;.&lt;TABLE&gt;</span></li>
+<li><span class="SNO_DNT" style="float: none;" translate="no">LOAD &lt;SCHEMA&gt;.&lt;TABLE&gt; ALL</span></li>
+</ol></ul>
+</ul>
+<ul>
+<li>After the reload, check the <span class="SNO_DNT" style="float: none;" translate="no">NUMA</span> distribution of partitions using <span class="SNO_DNT" style="float: none;" translate="no">M_CS_COLUMNS</span></li>
+</ul>
+<p><strong> </strong></p></div></div></div></div>

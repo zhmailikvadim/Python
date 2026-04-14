@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">In the process "End of Supply for Gas (DSO View)" (DE_B_GELIGAS_EOS_DSO), step 8940 triggers the outdated version 2310 of the linked Start of Backup Supply (SBS) process instead of the latest version 2604.</p>
+<p id="__html0">This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">End of Supply, Gas, GPKE, DE_B_GELIGAS_EOS_DSO, DE_B_GELIGAS_DSO_SBS, Backup Supply, linked process version, 2310, 2604, step 8940</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because version 2310 was hardcoded in the linked process version field at step 8940.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system triggers the latest version (2604) of the process "Start of Backup Supply for Gas (DSO View)" (DE_B_GELIGAS_DSO_SBS) from the End of Supply process. You need to retrigger the Start of Backup Supply step. You can verify the fix by checking that the latest version of the SBS process (2604) is triggered.</p></div></div></div></div>

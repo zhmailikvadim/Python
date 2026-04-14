@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The database table OIUREP_REG_HIST from PRA solution stores various reporting data, including data from Oil and Gas Operations Report (OGOR) that was generated as per requirements from US Office of Natural Resources Revenue (ONRR).</p>
+<p>However, that storage is in raw binary format and cannot be read by standard data browser transactions (SE16, SE16N).</p>
+<p>Moreover, the data from that table is not available to the transaction /PRA/ONRR_OGOR_COMP for volume comparison against the volumes from ONRR royalty report.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Production and Revenue Accounting, Well Production, Product Disposition, Product Inventory, Data Migration.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>In the version OP 2025 FPS01 (S4CEXT 109 SP01) of PRA, four new tables were introduced to store the OGOR reporting data in a clear format. Those tables are /PRA/REP_OGOR_H, /PRA/REP_OGOR_A, /PRA/REP_OGOR_B and /PRA/REP_OGOR_C.</p>
+<p>Upon OGOR report generation executed after the abovementioned tables are available in the system, a copy of the data is stored in those tables, even if the original table OIUREP_REG_HIST remains the system of records. But the OGOR report data generated prior to the availability of those tables is not made automatically available there.</p>
+<p>This SAP Note introduces the migration program /PRA/OGOR_REP_MIGRATION that allows you to copy the OGOR reporting data generated prior to S4CEXT 109 SP01 availability in your system into the tables mentioned above.</p>
+<p>As result, you will be able to use standard data browser transactions (SE16, SE16N) to visualize such “old” OGOR reporting data in a clear format, and to use the transaction /PRA/ONRR_OGOR_COMP for that reporting data for volume comparison against the volumes from ONRR royalty report.</p>
+<p><strong>Steps to follow</strong></p>
+<p>1. Install this Note.</p>
+<p>2. Execute the program /PRA/OGOR_REP_MIGRATION in the system/client containing OGOR reporting data generated prior to S4CEXT 109 SP01 availability in the system. </p>
+<p><strong>Options available in the migration program</strong></p>
+<p>A. You have to specify selection criteria for the data to migrate: regulatory reporting run numbers, org levels and/or reporting periods.</p>
+<p>B. The program can be executed in simulation mode (recommended for the first run)</p>
+<p>C. The program operates in “all or nothing” mode. If you leave the checkbox “Overwrite if report exists” unchecked and the program detects data existing for the same OGOR report, it will not migrate any data. If you check the checkbox “Overwrite if report exists”, the program will migrate all the selected data, overwriting same data records if they existed prior to the program execution.</p>
+<p>Note. Even after execution of the migration program, the original table OIUREP_REG_HIST remains the system of records. The abovementioned four tables will contain a copy of the records in a “clear” format.</p></div></div></div></div>

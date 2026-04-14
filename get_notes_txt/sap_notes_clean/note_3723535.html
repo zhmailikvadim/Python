@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ol id="__html0">
+<li><span style="font-size: 14px;">You create a new wage type (for example, ZA14). In the </span><strong style="font-size: 14px;">Complete View T512W</strong><span style="font-size: 14px;"> (V_512W_O) view, you set the following for this wage type:</span></li>
+</ol>
+<ul>
+<ul>
+<li>Specification of <strong>EA Forms</strong> (06) evaluation class: <strong>Benefit of Leave Passage for Travel</strong> (2E)</li>
+<li>Specification of <strong>Tax Exempt Allowance Processing</strong> (70) processing class: blank</li>
+</ul>
+</ul>
+<ol start="2">
+<li>You run <strong>Malaysia payroll driver</strong> (RPCALCL0) report for an employee to calculate this wage type with a customized payroll schema. In the payroll result (RT) table:</li>
+</ol>
+<ul>
+<ul>
+<li><strong>Variable assignment number</strong> (V0ZNR) field is not blank.</li>
+<li><strong>HR Payroll: Amount</strong> (BETRG) field is 7800.</li>
+</ul>
+</ul>
+<ol start="3">
+<li>You run the <strong>EA or EC Annual Tax Report</strong> (RPCTEAL0_01) report for this employee for tax year 2025, the value displayed on B3 <strong>Benefits in kind</strong> field of EA Form is not 7800.</li>
+</ol>
+<p>After you've installed this SAP Note, the value becomes 7800 as expected.</p>
+<p>This SAP Note also enhanced the <strong>Getting the PDF stream for EA</strong> (HRXSS_MY_EA_GET_PDF) function module and <strong>Getting the PDF stream for PCB2</strong> (HRXSS_MY_PCB2_GET_PDF) function module. 2 new export parameters were added: PDF_TAB and REF_TAB.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>EA or EC Annual Tax Report, RPCTEAL0_01, 2E, EA2E, V0ZNR, HRXSS_MY_EA_GET_PDF, HRXSS_MY_PCB2_GET_PDF, SALV, 14REP, T512W, RPCPDFL0</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is a program error. You have installed SAP Note <a href="https://me.sap.com/notes/3397634" target="_blank">3397634</a>.</p>
+<p>Please notice the EA Form (C.P.8A - Pin. 2016) removes the field <strong>B2(e) Benefit of leave passage for travel</strong> that exists in EA form (C.P.8A - Pin. 2010). Therefore, for leave passages, it is <strong>not</strong> recommended to set any wage type with specification <strong>Leave Passage for Travel</strong> (2E) of <strong>EA Forms</strong> (06) evaluation class after year 2016.</p>
+<p>From 2016 onward, use one of the following options for leave passages:</p>
+<ul>
+<li>Use a wage type with specification <strong>Leave passages</strong> (N) of <strong>Tax Exempt Allowance Processing</strong> (70) processing class to indicate such kind of incomes. If the annual total amount of leave passages is more than MYR 3000, the exceeding part will display on <strong>B3 Benefits in kind</strong> of EA Form.</li>
+<li>Or set the specification of <strong>EA Forms</strong> (06) evaluation class as <strong>Benefit in Kind</strong> (B1) for those wage types that you want to display on <strong>B3 Benefits in kind</strong> of EA Form.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>You can apply HR Support Package or implement the correction instructions in this SAP Note and carry out the manual activities attached.</p>
+<p>Workaround: set the specification of <strong>EA Forms</strong> (06) evaluation class as <strong>Benefit in Kind</strong> (B1) for those wage types that you want to display on B3 <strong>Benefits in kind</strong> of EA Form.</p></div></div></div></div>

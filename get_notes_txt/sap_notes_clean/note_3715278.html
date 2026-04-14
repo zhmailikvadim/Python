@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3715278&amp;TargetLanguage=EN&amp;Component=PY-DE-AU-SI&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3715278/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3715278/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>Non-recurring payments subject to contributions, such as regular remuneration that is paid out as a non-recurring payment, are not indicated correctly in the wage type table of the <em>Employee Wage data record</em> (DSLA). In the <em>field Indicator SI</em> (KENNZSV), the value <em>5</em> is not entered for non-recurring remuneration subject to contributions.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p id="">Social insurance, euBP</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p id="">Program error</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package. For the software release SAP_HRCDE 604, refer to the manual post-implementation steps. Apart from this, you do not have to perform any further follow-on activities after you import the HR Support Package or implement the correction instructions.</p>
+<p>Wage types that have one of the following statement wage types in the <em>Wage Type Valuation</em> table (T512W) are now flagged as non-recurring remuneration subject to contributions:</p>
+<ul>
+<li><em>Gross Contrib. NrP Remaining</em> (/3N4)</li>
+<li><em>Gross Contr. NrP Inflow</em> (/3NC)</li>
+<li><em>Reg. EG as NRP Inflow Pr.</em> (/3W4)</li>
+<li><em>Reg. Remun. as NRP</em> (/3WB)</li>
+<li><em>Reg. EC as NRP Correction</em> (/3WC)</li>
+<li><em>Outflow: Val. Val. Inf. Pr. Corr</em>. (/3WD)</li>
+</ul>
+<p>In addition, the wage types must be coded in one of the cumulations 03, 05, or 75.</p>
+<p><span style="font-family: Arial, Helvetica, sans-serif; font-size: medium;"> </span></p></div></div></div></div></div>

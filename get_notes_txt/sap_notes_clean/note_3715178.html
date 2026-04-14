@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When the location bundle code (external code of the MCM instance) changed, the system did not create an MDX change entry,thus no bundle change process triggred and no market message sent out.</p>
+<p>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> /UCOM/MDX_PROC_OUT, /UCOM/RP_MDX_PROCESS_OUT, /UCOM/VC_MDX_RST, LBS, LBSHDMA0100, DE_B_MDC_MAIN_SEND_DSO_RESP_LBS, MarketLocationBundleChange, 55175</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Missing Functionality</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system creates an MDX change entry when the location bundle code (external code of the MCM instance) changes. The BC set /US4G/3_0_COMM_SP08_NOTE_3715178 contains the necessary corrections. You can verify the fix by changing the bundle code (external code of the MCM instance) and checking that an MDX change entry of event 'LBS' and change type 'LBSHDMA0100' appears in transaction /UCOM/MDX_PROC_OUT.</p></div></div></div></div>

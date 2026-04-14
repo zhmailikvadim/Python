@@ -1,0 +1,143 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When you use Organizational Changes, you are no longer allowed to manually change the profit center assignments in master data, such as materials, even when no transaction data exists at that time point. Changing the profit center manually would lead to an inconsistency between the master data and the runtime table of the Organizational Change functionality.</p>
+<p>This note explains why a manual change of the profit center assignment isn’t allowed.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Organizational Changes, Manually Changing Profit Center, FINOC, PRCTR</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>FAQ</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong><em>Scenario</em></strong></p>
+<p>Assume the following situation for an object:</p>
+<p>-          An Organizational Change “OC1” with effective date 01.01.2025 exists. The profit center assignment for an object changed from profit Center “A” to “B”. The Organizational Change “OC1” has status “Completed”.</p>
+<p>-          Afterwards you manually changed the profit center in the object to “C”.</p>
+<p>-          After this manual change, you create a new Organizational Change “OC2” with effective date 01.01.2026. The profit center assignment for this object is changed to profit center “D”. When creating the entries in the runtime tables (FINO_RT_*) for the time-dependent profit center derivation, SAP reads the old profit center from the object master data, which is “C”.</p>
+<p>As a result, the following time slices would be in the runtime table:</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td valign="top" width="121">
+<p><strong>Valid From</strong></p>
+</td>
+<td valign="top" width="121">
+<p><strong>Valid to</strong></p>
+</td>
+<td valign="top" width="124">
+<p><strong>Profit Center Old</strong></p>
+</td>
+<td valign="top" width="124">
+<p><strong>Profit Center New</strong></p>
+</td>
+<td valign="top" width="111">
+<p><strong>Organizational Change</strong></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="121">
+<p><strong>01.01.0001</strong></p>
+</td>
+<td valign="top" width="121">
+<p>31.12.2024</p>
+</td>
+<td valign="top" width="124">
+<p>A</p>
+</td>
+<td valign="top" width="124">
+<p>A</p>
+</td>
+<td valign="top" width="111">
+<p> </p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="121">
+<p><strong>01.01.2025</strong></p>
+</td>
+<td valign="top" width="121">
+<p>31.12.2025</p>
+</td>
+<td valign="top" width="124">
+<p>A</p>
+</td>
+<td valign="top" width="124">
+<p>B</p>
+</td>
+<td valign="top" width="111">
+<p>OC1</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="121">
+<p><strong>01.01.2026</strong></p>
+</td>
+<td valign="top" width="121">
+<p>31.12.9999</p>
+</td>
+<td valign="top" width="124">
+<p>C</p>
+</td>
+<td valign="top" width="124">
+<p>D</p>
+</td>
+<td valign="top" width="111">
+<p>OC2</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Or logically the following time slices</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td valign="top" width="85">
+<p>Time</p>
+</td>
+<td valign="top" width="180">
+<p>01.01.0001-31.12.2024</p>
+</td>
+<td valign="top" width="170">
+<p>01.01.2025-31.12.2025</p>
+</td>
+<td valign="top" width="167">
+<p>01.01.2026-31.12.9999</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="85">
+<p>Year</p>
+</td>
+<td valign="top" width="180">
+<p>0001-2024</p>
+</td>
+<td valign="top" width="170">
+<p>2025</p>
+</td>
+<td valign="top" width="167">
+<p>2026-9999</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="85">
+<p>Profit Center</p>
+</td>
+<td valign="top" width="180">
+<p>A</p>
+</td>
+<td valign="top" width="170">
+<p>B / C</p>
+</td>
+<td valign="top" width="167">
+<p>D</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p> </p>
+<p>For the fiscal year 2025 we either have the new profit center from Organizational Change “OC1” --&gt; Profit Center “B” or the manually changed profit center “C”.</p>
+<p><em><strong>Document Posting</strong></em></p>
+<p>When you post to year 2025 prior to creating Organizational Change “OC2” but after changing the object master record, the profit center from the master data (profit center “C”) is used.</p>
+<p>When you post to year 2025 after creating and activating Organizational Change “OC2”, the profit center is derived from the runtime table and therefore is profit center “B”.</p>
+<p>We have to read from the runtime table, as there is a relevant Organizational Change after the posting date. When reading from the runtime table, we always use the entry with a matching validFrom / validTo value and take the new profit center.</p>
+<p>This leads to a journal entry posted to a profit center (profit center B) defined by OC1 which is different to the manually entered profit center in the master data (profit center C). This would lead to an inconsistency.</p>
+<p><em><strong>Open Item Managed Accounts</strong></em></p>
+<p>For open item managed accounts this is critical. When an open item (like an invoice) is cleared (e.g. by payment), we rederive the profit center and assume that there are transfer postings from the original profit center of the open item to the currently derived profit center. The overall balance must be balanced to zero.</p>
+<p>In the scenario described above, we post the invoice to profit center C but post the payment to profit center B – as described in general above. The clearing process does not balance to zero. [Both open items trigger transfer documents from their respective profit center to profit center D, but this does not change the balance at the end of 2025.]</p></div></div></div></div>

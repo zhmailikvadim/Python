@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You implemented the BAdI /SCMTMS/BADI_LI_BTD_CHG~ADAPT_LI_INPUT_EWM and cleared all warehouse data in order to skip the update from EWM to TM in Adv. SR integration. Despite clearing the input data, the integration method continues processing resulting into a runtime error instead of terminating early.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Adv. SR; EWM-TM Integration; Direct EWM-TM Integration;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Due to a programming error, the integration method does not immediately terminate when warehouse input data is cleared in the BAdI /SCMTMS/BADI_LI_BTD_CHG~ADAPT_LI_INPUT_EWM. Instead, the method continues processing, which leads to a runtime error during subsequent operations.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached correction instruction or install the corresponding support package. Afterwards, when input data is cleared in the BAdI, the integration method will terminate immediately without further processing, preventing the runtime error.</p></div></div></div></div>

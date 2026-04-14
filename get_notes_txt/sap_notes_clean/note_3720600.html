@@ -1,21 +1,8 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">In certain situations, processing within the FSM Connector is blocked.</p>
-<p>The issue can be observed in transaction SM13, where a lock entry related to table /PACG/ECM_ASCII remains in status “initial”.</p>
-<p>The corresponding update request does not complete and the lock entry is not released.</p>
-<p>As a consequence:</p>
-<ul>
-<li>Further processing of the affected queue is blocked</li>
-<li>Subsequent messages remain unprocessed</li>
-<li>Manual intervention (lock deletion) may be required</li>
-</ul>
-<p>The issue occurs sporadically and cannot be deterministically reproduced.</p>
+<p id="__html0">You have executed time evaluation in the HR Process Workbench and the status of the personnel numbers is not being set properly. When the personnel number was evaluated already in the set period, the status in the HR Process Workbench is set to initial.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>FSM, Connector, SM13, blocked queue</p>
+<p>PUST/PEST,  HRPY_PROCESS_SET_PERNR_STATUS, HR Process Workbench, Time Evaluation</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p id="">The update of table /PACG/ECM_ASCII is executed using the ABAP update task mechanism (CALL FUNCTION … IN UPDATE TASK).</p>
-<p>In rare situations, the update task remains in an incomplete state, leaving a lock entry (SM13) in status “initial”.</p>
-<p>The update of table /PACG/ECM_ASCII does not require asynchronous update processing and is not technically dependent on the update task mechanism.</p>
-<p>The use of the update task in this context was not functionally required.</p>
+<p id="">This is a program error.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id="">Implement attached correction instructions</p>
-<p>The update of table /PACG/ECM_ASCII is executed using the ABAP update task mechanism (CALL FUNCTION … IN UPDATE TASK).<br/>In rare situations, the update task remains in an incomplete state, leaving a lock entry (SM13) in status “initial”.<br/>The update of table /PACG/ECM_ASCII does not require asynchronous update processing and is not technically dependent on the update task mechanism.<br/>The use of the update task in this context was not functionally required.</p></div></div></div></div>
+<p>Implement the attached correction instructions or import the relevant support package.</p></div></div></div></div>

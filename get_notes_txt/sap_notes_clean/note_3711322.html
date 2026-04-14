@@ -1,0 +1,45 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Several Collective agreements in Sweden require that the Valuation rules for employee absences be determined by the total number of Calendar days of the absence, rather than the number of Working days.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">SNAB, Unpaid leave, T5S0Q, KLBEW</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="font-size: 14px;">- The standard configuration for absence evaluation in Swedish Payroll allows the Valuation rule changes based on the number of W</span><span style="font-size: 14px;">ork days</span><span style="font-size: 14px;"> within an absence period.</span></p>
+<p>- This enhancement allows the system to count either Work days or Calendar days when evaluating absence duration against configured days in table T5S0Q.</p>
+<p><span style="font-size: 14px;">- This enhancement solution is flexible, as companies may need to apply both Calendar-day and Work-day based rules for different Employee groups within the same organization, depending on the applicable Collective agreements.</span></p>
+<p><strong>     </strong></p>
+<p><strong>Procedure of SAP note installation:</strong></p>
+<p><span style="font-size: 14px;">- Implement DDIC changes via automatic correction instruction or manually to adjust table T5S0Q and table view V_T5S0Q.</span></p>
+<p><strong style="font-size: 14px;">- Execute a Table Maintenance generator</strong><span style="font-size: 14px;"> for the table view V_T5S0Q to be editable for the maintenance and entering new records. This step is mandatory and must be executed before aplying of automatic correction instructions as a last step.</span></p>
+<p><span style="font-size: 14px;">- Implement automatic correction instructions giving correct behavior to the Maintenance view V_T5S0Q and bringing new method of Unpaid absence leave evaluation in Calendar days.</span></p>
+<p><strong>     </strong></p>
+<p><strong>Table view V_T5S0Q custonizing:</strong></p>
+<p>- Processing of Unpaid leave using <span style="text-decoration: underline;">Calendar days</span> together with the ordinary way using <span style="text-decoration: underline;">Working days</span> is possible, no conflict happen in the Payroll absence evaluation.</p>
+<p>- Therefore in case when there is the same KLBEW used for evaluation in Calendar days and also in Working days, then method using Calendar days is prioritized (indeed if value of CAP Grouping of processed Employee meets the customized criteria in T5S0Q).</p>
+<p>- Other Employees who doesn't meet the criteria of CAP grouping (T503-TRFKZ) are evaluated standardly by using Working days if such record exists with the same KLBEW.</p>
+<p>- Please be aware that records in table view V_T5S0Q are stored in database based on table keys, so records with the same KLBEW are mostly inserted as a pair automatically, distinguished by the flag for Calendar days. If you don't need both records just simply remove one manually.</p>
+<p> </p>
+<p><strong>Please note:</strong></p>
+<p>Part of the function SNAB responsible for processing of Unpaid leave absences has been refactored completely. <strong>Please retest typical scenarios used for Unpaid leave evaluation before aplying this SAP note to productive systems</strong>.</p>
+<p> </p>
+<div class="table-responsive"><table border="0" cellpadding="1" cellspacing="1" class="table table-bordered table-striped col-resizeable" style="width: 726px; height: 54px;">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>01</td>
+<td>2026.02.20 </td>
+<td>Pilot version - changes mentioned in the section of Solution have been done</td>
+</tr>
+<tr>
+<td>02</td>
+<td>2026.03.20 </td>
+<td>Released for customers</td>
+</tr>
+</tbody>
+</table></div>
+<p> </p>
+<p><strong>Delivery</strong></p>
+<p>Before an implementation of automatic Correction Instructions of this SAP note that please follow manual PRE-implementation steps described in attachment of this note ("Manual_steps_3711322.pdf") and implement DDIC corrections into the system or import appropriate Support Package into your system.</p></div></div></div></div>

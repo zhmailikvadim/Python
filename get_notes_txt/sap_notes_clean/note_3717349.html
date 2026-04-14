@@ -1,0 +1,169 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"> When you use the <em>Standard Audit File for Tax Purpose (<span class="SNO_DNT" style="float: none;" translate="no">SAF-T</span>)</em> (<span class="SNO_DNT" style="float: none;" translate="no">RPFIEU_SAFT</span>) report, you encounter issues when generating the <span class="SNO_DNT" style="float: none;" translate="no">SAF-T</span> file for Luxembourg and/or Portugal. You experience the following symptoms (affected country indicated):</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 1088px; height: 120px;">
+<tbody>
+<tr>
+<td valign="top" width="73">
+<p><strong>Symptom No.</strong></p>
+</td>
+<td valign="top" width="76">
+<p><strong>Functionally<br/>Affected Solution</strong></p>
+</td>
+<td valign="top" width="115">
+<p><strong>Event</strong></p>
+</td>
+<td valign="top" width="186">
+<p><strong>Scenario</strong></p>
+</td>
+<td valign="top" width="246">
+<p><strong>Affected Section/Fields in XML File.</strong></p>
+</td>
+<td valign="top" width="324">
+<p><strong>Problem<br/><br/></strong></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="73">
+<p>1</p>
+</td>
+<td valign="top" width="76">Portugal</td>
+<td valign="top" width="115">File creation</td>
+<td valign="top" width="186">
+<p>Billing (MFI scenario)- Document types are considered outside given date range</p>
+</td>
+<td valign="top" width="246">N/A</td>
+<td valign="top" width="324">
+<p>Unexpected warning message <span class="SNO_DNT" style="float: none;" translate="no">FIEU_SAFT</span> 138</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="73">
+<p>2</p>
+</td>
+<td valign="top" width="76">Portugal</td>
+<td valign="top" width="115">Data extraction</td>
+<td valign="top" width="186">
+<p>Billing - Invoicing, recent upgrade</p>
+</td>
+<td valign="top" width="246">N/A</td>
+<td valign="top" width="324">
+<p>Missing invoices in extraction</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="73">
+<p>3</p>
+</td>
+<td valign="top" width="76">Luxembourg</td>
+<td valign="top" width="115">File creation</td>
+<td valign="top" width="186">
+<p>Billing - Foreign company code (LU), with Plants abroad for PT</p>
+</td>
+<td valign="top" width="246">N/A</td>
+<td valign="top" width="324">
+<p>Unexpected and incomplete MFIs (manual FI invoices) included</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> <span class="SNO_DNT" style="float: none;" translate="no">SAFT</span>, <span class="SNO_DNT" style="float: none;" translate="no">SAF-T</span>, <span class="SNO_DNT" style="float: none;" translate="no">RPFIEU_SAFT</span>, Portugal, Luxembourg, <span class="SNO_DNT" style="float: none;" translate="no">SAF-T(PT)</span>, FAIA, <span class="SNO_DNT" style="float: none;" translate="no">SAF-T(LU)</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 326px; height: 45px;">
+<tbody>
+<tr>
+<td>
+<p><strong>Symptom No.</strong></p>
+</td>
+<td>
+<p><strong>Reason</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>This is due to a program error</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>2</p>
+</td>
+<td>
+<p>This is due to a program error</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>3</p>
+</td>
+<td>
+<p>This is an improvement</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Import the Support Package specified for your release or implement the attached correction instructions.</p>
+<p>As a general rule, <span class="SNO_DNT" style="float: none;" translate="no">SAP</span> recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the <span class="SNO_DNT" style="float: none;" translate="no">SAP</span> Note Assistant to implement the correction instruction. You can find more information about the <span class="SNO_DNT" style="float: none;" translate="no">SAP</span> Note Assistant under <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank"><strong>SAP Note Assistant</strong></a><strong>.</strong></p>
+<p><strong>Re-extract Data</strong></p>
+<p>After you have implemented this <span class="SNO_DNT" style="float: none;" translate="no">SAP</span> Note, delete and recreate extraction data to correctly fill out the extraction tables. If you do not execute this step, errors and inconsistencies may persist.</p>
+<p>Note: if you implement an <span class="SNO_DNT" style="float: none;" translate="no">SAP </span>Note sequence, you will only be required to execute this step after all <span class="SNO_DNT" style="float: none;" translate="no">SAP</span> Notes have been implemented.</p>
+<p><strong>Version History</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p>Version</p>
+</td>
+<td>
+<p>Date</p>
+</td>
+<td>
+<p>Description</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>26/02/2026</p>
+</td>
+<td>
+<p>Pilot Release - Added S4CORE release 108 and Symptom 1</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>2</p>
+</td>
+<td>
+<p>02/03/2026</p>
+</td>
+<td>
+<p>Pilot Release - Added SAP_FIN release 617 and Symptom 2</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>3</p>
+</td>
+<td>
+<p>13/03/2026</p>
+</td>
+<td>
+<p>Mass Release</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>List of affected objects</strong></p>
+<ul>
+<li>Report <span class="SNO_DNT" style="float: none;" translate="no">RPFIEU_SAFT</span>;</li>
+<li>Include <span class="SNO_DNT" style="float: none;" translate="no">RPFIEU_SAFT_MAIN</span>;</li>
+<li>Class <span class="SNO_DNT" style="float: none;" translate="no">CLFIEU_GENERIC_SAFT</span>;</li>
+<li>Class <span class="SNO_DNT" style="float: none;" translate="no">CLFIEU_GENERIC_SAFT_01</span>;</li>
+</ul></div></div></div></div>

@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3723537&amp;TargetLanguage=EN&amp;Component=FS-RI-B-TTY&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3723537/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3723537/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>You can use the interface for FS-RI treaties to deliver and create a retrocession whose assignment is not uniquely specified with regard to assumed treaty section and retrocession treaty section.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>/MSG/BAPI_TTY_CHANGE_MULTIPLE</p>
+<p id="">/MSG/R_V_VTG2</p>
+<p>432</p>
+<p>/MSG/R_V_VTG.</p>
+<p>999</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p id=""><strong>Prerequisite:</strong></p>
+<ul>
+<li>The system contains a retrocession assignment for the assumed treaty A/Section 1 and retrocession treaty B/Section 1.</li>
+<li>The following additional retrocession assignment is delivered via the interface: Assumed treaty A/section “SPACE” and retrocession treaty B/section 1.</li>
+</ul>
+<p><strong><span style="font-size: 14px;">Reason:</span></strong></p>
+<p>During interface processing, the system does not check whether retrocession assignments are unique.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p><strong>History:</strong></p>
+<p>March 11, 2026: New</p>
+<p><strong>Troubleshooting Description:</strong></p>
+<p>Checks for the uniqueness of retrocession assignments are also performed during the delivery via the interface for FS-RI treaties.</p>
+<p>A retrocession assignment between two treaties without entering sections is permitted only if there is no concrete assignment using sections between the treaties. If concrete assignments already exist, you must remove them or, alternatively, make the assignment more specific by entering an assumed or retrocession section number. This ensures that the assignments are unique. If an error occurs, the system issues the following messages:</p>
+<p>“Missing uniqueness in retrocession assignments”</p>
+<p>“Data record already exists in the retrocession data database table”</p>
+<p><strong>Manual activities:</strong></p>
+<p>Manual pre-implementation steps are required.</p></div></div></div></div></div>

@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The process "Sending of Calculation Formula (DSO View)" (DE_B_MET_CALCULATION_FORMULA_DSO) doesn't support sending calculation formulas from DSO Old to DSO New.</p>
+<p>As specified in the <a href="https://bdew-mako.de/pdf/UTILTS_AHB_1_0_Fehlerkorrektur_20251211.pdf" target="_blank">UTILTS Anwendungshandbuch</a> error correction from December 11, 2025, this function should be supported.</p>
+<p>This SAP Note is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DSO Change, DSO New, DSO Old, MET, Sending of Calculation Formula (DSO View), DE_B_MET_CALCULATION_FORMULA_DSO, Receipt of Calculation Formula (DSO View), DE_B_MET_RECV_CALCULATION_FORMULA_DSO, UTILTS 25001, /US4G/CL_WIM_API, /US4G/IF_WIM_API_PROC~TRIG_CALC_FORMULA_PROC_DSO, /US4G/CL_CHK_MET_PROCESS, CHECK_UPD_CAL_FRM_IS_NEEDED, CHECK_CALC_FORM_RECIPIENT, CP_SEND_PROC_CANCEL_INFO</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The functionality wasn't implemented to comply with the UTILTS Application Guide requirements that allow DSO Old to send calculation formulas to DSO New.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant Support Package (SP).</p>
+<p>After implemention, the system supports sending calculation formulas from DSO Old to DSO New. The following changes are included:</p>
+<p>- A new process "Receipt of Calculation Formula (DSO View)" (DE_B_MET_RECV_CALCULATION_FORMULA_DSO) is added.<br/>- The process step 9810 "Inform Market Communication System That Process Can Be Canceled" (CP_SEND_PROC_CANCEL_INFO) is obsoleted from process DE_B_MET_CALCULATION_FORMULA_DSO.</p>
+<p>Import BC set /US4G/3_0_DSO_SP08_NOTE_3721706 to activate the configuration changes.</p>
+<p>With this NOTE and emergency patch EP/VP 2000011461, DSO Old can send calculation formulas to DSO New.</p>
+<p>You can verify the fix by testing the sending of calculation formulas from DSO Old to DSO New and confirming that the process completes successfully.</p></div></div></div></div>

@@ -1,0 +1,305 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">As described in the <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html" target="_blank">regulatory change manager</a> under <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-7374" target="_blank">Tax Reform Fuels Specific Taxation</a>:</p>
+<ul>
+<ul>
+<li><a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-7374" target="_blank">SAP S/4HANA Cloud Private Edition</a></li>
+<li><a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-7374" target="_blank">SAP S/4HANA</a></li>
+<li><a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-7374" target="_blank">SAP ERP Central Component</a></li>
+</ul>
+</ul>
+<p>This SAP Note provides you with relevant system changes to enable the new tax types (CBS and IBS) for monophasic scenarios to be used in the <strong>Nota Fiscal Writer </strong>(J1B*N) transactions.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Brazil, Tax Reform, CBS, IBS, monophasic, legal change, NF, Nota Fiscal Writer, tax groups, tax types, subdivisions, Ad Rem, Already Levied</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is relevant only for Brazil.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After you implement this SAP Note, the system provides new tax groups, tax subdivisions and tax types for monophasic CBS and IBS scenarios.</p>
+<ul>
+<li>Tax Groups:</li>
+</ul>
+<div class="longtext">
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p><strong>Tax Group</strong></p>
+</td>
+<td>
+<p><strong>Description</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IBSL</p>
+</td>
+<td>
+<p>IBS Ad Rem Already Levied</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CBSL</p>
+</td>
+<td>
+<p>CBS Ad Rem Already Levied</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Subdivisions:</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p><strong>Subdivision</strong></p>
+</td>
+<td>
+<p><strong>Description</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>007</p>
+</td>
+<td>
+<p>IBS Ad Rem</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>008</p>
+</td>
+<td>
+<p>IBS Ad Rem Retention</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>009</p>
+</td>
+<td>
+<p>CBS Ad Rem</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>010</p>
+</td>
+<td>
+<p>CBS Ad Rem Retention</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Tax Types:</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p><strong>Tax Type</strong></p>
+</td>
+<td>
+<p><strong>Description</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IB5S</p>
+</td>
+<td>
+<p>IBS Ad Rem for Outgoing</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IB7Z</p>
+</td>
+<td>
+<p>IBS Ad Rem for Incoming – Deductible Tax</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IB7S</p>
+</td>
+<td>
+<p>IBS Ad Rem for Incoming – Non-Deductible Tax</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IB6S</p>
+</td>
+<td>
+<p>IBS Monophasic Retention for Outgoing</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IB8Z</p>
+</td>
+<td>
+<p>IBS Monophasic Retention for Incoming – Deductible Tax</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IB8S</p>
+</td>
+<td>
+<p>IBS Monophasic Retention for Incoming – Non-Deductible Tax</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IB61</p>
+</td>
+<td>
+<p>IBS Already Levied for Outgoing</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IB62</p>
+</td>
+<td>
+<p>IBS Already Levied for Incoming – Non-Deductible Tax</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IB60</p>
+</td>
+<td>
+<p>IBS Already Levied for Incoming – Deductible Tax</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CBS5</p>
+</td>
+<td>
+<p>CBS Ad Rem Outgoing</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CBZ7</p>
+</td>
+<td>
+<p>CBS Ad Rem for Incoming – Deductible Tax</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CBS7</p>
+</td>
+<td>
+<p>CBS Ad Rem for Incoming – Non-Deductible Tax</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CBS6</p>
+</td>
+<td>
+<p>CBS Monophasic Retention for Outgoing</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CBS8</p>
+</td>
+<td>
+<p>CBS Monophasic Retention for Incoming – Non-Deductible Tax</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CBZ8</p>
+</td>
+<td>
+<p>CBS Monophasic Retention for Incoming – Deductible Tax</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CB61</p>
+</td>
+<td>
+<p>CBS Already Levied for Outgoing</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CB62</p>
+</td>
+<td>
+<p>CBS Already Levied for Incoming – Non-Deductible Tax</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CB60</p>
+</td>
+<td>
+<p>CBS Already Levied for Incoming – Deductible Tax</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><br/>As a general rule SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank"><strong>SAP Note Assistant</strong></a>.</p>
+<p>Note that the documentation of certain objects is delivered with the corresponding Support Package only.</p>
+<p><strong>List of Affected Objects</strong></p>
+<ul>
+<li>Include</li>
+<ul>
+<li>LJ1BB2TOP</li>
+<li>LJ1BB2F1T</li>
+<li>LJ1BB2FJ2</li>
+<li>LJ1BB2FJ1</li>
+</ul>
+<li>Domain</li>
+<ul>
+<li>J_1BTAXGRP</li>
+<li>J_1B_SUBDIV</li>
+</ul>
+</ul>
+<p><strong>Product Documentation</strong></p>
+<p>​​​​​​​For more information about the development delivered with this SAP Note, see the entry for this SAP Note in the What's New topic on SAP Help Portal.</p>
+<ul>
+<li>SAP S/4HANA: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/b6d54285573c4fe68933c2d89c64b28d.html" target="_blank">Tax Groups and Tax Types Added to Monophasic CBS and IBS</a><a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/2eff6905fce1464c8ba4c72186881ca5.html" target="_blank"><br/></a></li>
+<li>SAP ERP: <a href="https://help.sap.com/docs/SAP_ERP/063e7e5f4d7f4fc0be08565793a9b941/b6d54285573c4fe68933c2d89c64b28d.html" target="_blank">Tax Groups and Tax Types Added to Monophasic CBS and IBS</a></li>
+</ul>
+<p>You are welcome to leave your anonymous feedback on the content of the <a href="https://help.sap.com/viewer/s4h_op_brazil" target="_blank">SAP Help Portal documentation</a> by choosing "Was this topic helpful?". If your feedback is relevant, the documentation will be updated accordingly.</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p><strong>Version</strong></p>
+</td>
+<td>
+<p><strong>Date</strong></p>
+</td>
+<td>
+<p><strong>Reason</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>March 06, 2026</p>
+</td>
+<td>
+<p>Released for Customer</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div></div></div></div></div>

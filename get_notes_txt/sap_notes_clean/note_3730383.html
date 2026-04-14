@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The Data Collection Entry plugin in a Touch POD does not support the 'Enter' hotkey to add data collection values.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DC500</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Steps to reproduce:<br/>1. Create an SFC.<br/>2. Create a Data Collection with 2 or more parameters.<br/>3. Attach the SFC to the Data Collection.<br/>4. Open POD - SFC TOUCH.<br/>5. Retrieve the SFC.<br/>6. Open the list of data collection.<br/>7. Fill 1 parameter and press 'ENTER'.</p>
+<p><strong>Expected result</strong>: The 'add' process will execute, resulting in an error message stating that the other fields are empty.<br/><strong>Actual result:</strong> Nothing has changed.</p>
+<p>8. Fill in all parameters and press 'ENTER'.</p>
+<p><strong>Expected result:</strong> The view will close, and the data collection parameters will be added.<br/><strong>Actual result:</strong> Nothing has changed.<br/><br/></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This is a rework of the implementation of SAP Note <a href="https://i7p.bss.net.sap/sap/support/notes/3589546" target="_blank" title="3589546  - Data Collection Entry plugin does not Save values when ENTER key is pressed in a Touch POD">3589546</a>, as the previous blocked the functionality of the ENTER key in various PODs.</p>
+<p>New solution is provided in the form of a code correction. Key pressed listener has been added for the Data Collection Touch view to evaluate 'add' button click and process adding data collection set parameters.</p>
+<p><strong>Impact</strong></p>
+<p>The code change implemented to address the symptom above is isolated to POD Touch view.</p></div></div></div></div>

@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">In the process "MOS Billing: Receipt of Price Catalog (Receiver View)" (DE_B_MOSB_PCAT_SUP), step 0020 "Request for Price Catalog Data" contains a check in method /US4G/CL_PROC_STEP_PRICAT -&gt; ENHANCE_STEP_DATA that verifies whether the predecessor document exists. You cannot adjust this check to meet your requirements.</p>
+<p id="__html0">This issue is relevant for the market role: SUP.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Price Catalog, /US4G/CL_PROC_STEP_PRICAT, /US4G/CL_UBD_DATA_MOSB_PRICAT, GET_DATA_FOR_QUERY, /US4G/CL_UBD_MOSB_PRICAT, /US4G/IF_UBD_MOSB_PRICAT~QUERY, BO_UBD_MOSB_PRICAT, MOSB, predecessor document</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Insufficient customization options.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p><br/>After implementing this SAP Note, the system provides code changes in /US4G/CL_PROC_STEP_PRICAT -&gt; ENHANCE_STEP_DATA that allow you to customize the price catalog retrieval logic.<br/>If you need to implement your own price catalog retrieval logic to affect step 0020 "Request for Price Catalog Data" in process DE_B_MOSB_PCAT_SUP, follow these steps:</p>
+<p><br/>1. Open the Fiori App "Configure Business Objects"<br/>2. Select and open business object BO_UBD_MOSB_PRICAT<br/>3. Select "Extend" and enter your own Data Container Class, such as 'ZCL_UBD_DATA_MOSB_PRICAT', then select OK</p>
+<ul>
+<li>for class ZCL_UBD_DATA_MOSB_PRICAT, ensure it inherits from class /US4G/CL_UBD_DATA_MOSB_PRICAT</li>
+<li>redefine method GET_UBD_INSTANCE to instantiate with class ZCL_UBD_MOSB_PRICAT.</li>
+<ul>
+<li>for class ZCL_UBD_MOSB_PRICAT, ensure it inherits from class /US4G/CL_UBD_DATA_MOSB_PRICAT</li>
+<ul>
+<li>redefine method /US4G/IF_UBD_MOSB_PRICAT~QUERY to fulfill your business requirement</li>
+</ul>
+</ul>
+</ul>
+<p>You can verify the fix by testing your customized price catalog retrieval logic in step 0020 of the process.</p></div></div></div></div>

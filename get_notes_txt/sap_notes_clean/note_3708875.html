@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3708875&amp;TargetLanguage=EN&amp;Component=BC-SEC-AUT-TOO&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3708875/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3708875/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>In transaction SU22, you can deactivate the inheritance for a variant transaction.</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p id="">Program error</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p id="">Implement the correction instructions using the Note Assistant or import the relevant support package.</p>
+<p>Explanation:</p>
+<p>Parameter and variant transactions are specializations of their corresponding base transactions. Therefore, it makes sense to automatically add the authorization defaults of the basic transactions of the role when merging after including parameter transactions or variant transactions in a single role menu to ensure that the parameter or variant transactions are always executed without errors. If inheritance mode is active, the default values of those authorization objects are copied from the basis transaction for which there are no separate default values in the respective parameter or variant transaction.</p>
+<p>With regard to deactivating inheritance, parameter transactions and variant transactions behave differently:</p>
+<p> <strong>Parameter Transactions</strong></p>
+<ul>
+<li>Since these transactions always run in their own check context, their default data can be completely independent of the corresponding base transactions. Therefore, the deactivation of the inheritance mode is allowed.</li>
+</ul>
+<p><strong><span style="font-size: 14px;">Variant Transactions</span></strong></p>
+<ul>
+<li>With the exception of the start authorization check, a variant transaction is executed in the check context of its base transaction. The data transfer from the base transaction is therefore important for authorization objects without their own default values in the variant transaction. For this reason, the inheritance mode for a variant transaction cannot be deactivated.</li>
+</ul></div></div></div></div></div>

@@ -1,0 +1,87 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You have received a notification email advising of the switch in OData Provisioning [NEO] Root Certificate from DigiCert Global Root G2 to DigiCert Global Root</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DigiCert, Certificate Update, Certificate Renewal, OData Provisioning, Root CA G3, Root Certificate</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Environment</strong><br/>SAP ODATA Provisioning (NEO)</p>
+<p><strong>Cause</strong><br/>As part of our ongoing commitment to security and trust, SAP is updating the Root Certificate Authority (CA) used for certificates in ODATA Provisioning from DigiCert Global Root G2 to DigiCert Global Root G3. For more information, refer to the following SAP Note: 3666687.</p>
+<p>Also, refer to the root certificate migration schedule provided in the <strong>See Also</strong> section.</p>
+<p><strong>Impact</strong><br/>After the update, client systems that do not trust the new Root certificate may encounter SSL certificate validation errors when accessing ODATA Provisioning endpoints. This may result in failed access to the OData services hosted on OData Provisioning.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Action Required</strong></p>
+<p>Customers accessing ODATA Provisioning endpoints from any client systems must:</p>
+<ul>
+<li>Check trust: Ensure your client system trusts the Root CA: “DigiCert Global Root G3”.</li>
+</ul>
+<ul>
+<li>Update if necessary: If this certificate is not present, you must download and add it to your client system’s trust store before the migration date to avoid service disruptions.</li>
+</ul>
+<p><strong>FAQ:</strong></p>
+<p>1. Are web browsers affected?<br/>Web browsers connecting to the ODATA Provisioning Administration UI will generally remain unaffected, as the new Root CA is included in the latest versions of all major browsers and up-to-date operating systems. However, if your organization manages certificates manually, utilizes legacy browser versions, or maintains its own restricted trust store, you must manually add the new DigiCert Global Root G3 certificate to ensure continued access.</p>
+<p>2. Do I need to trust Intermediate or Leaf certificates?<br/>No. SAP recommends trusting only the Root CA.</p>
+<p>3. Is there an impact on the Cloud Connector scenario? <br/>Impact is not anticipated. The DigiCert Global Root G3 root certificate (used for SAP BTP Neo endpoints for Cloud Connector connectivity) is widely included in standard JVM distributions. As long as the Cloud Connector is running on a supported JVM version, the certificate should already be present. For legacy or highly restricted environments, we recommend a manual verification of the trust store.</p>
+<p><strong>See Also</strong><br/>Root Certificate migration schedule for SAP ODATA Provisioning on BTP NEO:</p>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 297px;"><colgroup><col width="168"/><col width="129"/></colgroup>
+<tbody>
+<tr>
+<td class="xl65" height="24" width="168"><strong>Neo Data Center</strong></td>
+<td class="xl65" width="129"><strong>Date</strong></td>
+</tr>
+<tr>
+<td class="xl66" height="24">JP1</td>
+<td class="xl67">14-Apr-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">US1</td>
+<td class="xl67">15-Apr-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">BR1</td>
+<td class="xl67">16-Apr-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">US4</td>
+<td class="xl67">21-Apr-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">CA1</td>
+<td class="xl67">22-Apr-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">AP1</td>
+<td class="xl67">23-Apr-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">AE1</td>
+<td class="xl67">27-Apr-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">SA1</td>
+<td class="xl67">28-Apr-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">CN1</td>
+<td class="xl67">29-Apr-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">EU3</td>
+<td class="xl67">11-May-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">US2</td>
+<td class="xl67">12-May-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">US3</td>
+<td class="xl67">18-May-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">EU2</td>
+<td class="xl67">19-May-26</td>
+</tr>
+<tr>
+<td class="xl66" height="24">EU1</td>
+<td class="xl67">26-May-26</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div>

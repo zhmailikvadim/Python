@@ -1,0 +1,66 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>A user who has Additional Access Control based on a DRTM-enabled Country/Region is able to download purge preview reports for all users belonging to that country/region, including users outside the user’s Department or Legal Entity target population.</li><li>Users can download DRTM purge preview reports that include users outside their assigned target population. </li><li>DRTM purge preview reports display users from multiple Legal Entities even though the user has restricted target population access.</li><li>Access to DRTM purge preview reports is broader than expected and not limited by Department or Legal Entity.</li><li>Issue with restricting access to purge preview report based on Legal Entity (LE).</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors HCM Suite</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This behavior is working as designed.<br/>Access to DRTM purge preview reports is controlled only at the DRTM-enabled country/region level. Legal Entity– or Department-based restrictions and target population filtering are not supported for downloading or viewing already generated purge preview reports.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>At this time, it is not possible to restrict purge preview report visibility or content by Legal Entity or target population. Access control is enforced only at the country level for DRTM purge reports.</p>
+<h1 data-toc-skip="">Permission Behavior Clarification</h1>
+<h2 data-toc-skip="">1. Additional Access Control Based on DRTM-enabled Country/Region Permission</h2>
+<ul><li>
+<p>Purpose: Controls whether a user can download a purge preview report based on country only.</p>
+</li><li>
+<p>Target Population: Not applicable</p>
+</li><li>
+<p>Behavior:</p>
+<ul><li>
+<p>If at least one to-be-purged user in the preview report belongs to the same DRTM-enabled country/region:</p>
+<ul><li>
+<p>A user without this permission will see the <strong>Download Preview Report</strong> link greyed out.</p>
+</li><li>
+<p>A user with this permission can download the entire report.</p>
+</li></ul>
+</li></ul>
+</li><li>
+<p>Limitation:</p>
+<ul><li>
+<p>This permission does not filter report content by Department or Legal Entity.</p>
+</li><li>
+<p>If the report contains users from multiple Legal Entities within the same DRTM-enabled country/region, the full report is downloadable.</p>
+</li></ul>
+</li></ul>
+<p></p>
+<h2 data-toc-skip="">2. Manage and Approve DRTM Purge Requests Permission </h2>
+<ul><li>
+<p>Purpose: Controls whether the <strong>Approve</strong> and <strong>Decline</strong> buttons are clickable.</p>
+</li><li>
+<p>Target Population:  Not applicable</p>
+</li><li>
+<p>Behavior:</p>
+<ul><li>
+<p>Does not restrict visibility of purge report data.</p>
+</li><li>
+<p>Does not validate target population for the to-be-purged users.</p>
+</li></ul>
+</li></ul>
+<p></p>
+<h2 data-toc-skip="">3. Manage User Permission (with Target Population)</h2>
+<ul><li>
+<p>Purpose: Controls which users can be selected and included when a purge request is launched.</p>
+</li><li>
+<p>Target Population: Applicable</p>
+</li><li>
+<p>Behavior:</p>
+<ul><li>
+<p>Applies only to the purge request launcher.</p>
+</li><li>
+<p>Filters which users are included in the purge request at creation/scheduling time.</p>
+</li><li>
+<p>Does not restrict access to a purge preview report.</p>
+</li></ul>
+</li><li>
+<p>Important Note:</p>
+<ul><li>
+<p>There was a behavior change (within the last year) <a href="https://help.sap.com/docs/successfactors-release-information/8e0d540f96474717bbf18df51e54e522/a8074e181290414ca86e7e6fb52b14c3.html" rel="noopener noreferrer nofollow" target="_blank">Enhancements to Data Retention Management | SAP Help Portal</a>:</p>
+<ul><li>
+<p>New purge requests validate the launcher’s <em>Manage User</em> permission (not the approver’s).</p>
+</li><li>
+<p>Existing reports created before this change may not follow the new logic.</p>
+</li></ul>
+</li></ul>
+</li></ul>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://help.sap.com/docs/successfactors-release-information/8e0d540f96474717bbf18df51e54e522/a8074e181290414ca86e7e6fb52b14c3.html" rel="noopener noreferrer nofollow" target="_blank">Enhancements to Data Retention Management | SAP Help Portal</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>restricting access, purge preview report, legal entity, target population, GDPR implications, approver permissions, data retention management, country-level restriction, SAP SuccessFactors, DRTM permissions, permission groups, access control, Additional Access Control Based on DRTM-enabled Country/Region, Manage and Approve DRTM Purge Requests, Manage User</p></div></div></div></div>

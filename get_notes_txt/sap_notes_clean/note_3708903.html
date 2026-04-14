@@ -1,6 +1,19 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">When a Lockbox item is set to Done in a partial application scenario, and the user navigates to the Documents tab, the document from Posting Area 2 is marked with “*” and disappears from Reprocess Incoming Checks – From Lockbox app</p>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>F3398, FEBA_LOCKBOX, FLB1, Reprocess Lockbox Items, Reprocess Incoming Checks - From Lockbox</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id="">Implement the note</p></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3708903&amp;TargetLanguage=EN&amp;Component=IS-U-EEG&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3708903/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3708903/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>If you subsequently change the commissioning date of an inactive generating unit, the start date is currently adjusted accordingly only for such time-dependent data in the generating unit for which the original start date of the corresponding time slice was identical to the old commissioning date.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p id="">Transaction /ENBIL/GU02, COMM_DATE</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Missing function</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>You can implement this SAP Note in your system either manually or by importing the relevant Support Package.</p>
+<p>After you implement this SAP Note, the default behavior changes as follows:</p>
+<p>Change the commissioning date (COMM_DATE) to the future, for example, 1/1/2024 to 1/1/2026:</p>
+<ol>
+<li>Time slices whose start date would be before the adjusted commissioning date of the generating unit are given the new start-up date as the new start date. The end date of the time slice is not adjusted.</li>
+<li>If time slices are determined whose start and end date are before the new commissioning date, these time slices are only deleted.</li>
+<li>If several time slices are determined for an object, for example, billing models for which the start date is before the new commissioning date, only the most recent time slice is adjusted accordingly. The other time slices are deleted.</li>
+</ol>
+<p>Change the commissioning date (COMM_DATE) to the past, for example, 1/1/2026 to 1/1/2024</p>
+<ol>
+<li>The date is only adjusted for the time slices whose start date was identical to the original commissioning date.</li>
+</ol></div></div></div></div></div>

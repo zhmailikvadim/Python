@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When you execute queries using the ABAP function module TREX_EXT_AGGREGATE, the following error may occur:</p>
+<p style="padding-left: 30px;"><strong>Bad request from application: H001.PRED does not exist in object structure</strong></p>
+<p>This error appears when the query filter in import parameters I_QUERY_ENTRIES or I_QUERY_ENTRIES2 of the ABAP interface TREX_EXT_AGGREGATE contains multiple OR conditions on hierarchy-related columns (such as H001.PRED).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">TREX_DBS_AGGREGATE, trexviadbsl, trexviadbslwithparameter</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong><span style="text-decoration: underline;">Prerequisite:</span></strong><br/>The query is a hierarchy query. The import parameter I_INDEX_ALIAS_OPERATION is defined for the ABAP interface TREX_EXT_AGGREGATE.</p>
+<p><span style="text-decoration: underline;"><strong>Cause:</strong></span><br/>A bug exists in the HANA ABAP client. According to SAP Note 2893791, multiple OR conditions in the query filter table are normally optimized during query execution. However, in complex scenarios involving hierarchy queries, hierarchy-related columns in the query filter table are not recognized because they are not part of the main query object.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">To resolve this issue, apply the ABAP patch or source code correction provided in the relevant SAP note. This enables the optimiser to recognize hierarchy-related columns in the query filter table.</p>
+<p><span style="text-decoration: underline;"><strong>Workaround:</strong></span><br/>Until the fix is applied, you can temporarily disable the optimization feature as described in SAP Note 2925382.</p></div></div></div></div>

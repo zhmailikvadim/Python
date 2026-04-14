@@ -1,0 +1,60 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3720722&amp;TargetLanguage=EN&amp;Component=PY-DE-FP-MV&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3720722/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3720722/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>In the infotype <em>Electronic Data Exchange</em> (0700) with the subtype DBPV, existing data records cannot be delimited in terms of time. The system only allows you to change the existing data record, whereby the start and end dates must not be changed.</p>
+<p>This leads to the following problem:</p>
+<p>An employee is registered using the DaBPV notification procedure. The confirmation in the infotype <em>Electronic Data Exchange</em> (0700), subtype DBPV, contains correct data (e.g. B. Parent Property: No, Number of Children: 0, Payroll-Relevant: Yes). Children that cannot be reported using the DaBPV notification procedure (e.g. B. foster children). These are maintained in the infotype Family Members/Beneficiaries (0021) and the parent property is overridden using the SI attribute 31 in the infotype Social Insurance DE (0013).</p>
+<p>To take these children into account in payroll to reduce contributions, the indicator <em>Payroll-Relevant</em> must be set to "Not Relevant for Payroll" in infotype 0700, subtype DBPV. Since a time-based delimitation is not possible, the change to the existing record would trigger unwanted retroactive accounting over the entire period.</p>
+<p>In addition, the use of the <em>buttons Use Data</em> or <em>Do Not Use Data</em> when processing DaBPV responses so that all existing data records in the infotype <em>Electronic Data Exchange</em> (0700), subtype DBPV, are overwritten. In this case, too, unwanted retroactive accounting is triggered over the entire period, even if the difference in the number of children or parent property occurs only at a later point in time.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>Social insurance, foster children, DaBPV, CI children</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p>
+<p>After the implementation, it is possible to copy data records in the infotype <em>Electronic Data Exchange</em> (0700), subtype DBPV. You can now delimit an existing record and change the Relevant <em>for Payroll</em> indicator as of a specific key date without triggering retroactive accounting for the entire period. However, it is only possible to copy the infotype record within the time limits of the original record. For example, bringing forward the start date is not allowed.</p>
+<p>Post-Implementation Procedure:</p>
+<ol>
+<li>Call the infotype <em>Electronic Data Exchange</em> (0700), subtype DBPV, for the affected personnel number.</li>
+<li>Copy the existing data record and delimit it to the required start date.</li>
+<li>In the new data record, change the Relevant <em>for Payroll</em> indicator from selected to not selected (or vice versa).</li>
+<li>Save the data record.</li>
+</ol>
+<p>In addition, the functions of the <em>Use Data</em> and <em>Do Not Use Data</em> pushbuttons have been adjusted. If data of the DaBPV procedure already exists in the infotype <em>Electronic Data Exchange</em> (0700), the system adjusts only entries that are after the date for which differences in the number of children or parent property occur for the first time. As a result, longer retroactive accounting is avoided.</p>
+<p><strong>Example:</strong></p>
+<p>A proactive confirmation from the BZSt is to be checked in the administrator list:</p>
+<div class="table-responsive"><table class="table table-bordered table-striped col-resizeable">
+<thead>
+<tr><th>Start</th><th>End</th><th>Number of Children (Notification)</th><th>Number of Children (IT 0700)</th><th>Relevant for Billing</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>01.04.2025</td>
+<td>31.07.2025</td>
+<td>1</td>
+<td>1</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>01.08.2025</td>
+<td>30.09.2025</td>
+<td>1</td>
+<td>1</td>
+<td>No</td>
+</tr>
+<tr>
+<td>01.10.2025</td>
+<td>31.01.2050</td>
+<td>2</td>
+<td>1</td>
+<td>No</td>
+</tr>
+<tr>
+<td>01.02.2050</td>
+<td>31.12.9999</td>
+<td>0</td>
+<td>0</td>
+<td>No</td>
+</tr>
+</tbody>
+</table></div>
+<p>The number of children from the notification differs from the number of children saved in the infotype <em>Electronic Data Exchange</em> (0700) for the first time as of October 1, 2025.</p>
+<p>If the administrator chooses the <em>Do Not Use Data</em> pushbutton, only the data records as of October 1, 2025 are saved with the deactivated Relevant for Payroll indicator. The records before this date (01.04.2025 – 30.09.2025) remain unchanged. Retroactive accounting over the entire period is therefore avoided.</p>
+<p>In addition, after the implementation, it is possible to create and edit data records in the infotype <em>Electronic Data Exchange</em> (0700), subtype DBPV, using batch input.</p>
+<p>After you import the HR Support Package or implement the correction instructions, you do not have to perform any further follow-on activities.</p></div></div></div></div></div>

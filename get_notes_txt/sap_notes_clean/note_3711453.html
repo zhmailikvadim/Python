@@ -1,0 +1,51 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">It is needed to know how to retrieve service child line accounting data from table(s). </p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Materials Management (MM)</li><li>SAP ERP Central Component</li><li>SAP ERP</li><li>SAP enhancement package for SAP ERP</li><li>SAP enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 868.0pt;" summary="" title=""><tbody><tr style="height: 17.45pt;"><td style="width: 31.0pt;" valign="top">
+<p>Sl. No.</p>
+</td><td style="width: .75in;" valign="top">
+<p>Table</p>
+</td><td style="width: 175.7pt;" valign="top">
+<p>Description</p>
+</td><td style="width: 123.5pt;" valign="top">
+<p>Key Fields</p>
+</td><td style="width: 483.8pt;" valign="top">
+<p>Comments</p>
+</td></tr><tr style="height: 17.45pt;"><td style="width: 31.0pt;" valign="top">
+<p>1</p>
+</td><td style="width: .75in;" valign="top">
+<p>EKPO</p>
+</td><td style="width: 175.7pt;" valign="top">
+<p>Purchasing Document Item</p>
+</td><td style="width: 123.5pt;" valign="top">
+<p>EBELN, EBELP</p>
+</td><td style="width: 483.8pt;" valign="top">
+<p>Get the PACKNO</p>
+</td></tr><tr style="height: 43.15pt;"><td style="width: 31.0pt;" valign="top">
+<p>2</p>
+</td><td style="width: .75in;" valign="top">
+<p>ESLL</p>
+</td><td style="width: 175.7pt;" valign="top">
+<p>Lines of Service Package</p>
+</td><td style="width: 123.5pt;" valign="top">
+<p>PACKNO, INTROW</p>
+</td><td style="width: 483.8pt;" valign="top">
+<p>Input the EKPO-PACKNO to ESLL-PACKNO to get all the SUB_PACKNO. Then input same in ESLL-PACKNO and get the outputs.</p>
+</td></tr><tr style="height: 56.3pt;"><td style="width: 31.0pt;" valign="top">
+<p>3</p>
+</td><td style="width: .75in;" valign="top">
+<p>ESKL</p>
+</td><td style="width: 175.7pt;" valign="top">
+<p>Account Assignment Specification: Service Line</p>
+</td><td style="width: 123.5pt;" valign="top">
+<p>PACKNO, INTROW, NUMKN</p>
+</td><td style="width: 483.8pt;" valign="top">
+<ol><li>Input the ESLL-PACKNO to ESKL-PACKNO</li><li>ESKL will hold only the quantity, percentage, but not the GL account details. ESKL-ZEKKN should be compared with EKKN-ZEKKN</li></ol>
+</td></tr><tr style="height: 34.2pt;"><td style="width: 31.0pt;" valign="top">
+<p>4</p>
+</td><td style="width: .75in;" valign="top">
+<p>EKKN</p>
+</td><td style="width: 175.7pt;" valign="top">
+<p>Account Assignment in Purchasing Document</p>
+</td><td style="width: 123.5pt;" valign="top">
+<p>EBELN, EBELP, ZEKKN</p>
+</td><td style="width: 483.8pt;" valign="top">
+<p>Get the outputs</p>
+</td></tr></tbody></table></div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>service child line accounting data, multiple splits, bapi_po_getdetail, ekpo, esll, eskl, ekkn, account assignment, service child</p></div></div></div></div>

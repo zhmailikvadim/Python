@@ -1,13 +1,8 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">During BOM3 ballooning, warnings with number "027" are raised although balloon positions are determined correctly.</p>
-<p>This can occur if a part is used both in a top-level assembly and in a subassembly with split positions.<br/>Warnings are reported for part instances belonging to subassemblies, even though the corresponding balloon positions are resolved correctly later.</p>
+<p id="__html0">Performance issues may occur during actual costing status determination when calling function modules FCML4H_STATUS_GET, FCML4H_STATUS_SET_UPDATE, and FCML4H_STATUS_CHECK_CLOSE.<br/>This SAP Note corrects the issue and improves performance.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>(PLM-41897), BOM3, Ballooning, MBOM</p>
+<p>FCML4H_STATUS_GET, FCML4H_STATUS_SET_UPDATE, FCML4H_STATUS_CHECK_CLOSE</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>During balloon derivation, paths are evaluated across multiple assembly levels.</p>
-<p>When processing the top-level assembly, components originating from subassemblies are temporarily evaluated as potential candidates.<br/>If these paths cannot be resolved at top level, warnings are generated.</p>
-<p>The warning handling does not distinguish between intermediate evaluation results and final resolution results.<br/>As a consequence, warnings remain although the positions are correctly determined when the subassembly is processed.</p>
+<p id="">Performance improvement</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>The ballooning logic was corrected to remove obsolete warnings once the corresponding balloon position is successfully resolved.</p>
-<p>Warnings created during intermediate evaluation steps are now linked to the corresponding input row and removed from the error table if the position is found in a later processing step.</p>
-<p>Changed function module: /DSCSAG/PLM_MBOM_BALLOONING</p></div></div></div></div>
+<p id="">Implement attached correction instructions. Alternatively, install appropriate Support Package mentioned in this SAP Note.</p></div></div></div></div>

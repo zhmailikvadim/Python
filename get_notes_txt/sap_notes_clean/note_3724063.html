@@ -1,9 +1,22 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">When an user discards the draft for a Document Info Record that has classifications assigned, the draft entry for the classification is not being cleared from the draft table CLF_CTX_D.</p>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>Classification, DRAFT, CLF_CTX_D, CLF_AUSP_D, CL_LO_VCHCLF_VCH_DET_DISCARD, CL_LO_VCHCLF_CLF_DET_DISCARD</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Program error</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement attached correction instructions.</p>
-<p><span style=" font-family: SourceSansPro, Helvetica, Arial, sans-serif; font-size: 14px; white-space-collapse: preserve; background-"> </span></p></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3724063&amp;TargetLanguage=EN&amp;Component=FS-RI-AC&amp;SourceLanguage=DE&amp;Priority=02&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3724063/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3724063/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>The release of an account terminates with an error. The short text of the error message is "Local currency amount exceeds the largest postable amount".</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>B_WHGNR</p>
+<p>BETRH_KK</p>
+<p>/MSG/RVTGANTKO-BET_VTGNR</p>
+<p>&gt;U262</p>
+<p>CX_SY_CONVERSION_OVERFLOW.</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>When account A1 is released, the system generates account A2 for a participating treaty.</li>
+<li>The release process the generated accounts in the sequence A1, A2.</li>
+<li>Account A1 has an original currency or an account currency that matches the local currency of the company code.</li>
+<li>Account A2 has an original currency and an account currency that are both different from the local currency of the company code.</li>
+<li>Account A2 has a local currency that differs from the local currency of account A1.</li>
+<li>The account A2 has a posting with an amount that exceeds 13 digits translated into the local currency.</li>
+</ul>
+<p><strong>Reason:</strong> The system only takes into account the currencies of account A1. Therefore, the system does not split the amount of account A2 that is too high.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p><strong>History:</strong><br/>March 9, 2026: New</p>
+<p><strong>Troubleshooting Description:</strong><br/>The system takes into account the currencies of each account to be released and splits the amount that is too high into smaller amounts before it calls the connected current account system.</p></div></div></div></div></div>

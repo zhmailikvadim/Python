@@ -1,0 +1,396 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3732797&amp;TargetLanguage=EN&amp;Component=BW4-DM-TRFN&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3732797/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3732797/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>Symptom</p>
+<p>During the execution of a process chain of a DTP, terminations occur sporadically:</p>
+<p>"You are not authorized to use this transformation"<br/>Message no. RSTRAN011<br/><br/>After you implement the corrections from this SAP Note, the system tries to trace the cause.</p>
+<p>After you implement the corrections in the system, you must add the following entry to the table RSDHA_ADMIN:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>RSDHA_ADMIN</strong></td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>FIELD</strong></td>
+<td>RSDHA_TRACE_EXCEPTION</td>
+</tr>
+<tr>
+<td><strong>VALUE</strong></td>
+<td><strong>CX_RSTRAN_NOT_AUTHORIZED</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Afterwards, the table RSDHA_TRACE should contain entries of the following type, which can be used to restrict the cause under certain circumstances.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="181">20,260,220,074,033.2427420</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>1</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">&lt;USER&gt;</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="124">EXCEPTION_RAISED</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255">CL_RSDHA_UTILITIES_SQL========CP</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255">
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">METHOD</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255">
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">WRITE_RSDHA_TRACE</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="181">20,260,220,074,033.2427420</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>2</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">&lt;USER&gt;</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="124">EXCEPTION_RAISED</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255">CL_RSDHA_TRACE================CP</td>
+<td height="19" width="255"></td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">METHOD</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">WRITE_TRACE_EXCEPTION</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="181">20,260,220,074,033.2427420</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>3</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">&lt;USER&gt;</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="124">EXCEPTION_RAISED</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255"><strong>CX_RSTRAN_NOT_AUTHORIZED</strong>=======CP</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255">
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">METHOD</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255">
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">CONSTRUCTOR</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="181">20,260,220,074,033.2427420</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>4</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">&lt;USER&gt;</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="124">EXCEPTION_RAISED</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255">ZCTEST196</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255">FORM</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255">
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">YY</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="181">20,260,220,074,033.2427420</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>5</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">&lt;USER&gt;</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="124">EXCEPTION_RAISED</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255">ZCTEST196</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255">EVENT</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+<td>
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="255">
+<div class="table-responsive"><table border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td height="19" width="64">START-OF-SELECTION<br/><br/></td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+</tbody>
+</table></div>
+</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>RSDHA, TRFN, DTPA, RSTRAN, 011, CX_RSDHA_NOT_AUTHORIZED, RSDHA_TRACE.</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Program</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<ul>
+<li><span style="text-decoration: underline;"><strong>SAP BW/4HANA 2021</strong></span><br/>Import Support Package 14 for SAP BW/4HANA 2021 (SAPK-30014INDW4CORE) into your BW system. The support package is available once <strong>SAP Note 3625395 </strong> ("SAPBWNews SAP BW/4HANA 2021 SP14"), which describes this SP in more detail, has been released for customers.<br/><br/></li>
+<li><span style="text-decoration: underline;"><strong>SAP BW/4HANA 2023</strong></span><br/>Import Support Package 09 for SAP BW/4HANA 2023 (SAPK-40009INDW4CORE) into your BW system. The support package is available once <strong>SAP Note 3678578 </strong> ("SAPBWNews SAP BW/4HANA 2023 SP09"), which describes this SP in more detail, has been released for customers.</li>
+</ul>
+<p>In urgent cases, you can use the correction instructions as an advance correction.</p>
+<p><strong>Before you do this, you must refer to SAP Notes 1668882 and 2248091 for information about transaction SNOTE.</strong></p>
+<p>To provide information in advance, the specified SAP Notes may already be available before the Support Package is released. In this case, however, the short text still contains the word "preliminary version".</p></div></div></div></div></div>

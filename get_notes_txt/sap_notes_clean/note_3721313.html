@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In certain scenarios, when the RFC function module CDESK_SRV_DISPLAY_DMUDATA is called with variant‑specific information, the input parameter IV_VARIANT_GUID is ignored.</p>
+<p>As a result, the function may return DMU data for all variants. The caller is not able to identify which data belongs to the requested variant.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PLMECTR-1122, CL_CDESK_SRV_DMUDATA_DISPL, ECTR</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The behavior may occur when variant‑dependent DMU data is maintained and the caller expects IV_VARIANT_GUID to control the selection.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The handling of the variant GUID was adjusted to ensure consistent application during DMU data processing.<br/>The following changes were implemented:</p>
+<ul>
+<li>The input parameter IV_VARIANT_GUID was removed from method IF_CDESK_SRV_DMUDATA_DISPL~GET_DMUPB_BY_STPO of class CL_CDESK_SRV_DMUDATA_DISPL.</li>
+<li>The method now exclusively uses the instance attribute MS_CDESK_VARIANT-VARIANT_GUID, which is initialized by the constructor.</li>
+<li>The selection logic was aligned so that the variant GUID stored in the instance is consistently applied.</li>
+</ul>
+<p>Existing behavior remains unchanged for other scenarios.</p></div></div></div></div>

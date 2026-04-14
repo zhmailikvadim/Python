@@ -1,0 +1,64 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The following errors occur when processing infotype 0267 via the renewal screen:</p>
+<ul>
+<li>When creating a new record, the starting date is suggested based on the payroll control record. For this  the payroll area (ABKRS) is taken from the first 0001 infotype record, instead of the 0001 record corresponding to the sy-datum.</li>
+<li>The values ​​of Polish specific fields (such as Insurance title code and insurance fields) are lost after saving the record.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Renewal IT0267, CL_HRPA_INFOTYPE_0267_PL, CL_HRPA_UI_CONVERT_0267_PL, ZUORD.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><span style="font-size: 14px;">Program error.</span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">The date handling error has been corrected in the CL_HRPA_INFOTYPE_0267_PL class.</p>
+<p>The following two table settings resolve the field values ​​disappearing error:</p>
+<ul>
+<li>1 record has been deleted from maintenance view V_T588MFPROPS:</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 239px; height: 52px;">
+<tbody>
+<tr>
+<td>INFTY</td>
+<td>ITVERS</td>
+<td>SUBTY</td>
+<td>SNAME</td>
+<td>FNAME</td>
+</tr>
+<tr>
+<td>0267</td>
+<td>46</td>
+<td> </td>
+<td>P0267</td>
+<td>ZUORD</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>1 record has been added to maintenance view V_T588MUIFPROPS</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>INFTY</td>
+<td>CONTEXT</td>
+<td>VERSIONID</td>
+<td>SUBTY</td>
+<td>STRUCTURE_NAME</td>
+<td>FIELD_NAME</td>
+<td>FIELD_ATTRIBUTE</td>
+</tr>
+<tr>
+<td>0267</td>
+<td> </td>
+<td>46</td>
+<td> </td>
+<td>HCMT_BSP_PA_PL_R0267</td>
+<td>ZUORD</td>
+<td>READONLY</td>
+</tr>
+</tbody>
+</table></div>
+<p>Please apply the correction by importing the Support Package specified for your release, or by using the Note Assistant. If you implement the change with SNOTE, maintain the two tables manually.</p>
+<p><strong>Version history:</strong></p>
+<p>Version 1. 23.02.2026. - Pilot release</p>
+<p>Version 2. 26.02.2026. - Pilot release, no changes</p>
+<p>Version 3. 27.02.2026. - Released for Customer</p></div></div></div></div>

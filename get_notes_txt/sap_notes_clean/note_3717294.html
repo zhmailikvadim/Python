@@ -1,0 +1,71 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP Note describes an issue that occurs when releasing a Shop Floor Routing, where the system does not permit the creation of a Production Version for multiple assigned materials and MBOMs.</p>
+<p>The issue arises under the following conditions:</p>
+<ul>
+<li>
+<p>The previous version of the Shop Floor Routing contained a single assigned material and MBOM.</p>
+</li>
+<li>
+<p>A Production Version has been created for the previous version of the Shop Floor Routing.</p>
+</li>
+<li>
+<p>The previous version of the Shop Floor Routing is subsequently revised.</p>
+</li>
+<li>
+<p>New materials and MBOMs are assigned in the subsequent version of the Shop Floor Routing.</p>
+</li>
+<li>
+<p>The subsequent version of the Shop Floor Routing is released.</p>
+</li>
+</ul>
+<p>As a result, the system does not allow the creation of Production Versions for the newly assigned materials and MBOMs.<br/><br/></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PP-PEO; Production Version; MSFR4; Shop Floor Routing</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error.<br/><br/>A released Shop Floor Routing and a corresponding Production Version must exist.<br/>One material and one MBOM must be assigned to it.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the attached correction instructions<br/><br/>The system allows the creation of Production Versions for the newly assigned materials and MBOMs for the following case:</p>
+<ul>
+<li>
+<p>The previous version of the Shop Floor Routing contained a single assigned material and MBOM.</p>
+</li>
+<li>
+<p>A Production Version has been created for the previous version of the Shop Floor Routing.</p>
+</li>
+<li>
+<p>The previous version of the Shop Floor Routing is subsequently revised.</p>
+</li>
+<li>
+<p>New materials and MBOMs are assigned in the subsequent version of the Shop Floor Routing.</p>
+</li>
+<li>
+<p>The subsequent version of the Shop Floor Routing is released.</p>
+</li>
+</ul>
+<p>The following additional scenarios must also be considered.</p>
+<p><strong>Scenario 1:</strong> The current routing version contains more than one Material and MBOM assignment.</p>
+<ul>
+<li>
+<p>A new routing version is created.</p>
+</li>
+<li>
+<p>One or all MBOM assignments are removed in the new routing version.</p>
+</li>
+<li>
+<p>The routing is released.</p>
+</li>
+<li>
+<p>The corresponding Production Version from the previous routing version is used during the Production Version update process.</p>
+</li>
+<li>
+<p>The Production Version is updated accordingly based on the latest MBOM assignments maintained in the routing.</p>
+</li>
+</ul>
+<p>The same behavior should apply to the scenario where the current routing version does not contain any MBOM assignment and an MBOM assignment is added in the new routing version.<br/><br/></p>
+<p><strong>Scenario 2: </strong>The current routing version contains more than one Material and MBOM assignment and previous version does not contain.</p>
+<ul>
+<li>Set obsolete for current routing version.</li>
+<li>The corresponded production version will be used during production version changes.</li>
+<li>And the production version will be updated to contain the latest MBOM assignments.</li>
+</ul>
+<p>The same behaviour is happened when current routing version without MBOM assignment and in previous version contains more than one Material and MBOM assignment.</p></div></div></div></div>

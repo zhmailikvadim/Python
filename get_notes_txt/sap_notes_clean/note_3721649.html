@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The "Take Readings" option is being controlled by the Work Order Edit authorization check. This is incorrect as the readings are tied to Technical objects.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<ul>
+<li>Phase Model</li>
+<li>Take Readings</li>
+<li>Supervisor Technician</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>BAS/Visual Studio Code with SAM MDK Project</li>
+<li>`patch` command (available on BAS and macOS by default) via terminal or other patching utility</li>
+<li>Read the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://community.sap.com/t5/enterprise-resource-planning-blogs-by-sap/how-to-apply-metadata-patch-in-sap-service-and-asset-manager/ba-p/13801041" rel="nofollow" target="_blank">guidelines</a> on how to apply the patch and read the appendix section if you receive any error</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><span style="font-size: 14px;">The note fixes this issue by removing the workorder edit authorization check while taking readings.</span></p>
+<p><span style="font-size: 14px;">To apply the patch, download the attached 3721649_YYMM.patch file and save it in a known location, preferably adjacent to your SAM.mdkproject<br/>YYMM represents product release version. </span></p>
+<p><span style="font-size: 14px;">If you are on Windows, see SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3533879" rel="nofollow" target="_blank">3533879</a> for how to install a .patch file in Windows. If you are on a Mac, follow the steps below:</span></p>
+<ol>
+<li>Open a terminal in the root of your SAM metadata (i.e. SAM.mdkproject/metadata or SAM.mdkproject/metadata/base.definitions)</li>
+<li>Run the terminal command `<em>patch --no-backup-if-mismatch -p4 &lt; path/to/3721649_YYMM.patch</em>`. </li>
+<li>Verify in the terminal window that the following files have been modified and listed as patched, as indicated by the console output:</li>
+</ol>
+<ul>
+<ul>
+<li>modified:   Rules/Measurements/Points/MeasuringPointsTakeReadingsIsVisible.js</li>
+</ul>
+</ul></div></div></div></div>

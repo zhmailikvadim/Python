@@ -1,0 +1,191 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div></div>
+</div>
+<div>
+<div></div>
+</div>
+<div class="OutlineElement Ltr SCXW17404716 BCX8">
+<p>You run the <strong>Sistema de Informação de Organização do Estado (SIOE+)</strong> (RPC_PAYPT_SIOE) report and the following symptoms occur:</p>
+<ol>
+<li>The system displays the employee's birth country instead of the nationality in the <strong>Nacionalidade</strong> field.</li>
+<li>There is no option to change the standard output of the employee eligibility decision for generating the <em>Ficha do Trabalhador</em> and <em>Saída de Trabalhador</em> files.</li>
+<li>The logic for calculating the <strong>Antiguidade/Tempo de Serviço</strong> and <strong>Antiguidade na Carreira</strong> fields does not accurately account for absences, licenses, and bonus periods.</li>
+<li>The <strong>BAdI para SIOE+</strong> (HRPAYPT_SIOE) enhancement spot does not have documentation.</li>
+</ol>
+<div>
+<div>
+<div></div>
+</div>
+</div>
+<div>
+<div></div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<div></div>
+<div>
+<p><strong>Transaction: </strong>PC00_M19_SIOE_PLUS</p>
+</div>
+<div>
+<p>&amp;SIOE (for more information, see SAP Note <a href="/notes/2197631" target="_blank">2197631</a>)</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<div></div>
+<div>
+<div></div>
+<div>
+<p><strong>Reason</strong></p>
+<p>These issues are side effects caused by the solution delivered by SAP Note <a href="https://me.sap.com/notes/3690959" target="_blank">3690959</a>.</p>
+<ol>
+<li>
+<div>The system incorrectly retrieves the <strong>País/região de nascimento</strong> (P0002-GBLND) field instead of the <strong>Nacionalidade</strong> (P0002-NATIO) field from the <strong>Dados pessoais</strong> (0002) infotype when populating the report.</div>
+</li>
+<li>There are no BAdI methods to allow customization of the standard behavior.</li>
+<li>The system does not retrieve the calculated time evaluation data from the <strong>Cálculo de tempo de serviço</strong> (0553) infotype to determine the correct seniority and length of service. </li>
+<li>The solution does not consider this documentation. </li>
+</ol></div>
+</div>
+<div></div>
+<p><strong>Prerequisite</strong></p>
+<p>The following Support Package (SP) level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr><th>Release</th><th>Support Package</th></tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 06</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 19</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP D0</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04 (EhP6 and EhP7)</td>
+<td>HR SP K2</td>
+</tr>
+</tbody>
+</table></div>
+<div>
+<div></div>
+<div>
+<p>SAP Note <a href="https://me.sap.com/notes/3690959" target="_blank">3690959</a> is required.</p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="SCXW98177726 BCX8">
+<div class="OutlineElement Ltr SCXW98177726 BCX8">
+<div class="SCXW227182874 BCX8">
+<div class="OutlineElement Ltr SCXW227182874 BCX8">
+<div><ol>
+<li>From now on, the system reads the nationality of the employee from the P0002-NATIO field.</li>
+<li>From now on, the HRPAYPT_SIOE enhancement spot has two new methods:<br/>
+<ul>
+<li><strong>Alterar eligibilidade de geração da Ficha do Trabalhador</strong> (CHANGE_WORKER_FILE_ELIGIBILITY) </li>
+<li><strong>Alterar eligibilidade de geração da Saída de Trabalhador </strong>(CHANGE_WORKER_LEAVE_ELIGIBILTY)</li>
+</ul>
+<p>With these methods, you can change the standard eligibility criteria for generating the <em>Ficha do Trabalhador</em> and <em>Saída de Trabalhador</em> files for each employee individually.</p>
+</li>
+<li><span style="font-size: 14px;">From now on, the system updates the logic for the </span><strong style="font-size: 14px;">Antiguidade/Tempo de Serviço</strong><span style="font-size: 14px;"> and </span><strong style="font-size: 14px;">Antiguidade na Carreira</strong><span style="font-size: 14px;"> fields to consider absences, licenses, and bonus periods by retrieving data from the </span><strong style="font-size: 14px;">Cálculo de tempo de serviço</strong><span style="font-size: 14px;"><span style="font-size: 14px;"> (0553) infotype. The fields are mapped as follows:</span></span>
+<ul>
+<li>
+<p><strong>Antiguidade/Tempo de Serviço</strong> (where field <strong>Processo de cálculo cálculo do tempo de serviço</strong> (PROCE) = 'PTPS'):</p>
+<ul>
+<li>
+<p><strong>Trabalhador-Antiguidade na AP / tempo de serviço: anos</strong>: Retrieves the <strong>Resultado do cálculo do tempo de serviço: duração em anos</strong> (RESYY) field.</p>
+</li>
+<li>
+<p><strong>Trabalhador-Antiguidade na AP / tempo de serviço: meses</strong>: Retrieves the <strong>Resultado do cálculo do tempo de serviço: duração em meses</strong> (RESMM) field.</p>
+</li>
+<li>
+<p><strong>Antiguidade na AP / tempo de serviço: data de atualização da antiguidade na AP</strong>: Retrieves the <strong>Início da validade</strong> (BEGDA) field.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Antiguidade na Carreira</strong> (where field PROCE = 'PTCA'):</p>
+<ul>
+<li>
+<p><strong>Entidade de origem-Anos</strong>: Retrieves the RESYY field.</p>
+</li>
+<li>
+<p><strong>Entidade de origem-meses</strong>: Retrieves the RESMM field.</p>
+</li>
+<li>
+<p><strong>Entidade de origem-Data de atualização da antiguidade</strong>: Retrieves the BEGDA field.</p>
+</li>
+</ul>
+</li>
+</ul>
+<span style="font-size: 14px;">The CRULE field of the <strong>Processo de cálculo cálculo do tempo de serviço</strong> (V_T525P) table view allows you to customize the date output format.</span></li>
+<li><span style="font-size: 14px;">From now on, the documentation for the HRPAYPT_SIOE enhancement spot is available in the system.</span></li>
+</ol></div>
+<p><strong>Versioning</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div></div>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong> </td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p>March 31, 2026</p>
+</td>
+<td>Released for customer</td>
+</tr>
+</tbody>
+</table></div>
+<div></div>
+<div>
+<div>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package (SP). However, if you need to install a solution earlier, proceed as follows:</p>
+<ol>
+<li>Apply the manual pre-implementation steps.</li>
+<li>Use Note Assistant (SNOTE) to implement the correction instructions.</li>
+</ol></div>
+</div>
+<p><strong>Stay Informed</strong></p>
+<ul>
+<li>To get an email notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" rel="noreferrer noopener" target="_blank">My SAP Notes &amp; KBAs</a> or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" rel="noreferrer noopener" target="_blank">online help</a> for further information.</li>
+<li>For legal changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" rel="noreferrer noopener" target="_blank">Regulatory Change Manager</a>.</li>
+<li>For documentation about Payroll Portugal, access the <a href="https://help.sap.com/docs/ERP_HCM/7fc707b2f5784b5793399cfb4261fba3/383de153038a424de10000000a174cb4.html?locale=en-US&amp;version=6.18.latest" rel="noreferrer noopener" target="_blank">Help Portal</a>.</li>
+<li>For information about the Note Assistant (SNOTE), access the <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="noreferrer noopener" target="_blank">SAP Support Portal</a>.</li>
+<li>For information about Support Package (SP) schedules, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" rel="noreferrer noopener" target="_blank">SAP ERP Human Capital Management – Support Package Schedules</a>. </li>
+</ul>
+<p><strong>Disclaimers</strong></p>
+<div>
+<div>
+<div>
+<p>By clicking an external hyperlink, you agree that, unless expressly stated otherwise, your agreement with SAP includes the following:</p>
+</div>
+<div>
+<ul>
+<li>The content of the associated website and any other external websites is not content provided by or on behalf of SAP, nor is it otherwise under SAP’s control.</li>
+<li>The fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the contents and information provided on such websites.</li>
+<li>SAP does not give any representation regarding the quality, safety, suitability, accuracy, or reliability of any external website or any of the information, content, and materials provided thereon.</li>
+<li>You visit those external websites entirely at your own risk. SAP shall not be directly or indirectly responsible or liable for any damage or loss caused or alleged to be caused by or in connection with your use or reliance on any content, goods, or services available on or through any such linked website. </li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>Good to Know</strong></p>
+<ul>
+<li>When you install an SAP Note, some prerequisites, which are SAP Notes that have already been released and that change the same context of the current one, might be required. Even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</li>
+<li>During the piloting phase, this SAP Note is available only for pilot testing. Even though SAP performs internal functional tests, it is possible that tests in a customer environment reveal issues not captured before, making it necessary to update the solution and version of this SAP Note. After this SAP Note has its status updated to "Released for Customer", it will only be changed if there is a very specific situation that demands an update, and the reason for it will be added to the log of changes. </li>
+</ul>
+<p><link/></p></div></div></div></div>

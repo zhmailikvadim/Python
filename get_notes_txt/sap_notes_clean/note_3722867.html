@@ -1,8 +1,79 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">The values of TOTAL LOSS and EXPECTED LOSS in risk word report template are taken from the inherent results of the risk analysis. Update the value from the risk residual.</p>
+<p id="__html0">The <em>Manage Commercial Location Groups</em> app provides enhanced capabilities for creating and managing energy communities by grouping Commercial Locations. The application enables both operational and future‑dated planning of participants, ensuring seamless integration with downstream systems such as SAP S/4HANA.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>Risk Report Template, Analysis, Total Loss, Expected Loss</p>
+<p><em>Manage Commercial Location Groups, Energy Sharing, Consumer Participant, Producer Participants, Formula</em></p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>This is a program error.</p>
+<p>New Feature Development</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement this note to fix this issue.</p></div></div></div></div>
+<p id=""><strong><em>Manage Commercial Location Groups <strong>Functional Capabilities - </strong></em></strong></p>
+<p><strong>1. Creation and Classification of Commercial Location Groups</strong></p>
+<ul>
+<li>Users can create Commercial Location Groups and assign: </li>
+<ul>
+<li><strong>Division</strong></li>
+<li><strong>Define Mapping for Commercial Group Categories - (Config Table - /APEU/V_CG_CATEG )</strong></li>
+<li><strong>IMG Path: </strong>Measurement Concept Management Adapter &gt;&gt; Basic MCM Configuration and Mapping &gt;&gt; Define Mapping for Commercial Group Categories.</li>
+</ul>
+<li>The <strong>Define Commercial Location Types</strong> allows classification of the group (e.g., tenant electricity, shared building supply) ( <strong>Config Table - /APEU/V_CG_TYPE </strong>).</li>
+<ul>
+<li><strong>IMG Path:</strong> Measurement Concept Management Adapter &gt;&gt; Basic MCM Configuration and Mapping &gt;&gt; Define Commercial Location Types.</li>
+</ul>
+<li>In <strong>/APEU/V_LOCCAT</strong>, you define the various location categories, used in the SAP Cloud for Utilities Foundation MCM component for metering location and market location. Moreover, you assign the location categories to the location ID.</li>
+<ul>
+<li><strong>IMG Path: </strong>Measurement Concept Management Adapter &gt;&gt; Basic MCM Configuration and Mapping &gt;&gt; Define Location Category Codes.</li>
+<li>An Aggregation Point of Delivery (PoD) represents a group of PoDs within the same Commercial Group. It serves as the central PoD to which the data of other PoDs in the group is associated.</li>
+</ul>
+<li>Categories can be extended or customized using an <strong>API‑based configuration</strong>.</li>
+</ul>
+<p><strong>2. Participant Management</strong></p>
+<ul>
+<li>Participants can be added or removed with <strong>time-slice precision</strong>.</li>
+<li>Participants can be maintained as: </li>
+<ul>
+<li><strong>Consumers</strong></li>
+<li><strong>Producers</strong></li>
+</ul>
+</ul>
+<p><strong>3. Administration Data Entry</strong></p>
+<p>Users can maintain:</p>
+<ul>
+<li><strong>Validity period</strong></li>
+<li><strong>Order code</strong></li>
+<li>Optional data: </li>
+<ul>
+<li><strong>Installation operator</strong></li>
+<li><strong>Energy community address</strong></li>
+</ul>
+</ul>
+<p><strong>4. Validation and Submission Process</strong></p>
+<ul>
+<li><strong>Process ID:</strong> APEU_B_MCM_CG_VALIDATION_PROCESS</li>
+<li>The <strong>Submit</strong> action finalizes the current state of the Commercial Location Group.</li>
+<li>The user can extend the customer implementation step to implement there own validations.</li>
+<li>By default, validation success is passed. If the user wishes to overwrite via another validation they need to reset the validation success flag.</li>
+<li>The user can implement their own country specific process through the country specific market process.</li>
+<li>Submission triggers a <strong>validation event</strong>, which can be used in SAP S/4HANA to: </li>
+<ul>
+<li>Confirm participant eligibility,</li>
+<li>Determine permissible switch‑in dates,</li>
+<li>Return validations including potential error messages.</li>
+</ul>
+</ul>
+<p><strong>5. After update event successfully completed below action would be performed.</strong></p>
+<ul>
+<li><strong>Process ID:</strong> <em></em>APEU_B_MCM_CG_UPDATE_PROCESS</li>
+<li>Update POD Additional Attributes - Usage context, Commercial group identifer, Aggregation POD name, Dormant Indicator.</li>
+<li>Update formula into formula application table.</li>
+<li>The user can extend the customer implementation step to implement there own master data updates.</li>
+<li>The user can implement their own country specific process through the country specific market process.</li>
+</ul>
+<p><strong>6. Formula Explosion and System Integration</strong></p>
+<ul>
+<li>Upon successful validation:</li>
+<ul>
+<li>A <strong>formula explosion</strong> ( Application Table - /APEU/INST_FORMU, VALID_FROM &amp; VALID_TO added as new fields ) is triggered for all related Commercial Locations.</li>
+<li>Updated formulas are then transferred to connected operational systems via an outbound event.</li>
+</ul>
+<li>Planned future changes are also captured and reflected in the formulas for the relevant effective dates. ( Application Table - /APEU/INST_FORMU ). </li>
+</ul>
+<p> </p></div></div></div></div>

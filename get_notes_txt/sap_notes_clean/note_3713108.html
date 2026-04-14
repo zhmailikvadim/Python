@@ -1,0 +1,119 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="OutlineElement Ltr SCXW262575313 BCX8" id="__html0"></div>
+<div class="OutlineElement Ltr SCXW17404716 BCX8">
+<p class="Paragraph SCXW17404716 BCX8">You run the <strong>UniEmens</strong> (RPCUEMI0) report and the following symptoms occur:</p>
+<ol>
+<li>The &lt;TipoCoperturaGiorn&gt; element of the first three days of the continuation of an illness absence is filled with <strong>0</strong>.</li>
+<li>The &lt;TipoCoperturaGiorn&gt; element of all the days of illness absences with 7 days of duration is filled with <strong>0</strong>.</li>
+<li>The &lt;CodiceEvento&gt; <strong>MAL</strong> is generated in the &lt;Settimana&gt; section even when there are no indemnity amounts paid for the illness event.</li>
+<li>The amount of the daily lost salary for the &lt;DifferenzaAccredito&gt; section does not consider the percentage configured in the <strong>Moduli: definizione gruppo sorgente voce retributiva</strong> (V_T5F99FW) and <strong>Moduli: ampliamento cliente gruppo sorgente voci retributive</strong> (V_T5F99FX) table views.</li>
+<li>The &lt;DiffAccredito&gt; element's amount is not equal to the sum of all &lt;DiffAccreditoEvento&gt; elements.</li>
+</ol></div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<div class="OutlineElement Ltr SCXW179768508 BCX8">
+<p class="Paragraph SCXW179768508 BCX8"><strong>Transaction: </strong></p>
+</div>
+<div class="OutlineElement Ltr SCXW179768508 BCX8">
+<p class="Paragraph SCXW179768508 BCX8">&amp;UNIEMENS (for more information, see SAP Note <a href="/notes/2327917" target="_blank">2327917</a>)</p>
+</div>
+<div class="OutlineElement Ltr SCXW179768508 BCX8">
+<p class="Paragraph SCXW179768508 BCX8">Illness, Ricaduta, Indennizzo</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<div class="SCXW197841139 BCX8">
+<div class="OutlineElement Ltr SCXW197841139 BCX8"></div>
+<div class="OutlineElement Ltr SCXW197841139 BCX8">
+<p class="Paragraph SCXW197841139 BCX8"><strong>Reason</strong></p>
+<ol>
+<li>The system considers the first three days of the continuation of an illness absence<strong> </strong>as if they were the <em>carenza</em> period of another, independent illness.</li>
+<li>The system considers only illnesses longer than 7 days for the generation of &lt;TipoCoperturaGiorn&gt; with values other than <strong>0</strong>.</li>
+<li>The program does not consider the verification for indemnity amounts paid for the generation of &lt;CodiceEvento&gt; <strong>MAL</strong> in &lt;Settimana&gt;.</li>
+<li>The calculation of the daily lost salary does not consider the percentage from the <strong>Moduli: percentuale per un campo</strong> (PERCT) field configured in the V_T5F99FW and V_T5F99FX table views.</li>
+<li>The &lt;DiffAccredito&gt; element's amount is rounded during the processing of &lt;DiffAccreditoEvento&gt; elements, instead of after the calculation of all amounts from those elements. This causes differences between the amount of lost salary calculated for the &lt;DiffAccredito&gt; element and the sum of all &lt;DiffAccreditoEvento&gt; elements.</li>
+</ol>
+<p>These issues are side effect caused by the solution delivered by SAP Note <a href="/notes/3695910" target="_blank">3695910</a>.</p>
+</div>
+</div>
+<p><strong>Prerequisite</strong></p>
+<p>The following Support Package (SP) level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr><th>Release</th><th>Support Package</th></tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 05</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 18</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP C9</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04 (EhP6 and EhP7)</td>
+<td>HR SP K1</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="SCXW98177726 BCX8">
+<div class="OutlineElement Ltr SCXW98177726 BCX8"><ol>
+<li>The system considers only the first three days of the first illness absence as the <em>carenza</em> period of an illness with continuation.</li>
+<li>The system considers illnesses with duration of 7 days or more for the generation of &lt;TipoCoperturaGiorn&gt; with values other than <strong>0</strong>.</li>
+<li>The program considers the verification for indemnity amounts paid for the generation of &lt;CodiceEvento&gt; <strong>MAL</strong> in &lt;Settimana&gt;.</li>
+<li>The calculation of the daily lost salary considers the percentage from the PERCT field configured in the V_T5F99FW and V_T5F99FX table views.</li>
+<li>The &lt;DiffAccredito&gt; element's amount is rounded after the compilation of all &lt;DiffAccreditoEvento&gt; elements.</li>
+</ol></div>
+</div>
+<p><strong>Versioning</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>February 17, 2026</td>
+<td>Released for customer</td>
+</tr>
+</tbody>
+</table></div>
+<div class="OutlineElement Ltr SCXW234214447 BCX8">
+<p class="Paragraph SCXW234214447 BCX8">As a general rule, SAP recommends that you install a solution by applying a Support Package (SP). However, if you need to install a solution earlier, use Note Assistant (SNOTE) to implement the correction instructions.</p>
+</div>
+<p><strong>Stay Informed</strong></p>
+<ul>
+<li>To get an email notification in case this SAP Note is updated, go to <a class="Hyperlink SCXW213975517 BCX8" href="https://launchpad.support.sap.com/#/mynotes?tab=New" rel="noreferrer noopener" target="_blank">My SAP Notes &amp; KBAs</a> or access the <a class="Hyperlink SCXW213975517 BCX8" href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" rel="noreferrer noopener" target="_blank">online help</a> for further information.</li>
+<li>For legal changes, access the <a class="Hyperlink SCXW213975517 BCX8" href="https://app.main.regulatory-change-manager.cloud.sap/" rel="noreferrer noopener" target="_blank">Regulatory Change Manager</a>.</li>
+<li>For documentation about Payroll Portugal, access the <a class="Hyperlink SCXW213975517 BCX8" href="https://help.sap.com/docs/ERP_HCM/4a626d4db267456cb20b531a30968221/9579cc53a8b77214e10000000a174cb4.html?locale=en-US&amp;version=6.18.latest" rel="noreferrer noopener" target="_blank">Help Portal</a>.</li>
+<li>For information about the Note Assistant (SNOTE), access the <a class="Hyperlink SCXW213975517 BCX8" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="noreferrer noopener" target="_blank">SAP Support Portal</a>.</li>
+<li>For information about Support Package (SP) schedules, access the <a class="Hyperlink SCXW213975517 BCX8" href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" rel="noreferrer noopener" target="_blank">SAP ERP Human Capital Management – Support Package Schedules</a>. </li>
+</ul>
+<p><strong>Disclaimers</strong></p>
+<div class="SCXW257531997 BCX8">
+<div class="OutlineElement Ltr SCXW257531997 BCX8">
+<p class="Paragraph SCXW257531997 BCX8">By clicking an external hyperlink, you agree that, unless expressly stated otherwise, your agreement with SAP includes the following:</p>
+</div>
+<div class="ListContainerWrapper SCXW257531997 BCX8">
+<ul class="BulletListStyle1 SCXW257531997 BCX8">
+<li>The content of the associated website and any other external websites is not content provided by or on behalf of SAP, nor is it otherwise under SAP’s control.</li>
+<li>The fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the contents and information provided on such websites.</li>
+<li>SAP does not give any representation regarding the quality, safety, suitability, accuracy, or reliability of any external website or any of the information, content, and materials provided thereon.</li>
+<li>You visit those external websites entirely at your own risk. SAP shall not be directly or indirectly responsible or liable for any damage or loss caused or alleged to be caused by or in connection with your use or reliance on any content, goods, or services available on or through any such linked website. </li>
+</ul>
+</div>
+</div>
+<p><strong>Good to Know</strong></p>
+<ul>
+<li>When you install an SAP Note, some prerequisites, which are SAP Notes that have already been released and that change the same context of the current one, might be required. Even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</li>
+<li>During the piloting phase, this SAP Note is available only for pilot testing. Even though SAP performs internal functional tests, it is possible that tests in a customer environment reveal issues not captured before, making it necessary to update the solution and version of this SAP Note. After this SAP Note has its status updated to "Released for Customer", it will only be changed if there is a very specific situation that demands an update, and the reason for it will be added to the log of changes.</li>
+</ul>
+<p><link/></p></div></div></div></div>

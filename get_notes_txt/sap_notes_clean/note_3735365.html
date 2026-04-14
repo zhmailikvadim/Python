@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">For two purchase orders with the same prices, the value of the consumption of the subcontracting component in a reversal is different. <br/>The behavior is explained by the “GR-Based IV” Indicator EKPO-WEBRE.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p><span>Materials Management (MM)<br/>SAP ERP Central Component<br/>SAP ERP<br/>SAP enhancement package for SAP ERP<br/>SAP enhancement package for SAP ERP, version for SAP HANA<br/>SAP S/4 Hana</span></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>For the two cases below:</strong></p>
+<p> </p>
+<p>1,The component is managed with standard price control.</p>
+<p>2,In the first partial reception the standard price was 25 EUR/KG. 5 KG were issued at 125 EUR.</p>
+<p>3.In the second partial reception the standard price was 20 EUR/KG. 5 KG were issued at 100 EUR.</p>
+<p> </p>
+<p>The cancellation of the second reception is posted and the values are determined in a different way:</p>
+<p> </p>
+<p><strong>Purchase Order without “GR-Based IV”. PO History with SC Consumption view: The value of the cancellation is 112,50 EUR.</strong></p>
+<p> <span style="font-size: 12.0pt; font-family: Aptos, sans-serif;"><img class="img-responsive" height="180" src="/documents/customerkba/g684n1Ec5Sj1QuPsfkbWhjZbmvkOldETL2aOiMcv1tY" style="height: 176px; width: 1032px;" width="1055"/></span></p>
+<p><span style="font-size: 12.0pt; font-family: Aptos, sans-serif;"> </span></p>
+<p><strong>Purchase Order with GR-Based IV. PO History with SC Consumption view: The value of the cancellation is 100,00 EUR.</strong></p>
+<p style="margin: 0in; font-size: 12pt; font-family: Aptos, sans-serif;"> </p>
+<p style="margin: 0in; font-size: 12pt; font-family: Aptos, sans-serif;"><img class="img-responsive" height="173" src="/documents/customerkba/7YrTOaOE4YDMYWki-eUrqsE-5dxBptQNlFdrJwRqFx0" style="height: 1.802in; width: 10.916in;" width="1048"/></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>In cancellations or reversals of goods receipts, the value of the consumption of the subcontracting component is determined according to the average values posted so far.</strong></p>
+<p><strong> CASE-1</strong></p>
+<p><strong>When the Indicator for “GR-Based IV” is not set in the purchase order item the system does not differentiate the individual receptions and all postings are managed together in terms of valuation:</strong></p>
+<p>In total for the component we have received 10 KG with a value of 125 + 100 = 225 EUR and the cancellation is valuated as per the average: 5 KG x 225 EUR / 10 KG = 112,50 EUR.</p>
+<p> </p>
+<p><strong> CASE-2</strong></p>
+<p>When the Indicator for “GR-Based IV” is set in the purchase order item the system differentiates the individual receptions each new reception with reference to the purchase order builds a new valuation group. Only postings within the specific GR/IR assignment group are considered. This can be seen in ME23N, in the purchase order history, changing the view to GR/IR assignment:</p>
+<p> </p>
+<p><img class="img-responsive" height="279" src="/documents/customerkba/FFZMwSyEbOpmmjgfyAGnMXaNbIWlUFo1DjurRJvw6kY" width="1084"/></p>
+<p> </p>
+<p><img class="img-responsive" height="343" src="/documents/customerkba/68ZNfyn9_wRglX_7ugDCJ3ZrtA4bFwzA3IU9zQ8G8X4" width="1053"/></p>
+<p> </p>
+<p>Here we can see two different GR/IR assignment groups: The one for the first partial reception and the one for the second partial reception.</p>
+<p>The cancellation has specifically cancelled the second partial reception.</p>
+<p>The valuation is made as per the average values within this group only. We have received 5 KG with a value of 100 EUR and the cancellation is valuated as per the average: 5 KG x 100 EUR / 5 KG = 100 EUR.</p>
+<p> </p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>refer to: <a href="https://me.sap.com/notes/0000049995" rel="nofollow">0000049995 - MMIM: Valuation of return deliveries and GR reversals</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>543, 544, subcontracting, reversal , valuation difference, average consumption, return delivery valuation, subcontracting consumption, goods issue, goods movement, GR/IR Assignment,  GR reversal,</p></div></div></div></div>

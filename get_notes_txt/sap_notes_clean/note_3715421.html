@@ -1,0 +1,243 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="OutlineElement Ltr SCXW174386907 BCX8" id="__html0"></div>
+<div class="OutlineElement Ltr SCXW174386907 BCX8"></div>
+<div class="OutlineElement Ltr SCXW174386907 BCX8">
+<div class="OutlineElement Ltr SCXW174386907 BCX8">
+<p>As described in the <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html" target="_blank">regulatory change manager</a> tool under <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQWE-5487" target="_blank">https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQWE-5487</a>, t<span style="font-size: 14px;">his SAP Note provides you with the relevant system changes to address the Glossary Changes for Version 2026/1, valid as of 01/04/2026.</span></p>
+<p>These Glossary Changes have been published by the Belgian Social Insurance Authorities on their homepage <em>Sociale zekerheid/Sécurité sociale/Soziale Sicherheit</em> (<a href="https://www.socialsecurity.be/" target="_blank">www.socialsecurity.be</a>).</p>
+<p><strong>Summary of main changes</strong></p>
+<ul>
+<li>Social Risk Declaration</li>
+<ul>
+<li>Scenario UN05 =&gt; no major changes</li>
+</ul>
+</ul>
+<ul>
+<ul>
+<li>Scenario AL01 =&gt; no major changes</li>
+</ul>
+</ul>
+<ul>
+<li>DmfA =&gt; No major changes</li>
+</ul>
+<ul>
+<li>Notification file =&gt; No major changes</li>
+</ul>
+<ul>
+<li>Dimona =&gt; No major changes</li>
+</ul>
+<ul>
+<li>Acknowledge receipt file =&gt; no major changes </li>
+</ul>
+<ul>
+<li>Bijlage 3 - Type bijdrage / Annex 3 - Type de cotisation<br/>New condition in function module <em>HR_BE_WORKER_CONTRIBUTION</em>:<br/>Contribution <strong>836</strong> is calculated for employer categories <strong>257</strong> &amp; <strong>357</strong>, in combination with  the worker codes 046, 047, 484, 487 &amp; 495.</li>
+</ul>
+<ul>
+<li>Bijlage 4 - Lijst van de verminderingscodes / Annex 4 - Liste des codes déductions</li>
+<ul>
+<li>Reduction <strong>1360</strong> "<em>Wage Ceiling Reduction</em>":<br/>The wage ceiling amount - customized in table T511P with constant <strong>SVERE</strong> - has been increased from 85.000,00€ to 86.700,00€ as of 01/01/2026.<br/> <br/>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Constant (T511P)</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Amount</strong></td>
+<td><strong>Valid from</strong></td>
+<td><strong>Valid to</strong></td>
+</tr>
+<tr>
+<td>SVERE</td>
+<td>Employer Contrib. Wage Ceiling</td>
+<td>86.700,00€</td>
+<td>01/01/2026</td>
+<td>31/12/9999</td>
+</tr>
+</tbody>
+</table></div>
+ </li>
+<li>Reduction <strong>0611 </strong>"<em>Pensioner Health Care</em>":<br/>The reduction has been extended to Q4/2026:<br/> <br/>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Reduction (T5BDR)</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Valid from</strong></td>
+<td><strong>Valid to</strong></td>
+</tr>
+<tr>
+<td>0611</td>
+<td>Pensioner Health Care</td>
+<td>01/07/2022</td>
+<td>31/12/2026</td>
+</tr>
+</tbody>
+</table></div>
+  </li>
+</ul>
+<li>Bijlage 8 - Codificatie van arbeidstijdgegevens / Annex 8 Codification des données de temps de travail<br/>The following Service Codes have been added:</li>
+<ul>
+<li>36 FULL ABS. NON PAID EQ. TO SERV. MOTIVATION, ANNEX 06/01/2014</li>
+<li>37 FULL ABS. NON PAID EQ. TO SERV. NO MOTIVATION,  ANNEX 06/01/2014</li>
+<li>80 NON-RECOVERABLE OVERTIME HOURS EXEMPTED FROM SI CONTRIBUTIONS (already existing since 01.10.2015)</li>
+<li>81 VOLUNTARY OVERTIME - NOT SUBJECT TO CONTRIBUTIONS<br/><br/></li>
+</ul>
+<li>Bijlage 27 - Werkgeverscategorieën / Annex 8 catégories d' employeurs <br/>New employer categories 257 and 357.</li>
+</ul>
+<ul>
+<li>Bijlage 44 - Maatregelen tot reorganisatie van de arbeidstijd / Annex 44 Mesures de réorganisation du travail<br/>New Reorganization Measures have been introduced. The list of fixed values of domain P12_REMES has been extended by 520, 522, 523, 551, 552, 553, 554, 567, 568, 578, 579, 584, 585, 701 &amp; 702.<br/>As the Reorganization Measures 501, 502, 507 &amp; 508 will be replaced by 520, 522, 523, 551, 552, 553, 554, 567, 568, 578 &amp; 579, these new ones will be handled, as the old ones which e.g. have been used in the processing within the function modules HR_BE_DAQ_SERVICE &amp; HR_BE_CAREER_INTERRUPTION_FT. <br/>For the Reorganization Measures 584, 585, 701 &amp; 702 nothing has been done in the processing, as the Social Security asks to continue to use the old ones 7 &amp; 514.<br/><br/></li>
+<li>Mealvouchers<br/>
+<p>Amount of employer contribution</p>
+<p>The employer's contribution to the cost of the meal voucher may not exceed EUR 6.91 or EUR 8.91 (amount from 1 January 2026 - Royal Decree of 10 November 2025 – Belgian Official Gazette of 17 November 2025) per voucher. All vouchers with an employer contribution of more than EUR 8.91 are considered wages.</p>
+<p>Amount of employee contribution</p>
+<p>The employee's contribution must amount to at least EUR 1.09. All vouchers with an employee contribution of less than EUR 1.09 are considered wages.<br/><br/>For the SAP Model wage types <strong>M911</strong> (Meal cheques - Eer part) &amp; <strong>M912</strong> (Meal cheques: Ee part) in table <strong>Wage Type Characteristics</strong> (T511) the maximum and minimum amount is maintained. It turned out, that these amounts have not been maintained since the introduction of EUR on 01.01.2002. The maximum amounts are retroactively maintained as shown in this overview, based upon the information available for SAP. Nevertheless, these wagetype are model wage types, with the purpose to serve as models for the customer specific wage types.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Start date</td>
+<td>End date</td>
+<td>M911</td>
+<td>M912</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>01.01.1900</td>
+<td>31.12.2001</td>
+<td>180,00</td>
+<td>45,00</td>
+<td>BEF</td>
+</tr>
+<tr>
+<td>01.01.2002</td>
+<td>31.12.2002</td>
+<td>4,46</td>
+<td>1,09</td>
+<td>EUR</td>
+</tr>
+<tr>
+<td>01.01.2003</td>
+<td>31.12.2009</td>
+<td>4,91</td>
+<td>1,09</td>
+<td>EUR</td>
+</tr>
+<tr>
+<td>01.01.2010</td>
+<td>31.12.2010</td>
+<td>5,41</td>
+<td>1,09</td>
+<td>EUR</td>
+</tr>
+<tr>
+<td>01.01.2011</td>
+<td>31.12.2015</td>
+<td>5,91</td>
+<td>1,09</td>
+<td>EUR</td>
+</tr>
+<tr>
+<td>01.01.2016</td>
+<td>31.12.2025</td>
+<td>6,91</td>
+<td>1,09</td>
+<td>EUR</td>
+</tr>
+<tr>
+<td>01.01.2026</td>
+<td>31.12.9999</td>
+<td>8,91</td>
+<td>1,09</td>
+<td>EUR</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+</ul>
+</div>
+<div class="OutlineElement Ltr SCXW174386907 BCX8"> </div>
+<div class="OutlineElement Ltr SCXW174386907 BCX8">
+<ul>
+<li>Social Maribel Reduction<br/>The amount of constant <strong>MARSW</strong> for "Social Maribel Sheltered Workshops" has been changed:<span style="font-size: 14.000001px;"><span style="font-size: 14.000001px;"><span style="font-size: 14.000001px;"><br/>  <br/></span></span></span>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Constant (T511P)</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Amount</strong></td>
+<td><strong>Valid from</strong></td>
+<td><strong>Valid to</strong></td>
+</tr>
+<tr>
+<td>MARSW</td>
+<td>Social Maribel Sheltered Workshops</td>
+<td>574,55€</td>
+<td>01/01/2026</td>
+<td>31/12/9999</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+</ul>
+<ul>
+<li><span style="font-size: 14px;">Glossary Version<br/><span style="font-size: 14px;">The version (2026/1) of the following forms for the Social Insurance Reporting has to be changed as of 01.04.2026:</span></span><span style="font-size: 14px;"> </span></li>
+</ul>
+<ul>
+<ul>
+<li><span style="font-size: 14px;">DMFA - DmfA</span></li>
+<li><span style="font-size: 14px;">DMUP - DmfA Update</span></li>
+<li><span style="font-size: 14px;">DMUN - DmfA Update Notification</span></li>
+<li><span style="font-size: 14px;">DMCR - DmfA Consultation Request</span></li>
+<li><span style="font-size: 14px;">DMCA - DmfA Consultation Answer</span></li>
+<li><span style="font-size: 14px;">DMNO - DmfA Notification File</span></li>
+<li><span style="font-size: 14px;">DMPI - DmfA PID</span></li>
+<li><span style="font-size: 14px;">DMRE - Receipt File</span></li>
+<li><span style="font-size: 14px;">SMFA - DmfA Simulation</span></li>
+<li><span style="font-size: 14px;">SMNO - DmfA Simulation Notification File</span></li>
+<li><span style="font-size: 14px;">SMPI - DmfA Simulation with PID</span></li>
+<li><span style="font-size: 14px;">DIMN - Dimona</span></li>
+<li><span style="font-size: 14px;">AL01 - Social risk scenario AL01</span></li>
+<li><span style="font-size: 14px;">UN05 - Social risk scenario UN05</span></li>
+</ul>
+</ul>
+<p><strong>Other changes</strong></p>
+<ul>
+<li>Workbonus constant <strong>LIMLW</strong> (table <em>T511P</em>) has been increased to 3.466,44 € starting from 01.01.2026</li>
+<li>
+<p>Infotype <strong>Social Insurance</strong> (0100):<br/>Added new domain value <strong>3</strong> "<em>Gentle career (no transition to part-time)</em>" to field <em>Career Measure</em> (P0100-CARME, domain P12_CARME, 01194). The Belgian Social Insurance Glossary suggests this new value, is not yet allowed to be used for Q1 2026.</p>
+</li>
+<li>Adjustment of the Social Insurance Contribution rate database (aanpassing bijdragevoetenbestand/Adaptation fichier des taux dans ce sens)</li>
+</ul>
+<p><strong>WORKZONE</strong></p>
+<p>SAP Globalization have created a workzone dedicated to Human Capital Management in Belgium. The purpose of this workspace is for SAP, customers and partners to share information and collaborate on Belgian Human Capital Management topics.</p>
+<p>This new workzone will be used as our main communication channel for updates related to the eGov 3.0 and Belcotax 2.0 projects. Customers and partners can request access to the new workzone using the following link:</p>
+<ul>
+<li><a href="https://workzone.one.int.sap/site#workzone-home&amp;/groups/vSBMHtvKwIuLSWpd4spd1P/workpage_tabs/Sw5XByos68YQwCxAqZib3F" target="_blank">https://workzone.one.int.sap/site#workzone-home&amp;/groups/vSBMHtvKwIuLSWpd4spd1P/workpage_tabs/Sw5XByos68YQwCxAqZib3F</a></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>RPCDMFB0, DMFA, 20261, 2026Q1, 01194</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li><a href="https://www.socialsecurity.be/site_nl/employer/general/techlib.htm#glossary" target="_blank">https://www.socialsecurity.be/site_nl/employer/general/techlib.htm#glossary</a></li>
+<li><a href="https://www.socialsecurity.be/site_fr/employer/general/techlib.htm#glossary" target="_blank">https://www.socialsecurity.be/site_fr/employer/general/techlib.htm#glossary</a></li>
+<li><a href="https://www.socialsecurity.be/site_de/employer/general/techlib.htm#glossary" target="_blank">https://www.socialsecurity.be/site_de/employer/general/techlib.htm#glossary<br/></a></li>
+</ul>
+<p>The websites that can be accessed using these hyperlinks are external websites which are not part of SAP's offering.<br/>By clicking the hyperlinks YOU AGREE that unless expressly stated otherwise in your agreements with SAP:<br/>(i) the content of the associated website and any other external websites is not content provided by or on behalf of SAP, nor is it otherwise under SAP's control;<br/>(ii) the fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the contents and information provided on such websites;<br/>(iii) SAP does not give any representation regarding the quality, safety, suitability, accuracy or reliability of any external website or any of the information, content, and materials provided thereon;<br/>(iv) you visit those external websites entirely at your own risk. SAP shall not be directly or indirectly responsible or liable for any damage or loss caused or alleged to be caused by or in connection with your use of or reliance on any content, goods or services available on or through any such linked website.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div><strong style=" font-style: italic; background-"> </strong></div>
+<div></div>
+<div></div>
+<div>
+<ul>
+<li>
+<p>As a general rule SAP recommends that you implement the Support Package specified for your release.</p>
+</li>
+<li>
+<p>However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction.</p>
+</li>
+<li>
+<p>You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank"><strong>SAP Note Assistant</strong></a>.</p>
+</li>
+<li>To implement the solution, you must carry out manual activities (see attachment).</li>
+</ul>
+</div>
+</div>
+</div></div></div></div></div>

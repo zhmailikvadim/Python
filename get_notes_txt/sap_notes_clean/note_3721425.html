@@ -1,8 +1,14 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">The classic FI amount release workflow for parked documents is customized. For some approved documents the posting step in background fails. This happens for accounts with the "Supplement for automatic postings" indicator active in master data settings and corresponding postings with automatic line item creation (e.g. some tax related postings). Symptoms like "No batch input data found for dynpro SAPMF05A 0700. SAPLKACB 0002" (00 344) can occur in the workflow log.</p>
+<p id="__html0">You declare your import declaration in SAP GTS to customs system DMS.</p>
+<p>If you enter more than one container on the "Packaging Data" tab at header level, the incompleteness check prevents you from sending the message with the following error message: "Assign container ... to an item"</p>
+<p>The error message remains even if you assign the container to an item.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>FP132, FP 132, SAPMF05A, SAPLKACB 0002, SAPMF05A 0700, 00344, 00 344</p>
+<p>Denmark, XML, UCC, /SAPSLL/LLEG_ECC_DATAF56, dk_dms_im_container_reference, container</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Program issue.</p>
+<p>The problem is caused by a program error.</p>
+<p>Prerequisities:</p>
+<ul>
+<li>Note <a href="https://me.sap.com/notes/3643910" target="_blank">3643910</a> - UCC: Cross-country logic for data retrieval - containers and item references in the import customs declaration</li>
+</ul>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement the attached correction or corresponding support package. After implementation the posting step in the workflow won't consider this master data setting ("Supplement for automatic postings") of the GL account so that the posting can take place. As the approver has approved the document and the technical workflow user can't add anything to automatically created line items, it does not make sense to stop the posting otherwise.</p></div></div></div></div>
+<p id="">Implement the correction instructions.</p></div></div></div></div>

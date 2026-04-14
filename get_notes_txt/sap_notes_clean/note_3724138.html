@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3724138&amp;TargetLanguage=EN&amp;Component=PY-DE-NT-NI&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3724138/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3724138/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>This SAP Note contains two changes with regard to personnel cases with voluntary insurance for an agricultural health insurance fund:</p>
+<ul>
+<li>The option to determine the fixed contributions from the master data file</li>
+<li>The consideration of the average additional contribution in the allowance calculation for health insurance</li>
+</ul>
+<p><strong><span style="font-size: 14px;">Determination of Fixed Contributions from Master Data File</span></strong></p>
+<p><span style="font-size: 14px;">If the contributions for voluntarily insured persons are calculated according to fixed values, these must be entered in the infotype <em>Social Insurance D</em> (0013) in the <em>Cont. Cl./Amt HI</em> and <em>Cont. Cl./Amt PV</em>. For the agricultural health insurance fund, these fixed values are contained in the master data file and are managed in the <em>Payroll Constants</em> table (T511K) as of 1/1/2026 under the following constants:</span></p>
+<ul>
+<li><span style="font-size: 14px;">HI Farmer's Fund (Bkl 20) (KVLF0)</span></li>
+<li><span style="font-size: 14px;">PV Farmer's Sec. w/o Parents (PVLF0)</span></li>
+<li><span style="font-size: 14px;">PV Farmer's Sec. with Parents (PVLF1)</span></li>
+<li><span style="font-size: 14px;">CI Farmer's Char. 2 Children (PVLF2)</span></li>
+<li>CI Farmer's Day 3 Children (PVLF3)</li>
+<li>CI Farmer's Day 4 Children (PVLF4)</li>
+<li>CI Farmer's Day 5 Children (PVLF5)</li>
+</ul>
+<p><span style="font-size: 14px;">In the infotype <em>Social Insurance D</em> (0013), after you implement this SAP Note, the fields <em>Cont. Cl./Amt HI</em> and <em>Cont. Cl./Amt CI </em> for infotype records with a start date after 1/1/2026. In payroll, the fixed contributions are then determined from the constants mentioned above. For care insurance, this depends on the number of children and parent characteristic of the personnel case.</span></p>
+<p><strong><span style="font-size: 14px;">Consideration of the average additional contribution for the allowance calculation for health insurance</span></strong></p>
+<p><span style="font-size: 14px;">No additional contribution is taken into account during the allowance calculation for health insurance for personnel cases that are voluntarily insured with an agricultural health insurance fund. As a result, the allowance for health insurance may be too low as of 1/1/2024. Since the agricultural health insurance funds do not have an individual additional contribution rate, the average additional contribution rate is to be taken into account.</span></p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p id="">Implement the attached correction instructions or import the specified support package.</p>
+<p>After you implement this SAP Note, you may have to change the contribution calculation of the agricultural health insurance funds to fixed value calculation as of 1/1/2024. This is defined in view cluster V_T5D11. The Fixed Value Calculation value should be defined in all four entries for the contribution calculation. Up to 1/1/2026, the fixed values for the affected personnel cases in the infotype <em>Social Insurance D</em> (0013).</p>
+<p>Perform retroactive accounting for affected personnel cases to 1/1/2024.</p></div></div></div></div></div>

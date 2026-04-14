@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Compliance checks are being triggered for all warehouses, even for those where the GTS business system is not defined </li><li>Error message: "RFC for GTS system could not be determined" /SCWM/NCTS (Transit Procedure: Messages) Message Number_003.</li><li>Technical error observed in outbound delivery order processing: "Action could not be successfully executed".</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p><label for="form-field-p4rl4l178pfl-2571" id="form-field-p4rl4l178pfl-2571-label"></label></p>
+<div>
+<div>
+<ul style="list-style-type: none;"><li aria-label="SAP S/4HANA">
+<div>
+<div>
+<ul style="list-style-type: disc;"><li>SAP S/4HANA</li><li>SAP Extended Warehouse Management</li><li>GTS</li></ul>
+</div>
+</div>
+</li></ul>
+</div>
+<div>
+<div> </div>
+</div>
+</div>
+<p><br/><br/></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Configure the GTS system for a specific warehouse number (e.g., ****) using the following path: SPRO -&gt; SAP SCM Extended Warehouse Management -&gt; Extended Warehouse Management -&gt; Interfaces -&gt; GTS Integration -&gt; Define GTS system for warehouse number. warehouse-specific settings are applied in table view `/SCWM/V_T340DGTS.</li><li>Trigger a compliance check for outbound delivery orders in embedded EWM.</li><li>Observe that compliance checks are triggered for warehouses not activated for GTS compliance.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Same Document type used whare relevant to legal control has the GTS check box active, causing compliance checks to be triggered for all warehouses.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>There are two approaches to determine at warehouse level whether a delivery document is relevant for GTS compliance checks:  </p>
+<p>1. Review the settings for outbound delivery orders in embedded EWM: :You can utilize a specific document type for deliveries that are relevant for compliance checks. To implement this, it is necessary to customize the mapping of the ERP document type to the corresponding EWM document type.  </p>
+<ol style="list-style-type: upper-alpha;"><li>Navigate to the IMG path: SCM EWM -&gt; Extended Warehouse Management -&gt; Goods Issue Process -&gt; Outbound Delivery -&gt; Define Document Types for Outbound Delivery Process.</li><li>Ensure the GTS check box is only active for relevant warehouses.</li></ol>
+<p><br/>2. Alternatively, you can implement the BAdI /SCWM/GTS_CHECK_RELEVANCE_SET. This allows you to decide relevance based on the warehouse number.  </p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/3233696" rel="noopener noreferrer nofollow" target="_blank">SAP Note 3233696 - SAP GTS Integration in EWM on S/4HANA - How-To Guide</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>s4 embedded EWM, GTS. compliance integration, warehouse-specific settings, compliance check, outbound delivery orders, lock, technical error, RFC. legal control flag, sap s/4hana, EWM integration. Document type.</p></div></div></div></div>

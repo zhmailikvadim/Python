@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ol id="__html0">
+<li>In long‑running applications that use RFC compression, memory usage grows continuously and may lead to performance degradation or crashes.</li>
+<li>When using a PasswordChangeHandler for expired passwords, the handler does not receive the expected details in all scenarios, so the application cannot handle the password change properly.</li>
+<li>Reading SAPUILandscape.xml fails with an “Invalid format of landscape XML file” error although the file is valid.</li>
+<li>WebSocket RFC connections fail to establish in environments where the upgrade handshake response contains many or long headers.</li>
+<li>When an RFC call is cancelled by the ABAP backend (rc 10002), a registered RFC server connection does not always terminate cleanly and may leave the connection in an unexpected state.</li>
+<li>When using WebSocket RFC server connections with client certificate authentication, logon can fail or behave inconsistently (e.g., optional certificates are rejected or required certificates are not handled as expected).</li>
+</ol>
+<p><span style="font-size: 14px;"> </span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The symptoms above have been caused by the following issues in previous patch levels:</p>
+<ol>
+<li>Native compression resources were not released reliably by the .NET finalizers, causing a memory leak in compression usage.</li>
+<li>Password change details were not consistently propagated because the internal ChangePassword() method did not take the username as an explicit parameter. When rfc/reject_expired_passwd=1 is configured on the ABAP system and a user logs on with an expired password, the ABAP system returns largely initial SystemAttributes, including an empty user name. As a consequence, the actual logon user name was not available when the internal password-change function module SUSR_USER_CHANGE_PASSWORD_RFC was invoked, causing the password change to fail. The username is now captured at logon time and passed explicitly to the password change logic, independent of the SystemAttributes returned by the server.</li>
+<li>The XML parser relied on a fixed node navigation pattern and failed on valid XML with different structure.</li>
+<li>WebSocket upgrade handshake buffers were too small for large responses.</li>
+<li>CPIC cancellation (CANCEL_REQUEST / rc 10002) was not treated as a normal termination path in registered RFC server connections. When the ABAP backend cancelled an active conversation, the server-side receive loop did not handle the cancel return code explicitly. Instead of cleanly waiting for the subsequent deallocation and then continuing to serve the next request, the connection could end up in an unexpected state.</li>
+<li>WebSocket server logic did not correctly distinguish between client certificate REQUEST vs REQUIRED and did not check certificate availability consistently.</li>
+</ol>
+<p><span style="font-size: 14px;"> </span></p>
+<p>In addition, this patch level provides the following enhancements:</p>
+<p>-Enhanced diagnostic trace output for WebSocket connections and RFC operations, improving troubleshooting capabilities.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> Install and use the latest patch level of NCo 3.1, at least NCo 3.1.7, which is available on the download page under https://support.sap.com/nco#downloads.</p></div></div></div></div>

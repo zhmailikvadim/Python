@@ -1,0 +1,49 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">OpenID Connect (OIDC) Authentication is missing features such as being able to select a specific OIDC configuration (besides the Default Interactive Configuration) for interactive OIDC Logon, Token Exchange support for SAP Cloud, a more flexible Redirect URL handling for multi-hostname system setups or an improved OIDCTokenRequested cookie handling.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">OpenID Connect, OIDC, OIDC Logon, OIDC Bearer, ID Token, JSON Web Token, JWT, authentication, reauthentication, logon, login, single sign-on, SSO, security, OIDCTokenRequested<em>, </em>SOIDC, SOIDC_ANALYZER, SOIDC_SESSIONS, Fiori, FLP, Token Exchange</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="__html0"><strong>OpenID Connect (OIDC) in ABAP</strong></p>
+<p>With this delivery we enhance the existing support for <em>OpenID Connect (OIDC) authentication</em> for ICF services, WebSocket RFC, and JCo.</p>
+<p>Please note, that I will not duplicate the extensive configuration and troubleshooting guide I wrote in SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3111813" target="_blank">3111813</a>. That SAP Note will always be kept up to date and reflect the latest available features, their configuration, and how to troubleshoot OIDC authentication. Therefore, if the following brief description is not sufficient, <strong>please consult the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3111813" target="_blank">OpenID Connect (OIDC): Troubleshooting Note 3111813</a> for more extensive information</strong>.</p>
+<p>Find here a list of all the <em>features</em> delivered with OpenID Connect (OIDC) up to and including this OIDC Feature Set 6 with a short introductory description:</p>
+<ul>
+<li>(<strong>F1</strong>) <em>User propagation</em> via an OIDC ID Token (JWT), described in the following as logon method 'OIDC Bearer' for ICF services.</li>
+<li>(<strong>F2</strong>) <em>Interactive standard-compliant OpenID Connect Authentication</em>, described in the following as logon method 'OIDC Logon' for ICF services.</li>
+<li>(<strong>F3</strong>) Ease of configuration by optionally supporting the <em>automated download</em> of the OpenID Provider metadata (<em>OIDC discovery</em> document) and its JSON Web Key Set (JWKS).</li>
+<li>(<strong>F4</strong>) Interactive single logout (SLO) via the <em>Front-Channel</em>.</li>
+<li>(<strong>F5</strong>) Interactive single logout (SLO) via the <em>Back-Channel</em>.</li>
+<li>(<strong>F6</strong>) <em>Fiori Launchpad</em> support for interactive OIDC authentication by preserving the <em>URL Anchor Fragments</em> (https://fiorilaunchpad.sap.com/sites<strong>#Shell-home</strong>).</li>
+<li>(<strong>F7</strong>) Additional ID Token signature algorithms (RS384, RS512).</li>
+<li>(<strong>F8</strong>) Selected additional <em>claims</em> for the <em>user mapping</em> besides the standard claim <em>'sub'.</em></li>
+<li>(<strong>F9</strong>) <em>Proof Key for Code Exchange</em> (PKCE) support during <em>interactive OIDC</em> (OIDC Logon).</li>
+<li>(<strong>F10</strong>) Configurable / custom claim for the <em>user mapping in addition to the standard claim <em>'sub' and the selected additional claims <em>'email', 'oid', and 'user_name'</em></em></em>.</li>
+<li>(<strong>F11</strong>) <em>Enhanced supportability</em> of OpenID Connect via the new <em>transaction SOIDC_ANALYZER</em>. </li>
+<li>(<strong>F12</strong>) A report which can be scheduled to <em>regularly update </em>an OIDC Configuration's<em> key material </em>with the<em> latest JWKS </em>from the OpenID Provider. </li>
+<li>(<strong>F13</strong>) The possibility to configure for each OIDC Configuration a local proxy which you might need if your ABAP system requires an HTTP proxy for outgoing HTTP connectivity. </li>
+<li>(<strong>F14</strong>) For OIDC Bearer, <em>certificate-bound tokens</em> can be properly validated via the new '<em>cnf</em>' claim check. SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3455890" target="_blank">3455890</a> must be applied additionally. </li>
+<li>(<strong>F15</strong>) The <em>usability/clarity</em> of <em>transaction SOIDC</em> has been significantly <em>improved</em> to <em>dynamically</em> hide non-activated properties in the OIDC configuration. </li>
+<li>(<strong>F16</strong>) An OIDC configuration can be <em>activated</em> and <em>de-activated</em> in transaction SOIDC. </li>
+<li>(<strong>F17</strong>) Logout Token Validation for <em>Back-Channel single logout</em> evaluates configured <em>non-standard User Mapping Claims</em>.</li>
+<li>(<strong>F18</strong>) Transaction <em>SOIDC_ANALYZER</em> supports the creation and validation of <em>custom tokens</em>.</li>
+<li>(<strong>F19</strong>) The download of the JWKS in transaction SOIDC no longer directly replaces the configuration's keys but highlights the differences.</li>
+<li>(<strong>F20</strong>) A correction was provided for <em>Feature F6</em> which caused Syslog Events and Security Audit Log entries. </li>
+<li>(<strong>F21</strong>) A correction was provided for Feature F13 which prevented the Local Proxy usage for new OIDC configurations prior to saving for the first time.</li>
+<li>(<strong>F22</strong>) The HTTP Client can select <em>specific</em> OIDC Configurations (besides the <em>Default Interactive Configuration</em>) for interactive OIDC Logon.</li>
+<li>(<strong>F23</strong>) Option to <em>auto-update</em> an OIDC configuration's <em>key material.</em></li>
+<li>(<strong>F24</strong>) Usage of configured SSL ID in <em>all</em> outgoing HTTP calls from the ABAP system to the OpenID Provider (download of metadata/discovery, JWKS, exchange of Authorization Code into ID Token).</li>
+<li>(<strong>F25</strong>) <em>Transaction SOIDC_SESSIONS</em> and <em>Token Exchange Support</em> for OAuth Client to support SAP Cloud scenarios.</li>
+<li>(<strong>F26</strong>) <em>Flexible Redirect URL handling</em> for multi-hostname system setups.</li>
+<li>(<strong>F27</strong>) Improved <em>OIDCTokenRequested</em> cookie handling.</li>
+<li>(<strong>F28</strong>) An alternative to the Default Provider Metadata URL in <em>OIDC Discovery</em> (determined from the Issuer URL), a <em>new</em> option allows to download metadata from a <em>Custom Provider Metadata URL</em>.</li>
+<li>(<strong>F29</strong>) Improved <em>idempotency</em> in the <em>OIDC Configuration API</em> ensures that a database update is only triggered when the OIDC Configuration was actually changed.</li>
+<li>(<strong>F30</strong>) API Protection support through OIDC Bearer Token authentication for selected SAP scenarios. </li>
+</ul>
+<p>The initial support for OIDC authentication (Features <strong>F1</strong>, <strong>F2</strong>, and <strong>F3</strong>) was started in SAP BASIS 7.56 SP1 as described with SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3105025" target="_blank">3105025</a>.</p>
+<p>This was extended by additionally offering support for Front-Channel Single Logout (Feature <strong>F4</strong>) in SAP BASIS 7.57 (<em>OpenID Connect Feature Set 1</em>).</p>
+<p><em>OpenID Connect Feature Set 2</em> provides the aforementioned features <strong>F5</strong> to <strong>F10</strong> (and in case of the OIDC Downport the features <strong>F1</strong> to <strong>F10</strong>) and the corresponding SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3313726" target="_blank">3313726</a> describes the corresponding SPs for each release from SAP BASIS 7.58 down to SAP BASIS 7.52. including the kernel dependencies. Please note that ABAP and kernel are <em>separate</em> entities which can be updated in the system, and OIDC will <em>only</em> work if both (ABAP <em>and</em> kernel) are new enough.</p>
+<p><em>OpenID Connect Feature Set 3 </em>provided by <em>SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3452750" target="_blank">3452750</a></em> contains the features <strong>F11</strong> to <strong>F15</strong>.</p>
+<p><em>OpenID Connect Feature Set 4 </em>provided by <em>SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3585020" target="_blank">3585020</a> </em>contains the features <strong>F16</strong> to <strong>F21</strong>.</p>
+<p>SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3594613" target="_blank">3594613</a> contains feature <strong>F22</strong>.</p>
+<p><em>OpenID Connect Feature Set 5 </em>provided by <em>SAP Note <a href="https://me.sap.com/notes/3632887" target="_blank">3632887</a> </em>contains the features <strong>F23</strong> to <strong>F27</strong>.</p>
+<p><em>OpenID Connect Feature Set 6 </em>provided by this SAP Note contains the features <strong>F28</strong> to <strong>F30</strong>. <em><br/></em></p></div></div></div></div>

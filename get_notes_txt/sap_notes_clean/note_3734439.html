@@ -1,18 +1,11 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>CMS service fails to start on one cluster node.</li><li>CMS runs normally on the other node.</li><li>In CMC, CMS properties observe "CentralManagementServer is considered failed it has stopped 5 time(s) within 60 minute(s). Please restart this server."</li></ul>
-<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP BusinessObjects BI Platform 4.x</li><li>Windows server OS</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>1. Create a new node in the SAP BusinessObjects using an existing CMS</p>
-<p>2. Start the SIA on the newly added node</p>
-<p>3. Observe that the CMS on this node fails to start</p>
-<p>4. Check the CCM, the CMS will show as failed</p>
-<p>5. Attempting to manually start the CMS also fails</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
-<p>The root cause was a service account mismatch between the two cluster nodes:</p>
-<ul><li>Node A: CMS was configured to run using domain service account.</li><li>Node B: CMS was configured using a local account</li></ul>
-<p></p>
-</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>1. Open the central configuration manager (CCM) on the node where the CMS is failed</p>
-<p>2. Stop (server intelligent agent) SIA</p>
-<p>3. Right click the SIA and select properties</p>
-<p>4. Navigate to the "Log on as" section</p>
-<p>5. Clear the system account option</p>
-<p>6. Enter the same domain service account used on the working node</p>
-<p>7. Enter the password</p>
-<p>8. Click apply, and then ok to save the changes </p>
-<p>9. Start the SIA</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>CMS, failed, cluster.</p></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The below runtime error occurs when user tries to use ILMVIEW transaction:</p>
+<p>Runtime Errors: SAPSQL_PARSE_ERROR</p>
+<p>Except.:            CX_SY_DYNAMIC_OSQL_SEMANTICS</p>
+<p>ABAP Program:  CL_ILM_VIEW_DEFINITION========CP</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">ILM RW, DART Views, ILM Views, Information Lifecycle Management, Retention Warehouse, SAPSQL_PARSE_ERROR, ILMVIEW.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Program Error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the attached correction instructions or upgrade to the relevant support package.</p></div></div></div></div>

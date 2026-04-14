@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the <em>Settle Route Data</em> app, you navigate to the <em>Visits</em> tab and you open, for example, a delivery (outbound delivery) that requires a signature date.</p>
+<p>If the user of the front-end launchpad is set to a different time zone than the back-end launchpad, the F4 value help does not open, and if you enter the same signature date as the route departure or arrival date, you get the following error:</p>
+<p>"<em>The signature date must be between the departure and the arrival date for the route.</em>"</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Last Mile Distribution, LMD, Settle Route Data, SRD, F4242, Signature Date, LstMiRteDocumentSignatureDate</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">This issue is caused by a programming error.</p>
+<p>The signature date DatePicker's minimum and maximum date constraints were being set without considering time zone differences between the backend and the launchpad time zone. This caused the date validation to fail or allow incorrect dates when launchpad users were in different time zones than the system.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please apply the attached correction instructions to resolve the described issue.</p></div></div></div></div>

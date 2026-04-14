@@ -1,0 +1,124 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">As described in <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">regulatory change manager</a>, under <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-17378" target="_blank">Tax treatment of employer paid family and medical leave contributions</a><a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-17152" target="_blank">,</a> this SAP Note provides you with the relevant system changes to address the updates from Business Software, Inc. (BSI) delivered in <strong>TaxFactory 11.0 Regulatory Bulletin 189</strong>, regarding the new <strong>PFML - Employer Pick-Up </strong>(139) tax type.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ER Pick-Up; PFML; Tax Type 139; BTXRATE; T5UTX; 10ERP; 10TSA; 10STT.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p>Legal change.</p>
+<p><strong>Prerequisites</strong></p>
+<p>You have applied SAP Note <a href="/notes/3706197" target="_blank">3706197</a> - <em>TAX: New PFML - Employer Pick-Up (139) tax type</em>.</p>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 05</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 18</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP C9</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04 (EhP6 and EhP7)</td>
+<td>HR SP K1</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules (SAP_HR)</a> or <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp-s4hcm.html" target="_blank">SAP S/4HANA On Premise Human Capital Management (S4HCM)</a><a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">.</a></p>
+<p>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>From now on, the system allows you to pick-up employee's PFML taxes. To enable this functionality, proceed as follows:</p>
+<ul>
+<li>Add <strong>PFML - Employer Pick-Up</strong> (139) tax type into your taxability model.</li>
+<li>Maintain the <strong>PFML Employer Pick-Up tax type selector</strong> (10ERP) feature with the Employee's PFML tax types for each tax authority you want to pick-up.</li>
+<li>Maintain an entry for <strong>PFML - Employer Pick-Up</strong> (139) tax type for each tax authority in <strong>BSI: Company Experience Rate</strong> (V_BTXRATE) view with the desired pick-up rate.</li>
+</ul>
+<p>If you do not maintain 10ERP and a BTXRATE entry for Tax Type 139, the system does not calculate any <strong>PFML - Employer Pick-Up</strong> (139) tax type amount.</p>
+<p><strong>Example</strong></p>
+<p>Consider an employee that receives USD 10,000.00, lives and works in <strong>Delaware</strong> (DE) tax authority. This employee pays taxes for two PFML tax types: <strong>EE PARENTAL LEAVE TAX STATE PLAN</strong> (125) and <strong>EE FAM CAREGIVER/QE LV TX STATE PLN</strong> (129), and rates 0.16% and 0.04%, respectively. In this scenario, you want to pick-up 50% of Employee's 125 and 129 taxes.</p>
+<ul>
+<li>In 10ERP feature, you choose 125 and 129 tax types for Delaware to return the value "X", and otherwise to return a blank value. Do not use a value other than "X" for the selected tax types.</li>
+<li>In V_BTXRATE table, you maintain an entry for Delaware and tax type 139 with experience rate as 0.5.</li>
+</ul>
+<p>After the configuration is finished and you run payroll, the system automatically recalculates the 125, 129, and 139 tax type rates as follows (which can be checked in <strong>Experience Rate</strong> (LUD ER:) parameter from BSI interface):</p>
+<ul>
+<li>125 Experience rate: 0.0016 * (1 - 0.5) = 0.0008</li>
+<li>129 Experience rate: 0.0004 * (1 - 0.5) = 0.0002</li>
+<li>139 Experience rate: (0.0016 + 0.0004) * 0.5 = 0.0010</li>
+</ul>
+<p>As a consequence, the tax calculation results are:</p>
+<ul>
+<li>125 tax result: USD 8.00</li>
+<li>129 tax result: USD 2.00</li>
+<li>139 tax result: USD 10.00</li>
+</ul>
+<p><strong>Note:</strong> the calculated Employer Pick-Up contribution amount is included in employee income and wages subject to FIT, FITW, FICA, and FUTA taxes. For more information, see TaxFactory 11 Regulatory Bulletin 189.</p>
+<p><strong>PFML tax types rates maintenance in V_BTXRATE and V_T5UTX</strong></p>
+<ul>
+<li>The system searches first for any experience rate maintained in V_BTXRATE for the selected employee's PFML tax type to apply the pick-up percentage. In case it does not find, the system uses the default rate from <strong>Tax ceilings and rates</strong> (V_T5UTX) table.</li>
+<li>If the selected PFML tax type does not have a rate maintained in V_T5UTX or the default rate value does not fit your business needs, a new entry for this tax type must be maintained in V_BTXRATE view. Do not perform any manual update in V_T5UTX.</li>
+<li>A rate for <strong>PFML - Employer Pick-Up</strong> (139) tax type must be maintained in V_BTXRATE. Otherwise, the system will not calculate the employer pick-up amount.</li>
+<li>If the "Experience Rate Zero" option is selected in V_BTXRATE for <strong>PFML - Employer Pick-Up</strong> (139) tax type, then the system does not adjust any PFML tax types, and the ER Pick-Up calculation will be 0.</li>
+<li>If the "Experience Rate Zero" option is selected in V_BTXRATE for one of the selected employee's PFML tax type, the system does not adjust the experience rate and ignores this tax type in the <strong>PFML - Employer Pick-Up</strong> (139) rate calculation.</li>
+</ul>
+<p><strong>Self-adjust considerations</strong></p>
+<ul>
+<li>The <strong>Self-Adjust Tax</strong> (LUD SA:) parameter for <strong>PFML - Employer Pick-Up</strong> (139) tax type by default is <strong>Self-adjust tax using year-to-date wages and year-to-date taxes</strong> (0) value. If you want to use a different value, maintain <strong>Tax Authority Self-Adjust Parameter Selector</strong> (10TSA) feature. For more information, see SAP Note <a href="/notes/3677145" target="_blank">3677145</a> - <em>BSI: Enablement of 10TSA feature for self-adjustment parameter configuration</em>.</li>
+<li>Do not use <strong>PFML - Employer Pick-Up</strong> (139) tax type in <strong>Customize Tax Types to be self-adjusted for payroll processing</strong> (10STT) feature. If tax type 139 is entered in 10STT with either "X" or "S" value, it will be ignored. Use the Self-Adjust parameter through 10TSA feature if you want to perform any self-adjustment calculation.</li>
+</ul>
+<p><strong>Documentation</strong></p>
+<p>​​​​​​​For more information about the development delivered with this SAP Note, see the following What's New topics on SAP Help Portal:</p>
+<ul class="customListStyle">
+<li>SAP S/4HANA and SAP S/4HANA Cloud Private Edition: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/e5deff7f260b4b8ead3848a2c9a75642.html" target="_blank">Employer Pick-Up for Paid Family and Medical Leave</a><a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/8f0696f5ae944ed5a7e6adea8a279e01.html" target="_blank"><br/></a></li>
+<li>SAP ERP: <a href="https://help.sap.com/docs/SAP_ERP/063e7e5f4d7f4fc0be08565793a9b941/e5deff7f260b4b8ead3848a2c9a75642.html" target="_blank">Employer Pick-Up for Paid Family and Medical Leave</a></li>
+</ul>
+<p><strong>Log of Changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Description of the change</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>February 20, 2026</td>
+<td>Released for Customers</td>
+</tr>
+</tbody>
+</table></div>
+<p>During the piloting phase, this SAP Note may be updated and versioned depending on the feedback from pilot customers. After this SAP Note has its status changed to <em>Released for Customer</em>, it will not be changed anymore, unless there is a specific situation that demands it. In this case, a reason for the change will be mentioned in the SAP Note.</p>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, proceed as follows:</p>
+<ol>
+<li>Install TaxFactory 11 Regulatory Bulletin 189</li>
+<li>Apply SAP Note <a href="/notes/3706197" target="_blank">3706197</a> - TAX: Tax treatment of employer pick-up for Paid Family and Medical Leave contributions</li>
+<li>Use the Note Assistant (SNOTE) to implement the correction instructions.</li>
+<li>Apply the manual post-implementation steps.</li>
+</ol>
+<p>Learn more at <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
+<p><strong>More information</strong></p>
+<ul>
+<li>To receive an e-mail notification in case of new updates, mark this SAP Note as favorite and add it to your <a href="https://me.sap.com/mynotes" target="_blank">My SAP Notes &amp; KBAs</a> page, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for a complete guide.</li>
+<li>To stay informed about legal changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">regulatory change manager</a></li>
+</ul>
+<p><strong>Disclaimers</strong></p>
+<p>The website accessible through this hyperlink is an external website which is not part of SAP's offering. By clicking on the hyperlink YOU AGREE that, unless expressly stated otherwise in your agreements with SAP:</p>
+<ol>
+<li>The content of the linked website and any further external website is not content provided by or on behalf of SAP, nor it is under SAP's control.</li>
+<li>The fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the content and information provided in such websites.</li>
+<li>SAP does not give any representation regarding the quality, safety suitability, accuracy or reliability of any external website or any information, content and materials provided thereon.</li>
+<li>You visit those external websites entirely at your own risk. SAP must not be directly or indirectly responsible or liable for any damage or loss caused, or alleged to be caused by, or in connection with your use of, or reliance on any content, goods or services available on, or through any linked website.</li>
+</ol></div></div></div></div>

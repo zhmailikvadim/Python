@@ -1,0 +1,24 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP Note provides the optimizations the following address and message optimizations for the Singapore Income Tax IR8A (New Report):</p>
+<p><strong>Employee's address:</strong></p>
+<p>1.Remove the postal code from address information.</p>
+<p>Since the postal code is a separate field in the generated file, it should not be included in the address fields to avoid duplication.</p>
+<p>2.Modify the CO (Care Of) address determination logic.</p>
+<p>With the new optimization, if the Care of field in infotype 0006 is maintained, the Singapore local address will be recognized as a CO address.</p>
+<p>3.Fix the issue where the field may be duplicated in Address Line 1 and Address Line 2 in the file.</p>
+<p>4.For myTax files: clear the Country/Region field when the employee’s address is a local Singapore address.</p>
+<p>As the myTax file template does not provide a Singapore option for this optional field, the field shall be submitted blank for local address.</p>
+<p><strong>Message optimizations:</strong></p>
+<p>1. Change the message 'Has no employment' to 'Employee has no employment for the current period', and change the message type from 'Error' to 'Warning'.</p>
+<p>2. Add a new message when Appendix 8A records exceed the limit of 10.</p>
+<p>3. Add a new message when Appendix 8B records exceed the limit of 30.</p>
+<p>For employees affected by items 2 and 3, it is recommended to exclude them from the current variant and submit manually.</p>
+<p>In addition, this SAP Note includes an enhancement to optimize the scenario where IC Type cannot be retrieved due to the absence of the NRIC table in the payroll result.</p>
+<p>Some customers may have no NRIC table in their payroll results due to their custom payroll scheme. With the new change, the report will read IC Type from IT0185 in such cases.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>RPCT8AR0_01, PATLine, API File, Mytax</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">This is an enhancement.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p class="x_MsoNormal">Apply the HR Support Package to get this solution.</p>
+<p class="x_MsoNormal">Alternatively, you may apply correction instruction and Manual Post-Implement with this SAP Note if the changes are required immediately.</p></div></div></div></div>

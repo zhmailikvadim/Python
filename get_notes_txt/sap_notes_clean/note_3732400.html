@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3732400&amp;TargetLanguage=EN&amp;Component=XX-PART-KVSPRINT&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3732400/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3732400/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>The following symptom is corrected with this SAP Note:</p>
+<ul>
+<li>Incorrect update of customer history </li>
+<li>In the R4CM credit insurance master data maintenance (transaction /cgs/start), changes are not saved. With the error message "Previous insured person indicator record exists with same date", the user remains on a tab page such as "Insurance Data". </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>Ticket 1000007463, master data maintenance, transaction /cgs/start, exception J_1VCX_ERROR_MESSAGE, RAISE EXCEPTION TYPE J_1VCX_ERROR_MESSAGE, message e558(8V), message e558(8V)</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>The error is due to the check that is processed in the background in the PAI module J_1VCL_MAIN_SCR_TAB_INSURANCE~PAI_0220_YGAB. Before saving one or more master data changes, the system performs plausibility checks in the method J_1VIF_KV_GENERAL_SUBSCREEN~PRE_SAVE_PROCESS. This triggers the exception RAISE EXCEPTION TYPE j_1vcx_error_message and prevents the master data changes from being saved. The changes can only be saved when you save again and, as a result, the customer history can be updated correctly.</p>
+<p>The prerequisite for implementing the program corrections is R4CM Credit Insurance (software component P1V) Release 5.700 or 5.751H:</p>
+<ul>
+<li><span style="font-size: 14px;">Patch level 2403 or 2503 for R4CM credit insurance Release 5.700</span></li>
+<li><span style="font-size: 14px;">Patch level 2403 or 2503 for </span> <span style="font-size: 14px;">R4CM credit insurance </span> <span style="font-size: 14px;">Release 5.751H</span></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<ul>
+<li>Implement the attached correction instructions.</li>
+</ul>
+<p>Corrected as of: R4CM credit insurance 5.700 and 5.751H patch level 2603</p>
+<p><strong>Supplementary SAP Notes</strong></p>
+<ul>
+<li>If you want to implement correction instructions for R4CM credit insurance for the first time and the system issues an error message regarding the namespace, refer to SAP Note 495211.</li>
+<li>If the solution text refers to attached attachments, you can download them directly from this SAP Note.<br/>For information about downloading attachments from SAP Service Marketplace (<a href="http://support.sap.com/notes" target="_blank">http://support.sap.com/notes</a>), see SAP Note 556549.</li>
+<li>For information about the R4CM Credit Insurance Release that you are using, call transaction J3VV.</li>
+</ul></div></div></div></div></div>

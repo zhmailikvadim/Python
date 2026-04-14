@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are importing a transport request or Support Packages containing new search help objects. The same request contains structures/appends/database table with fields assigned to the new search help or to a search help which does not exist at all. The activation log contains errors related to search help assignment for dependent objects. The direct object activation results in a warning only. Sample log entries:</p>
+<p> EDT012XActivate table "PTPHD_APPEND"<br/><strong>W</strong>EDT352 Search field "PTPHD_APPEND"-"ORIGIN_SEP_ALLOWANCE" of search help interface: Search help "SH_SAME_SEP_ALLOWANCES" not active<br/> EDT058 Table "PTPHD_APPEND" was activated with warnings</p>
+<p>...</p>
+<p> EDT014XActivate dependent table "PTPHD"<br/><strong>E</strong>EDT352 Search field "PTPHD"-"ORIGIN_SEP_ALLOWANCE" of search help interface: Search help "SH_SAME_SEP_ALLOWANCES" not active<br/> EDT015 Dependent table "PTPHD" was not activated</p>
+<p>Usually the transport step 'ABAP Dictionary Activation' fails with rc = 8.</p>
+<p>In rare cases, if a type change for other objects is involved in the same activation, the activation does not fail. Instead, some dependent objects remain inconsistent. Known scenario: Applying the Support Packages SAPK-61823INSAPAPPL and SAPK-608C5INEAHR via SUM. The activation does not fail, but the table PTRV_HEAD is inconsistent and lead to dumps in phase SUM:XPRAS_AIMMRG.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DT352, SUM:XPRAS_AIMMRG</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>- A cyclical dependency between the table, include, and search help is not resolved correctly in releases 750 and 752. This error has been resolved with release 755, the SAP Note 2904769 provides the solution for releases 753 and 754.</p>
+<p>- The search help assigned to a TABL-object does not exist, this erroneous situation is accepted for the direct activated objects only</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the correction instruction or the corresponding Support Package of this SAP Note. If the problem has already occurred: Activate the erroneous object.</p></div></div></div></div>

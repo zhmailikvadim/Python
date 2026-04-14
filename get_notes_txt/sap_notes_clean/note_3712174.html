@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When the case attribute description exceeds 30 characters, it is truncated in the search dialog. In the attribute dialog, the description is displayed in full.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>search, attribute, attribute description, document, record, case, document template, record models</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The structure SCMG_ATTR_ALV_OUTPUT uses the component type CHAR30 for the label fields, limiting the display length to 30 characters.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Perform the following manual changes.<br/><br/>1. Go to transaction SE11.<br/>2. Select the 'Data Type' option.<br/>3. Enter 'SCMG_ATTR_ALV_OUTPUT' and select 'Change' button.<br/>4. Go to the 'Components' tab.<br/>5. For the component 'LABEL1', change the component type from 'CHAR30' to 'SRMALVL'.<br/>6. Repeat step 5 for the component 'LABEL2'.<br/>7. Save and activate the object.</p>
+<p>After these changes, the description display length in the search dialog is increased to 64 characters.</p>
+<p><strong>Limitation</strong><br/>Descriptions longer than 64 characters will be truncated. The 64-character maximum is a limitation of the underlying KPRO (Knowledge Provider) framework.</p></div></div></div></div>

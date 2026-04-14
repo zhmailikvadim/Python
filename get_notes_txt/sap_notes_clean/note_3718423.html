@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When executing the "Push to Supply Planning" process with existing Scheduling Agreement and follow-on Sales Order documents, the system cannot delete Scheduling Agreements. Instead, quantities are reduced to match existing Sales Order quantities, triggering multiple cascading issues.</p>
+<ol>
+<li>During Scheduling Agreement Updates, "Study ID" and "Protocol ID" header fields may be set to blank. Also Scheduling Agreements may not be properly deleted despite the process execution</li>
+<li>In Callback Messages (SAP S/4HANA to BTP Communication):</li>
+<ul>
+<li>Success messages contain incorrect "Depot ID" values</li>
+<li>"Protocol ID" field remains unpopulated despite being required for Lean Studies status update</li>
+<li>When Scheduling Agreements cannot be located due to incomplete request data, a success message is sent instead of an error message</li>
+<li>Response data shows incomplete information: Sales Area displays "--", Depot and Document Number fields are empty</li>
+</ul>
+<li>Upon Multiple "Push to Supply Planning" Executions:</li>
+<ul>
+<li>Duplicate requests are triggered for identical site groups</li>
+<li>Scheduling Agreements display with incorrect or missing MRP Area values (including malformed entries such as "()")</li>
+<li>MRP Area descriptions fail to populate</li>
+<li>Site groups remain in "<em>In progress</em>" status until the timeout check automatically sets the status to "<em>Processing failed</em>".</li>
+</ul>
+</ol>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Push to Supply Planning, Scheduling Agreement</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">You use SAP Intelligent Clinical Supply Management.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the attached correction.</p></div></div></div></div>

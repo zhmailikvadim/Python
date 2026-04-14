@@ -1,51 +1,9 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When there is a split RGDIR (due to IT, PSS, or other absenteeism), the total reported base does not reach the monthly maximum, even though the employee’s gross salary clearly exceeds it. The excess from one period cannot be redistributed to the unused capacity of the other period, resulting in a loss of contributions for the employee and possible incoherence between SLD and CRA validations. These differences might not be detected nor warned by the SLD Bases file response, resulting in false positive scenarios.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>Human Capital Management (HCM)</li><li>SAP R/3</li><li>SAP R/3 Enterprise 4.7</li><li>SAP ERP Core Component</li><li>SAP ERP</li><li>SAP enhancement package for SAP ERP</li><li>SAP enhancement package for SAP ERP, version for SAP HANA </li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><h2 data-toc-skip="">Example 1</h2>
-<p>When a payroll is split (e.g., employee works days 1-15, then goes on sick leave days 16-30), each period applies the daily maximum cap independently. This could happen when an employee has a salary increment and during the same transition period, has an absence that would contribute based on previous months. Here the employee would have 4,500 € regularly as a salary during previous months, but during this month, starts to earn 6,000 € monthly.</p>
-<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; border-style: solid;"><thead><tr><th>Period</th><th>Gross Base</th><th>Proportional Max</th><th>Reported Base</th></tr></thead><tbody><tr><td>Days 1-15 (work)</td><td>3,000 €</td><td>2,454.75 €</td><td>2,454.75 €</td></tr><tr><td>Days 16-30 (sick leave)</td><td>2,250 €</td><td>2,454.75 €</td><td>2,250 €</td></tr></tbody></table></div>
-<p>Total reported: 4,704.75 €<br/>Expected monthly max: 4,909.50 €<br/>Gap: 204.75 € lost</p>
-<p>The excess from period 1 (545.25 €) cannot offset the unused capacity in period 2 (204.75 €). Each period is capped independently, resulting in lower total contributions than if calculated as a single monthly period.</p>
-<hr/>
-<h2 data-toc-skip="">Example 2</h2>
-<p>When a payroll is split (e.g., employee works days 1-28, then has a different situation days 29-30 with PSS), each period applies the daily maximum cap independently. This applies to all employees contributing over the maximum based on the proportional earnings [(base salary / contribution days × worked days) &gt; monthly maximum], in scenarios with PSS and payroll splits.</p>
-<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; border-style: solid;"><thead><tr><th>Period</th><th>Gross Base</th><th>Proportional Max</th><th>Reported Base</th></tr></thead><tbody><tr><td>Days 1-28 (work)</td><td>5,600 €</td><td>4,582.20 €</td><td>4,582.20 €</td></tr><tr><td>Days 29-30 (PSS)</td><td>92.08 €</td><td>327.30 €</td><td>92.08 €</td></tr></tbody></table></div>
-<p>Total reported (current): 4,674.28 €<br/>Expected monthly max: 4,909.50 €<br/>Gap: 235.22 € lost</p>
-<p>The excess from period 1 (1,017.80 €) cannot offset the unused capacity in period 2 (235.22 €). Each period is capped independently, resulting in a reported base of 4,674.28 € instead of 4,909.50 €, which creates an inconsistency with the solidarity base (782.58 €) that is correctly calculated using the full monthly maximum.</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The root cause in all these cases is a <strong>limitation of the HCM Spain payroll solution that uses the international payroll framework</strong> with a "hard" RGDIR split. When the payroll period is divided (due to IT, PSS, or other absences), each split applies the maximum contribution cap independently, without any visibility into what will be calculated in the next interval. This means the system cannot redistribute the excess from one period to cover the unused capacity in another, resulting in a total reported base lower than the monthly maximum, even when the employee’s gross salary clearly exceeds it.</p>
-<p>This creates inconsistencies with calculations that do consider the full month, such as the additional solidarity base (Contribución Adicional de Solidaridad / additional solidarity base).</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>For the analysis of these cases a tool is provided in SAP note <a href="https://me.sap.com/notes/2839798" rel="noopener noreferrer nofollow" target="_blank">2839798 </a>- CALC: Log for calculation of Social Security bases intervals with a new processing node on the payroll schema:</p>
-<p>The <strong>ESLOG </strong>log offers an interval view (ABSENCE, WORKED) similar to the SLD, useful for comparing and validating DBMAX results:</p>
-<ul><li>The ABSENCE intervals should include the sum of SLD concepts for the absence.</li><li>The WORKED intervals are related to the intervals of concept 500 in SLD.</li></ul>
-<p>It confirms the lack of a 1:1 equivalence between SLD absenteeism intervals and bases returned by DBMAX: SLD trims by benefit/maximums, while DBMAX may return the total base for the absence period. The new log allows for breaking down and analyzing these differences.</p>
-<p>On the aforementioned examples:</p>
-<p>-- Example 1</p>
-<p></p>
-<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; border-style: solid;"><thead><tr><th>Period</th><th>Days</th><th>Gross Base</th><th>Maximum</th><th>Final Base</th></tr></thead><tbody><tr><td>Days 1-15 (work)</td><td>15</td><td>3,000.00 €</td><td>2,454.75 €</td><td>2,659.50 €</td></tr><tr><td>Days 16-30 (absence)</td><td>15</td><td>2,250.00 €</td><td>2,454.75 €</td><td>2,250.00 €</td></tr><tr><td>Total</td><td>30</td><td>5,250.00 €</td><td>4,909.50 €</td><td>4,909.50 €</td></tr></tbody></table></div>
-<p></p>
-<p>-- Example 2</p>
-<p></p>
-<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" style="border-collapse: collapse; border-style: solid;"><thead><tr><th>Period</th><th>Days</th><th>Gross Base</th><th>Maximum</th><th>Final Base</th></tr></thead><tbody><tr><td>Days 1-28 (work)</td><td>28</td><td>5,600.00 €</td><td>4,582.20 €</td><td>4,817.42 €</td></tr><tr><td>Days 29-30 (absence)</td><td>2</td><td>0.00 €</td><td>327.30 €</td><td>92.08 €</td></tr><tr><td>Total</td><td>30</td><td>5,600.00 €</td><td>4,909.50 €</td><td>4,909.50 €</td></tr></tbody></table></div>
-<div> </div>
-<div id="message-list_1770989037.614029">
-<div>
-<div>
-<div>
-<div>
-<div>
-<div>
-<div>
-<div>
-<div>
-<div>
-<div><em>the ESLOG include technical columns there are components for the main calculation and are supressed in this KBA: INTERMED, DIFF_INT, DISCOUNT</em></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p></p>
-<p>For all these split scenarios, you must define<strong> manual contribution bases</strong> for the worked period to reach the monthly cap via SAP Note <a href="https://me.sap.com/notes/2447355" rel="noopener noreferrer nofollow" target="_blank">2447355 </a>- CALC: Manual contribution base </p>
-<p>Currently, DBMAX should only be used for comparison and analysis of full-time employees with monthly contributions, without VNDs or any partiality. This KBA will be updated to reflect the adherence to new scenarios and features.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP note <a href="https://me.sap.com/notes/2839798" rel="noopener noreferrer nofollow" target="_blank">2839798 </a>- CALC: Log for calculation of Social Security bases intervals</p>
-<p>SAP Note <a href="https://me.sap.com/notes/2447355" rel="noopener noreferrer nofollow" target="_blank">2447355 </a>- CALC: Manual contribution base</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>DBMAX, RGDIR, partición RGDIR, SLD (sistema de liquidación directa), ESLOG, Contribución Adicional de Solidaridad, additional solidarity base</p></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You use a TU-based TM-EWM integration.<br/><br/>You configured Early Package Building on the TM documents. Also, on the Process Profile used by the Outbound Delivery Order Document Header, you did not set the flag "Qty Update". In EWM, before the initial LDAP Request is processed, you lowered the quantity of the product - the TM and ERP product items remain with the original quantity. When the LDAP Request is sent to EWM, it fails with the following error:</p>
+<p><strong>An error occured when trying to pack stock into planned shipping HU<br/></strong><strong>091(/SCWM/POHU)</strong></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PSHU, qty, process code, lowering</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the following Note, or apply the support package<br/><br/>After the Note implementation, the PSHU creation from the LDAP message will not consider the open quantity, it will generate the PSHUs for the given product items as sent by TM.</p></div></div></div></div>

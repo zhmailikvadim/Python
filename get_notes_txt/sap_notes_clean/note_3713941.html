@@ -1,11 +1,40 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="">Transaction Code: O3U_DI2<br/> In the Base DOI Maintenance screen, under the Legal Description tab, entering a value in the Legal Type Code field, together with its associated entries in the Field level section, results in an ABAP runtime error.</p>
+<p id="__html0">This SAP Note delivers functionality to delete simulation data stored in the following four tables:</p>
+<p>T5Q_STP2_ER<br/>T5Q_STP2_EE<br/>T5Q_STP2_PAY<br/>T5Q_STP2_LOG</p>
+<p>Currently, when the Single Touch Payroll Phase 2 report (TCODE PC00_M13_STP_GEN or PC00_M13_STP_GEN_CE) is executed for an employee in Submit Event or Update Event mode with Test Run and Update Database selected, SAP stores simulation data in these respective tables.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p id="__html0">General keywords:</p>
-<p>Add-on, IS-Oil, IS-OIL-PRA-REV-CW, Industry Solution, Production and Revenue Accounting, Base DOI Maintenance</p>
-<p> Problem-Specific Keywords:</p>
-<p>Base DOI Maintenance, O3U_DI2, ABAP Runtime Error, Legal Description</p>
+<p>T5Q_STP2_ER, T5Q_STP2_EE, T5Q_STP2_PAY, T5Q_STP2_LOG, Simulation data</p>
+<p>Report: RPCSTDQ0</p>
+<p>Transaction Code:PC00_M13_STP2_DE</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Program Error.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Reason for Version Creation</strong></td>
+</tr>
+<tr>
+<td><strong>     </strong>01</td>
+<td>
+<p> Pilot Release</p>
+</td>
+</tr>
+<tr>
+<td><strong>     </strong>02</td>
+<td>
+<p> General Release for Customers</p>
+</td>
+</tr>
+</tbody>
+</table></div>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement the attached correction instruction.</p></div></div></div></div>
+<p>Code changes required for deleting simulation data stored in the T5Q_STP2_ER, T5Q_STP2_EE, T5Q_STP2_PAY, and T5Q_STP2_LOG tables have been implemented in the new report RPCSTDQ0, along with the transaction code PC00_M13_STP2_DE.</p>
+<p>To get the code corrections immediately,</p>
+<ul>
+<li>Apply the correction instructions attached to this SAP Note.</li>
+</ul>
+<p> OR</p>
+<ul>
+<li>Apply the appropriate HR Support Package (HRSP) mentioned in the ‘Support Packages and Patches’ section of this SAP Note.</li>
+</ul>
+<p>As a general rule SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="nofollow" target="_blank">SAP Note Assistant</a></strong>.</p></div></div></div></div>

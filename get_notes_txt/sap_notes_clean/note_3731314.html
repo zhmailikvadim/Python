@@ -1,0 +1,47 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The CDS view I_BillingDocumentPrcgElmnt returns no data from a Preliminary Billing Document for all users when executed in the view browser.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Open the View Browser in CDS.</li><li>Search for and open the CDS view I_BillingDocumentPrcgElmnt.</li><li>Run the view without additional filters.</li><li>Observe that no records are returned.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Standard system design.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>The CDS view I_BillingDocumentPrcgElmnt does not return data from PBDs, only for the SD document categories:</p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable" frame="border" id="loio116ddcc5a4f244a1a138c4a8146f8dc9__table_pmw_vfh_1cb" rules="all" summary=""><thead><tr><th id="d1993450e181">
+<p>Description</p>
+</th><th id="d1993450e187">
+<p>SD Document Category</p>
+</th></tr></thead><tbody><tr><td headers="d1993450e181">
+<p>Invoice</p>
+</td><td headers="d1993450e187">
+<p>M</p>
+</td></tr><tr><td headers="d1993450e181">
+<p>Invoice Canceled</p>
+</td><td headers="d1993450e187">
+<p>N</p>
+</td></tr><tr><td headers="d1993450e181">
+<p>Credit Memo</p>
+</td><td headers="d1993450e187">
+<p>O</p>
+</td></tr><tr><td headers="d1993450e181">
+<p>Debit Memo</p>
+</td><td headers="d1993450e187">
+<p>P</p>
+</td></tr><tr><td headers="d1993450e181">
+<p>Credit Memo Canceled</p>
+</td><td headers="d1993450e187">
+<p>S</p>
+</td></tr><tr><td headers="d1993450e181">
+<p>Pro Forma Invoice</p>
+</td><td headers="d1993450e187">
+<p>U</p>
+</td></tr><tr><td headers="d1993450e181">
+<p>Intercompany Invoice</p>
+</td><td headers="d1993450e187">
+<p>5</p>
+</td></tr><tr><td headers="d1993450e181">
+<p>Intercompany Credit Memo</p>
+</td><td headers="d1993450e187">
+<p>6</p>
+</td></tr><tr><td headers="d1993450e181">
+<p>Down Payment Request (for advanced down payment processing)</p>
+</td><td headers="d1993450e187">
+<p>DPRQ</p>
+</td></tr><tr><td headers="d1993450e181">
+<p>Down Payment Request Cancellation (for advanced down payment processing)</p>
+</td><td headers="d1993450e187">
+<p>DPCC</p>
+</td></tr></tbody></table></div>
+<p>If you want to retrieve data from Preliminary Billing Documents, Billing Document Requests or Invoice lists you might use the Billing Process Document: <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/c0c54048d35849128be8e872df5bea6d/e8b2a201707440c69d0941d8691e9661.html?locale=en-US" rel="noopener noreferrer nofollow" target="_blank">I_BillingDocumentRequest</a></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>refer to: <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/c0c54048d35849128be8e872df5bea6d/116ddcc5a4f244a1a138c4a8146f8dc9.html?locale=en-US&amp;q=I_BillingDocumentPrcgElmnt" rel="nofollow">I_BillingDocumentPrcgElmnt documentation</a></p><p>refer to: <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/c0c54048d35849128be8e872df5bea6d/e8b2a201707440c69d0941d8691e9661.html?locale=en-US" rel="nofollow">I_BillingDocumentRequest documentation</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>I_BillingDocumentPrcgElmnt, no data, cds view, billing header pricing elements, SD document category, preliminary billing document, PBD, I_BillingDocumentRequest, view browser, billing document pricing, header level, I_BillingDocItemPrcgElmntBasic, s/4hana cloud public edition</p></div></div></div></div>

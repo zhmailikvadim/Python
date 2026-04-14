@@ -1,0 +1,94 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">With SAP S/4HANA Cloud Private Edition 2025 FPS00 and SAP S/4HANA 2025 FPS00, the following features that are required for the integration of In-House Service with the processes for Inventory Management and Inventory (MM-IM), and Delivery Management (LE-SHP) have been provided:</p>
+<ul>
+<li>Transfer service objects to another service center (intracompany nransfer)</li>
+<li>receive service objects using inbound deliveries</li>
+<li>Post service objects to customer stock (B stock)</li>
+</ul>
+<p>The following feature has been updated:</p>
+<ul>
+<li>Create outbound deliveries when sending the service objects back to the customer</li>
+</ul>
+<p>To use these features, specific Customizing settings are required.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The required Customizing activities are grouped under the following Business Configuration Sets (BC sets):</p>
+<ul>
+<li>
+<p>LE_SHP_IHS_INTCO_LOGISTICS (LESHP Customizing for In-House Service(Intco Log))</p>
+</li>
+</ul>
+<p style="padding-left: 30px;">The following delivery types and output types are delivered with this BC set:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Delivery Type</strong></td>
+<td><strong>Output Type</strong></td>
+</tr>
+<tr>
+<td>LFS2 (Transfer Service Object - Outbound Delivery)</td>
+<td>LFS (Outbound Delivery for In-House Service)</td>
+</tr>
+<tr>
+<td>ELS3 (Transfer Service Object - Inbound Delivery)</td>
+<td>ELS (Inbound Delivery for In-House Service)</td>
+</tr>
+<tr>
+<td>ELS1 (Receive Service Object - Inbound Delivery)</td>
+<td>ELS (Inbound Delivery for In-House Service)</td>
+</tr>
+<tr>
+<td>LFS4 (Send Service Object Back to Customer - Outbound Delivery)</td>
+<td>LFS (Outbound Delivery for In-House Service)</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>MM_IM_IHR (Movement Types for In-House Service)</li>
+</ul>
+<p>Once you have activated the BC sets, make the following settings for in Customizing for <strong>Service</strong>:</p>
+<ol>
+<li><span style="font-size: 14px;">In the </span><strong style="font-size: 14px;">Define Profiles for Logistics Integration</strong><span style="font-size: 14px;"> Customizing activity, create the required logistics profiles and assign the steps required to launch the logistics processes for the service objects in the In-House Service apps.</span></li>
+</ol>
+<p style="padding-left: 30px;"><span style="font-size: 14px;">The movement types have been enhanced so that they can be used for the logistics integration in In-House Service:</span></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Logistics-Related Step</strong></td>
+<td><strong>Delivery Type</strong></td>
+<td><strong>Movement Type</strong></td>
+</tr>
+<tr>
+<td>Transfer: Create Inbound Delivery</td>
+<td>ELS3 (Transfer Service Object - Inbound Delivery)</td>
+<td>501</td>
+</tr>
+<tr>
+<td>Transfer: Create Outbound Delivery</td>
+<td>LFS2 (Transfer Service Object - Outbound Delivery)</td>
+<td>601</td>
+</tr>
+<tr>
+<td>Receive from Customer: Create Inbound Delivery</td>
+<td>ELS1 (Receive Service Object - Inbound Delivery)</td>
+<td>501</td>
+</tr>
+<tr>
+<td>Send Back to Customer: Create Outbound Delivery</td>
+<td>LFS4 (Send Service Object Back to Customer - Outbound Delivery)</td>
+<td>601</td>
+</tr>
+</tbody>
+</table></div>
+<ol start="2"></ol><ol start="2">
+<li><span style="font-size: 14px;"><strong>Only revelant for transferring service object to another service center</strong>: In the </span><strong style="font-size: 14px;">Define Item Categories</strong> Customizing activity, assign the logistics profile that you have defined in the <strong>Define Profiles for Logistics Integration</strong> Customizing activity to the item category that is used for service objects.</li>
+</ol>
+<p><strong>Specific Settings to Post Service Objects to Customer Stock</strong></p>
+<p>Service objects for which the logistics process is launched in customer returns have this special stock indicator <strong>Orders on Hand</strong> by default. However, you can specify the special stock indicator <strong>Customer Stock</strong> to be used if the logistics process is launched in customer returns. You do this in the following Customizing activities:</p>
+<ul>
+<li><span style="font-size: 14px;">Logistical follow-up activity 0027 (</span><strong style="font-size: 14px;">Continue In-House Service</strong><span style="font-size: 14px;">): </span><strong style="font-size: 14px;">Specify Settings for Returns Orders as Follow-Up</strong><span style="font-size: 14px;"> in Customizing for </span><strong style="font-size: 14px;">Service</strong><span style="font-size: 14px;"> under </span><strong style="font-size: 14px;">Transactions</strong><strong style="font-size: 14px;">-&gt;Settings for In-House Service</strong></li>
+<li><span style="font-size: 14px;">Logistical follow-up activity 0026 (</span><strong style="font-size: 14px;">In-House Service</strong><span style="font-size: 14px;">): </span><strong style="font-size: 14px;">Specify Settings for In-House Service as Follow-Up Activity</strong><span style="font-size: 14px;"> in Customizing for </span><strong style="font-size: 14px;">Sales and Distribution</strong><span style="font-size: 14px;"> under </span><strong style="font-size: 14px;">Sales<strong>-&gt;</strong></strong><strong style="font-size: 14px;">Advanced Returns Management<strong>-&gt;</strong></strong><strong style="font-size: 14px;">Settings for Repair as Follow-Up Activity</strong></li>
+</ul>
+<p><strong>Note: </strong>If you specify the special stock indicator <strong>Customer Stock</strong> (B stock), the system uses the movement type 431 to transfer the stock from <strong>Orders on Hand</strong> to <strong>Customer Stock</strong> once the quality inspection has been performed successfully for the service object and its availability at the service center is set to <strong>Received by Service Center</strong>.</p>
+<p><strong>More Information</strong></p>
+<p>For more information about implementing the logistics process for In-House Service, see the Customizing documentation in Customizing for <strong>Service</strong> under <strong>In-House Service -&gt; </strong><strong>Integrate In-House Service with Inventory and Delivery Management</strong>.</p>
+<ol></ol></div></div></div></div>

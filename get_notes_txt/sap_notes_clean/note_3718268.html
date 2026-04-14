@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li><span style="font-size: 14px;">If an employee has a KiwiSaver record with a temporary rate reduction (TRR) date earlier than the current pay period end date, the system applies the higher employee and employer contribution rate instead of the lower rate.</span></li>
+<li>If an employee has a KiwiSaver record with a TRR date, and the pay period start and end dates fall in March 2026 but the corresponding pay date is on or after April 1, 2026, the TRR date is not considered and the higher contribution rate is applied.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<ul>
+<li>Include: PCMASNZ0</li>
+<li>Report: HNZCALC0</li>
+<li>Transaction: PC00_M43_CALC</li>
+<li>Table: T511K</li>
+<li>Function: P0310</li>
+</ul>
+<p><strong>Type of Object Change</strong></p>
+<ul>
+<li>Workbench Objects – No</li>
+<li>Code – Yes</li>
+<li>Schema/Rules – No</li>
+<li>Wage Types – No</li>
+<li>Customizing Tables – No</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>
+<p>The current logic determines eligibility for the lower rate by checking whether the TRR date is greater than or equal to the pay period end date.</p>
+</li>
+<li>
+<p>The system retrieves the lower rate from constants KSTRE and KSTRC based on the pay period end date rather than the pay date.</p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The logic has been corrected so that the lower rate will be considered if the TRR date is greater than or equal to the pay period start date, and if the current period pay date is greater than April 1, 2026.</p>
+<p>As a general rule, SAP recommends that you implement the support package specified for your release in the <em>Reference to Support Packages and Patches</em> section of this SAP Note. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the attached correction instructions. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank"><strong>SAP Note Assistant</strong></a>.</p></div></div></div></div>

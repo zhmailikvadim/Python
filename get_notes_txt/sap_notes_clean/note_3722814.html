@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The <strong>Assign Stock Movement Buckets to Goods Movement Type and Reason</strong> activity allows you to configure the INRE (Rework) bucket value status and corresponding movement types.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ISLS, Intelligent Clinical Supply Management, INRE medkit Status</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You use SAP Intelligent Clinical Supply Management.</p>
+<p><strong>Changes and Validations for "Assign Stock Movement Buckets to Goods Movement Type and Reason":</strong></p>
+<p><strong>Path</strong>: Life Sciences &gt; SAP Intelligent Clinical Supply Management à Distribution &gt; Medkit Status Mapping  &gt; Assign Stock Movement Buckets to Goods Movement Type and Reason</p>
+<p><strong>Required Changes</strong></p>
+<ol>
+<li><span style="text-decoration: underline;">Remove INRE from Bucket Value Dropdown</span> - INRE (In rework) isn't a bucket value in the Reconcile app. Remove it from the bucket value dropdown list in the SPRO node "Assign Stock Movement Buckets to Goods Movement Type and Reason."</li>
+<li><span style="text-decoration: underline;">Restrict Movement Types 541 and 542</span> - Movement types 541 and 542, and their equivalents in the rework process, aren't dependent on this table and have no relevance here. If you enter these movement types, the system raises an error and doesn't allow the entry.</li>
+<li><span style="text-decoration: underline;">Restrict Bucket Value Combinations for Movement Types 543 and 261</span> - If you combine movement types 543, 261, or their equivalents with other bucket values, the system raises an error and doesn't allow the entry. These movement types can only be used with the "Destroyed" status.</li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached correction.</p></div></div></div></div>

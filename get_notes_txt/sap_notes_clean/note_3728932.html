@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">BAPI_INSPOPER_GETDETAIL returns a non‑initial quantity for an inspection point although the corresponding database field is initial (INSPPOINTS‑QUANTITY vs. QAPP‑MENGE). The behavior reproduces when comparing the BAPI output with table QAPP for the same inspection point.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>BAPI_INSPOPER_GETDETAIL, QAPP, INSPPOINTS, MENGE, QUANTITY, lcl_inspection_point, LIF_INSPECTION_POINT~GET_LIST</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The reason is a program error. A missing CLEAR of the inspection point structure at the start of the loop over LT_QAPP in method lcl_inspection_point=&gt;get_instance()-&gt;get_list causes values to persist between iterations, which leads to inconsistent INSPPOINTS‑QUANTITY when QAPP‑MENGE is initial.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement correction insturction.</p></div></div></div></div>

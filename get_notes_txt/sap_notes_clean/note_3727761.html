@@ -1,8 +1,14 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">You use the budgeting workbench (transaction code FMBB) with the accessibility mode active. You observe that when selecting 'Carry Over', or 'Distribution', 'Revenues Increasing the Budget', the process value switches to 'Transfer' process value.</p>
+<p id="__html0">During the TTRQ-mapping of serial numbers in the LE-TM integration a runtime error occurs. The issue is observed when serial numbers contain significant leading zeros as defined in transaction OLZSN. More details about the setting can be found in consulting note 3101810.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>Usability improvement, accessibility mode is active.</p>
+<p>Logistics Integration; Serial Numbers; SN; Alpha Conversion; CX_SY_ITAB_DUPLICATE_KEY; /SCMTMS/CL_LE_TM_MAP_TTRQ=====CP</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Side effect of SAP Note 3387752 - FMBB: Group header fields, accessibility mode is active.</p>
+<p>SAP Transportation Management (TM) does not support significant leading zeros for serial numbers so far. When a numeric value is transferred, an automatic alpha conversion is applied. The runtime error arises when the system is configured with significant leading zeros and the LE document contains serial numbers which result into duplicates after applying the conversion logic.</p>
+<p>Important:<br/>The note will prevent the runtime error, but the alpha conversion of numeric serial numbers will still take place. TM will therefore not be able to differentiate serial numbers whose uniqueness depends solely on leading zeros.</p>
+<p>If differentiation is required, it is recommended to:</p>
+<ul>
+<li>Introduce at least one alphanumeric character in the serial number as mentioned in the Note given before</li>
+<li>This can also be done just for logistics integration to TM using BAdI /SCMTMS/BADI_LI_BTD_CHG (method for adjusting serial numbers before mapping)</li>
+</ul>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>After applying the following correction, when the accessibility mode is active, the selected Budgeting process is kept in the field area of the screen. The following SAP Note will correct the side effect of SAP Note 3387752 - FMBB: Group header fields, when accessibility mode is active.</p></div></div></div></div>
+<p>Implement the correction instruction attached to this Note or install the corresponding support package.</p></div></div></div></div>

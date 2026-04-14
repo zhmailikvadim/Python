@@ -1,0 +1,49 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div></div>
+<div>This SAP Note addresses the following symptoms.</div>
+<br/>
+<div>1. The <strong>Submit</strong> action is incorrectly enabled when a document is in <strong>Sent to DRCC</strong> or <strong>Acknowledged by DRCC</strong> status. Performing this action leads to a <strong>Rejected by DRCC</strong> status because the document already holds an <strong>Accepted</strong>, <strong>Rejected</strong>, or <strong>Failed</strong> status in the <strong>Document and Reporting Compliance Cloud Edition</strong>. Additionally, the <strong>Get Service Status</strong> action fails to retrieve the most recent status for the affected documents.</div>
+<div></div>
+<div>For more details on how to resolve the status mismatches, please refer to the <strong>Solution</strong> section of this SAP Note.</div>
+<br/>
+<div>2. After resubmitting documents that are in <strong>Rejected by KSeF</strong> or <strong>Rejected by KSeF (Offline)</strong> status, the <strong>Display XML</strong> action continues to show the previous version of the XML instead of the updated one.</div>
+<div></div>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Poland, eDocument, eDoc, eInvoicing, electronic invoice, electronic invoicing, Poland eInvoice, Document Compliance, Digital Compliance, DC, B2B, National System of e-Invoices, KSeF, Krajowy System e-Faktur, e-Faktura, faktura ustrukturyzowana, faktura elektroniczna, Electronic Document, Document and Reporting Compliance, electronic document processing, FA(2) Schema Version Code, FA(3) Schema Version Code</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Prerequisites</strong></p>
+<p>For a complete prerequisite list, refer to SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3279206" target="_blank">3279206</a> (Electronic Document Processing for Poland - KSeF: Implementation Overview).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Date</strong></td>
+<td><strong>Version</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>02.03.2026</td>
+<td>1</td>
+<td>Released for Customers</td>
+</tr>
+<tr>
+<td>25.03.2026</td>
+<td>2</td>
+<td>Correction for SAP APPL 606</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<p>Import the Support Package specified for your release or implement the attached correction instruction.</p>
+<p>SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <strong><a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="nofollow" target="_blank">SAP Note Assistant</a>.</strong></p>
+<p>You must also implement the customization activities shared in the attachment <strong>SAP Note 3722249 Customization Steps </strong>PDF<strong>.</strong></p>
+<p>Once the corrections are available in your system, please follow the steps below to resolve the status mismatch.</p>
+<p>1. Open the <strong>Electronic Document Cockpit</strong> or <strong>Manage Electronic Documents</strong> application.</p>
+<p>2. Select the Electronic Documents with status mismatch and perform <strong>More -&gt; Get Status </strong>to pull the latest status from <strong>Document and Reporting Compliance Cloud Edition</strong>.</p>
+<p>3. Once the latest status<strong> </strong>is received in the Business System, you can take the necessary follow up actions - <strong>Send to Customer/More -&gt; Display PDF</strong> on documents in <strong>Accepted by KSeF </strong>status, <strong>Retry</strong> on documents in <strong>Failed to Send </strong>status and <strong>Submit</strong> on documents in <strong>Rejected by KSeF</strong> status.</p>
+<p>#SAP Document and Reporting Compliance</p></div></div></div></div>

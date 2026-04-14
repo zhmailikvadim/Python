@@ -1,8 +1,13 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">User performs an Opportunity search with search criteria Product = X (where X is the product description). The search result does not take into account the Product search criteria; all Opportunities are returned.</p>
+<p id="__html0">In the Create/Change Maintenance Order transactions (IW31/IW32) on the Malfunction data tab of the header notification, you change the malfunction start/end Date/time and the breakdown duration is not updated. Instead you get the message  IM 476 'Please check length of downtime'.</p>
+<p>This is incorrect behavior. Only in case if the Break down duration is changed by the user manually, it shouldn't update the break-down duration based on Malfunction Date /time changes and inform the user by message IM 476.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>PRODUCT_NAME, search result, opportunities, CRMS4C_RF_REPDY, CRMS4_OPPT_A_SRC</p>
+<p>EAM, PM/CS, Plant Maintenance, IW31, IW32, Maintenance Work Order, RIWO00-EAUSZT, VIQMEL-MSAUS, SAPLIQS0, 7020, ON REQUEST.<br/>IM476.</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Program error.</p>
+<p>Programm error in the following Notes:</p>
+<p><a href="/notes/3285783" rel="noopener noreferrer" target="_blank" title="3285783  - Breakdown duration remains when unchecking the checkbox">3285783 - Breakdown duration remains when unchecking the checkbox</a></p>
+<p><a href="/notes/3290318" rel="noopener noreferrer" target="_blank" title="3290318  - Breakdown duration remains when unchecking the checkbox">3290318 - Breakdown duration remains when unchecking the checkbox</a></p>
+<p>The same issue is already fixed for Notifications directly:</p>
+<p><a href="/notes/3413675" rel="noopener noreferrer" target="_blank" title="3413675  - IW22: Break down duration is not updated correctly when the Malfunction start/End  Date/Time is changed.">3413675 - IW22: Break down duration is not updated correctly when the Malfunction start/End Date/Time is changed.</a></p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement the manual instructions attached to this note.</p></div></div></div></div>
+<p>Implement this SAP Note or the import of the relevant support package.</p></div></div></div></div>

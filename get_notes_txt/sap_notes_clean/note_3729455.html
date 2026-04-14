@@ -1,0 +1,101 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Privacy by design and default is based on the purposes (describing the reasons) for processing of personal data. SAP Policy Management (FS-PM) simplifies respectively supports the determination and assignment of purposes to person-related data by the enablement for the Purpose Determination. The Purpose Determination is the central instance between the purpose configuration and the applications to asynchronously determine and update the purpose assignment for business documents.</p>
+<p>You can find further details in the SAP Help Portal (https://help.sap.com) by searching for Purpose Determination.</p>
+<p>In the following table, you can find details about the Purpose Determination enablement delivered in SAP Policy Management (FS-PM).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Line of business Basis</p>
+<p>Purpose Determination</p>
+<p>DPP</p>
+<p>Data protection</p>
+<p>Purpose</p>
+<p>Data controller</p>
+<p>BRF+</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Purpose Determination</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>You have activated the automatic determination of purposes for application objects in the IMG activity <em>'Configure Purpose Determination'</em>.</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 1620px; height: 229px;">
+<tbody>
+<tr>
+<td valign="top" width="94">
+<p><strong>Registered Application Object for Purpose Determination</strong></p>
+</td>
+<td valign="top" width="208">
+<p><strong>Related Data Category</strong></p>
+</td>
+<td valign="top" width="198">
+<p><strong>Related ILM Object</strong></p>
+</td>
+<td valign="top" width="198"><strong>Data Controller relation of the application object</strong></td>
+<td valign="top" width="198"><strong>Event when an entry for Purpose Determination worklist is triggered</strong></td>
+<td valign="top" width="198"><strong>How to influence the Purpose Determination?</strong></td>
+</tr>
+<tr>
+<td valign="top" width="94">
+<p>/PM0/INSURANCEPOLICYCONTRACT</p>
+</td>
+<td valign="top" width="208">
+<p>/PM0/INSURANCEPOLICYCONTRACT</p>
+</td>
+<td valign="top" width="198">
+<p>PM0_ABP_CONTRACT</p>
+</td>
+<td valign="top" width="198">
+<p>Assigned data controller is determined based on the Company Code of the FS-PM Contract.</p>
+</td>
+<td valign="top" width="198">
+<p>Purpose Determination worklist is triggered during the creation of a FS-PM Policy and Contract.</p>
+<p>In case of changing a FS-PM Policy and Contract it depends on the business process. Purpose Determination worklist is triggered for:</p>
+<ul>
+<li>Business process 'Change'</li>
+<li>Business process 'Reset'</li>
+<li>Business process 'Reversal'</li>
+</ul>
+<ul>
+<li>Business process 'Inquiry', but only if a charge has been created</li>
+</ul>
+<ul>
+<li>For background processing, but only if a BTS date has been processed</li>
+</ul>
+</td>
+<td valign="top" width="198">
+<p>The purpose determination can be influenced using customer-specific BRF+ rules based on the following document attributes:</p>
+<ul>
+<li>Contact level:</li>
+<ul>
+<li>POLPR_COMPANYKEY_CD - ID of Company</li>
+<li>POLPR_COMPCODE_ID - G/L Company Code</li>
+<li>POLPR_LOB_CD - Name of Line of Business</li>
+<li>POLPR_PM_ID - Product</li>
+<li>POLPR_PRODUCTGROUP_ID - Product Module Group - derived from group dimension ' - derived from group dimension 'ILMINFORCE'</li>
+</ul>
+<li>Policy level</li>
+<ul>
+<li>POLICY_COMPANYKEY_ID - ID of Company</li>
+<li>POLICY_PM_ID - Sales Product Template ID</li>
+<li>POLICY_PRODUCTGROUP_ID - Product Module Group - derived from group dimension 'J_7OAPMPRT'</li>
+<li>POLICY_SALECH_CD - Distribution Channel</li>
+<li>POLICY_ACQUISTP_CD - Acquisition Type</li>
+</ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td valign="top" width="94"></td>
+<td valign="top" width="208"></td>
+<td valign="top" width="198"></td>
+<td valign="top" width="198"></td>
+<td valign="top" width="198"></td>
+<td valign="top" width="198"></td>
+</tr>
+<tr>
+<td valign="top" width="94"></td>
+<td valign="top" width="208"></td>
+<td valign="top" width="198"></td>
+<td valign="top" width="198"></td>
+<td valign="top" width="198"></td>
+<td valign="top" width="198"></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Remark:</strong> In case you need to select more attributes to influence the Purpose Determination, then use implizit enhancmentment option in method ENHANCE_BRFPLUS_CONTEXT in class /PM0/CL_ABP_PURP_DETERMINATION.</p></div></div></div></div>

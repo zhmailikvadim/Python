@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>During SAP HANA instance startup, the <span class="SNO_DNT" style="float: none;" translate="no">landscapeHostConfiguration.py</span> <span class="SNO_DNT" style="float: none;" translate="no">Python</span> script reports inconsistent status transitions. The script reports "<span class="SNO_DNT" style="float: none;" translate="no">partial</span>" status first, then changes to "<span class="SNO_DNT" style="float: none;" translate="no">unknown</span>", and finally shows "<span class="SNO_DNT" style="float: none;" translate="no">starting</span>" when executed repeatedly during the <span class="SNO_DNT" style="float: none;" translate="no">nameserver</span> startup process.</p>
+<p>In environments using Cluster Pacemaker Resource Managers, this can trigger unintended automated node fencing during database startup operations, particularly in SAP HANA <span class="SNO_DNT" style="float: none;" translate="no">scale-out</span> (multi-node) environments.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><span class="SNO_DNT" style="float: none;" translate="no">landscapeHostConfiguration.py</span>,<span class="SNO_DNT" style="float: none;" translate="no"> nameserver</span> startup, Pacemaker cluster environment, <span class="SNO_DNT" style="float: none;" translate="no">SAPHanaSR </span>resource agents, network requets, <span class="SNO_DNT" style="float: none;" translate="no">unknown</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 348679</p>
+<p><strong>Reason:</strong></p>
+<p>Due to an enhancement in network availability detection during <span class="SNO_DNT" style="float: none;" translate="no">nameserver</span> initialization, the network port is detected earlier in the startup sequence than previously. This creates a brief window where the port is accessible but the <span class="SNO_DNT" style="float: none;" translate="no">nameserver</span> is not yet ready to process requests, causing the monitoring script to report "<span class="SNO_DNT" style="float: none;" translate="no">unknown</span>" status instead of "<span class="SNO_DNT" style="float: none;" translate="no">partial</span>". This status change may trigger Cluster Pacemaker Resource Managers to initiate node fencing operations.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions: 079.03 - 079.08 (SPS07)</li>
+<li>Revisions: 083.00 - 089.00 (SPS08)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>SAP HANA is configured in a Pacemaker cluster environment using <span class="SNO_DNT" style="float: none;" translate="no">SAPHanaSR</span> resource agents.</li>
+<li>The <span class="SNO_DNT" style="float: none;" translate="no">landscapeHostConfiguration.py</span> script is executed during <span class="SNO_DNT" style="float: none;" translate="no">nameserver</span> startup (typically called by<span class="SNO_DNT" style="float: none;" translate="no"> Pacemaker's SAPHanaController</span> or <span class="SNO_DNT" style="float: none;" translate="no">SAPHana resource agen</span><span class="SNO_DNT" style="float: none;" translate="no">t</span> for monitoring). See SAP Note <a href="/notes/3288971" target="_blank">3288971</a>. </li>
+<li>The timing of the script execution coincides with the period after the network port has been opened but before the <span class="SNO_DNT" style="float: none;" translate="no">NameServer</span> can handle network requests. </li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 079.09 (SPS07)</li>
+<li>Revisions &gt;= 089.01 (SPS08)</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul></div></div></div></div>

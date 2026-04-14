@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3733022&amp;TargetLanguage=EN&amp;Component=XX-CSC-CH-IS-H&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3733022/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3733022/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>For the electronic invoice XML version 5.0, the following adjustments are required:</p>
+<ul>
+<li>In future, the tax points in the fields <em>unit_mt</em> and <em>unit_tt</em> may no longer be divided by the number of participants. On the other hand, the quantity or Number (<em>quantity</em>) of the service divided by the number of participants. The taxpoint value and the scaling factor (<em>scale_factor_mt</em> and <em>scale_factor_tt</em>) must have the full original value (without division). As before, the number of participants is to be returned in the group <em>size</em> field.</li>
+<li>For invoices according to XML 5.0, only the field NLEI-LFDTSI is delivered as a session code in XML/invoice printing. As a result, the field "SC" (NLEI-WNDNR) is no longer displayed for services from earlier invoices. Since a session number does not yet exist in the field NLEI-LFDTSI for these services, the default value "01" is transferred for the session.</li>
+<li>For invoices according to XML 5.0, only the field NLEI-SECTION_CODE is delivered as the specialty (<em>section_code)</em> in XML/invoice printing. As a result, the "Specialty" field (TNKFO-FACHR) of the assigned organizational unit is no longer displayed for services from earlier invoices.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>MEDIDATA 4.0, XML standard 5.0, INXML, electronic invoice, EOXML, electronic invoice for external order, invoice printing</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Prerequisites:</p>
+<ul>
+<li>Country Version Switzerland (CH) </li>
+<li>Use of XML standard 5.0 (for INXML or EOXML or invoice printing)  </li>
+</ul>
+<p>Reason:</p>
+<ul>
+<li>Adjustments to the new version 5.0 for the electronic invoice</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the source code corrections and perform the manual tasks.</p>
+<p>The following changes are made:</p>
+<ul>
+<li>In the case of a group therapy service, only the quantity or <em>Quantity</em> of the service divided by the number of participants.</li>
+<li>Before 1/1/2026, the old determination logic is used again for the transfer of the session code (<em>session_nr</em>) and the session code is read from the field "SC" (NLEI-WNDNR).</li>
+<li>Before January 1, 2026, the old determination logic is used again for the transfer of the user department (<em>section_code</em>) and the user department is read from the "User Department" field (TNKFO-FACHR) of the assigned organizational unit.</li>
+</ul></div></div></div></div></div>

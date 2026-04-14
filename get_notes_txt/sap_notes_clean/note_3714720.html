@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3714720&amp;TargetLanguage=EN&amp;Component=IS-H-PM-PAT&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3714720/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3714720/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p><strong><em>This SAP Note is relevant only for the country versions Germany, Switzerland, and Austria.</em></strong></p>
+<p>The <em>long fields</em> are not active in your system, the <em>additional fields</em> are active. As a result, the <em>House Number</em> field is available as an additional field in the patient address. You use the GetDetail method of the Patient business object (BAPI_PATIENT_GETDETAIL) to determine the patient data. The system does not return only the street in any field in table ADDRESSES for the patient's address or for the patient's additional address. The STR_NO field in the ADDRESSES structure always contains the street and house number. The field STREET_LONG is not filled because the long fields are not active. The HOUSE_NO field is filled if the house number has been maintained in this field.</p>
+<p>A field is missing that contains only the street in this constellation (long fields are not active, additional fields are active).</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>BAPI_PATIENT_GETDETAIL, TN00, IS-H: Client Control Parameters, Additional Fields, Add. Fields, EXTFIELDS_ACTIVE, long fields, LONG_PAT_ADR, STR_NO, HOUSE_NO, STREET_LONG, street, house number</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p><span style="text-decoration: underline;">Prerequisite:</span></p>
+<p>You use one of the following country versions:</p>
+<ul>
+<li>Germany (DE)</li>
+<li>Switzerland (CH)</li>
+<li>Austria (AT)</li>
+</ul>
+<p>In the Customizing activity <em>Maintain Client-Specific Basic Control</em> (SAP Healthcare - Industry-Specific Components for Hospitals -&gt; Basic Settings -&gt; System Parameters -&gt; Maintain Client-Specific Basic Control -&gt; Set Client-Specific Control Parameters), you have maintained both parameters for your client as follows:</p>
+<ul>
+<li><em>Long fields Patient and Patient Address</em>: not selected</li>
+<li><em>Addnl Fields Active</em>: Selected</li>
+</ul>
+<p><span style="text-decoration: underline;">Reason:</span></p>
+<p>Missing function</p>
+<p>A field is missing that contains only the street in this constellation (long fields are not active, additional fields are active). The field STREET_LONG is only filled if the <em>long fields</em> are active.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p>
+<p>Afterwards, the method GetDetail of the business object Patient (BAPI_PATIENT_GETDETAIL) returns the street name without house number in the export parameter ADDRESSES in the constellation described above (long fields: not active, additional fields: active) for the patient address or for the other patient address in the field STREET_LONG. You can find the house number in the HOUSE_NO field as before. The STR_NO field is still filled with the street and house number.<br/>CAUTION: If the house number was not entered in the House Number field in the patient's address, but in the Street field, the STREET_LONG field also contains the house number in this constellation.</p>
+<p><span style="text-decoration: underline;">Please note:</span></p>
+<p>This change only affects the patient address and the other patient address, not the addresses of next of kin, employers, or other addresses that are stored in the system for the patient in their country version.</p>
+<p>For these addresses, the street name with house number can only be found in the table <em>ADDRESSES</em> as before in the field <em>STR_NO</em>, since you cannot enter the street and house number for these addresses in separate fields on the interface of SAP Patient Management.</p></div></div></div></div></div>

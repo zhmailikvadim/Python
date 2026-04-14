@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0" lang="en-US">In the process "Device Installation/Replacement and Finalization of Technical Master Data" (APEU_B_MCM_TMD_CHANGE_PROCESS), step 0170 calculates the Business Start Date incorrectly. The system sets the Business Start Date to either the first of the next month or the first of the month after next.</p>
+<p lang="en-US">This issue is relevant for the market roles: SUP, DSO, MOS, PRS.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p lang="en-US">BAdI /US4G/CL_IM_BADI_MCM_DATES, /APEU/IF_BADI_MCM_DATES~GET_BUSINESS_DATE, Business Start Date, Device Installation, MCM_DE, SLP, RLM</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p lang="en-US">The system incorrectly calculates the Business Start Date in the BAdI /US4G/CL_IM_BADI_MCM_DATES -&gt;/APEU/IF_BADI_MCM_DATES~GET_BUSINESS_DATE.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div>
+<p lang="en-US">Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p lang="en-US">After implementing this SAP Note, the system calculates the Business Start Date correctly and no longer sets it to the first of the next month or the first of the month after next.</p>
+<p lang="en-US">You need to run the process again and reprocess step 0170. You can verify the correction by creating an MCM change process (SLP-&gt;RLM) and checking that the system calculates the Business Start Date correctly.</p>
+</div></div></div></div></div>

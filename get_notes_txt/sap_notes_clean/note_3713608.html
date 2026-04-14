@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3713608&amp;TargetLanguage=EN&amp;Component=IS-H-MD-DOC&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3713608/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3713608/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>You group a case for which more than 9999 mechanical ventilation hours were entered. Two symptoms can occur:</p>
+<ul>
+<li>The ENTL message can be sent due to error message NC 476 <em>Value for mechanical ventilation hours is too large:</em> not sent.</li>
+<li>The grouping result does not correspond to the expected result.</li>
+</ul>
+<p>Example:</p>
+<p>You have documented 12000 mechanical ventilation hours for a case.</p>
+<ul>
+<li>In the EDI workbench for the messages for the case, the system issues error message NC 476 <em>Value for mechanical ventilation hours is too large: 12000</em>.</li>
+<li>The grouper determines the DRG code A07A, but you expect the DRG code A06A.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>NPDRG2, grouping, mechanical ventilation hours</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p id="">Reason:</p>
+<p>There is a program error and legal requirements.</p>
+<p>Currently, in the country version Germany, a maximum length of 4 is provided for the field of the mechanical ventilation hours when transferring the data in the ENTL message in the segment DAU as part of §301. As a result, it is not possible to transfer more than 9999 mechanical ventilation hours.</p>
+<p>In the same way, the program only transfers a maximum of four places to the grouper. However, you can enter a five-digit number of mechanical <em>ventilation</em> hours in the Ventilation field (NFAL-RESPI). The program sends only the first four places to the grouper. This can lead to an incorrect result. For example, the grouper only determines the DRG code A06A if more than 1799 mechanical ventilation hours were performed. If there are fewer (for example, 1240), the grouper determines A07A.</p>
+<p>It is very unlikely that more than 9999 mechanical ventilation hours will have to be documented for a case.</p>
+<p>Prerequisites:</p>
+<ul>
+<li>You use the country version Germany.</li>
+<li>More than 9999 mechanical ventilation hours have been entered for the case. Either by manually maintaining the mechanical ventilation hours in the case data or by entering internal procedures for totaling the mechanical ventilation hours (charge type 73).</li>
+<li>You use the sample function module ISH_OLE2_3MKS_GRP_DRGPEPP_OUT to group a case with the 3M Kopdip Suite from Solventum. This function module determines the mechanical ventilation hours using the form routine fill_gdrg_pepp_input. The field for the mechanical ventilation hours is only defined with four characters in the parameter gdrg_pepp_record (using the structure ish_gdrg_grouper_1-HMV).<br/>Alternatively, use another function module for the grouping that also transfers only the first four digits of the mechanical ventilation hours to the grouper.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p>
+<p>The field HMV of the structure ISH_GDRG_GROUPER_1 is now defined with five characters. This means that the component type is now CHAR5 instead of CHAR4.</p>
+<p>As a result, the sample function module ISH_OLE2_3MKS_GRP_DRGPEPP_OUT automatically transfers the mechanical ventilation hours to the grouper with five digits. This enables the grouper to determine the correct DRG code.</p>
+<p>It is still not possible to transfer data using §301. Contact the relevant health insurance fund to transfer this case to the fund in a different way. Automatic transfer is not possible.</p>
+<p>If you use a different function module for the grouping, check whether only four places are still transferred to the grouper after the implementation of the correction and adjust the function module accordingly to transfer the mechanical ventilation hours with 5 digits.</p></div></div></div></div></div>

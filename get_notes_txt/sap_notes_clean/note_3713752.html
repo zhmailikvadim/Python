@@ -1,0 +1,50 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>What is the Resolution for blank screen issues in Fiori apps occurring during back-navigation and re-initialization of OData models?</li><li>When a user opens a custom/standard Fiori application (e.g., <em>Manage Consolidated Billing or any other Fiori app or custom app</em>), the application loads correctly the first time. However, after the user clicks the "Back" button to return to the Fiori Launchpad home and attempts to open the same application a second time, the screen remains blank.</li><li>The browser's URL updates to the correct App Hash, but the UI fails to render. Investigating the browser's Console/Developer Tools reveals the following error:
+<ul><li>Assertion failed: oModel must be an instance of sap.ui.model.Model, null or undefined</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>S/4HANA</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Log in to the Fiori Launchpad.</p>
+</li><li>
+<p>Click the tile for the custom application (e.g., <code>ManageConsolBilling-display</code> or any Fiori app or custom application).</p>
+</li><li>
+<p>The app loads and displays data successfully.</p>
+</li><li>
+<p>Click the Back (&lt;) button in the Fiori Shell header.</p>
+</li><li>
+<p>Click the same application tile again.</p>
+</li><li>
+<p>Result: The application shows a blank screen.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The issue is caused by a collision in the browser's memory during "Soft Navigation."</li><li>When the "Back" button is pressed, the Fiori Launchpad does not always fully destroy the previous instance of the application to improve performance. If the custom application's <code>Component.js</code><span style="font-size: 10pt;"> does not properly clean up or "destroy" its OData models upon exiting, a "dirty session" or "ghost instance" remains in the background.</span></li><li>Upon the second launch, the application attempts to initialize the OData model again. Because a reference to the previous (but now invalid or null) model still exists in the Document Object Model (DOM) cache, the UI5 framework fails the assertion check. This causes a silent crash during the binding process, preventing the View from rendering.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>There are three primary strategies to resolve this issue, ranging from configuration changes to code-level fixes:
+<ul><li><strong>Option 1:</strong> Force App to Open in a New Tab (Recommended for quick fix)
+<ul><li>By forcing the app to open in a new browser tab, the "Back" button event is avoided entirely. Closing the tab ensures a clean state for the next session.
+<ol><li>Open the Fiori Launchpad Designer or Content Manager.</li><li>Locate the Target Mapping for the affected app.</li><li>In the Parameters section, add:
+<ul><li>Parameter Name: <code>sap-ushell-next-navmode</code>Value: <code>explace</code></li></ul>
+</li></ol>
+</li></ul>
+</li></ul>
+</li></ul>
+<p><code></code></p>
+<ul><li style="list-style-type: none;">
+<ul><li><code></code><strong>Option 2:</strong> Clear App State via Target Mapping
+<ul><li>You can instruct the Launchpad to treat every navigation as a fresh start.
+<ol><li>In the Target Mapping, add the following parameter:
+<ul><li>Parameter Name: <code>sap-keep-alive </code>Value: <code>false</code></li></ul>
+</li></ol>
+</li></ul>
+</li><li><code></code><strong><em style="font-size: 10pt;">Option 2A: (Optional)</em></strong><span style="font-size: 10pt;"><strong> </strong>If multiple mappings exist, ensure priority by adding:</span>
+<ul><li>Parameter Name: <code>sap-priority </code>Value: <code>1</code><span style="font-size: 10pt;"> (This ensures the custom mapping is favored over standard ones).</span></li></ul>
+</li></ul>
+</li></ul>
+<h4 data-toc-skip="">Option 3: Implement Lifecycle Clean-up (Code-level fix) - This solution is for the SAPUI5 custom developer who developed the code.</h4>
+<p>Ask the custom UI5 developer to ensure the application explicitly destroys models when the component is destroyed (The example below is theoretical or a general response for a Javascript and/or UI5 expert to review tied to the custom coding). </p>
+<p>Update the exit function in Component.js:</p>
+<p>JavaScript (Theoretical Example): <br/>exit: function() {<br/>    if (this.getModel("yourModelName")) {<br/>        this.getModel("yourModelName").destroy();<br/>    }<br/>}</p>
+<p><br/>In manifest.json, ensure OData models are set to load asynchronously to avoid synchronization conflicts:</p>
+<p>JSON<br/>"models": {<br/>    "": {<br/>        "dataSource": "mainService",<br/>        "settings": {<br/>            "preload": true,<br/>            "synchronizationMode": "None"<br/>        }<br/>    }<br/>}</p>
+<div>
+<div>
+<div>
+<pre><code></code></pre>
+</div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>KBA <a href="https://me.sap.com/notes/3720980" rel="noopener noreferrer nofollow" target="_blank">3720980</a> - "Authentication Information" popup or Space/Page ID errors in Fiori Launchpad when switching tabs in Microsoft Edge
+<ul><li>Shows: Why the issue can be caused by the browser -&gt; The issue is caused by Chromium-based "Sleeping Tabs" or "Efficiency Mode" interacting with the SAP Session state.</li><li>Tab Suspension: To save memory, Edge "suspends" background tabs. This stops the Fiori Launchpad's "Keep Alive" heartbeats.</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Blank screen, Back button, oModel Assertion Failed, Second launch, Fiori navigation, UI5 Model Destroy, sap-ushell-next-navmode ,"Assertion failed: oModel must be an instance of sap.ui.model.Model", "oModel must be an instance of sap.ui.model.Model, null or undefined", "Fiori app blank screen after back button", "Custom UI5 app white screen on second launch", "sap-ushell-next-navmode explace", "Assertion failed UI5 RequestManager.js", "Fiori Launchpad back button navigation issue", "Re-opening Fiori app blank screen", "Soft navigation vs Hard navigation UI5", "Fiori tile not loading on second click", "Dirty session Fiori Launchpad", "Component.js model cleanup error", DOM cache conflict, Fiori Launchpad (FLP) </p></div></div></div></div>

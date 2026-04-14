@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Standard APIs explored for FI-based supplier invoice (vendor invoice) details with required fields such as company code and payment block indicator.</p>
+<div>
+<div>
+<div>
+<p><span style="color: rgb(224, 62, 45);"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em> </span></p>
+</div>
+</div>
+</div>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To retrieve FI supplier invoice (vendor invoice) line item details in SAP S/4HANA Public Cloud, a standard accounting analytics API can be used to access accounting document items.</p>
+<p>Use the following API:</p>
+<ul><li>API Name: A_OperationalAcctgDocItemCube</li><li>Communication Scenario: Finance – Accounting Analytics Integration (SAP_COM_0303)</li><li>Purpose: Extraction of operational journal entry items</li></ul>
+<p>Apply relevant filters to retrieve FI supplier invoice data:</p>
+<ul><li>FinancialAccountType = 'K' (Supplier)</li><li>AccountingDocumentType (based on configured FI document types)<br/>or</li><li>PostingKey = '31'</li></ul>
+<p>For payment block information, use the field:</p>
+<ul><li>PaymentBlockingReason</li></ul>
+<p>        <img class="img-responsive" src="/documents/customerkba/jSqx2ylYpPFNmwtZrgHokgDkLbg1f_uNhaWcSzrbl58"/></p>
+<p>This configuration enables retrieval of company code–wise FI supplier invoice data along with payment block details.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://api.sap.com/api/API_OPLACCTGDOCITEMCUBE_SRV/resource/get_A_OperationalAcctgDocItemCube" rel="noopener noreferrer nofollow" target="_blank">SAP Business Accelerator Hub</a> </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>fi supplier invoice api, vendor invoice line items, a_operationalacctgdocitemcube, sap_com_0303, paymentblockingreason, company code filter, manage supplier line items, accounts payable api, financialaccounttype k, accountingdocumenttype, public cloud, odata, ap payment block, fi-ap analytics, journal entry items api</p></div></div></div></div>

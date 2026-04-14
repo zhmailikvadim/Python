@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">You work with inspection lot origin 17 and you can experience that the quantity update is missing for the field QALS-LMENGE03 (Quantity Posted to Sample) in case of UD (EWM inspection) with follow-up action code sample consumption.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">IOT4 decentral embedded EWM FUINT 9 LMENGE03</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="__html0">Missing functionality</p>
+<p>The handling of the field LMENGE03 in DB table QALS is missing in the EWM-QM / ERP-QM integrated scenario.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the attached code corrections.</p>
+<p><strong>Attention!!!</strong></p>
+<p><strong>If you are working in embedded EWM and you don't have generated version for IOT4 then you don't need to create a new IOT version otherwise please read it further.</strong></p>
+<p>The additional data (LMENGE03) for the inspection lot is activated through the generation of a new inspection object type (IOT) version. Afterwards, you must adjust the inspection object type-dependent Customizing and if you are using inspection rules then copy the existing check rules to the new inspection object type version.</p>
+<p><strong>All inspection document / lot has to be completed before generating a new IOT version in the production system! Otherwise the system won't be able to find the old documents which can cause issues during the GR (lot summary) process and the decision process because of the mismatching IOT versions. For more details please check the KBA 2866278 - How-to generate new IOT version in EWM.<br/></strong></p>
+<p><strong> </strong></p></div></div></div></div>

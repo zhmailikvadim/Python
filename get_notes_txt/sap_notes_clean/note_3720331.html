@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When using SSAM, application may not allow a user to re-onboard after resetting. App will be stuck in a completely white screen or a white screen with a "Loading" message. This generally occurs if there is a sync running during the reset.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<ul>
+<li>White Screen</li>
+<li>Loading Screen</li>
+<li>App Unresponsive</li>
+<li>App Reset</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>BAS/Visual Studio Code with SAM MDK Project</li>
+<li>`patch` command (available on BAS and macOS by default) via terminal or other patching utility</li>
+<li>Read the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://community.sap.com/t5/enterprise-resource-planning-blogs-by-sap/how-to-apply-metadata-patch-in-sap-service-and-asset-manager/ba-p/13801041" rel="nofollow" target="_blank">guidelines</a> on how to apply the patch and read the appendix section if you receive any error</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ul>
+<li>Find attached file 3720331.patch</li>
+<li>Save patch file into known location</li>
+<li>Run command in base metadata folder: `patch -p1 &lt; /path/to/3720331.patch`. Validate 1 file changed and no hunk failures.</li>
+<li>Republish application</li>
+</ul></div></div></div></div>

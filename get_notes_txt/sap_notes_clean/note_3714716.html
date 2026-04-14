@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">HTML rendering of OZ-1, OZ-2, OZ-3, OZ-6, and FI Register invoices depended on a legacy XSL file. You implemented ABAP-side changes that use <code class="ui5-content-native-scrollbars">XSLT_TOOL</code> templates, affecting XML-to-HTML transformation behavior</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p><code class="ui5-content-native-scrollbars">XSLT_TOOL</code>, XSLT, XML-to-HTML, Ukraine OZ1/OZ2/OZ3/OZ6, FI invoice register, ABAP Call transformation</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><span style="font-size: 14px;">Standard XSL files were hard to maintain/version; moved to ABAP-managed transformations via </span><code class="ui5-content-native-scrollbars" style="font-size: 14px;">XSLT_TOOL</code><span style="font-size: 14px;"> to centralize control and reduce external XSL dependencies</span></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement correction instructions using transaction SNOTE or install the Support Package indicated.</p>
+<p>Solution delivered within this SAP Note will:</p>
+<p>1. Replace external XSL with <code class="ui5-content-native-scrollbars">XSLT_TOOL</code> templates per document type (OZ-1, OZ-2, OZ-3, OZ-6, FI Register);</p>
+<p>2. Adjust ABAP code to call <code class="ui5-content-native-scrollbars">CALL TRANSFORMATION &lt;template&gt;</code> on the XML;</p>
+<p>3. Create a new ABAP class for CALL Transformation functionality.</p></div></div></div></div>

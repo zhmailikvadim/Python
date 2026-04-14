@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When the same plant is used both:</p>
+<p>- in the Company ID level, and</p>
+<p>- in the organizational level assigned to that Company ID,</p>
+<p>the Parent ID of the parent object is not included in the equipment outbound IDoc generated for the organizational level. As a result, the equipment is sent without information about its parent object, which leads to inconsistencies between FSM and SAP ECC/S4 systems.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">FSM, E4C, Connector, Equipment, Functional Location, Parent ID, /PACG/ECM_EQUI, IDoc, Organizational Level</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The issue was caused by an incorrect relevance check during IDoc preparation in methods PREPARE_EQUI and PREPARE_TELO of class /PACG/ECM_CL_S_IDOC_O_EQUI2.</p>
+<p>Due to this incorrect validation logic, the system determined that the parent functional location was not FSM-relevant and therefore cleared the PARENT_ID field in the outbound IDoc.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Please, implement this correction instruction.</p></div></div></div></div>

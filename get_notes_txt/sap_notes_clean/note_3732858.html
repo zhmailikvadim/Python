@@ -1,0 +1,154 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">You are using the Run Statutory Reports app to prepare VAT reporting for Russia.</p>
+<p id="__html0">According to the Order dated 18.12.2025 № ЕД-7-3/1227@ issued by the Russian Federal Tax Service, the VAT return format has been updated to version 5.12.</p>
+<p>This SAP Note delivers the necessary corrections to enable the system to generate XML files in accordance with the updated VAT return format (version 5.12) and to support the changes introduced by the new legal requirements.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>RU, Russia, SAP Document and Reporting Compliance – statutory reporting, formerly known as Advanced Compliance Reports, Russia VAT Return, RU_VAT_DCL, Run Statutory Reports, Run Advanced Compliance Reports, RU_VAT_DCL_V512_26Q1, 5.12</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Legal Change</p>
+<p><em>This SAP Note provides you with the relevant system changes to address the legal change: </em><a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQEE-12397" target="_blank">Changes: VAT Return and electronic formats 2026</a></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><em>As a general rule SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in SAP Support Portal, under <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</em></p>
+<p>New xml tag <strong>СумСрокПр1992 </strong>has been<strong> </strong>introduced in section 1 of the VAT return. The tag derives its value from line 041 maintained in the customization.</p>
+<p>New xml tags <strong>РеалТов22</strong>, <strong>РеалТов122</strong>, and <strong>РеалТов18.03</strong> have been introduced in section 3 of the VAT return. These tags derive their values from lines 003, 005, and 007 maintained in the customization respectively.</p>
+<p>The system derives data for the new tag <strong>СвЧастСчФ </strong>in the section 8 using the external number and external date of the invoice cleared with the down payment.</p>
+<p><strong>Example:</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 1021px; height: 195px;">
+<tbody>
+<tr>
+<td> </td>
+<td><strong>Down Payment</strong></td>
+<td><strong>Invoice</strong></td>
+<td><strong>Down Payment Clearing</strong></td>
+<td><strong>External Number of Invoice</strong></td>
+<td><strong>External Date of Invoice</strong></td>
+</tr>
+<tr>
+<td><strong>Case 1</strong></td>
+<td>1400000001</td>
+<td>1800000001</td>
+<td>1600000001</td>
+<td>INV1</td>
+<td>01.01.2026</td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>Case 2</strong></td>
+<td>1400000002</td>
+<td>1800000002</td>
+<td>1600000002</td>
+<td>INV2</td>
+<td>01.01.2026</td>
+</tr>
+<tr>
+<td> </td>
+<td>1400000002</td>
+<td>1800000003</td>
+<td>1600000003</td>
+<td>INV3</td>
+<td>02.02.2026</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Case 1 Output:</strong></p>
+<p>&lt;<strong>КнПокСтр </strong>НомерПор="1" НомСчФПрод="1400000001" ...&gt;</p>
+<p>    &lt;<strong>СвЧастСчФ</strong> НомЧастСчФ="INV1" ДатаЧастСчФ="01.01.2026"/&gt;</p>
+<p>&lt;/<strong>КнПокСтр</strong>&gt;</p>
+<p> </p>
+<p><strong>Case 2 Output:</strong></p>
+<p>&lt;<strong>КнПокСтр </strong>НомерПор="2" НомСчФПрод="1400000002" ...&gt;</p>
+<p>    &lt;<strong>СвЧастСчФ</strong> НомЧастСчФ="INV2" ДатаЧастСчФ="01.01.2026"/&gt;</p>
+<p>    &lt;<strong>СвЧастСчФ</strong> НомЧастСчФ="INV3" ДатаЧастСчФ="02.02.2026"/&gt;</p>
+<p>&lt;/<strong>КнПокСтр</strong>&gt;</p>
+<p>The system derives data for the new tag <strong>СвЧастСчФ</strong> in the section 9 using the external number and date of the document specified in 'Payment Order' option for respective subscenario in VAT Return Version.</p>
+<p><strong>Example when option 'Payment Order' = Advance Payment:</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 1029px; height: 161px;">
+<tbody>
+<tr>
+<td> </td>
+<td><strong>Down Payment</strong></td>
+<td><strong>Invoice</strong></td>
+<td><strong>Down Payment Clearing</strong></td>
+<td><strong>External Number of Down Payment</strong></td>
+<td><strong>External Date of Down Payment</strong></td>
+</tr>
+<tr>
+<td><strong>Case 1</strong></td>
+<td>1400000001</td>
+<td>1800000001</td>
+<td>1600000001</td>
+<td>DP1</td>
+<td>01.01.2026</td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td><strong>Case 2</strong></td>
+<td>1400000002</td>
+<td>1800000002</td>
+<td>1600000002</td>
+<td>DP2</td>
+<td>01.01.2026</td>
+</tr>
+<tr>
+<td> </td>
+<td>1400000003</td>
+<td>1800000002</td>
+<td>1600000003</td>
+<td>DP3</td>
+<td>02.02.2026</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Case 1 Output:</strong></p>
+<p>&lt;<strong>КнПродСтр </strong>НомерПор="1" НомСчФПрод="1800000001" ...&gt;</p>
+<p>    &lt;<strong>СвЧастСчФ</strong> НомЧастСчФ="DP1" ДатаЧастСчФ="01.01.2026"/&gt;</p>
+<p>&lt;/<strong>КнПродСтр</strong>&gt;</p>
+<p> </p>
+<p><strong>Case 2 Output:</strong></p>
+<p>&lt;<strong>КнПродСтр </strong>НомерПор="2" НомСчФПрод="1800000002" ...&gt;</p>
+<p>    &lt;<strong>СвЧастСчФ</strong> НомЧастСчФ="DP2" ДатаЧастСчФ="01.01.2026"/&gt;</p>
+<p>    &lt;<strong>СвЧастСчФ</strong> НомЧастСчФ="DP3" ДатаЧастСчФ="02.02.2026"/&gt;</p>
+<p>&lt;/<strong>КнПродСтр</strong>&gt;</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>30.03.2026</td>
+<td>Released for customers</td>
+</tr>
+<tr>
+<td>2</td>
+<td>30.03.2026</td>
+<td>SAP Note text formally revised</td>
+</tr>
+<tr>
+<td>3-4</td>
+<td>31.03.2026</td>
+<td>SAP Note text formally revised</td>
+</tr>
+<tr>
+<td>5</td>
+<td>02.04.2026</td>
+<td>BC Set validity fixed - attachment reloaded.</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div>

@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When a SAP user is assigned to a role defined in /PACG/ECM_USROL, the corresponding entry is automatically created in table /PACG/ECM_ALV_USERS with the "Loginable" flag enabled.</p>
+<p>However, if the user is later unassigned from the role and then reassigned again, the "Loginable" flag is not reactivated. As a result, the user remains non-loginable in the Connector, even though the role assignment has been restored.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">FSM, E4C, Connector, User, Role, /PACG/ECM_USROL, /PACG/ECM_ALV_USERS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The issue occurred in method USER_ASSIGNMENT_CHANGE of class /PACG/ECM_CL_A_ENH_USER_TRANS. The existing logic correctly set the "Loginable" flag when a user was assigned to a role for the first time. However, it did not properly detect and handle reassignments of previously removed users.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please, check for pre-installaton steps (component (S4)PACG200) and in the next step implement this correction instruction.</p></div></div></div></div>

@@ -1,8 +1,11 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">When product data is replicated using SOA inbound messaging, the MDG, Consolidation application is failing to create source data records if product contains material ledger data.</p>
+<p id="__html0">When processing a time stream calculation, the system terminates with a runtime error caused by an arithmetic overflow. The issue occurs during the calculation of time intervals when the system attempts to derive seconds from the date difference.</p>
+<p>Internally, the function module TSTR_CALC_TIME receives an invalid base date, which results in an excessively large delta value. As a result, date-dependent  calculations may fail.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>CMP-MM, Material Ledger, cost estimate number, KALN1, KALNR, MBEW, CKMLCR, CKMLPR, CKMLHD</p>
+<p>TSTR_CALC_TIME, TSTR_DB_SAVE, TSTR_INVALIDATE, Time stream, TSTRCOMP, TSTRCOMPH, STS0, STS1</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Support for temporary KALN1 generation was missing.</p>
+<p>The reason is a program error.</p>
+<p>The shared buffer for time‑stream structures was used inconsistently, causing outdated or incomplete data to be read during time‑stream loading.</p>
+<p>This led to several kind of error like; incomplete generation of time streams or to a missing or invalid base date during delta time calculation, resulting in an arithmetic overflow.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement correction instruction or apply relevant Support Package</p></div></div></div></div>
+<p>Apply the attached Correction Instruction.<br/>The correction disables the use of the shared buffer for time‑stream handling to ensure that only consistent data is read from the database.<br/>No manual post‑implementation steps are required.</p></div></div></div></div>

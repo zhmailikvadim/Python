@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Freight documents cannot be filtered before integrating TM with event management. This capability may be needed in bulk processing scenarios, for example e.g.: creation of a settlement for multiple freight documents.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Event Management, EM-TM Integration, CALL_EM_TOR_DATA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is due to Program Error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement this SAP Note or upgrade to the relevant Support Package.</p>
+<p>With this SAP Note, a new method: FILTER_RELEVANT_TOR has been introduced in the BAdI: /SCMTMS/SEND_TOR_DATA which can be used to remove those TOR objects that are not relevant for EM integration during the current process.</p>
+<p>To use this method for filtering data, you need to additionally redefine the method: /SCMTMS/IF_COMMON_BADI~SET_BADI_WORK_MODE and add a new entry to the changing parameter CT_WORK_MODE with the following values:</p>
+<p>(a) INTF_METHOD_NAME = /SCMTMS/IF_SEND_TOR_DATA=&gt;MC_INTF_METHOD_FILTER_REL_TOR</p>
+<p>(b) BADI_WORK_MODE = /SCMTMS/IF_COMMON_BADI~GC_MODE_MODIFY_STAND_RESULTS</p></div></div></div></div>

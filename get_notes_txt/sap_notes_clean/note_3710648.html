@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">You are using the Fiori app 'Migrate Your Data' and the 'SAP S/4HANA Migration Object Modeler' to migrate data to SAP S/4HANA.</p>
+<p id="__html0">After an SAP S/4HANA upgrade, you choose the action 'Prepare' in the Migrate your Data app, or you generated a migration object in transaction LTMOM. <br/>However, errors similar to the following occur:</p>
+<ul>
+<li>DMC_RT_GEN 005/1LT/*</li>
+<li>DMC_RT_MSG 000The statement "PS ENDFORM" is not expected. A correct similar statement is "ENDFORM"</li>
+</ul>
+<p>The error message belongs to a created function module that contains syntax errors.<span style="text-decoration: underline;"><br/></span></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Migration Cockpit, staging table, staging approach, data migration, simulation, Migrate your Data App, LTMOM, Migration Object Modeler, Transport, DMC_RT_GEN 005,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>You are using:</p>
+<p>SAP S/4HANA<br/> • Migrate Your Data - Migration Cockpit (migration approach 'Migrate Data Using Staging Tables')<br/> • Migration Object Modeler</p>
+<p>SAP S/4HANA Migration Cockpit functionality is used on one of the following releases:</p>
+<ul>
+<li>SAP S/4HANA 2022 FPS00 - SPS07</li>
+<li>SAP S/4HANA 2023 FPS00 - SPS05</li>
+<li>SAP S/4HANA 2025 FPS00 - FPS01</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>1. Implement the attached correction using transaction SNOTE.</p>
+<p>2. Create a workbench transport request for your system landscape in the development system.</p>
+<p>3. Execute report DMC_REPAIR_CONTENT_UPDATE_DATE without simulation mode (ensure that the 'Test' checkbox is not selected) and enter the newly created transport request.</p>
+<p>4. Release the transport request and propagate it across your system landscape.</p>
+<p>5. Update the migration object where the error occurred, either in the Migrate your Data app or in transaction LTMOM.</p>
+<p>6. Repeat the relevant action for the migration object – either choose the action 'Prepare' in the Migrate your Data app, or generate the migration object in transaction LTMOM.</p></div></div></div></div>

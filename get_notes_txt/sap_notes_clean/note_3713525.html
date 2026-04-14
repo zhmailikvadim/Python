@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are logged on to the SAP System with a language different than English.</p>
+<p>In transaction /SAPAPO/PPO_DPEN, you are in edit mode and select a demand class from the dropdown menu. It is translated to the language you are logged on. When selecting one of the possible values, you're getting the error message 'DB861: your entry "*" is too long. The maximum possible entry is 20.' The reason for that is that the field is defined as 20 characters, but in the language you are logged on, the demand class name is longer than 20 characters.</p>
+<p>After confirming the message and saving, the system terminates with ABAP dump GETWA_NOT_ASSIGNED.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>/SAPAPO/PPO_DEMAND_CLASS_TEXT, /SAPAPO/PPO_S_DEMAND_PEN_ALV, /SAPAPO/CL_PPO_DEM_PEN_MNTNCE</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The field for the demand class text is not defined long enough for all languages.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached correction instructions. With this SAP Note, the field length for the demand class text is enhanced to handle the demand class texts in all languages.</p></div></div></div></div>

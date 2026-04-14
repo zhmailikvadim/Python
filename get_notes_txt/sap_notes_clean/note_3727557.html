@@ -1,28 +1,8 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3727558&amp;TargetLanguage=EN&amp;Component=BW-BEX-OT-MDX&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3727558/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3727558/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p>When you use bxml flattening, you do not want the system to display a different number of decimal places for the cell properties VALUE and FORMATTED_VALUE.</p>
-<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
-<p>BAdI RSMDX_BAPI Cell Property VALUE FORMATTED_VALUE</p>
-<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
-<p>The observed behavior is correct. When the cell property VALUE is displayed, the number of decimal places used by the OLAP processor to calculate values for the relevant BW key figure is used. This number can differ from the number of decimal places defined for the display of this BW key figure. If you do not want this behavior, you can change the behavior after you implement the correction instructions from this SAP Note or import the relevant Support Package.</p>
-<p>To do this, you must create an implementation of the BAdI RSMDX_BADI and implement the interface method IF_RSMDX_BADI~FORMATTED_DECIMALS_VALUE_BXML. The exporting parameter E_USE_FORMATTED_DECIMALS must be set to the value 'X' for all MDX cubes for which a behavior change is required. For these MDX cubes, the number of decimal places of the cell property VALUE corresponds to the number of the cell property FORMATTED_VALUE if no technical restrictions prevent this behavior.           </p>
-<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
-<ul>
-<li><strong><span style="text-decoration: underline;">SAP BW 7.50</span></strong><br/>Import Support Package 36 for SAP BW 7.50 (SAPK-75036INSAPBW) into your BW system. The support package is available once <strong>SAP Note 3725030 </strong> ("SAPBWNews NW BW 7.50 ABAP SP36"), which describes this SP in more detail, has been released for customers.</li>
-</ul>
-<ul>
-<li><span style="text-decoration: underline;"><strong>SAP BW 7.56</strong></span><br/>Import Support Package 10 for SAP BW 7.56 (SAPK-75610INSAPBW) into your BW system. The support package is available once <strong>SAP Note</strong> <strong> 3672673 </strong> (<strong></strong>"SAPBWNews NW BW 7.56 ABAP SP10"), which describes this SP in more detail, has been released for customers.</li>
-</ul>
-<ul>
-<li><strong><span style="text-decoration: underline;">SAP BW 7.57</span><br/></strong>Import Support Package 08 for SAP BW 7.57 (SAPK-75708INSAPBW) into your BW system or AS ABAP system. The support package is available once <strong>SAP Note <strong>3672675</strong> </strong> ("SAPBWNews NW BW 7.57 ABAP SP08"), which describes this SP in more detail, has been released for customers.<br/><br/></li>
-<li><strong><span style="text-decoration: underline;">SAP BW 7.58</span><br/></strong>Import Support Package 06 for SAP BW 7.58 (SAPK-75806INSAPBW) into your BW system or AS ABAP system. The support package is available once <strong>SAP Note 3538326 </strong> ("SAPBWNews NW BW 7.58 ABAP SP06"), which describes this SP in more detail, has been released for customers.</li>
-</ul>
-<ul>
-<li><strong><span style="text-decoration: underline;">SAP BW 8.16</span><br/></strong>Import Support Package 02 for SAP BW 8.16 (SAPK-81602INSAPBW) into your BW system or AS ABAP system. The support package is available once <strong>SAP Note 3692519 </strong> ("SAPBWNews NW BW 8.16 ABAP SP02"), which describes this SP in more detail, has been released for customers.</li>
-</ul>
-<ul>
-<li><span style="text-decoration: underline;"><strong>SAP BW/4HANA 2021</strong></span><br/>Import Support Package 14 for SAP BW/4HANA 2021 (SAPK-30014INDW4CORE) into your BW system. The support package is available once <strong>SAP Note 3625395 </strong> ("SAPBWNews SAP BW/4HANA 2021 SP14"), which describes this SP in more detail, has been released for customers.<br/><br/></li>
-<li><span style="text-decoration: underline;"><strong>SAP BW/4HANA 2023</strong></span><br/>Import Support Package 09 for SAP BW/4HANA 2023 (SAPK-40009INDW4CORE) into your BW system. The support package is available once <strong>SAP Note 3678578 </strong> ("SAPBWNews SAP BW/4HANA 2023 SP09"), which describes this SP in more detail, has been released for customers.</li>
-</ul>
-<p>In urgent cases, you can use the correction instructions as an advance correction.</p>
-<p><strong>Before you do this, you must refer to SAP Notes 1668882 and 2248091 for information about transaction SNOTE.</strong></p>
-<p>To provide information in advance, the specified SAP Notes may already be available before the Support Package is released. In this case, however, the short text still contains the word "preliminary version".</p></div></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Migration of Project Activities Application for Business Application Studio (BAS) compatibility.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>BAS migration, Project Activities, Commercial Project, Business Application Studio.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Upgrade application for BAS compatibility.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the SAP Note.</p></div></div></div></div>

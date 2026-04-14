@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the RFUI Receiving HU logical transaction, the system displays the generic error message "E: Error locking Delivery (/SCWM/RF_EN337)" in situations where a more informative message is technically available.</p>
+<p>In the scenarios described below, the inbound delivery is already locked (for example, because it is being processed in another session). Instead of displaying the more informative error message "E: Document … is already locked by user … (/SCDL/DL_DBAL_DB002)", RFUI displays the generic message /SCWM/RF_EN337.</p>
+<p>This behavior can occur in the following situations:</p>
+<p>Issue #1: Packing has already been completed for the delivery. In RFUI, after entering the delivery number, the user presses the F4 PostG button to post the Goods Receipt. If the inbound delivery is locked at that moment, the system displays the generic error message /SCWM/RF_EN337.</p>
+<p>Issue #2: Packing has already been completed for the delivery. In RFUI, after entering the delivery number, the user enters the HU. On the next screen, when pressing the F2 PGr button, the system displays the generic error message /SCWM/RF_EN337 if the inbound delivery is already locked.</p>
+<p>Issue #3: The user performs Goods Receipt posting for multiple HUs. After entering the delivery number, the user initiates the creation of new mass HUs using the F3 NMHU button. After entering the required data (Product, Act.Qty, NewPack.Mat. No. of HUs), the user executes the process by pressing the F1 Pack button and then the F1 Next button. At this stage, the delivery is not locked and the HUs are created successfully.</p>
+<p>The system then navigates to the next screen, where the user presses the F2 PGrAl button to post the Goods Receipt for all HUs. If the delivery becomes locked in the meantime, the system displays the generic error message /SCWM/RF_EN337.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">/SCWM/RF_EN 337, /SCDL/DL_DBAL_DB 002</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">It is possible to use a more informative error message.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the attached code changes or import the corresponding support package.</p></div></div></div></div>

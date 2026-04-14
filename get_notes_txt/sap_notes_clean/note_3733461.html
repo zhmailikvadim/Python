@@ -1,0 +1,31 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>
+<p>Invoice status updates from SAP S/4HANA Cloud are not flowing to SAP Business Network (Ariba) via Cloud Integration Gateway (CIG).</p>
+</li><li>
+<p>When an invoice is rejected via workflow in S/4HANA Cloud, the "Rejected" status is not transmitted back to Ariba.</p>
+</li><li>
+<p>Actions performed on a parked invoice do not trigger any status updates to Ariba.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>Scenario 1: Workflow rejection status is missing in Ariba (Standard Behavior)</p>
+<ol><li>
+<p>Submit an invoice in SAP S/4HANA Cloud that triggers a standard approval workflow.</p>
+</li><li>
+<p>Log in as the designated approver and reject the invoice via the My Inbox app.</p>
+</li><li>
+<p>Verify that the invoice status in S/4HANA Cloud updates to Rejected.</p>
+</li><li>
+<p>Check the corresponding invoice in SAP Business Network (Ariba) and observe that the status does not reflect the workflow rejection.</p>
+</li></ol>
+<p>Scenario 2: Parked invoice status is missing in Ariba (Standard Behavior)</p>
+<ol><li>
+<p>Create a supplier invoice in SAP S/4HANA Cloud and select the Park action.</p>
+</li><li>
+<p>Check the corresponding invoice in SAP Business Network (Ariba).</p>
+</li><li>
+<p>Observe that no status update message has been transmitted for the parked invoice.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Standard System Behavior (Workflow/Parked invoice statuses not flowing): As per the standard business flow defined in Scope Item 42K (Automation of Source-to-Pay with Ariba Network), workflow statuses do not get updated to Ariba. Furthermore, any actions performed on a parked invoice will not trigger a status update to Ariba.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Understanding Standard Behavior for Scope Item 42K If general status updates are working, but workflow rejections or parked invoice statuses are missing, note that this is standard system design:</p>
+<ul><li>
+<p>Parked Invoices: Any actions performed on a parked invoice will not trigger any status update to Ariba.</p>
+</li><li>
+<p>Workflow Rejections: The invoice workflow rejection status does not flow back to Ariba.</p>
+</li><li>
+<p>Trigger Points: Status updates are only sent to Ariba when an invoice is successfully posted or when a posted invoice is reversed. When a posted invoice is reversed, the rejection/reversal status flows back correctly.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>invoice status update, ariba, s/4hana, INVOICE_STATUS_UPDATE, output parameter determination, XML channel, CIG, cancelled vs rejected, workflow rejection, parked invoice, status not flowing, /MMPUR/INVSTUPOUT/00001, scope item 42K, invoice reversal, posted invoice status</p></div></div></div></div>

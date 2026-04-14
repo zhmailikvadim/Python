@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3709330&amp;TargetLanguage=EN&amp;Component=PY-DE-BA&amp;SourceLanguage=DE&amp;Priority=02&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3709330/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3709330/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p><strong>02/16/2026</strong>: The SAP Note text under <em>"Solution</em>" has been adjusted and enhanced with an example.</p>
+<p>------------------------------------------------------------</p>
+<p>When you execute the report <em>SI: Transfer to SI Procedures </em> (RP_PAYDE_B2A_SV_UNPACK), the system issues one of the following messages:</p>
+<ul>
+<li>"<em>Quarantine due to alternative file number (<em>&lt;DTART&gt; </em> /&lt;BNRAG&gt;/&lt;BNRKK&gt;/&lt;DATNR&gt;): File number <em>&lt;DATNR&gt;</em> is not the next file number <em>&lt;DATNR&gt;</em></em>" (HRPAYDEB2A 607)</li>
+<li>"<em>File sequence number &lt;DATNR&gt; for data type &lt;DTART&gt; already processed</em>" (HRPAYDEB2A 006)</li>
+</ul>
+<p><strong>When you do this, the displayed file number differs from the file number in the user data. </strong>You can use the <em>Display User Data </em> pushbutton to display the user data in the log. The file number is in the preprocessing record of the file.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>eXTra 1.5, complete collection, RP_PAYDE_B2A_SV_UNPACK, RP_PAYDE_B2A_SV_COLLECTOR</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>The counter in the file name in the outer XML (the displayed file number) differs from the file number of the user data. With the conversion to eXTra 1.5/SOAP, the system unwittingly switched from the file number in the user data to the counter in the outer XML to update the V_T5D4U.</p>
+<ul>
+<li>For message 607, the counter in the outer XML is larger than the file number in the user data.<br/><br/></li>
+<li>For message 006, the counter in the outer XML is smaller than the file number in the user data.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p>
+<p>After you implement the corrections, the file number of the user data is now used again as the file number/file counter for V_T5D4U when you execute the report <em>SI: Get Data from SI Agencies</em> (RP_PAYDE_B2A_SV_COLLECTOR).<br/><br/>If affected data packages still have the status <em>To</em> Be <em>Processed</em>, the file counters of these data packages are corrected automatically the next time report RP_PAYDE_B2A_SV_UNPACK is run. If you are affected by the problem, the system issues the following information in the output log:</p>
+<p style="padding-left: 30px;">"<em>File number adjusted from &lt;DATEINUMMER_ALT&gt; to &lt;DATEINUMMER_NEU&gt;</em>" (HRPAYDEB2A 619)</p>
+<p>After you implement this SAP Note, if the system issues the message <em>"File sequence number &lt;DATNR&gt; for data class &lt;DTART&gt; already processed"</em> (006), proceed as follows:</p>
+<ol>
+<li>Adjust the file counter in V_T5D4U so that the data packages can be processed with the message. To do this, temporarily delete the existing entries from V_T5D4U.</li>
+<li>Execute the report RP_PAYDE_B2A_SV_UNPACK again so that the data package is processed with the message.</li>
+<li>Then enter the temporarily deleted entries with the file numbers back to the last processed file number in V_T5D4U.</li>
+</ol>
+<p style="padding-left: 30px;"><span style="text-decoration: underline;">Example</span>:</p>
+<p style="padding-left: 30px;">The data package with the message "<em>File sequence number &lt;DATNR&gt; for data class &lt;DTART&gt; already processed</em>" (006) has the file number 201. <br/>In V_T5D4U, the file counter is already set to 205.</p>
+<ol><ol>
+<li>Copy the entries with the file counters 201 to 205 from V_T5D4U and delete them temporarily.</li>
+<li>Execute RP_PAYDE_B2A_SV_UNPACK again. The data package with the file number 201 is now processed.</li>
+<li>Then enter the temporarily deleted entries with the file numbers 202 to 205 in V_T5D4U again. </li>
+</ol></ol>
+<p>After you implement this SAP Note, if you receive the message with the number 607, wait two more days to determine whether the quarantine resolves itself. Otherwise, maintain the missing file numbers in V_T5D4U.</p>
+<p>If you have not saved the output log, you can use transaction SE16 to select the affected data packages in the database table PC01B2A_SV_P_HI. To do this, maintain the value <strong>619</strong> in the <em>MSGNO </em> field.</p></div></div></div></div></div>

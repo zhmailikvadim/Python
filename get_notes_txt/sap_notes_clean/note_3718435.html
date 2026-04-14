@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You try to edit additional data for relation A040 (A025) in PP01 transaction and getting info message 00 119 "Protected tab titles are not supported (tab TABSTR_025 title TAB1)". In display mode there is no ths message.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> MP100135, MODULE INIT_PAD25, Screen 4025,  A025, A040</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Reason for the information message 00 119  is explained in the note 334400 and described in the long text for the message.</p>
+<p><strong>Prerequisites</strong>:</p>
+<p>You have changed the standard settings for the relationship in T777E to allow edit the relationship ( you removed 'X' value from the field MAINT for <span style="font-size: 16px;">Indicator: <em>Cannot be edited using standard transactions</em> </span>).</p>
+<p>In SAP standard system, 025 and 040 relationships can't be maintained directly in the basic transaction code PP01. It is defined by setting in the table view T777E.</p>
+<p>It is strongly recommended to use only LSO specific transactions for the LSO application. Any changes done in generic transactions like PP01are not supported.</p>
+<p>See SAP Note 3707299 - "PP01 is not a valid LSO transaction".</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply attached correction instruction or import corresponding support package.<br/><strong>The corection allows you to suppress the message 00 119, but does not allow you to edit additional data.</strong></p></div></div></div></div>

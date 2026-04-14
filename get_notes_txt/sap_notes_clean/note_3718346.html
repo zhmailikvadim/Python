@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Running the transaction CMM_FX_HRQ_SWAP or CMM_FX_HRE_FWD_AVG for a keydate (e.g. 31.12.yyyy) with Commodity Prices being fixated until 3 days before keydate:</p>
+<ul>
+<li>Prices Before 3 days before keydate : fixated  (price &gt; 0.00 USD)     (e.g. 29.12.yyyy)</li>
+<li>Price At next day of running date: unfixed                                       (e.g. 30.12.yyyy)</li>
+<li>Price At 2nd day after running date: unfixed                                    (e.g. 31.12.yyyy)</li>
+</ul>
+<p>The transactions CMM_FX_HRQ_SWAP and CMM_FX_HRE_FWD_AVG allow a pre-processing for up to three days. Doing so, the price-readback follows two defined rules:</p>
+<ol>
+<li>Price Determination is only performed for the last fixation-date of a commodity swap/forward, which is in this case keydate only. This results by the design of the transaction to minimize the deviation from fixated prices.</li>
+<li>The Price Determination reads-back the price from the previous fixing date - regardless of whether it was fixed or not, which is in this case at next day of runnung date (0.00 USD).</li>
+</ol>
+<p>As a consequence, both the fixation dates (e.g. 31.12.yyyy) are considered with an amount of 0.00USD.</p>
+<p>The transaction only allows running three days into the future for the use case when there is a holiday after a weekend so that you can run the report on the Friday in advance.</p>
+<p>The transactions have to read-back the price for the date before keydate, too. (e.g. 30.12.yyyy), where the prices are not fixed yet.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Commodity Risk Management</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Specification of program logic and requirements</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id=""> Implement the attached Correction Instruction or the related Support Package.</p></div></div></div></div>

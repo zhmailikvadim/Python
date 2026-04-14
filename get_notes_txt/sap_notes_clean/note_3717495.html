@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Decision Tree Diagram E_0608 (Registration of an Assignment)" (DE_B_GPKE_DSO_NIN_DTD_E0608), step 0230 overwrites any check result from the customer extension in step 0115.</p>
+<p>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">New Installation, Change of Supplier 24, DE_B_GPKE_NIN_DTD_E0608, GPKE_DSO, Customer Extension, US4G_POD_IDENT_AGAIN, US4G_POD_IDENT_FINAL, US4G_POD_NOT_IDENT_FINAL, Point of Delivery, PoD Identification, 60-Day Loop</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> The error occurred because step 0230 had incorrect preconditions, causing it to overwrite the check result from the customer extension in step 0115.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, step 0230 is only triggered if you provide a specific value in step 0115. When you use a customer extension in step 0115, you need to use one of the following three values to signal the process what action to take next:<br/>- US4G_POD_IDENT_AGAIN: Identify the point of delivery again (60-day loop)<br/>- US4G_POD_IDENT_FINAL: Point of delivery is identified (skip 60-day loop)<br/>- US4G_POD_NOT_IDENT_FINAL: Point of delivery is not identified (skip 60-day loop)</p>
+<p>You can verify the fix by checking that step 0230 is only triggered when the value US4G_POD_IDENT_AGAIN is provided from step 0115.</p></div></div></div></div>

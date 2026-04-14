@@ -1,8 +1,11 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">At integrating between SAP Analytics Cloud and SAP S/4HANA systems using S/4HANA Apps, the posted data may have inconsistences for amounts using some currencies. For example, amounts in currency JPY in S/4HANA appear 100 times higher than expected. The issue is arizing when mapping rules in configuration include amount fields linked to particular currency keys which do not have 2 digits decimals representation (the number of decimals is defined in TCURX table). The described issue is relevant for Target Types "Plan Data Line Items" (ACDOCP), "Plan Cost Rates" (ACCOSTRATE) and "Activity Type Cost Rate Component Split" (ATPCRCS).</p>
+<p id="__html0">In Business User Management we provided business partner grouping BPEE for internal number range and business partner grouping BPEX for external number range. In case this business partner groupings were not used we detected the standard business partner groupings based on the business partner customizing (Maintenance View V_TB001, Transaction S_ABA_72000040).</p>
+<p>This pre-delivered business partner groupings are not sufficient for some customers and they requested the possibility to use self-defined business partner groupings for business users.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p id="">SAC Pull, SAC_INT_PULL, Manage Financial Plan Data Jobs for SAP Analytics Cloud Integration, Schedule Financial Plan Data Jobs for SAP Analytics Cloud Integration, Plan Data Line Items, ACDOCP, Plan Cost Rates, ACCOSTRATE, Activity Type Cost Rate Component Split, ATPCRCS</p>
+<p>TB001 BUM BP Grouping FS4BPU_B_BP_GROUPING_ENH</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p id=""> Program error. Missing conversion for amounts with regard to number of decimals from TCURX table.</p>
+<p>Missing BAdI Definition for self-defined business partner groupings.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Upgrade to corresponding SPS or implement attached SAP Note.</p></div></div></div></div>
+<p>Implement the correction instructions. Alternatively import the support package.</p>
+<p>This SAP Note contains manual activities which you need to execute.</p>
+<p>Afterwards use transaction SE20 and create a BAdI implemention based on BAdI Definition FS4BPU_B_BP_GROUPING_ENH.</p></div></div></div></div>

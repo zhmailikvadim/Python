@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">TCI version of SAP note <a href="https://me.sap.com/notes/3731343" target="_blank">3731343</a></p>
+<p>While using SAP Service and Asset Manager application, user is configured with variant and the variant configuration influences some change to standard delivered mobile app parameter e.g., 'ABC' delivered with value as 'X' in standard. In variant configuration, it is overidden to 'Z'. Though the variant is active, new parameter value isn't determined using the variant configuration. Determined value is from standard configuration.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">S4MOBADDON-8404, Variant Configuration, /SYCLO/CL_CORE_MDO_TOOLS, /MFND/CL_CORE_ODATA2_PROXY_MGR, /MFND/CL_CORE_OMDO_HNDLER_BASE, /MFND/CORE_REPEATABILITY_UTIL, TCI</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Reason: If the user is assigned with variant, it should be applied in the below cases:</p>
+<ul>
+<li>Reading mobile app parameter value using utility class/method /SYCLO/CL_CORE_MDO_TOOLS~READ_MAPP_PARAM_VALUE</li>
+<li>Evaluate Repeatability is supported using utility class/method /MFND/CORE_REPEATABILITY_UTIL~EVAL_REPEATABILITY_SUPPORTED</li>
+<li>Determine the usage of HDB Hints /MFND/CL_CORE_OMDO_HNDLER_BASE~SET_DATABASE_HINTS</li>
+<li>Evaluate if tombstone should be skipped in case of shared data between multiple oMDOs /MFND/CL_CORE_OMDO_HNDLER_BASE~READ_SKIP_TOMBSTONE_PARAM</li>
+<li>Load inactive user dependency list to generate tombstone /MFND/CL_CORE_OMDO_HNDLER_BASE~LOAD_INACTIVE_DEP_KEYLIST</li>
+<li>Auto purge client state jobs /MFND/CL_CORE_ODATA2_PROXY_MGR~SCHEDULE_CLIENT_STAT_PURGE_JOB</li>
+<li>Auto purge user dependency /MFND/CL_CORE_ODATA2_PROXY_MGR~INIT_USR_DEPLIST</li>
+<li>oMDO feature check in proxy class /MFND/CL_CORE_ODATA2_PROXY_MGR~PROCESS_REQUEST</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please apply this note in SAP system only if SAP note <a href="https://me.sap.com/notes/3731343" target="_blank">3731343</a> cannot be applied due to validity restrictions.</p></div></div></div></div>

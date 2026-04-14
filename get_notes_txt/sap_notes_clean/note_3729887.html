@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>The automatic line with the <em>Tax Account</em> in the<em> Manual Journal Entry</em> is not immediately after the <em>G/L Acct/ BP Code </em>line that contains the <em>Tax Group</em> or <em>Tax Code</em></p>
+<ul></ul>
+<p></p>
+</div>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Business One</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Prerequisites:</strong></p>
+<p>Company localizations where <em>Automatic Tax</em> is available in <em>Manual Journal Entry</em></p>
+<p><strong>Scenario:</strong></p>
+<ol><li>Go to <em>Financials </em>→ <em>Journal Entry.</em></li><li>In the header of the document ensure that <em>Automatic Tax</em> is checked.</li><li>In the first line select<em> G/L Acct/ BP Code</em>, enter <em>Debit</em> or <em>Credit</em> value and select a <em>Tax Group</em> or <em>Tax Code</em> -depending on localization. Line one.</li><li>Verify that the application adds a new line with the <em>Tax Account</em> associated to the <em>Tax Group</em> or <em>Tax Code</em>, with a value in <em>Debit </em>or <em>Credit</em>, immediately after. Line two.</li><li>Add a new line with another <em>G/L Acct/ BP Code</em> and either leave the application calculate the balancing <em>Debit </em>or <em>Credit </em>value or enter any value. Line three.</li><li>Go back to the line one and change the <em>Tax Group</em> or <em>Tax Code.</em><br/><br/></li></ol>
+<p><strong>Expected behavior:</strong></p>
+<ul><li>The line that contains the changed <em>Tax Account</em> remains in the same position but with different <em>Tax Account</em> and values. In the example, Line two.</li><li>The rest of the lines remain unchanged in value and position. In the example, line three.</li></ul>
+<p><strong>Actual behavior:</strong></p>
+<ul><li>The line with the new <em>Tax Account</em> is displaced to the last line in the form. In this example line three.</li><li>The rest of the lines are moved one line upwards. In this example line three becomes line two.</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The general mechanism of insertion in the form <em>Manual Journal Entry:</em></p>
+<ul><li>Adds any new record line after the last record already present in the form.</li><li>When a line is deleted, the following lines move on position upwards</li></ul>
+<p>The automatic line or lines created by the <em>Automatic Tax</em> functionality are no exception to this rule.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>This is the correct system behavior. </p>
+<p></p>
+</div>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>manual journal entry, autovat, vat group change, tax code change, line order change, datev export, interim account, 9999 interim, code 40, germany localization, de datev, tax line, gl account, posting batch, warning</p></div></div></div></div>

@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3731547&amp;TargetLanguage=EN&amp;Component=PY-CH&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3731547/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3731547/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">You create wage notifications for employees. To do this, you execute the program <em>Data Extractor for Uniform Wage Notification Procedure (ELM)</em> (report: <strong>RPLELMC0</strong>, transaction: <strong>PC00_M02_LELM0</strong>) in <strong>version ELM 5.0</strong> (document type: 0005 - "ELM 5.0 - PIV/EIV") and have selected the <strong>domain LAW/Tax</strong> on the selection screen.</p>
+<p>You must create pension statements and have selected the value "3 - Internal XML Schema Validation" for Additional Checks on the selection screen. The system issues the following error messages:</p>
+<ul>
+<li>Error during validation of XML at position 34.780 (The element &lt;NumberOfSalaryCertificate&gt; is not provided at this point. (Message no. HRPAYCH_ELM50, 060)</li>
+<li>Error during additional check (003 "Internal XML Schema Validation")</li>
+<li>Data extractor finished with errors</li>
+</ul>
+<p>You must create wage notifications for employees and have selected the value "3 - Internal XML Schema Validation" for Additional Checks on the selection screen. The system issues the following error messages:</p>
+<ul>
+<li>Error during validation of XML at position 3.572 (the element &lt;Remark&gt; is not visible here. Expected: &lt;person&gt;) (message no. HRPAYCH_ELM50, 060)</li>
+<li>Error during additional check (003 "Internal XML Schema Validation")</li>
+<li>Data extractor finished with errors</li>
+</ul>
+<p>If you select the value "4 - Send Test Message and Status Query" for additional checks, the system issues one of the following error messages in both cases:</p>
+<ul>
+<li>The destination reported an error (soap-fault) (message no. 5C368)</li>
+<li>Error classification (faultcode): soap:Client.validation (Message no. 5C362)</li>
+<li>( A series of explanatory messages (message no. 5C363) )</li>
+<li>Error status code (code): NOT_valid (message no. 5C364)</li>
+<li>Quality Level: Validity (Message no. 5C365)</li>
+<li>Description code (DescriptionCode): 1000 (Message no. 5C366)</li>
+<li>Error during additional check (004 "Send test message and status query")</li>
+<li>Data extractor finished with errors</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>Payroll Switzerland, ELM ("Uniform Wage Notification Procedure"), ELM 5.0, class: CL_HRPAYCH_ELM_XML_0003, method: CR_DS_SD_CPY_STF_PER_TAX, class: CL_HRPAYCH_ELM50_DAQ_LAW, methods: GENERATE_REMARKS, GET_BUSINESS_KEY, IF_HRPAYCH_PNPCE~PNPCE_END_OF_SELECTION</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p id="">You require the change described here for productive use only as of Version ELM 5.0.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Import the HR Support Package relevant for your release. If you have to implement the solution in advance, use the SAP Note Assistant to implement the correction instructions relevant for your release. You can find more information about the SAP Note Assistant on SAP Support Portal at <a href="https://support.sap.com/notes" target="_blank">https://support.sap.com/notes</a>.</p>
+<p>After you implement this SAP Note, the above mentioned Symptoms corrected.</p>
+<p>Details:</p>
+<ul>
+<li>For the electronic notification for the pension statement, only the standard comment &lt;Rectificate&gt; is permitted in the schema definition.</li>
+<li>For the electronic notification for the wage statement, the standard comment &lt;StaffShareThirdCompany&gt; = (Award by Third-Party Company) is obsolete as of ELM 5.0 and may no longer be used.</li>
+</ul></div></div></div></div></div>

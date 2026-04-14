@@ -1,17 +1,12 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="">This report can delimit all roles for BPs connected to personnel numbers who are so called No-Shows.<br/>No shows are people that were hired but never showed up for work and therefore are set to “Withdrawn” (Employment Status = 0) via executing a “No-Show” action.</p>
+<p id="__html0">SAP note <a target="_blank">3701276 provides a correction so that a warning message is displayed when creating a Shop Floor Routing if this is required by the material status.</a></p>
+<p>The warning message shall also be issued in release check when changing a shop floor routing, when copying a Shop Floor Routing and when creating a new version of a shop floor routing.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>MSFR4, MSFR2, Shop Floor Routing, Routing type V, message CP 089</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p id="__html0">For this report to work you must have activated the business function /SHCM/EE_BP_1.</p>
+<p>Coding error.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>The following input parameters are available for this report:</p>
-<p>No Show Measure:<br/>This lets you customize which measure you use to designate no shows. For a measure to be considered a No-Show measure it has to have the values "1" for the field "FUNCH" (Function character for action) and "0" for the field "STAT2" (Employment Status) in table "T529A". The measure "70" (Incorrect entry) is usually used to designate No Shows.</p>
-<p>No Show Date:<br/>Only personnel numbers who were hired at or after the given date are considered for this report.</p>
-<p>Personnel Number:<br/>Here you can specify a single personnel number to check.<br/>If an input is made here only the given number will be handled by the report.<br/>If the input field is empty, all personnel numbers with a measure given by "No Show Measure" and created at or after "No Show Date" are handled by this report.</p>
-<p>Roles to Delimit:<br/>Here you can specify which roles to delimit.<br/>If an input is given only these roles will be delimited. All other roles will be ignored.<br/>If no input is given all roles for the found BPs will be delimited.<br/>If only the main personnel number in a concurrent employment legacy case is a no show the role "BUP003" cannot be delimited and will not be delimited even if it is entered here.</p>
-<p>Past Days:<br/>This field should be used if the report is planned to run in the background on a regular basis. When this report runs in the background it only looks at personnel numbers created on the current date. With this parameter you can specify a number of days to look in the past.</p>
-<p>Lock BPs:<br/>If this flag is set all the BPs connected to the No-Show personnel numbers will additionally be locked.</p>
-<p>Test Run:<br/>If this flag is set no changes will be made to the data. The report will just inform you of the changes that would be made if you run the report in a regular run.</p>
-<p>If the program detects No-Shows, the output is delivered in a table format.<br/>The column "PersNo." lists all the No-Show personnel numbers found.<br/>The column "Bus. Partner" lists all the BPs connected to these personnel numbers.<br/>The column "BP Role" lists all the roles a BP has.<br/>The column "Status" shows a message describing what was done to the role.</p>
-<p>If a user is not authorized to use the report, or the business function /SHCM/EE_BP_1 is not turned on the report will display a message when trying to start it.</p>
-<p>If no No-Shows are found the message a message will inform the user that there are no No-Shows in the given time frame or with the given measure.</p>
-<p>If the input in field "No Show Measure" is not a No-Show measure a message will inform the user about this.</p></div></div></div></div>
+<p>Implement the correction instruction.</p>
+<p>The warning will not be raised in order-specific routings.</p>
+<p>The check on the material status is only executed in Shop Floor Routings.</p>
+<p>When creating a new Shop Floor Routing, the warning will be displayed immediately. When copying a Shop Floor Routing or creating a new version of a Shop Floor routing, the warning will not be shown immediately, but only in the release check. In contrast to standard routings, shop floor routings have lifecycle management (via versions), so it is sufficient to display the warning in the release check.</p></div></div></div></div>

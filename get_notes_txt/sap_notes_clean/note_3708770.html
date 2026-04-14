@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You declare your import declaration in SAP GTS to customs system DMS.</p>
+<p>You remove your goods from customs warehousing procedure and place them into free circulation procedure. In your declaration into free circulation, you have an item reference on the customs warehousing declaration on the CWH Closing Portions tab.</p>
+<p>In the generated XML message, there is no &lt;PreviousDocument&gt; with type 1REF or NMRN. As a result, you receive error DK1287 saying, that Previous document (12 01 001 000) must be filled and Type must be NMRN or 1REF with valid reference to previous declaration.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Denmark, XML, /SAPSLL/LLEG_ECC_DATAF56, &lt;PreviousDocument&gt;, SUMA, DK1287, dk_dms_im_prev_doc_cwh_add_it, cupro, 4071</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The problem is caused by a program error.</p>
+<p>&lt;PreviousDocument&gt; with type 1REF or NMRN is used as reference to the declaration from previous procedure.</p>
+<p>For details on how to manually fill Previous document in the declaration, see Note <a href="https://me.sap.com/notes/3707799" target="_blank">3707799</a>.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the correction instructions.</p>
+<p>Update your mapping according to point 23 in Note <a href="https://me.sap.com/notes/2406946" target="_blank">2406946</a>.</p></div></div></div></div>

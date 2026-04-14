@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">During the posting of concur documents in transaction cte_post_moni (externa tax engine is called via SETI add on) the error:</p>
+<p>"Tax entered incorrect (code RS, amount), correct CAD" is being raised in the error log.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">SETI, TXINTF</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>In transaction CTE_POST_MONI, when posting documents, an external tax engine is called via SETI.</p>
+<p>In ECC, the Concur expense posting–tax calculation was performed through custom code. As a result, the tax engine was invoked exclusively within the custom object, producing the expected behavior: one seller call and one buyer call.</p>
+<p>After the upgrade to S/4, the Concur expense posting–tax calculation was also initiated by standard FI code, in addition to the existing custom code call. Technically, the first invocation still occurs within the custom object, but a second invocation now occurs within the standard function module FI_TAX_CALCULATION. This is due to additional standard code introduced in S/4, which triggers the SETI object a second time.</p>
+<p>Consequently, while ECC results in only the expected seller and buyer calls, S/4 initiates extra calls because the tax engine is invoked twice.</p>
+<p>The primary root cause is the second invocation through the standard function module FI_TAX_CALCULATION.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><br/>To avoid the external call triggered by standard function module code, a check is introduced to restrict FI hook from concur transaction (internally, cte_doc_moni_start).</p></div></div></div></div>

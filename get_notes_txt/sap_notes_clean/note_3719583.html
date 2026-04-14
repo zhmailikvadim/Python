@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3719583&amp;TargetLanguage=EN&amp;Component=BC-XI-IS-IEN&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3719583/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3719583/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>You use SAP NetWeaver Process Integration and use the report <span class="SNO_DNT" style="float: none;" translate="no">RSXMB_CANCEL_MESSAGES</span> to cancel the processing of messages with errors. You want to delete these messages without archiving them first.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p id=""><span class="SNO_DNT" style="float: none;" translate="no">RSXMB_CANCEL_MESSAGES</span>, Archive, Delete, <span class="SNO_DNT" style="float: none;" translate="no">PERSIST_ARCH_MANUAL_CHANGES</span></p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>You use SAP NetWeaver Process Integration as a central integration server or local integration engine in an application system. You use the report <span class="SNO_DNT" style="float: none;" translate="no">RSXMB_CANCEL_MESSAGES</span> to cancel the processing of messages with errors.</p>
+<p>In non-productive system clients, you can prevent the archiving of messages that were terminated with report <span class="SNO_DNT" style="float: none;" translate="no">RSXMB_CANCEL_MESSAGES</span> by assigning the value 0 to the configuration parameter <span class="SNO_DNT" style="float: none;" translate="no">ARCHIVE</span> - <span class="SNO_DNT" style="float: none;" translate="no">PERSIST_ARCH_MANUAL_CHANGES</span>. This change must be made in transaction <span class="SNO_DNT" style="float: none;" translate="no">SXMS_IECONF</span> <strong>before</strong> executing the report.</p>
+<p>There is no option to make this setting in the report <span class="SNO_DNT" style="float: none;" translate="no">RSXMB_CANCEL_MESSAGES</span>.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p id="">Implement the attached correction instructions or import the specified support package.</p>
+<p>After you implement the corrections, the selection criterion "Reorganization Action" is added to the selection screen of the report. You use this option to specify whether messages whose processing is canceled with this report are to be deleted or archived.</p>
+<p>Remarks:</p>
+<ul>
+<li>
+<p>Canceling processing is a violation of the "Exactly Once" protocol, which must be documented in productive system clients by archiving. Therefore, this option is preset to "Archive" in productive system clients and cannot be changed. A client is considered productive if it has been assigned the client role "Productive" in transaction <span class="SNO_DNT" style="float: none;" translate="no">SCC4</span>. In non-productive clients, you can select the "Delete" option. In this case, the affected messages are deleted without prior archiving.</p>
+</li>
+<li>
+<p>The correction is delivered with replacement texts in English. The creation of the text element is therefore optional.</p>
+</li>
+<li>
+<p>SAP NetWeaver 7.0 - 7.3 EHP1: For newer Support Packages, the German version of the text elements is already contained in the automatic correction instructions. If you want the output in a different language, translate the text elements in transaction <span class="SNO_DNT" style="float: none;" translate="no">SE63</span>. If there is no translation for the relevant logon language, the replacement texts are output in English.</p>
+</li>
+<li>
+<p>SAP NetWeaver 7.4 and higher: For newer support packages, the English version of the text elements is already contained in the automatic correction instructions. If you want the output in a different language, translate the text elements in transaction <span class="SNO_DNT" style="float: none;" translate="no">SE63</span>. If there is no translation for the relevant logon language, the replacement texts are output in English.</p>
+</li>
+<li>
+<p>For older Support Packages, the text elements are not contained in the automatic correction instructions. For these support packages, the replacement text is output in English. If you want the text elements to be output in a different language, create the text elements manually in the required language. The required steps are described in the manual correction instructions.</p>
+</li>
+<li>
+<p>This correction updates the documentation object of the report <span class="SNO_DNT" style="float: none;" translate="no">RSXMB_CANCEL_MESSAGES</span>.<br/>The update of the documentation object is contained in the automatic correction instructions only for higher support packages. The documentation is delivered in German using automatic correction instructions. If you want the output in a different language, translate it in transaction <span class="SNO_DNT" style="float: none;" translate="no">SE63</span>. The translation is already contained in the support packages.<br/>You can find a preview of the documentation in German and English in the attachment.</p>
+</li>
+</ul></div></div></div></div></div>

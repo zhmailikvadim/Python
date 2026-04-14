@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Even though you can create profit centers with valid from date 01.01.1900 in KE51, the interval check while using the BAPIs BAPI_PROFITCENTER_CREATE and BAPI_PROFITCENTER_CHANGE is performed against the valid from date 01.01.1950.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>LRKPMTOP, PROFITCENTER_CREATE, PROFITCENTER_CHANGE, mindatum</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The valid from date was changed from 01.01.1950 to 01.01.1900, but the corresponding BAPI variable for the interval check had not been adjusted yet.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached coding correction or the respective correction instruction.</p>
+<p>Once the note is implemented, the system will be consistent in the valid from date for master data maintenance with KE51/KE52 as well as with the BAPIs BAPI_PROFITCENTER_CREATE and BAPI_PROFITCENTER_CHANGE.</p></div></div></div></div>

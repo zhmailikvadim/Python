@@ -1,0 +1,9 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In certain scenarios, the workflow description text returned by /DSCSAG/WI_DESCRIPTION_GET may not be displayed completely.<br/>HTML‑based workflow texts containing line‑break or paragraph tags may not be split correctly into individual text fragments.<br/>As a result, parts of the workflow description may not appear in the consuming application.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> PLM-42128, ECTR, Workitem</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The function module /DSCSAG/WI_DESCRIPTION_GET processes workflow texts by detecting HTML line‑break‑related tags using a regular expression replacement. When the incoming workflow description contains the same elements in uppercase, the expression does not match.</p>
+<p>The issue may occur when HTML tags are provided in uppercase (e.g. &lt;P&gt;, &lt;BR&gt;, &lt;TR&gt;, &lt;BODY&gt;).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">The HTML tag detection logic in /DSCSAG/WI_DESCRIPTION_GET was enhanced to support both uppercase and lowercase HTML tags.</p></div></div></div></div>

@@ -1,0 +1,102 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You run the <strong>Cálculo de nómina española</strong> (RPCALCE0) program for an employee with the following conditions:</p>
+<ul>
+<li>Daily contribution group configured in the <strong>Seguridad Social (ES)</strong> (IT0061) infotype.</li>
+<li>A <strong>Vacaciones no disfrutadas</strong> (VND) situation with an amount below the minimum monthly contribution limit that is generated for all February month.</li>
+<li>The <strong>Topes AT/EP mens. para diarios</strong> (TOCPD) payroll constant set to '1' in the <strong>Constantes de nómina</strong> (V_T511K) view.</li>
+</ul>
+<p>The system incorrectly calculates the <strong>Base Cotizada VND CP</strong> (/3VD) wage type below the minimum monthly contribution limit.</p>
+<p><strong>Example:   </strong></p>
+<p style="padding-left: 30px;">Proceed with the following steps to reproduce the symptom mentioned in this SAP Note.</p>
+<p style="padding-left: 30px;"><em>Disclaimer: this test case example aims to provide a better understanding of this SAP Note purpose. Please, take into account that some additional cases might need to be tested, considered, or impacted.</em></p>
+<p style="padding-left: 30px;"><strong>Description</strong></p>
+<p style="padding-left: 30px;">Daily employee with 31 days of VND.</p>
+<p style="padding-left: 30px;"><strong>Preparation/Background</strong></p>
+<ol style="padding-left: 30px;">
+<li style="padding-left: 30px;">Hire a daily employee.</li>
+<li style="padding-left: 30px;">Set the TOCPD payroll constant to '1' in the V_T511K view.</li>
+<li style="padding-left: 30px;">Terminate the employee in January 2025.</li>
+<li style="padding-left: 30px;">Create a 40 days VND payment below the minimum limit starting on January 30, 2025.</li>
+</ol>
+<p style="padding-left: 30px;"><strong>Execution</strong></p>
+<p style="padding-left: 30px;">Run the payroll for this employee for February 2025.</p>
+<p style="padding-left: 30px;"><strong>Result</strong></p>
+<p style="padding-left: 30px;">The system generates the /3VD wage type below the minimum monthly contribution limit.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>&amp;CALC - PC00_M04_CALC</p>
+<p>For more information, see SAP Note <a href="/notes/1071282" target="_blank">1071282</a> - <em>CONSULT: List of tags for Spain notes.</em></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p>This issue is a side effect caused by the solution delivered by the SAP Note <a href="/notes/3475893" target="_blank">3475893</a> - <em>CALC: VND amount below minimum for daily employees in 31-days months</em>.</p>
+<p>The solution delivered by SAP Note <a href="/notes/3475893" target="_blank">3475893</a> does not consider the 28/29 days of February.</p>
+<p><strong>Prerequisites</strong></p>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="2" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 06</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 19</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP D0</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04 (EhP6 and EhP7) </td>
+<td>HR SP K2</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, access <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</p>
+<p><strong>Note:</strong></p>
+<p>When you implement an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context as the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them for technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>From now on, the system generates the CP VND wage types above or equal to the monthly minimum in February.</p>
+<p><strong>Example:</strong></p>
+<p style="padding-left: 30px;">Following the steps from the example of the <strong>Symptom</strong> section.</p>
+<p style="padding-left: 30px;"><strong>Result</strong></p>
+<p style="padding-left: 30px;">The system generates the wage type /3VD with the minimum monthly value.</p>
+<p><strong>Retroactivity:</strong></p>
+<p>To avoid problems with retroactivity, the changes were sheltered with the entry 'NOTE' '03721646' in the V_T5F99VD table view. <br/>For further information, see SAP Note <a href="/notes/515323" target="_blank">515323</a> - CONSULT.: Protección de correcciones.</p>
+<p><strong>Log of changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<p>March 4, 2026</p>
+</td>
+<td>
+<p>Released for Customer</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Note:</strong></p>
+<p>During the piloting phase, this SAP Note may be updated and versioned depending on the feedback from pilot customers. After this SAP Note has its status changed to <em>Released for Customer</em>, it will not be changed anymore, unless there is a specific situation that demands it. In this case, a reason for the change will be mentioned in the SAP Note.</p>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, use Note Assistant (SNOTE) to implement the correction instructions.</p>
+<p>You can find more information about the SAP Note Assistant in SAP Support Portal, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a></strong>.</p>
+<p><strong>Stay connected</strong></p>
+<ul>
+<li>To get an e-mail notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
+<li>To stay informed about legal changes, access the <a href="https://launchpad.support.sap.com/#/legalchangenotification" target="_blank">Announcement of Legal Changes</a>.</li>
+<li>For documentation about Payroll Spain, access the <a href="https://blogs.sap.com/tags/306843521589030681976078829712463/" target="_blank">Help Portal</a>.</li>
+</ul></div></div></div></div>

@@ -1,0 +1,55 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This note contains information about:</p>
+<ul>
+<li>
+<p>OMF nr. OMF nr. 2036/2025 privind principalele aspecte legate de întocmirea şi depunerea situaţiilor financiare anuale şi a raportărilor contabile anuale ale operatorilor economici la unităţile teritoriale ale Ministerului Finanţelor, precum şi pentru reglementarea unor aspecte contabile.</p>
+</li>
+<li>
+<p>The Authority Software has updated with new structure of XML files needed to be sent.</p>
+</li>
+<li>This information is based on legislation and regulations which could be subject to change at any time by the respective authorities and are therefore not binding. The note will be updated if necessary.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Romania, Financial Statement 2025, RO_FS_GAAP, RO_FS_IFRS</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<ul>
+<li>
+<p>OMF nr. 2036/2025 privind principalele aspecte legate de întocmirea şi depunerea situaţiilor financiare anuale şi a raportărilor contabile anuale ale operatorilor economici la unităţile teritoriale ale Ministerului Finanţelor, precum şi pentru reglementarea unor aspecte contabile.</p>
+</li>
+</ul>
+<p>        The applications for Annual Reporting - XML files were published on the Tax Authority site:</p>
+<p>        https://static.anaf.ro/static/10/Anaf/Declaratii_R/situatiifinanciare/2025/1002_5_2025.html  for RO GAAP</p>
+<p>        https://static.anaf.ro/static/10/Anaf/Declaratii_R/situatiifinanciare/2025/1040_1041_2025.html for RO IFRS</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This legal change affect RO GAAP Reporting and RO IFRS Reporting.</p>
+<ul>
+<li>You will update your FSV accordingly with templates above or with new rows introduced by law. </li>
+<li>To implement this legal change, implement the relevant correction instructions or apply the relevant Support Package when available.</li>
+</ul>
+<p>There are several sample Romania Financial Statment Versions available:</p>
+<ul>
+<li>2810   Annual Financial Statement for Romania - BL</li>
+<li>2811   Annual Financial Statement for Romania - BS</li>
+<li>2812   Annex 30 Romania</li>
+<li>2813   Semester reporting RO</li>
+<li>2814   Semester annex 30 Romania</li>
+<li>2815   Annual Financial Statement for Romania - IR</li>
+<li>2816   Annex 30 Romania -IR</li>
+<li>2817   Semester Financial Statetment for Romania - IT</li>
+<li>2818   Semester Annex 30 Romania - IT</li>
+</ul>
+<p>These are delivered by BC Set /CEECV/ROFI_FSV and they are based on accounts from YBRO chart of accounts.</p>
+<p>If you want to get the sample data, it's necessary to upload the BC Set:</p>
+<ul>
+<li>Download attached file CEECV_ROFI_FSV.bcs.zip and extract it locally</li>
+<li>Call transcation SCPR3 and selet from Menu: BC Set -&gt; Upload</li>
+<li>Select file CEECV_ROFI_FSV.bcs extracted in the first step</li>
+<li>Save the BC Set. Use package /CEECV/ROFI when asked for.</li>
+</ul>
+<p>Then it's necessary to activate the BC Set:</p>
+<ul>
+<li>Make sure, yu are logged in your Development/Customizing or Test system. Never perform following steps in your Productive system!</li>
+<li>Call transaction OB58 and check if any of FSVs 2810 - 2818 exists. If so, consider if you want to rewrite them. If not, skip further activation. If so, delete all 2810 - 2818 FSVs. Otherwise you youd face activation errors.</li>
+<li>Call transaction SCPR20, put /CEECV/ROFI_FSV as BC Set and activate it by pressing F7 key.</li>
+</ul>
+<p>After successful activation of the BC Set call transaction OB58 and adjust all necessary 2810 - 2818 FSVs manually.</p></div></div></div></div>

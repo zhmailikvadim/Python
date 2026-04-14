@@ -1,0 +1,70 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When using the GR/IR Reconciliation Fiori app, you expect machine learning–based Data Attribute Recommendation (DAR) functionality to provide automatic recommendations and completion of relevant GR/IR attributes. With the introduction of SAP‑RPT‑1 (Relational Prompting), DAR will continue to be supported for existing customers during a migration period; however, DAR will no longer be available for new customer activations after April 1, 2026 (https://discovery-center.cloud.sap/serviceCatalog/data-attribute-recommendation?region=all)</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>GR/IR Reconciliation, Fiori, DAR, Machine Learning, SAP‑RPT‑1, AI Core, BTP, RFC Destinations, GR/IR ML Setup, F3302</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>With recent innovations in SAP AI Core and the introduction of the SAP‑RPT‑1 scenario, the legacy DAR (Data Attribute Recommendation) service will no longer be used by the GR/IR Reconciliation app for recommendations. Therefore, the app expects the new customer to configure the SAP‑RPT‑1 model scenario on the SAP Business Technology Platform (BTP). The SAP‑RPT‑1 feature is not provisioned automatically. To make the recommendation capabilities available in the GR/IR Reconciliation app, the backend system must run on S/4HANA 2020 (or higher) and the following prerequisites must be fulfilled:</p>
+<p><span style="text-decoration: underline;">1. Access to an SAP BTP account</span></p>
+<ul>
+<li>An SAP BTP subaccount with entitlement to SAP AI Core is required.</li>
+<li>More information: https://help.sap.com/docs/btp and https://help.sap.com/docs/btp/sap-btp-cockpit/create-subaccount</li>
+</ul>
+<p><span style="text-decoration: underline;">2. Activation of SAP AI Core</span></p>
+<ul>
+<li>Enable SAP AI Core in the chosen subaccount.</li>
+<li>More information: https://help.sap.com/docs/sap-ai-core</li>
+</ul>
+<p><span style="text-decoration: underline;">3. Creation and deployment of an SAP‑RPT‑1 scenario</span></p>
+<ul>
+<li>Create a scenario in SAP AI Core, deploy SAP‑RPT‑1, and ensure the deployment is active and reachable.</li>
+<li>More information: https://help.sap.com/docs/sap-ai-core</li>
+</ul>
+<p><span style="text-decoration: underline;">4. Retrieval of credentials from the AI Core deployment</span></p>
+<p>After deploying, collect the following:</p>
+<ul>
+<li>OAuth 2.0 Client ID: clientid</li>
+<li>Client Secret: clientsecret</li>
+<li>Token Endpoint: url + /oauth/token</li>
+<li>AI Core API URL: serviceurls.AI_API_URL (host used in SM59)</li>
+<li>Deployment ID: the unique identifier of your SAP‑RPT‑1 deployment (required for Step 7 Path Suffix; case-sensitive)</li>
+<li>Resource Group: the resource group of the deployment (often default; case-sensitive)</li>
+</ul>
+<p><span style="font-size: 14px;">Save these values for later; they are required for configuration in the ABAP system. I</span><span style="font-size: 14px;">dentityzone and identityzoneid are informative and typically not needed for this setup.</span></p>
+<p><span style="text-decoration: underline;">5. Setup of OAuth 2.0 client profile</span></p>
+<ul>
+<li>Use transaction SOAUTH2_CLIENT. If unavailable, use OA2C_CONFIG.</li>
+<li>Service Provider Type: DEFAULT</li>
+<li>Profile: /IWXBE/MGW_MQTT</li>
+<li>Configuration: &lt;Profile name&gt; (used later in SM59), e.g., OAUTH-PROFILE-RPT-1</li>
+<li>OAuth 2.0 Client ID: value "clientid" from Step 4 (e.g., sb-a1692eb4-6f3c-442e-9921-d3fea4fa6840!b947642|xsuaa_std!b318061)</li>
+<li>Token Endpoint: value "url + /oauth/token" from Step 4 (e.g., test-GRIR-finance.authentication.eu12.hana.ondemand.com<strong>/oauth/token</strong>)</li>
+<li>Refresh Token Validity: 0 days (select Unlimited)</li>
+<li>Clock Skew Tolerance: 5 seconds</li>
+<li>Resource Access Authentication: Header Field</li>
+<li>Client Authentication tab: Form Fields &gt; Client Secret = value "clientsecret" from Step 4</li>
+<li>Grant Type: Client Credentials</li>
+</ul>
+<p><span style="text-decoration: underline;">6. Setup of RFC destinations in transaction SM59</span></p>
+<ul>
+<li>Create an HTTP connection to external server (Type G) to connect to SAP AI Core.</li>
+<li>Destination name: remember it for later (e.g., RFC-RPT-1).</li>
+<li>Target Host: the host from Step 4 under serviceurls -&gt; AI_API_URL (e.g., api.ai.intprod-eu12.eu-central-1.aws.ml.hana.ondemand.com). Enter it without the http/https prefix.</li>
+<li>Port: 443</li>
+<li>Path Prefix: leave empty</li>
+<li>OAuth Profile: the one created in Step 5 (e.g., OAUTH-PROFILE-RPT-1)</li>
+<li>SSL: select an appropriate SSL client PSE (e.g., SSL Client (Standard))</li>
+</ul>
+<p><span style="text-decoration: underline;">7. Execute report FIS_GRIR_ML_DESTINATIONS_SETUP</span></p>
+<p>After the RFC destination is created, run report FIS_GRIR_ML_DESTINATIONS_SETUP, so the Fiori app can detect and use it.</p>
+<p>Parameters:</p>
+<ul>
+<li>RFC Destination: the value from Step 6 (e.g., RFC-RPT-1)</li>
+<li>Path Suffix: the deployment ID from Step 4 in the format /v2/inference/deployments/&lt;deploymentId&gt; (e.g., /v2/inference/deployments/d7dfe3cf7c2f9ed3). Note: case-sensitive.</li>
+<li>Resource Group: from Step 4 (commonly default). Note: case-sensitive.</li>
+<li>Model Size: depending on the model deployed in Step 3, enter 2000 (SAP‑RPT‑1 Small) or 65000 (SAP‑RPT‑1 Large)</li>
+</ul>
+<p>Only after these configuration steps are correctly executed, the GR/IR Reconciliation app will be able to use the SAP‑RPT‑1 features.</p>
+<p>Security reminder: clientsecret is sensitive. Store it securely, avoid sharing it in channels that may be logged, and rotate it if you suspect exposure.</p>
+<p>Migration reminder: If you have successfully migrated to SAP‑RPT‑1, please unschedule any scheduled periodic runs (background jobs) for the DAR reports FIS_GRIR_ML_DAR_TRAIN, FIS_GRIR_ML_DAR_INFERE, and FINS_ML_DAR_MONI.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>With the implementation of this SAP Note 3730452, the GR/IR Reconciliation app supports the SAP‑RPT‑1 scenario, replacing the DAR service for recommendations. This setup provides additional features via SAP AI Core but requires a one‑time technical configuration by customers. Once the AI Core scenario is deployed and connected, the app can fully use SAP‑RPT‑1‑based recommendations. Customers who previously relied on DAR should migrate to the SAP‑RPT‑1 configuration to continue receiving recommendations.</p></div></div></div></div>

@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The approval process is retriggered when you add an already approved draft document.</p>
+<p><span style="color: rgb(224, 62, 45);"><em>Image/data in this SAP Note is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em> </span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Business One</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Prerequisites:</strong></p>
+<ol><li>You are working in one of the following localizations: Argentina (AR), Brazil (BR), Canada (CA), Chile (CL), Costa Rica (CR), Guatemala (GT), India (IN), Mexico (MX), United States (US).</li><li>You are using the SAP Business One 10.0 FP 2405 version or higher.</li></ol>
+<p></p>
+<p><strong>Scenario:</strong></p>
+<ol><li>In Administration → Approval Procedures → Approval Stages, create an approval stage <em>Approval</em> as below:
+<ul><li><em>Authorizer</em> = user "manager"</li><li><em>No. of Approvals Required</em> = 1</li><li><em>No. of Rejections Required</em> = 1</li></ul>
+</li><li>In Administration → Approval Procedures → Approval Templates, create an approval template <em>Sales Order </em>as below:
+<ul><li><em>Originator</em> = user "A001"</li><li><em>Documents</em> → Sales Order</li><li><em>Stages</em> → Approval</li><li><em>Terms</em> → Always</li></ul>
+</li><li>Log on with user "A001" and create a <em>Sales Order.</em></li><li>Choose <em>Tax Code</em> in the row and add the <em>Sales Order</em>.<br/>The approval procedure is triggered and a draft is added.</li></ol>
+<p><img alt="KBA51.png" class="img-responsive" src="/documents/customerkba/qG-0yQ4ObkdGbXu_sjHz6uWNmWP4ABcf0prbQMAfJow" title="KBA51.png"/></p>
+<p>       5. Log on with user "manager".</p>
+<p>       6. Go to <em>Administration → Setup → Financials → Tax → Sales Tax Codes</em> and find the <em>Tax Code</em> used in the <em>Sales Order</em> draft.</p>
+<p>       7. Change one of the Codes in the row setup to one with a different rate and update.<br/>           As a result, the overall <em>Tax Rate</em> is different from the <em>Tax Rate</em> used in the <em>Sales Order</em> draft.</p>
+<p><img alt="KBA52.png" class="img-responsive" src="/documents/customerkba/e-AelO_izy3vIGRDLlol8jNZrZzTKfXKsQtnNx_bTEw" title="KBA52.png"/></p>
+<p>       8. Approve the draft.</p>
+<p>       9. Log on with user "A001" and add the approved draft.</p>
+<p></p>
+<p><strong>Actual behavior:</strong></p>
+<p>The approval process is retriggered.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>This is due to the fact that the tax code rate in the approved draft does not match the current tax code definition. Once the second approval process with the draft with the new <em>Tax Code </em>is approved, the final document can be added successfully.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>fire, authorization</p></div></div></div></div>

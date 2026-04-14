@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0"><span style="font-size: 14px;">Underlying concepts of queries and reporting based on InfoSets do not fit to new data model in S/4 HANA. The delivered queries have limited use and usability (for example, only Entry View, no GL View, based on logical databases). SAP Financials officially ends support of these InfoSets with the support packages referenced in this note.</span></div>
+<p>This SAP Note deactivates the following InfoSets and the queries based on them:</p>
+<p>/SAPQUERY/FIBR<br/>/SAPQUERY/FIBR_AUDIT_01<br/>/SAPQUERY/FIBR_AUDIT_02<br/>/SAPQUERY/FIDD<br/>/SAPQUERY/FIDD_AUDIT_901<br/>/SAPQUERY/FIGL10<br/>/SAPQUERY/FIGL20<br/>/SAPQUERY/FIGL30<br/>/SAPQUERY/FIGL40<br/>/SAPQUERY/FIKD<br/>/SAPQUERY/FIKL_AIS_01<br/>/SAPQUERY/FIKL_AIS_02<br/>/SAPQUERY/FISD</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">SQ00, SQ01, SQ02</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The reporting solutions are outdated.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After implementing this SAP Note, when you run a query based on one of these InfoSets, the system issues the new warning message FAGL_RSC_EN050:</p>
+<p>"Functionality is not supported anymore (see SAP Note 3722523)".</p>
+<p>If you want to continue using the query exactly as it is, you can switch off the warning message via transaction OBA5. From release S4CORE 110, you will need to implement BADI FAGL_AIS method ALLOW_QUERY and set the parameter CD_ALLOW according to your requirements.</p>
+<p>Note that the changes to the InfoSets themselves are only delivered via the referenced Support Packages. The correction instructions of this note only implement some prerequisite changes.</p>
+<p>Changing the message type of SFIN_FI050 or implementing the BADI method declares that you accept the limitations and want to continue using the queries without any support or future developments by SAP.</p></div></div></div></div>

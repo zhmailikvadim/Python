@@ -1,0 +1,174 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Previously, users did not receive SAP Fiori Launchpad (FLP) notifications for workflow actions in AdjustmentHub and ApprovalHub applications. As a result, users had to manually monitor the applications to track approval, assignment, or rejection updates.</p>
+<p>FLP notifications were not enabled for workflow actions such as Submit, Approve, Reassign, Partial Approval, or Reject.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>FLP notification functionality has been enabled for AdjustmentHub and ApprovalHub applications. The system now automatically sends notifications to Adjusters and Approvers based on workflow actions and approval status changes.</p>
+<p>Notification Scenarios</p>
+<p><strong>Submit Action</strong></p>
+<p>Case 1 – Auto Approve<br/> Notification To: Adjuster<br/> Message: Item(s) created on &lt;date&gt; are auto approved.</p>
+<p>Case 2 – Pending Approver Assignment<br/> Notification To: Adjuster<br/> Message: Item(s) created on &lt;date&gt; are pending approver assignment.</p>
+<p>Case 3 – Auto Approver Assignment<br/> Notification To: Approver<br/> Message: Item(s) created on &lt;date&gt; are pending your approval.</p>
+<p><strong>Reassign</strong></p>
+<p>AdjustmentHub Reassign<br/> Case 1 – 1st Level Approver<br/> Notification To: Approver<br/> Message: Item(s) created on &lt;date&gt; are pending your approval.</p>
+<p>ApprovalHub Reassign<br/> Case 1 – Assigned Approver<br/> Notification To: Approver<br/> Message: Item(s) created on &lt;date&gt; are pending your approval.</p>
+<p><strong>Approval</strong></p>
+<p>Case 1 – Next Level Approval<br/> Notification To: Approver<br/> Message: Item(s) created on &lt;date&gt; are pending your approval.</p>
+<p>Case 2 – All Level Approved (Skip Auto Approval)<br/> Notification To: Adjuster<br/> Message: Item created on &lt;date&gt; has been approved.</p>
+<p><strong>Partial Approval</strong></p>
+<p>Case 4 – Document Level Next Level Approval<br/> Notification To: Approver<br/> Message: Item(s) created on &lt;date&gt; are pending your approval at the document level.</p>
+<p>Case 3 – Document Level All Level Approved<br/> Notification To: Adjuster<br/> Message: Item created on &lt;date&gt; has been approved at the document level.</p>
+<p><strong>Reject</strong></p>
+<p>Case 1 – Reject at Group Level<br/> Notification To: Adjuster<br/> Message: Item(s) created on &lt;date&gt; has been rejected.</p>
+<p>Case 2 – Reject at Document Level<br/> Notification To: Adjuster<br/> Message: Item(s) created on &lt;date&gt; has been rejected at the document level.<br/><br/></p>
+<p>-------------------------------------------------------------------------------------------------------------------------------------</p>
+<p><strong>BADI Details for</strong><strong> Email Trigger.</strong></p>
+<ul>
+<li>Email notification functionality is not delivered as standard and must be implemented using the provided BADI.</li>
+</ul>
+<p>To enable email notifications, implement the following BADI:</p>
+<ul>
+<li><strong>BADI Name:</strong> /FC1/BADI_EMAIL_TRIGGER</li>
+<li><strong>Method:</strong> TRIGGER_EMAIL</li>
+</ul>
+<p>This method is triggered during workflow actions and can be used to send email notifications to relevant users.</p>
+<p><strong>Method Signature</strong></p>
+<div class="table-responsive"><table border="0" cellpadding="0" class="table table-bordered table-striped col-resizeable">
+<thead>
+<tr>
+<td>
+<p><strong>Parameter</strong></p>
+</td>
+<td>
+<p><strong>Description</strong></p>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>IV_CINS_ID</p>
+</td>
+<td>
+<p>CaseIns ID of the request</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IV_GROUP_ID</p>
+</td>
+<td>
+<p>Group ID of the request</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IV_ACTION</p>
+</td>
+<td>
+<p>UI action name (e.g., 'ADJH-SUBMIT', 'ADJH-REASSIGN', 'APPH-REASSIGN', 'APPH-APPROVE', 'REJECT')</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IV_PARTIAL</p>
+</td>
+<td>
+<p>Indicator for partial approval scenario</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IT_APPR_CHECK</p>
+</td>
+<td>
+<p>Contains approver details, approval level, auto-approve flag, and item status</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IT_DATA</p>
+</td>
+<td>
+<p>Contains request item details such as Posting Date, Document ID, current approval level</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>IT_DOCID</p>
+</td>
+<td>
+<p>Document ID (used in partial approval scenarios)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CT_NOTIF_PARAMETERS</p>
+</td>
+<td>
+<p>Deep internal table containing finalized notification data</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CV_SKIP_NOTIFICATION</p>
+</td>
+<td>
+<p>Flag to skip FLP notification trigger</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Implementation Details</strong></p>
+<ul>
+<li>Implement custom logic inside method TRIGGER_EMAIL to send emails based on:</li>
+<ul>
+<li>Action (IV_ACTION)</li>
+<li>Approval level</li>
+<li>Item status</li>
+</ul>
+<li>Use available data in IT_APPR_CHECK and IT_DATA to construct email content dynamically.</li>
+<li>Handle partial approval scenarios using IV_PARTIAL and IT_DOCID.</li>
+</ul>
+<div></div>
+<p><strong>Important Note</strong></p>
+<ul>
+<li>Parameter <strong>CT_NOTIF_PARAMETERS</strong> contains all the finalized recipient and message details used for FLP notifications.</li>
+<li>It is recommended to reuse this parameter to trigger email notifications for the same set of users.</li>
+</ul>
+<div></div>
+<p><strong>Reference Implementation</strong></p>
+<p>Refer to example class:</p>
+<ul>
+<li><strong>Class:</strong> /FC1/CL_EMAIL_TRIGGER</li>
+</ul>
+<p>This class demonstrates sample email trigger logic for the <strong>Submit</strong> action.</p>
+<p>---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+<p>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+<p>. Enhancement of Notification Logic via Class <strong>/FC1/CL_AH_NOTIFICATIONS</strong></p>
+<ul>
+<li>Standard notification texts and values generated in FLP Notifications may not meet specific customer requirements (e.g., custom text, additional fields).</li>
+</ul>
+<p><strong>Solution</strong></p>
+<p>Customers can enhance the notification logic by post-Method enhancement of the following methods of class:</p>
+<p><strong>Class:</strong> /FC1/CL_AH_NOTIFICATIONS</p>
+<p><strong>Methods for Enhancement</strong></p>
+<ol start="1">
+<li><strong>/IWNGW/IF_NOTIF_PROVIDER~GET_NOTIFICATION_TYPE_TEXT</strong></li>
+<ul>
+<li>Used to determine and modify the <strong>notification text</strong> displayed in FLP.</li>
+<li>Can be enhanced to provide <strong>custom message content</strong> based on:</li>
+<ul>
+<li>Action (Submit, Approve, Reject, etc.)</li>
+</ul>
+</ul>
+<li><strong>SET_NOTIF_VALUE</strong></li>
+<ul>
+<li>Used to populate and control <strong>notification parameters/values</strong>.</li>
+<li>Can be enhanced to:</li>
+<ul>
+<li>Add additional data to notifications</li>
+<li>Modify existing values</li>
+</ul>
+</ul>
+</ol>
+<p>---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p></div></div></div></div>

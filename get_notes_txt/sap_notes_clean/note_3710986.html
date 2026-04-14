@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3710986&amp;TargetLanguage=EN&amp;Component=PY-AT&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3710986/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3710986/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p><strong>Versions:</strong></p>
+<ul>
+<li>23.2.2026: Manual correction related T5A1M and T5A1L.</li>
+</ul>
+<p id="">Symptoms:</p>
+<ol>
+<li>File structure: From the internal correct internal display, four characters instead of two characters are reserved for the record type in the file.</li>
+<li>File structure: When you fill the sequence number of a service, nine is saved from the internal display instead of the number that was actually calculated.</li>
+<li>SI number in notification: The SI number contains two blanks between the checksum part and the part resulting from the date of birth.</li>
+<li>The length of DDS and DDSOL is incorrect: the last character from field AKTZE is truncated.</li>
+<li>Payroll operation ASOP1 does not appear to exist and personnel calculation rule A011 cannot be activated. </li>
+</ol>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>SOPENS, stock notification, export</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p><span style="font-size: 14px;">Symptom 1 and 2 are corrected by the manual correction: Changes in T5A1L and </span> <span style="font-size: 14px;">in T5A1M.<br/>Symptom 3 and 4 are corrected automatically by implementing the source code corrections using transaction SNOTE.<br/>For symptom 5, you can find some notes in the manual instructions. If this does not correct the symptom, open a new message with reference to this SAP Note and symptom 5. </span></p>
+<p>Import the corresponding HR Support Package into your SAP system.</p>
+<p>For an advance correction, proceed as follows:</p>
+<ul>
+<li>First, implement the advance corrections described in the manual instructions.</li>
+<li>Then upload the attached correction instructions to your SAP system using transaction SNOTE.</li>
+</ul></div></div></div></div></div>

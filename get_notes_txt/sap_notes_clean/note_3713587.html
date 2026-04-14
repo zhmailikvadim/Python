@@ -1,11 +1,72 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<ul id="__html0">
-<li>Enable Select All to perform Edit and Delete actions.</li>
-<li>Technical Adjustments.</li>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3713587&amp;TargetLanguage=EN&amp;Component=FI-BL-PT-BA&amp;SourceLanguage=DE&amp;Priority=04&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3713587/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3713587/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>You use the manual bank statement, transaction FF67.<br/>In the overview of manual bank statements, the system displays the status "Not to Be Posted" for a line item. This status is unclear.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>FF67 SAPLKKBL SAPMF40K text L85</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Unclear text element SAPMF40K TEXT-L85: 'Not to be posted'. This text is displayed as the status if the line item has not yet been completed with the following status:</p>
+<ul>
+<li>Posting area 1 is still open (FEBKO-VB1OK initial)</li>
+<li>Posting area 2 is not to be posted (for example, because it is a one-step posting rule)</li>
 </ul>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p id=""> DC; Frontend; GENPROV_DEFS1; F5581;</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Accessibility.</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id="">Apply this SAP Note.</p></div></div></div></div>
+<p>'Not to be posted' means that the subledger is not to be posted.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the correction instructions in your system.<br/>In this case, the item whose posting area 1 is still to be posted but posting area 2 is not to be posted receives the new status "Subledger Not to Be Posted".</p>
+<p>------------------------------------------------------------------------------------------------------------------------------------------<br/>------------------------------------------------------------------------------------------------------------------------------------------</p>
+<p><strong>Translation</strong></p>
+<p>The translation is delivered with the same Support Package as the correction.</p>
+<p>You can also correct the translation manually as follows:</p>
+<p>Object type [abbreviation]: <em><strong>RPT4<br/></strong></em><br/>Object Name: <strong><em>SAPMF40K</em></strong></p>
+<p>To translate the texts, call the translation transaction SE63.</p>
+<ol>
+<li>Enter <em><strong>/oSE63</strong></em> in the <a href="http://help.sap.com/saphelp_nw04/helpdata/EN/73/69ec8d55bb11d189680000e829fbbd/frameset.htm" target="_blank">command field</a> (transaction field) and press <em><strong>Enter</strong></em>.</li>
+<li>In the command field, enter the object type ID (see above) and press <em><strong>Enter</strong></em>.</li>
+<li>In the <em><strong>Object Name</strong></em> field, enter the object name (see above).</li>
+<li>Set the source language to deDE and the target language to enUS (or the desired target language).</li>
+<li>Choose <strong>Edit</strong>.</li>
+<li>Enter the relevant translations for the following fields:<br/>For language enUS:<br/><br/>
+<div class="table-responsive"><table cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td class="valk">TEXT L85 30</td>
+<td> </td>
+</tr>
+<tr>
+<td class="key" valign="top">deDE</td>
+<td> </td>
+<td class="val">Subledger not to be posted</td>
+</tr>
+<tr>
+<td class="key" valign="top">enUS</td>
+<td> </td>
+<td class="val">Subledger not to be posted</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+<li>Choose <em><strong>Save</strong></em> to save the translations and <em><strong>Back</strong></em> (F3) to exit the translation editor.</li>
+</ol>
+<p style="display: inline !important;">Please refer to the following SAP Notes:<br/><br/><a href="/notes/585116" target="_blank">585116</a> - Translation after installation of WebAS SP25<br/><a href="/notes/110910" target="_blank">110910</a> - Deleting the language load</p>
+<p><br/><strong>Remark:</strong><br/><br/>Translations made in a customer system may be overwritten in the following cases:</p>
+<ul style="font-size: 14px;">
+<li>The object will be part of a future support package.</li>
+<li>You are upgrading to a new release.</li>
+<li>You import new language CDs from Support Releases.</li>
+</ul>
+<p><br/><strong>Transport of translations between customer systems:</strong><br/><br/>Transport the corrected translation objects to all relevant systems (transport of copies):<br/>Systems:</p>
+<div class="table-responsive"><table border="2" cellpadding="4" cellspacing="2" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>PgID</td>
+<td>Object</td>
+<td>Name</td>
+</tr>
+<tr>
+<td>LONG</td>
+<td>REPS</td>
+<td>RF150SMS</td>
+</tr>
+</tbody>
+</table></div>
+<p>Note one of the following:</p>
+<p><a href="/notes/669505" target="_blank">669505</a> (for customers on Basis 620 or 640)<br/><a href="/notes/980626" target="_blank">980626</a> (for customers on Basis 700 or higher)</p>
+<p><em><strong> </strong></em></p></div></div></div></div></div>

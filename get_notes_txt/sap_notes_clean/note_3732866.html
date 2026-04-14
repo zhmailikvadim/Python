@@ -1,0 +1,178 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">This page provides an overview of error messages and issues that may occur during on-premise installations or upgrades. For each case, you will find a description of the symptoms along with practical guidance on how to resolve them.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html0">SAP Enable Now, Manager, SAML, Kerberos</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Best practices, known issues, and how to resolve them.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p> </p>
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable">
+<thead>
+<tr><th>Error Message</th><th>Symthom</th><th><strong>Problem</strong></th><th><strong>Possible Solutions/Workarounds</strong></th></tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>502 Bad Gateway (nginx)</p>
+</td>
+<td>When trying to access a manager URL, an error page with 502 is shown.</td>
+<td>The proxy (here nginx) is misconfigured and blocks traffic to the application server.</td>
+<td>First, make sure that application server and proxy can communicate with each other (ping, telnet). Then validate correct traffic forwarding and correct <abbr>SSL</abbr> certificates used.</td>
+</tr>
+<tr>
+<td>Account not found</td>
+<td>When logging into <abbr>SSO</abbr> page, redirect shows formlogin with error Account not found.</td>
+<td>Missing attributes Firstname and Lastname in Azure Application.</td>
+<td>Add firstname and lastname to solve the issue.</td>
+</tr>
+<tr>
+<td>Catalina.out: java.lang.Exception: Socket bind failed: [730048] [Only one usage of each socket address (protocol/network address/port) is normally permitted.</td>
+<td>Error message pops up in catalina.out, no other symptoms found.</td>
+<td>No problems found, just error message.</td>
+<td>There were two <abbr>SSL</abbr> configs inside server.xml file, but tomcat can serve only one. Keep the Nio-protocol config and comment out the rest. Use new syntax.</td>
+</tr>
+<tr>
+<td>Error: Assertion is missing a subject</td>
+<td>After login to <abbr>SSO</abbr>, error page shows up printing the this error.<br/><br/></td>
+<td>Wrong configuration on ADFS in Claims Issuance Policy of the Relying Party Trust.</td>
+<td>Configure missing Claim Issuance Policy in ADFS Relying Party Trusts with correct mapping. Clear browser cache after that and try login again.</td>
+</tr>
+<tr>
+<td>Error: Assertion not found</td>
+<td>After login to <abbr>SSO</abbr>, error page shows up printing this error.</td>
+<td>User who tried to login is missing a value like name, surname or email in active directory, or the signing certificate on ADFS side does not match with the pub.key specified in config.properties.</td>
+<td>Checkout the user in Active Directory whether it holds all necessary information like name, lastname or email and then add them. Try <abbr>SSO</abbr> login again after the change, clear browser cache before doing so. Also compare public key/certificate in config.properties with signing cert on ADFS in relying party.</td>
+</tr>
+<tr>
+<td>Hmm... can't reach this page. It look like &lt;URL&gt; closed the connection. </td>
+<td>After upgrading Manager version and Tomcat Version, only the first user session gets allowed to log in. Any other login attempt on a different browser gets denied and an error page appears.</td>
+<td>During tomcat installation, not all libraries were installed.</td>
+<td>
+<p>Re-install Tomcat with FULL installation (only exclude examples) and setup proper <abbr>SSL</abbr> configuration.</p>
+<p>Then this issue should be fixed.</p>
+</td>
+</tr>
+<tr>
+<td>Invalid tiket :TlRMTVNTUAABAAAAl4II4gAAAAAAAAAAAAAAAAAAAAAKAHxPAAAADw==</td>
+<td>After uploading a keytab file for the LDAP kerberos import.</td>
+<td> </td>
+<td><ol>
+<li>ktpass /out "C:\keytab\KRB_CLIENT1.keytab" /mapuser KRB_CLIENT1@<abbr>SEN</abbr>.LOCAL /pass MyPassWord /princ <abbr>HTTP</abbr>/client1.sen.local@<abbr>SEN</abbr>.LOCAL /kvno 0 /ptype KRB5_NT_PRINCIPAL <strong>/crypto AES256-SHA1</strong></li>
+<li><strong>IMPORTANT:</strong> On the application server, the keytab file should be placed in an empty folder, e.g. <code>C:\keytab\.keytab</code>.</li>
+<li><strong>IMPORTANT:</strong> Since there is no IP address in the CN record, the client’s IP address must be added to the hosts file located at <code>C:\Windows\System32\drivers\etc\hosts</code>. Ideally, however, an A record should be created in the DNS server being used.</li>
+<li><strong>IMPORTANT:</strong> Change settings of all Domain Users to: "This account supports Kerberos <abbr>AES</abbr> 256 bit encryption" and "<abbr>AES</abbr> 128 bit encryption".</li>
+<li><strong>IMPORTANT:</strong> Change all timezones of DCs and App Servers to the same one.</li>
+<li><strong>IMPORTANT</strong>: Additional Windows settings on the server from which you want to log in:<br/>1. Open Internet Options<br/>2. Click on Security<br/>3. Click on Local Intranet<br/>4. Click on Custom Level<br/>5. Scroll down until User Authentication and activate "Automatic Logon with current user name and password"<br/>6. Click Ok<br/>4. Open Sites<br/>5. Add: your manager URL, e.g. <a class="external-link" href="https://client1.sen.local/manager-Hana-Edition-OP-10.7.13/" rel="nofollow" target="_blank" title="https://client1.sen.local/manager-hana-edition-op-10.7.13/">https://mycustom.domain/manager-Hana-Edition-OP-10.7.13/</a><br/>6. Click apply and close.</li>
+</ol></td>
+</tr>
+<tr>
+<td>java.security.KeyManagementException: problem accessing trust store</td>
+<td>After opening some content via Library button in manager, you should be able to press the Translation button. This process sends a translation request to a <abbr>SEN</abbr> cloud server, and receives the translation to display. For an onprem customer, the request resulted in 500 error, where the logs showed the message written. </td>
+<td>The customer initially installed Oracle <abbr>JDK</abbr>, whose "cacerts" file is in JKS format, and later switched to SapMachine <abbr>JDK</abbr> 17. When using the old Oracle "cacerts" or a custom JKS truststore, SapMachine 17’s default PKCS12 assumption caused it to fail parsing the file, resulting in the <abbr>ASN.1</abbr> PKCSParsingException. When installing SapMachine <abbr>JDK</abbr> initially, it also comes with a cacerts in JKS format, even tho the JDK17 uses PKCS12 as default. But because its in java home default path ($JAVA_HOME/lib/security/cacerts) it uses a fallback procedure to check the trustStoreType and is then able to read JKS.</td>
+<td>
+<p>Specifying <strong>-Djavax.net.ssl.trustStoreType=JKS </strong>forced the correct format, resolving the truststore loading error. Else its recommended to use a new <abbr>VM</abbr> and only install SapMachine17 <abbr>JDK</abbr> using default settings.</p>
+<p><a class="external-link" href="https://i7p.wdf.sap.corp/sap(bD1lbiZjPTAwMQ==)/bc/bsp/sno/ui_entry/entry.htm?param=69765F6D6F64653D3030312669765F7361706E6F7465735F6E756D6265723D3336383033303326" rel="nofollow" target="_blank"> </a></p>
+</td>
+</tr>
+<tr>
+<td>javax.security.auth.login.LoginException: No CallbackHandler available to garner authentication information from the user</td>
+<td>When trying to save a config on the LDAP Import page, an error popup is shown together with this log message.</td>
+<td>
+<p>Inside the manager settings, the keytab directory C:\keytab\ and login domain "sen" was configured, but during the LDAP import keytab upload, a wrong keytab file was selected.</p>
+<p><strong>The upload and saving the config works fine when selecting the correct keytab file that corresponds to the defined service principal, having the keytab file in an empty folder. The folder must NOT be the one registered in manager settings (C:\keytab\), BUT the exact <abbr>SAME</abbr> keytab file that was uploaded must be inside this folder as well!! Else the upload fails with the mentioned logs!</strong></p>
+</td>
+<td>
+<p>First, open Administration → Server Settings → Security and Password → <abbr>SSO</abbr> → and then specify the folder of the keytab directory (e.g. C:\keytab\). Then restart the tomcat.</p>
+<p>Then go to Administration → User Import → LDAP → Add New or edit existing, upload keytab file and click save. Should work if keytab file and principle match!</p>
+</td>
+</tr>
+<tr>
+<td>LDAP User Import Scheduler does not work</td>
+<td>Customer reported that a manual user import works fine, but the scheduler does not work.</td>
+<td>Customer had no funtioning SMTP configuration for the manager, but its required for a scheduled LDAP import.</td>
+<td>Stop tomcat and access /webapps/&lt;deployed_folder&gt;/WEB-INF/classes/config.properties and adjust all mail. values to make SMTP work. Then LDAP scheduler should run with email notification.</td>
+</tr>
+<tr>
+<td>License: There are illegal data in the license key store.</td>
+<td>After startup of manager, the logs show this error message.</td>
+<td>After the manager was updated once, this error pops up everytime the manager gets started, confusing everyone.</td>
+<td>This error can be ignored, it does not harm anything and the app is still fully functioning.</td>
+</tr>
+<tr>
+<td>LOGIN FROM screen showing without redirect</td>
+<td><abbr>SAML</abbr> <abbr>SSO</abbr> is enabled, but when trying to access manager URL it just shows empty page with "LOGIN FROM" printed.</td>
+<td>Inside manager settings the option "Enable Multiple <abbr>IDP</abbr> Configurations" is activated, causing this screen to pop up. </td>
+<td>Deactivate the option "Enable Multiple <abbr>IDP</abbr> Configurations" inside manager settings.</td>
+</tr>
+<tr>
+<td>Manager-manager.log: javax.naming.CommunicationException: simple bind failed test.ad:636<br/>Tomcat9-stderr: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</td>
+<td>When trying to save an LDAP import parameter, an error pops up and the logs show this message. </td>
+<td>When the tomcat tries to establish a trusted connection to an active directory server, it needs to validate the certificate provided by the ad server. This only works if the tomcat explicitly trusts all root and intermediate certificates which have signed the <abbr>AD</abbr> server certificate. </td>
+<td>
+<p>To solve this issue, all root and intermediate certificates which have signed the <abbr>AD</abbr> server cert or are included in its key chain must be imported into the <abbr>JDK</abbr> trust store (C:\Program Files\SapMachine\<abbr>JDK</abbr>\17\lib\security\cacerts). The certificates can be pulled using openssl command:<br/><strong>openssl s_client -connect TEST.<abbr>AD</abbr>:636 -showcerts<br/></strong></p>
+<p><strong>BUT CAREFUL: </strong>Often the root cert is not printed, so keep in mind to also find the root <abbr>CA</abbr> cert somewhere.<strong><br/></strong><br/>For the import, use following example command:<br/><strong>keytool -importcert -trustcacerts -keystore "C:\Program Files\SapMachine\<abbr>JDK</abbr>\17\lib\security\cacerts" -storepass changeit -alias ad-root -file d:\Company_Root_CA_1.crt<br/></strong>and import all certificates one at a time!<strong><br/></strong>After tomcat restart, the issue will be resolved.</p>
+<p>To validate if the bind user is valid, try this command on a linux machine:<br/><strong>ldapwhoami -vvv -H ldaps://TEST.<abbr>AD</abbr> -D "user@test.ad" -x -W<br/><br/></strong>To add debugging level into tomcat9-sterr.log add following Java params:<br/>-Djavax.net.debug=ssl,handshake<br/>-Dcom.sun.jndi.ldap.trace.ber=true</p>
+</td>
+</tr>
+<tr>
+<td>No assertions found in response.</td>
+<td>After <abbr>SSO</abbr> login, error page shows up with:<br/>No assertions found in response. &lt;aws-sso-t4&gt;</td>
+<td>On the manager side, the setting "Create user on <abbr>SSO</abbr> login" is deactivated. Now if an existing user is having the correct user name, but is missing the email or is holding a different email than in <abbr>AD</abbr>, the <abbr>SSO</abbr> login user can not log in!</td>
+<td>
+<p>Log into the manager using admin, modify the existing user to have <strong>correct username and email</strong> attribute like in <abbr>AD</abbr>, and then login should work, assuming that <abbr>SAML</abbr> <abbr>SSO</abbr> is configured correctly!</p>
+<p>If First Name and Last Name are empty, the <abbr>SAML</abbr> user will fill it or overwrite it. <strong>But email and username must match!</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Unsupported signature algorithm (rsa_pss_rsae_sha256) used in CertificateVerify handshake message</p>
+<p>Caused by: java.security.InvalidAlgorithmParameterException: Params must be a RSAPssParameterSpec!</p>
+<p>com.sap.db.jdbc.exceptions.SQLIntegrityConstraintViolationExceptionSapDB: [301]: <strong>unique constraint violated</strong>: "SENTABLE"."UPDATEDNFORLDAPIMPORTEDIDENTITIES": line 27 col 1 (at pos 842): Table(ACTOR), Index(UNIQUE_ACTOR_DN) with error: unique constraint violation in self check for table SEN::SENTABLE:ACTORen, constraint='DN',</p>
+</td>
+<td>
+<p>A client reported a problem with LDAP import where the import did not finish successfully, and listed errors where visible in log files. The LDAP configuration was saved and selected successfully, but after 8hrs of running the import, it did not show a summary table.</p>
+<p>Another client reported only the Unsupported signature error inside the logs and wanted to get rid of it.</p>
+</td>
+<td>
+<p>The main problem found here was that the client tried to import 45k users every night on their prod system and on their dev system, and at some point the prod failed. It was found that the client had 40k inactive users which caused <strong>duplicate entries</strong> after some import, because a user was deleted in their <abbr>AD</abbr> and then recreated, but not deleted in the manager.</p>
+<p>After importing a license key the error popped up inside the logs.</p>
+</td>
+<td>
+<p>The solution was to simply do <strong>Server Housekeeping</strong> inside the manager and delete all inactive history and user data. After that, the import worked again. Additionally, its possible to search for duplicated user/roles/ous entries on <abbr>DB</abbr> level like this:</p>
+<p>select auth_user, count(auth_user) as usercount, a.ou_id, parent.name as parent_ou from actor as a inner join ws_user on ws_user_id = a.identity_id inner join actor as parent on parent.identity_id = a.ou_id group by auth_user, a.ou_id, parent.name having count(auth_user) &gt; 1</p>
+<p>and then rename the inactive user with:</p>
+<p>update ws_user set auth_user = '&lt;new_name&gt;' where ws_user_id = 28919<br/><br/>update actor set dn = 'U=&lt;new_name&gt;,OU=Name1,OU=Name2,OU=Name3,OU=Name4,OU=domain,OU=root' where identity_id = 28919</p>
+<p>Remove the license key from database with: “delete from LICENSE;"</p>
+<p>The manager will still have full functionalities without license, but error disappeared.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Server certificate<br/> subject=C=DE, ST=Baden-Württemberg, L=Walldorf, O=SAP SE, CN=*.enable-now.cloud.sap<br/> issuer=C=US, O=DigiCert Inc, CN=DigiCert Global G2 TLS RSA SHA256 2020 CA1<br/> ---<br/> No client certificate CA names sent<br/> Peer signing digest: SHA256<br/> Peer signature type: rsa_pss_rsae_sha256<br/> Peer Temp Key: X25519, 253 bits<br/> ---<br/> SSL handshake has read 3996 bytes and written 1641 bytes<br/> Verification error: unable to get local issuer certificate<br/> ---<br/> New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384<br/> Protocol: TLSv1.3<br/> Server public key is 4096 bit<br/> This TLS version forbids renegotiation.<br/> Compression: NONE<br/> Expansion: NONE<br/> No ALPN negotiated<br/> Early data was not sent<br/> Verify return code: 20 (unable to get local issuer certificate)</p>
+<p> </p>
+<p>When trying to connect to remote workarea of education</p>
+<p>Received fatal alert: handshake_failure</p>
+</td>
+<td>creation of the connected workarea is failing.</td>
+<td>Customer copied old deployed folder into webapps and thats why old security provider version of  IAIK JCE was used and denied from education server.</td>
+<td>Remove deployed folder, copy new war file, start tomcat, create new schema, done.</td>
+</tr>
+<tr>
+<td>
+<p>com.sap.db.jdbc.exceptions.JDBCDriverException: SAP DBTech JDBC: [257]: sql syntax error: incorrect syntax near "-": line 1 col 20 (at pos 20)</p>
+</td>
+<td> </td>
+<td> </td>
+<td>The schema name contains a hyphen (“-”). Please create a new schema without a hyphen in the name.”</td>
+</tr>
+</tbody>
+</table></div>
+<ul></ul>
+<div class="tablefilter-outer-wrapper" id="table-filter-1774519815345">
+<div class="aui-inline-dialog-contents">
+<div class="tableFilterCbStyle"><form class="aui tf-form aui-legacy-forms prevent-default-form" name="inlinecommentform">
+<div class="sortable-container"><br/><br/></div>
+</form></div>
+</div>
+<div class="tablefilter-table-wrapper tf-source table-header-filter" id="tf-table-1774519815345-1"></div>
+</div></div></div></div></div>

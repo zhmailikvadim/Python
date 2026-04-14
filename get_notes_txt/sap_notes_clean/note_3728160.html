@@ -1,10 +1,9 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">In the process "Setup/Replacement of Devices (MOS View)" (DE_B_IM_DEV_CHANGE), step 0390 stops and throws an exception due to incorrect data update.<br/>This issue is relevant for the market roles SUP, DSO, MOS, and PRS.</p>
+<p id="__html0">User opens an object say "Specification" from PLM Web user interface (PLMWUI) and navigates to "Documents" section. If there are more than one document selected and "Add attachment" is used, then both the Document info Records (DIR) get the same file with same IDs. This causes an issue when user wants to delete the file from one of the document and throws an error "Deletion not possible, original is being used in other documents".</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>PoD ID, MaLo, MEMA Relation, PoD relation, Device Installation, MCM_DE, DE_B_IM_DEV_CHANGE</p>
+<p id=""> DIR_DO_LINK, add attachment, LOIO, used in other documents, 26 293.</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>The error occurred because MaLos that were marked for deletion were not excluded from billing-related installation.</p>
+<p id=""> Program error.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<div>
-<p>Implement the corrections of this SAP Note or import the relevant support package.<br/>After implementing this SAP Note, the system excludes MaLos marked for deletion from billing-related installation.<br/>You need to retrigger the process from the cloud again. You can verify the fix by checking that device installation and PoD relations are established correctly.</p>
-</div></div></div></div></div>
+<p>Implement the instructions attached.</p>
+<p><em>Note: Since the underlying framework (attachment service) integrated with PLMWUI can handle only one upload at a time, the "Add Attachment" click will indicate this when multiple documents are selected.</em></p></div></div></div></div>

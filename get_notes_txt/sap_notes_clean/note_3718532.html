@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When you use the <strong>Manage Basic Compliance Data - Unpackaged Products</strong> app or the Migration Cockpit, you can assign packaged products to an unpackaged product. The system then uses <strong>Product Compliance Event Processing</strong> (PCEP) to generate a compliance assessment for each packaged product.</p>
+<p>If you have assigned a large number of products to an unpackaged product, the system started to create a huge amount of Event - Task - Linkages which could result into an out-of-memory runtime error, and stops processing. Events are set to status failed.</p>
+<p>When failed Product Compliance Events are reprocessed again, the system might dump with an our of memory error.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">PCEP, Migration Cockpit, Creation of Compliance Assessments</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Reason: The <strong>Product Compliance Event Processing</strong> (PCEP) has memory issues when reprocessing failed events.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>You have implemented the latest version of note 3714804.</p>
+<p>After implementing this SAP Note, the system optimizes the reprocessing of compliance assignments between PECP events and tasks. This optimization prevents the out-of-memory error.</p></div></div></div></div>

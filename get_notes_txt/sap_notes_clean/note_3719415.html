@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When maintaining a Duration/Offset Values in an input field, the system may terminate with a runtime error. The dump occurs after saving and entering invalid characters (for example “//”) into Additional Duration or Additional Offset fields.</p>
+<p>Instead of prompting for a valid value, the application terminates unexpectedly.</p>
+<p>The issue is reproducible when the invalid entry is processed by the duration/offset conversion routine.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CONVERSION_EXIT_TSTRN_INPUT<br/>CONVERSION_EXIT_TSTRN_OUTPUT<br/>TSTRDURAN<br/>Duration conversion routine</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The reason is a program error.</p>
+<p>Invalid input values are not correctly handled within the underlying conversion routine, causing an exception during type conversion.</p>
+<p>This leads to a runtime dump instead of returning an initial value.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the attached Correction Instruction.</p>
+<p>The correction enhances error handling in the conversion routine so that invalid duration/offset entries no longer trigger a dump but return a safe, initial output value.</p></div></div></div></div>

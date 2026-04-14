@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3727252&amp;TargetLanguage=EN&amp;Component=BC-SEC-USR-ADM&amp;SourceLanguage=DE&amp;Priority=04&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3727252/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3727252/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>You use transaction SU53 to analyze failed authorization checks of a user.<br/>Even though you are sure that there must have been failed authorization checks, transaction SU53 does not display anything.</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>The failed authorization checks of all users and all clients of a system are stored in the same ring buffer per server instance. <br/>If the maximum size of the ring buffer is reached, old failed authorization checks are overwritten.<br/>Since the same ring buffer is used for all clients, a large number of failed authorization checks in other clients of the same server instance may have overwritten failed authorization checks of their own client.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p>
+<p><span style="text-decoration: underline;"><strong>Remark about the solution:</strong></span></p>
+<p>This correction provides a new report, RSUSR_SU53_STATISTICS. In the releases in which transaction SEC_SUPPORT exists, it is integrated into the subfolder 'Authorization Management'.</p>
+<p>You can use the report to determine the buffer statistics of the SU53 buffer on the current server instance. The ring buffer is instance-specific, which is why the statistics are relevant only for the instance on which SU53 was also analyzed.<br/>These are:</p>
+<ul>
+<li>
+<p>Instance Name</p>
+</li>
+<li>
+<p>Maximum Number of Entries</p>
+</li>
+<li>
+<p>Number of Entries Currently Used</p>
+</li>
+<li>
+<p>First entry (according to time zone: UTC)</p>
+</li>
+<li>
+<p>First entry (according to user's time zone)</p>
+</li>
+<li>
+<p>Time of the analysis of the buffer (according to the time zone of the user)</p>
+</li>
+<li>The following values are output for each client:</li>
+<ul>
+<li>Client</li>
+<li>Number of entries in this client</li>
+<li>Time stamp of the first entry in this client</li>
+<li>Time stamp of the last entry in this client</li>
+</ul>
+</ul></div></div></div></div></div>

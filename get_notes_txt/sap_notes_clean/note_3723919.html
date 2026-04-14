@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are running Interaction Center functionality in S/4 with email integration via ERMS and SAP Connect. While opening certain emails from the Inbox list the inline images are not getting displayed correctly. Only placeholders are visible. This happens most likely when emails have been sent by Apples Mail program and server.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>inline images, Apple Mail program</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>When you inspect the MIME contents of those emails, there are references to embedded images similar to this one:</p>
+<p>cid=&lt;mf_177A18F2-2AB5-462E-9D1B-4F05A0ABC28F/L0/001&gt;</p>
+<p>This format interferes with our own KPRO format which also contains 2 slashes ("/"). Therefore KPRO logic gets applied instead of reading the data correctly from MIME repository.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the attached correction instruction according your S4CRM or S4CEXT release or upgrade to the corresponding support package version mentioned in the correction instructions.</p></div></div></div></div>

@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Trigger of Master Data Changes" (DE_B_GPKE_TRIG_MDC_ASSGN_DSO), step 0610 (Determine Technical Resource Change Data) did not run despite step 0600 having the check result MDC_TECH_RSRC_TRIG_REO. Step 8999 completed even though step 0605 (Deadline step) was still in Deadline Active status.</p>
+<p>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>MDC, DE_B_GPKE_TRIG_MDC_ASSGN_DSO, Technical Resource Change Data, step 0610, step 0600, step 0605, step 8999, MDC_TECH_RSRC_TRIG_REO, Deadline Active</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because step 8999 completed even though step 0605 (Deadline step) was still in Deadline Active status.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, step 8999 runs only when step 0605 status is set to completed along with other preconditions. The BC sets are /US4G/3_0_SUP_SP00_NOTE_3732328, /US4G/3_0_SUP_SP07_NOTE_3732328, and /US4G/3_0_SUP_SP08_NOTE_3732328. You can verify the fix by rerunning the scenario and checking that step 0610 runs correctly when step 0600 has the check result MDC_TECH_RSRC_TRIG_REO and step 0605 is completed.</p></div></div></div></div>

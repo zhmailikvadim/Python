@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Issue 1: Transaction-Based Creation (FPP1). When creating a business partner via transaction FPP1 or BP in SAP S/4HANA (Utilities scenario), the GP role CRM000 is not automatically assigned to the newly created business partner.</p>
+<p>Issue 2: API/Master Data Generator-Based Creation (BAPI_ISUPARTNER_CREATEFROMDATA) When creating a business partner using the BAPI_ISUPARTNER_CREATEFROMDATA function or the master data generator, the business partner role CRM000 is automatically created and assigned, even when this behavior is not desired or required.</p>
+<p>The behavior is not aligned. If CE (Customer Engagement) is used or shall be used - the BP role CRM000 is needed for every affected/used contract partner.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>FPP1 MKK BAPI_ISUPARTNER_CREATEFROMDATA FKK_FEATURE_ADMIN Master Data Generator MDT</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The inconsistent behavior of CRM000 role assignment across different business partner creation methods is caused by:</p>
+<ul>
+<li>Hard-Coded Logic in BAPI - The static method is_crm_erp_coclient in BAPI_ISUPARTNER_CREATEFROMDATA is hard-coded to always return true, forcing automatic assignment of the CRM000 role regardless of the user's intent.</li>
+<li>Master Data Generator Behavior - The master data generator in S/4HANA enforce the assignment of the role "CRM000" during GP creation, which operates differently from transaction-based creation methods</li>
+<li>CE (Customer Engagement) Default Activation - Customer Engagement (CE) is automatically active in S/4HANA systems, causing different role assignment behavior between API-based and dialog-based creation methods</li>
+<li>Inconsistent Configuration Across Channels - There is no unified, configurable approach to handle CRM000 role assignment across different creation channels (Transaction BP/FPP1, Master Data Generator, C4C, WebUI, APIs)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached Correction Instruction or the mentioned Support Package.</p>
+<p>This SAP Note provides a unified configuration option to control the automatic creation of the GP role CRM000 when business partners are created via any channel (Transaction FPP1/BP, Master Data Generator, BAPI_ISUPARTNER_CREATEFROMDATA, C4C, WebUI, or other APIs).</p>
+<p><strong>Option A: Enable Automatic CRM000 Role Creation (Default Behavior - recommended)</strong><br/>To ensure the CRM000 role is automatically created and assigned to all new business partners across all creation channels:</p>
+<p>Navigate to transaction: FKK_FEATURE_ADMIN<br/>Locate the feature ISU_BP_SUPPRESS_CRM000<br/>Ensure the feature is deactivated/unchecked (default state)</p>
+<p><strong>Option B: Completely Suppress Automatic CRM000 Role Creation</strong><br/>To suppress automatic creation across all channels and manage CRM000 role assignment manually:</p>
+<p>Navigate to transaction: FKK_FEATURE_ADMIN<br/>Locate the feature ISU_BP_SUPPRESS_CRM000<br/>Activate/check the feature to suppress CRM000 automatic creation<br/>Save the settings<br/>Business partners created via any channel (FPP1, BP, BAPI_ISUPARTNER_CREATEFROMDATA, Master Data Generator, etc.) will not have the CRM000 role automatically assigned<br/>Manual role assignment can be performed using transaction BP or the BP Master Data UI if needed</p></div></div></div></div>

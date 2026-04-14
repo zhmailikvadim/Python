@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Your usual ABAP transports regularly execute the steps 'Versioning' and 'Generation'.</p>
+<p>Your ABAP server has a lot of batch processes available and you are looking for a way to reduce import times.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Usually all import steps of a transport request are executed in sequential order.</p>
+<p>But this is not needed for the steps 'Generation' and 'Versioning'. Once the 'Main Import' step has been executed, they can be processed independently of the other steps.</p>
+<p>Remark:</p>
+<p>This is true up to kernel release 9.18. Starting from that release, 'Versioning' can no longer be executed independently of other steps. It can have a dependency on the transport step 'After-Import-Method'. So from 9.18, only the step 'Generation' can be executed independently.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The import behavior described above can be used when you have installed at least one of these tp versions or higher:</p>
+<p>9.16: 381.699.95</p>
+<p>7.93: 381.587.93</p>
+<p>7.89: 381.576.93</p>
+<p>See note 19466 on how to download and install a new tp version.</p>
+<p>Additionally, you need to configure the tp transport profile parameter ASYNCHRONOUS_STEPS with the step letter which should be executed asynchronously.</p>
+<p>E.g., configure</p>
+<p>ASYNCHRONOUS_STEPS = 'VvG'</p>
+<p>in kernel release 7.93 for the asynchronous execution of 'Versioning', 'Versioning after Import', and 'Generation'</p>
+<p>Or configure</p>
+<p>ASYNCHRONOUS_STEPS = 'G'</p>
+<p>in kernel release 9.16 or higher for the asynchronous execution of 'Generation'</p></div></div></div></div>

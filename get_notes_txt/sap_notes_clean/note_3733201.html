@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">In the process "Device Takeover (Old MOS View)" (DE_B_WIM_DEV_TKO_MOSO), the device takeover item list is not filled in step 0300 when you use the transactions "Decide on Quotation Automatically" (/US4G/DTKO_SQ_DC) and "Determine Price Automatically" (/US4G/DTKO_SQ_PR) to automatically determine whether to rent or sell the technical equipment.</p>
+<p id="__html0">This issue is relevant for the market role: MOS.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Device Takeover, /US4G/DTKO_SQ_DC, /US4G/DTKO_SQ_PR, DCL list, external device number, internal device number, /US4G/IF_BADI_WIM_PROCESS, /US4G/CL_DEF_BADI_WIM_PROCESS, /US4G/V_DTKOSQDC, /US4G/V_DTKOSQPR</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> The error occurred because the system did not delete the leading zero when mapping between the external device number and the internal device number.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system fills the price for the item list, and the BPEM case in step 0300 displays the maintained price from transaction /US4G/DTKO_SQ_PR. You can verify the fix by checking that the price is filled when you use the automatic determination for rent or sale of the device.</p></div></div></div></div>

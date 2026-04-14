@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">SAP has released Note 3573619 to provide the solution for IR8A file submission for YOA2026. The LC Note delivers the new feature 25BKC in the current Change Request (CR), which maps the Bank Key (from Infotype 0009) to the officially published Bank Code.</p>
+<p>However, for special scenarios such as PayNow, maintaining a Bank Code may not be required. Therefore, this SAP Note has adjusted the relevant logic in Singapore Income Tax IR8A (New Report). If the customer requires the Bank Code field to be blank in the file, it can be achieved via the following two solutions:</p>
+<ol>
+<li>Non-numeric Bank Key: If the Bank Key maintained in IT0009 is non-numeric (e.g., "PAYNOW"), the system will automatically generate a blank Bank Code in the IR8A file.</li>
+</ol><ol start="2">
+<li>Numeric Bank Key: If the Bank Key in IT0009 is numeric but you need the Bank Code to appear as a blank value in the file, please configure the return value as "BLANK" for this Bank Key in Feature 25BKC. The system will then generate a blank Bank Code in the file accordingly.</li>
+</ol>
+<p>This change covers both the PATLine file and the API file.</p>
+<p>In addition, this SAP Note extends the length of the field Max Employee Records Per File on the IR8A report selection screen to 6 digits.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>RPCT8AR0_01</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is an enhancement for legal of correction.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the HR Support Package to get this solution.</p>
+<p>Alternatively, you may apply the correction instruction with this SAP Note if the changes are required immediately.</p></div></div></div></div>

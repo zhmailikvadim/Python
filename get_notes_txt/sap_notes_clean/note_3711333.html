@@ -1,12 +1,18 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">When using "Search Contract by Cointainer" within the business role /WATP/EWA_IC (Waste &amp; Recycling) in interaction center, you can confirm the found search result.</p>
-<p>If the selected business partner differs from the previously confirmed one, the current business partner is unconfirmed and the chosen one is confirmed.</p>
-<p>This switch does not necessarily end a running interaction. Upcoming messages – like “The interaction record is not reverted to reset Business Partners” - reflect this behavior.</p>
-<p>Especially, if an interaction record was explicitely saved before, this record is kept for further confirmed business partners when switched by using methods CL_CRM_EEWA_IC_CONTEXTHELPER=&gt;CL_UNCONFIRM_BP.</p>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>/WATP/CL_CWC_QUERY_SRC_RE_IMPL, /WATP/CM_NOTE_3711334_SWITCH_BP, /WATP/CL_CRM_IC_CONTEXTHELPER</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement the correction instructions. Please consider the manual tasks you will be reminded during implemention.</p>
-<p>The note introduces a new method /WATP/CL_CRM_IC_CONTEXTHELPER=&gt;END_INTERACTION that is now called before switching to a new business partner. So a new interaction (record) is opened for further processes.</p>
-<p>As ending an interaction is a heavier intervention than only un/confirming business partners, you might notice, that - as an example - the page history is reset after starting a new interaction. It is the same behavior as if you explicitely press the "End"-button in the ic-toolbar to end a session.</p>
-<p>The implementation uses parameter IC_MS_1TAB_LOG_LINK (SAP Customizing Implementation Guide -&gt; Service -&gt; UI Framework -&gt; Technical Role Definition -&gt; Define Parameters) to ensure navigation to the overview page, when a new business partner is confirmed. Its value is set to the logical link of the used overview page (here: /WATP/OVBP). Please consider that fact, when using your own Profile definition in your business role (Function Profile ID : PARAMETERS).</p></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3711333&amp;TargetLanguage=EN&amp;Component=PY-DE-FP-PJ&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3711333/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3711333/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p><strong>3/16/2026:</strong> The manual correction instructions for the HR Forms remuneration statement have been enhanced so that a '-' must be specified as the arithmetic operator for the assignment of wage types to cumulation wage types (point 1. b).</p>
+<p><strong>3/6/2026:</strong> The manual correction instructions for uploading PE51 forms have been enhanced so that certain displayed error messages can be ignored.</p>
+<p>This SAP Note provides the display of the active pension on the remuneration statement.</p>
+<p>The function for settling the capitalized annuity was provided with SAP Note <a href="/notes/3669507" target="_blank">3669507</a> - <em>Asset-side annuity: Delivery of the function</em>.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>SAP_PAYSLIP_DE_O, DF01, DFB1, DFKA</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Law for the Tax Promotion of Employees at Pension Age (Active Pension Act)</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p>
+<ul>
+<li>In the remuneration statement, in the section "Remuneration Elements" or 'Basic Pay', specify the amount of the tax-exempt active pension for non-recurring payments and regular payments.</li>
+</ul>
+<p>After you import the HR Support Package or implement the correction instructions, you must perform the following activities.</p>
+<ul>
+<li>Implement the changes described in the manual correction instructions in your own forms.</li>
+</ul></div></div></div></div></div>

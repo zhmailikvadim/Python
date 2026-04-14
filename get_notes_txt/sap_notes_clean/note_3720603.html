@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Start of Supply for Gas (New SUP View)" (DE_B_GELIGAS_SOS_SUP), step 1500-0100 treats the values 0.000 and 0,000 as different in the comparison logic. This affects the business message BM_GPKE_SUP_SOS_INFO_PROC_END and the field GRID_USAGE_COMMUNITY_DISCOUNT.</p>
+<p>This issue is relevant for all market roles.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">GPKE_SUP, DE_B_GELIGAS_SOS_SUP, MDX data container list, /UCOM/CL_MDX_CONVERSION_RULE-&gt;CONV_OF_QTY, conversion group QTY_FORMAT, BM_GPKE_SUP_SOS_INFO_PROC_END, GRID_USAGE_COMMUNITY_DISCOUNT, decimal comparison</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because the comparison logic between the system value and the inbound value didn't handle the special case where decimal values use different separators (0.000 versus 0,000).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system treats the values 0.000 and 0,000 as equal in the MDX data container list. You need to retrigger the process to run the MDX inbound update process. You can verify the fix by checking that the data container list treats the values 0.00 and 0,00 as equal.</p></div></div></div></div>

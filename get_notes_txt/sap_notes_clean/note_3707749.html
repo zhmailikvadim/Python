@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP Note provides essential guidelines and information for the implementation of the RPFIPL_SAFT_VAT report.</p>
+<p>It introduces the National e-Invoicing System (KSeF) reference number into the extraction of JPK_VAT ("NrKSeF"), and considers adding other markers to indicate invoices issued during system failures ("OFF") or those not sent via KSeF ("BFK", "DI").</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Poland, JPK, Jednolity Plik Kontrolny, JPK_VAT, RPFIPL_SAFT, RPFIPL_SAFT_VAT, FIPL_SAFT, Legal change, SAFT, SAF-T</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">This SAP Note is relevant only for Poland.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Explanation of Changes Implemented for RPFIPL_SAFT_VAT executed through transaction FIPL_SAFT.</p>
+<p>To ensure compliance with the latest Polish VAT reporting regulations, we have made several critical updates to our SAP system under the RPFIPL_SAFT_VAT report. <br/><br/>Below is a detailed explanation of the changes implemented:</p>
+<p>Related to KSeF:</p>
+<ul>
+<li>The system now supports the inclusion of the KSeF Reference Number ("NrKSeF") in the JPK_VAT report. This number is crucial for tracking invoices processed via the National e-Invoicing System (KSeF), enhancing traceability and compliance.</li>
+<li>We have introduced new tags for invoices, including:
+<ul>
+<li>"OFF": Applies to invoices referred to in Article 106nf(1) of the VAT Act, which, as of the date of submission of the records, do not have an assigned identification in the National e-Invoice System. This field will can be automatically filled only for customers up to SAP_APPL 606.</li>
+<li>"BFK": Applies to invoices not sent through KSeF, e.g., in paper form.</li>
+<li>"DI": Applies to other specific identifiers, such as documents that do not have KSeF numbers, have not been sent to KSeF, and do not fall under "OFF" or "BFK".</li>
+</ul>
+</li>
+</ul>
+<p>These tags allow for precise categorization and handling of invoices under various conditions, improving reporting accuracy.</p>
+<p>Extend the table FIPLD_VAT_H with new tags: "NrKSeF,"  "OFF," "BFK," and "DI".</p>
+<p>Extend the customizing tables FIPLD_TAX_DATA and FIPLV_VAT_TYPMAP with the DI indicator.<br/><br/>For more information about the development delivered with this SAP Note, see the following What's New topics on SAP Help Portal:</p>
+<ul>
+<li>SAP S/4HANA and SAP S/4HANA Cloud Private Edition: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/1b5e6133f9f24c4f979e8367bba22e27.html" target="_blank">KSeF Requirements for SAF-T JPK_VAT with Declaration for Starter Solution</a></li>
+<li>SAP ERP: <a href="https://help.sap.com/docs/SAP_ERP/063e7e5f4d7f4fc0be08565793a9b941/f6f581abf33b4a59b0d5436dbda674ea.html" target="_blank">KSeF Requirements for SAF-T JPK_VAT with Declaration for Starter Solution</a></li>
+</ul></div></div></div></div>

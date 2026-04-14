@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3733366&amp;TargetLanguage=EN&amp;Component=PY-CH&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3733366/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3733366/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>You create an ELM 5 notification with the data extractor for the uniform wage notification procedure (ELM) (program <span class="SNO_DNT" style="float: none;" translate="no"><strong>RPLELMC0</strong></span>) with company-wide work centers for which both the BUR number and the <span class="SNO_DNT" style="float: none;" translate="no">InhouseID</span> were maintained.</p>
+<p>In this case, only the tag &lt;<span class="SNO_DNT" style="float: none;" translate="no">BUR-REE-Number</span>&gt; is output in the generated XML. The &lt;<span class="SNO_DNT" style="float: none;" translate="no">InHouseID</span>&gt; is missing. Instead, you want to transfer the <span class="SNO_DNT" style="float: none;" translate="no">InHouseID</span> to the recipient, but you do not have the option to control the system behavior because the system always prioritizes the BUR number.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>ELM 5.0, XML, <span class="SNO_DNT" style="float: none;" translate="no">CR_DS_SD_CPY_DSC</span>, work center, <span class="SNO_DNT" style="float: none;" translate="no">Workplace</span>, BUR number, <span class="SNO_DNT" style="float: none;" translate="no">InHouseID</span>, <span class="SNO_DNT" style="float: none;" translate="no">T50BK</span></p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p class="ng-star-inserted">The official Swissdec ELM XML schema stipulates that either the &lt;<span class="SNO_DNT" style="float: none;" translate="no">Workplace</span>&gt; or the &lt;<span class="SNO_DNT" style="float: none;" translate="no">BUR-REE-Number</span>&gt; must be transferred in the node &lt;<span class="SNO_DNT" style="float: none;" translate="no">InHouseID</span>&gt; (<span class="SNO_DNT" style="float: none;" translate="no">xs:choice</span>). A simultaneous transfer of both values leads to an invalid XML and to the rejection of the notification by the distributor.</p>
+<p class="ng-star-inserted">In the previous SAP standard, the priority was defined statically: As soon as a BUR number was maintained, this was reported. The <span class="SNO_DNT" style="float: none;" translate="no">InHouseID</span> was only reported if no BUR number existed.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Import the HR Support Package relevant for your release. If you implement the solution in advance, use the Note Assistant to implement the correction instructions relevant for your release. You can find more information about the Note Assistant on SAP Support Portal at <a href="https://support.sap.com/notes" target="_blank">https://support.sap.com/notes</a>.</p>
+<p>This SAP Note introduces a new control option. You can now use a new entry in the view <strong class="ng-star-inserted">HR-B2A: Constants</strong> (maintenance view <span class="SNO_DNT" style="float: none;" translate="no">V_T50BK</span>) to specify that the system is to write the &lt;<span class="SNO_DNT" style="float: none;" translate="no">InHouseID</span>&gt; to the XML if the BUR number and <span class="SNO_DNT" style="float: none;" translate="no">InHouseID</span> are maintained at the same time.</p>
+<p><strong>Configuration</strong>:</p>
+<p class="ng-star-inserted">To activate this preference, you must maintain the following entry in view <span class="SNO_DNT" style="float: none;" translate="no">V_T50BK</span> (using transaction <span class="SNO_DNT" style="float: none;" translate="no">SM30</span>) (HCM localization = '02'):</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Area</td>
+<td>Doc.Cat.</td>
+<td>Constant</td>
+<td>Text</td>
+<td>Start</td>
+<td>End</td>
+<td>CVal</td>
+</tr>
+<tr>
+<td><strong>ELM</strong></td>
+<td><strong>0005</strong></td>
+<td><strong>CPINH</strong></td>
+<td>Work Center: InHouseID Report Preferred Instead of BUR Number (X = Active)</td>
+<td>01.01.1800</td>
+<td>31.12.9999</td>
+<td><strong>X</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Note</strong>: The simultaneous display of both tags in the XML is technically not permitted because the official Swissdec XML schema defines these two fields as an "either or" condition (<span class="SNO_DNT" style="float: none;" translate="no">xs:choice</span>).<br/><br/>The <span class="SNO_DNT" style="float: none;" translate="no">InHouseID</span> is a company-internal number or information compilation that defines a work location. The use of the <span class="SNO_DNT" style="float: none;" translate="no">InHouseID</span> requires a previous agreement between the BFS and the company and requires close and direct cooperation with the BFS as part of profiling. The BFS decides which companies are eligible. The BUR number can only be dispensed with if this information is available and of good quality.</p></div></div></div></div></div>

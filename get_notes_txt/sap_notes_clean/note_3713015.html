@@ -1,0 +1,151 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div></div>
+</div>
+<div>
+<div></div>
+</div>
+<div class="OutlineElement Ltr SCXW17404716 BCX8">
+<p>You run the <strong>Sistema de Informação de Organização do Estado (SIOE+)</strong> (RPC_PAYPT_SIOE) report and the following symptoms occur:</p>
+<ol>
+<li>For some fields from the <em>Ficha do trabalhador</em> file, the final output text gets truncated. </li>
+<li>When an employee is terminated on the first day of the month, the <em>Saída de trabalhador</em> file is not generated for that period.</li>
+<li>The regular character for allowance or supplement wage types is incorrectly reported.</li>
+<li>The <em>Índice</em> field from the <em>Ficha do trabalhador</em> file is displayed with the wrong text in the final ALV header. </li>
+</ol>
+<p>Additionally, when trying to install the required notes for the SIOE+ solution, you might run into installation problems regarding the table views delivered.</p>
+<div>
+<div>
+<div></div>
+</div>
+</div>
+<div>
+<div></div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<div></div>
+<div>
+<p><strong>Transaction: </strong></p>
+</div>
+<div>
+<p>&amp;SIOE (for more information, see SAP Note <a href="/notes/2197631" target="_blank">2197631</a>)</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<div></div>
+<div>
+<div></div>
+<div>
+<p><strong>Reason</strong></p>
+<ol>
+<li>These fields have descriptions that surpass the allocated character limit for them. </li>
+<li>This edge scenario is incorrectly treated because it considers the last active day of the employee, which falls in the previous month. </li>
+<li>The wage types entries are sorted in the wrong order. </li>
+<li>The ALV framework cannnot properly handle this field text. </li>
+</ol>
+<p>The language inconsistencies between different releases might cause installation problems.</p>
+<p>These issues are side effects caused by the solution delivered by SAP Note <a href="https://me.sap.com/notes/3690959" target="_blank">3690959</a>.</p>
+</div>
+</div>
+<div></div>
+<p><strong>Prerequisite</strong></p>
+<p>The following Support Package (SP) level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr><th>Release</th><th>Support Package</th></tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 05</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 18</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP C9</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04 (EhP6 and EhP7)</td>
+<td>HR SP K1</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="SCXW98177726 BCX8">
+<div class="OutlineElement Ltr SCXW98177726 BCX8">
+<div class="SCXW227182874 BCX8">
+<div class="OutlineElement Ltr SCXW227182874 BCX8">
+<div><ol>
+<li>The fields are generated integrally. </li>
+<li>The <em>Saída de trabalhador</em> file is generated correctly in the month the termination occurred. </li>
+<li>The system reads the evaluation class 13 of the first wage type customized in the cumulation wage type.</li>
+<li>The field text is correctly displayed in the final ALV header. </li>
+</ol>
+<p>Additionally, a workaround has been implemented, using the manual installation of the table views if the automatic delivery is unsuccessful.</p>
+</div>
+<div>
+<p><strong>Versioning</strong></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div></div>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong> </td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>
+<p>February 13, 2026</p>
+</td>
+<td>Released for customer</td>
+</tr>
+</tbody>
+</table></div>
+<div></div>
+<div>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package (SP). However, if you need to install a solution earlier, proceed as follows:</p>
+<ol>
+<li>Use Note Assistant (SNOTE) to implement the correction instructions.</li>
+<li>Apply the manual post-implementation steps.</li>
+</ol></div>
+<p><strong>Stay Informed</strong></p>
+<ul>
+<li>To get an email notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" rel="noreferrer noopener" target="_blank">My SAP Notes &amp; KBAs</a> or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" rel="noreferrer noopener" target="_blank">online help</a> for further information.</li>
+<li>For legal changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" rel="noreferrer noopener" target="_blank">Regulatory Change Manager</a>.</li>
+<li>For documentation about Payroll Portugal, access the <a href="https://help.sap.com/docs/ERP_HCM/7fc707b2f5784b5793399cfb4261fba3/383de153038a424de10000000a174cb4.html?locale=en-US&amp;version=6.18.latest" rel="noreferrer noopener" target="_blank">Help Portal</a>.</li>
+<li>For information about the Note Assistant (SNOTE), access the <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="noreferrer noopener" target="_blank">SAP Support Portal</a>.</li>
+<li>For information about Support Package (SP) schedules, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" rel="noreferrer noopener" target="_blank">SAP ERP Human Capital Management – Support Package Schedules</a>. </li>
+</ul>
+<p><strong>Disclaimers</strong></p>
+<div>
+<div>
+<div>
+<p>By clicking an external hyperlink, you agree that, unless expressly stated otherwise, your agreement with SAP includes the following:</p>
+</div>
+<div>
+<ul>
+<li>The content of the associated website and any other external websites is not content provided by or on behalf of SAP, nor is it otherwise under SAP’s control.</li>
+<li>The fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the contents and information provided on such websites.</li>
+<li>SAP does not give any representation regarding the quality, safety, suitability, accuracy, or reliability of any external website or any of the information, content, and materials provided thereon.</li>
+<li>You visit those external websites entirely at your own risk. SAP shall not be directly or indirectly responsible or liable for any damage or loss caused or alleged to be caused by or in connection with your use or reliance on any content, goods, or services available on or through any such linked website. </li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>Good to Know</strong></p>
+<ul>
+<li>When you install an SAP Note, some prerequisites, which are SAP Notes that have already been released and that change the same context of the current one, might be required. Even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</li>
+<li>During the piloting phase, this SAP Note is available only for pilot testing. Even though SAP performs internal functional tests, it is possible that tests in a customer environment reveal issues not captured before, making it necessary to update the solution and version of this SAP Note. After this SAP Note has its status updated to "Released for Customer", it will only be changed if there is a very specific situation that demands an update, and the reason for it will be added to the log of changes. </li>
+</ul>
+<p><link/></p></div></div></div></div>

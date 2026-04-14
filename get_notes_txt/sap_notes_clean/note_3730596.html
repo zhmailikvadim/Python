@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">After rebooting the SAP Business One server machine, the Electronic Document Service (EDS) dashboard URL becomes inaccessible.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Business One</li><li>SAP Business One version for HANA</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>Prerequisites:</strong></p>
+<p>Ensure the EDS dashboard URL is accessible and functioning normally before proceeding.</p>
+<p><strong>Scenario: </strong></p>
+<p>Reboot the SAP Business One server machine.</p>
+<p><strong>Expected behavior:</strong></p>
+<p>The EDS dashboard URL should remain accessible, allowing continued work.</p>
+<p><strong>Actual behavior:</strong></p>
+<div>
+<p>The EDS dashboard URL becomes inaccessible and displays the following error message:</p>
+</div>
+<p><em>{"Error":{"Code":400,"Message":"Could not retrieve OIDC service details from SLD","Description":"Contact Technical Support or System Administrator."}}</em></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>After rebooting the server machine, restart the following services in the specified order:</p>
+</div>
+<p><strong>On the SAP HANA server</strong></p>
+<p><em>systemctl restart sapb1servertools.service</em></p>
+<p><em>systemctl restart sapb1servertools-authentication.service</em></p>
+<p><em>systemctl restart sapb1edfbackend</em></p>
+<p><strong>On the Microsoft SQL Server</strong></p>
+<p>SAP Business One Server Tools Service (64-bit)</p>
+<p>SAP Business One Server Tools Authentication Service</p>
+<p>SAP Business One EDF Back-end</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>reboot, EDS, dashboard, 400, OIDC service</p></div></div></div></div>

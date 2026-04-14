@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Receipt of Meter Reading (DSO View)" (DE_B_MET_MR_INFO_DSO), when you receive a meter reading MSCONS message, the system creates a separate meter reading document after step 0200-0040, even when a matched open meter reading order exists.</p>
+<p>This issue is relevant for the market roles: SUP, DSO, MOS.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">MSCONS, /US4G/CL_UBD_MR_VALUE_01, /US4G/IF_UBD_MR_VALUE~DETERMINE_MR_DOC, meter reading order, meter reading document, Receipt of Meter Reading (DSO View), DE_B_MET_MR_INFO_DSO</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error occurred because of an incorrect check in the system.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, when you receive a meter reading MSCONS message and a matched open meter reading order exists, the system no longer creates a separate meter reading document. Instead, the system updates the meter reading value on the matched open meter reading order. You can verify the fix by re-inbounding a meter reading MSCONS message or running a new test to confirm that the system updates the existing order instead of creating a separate document.</p></div></div></div></div>

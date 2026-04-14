@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">ERP triggers outbound delivery confirmations for deliveries that are not relevant for Advanced Shipping and Receiving (AdvS&amp;R) processing in embedded Extended Warehouse Management (EWM) scenarios.</p>
+<p>This creates unnecessary update tasks and RFC calls, which increases system load and causes redundant processing in EWM.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Embedded EWM, Decentralized EWM, ASR, /SCWM/OUTB_DLV_CONF_CENTRAL</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement this SAP Note or the relevant feature package.</p>
+<p>This SAP Note improves the ERP outbound delivery confirmation logic in the following ways:</p>
+<ol>
+<li>Detects whether the target system is the same as the local system in embedded EWM scenarios</li>
+<li>Triggers confirmations only for ASR-relevant deliveries in embedded scenarios</li>
+<li>Keeps the confirmation behavior unchanged for decentralized scenarios</li>
+<li>The sender logical system is determined explicitly within the method and is no longer taken from the TECHN_CONTROL structure</li>
+</ol></div></div></div></div>

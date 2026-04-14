@@ -1,9 +1,14 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">You manage a bond or an interest rate instrument using risk free rates. You created an accumulating condition to create an accumulating nominal interest flow. The condition for the nominal interest flow uses a spread. For the accumulating flow the following field is not filled: Average Interest Rate Spread</p>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p id="">PAVGSPREAD, DZFEST, DPKOND, SOFR, SONIA, ESTR, TONA</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p id="">Design</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement the correction instructions with transaction code SNOTE.</p>
-<p>For the accumulating nominal interest flow the field Average Interest Rate Spread is filled using the information from the last snippet contributing to the accumulation.</p></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3710609&amp;TargetLanguage=EN&amp;Component=IS-U-CA&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3710609/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3710609/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">You post a document with business partner items with different plus/minus signs that balance to zero, for example, from transaction FPE1. The account assignments of the expenses and revenues are identical and add up to zero. The system does not create any general ledger items and does not inherit any account assignments to the tax items. The document cannot be posted if the business area, profit center, or segment is set as a required entry field.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>DFKKOPAA, tax split, TFK001B, TXAAR, GSBER, PRCTR, SEGMENT</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>This is a program error. It occurs if the following prerequisites are met:</p>
+<ul>
+<li>The function 'Splitting of Tax Items by Account Assignments' is active in the company code configuration (TFK001B-TXAAR).</li>
+<li>The system determines the general ledger lines for revenues and expenses at event 1100 using the standard module ISU_EVENT_1100.</li>
+<li>The account assignments of the general ledger lines for the revenues and expenses are stored identically in posting area R001.</li>
+<li>The G/L lines for revenues and expenses aggregate to zero and the system does not create them.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>After you implement this SAP Note, the system creates separate items for expenses and revenues in the case described above. The account assignments are distributed to the tax items.</p></div></div></div></div></div>

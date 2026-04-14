@@ -1,8 +1,10 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">You are running internal cash concentration for your IHB accounts where subsidiaries are zero-balancing into the head office accounts. When the head office receives its bank statement, it is not clear which transaction is linked to which counterparty.</p>
+<p id="__html0">FSM Cloud Connector allows manual sending of master data for Functional Location from SAP ECC/S4 to FSM. One of the program options is "Send Subhierarchy", which, when enabled, is intended to transfer functional locations and equipment belonging to the structure of the selected functional location.</p>
+<p>However, even when this option is enabled, the components belonging to the structure of the functional location being sent are not transferred as expected.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>cash pooling, APM, CAMT053, IHB EOD</p>
+<p id="">FSM, E4C, Connector, Equipment, Functional Location, /PACG/ECM_TRIG_TELO, Subhierarchy</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>If the bank statement of the head office has the subsidiary counterparties mentioned, it has a better tracking on where the cash flow is originating from. So we are populating counterparty IHB account number to the camt.053 tag <em>BkToCstmrStmt/Stmt/Ntry/NtryDtls/TxDtls/RmtInf/Ustrd</em>.</p>
+<p>The issue was caused by inconsistent selection logic during subhierarchy processing</p>
+<p>When processing, the logic collected child functional locations and subsequent selection continued only if the sub-functional locations were found.<br/>In scenarios where the original functional location had only equipment assigned beneath deeper hierarchy levels, they were not considered in further processing.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Please apply this SAP Note or the assigned Support Package.</p></div></div></div></div>
+<p id="">Please, implement this correction instruction.</p></div></div></div></div>

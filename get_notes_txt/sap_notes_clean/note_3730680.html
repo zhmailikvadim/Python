@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><div id="__html0">
+<p>You are planning to license Data Quality Management (DQM) together with SAP Sales Cloud / Service Cloud Version 2.<br/>However, the following points related to DQM unit consumption are unclear:</p>
+<ul><li>Whether DQM units can be triggered only for <em>prospects</em> and not for <em>customers</em>, and whether such configuration options exist.</li><li>Whether DQM units are consumed when Business Partners (BPs) are created automatically from an external system (e.g., portal via SAP CPI).</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>SAP Sales Cloud Version 2</div>
+<div>SAP Service Cloud Version 2</div>
+<div>Data Quality Management (DQM)</div><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<p>A DQM unit is charged each time a user triggers a DQM action, such as:</p>
+<ul><li>Clicking Validate Address</li><li>Selecting a suggestion from the type‑ahead address search</li></ul>
+<p>Customers typically want to control when DQM is invoked and whether there are configuration options to limit its usage to specific business partner types (e.g., prospects only).</p>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>DQM units are consumed only when DQM functionality is explicitly triggered within the Sales Cloud UI, such as:</p>
+<ul><li>Validate Address action</li><li>Type‑ahead address suggestion selection</li></ul>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">Filtering DQM Usage by BP Type</span></h3>
+<p>DQM can be configured through dynamic properties so that the feature is enabled only for specific BP categories (for example, Prospects).<br/>However, DQM is still triggered whenever the user interacts with address validation or type‑ahead features where they are available.</p>
+</div>
+<div>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">1. If a user types an address and selects an option from the type‑ahead suggestions, do units get consumed?</span></h3>
+<p><strong>Answer</strong>:<br/>Yes. Selecting an address suggestion in the type‑ahead field always consumes DQM units.<br/>The suggested address always overwrites the currently maintained data—regardless of whether the field was initially empty or prefilled.</p>
+<p><strong>Important:</strong><br/>Standard address fields must not be hidden, as doing so is not supported and may disrupt standard processes.</p>
+</div>
+<div>
+<h3 data-toc-skip=""><span style="font-size: 10pt;">2. If Accounts or Individual Accounts are created automatically via an external source (e.g., CPI from an external portal), are DQM units consumed?</span></h3>
+<p><strong>Answer:</strong><br/>No. If the BP is created in the background through an external interface, DQM is not invoked automatically, and therefore no DQM units are consumed.</p>
+<p>At present, there is no API-based DQM trigger available during external data loads.<br/>Once SAP introduces API-based address validation in the future, DQM units will be consumed if the external process explicitly invokes DQM for address standardization.</p>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><div>As summary, DQM units are only consumed when user-triggered within the UI (Validate Address or Type-Ahead).Usage can be limited via dynamic properties (e.g., only for Prospects).External/automated BP creation does not consume units, unless a future API-based DQM function is intentionally invoked.</div><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>DQM;data quality management;service cloud 2; Units; API; DQM Usage; DQM Units; dynamic properties</p></div></div></div></div>

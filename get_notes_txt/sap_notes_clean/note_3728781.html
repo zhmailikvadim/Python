@@ -1,9 +1,8 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">In the application Manage Material Assignments for Force Elements (DFS_MCHG_ASSGMT), customer extended fields are not processed in transaction DFS_MCHG_ASSGMT, causing incorrect and inconsistent data display in ALV output.</p>
+<p id="__html0">In Create Maintenance Request Fiori app (F1511A), opening the Assess Priority dialog displays likelihoods or consequences that have no configured priority mapping. These appear as selectable entries even though no valid priority combination exists.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>BADI, BADI_DFS_ASSGMT_ALV_FIELDS, DFS_MCHG_ASSGMT, S/4 HANA D&amp;S, Defense and Security.</p>
+<p>F1511A, PM-FIO-WOC-MN, MaintPriorityDesc, Plant, NotificationType, OData, $filter, NE operator</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p id="">This is an enhancement.</p>
+<p id="">The reason is a program error. The selection logic filters by Plant and NotificationType only and does not restrict the result set to likelihood and consequence combinations that map to a maintenance priority, which leads to display inconsistencies.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>BADI is provided for extended fields handling - BADI_DFS_ASSGMT_ALV_FIELDS -&gt; SET_FIELDCATALOG , SET_EDITABLE_FIELDS and FILTER as DFS_ASSIGNMENT_TYPE.</p>
-<p>Implement the attached correction instruction for the solution.</p></div></div></div></div>
+<p>Install this SAP Note. The correction adds selection logic to exclude combinations that do not have a maintenance priority so only valid likelihood and consequence pairs remain visible.</p></div></div></div></div>

@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">In the process "Receipt of 55616 from Responsible DSO to SUP" (DE_B_MDC_55616_DSO2SUP_RECV), the Status of Remote Controllability for PoD relationship attributes could not be updated based on inbound master data values from the market partner in step 1600-0200.</p>
+<p id="__html0">This issue is relevant for the market roles: SUP, DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">MDC, PoD relationship attributes, Status of Remote Controllability, /US4G/CL_MDX_UBD_POD_PERIOD, /US4G/CL_UBD_DATA_POD_PERIOD, /US4G/S_UBD_POD_PERIOD_REQ, DEFAULT_VALUE, 55616</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> The error occurred because of a code defect in Class /US4G/CL_MDX_UBD_POD_PERIOD, Method /UCOM/IF_MDX_MARKET_DATA_ACC~FILL_PROC_STEP_DATA, Class /US4G/CL_UBD_DATA_POD_PERIOD, Method GET_POD_RELATIONSHIP, and Structure /US4G/S_UBD_POD_PERIOD_REQ, field DEFAULT_VALUE.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>If you are DSO role, you need to follow post-implementation activities to activate the BC set US4G_3_0_DSO_SP07_NOTE_3711024.bcs.</p>
+<p>After implementing this SAP Note, You can verify the fix by checking that after step 1600-0200 runs, the Status of Remote Controllability for PoD relationship attributes is updated with the inbound values.</p></div></div></div></div>

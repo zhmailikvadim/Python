@@ -1,0 +1,122 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You run the <strong>Programa de cálculo da folha de pagamento - Brasil </strong>(HBRCALC0) report. However, when the system recomposes the taxable income for the current month, it incorrectly considers taxable income amounts from the previous month instead of only using the current month.</p>
+<p><strong>Example:</strong></p>
+<p>Consider an employee with the following payroll cluster:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Payroll Period </strong></td>
+<td>
+<div><strong>RTRIB (Taxable Income)</strong></div>
+</td>
+</tr>
+<tr>
+<td>
+<div>01.2026</div>
+</td>
+<td>
+<div>BRL 5,000.00</div>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>When you run the HBRCALC0 for 02.2026, the employee contains the following payroll cluster:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Payroll Period </strong></td>
+<td><strong>RTRIB (Taxable Income)</strong></td>
+</tr>
+<tr>
+<td>01.2026</td>
+<td>BRL 5,000.00</td>
+</tr>
+<tr>
+<td>02.2026</td>
+<td>BRL 11,000.00 (BRL 6,000.00 + <strong>BRL 5,000.00</strong>)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Note:</strong> The RTRIB for payroll period 02.2026 totals BRL 11,000.00, which is the sum of BRL 6,000.00 earned in the current month (02.2026) plus BRL 5,000.00 carried over from the previous month (01.2026).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>BRTI; payroll function; taxable income; recomposition; RTRIB; payroll cluster; previous month;</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p>When the system searches for previous payroll clusters to perform taxable income recomposition, it includes taxable income values from previous months instead of limiting the search to the current payroll period only.</p>
+<p><strong>Prerequisites</strong></p>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>SAP_HRCBR 6.04 (EhP6 and EhP7)</td>
+<td>HR SP J1</td>
+</tr>
+<tr>
+<td>SAP_HRCBR 6.08</td>
+<td>HR SP B9</td>
+</tr>
+<tr>
+<td>S4HCMCBR 1.00</td>
+<td>HR SP 08</td>
+</tr>
+<tr>
+<td>S4HCMCBR 1.01</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCMCBR 1.02</td>
+<td>HR SP 00</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</p>
+<p>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>When you run the HBRCALC0 report, the system correctly recomposes the taxable income for the current month using only the current month amounts, without considering taxable income amounts from previous months.</p>
+<p><strong>Example:</strong></p>
+<p>Considering the scenario from the Symptom section, when you run the HBRCALC0 for 02.2026, the employee now contains the following payroll cluster:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Payroll Period </strong></td>
+<td><strong>RTRIB (Taxable Income)</strong></td>
+</tr>
+<tr>
+<td>01.2026</td>
+<td>BRL 5,000.00</td>
+</tr>
+<tr>
+<td>02.2026</td>
+<td>BRL 6,000.00 </td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Log of changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Description of the change</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>March 26, 2025 </td>
+<td>Released for Customer</td>
+</tr>
+</tbody>
+</table></div>
+<p>During the piloting phase, this SAP Note is available only for pilot testing. Even though SAP has performed the internal functional tests, it is possible that tests in customers’ environments reveal issues not captured during the functional tests, being necessary to update the solution and version this SAP Note. After this SAP Note has its status updated to Released for Customer, it will be changed only if there is a very specific situation that demands an update, and the reason for it will be added in the log of changes.</p>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, use Note Assistant (SNOTE) to implement the correction instructions.</p>
+<p>You can find more information about the SAP Note Assistant in SAP Support Portal, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a></strong>.</p>
+<p><strong>Stay connected</strong></p>
+<ul>
+<li>To get an e-mail notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
+<li>To stay informed about legal changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">Regulatory Change Manager</a>.</li>
+<li>For documentation about Payroll Brazil, access the <a href="https://blogs.sap.com/tags/517106488272734260515465412269325/" target="_blank">Community</a>.</li>
+</ul></div></div></div></div>

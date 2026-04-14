@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The system sets the field "Earliest personal recalculation date for time evaluation" in infotype 0003 to high date (12/31/9999). This prevents you from making further changes to time data.</p>
+<p>The system can also set the field "Earliest personal retroactive accounting date" to high date, which affects payroll retro calculation.</p>
+<p>The system sets these dates in infotype 0283.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PA_CALC, PA_TIME, PU22, PRDAT, PRTEV</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong><br/>The system sets the date to high date (12/31/9999) when the method SET_SMALLEST_DATE of class CL_HRARCH_SMALLEST_DATE_FINDER receives an initial date value.</p>
+<p><strong>Prerequisites:</strong><br/>You run archiving with payroll (PA_CALC object) without selecting the option to archive time data, or you run archiving for time data (PA_TIME object).</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached correction instructions or implement the relevant HR Support Package for your system.<br/>After implementing this SAP Note, the system correctly handles initial date values during archiving operations.</p>
+<p>The correction adds a parameter to the method SET_SMALLEST_DATE to return an initial value as the smallest date. <br/>This behavior is optional to avoid affecting other code that do not want an initial value as the smallest value.</p></div></div></div></div>

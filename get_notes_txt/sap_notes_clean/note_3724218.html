@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Financial transactions (Commodity Swaps/Commodity Forwards) used in SAP Commodity Price Risk Hedge Accounting are not displayed in the Trader’s Order Cockpit, despite being properly assigned to valid hedge specifications with currently released status.</p>
+<p>Affected transactions remain assigned to superseded hedge specifications and become invisible to traders, impacting hedge position monitoring and risk management oversight.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Commodity Price Risk Hedge Accounting, Trader's Order Cockpit, Superseeded Hedge Specification, Period Mismatch</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>When hedge specifications are superseded during the hedge accounting lifecycle, financial transactions may become "orphaned" in the Trader’s Order Cockpit due to periodicity mismatches between original and current hedge specifications.</p>
+<p><strong>Technical Background:</strong></p>
+<ol>
+<li>Financial transactions are initially assigned to a hedge specification with specific periodicity</li>
+<li>New hedge specification creation with identical key parameters (Company Code, Hedge Book, DCS ID, Direction, MIC Code) automatically supersedes the previous specification</li>
+<li>Periodicity differences prevent proper mapping of existing transactions to the new period structure</li>
+<li>Transactions remain assigned to superseded specifications but lose visibility in the cockpit</li>
+</ol>
+<p><strong>Periodicity Downscaling Restrictions:</strong></p>
+<p>The system prevents the following downscaling scenarios to maintain hedge accounting integrity:</p>
+<ul>
+<li>Half-Year (Target Quota) → Quarter-Based (Hedge Book)</li>
+<li>Year (Target Quota) → Half-Year (Hedge Book)</li>
+<li>Year (Target Quota) → Quarter-Based (Hedge Book)</li>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>SAP Commodity Price Risk Hedge Accounting is active</li>
+<li>Multiple hedge specifications exist with same key parameters</li>
+<li>Periodicity differences between superseded and current specifications</li>
+<li>Financial transactions assigned to superseded hedge specifications</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the correction instructions provided within this note. After that, an upscaling in the Hedge Specification periodicities will get supported in the Trader's Order Cockpit.</p>
+<p>The code corrections applies additional validation during Hedge Specification creation to check the period category downscaling and to block the creation if such situation happens. Additionally to the period category validation</p>
+<p>system verifies if there are future financial transactions assigned in Traders Order Cockpit as the downscaling of periodicity is possible when all financial transactions of the Hedge Specifications are settled for the past.</p>
+<p>When creating new hedge specifications, consider periodicity impact on existing financial transaction assignments to minimize superseding conflicts.</p>
+<p><strong>Please note:</strong> Message text translation must be performed manually for non-English system languages (see separate correction instruction).</p></div></div></div></div>

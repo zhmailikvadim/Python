@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Overtake and Undertake Quantity Process" (DE_MEMI), when INVOIC resending for MeMi is triggered, the process document reopens, but the INVOIC sending step can't run because step 800 (Check Before End Process) is already completed.</p>
+<p>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">MeMi, Resend INVOIC, DE_MEMI, DE_MEMI_CHK_BEF_END, Check Before End Process, /IDXMM/CL_UTILITY, REOPEN_PDOC, overtake, undertake</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Program error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please implement the corrections of this SAP Note by importing BC sets /IDXGL/2_0_CLNT_INDEP_SP17_002 and /IDXMM/CLNT_DEP_18_001 or the relevant Support Package (SP).<br/>After implementing this SAP Note, when INVOIC resending is triggered for MeMi, the system sends the INVOIC successfully.<br/>You need to retest INVOIC resending for MeMi.</p>
+<p>You can verify the fix by checking that when INVOIC resending is triggered for MeMi, the INVOIC is sent successfully.</p></div></div></div></div>

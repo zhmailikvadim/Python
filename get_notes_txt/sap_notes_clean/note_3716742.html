@@ -1,9 +1,22 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">You create a BOM with components and substitutes and provide MUE parameters. During an update, you notice the following symptoms:</p>
-<p>- When you delete one substitute assignment, the system deletes all substitutes.</p>
-<p>- When you update substitutes with a new ECN and change MUE parameters, the system deletes all substitutes.</p>
-<p>- When you change only the ECN and MUE parameters, the system deletes all substitutes.</p>
+<div class="table-responsive" id="__html0"><table border="0" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Component:</td>
+<td>Recipe Management</td>
+</tr>
+<tr>
+<td>Module:</td>
+<td>Specification Management</td>
+</tr>
+</tbody>
+</table></div>
+<p>You use Specification Management in the PLM Web user interface (PLM Web UI) to access specification data. The CBUI_BO API is used in the background to access this data.<br/><br/>You inherit data from one specification to another one. Using the SAP GUI the data is displayed completely independent of being inherited or not while in the Web UI instances not being inherited having the same sort order are not displayed.<br/><br/>Important remark about CBUI_BO APIs:<br/>Do not confuse CBUI_BO APIs with CBUI APIs which are used in specification management (for example, in transaction CG02BD). CBUI_BO APIs are used internally for Recipe Development Web user interface.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>SV, Structure Version, Components, Items, Substitutes, Alternative Items</p>
+<p>CBUI_BO<br/>Inheritance<br/>RC1R0INH<br/>Valuation instance</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><span style="text-decoration: underline;">Reason</span><br/>Program error. The error is caused by SAP note 3485203. This SAP note did not take into account that there might exist non-inherited valuation instances having the same sort order as inherited ones.</p>
+<p><span style="text-decoration: underline;">Prerequisites</span><br/>For information about the validity of the corrections, see the correction instructions.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement this SAP Note to correct substitute updates with MUE parameters.</p></div></div></div></div>
+<p>The section "Support Packages" specifies the support packages that contain the corrections.</p>
+<p>Alternatively, you can implement the attached correction instructions.</p></div></div></div></div>

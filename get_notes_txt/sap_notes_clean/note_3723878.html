@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In SAP S/4HANA Cloud Public Edition, when executing the following tasks in the Data Monitor for Group Reporting:</p>
+<ul><li>1080 – Validation of Reported Data</li><li>1180 – Validation of Standardized Data</li></ul>
+<p>The system returns the following message:</p>
+<p>"Task is obsolete. New Balance Validation is activated."</p>
+<p>The tasks cannot be executed.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Open the Data Monitor app.</li><li>Fill in the required Global Parameters.</li><li>Run the Validation for Reported Data task (1080) and Validation for Standardized Data task (1180).</li><li>Observe the following error messages:</li></ol>
+<p>"Task 1080 is obsolete. New Balance Validation is activated."</p>
+<p>"Task 1180 is obsolete. New Balance Validation is activated."</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The New Balance Validation framework is activated in the system.</p>
+<p>In recent releases of SAP S/4HANA Cloud Public Edition, was introduced a new validation framework called Balance Validation for financial data validation.</p>
+<p>When this framework is active:</p>
+<ul><li>The legacy validation tasks in the Data Monitor are no longer used.</li><li>This includes:</li></ul>
+<p>1080 – Validation of Reported Data<br/>1180 – Validation of Standardized Data</p>
+<p>As a result, the system automatically marks these tasks as obsolete and displays the error message.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>When the Balance Validation framework is active, validations must be executed using the Balance Validation apps instead of the legacy Data Monitor tasks.</p>
+<p>Use the following applications:</p>
+<p><strong>Maintain Validation Rules and Rule Groups</strong></p>
+<p>Use:</p>
+<p>"Manage Balance Validation Rules and Rule Groups" app</p>
+<p>This app allows you to:</p>
+<ul><li>Define balance validation rules</li><li>Create and maintain rule groups</li><li>Assign rules to rule groups.</li></ul>
+<p><strong>Execute Validation and Analyze Results</strong></p>
+<p>Use:</p>
+<p>"Run Balance Validation and View Results" app</p>
+<p>This app allows you to:</p>
+<ul><li>Execute balance validation runs</li><li>Select the relevant rule group</li><li>Review validation messages and results.</li></ul>
+<p></p>
+<p>For further details and guidance, please refer to the following blog post: <a href="https://community.sap.com/t5/enterprise-resource-planning-blog-posts-by-sap/sap-s-4hana-group-reporting-new-balance-validation-process/ba-p/14000555" rel="noopener noreferrer nofollow" target="_blank">SAP S/4HANA Group Reporting - New Balance Validation Process</a> and the KBA <a href="https://me.sap.com/notes/3577657" rel="noopener noreferrer nofollow" target="_blank">3577657</a> - How to finish Group Reporting New Balance Validation Setup.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>KBA <a href="https://me.sap.com/notes/3577657" rel="noopener noreferrer nofollow" target="_blank">3577657</a> - How to finish Group Reporting New Balance Validation Setup</p>
+<p>SAP Note <a href="https://me.sap.com/notes/3553668" rel="noopener noreferrer nofollow" target="_blank">3553668</a> - Group Reporting: Migration of new Balance Validation Process</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>task obsolete, validation error, data monitor, group reporting, new balance validation, SAP S/4HANA Cloud, public edition, validation tasks, 1080, 1180, balance validation framework, financial data validation, hierarchy, manage balance validation rules, run balance validation, validation setup, group reporting validation</p></div></div></div></div>

@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When you activate or use the OData service <strong>LE-SHP Quick Create: Delivery Without Reference </strong>(<em>LE_SHP_QC_DLVNOREF_SRV</em><em>)</em>, the system displays the following error:</p>
+<blockquote>
+<p><em>“Association 'TO_BPDATACONTROLLERUSAGE' of SADL structure 'I_BPCustomerMultiAddrVH' with binding '_BPDATACONTROLLERUSAGE' does not exist. Cleanup of the project is needed.”</em></p>
+</blockquote>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>LE_SHP_QC_DLVNOREF_SRV, I_BPCustomerMultiAddrVH, I_BPDataControllerUsage, /IWFND/MAINT_SERVICE</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The association to <em>I_BPDataControllerUsage</em> is obsolete due to SAP Note <a href="/notes/3535818" target="_blank">3535818</a>. As a result, the OData service <em>LE_SHP_QC_DLVNOREF_SRV</em> refers to outdated or inconsistent metadata. The OData project for <em>LE_SHP_QC_DLVNOREF_SRV</em> was not regenerated after the changes in the SAP Note.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Perform the manual steps explained in this SAP Note. This corrects the metadata inconsitencies.</p></div></div></div></div>

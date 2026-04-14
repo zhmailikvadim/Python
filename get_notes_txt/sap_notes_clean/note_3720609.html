@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">When running a disassembly order calculation it is calculating over the whole cut list and not only the cuts which are active on this disassembly order, which leads to performance issues.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">IS-MFM, MEAT, Disassembly Order, /SPMEAT/CTOB, SAP Meat and Fish Management by msg.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The issue arises because the calculation routine does not properly filter out materials that are not part of an active cut in the disassembly order. As a result, all materials are processed, regardless of their status, leading to incorrect results and potential performance degradation.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="__html0"><strong>History:</strong><br/>This SAP Note was created on 2026-02-25 to address the described defect.</p>
+<p><strong>Description of Correction:</strong><br/>The correction ensures that only materials belonging to an active cut in the disassembly order are included in the calculation. The calculation logic in the relevant routines has been adjusted to check the active status of each material before processing. This prevents non-active materials from being calculated and reflected in the statistics.</p>
+<p><strong>Functional Dependencies:</strong><br/>None.</p>
+<p><strong>Manual Changes:</strong><br/>No manual changes are required for end users.</p></div></div></div></div>

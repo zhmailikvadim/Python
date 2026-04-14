@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">liveCache functionality to manually adjust the notified and confirmed quantities of a delivery plan.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>/SAPAPO/OM_DELIVERY_MESSAGE, goods receipts, delivery plan</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The total notified or confirmed quantities of a delivery plan need to be adjusted manually to correct inconsistencies.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement this note to add two optional import parameters</p>
+<ul>
+<li>IV_METHOD_CONF (method to change the confirmed quantity)</li>
+<li>IV_METHOD_AVIS (method to change the notified quantity)</li>
+</ul>
+<p>to the liveCache interface module /SAPAPO/OM_DELIVERY_MESSAGE. These methods default to 'A' (add), i.e. the quantities are added to the existing ones stored in the liveCache. This is the legacy behavior. To perform an absolute quantity change, i.e. to replace the existing quantities with the ones specified, use method 'C' (gc_change) instead.</p>
+<p>The liveCache side functionality required for absolute changes is shipped as of liveCache builds <strong>101.26</strong> (see note <a href="/notes/2074843" target="_blank">2074843</a>) and <strong>100.58</strong> (see note <a href="/notes/2074842" target="_blank">2074842</a>) respectively. Use of method 'C' is not intended for business purposes and is not supported within a transactional simulation (simsession).</p></div></div></div></div>

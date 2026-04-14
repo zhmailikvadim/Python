@@ -1,0 +1,75 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">On Overview page, 'Hours Logged Today' KPI header shows time for all users instead of showing time just for the current user.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<ul id="__html28">
+<li>SAP Service and Asset Manager</li>
+<li>SAM</li>
+<li>SSAM</li>
+<li>Labor Time</li>
+<li>Confirmations</li>
+<li>Time Records</li>
+<li>Time Sheets</li>
+<li>KPI</li>
+<li>ICMTANGOAMF10-42945</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason: </strong></p>
+<p>Missing metadata logic to show only the current user time</p>
+<p><strong>Prerequisites</strong>:</p>
+<ul>
+<li> <em>BAS or Visual Studio Code with SAM MDK project</em></li>
+<li><em>`patch` command (available on BAS and macOS by default) via terminal or other patching utility</em></li>
+<li><em>Read the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://community.sap.com/t5/enterprise-resource-planning-blogs-by-sap/how-to-apply-metadata-patch-in-sap-service-and-asset-manager/ba-p/13801041" rel="nofollow" target="_blank">guidelines</a> on how to apply the patch and read the </em><em>appendix section if you receive any error</em></li>
+<li><em>Review the SAP MDK support Matrix SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/2933065" target="_blank">2933065 </a> for your version of SSAM to determine the correct SAP Notes to apply before this patch</em></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To apply the patch, download the attached <strong>3718010-&lt;version&gt;.patch</strong> file and save it in a known location, preferably adjacent to your SAM.mdkproject.</p>
+<p>If you are on Windows, see SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3533879" rel="nofollow" target="_blank">3533879</a> for how to install a .patch file in Windows. If you are on a Mac or on BAS, follow the steps below:</p>
+<ol>
+<li>Open a terminal in the root of your SAM metadata (i.e. SAM.mdkproject/metadata or SAM.mdkproject/metadata/base.definitions)</li>
+<li>Run the terminal command `<em>patch --no-backup-if-mismatch -p4 &lt; path/to/<strong>3718010-&lt;version&gt;</strong><strong>.patch</strong></em>`.</li>
+<li>Verify in the terminal window that the following files have been modified and listed as patched, as indicated by the console output:</li>
+</ol>
+<p>    For 2511 patch:</p>
+<ul>
+<li><span style="font-size: 14px;">patching file 'Pages/FieldService/FieldServiceOverview.page'</span></li>
+<li><span style="font-size: 14px;">patching file 'Pages/Fragments/Overview/KPIHeader.fragment'</span></li>
+<li><span style="font-size: 14px;">patching file 'Pages/OverviewMTStd.page'</span></li>
+<li><span style="font-size: 14px;">patching file 'Pages/TimeSheets/TimeSheetEntryDetails.page'</span></li>
+<li><span style="font-size: 14px;">patching file 'Rules/Confirmations/ConfirmationPageMetadata.js'</span></li>
+<li><span style="font-size: 14px;">patching file 'Rules/OverviewPage/KPI/TimeCount.js'</span></li>
+<li><span style="font-size: 14px;">patching file 'Rules/OverviewPage/TimeCaptureSection/AddMyTimePreselectedQuickFilter.js'</span></li>
+<li><span style="font-size: 14px;">patching file 'Rules/OverviewPage/TimeCaptureSection/OnPressKPITimeToday.js'</span></li>
+<li><span style="font-size: 14px;">patching file 'Rules/OverviewPage/TimeCaptureSection/OnPressTimeCaptureSectionToday.js'</span></li>
+<li><span style="font-size: 14px;">patching file 'Rules/TimeSheets/TimeEntryDetailsPageMetadata.js'</span></li>
+<li><span style="font-size: 14px;">patching file 'Rules/TimeSheets/TimeSheetsTodaysDetails.js'</span></li>
+</ul>
+<p><span style="font-size: 14px;">    For 2505 and 2410 patch:</span></p>
+<ul>
+<li>patching file 'Pages/FieldService/FieldServiceOverview.page'</li>
+<li>patching file 'Pages/Overview.page'</li>
+<li>patching file 'Pages/OverviewMTStd.page'</li>
+<li>patching file 'Pages/TimeSheets/TimeSheetEntryDetails.page'</li>
+<li>patching file 'Rules/Confirmations/ConfirmationPageMetadata.js'</li>
+<li>patching file 'Rules/OverviewPage/KPI/TimeCount.js'</li>
+<li>patching file 'Rules/OverviewPage/TimeCaptureSection/AddMyTimePreselectedQuickFilter.js'</li>
+<li>patching file 'Rules/OverviewPage/TimeCaptureSection/OnPressKPITimeToday.js'</li>
+<li>patching file 'Rules/OverviewPage/TimeCaptureSection/OnPressTimeCaptureSectionToday.js'</li>
+<li>patching file 'Rules/TimeSheets/TimeEntryDetailsPageMetadata.js'</li>
+<li>patching file 'Rules/TimeSheets/TimeSheetsTodaysDetails.js'</li>
+</ul>
+<p>    For 2405 patch:</p>
+<ul>
+<li>patching file 'Pages/FieldService/FieldServiceOverviewNew.page'</li>
+<li>patching file 'Pages/OverviewMTStd.page'</li>
+<li>patching file 'Pages/OverviewNew.page'</li>
+<li>patching file 'Pages/TimeSheets/TimeSheetEntryDetails.page'</li>
+<li>patching file 'Rules/Confirmations/ConfirmationPageMetadata.js'</li>
+<li>patching file 'Rules/OverviewPage/KPI/TimeCount.js'</li>
+<li>patching file 'Rules/OverviewPage/TimeCaptureSection/AddMyTimePreselectedQuickFilter.js'</li>
+<li>patching file 'Rules/OverviewPage/TimeCaptureSection/OnPressKPITimeToday.js'</li>
+<li>patching file 'Rules/OverviewPage/TimeCaptureSection/OnPressTimeCaptureSectionToday.js'</li>
+<li>patching file 'Rules/TimeSheets/TimeEntryDetailsPageMetadata.js'</li>
+<li>patching file 'Rules/TimeSheets/TimeSheetsTodaysDetails.js'</li>
+</ul>
+<p>Deploy the modified metadata and test.</p></div></div></div></div>

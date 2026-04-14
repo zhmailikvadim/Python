@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are using MTM versioned logistics and have a Material with Moving Average Price (VPRSV = V) . Since there is no standard implementation to support moving average as contract value in Stock MTM calculation , so you have implemented BADI_CMM_STOCK_GMDA_UPDATE to update the prices to GMDA . Here you notice that CMM_VLOGP-QUOTGROUP is still remaning blank which is unexpected .</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>QUOTGROUP, CMM_VLOGP, BADI_CMM_STOCK_GMDA_UPDATE , VPRSV = V , Moving Average Price</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">This is a program error .</p>
+<p>Prerequisites :</p>
+<ul>
+<li>You are using material with MBEW-VPRSV = V (Moving Average Price).</li>
+<li>There is a custom implementation of BADI_CMM_STOCK_GMDA_UPDATE to get the instrument key and load data to CMM_GMDA  table via MATREX.</li>
+</ul>
+<p> </p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached corrections .</p></div></div></div></div>

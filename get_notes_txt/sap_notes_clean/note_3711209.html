@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">You want to use the "Create Equipment Records Using Scanner" feature and specifically leverage the Advanced Configuration option, which requires a ScreenConfiguration.</p>
+<p>Your goal is to customize how barcodes (for example, QR codes) are parsed, such as:</p>
+<ul><li>Splitting a barcode string into multiple field values</li><li>Using key–value pairs to populate equipment fields automatically</li></ul>
+<p>However, after configuring the ScreenConfiguration:</p>
+<ul><li>The barcode can be scanned successfully and the equipment creation screen opens</li><li>But the fields you defined are not automatically populated as expected</li></ul>
+<p><span style="color: rgb(224, 62, 45);"><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental.</em></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Field Service Management (FSM)</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This issue occurs when:</p>
+<ul><li>The ScreenConfiguration JSON is incomplete or incorrectly configured, and/or</li><li>The barcode string format does not match the parsing logic defined in the ScreenConfiguration</li></ul>
+<p>As a result, the system cannot correctly interpret the scanned barcode and map the values to the intended equipment fields.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To correctly use the Advanced Configuration for barcode parsing, both of the following must be aligned:</p>
+<ol><li>The <strong>barcode format</strong> (for example, key–value pairs and separators)</li><li>The <strong>barcodeParserConfiguration </strong>section in the ScreenConfiguration JSON</li></ol>
+<p>Please note that the configuration and examples provided in this article are for <strong>reference purposes only</strong> and are intended to illustrate a best-practice approach. They do not represent a mandatory or complete configuration for all scenarios. For comprehensive guidance refer to documentation: <a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_mobile/search-create-equipment-with-scanner.html" rel="noopener noreferrer nofollow" target="_blank">Search for / Create Equipment Records Using Scanner</a> </p>
+<p></p>
+<p><span style="text-decoration: underline;"><strong>Step 1: Extend the ScreenConfiguration</strong></span></p>
+<p>The ScreenConfiguration “Equipment Mobile” must be manually extended. In particular, you need to update the JSON Template and add a barcodeParserConfiguration section.</p>
+<p>"barcodeParserConfiguration": {<br/>    "valuesSeparator": ";",<br/>    "keyValueSeparator": ":",<br/>    "fieldsMapping": {<br/>        "eqmsn": "equipment.manufacturerSerialNumber",<br/>        "eqsn": "equipment.serialNumber"<br/>    },<br/>    "fieldsOrder": [<br/>        "equipment.manufacturerSerialNumber",<br/>        "equipment.serialNumber"<br/>    ]<br/>}</p>
+<p></p>
+<p><strong>Explanation of the Configuration</strong></p>
+<ul><li><strong>valuesSeparator</strong><br/>Defines how individual values in the barcode string are separated<br/>(in this example: <strong>;</strong>)</li><li><strong>keyValueSeparator</strong><br/>Defines how keys and values are separated<br/>(in this example: <strong>:</strong>)</li><li><span style="font-size: 10pt;"><strong>fieldsMapping</strong><br/></span>Maps barcode keys to equipment fields
+<ul><li><strong>eqmsn </strong>→ equipment.manufacturerSerialNumber</li><li><strong>eqsn </strong>→ equipment.serialNumber</li></ul>
+</li><li><strong>fieldsOrder</strong><br/>Defines the order in which fields are processed and populated</li></ul>
+<p></p>
+<p><span style="text-decoration: underline;"><strong>Step 2: Generate a Barcode That Matches the Configuration</strong></span></p>
+<p>Using the configuration above, the barcode string must follow this structure.</p>
+<ul><li><em>eqmsn:Test123;eqsn:Test456;</em></li></ul>
+<p><img class="img-responsive" src="/documents/customerkba/m970rOPwSkRIAalbI_FXSGeitXL0fimOHzpoFNVs2SE" style="border-width: 1px; border-style: solid;" width="650"/></p>
+<p></p>
+<p><span style="text-decoration: underline;"><strong>Step 3: Scan the Barcode on the Mobile App</strong></span></p>
+<ol><li>Open the FSM Mobile App</li><li>Navigate to the Equipment section</li><li>Tap the plus (+) button to create a new equipment record</li><li>Scan the generated barcode / QR code</li></ol>
+<p><img class="img-responsive" src="/documents/customerkba/9rzQNCydWHZzkBVmpEDqRQQlXtbhhuDcMWjM7l1XMww" style="border-width: 1px; border-style: solid;" width="300"/></p>
+<p></p>
+<p><span style="text-decoration: underline;"><strong>Step 4: Verify Automatic Field Population</strong></span></p>
+<p>After scanning the barcode:</p>
+<ul><li>The <strong>Manufacturer Serial Number</strong> field is automatically populated with <em><strong>Test123</strong></em></li><li>The <strong>Serial Number </strong>field is automatically populated with <em><strong>Test456</strong></em></li></ul>
+<p><em><strong><img class="img-responsive" src="/documents/customerkba/CONE8GzjY_C3HeGTVXTwANNi8al88mIvoWvifhdj9lk" style="border-width: 1px; border-style: solid;" width="300"/></strong></em><strong></strong></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to:  <a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_mobile/search-create-equipment-with-scanner.html" rel="noopener noreferrer nofollow" target="_blank">Search for / Create Equipment Records Using Scanner | SAP Help Portal</a> </li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Search for Equipment Using Scanner, Create Equipment Using Scanner, Advanced Configuration, ScreenConfiguration, Barcode Parser Configuration, QR Code Scanning, Equipment Mobile Configuration, Barcode Field Mapping, Key Value Pair Barcode, Automatic Field Population, Equipment Serial Number, Manufacturer Serial Number, SAP Field Service Management</p></div></div></div></div>

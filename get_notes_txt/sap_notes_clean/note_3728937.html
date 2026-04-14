@@ -1,0 +1,70 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">As described in the <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html" target="_blank">regulatory change manager</a> under <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-17845" target="_blank">Complementary Law 224/2025</a>:</p>
+<ul>
+<li><a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-17932_17" target="_blank">SAP S/4HANA Cloud Private Edition</a></li>
+<li><a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-17932_3" target="_blank">SAP S/4HANA</a></li>
+<li><a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-17932_4" target="_blank">SAP ERP Central Component</a></li>
+</ul>
+<p>This SAP Note provides you with relevant system changes to address the enablement of IPI tax rate with 4 decimal places in the sales processes using CBT (Condition-based technique) solution (RVABRA as standard pricing procedure).</p>
+<p>For more information, see also <a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp224.htm" target="_blank">Complementary Law No. 224</a>, <a href="https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/148694" target="_blank">Normative Instruction 2305</a> and <a href="https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/149398" target="_blank">Normative Instruction 2307</a>. The website accessible through this hyperlink is an external website which is not part of SAP's offering. By clicking the hyperlink, YOU AGREE that unless expressly stated otherwise in your agreements with SAP: (i) the content of the linked to website and any further external website is not content provided by or on behalf of SAP, nor is it otherwise under SAP's control; (ii) the fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the contents and information provided on such websites; (III) SAP does not give any representation regarding the quality, safety, suitability, accuracy or reliability of any external website or any information, content and materials provided thereon; (IV) you visit those external websites entirely at your own risk. SAP shall not be directly or indirectly responsible or liable for any damage or loss caused or alleged to be caused by or in connection with your use of or reliance on any content, goods or services available on or through any such linked website.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Brazil, Brasil, BR, LC 224/2025, Lei Complementar, Instrução Normativa, IN 2305/25, IN 2307/26, Nota Fiscal, NF, tax calculation, IPI, PIS, COFINS, tax rate, 4 decimals, casas decimais, mapping, pricing, RVABRA, CBT, internal code, condition type, procedure, currency, conversion</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is relevant only for Brazil.</p>
+<p>For additional details, we strongly recommend you to check the implementation guide available in the attachment section.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Solution Description</strong></p>
+<p>After you implement this SAP Note, the system enables the calculation of IPI tax, considering a tax rate with 4 decimal places in the sales processes. Plus, tax calculation of IPI, PIS and COFINS with 4 decimal places in tax rates were adjusted to support foreign currencies in the processes.</p>
+<div class="OutlineElement Ltr SCXW71563792 BCX0">
+<p class="Paragraph SCXW71563792 BCX0">This SAP Note provides a detailed solution description. It outlines the changes, requirements, and system adjustments needed to accommodate these new tax obligations in SAP systems.</p>
+</div>
+<div class="SCXW71563792 BCX0">
+<div class="OutlineElement Ltr SCXW71563792 BCX0">
+<p class="Paragraph SCXW71563792 BCX0">The system has changed as follows:</p>
+</div>
+<div class="ListContainerWrapper SCXW71563792 BCX0">
+<ul>
+<li>Mapping of the new IPI tax rate 4 decimals to nota fiscal </li>
+<li>Proposed pricing procedure changes (e.g.: RVABRA as standard) </li>
+<li>New proposed pricing elements like condition types </li>
+<li>Inform tax rate with 4 decimal places for IPI in NF writer creation</li>
+</ul>
+</div>
+</div>
+<p>As a general rule, SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <strong><a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a></strong>.</p>
+<p>Note that the documentation of certain objects is delivered with the corresponding Support Package only.</p>
+<p><strong>List of Affected Objects:</strong></p>
+<ul>
+<li>Classes</li>
+<ul>
+<li>CL_TAX_CALC_BR</li>
+</ul>
+</ul>
+<ul>
+<li>Includes</li>
+<ul>
+<li>LJ1BB2FJ1</li>
+<li>LJ1BGF01</li>
+</ul>
+</ul>
+<p><strong>Product Documentation</strong></p>
+<p>For more information about the <strong>development delivered with this SAP Note</strong>, see the following What's New topics on SAP Help Portal:</p>
+<ul class="customListStyle">
+<li><strong>SAP S/4HANA and SAP S/4HANA Cloud Private Edition</strong>: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/1bf8722e6e5a4ddcb6e8f91c6df7ac49/546485c0585d4888ba45886fd664b78b.html?locale=en-US" target="_blank">IPI Tax Rate With Four Decimal Places for RVABRA</a></li>
+<li><strong>SAP ERP</strong>: <a href="https://help.sap.com/docs/SAP_ERP/063e7e5f4d7f4fc0be08565793a9b941/546485c0585d4888ba45886fd664b78b.html?locale=en-US" target="_blank">IPI Tax Rate With Four Decimal Places for RVABRA</a></li>
+</ul>
+<p>You are welcome to leave your anonymous feedback on the content of the <a href="https://help.sap.com/viewer/s4h_op_brazil" target="_blank">SAP Help Portal documentation</a> by choosing "Was this topic helpful?". If your feedback is relevant, the documentation will be updated accordingly.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>March 27, 2026</td>
+<td>Released for Customer</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div>

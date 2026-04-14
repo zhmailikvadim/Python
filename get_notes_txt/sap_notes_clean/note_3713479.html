@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>Users are able to edit the workflow for planned steps, such as adding or deleting the next-level approver, while approving purchase requisitions and purchase orders in the My Inbox app.</li><li>The "Edit " button is visible for approvers in the approval details section of purchase requisitions and purchase orders when accessing via My Inbox</li><li>How to enable the edit button to be able to add new approvers in the work flows of any document</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><div>
+<ul style="list-style-type: none;"><li aria-label="SAP S/4HANA Cloud Public Edition">
+<div>
+<div>SAP S/4HANA Cloud Public Edition</div>
+</div>
+</li></ul>
+</div>
+<div>
+<div> </div>
+</div>
+<p><br/><br/></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Open the My Inbox app in SAP S/4HANA Cloud.</li></ol>
+<p>Navigate to the approval details section of for example purchase requisition or purchase order.</p>
+<ol><li>Observe that the "Edit Workflow" button is visible for approvers.</li><li>Approvers can use the button to modify the workflow by adding or removing next-level approvers.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Business roles assigned to users are granting access to edit button in the approval details tab of purchase requisitions and purchase orders.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Identify the business roles assigned to the users which has catalog  like SAP_MM_BC_PO_ADHOCAPPROVE_PC and remove the roles </p>
+<p>or </p>
+<p>Remove the catalog SAP_MM_BC_PO_ADHOCAPPROVE_PC from any roles assigned to the users, especially business roles created using the standard roles SAP_BR_MANAGER_PROCUREMENT and SAP_BR_PURCHASER.</p>
+<p> </p>
+<p></p>
+<p>Note1: To enable the Edit button ensure the above catalog is added to your custom roles and that roles are assigned to the users.</p>
+<p>Note 2 :The above given catalog is for PO, similarly consider respective catalog for PR or CPO etc</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p></p>
+<ul><li>Refer to: <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/0e602d466b99490187fcbb30d1dc897c/b0aa0849cb3c4df6bd1143e0e2414f71.html?q=How+to+Configure+the+Flexible+Workflow+for+rfq" rel="noopener noreferrer nofollow" target="_blank">Edit and Approve Purchase Requisition | SAP Help Portal</a></li><li>Refer to: <a href="https://help.sap.com/docs/SAP_S4HANA_CLOUD/0e602d466b99490187fcbb30d1dc897c/38cbf557c328be12e10000000a4450e5.html" rel="noopener noreferrer nofollow" target="_blank">Manage Purchase Orders | SAP Help Portal</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>edit workflow, approval details, purchase requisition, purchase order, SAP S/4HANA Cloud, My Inbox app, SAP_MM_BC_PO_ADHOCAPPROVE_PC, SAP_MM_BC_PR_ADHOCAPPROVE_PC, SAP_BR_MANAGER_PROCUREMENT, SAP_BR_PURCHASER, restrict edit functionality, workflow modification, approver permissions, Fiori UI</p></div></div></div></div>

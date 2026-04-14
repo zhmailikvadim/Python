@@ -1,8 +1,37 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">Changes in item status values like production relevant (SANFE), Costing relevant (SANKA) etc are not being saved when items are planned from source panel to the working panel and item attribute values are changed using 'Edit Item Attributes' option in VMP_MAINTAIN.</p>
+<p id="__html0">You run the <strong>HR-HK: Periodic MPF contribution report (format: eMPF)</strong> (HHKCPFE0) to generate eMPF data. The system reads the department code from the <strong>Feature for eMPF Contribution Report HHKCPFE0</strong> (27PFE) using the format D&lt;Department code&gt;.</p>
+<p>Previously, you could not configure the system to retrieve the department code from a specific field in infotype <strong>Organizational Assignment</strong> (0001), such as Personnel Subarea (BTRTL).</p>
+<p>Now after you apply this SAP Note, the system supports reading the department code from a specific IT0001 field with the format D&lt;0001-&lt;Field&gt;&gt;.<br/>For example, if you configure D&lt;0001-BTRTL&gt; in feature 27PFE, the system reads field BTRTL from infotype 0001 as the department code.</p>
+<p>Note: You must include the angle brackets ("&lt;" and "&gt;") around 0001-&lt;Field&gt; in your configuration.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>SANFE, SANKO, ERSKZ, SANIN, RVREL, SANKA, Item Status, OS21, Bulk Material</p>
+<p>eMPF, HHKCPFE0, Department code, 27PFE</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Program Error</p>
+<p>This is an enhancement.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement attached correction instructions.</p></div></div></div></div>
+<p>Do either of the following:</p>
+<ul>
+<li>Apply the Support Package;</li>
+<li>Implement the corresponding correction instructions, then carry out the following manual activities: </li>
+</ul>
+<ol><ol>
+<li>In transaction <strong>SE38</strong>, change the Text Elements for the <strong>HHKCPFE0</strong> report.</li>
+<li>On the Text Symbols tab page, add the following data:<br/>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Symbol</strong></td>
+<td><strong>Text</strong></td>
+</tr>
+<tr>
+<td>099</td>
+<td>Department Code can not be read because the infotype &amp;1 does not exist.</td>
+</tr>
+<tr>
+<td>100</td>
+<td>Department Code can not be read because the component &amp;1 does not exist in the infotype &amp;2.</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+<li>Save your entries.</li>
+</ol></ol></div></div></div></div>

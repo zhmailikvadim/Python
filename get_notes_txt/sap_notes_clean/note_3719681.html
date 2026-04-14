@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>When clicking a tile in the SAP Fiori Launchpad (FLP) intended to launch the Customer Engagement (CE) or CRM UI interface, the following behavior occurs:
+<ul><li>
+<p>A new window or loading indicator flashes briefly for a fraction of a second.</p>
+</li><li>
+<p>The system immediately returns (falls back) to the Fiori Launchpad home screen.</p>
+</li><li>
+<p>The application fails to load, but no explicit error message is displayed in the UI.</p>
+</li><li>
+<p>The issue persists even if the underlying transaction (e.g., WUI) works correctly when executed directly in SAP GUI for Windows.</p>
+</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>S/4HANA 2023 and others</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>The issue is caused by a technical conflict between the Fiori Launchpad's web container and "Launcher Transactions."</li></ul>
+<ol><li style="list-style-type: none;">
+<ol><li>
+<p><strong>Launcher Behavior:</strong> Transaction <code>WUI</code> (similar to <code>WEBGUI</code>) is a launcher designed to trigger a URL from a SAP GUI for Windows environment.</p>
+</li><li>
+<p><strong>Recursive Call:</strong> When called from a browser-based Fiori Launchpad, the transaction attempts to trigger a web session from within an existing web session. This causes a loop or session conflict.</p>
+</li><li>
+<p><strong>Framework Fallback:</strong> To prevent a browser crash or infinite loop, the Fiori Launchpad framework terminates the navigation and returns the user to the home screen.</p>
+</li></ol>
+</li></ol><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ul><li>To resolve this issue and maintain a system-agnostic (multi-client/multi-system) configuration, change the tile from a Transaction-based mapping to a URL-based mapping using a <strong>Relative Path</strong> versus an <strong>Absolute Path</strong>.
+<ul><li>What is an Absolution Path for Target mapping?  This is an example:<br/><br/>----<strong>Absolute Path</strong> example (Typical Workaround - Limited Scalability): An absolute path includes the full server address (https://) and often a specific client.--- <br/><br/>1) Change the Target Mapping from "Transaction" to "URL" in Fiori.<br/>2) Maintain the direct URL for the Customer Engagement service: <strong>https://&lt;your domain&gt;</strong>/sap/bc/bsp/sap/crm_ui_start/default.htm?<strong>sap-client=032 </strong><br/><br/>NOTE: <strong>Limitation</strong>: The tile configured above is "locked" to the target system and the defined hard coded client (<strong>sap-client=xxx</strong>) - It will work for that client but, it may cause login or "page not found" errors for other clients (Scenario: If the user is using the same hardcoded absolute path tile for other clients). <br/>----end-------- </li></ul>
+</li></ul>
+<ol><li style="list-style-type: none;">
+<ol><li>Open the Fiori Launchpad Designer or Launchpad Content Manager.</li><li>Locate the Target Mapping for the affected intent.</li><li>Change the Application Type from Transaction to URL.</li><li>Enter the URL as a <strong>Relative path</strong> to ensure it works across all systems and clients:
+<ul><li>URL: /sap/bc/bsp/sap/crm_ui_start/default.htm (This is just an example)</li></ul>
+</li><li>Important: <strong>Do not hardcode</strong> the hostname or sap-client parameter (See <strong>Absolute Path </strong>workaround above where it shows limitation). The Launchpad will automatically append the current system's host, port, and the user's active client at runtime.</li><li>Set the Navigation Type (NavType) to explace (Open in a new window) to ensure the CRM UI has a full browser context.</li></ol>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>SAP Note <a href="https://me.sap.com/notes/2557255" rel="noopener noreferrer nofollow" target="_blank">2557255</a>: T-code "WEBGUI" usage in SAP GUI for HTML and Fiori.</li><li>SAP KBA <a href="https://me.sap.com/notes/3268877" rel="noopener noreferrer nofollow" target="_blank">3268877</a>: How to configure the target mapping of Fiori application type: URL.</li><li>SAP KBA <a href="https://me.sap.com/notes/2442415" rel="noopener noreferrer nofollow" target="_blank">2442415</a>: How to add a SAP GUI for HTML application to Fiori Launchpad.</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Fiori Launchpad, WUI, Customer Engagement, CRM UI, Fallback issue, Target Mapping, Transaction WUI, 2557255, Relative URL, System Alias, Navigation Fallback, CE, CRM_UI_START, Return to Fiori Home Page, Crashes back to Fiori Home Page, Navigation back to Fiori</p></div></div></div></div>

@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Payment order remains in status "export completed - pending confirmation(228)" or "export completed(230)" and can't be finalized because some payment items are still in status "conversion completed(39)".</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">/PF1/FIN_OUT_ORD - Finalize Pending Outgoing Orders</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>During the export process for large payment orders, the status transition of payment items is executed in parallel.</p>
+<p>If the payment file is sent and the pain.002 (status notification) is received before the internal process finishes updating all payment items, the technical status of the payment items may be overwritten back to "conversion completed(39)".</p>
+<p>This occurs because the main export process keeps a lock at the object level. During the pain.002 import, this lock is checked only at the end of the process, after the external status has already been updated in the payment items. This can lead to an overlap, where two processes update the same payment items at the same time.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Code correction to check object list lock at the earliest during processing of status notification file to prevent concurrent updates.</p>
+<p id="">Please implement SAP Note or assigned Support Package.</p></div></div></div></div>

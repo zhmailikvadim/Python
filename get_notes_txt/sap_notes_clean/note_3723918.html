@@ -1,0 +1,33 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Customers may observe slow system performance in Warehouse Management (WM) as part of SAP S/4HANA Cloud Public Edition when:</p>
+<p>· Posting <strong>Goods Receipts (GR) </strong>or <strong>Goods Issues (GI).</strong> This could e.g. happen on central goods issue or goods receipt bins.</p>
+<p>· Confirming <strong>Warehouse Tasks (WTs)</strong></p>
+<p>· Several users work on WTs for the<strong> same storage bin </strong>at the same time</p>
+<p><strong>Typical effects include:</strong></p>
+<p>· Long processing times during GR/GI postings</p>
+<p>· Delays during WT confirmations</p>
+<p>· Overall slowdown because multiple processes are waiting for access to the same bin‑related stock information</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This behavior occurs when <strong>one storage bin contains an unusually high number of different stock items </strong>(for example, several hundred or even thousands of unpacked stock items).</p>
+<p>In WM, the system must evaluate the <strong>complete stock situation of a bin </strong>whenever GR, GI, or WT confirmation is carried out. If a bin contains an extremely large number of stock items, this check becomes increasingly slow.</p>
+<p>This is based on a fundamental WM design principle:</p>
+<p><strong>A single storage bin should not contain extremely large amounts of unpacked stock items.</strong> In a physical warehouse, such a bin would be difficult or impossible to work with efficiently. Warehouse clerks would have a hard time finding the right stock items.</p>
+<p>When warehouse structures do not follow this principle, performance issues can occur.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To maintain stable performance, SAP recommends reducing the number of unpacked stock items per bin. The following approaches can be used:</p>
+<p><strong></strong></p>
+<p><strong>1. (Recommended): Use Handling Units (HUs)</strong></p>
+<p>Pack stock items into Handling Units rather than storing large numbers of unpacked stock items directly in the bin. Recommendation is to model physics in the system having HUs containing multiple stock items, i.e. as the items will be shipped on multiple loading carriers to customers.</p>
+<p><strong>Benefits:</strong></p>
+<p>· The system processes only HU‑related stock items during GR/GI or WT confirmation</p>
+<p>· Bins can hold many HUs without causing performance problems</p>
+<p>· Parallel processing becomes more efficient</p>
+<p>Important: Avoid using level of available quantity on bin level in the respective storage type of affected storage bins. Such settings can create new performance bottlenecks.</p>
+<p></p>
+<p><strong>2. Split the Bin into Smaller Bins</strong></p>
+<p>If handling units cannot be used:</p>
+<p>· Create multiple smaller bins</p>
+<p>· Distribute stock evenly among them</p>
+<p>This keeps the number of stock items per bin low and improves performance. For goods issue areas you could use app <a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps%28'%252FSCWM%252FSTADET_OUT'%29/S36" rel="noopener noreferrer nofollow" target="_blank">Determine Staging Area – Outbound </a>to determine different bins in the GI area. This setting allows determination of Staging Bays in a flexible way. You could determine different Staging Bays (= storage bin) e.g. per Route, Carrier, or Ship-To party.</p>
+<p></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><strong>Best Practice Recommendation</strong></p>
+<p style="padding-left: 40px;"><strong>Aim for having system and physical world in sync in a timely manner.</strong></p>
+<p style="padding-left: 40px;">Example: If in physics trucks leave the warehouse on hourly basis, do not only post goods issue once a week. Instead, post GI right after the truck has left your premises.</p>
+<p>This is especially important when several users may create or confirm WTs in the same area simultaneously.</p>
+<p></p>
+<p><strong>Additional Information </strong></p>
+<p>You can check the number of stock items on a bin using the <a href="https://fioriappslibrary.hana.ondemand.com/sap/fix/externalViewer/#/detail/Apps%28'%252FSCWM%252FMON'%29/S36" rel="noopener noreferrer nofollow" target="_blank">Warehouse Monitor</a> APP. There open the node Stock and Bin -&gt; Storage Bin -&gt; Physical Stock. On the selection screen specify the storage bin you would like to check. The result list shows the stock items on this bin in detail. As it also shows packed items the result list needs to be filtered to rows without an entry in column HU. With this filter in place, you can see the number of unpacked stock items on your bin. </p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Performance, Trace, Runtime, WO processing, WT confirmation, GI posting, GR posting, GR-AREA, GI-AREA, RFUI, RF, s/4hana public cloud.</p></div></div></div></div>

@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This note includes the following corrections in the S/4 Defense Disconnected system:</p>
+<p><strong>Issue:</strong></p>
+<p>1. Outbound Delivery creation is processed before all STOs queues for the Outbound Delivery are processed in the inbound side (REM) during Delta Load (DL).</p>
+<p>2. An error message regarding missing MBEW entries was raised when the system tried to reprocess the error queues via the report /SMFND/IBQ_TRANS_PROC_PROG.</p>
+<p><strong>Resolution: </strong></p>
+<p>1. Code updated to check whether all the STOs mentioned in the delivery (LIPS table) are there in the inbound side (REM) before proceeding with Outbound Delivery create.</p>
+<p>2. Outbound Delivery which is processed first initializes an instance of CL_MMIM_CROSS_SYSTEM which is kept alive also during the processing of later queues. Code logic added in Outbound Delivery MDO to reset this instance when the creation of the 6B1 movement  material document went into error in Delta Load in the inbound side (REM).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>STO, Outbound Delivery, Stock Transfer Order, S/4 Defense Disconnected</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the corresponding CI as per the note.</p></div></div></div></div>

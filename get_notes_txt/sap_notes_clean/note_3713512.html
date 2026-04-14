@@ -1,0 +1,51 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">A specific document number is not displayed in transaction <strong>AW01N</strong>, although:</p>
+<ul><li>
+<p>the document was posted to the same asset as other documents,</p>
+</li><li>
+<p>other postings (for example from later fiscal years) are visible in AW01N,</p>
+</li><li>
+<p>the asset itself can be displayed without errors.</p>
+</li></ul>
+<p>This situation typically occurs when reviewing historical postings and leads to the assumption that a reporting or system issue exists in AW01N.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul style="list-style-position: inside;"><li>FIN Asset Accounting</li><li>SAP ERP</li><li>SAP ERP Central Component</li><li>SAP enhancement package for SAP ERP</li><li>SAP enhancement package for SAP ERP, version for SAP HANA</li><li>SAP S/4HANA</li><li>SAP S/4HANA Finance</li><li>SAP S/4HANA Cloud Private Edition</li><li>SAP Fiori for SAP S/4HANA Finance,</li><li>SAP Fiori for SAP S/4HANA,</li><li>SAP Fiori for SAP S/4HANA Cloud Private Edition</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Open transaction AW01N.</p>
+</li><li>
+<p>Display an asset with multiple postings across different fiscal years.</p>
+</li><li>
+<p>Observe that some document numbers (for example from later fiscal years) are displayed.</p>
+</li><li>
+<p>Observe that a specific document (for example from an earlier fiscal year) is not displayed in AW01N, although it was posted to the same asset.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>AW01N is not a general document display.<br/>The report shows only postings that are Asset Accounting–relevant and were successfully posted further to Asset Accounting.</p>
+<p>A document will <strong>not be displayed</strong> in AW01N if, for example:</p>
+<ul><li>
+<p>it was posted in FI but not capitalized or posted further to the asset,</p>
+</li><li>
+<p>it was not Asset Accounting–relevant (posting type not relevant for FI-AA),</p>
+</li><li>
+<p>it exists only in FI and never reached Asset Accounting,</p>
+</li><li>
+<p>it was reversed or posted as a statistical/technical entry,</p>
+</li><li>
+<p>it originates from an older fiscal year (for example before migration or with different customizing).</p>
+</li></ul>
+<p>This behavior is <strong>by design.</strong></p>
+<p></p>
+<p>When is a document displayed in AW01N?<br/>A document is shown in AW01N only if:</p>
+<ul><li>
+<p>it was posted further to the asset (for example, capitalized),</p>
+</li><li>
+<p>it was Asset Accounting–relevant,</p>
+</li><li>
+<p>it was not reversed or posted as a purely technical/statistical entry.</p>
+</li></ul>
+<p>In this case, the posting appears as a movement in AW01N.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Verify the original posting of the document that is not displayed in AW01N:</p>
+<ul><li>
+<p>Check whether the document was capitalized or posted further to Asset Accounting.</p>
+</li><li>
+<p>Check the posting type and its relevance for FI-AA.</p>
+</li><li>
+<p>Check whether the document was reversed.</p>
+</li><li>
+<p>For older fiscal years, consider possible differences in customizing or migration history.</p>
+</li></ul>
+<p>If the document was not Asset Accounting–relevant or not posted further, it is expected that it does not appear in AW01N.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>AW01N Asset Accounting FI-AA Document not displayed</p>
+<p></p></div></div></div></div>

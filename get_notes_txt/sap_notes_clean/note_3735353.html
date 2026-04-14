@@ -1,0 +1,27 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Mass activation of ABAP Dictionary objects terminates with memory-related short dumps such as:</p>
+<ul>
+<li><code>SYSTEM_NO_MEMORY</code></li>
+<li><code>SYSTEM_NO_ROLL</code></li>
+<li><code>STACK_STATE_NO_ROLL_MEMORY</code></li>
+</ul>
+<p>The termination occurs inside the V1 postprocessing logic. Analysis of the short dump reveals an extremely deep call stack (tens of thousands of frames), indicating infinite recursion as the actual cause of memory exhaustion. Increasing memory parameters does not resolve the issue.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">RDDMASGL, STACK_STATE_NO_ROLL_MEMORY, SYSTEM_NO_MEMORY, infinite loop, infinite recursion, self-referencing structure, circular structure include, V1 postprocessing, CL_DDCMP_DDLS_V1_POSTPROC, circular dependency, ABAP Dictionary, structure activation</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>During V1 postprocessing, the activation framework recursively follows the include hierarchy of ABAP Dictionary structures. If two or more structures mutually include each other — directly or transitively — this recursion has no exit condition, causing an infinite call stack and eventual memory exhaustion.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Two separate actions are required to fully resolve this issue.</strong></p>
+<h3 data-toc-skip="">1. Apply the code correction</h3>
+<p>This SAP Note corrects the V1 postprocessing logic to detect circular include references and terminate the recursion gracefully. Apply this SAP Note or install the corresponding Support Package.</p>
+<p>Once the correction is applied, the activation will fail gracefully with an error message identifying the structures involved in the circular dependency, instead of crashing with a memory dump.</p>
+<h3 data-toc-skip="">2. Fix the circular structure definition</h3>
+<ol>
+<li><strong>Identify the affected structures</strong> from the error message produced after applying the code correction, or from the short dump call stack.</li>
+<li><strong>Inspect the include hierarchy</strong> in SE11 to confirm the circular reference.</li>
+<li><strong>Break the cycle</strong> by removing the include that creates the circular dependency.</li>
+</ol>
+<div id="skip-silence-bar"></div>
+<div id="skip-silence-bar"></div>
+<div id="skip-silence-bar"></div>
+<div id="skip-silence-bar"></div></div></div></div></div>

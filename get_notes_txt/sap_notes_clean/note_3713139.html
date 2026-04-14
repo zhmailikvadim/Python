@@ -1,0 +1,154 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When I attempt to send or receive SOAP messages between my middleware (such as SAP CPI or SAP PI/PO) and SAP Ariba, the integration fails. I may see connection errors, SSL handshake failures, authentication errors, SOAP validation errors, or timeout-related issues. As a result, my SOAP web service calls are not processed successfully.</p>
+<p>One or more of the following issues occur while integrating with SAP Ariba SOAP APIs:</p>
+<ul><li>
+<p>Unable to connect to SAP Ariba SOAP endpoint</p>
+</li><li>
+<p>SSL handshake failures</p>
+</li><li>
+<p>HTTP 401 Unauthorized or Invalid Security Token errors</p>
+</li><li>
+<p>SOAP request rejected due to XML or schema validation errors</p>
+</li><li>
+<p>Timeouts, slow responses, or no response received from Ariba</p>
+</li><li>
+<p>HTTP 500 internal server errors</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>Applicable for the following environments:</p>
+<ul><li>
+<p>SAP Ariba SOAP APIs</p>
+</li><li>
+<p>Integration via middleware such as SAP CPI, SAP PI/PO, or third-party ESB</p>
+</li><li>
+<p>Cloud Integration Gateway (CIG)</p>
+</li><li>
+<p>Inbound or outbound SOAP web service calls</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ul><li>
+<p>I trigger a SOAP web service call from my middleware to SAP Ariba.</p>
+</li><li>
+<p>The message fails during connection, authentication, payload validation, or response processing.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The issue can result from one or more of the following:</p>
+<ul><li>
+<p>Network or firewall blocking HTTPS traffic</p>
+</li><li>
+<p>SSL certificate trust chain or expiry issues</p>
+</li><li>
+<p>Incorrect or missing authentication credentials (certificate or basic auth)</p>
+</li><li>
+<p>Improper WS-Security headers</p>
+</li><li>
+<p>Invalid SOAP namespaces, structure, or missing mandatory elements</p>
+</li><li>
+<p>Unsupported characters or encoding errors in XML</p>
+</li><li>
+<p>Large payload sizes exceeding limits</p>
+</li><li>
+<p>Middleware timeout settings too low</p>
+</li><li>
+<p>SAP Ariba service outages or backend errors</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Follow the steps below to identify and resolve your specific SOAP API issue:</p>
+<h3 data-toc-skip="">1. Connectivity / SSL / Network issues</h3>
+<ol><li>
+<p>Verify that your middleware can reach SAP Ariba over HTTPS (port 443).</p>
+</li><li>
+<p>Test connectivity using tools such as ping, curl, or Postman.</p>
+</li><li>
+<p>Ensure the following domains are whitelisted:</p>
+<ul><li>
+<p>service.ariba.com</p>
+</li><li>
+<p>openapi.ariba.com</p>
+</li><li>
+<p>buyer.ariba.com (depending on the API)</p>
+</li></ul>
+</li><li>
+<p>Check proxy and firewall settings to confirm there is no HTTPS blocking or SSL interception.</p>
+</li><li>
+<p>If the SSL handshake fails:</p>
+<ul><li>
+<p>Ensure SAP Ariba root and intermediate certificates are trusted.</p>
+</li><li>
+<p>Update the trust store if certificates were renewed.</p>
+</li><li>
+<p>Verify certificate expiry and Common Name (CN).</p>
+</li><li>
+<p>In SAP CPI, navigate to Monitor → Keystore → Trusted Certificates.</p>
+</li></ul>
+</li></ol>
+<h3 data-toc-skip="">2. Authentication / certificate / WS-Security issues</h3>
+<ol><li>
+<p>Verify the authentication method configured for the SOAP API.</p>
+<ul><li>
+<p>SAP Ariba SOAP APIs typically use certificate-based or basic authentication.</p>
+</li></ul>
+</li><li>
+<p>Confirm that the correct and valid certificate is used.</p>
+</li><li>
+<p>Ensure the SOAP request includes a valid WS-Security header.</p>
+</li><li>
+<p>If you are using CIG:</p>
+<ul><li>
+<p>Go to CIG Portal → Connections → Test Connectivity.</p>
+</li><li>
+<p>Confirm that the handshake is successful.</p>
+</li></ul>
+</li></ol>
+<h3 data-toc-skip="">3. SOAP request / payload validation issues</h3>
+<ol><li>
+<p>Validate that the SOAP request is generated using the correct WSDL.</p>
+</li><li>
+<p>Verify that the correct namespaces are used in the SOAP envelope.</p>
+</li><li>
+<p>Ensure all mandatory elements are included in the payload.</p>
+</li><li>
+<p>Confirm that:</p>
+<ul><li>
+<p>XML encoding is UTF-8.</p>
+</li><li>
+<p>Special characters are properly escaped.</p>
+</li><li>
+<p>Payload size does not exceed SAP Ariba limits (typically less than 10 MB).</p>
+</li></ul>
+</li></ol>
+<h3 data-toc-skip="">4. SOAP response / timeout / performance issues</h3>
+<ol><li>
+<p>Check SAP Ariba system availability using the SAP Ariba status page.</p>
+</li><li>
+<p>Review middleware timeout settings.</p>
+<ul><li>
+<p>In SAP CPI, increase the adapter timeout if required.</p>
+</li></ul>
+</li><li>
+<p>Optimize the payload size by reducing the number of records per call.</p>
+</li><li>
+<p>Review middleware logs:</p>
+<ul><li>
+<p>HTTP 200 with empty response may indicate a backend issue.</p>
+</li><li>
+<p>HTTP 500 indicates an internal SAP Ariba error and requires support engagement.</p>
+</li></ul>
+</li></ol>
+<h3 data-toc-skip="">5. General troubleshooting</h3>
+<p>Before logging a support case, collect the following information:</p>
+<ol><li>
+<p>Full SOAP request and response XMLs with timestamps</p>
+</li><li>
+<p>Middleware logs</p>
+</li><li>
+<p>Endpoint details (test or production)</p>
+</li><li>
+<p>Certificate details (issuer, validity, serial number)</p>
+</li><li>
+<p>Screenshot of CIG or connectivity test</p>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>This KBA serves as a master troubleshooting guide for SAP Ariba SOAP API integrations and can be referenced for most connectivity, authentication, and payload-related issues.</p>
+<ul><li>
+<p>SAP Ariba system availability information on the SAP Ariba status page -<a href="https://support.ariba.com/item/view/KB0399464" rel="noopener noreferrer nofollow" target="_blank">Where can I find a report for SAP Ariba system availability?</a></p>
+</li><li>
+<p>SAP Ariba integration documentation for SOAP APIs - <a href="https://help.sap.com/docs/strategic-sourcing/soap-web-service-api-integration/what-are-sap-ariba-soap-web-service-apis" rel="noopener noreferrer nofollow" target="_blank">What Are SAP Ariba SOAP Web Service APIs?</a>, <a href="https://help.sap.com/doc/631084d43b6a4216b391ec37ce94733b/cloud/en-US/ws_index.htm" rel="noopener noreferrer nofollow" target="_blank">Index for supported web services</a></p>
+</li><li>
+<p>SAP Cloud Integration documentation for certificate and keystore management - <a href="https://connectsupport.ariba.com/sites#item-view&amp;/178876" rel="noopener noreferrer nofollow" target="_blank">SAP Ariba certificates</a>, <a href="https://help.sap.com/docs/business-network-freight-collaboration/administration-shipper/sap-cloud-integration-keystore" rel="noopener noreferrer nofollow" target="_blank">SAP Cloud Integration: Keystore</a></p>
+</li><li>
+<p>Always ensure certificates are up to date.</p>
+</li><li>
+<p>Use trace logs for debugging deeper XML and connectivity issues.</p>
+</li><li>
+<p>Follow SAP Ariba API documentation for payload schemas and limits.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SOAP API, SAP Ariba Web service, SAP Ariba, Connectivity, SSL, Authentication, WS-Security, Payload Validation, Namespaces, Timeout, Certificate, CPI, CIG, Integration </p></div></div></div></div>

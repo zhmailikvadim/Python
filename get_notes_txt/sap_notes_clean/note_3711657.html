@@ -1,0 +1,25 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The SAP Note contains the following two new enhancements:</p>
+<p>1. New BAdI BADI_FSTB_CAS_PA_CANCELLATION (interface IF_FSTB_CAS_PA_CANCELLATION, enhancement spot ES_FSTB_CAS_PA_PROCESSING):</p>
+<p>The BAdI is called during the cancellation of payment arrangements by mass run Cancel Payment Arrangements (report RFSTB_CAS_CANCEL_PAYM_ARRGMT) after receiving the data of the payment arrangements to be cancelled for a switch-out request. It identifies the standing orders and the direct debit mandates from the switch-from account. Forward orders and payment templates are not cancelled.</p>
+<p>The following methods are available:</p>
+<ul>
+<li>DETERMINE_STANDING_ORDER: Determines which standing order from the switch-from account is to be cancelled.</li>
+<li>DETERMINE_DD_MAND: Determines which direct debit mandate from the switch-from account is to be cancelled.</li>
+</ul>
+<p>The fallback class CL_FSTB_CAS_PA_CANCELLATION is available which identifies payment arrangements to be cancelled, as follows:</p>
+<ul>
+<li>Standing order: From all standing orders of the switch-from account, the standing order is identified by the recipient account (bank key and account number) and the reference number of creation.</li>
+<li>Direct debit mandate: The direct debit mandate is identified by the payer account (switch-from account), the mandate ID and the payee ID.</li>
+</ul>
+<p>2. Include the reference number of creation to identidy a standing order to be cancelled from switch-from account:</p>
+<p>After receiving the data of the payment arrangements to be cancelled for a switch-out request, the mass run Cancel Payment Arrangements (report RFSTB_CAS_CANCEL_PAYM_ARRGMT) identifies and cancels the standing orders based on the recipient account details. If multiple standing orders exist for the same recipient, an error is thrown.</p>
+<p>With this SAP Note, the determination logic is enhanced so that, in addition to the recipient bank details, the reference number of creation (data element BCA_DTE_SO_REFNO_CREATE) is also considered to accurately identify a standing order that needs to be cancelled. If multiple standing orders exist for the same recipient account and for the same reference number of creation, an error is thrown.</p>
+<p>The new logic is included in the method DETERMINE_STANDING_ORDER of fallback class CL_FSTB_CAS_PA_CANCELLATION.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>CAS, Current Account Switch Request</p>
+<p>Package FS_TB_CAS_AL</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Additional enhancements</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Import the relevant Support Package for your release. You can use transaction SNOTE to implement the correction instructions relevant for your release in advance.</p></div></div></div></div>

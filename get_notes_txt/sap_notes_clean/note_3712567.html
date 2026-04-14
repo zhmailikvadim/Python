@@ -1,29 +1,11 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">A client uses the BW InA client-server protocol and in a request an advanced filter containing a tuple filter is used. Such a request may not be processed, the response might contain error messages, also a program error might be recorded on the ABAP server. In the ST22 dump one will find the following:</p>
-<ul>
-<li>
-<p>Category ABAP programming error</p>
-</li>
-<li>
-<p>Runtime Errors ASSERTION_FAILED</p>
-</li>
-<li>
-<p>ABAP: Program CL_RS_INFOOBJECT_UNIVERSE=====CP</p>
-</li>
-<li>
-<p>Application Component BW4</p>
-</li>
-<li>The ASSERT condition was violated.</li>
-</ul>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>SAC, BW InA, advanced filter, tuple filter, story filter, widget filter, chart</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p id="">Program error.</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<ul>
-<li><strong>SAP BW/4HANA 2021</strong><br/>Implement Support Package 14 for SAP BW/4HANA 2021 (SAPK-30014INDW4CORE) into your SAP BW/4HANA system. The Support Package will be available as soon as <strong>SAP Note 3625395 </strong>with the short text "SAPBWNews SAP BW/4HANA 2021 SP14", which describes this Support Package in more detail, is released for customers.</li>
-</ul>
-<ul>
-<li><strong>SAP BW/4HANA 2023</strong><br/>Implement Support Package 08 for SAP BW/4HANA 2023 (SAPK-40008INDW4CORE) into your SAP BW/4HANA system. The Support Package will be available as soon as <strong>SAP Note 3639252 </strong>with the short text "SAPBWNews SAP BW/4HANA 2023 SP08", which describes this Support Package in more detail, is released for customers.</li>
-</ul>
-<p>In urgent cases you can use the correction instructions.<br/><br/>Before you use the correction instructions, make sure that you check <strong>SAP Note 1668882 and SAP Note 2248091</strong> for transaction SNOTE.<br/><br/>This SAP Note might already be available before the Support Package is released. In this case, however, the short text still contains the term "preliminary version".</p></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3712567&amp;TargetLanguage=EN&amp;Component=IS-A-HUM&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3712567/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3712567/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>You use transaction VL10HU to create an outbound delivery for handling units. These HUs are loosely assigned to a stock transport order. The purchase order has items with the Subcontracting Stock indicator. (SOBKZ = O). A short dump occurs with the error message "GETWA_NOT_ASSIGNED".</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>SAPLVHUDLVHU, LVHUDLVHUF09, ADD_MM_DATA_BY_ORDER, special stock indicator, SOBKZ, EKPO, EKKN</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Prerequisite:</p>
+<p>The purchase order has a special stock indicator that is not assigned to an account assignment.</p>
+<p>Reason:</p>
+<p>In the source code, it is assumed that a special stock indicator is always assigned to an account assignment and that an entry therefore exists in the table EKKN.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p></div></div></div></div></div>

@@ -1,0 +1,49 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Why are invoice lines not automatically generated for PO‑based invoices from the equivalent lines on the selected PO, and what criteria determine their creation?</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Invoice lines are automatically generated for PO-based invoices from the equivalent lines on the selected PO. The quantity or amount value in the generated invoice line is determined by the following enrichment rules, which are applied in the sequence described here.</p>
+<ol><li>
+<div>The invoice header subtotal amount equals the exact amount ordered on the PO, after applying the invoice tolerance.
+<ul><li>
+<p>In this case, one invoice line will be generated for each PO line, with the same ordered quantity or amount.</p>
+</li><li>
+<p>The amount ordered on the PO is the amount excluding the tax, charge, or discount amount applicable on the order.</p>
+</li></ul>
+</div>
+</li><li>
+<div>The invoice header subtotal amount equals the amount received against the PO, after applying the invoice tolerance.
+<ul><li>
+<p>In this case, one invoice line will be generated for each PO line, with the received quantity or amount.</p>
+</li><li>
+<p>The received amount is the amount accepted (<span style="font-family: 'courier new', courier;"><samp>AmountAccepted</samp></span>) or approved amount accepted (<span style="font-family: 'courier new', courier;"><samp>AmountAcceptedApproved</samp></span>), based on the value specified for the parameter Line items received for invoicing (<span style="font-family: 'courier new', courier;"><samp>Application.Procure.OrderReceivedForInvoicingOnReceiptApproval</samp></span>).</p>
+</li><li>
+<p>Invoice line items will not be created if the PO line has a zero received quantity or amount.</p>
+</li></ul>
+</div>
+</li><li>
+<div>The invoice header subtotal amount equals the amount received against the PO, less the amount reconciled, after applying the invoice tolerance.
+<ul><li>
+<p>In this case, one invoice line will be generated for each PO line, with the difference between the received quantity or amount and the reconciled quantity or amount.</p>
+</li><li>
+<p>Invoice line items will not be created if the received amount on the PO line is equal to the reconciled amount.</p>
+</li></ul>
+</div>
+</li><li>
+<div>The invoice header subtotal amount equals the amount ordered on the PO, less the amount reconciled, after applying the invoice tolerance.
+<ul><li>
+<p>In this case, one invoice line will be generated for each PO line, with the difference between the ordered quantity or amount and the reconciled quantity or amount.</p>
+</li><li>
+<p>Invoice line items will not be created if the ordered amount on the PO line is equal to the reconciled amount.</p>
+</li></ul>
+</div>
+</li><li>
+<div>There is no match between the invoice header subtotal amount and any of the amounts on the PO.
+<ul><li>
+<p>In this case, invoice lines will be generated for all PO lines, with the difference between the ordered quantity or amount and the reconciled quantity or amount.</p>
+</li></ul>
+</div>
+</li><li>
+<div>The scanned paper invoice is a credit memo.
+<ul><li>
+<p>In this case, invoice lines will be generated for all PO lines, with the ordered quantity or amount, but with negative values.</p>
+</li></ul>
+</div>
+</li></ol><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>When invoice tolerance is applied in enrichment rules 1 through 4, a match between the invoice and PO amounts occurs when their difference is smaller than the <strong>Absolute Tolerance</strong><span style="font-family: verdana, geneva;"><strong><samp> </samp></strong></span>and/or <strong>PercentageTolerance </strong>defined for each purchasing unit. In this case, to avoid having an unbalanced invoice, the line with the higher amount will be adjusted to include the difference, in the invoice document.</p>
+<p>For more information please see <a href="https://help.sap.com/docs/buying-invoicing/creating-and-managing-invoices/enrichment-rules-for-automatically-creating-invoice-line-items?locale=en-US&amp;version=2602" rel="noopener noreferrer nofollow" target="_blank">Enrichment Rules for Automatically Creating Invoice Line Items</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Enrichment Rules, ICS Invoice, AutoInvoiceLineCreation , purchasing unit</p></div></div></div></div>

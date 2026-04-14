@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3722671&amp;TargetLanguage=EN&amp;Component=IS-H-PM&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3722671/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3722671/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p><strong><em>This SAP Note is relevant only for the country version Germany.</em></strong></p>
+<p>You use your HBA card to sign electronic regulations. Signing is not possible.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>Crypt, RSA, ECC, HBA, health professional card, connector, PTV5, PTV6, ECC only, encryption procedure, consumer proxy, CO_ISH_TICERTIFICATE_SERVICE_P, READ_CARD_CERTIFICATE, CRYPT, TI, telematics infrastructure</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>This is caused by a program error.</p>
+<p>The method <em>READ_CARD_CERTIFICATE </em> has an optional parameter <em><em>CRYPT</em></em> in accordance with the GEMATIK specification. This parameter is not yet contained in the interface of the method <em>READ_CARD_CERTIFICATE<em> </em></em> of the consumer proxy <em><em><em>CO_ISH_TICERTIFICATE_SERVICE_P</em></em></em>. As a result, the system does not return a certificate and therefore signing is also not possible.</p>
+<p>Prerequisites:</p>
+<ul>
+<li>You use the country version Germany.</li>
+<li>The business function ISH_AMBULATORY is active in your system.</li>
+<li>You use a connector with PTV5 or lower (firmware version).</li>
+<li>You use a new HBA that has only one ECC certificate. There is no RSA certificate on the HBA, only an ECC certificate.</li>
+</ul>
+<p>Note that if you already use a corrector with PTV6, this error does not occur.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p>
+<p>This correction is the prerequisite for the correction of note <a href="/notes/3723569" target="_blank">3723569 DE: ACM: TI: Error in HBA signature without valid RSA certificate</a>.</p>
+<p>If you want to implement the corrections before you import the Support Package, <strong>you must also implement the corrections from SAP Note 3723569 after you implement this SAP Note</strong>. Note the sequence. Signing is only possible again if both SAP Notes are implemented.</p></div></div></div></div></div>

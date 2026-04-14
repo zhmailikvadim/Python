@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When you check the model in transaction PEST, the system displays the runtime error DATA_LENGTH_0 with Exception CX_SY_RANGE_OUT_OF_BOUNDS.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>PEST, PUST, SCAN, SAPLHRST, HRPY_PROCESS_SCAN_PROG</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason:</strong></p>
+<p>The ABAP scan statement returns a value of 0 for variable length "LEN1" when the system performs a dynamic call using literal text, such as:</p>
+<p>CALL METHOD ('CL_H4S4_ACCESS_BUSINESS_FUNC')=&gt;('CHECK_H4S4_SFWS_SC_01').</p>
+<p><strong>Prerequisites:</strong> You have a process model with a step that is defined as a payroll program.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After implementing this SAP Note, the system correctly handles the variable length in the ABAP scan statement during dynamic method calls. The system uses constant names for the class and method. Runtime error DATA_LENGTH_0 with Exception CX_SY_RANGE_OUT_OF_BOUNDS no longer occurs when you check the process model in transaction PEST.</p></div></div></div></div>

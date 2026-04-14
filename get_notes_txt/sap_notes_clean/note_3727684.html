@@ -1,16 +1,60 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">Valid during period 1.4.2026 – 30.9.2027 an Employer's Contribution is temporary lowered for Employees in an age of 18-22 years at start of income year. For year 2026 this means Employees born year 2003-2007.</p>
-<p>For such employees the Employer's Contribution is calculated with a rate of 20.81% for gross income that does not exceed 25.000 SEK per calendar month. For gross amounts above this limit, standard Employer’s contribution of 31.42% should be paid.</p>
+<div class="OutlineElement Ltr SCXW262575313 BCX8" id="__html0"></div>
+<div class="OutlineElement Ltr SCXW17404716 BCX8"></div>
+<div class="OutlineElement Ltr SCXW17404716 BCX8">
+<p class="Paragraph SCXW17404716 BCX8">You run the <strong>Programma di calcolo della retribuzione ITALIA</strong> (RPCALCI0) report for part-time employees. The system does not apply the part-time percentage limit maintained in the <strong>Grado di occupazione</strong> (BSGRD) field of the<strong> Retribuzioni di base</strong> (0008) infotype when it calculates the cap on monthly integration for events.</p>
+</div>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p id="">EC, Employer's Contribution, ECONY, HR_SE_CALC_ECONT</p>
+<div class="OutlineElement Ltr SCXW179768508 BCX8">
+<p class="Paragraph SCXW179768508 BCX8"><strong>Transaction:</strong> PC00_M19_CALC</p>
+</div>
+<div class="OutlineElement Ltr SCXW179768508 BCX8">
+<p class="Paragraph SCXW179768508 BCX8">&amp;ITASS_PLAF (for more information, see SAP Note <a href="/notes/2327917" target="_blank">2327917</a>)</p>
+<p class="Paragraph SCXW179768508 BCX8">Plafonamento, IT008</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<div class="SCXW197841139 BCX8">
+<div class="OutlineElement Ltr SCXW197841139 BCX8"></div>
+<div class="OutlineElement Ltr SCXW197841139 BCX8">
+<p class="Paragraph SCXW197841139 BCX8"><strong>Reason</strong></p>
+<p class="Paragraph SCXW197841139 BCX8">The system considers only the amount maintained in the <strong>Tabella periodi convenzionali</strong> (V_T5ITIG) table when it calculates the cap limit in the <strong>Elaborazione delle assenze</strong> (ITASS) payroll function with parameter PLAF.</p>
+</div>
+</div>
+<p><strong>Prerequisite</strong></p>
+<p>The following Support Package (SP) level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr><th>Release</th><th>Support Package</th></tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 06</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 19</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP D0</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04 (EhP6 and EhP7)</td>
+<td>HR SP K2</td>
+</tr>
+</tbody>
+</table></div>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>The new rate of <span style="text-decoration: underline;">20.81%</span> used in EC calculation for younger Employees is valid from 1.4.2026 and is stored under the constant ECONY in table T511K (please follow the document with manual steps attached to this SAP note to apply these changes).</p>
-<p>The calculation of age necessary for Employer's Contribution reflects the fact that Employee's age needs to be defined at the start of each income year for legal purposes.</p>
-<p> </p>
-<div class="table-responsive"><table border="0" cellpadding="1" cellspacing="1" class="table table-bordered table-striped col-resizeable" style="width: 1188px; height: 91px;">
+<div class="SCXW98177726 BCX8">
+<div class="OutlineElement Ltr SCXW98177726 BCX8">
+<p class="Paragraph SCXW98177726 BCX8">From now on, the <strong>Adjust plafonamento limit for absences</strong> (ADJUST_PLAFONAMENTO_LIMIT) method of the <strong>BADI: valutazione delle assenze con XNAB/ITASS</strong> (HRPAYIT_XNAB) BAdI allows you to adjust how the system calculates the cap limit for employees.</p>
+</div>
+</div>
+<p><strong>Versioning</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
 <tbody>
 <tr>
 <td><strong>Version</strong></td>
@@ -18,50 +62,43 @@
 <td><strong>Reason</strong></td>
 </tr>
 <tr>
-<td>01</td>
-<td>2026.03.18</td>
-<td>Release for customers - changes mentioned in the section of Solution have been done</td>
-</tr>
-<tr>
-<td>02</td>
-<td>2026.03.18</td>
-<td>Release for customers - manual steps instruction added, no change in the functionality</td>
-</tr>
-<tr>
-<td>03</td>
-<td>2026.03.27</td>
-<td>Release for customers - validity of SAP note release for 608 extended based on customer's request, no change in the functionality</td>
+<td>2</td>
+<td>April 6, 2026</td>
+<td>Released for Customer</td>
 </tr>
 </tbody>
 </table></div>
-<p> </p>
-<p><strong>Delivery</strong></p>
-<p>For correct application of this note, please implement Correction Instructions attached to the SAP note (by SNOTE transaction) and follow manual post-implementation steps described in attachment of this SAP note ("Manual_steps_3727685.pdf") or import appropriate Support Package into your system.</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>This problem is caused by a program error.</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id="">Implement the attached program corrections or import the<br/>relevant Support Package.</p>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>Max Parallel, ODH, Package Size</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>ODH process was designed to run in a batch work process. So, to enable parallel processing via RFC in dialog, ODH tool provides a new configuration parameter 'Max Parallel'.</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="OutlineElement Ltr SCXW234214447 BCX8">
+<p class="Paragraph SCXW234214447 BCX8">As a general rule, SAP recommends that you install a solution by applying a Support Package (SP). However, if you need to install a solution earlier, proceed as follows:</p>
 <ol>
-<li>Import the relevant Support Package or implement the correction instructions.</li>
-<li>In ODH transaction:</li>
-<ol>
-<li>Mark the ODH class.</li>
-<li>Hit the button 'Details(Analysis)'.</li>
-<li>Hit the button 'Show Parameters'. Here you choose 'Max Parallel'.</li>
-<li>Select a rule that you want to change its 'Max parallel'.</li>
-</ol>
-<li>If you set the 'Max Parallel' to more than 1 (default), the parallelization processing will run in dialog work process. In this case, you need to modify the 'Package size' parameter to avoid timeout.</li>
-</ol>
-<p>Note: The default value of Max Parallel is 1 which means the processing run in batch.</p>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>S4MOBADDON-8364, /MERP/CL_PM_NOTIFICATION_OD, /MERP/CL_PM_FUNCLOC1_OD, /MERP/CL_PM_EQUIPMENT1_OD, Pre Sync ABAP Objects, Optimised Delta Sync</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Reason: ABAP enhancements required to support pre sync functionality.</p>
-<p>Prerequisite: Prior to installing this note, please ensure the Mobile Foundation layer ABAP objects SAP note <a href="https://me.sap.com/notes/3581875" target="_blank">3581875</a> is installated in the system.</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Please apply this note in SAP system.</p></div></div></div></div>
+<li>Apply the manual implementation steps;</li>
+<li>Use Note Assistant (SNOTE) to implement the correction instructions;</li>
+</ol></div>
+<p><strong>Stay Informed</strong></p>
+<ul>
+<li>To get an email notification in case this SAP Note is updated, go to <a class="Hyperlink SCXW213975517 BCX8" href="https://launchpad.support.sap.com/#/mynotes?tab=New" rel="noreferrer noopener" target="_blank">My SAP Notes &amp; KBAs</a> or access the <a class="Hyperlink SCXW213975517 BCX8" href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" rel="noreferrer noopener" target="_blank">online help</a> for further information.</li>
+<li>For legal changes, access the <a class="Hyperlink SCXW213975517 BCX8" href="https://app.main.regulatory-change-manager.cloud.sap/" rel="noreferrer noopener" target="_blank">Regulatory Change Manager</a>.</li>
+<li>For documentation about Payroll Italy, access the <a class="Hyperlink SCXW213975517 BCX8" href="https://help.sap.com/docs/ERP_HCM/4a626d4db267456cb20b531a30968221/9579cc53a8b77214e10000000a174cb4.html?locale=en-US&amp;version=6.18.latest" rel="noreferrer noopener" target="_blank">Help Portal</a>.</li>
+<li>For information about the Note Assistant (SNOTE), access the <a class="Hyperlink SCXW213975517 BCX8" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="noreferrer noopener" target="_blank">SAP Support Portal</a>.</li>
+<li>For information about Support Package (SP) schedules, access the <a class="Hyperlink SCXW213975517 BCX8" href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" rel="noreferrer noopener" target="_blank">SAP ERP Human Capital Management – Support Package Schedules</a>. </li>
+</ul>
+<p><strong>Disclaimers</strong></p>
+<div class="SCXW257531997 BCX8">
+<div class="OutlineElement Ltr SCXW257531997 BCX8">
+<p class="Paragraph SCXW257531997 BCX8">By clicking an external hyperlink, you agree that, unless expressly stated otherwise, your agreement with SAP includes the following:</p>
+</div>
+<div class="ListContainerWrapper SCXW257531997 BCX8">
+<ul class="BulletListStyle1 SCXW257531997 BCX8">
+<li>The content of the associated website and any other external websites is not content provided by or on behalf of SAP, nor is it otherwise under SAP’s control.</li>
+<li>The fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the contents and information provided on such websites.</li>
+<li>SAP does not give any representation regarding the quality, safety, suitability, accuracy, or reliability of any external website or any of the information, content, and materials provided thereon.</li>
+<li>You visit those external websites entirely at your own risk. SAP shall not be directly or indirectly responsible or liable for any damage or loss caused or alleged to be caused by or in connection with your use or reliance on any content, goods, or services available on or through any such linked website. </li>
+</ul>
+</div>
+</div>
+<p><strong>Good to Know</strong></p>
+<ul>
+<li>When you install an SAP Note, some prerequisites, which are SAP Notes that have already been released and that change the same context of the current one, might be required. Even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</li>
+<li>During the piloting phase, this SAP Note is available only for pilot testing. Even though SAP performs internal functional tests, it is possible that tests in a customer environment reveal issues not captured before, making it necessary to update the solution and version of this SAP Note. After this SAP Note has its status updated to "Released for Customer", it will only be changed if there is a very specific situation that demands an update, and the reason for it will be added to the log of changes.</li>
+</ul>
+<p><link/></p></div></div></div></div>

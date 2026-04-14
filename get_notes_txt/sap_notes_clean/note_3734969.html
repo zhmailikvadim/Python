@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> In the processes "Decision Tree Diagram E_0608 (Registration of an Assignment)" (DE_B_GPKE_DSO_NIN_DTD_E0608) and "New Installation (DSO View)" (DE_B_GPKE_NIN_DSO), step 0230 overwrites any check result from the customer extension in step 0115.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html0">New Installation, change of supplier 24, DE_B_GPKE_NIN_DSO, customer extension, check result, pod identification, step 0115, step 0230, step 0235</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because step 0230 ignored the customer extension result.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>Activate BC set according to your system:</p>
+<p>S/4HANA 2021 SP07 service pack, BC set is /US4G/3_0_DSO_SP07_NOTE_3734969<br/>S/4HANA 2021 SP08 service pack, BC set is /US4G/3_0_DSO_SP08_NOTE_3734969<br/>S/4HANA 2025 SP00 service pack, BC set is /US4G/3_0_DSO_SP00_NOTE_3734969</p>
+<p>After implementing this SAP Note, step 0230 triggers step 0235 when a customer extension is detected. You need to implement pod identification in step 0235. You can verify the fix by checking that step 0230 doesn't provide a check result, step 0235 is triggered, and pod identification is performed by step 0235 instead of step 0230.</p>
+<p id="">This issue is relevant for the market role: DSO.</p></div></div></div></div>

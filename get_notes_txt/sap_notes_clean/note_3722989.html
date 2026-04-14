@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Sending of 55653 from Responsible MOS to SUP" (DE_B_MDC_55653_MOS2SUP_SEND), the meter reading card group information is missing in step 1100 when sending the 55653 message to the supplier.</p>
+<p>This issue is relevant for all market roles.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">MDC_55653_MOS2SUP, meter reading card, feed-in scenario, /UCOM/IF_BADI_POD_DATA_ACCESS-&gt;GET_POD_MALO, /US4G/CL_IM_BADI_POD_DATA_ACC, GET_POD_MALO</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because the system did not retrieve the market location POD for generation/feed-in scenarios.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system retrieves the feed-in POD when only a feed-in POD exists in the master data in API /US4G/CL_IM_BADI_POD_DATA_ACC-&gt;GET_POD_MALO. In the BPEM case, select the *<strong>Refetch Data</strong>* option. You can verify the fix by checking that the system sends the 55653 message to the supplier in the cloud with the complete meter reading card group information.</p></div></div></div></div>

@@ -1,0 +1,59 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP Note provides essential guidelines and information for the implementation of the PL_SAFT_VAT_JPK_V7M_V3 report. This report aligns with the JPK_VAT - JPK_V7(3) requirements due to KSeF and requirements related to Tax on Unreturned Deposits.</p>
+<p><br/>The Document and Reporting Compliance solution is available as of the SAP S/4HANA OP 2021 release and in all higher releases.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>SAF-T PL; SAF-T; SAFT; DRC; Poland, Compliance Reports; Document and Reporting Compliance;</p>
+<p>Tax reporting, audit, JPK_VAT, JPK_V3M, JPK_VATV7M, Standard Audit File, KSeF; e-invoic; Tax on Unreturned Deposits</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">This SAP Note is relevant only for Poland.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Explanation of Changes Implemented for PL_SAFT_VAT_JPK_V7M_V3 Compliance</strong></p>
+<p>To ensure compliance with the latest Polish VAT reporting regulations, we have made several critical updates to our SAP system under the PL_SAFT_VAT_JPK_V7M_V3 report. Below is a detailed explanation of the changes implemented:</p>
+<ol>
+<li>Related to KSeF:</li>
+<ul>
+<li>The system now supports the inclusion of the KSeF Reference Number ("NrKSeF") in the JPK_VAT (JPK_V7M) report. This number is crucial for tracking invoices processed via the National e-Invoicing System (KSeF), enhancing traceability and compliance.</li>
+<li>We have introduced new tags for invoices, including:
+<ul>
+<li>"OFF": Applies to invoices referred to in Article 106nf(1) of the VAT Act, which as of the date of submission of the records do not have an assigned identification in the National e-Invoice System;</li>
+<li>"BFK": Applies to invoices not sent through KSeF, e.g. in paper form.</li>
+<li>"DI": Applies to other specific identifiers, such as documents that do not have KSeF numbers, have not been sent to KSeF and do not fall under "OFF" or "BFK".</li>
+</ul>
+</li>
+<li>These tags allow for precise categorization and handling of invoices under various conditions, improving reporting accuracy. Please note that there is a limitation regarding the handling of the OFF mode, which will be addressed once the Ministry of Finance (MoF) provides the full solution.</li>
+</ul>
+<li>Related to Tax on Unreturned Deposits</li>
+<ul>
+<li>The system now supports <span><span>new requirements for VAT tax on the non-refundable deposit. This update ensures that transactions involving deposits that are not returned are accurately captured and reported in compliance with the new VAT regulations. <br/></span></span></li>
+<li>New VAT output tax codes similar to the examples below should be created by you for the VAT tax on non-refundable deposits:<br/>
+<ul>
+<li>Output tax - on the non-refundable deposit at 5%</li>
+<li>Output tax - on the non-refundable deposit at 8%</li>
+<li>Output tax - on the non-refundable deposit at 23%</li>
+</ul>
+</li>
+</ul>
+</ol>
+<p>The SAF-T XSD structures for JPK_V7M were upgraded to version 3. This ensures readiness for future compliance, as version 3 will substitute the current version 2, which remains obligatory until 01.02.2026. This change accommodates necessary adjustments in structure definitions resulting from recent regulatory updates.</p>
+<p>We have updated the system configurations to reflect the new VAT refund deadline, reducing it from 60 days to 40 days. This modification ensures that our financial processes align with the updated legal requirements for expedited VAT refunds.</p>
+<p>Introduction of Edit Data Preview Option: This version of the report introduces a new Edit Data Preview option. Customers can now preview the report data with the ability to make changes as needed. This feature enhances flexibility and user control, allowing customers to tailor the report outputs to better meet their specific needs</p>
+<p>As a general rule, SAP recommends that you implement the Support Package specified for your release. This significantly reduces the SAP Note implementation efforts.</p>
+<p>Implement the SAP Notes in the sequence shown. Note the following:</p>
+<ul>
+<li>Some of the SAP Notes have pre and post implementation steps. Make sure you carry out them in your system.</li>
+<li>Depending on your Support Package (SP), you may not need to implement certain SAP Notes. Check the following information:</li>
+<ul>
+<li>Delivered SP: If your system release is the delivered support package or a higher release, you can skip the SAP Note.</li>
+<li>Supported SP: If your system release is one of the supported support packages, you need to implement the SAP Note</li>
+</ul>
+</ul>
+<p>SAP S/4HANA Cloud Private Edition, S/4HANA Cloud Public Edition, S/4HANA support the storing of KSeF numbers using the ODN framework.</p>
+<div class="OutlineElement Ltr SCXW107478984 BCX4">
+<p class="Paragraph SCXW107478984 BCX4"><strong>Product Documentation </strong></p>
+</div>
+<ul>
+<li class="OutlineElement Ltr SCXW107478984 BCX4">
+<p class="Paragraph TrackedChange SCXW107478984 BCX4">For the initial delivery of the statutory report, see the "What's New" information on the SAP Help Portal: SAP S/4HANA: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/781898758a354ae3bb2d840518b2339b.html" target="_blank">KSeF Requirements for SAF-T JPK_VAT with Declaration (JPK_V7M) - Monthly Report</a></p>
+</li>
+<li>To display the Help Portal documentation, check the following link: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/80a58aef89b3425f8c334dc588567789/dc4def9770934a12a5f2b61091c28a70.html?version=2025.000" target="_blank">SAP S/4HANA: SAF-T JPK_VAT with Declaration (JPK_V7M) - Monthly</a></li>
+</ul></div></div></div></div>

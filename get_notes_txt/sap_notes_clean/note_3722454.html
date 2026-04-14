@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">1. Resolved the truncation issue if the length of the tracking unit stop ID exceeded 16 characters.</p>
+<p>2. Resolved the duplicate planned event issue. If a freight order or a freight booking contains a stop where the same stop ID has multiple stop roles assigned, for example, stop ID ZS01 has both the standard stop role and the LH (Load Handling Substop for Advanced Shipping &amp; Receiving) role—then, when the tracked process is generated and sent to GTT, the following error appears in the MML (Manage Message Logs): “Duplicate planned events XXX are not allowed. Change the message payload to remove the duplication or contact your Model Administrator.”</p>
+<p>3. Added the carrier reference document for the scenario "Generate Tracking Unit based on Container Unit". The system now retrieves this data from the following sources in order of precedence:</p>
+<ol start="1">
+<li> "Document References" sub-tab within the Container Unit's "Items" tab.</li>
+<li> "Document References" tab of the corresponding freight booking.</li>
+</ol>
+<p>4. Other code enhancements.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Tracking unit stop ID truncated, duplicate planned events, carrier reference document</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached correction instructions.</p></div></div></div></div>

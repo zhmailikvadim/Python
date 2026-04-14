@@ -1,44 +1,28 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<div class="table-responsive" id="__html0"><table border="0" cellpadding="1" cellspacing="0" class="table table-bordered table-striped col-resizeable">
-<tbody>
-<tr>
-<td>Component:</td>
-<td>Risk Management</td>
-</tr>
-<tr>
-<td>Module:</td>
-<td>Risk Assessment</td>
-</tr>
-</tbody>
-</table></div>
-<p>You edit risk assessments on the <em>Manage Risk Assessment Projects</em> app (App ID EHHSS_UI_RAS_ENTRY). You select the step <em>Determine Initial Risk</em> or <em>Determine Residual Risk</em> for a risk. The system encounters a runtime error. The <em>ABAP Runtime Errors</em> transaction displays the following error details:</p>
-<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
-<tbody>
-<tr>
-<td>Category</td>
-<td>ABAP programming error</td>
-</tr>
-<tr>
-<td>Runtime Errors</td>
-<td>OBJECTS_OBJREF_NOT_ASSIGNED_NO</td>
-</tr>
-<tr>
-<td>Exception</td>
-<td>CX_SY_REF_IS_INITIAL</td>
-</tr>
-<tr>
-<td>Web-Dynpro-Component</td>
-<td>EHHSSWDC_RAS_OIF_RMATRIX</td>
-</tr>
-</tbody>
-</table></div>
-<p> </p>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p><span class="SNO_DNT" style="float: none;" translate="no">EHHSSWDC_RAS_OIF_RMATRIX</span></p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p><span style="text-decoration: underline;">Reason:</span><br/>Program error.</p>
-<p><span style="text-decoration: underline;">Prerequisites:</span><br/>For information about the validity of the corrections, see the correction instructions.</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>After implementing this SAP Note, the system no longer encounters the runtime error when you determine initial risk or residual risk in the Manage Risk Assessment Projects app.</p>
-<p>The Support Packages section lists the Support Packages that contain these corrections.</p>
-<p>Alternatively, you can implement the attached correction instructions.</p></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3730431&amp;TargetLanguage=EN&amp;Component=BW-BEX-OT-MDX&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3730431/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3730431/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>When you use the 'bxml-flattening' interface, the scaling factor defined in the BW query is used unexpectedly for the cell property 'Value'.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>Scaling Factor Sign Reversal bxml VALUE FORMATTED_VALUE</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>There is a program error.</p>
+<p>The problem occurs only if a plus/minus sign reversal is active for the affected BW key figure. This is a side effect of SAP Note 3515144.</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<ul>
+<li><strong><span style="text-decoration: underline;">SAP BW 7.50</span></strong><br/>Import Support Package 36 for SAP BW 7.50 (SAPK-75036INSAPBW) into your BW system. The support package is available once <strong>SAP Note 3725030 </strong> ("SAPBWNews NW BW 7.50 ABAP SP36"), which describes this SP in more detail, has been released for customers.</li>
+</ul>
+<ul>
+<li><span style="text-decoration: underline;"><strong>SAP BW 7.56</strong></span><br/>Import Support Package 10 for SAP BW 7.56 (SAPK-75610INSAPBW) into your BW system. The support package is available once <strong>SAP Note</strong> <strong> 3672673 </strong> (<strong></strong>"SAPBWNews NW BW 7.56 ABAP SP10"), which describes this SP in more detail, has been released for customers.</li>
+</ul>
+<ul>
+<li><strong><span style="text-decoration: underline;">SAP BW 7.57</span><br/></strong>Import Support Package 08 for SAP BW 7.57 (SAPK-75708INSAPBW) into your BW system or AS ABAP system. The support package is available once <strong>SAP Note <strong>3672675</strong> </strong> ("SAPBWNews NW BW 7.57 ABAP SP08"), which describes this SP in more detail, has been released for customers.<br/><br/></li>
+<li><strong><span style="text-decoration: underline;">SAP BW 7.58</span><br/></strong>Import Support Package 06 for SAP BW 7.58 (SAPK-75806INSAPBW) into your BW system or AS ABAP system. The support package is available once <strong>SAP Note 3538326 </strong> ("SAPBWNews NW BW 7.58 ABAP SP06"), which describes this SP in more detail, has been released for customers.</li>
+</ul>
+<ul>
+<li><strong><span style="text-decoration: underline;">SAP BW 8.16</span><br/></strong>Import Support Package 02 for SAP BW 8.16 (SAPK-81602INSAPBW) into your BW system or AS ABAP system. The support package is available once <strong>SAP Note 3692519 </strong> ("SAPBWNews NW BW 8.16 ABAP SP02"), which describes this SP in more detail, has been released for customers.</li>
+</ul>
+<ul>
+<li><span style="text-decoration: underline;"><strong>SAP BW/4HANA 2021</strong></span><br/>Import Support Package 14 for SAP BW/4HANA 2021 (SAPK-30014INDW4CORE) into your BW system. The support package is available once <strong>SAP Note 3625395 </strong> ("SAPBWNews SAP BW/4HANA 2021 SP14"), which describes this SP in more detail, has been released for customers.<br/><br/></li>
+<li><span style="text-decoration: underline;"><strong>SAP BW/4HANA 2023</strong></span><br/>Import Support Package 09 for SAP BW/4HANA 2023 (SAPK-40009INDW4CORE) into your BW system. The support package is available once <strong>SAP Note 3678578 </strong> ("SAPBWNews SAP BW/4HANA 2023 SP09"), which describes this SP in more detail, has been released for customers.</li>
+</ul>
+<p>In urgent cases, you can use the correction instructions as an advance correction.</p>
+<p><strong>Before you do this, you must refer to SAP Notes 1668882 and 2248091 for information about transaction SNOTE.</strong></p>
+<p>To provide information in advance, the specified SAP Notes may already be available before the Support Package is released. In this case, however, the short text still contains the word "preliminary version".</p></div></div></div></div></div>

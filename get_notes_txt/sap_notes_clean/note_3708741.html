@@ -1,0 +1,129 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><strong>What it is about:</strong><br/>For cases where UI Data Protection for SAP S/4HANA does not support masking or data blocking out of the box, UI Data Protection API can be used for data protection.</p>
+<p>Examples of such scenarios include:</p>
+<ul>
+<li>System to system communication cases where user interface is not involved. E.g. Masking in RFCs and WebServices</li>
+<li>Case where required context is not available on the UI layer. E.g. certain old classicial reports </li>
+<li>Out of scope UI technology is being used by application. E.g. embedded HTML views</li>
+</ul>
+<p>For these cases, the solution provides Data Protection APIs in the form of class methods that can be used to implement custom masking or blocking logic. However, these APIs are intended as a fallback option and should be used only when traditional or configuration-based masking approaches are not applicable or do not work directly.</p>
+<p><strong>Intention of this SAP Note:<br/></strong>This consulting SAP Note provides an overview of the UI Data Protection APIs and explains how to use these APIs for implementing masking or data blocking in scenarios where standard or configuration-based approach is not supported or cannot be applied due to missing context.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""><span style="font-family: Arial, Helvetica, sans-serif; font-size: medium;">UI Masking, UI Data Protection Masking, UIDP 100, </span><span style="font-family: Arial, Helvetica, sans-serif; font-size: medium;">Data Protection APIs</span></p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> Standard UI Data Protection masking or data blocking cannot be applied because the required framework support or runtime context for attribute-based masking is not available in certain scenarios.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong style="font-size: 14px;">Masking API:</strong></p>
+<p>Follow the steps below to call the Data Protection Masking API at an appropriate interception point.</p>
+<ol>
+<li>Identify a suitable interception point in the application flow where custom logic can be implemented. This interception point can be an existing BAdI, enhancement spot, user exit, or an implicit enhancement in the code.</li>
+<li>Ensure that the interception point is reached after the application’s business logic has been executed, so that the final data to be returned is available. Typical examples include the end of an RFC, a post-processing BAdI, or similar exit points. This approach ensures that masking is applied correctly to the output data without impacting the core business logic.</li>
+<li>Call the UI Data Protection Masking API at the identified interception point.</li>
+<li>Pass a data reference of the data object (table, structure, or variable) that needs to be masked to the API method.</li>
+</ol>
+<p>Parameters:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 1013px; height: 101px;">
+<tbody>
+<tr>
+<td><strong>Parameter Name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Optional</strong></td>
+<td><strong>Use</strong></td>
+</tr>
+<tr>
+<td>IT_FIELD_MAP</td>
+<td>Importing</td>
+<td>X</td>
+<td>
+<p>Required only for table–field–based masking; not needed for data-element-based masking.<br/>Maintain the table name–field name mapping for the fields to be masked. The field name should be from the structure or table that is passed in paramter CR_DATA. Table name could be of your choice.</p>
+</td>
+</tr>
+<tr>
+<td>IV_UNAME</td>
+<td>Importing</td>
+<td>X</td>
+<td>User ID for which the authorization check is performed.</td>
+</tr>
+<tr>
+<td>CR_DATA</td>
+<td>Changing</td>
+<td> </td>
+<td>Data reference to the table, structure, or variable to be masked.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Data Blocking API:<br/></strong>Follow the steps below to call the Data Blocking API at an appropriate interception point.</p>
+<ol>
+<li><span style="font-size: 14px;">Analyze the business transaction and identify a suitable enhancement option where the API can be invoked. This can be an existing BAdI, customer exit, user exit, or an implicit enhancement point.</span></li>
+<li>Determine the blocking requirement based on the use case:</li>
+<ul>
+<li>Data Blocking:For example, blocking the execution or response of a web service or RFC call when a sensitive value is detected in the request payload</li>
+<li>Data Suppression/Filtering:For example, suppressing selected records in the response of a web service or RFC-based system-to-system data transfer</li>
+</ul>
+<li><span style="font-size: 14px;">Call the Data Blocking API at the identified interception point by passing a data reference to the data object (table, structure, or variable) that needs to be blocked or suppressed.</span></li>
+<li><span style="font-size: 14px;">Evaluate the API response:</span></li>
+<ul>
+<li><span style="font-size: 14px;">The API returns an indicator specifying whether blocking or Suppression/Filtering has been applied.</span></li>
+<li><span style="font-size: 14px;">In case of authorization failure, a corresponding message is returned.</span></li>
+</ul>
+<li><span style="font-size: 14px;">Raise the returned message explicitly in the interception logic to stop processing or suppress data as required.<br/></span></li>
+</ol>
+<p><span style="font-size: 14px;">Parameters:<br/></span></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 947px; height: 119px;">
+<tbody>
+<tr>
+<td><strong>Parameter Name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Optional</strong></td>
+<td><strong>Use</strong></td>
+</tr>
+<tr>
+<td>IT_FIELD_MAP</td>
+<td>Importing</td>
+<td>X</td>
+<td>
+<p>Required only for table–field–based blocking; not needed for data-element-based blocking.<br/>Maintain the table name–field name mapping for the fields to be blocked.</p>
+</td>
+</tr>
+<tr>
+<td>IV_UNAME</td>
+<td>Importing</td>
+<td>X</td>
+<td>User name for which the authorization check is performed.</td>
+</tr>
+<tr>
+<td>CR_DATA</td>
+<td>Changing</td>
+<td> </td>
+<td>Data reference to the table, structure, or variable that needs to be blocked or suppressed.</td>
+</tr>
+<tr>
+<td>EV_INDICATOR</td>
+<td>Exporting</td>
+<td>NA</td>
+<td>
+<p>Returns the action applied by the API:</p>
+<ul>
+<li>‘B’ – Data Blocking (structure or variable)</li>
+<li>‘S’ – Data Suppression/Filtering (table data)</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>ES_RETURN</td>
+<td>Exporting</td>
+<td>NA</td>
+<td>
+<p>Returns the message class and message number.<br/>The developer must explicitly raise this message at the interception point.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><span style="font-size: 14px;"><strong>Example:<br/><br/></strong>For Masking API example refer to the Blog: <a href="https://community.sap.com/t5/technology-blog-posts-by-sap/ui-data-protection-masking-bank-account-field-of-customer-using-masking-api/ba-p/13437150" target="_blank">Masking API</a>.</span></p>
+<p><span style="font-size: 14px;">For Blocking API example refer to the attachment 'Data Blocking API.Docx'. </span></p>
+<p><span style="font-size: 14px;"><strong>Considerations: </strong><br/></span></p>
+<ol>
+<li><span style="font-size: 14px;">The Data Protection APIs are intended to be used only as a fallback option and should be considered when traditional or configuration-based masking approaches are not applicable or do not work directly. These APIs are not a replacement for standard UI Data Protection configuration and should be used selectively based on the application scenario.<br/></span></li>
+<li><span style="font-size: 14px;">In the case of the Masking API, numeric fields are masked by replacing the original values with ‘0’, as masking with ‘*’ is applicable only to character-based fields.</span></li>
+<li><span style="font-size: 14px;">Masking APIs  should be used only in case Reac scenarios as for update scenarios more complex handling will be required. For Eg. Replacing masked value with actual value before commiting them to data base. </span></li>
+</ol></div></div></div></div>

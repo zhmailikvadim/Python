@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<div class="longtext">
+<p>While <span>login into Service Layer, an error occurs: <em>401, Internal error: Get access token error,{\"error\":\"unknown_error\",\"error_description\":\"For more on this error consult the server log.\"}</em><span>.</span></span></p>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<div class="longtext" style="font-size: 100.01%;">
+<div class="longtext">
+<div class="longtext">
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>Both <em>Active Directory Domain Services</em> and <em>SAP Business One Authentication Server</em> are enabled under <em>Identity Providers</em> tab in System Landscape Directory (SLD).</li>
+<li>In SLD, navigate to the <em>Users </em>tab and create an <em>SAP Business One Authentication Server</em> user as 'manager' and set its Password as '<em>Welcome1!</em>'.</li>
+<li>Login into SAP Business One client with 'manager' user. The system asks you to change the password for 'manager'. Set the new Password having special characters such as '<em>%iTest1</em>'.</li>
+</ul>
+<p><strong>Scenario:</strong></p>
+<p>Login into Service Layer with 'manager' user as below:</p>
+<p><span>POST /b1s/v1/Login</span></p>
+<p><span>{</span><br/><span>    "CompanyDB": "405830",</span><br/><span>    "Password": "<strong>%iTest1</strong>",</span><br/><span>    "UserName": "manager"</span><br/><span>}</span></p>
+<p><strong>Expected behavior:</strong></p>
+<p>Login is successful.</p>
+<p><strong>Actual behavior:</strong></p>
+<div class="longtext">
+<p>An error occurs:</p>
+<p><em>{</em><br/><em>    "error": {</em><br/><em>        "code": 401,</em><br/><em>        "message": {</em><br/><em>            "lang": "en-us",</em><br/><em>            "value": "Internal error: Get access token error,{\"error\":\"unknown_error\",\"error_description\":\"For more on this error consult the server log.\"}."</em><br/><em>        }</em><br/><em>    }</em><br/><em>}</em></p>
+</div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>SAP intends to provide a feature package or patch to solve the symptom that is described in this SAP Note. The section <strong>References</strong> below lists the related feature package or patch once they become available. Be aware that <strong>References</strong> can only be confirmed at feature package or patch release date. SAP delivers feature packages or patches only for selected releases at its own discretion, based on the business impact and the complexity of implementation.</p>
+<p><em><strong><strong>Workaround:</strong></strong></em></p>
+<p>Set the password without special characters.</p>
+<h3 class="section" data-toc-skip="" id="Other terms">Other terms</h3>
+<p id="">unknown_error, error_description, Get access token error</p></div></div></div></div>

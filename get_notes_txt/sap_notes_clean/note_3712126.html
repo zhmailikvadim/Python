@@ -1,0 +1,113 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<h3 data-toc-skip="" id="__html0">Sales Order Change – Missing F4 Help</h3>
+<p>In Sales Order Change scenarios, <strong>Joule does not display the required F4 help lists</strong> when configuration values contain special characters such as <code>"</code> or <code>\</code>.</p>
+<p>When asked to change for either delivery block reason/ billing block reason /change of payment terms/ sales document rejection reason  in the sales order , Joule doesn't return List diplay with respective F4 helps .</p>
+<p>This issue is observed in the following scenarios:</p>
+<ul>
+<li>
+<p>Changing <strong>Delivery Block Reason</strong></p>
+</li>
+<li>
+<p>Changing <strong>Billing Block Reason</strong></p>
+</li>
+<li>
+<p>Changing <strong>Payment Terms</strong></p>
+</li>
+<li>
+<p>Changing <strong>Sales Document Rejection Reason</strong></p>
+</li>
+</ul>
+<p>When special characters are present in the <strong>code or description</strong> of these configurations, Joule fails to return the list display with F4 help.</p>
+<h3 data-toc-skip="">Sales Order Fulfilment Monitoring (SOFM) – Carousel Not Displayed</h3>
+<p>In SOFM issue scenarios, <strong>Joule fails to load the carousel display</strong> (zero cards are shown) for the following issue types:</p>
+<ol>
+<li>
+<p>Delivery Block in Sales Order</p>
+</li>
+<li>
+<p>Delivery Issue in Sales Order</p>
+</li>
+</ol>
+<p>This occurs when the sales order data contains special characters such as <code>"</code> or <code>\</code> in:</p>
+<ul>
+<li>
+<p>Material descriptions</p>
+</li>
+<li>
+<p>Delivery block reason codes or descriptions</p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>API_SalesDocuments_AI_SRV,display SOFM Issues in Joule, Joule sales order change capability,Change delivery block reason, change payment terms,display sales order issue , delivery issue in sales order, delivery block in sales order</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>In both <strong>Sales Order Change</strong> and <strong>Sales Order Fulfilment Monitoring (SOFM)</strong> scenarios, Joule fails to handle special characters (for example <code>"</code> and <code>\</code>) present in backend configuration .</p>
+<p>These special characters are not properly escaped while forming JSON responses, resulting in <strong>invalid JSON structures</strong>. As a consequence:</p>
+<ul>
+<li>
+<p>F4 help lists fail to render in Sales Order Change scenarios.</p>
+</li>
+<li>Carousel displays fail to load (showing zero cards) in SOFM for delivery block and delivery issue cases.</li>
+</ul>
+<p>Reason : Joule does not properly escape special characters such as <code>"</code> and <code>\</code> while constructing JSON responses from backend configuration and transactional data.<br/><br/></p>
+<p>This leads to:</p>
+<ul>
+<li>
+<p><strong>F4 help lists not rendering</strong> in Sales Order Change scenarios when delivery block reason, billing block reason, payment terms , or rejection reason 'codes/descriptions' contain special characters.</p>
+</li>
+<li>
+<p><strong>Carousel display failures (zero cards shown)</strong> in Sales Order Fulfilment Monitoring (SOFM) for delivery block and delivery issue cases when sales order data (for example, material descriptions or delivery block reasons) contains special characters.</p>
+</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The issue was caused by special characters (for example <code>"</code> and <code>\</code>) present in backend configuration and transactional data not being properly escaped while constructing JSON responses. This resulted in invalid JSON structures, which caused UI rendering failures in Joule.</p>
+<p>The implementation corrects JSON handling by ensuring that special characters are properly escaped before forming responses consumed by the Joule UI.</p>
+<p>As a result:</p>
+<ul>
+<li>
+<p><strong>Sales Order Change scenarios</strong></p>
+<ul>
+<li>
+<p>F4 help list rendering is now stable when special characters exist in:</p>
+<ul>
+<li>
+<p>Delivery block reason (code and description)</p>
+</li>
+<li>
+<p>Billing block reason</p>
+</li>
+<li>
+<p>Customer payment terms</p>
+</li>
+<li>
+<p>Sales document reason (header level)</p>
+</li>
+<li>
+<p>Sales document rejection reason (item level)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>The F4 help list is displayed correctly, and sales order updates complete successfully.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Sales Order Fulfilment Monitoring (SOFM)</strong></p>
+<ul>
+<li>
+<p>Carousel rendering is now supported for the following issue categories when special characters are present in material descriptions or delivery block reasons:</p>
+<ul>
+<li>
+<p><strong>SO02 – Delivery Block in Sales Order</strong></p>
+</li>
+<li>
+<p><strong>SO05 – Delivery Issues in Sales Order</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>The carousel now displays the relevant cards instead of failing with zero cards.</p>
+</li>
+</ul>
+</li>
+</ul></div></div></div></div>

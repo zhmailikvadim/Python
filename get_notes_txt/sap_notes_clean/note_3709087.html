@@ -1,0 +1,123 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP note provides you with relevant system changes to prepare the following events with limited scope for alphanumeric CNPJs:</p>
+<ul>
+<li><strong>S-1070 - Tabela de processos administrativos/judiciais</strong> (administrative/legal proceedings table)</li>
+<li><strong>S-1260 - Comercialização da produção rural pessoa física</strong> (marketing of rural production, natural person)</li>
+<li><strong>S-1270 - Contratação De Trabalhadores Avulsos Não Portuários</strong> (Hiring Of Temporary Workers, Non-Dockworkers)</li>
+<li><strong>S-2210 - Comunicação de Acidente de Trabalho</strong> (Work Accident Communication) </li>
+<li><strong>S-2220 - Monitoramento da Saúde do Trabalhador </strong>(Monitoring of employee health)</li>
+<li><strong>S-2231 - Cessão/Exercício Em Outro Órgão</strong> (Assigment In Another Entity)</li>
+<li><strong>S-2240 - Condições ambientais do trabalho - fatores de risco</strong> (Environmental working conditions - risk factors)</li>
+<li><strong>S-2400 - Cadastro de Beneficiário - Entes Públicos - Início </strong>(Beneficiary registration – public entities - beginning)</li>
+<li><strong>S-2405 - Cadastro de Beneficiário - Entes Públicos - Alteração </strong>(Beneficiary registration – public entities - update)</li>
+<li><strong>S-2410 - Cadastro De Benefício - Entes Públicos - Início</strong> (Benefit Registration – Public Entities – Beginning)</li>
+<li><strong>S-2416 - Cadastro De Benefício - Entes Públicos - Alteração</strong> (Benefit Registration – Public Entities – Update)</li>
+<li><strong>S-2418 - Reativação De Benefício - Entes Públicos</strong> (Benefit Reactivation – Public Entities)</li>
+<li><strong>S-2420 - Cadastro De Benefício - Entes Públicos - Término</strong> (Benefit Registration – Public Entities – Expiration)</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Alphanumeric CNPJ; event structures</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p>According to the Normative Instruction nº 2229, October 15 of 2024, starting from July 2026, CNPJs may be alphanumeric. Therefore, system adjustment are necessary to ensure correct reporting of this information.</p>
+<p><strong>Prerequisites</strong></p>
+<p>You have applied the following SAP Note as prerequisite: <a href="https://me.sap.com/notes/3700999" target="_blank">3700999</a> - eSocial - Alphanumeric CNPJ - Changes in standard events.</p>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>SAP_HRCBR 6.04 (EhP6 and EhP7)</td>
+<td>HR SP J1</td>
+</tr>
+<tr>
+<td>SAP_HRCBR 6.08</td>
+<td>HR SP B9</td>
+</tr>
+<tr>
+<td>S4HCMCBR 1.00</td>
+<td>HR SP 08</td>
+</tr>
+<tr>
+<td>S4HCMCBR 1.01</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCMCBR 1.02</td>
+<td>HR SP 00</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</p>
+<p>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This SAP Note delivers changes in the following structure fields to prepare the system for alphanumeric CNPJs:</p>
+<ul>
+<li>HRPADBR_EFDE_S_ADMIN_LAWSUIT (field EMPLOYER-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_PAY_OSSR (field EMPLOYER-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_PAY_OSSR (field EMPLOYEE_INFO-LINK_SUCESSION-<strong>PREVIOUS_CNPJ</strong>)</li>
+<li>HRPADBR_EFDE_S_PAY_OSSR (field PAYMENT-LINK_SUCESSION-WORKPLACES-WRKPLC_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_PAY_OSSR (field PAYMENT-LINK_SUCESSION-PY_PREVIOUS-PERIODS-WORKPLACES-WRKPLC_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_PAY_OSSR (field PAYMENT-LINK_SUCESSION-RRA-LAWYER_INFO-<strong>LAWYER_INSC_NR</strong>)</li>
+<li>HRPADBR_EFDE_S_PAY_BEN_OSSR (field EMPLOYER-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_PAY_BEN_OSSR (field PAYMENT-WORKPLACES-WRKPLC_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_PAY_BEN_OSSR (field PAYMENT-PY_PREVIOUS-PERIODS-WORKPLACES-WRKPLC_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_PAY_BEN_OSSR (field PAYMENT-RRA-LAWYER_INFO-<strong>LAWYER_INSC_NR</strong>)</li>
+<li>HRPADBR_EFDE_S_RURAL_MKT (field EMPLOYER-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_RURAL_MKT (field TRADER_WORKPLACE-<strong>CNPJ</strong>)</li>
+<li>HRPADBR_EFDE_S_NONDOCK_WORKR (field EMPLOYER_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_WORK_ACCIDENT (field EMPLOYER-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_WORK_ACCIDENT (field WORK_ACCIDENT-ACCIDENT_PLACE-<strong>ACC_INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_EE_HEALTH (field ER_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_ER_CESSION (field EMPLOYER_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_ER_CESSION (field CESSION_INFO-<strong>DESTINATION_INSC</strong>)</li>
+<li>HRPADBR_EFDE_S_WRKPLC_COND (field ER_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_WRKPLC_COND (field ENV_HAZARD-RISK_INFO_X-<strong>INSC_NUMBER</strong>)</li>
+<li>HRPADBR_EFDE_S_WRKPLC_COND (field ENV_HAZARD-RISK_INFO-<strong>INSC_NUMBER</strong>)</li>
+<li>HRPADBR_EFDE_S_BENEFRY_REG (field EMPLOYER_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_BENEFRY_CHANGE (field EMPLOYER_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_BENEFIT_REG (field EMPLOYER_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_BENEFIT_REG (field BENEFICIARY_INFO-<strong>CNPJ</strong>)</li>
+<li>HRPADBR_EFDE_S_BENEFIT_REG (field BENEFIT_INFO-SUCESSION-<strong>CNPJ</strong>)</li>
+<li>HRPADBR_EFDE_S_BENEFIT_CHANGE (field EMPLOYER_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_BENEFIT_REACT (field EMPLOYER_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_BEN_CESSATION (field EMPLOYER_INFO-<strong>INSC_NUM</strong>)</li>
+<li>HRPADBR_EFDE_S_BEN_CESSATION (field CESSATION_INFO-<strong>CPNJ</strong>)</li>
+</ul>
+<p><strong>Important:</strong> If you have implemented any of the mentioned events, review the use of the specified fields above to avoid activation and runtime errors.</p>
+<p><strong>Log of changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Description of the change</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>March 16, 2026</td>
+<td>
+<p>Text changes. It is not necessary to reapply this SAP Note</p>
+</td>
+</tr>
+<tr>
+<td>1</td>
+<td>March 13, 2026 </td>
+<td>
+<p>Released for Customer</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier use Note Assistant (SNOTE) to implement the correction instructions.</p>
+<p>You can find more information about the SAP Note Assistant in SAP Support Portal, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a></strong>.</p>
+<p><strong>Stay connected</strong></p>
+<ul>
+<li>To get an e-mail notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
+<li>To stay informed about legal changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">Regulatory Change Manager</a>.</li>
+<li>For documentation about Payroll Brazil, access the <a href="https://blogs.sap.com/tags/517106488272734260515465412269325/" target="_blank">Community</a>.</li>
+</ul></div></div></div></div>

@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Start of Supply for Electricity (New SUP View)" (DE_B_GPKE_SOS_SUP), step 1100-0030 contains check group CHKGRP_GPKE_SUPN_SOS_CA with check ID CHK_CP_DET_CA_BY_BP. The action items BP_NOT_FOUND and CA_NOT_FOUND_FOR_BP were missing an exception code assignment, preventing proper error handling.</p>
+<p>This issue is relevant for the market role: SUP.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">GPKE_SUP, Start of Supply for Electricity, DE_B_GPKE_SOS_SUP, CHKGRP_GPKE_SUPN_SOS_CA, CHK_CP_DET_CA_BY_BP, BP_NOT_FOUND, CA_NOT_FOUND_FOR_BP, EX_GPKE_SUPN_SOS_CA, contract account, business partner</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because the action items BP_NOT_FOUND and CA_NOT_FOUND_FOR_BP in check ID CHK_CP_DET_CA_BY_BP lacked an exception code assignment.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system assigns the exception code "SOS process: CA check" (EX_GPKE_SUPN_SOS_CA) to the action items BP_NOT_FOUND and CA_NOT_FOUND_FOR_BP. Import BC set /US4G/3_0_SUP_SP08_NOTE_3732053 or /US4G/3_0_SUP_SP07_NOTE_3732053, depending on your support package level. You can verify the fix by retesting the scenario and confirming that the exception code is correctly assigned to these actions in step 1100-0030.</p></div></div></div></div>

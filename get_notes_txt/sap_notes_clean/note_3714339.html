@@ -1,8 +1,13 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">Long execution time is observed when processing a big batch of Settlement Out eDocuments.</p>
+<p id="__html0">During execution of a CKMLCP step one of the following issues occurs:</p>
+<ul>
+<li>The error message MLCCS-101 'Field overflow when determining the cost component split' is raised in function module FCMLA_REP_ONL_UPD_PREPARE.</li>
+<li>When the CKMLCP step 'Revaluation of Consumption' is repeated, it updates wrong CCS data in table FCML_CCS_REP.</li>
+<li>One of the CKMLCP steps is repeated. Some cost components to which values were allocated during the first execution do no longer receive values during the second execution. <br/>In this situation the records for these obsolete cost components are not deleted from table FCML_CCS_REP.</li>
+</ul>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p id="">G-Invoicing, SET_OUT, Manual Activty Flag</p>
+<p>FCML_REP; FCML_CCS_REP, Online Update</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>This is due to program error.</p>
+<p>Online update for reporting tables FCML_REP, FCML_CCS_REP as of note 1947357 is active.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement the following correction instructions or import the relevant support package.</p></div></div></div></div>
+<p>Apply the correction.</p></div></div></div></div>

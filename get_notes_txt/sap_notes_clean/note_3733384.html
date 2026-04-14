@@ -1,0 +1,8 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">Warning message WN131 ("Central deletion flag set for site") does not appear when calling transactions WB02 (Change Site) or WB03 (Display Site), even though the archiving flag (XT001W-ACHVM = 'X') is set for the plant.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="__html0">WB01,WB02, WB03, WN131</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The archiving check in Include MWBE3FA0_ACHVM_PRUEFUNGEN, FORM ACHVM_PRUEFUNGEN, is only executed when <code class="ui5-content-native-scrollbars">OK_CODE = SPACE</code>. However, in transactions WB02 and WB03, the OK_CODE is always set to 'ENTR' upon initial screen entry, causing the CHECK statement to fail and the archiving check to be skipped.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the note</p></div></div></div></div>

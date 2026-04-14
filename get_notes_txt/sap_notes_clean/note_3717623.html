@@ -1,73 +1,70 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">When running the <strong>Cálculo de nómina española</strong> (RPCALCE0) program in simulation mode, the system incorrectly applies SAP Notes that are active in the SNOTE but are not registered in the <strong>Fechas activación modificaciones</strong> (T5F99VD) table. In production mode, these same notes are correctly ignored, causing discrepancies between simulation and productive payroll runs.</p>
+<p id="__html0">The Reconcile Draft Report application allows you to request an authority draft report, generate reports from your source application, compare outputs, reconcile data, and electronically submit to authorities. You can also track the submission status. The authority draft reports and generated report could not be downloaded.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>&amp;CALC - PC00_M04_CALC</p>
-<p>For more information, see SAP Note <a href="/notes/1071282" target="_blank">1071282</a> - <em>CONSULT: List of tags for Spain notes.</em></p>
+<p>Implementation Overview Note, Document and Reporting Compliance (DRC), India GST, Cloud Edition, GST Reporting, GST, Goods and Service Tax, Reconcile Draft Reports, DRR, GSTR1</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<div class="longtext">
 <p><strong>Reason</strong></p>
-<p>This issue is a side effect caused by the solution delivered by the SAP Note <a href="/notes/3602062" target="_blank">3602062</a> - <em>UTIL: Read and apply a correction on a given date on simulation mode</em>.</p>
+<div class="longtext">
+<div class="longtext">
+<ul>
+<li>You want to download the authority draft reports and generated report in Reconcile Draft Report for the GSTR1 report in India.</li>
+</ul>
 <p><strong>Prerequisites</strong></p>
-<p>The following Support Package level is the minimum prerequisite:</p>
-<div class="table-responsive"><table border="2" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
-<tbody>
-<tr>
-<td><strong>Release</strong></td>
-<td><strong>Support Package</strong></td>
-</tr>
-<tr>
-<td>S4HCM 102</td>
-<td>HR SP 00</td>
-</tr>
-<tr>
-<td>S4HCM 101</td>
-<td>HR SP 05</td>
-</tr>
-<tr>
-<td>S4HCM 100</td>
-<td>HR SP 18</td>
-</tr>
-<tr>
-<td>SAP_HR 6.08</td>
-<td>HR SP C9</td>
-</tr>
-<tr>
-<td>SAP_HR 6.04 (EhP6 and EhP7) </td>
-<td>HR SP K1</td>
-</tr>
-</tbody>
-</table></div>
-<p>For more information, click on <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules</a>.</p>
-<p><strong>Note:</strong></p>
-<p>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you should implement them due to technical reasons.</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>From now on, when using the CHECK method of the <strong>Verifica y aplica la correción en una fecha</strong> (CL_HRPAYES_CORRECTION_ON_DATE) class in simulation mode, the system only considers a SAP Note as active if it has an entry in the T5F99VD table.</p>
-<p><strong>Log of changes</strong></p>
 <div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
 <tbody>
 <tr>
-<td><strong>Version</strong></td>
-<td><strong>Date</strong></td>
-<td><strong>Reason</strong></td>
+<td><strong>Sequence</strong><br/><strong>Number</strong></td>
+<td><strong>SAP Note</strong><br/><strong>Number</strong></td>
+<td><strong>SAP Note Desc.</strong></td>
+<td><strong>Supported SP</strong></td>
 </tr>
 <tr>
 <td>1</td>
+<td>3717788</td>
+<td>DRC India: Reconcile Draft Reports: Authority File and Source File Download</td>
+<td>2023 SP03</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After implementing this SAP Note, the download functionality for authority draft reports and generated report is enabled for the Reconcile Draft Report in the GSTR1 report for India.</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
 <td>
-<p>February 18, 2026</p>
+<p><strong>Version </strong></p>
 </td>
 <td>
-<p>Released for Customer</p>
+<p><strong> Date</strong></p>
+</td>
+<td>
+<p><strong> Reason</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p> 01</p>
+</td>
+<td>March 31 , 2026</td>
+<td>
+<p> Released for Customers</p>
+</td>
+</tr>
+<tr>
+<td>
+<p> 02</p>
+</td>
+<td>March 31 , 2026</td>
+<td>
+<p>Note text update</p>
 </td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>Note:</strong></p>
-<p>During the piloting phase, this SAP Note may be updated and versioned depending on the feedback from pilot customers. After this SAP Note has its status changed to <em>Released for Customer</em>, it will not be changed anymore, unless there is a specific situation that demands it. In this case, a reason for the change will be mentioned in the SAP Note.</p>
-<p><strong>Delivery</strong></p>
-<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, use the Note Assistant (SNOTE) to implement the correction instructions.</p>
-<p>You can find more information about the SAP Note Assistant in SAP Support Portal, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a></strong>.</p>
-<p><strong>Stay connected</strong></p>
-<ul>
-<li>To get an e-mail notification in case this SAP Note is updated, go to <a href="https://launchpad.support.sap.com/#/mynotes?tab=New" target="_blank">My SAP Notes &amp; KBAs</a>, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for more information.</li>
-<li>To stay informed about legal changes, access the <a href="https://launchpad.support.sap.com/#/legalchangenotification" target="_blank">Announcement of Legal Changes</a>.</li>
-<li>For documentation about Payroll Spain, access the <a href="https://blogs.sap.com/tags/306843521589030681976078829712463/" target="_blank">Help Portal</a>.</li>
-</ul></div></div></div></div>
+<p>Disclaimer:</p>
+<p id="">As a general rule, SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in the SAP Support Portal, under <a class="fui-Link ___1q1shib f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fjoy568 figsok6 f1s184ao f1mk8lai fnbmjn9 f1o700av f13mvf36 f1cmlufx f9n3di6 f1ids18y f1tx3yz7 f1deo86v f1eh06m1 f1iescvh fhgqx19 f1olyrje f1p93eir f1nev41a f1h8hb77 f1lqvz6u f10aw75t fsle3fq f17ae5zn" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" id="menur3m5" rel="noreferrer noopener" target="_blank" title="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html">SAP Note Assistant</a>.</p>
+<p><span style="font-family: Arial, Helvetica, sans-serif; font-size: medium;"> </span></p></div></div></div></div>

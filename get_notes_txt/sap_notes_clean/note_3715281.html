@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Short dump occurs during authorization check when creating or changing a Production Version in PEO</p>
+<p>The dump happens in /bobf/if_lib_auth_draft_active~check_static_authority when calling function module EFG_USER_AUTH_FOR_OBJ_GET</p>
+<p>Instead of showing an authorization error message, the process terminates due to an unhandled exception</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">PV - Production Version</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Custom authorization logic calls EFG_USER_AUTH_FOR_OBJ_GET without handling its exceptions (USER_NOT_FOUND, NOT_AUTHORIZED, INTERNAL_ERROR)</p>
+<p>The function module can raise NOT_AUTHORIZED if YT_USVALUES remains initial (e.g. after internal mapping/filtering), which leads to a runtime error if not caught<br/><br/>Prerequisite: execution of the BOPF draft authorization check with a user lacking required authorizations for C_FVER_WRK (or missing values for ACTVT/WERKS)</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Adjust the custom code to explicitly handle the exceptions of EFG_USER_AUTH_FOR_OBJ_GET using EXCEPTIONS and treat NOT_AUTHORIZED as an authorization failure (add an error message to eo_message instead of dumping)</p>
+<p>Optionally, replace the approach with a standard AUTHORITY-CHECK for object C_FVER_WRK (checking ACTVT and WERKS once WERKS is available) to avoid dependency on returned authorization value lists</p></div></div></div></div>

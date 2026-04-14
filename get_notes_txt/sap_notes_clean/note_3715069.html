@@ -1,0 +1,29 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<ul id="__html0">
+<li>
+<p>When an operation is deleted from an existing work order, the 'FLAG_DELETE' flag is not updated in table /SMFND/D_OBLNK_H.</p>
+</li>
+<li>
+<p>When an operation in an existing work order is deleted and added again with the same activity/operation number, the external ID changes in SAP Business Network Asset Collaboration (BNAC), but it is not updated in table /SMFND/D_OBLNK_H. As a result, any changes to the new operation are not reflected in BNAC. The documents attached to the new operation also do not get synchronized to BNAC.<br/><br/></p>
+<p><strong>Steps to reproduce the issue:</strong></p>
+<ol>
+<li>
+<p>Change an existing work order with operations in IW32.</p>
+</li>
+<li>
+<p>Delete an operation and add it again with the same operation number.</p>
+</li>
+<li>
+<p>Save the work order.</p>
+</li>
+<li>
+<p>Check table /SMFND/D_OBLNK_H in SE16N. A new external ID is generated in BNAC, while the table /SMFND/D_OBLNK_H still contains the old external ID.</p>
+</li>
+</ol></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Work order, document, operation</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Mismatch of external IDs in the object link table for work order operations in SAP ERP (S4/ECC)</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the note or upgrade to the relevant support package.<br/><br/>After implementing the note, all changes and documents attached to the work order operations in ERP (S4/ECC) will be replicated and attached to the work order operations in SAP Business Network Asset Collaboration (BNAC).<br/><br/><br/></p></div></div></div></div>

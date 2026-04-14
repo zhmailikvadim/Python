@@ -1,0 +1,217 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><strong>Symptom 1</strong></p>
+<p>You run the <strong>Audit Report for Adjustments</strong> (RPCADJK0) report, select employees with different business numbers, and the system does not display all the selected records.</p>
+<p><strong>Example:</strong></p>
+<p>Employees selected:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Personnel Number</strong></td>
+<td><strong>Business No.</strong></td>
+</tr>
+<tr>
+<td>07105302</td>
+<td>123456789RP0001</td>
+</tr>
+<tr>
+<td>07105305</td>
+<td>123456789RP0002</td>
+</tr>
+</tbody>
+</table></div>
+<p>Output:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable" style="width: 296px; height: 50px;">
+<tbody>
+<tr>
+<td><strong>Personnel Number</strong></td>
+<td><strong>Business No.</strong></td>
+</tr>
+<tr>
+<td>07105302</td>
+<td>123456789RP0001</td>
+</tr>
+</tbody>
+</table></div>
+<p>The system does not display the employee with a different business number in the output.</p>
+<p><strong>Symptom 2</strong></p>
+<p>You run the <strong>Audit Report for Adjustments</strong> (RPCADJK0) report, try to export the output to a spreadsheet such as Excel, and the system does not export any data.</p>
+<p><strong>Example:</strong></p>
+<p>Output:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Personnel Number</strong></td>
+<td><strong>Business No.</strong></td>
+</tr>
+<tr>
+<td>07105302</td>
+<td>123456789RP0001</td>
+</tr>
+</tbody>
+</table></div>
+<p>Excel export:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Personnel Number</strong></td>
+<td><strong>Business No.</strong></td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+</tr>
+</tbody>
+</table></div>
+<p>The system does not export any data to Excel.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>RPCADJK0; display_adj_status_summary_alv; build_fieldcat_alv; RPCADJK2_ALV; display_adj_status_summary.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><strong>Reason</strong></p>
+<p><strong>Symptom 1</strong></p>
+<p>The index of the output ALV is incorrect due to an incorrect assignment.</p>
+<p><strong>Symptom 2</strong></p>
+<p>The system uses the default export to Excel function, which only works when there is one ALV in the output. Because there are multiple ALVs, the export does not work.</p>
+<p><strong>Prerequisites</strong></p>
+<p>The following Support Package level is the minimum prerequisite:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Release</strong></td>
+<td><strong>Support Package</strong></td>
+</tr>
+<tr>
+<td>S4HCM 102</td>
+<td>HR SP 00</td>
+</tr>
+<tr>
+<td>S4HCM 101</td>
+<td>HR SP 05</td>
+</tr>
+<tr>
+<td>S4HCM 100</td>
+<td>HR SP 18</td>
+</tr>
+<tr>
+<td>SAP_HR 6.08</td>
+<td>HR SP C9</td>
+</tr>
+<tr>
+<td>SAP_HR 6.04 (EhP6 and EhP7)</td>
+<td>HR SP K1</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information, access the <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">SAP ERP Human Capital Management - Support Package Schedules (SAP_HR)</a> or <a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp-s4hcm.html" target="_blank">SAP S/4HANA On Premise Human Capital Management (S4HCM)</a><a href="https://support.sap.com/en/release-upgrade-maintenance/maintenance-information/schedules-for-maintenance-deliveries/hrsp.html" target="_blank">.</a></p>
+<p>When you install an SAP Note, some prerequisites might be required. The prerequisites are SAP Notes that have already been released and that change the same context of the current one. Then, even if these prerequisites are not necessarily related to the symptom of this SAP Note, you must implement them due to technical reasons.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p><strong>Symptom 1</strong></p>
+<p>From now on, the system displays employees with different business numbers in the same ALV without separating them by business number.</p>
+<p><strong>Example:</strong></p>
+<p>Employees selected:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Personnel Number</strong></td>
+<td><strong>Business No.</strong></td>
+</tr>
+<tr>
+<td>07105302</td>
+<td>123456789RP0001</td>
+</tr>
+<tr>
+<td>07105305</td>
+<td>123456789RP0002</td>
+</tr>
+</tbody>
+</table></div>
+<p>Output:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Personnel Number</strong></td>
+<td><strong>Business No.</strong></td>
+</tr>
+<tr>
+<td>07105302</td>
+<td>
+<p>123456789RP0001</p>
+</td>
+</tr>
+<tr>
+<td>07105305</td>
+<td>
+<p>123456789RP0002</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The system displays the employee with a different business number in the output.</p>
+<p><strong>Symptom 2</strong></p>
+<p>From now on, the system exports all information displayed in the output to Excel.</p>
+<p>Output:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Personnel Number</strong></td>
+<td><strong>Business No.</strong></td>
+</tr>
+<tr>
+<td>07105302</td>
+<td>
+<p>123456789RP0001</p>
+</td>
+</tr>
+<tr>
+<td>07105305</td>
+<td>
+<p>123456789RP0002</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Excel export:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Personnel Number</strong></td>
+<td><strong>Business No.</strong></td>
+</tr>
+<tr>
+<td>07105302</td>
+<td>
+<p>123456789RP0001</p>
+</td>
+</tr>
+<tr>
+<td>07105305</td>
+<td>
+<p>123456789RP0002</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The Excel export contains all information displayed in the output.</p>
+<p><strong>Log of Changes</strong></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Description of the change</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>March 27, 2026</td>
+<td>Released for Customer</td>
+</tr>
+</tbody>
+</table></div>
+<p>During the piloting phase, this SAP Note may be updated and versioned depending on the feedback from pilot customers. After this SAP Note has its status changed to <em>Released for Customer</em>, it will not be changed anymore, unless there is a specific situation that demands it. In this case, a reason for the change will be mentioned in the SAP Note.</p>
+<p><strong>Delivery</strong></p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install the solution earlier, use Note Assistant (SNOTE) to implement the correction instructions.</p>
+<p>Learn more at <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
+<p><strong>More information</strong></p>
+<ul>
+<li>To receive an e-mail notification in case of new updates, mark this SAP Note as favorite and add it to your <a href="https://me.sap.com/mynotes" target="_blank">My SAP Notes &amp; KBAs</a> page, or access the <a href="https://support.sap.com/content/dam/support/en_us/library/ssp/my-support/help-for-sap-support-applications/online_help-my_notes.html" target="_blank">Online help</a> for a complete guide.</li>
+<li>To stay informed about legal changes, access the <a href="https://app.main.regulatory-change-manager.cloud.sap/" target="_blank">regulatory change manager</a></li>
+</ul></div></div></div></div>

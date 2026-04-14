@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When using a custom document type for return purchase orders in SAP S/4HANA, the Shipping tab is missing. Purchase orders created with this custom document type do not display shipping data, whereas standard document types (e.g., NB) for the same vendor and material display the Shipping tab correctly.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Create a return purchase order using the custom Z-type document with:</li><li style="list-style-type: none;">
+<ul><li>
+<p>Vendor: X</p>
+</li><li>
+<p>Material: X1</p>
+</li></ul>
+</li><li>
+<p>Observe that the Shipping tab is not visible in the purchase order.</p>
+</li><li>
+<p>Create a return purchase order using the standard document type NB with the same vendor and material.</p>
+</li><li>
+<p>Observe that the Shipping tab is displayed correctly.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The custom document type Z is not supported for the Shipping tab functionality in SAP S/4HANA Cloud Public Edition. Additionally, the SSCUI “Configure Delivery Type &amp; Availability Check Procedure by Plant” does not permit configuration of a returns delivery type for custom purchase order types.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To enable shipping and return delivery processing, use the standard NB return purchase order type, as custom document types cannot be extended to support this functionality in SAP S/4HANA Cloud Public Edition.</p>
+<p>Since this functionality is currently not available, submitting a feature request through the SAP Customer Influence portal is recommended. This allows SAP Product Management to evaluate the requirement for potential inclusion in upcoming releases.</p>
+<p>For reference, you can find more information on submitting feature requests for SAP S/4HANA Cloud Public Edition here:</p>
+<p><a href="https://me.sap.com/notes/2963059" rel="noopener noreferrer nofollow" target="_blank">2963059 - How to Submit Feature Requests for SAP S/4HANA Cloud Public Edition</a></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://me.sap.com/notes/0002831464" rel="noopener noreferrer nofollow" target="_blank">2831464 - Return to Supplier no shipping data determined</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>return purchase order, custom PO document type, shipping data, shipping tab, missing shipping tab</p></div></div></div></div>

@@ -1,37 +1,10 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="">You're using electronic document processing for e-mail submission of invoices for Peppol countries/regions and want to implement the following correction:</p>
-<ul id="__html0">
-<li>Cross-border email invoices are now sent using the sender company's country process instead of failing when the customer's country has no email invoicing configured.</li>
-<li>The check whether a customer is activated for email invoicing now correctly considers the company code and sales organization.</li>
-</ul>
+<p id="__html0">The exchange rate field for flows can be saved to the database with a positive or a negative value, however in the external data transfer it was previously not possible to transfer negative values.</p>
+<p>This note adds a new field to the sender structure (S_KURS2). If a minus sign (-) is entered in this field, the external data transfer will save the value in KURS2 as a negative exchange rate. If the the field is left blank, KURS2 will be saved in the same was as previously, with a positive value.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p id="">eDocument, eDoc, eInvoicing, e-Invoicing, electronic invoice, electronic invoicing, e-document, e-Document, e-Docs, e-Doc, e-docs, e-doc, Document Compliance, DC, Peppol Exchange, Document and Reporting Compliance, electronic document processing, incoming automation solution</p>
+<p id="">KCLJ KCLT KCLL EDT J11SDAB</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>This SAP Note is relevant only for Peppol countries/regions with e-mail submission.</p>
-<p><strong>Prerequisite: </strong></p>
-<p>You have implemented the electronic document processing framework in your system. Refer to the implementation instructions provided on SAP the Help Portal for <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_ERP/3cc2de556123432e9176a72f2b09c815/1899b48f181c4b8095f6b7d1de4c6ca3.html?version=6.18.latest" target="_blank">SAP ERP</a> or <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/43236947358f4837a0e26add271aedd0/1899b48f181c4b8095f6b7d1de4c6ca3.html?version=2021.latest" target="_blank">SAP S/4HANA</a>.</p>
-<p>You have implemented the following SAP Note:</p>
-<ul>
-<li><a href="/notes/2783795" target="_blank">2783795</a> - Electronic Document Processing for Peppol Countries/Regions: Implementation Overview</li>
-<li><a href="https://me.sap.com/notes/3724581" target="_blank">3724581</a> - Electronic Invoice for Peppol Countries/Regions - DDIC Changes in EDOEUBUPA and EDOEUBUPAV</li>
-<li><a href="https://me.sap.com/notes/3712230" target="_blank">3712230</a> - Electronic Invoice for Peppol Countries/Regions - EDOEUBUPAV with Company Code and Sales Organization</li>
-<li><a href="https://me.sap.com/notes/3708482" target="_blank">3708482</a> - Electronic Invoice for Peppol Countries/Regions - Corrections</li>
-</ul>
+<p>This was not previously provided</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Import the Support Package specified for your release or implement the attached correction instruction.</p>
-<p>SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in SAP Support Portal, under <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="nofollow" target="_blank">SAP Note Assistant</a>.</p>
-<p><strong>Versioning</strong></p>
-<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
-<tbody>
-<tr>
-<td><strong>Version</strong></td>
-<td><strong>Date</strong></td>
-<td><strong>Reason</strong></td>
-</tr>
-<tr>
-<td>01</td>
-<td> 31.03.2026 </td>
-<td>Released for Customers</td>
-</tr>
-</tbody>
-</table></div></div></div></div></div>
+<p lang="en-GB">Implement the attached correction instructions or import the specified Support Package</p>
+<p lang="en-GB">If you have already defined the transfer structure using transaction KCLL, you have to delete this and then create it again so that the changes take effect.</p></div></div></div></div>

@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">At 'Admin' under 'Messages' &gt; 'Email' &gt; 'Email Messages' Email notifications fail to send and display the error “<span style="font-family: 'courier new', courier;">Failed to send email due to email configuration validation error</span>”. </p>
+<p></p>
+<p><span><strong><em>Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental. </em></strong></span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Field Service Management</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Log in Admin </li><li>Navigate on Company Level to 'Messages'</li><li>Enter 'Emails' and then 'Email Messages'</li><li>At 'Subject' filter for 'failed'<br/><strong>Actual behavior</strong></li><li>Emails fail to send and show the following error: <span style="font-family: 'courier new', courier;">Failed to send email due to email configuration validation error</span><br/><strong>Expected behavior:</strong></li><li>Email notifications should be sent successfully without error message</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div id="__vbox3-__vbox6-10">
+<div id="__hbox4-__vbox6-10">
+<div id="__data1095">
+<div id="__vbox3-__vbox6-12">
+<div id="__hbox4-__vbox6-12">
+<div id="__data1267">
+<p>Email settings were turned off at the company, so all emails failed, and no automatic alert exists to flagged the issue.</p>
+</div>
+</div>
+</div>
+<div id="__hbox5-__vbox6-12">
+<div id="__data1269">
+<div id="__toolbar2-__vbox6-12" role="toolbar"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="__hbox5-__vbox6-10">
+<div id="__data1097">
+<div id="__toolbar2-__vbox6-10" role="toolbar"></div>
+</div>
+</div>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><div>
+<p>A Business Rule is needed to provide proactive monitoring of email delivery with the following capabilities:</p>
+<ul><li>Real-time monitoring of outbound email processing</li><li>Immediate notification on any email delivery failure or when email settings are disabled</li><li>Automatic alerting of the account owner</li><li>Optional configuration of additional recipients</li></ul>
+<p>This ensures administrators are notified instantly if email functionality is disabled or if a send attempt fails for any reason.</p>
+<p>For configuration guidance, refer to the attached step-by-step Guide:</p>
+<ol><li>Create a Business Rule:<br/><img alt="" class="img-responsive" height="382" src="/documents/customerkba/1THeN-owWV2vUgGDoQWMXPO6Pr0YmZHljUMv39fYlzs" width="650"/></li><li>Set up a scheduled trigger:<br/><img alt="" class="img-responsive" height="385" src="/documents/customerkba/lRpp_fOvl1bJV_MVvT_EbQlnKMXpdaLdm5EdAXVtZ6g" width="650"/></li><li>Define Action #1 as Webhook:<br/><img alt="" class="img-responsive" height="449" src="/documents/customerkba/lVT_HmlNuU81XdGtLGiIUh95_VUl3SfYvKdKKGKrgKg" width="650"/></li><li>Define Action #2 with following conditional operator:<br/><span style="font-family: 'courier new', courier;">${JSON.parse(emailConfigurationResponse).disabled}==False</span><br/><img alt="" class="img-responsive" height="320" src="/documents/customerkba/dqbWjHEE9ixOmB4BoARG2Q43kJGWU604RSZWZP2vyn8" width="650"/></li><li>Define Action #3 as Send Email:<br/><img alt="" class="img-responsive" height="470" src="/documents/customerkba/CCFXpCJDUOJvIjqfIH8cZa90uaMAkRArE6S1SuX7RCk" width="650"/></li><li>Save and Activate the Business Rule</li></ol>
+</div><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>SAP Help Portal official documentation about '<a href="https://help.sap.com/docs/SAP_FIELD_SERVICE_MANAGEMENT/fsm_admin/email-configurations.html?locale=en-US&amp;state=PRODUCTION&amp;version=Cloud" rel="noopener noreferrer nofollow" target="_blank">Email Configuration</a>'.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>missing, failed, email, message, notification, no errors</p></div></div></div></div>

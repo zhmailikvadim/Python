@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The [[VIEW_LINK]] tag in workflow action email notifications directs approvers and contributors to the workflow details page instead of the subject workflow user People Profile page.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Employee Central</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p></p>
+<ol><li>Approve a workflow.</li><li>The initiator receives a Workflow Action Approval Notification email containing a link.</li><li>The link directs to the approval page instead of the People Profile page</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li> The observed behavior is expected system functionality for initiators and contributors.</li><li> When these users click the [[view_link]] tag in the Workflow Action Notification email, they are redirected to the Workflow Details page because they are active participants in the workflow process.</li></ul>
+<p> </p>
+<p>When “Redirect CC Users to Approval Page” = No on Workflow Configuration Page <em>(Default setting)</em></p>
+<ul><li>CC users are redirected based on workflow type:
+<ul><li>User‑based Workflows
+<ul><li>CC users are redirected to the People Profile page of the subject user.</li></ul>
+</li><li>Non‑user MDF Workflows
+<ul><li>Redirects to the Manage Data page for MDF objects (e.g., Departments, other MDF entities).</li><li>For Position‑related workflows, redirects to Manage Positions.</li></ul>
+</li><li>Foundation Object (FO) Workflows
+<ul><li>Redirects to the specific Foundation Object page.</li></ul>
+</li></ul>
+</li></ul>
+<p> </p>
+<p>When “Redirect CC Users to Approval Page” = Yes</p>
+<ul><li>CC users are always redirected to the Workflow Details page, regardless of workflow type</li></ul>
+<p> </p>
+<p> </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>If this behavior is not ideal for your business needs. Please consider opening an enhancement request to have this feature introduced. The design team will consider all enhancement requests raised in the community and will consider this request as an option for a future release. Please see the attached KBA <a aria-label="Link 2090228 - How to Submit Ideas for SAP SuccessFactors Products" href="/notes/2090228" id="menur38j" rel="noopener noreferrer nofollow" target="_blank">2090228 - How to Submit Ideas for SAP SuccessFactors Products</a> on how to do this. </p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to: <a href="https://me.sap.com/notes/0002843094" rel="noopener noreferrer nofollow" target="_blank">KB Article- Redirect CC Users To Workflow Approval Page - EC</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>[[view_link]], workflow email notifications, workflow action approval notification, people profile page, approval page, initiator, contributor, cc recipient, redirect users to workflow approval page, successfactors employee central, user-based workflow, HRIS element, workflow details page</p></div></div></div></div>

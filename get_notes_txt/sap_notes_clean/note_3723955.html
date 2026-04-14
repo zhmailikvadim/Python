@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Preparation and Waiting for Sending of Meter Reading (MOS MaLo View)" (DE_B_MET_PREPARE_SEND_MR_MOSMALO), the original design purpose​ of this process was to monitor​ the sending status of meter reading documents, not to actively trigger the sending.</p>
+<p>To improve the higher automation in daily operations, SAP has added a new feature​ to this process in this update: In step 0330, the system can now actively check for and send​ any existing meter reading documents that have not yet been sent.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>MSCONS 13017, /US4G/CL_PRST_SEND_EXIST_MR, /US4G/FM_SEND_MR, meter reading documents, MaLo, step 0330, /US4G/3_0_MOS_NOTE_SP08_3723955, DE_B_MET_PREPARE_SEND_MR_MOSMALO, /US4G/MRVOBJREF, /US4G/MREDIRE</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>New features.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package to enable this enhancement.</p>
+<p>Please activate the BC-set /US4G/3_0_MOS_NOTE_SP08_3723955in transaction SCPR20.</p>
+<p>After implementation, the system will have the capability to proactively send pending meter reading documents in step 0330.  You can verify the new functionality by checking that the relevant meter reading documents are sent successfully after step 0330 is run.</p>
+<p>The proactive send in step 0330 is triggered the first time the process detects that the MR (Meter Reading Document) has not been sent. The check logic for determining the "not sent" status remains consistent with the previous monitoring logic:</p>
+<ul>
+<li>If no specific receiver is configured, the system checks if table /US4G/MRVOBJREF​ has been updated.</li>
+<li>If a specific receiver is configured, the system checks if table /US4G/MREDIREF​ has been updated.</li>
+</ul></div></div></div></div>

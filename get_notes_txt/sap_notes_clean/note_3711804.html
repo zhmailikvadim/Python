@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In transaction "FGRIR_CLEARING", if the box "Use Clearing Criteria" is checked and a non-existing clearing criterion is used, a dump occurs.</p>
+<p>The dump occurs in class "CL_FINS_OI_GROUPING_HELPER" (and method "IF_FINS_OI_GROUPING_HELPER~REPLACE_BSEG_WITH_ACDOCA_NAMES").</p>
+<p>A non-existing clearing criterion means, it exists in database tables BSEG, BSIS, ... but not in ACDOCA.</p>
+<p>Extended open item management just clears in/operates on database table ACDOCA. Therefore, also just clearing criterion could be used that exists in this database table.</p>
+<p>After implementing this SAP note, an error message is shown, if there are clearing criterion entered in the customizing that can't be processed by transaction "FGRIR_CLEARING".</p>
+<p>It is recommended in the customizing of clearing criterion (transaction "OB74") to create an own entry for each GR/IR GL-account using extended open item management.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">FGRIR_CLEARING, FINS_GR_IR_MASS_CLEARING, Extended open item management, Extended OIM, GR/IR, CL_FINS_OI_GROUPING_HELPER</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Please implement the attached correction instruction.</p></div></div></div></div>

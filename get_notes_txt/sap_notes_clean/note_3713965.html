@@ -1,8 +1,37 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">You create a Functional Location in Central System and maintain descriptions in more than one language, and transfer it to a Remote System. Functional location description is transferred to remote system in only one language during initial load.</p>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>Multilingual description in remote system, FLOC Description, Description in local language, Defense &amp; Security, S/4 Defense Disconnected, DFS_DISCONNECTED</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p id="">Programming Error</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Please implement the attached correction instructions.</p></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3713965&amp;TargetLanguage=EN&amp;Component=XX-CSC-CH-IS-H&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3713965/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3713965/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>For the electronic invoice or invoice printing, XML Version 5.0, this SAP Note contains further enhancements that have resulted from the introduction of the new outpatient flat rates and TARDOC.</p>
+<p>Version 4: This version corrects the display of an outpatient flat rate with regard to the sequence number of an outpatient treatment. Up to now, the pay scale language session was incorrectly output. However, the outpatient treatment must be displayed correctly.</p>
+<p>Version 6: Services that are entered in the Customizing table <em>CH: Information Services XML Invoice and Print</em> (TNWCHAMBP_XMLSRV) but are assigned to an <em>outpatient treatment</em> <span style="text-decoration: underline;">without</span> an <em>outpatient flat rate</em> (that is, settlement according to individual TARDOC services) may not appear on the invoice as information services (with price 0).</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>MEDIDATA 4.0, XML standard 5.0, INXML, electronic invoice, EOXML, electronic invoice for the external order, invoice printing<br/>TARDOC, outpatient flat rates, report or print drugs on invoice</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Prerequisites:</p>
+<ul>
+<li>Country Version Switzerland (CH) </li>
+<li>Use of XML standard 5.0 (for INXML or EOXML or invoice printing)  </li>
+<li>SAP Note 3723953 (pre-implementation steps)</li>
+</ul>
+<p>Reason:</p>
+<p><span style="font-size: 14px;">Adjustments to the new version 5.0 for the (electronic) invoice</span></p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the source code corrections and perform the manual tasks.</p>
+<p>This SAP Note contains the following points:</p>
+<ul>
+<li>Invoice Printing</li>
+</ul>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">The printout of the "partners" (physicians, employers) is sorted as follows: Referrer - Employer - Service Provider (service_provider)</span></p>
+<ul>
+<li>Electronic Invoice (Correction)</li>
+</ul>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">According to guidelines, the invoice:street element is 35 characters long. Previously, if the street name with the house number was longer, the system filled it with a length of up to 46 characters.</span></p>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">Note the following: Depending on the setting, you can enter the street name and the "house number" in two separate input fields for address data, or only in one. Both field contents may be combined for the element invoice:street. This results in the total length.</span></p>
+<ul>
+<li><span style="font-size: 14px;">Notification of Additional Drugs Not Billed</span></li>
+</ul>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">Previously, the electronic invoice (and the printout) only included billed services (the invoice items). You can now use the CH<em>: Information Services XML Invoice and Print</em> activity point to inform the system that you are using the services entered there (for example: medication) in the invoice. These must, of course, have been entered beforehand for the case as a prerequisite for the additional specification on the invoice, but do not need to be billable.</span></p>
+<p style="padding-left: 60px;">You maintain the entries for these information services in <em>Customizing </em> under <em> SAP Healthcare - Industry-Specific Components for Hospitals</em> --&gt; <em>Communication </em> --&gt; <em> Electronic Data Interchange </em> --&gt; <em> Country Specifics </em> --&gt; <em> Country Specifics Switzerland </em> --&gt; <em> INXML/EOXML </em> --&gt; <em> CH: Information Services XML Invoice and Print</em></p>
+<p style="padding-left: 60px;">For more information, see the documentation for this point.</p>
+<ul>
+<li>Session number of "additionally generated items" (e.g. TMA, information services; item amount 0) (change)</li>
+</ul>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">The system no longer takes this session number from the table field NLEI-LFDTSI, but from NLEI-LFDAMB (for printing: column "Gr").</span></p></div></div></div></div></div>

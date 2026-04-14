@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">A subitem created by Alternative-Based Confirmation (ABC) with a sourcing profile for Third-Party Order Processing (TPOP) has an incorrect item category.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ATP; aATP; Third-Party Order Processing; TPOP; Alternative-Based Confirmation; ABC; Substitution Strategy; Remaining Open Quantity Assignment; VOV4; Item Category Assignment</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The symptom applies if the following conditions are met:</p>
+<ul>
+<li>The substitution strategy or its follow-up substitution strategy has a sourcing profile maintained.</li>
+<li>TPOP does not give a confirmation. This can occur, e.g., if an invalid source of supply was found.</li>
+<li>The setting for remaining open quantity assignment in the app Configure Substitution Strategy prefers a scheduleline created for TPOP.</li>
+</ul>
+<p>The reason for the symptom is that schedulelines created for TPOP having item usage ABC4 or ABC5 are filtered out and a scheduleline with ABC2 is used instead for the subitem creation. The customizing for item category assignment (transaction code VOV4) then chooses an incorrect item category.</p>
+<p>The correction makes sure that also schedulelines with item usage ABC4 or ABC5 are considered for remaining open quantity assignment in ABC.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Apply the correction instructions for this note or upgrade to a SAP S/4HANA support package that contains this correction.</p></div></div></div></div>

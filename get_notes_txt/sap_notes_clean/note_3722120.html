@@ -1,0 +1,37 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When starting transaction SM35 – Batch Input: Session Overview, the system loads all existing Batch Input sessions stored in table APQI. In systems with a very high number of sessions, this can result in:</p>
+<ul>
+<li>Long startup times</li>
+<li>High memory consumption</li>
+<li>Potential out-of-memory terminations</li>
+<li>Unresponsive UI behavior</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">SM35, APQI, BDC Sessions, Performance, OOM, TSV_TNEW_PAGE_ALLOC_FAILED, BDC_MAX_SESSIONS, Message 00753.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>During the initialization of transaction SM35, the system attempted to load all existing Batch Input sessions from table APQI into memory. This behavior resulted from the fact that SM35 did not previously implement a technical upper bound for the number of sessions to be read and displayed at once.</p>
+<p>There are no specific prerequisites for the issue; it can occur in any system with an unusually large population of Batch Input sessions, regardless of release or support package level.</p>
+<p><em>Also remember to delete sessions that are no longer needed. Instructions for this can be found in SAP Notes <a href="/notes/147354" target="_blank">147354</a> and <a href="/notes/18307" target="_blank">18307</a>.</em></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To prevent performance degradation and memory issues, an update has been implemented in the SM35 session overview logic. The correction introduces the following changes:</p>
+<p><strong>1. Introduction of a Display Limit for Sessions</strong></p>
+<p>A new internal threshold has been implemented: If the total number of sessions in table APQI exceeds 100,000, SM35 will display a maximum of 100,000 sessions by default and the message 00753 is raised to notify the user. This safeguard ensures stable transaction startup and prevents excessive memory usage.</p>
+<p><strong>2. New SET/GET Parameter: BDC_MAX_SESSIONS</strong></p>
+<p>A new parameter has been added to allow users to configure the maximum number of sessions to be displayed:</p>
+<ul>
+<li>Parameter name: BDC_MAX_SESSIONS</li>
+<li>Valid input range: 0 – 999999999 (the value must be entered without separators)</li>
+<li>If the parameter is maintained in the user profile (SU3), SM35 will use this value directly and the internal limit of 100,000 is not applied.</li>
+<li>If the parameter is maintained in the user profile and the value remains empty or 0, the check for the internal limit will be deactivated.</li>
+</ul>
+<p><strong>3. New Input Field in SM35: "Max. Sessions"</strong></p>
+<p>In the "Selection criteria" area of SM35, a new input field has been added:</p>
+<ul>
+<li>Field name: "Max. Sessions"</li>
+<li>Purpose: Allows the user to adjust the maximum number of sessions to be displayed at runtime.</li>
+<li>The field is linked to the SET/GET parameter BDC_MAX_SESSIONS.</li>
+<li>If no value or 0 is entered, the system applies no limit.</li>
+</ul>
+<p><strong>4. New Footer Fields for Visibility and Transparency</strong></p>
+<p>The SM35 footer now contains two output fields:</p>
+<p>"Sessions found" – Displays the total number of sessions in table APQI, corresponding to the selection criteria (without the "Max. Sessions" limit).<br/>"Displayed sessions" – Displays the final number of sessions shown in the SM35 list (after applying limits or user input).</p></div></div></div></div>

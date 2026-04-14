@@ -1,0 +1,44 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When attempting to extract data from specific SAP Views (such as <code>USER_ADDR</code> or <code>V_USR_NAME</code>) using the SAP ERP connection type, the extraction job fails.</p>
+<p>If the underlying <code>RFC_READ_TABLE</code> function module is tested directly in the SAP backend (using transaction <code>SE37</code>) with the exact parameters passed by SAP Signavio Process Intelligence, the following error is observed in the debugger:</p>
+<ul><li>
+<p>Exception: <code>OPTION_NOT_VALID</code></p>
+</li><li>
+<p>System Message (SY-MSGV4): <code>The parser produced the error: "ORDER BY PRIMARY K "</code></p>
+</li></ul>
+<p>Data extraction from other views, such as <code>V_ADDR_USR</code>, completes successfully without this error.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>
+<p>SAP Signavio Process Intelligence</p>
+</li><li>
+<p>Process Data Management (PDM) Bridge</p>
+</li><li>
+<p>On-premises Package (OPP) / Extractor</p>
+</li><li>
+<p>SAP ERP Connection </p>
+</li><li>
+<p>On-premises SAP ERP system</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p><strong>In SAP Signavio Process Intelligence:</strong></p>
+<ol><li>
+<p>Configure a Source Data entity using the SAP ERP connection type that includes Extra Connection Argument <code>GET_SORTED</code>.</p>
+</li><li>
+<p>Select a view where all fields constitute the composite primary key (e.g., <code>USER_ADDR</code> or <code>V_USR_NAME</code>) as the extraction target.</p>
+</li><li>
+<p>Preview or Extract the View.</p>
+</li><li>
+<p>It will fail with the <code>OPTION_NOT_VALID</code> exception.</p>
+</li></ol>
+<p><strong>In the SAP Backend (via SE37):</strong></p>
+<ol><li>
+<p>Log into the SAP GUI and launch transaction SE37 (Function Builder).</p>
+</li><li>
+<p>Execute the function module <code>RFC_READ_TABLE</code> in test mode.</p>
+</li><li>
+<p>Provide the table name (e.g., <code>USER_ADDR</code>).</p>
+</li><li>
+<p>Set the parameter <code>GET_SORTED = X</code> (this mimics the sorting instruction sent by the connection argument).</p>
+</li><li>
+<p>Execute the module. It will fail with the <code>OPTION_NOT_VALID</code> exception.</p>
+</li><li>
+<p>Inspecting the error variables in the debugger reveals <code>SY-MSGV4 = The parser produced the error: "ORDER BY PRIMARY K "</code>.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>SAP Signavio uses SAP's standard <code>RFC_READ_TABLE</code> function module to retrieve data. To ensure consistent pagination and reliable data retrieval, Signavio Process Intelligence connections that have the Extra Connection Argument <code>GET_SORTED</code> instruct SAP to sort the output by passing the parameter <code>GET_SORTED=X</code>.</p>
+<p>However, SAP's internal Open SQL parser cannot process the resulting <code>ORDER BY PRIMARY K</code> instruction for certain specific view architectures (such as <code>USER_ADDR</code> and <code>V_USR_NAME</code>). Because SAP Signavio Process Intelligence RFC type connections rely entirely on SAP's native extraction module, any structural or parsing limitations encountered directly within SAP will cascade down to the Signavio extraction.</p>
+<p>Ultimately, if executing <code>RFC_READ_TABLE</code> natively in SAP via <code>SE37</code> with <code>GET_SORTED=X</code> fails with an <code>OPTION_NOT_VALID</code> exception, the extraction will inherently fail in SAP Signavio Process Intelligence as well.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>Method 1 (Recommended)</strong>: Extract Base Tables. Instead of attempting to extract the problematic views directly, configure the SAP Signavio Process Intelligence Source Data to extract the underlying transparent tables that make up the view. Once the raw tables are ingested, recreate the view's joining logic within a Data View in the PDM pipeline.</p>
+<p><strong>Method 2</strong>: Create a Dedicated Connection for which <code>GET_SORTED</code> is not added to the Extra Connection Arguments. Create a Source Data entity specifically for <code>USER_ADDR</code> (and potentially other joined Database Views) linking to the dedicated Connection created earlier. This Source Data can then be added to the PDM Pipeline object in addition to any existing ones.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>soe, PDM, PDM Bridge, RFC Connection, Extractor, CData JDBC, SAP ERP, RFC_READ_TABLE, OPTION_NOT_VALID, ORDER BY PRIMARY KEY, GET_SORTED, Extra Connection Argument, SE37, USER_ADDR, V_USR_NAME</p></div></div></div></div>

@@ -1,13 +1,59 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">You use NZDT SP &gt;= 4.</p>
-<p>During re-replication, dumps of type DYN_CALL_METH_PARAM_MISSING occurs for program CL_IUUC_S4_SDM_NZDT_GENERIC===CP occur on the receiver system.</p>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p id="">downtime minimization tool for SAP S/4HANA, NZDT, S4CORE</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>You use NZDT SP &gt;= 4 and any of the following S4CORE components is installed in the receiver system:</p>
+<p id="__html0">After the inbound of time confirmations of an order in the receiving system is showing the following issues:</p>
+<p>In the receiving system</p>
 <ul>
-<li>S4CORE 108 FPS00 - FPS05</li>
-<li>S4CORE 109 FPS00 - FPS01</li>
+<li>time confirmation counter (AFRU-RMZHL) is not in sequence after cancellation is performed in the sending system.</li>
+<li>time confirmation counter (AFRU-RMZHL) is not in sequence after an additional time confirmation for the operation is performed in the sending system.</li>
+<li>time confirmation counter are not created after cancellation is performed in the sending system.</li>
 </ul>
+<p>In the receiving system there are already existing time confirmations for an operation of the order in question!</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Distribution, redistribution, /ISDFPS/PMCP1, /ISDFPS/PMDIS2.</p>
+<p>/ISDFPS/TC, /ISDFPS/WO.</p>
+<p>/ISDFPS/WOUPS, /ISDFPS/LWOUPSF02, WO_DIRECT_UPD_CR.</p>
+<p>/ISDFPS/TCUPS.</p>
+<p>AFVC, AFVC-RMZHL.</p>
+<p>AFRU, AFRU-RMZHL.</p>
+<p>IW31, IW32, IW33, IW41, IW43, IW45.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""><span style="text-decoration: underline;">Reason:</span></p>
+<p>Corrections/enhancements with SAP Notes</p>
+<ul>
+<li>IS-DFS-PM-DIS        3636922        Redistribution: Confirmation not redistributed (2)</li>
+<li>IS-DFS-PM-DIS        3518606        Redistribution: Confirmation not redistributed</li>
+<li>IS-DFS-PM-DIS        3313604        Redistribution: Too many orders selected</li>
+<li>IS-DFS-PM-DIS        3251975        /ISDFPS/TCUPS_APPLY_SUBLEV - ASSERTION_FAILED</li>
+<li>IS-DFS-PM-DIS        3119907        Distribution of confirmations incomplete or incorrect</li>
+</ul>
+<p><span style="text-decoration: underline;">Prerequisites:</span></p>
+<ul>
+<li>Usage of EA-DFPS in ECC</li>
+<li>Usage of the distribution functionality</li>
+<li>See Symptoms</li>
+<li>Example:</li>
+</ul>
+<ol>
+<li><span style="font-size: 14px;">Day 1: IW31 - Decentral: Create and Release Order with one operation.</span></li>
+<li><span style="font-size: 14px;">Day 1: IW41 - Decentral: Create tree time confirmations for this operation</span></li>
+<li><span style="font-size: 14px;">Day 1: Decentral: Nightly scheduled redistribution takes place to central system</span></li>
+<li><span style="font-size: 14px;">Day 2: Central: In central system the confirmation counter AFRU-RMZHL of all confirmations is in order (conf. one AFRU-RMZHL = 1, conf. two AFRU-RMZHL = 2, conf. three AFRU-RMZHL = 3)</span></li>
+<li><span style="font-size: 14px;">Day 2: Decentral: IW32 - Change order in decentral system in a way that AEDAT of order is updated (e.g. description)</span></li>
+<li><span style="font-size: 14px;">Day 2: Decentral: IW45 – Cancel the confirmation number 3. A new AFRU record is created with AFRU-RMZHL = 4 to document the cancellation of confirmation number 3. </span></li>
+<li><span style="font-size: 14px;">Day 2: Decentral: Nightly scheduled redistribution takes place to central system </span></li>
+<li><span style="font-size: 14px;">Day 3: Central: In central system the confirmation counter AFRU-RMZHL of the first three confirmations is in order (conf. one AFRU-RMZHL = 1, conf. two AFRU-RMZHL = 2 , conf. three AFRU-RMZHL = 3), the confirmation record to document the cancellation has got the wrong confirmation counter AFRU-RMZHL = 5!</span></li>
+</ol>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement the automatic correction instructions on your <strong>receiver</strong> system. If the dumps occurred already, stop the re-replication and restart it after the not has been implemented.</p></div></div></div></div>
+<p>Correction via this SAP Note or the corresponding support package.</p>
+<p><span style="text-decoration: underline;">Important:</span></p>
+<ul>
+<li>Before you implement this SAP Note, make sure, that the following SAP Notes are available in your system:</li>
+<ul>
+<li>IS-DFS-PM-DIS        3636922        Redistribution: Confirmation not redistributed (2)</li>
+<li>IS-DFS-PM-DIS        3518606        Redistribution: Confirmation not redistributed</li>
+<li>IS-DFS-PM-DIS        3313604        Redistribution: Too many orders selected</li>
+<li>IS-DFS-PM-DIS        3251975        /ISDFPS/TCUPS_APPLY_SUBLEV - ASSERTION_FAILED</li>
+<li>IS-DFS-PM-DIS        3119907        Distribution of confirmations incomplete or incorrect</li>
+<li>IS-DFS-PM-DIS        2435271        Deployed Server: Distribution of customer tables via IDOC (Part 2)</li>
+</ul>
+<li>All these SAP Notes and this SAP Note must be available in all of your systems - central and decentral - as inbound and outbound processes are effected!</li>
+</ul></div></div></div></div>

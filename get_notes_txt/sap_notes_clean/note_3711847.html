@@ -1,14 +1,19 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">Corrections in Data Product Generator Fiori UI.</p>
+<p id="__html0">In freight unit building, the bin packing heuristic <strong>worst-fit-decreasing</strong> was used up to now to assign items to freight units in scenarios that don't allow item splits. This heuristic could lead to the following issues:</p>
+<ul>
+<li>Wasted space within freight units resulting in suboptimal capacity utilization</li>
+<li>Higher number of freight units than expected because an inefficient item-to-bin assignment caused the unnecessary creation of additional freight units</li>
+</ul>
+<p style="display: inline !important;">Therefore, the default bin packing heuristic has now been changed to the <strong>first-fit-decreasing </strong>bin packing<strong> </strong>heuristic. This heuristic has the following benefits:</p>
+<ul style="font-size: 14px;">
+<li>It reduces the wasted space within freight units.</li>
+<li>It avoids the creation of unnecessary additional freight units.</li>
+<li>It improves the overall system performance.</li>
+</ul>
+<p>To allow customers to choose between the different bin packing heuristics via enhancement, a new parameter, /SCMTMS/CL_FU_BUILDER_CORE=&gt;MV_FUB_ALGORITHM, has been introduced.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Freight Unit Building, FUB, Bin Packing, First-Fit-Decreasing, Best-Fit-Decreasing, Worst-Fit-Decreasing, MV_FUB_ALGORITHM, /SCMTMS/CL_FU_BUILDER_CORE</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Corrections and enhancements</p>
+<p id="">Program Error</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>To solve the issue please apply the Support Package as mentioned below. In urgent cases you can use the correction instructions.</p>
-<ul>
-<li><strong><span style="text-decoration: underline;">SAP BW/4HANA 2021</span></strong><br/> Implement Support Package 14 for SAP BW/4HANA 2021 (SAPK-30014INDW4CORE) into your SAP BW/4HANA system. The Support Package will be available as soon as <strong>SAP Note 3625395 </strong>with the short text "SAPBWNews SAP BW/4HANA 2021 SP14", which describes this Support Package in more detail, is released for customers.</li>
-</ul>
-<ul>
-<li><span style="text-decoration: underline;"><strong>SAP BW/4HANA 2023</strong></span><br/>Implement Support Package 08 for SAP BW/4HANA 2023 (SAPK-40008INDW4CORE) into your SAP BW/4HANA system. The Support Package will be available as soon as <strong>SAP Note 3639252 </strong>with the short text "SAPBWNews SAP BW/4HANA 2023 SP08", which describes this Support Package in more detail, is released for customers.</li>
-</ul>
-<p>In urgent cases you can use the correction instructions.<br/><br/>Before you use the correction instructions, make sure that you check <strong>SAP Note 1668882 and SAP Note 2248091</strong> for transaction SNOTE.<br/><br/>This SAP Note might already be available before the Support Package is released. In this case, however, the short text still contains the term "preliminary version".</p>
-<p><span style="font-size: 14px;"> </span></p></div></div></div></div>
+<p>Implement the attached correction instruction or the mentioned support package.</p></div></div></div></div>

@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>You experience slow system performance in SAP HANA when a high number of statements execute concurrently. The majority of these statements are mapped to the same aggregated <span class="SNO_DNT" style="float: none;" translate="no">workload class</span>. A significant number of threads show contention on an "<span class="SNO_DNT" style="float: none;" translate="no">unnamed Mutex</span>" (as per "<span class="SNO_DNT" style="float: none;" translate="no">M_DEV_CONTEXTS</span>"."<span class="SNO_DNT" style="float: none;" translate="no">WAIT_SYNC_NAME</span>")  with a callstack similar to:</p>
+<p style="padding-left: 30px;"><span class="SNO_DNT" style="float: none;" translate="no">[thr=x]: JobWrkxyz at</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 0: in syscall</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 1: in Synchronization::Mutex::<strong>lockInternal</strong>(Execution::Context&amp;, unsigned long, unsigned long, bool)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 2: in Execution::StatementContext::<strong>associateWorkloadContext</strong>(ltt::refcounted_handle&lt;Execution::WorkloadContext&gt;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 3: in ptime::Statement::<strong>applyWorkloadProperties</strong>(Execution::Context&amp;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 4: in ptime::Statement::validateLocalStatementContext(Execution::Context&amp;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 5: in ptime::Statement::compile_(Execution::Context&amp;, char const*, ptime::Query::RecompileOption const&amp;, bool, bool, bool)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 6: in ptime::PreparedStatement::compile_(Execution::Context&amp;, char const*, ptime::Query::RecompileOption const&amp;, bool, bool, bool)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 7: in ptime::Connection::prepareStatement(Execution::Context&amp;, ptime::SubTransaction*, char const*, char const*, char const*, int, int, EAPI::CursorHoldability const&amp;, bool, bool, int, bool, char const*, int, bool)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 8: in ptime::Connection::prepareStatement(Execution::Context&amp;, EAPI::ConnectionProperty const&amp;, char const*)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 9: in ptime::SessionEAPIManager::PrepareStatementScope::prepare(Execution::Context&amp;, EAPI::ConnectionProperty const&amp;, char const*)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 10: in ptime::ActionExecutor::prepareQuery(Execution::Context&amp;, ptime::Action&amp;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 11: in ptime::ActionExecutor::prepareAction(Execution::Context&amp;, ptime::SessionEvent*, ptime::Action&amp;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 12: in ptime::SessionHandler::prepareAction(Execution::Context&amp;, SessionLayer::SessionEvent*, ptime::Action&amp;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 13: in .LTHUNK390.lto_priv.1+0xd9 at ptime/session/sm_handler.cc:2282 (libhdbsqlsession.so)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 14: in ptime::SessionHandler::receiveMessage_(Execution::Context&amp;, ptime::ThreadStatusCallbackBase&amp;, SessionLayer::CommEvent*, bool)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 15: in ptime::SessionHandler::handleNotDecodedMessage(Execution::Context&amp;, Execution::JobNode&amp;, SessionLayer::CommEvent*)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 16: in strlen.cpp.3d59cceb</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 17: in Execution::JobObjectImpl::run(Execution::JobWorker*)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 18: in Execution::JobWorker::runJob(ltt::smartptr_handle&lt;Execution::JobObjectForHandle&gt;&amp;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 19: in Execution::JobWorker::run(Execution::ThreadRC&amp;)</span><br/><span class="SNO_DNT" style="float: none;" translate="no"> 20: in Execution::Thread::staticMainImp(Execution::Thread*)</span><br/><span class="SNO_DNT" style="float: none;" translate="no">...</span></p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Mutex contention, Workload context, Thread synchronization, Performance bottleneck, High concurrency</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 334120</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, when many threads execute statements concurrently and these statements are mapped to the same aggregated <span class="SNO_DNT" style="float: none;" translate="no">workload class</span> with total memory limits configured, the threads are forced to wait for each other during workload association. This unnecessary serialization causes significant performance degradation in high-concurrency scenarios.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions of SPS00 - SPS06</li>
+<li>Revisions &lt;= 079.02 (SPS07)</li>
+<li>Revisions &lt;= 082.00 (SPS08)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>Many threads execute statements concurrently</li>
+<li>Statements are mapped to the same aggregated <span class="SNO_DNT" style="float: none;" translate="no">workload class</span></li>
+<li>Total memory limits are configured for the <span class="SNO_DNT" style="float: none;" translate="no">workload class</span>. See <a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/3ae17c3b1d6c4adea6f0ddfec3041dd4.html?locale=en-US&amp;state=PRODUCTION&amp;version=LATEST&amp;q=TOTAL+STATEMENT+MEMORY+LIMIT" target="_blank">Properties for Workload Classes and Mappings</a></li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions &gt;= 079.03 (SPS07)</li>
+<li>Revisions &gt;= 083.00 (SPS08)</li>
+<li>or higher</li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<p><strong>Workaround:<br/><br/></strong>You may change the<span class="SNO_DNT" style="float: none;" translate="no"> workload class</span> type by converting the aggregated <span class="SNO_DNT" style="float: none;" translate="no">workload class</span> to individual <span class="SNO_DNT" style="float: none;" translate="no">workload class</span>es. This reduces the contention as each statement gets its own context.</p></div></div></div></div>

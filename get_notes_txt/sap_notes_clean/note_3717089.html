@@ -1,38 +1,12 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">As described in <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#" target="_blank">Regulatory Change Manager</a>: <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQEE-12154" target="_blank">Changes: Calculation of insurance premiums form for Q1 2026 (version 5.08)</a>, the electronic format of the Calculation Form for Social Insurance Contributions (<em>RPCPAYRU_SICC</em>) report is updated to the version 5.08.</p>
-<p>This SAP Note provides you with the relevant system changes to address this change.</p>
+<p id="__html0">When DAS appointment is being created from Yard Order in subsequent call of qRFC, it could be processed in later point of time. For some customer's scenarios synchronous DAS creation could be critical.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>RSV, HRPAYRU_SICC, RPCPAYRU_SICC, SICC, SICC_2017, XML, 508.</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Letter of the Federal Tax Service of Russia No. BS-4-11/11504@ published on December 19, 2025.</p>
+<p>/SAPYL/CL_YL_DAS_HELPER_BASE=&gt;CALL_DAS_APP_RFC</p>
+<p>/SAPYL/CL_YL_DAS_HELPER_BASE=&gt;CREATE_UPDATE_DS_APP</p>
+<p>/SAPYL/CL_YL_DAS_HELPER_BASE=&gt;MODIFY_DSAPP_FROM_YR_YO</p>
+<p>/SAPYL/CL_YL_DAS_HELPER_BASE=&gt;MODIFY_DSAPP_FROM_YT</p>
+<p>/SAPYL/V_DS_RELO</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>As a general rule, SAP recommends that you implement the Support Package specified for your release.</p>
-<p>However, if you need to install the solution earlier, use the SAP Note Assistant to carry out <strong>automatic </strong>and <strong>manual</strong><strong> post-implementation</strong> correction instructions. For more information, see <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
-<p><strong> </strong></p>
-<p><strong>Product Documentation</strong></p>
-<p>​​​​​​​For more information about the development delivered with this SAP Note, see the entry for this SAP Note in the What's New topic on SAP Help Portal.</p>
-<p>- SAP S/4HANA: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/11aca04ba4ff4d87b748f5ccbb2743ff.html" target="_blank">Calculation Form for Social Insurance Contributions: New Electronic Format as of 2026</a></p>
-<p>- SAP ERP: <a href="https://help.sap.com/docs/SAP_ERP/063e7e5f4d7f4fc0be08565793a9b941/11aca04ba4ff4d87b748f5ccbb2743ff.html" target="_blank">Calculation Form for Social Insurance Contributions: New Electronic Format as of 2026</a></p>
-<p><strong> </strong></p>
-<p><strong>Version History</strong></p>
-<div class="myNNFV2-container">
-<div class="myNNFV2-table-responsive">
-<div class="table-responsive"></div>
-</div>
-</div>
-<div class="table-responsive"><table border="0" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable"></table></div>
-<div class="table-responsive"><table border="0" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
-<tbody>
-<tr>
-<td><strong> Version</strong></td>
-<td><strong> Date</strong></td>
-<td><strong> Reason</strong></td>
-</tr>
-<tr>
-<td>1</td>
-<td>February 26, 2026</td>
-<td>Released for customer</td>
-</tr>
-</tbody>
-</table></div>
-<p><span style=" font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; font-size: 14px; background-"> </span></p></div></div></div></div>
+<p>Implement the the attached note. There is a new feature to run DAS creation within the FM /SAPYL/YO_EXT_COMMUNICATION. It's relevant for internal DAS integration only in the same client. This option to be switched on in the IMG customizing:</p>
+<p>Yard Logistics -&gt; Integration -&gt; Integration to Dock Appointment Scheduling or Logistics Business Network -&gt; Maintain Loading Appointment Relevance for Yard Order Type.</p>
+<p>By default this approach is switched-off.</p></div></div></div></div>

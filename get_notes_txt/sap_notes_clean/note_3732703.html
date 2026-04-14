@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">In the processes "Preparation and Waiting for Sending of Meter Reading (Template Process)" (DE_B_MET_TMP_PREPARE_SEND_MR), "Preparation and Waiting for Sending of Meter Reading (MOS MaLo View)" (DE_B_MET_PREPARE_SEND_MR_MOSMALO), and "Preparation and Waiting for Sending of Meter Reading (MOS MeLo View)" (DE_B_MET_PREPARE_SEND_MR_MOSMELO), step 0350 only created meter reading orders when the usage date matched the process key date. Meter reading orders with planned scheduled meter reading dates that were ready for creation were not created because the usage date didn't match.</p>
+<p id="__html0">This issue is relevant for the market role: MOS.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">MET, meter reading order, usage date, scheduled meter reading date, /US4G/CL_PRST_MET_BILLING_MRO, CREATE_MR_ORDER, /US4G/CL_PRST_DET_MR_ORDER, MaLo, MeLo</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because of a program error that incorrectly filtered meter reading orders based on the usage date matching the process key date.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system creates all meter reading orders that are ready, regardless of whether the usage date matches the process key date.</p>
+<p>You need to activate the BC-Set /US4G/3_0_MOS_SP08_NOTE_3732703 in transaction SCPR20.</p></div></div></div></div>

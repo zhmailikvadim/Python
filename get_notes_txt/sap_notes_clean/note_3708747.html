@@ -1,0 +1,57 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">When WPBP splits exist in the last month of a contract that has ended, the system generates incorrect blocks 53 with unit code 40. The sum of the number of days in blocks 53 unit code 40 exceeds the number of contract days in the month.</p>
+<p>This issue also occurs when you perform a complementary pay for the last month of a contract that has ended with WPBP splits. In this case, the system also generates an unexpected block 51 of type 001 (RD for re-distribution) with the re-distribution of the remuneration of the contract's last active period. The system already declares this remuneration in block 51 of type 001 (RDF for re-distribution and fusion) with the retroaccounted difference.</p>
+<p>After you send your DSN, you receive a Urssaf CRM 119 after 4 hours with the following anomaly:<br/>"Une anomalie est détectée lorsque le nombre de jours calendaires de la période d'emploi pris en compte dans le calcul du plafond de Sécurité sociale (53.002 rattaché au 53.001 type 001, 53.003 unité de mesure 40) est supérieur au nombre de jour de présence du contrat du salarié dans le mois (40.001, 62.001).<br/>Ce contrôle ne s'applique pas :<br/>- aux contrats rattachés à une base assujettie plafonnée (78.001 type 02) ayant une date de début antérieure au 1er jour du mois contrôlé,<br/>- aux individus en multi-contrats."</p>
+<p>It is unclear whether the MSA performs a similar check. You have then to check your DSN for the incorrect blocks.</p>
+<p>The January 2026 payroll results are correct.</p>
+<div class="table-responsive"><table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>
+<p><strong>SAP Note Version</strong></p>
+</td>
+<td>
+<p><strong>Reason for the new Version</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>4</p>
+</td>
+<td>
+<p>Status change from "pilot release" to "release for customer"</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>5</p>
+</td>
+<td>
+<p>Additional fix for the following scenario: <br/>You process a retroactive contract termination for a personnel number with multiple WPBP splits in the original period, impacting the duration of only one of those WPBP splits, for instance by reducing its duration. You have however changes to the remuneration of types 001 and 002, and to the activity in all WPBP splits, reflected in the content of cluster tables REM and ACTI for the same payroll period.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>9</p>
+</td>
+<td>When you process a retroactive departure for an employee who has multiple WPBP splits in the departure month, the system declares block 53 'cancel and replace' entries twice. The system declares these entries once under parent block 51 type 001 'A' cancel and 'RD' redistribute, and again under parent block 51 type 001 'D' Delta or 'DF' merged delta.</td>
+</tr>
+<tr>
+<td>
+<p>11</p>
+</td>
+<td>
+<p>When you hire an employee in month M under contract 00002 with start and end dates in month M-1, the system contains no relevant compensation or activities in the REM/ACTI cluster tables for month M. When you rehire this employee in month M+1 under contract 00003 with a start date on the first day of month M, the system declares the activity for month M+1 twice in the monthly DSN for MPD M+1. The system displays one entry under block 51/type 001 for the new contract 00003 and another entry under block 51/type 001 for the former contract 00002. The system should declare the activity only once under the new contract 00003.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DSN, WPBP, CRM, MSA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>WPBP splits exist in the last active period of a contract that has ended.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After implementing this SAP Note, the system does not generate the incorrect blocks 51 of type 001 (RD) and blocks 53 with unit code 40 described above.</p>
+<p><strong>Check whether you received CRM 119 with the above anomaly for the DSN you already sent. Check whether you have unexpected blocks 51 type 001 (RD) and blocks 53 with unit code 40. If you have these blocks, implement this SAP Note immediately and run the DSN again. For the DSN you already sent, send a DSN of type "cancel-and-replace".</strong></p>
+<p><strong>If you do not correct these errors in the January 2026 DSN, correcting them in the February 2026 DSN becomes complicated. You need to create technical wage types to create a fictitious difference with the January 2026 payroll results, which are correct.</strong></p>
+<p>The correction in this SAP Note is part of the HR Support Packages referenced below.<br/>If you need the correction before the HRSP is available, implement the attached correction instructions. Correction instructions are a short-term solution and not a substitute for the Support Package.</p></div></div></div></div>

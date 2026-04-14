@@ -1,8 +1,19 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">Multiple Reveal-on-Demand requests for the same sensitive attribute, where each rule block in policy has its own approver is not working</p>
+<p id="__html0">In My Timesheet (S/4HANA/Version 4) application:</p>
+<ul>
+<li>The selected order of assignments within an assignment group was not properly retained in some cases.</li>
+<li>Switching from the <em>To Do List</em> to the <em>Timesheet</em> tab, the table was shown in both display and edit mode.</li>
+<li>When changing a time entry, the first column of the table was taking too much width.</li>
+<li>The feature to autocopy the last end time to the start time of a new record in a day was not working.</li>
+</ul>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>UI Data Protection Masking, Reveal on demand, Reveal Attribute, multiple reveal request, GRCUIDP</p>
+<p>F3074A, My Timesheet V4, Assignment Group, Assignment, To Do List, Timesheet, Table, Vertical, Strict layout, Copy Time, Feature, <span class="SNO_DNT" style="float: none;" translate="no">EnableCopyEndTimeToNextRow</span>, <span class="SNO_DNT" style="float: none;" translate="no">HRFIO_B_TSH_FEATURE_ENABLER</span>, <span class="SNO_DNT" style="float: none;" translate="no">ENABLE_COPY_ENDTIME_TO_NEXTROW</span>, <span class="SNO_DNT" style="float: none;" translate="no">EnableDefaultClockTimes</span>, Act As, On Behalf, <span class="SNO_DNT" style="float: none;" translate="no">EnableDefaultDraft</span>.</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Program Error</p>
+<ul>
+<li>When the number of assignments exceeded 9, the sorting logic failed.</li>
+<li>Table reload in edit mode was performed without destruction of the table in display mode.</li>
+<li>When columns were less in the table, the <em>Strict</em> mode was not applied which resulted in a wider highlight column.</li>
+<li>The feature: <span class="SNO_DNT" style="float: none;" translate="no"><em>Enable Copy End Time To Next Row </em></span>(View: <em><span class="SNO_DNT" style="float: none;" translate="no">V_HRFIO_FEAT_LST</span></em>)<em> </em>along with BAdI method: <span class="SNO_DNT" style="float: none;" translate="no"><em>ENABLE_COPY_ENDTIME_TO_NEXTROW </em></span>(BAdI<em>: <span class="SNO_DNT" style="float: none;" translate="no"><em>HRFIO_B_TSH_FEATURE_ENABLER</em></span></em>) can be now used for getting the functionality.</li>
+</ul>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement automatic correction instruction</p></div></div></div></div>
+<p id="">Please implement the automatic correction instruction attached to this SAP Note or alternatively you can implement the corresponding support pack.</p></div></div></div></div>

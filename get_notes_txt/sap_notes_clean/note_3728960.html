@@ -1,8 +1,10 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">When using Inbound Field Value Mapping to convert time values into minutes, seconds, or hours, incorrect values may appear after the conversion.</p>
-<p>The issue occurs because the fractional part of seconds is lost during the conversion.</p>
+<p id="__html0">When you post a payment using payment order lot FP45, a dump occurs with message (&gt;0 577): "In number range &amp;1, correct current number to &amp;2" during receipt number determination.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>PLMSI, PLM System Integration, FVM, Inbound Field Value Mapping, Conversion</p>
+<p>FP-REPT  , &gt;0, 577, 577(&gt;0), FKK_RECEIPT_0020, FKK_REPT, LFKREPTF01, 577&gt;0, &gt;0577, (&gt;0 577)</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Reason: Number range 01 for FKK_REPT has been exhausted.</p>
+<p>Prerequisites: Receipt management is active.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id=""> Implement this SAP Note to resolve the symptom.</p>
-<p><span style="font-family: Arial, Helvetica, sans-serif; font-size: medium;"> </span></p></div></div></div></div>
+<p>The system should not raise an error when a number range interval lacks sufficient free numbers. Instead, it should proceed to the next number range.</p>
+<p id="">Implement the correction instructions for your release or import the relevant Support Package.</p></div></div></div></div>

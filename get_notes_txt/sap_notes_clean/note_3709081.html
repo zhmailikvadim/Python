@@ -1,0 +1,35 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">Swedish Absence Splitter payroll function SNAB - For absences that start the day before a holiday but are not full-day absences, the system incorrectly triggers a payroll warning on the holiday itself, indicating that no work schedule exists for that day. This should not occur because holidays should not be considered for absence continuation. The absence should resume only on the next working day.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">SNAB, 1SD split, Absence, Karensavdrag, Payroll</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>We have modified the processing of planned hours so that holidays are now excluded from consideration. As a result, the system skips holidays when determining absence split continuation.</p>
+<p><strong>Important Configuration Note:</strong></p>
+<ul>
+<li>For non-working holidays, the <strong>day type</strong> must be set to a value <strong>other than 0</strong>.</li>
+<li>If an employee is scheduled to work on a holiday, the <strong>day type</strong> must be set to <strong>0</strong>.</li>
+</ul>
+<div class="table-responsive"><table border="0" cellpadding="1" cellspacing="1" class="table table-bordered table-striped col-resizeable" style="width: 380px; height: 63px;">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>01</td>
+<td>2026-01-28</td>
+<td>Pilot version</td>
+</tr>
+<tr>
+<td>02</td>
+<td>2026-03-06</td>
+<td>Released for all customers</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Implementation</strong></p>
+<ul>
+<li>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install a solution earlier, use the Note Assistant to implement the correction instruction. You can find more information about the Note Assistant in SAP Service Marketplace, under <strong><em>service.sap.com/note-assistant</em></strong>.<br/> </li>
+<li>Note that documentation, transactions, and Customizing activities are only delivered via Support Package. </li>
+</ul></div></div></div></div>

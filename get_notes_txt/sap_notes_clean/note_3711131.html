@@ -1,0 +1,12 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You ran the SPM_AU_LOG archiving with the "Archive with Deletion" option.</p>
+<p>Symptom #1: After the job completed, no records were deleted from the GRACAUDITLOG table, and a DBSQL_SQL_ERROR runtime error appears in ST22.</p>
+<p style="padding-left: 90px;">Database error text: "SQL message: [ASE Error SQL12213]Resource Governor lock count limit (#####) exceeded"</p>
+<p>Symptom #2: The archiving process is canceled by a runtime error: TSV_TNEW_PAGE_ALLOC_FAILED.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>GRC, Access Control, GRACAUDITLOG, archiving, SPM_AU_LOG, GRAC_SPM_AUDIT_LOG_ARCHIVE_W, dump, ST22,  DBSQL_SQL_ERROR,  CX_SY_OPEN_SQL_DB, TSV_TNEW_PAGE_ALLOC_FAILED, Resource Governor lock.</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Reason #1: Resource Governor lock count limit was exceeded due to the large volume of auditlog data selected for archiving.</p>
+<p>Reason #2: No more memory available to add rows to an internal table.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the attached Correction Instruction.</p></div></div></div></div>

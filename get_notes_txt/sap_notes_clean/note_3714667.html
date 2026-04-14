@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">A Standing Order with a workday shift rule is created with a first execution date, next execution date, and last execution date. The Standing Order is then executed for the first execution date and the regular execution date.</p>
+<p>After this, the next regular execution is skipped due to an incorrect calculation of the reference date (next execution date calculated without applying the workday shift).</p>
+<p>In addition to that, when the system date is same as the valid from date of the Standing Order and periodicity changes, the next execution date is calculated incorreclty.</p>
+<p>This SAP Note implements logic to include the skipped regular execution of the Standing Order and calculate the next execution date correctly when system date and valid from date are same.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>BCA_SRV_SORD_CALC_NEXT_DATE, First Last Active Indicator, BCA_SO_CREATE, BCA_SORD_RUN</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program Error.</p>
+<p>Example 1: monthly standing order on 14 with WD shift has been executed on 16.02.2026 (posting date in the future, system date was 02.02.2026). Next execution date should be 16.03 (monday), but the system set the next execution date to 14.04.2026 skipping execution in March.</p>
+<p>Example 2: SO created with periodicty 1 day, system date and valid from date 12.02.2026(Thursday). Posting date changes to 12.02.2026 and execute the SO. Now the periodicy of the SO changes to weekly on Thursday. But the calculated next execution date is 12.02.2026, expected date is 19.02.2026.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Import the relevant Support Package for your release. You can use transaction SNOTE to implement the correction instructions relevant for your release in advance.</p>
+<p>There are no manual activities.</p></div></div></div></div>

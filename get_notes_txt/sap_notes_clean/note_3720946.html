@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>This SAP Note provides you with updates to the <strong>Colombia DIAN 1001 Report Format</strong> (CO_DIAN_1001) report in the <strong>Run Statutory Reports</strong> app for SAP Document and Reporting Compliance. It addresses the consumption of third‑party information when the <strong>Offsetting Account Type</strong> (GKOAR) and <strong>Offsetting Account Number</strong> (GKONT) fields are missing in the financial accounting documents table Universal Journal Entry Line Items (<strong>ACDOCA</strong>).</p>
+<p>When you run the <strong>CO_DIAN_1001</strong> report, the system incorrectly aggregates the results when the third‑party offsetting information is not maintained in <strong>ACDOCA</strong>, as the business partner is not considered in the final output.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>1001 Report Format, ACDOCA, BSEG, Offsetting, Third-party, GKOAR, GKONT, DRC, Colombia, DIAN, Magnetic Media</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>To implement the <strong>Magnetic Media compliance reports </strong>solution, you need a separate license for <strong>Document and Reporting Compliance (DRC)</strong>. For more information, contact your SAP key account manager.</p>
+<p>You have installed the <strong>Magnetic Media compliance reports</strong> for Colombia. For more information, check SAP Note <a href="/notes/2717885" target="_blank">2717885</a>.</p>
+<p>This SAP Note is relevant only for Colombia.</p>
+<p>You have implemented SAP Note 3704612.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<div class="table-wrap">
+<p>After implementing this SAP Note, the system reads the offsetting information primarily from the <strong>ACDOCA</strong> table. If the corresponding field is not maintained in <strong>ACDOCA</strong>, the system retrieves the offsetting information from the financial accounting documents table Accounting Document Segment (<strong>BSEG</strong>) instead. This ensures that the report correctly aggregates the data and accurately reflects the appropriate business partner information.</p>
+<p>As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install a solution earlier, use the Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in the SAP Support Portal, under <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p>
+<p>To implement the solution, you must carry out manual activities and implement the correction instructions that are valid for your release.</p>
+<p>You can activate the objects contained in this SAP Note by executing these reports:</p>
+<ul>
+<li>For DDLS objects, execute the RUTDDLSACTSNOTE report according to the steps available in SAP Note <a href="/notes/2607137" target="_blank">2607137</a>.</li>
+<li>For DCLS objects, execute the R_ACMTOOL_DELETE_INACTIVE_V report according to the steps available in SAP Note <a href="/notes/2691812" target="_blank">2691812</a>.</li>
+</ul>
+<p>Documentation for <strong>Magnetic Media compliance reports</strong> is available in the system and in the SAP Help Portal. System documentation (such as field help, customizing, messages) is delivered via Support Packages. SAP Help Portal documentation is available at <a href="https://help.sap.com/viewer/S4HANACOLOMBIA" target="_blank">help.sap.com/viewer/s4h_op_colombia</a>.</p>
+<p>We also recommend you to check our <a href="/notes/2717885" target="_blank">FAQ SAP Note (2717885)</a>, in which you find an extensive list of frequently asked questions and recommendations that relate to<strong> Magnetic Media compliance reports</strong>.</p>
+<p>You can also find blog posts with news and updates about the <strong>Magnetic Media compliance reports</strong> in the SAP Community (<a class="external-link" href="https://blogs.sap.com/" rel="nofollow" target="_blank">https://blogs.sap.com/</a>): follow the <strong>Document and Reporting Compliance</strong> tag to find the posts.</p>
+</div></div></div></div></div>

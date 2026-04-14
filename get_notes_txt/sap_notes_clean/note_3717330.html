@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>An error occurs when using Excel Data Loader to upload a file to Position's Workspace. </li><li>The error message displayed is: "Value is Required for the Target Compensation Value Field." </li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul style="list-style-position: inside;"><li>SAP Sales Performance Management
+<ul style="list-style-position: inside;"><li>Incentive Management on Hyperscalers</li><li>Incentive Management on Legacy Oracle</li><li>Incentive Management on Legacy Hana</li></ul>
+</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Go to Incentive Management Admin.</li><li>Navigate to any Workspace that contains fields associated with a Unit Type.</li><li>Attempt to update the Unit Type of a field without providing a corresponding value for that field, using either the User Interface (UI) or Excel Data Loaders.</li><li>Example:
+<ul><li>
+<p>Excel Data Loader scenario:</p>
+<ul><li>
+<p>Use the Position Workspace Excel Data Loader template and populate the Unit Type for the <em>Target Compensation Value</em> field, while leaving the <em>Target Compensation Value</em> itself as <code>null</code>.<br/>Upon uploading the file to the Position workspace, the error described in the Symptoms section is observed.</p>
+</li></ul>
+</li><li>UI scenario :
+<ul><li>Navigate to the Transaction Workspace and update the Unit Type for <code>GenericNumber1</code> through the UI without providing or associating a value for <code>GenericNumber1</code>.<br/>The UI will fail to save the record and will display a validation or exception error.</li></ul>
+</li></ul>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>In Incentive Management, fields that support Unit Types require a value to be provided whenever a Unit Type is specified. </p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>When updating any field that is associated with a Unit Type, ensure that a valid value is provided at the same time. The Unit Type and its corresponding value must always be populated together.</li><li>
+<p>When using the User Interface (UI), enter a value for the field, selecting or updating the Unit Type.</p>
+</li><li>
+<p>When using Excel Data Loaders, ensure that both the Value column and the Unit Type column are populated for the same field.</p>
+</li><li>
+<p>If a value is not required, remove or leave the Unit Type empty as well.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>error message, missing target compensation value, upload failure, SAP Incentive Management error, Position Workspace issue, Excel Data Loader validation, Unit Type requirement, troubleshooting upload errors, SAP Sales Performance Management, file upload error, workspace validation error, compensation field missing, SAP UI error, file processing issue, resolution guidance</p></div></div></div></div>

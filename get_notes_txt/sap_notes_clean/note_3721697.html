@@ -1,0 +1,58 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">In <strong>EWA (EarlyWatch Alert)</strong> or<strong> transaction ST03 / ST03N (Workload Analysis)</strong>, the following observations may appear:</p>
+<ul><li>High response times for RFC processing</li><li>Long-running RFC function modules</li><li>RFC runtimes of up to two hours</li><li>Increased number of parallel RFC calls</li><li>Long execution times without corresponding dumps</li></ul>
+<p>Typical observation patterns include:</p>
+<ul><li>Long-running RFC entries in ST03N → Workload → RFC Client or RFC Server profile</li><li>EWA alerts indicating high RFC response times</li><li>RFC function modules running continuously for extended periods</li><li>Multiple parallel RFC processes per instance</li></ul>
+<p>These observations are related to the SAP Cloud ALM Health Monitoring data collection mechanism and are expected by design.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP Cloud ALM 1.0</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>1. Introduction</strong></p>
+<p>This document explains how data collection works for SAP Cloud ALM Health Monitoring and clarifies why long-running RFC entries visible in EWA or ST03 are technically expected and harmless.</p>
+<p>The focus is on:</p>
+<ul><li>The role of the Central Collector</li><li>The behavior of the Health Monitoring Daemons</li><li>Runtime characteristics</li><li>The reason long-running RFC function modules appear in workload statistics</li><li>The correct interpretation of these entries in EWA and ST03</li></ul>
+<p>The objective is to provide transparency into the technical architecture and to clarify the relationship between monitoring observations and the underlying design.<br/><br/></p>
+<p><strong>2. High-Level Architecture Overview</strong></p>
+<p>SAP Cloud ALM Health Monitoring follows a controlled and resilient scheduling concept:</p>
+<ul><li>A Central Collector acts as a watchdog.</li><li>It ensures that hourly data collection is properly scheduled.</li><li>A daemon (RFC Function Module) runs continuously for two hours:
+<ul><li>First hour: waiting/preparation</li><li>Second hour: active metric collection</li></ul>
+</li></ul>
+<p>This overlapping design guarantees reliable and precise metric acquisition, especially for time-critical metrics such as:</p>
+<ul><li>System heartbeat</li><li>Instance heartbeat</li></ul>
+<p>Due to this design, long-running RFC calls are expected and are part of normal operation.<br/><br/><img class="img-responsive" height="400" src="/documents/customerkba/DkhUZc45KUa0wMMmFBSHG0dDfTra6vxBt9piZS9GBIw" width="658"/><br/><br/></p>
+<p><strong>3. The Central Collector (Watchdog Mechanism)</strong></p>
+<p>The Central Collector performs a watchdog check every 5 minutes.</p>
+<p>Responsibilities include:</p>
+<ul><li>Verification that a data collection daemon is scheduled for:
+<ul><li>The current hour</li><li>The next hour</li></ul>
+</li><li>Ensuring uninterrupted hourly metric collection</li><li>Automatic recovery of scheduling gaps</li></ul>
+<p>The Central Collector does not perform the actual metric collection.</p>
+<p>Instead, it ensures that the appropriate daemon RFC function module is active and ready.<br/><br/></p>
+<p><strong>4. The Health Monitoring Daemon</strong></p>
+<p>The daemon is implemented as an RFC-enabled Function Module triggered by SAP Cloud ALM integration.</p>
+<p>Each daemon instance runs for two hours:</p>
+<ol><li>Waiting phase</li><li>Data collection phase<br/>(In parallel, the next daemon is already in its waiting phase.)</li></ol>
+<p>This overlapping concept ensures a seamless handover between two hourly cycles.</p>
+<p>The daemons are scheduled per application server instance.</p>
+<p>Therefore:</p>
+<p>Number of running daemons = Number of instances × 2</p>
+<p>During its runtime, the daemon wakes up every 60 seconds to:</p>
+<ul><li>Check whether metrics are due</li><li>Collect the required monitoring data</li></ul>
+<p>The collection schedule is predefined by SAP and cannot be customized.<br/><br/></p>
+<p><strong>5. Appearance in EWA and ST03</strong></p>
+<p>Because each daemon runs for two hours, workload statistics may display:</p>
+<ul><li>RFC calls with very long runtimes (up to 2 hours)</li><li>High accumulated response times in RFC statistics</li><li>Multiple parallel RFC calls (2 per instance)</li><li>Long-running RFC entries without dumps</li></ul>
+<p>In ST03/ST03N, this typically appears under:</p>
+<p>Workload → RFC Client or RFC Server profile</p>
+<p>In EWA, alerts such as the following may be reported:</p>
+<ul><li>High RFC response time</li><li>Long-running RFC daemon processes</li></ul>
+<p>Important clarification:</p>
+<p>These values represent the technical lifecycle of the daemon and do not indicate a performance issue by themselves.</p>
+<p>The reported runtime reflects the design (waiting + collection phases), not continuous CPU consumption.<br/><br/></p>
+<p><strong>6. System Resource Consumption</strong></p>
+<p>Although the daemon shows a long runtime:</p>
+<ul><li>Most of the time is spent in a waiting state</li><li>CPU utilization remains minimal</li><li>Database activity remains minimal</li><li>The work process is released during idle waiting periods</li></ul>
+<p>Long-running RFC function modules in workload statistics are therefore expected behavior and can be considered harmless as long as:</p>
+<ul><li>No excessive CPU usage is observed</li><li>No abnormal dumps occur</li><li>No unusual system-wide performance degradation is present</li></ul>
+<p>Only if high CPU consumption, dumps, or system instability accompany the RFC entries should further investigation be performed.<br/><br/></p>
+<p><strong>7. Summary</strong></p>
+<p>SAP Cloud ALM Health Monitoring uses a robust, overlapping daemon-based architecture:</p>
+<ul><li>A watchdog (Central Collector) performs scheduling checks every 5 minutes.</li><li>A two-hour daemon lifecycle ensures seamless hourly data collection.</li><li>Metrics are evaluated every 60 seconds during collection.</li><li>Two parallel daemons run per instance.</li><li>Long runtimes in ST03 and EWA are intentional and technically harmless.</li></ul>
+<p>This design ensures:</p>
+<ul><li>High reliability</li><li>Accurate metric timing</li><li>Stability for critical heartbeat monitoring</li></ul>
+<p>Long-running RFC entries related to SAP Cloud ALM Health Monitoring do not indicate a system issue when resource consumption remains low.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP Cloud ALM, Health Monitoring, Data Collection, Watchdog, Daemon, RFC, ST03, ST03N, EWA, EarlyWatch Alert, Response Time, Workload Analysis, CPU, Runtime, Resource Consumption</p></div></div></div></div>

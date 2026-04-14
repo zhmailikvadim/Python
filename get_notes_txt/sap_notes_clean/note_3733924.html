@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Processing of Disconnection Request from SUP (DSO View)" (DE_B_GPKE_DISC_DOC_DSO),This occurs when a master data issue prevents step 1800 from completing. After five minutes, step 2850 (Receive process end notification from maco) closes the Pdoc, despite step 1800 remaining active.</p>
+<p>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>GPKE, DE_B_GPKE_DISC_DOC_DSO, disconnection request, ORDRSP 19116, step 1800, master data update, MDR</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because the precondition for step 2900 was incorrect, allowing the process to complete before step 1800 finished.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system ensures that the process completes only after finishing the master data update in step 1800 and all subsequent steps. The BC set /US4G/3_0_DSO_SP00_NOTE_3733924 contains the necessary corrections. No further action is required. You can verify the fix by checking that the process completes only after step 1800 and all subsequent steps finish successfully.</p></div></div></div></div>

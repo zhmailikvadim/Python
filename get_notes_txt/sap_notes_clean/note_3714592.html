@@ -1,0 +1,39 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">There is a requirement to execute the available batch (.bat) or shell (.sh) script tools delivered with the SAP Cloud Connector installation.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>
+<p>SAP Cloud Connector</p>
+</li><li>
+<p>Microsoft Windows (for .bat scripts)</p>
+</li><li>
+<p>Linux/Unix-based operating systems (for .sh scripts)</p>
+</li><li>
+<p>Supported JDK version used by SAP Cloud Connector</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To use the script tools provided in the SAP Cloud Connector installation directory, follow the steps below:</p>
+<p><strong>1. Open Command Line with Required Privileges</strong></p>
+<p>On Windows: Open a Command Prompt with Administrator privileges or with sufficient read and write permissions to the SAP Cloud Connector installation directory.</p>
+<p>On Linux/Unix: Open a terminal session with sufficient permissions to access and modify files in the installation directory.</p>
+<p></p>
+<p><strong>2.  Verify JAVA_HOME Environment Variable</strong></p>
+<p>Ensure that the JAVA_HOME environment variable is set to the installation directory of the JDK currently used by SAP Cloud Connector.</p>
+<p>To verify:</p>
+<p>On Windows: <em>echo %JAVA_HOME%</em></p>
+<p>On Linux/Unix: <em>echo $JAVA_HOME</em></p>
+<p>If not set, configure JAVA_HOME accordingly before proceeding.</p>
+<p><strong>Note</strong>: When verifying the JAVA_HOME environment variable, system behavior differs between Windows and Linux/Unix platforms. On Windows, if JAVA_HOME is not set, running echo %JAVA_HOME% will return %JAVA_HOME%, indicating that the variable is undefined. On Linux/Unix systems, if JAVA_HOME is not set, executing echo $JAVA_HOME will return an empty line or no output. In both cases, this confirms that the environment variable is not configured.</p>
+<p>For the script tools delivered with SAP Cloud Connector to function correctly, JAVA_HOME must be set to the root directory of a supported JDK installation (not the `bin` directory), and a new terminal session must be opened after setting the variable to ensure the changes take effect.</p>
+<p></p>
+<p><strong>3. Navigate to the Installation Directory</strong></p>
+<p>Switch to the SAP Cloud Connector installation directory.</p>
+<p>On Windows: cd &lt;CloudConnector_Installation_Directory&gt;\SAP\scc20</p>
+<p>On Linux/Unix: cd &lt;CloudConnector_Installation_Directory&gt;/SAP/scc20</p>
+<p></p>
+<p><strong>4. Execute the Required Script Tool</strong></p>
+<p>Run the respective tool depending on the operating system:</p>
+<p>On Windows (.bat files): &lt;toolname&gt;.bat</p>
+<p>On Linux/Unix (.sh files): ./&lt;toolname&gt;.sh</p>
+<p></p>
+<p><strong>5. Provide Required Parameters (If Applicable)</strong></p>
+<p>If the script requires additional input parameters, the usage syntax will be displayed in the console output.</p>
+<p>Follow the syntax instructions shown and rerun the command including the required parameters.</p>
+<p></p>
+<p></p>
+<p><strong>Additional Information</strong></p>
+<ul><li>Always ensure that SAP Cloud Connector and its underlying JDK are running on supported versions to avoid compatibility issues.</li><li>Script execution may fail if insufficient permissions are granted or if JAVA_HOME is incorrectly configured.</li><li>For supported JDK versions and compatibility details, refer to the official SAP documentation for SAP Cloud Connector.</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li><a href="https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/update-java-vm" rel="noopener noreferrer nofollow" target="_blank">Update the Java VM | SAP Help Portal</a></li><li><a href="https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/cloud-connector-troubleshooting#scripts-for-configuration-%28issues%29" rel="noopener noreferrer nofollow" target="_blank">Scripts for Configuration| SAP Help Portal</a></li><li><a href="https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/cloud-connector-faq" rel="noopener noreferrer nofollow" target="_blank">Frequently Asked Questions | SAP Help Portal</a></li><li>KBA <a href="https://me.sap.com/notes/3201518" rel="noopener noreferrer nofollow" target="_blank">3201518</a> - SAP Cloud Connector Documentation</li><li>KBA <a href="https://me.sap.com/notes/2701137" rel="noopener noreferrer nofollow" target="_blank">2701137</a> - SAP Cloud Connector - Guided Answers</li><li>SAP Note <a href="https://me.sap.com/notes/3302250" rel="noopener noreferrer nofollow" target="_blank">3302250</a> - Cloud Connector support strategy</li><li>KBA <a href="https://me.sap.com/notes/2539713" rel="noopener noreferrer nofollow" target="_blank">2539713</a> - Upgrade to a new version of the Cloud Connector</li></ul></div></div></div></div>

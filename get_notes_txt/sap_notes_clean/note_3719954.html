@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the Fiori app for malfunction reports (F2023), creation date and time fields are displayed incorrectly after saving a notification.</p>
+<p>The issue appears when user time zone and system time zone differ.</p>
+<p>The problem occurs without any error message.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>F2023, CL_EAMS_BO_NTF_TIMECONV, CONVERT_USERTIME2SYSTEMTIME, CL_EAM_BOPF_NOTIF_HEADER_DEF, EAMS_S_BO_NTF_HEADER, Time zone conversion, TZS1_SESSION_TO_SYSTEM</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The reason is a program error in the time conversion logic for notification header data.</p>
+<p>The conversion routine does not correctly handle user‑to‑system time zone mapping, leading to incorrect timestamps.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the attached Correction Instruction.</p>
+<p>The correction introduces enhanced time zone handling in the conversion method, including consistent mapping of date/time fields and updated logic for system/user time zone determination.</p>
+<p>New automated test coverage is also added to prevent regressions.</p>
+<p>No manual post‑implementation steps are required.</p></div></div></div></div>

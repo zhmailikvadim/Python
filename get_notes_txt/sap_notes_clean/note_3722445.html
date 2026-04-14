@@ -1,0 +1,34 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">After upgrading to PCo 15.5.5.6 or higher, OPC UA connections may fail if the ApplicationUri in the server certificate does not exactly match the ApplicationUri in the endpoint configuration. In previous PCo versions, connections could succeed even if the ApplicationUri in the certificate did not match exactly.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Plant Connectivity, PCo, OPC UA, ApplicationUri, certificate validation, EndpointDescription</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>In PCo 15.5.5.6 and higher, strict ApplicationUri validation is enforced for all OPC UA connections:</p>
+<ul>
+<li>
+<p>The ApplicationUri in the server certificate must exactly match the ApplicationUri defined in the EndpointDescription.</p>
+</li>
+<li>
+<p>This check is mandatory and cannot be disabled.</p>
+</li>
+<li>
+<p>It ensures compliance with OPC UA security specifications.</p>
+</li>
+</ul>
+<p>Previous PCo versions did not enforce this strict validation, which may explain why connections worked without matching ApplicationUris.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>To resolve the OPC UA connection issue in PCo 15.5.5.6 or higher:</p>
+<ol>
+<li>
+<p>Create a new OPC UA server certificate with the correct ApplicationUri that exactly matches the EndpointDescription.</p>
+</li>
+<li>
+<p>Replace any existing certificate on the PCo server with this newly created certificate.</p>
+</li>
+<li>
+<p>Re-trust the new certificate on all OPC UA clients (e.g., PLCs).</p>
+</li>
+</ol>
+<blockquote>
+<p>After completing these steps, OPC UA connections will succeed, and the mandatory ApplicationUri validation will pass.</p>
+</blockquote></div></div></div></div>

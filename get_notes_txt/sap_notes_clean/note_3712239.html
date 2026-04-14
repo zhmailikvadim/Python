@@ -1,0 +1,78 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3712239&amp;TargetLanguage=EN&amp;Component=BW4-DM-TRFN&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3712239/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3712239/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>During the activation of a transformation TRFN with SAP HANA runtime for an error of the following type:</p>
+<p>SQL error with code '2.048'. See the following SQL message:<br/>=&gt; column store error: fail to create scenario: [34011] Inconsistent calculation mo<br/>=&gt; del;calculationNode (0BW_SRC_INFOSOURCE_1.<strong>[IOBJNM]</strong>.JOIN.<strong>[number]</strong>.FILTER_JOIN): Mappin<br/>=&gt; g for attribute DATEFROM was found morethan once,Details (Errors): - calculatio<br/>=&gt; nNode (0BW_SRC_INFOSOURCE_1.<strong>[IOBJNM]</strong>.JOIN.<strong>[number]</strong>.FILTER_JOIN): Mapping for Attribute<br/>=&gt; e DATEFROM was found more than once. - calculationNode (0BW_SRC_INFOSOURCE_1.<br/>=&gt; <strong>[IOBJNM]</strong>.JOIN.<strong>[number]</strong>.FILTER_JOIN): Mapping forattribute DATETO was found more than on<br/>=&gt; ce.</p>
+<p>The prerequisite for this is that the content of a target field is determined in the model using a lookup and the lookup is based on a time-dependent InfoObject.<br/>In addition, DATEFROM and/or DATETO are used explicitly in the model:<br/><br/>Example:<br/>An aDSO is updated in two steps:<br/><br/>RSDS (DataSource) -&gt; TRFN(1) (Transformation) -&gt; TRCS (InfoSource) -&gt; TRFN(2) (Transformation) -&gt; ADSO (DataStore (advanced))</p>
+<p>In TRFN(1), the fields are mapped 1:1 as follows:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>RSDS</strong></td>
+<td> </td>
+<td><strong>TRCS</strong></td>
+</tr>
+<tr>
+<td>FIELD1(key)</td>
+<td>-&gt;</td>
+<td>FIELD1(key)</td>
+</tr>
+<tr>
+<td>DATEFROM</td>
+<td>-&gt;</td>
+<td>DATEFROM</td>
+</tr>
+<tr>
+<td>MY_EQUINO</td>
+<td>-&gt;</td>
+<td>MY_EQUINO</td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td>BPARTNER (Constant e.g.)</td>
+</tr>
+</tbody>
+</table></div>
+<p><br/>In TRFN(2), the fields are mapped as follows:</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>TRCS</td>
+<td> </td>
+<td>ADSO</td>
+<td> </td>
+</tr>
+<tr>
+<td>FIELD1(key)</td>
+<td>-&gt;</td>
+<td>FIELD1(key)</td>
+<td> </td>
+</tr>
+<tr>
+<td>DATEFROM</td>
+<td>-&gt;</td>
+<td>0DATEFROM</td>
+<td> </td>
+</tr>
+<tr>
+<td>MY_EQUINO (CHAR18),<br/>BPARTNER (CHAR10)</td>
+<td>-&gt;</td>
+<td>ZBED41TYP(CHAR10)</td>
+<td>Lookup</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lookup object on ZBED41TYP is: ZBE41CEQP<br/>with the mappings:<br/>Step 1<br/>ZBE41CEQP (Lookup Object) &lt;-&gt; MY_EQUINO (TRFN Source)<br/>0BPARTNER (Lookup Object) &lt;-&gt; BPARTNER (TRFN Source)<br/><br/>Step 2<br/>ZBEC41TYP (Target) &lt;-&gt; ZBEC41TYP (Lookup)</p>
+<p>where the lookup IOBJ ZBE41CEQP(CHAR18) is defined as follows:<br/>ZBE41CEQP with 0BPARTNER(CHAR10) as compounding parent<br/>and the time-dependent navigation attribute ZBEC41TYP(CHAR10)</p>
+<p>Since a time-dependent IOBJ internally uses the DATEFROM and DATETO fields to specify the time interval, collisions occur during mapping in the join condition.<br/><br/><br/>You can only rename the DATEFROM field in the InfoSource (TRCS), for example: DATEFROM_X<br/>or implement the attached correction.<br/>In both cases, it should be possible to activate the transformation afterwards.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>RSDHA, TRFN, 2048, lookup, CL_RSDHA_JOINS, P_ADD_MAPPINS, timedep, datefrom, dateto, 0datefrom, 0dateto</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Program</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<ul>
+<li><span style="text-decoration: underline;"><strong>SAP BW/4HANA 2021</strong></span><br/>Import Support Package 14 for SAP BW/4HANA 2021 (SAPK-30014INDW4CORE) into your BW system. The support package is available once <strong>SAP Note 3625395 </strong> ("SAPBWNews SAP BW/4HANA 2021 SP14"), which describes this SP in more detail, has been released for customers.<br/><br/></li>
+<li><span style="text-decoration: underline;"><strong>SAP BW/4HANA 2023</strong></span><br/>Import Support Package 08 for SAP BW/4HANA 2023 (SAPK-40008INDW4CORE) into your BW system. The support package is available once <strong>SAP Note 3639252 </strong> ("SAPBWNews SAP BW/4HANA 2023 SP08"), which describes this SP in more detail, has been released for customers.</li>
+</ul>
+<p>In urgent cases, you can use the correction instructions as an advance correction.</p>
+<p><strong>Before you do this, you must refer to SAP Notes 1668882 and 2248091 for information about transaction SNOTE.</strong></p>
+<p>To provide information in advance, the specified SAP Notes may already be available before the Support Package is released. In this case, however, the short text still contains the word "preliminary version".</p></div></div></div></div></div>

@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0"><span style="text-decoration: underline;">IL Withholding tax report - form 856 - </span></p>
+<p>Israeli tax authority published new changes for reporting year 2025 for form 856.</p>
+<p>You can see the changes that were published in the attached file "IL tax authority new instructions for 2025.pdf".<a class="urLnk" href="https://i7p.bss.net.sap/sap/bc/bsp/sno/ui/attachment.htm?iv_key=002075125900000001022026&amp;iv_version=0001&amp;alt=2BCE4CB10DF674B172F4F3F7B32A2E284F492BCB353533358BF734378A3730B44A8F742DF4B1748E48094C720B372F4829280FF37571F6AE0C4876A9F02F704DF6320F31F5F24D4ED2750C09514BCECFCFCE4C8DCF4BCC4DB5F575F4F4F3F57771F571F6F70B01B25D83D4120B0A722092A599504EB16D715E3E00&amp;iv_guid=FA163EDBBAC71FE186DADB0052E104C4" id="DEFAULT_ATTACHMENT_C_attachments_1_1" rel="opener" tabindex="0" target="_blank"><br/></a></p>
+<p><span style="text-decoration: underline;">The changes are in record 60 structure as follows</span>:</p>
+<ol>
+<li><span style="text-decoration: underline;">New Field 17a was added</span> - Additional Tax From All  Income Sources.</li>
+<li><span style="text-decoration: underline;">New field 17b was added</span> - Additional Tax From Capital Sources.</li>
+<li><span style="text-decoration: underline;">The length of field 18, FILLER, was changed</span> from 52 to 32 characters.</li>
+</ol>
+<p>As the new fields that were added are not relevant for SAP suppliers and customers, by default, they will be filled with zeroes.</p>
+<p>If you wish to add such amounts for some of your suppliers, you can use the BAdI /ATL/BADI_WHT_REPORT, method GENERAL_USER_EXIT (if you don't have this BAdI in your system you should use the function module /ATL/WT_CUSTOMER_EXIT2 user exit).</p>
+<p>In the BAdI method or function module, you should add the relevant amounts to the relevant suppliers in the new fields that were added to tables VENDORS, VENDORS_MONTHLY, VENDORS_MONTHLY_SUG accordingly.</p>
+<p>Pay attention, according to tax authority's instructions, the amounts of the new fields should be added also to the amount of the withholding tax that was deducted (field 12 in record 60). So, if you updated the amounts in the user exit BAdI or function module, you should also need to update the amount of the withholding tax that was deducted in the 3 mentioned tables accordingly.</p>
+<p>In addition, if you are using the method GET_FICA_DATA in BAdI /ATL/BADI_WHT_REPORT or function module /ATL/WT_CAFI_CUSTOMER_EXIT1, you can update the new fields in the tables VENDORS_CA, VENDORS_MONTHLY_CA and VENDORS_MONTHLY_SUG_CA accordingly, and as mentioned, you should also update the amount of the field withholding tax that was deducted.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">IL localization, Israeli localization, WT report, withholding tax report, /ATL/VK01_46, IL_WHT_856</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is relevant only for The Israeli Localization.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Import the Support Package specified for your release or implement the attached correction instruction.</p>
+<p>As a general rule SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <strong><a class="external-link" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="nofollow" target="_blank">SAP Note Assistant</a>.</strong></p></div></div></div></div>

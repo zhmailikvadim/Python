@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0"><span style="font-size: 10pt;">The response for the Import Requisitions created from Ariba does not contain the <span style="font-family: 'courier new', courier;">UniqueName</span> or <span style="font-family: 'courier new', courier;">StatusString</span> fields. Instead, a blank response is returned, similar to the example shown below:</span></p>
+<p><span style="font-size: 10pt; font-family: 'courier new', courier;">&lt;soap:Envelope xmlns:soap="<a href="http://schemas.xmlsoap.org/soap/envelope/" rel="noopener noreferrer nofollow" target="_blank">http://schemas.xmlsoap.org/soap/envelope/</a>" xmlns:xsd="<a href="http://www.w3.org/2001/XMLSchema" rel="noopener noreferrer nofollow" target="_blank">http://www.w3.org/2001/XMLSchema</a>" xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance" rel="noopener noreferrer nofollow" target="_blank">http://www.w3.org/2001/XMLSchema-instance</a>"&gt;<br/>    &lt;soap:Header&gt;<br/>        &lt;Headers xmlns="urn:Ariba:Buyer:@variant"&gt;<br/>            &lt;variant&gt;@variant&lt;/variant&gt;<br/>            &lt;partition&gt;@partition&lt;/partition&gt;<br/>        &lt;/Headers&gt;<br/>    &lt;/soap:Header&gt;<br/>    &lt;soap:Body&gt;<br/>        &lt;RequisitionImportPullReply xmlns="urn:Ariba:Buyer:@variant" partition="@partition" variant="@variant"/&gt;<br/>    &lt;/soap:Body&gt;<br/>&lt;/soap:Envelope&gt;</span></p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><div>
+<section>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<p><span style="font-size: 10pt;">In the standard configuration, when internal budgets are enabled for requisitions and an imported requisition is created and moves to Submitted status, internal budget processing is triggered for that requisition. Since both the internal budget processing and the import requisition processing run in the same thread, the web service response does not include the <span style="font-family: 'courier new', courier;">UniqueName</span> or <span style="font-family: 'courier new', courier;">StatusString</span>.</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>To resolve this issue, the system can be configured to process certain requests in the background instead of handling everything within the same thread. This helps maintain the correct system context and ensures that responses are returned properly, even when internal budget processing is involved.</p>
+<p>This behavior is controlled by the <span style="font-family: 'courier new', courier;">Application.Budget.InvokeBudgetPDEInSeperateThread</span> parameter. When this setting is enabled, any requisitions imported into <strong>SAP Ariba Buying</strong> solutions will be processed and submitted separately whenever Budget PDE calls are required.</p>
+<p>In simpler terms, enabling this option allows the system to handle complex steps independently without interrupting the main process. This improves reliability and helps prevent situations where the system does not return a response as expected.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p><span style="font-family: verdana, geneva;">no uniquename,no statusstring,RequisitionImportPullReply,Application.Budget.InvokeBudgetPDEInSeperateThread,import requisition, no response, blank response, requisition import, internal budget, budget</span></p></div></div></div></div>

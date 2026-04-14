@@ -1,0 +1,22 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">This KBA describes the steps on how to update the Operator (Recruiter) field for a Job Requisition using Integration Center.</p>
+<p><span style="color: rgb(224, 62, 45);"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em>  </span></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Recruiting Management</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><em>Note: The Operator Team is not upsertable and updateable through Integration Center.</em></p>
+<ol><li>
+<p>Create a CSV UTF file with the minimum mandatory fields: Job Req ID, UserSysID, Username, and isDraft:<br/><br/><img alt="" class="img-responsive" height="77" src="/documents/customerkba/-3hw-XAsv1-JK67fUI6qlmBIsc0O2BOqe6zm6kxVIsk" width="366"/></p>
+</li><li>Upload the file in SFTP Server.</li><li>
+<p>Go to Integration Center → Create → select Scheduled CSV Input Integration.</p>
+</li><li>
+<p>Search for JobRequisition under Entity Name and select it.</p>
+</li><li>
+<p>Click Configure Fields → Upload Sample CSV, then upload the CSV created in Step 1.</p>
+</li><li>
+<p>After uploading, ensure to follow the mapping with destination fields and set Operation to "<strong>Upsert Multiple</strong>": </p>
+<ul><li>
+<p><strong>Under the JobRequisition entity:</strong><br/><img alt="" class="img-responsive" height="578" src="/documents/customerkba/h8w0VxJ1w6xKe3pfznpZahHJfXirfnNDDpqsLqhAjPY" width="1247"/><br/><br/>isDraft:<br/><br/><img alt="" class="img-responsive" height="567" src="/documents/customerkba/WIOeAYigmS8tK_TBWVEODlQJjsoUt_u4UZ-r4xYwbNI" width="1247"/></p>
+</li><li>
+<p><strong>Under the Operator (Recruiter) Navigational Property:<br/><br/></strong><img alt="" class="img-responsive" src="/documents/customerkba/PcWrbNi0wqcqc0uupdCRrz5TfquF3sFdlpUdlmGa7Ak"/><br/><br/><img alt="" class="img-responsive" height="567" src="/documents/customerkba/TPxNQX_R70MvAxbI9DDTvB8RJo36qwysP31msxCNaYU" width="1247"/></p>
+</li></ul>
+</li><li>
+<p>Configure the Source Settings according to the SFTP credentials where the file is uploaded.</p>
+</li><li>
+<p>Save the integration and click Run to execute the job.</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>recruiter update, job requisition, integration center, reassign job requisition tool, sap successfactors recruiting, user field not mapped, RCM entity, recruiter assignment, integration issue, job requisition update, scheduled csv file import, recruiter updates, sap for me, sap kba, SFTP, Operator, Operator Update,</p></div></div></div></div>

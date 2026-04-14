@@ -1,0 +1,19 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You are working with field catalogs in the transportation cockpit. Each field catalog generates a UI structure to be used for the respective UIBB in the transportation cockpit, depending on the components defined as display (default or personalization) in the respective field catalog. Technically, this UI structure is based on the maximum UI structure, where all possible components/fields are available. This maximum UI structure is organized with substructures. A substructure contains components/fields for a semantic topic, such as TOR root or TOR stop data. The generation of the UI structure is generating substructures that are not needed, because no components/fields are defined as display (default or personalization).</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">FC, /SCMTMS/FIELD_CONFIG</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The problem is caused by a program error.</p>
+<p><strong>Remark</strong>: The substructures for TOR root, item, stage and stops for Loading, Unloading, departure and arrival will be generated for each field catalog valid in field catalogs for transportation order business object.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<ol>
+<li><span style="font-size: 14px;">Implement the attached correction instructions or import the specified Support Package</span></li>
+<li>Correct the generated UI structure of the affected field catalogs. To correct it, follow the steps mentioned below.<br/><br/><strong>For customer specific field catalogs:</strong></li>
+</ol>
+<ul>
+<li>Make a dummy change (set a field to 'Display (Default)' or 'Display (Personalization)') in an affected field catalog, and save the field catalog.</li>
+<li>Afterwards, remove the dummy change and save the field catalog again. The save leads to a re-generation of the respective UI structure and correct it.</li>
+<li>It is also possible to correct the generated UI structure described for SAP standard field catalogs below.<br/><br/><strong>For SAP standard field catalogs: </strong></li>
+<li>Start the transportation Cockpit with a page layout where an affected SAP standard field catalog is used.</li>
+<li>An abortion with the error message: "A newer version of data type '/FBI/STC*' was found than the one required," with runtime error TYPELOAD_NEW_VERSION in method CL_ABAP_TYPEDESCR-&gt;DESCRIBE_BY_NAME can occur in each affected SAP standard field catalog if the transportation cockpit is started for the first time after the specified correction instruction has been implemented. This abortion is caused by the fact that the saved generated UI structure will be checked and regenerated (if necessary) during the start of the TC, but the newly generated UI structures do not fit the (technical FBI structure) UI structures currently used. Afterward the issue will be automatically fixed and the transportation cockpit can be started again without issue for the respective field catalogs.</li>
+</ul></div></div></div></div>

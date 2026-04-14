@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In <span class="hover:entity-accent entity-underline inline cursor-pointer align-baseline">SAP Business One Integration Framework</span> version 2.0.50, when you execute a scenario that calls an internal queue (DBQO) after a Service Layer adapter step, the following error occurs:</p>
+<blockquote>
+<p><em>"Character not allowed in XPath, ':'."</em></p>
+</blockquote>
+<h3 class="section" data-toc-skip="" id="Reproducing the issue">Reproducing the issue</h3>
+<p>The error is reproducible when:</p>
+<ul>
+<li>The internal queue (DBQO) is triggered after a Service Layer adapter.</li>
+<li>The scenario reads a CSV file through an SLD configuration (for example, step "IAG.getTimeSheetFile").</li>
+<li>The SLD ID of the SAP Business One demo database is maintained in <em>configurationFile.xml</em>.</li>
+</ul>
+<p>If the same internal queue (DBQO) is executed <strong>without</strong> the Service Layer adapter step, the error does <strong>not</strong> occur.</p>
+<p><strong>Expected Behavior:</strong></p>
+<p>No error occurs when calling the internal queue (DBQO).</p>
+<p><strong>Actual Behavior:</strong></p>
+<p>Error occurs: <em>"Character not allowed in XPath, ':'."</em></p>
+<h3 class="section" data-toc-skip="" id="Cause">Cause</h3>
+<p>The issue relates to the parameter <strong>“Adjust to Smart Message = True”</strong>, which can affect all Version 2 adapters in <span class="hover:entity-accent entity-underline inline cursor-pointer align-baseline">SAP Business One Integration Framework</span>.</p>
+<p>When this parameter is enabled, the message is generated dynamically using a style sheet. During this process, the transformation copies the entire message content without explicitly handling attributes.</p>
+<p>In this specific scenario, the Service Layer call returns an HTTP error, which is stored in an attribute named <strong>“HTTPmsg”</strong>. The presence of special characters (such as “:”) in this attribute leads to an invalid XPath expression, resulting in the error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p class="p1">SAP intends to provide a feature package/patch in order to solve the problem described. The section <strong>References</strong> below will list the specific feature package/patches once they become available. The corresponding <strong>Info file</strong> of the feature package/patches in SAP Service Marketplace will also show the SAP Note number. Be aware that these references can only be set at feature package/patch release date. SAP will deliver feature package/patches only for selected releases at its own discretion, based on the business impact and the complexity of the implementation.</p></div></div></div></div>

@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">When attempting to approve the termination workflow for Manager A, the following error message is displayed:</p>
+<p>"This operation cannot be performed due to errors in other records."</p>
+<ul></ul>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Employee Central</p>
+<ul></ul>
+<p></p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>
+<p>Initiate the termination process for Manager A and discover an unknown direct reportee in the system.</p>
+</li><li>
+<p>Click Save. A termination workflow is automatically triggered.</p>
+</li><li>
+<p>Attempt to approve the workflow. The error message is displayed: "This operation cannot be performed due to errors in other records."</p>
+</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>Using Data Inspector tool to examine Table_USERS_SYSINFO for users where Manager = A, it was identified that Manager A has a direct reportee with the following characteristics:</p>
+<ul><li>User ID: AAA</li><li>Username: BBB</li><li>Valid: e (means it is a Onboarding external user)</li><li>Name Field: Unknown</li></ul>
+<p>This incomplete user record prevents the termination workflow approval from processing.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Verify the status of the direct reportee.</li><li>Determine whether the direct reportee needs to be hired or purged.</li><li>After verifying the above, reattempt to process the termination workflow again.</li></ol>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>data inspector, onboarding user, termination process</p>
+<p></p>
+<p></p></div></div></div></div>

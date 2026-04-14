@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the device change scenario in processes <em>Setup / Replacement of Devices (SUP View)</em> (DE_B_IM_DEV_CHANGE_SUP) and <em>Setup / Replacement of Devices (DSO View)</em>" (DE_B_IM_DEV_CHANGE_DSO), the fallback implementation of BAdI /US4G/BADI_IM_DEV_MGR_PASSIVE doesn't consider the time dependency of table /US4G/DCX_ATTR in method DET_DEV_CAT_METER. As a result, incorrect device category attributes are determined.</p>
+<p>This issue is relevant for the market roles SUP and DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>IM4G, Device Change, BAdI, /US4G/BADI_IM_DEV_MGR_PASSIVE, /US4G/CL_BADI_IM_DEV_MGR_PASV, DET_DEV_CAT_METER, /US4G/DCX_ATTR, device category attributes, time dependency</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurs because the fallback implementation is missing the logic to consider the time dependency of table /US4G/DCX_ATTR.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections from this SAP Note or import the next Support Package.</p>
+<p>After you implement this SAP Note, the system considers the time dependency of table /US4G/DCX_ATTR when determining device category attributes. You can verify the fix by checking that the system determines the correct device category attributes.</p></div></div></div></div>

@@ -1,0 +1,26 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3709498&amp;TargetLanguage=EN&amp;Component=PY-AT&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3709498/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3709498/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>New forms for the <a href="https://www.sozialversicherung.at/cdscontent/load?contentid=10008.801016&amp;version=1767104605" target="_blank">sick pay notification</a> and <a href="https://www.sozialversicherung.at/cdscontent/load?contentid=10008.801017&amp;version=1767104303" target="_blank">maternity</a> pay notification have been published on the OEGK website. These forms are delivered with this SAP Note for printing from the infotype "Work and Remuneration Confirmation A" (0526).</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>IT0526, print, AW notification, AK notification, P6, P7</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p id="">Legal change</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Import the corresponding HR Support Package into your SAP system.</p>
+<p>For an advance correction, proceed as follows:</p>
+<ul>
+<li>Only systems based on SAPK-604: first implement the advance corrections described in the manual instructions.</li>
+<li>Then upload the attached correction instructions to your SAP system using transaction SNOTE.</li>
+<li>Then perform the post-implementation steps described in the manual instructions. You can find the form templates in the attachment to this SAP Note.</li>
+</ul>
+<p><strong><span style="font-size: 14px;">We will check the following inconsistencies with the ÖGK and ELDA:</span></strong></p>
+<p><span style="font-size: 14px;">Maternity pay notification:</span></p>
+<ul>
+<li><span style="font-size: 14px;">Non-Working Days Area<br/>The sample for the non-working days known from the sick pay notification (DM Org, chapter E.10, field AFRT) is not provided for the maternity pay notification (DM Org, chapter E.11).</span></li>
+<li><span style="font-size: 14px;">Reason for Dissolution of Employment Area:</span></li>
+<ul>
+<li><span style="font-size: 14px;"> With reference to DM org. chapter D.22, reasons that are not provided for in the ELDA notification are listed here, for example, 01 - Termination by Employer</span></li>
+<li><span style="font-size: 14px;"><span style="font-size: 14px;">With reference to DM org. chapter D.22, reasons that are permitted in the ELDA notification are not listed here, for example, </span></span> 22 - Unjustified early leaving</li>
+</ul>
+<li>The start and end of pay in lieu of notice and payment in lieu of unused leave are not provided for the maternity pay notification by ELDA (DM Org, chapter E.11).</li>
+</ul>
+<p><span style="font-size: 14px;">If you notice further discrepancies, contact SAP with a customer message. SAP will only populate the form fields that are part of the ELDA field structure.</span></p></div></div></div></div></div>

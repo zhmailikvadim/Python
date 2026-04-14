@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the processes "End of Supply for Gas (DSO View)" (DE_B_GELIGAS_EOS_DSO) at step 1700 and "End of Supply for Electricity (DSO View)" (DE_B_GPKE_DSO_EOS) at step 1500, the system incorrectly ended the future supplier contract when the following conditions were met:</p>
+<ul class="alternate" type="square">
+<li>The ending contract had a different business partner than the future contract</li>
+<li>An SBS process existed with a process key date equal to the future contract start date</li>
+</ul>
+<p>After ending the future supplier at step 1800, the system sent market message 44038 to the future supplier.</p>
+<p>This issue is relevant for the market role: DSO.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">End of Supply for Gas, End of Supply for Electricity, DE_B_GELIGAS_EOS_DSO, DE_B_GPKE_DSO_EOS, SBS, future supplier, market message 44038, ZT6, ZT7, /US4G/CL_CHK_GPKE_PROCESS~CHECK_FUTURE_SUPPLIER</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">The error occurred because the system was missing functionality to check the transaction reason of the SBS process before ending the future supplier contract.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the EOS process only ends the future supplier if all of the following conditions are met:</p>
+<ul class="alternate" type="square">
+<li>The future contract has a different business partner than the current contract business partner</li>
+<li>An SBS process exists with a process key date equal to the future contract start date</li>
+<li>The SBS process has transaction reason ZT6 (EoGDueToCancellationBySUPO) or ZT7 (EoGDueToCancellationByCustomerOrSUPN)</li>
+</ul>
+<p>You can verify the fix by testing an EOS process and checking that the system only ends the future supplier when all three conditions are met.</p></div></div></div></div>

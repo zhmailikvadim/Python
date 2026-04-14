@@ -1,0 +1,84 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html26">As described in the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://app.qa.regulatory-change-manager.cloud.sap/index.html#" target="_blank">regulatory change manager</a> under Microgeneration REN 1.059/2023:</p>
+<ul id="__html0">
+<li><a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://app.qa.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-3007" target="_blank">SAP S/4HANA Cloud Private Edition</a></li>
+<li><a href="https://app.qa.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-3007" target="_blank">SAP S/4HANA</a></li>
+<li><a href="https://app.qa.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-3007" target="_blank">SAP ERP Central Component</a></li>
+</ul>
+<div class="OutlineElement Ltr SCXW185006470 BCX0">
+<p class="Paragraph SCXW185006470 BCX0">This SAP Note provides you with system changes to enable the <strong>Maintain Energy Credits Manually</strong> (EECA_UPD_BR) transaction to use the <strong>Credit Classification</strong> (CRED_CLASSIFICATION) and <strong>Credit Division</strong> (CREDIT_DIV) fields. The EECA_UPD_BR report that handles manual updates for the credits should display these new fields allowing customers to retrieve information with correct classification. However, it is not possible to modify the credit classification once it has been created.</p>
+<p>The Brazilian National Electric Energy Agency (ANEEL) establishes three classification categories for distributed generation contracts:</p>
+<ul>
+<li>GD I: Consumer contracts connected or with protocol at Energy Distributors until January 7, 2023.</li>
+<li>GD II: Contracts connected or with protocol at Energy Distributors from January 8, 2023.</li>
+<li>GD III: All microgeneration contracts starting their connection between January 8 and July 7, 2023 (valid from 2031); for all others, classification valid from 2029.</li>
+</ul>
+<p>These classifications affect how energy credits are distributed and must be maintained throughout all credit operations.</p>
+</div>
+<p>For more information, see also the <a href="https://www.in.gov.br/en/web/dou/-/resolucao-normativa-aneel-n-1.059-de-7-de-fevereiro-de-2023-463828999" target="_blank">REN 1.059</a> published on February 2023 and <a href="https://in.gov.br/en/web/dou/-/lei-n-14.300-de-6-de-janeiro-de-2022-372467821" target="_blank">law 14.300</a> published on January 6th of 2022. The website accessible through this hyperlink is an external website which is not part of SAP's offering. By clicking the hyperlink, YOU AGREE that unless expressly stated otherwise in your agreements with SAP: (i) the content of the linked to website and any further external website is not content provided by or on behalf of SAP, nor is it otherwise under SAP's control; (ii) the fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the content and information provided on such websites; (III) SAP does not give any representation regarding the quality, safety, suitability, accuracy or reliability of any external website or any information, content and materials provided thereon; (IV) you visit those external websites entirely at your own risk. SAP shall not be directly or indirectly responsible or liable for any damage or loss caused or alleged to be caused by or in connection with your use of or reliance on any content, goods or services available on or through any such linked website.</p>
+<p><strong>************************************************************************************************************************************************</strong></p>
+<p><strong>WARNING</strong>: This is an IS-UT-specific SAP Note.</p>
+<p>If you DO NOT have IS-UT installed on your system, this SAP Note DOES NOT apply to you.</p>
+<p><strong>Implementing this SAP Note without IS-UT installed can cause serious damage to your system.</strong></p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>IS-U, IS-UT, Brazil, Utilities, Legal Change, BR Microgen, Brazil Micro and Mini Generation, Generating contract, Consuming contract, Creating/Consuming credits manually, Manual Update Report , EENRGY_CR_BR, CRED_CLASSIFICATION, CREDIT_DIV</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is relevant only for Brazil.</p>
+<p>You are using SAP IS-Utilities solution.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After you implementing this SAP Note, you can use the <strong>Credit Classification</strong> and <strong>Credit Division</strong> fields from table <strong>Brazil: Energy Credits Account</strong> (EENRGY_CR_BR) in the activities from <strong>Maintain Energy Credits Manually</strong> (EECA_UPD_BR) transaction.</p>
+<p>As a general rule, SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <strong><a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a></strong>.</p>
+<p>Note that the documentation of certain objects is delivered with the corresponding Support Package only.</p>
+<p><strong>List of Modified Objects:</strong></p>
+<ul>
+<li>Class</li>
+<ul>
+<li><span style="font-size: 14px;">CL_ISU_ECA_UPD_MICRO_BR</span></li>
+</ul>
+</ul>
+<ul>
+<li>Dynpro</li>
+<ul>
+<li>REA_ECA_MANUAL_UPDATES_BR</li>
+<ul>
+<li>0111</li>
+<li>0400</li>
+<li>0600</li>
+</ul>
+</ul>
+</ul>
+<ul>
+<li>Report</li>
+<ul>
+<li>REA_ECA_MANUAL_UPDATES_BR_EXEC</li>
+<li>REA_ECA_MANUAL_UPDATES_BR_F01</li>
+<li>REA_ECA_MANUAL_UPDATES_BR_I01</li>
+<li>REA_ECA_MANUAL_UPDATES_BR_TOP</li>
+<li>REA_ECA_MANUAL_UPDATES_BR_O01</li>
+</ul>
+</ul>
+<p><strong>Product Documentation</strong></p>
+<p>For more information about the <strong>development delivered with this SAP Note</strong>, see the following What's New topics on SAP Help Portal:</p>
+<ul class="customListStyle">
+<li><strong>SAP S/4HANA: </strong><a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/caf2ef00400141ec9fb17420a0753d14.html" target="_blank">Fields Included for Energy Credit Manual Update Report</a><a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/7a74b9330839462984d3e53b18b2e3d0.html" target="_blank"><br/></a></li>
+<li><strong>SAP ERP: </strong><a href="https://help.sap.com/docs/SAP_ERP/063e7e5f4d7f4fc0be08565793a9b941/caf2ef00400141ec9fb17420a0753d14.html" target="_blank">Fields Included for Energy Credit Manual Update Report</a><a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/docs/SAP_ERP/063e7e5f4d7f4fc0be08565793a9b941/3e7d847ab6184b5db2a22b34770d8a2e.html" target="_blank"><br/></a></li>
+</ul>
+<p>You are welcome to leave your anonymous feedback on the content of the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/viewer/s4h_op_brazil" target="_blank">SAP Help Portal documentation</a> by choosing "Was this topic helpful?". If your feedback is relevant, the documentation will be updated accordingly.</p>
+<div class="table-responsive">
+<div class="table-responsive">
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>February 23, 2026</td>
+<td>Released for Customer</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div></div></div></div></div>

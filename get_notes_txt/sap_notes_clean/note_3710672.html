@@ -1,0 +1,14 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The option to use HDM is not available in transaction ACACTREE02.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>ACAC, ACE, ACACTREE02, HDM, GOS, DMS, AL, document, attachment</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><em>Reason:</em><br/>New functionality.</p>
+<p><em>Prerequisite:<br/></em>Ensure that the HDM framework is activated in the SAP Fiori apps for Accruals Management.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>This SAP Note introduces HDM possibility for transaction ACACTREE02.</p>
+<p>To apply this change and enable HDM:<br/><br/>1) Implement the attached Correction Instruction or the specified Support Package.</p>
+<p>2) As a prerequisite, you must configure HDM for manual Accrual Objects according to the instructions in the following SAP Notes:</p>
+<p>#3521117 - F5423 Manage Manual Accruals - HDM enablement [BE part]<br/>#3521118 - F5423 Manage Manual Accruals - HDM enablement [FE part]</p>
+<p>3) After the prerequisites are met, enable the HDM functionality in the GUI environment by ensuring<br/>the BAdI implementation <em>ACE_HDM_ATT_APP</em> of <em>BADI_HDM_STANDALONE_APP</em> is active.<br/>Alternatively, you can use your own implementation with the filter <em>SAPOBJECTTYPE = 'AccrualObject'</em><br/>and set the <em>CV_ENABLE</em> flag to 'X' (true) within the <em>ENABLE_STANDALONE_SERVICE</em> method.</p>
+<p>The <em>Manage Attachments</em> option will then be available under the Generic Object Services menu in the transaction.</p></div></div></div></div>

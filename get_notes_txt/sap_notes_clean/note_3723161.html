@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3723161&amp;TargetLanguage=EN&amp;Component=PY-DE-FP-MV&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3723161/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3723161/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>SAP Note <a href="/notes/3701545" target="_blank">3701545</a> <em>- DaBPV: Automatic activation of CI special rule 06 (exclusion of DaBPV) for each subapplication</em> delivered the subapplication <em>DBP2 (DaBPV: General simulation of CI special rule 06)</em>. If this subapplication is activated, the existence of the CI special rule <em>Exclusion</em> DaBPV (06) is simulated for all personnel cases when creating the DaBPV notifications using the report Create DaBPV <em>Outbound Notifications</em> (RP_PAYDE_DBP_CREATE_NOTIFS). However, after you activate the subapplication, two errors occur:</p>
+<ul>
+<li>For personnel cases to be registered, the warning message <em>Exclusion from DaBPV procedure is not permitted</em> (HRPAYDE_DBP038) is issued.</li>
+<li>Despite an existing tax ID in the infotype <em>Tax D</em> (0012), personnel cases may be excluded from the DaBPV procedure. Either no registration takes place or a termination is created if the registration has already taken place.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p id="">Social insurance, DaBPV, CI special rule 06</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p id="">Program error</p>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p id="">Implement the attached correction instructions or import the specified support package. After you import the HR Support Package or implement the correction instructions, you do not have to perform any further follow-on activities.</p>
+<p>The program errors are corrected:</p>
+<ul>
+<li>The warning messages are no longer issued if subapplication <em>DBP2</em> is active. Remaining warning messages in the Notification Tool must be set to Completed manually.</li>
+<li>If a tax ID exists, the personnel cases are no longer excluded from the DaBPV procedure.</li>
+</ul></div></div></div></div></div>

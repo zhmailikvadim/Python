@@ -1,8 +1,21 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">Nested Physical Inventory quantities in ERP do not match the Main Content total in EWM PackSpec, causing stock inconsistencies that require correction.</p>
+<div id="__html0">
+<p>Issues occur during the handling of extended table groups used for data replication scenarios:</p>
+<ol>
+<li>
+<p><strong>Extension of NEW_ROWS table groups for cluster tables with <code>COMPRFLAG = P</code></strong><br/>Systems may fail to correctly process or replicate data for cluster tables when the NEW_ROWS table groups are extended. This leads to inconsistencies or errors during replication activities involving compressed (P‑type) cluster tables.</p>
+</li>
+<li>
+<p><strong>Incorrect DDIC generation for the Re‑Replication Table (extended) of pool tables</strong><br/>In rare cases where re‑replication is triggered based on non-key fields for pool tables, the system generates an incorrect or incomplete DDIC structure for the extended Re‑Replication Table. Since re‑replication based on non-key fields for pool tables is an atypical scenario, the resulting DDIC mismatch can lead to activation errors or runtime issues during replication.</p>
+</li>
+</ol></div>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>Function Module : CIF_PINST_PACKSPEC_MAP</p>
+<p id="">downtime minimization tool for SAP S/4HANA, NZDT, S4CORE</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p id=""> The issue occurs when a PackSpec with Nested Packaging Instructions has inconsistent quantity maintenance between the Main PI and Nested PIs, causing incorrect total quantity calculation in /SCWM/PACKSPEC.</p>
+<p>Any of the following S4CORE components is installed in your system landscape:</p>
+<ul>
+<li>S4CORE 108 FPS00 - FPS05</li>
+<li>S4CORE 109 FPS00 - FPS01</li>
+</ul>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>Implement the attached correction instructions.</p></div></div></div></div>
+<p>Implement the automatic correction instructions on your <strong>receiver</strong> system.</p></div></div></div></div>

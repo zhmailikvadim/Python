@@ -1,0 +1,40 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div id="__html0">
+<p>When you apply a HEX hint by specifying the source table, it only takes effect on the coordinator where a source table resides and is not propagated to a corresponding replica table.</p>
+</div>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Performance, Source Table, Replica Table, HEX, hint</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Issue number 353782</p>
+<p><strong>Reason:</strong></p>
+<p>Due to a programming error in SAP HANA, HEX hints are not replica-aware and therefore match only the exact source table name.</p>
+<p><strong>Affected Releases:</strong></p>
+<ul>
+<li>SAP HANA 2:</li>
+<ul>
+<li>Revisions &lt;= 089.01 (SPS08)</li>
+</ul>
+</ul>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>The HEX hint references only the source table and does not explicitly mention the replica table.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply one of the following SAP HANA Revisions:</p>
+<ul>
+<li>SAP HANA 2:
+<ul>
+<li>Revisions of SPS08: SAP is currently working on a permanent solution to this issue. This SAP Note will be updated as soon as a revision containing the solution is available</li>
+<li>or higher<br/><br/></li>
+</ul>
+</li>
+<li>or higher</li>
+</ul>
+<ul></ul>
+<p><strong>Workaround:</strong></p>
+<ul>
+<li>Explicitly specify both the source and replica tables in the hint, e.g., &lt;<span class="SNO_DNT" style="float: none;" translate="no">HEX_HINT_NAME&gt;("&lt;SOURCE_TABLE&gt;"."&lt;COLUMN&gt;", "&lt;REPLICA_TABLE&gt;"."&lt;COLUMN&gt;")</span>:</li>
+</ul>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">ALTER SYSTEM ALTER STATEMENT HINT (&lt;HEX_HINT_NAME&gt;("&lt;SOURCE_TABLE&gt;"."&lt;COLUMN&gt;", "&lt;REPLICA_TABLE&gt;"."&lt;COLUMN&gt;")) COMMENT 'SAP Note 3720486. Revert after upgrade to a revision containing the fix' FOR &lt;statement_string&gt; or &lt;statement_hash&gt;;</span></p>
+<p style="padding-left: 30px;">or</p>
+<p style="padding-left: 60px;"><span class="SNO_DNT" style="float: none;" translate="no">&lt;statement_ string&gt; WITH HINT(&lt;HEX_HINT_NAME&gt;("&lt;SOURCE_TABLE&gt;"."&lt;COLUMN&gt;", "&lt;REPLICA_TABLE&gt;"."&lt;COLUMN&gt;"));</span></p></div></div></div></div>

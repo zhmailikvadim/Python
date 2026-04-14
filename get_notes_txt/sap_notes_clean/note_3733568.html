@@ -1,0 +1,73 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">As described in SAP ONE Support Launchpad <a href="https://launchpad.support.sap.com/#/legalchangenotification" target="_blank">Notification of Legal Change</a> <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQEE-10045" target="_blank">Unified monthly employer report 2026 (JMHZ)<br/></a></p>
+<p>The functionality delivered in this SAP Note is currently under development and needs to be updated regularly with latest SAP Notes.</p>
+<p>These updates are provided:</p>
+<p><strong style="font-size: 14px;">REGZEC (DM - data mining, CS - compose submission, PF - process feedback, SO - special operations, INIT - import of IDs to IT3457, XP - XML for ePortal)</strong></p>
+<ul>
+<li><strong>INIT</strong>: Report HCZCJHR0_INIT has been adjusted for case the input data contains a date in the item "insurance relationship to"(Pojistný vztah do), xml tag &lt;PojistnyVztahDo&gt;. A repeat run delimits the validity of the IT3457 record of subtype 2 to this date, if such a record already exists in the infotype.</li>
+<li><strong>DM</strong>: Report is prepared for the new legislation valid from 1.4.2026. It says the employee terminated one day and hired the day after must be handled as not continuous employment.</li>
+<li><strong>DM, CS, PF</strong>: Following recent updates to the ČSSZ technical documentation, attributes 10092–10101 are now also available for foster parents (pěstouni)</li>
+</ul>
+<p><strong style="font-size: 14px;"><strong>MH<strong> (DM - data mining, CS - compose submission, WB - workbench)<br/></strong></strong></strong><strong><strong><strong><strong>Corrections that may cause that corrective individual forms will be created for already submitted periods are marked with code abbreviation (DIF)</strong></strong></strong></strong></p>
+<ul>
+<li><strong>Improvements</strong></li>
+<ul>
+<li>In the ALV display of individual and summary forms, it is now possible to show attribute IDs via a tooltip—by hovering the cursor over the column header in ALV.</li>
+<li>In program HCZCJHM0_WB, the ability to navigate to the B2A transaction has been added for cases when you are sending forms to B2A in production.</li>
+<li>In program HCZCJHM0_WB, an option has been added to display an overview that makes it easier to check whether MH is complete in each period (month). The overview includes only currently valid (status 20) or rejected forms (status 90). The required final state for a fully closed period: all forms in status OK and their count should match the number of PPV for the given VS. Error columns: rejected forms that were sent last. If these are corrective forms, the original forms still apply and are included in the OK column; therefore, OK + Error will be higher than the number of existing PPV. This overview is not intended to control the reporting process and deliberately contains no editing elements.</li>
+<li>If you need to decrease the value of attribute 10268 using a wage type, assign that wage type to evaluation class (EVCLS) 14 with value O5 “10268 Worked hours deduction”.</li>
+<li>If you need to decrease the value of attribute 10268 using an absence, you can now do this in table T5T04_03, using the new classification values “10268 Number of hours worked” and use the summation sign “-”.</li>
+<li>In section PRO, attributes 10453, 10431-4 use infotype 0021 subtype CZ02. Newly, customer can specify different subtype(s) to be considered instead of CZ02 - via table T7CZRE (Parameter area=JHM_PRO; Parameter name=OTHER_PERSONS)</li>
+<li>It is now possible to suppress the creation of MH forms for selected contract types (infotype 16) using a setting in the new field T5T47N-NOJMHZ. Program HCZCJHM0_DM will suppress the creation of a form for the given month (FOR period) if all infotype 16 records falling into that month refer to T5T47N-NOJMHZ with value “X”.</li>
+</ul>
+<li><strong>Fixes</strong></li>
+<ul>
+<li>Logical check 028 corrected according to JMHZ version 1.4.2.</li>
+<li>If any of the health insurance elements (10371, 10482) is negative, it is set to zero and a warning message appears in the log indicating that this situation occurred. (<strong>DIF</strong>)</li>
+<li>Element 10416 (Income of a non-resident, member state org) is now filled only if the type of gainful activity equals Q or S. (<strong>DIF</strong>)</li>
+<li>Attribute 10333 Overtime premiums (source = wage types with evaluation class 13 = P1) is no longer automatically added to attribute 10332 Total premiums. (<strong>DIF</strong>)</li>
+<li>In section PRZ, for the absence hours in attributes 10275, 10277, 10278, 10280, 10471, the hours of planned shifts on public holidays that overlap these absences are now also added. (<strong>DIF</strong>)</li>
+<li>When determining excluded periods in section ELI, for employees with multiple employments, the overlap of excluded periods and insurance across these employments is now taken into account. (<strong>DIF</strong>)</li>
+</ul>
+</ul>
+<ul></ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>HRCZ, JMHZ</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is relevant only for Czech Republic (HRCZ)</p>
+<p>HRSP SAPK-10127INS4HCM, SAPK-10040INS4HCM, SAPK-608F1INSAPHR (or newer)</p>
+<p><strong>For implementation using the SAP Note Assistant, log in to SAP using the Czech (CS) language.</strong></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Source code changes were made to objects in the PC18_JMHZ package.</p>
+<p><strong>Implementation</strong></p>
+<div class="table-wrap">
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable">
+<thead>
+<tr>
+<td class="confluenceTd"><strong>Version</strong></td>
+<td class="confluenceTd">
+<p><strong>Date</strong></p>
+</td>
+<td class="confluenceTd">
+<p><strong>Reason</strong></p>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="confluenceTd">01</td>
+<td class="confluenceTd">
+<p>March 27, 2026</p>
+</td>
+<td class="confluenceTd">Released for Customer</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="table-wrap"></div>
+<div class="table-wrap"><strong><span style="font-size: 14px;">Remark for HR-CEE 604: During the period 23 March 2026–12 April 2026, a special delivery mode will apply for release <strong>HR-CEE </strong>604. It's because of transition of future deliveries from SAP BASIS (kernel) 604 to 606. Corrections for 604 will not be included in the regular, final JMHZ SAP Notes releases. Instead, separate SAP Notes will be created only for <strong>HR-CEE </strong>604 during this period and updated with the latest changes. Because these SAP Notes will not final till 12 April 2026, they cannot be released to all customers. They will be made available only for pilot testing during this period. Customers on release <strong>HR-CEE </strong>604 must request access by creating case(incident) for PY-CZ component for these SAP Notes (e.g. to SAP Notes <strong><a href="/notes/3732177" target="_blank">3732177</a>,</strong> <a href="/notes/3732178" target="_blank">3732178</a>).</span></strong></div>
+<div class="table-wrap"></div>
+<div class="table-wrap"><span style="font-size: 14px;">Import the Support Package specified for your release.</span></div>
+<p>As a general rule SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <span style="text-decoration: underline;"><strong><a class="external-link" href="https://support.sap.com/kb-incidents/notes/assistant.html" rel="nofollow" target="_blank">SAP Note Assistant</a>.</strong></span></p>
+<p>Note that documentation, transactions, and Customizing activities are only delivered via Support Package.</p>
+<p>Report is prepared for the new legislation valid from 1.4.2026. It says the employee terminated one day and hired the day after must be handled as not continuous employment.</p></div></div></div></div>

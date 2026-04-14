@@ -1,18 +1,94 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0"><br/>--- Description ---</p>
-<p>When starting transaction WRF_DIS_SEL or WRF_DIS_MON, the resulting list shows 3 columns with article status.</p>
-<p>The 'Site-specific' article status, reporting field MMSTA from table MARC is never shown.</p>
-<p>The report uses structure WRF_DISCONT_POS_ALV_STY, field MMSTA.</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Missing information on result screen</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id="">Implement the following correction instructions</p>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p><span style="font-size: 14px;">SAF-T Bulgaria monthly file, Bulgaria, BG, SAF-T, Tax Reporting, Audit, Standard Audit File, Legal Change, SAFT, Monthly File</span></p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Incorrect structure of the XML file.</p>
-<p>This SAP Note is only relevant for Bulgaria.</p>
-<p>You have implemented the prerequisites listed in SAP note 3702420 - SAF-T Bulgaria: Collective Note (SAP ERP).</p>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id="">As a general rule, SAP recommends that you install a solution by applying a Support Package. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in SAP Service Marketplace, under service.sap.com/note-assistant.</p></div></div></div></div>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">This document provides the information and frequently asked questions (FAQs) you need to know when using Migration Server in a Brownfield Migration Project.</p>
+<p></p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>RISE with SAP</p>
+<p>Enterprise Cloud Services (ECS)</p><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>You are interested in further details related to Migration Server.</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#intro" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">What is Migration server?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#required" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">In which scenarios is a migration server required?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#not_required" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">In which scenarios is a migration server not required?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#default_linux" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">Can we get a Windows Migration server as by default SAP RISE provides a Linux migration server?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#backup" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">Can we take a backup of the Migration server?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#perm_temp" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">Is the Migration Server permanent or temporary?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#validation" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">What is the validation period for the migration server?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#roles_response" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">What are the roles and responsibilities concerning the migration server?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#connect" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">How do I connect to the migration server?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#reboot" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">How do I reboot the Migration Server (IaaS)?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#download_notes" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">How do I download Notes on the migration server?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#SFTK" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">How do I open a remote connection (STFK) to applications running on the migration server?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><a href="#switch_pas" rel="noopener noreferrer nofollow" target="_self"><span style="font-family: '72 Brand', sans-serif;  text-decoration: underline;">How do I switch to the primary application server?</span></a></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">  </p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="intro" target="_blank"></a>1</b><b>.What is Migration server?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">The SAP Migration Server is a temporary, non-productive server, unmanaged (IaaS) used to perform RISE migration where the customer and partner don’t have direct access to RISE target servers in the RISE environment.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="required" target="_blank"></a>2.In which scenarios is a migration server required?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">The Migration server is a Virtual Machine (VM) where partners have access to set up, install ASCS (ABAP SAP Central Services), PAS (Primary application server) or Additional application server (in case of DMOVE2S4 migration method) and connect to ECS Database (HANA/ASE) to perform migration/conversion. Some examples are SUM DMO based migration, SWPM export import method based migrations.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">SAP RISE does not allow OS/root access to application or database servers in our cloud.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Therefore by default, SAP RISE provides an additional virtual Linux server (Migration server) - with full root access.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Migration Server will be added automatically to the landscape for RISE with SAP as applicable.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">300GB with /sapmnt 50GB, /usr/sap/&lt;SID&gt; 150GB, /Migration: 100GB</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"> </p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">If the project will use DMOVE2S4, the Customer needs to subscribe to temporary additional storage for /usr/sap/&lt;SID&gt;. E.g.: 300 GB</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Up to 2TB block storage can be requested for 6 months duration for temporary usage on the migration server, under the RISE contract.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">After successful migration, the Migration Server will be decommissioned.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"> </p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="not_required" target="_blank"></a>3.In which scenarios is a migration server not required?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">If migration partner/customer is using migration methods (for example the tenant copy method) which don’t require OS (operating system) level access to target (RISE side) and therefore don’t require any temporary Primary application server and ASCS (ABAP SAP Central Services) to be installed.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="default_linux" target="_blank"></a>4.Can we get a Windows Migration server as by default SAP RISE provides a Linux migration server?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">For Windows/MSSQL on-premise - Windows migration server should be additionally requested, as by default a Linux Migration server is provisioned.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"> </p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="backup" target="_blank"></a>5.Can we take a backup of the Migration server?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">ECS (SAP Enterprise Cloud Services) does not provide backups of the Migration Server. Backup requests for the Migration Server cannot be submitted or processed through a Service Request (SR).</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="perm_temp" target="_blank"></a>6.Is the Migration Server permanent or temporary?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Migration Server is a temporary IaaS (Infrastructure as a Service) server only provided until migration.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="validation" target="_blank"></a>7.What is the validation period for the migration server?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">12 months. ECS will trigger decommissioning once the system goes live.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="roles_response" target="_blank"></a>8.What are the roles and responsibilities concerning the migration server?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Migration Server is an unmanaged server. The customer and certified migration partners are granted full authorization (root access for Linux and administrator access for Windows based migration servers) to install any required software.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">No monitoring server is provided from the ECS (SAP Enterprise Cloud Services) side.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">No operations such as managing OS folders, files, server patching, or installing software are performed by the service provider.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">No backup solution is provided from the ECS (SAP Enterprise Cloud Services) side.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">No SLA is provided for any applications running on the migration server from the ECS (SAP Enterprise Cloud Services) side.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"> </p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="connect" target="_blank"></a>9.How do I connect to the migration server?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Prerequisite: Inbound access through port 22 is not allowed by default. So, to access Migration Server from the customer source network, ensure port 22 has been whitelisted.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">If not, please submit a Service Request with template “Add/Modify Hyperscalers NSG/FW Rules (Azure/AWS/GCP)”</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">You can connect to the migration servers using PuTTY for Linux-based servers and Remote Desktop Connection for Windows-based migration servers.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"> </p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="reboot" target="_blank"></a>10.How do I reboot the Migration Server (IaaS)?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"> </p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Since root access is provided for the migration servers, you may use the below commands:</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">For Linux-based migration systems, use the “reboot now” command.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">For Windows-based migration systems, use the “Restart-Computer” PowerShell command.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="download_notes" target="_blank"></a>11.How do I download Notes on the migration server?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">The migration team or customer is responsible for configuring the RFC connection to enable Notes download through the customer’s proxy.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"> </p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="SFTK" target="_blank"></a>12.How do I open a remote connection (STFK) to applications running on the migration server?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Please follow the below steps:</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Setup SAProuter for ABAP instance on migration server</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Logon to “SAP for Me”</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Find SID (LT1 by default) of the migration server in the “System” tab</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Ensure Hostname and Port of the migration server have been added for R/3 connection</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Ensure ECS CGS vh&lt;cid&gt;&lt;datacenterid&gt;gwa has been added for additional SAProuter</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;">Refer to note <a href="https://me.sap.com/notes/812732/E" rel="noopener noreferrer nofollow" target="_blank">812732 </a>- R/3 support service connection</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b><a id="switch_pas" target="_blank"></a>13.How do I switch to the primary application server?</b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"><b> </b></p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"> Customer/Migration partners can raise a service request “Switch Application back to Main Instance after Migration”.</p>
+<p style="margin: 6pt 0cm 0cm; line-height: 130%; font-size: 10pt; font-family: '72 Brand', sans-serif;"> Please note: schema and tenant database passwords would be changed once the service request “Switch Application back to Main   Instance after Migration” is completed.</p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>Migration Server</p>
+<p>ECS</p>
+<p>ECS IAAS</p>
+<p>ECS (SAP Enterprise Cloud Services) Migration Server </p></div></div></div></div>

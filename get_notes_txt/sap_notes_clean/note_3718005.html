@@ -1,8 +1,20 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">In the <em>Manage Waste Transportation Requests</em> (<em>F6084</em>) and the <em>My Waste Transfer Requests</em> (F6083) apps, a waste transfer request displays the status <em>Disposal Confirmed</em> even though the outgoing amount and the confirmed amount in the related transportation document differ. The status <em>Quantity Discrepancy</em> is not available in the value help for the Status filter.</p>
+<p id="__html0">In a self-written program you post operation confirmations to a shop floor order using BAPI BAPI_PRODORDCONF_CREATE_TT.</p>
+<p>Even though no error is sent the confirmation is not saved due to warning "Order is a shop floor order. Use the Perform OA app for confirmations."</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">MPE_EXEC_CONF046, MPE_EXEC_CONF 046</p>
+<p>BAPI, Prodcution Order Confirmation, Operation Confirmation</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>Reason: Program error.</p>
-<p>Prerequisites: The validity of the correction is maintained in the correction instructions.</p>
+<p>Shop floor orders typically must not be confirmed manually.</p>
+<ul>
+<li>This is since the operation confirmations are automatically created from operation activity execution.</li>
+<li>Please see note 3707332 for details.</li>
+</ul>
+<p><span style="font-size: 14px;">Nevertheless, it is not forbidden to manually post operation confirmations to shop floor orders.</span></p>
+<ul>
+<li><span style="font-size: 14px;">This e.g. can be used to do corrections to the actual data.</span></li>
+<li>To make the user aware of the fact that this is an exceptional situation warning MPE_EXEC_CONF 046 is sent.</li>
+</ul>
+<p>Due to a program error this warning prevents the saving of the confirmation via BAPI.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p>This SAP Note introduces the status <em>Quantity Discrepancy</em> for waste transfer requests and updates the status synchronization between transfer requests and their related transportation documents.</p>
-<p>The support packages that contain this correction are listed in the "Support Packages" section.</p></div></div></div></div>
+<p>Implement the correction instruction.</p></div></div></div></div>

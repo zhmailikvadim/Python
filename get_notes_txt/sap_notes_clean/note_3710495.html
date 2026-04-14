@@ -1,0 +1,20 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id=""> The current migration report CRMS4_MAINTSRVC_ITMTYP_USG_UPD has following drawbacks</p>
+<ul id="__html0">
+<li>No customizing validation - The report updates subitems to RRCO even if appropriate item category customizing is not maintained for them, potentially leading to inconsistencies and errors in the existing service quotations.</li>
+<li>Lack of Flexibility - The report does not offer customers an option to exclude specific subitems from being updated, even if they do not wish to use RRCO for those subitems.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Service with Advanced Execution, Execution Order Item, Maintenance Service Order, Maintenance Service Quotation, Billable Maintenance Order, Resource Related Cost Items</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This is due to lack of flexibility and capability report offers.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Read KBA 3533203, implement the correction instructions and execute the report.</p>
+<ul>
+<li><span style="font-size: 14px;">Before running the report, you must ensure that all relevant entries in the Item Category Determination Customizing have item category usage RRCO mapped. This means that if the item category usage RRCO is not present in the Item Category Determination Customizing then report will not do anything.</span></li>
+<li>The report updates transactional rows in CRMS4D_SERV_I by setting ITEM_CATEGORY_USAGE = ‘RRCO’ after considering the following points:</li>
+<ol start="1">
+<li>The item category of the subitem has Item Category Usage = RRCO in Customizing (Define Item Category Determination).</li>
+<li>The item category of the subitem passes all the validation checks for RRCO items. For more information on the list of validations, please check the Constraints/Properties section of <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/c9b5e9de6e674fb99fff88d72c352291/2cdf71c8eacf4009be55a6d5842717bf.html?version=2023.002" target="_blank">SAP Help Portal Resource-Related Cost Item</a> (select relevant version and language).</li>
+<li>If any of the validation checks fail for a particular item category of the subitem, the program will skip updating ITEM_CATEGORY_USAGE for the affected transactional rows. You can review the messages to identify skipped records and the reason for skipping.</li>
+</ol></ul></div></div></div></div>

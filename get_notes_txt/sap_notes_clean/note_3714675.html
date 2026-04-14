@@ -1,0 +1,15 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">If many replication requests are raised during some hierarchy processing, i.e.</p>
+<ul>
+<li>many cost center changes are being imported by MDG and the auto-replication of the hierarchy is switched on </li>
+<li>many manual changes are done in the SET hierarchy in a short time and the auto-replication of the hierarchy is switched on </li>
+</ul>
+<p>there are many background jobs created and it can take a long time to get the hierarchy replicated.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>HRRP, Replication, MDG, Master Data Governance, Auto-replication, HRY_REPRELEV</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id="">Program enhancement</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply following correction instructions using transaction SNOTE.</p>
+<p>This note brings an enhancement - if there are more replication requests in a short time, they are collected and the replication is done only once for the requested hierarchy. This is achieved by a new ABAP daemon FINS_HRRP_REPLIC_DAEMON. The daemon is activated automatically, but it could be activated manually using the program FINS_HRRP_START_DAEMON delivered by this note too.</p>
+<p>Please be aware that the drawback is that the auto-replication is not done immediately, but there will be short delay (~ 10 seconds or more until the replication requests are comming).</p></div></div></div></div>

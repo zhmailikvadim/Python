@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3713956&amp;TargetLanguage=EN&amp;Component=IS-H-PM&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3713956/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3713956/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p><strong><em>This SAP Note is relevant only for the country version Germany if you use integrated PPA billing.</em></strong></p>
+<p>You execute the program <em>RNCEEB_RECEIVE</em> regularly. During the first program run, messages are retrieved and processed correctly. If no new messages were available during a subsequent program run, all subsequent program runs also no longer retrieve any messages, even if new messages are available.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p id=""> eEB, NEEB_S</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>Prerequisite:</p>
+<ul>
+<li>In the IMG activity <em>SAP Healthcare - Industry-Specific Components for Hospitals -&gt; SAP Ambulatory Care Management -&gt; Treatment -&gt; Outpatient Clinic Forms -&gt; Electronic Outpatient Clinic Forms -&gt; Configure Dispatch</em>, you have maintained entries for different applications for a place of work number. For example, an entry for the Electronic <em>Work Incapacity Certificate (eAU)</em> application and an entry for <em>Electronic Replacement Certificate (eEB)</em>.</li>
+</ul>
+<p id="">Reason:</p>
+<ul>
+<li>Program error - if no messages are retrieved, the status entry in table <em>NEEB_S</em> in field <em>TS_EEB_SINCE</em> was set to <em>0</em>. This incorrect entry prevents a correct program run.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p>
+<p>If an incorrect entry already exists in your system, see SAP Note <a href="/notes/3712943" target="_blank">3712943</a> for information about deleting the incorrect table entry.</p></div></div></div></div></div>

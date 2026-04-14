@@ -1,0 +1,83 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3714914&amp;TargetLanguage=EN&amp;Component=IS-H-PM-PAT&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3714914/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3714914/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>You edit the <em>address</em> of a patient. You enter an Irish address with a postal code that does not correspond to the format that is relevant for Ireland. The following symptoms may occur:</p>
+<ul>
+<li>The system does not issue a corresponding error message in SAP Patient Management.<br/>When you save the patient, the system issues the following warnings:</li>
+<ul>
+<li>AM 653 <em>Postal code 12345 must have length 8</em></li>
+<li>N3 222 <em>Error when creating FI customer</em></li>
+</ul>
+</ul>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">Or</span></p>
+<ul>
+<ul>
+<li>AM 699 <em>No B,G,I,J,L,M,O,Q,S,U,0,1,2,3,4,5,7,8,9 in the postal code</em></li>
+<li>N3 222 <em>Error when creating FI customer</em></li>
+</ul>
+</ul>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">The system saves the patient data, but does not create the FI customer or does not change an existing FI customer.</span></p>
+<ul>
+<li>When you save the patient, the system displays the customer data in maintenance mode and issues one of the following error messages:</li>
+<ul>
+<li>AM 653 <em>Postal code 12345 must have length 8</em></li>
+<li>AM 699 <em>No B,G,I,J,L,M,O,Q,S,U,0,1,2,3,4,5,7,8,9 in the postal code</em></li>
+</ul>
+</ul>
+<p style="padding-left: 60px;"><span style="font-size: 14px;">You must maintain a correct postal code to be able to save the customer.</span></p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>Postal code, postal code, address, address, NPLZ, T005, ADDR_POSTAL_CODE_CHECK, POSTAL_CODE_CHECK, AM653, AM 653, AM699, AM 699, N3222, N3 222</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p>This is caused by a program error.</p>
+<p>If the business function ISH_BP_OM is not active, the system still uses the function module POSTAL_CODE_CHECK to check the format of the postal codes in SAP Patient Management. In this function module, the checks for some countries that require specific templates for the postal code check are missing or the existing checks may not be up-to-date.</p>
+<p>However, the new business partner uses the function module ADDR_POSTAL_CODE_CHECK. This contains more check templates for postal codes than POSTAL_CODE_CHECK. Among other things, the template for the country Ireland. For this reason, the system issues the relevant error message during the check in the FI customer if the postal code does not correspond to the correct format. If the business function ISH_BP_OM is active, the system also issues the error messages during the processing of the patient master data in SAP Patient Management if the format of the postal code is incorrect.</p>
+<p>Prerequisites:</p>
+<ul>
+<li>In the Implementation Guide (IMG) activity <em>Set Country-Specific Checks</em> (NetWeaver -&gt; General Settings -&gt; Set Countries), you have defined the currently valid settings for the postal code for the country Ireland (IE):</li>
+<ul>
+<li>Length 8</li>
+<li>Checking rule 9 (check against country-specific template)</li>
+</ul>
+<li>The business function ISH_BP_OM ("SAP Patient Management Rearchitecture BP/OM") is <em>NOT</em> active in your system. This business function is available as of SAP enhancement package 4 for SAP ERP 6.0, Industry Extension Healthcare (IS-H 604).</li>
+<li>When you save the patient, the system only displays the data of the FI customer if the IS-H system parameter DEB_ERR <em>Display FI Transactions in Case of Error</em> is selected and the FI customer sends an error message.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p>
+<p>Ensure that the following SAP Notes are implemented in your system:</p>
+<ul>
+<li><a href="/notes/3462785" target="_blank">BC-SRV-ADR 3462785 Length of Irish postal codes changed from 7 to 8</a></li>
+<li><a href="/notes/2690217" target="_blank">BC-SRV-ADR 2690217 Irish Postal Code (Eircode) Validation</a></li>
+<li><a href="/notes/2203055" target="_blank">BC-SRV-ADR 2203055 Eircode: Ireland’s new postal code system</a></li>
+</ul>
+<p>After you implement the corrections, the system uses the function module ADDR_POSTAL_CODE_CHECK to check the format of a postal code in SAP Patient Management even if the business function ISH_BP_OM is not active. As a result, the check for the current format of the postal code for Ireland is now also available, for example.</p>
+<p>After you implement the corrections, there are no additional checks in SAP Patient Management. The existing checks only use another function module.</p>
+<p>As a result, this correction affects the following addresses or Functions from (some of these functions are only available in certain country versions):</p>
+<ul>
+<li>Patient Address</li>
+<li>Patient's Additional Address</li>
+<li>Pseudonymized Address of Patient</li>
+<li>Address of Provisional Patient</li>
+<li>Next of Kin Address</li>
+<li>Address of Other Dependent</li>
+<li>Address of a legal representative</li>
+<li>Maintaining an address in the address overview (historical address overview)</li>
+<li>Address of third-party payer when creating a third-party payer (insurance relationship)</li>
+<li>Address of Case-Related Employer</li>
+<li>Address of Patient-Related Employer</li>
+<li>Business Partner Master Data:</li>
+<ul>
+<li>Address General</li>
+<li>Hospital Address</li>
+<li>Insurance Provider Address</li>
+<li>Customer Address</li>
+<li>Ext. Physician Address</li>
+<li>Employee Address</li>
+<li>Employer Address</li>
+</ul>
+<li>Implementation Guide:</li>
+<li>Activity <em>Create Institution</em>, maintain the address of an institution</li>
+<li>Manual maintenance of postal codes using the following activities:</li>
+<ul>
+<li>Maintain Postal Codes</li>
+<li>SG: Maintain Postal Codes</li>
+<li>ES: Maintain Postal Codes</li>
+</ul>
+</ul></div></div></div></div></div>

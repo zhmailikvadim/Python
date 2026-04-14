@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3712442&amp;TargetLanguage=EN&amp;Component=PY-DE&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3712442/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3712442/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p><strong>3/20/2026:</strong> Programming error in the correction instructions that prevented notification creation if no date of death was determined has been corrected.</p>
+<p>The notification creator (RPCRBMD0_MZ01) also creates notifications for inflow years after the year of death of the pension recipient.</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>RPCRBMD0_MZ01, CL_HRPAYDE_RBM_NOTIF_MANAGER-&gt;CREATE_NOTIFS, CL_HRPAYDE_RBM_NOTIF_MANAGER-&gt;MATCH_NOTIFS.</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p id="">Example:</p>
+<p>A pension recipient has also received benefits beyond his or her month of death. This was not noticed and corrected until the following year. The notification creator creates an MZ01 notification for the inflows in the following year.</p>
+<ul>
+<li>According to the ZfA, an MZ01 notification for the year of death is to be transferred for the last time in such a case.</li>
+<li>A MZ01 notification that has already been transferred for the following year must be reversed.</li>
+</ul>
+<p>Issues:</p>
+<ul>
+<li>For corresponding payments, an MZ01 notification is also created for an inflow year after the year of death.</li>
+<li>A manual option to reverse a transferred MZ01 notification is currently not provided.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>Implement the attached correction instructions or import the specified support package.</p>
+<ul>
+<li>If the year of death is before the inflow year, the system no longer creates an MZ01 notification.</li>
+<li>For MZ01 notifications that have already been transferred with an inflow year before the year of death, a reversal is sent for this.</li>
+</ul>
+<p>After you import the HR Support Package or implement the correction instructions, you must perform the following activities.</p>
+<ul>
+<li>In the table T596F, check which class is stored under PGMNA for the value SNAME = DBAVRBM.<br/>If the standard class is CL_HRPAYDE_RBM_NOTIF_MANAGER or the method MATCH_NOTIFS has not been redefined in the alternative customer class, no further action is required in the source code. <br/>Otherwise, compare the changes of the method of the customer class with those of the standard class.</li>
+<li>If the source code has been checked or adjusted, create the notifications again for the personnel cases that have received notifications for an inflow year after the year of death. When you do this, the old, incorrect notifications are reversed.</li>
+</ul></div></div></div></div></div>

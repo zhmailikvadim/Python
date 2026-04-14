@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<div class="table-responsive" id="__html0"><table border="0" cellpadding="1" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Component:</td>
+<td>Foundation for EHS Management</td>
+</tr>
+<tr>
+<td>Module:</td>
+<td>Transfer of chemical data from EHS specifications</td>
+</tr>
+</tbody>
+</table></div>
+<p>You use program <span class="SNO_DNT" style="float: none;" translate="no">R_EHFND_FILL_CHM_BY_EHS_SUBST</span> to transfer Chemicals from the <span class="SNO_DNT" style="float: none;" translate="no">SAP-ERP-EHS</span> Specification Database (for example, transaction <span class="SNO_DNT" style="float: none;" translate="no">CG02</span>) to an EHS Management system.</p>
+<p>When you transfer data, the system displays error message CM_EHFND_CHM 135: "You cannot add more than one hazardous ingredient" in the application log.</p>
+<p>This occurs when you maintain the following data in a specification:</p>
+<ul>
+<li>Property Type of Substance (SAP_EHS_1011_005): The value in Mixture or Pure Substance is set to Substance, and the corresponding phrase is maintained in BAdI BADI_EHFND_CHM_TRANSFER, method IF_EHFND_CHM_TRANSFER~MAP_TO_CHEMICAL_TYPE, as 'S' (specification),</li>
+<li>Property Hazardous Ingredients: More than one specification exists on the Composition tab, but only one specification has Component Type ACT_AGENT.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Migration, transfer, Hit List, Chemicals, BAdI: Business Add-In, CompType, unique,</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p><span style="text-decoration: underline;">Reason:<br/></span>During transfer, the system checks for a single hazardous ingredient, independent of Component Type. If more than one hazardous ingredient is maintained, the system adds the error and does not transfer the specification.</p>
+<p><span style="text-decoration: underline;">Prerequisites:</span><br/>For information about the validity of the corrections, see the correction instructions.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After implementing this SAP Note, the system additionally checks the Component Type during transfer. The system transfers the specification successfully when only one hazardous ingredient with Component Type ACT_AGENT is maintained.</p>
+<p>The "Support Packages" section lists the Support Packages that contain these corrections.<br/><br/>Alternatively, you can implement the attached correction instructions.</p></div></div></div></div>

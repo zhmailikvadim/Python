@@ -1,0 +1,38 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">The credential type <samp>instance-secret</samp> has reached end-of-life.</p>
+<p>The following scenarios are affected by this change:</p>
+<ul><li>
+<p> There is an explicitly configured credential type <samp>instance-secret</samp> in the application security descriptor.</p>
+</li><li>
+<p>The service instance was created before 12 November 2024 without the explicit configuration of credential types in the application security descriptor.</p>
+</li></ul><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><ul><li>SAP Business Technology Platform, Cloud Foundry Environment</li></ul><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><p>The following errors can be encountered when facing issues regarding this change:</p>
+<ul><li>
+<p>when trying to create a binding with a credential type that is not contained in the xs-security.json the following error is visible : "Unsupported credential type" </p>
+<p></p>
+</li><li>
+<p>when trying to create a binding while explicitly specifying the instance secret in the request body the following error is visible: "Instance secret is no longer allowed to be used." </p>
+<p></p>
+</li><li>
+<p>when trying to update a service instance with the instance secret, but it was not specified in the xs-security.json before, the following error is visible: "Inconsistent xs-security.json: unsupported credential-type instance-secret" </p>
+</li></ul><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>This change has the following impact:</p>
+<div>
+<ul><li>
+<p>Creating service instances with the credential type <samp>instance-secret</samp> in the security descriptor fails.</p>
+</li><li>
+<p>Updating service instances with the credential type <samp>instance-secret</samp> in the security descriptor succeeds if <samp>instance-secret</samp> was explicitly configured before and fails otherwise.</p>
+</li><li>
+<p>Creating bindings or service keys with the credential type <samp>instance-secret</samp> fail.</p>
+</li><li>
+<p>Existing instance secrets are removed or rejected if they haven't been used for more than 3 months.</p>
+</li><li>
+<p>For service instances created before 12 November 2024 without the explicit configuration of credential types in the security descriptor, the service instance update changes the default binding type from <samp>instance-secret</samp> to <samp>binding-secret</samp>.</p>
+</li><li>
+<p>New bindings or service keys for other BTP services can't contain instance secrets.</p>
+</li></ul>
+</div><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>Instead of using the <samp>instance-secret</samp> credential type, applications and services use the <samp>binding-secret</samp> credential type (see <a href="https://help.sap.com/docs/btp/sap-business-technology-platform/migrate-from-instance-secrets-to-binding-secrets" rel="noopener noreferrer nofollow" target="_blank">Migrate from Instance Secrets to Binding Secrets)</a> or <samp>x509</samp> (see <a href="https://help.sap.com/docs/btp/sap-business-technology-platform/retrieving-access-tokens-with-mutual-transport-layer-security-mtls" rel="noopener noreferrer nofollow" target="_blank">Retrieving Access Tokens with Mutual Transport Layer Security (mTLS)</a>).</p>
+<p>To test an application with these credential types, update the security descriptor to set the credential type to ["binding-secret", "x509"].</p>
+<p>For more information on the security descriptor, see <a href="https://help.sap.com/docs/btp/sap-business-technology-platform/application-security-descriptor-configuration-syntax" rel="noopener noreferrer nofollow" target="_blank">Application Security Descriptor Configuration Syntax</a>.</p>
+<p>In case the affected application is not a custom one, but rather an SAP managed application, please open a SAP Support Case in the application/service owner component.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://help.sap.com/whats-new/cf0cb2cb149647329b5d02aa96303f56?Component=Authorization+and+Trust+Management+Service&amp;locale=en-US" rel="noopener noreferrer nofollow" target="_blank">What's New for SAP Business Technology Platform | SAP Help Portal</a></p>
+<p><a href="https://help.sap.com/docs/BTP/65de2977205c403bbc107264b8eccf4b/dcee867db42e48d7b4f3243e41695a7a.html?locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank">Migrate from Instance Secrets to Binding Secrets | SAP Help Portal</a></p>
+<p><a href="https://help.sap.com/docs/BTP/65de2977205c403bbc107264b8eccf4b/f60c8e724bb8496eae10ed29e896766a.html?locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank">Retrieving Access Tokens with Mutual Transport Layer Security (mTLS) | SAP Help Portal</a></p>
+<p><a href="https://help.sap.com/docs/BTP/65de2977205c403bbc107264b8eccf4b/517895a9612241259d6941dbf9ad81cb.html?locale=en-US&amp;version=LATEST" rel="noopener noreferrer nofollow" target="_blank">Application Security Descriptor Configuration Syntax | SAP Help Portal</a></p>
+<p></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>credential, type, end of life, instance, secret, binding, xs-app.json, application security descriptor, configuration, error, token, access, creation, failure</p></div></div></div></div>

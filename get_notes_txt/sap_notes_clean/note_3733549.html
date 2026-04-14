@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">An issue was identified during IDoc processing, where the generated TE_IN XML was missing attributes 3, 4, and 11.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">SETI, TXINTF</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>After the upgrade to S/4, the code flow changed. The include program /TXINTF/DEFINE_CALCTYPE_C is missing or is no longer used in the same way as in ECC.</p>
+<p>In standard include program LMEPOF1T, subroutine MEPO_BADI_ME_DEFINE_CALCTYPE, a new subroutine was introduced after the upgrade. This new subroutine is executed as part of the BAdI processing and is used to call function module /TXINTF/DEFINE_CALCTYPE_C.<br/>The new subroutine, MEPO_BADI_MM_PUR_S4_PO_DEFINE, performs a mapping of PO data into intermediate structures:</p>
+<ul>
+<li>purchaseorder_old/new</li>
+<li>poitem_old/new</li>
+</ul>
+<p>This mapping follows a limited field-mapping approach, which means:</p>
+<ul>
+<li>Only selected fields are mapped and populated.</li>
+<li>Fields that are not included in the mapping remain initial (blank/zero) in both the “old” and “new” structures.</li>
+</ul>
+<p>Due to this limited mapping, the comparison logic in function module /TXINTF/DEFINE_CALCTYPE_C no longer works in the same way as in ECC.</p>
+<ul>
+<li>Both the new and old PO header/item structures contain the same data at the time of comparison.</li>
+<li>This occurs because the limited field mapping has already taken place earlier in the new S/4 standard flow.</li>
+</ul>
+<p>As a result:</p>
+<ul>
+<li>Some fields that are expected to differ are not populated, or remain initial, in the mapped structures.</li>
+<li>The comparison detects no difference, and therefore the calctype is not assigned.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">An implicit enhancement was added at the end of subroutine MEPO_BADI_ME_DEFINE_CALCTYPE to return the Include Program: /TXINTF/DEFINE_CALCTYPE_C, and the BAdI implementation /TXINTF/PO_DEF_CNDNCTRL was deactivated to allow function module /TXINTF/DEFINE_CALCTYPE_C to use the full EKKO and EKPO structures for comparison logic when assigning the calculation type.</p></div></div></div></div>

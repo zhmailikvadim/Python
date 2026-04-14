@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This SAP Note delivers additional enhancements  for the IMICC solution referred in SAP Note <a href="https://me.sap.com/notes/3513060" target="_blank">3513060</a>.</p>
+<p>Wage Type Reporter(HTRICM00) is adjusted to accomodate the changes to new payroll solution to support:</p>
+<ul>
+<li>Juper split due to Workplace/Company Change</li>
+<li>R&amp;D/Dangerous work(Document codes 29, 32, 35) which split with V0 table VTYPE B.</li>
+<li>New /DXX wage types for excessive amount.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">IMICC, ICMAL</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is relevant only for payroll solution of Turkyie.</p>
+<p><em>Please make sure that your system is patched up to the following minimum prerequisite Support Package level</em></p>
+<p><em>The following SAP Note explains why this step is important</em></p>
+<p><em><a href="/notes/3181624" target="_blank">3181624 - SAP Notes Implementation Prerequisites for HCM Turkey - SAP ONE Support Launchpad</a></em></p>
+<p><em>This SAP Note is a prerequisite for:</em></p>
+<ul>
+<li><em>3700431 - HRTR: IMICC - Enhancement for Payroll Wage Type Reporter - [3/3] Code</em></li>
+</ul>
+<p><em>Note </em><em> </em>3733817 - HRTR: IMICC - Enhancement for Payroll Wage Type Reporter - [1/3] Function Group <em>is prerequisite for this SAP note</em></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>New domain PTR_ISRDW, and Data Elements PTR_EXCES and PTR_ISRDW is added.</p>
+<p>PTR_EXCES and PTR_ISRDW  is added to table T7TRIC02 and View V_T7TRIC02 and maintenance view V_T7TRIC02.</p>
+<p>JUPER split is automatically splited and no extra step is needed.</p>
+<p>In schema TR00, the Social Security related wage types for R&amp;D employees were shown with additional wage types such as /PIE, /YIE whereas in the new payroll schema TR01 the they are still put into /NEE, /IEE with split used with V0 table with V0 TYPE = B. To print social security wage types related to R&amp;D you need to enter there through Labor Summary Customizing Sheet which can be open through  SAP MENU-&gt; Human Resources -&gt; Payroll -&gt; Europe -&gt; Turkey -&gt; Next Actions -&gt; Independent Period -&gt; Labor Summary OR through transaction SM31 view cluster V_T7TRIC01.  In Labor Summary Customizing Sheet after creating Wage Type Definition , with selected definition clicked on Connection of Wage Types to Wage Group, you need to enter a new wage TYPE (as example, /NEE) Sign, percentage and you need to set checkbox R&amp;D/Dangerous Work column true. This way the /NEE (SGK Employee Share ) for R&amp;D part of the Payroll will be shown in the Wage Type Reporter.</p>
+<p>In Schema TR00, the excessive amount is used with /D01, /D02, /D03 ... /D12 wage types for each month , in schema TR01 the it represented with one wage type /DXX and the month information is written to TMU(unit of time field) inRT table with 3 characters where first two character denotes the year and last  character denotes the month = 261(year: 2026 month:1), 262 (year:2026 month: 2), 263, 264, 265, 266, 267, 268, 269, 26A(year: 2026 month:10), 26B(year: 2026 month:11), 26C(year: 2026 month:12). To add the excessive amount for the DXX(261), in Labor Summary Customizing Sheet after creating Wage Type Definition , with selected definition clicked on Connection of Wage Types to Wage Group, you need to enter a new wage TYPE /DXX Sign ++ , percentage 100,000 and set column Excessive Amount Identifier (DevirMAthG) to 1 which is the last character of 261. If you leave the identifier empty it will sum all available /DXX wage types in the payroll result.</p>
+<ul>
+<li>Generally, SAP recommends that you install a solution by applying a Support Package. However, if you need to install a solution earlier, use the tool SAP Note Assistant (SNOTE) to implement automatic correction instruction from this SAP Note. For more information about the SAP Note Assistant see SAP Support Portal under SAP Note Assistant.</li>
+<li>Note that documentation, transactions, translation and customizing activities are only delivered via Support Package.</li>
+</ul></div></div></div></div>

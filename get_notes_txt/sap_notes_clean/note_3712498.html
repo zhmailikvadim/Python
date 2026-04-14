@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You declare your import declaration in SAP GTS to customs system DMS.</p>
+<p>You have your goods value customized to be declared in original currency. You declare your goods value in original currency, other then customs currency DKK. You are not using fixed exchange rate, but the &lt;CurrencyExchange&gt; element is created in the XML message. As a result, you receive error CWM10003, pointing to customs value and saying, that the currency could not be converted.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Denmark, XML, /SAPSLL/LLEG_ECC_DATAF56, customsValue, amount, amountForVat, cvrtf, cvrtq, txcur, hd_aar, conversion, exchange rate</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The problem is caused by program error.</p>
+<p>Element &lt;CurrencyExchange&gt; contains the exchange rate that is set in advance for the price of the goods, in a contract between the parties concerned.</p>
+<p>By default, this element is not created in SAP GTS. To create this element, you have to maintain following entries for Goods Value (invoice line) on Logistics Costs tab on the header.</p>
+<p>'Indicator for Fixed Exchange Rate' (CVRTF) must be set to 'Fixed Exchange Rate' (A) or 'Fixed Exchange Rate (IATA Rate)' (B). If you cannot see these options, maintain them in the /SAPSLL/CVRTF domain.</p>
+<p>'Indirect Quoted Exchange Rate' (CVRTQ) must contain the exchange rate.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the correction instructions.</p></div></div></div></div>

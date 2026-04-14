@@ -1,0 +1,17 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">This note fix following issues.</p>
+<p>1. Webservice for 'MeterProfileCreate' on SMGW should be completed before CTB install on CR.</p>
+<p>2. Waiting for iMS Parameterization Process completed is not mandatory for CTB install on Melo, in case of Parameterization Instance status is Installed or Productive or no webservice needed, there is no need to create deadline waiting for iMS Parameterization Process.</p>
+<p>3. Adjust the precondition of step 0409 in process DE_B_IM_DEV_CHANGE since step 0409 should not run before 0385 completed in case of 0385 exists.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>DE_B_IM_DEV_CHANGE, DE_B_IDEV_CTB_CHANGE, Control box, Control Resource, /US4G/CL_CHK_IM_PROCESS,  CHK_CTB_LEADING_POD,  CHK_IF_CTB_INST_START, CHK_IF_CTB_IN_TRIGGER, CHECK_IF_CTB_CHG_CONTINUE</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program and customizing error.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Please implement the correction instruction in the SAP Note or import the higher version of Support Package.</p>
+<p>The main changes in process are the following:</p>
+<ul>
+<li>Add step 0500 and 0508 in process DE_B_IM_DEV_CHANGE for checking If CTB Install process for CR need to wait MeterProfile WS on SMGW</li>
+<li>Add step 0700 in process DE_B_IDEV_CTB_CHANGErelay on the step 0508 above in case of CTB install on CR</li>
+<li>Adjust logic for step 0500 in DE_B_IDEV_CTB_CHANGE considering the webservice is needed or not.</li>
+</ul></div></div></div></div>

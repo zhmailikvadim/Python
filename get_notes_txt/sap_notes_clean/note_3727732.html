@@ -1,0 +1,127 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">As described in SAP ONE Support Launchpad <a href="https://launchpad.support.sap.com/#/legalchangenotification" target="_blank">Notification of Legal Change</a> <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQEE-10045" target="_blank">Unified monthly employer report 2026 (JMHZ)<br/></a></p>
+<p>The functionality delivered in this SAP Note is currently under development. It is intended exclusively for customers registered as JMHZ pilot testers, or for the preview of features that may become available for productive use in the future.</p>
+<p>These updates are provided:</p>
+<ul>
+<li><strong>REGZEC (DM - data mining, CS - compose submission, PF - process feedback, SO - special operations, INIT - import of IDs to IT3457)</strong></li>
+<ul>
+<li>
+<p>DM: All employees who weren't registered in ONZ are evaluated as relevant employees for registering via REGZEC with the real hire date</p>
+</li>
+<li>
+<p>DM: Issue with reading org. structure via PLOGI attribute (newly released functionality in the previous SAP Note) has been resolved</p>
+</li>
+</ul>
+<li><strong>MH<strong> (DM - data mining, CS - compose submission, WB - workbench)</strong></strong></li>
+</ul>
+<ul>
+<ul>
+<li>
+<p>Logical check 248 reported the existence of non‑zero elements on an employment relationship other than the primary one (PPV) in the DME section.<br/>Most source wage types for the DME section are stored in payroll results under the main personnel number, and are therefore correctly reported on the primary employment relationship (PPV). However, the source wage types for attributes 10289, 10416, 10417, 10308 can occur in the results for secondary personnel numbers. If that happened, these attributes were incorrectly populated for secondary PPVs as well. Going forward, the values of these wage types are transferred to the primary PPV.</p>
+</li>
+<li>
+<p>Bug in the XML editor of transaction PC00_M18_JHM_WB_ADMI<br/>After editing and saving an XML, its content remained in memory. If the user then opened another XML and chose not to save it (Cancel), the content of the previous XML still in memory was used and saved incorrectly.</p>
+</li>
+<li>
+<p>Place of work (10229, 10230, 10231) – New parameter for an alternative subtype of Infotype 0006<br/>The attributes are taken primarily from Infotype 6, subtype CZMV. It is now possible to set a different subtype using a parameter in table T7CZRE:</p>
+</li>
+<ul>
+<li>PAR_AREA = JHM_VYP_PLACE_OF_WORK</li>
+<li>PAR_NAME = W_ADDRESS</li>
+<li>PAR_VALUE = &lt;subtype&gt;</li>
+</ul>
+<li>
+<p>Place of work (10229, 10230, 10231) – New method for determining place of work from organizational assignment</p>
+</li>
+</ul>
+</ul>
+<p style="padding-left: 90px;"><span style="font-size: 14px;">It is now possible to set the algorithm for determining the place of work using a parameter in table T7CZRE:</span></p>
+<ul>
+<ul>
+<ul>
+<li>PAR_AREA = JHM_VYP_PLACE_OF_WORK</li>
+<li>PAR_NAME = METHOD_ORG</li>
+<li>PAR_VALUE = 2</li>
+</ul>
+</ul>
+</ul>
+<p style="padding-left: 90px;"><span style="font-size: 14px;">The first part is analogous to the processing in REGZEC:</span></p>
+<ul>
+<ul>
+<ul>
+<li>The program reads table T5T1L with key TXTYP = CZMV and uses the values in fields ANOWN and VAOWN to read table T536A.</li>
+<li>From table T536A it determines the country (key S) and the municipality (key W).</li>
+</ul>
+</ul>
+</ul>
+<p style="padding-left: 90px;"><span style="font-size: 14px;">It then retrieves the municipality name from table T5T54 using only two fields: Sign (ZNAK) and Municipality code (OBEC), i.e., without using the Region (BAND) field. Therefore, it is assumed that each municipality belongs to only one region. If table T5T54 contains duplicates, the algorithm will select one of the matching records and report the situation as a warning in the log.</span></p>
+<ul>
+<ul>
+<li>
+<p>Enhancement of Method 2 for determining attribute 10259 Statutory working time</p>
+</li>
+<ul>
+<li>If the value of Statutory (10259) is lower than the value of Agreed (10260), 10259 is set to 10260.</li>
+<li>For reduced working hours, Statutory (10259) has so far been calculated from Agreed (10260) by grossing up for the reduction in Infotype 7 and/or the reduction in the work schedule plan itself (T508A‑M2STD).<br/>It is now possible to avoid this calculation by specifying a reference work schedule in table T7CZPPD, field REFSC.<br/>The program goes through the work schedules it finds for the given period in WPBP (field SCHKZ) and looks them up in table T7CZPPD.</li>
+<ul>
+<li>If it finds at least one record in T7CZPPD with a filled reference schedule (REFSC), the program sums the shift lengths from T552A based on work schedules that are either in WPBP (if no REFSC is found for the given SCHKZ) or in T7CZPPD (if a non‑empty REFSC exists in T7CZPPD).</li>
+<li>If no record is found in T7CZPPD, or it is found but the REFSC field is empty, the existing algorithm applies. That is, the change is backward compatible and no configuration is needed to retain the current behavior.</li>
+</ul>
+</ul>
+<li>
+<p>WB: fix in XML editor to prevent overwrite if editor was closed without confirmation</p>
+</li>
+<li>
+<p>DZMH: added handling for new known "nonsense-protocol content errors".</p>
+</li>
+<li>
+<p>Introduced several substates for B2A final status to better hint users about overall state:</p>
+</li>
+<ul>
+<li>
+<p style="display: inline !important;">in case that protocol was not yet ready and therefore opened (i.e. status 80) rows are not handled, status will be marked as RED ERROR (previously green, as response was received, for example "Unprocessed") which confused user.</p>
+</li>
+<li>Status OK will be only if all forms in the submissions are accepted without any error (warnings are considered as OK).</li>
+<li>Status OK - Partially accepted will be if any form in the submission has an error</li>
+<li>Notice: Status is relevant for each submission (Correlation ID), not to the general state of the Monthly statement itself (GUID Podani).</li>
+</ul>
+</ul>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>HRCZ, JMHZ</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>This SAP Note is relevant only for Czech Republic (HRCZ)</p>
+<p>HRSP SAPK-10127INS4HCM, SAPK-10040INS4HCM, SAPK-608F1INSAPHR, SAPK-604N2INHRCEE (or newer)</p>
+<p><strong>For implementation using the SAP Note Assistant, log in to SAP using the Czech (CS) language.</strong></p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Source code changes were made to objects in the PC18_JMHZ package.</p>
+<p><strong>Implementation</strong></p>
+<div class="table-wrap">
+<div class="table-responsive"><table border="1" class="table table-bordered table-striped col-resizeable">
+<thead>
+<tr>
+<td class="confluenceTd"><strong>Version</strong></td>
+<td class="confluenceTd">
+<p><strong>Date</strong></p>
+</td>
+<td class="confluenceTd">
+<p><strong>Reason</strong></p>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="confluenceTd">01</td>
+<td class="confluenceTd">
+<p>March 13, 2026</p>
+</td>
+<td class="confluenceTd">Released for Customer</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="table-wrap"></div>
+<div class="table-wrap"><span style="font-size: 14px;">Import the Support Package specified for your release.</span></div>
+<p>As a general rule SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <span style="text-decoration: underline;"><strong><a class="external-link" href="https://support.sap.com/kb-incidents/notes/assistant.html" rel="nofollow" target="_blank">SAP Note Assistant</a>.</strong></span></p>
+<p>Note that documentation, transactions, and Customizing activities are only delivered via Support Package.</p>
+<p><strong>After implementing the correction instructions that are valid for your release, you must carry out manual activities.</strong></p></div></div></div></div>

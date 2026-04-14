@@ -1,0 +1,13 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">EWM printer-pool functionality can be used in two different ways:</p>
+<p>- Without RF: Printer-pool is used to distribute print jobs e.g. Pick list to several physical printers.</p>
+<p>- With RF: Printer-pool is used to assign a printer which is linked to a resource e.g. forklift. This functionality was introduced with note 3396347.</p>
+<p>In both cases, the determination of the printer (which should be used) happens automatically in the execution phase of the PPF (Post-Processing Framework) action for printing.</p>
+<p>The printer-pool is ignored if the PPF action uses so-called 'Processing Parameters'. In EWM they are only used for re-printing where user manually enters the printer, he wants to use.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">/SCWM/RFUI, /SCWM/RSRC_PRN, /SCWM/60000431, /SCWM/PRHU6, /SCWM/PRWO6</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>PPF creates processing parameters but with initial values and EWM only checks if they exist but not if they are filled. Because of this, the printer-pool is ignored.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Apply the note to your system.</p>
+<p>After that EWM checks the content of the processing parameters and use the printer-pool if they are initial.</p></div></div></div></div>

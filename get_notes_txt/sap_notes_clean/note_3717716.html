@@ -1,9 +1,17 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p id="__html0">In the scenario of the re-determination without certain substitutes introduced with note 3658178 and the scenario with reduced request introduced with note 3680716 an error can occur in the Review Availability Check Result Screen (RACR) when changing the confirmations of a requirement.</p>
+<p id="__html0">In the process "MDC: Sending of Settlement-Relevant Change from Responsible SUP to DSO as SUP" (DE_B_MDC_SUP_SETTL_REL_RSP_SUP_DSO) for the MDC_SUP cluster, the process gets stuck in step 200 when master data is not complete. Step 200 is executed only once, so if the master data is incomplete, the process does not proceed even after the data is retrieved again in step 300.</p>
+<p>This issue is relevant for the market role: SUP.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p id="">aATP; ABC; RACR</p>
+<p id="">MDC_SUP, DE_B_MDC_SUP_SETTL_REL_RSP_SUP_DSO, MDC process stuck, master data not complete, 2310, Gas, settlement-relevant change, step 200, step 300</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p>The reason is that the Alternative Determination UUID is not always filled.</p>
+<p id="">The error occurred because step 200 is executed only once. When the system retrieves master data again in step 300, step 200 is not executed a second time, so the process cannot continue if the master data was incomplete initially.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id="">Apply the correction instructions for this note or upgrade to an SAP S/4HANA support package that contains this correction.</p>
-<p><span style="font-family: Arial, Helvetica, sans-serif; font-size: medium;"> </span></p></div></div></div></div>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system executes step 200 again after retrieving master data if it was incomplete in the initial check. The process then proceeds as expected. Activate the BC sets /US4G/3_0_SUP_SP07_NOTE_3717716 and /US4G/3_0_SUP_SP08_NOTE_3717716 as required. <br/>You need to retest the process after implementing the SAP Note. You can verify the fix by checking that step 200 is executed a second time if the initial check for master data completeness fails, and the process continues as expected.</p>
+<div class="longtext">
+<p>This SAP Notes is relevant for the following role: SUP</p>
+<p>BC Set: /US4G/3_0_SUP_SP07_NOTE_3717716 to be activated</p>
+<p>1. After implementing the note. Run transaction SCPR20.</p>
+<p>2. Input BC set "/US4G/3_0_SUP_SP07_NOTE_3717716" .</p>
+<p>3. Click "Activate" button or choose BC Set-&gt;Activate option, from Menu</p>
+</div></div></div></div></div>

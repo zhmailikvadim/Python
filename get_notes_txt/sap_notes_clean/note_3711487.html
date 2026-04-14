@@ -1,0 +1,110 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">As described in the <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html" target="_blank">regulatory change manager</a> under <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-6714" target="_blank">Tax Reform</a>:</p>
+<ul>
+<li><a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-16513_17" target="_blank">SAP S/4HANA Cloud Private Edition</a></li>
+<li><a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-16513_3" target="_blank">SAP S/4HANA</a></li>
+<li><a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQAMER-16513_4" target="_blank">SAP ERP Central Component</a></li>
+</ul>
+<p>This SAP Note provides you with relevant system changes and information to address the enablement of access key for NFS-e (Electronic Nota Fiscal for Services) national layout and NFS-e São Paulo for purchasing scenarios.</p>
+<ul>
+<li>Municipal Code</li>
+<li>General Environment</li>
+<li>Type of Federal Registration</li>
+<li>Federal Registration</li>
+<li>NFS-e Number</li>
+<li>Year and Month of DPS Issuance</li>
+<li>Numerical Code</li>
+<li>Verification Digit</li>
+</ul>
+<p id="">For more information, see also <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://www.planalto.gov.br/ccivil_03/LEIS/LCP/Lcp214.htm" rel="noreferrer noopener" target="_blank">Complementary Law No. 214</a>. The website accessible through this hyperlink is an external website which is not part of SAP's offering. By clicking the hyperlink, YOU AGREE that unless expressly stated otherwise in your agreements with SAP: (i) the content of the linked to website and any further external website is not content provided by or on behalf of SAP, nor is it otherwise under SAP's control; (ii) the fact that SAP provides links to external websites does not imply that SAP agrees or disagrees with the contents and information provided on such websites; (III) SAP does not give any representation regarding the quality, safety, suitability, accuracy or reliability of any external website or any information, content and materials provided thereon; (IV) you visit those external websites entirely entirely at your own risk. SAP shall not be directly or indirectly responsible or liable for any damage or loss caused or alleged to be caused by or in connection with your use of or reliance on any content, goods or services available on or through any such linked website.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> Brazil, NFSe, Nota Fiscal de Serviço, Service Nota Fiscal, National Layout, NFS-e Nacional, NFS-e, NFS-e Layout Nacional, NFS-e São Paulo Layout, Nota Fiscal de Serviços Eletrônica, Supplier Invoice, MM</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p id=""> This SAP Note is relevant only for Brazil.</p>
+<p>You have SAP Note <a href="https://me.sap.com/notes/3706870" target="_blank">3706870</a> applied in your system.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After you implement this SAP Note, the system enables the access key on the Service NF Data tab of incoming NFS-e screen. Here are the key points of this update:</p>
+<ul>
+<li><strong>Enablement of the Access Key</strong>: The system allows the access key to be displayed and some fields modified, which was not previously possible.</li>
+<li><strong>Check Digit Calculation:</strong> This calculation uses module 11 and is influenced by all fields in the NFS-e Key.</li>
+<li>The <strong>General Environment</strong> field can be directly edited by the user.</li>
+<li>The <strong>Random Number</strong> field is editable and if it contains fewer than 9 digits, the system adds leading zeros.</li>
+<li>
+<p class="p" style="display: inline !important;">The <strong>NFS-e Number</strong> field must be entered in the Service NF-e section.</p>
+<ul class="ul">
+<li class="li">
+<p class="p">If the NFS-e Number has more than 13 digits, only the first 13 are considered in the Access Key section.</p>
+</li>
+<li class="li">
+<p class="p">If the NFS-e Number has fewer than 13 digits, the system adds leading zeros in the Access Key section.</p>
+</li>
+</ul>
+</li>
+<li>The <strong>Fed.Regn.Type</strong> field is automatically determined based on the CNPJ/CPF Number. When the number corresponds to a <strong>CPF</strong>, the value is 1, and when it corresponds to a <strong>CNPJ</strong>, the value is 2.</li>
+</ul>
+<p><strong>Customizing</strong></p>
+<p>The system adds the AMBGER (NFS-e Generation System), CDV (Check Digit in Access Key), DOCNUM9 (Random Number in Access Key) fields from NFE_NFSE_ACCESS_KEY structure to Field Group 21 (Service NF-e) in the <strong>Field Assignment to Field Group (Header)</strong> (J_1BAKHV) view. These customizing are delivered via the new report <strong>NOTE_3711487</strong>.</p>
+<p>Use the Note Assistant (SNOTE) to implement the correction instructions. You can find more information about the Note Assistant in SAP Support Portal, under <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">https://support.sap.com/en/my-support/knowledge-base/note-assistant.html</a>.</p>
+<p><strong>IMPORTANT</strong></p>
+<ul>
+<li>This report serves only as a tool to generate the required objects automatically. Therefore, it has no positive or negative effect to transport the report <strong>NOTE_3711487 </strong>to your production system.</li>
+<li>The objects created by the execution of this report can only be used after you apply the main SAP Note that delivers the solution.</li>
+</ul>
+<p><strong>List of Affected Objects:</strong></p>
+<ul>
+<li><span style="font-size: 14px;">Programs</span></li>
+<ul>
+<li><span style="font-size: 14px;">MJ1B1F01</span></li>
+</ul>
+</ul>
+<ul style="list-style-type: disc;">
+<li>Classes</li>
+<ul>
+<li>LOGBR_NFSE_ACCESS_KEY</li>
+<li>LOGBR_CHECK_DIGIT</li>
+<li>LOGBR_ALPHA_CONVERSION_WRAPPER</li>
+</ul>
+</ul>
+<ul>
+<li>Interfaces</li>
+<ul>
+<li>IF_LOGBR_NFSE_ACCESS_KEY</li>
+<li>IF_LOGBR_ALPHA_CONVERSION_WRAP</li>
+<li>IF_LOGBR_CHECK_DIGIT</li>
+</ul>
+<li>Includes</li>
+<ul>
+<li>LJ1BB2TOP</li>
+<li>LJ1BB2IE2</li>
+<li>LJ1BB2OF5</li>
+<li>LJ1BB2O01</li>
+</ul>
+</ul>
+<ul>
+<li>Funtion Module</li>
+<ul>
+<li>J_1B_NF_DOCUMENT_CANCEL</li>
+</ul>
+<li>Content for View J_1BAKHV</li>
+</ul>
+<p><strong>Product Documentation</strong></p>
+<p>For more information about the <strong>development delivered with this SAP Note</strong>, see the following What's New topics on SAP Help Portal:</p>
+<ul class="customListStyle">
+<li><strong>SAP S/4HANA and SAP S/4HANA Cloud Private Edition</strong>: <a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/9f37c8fcdfa44edcb68f1c6b3334da34.html" target="_blank">Enablement of NFS-e Access Key for Purchasing Scenarios</a><a href="https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/83fb257602634259bf40b22d80c1f563/9f37c8fcdfa44edcb68f1c6b3334da34.html" rel="noopener noreferrer" target="_blank"><br/></a></li>
+<li><strong>SAP ERP</strong>: <a href="https://help.sap.com/docs/SAP_ERP/063e7e5f4d7f4fc0be08565793a9b941/9f37c8fcdfa44edcb68f1c6b3334da34.html" target="_blank">Enablement of NFS-e Access Key for Purchasing Scenarios</a></li>
+</ul>
+<p>You are welcome to leave your anonymous feedback on the content of the <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/viewer/s4h_op_brazil" target="_blank">SAP Help Portal documentation</a> by choosing "Was this topic helpful?". If your feedback is relevant, the documentation will be updated accordingly.<br/><br/></p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td><strong>Date</strong></td>
+<td><strong>Reason</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>March 13, 2026</td>
+<td>Released for Customer</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div>

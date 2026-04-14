@@ -1,61 +1,8 @@
 <div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
 <p id="__html0">On opening Revenue Schedule app, you observe revenue contract column doesn't have hyperlink enabled.</p>
 <h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
 <p id="">Revenue Schedule app, Fiori, RAR, Revenue Accounting Contract, Revenue Contract, Hyperlink, F3882</p>
 <h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
 <p id="">Coding was missing for target navigation.</p>
 <h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p id="">Implement the corrections from note to resolve the issue.</p>
-<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
-<p>BILaunchpad , Open ID , Custom.jsp , 404 Error , BOETrustValidateFilter</p>
-<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
-<p><strong>Environment</strong></p>
-<ul>
-<li>SAP BusinessObjects Business Intelligence (BI) Platform 4.x / 2025</li>
-<li>All supported operating platforms</li>
-<li>OpenID</li>
-</ul>
-<p id=""><br/><strong>Steps to Reproduce:</strong><br/><br/> Case 1</p>
-<ol>
-<li>Stop tomcat.</li>
-<li>Navigate to ..\tomcat\webapps\BOE\WEB-INF\internal, then backup and edit global.properties and FioriBI.properties(in 4.2, BILaunchpad.properties).</li>
-<li>In global.properties, change the value of <em>precompiled.jsp.files.use</em> to false.</li>
-<li>In FioriBI.properties, change the value of <em>redirection.iframe.1.redirectto.url </em>to /custom.jsp.</li>
-<li>Navigate to ..\tomcat\webapps\BOE\WEB-INF\eclipse\plugins\webpath.FioriBI\web(in 4.2, webpath.InfoView), customize the custom.jsp file according to your requirements. </li>
-<li>Clear tomcat cache(Only BOE folder is enough) as per <a href="https://me.sap.com/notes/1879431" rel="noopener noreferrer nofollow" target="_blank">1879431</a></li>
-</ol>
-<p>Case 2</p>
-<ol>
-<li>Logon to CMC =&gt; Applications =&gt; AUth Server</li>
-<li>Enable an Auth server for OpenID</li>
-<li>Navigate to Home =&gt; Authentication =&gt; Enterprise =&gt;enable openid and select Auth server</li>
-<li>Edit FIoriBI.properties file for call back and restart tomcat </li>
-<li>launch BI Launchpad , notice it redirects to IDP logon page </li>
-<li>Pass the credentials and logon </li>
-<li>Notice it spins and asks for IDP logon again (again and again in a loop)</li>
-</ol>
-<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
-<p><span style="font-size: 14px;">This is only a workaround for the subject issues and an upgrade should be done to the fixed releases from the SAP notes as soon as is feasible</span></p>
-<ol>
-<li>Stop <strong>Apache Tomcat for BI</strong> from Central Configuration Manager (CCM) or Windows Services.</li>
-<li>Navigate to:<br/>&lt;BOE Installation path&gt;\SAP BusinessObjects\tomcat\webapps\BOE\WEB-INF\eclipse\plugins\webpath.FioriBI\web\WEB-INF</li>
-<li>Take a backup of the <strong>web.xml</strong> file (copy and rename it as <code>web_backup.xml</code>).</li>
-<li>Open <strong>web.xml</strong> in a text editor.</li>
-<li>Search for the filter named <strong>BOETrustValidateFilter</strong>.</li>
-<li>Inside the filter section, add the following entries after <code>excludeUrl4</code>:<br/>
-<p>&lt;init-param&gt;<br/> &lt;param-name&gt;excludeUrl5&lt;/param-name&gt;<br/> &lt;param-value&gt;/logon/start.do&lt;/param-value&gt;<br/>&lt;/init-param&gt;<br/>&lt;init-param&gt;<br/> &lt;param-name&gt;excludeUrl6&lt;/param-name&gt;<br/> &lt;param-value&gt;custom.jsp&lt;/param-value&gt;<br/>&lt;/init-param&gt;<br/><br/><strong>NOTE</strong> : Ensure the <code>param-name</code> numbers are <strong>incremental</strong> and <strong>not repetitive</strong>. For example, if the existing <code>excludeUrl4</code> is present, the new entry should be numbered <code>excludeUrl5 and </code>so on.</p>
-</li>
-<li>
-<p>Save the changes to web.xml.</p>
-</li>
-<li>
-<p>Navigate to &lt;BOE Installation path&gt;\SAP BusinessObjects\tomcat</p>
-</li>
-<li>
-<p>Rename the work folder to work_backup to clear the Tomcat cache.</p>
-</li>
-<li>
-<p>Start Apache Tomcat for BI from CCM or Windows Services.</p>
-</li>
-</ol></div></div></div></div>
+<p id="">Implement the corrections from note to resolve the issue.</p></div></div></div></div>

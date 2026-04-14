@@ -1,0 +1,36 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Monitoring tools (for example Avantra) or cluster logs report a failover or takeover in an SAP HANA high-availability environment.<br/>Pacemaker logs contain messages similar to:</p>
+<p><code>Choosing rsc_SAPHana_&lt;SID&gt;_&lt;Instance&gt;:0 (Master) on &lt;hostname&gt; for promotion</code></p>
+<p>However:</p>
+<ul><li>SAP HANA System Replication state remains unchanged</li><li>Primary and secondary hosts remain unchanged in SAP HANA monitoring tools (for example SAP HANA Cockpit).</li><li>Cluster resource roles remain unchanged </li><li>Cluster status still shows the same master and slave nodes</li></ul>
+<p>Administrators are unsure whether a real HANA failover occurred.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP HANA DB Version 2.0</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Monitor the SAP HANA cluster solution using the monitoring system.</li><li>Observe that the monitoring system reports a failover from Node A to Node B.</li><li>Check the roles and replication status using SAP HANA monitoring tools (for example SAP HANA Cockpit).</li><li>Review the logs indicating "takeover occurred to Master."</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><p>The message originates from the Pacemaker scheduler for a promotable SAPHanaSR resource.<br/>It reflects an internal cluster scheduling decision and does not indicate a database role change.</p>
+<p>This cluster promotion confirmation is not an SAP HANA System Replication takeover and does not trigger a database role switch.</p>
+<p>A SAP HANA takeover results in a change of the System Replication roles (primary/secondary).</p><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p>No corrective action is required.</p>
+<p>Verify the actual SAP HANA System Replication status using:</p>
+<ul><li>cluster status (crm_mon)</li><li>SAP HANA System Replication state</li><li>M_SYSTEM_REPLICATION view </li></ul>
+<p>If the primary and secondary roles are unchanged, the database has not performed a takeover.<br/><br/>Do not initiate manual failover actions based solely on Pacemaker promotion log entries.<br/><br/>A real HANA takeover is typically visible in:</p>
+<ul><li>Pacemaker resource role change</li><li>SAP HANA System Replication state</li><li>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div id="code-block-viewer">
+<div>
+<div>SAP HANA monitoring tools (for example SAP HANA Cockpit or SQL monitoring views)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li></ul><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p>Refer to:  </p>
+<ul><li><a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/4e9b18c116aa42fc84c7dbfd02111aba/6dfb77e634cc43c3a89c767cd39feee5.html" rel="noopener noreferrer nofollow" target="_blank">SAP HANA System Replication: Takeover and Failback</a></li><li><a href="https://help.sap.com/docs/SAP_HANA_PLATFORM/bed8c14f9f024763b0777aa72b5436f6/caca75c6f0cf4204af9d38ae0fe2d379.html" rel="noopener noreferrer nofollow" target="_blank">Troubleshoot System Replication</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>SAP HANA, Pacemaker, SAPHanaSR, takeover, System Replication</p></div></div></div></div>

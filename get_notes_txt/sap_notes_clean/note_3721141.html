@@ -1,0 +1,293 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">As of March 01, 2026, the payroll system no longer complies with the new and revised 2026/2027 tax table and PAYE-related modifications. This SAP Note provides you with the relevant system changes to ensure legal compliance for the 2026/2027 tax year. You can learn more about this in the <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html" target="_blank">regulatory change manager</a> tool under <a href="https://app.main.regulatory-change-manager.cloud.sap/index.html#/detail/GSREQMEA-9397" target="_blank">'Budget speech changes effective March 01, 2026'</a>.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Tax Rates, Tax Rebates, Salary Packaging: ZA Receiver Rates, V_T5W2R, V_T5W2S, V_T5W7F, MKRR, PFCAM, MAETC, MADTC</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Legal change.</p>
+<p>This SAP Note is relevant only for South Africa localization.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>After implementing this SAP Note, the payroll system complies with the 2026/2027 tax table and PAYE-related modifications effective March 01, 2026</p>
+<p><strong>1. Tax Table Changes for Tax Year 2027:</strong></p>
+<p class="p1"><strong>View V_T5W2R - Tax Rates</strong></p>
+<ul>
+<li>Enter the transaction code <em>SM30 </em>in the command field. </li>
+<li>Enter <em>V_T5W2R</em> in the <strong>View Name</strong> field and choose <strong>Maintain</strong>. </li>
+<li>Enter <em>2027</em> in the <strong>Tax Year</strong> field when the system prompts. </li>
+<li>Choose <strong>New Entries</strong> and create the tax rate entries as shown below.</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>From Sal</td>
+<td>Basic Deduction</td>
+<td>Ded. Percentage</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>18</td>
+</tr>
+<tr>
+<td>24510001</td>
+<td>4411800</td>
+<td>26</td>
+</tr>
+<tr>
+<td>38310001</td>
+<td>7999800</td>
+<td>31</td>
+</tr>
+<tr>
+<td>53020001</td>
+<td>12559900</td>
+<td>36</td>
+</tr>
+<tr>
+<td>69580001</td>
+<td>18521500</td>
+<td>39</td>
+</tr>
+<tr>
+<td>88700001</td>
+<td>25978300</td>
+<td>41</td>
+</tr>
+<tr>
+<td>187860001</td>
+<td>66633900</td>
+<td>45</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Save your changes.</li>
+</ul>
+<p>SAP Tax table considers the next bracket to start from the 1st cent over the bracket limit.</p>
+<p class="p1"><strong>View V_T5W2S - South African Tax Rebates</strong></p>
+<ul>
+<li>Enter the transaction code <em>SM30 </em>in the command field. </li>
+<li>Enter <em>V_T5W2S</em> in the <strong>View Name</strong> field and choose <strong>Maintain</strong>. </li>
+<li>Enter <em>2027</em> in the <strong>Tax Year</strong> field when the system prompts. </li>
+<li>Choose <strong>New Entries</strong> and create the tax rate entries as shown below.</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>To Age</td>
+<td>Prim. Rebate</td>
+<td>Add. Rebate</td>
+</tr>
+<tr>
+<td>64</td>
+<td>1782000</td>
+<td>0</td>
+</tr>
+<tr>
+<td>74</td>
+<td>1782000</td>
+<td>976500</td>
+</tr>
+<tr>
+<td>999</td>
+<td>1782000</td>
+<td>1301400</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Save the changes.</li>
+</ul>
+<p><strong>View V_T5W7F - Salary Packaging: ZA Receiver Rates</strong></p>
+<ul>
+<li>Enter the transaction code <em>SM30 </em>in the command field. </li>
+<li>Enter <em>V_T5W7F</em> in the <strong>View Name</strong> field and choose <strong>Maintain</strong>. </li>
+<li>Enter <em>2027</em> in the <strong>Tax Year</strong> field when the system prompts. </li>
+<li>Choose <strong>New Entries</strong> and create the tax rate entries as shown below.</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Up to</td>
+<td>Fixed cost</td>
+<td>Fuel cost</td>
+<td>Mnt.Cost</td>
+</tr>
+<tr>
+<td>115000</td>
+<td>38344</td>
+<td>132,90</td>
+<td>49,10</td>
+</tr>
+<tr>
+<td>230000</td>
+<td>68487</td>
+<td>148,40</td>
+<td>61,40</td>
+</tr>
+<tr>
+<td>345000</td>
+<td>98689</td>
+<td>161,20</td>
+<td>67,80</td>
+</tr>
+<tr>
+<td>460000</td>
+<td>125393</td>
+<td>173,40</td>
+<td>74,00</td>
+</tr>
+<tr>
+<td>575000</td>
+<td>152097</td>
+<td>185,50</td>
+<td>86,90</td>
+</tr>
+<tr>
+<td>690000</td>
+<td>180078</td>
+<td>212,80</td>
+<td>102,00</td>
+</tr>
+<tr>
+<td>805000</td>
+<td>208106</td>
+<td>216,50</td>
+<td>114,50</td>
+</tr>
+<tr>
+<td>920000</td>
+<td>237679</td>
+<td>220,10</td>
+<td>126,90</td>
+</tr>
+<tr>
+<td>99999999</td>
+<td>237679</td>
+<td>220,10</td>
+<td>126,90</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Save the changes.</li>
+</ul>
+<p class="p1"><strong>2. Tax Free KM Reimbursed Rate Changes</strong></p>
+<p class="p1"><strong>V_T511P</strong></p>
+<ul>
+<li>Enter the transaction code <em>SM30 </em>in the command field.</li>
+<li>Enter <em>V_T511P</em> in the <strong>View Name</strong> field and choose <strong>Maintain</strong>.</li>
+<li>When prompted for the Country Grouping, enter the value as <strong>16</strong>.</li>
+<li>Select Constant <em>MKRR</em> and choose Delimit.</li>
+<li>When prompted for the Start Date, enter the start date as <strong>01.03.2026</strong>.</li>
+<li>Create the entry as shown below.</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Constant</td>
+<td>From</td>
+<td>To</td>
+<td>Amount</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>MKRR</td>
+<td>01.03.2026</td>
+<td>31.12.9999</td>
+<td>4,95</td>
+<td>ZAR</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Save the changes.</li>
+</ul>
+<p class="p1"><strong>3. Medical Aid Monthly Credit Amounts Changed</strong></p>
+<p class="p1"><strong>View V_T511P - Payroll Parameters</strong></p>
+<ul>
+<li>Enter the transaction code <em>SM30 </em>in the command field.</li>
+<li>Enter <em>V_T511P</em> in the <strong>View Name</strong> field and choose <strong>Maintain</strong>.</li>
+<li>When prompted for the <strong>Country Grouping</strong>, enter the value as <strong>16</strong>. </li>
+<li>Select Constant MADTC and choose <strong>Delimit </strong>button. </li>
+<li>When prompted for the Start Date, enter the <strong>Start Date</strong> as <strong>01.03.2026</strong>. </li>
+<li>Create the entry as shown below.</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Constant</td>
+<td>From</td>
+<td>To</td>
+<td>Amount</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>MADTC</td>
+<td>01.03.2026</td>
+<td>31.12.9999</td>
+<td>254,00</td>
+<td>
+<p>ZAR</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Save the changes.</li>
+</ul>
+<p class="p2">Perform the same set of steps for MAETC constant.</p>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Constant</td>
+<td>From</td>
+<td>To</td>
+<td>Amount</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>MAETC</td>
+<td>01.03.2026</td>
+<td>31.12.9999</td>
+<td>376,00</td>
+<td>ZAR</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Save the changes.</li>
+</ul>
+<p class="p1"><strong>4. Retirement Fund Deductions</strong></p>
+<p class="p1"><strong>View V_T511P - Payroll Parameters</strong></p>
+<ul>
+<li>Enter the transaction code <em>SM30 </em>in the command field.</li>
+<li>Enter <em>V_T511P</em> in the <strong>View Name</strong> field and choose <strong>Maintain</strong>.</li>
+<li>When prompted for the <strong>Country Grouping</strong>, enter the value as <strong>16</strong>. </li>
+<li>Select Constant PFCAM and choose <strong>Delimit </strong>button. </li>
+<li>When prompted for the Start Date, enter the <strong>Start Date</strong> as <strong>01.03.2026</strong>. </li>
+<li>Create the entry as shown below.</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td>Constant</td>
+<td>From</td>
+<td>To</td>
+<td>Amount</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>PFCAM</td>
+<td>01.03.2026</td>
+<td>31.12.9999</td>
+<td>430000,00</td>
+<td>
+<p>ZAR</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Save the changes.</li>
+</ul>
+<p>As a general rule, SAP recommends that you install the solution by implementing the Support Package specified for your release.<br/>However, if you need to install the solution earlier, perform the manual steps provided in the SAP Note text. You can find more information about the SAP Note Assistant in SAP Support Portal, under <a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" target="_blank">SAP Note Assistant</a>.</p></div></div></div></div>

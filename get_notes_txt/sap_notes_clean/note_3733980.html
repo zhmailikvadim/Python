@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You create an agent in SAP Plant Connectivity (PCo) and configure it to connect to an OPC server.</p>
+<p>The agent is successfully connected and used in the ERP system via transactions COOPC or COOPC1 for namespace browsing.</p>
+<p>However, during namespace browsing in ERP:</p>
+<ul>
+<li>Only a limited number of tags (for example, 60) are displayed</li>
+<li>Not all available tags from the OPC server are visible</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id=""> Plant Connectivity, PCo, OPC DA, OPC UA, Namespace Browsing, Tag Limit, COOPC, COOPC1</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program Error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Install Patch 07 for SAP Plant Connectivity 15.5 with Support Package 5.<br/><br/>Download the current installation program for your release from the SAP Service Marketplace and install it in accordance with the instructions in the installation guide. The current version of the installation guide is available on the PCo documentation page in the SAP Help Portal at <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://help.sap.com/pco" id="menur4ck" rel="noreferrer noopener" target="_blank" title="https://help.sap.com/pco">https://help.sap.com/pco</a>. You can use the installation program for the PCo patch to update a PCo version that is already installed or to set up a new installation if PCo is not yet installed on the target computer. The installation will install the required Visual Studio C++ runtime environment needed by the .NET Connector.</p>
+<p>Before you start the installation, refer also to the installation instructions for PCo 15.5.5 in SAP Note <a class="sapMLnk sapMLnkWrapping sapMLnkMaxWidth" href="https://me.sap.com/notes/3480115" id="menur4cm" rel="noreferrer noopener" target="_blank" title="https://i7p.wdf.sap.corp/sap/support/notes/3480115">3480115</a>.<br/><br/></p>
+<p>Follow the steps below to configure the number of tags :</p>
+<p>1. Open the corresponding PCo agent <code>.exe.config</code> file located at:<br/>    C:\ProgramData\SAP\PCo\Config\Instances\</p>
+<p><br/>2. Add or Update the following entry within the existing <code>&lt;appSettings&gt;</code> section:<br/>   &lt;add key="MaxBrowseTags" value="number of tags which you would like to see in ERP" /&gt;</p>
+<p><br/>   Example: To display 250 tags, use:<br/>   &lt;add key="MaxBrowseTags" value="250" /&gt;<br/><br/>3. Restart the affected PCo Agent(s).<br/><br/>4. Refresh the ERP side (for example, re-open the transaction/screen or re-trigger namespace browsing) and verify that the expected number        of tags are now visible.</p>
+<p>NOTE - Please keep value for MaxBrowseTags to limited value to avoid any performance issue.</p>
+<p><br/><br/><br/></p></div></div></div></div>

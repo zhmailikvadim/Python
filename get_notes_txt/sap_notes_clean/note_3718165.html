@@ -1,16 +1,25 @@
-<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3718166&amp;TargetLanguage=EN&amp;Component=IS-H-MD-DOC&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3718166/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3718166/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
-<p>You want to display the diagnosis history for the patient in the diagnosis overview. If you expand the diagnosis history, the system does not display all diagnoses of the patient. Diagnoses of cases from other institutions are missing.</p>
-<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
-<p>NP61, diagnosis overview, diagnosis history, cross-institution, client-wide, TN00-MANID</p>
-<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
-<p>This is caused by a program error. Due to the correction from SAP Note 3674861, the system incorrectly no longer determines diagnoses from other institutions.</p>
-<p>The error described above occurs under the following prerequisites:</p>
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">There are several issues with delegations’ apps:</p>
 <ul>
-<li><a href="/notes/3674861" target="_blank">SAP Note 3674861 IS-H: NP61 - Call takes an extremely long time is implemented</a> in your system.</li>
-<li>You have activated the <em>client-wide (cross-institution) identification</em> of patients in the relevant client. You make this setting in the Implementation Guide (IMG) activity <em>Maintain Client-Specific Basic Control</em> (SAP Healthcare - Industry-Specific Components for Hospitals -&gt; Basic Settings -&gt; System Parameters -&gt; Maintain Client-Specific Basic Control -&gt; Set Client-Specific Control Parameters).</li>
-<li>The patient has cases with diagnoses in other institutions.</li>
+<li>Date intervals are not shown correctly</li>
+<li>It is not possible to change / delete existing delegation</li>
+<li>There is an error message “User 'xxx' does not have sufficient authorization (object S_WF_SUBST)”</li>
+<li>Menu item for delegation apps is not shown on NWBC menu</li>
 </ul>
-<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
-<p>Implement the attached correction instructions or import the specified support package.</p>
-<p>After you implement the corrections, the system determines diagnoses from all institutions for the diagnosis history again if <em>client-wide identification</em> is active.</p>
-<p>The system still only displays the diagnoses in the diagnosis history for which the user has authorization. If the treatment authorization is active in your system, the system also takes into account whether a treatment authorization has been issued for the case. In the diagnosis history, the system only displays diagnoses of cases for which a treatment authorization has been issued.</p></div></div></div></div></div>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>There was a change in the basis API, where the data entries now needs to be stored in UTC time zone. Basis API should be used instead of direct access to the DB table.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement corresponding correction instructions.</p>
+<p><strong>IMPORTANT!!!</strong> Once the note is implemented, you need to review/enhance the role(s) giving the access to the “Central Delegation” and “My delegation” applications. Originally, it was enough to assign the role with authorization object 'GRFN_USER' activity '58'(My Delegation) or 'GRFN_USER' activity '59'(Central Delegation).</p>
+<p>Now, the additional authorization needs to be added into the corresponding roles.</p>
+<p>My Delegation:</p>
+<ul>
+<li>'S_WF_SUBST' activity '03'</li>
+</ul>
+<p>Central Delegation:</p>
+<ul>
+<li>'S_WF_SUBST' activity '02'</li>
+<li>'S_WF_SUBST' activity '03'</li>
+<li>'S_WF_SUBST' activity '06'</li>
+</ul>
+<p>We have adjusted the standard power user role SAP_GRC_FN_ALL, so if you are using it, please add above mentioned authorized into it. In case you are using its copy, please adjust its copy accordingly.</p></div></div></div></div>

@@ -1,0 +1,21 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><p id="__html0">Joule feature is visible in the system for onboarding users; however, the functionality does not work as expected.</p>
+<p>For affected onboarding users:</p>
+<ul><li>
+<p>Users are able to log in to Joule using IAS credentials.</p>
+</li><li>
+<p>Joule prompts related to onboarding (for example, viewing onboarding tasks or checklist) do not return results or fail to respond.</p>
+</li><li>
+<p>Onboarding-related information such as checklist or assigned activities cannot be retrieved through Joule.</p>
+</li></ul>
+<p>This behavior is typically observed for onboarding users even though Joule appears to be correctly enabled in the instance.</p><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP SuccessFactors Onboarding</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Log in as a new hire through the provided link.</li><li>Access joule and enter the IAS credentials.</li><li>Provide the prompt as "view my buddy/assist new hires/view my onboarding checklist".</li><li>Observe that there is no response or the onboarding checklist cannot be accessed or retrieved.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>Joule functionality for onboarding users may fail due to an invalid UserUUID, which results in authentication failures when accessing Joule services.</li><li>This typically occurs when the Global User ID is not populated or does not match between SuccessFactors and IAS.</li><li>When IAS is not enabled for onboarding external users, the Global User ID is not generated or synchronized. As a result, Joule features will not function correctly.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><p><strong>Expected Behavior</strong></p>
+<p>Joule functionality for onboarding users requires proper integration between SAP SuccessFactors and Identity Authentication (IAS).</p>
+<p>If IAS is not enabled for onboarding external users, the Global User ID is not generated or synchronized. In this scenario, Joule features may be visible in the system but will not function as expected.</p>
+<p>This behavior is expected by design.</p>
+<p><strong>Recommendation</strong></p>
+<p>To enable Joule functionality for onboarding users:</p>
+<ul><li>
+<p>Ensure IAS is enabled and integrated for onboarding external users.</p>
+</li><li>
+<p>Verify that the Global User ID is generated and synchronized.</p>
+</li></ul>
+<p>Manual creation of users in IAS does not establish the required backend synchronization and will not enable Joule functionality.</p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><ul><li>Refer to: <a href="https://me.sap.com/notes/3655338/E" rel="noopener noreferrer nofollow" target="_blank">KBA 3655338 - access issues due to global user id mismatch</a></li><li>Refer to: <a href="https://me.sap.com/notes/3488269/E" rel="noopener noreferrer nofollow" target="_blank">KBA 3488269 - global user id setup validation</a></li></ul><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>sap successfactors onboarding, new hire tasks, ias integration, cdm refresh, useruuid, global user id mismatch, authentication failure, ias configuration, ips sync job, refresh synthetic group data, INC18436844</p></div></div></div></div>

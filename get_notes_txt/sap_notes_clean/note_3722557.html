@@ -1,0 +1,32 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the standard system as currently delivered, you execute either report <strong>Delete Personnel Numbers Completely<em> </em></strong>(RPUDELPN) or <strong>Destruction of Personnel Numbers in Live Systems</strong> (RPUDELPP) to completely delete personnel numbers, but the system does not delete the personnel number entries from the following tables:</p>
+<ul>
+<li>T5QABPY</li>
+<li>T5QABPYFS</li>
+<li>T5QDWH</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>Class: CL_IM_HRPAYAU_DELETE_TABLE</p>
+<p>Method: IF_EX_HRPAYXX_DELETE_PERNR~DELETE_DATA</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>When a Personnel Number(PERNR) is deleted, the corresponding entries in the following tables are not removed. This behavior is not in line with Data Protection and Privacy design considerations.</p>
+<ul>
+<li>T5QABPY</li>
+<li>T5QABPYFS</li>
+<li>T5QDWH</li>
+</ul>
+<div class="table-responsive"><table border="1" cellpadding="3" cellspacing="0" class="table table-bordered table-striped col-resizeable">
+<tbody>
+<tr>
+<td><strong>Note Version</strong></td>
+<td><strong>Reason for Versioning</strong></td>
+</tr>
+<tr>
+<td>       01</td>
+<td> General Release</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>The required logic has been implemented in method <strong>IF_EX_HRPAYXX_DELETE_PERNR~DELETE_DATA</strong> to delete the corresponding employee details when a Personnel Number (PERNR) is deleted.</p>
+<p>As a general rule SAP recommends that you implement the Support Package specified for your release. However, if you need to install a solution earlier, use the SAP Note Assistant to implement the correction instruction. You can find more information about the SAP Note Assistant in <strong>SAP Support Portal</strong>, under <strong><a href="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html" rel="noreferrer noopener" tabindex="-1" target="_blank" title="https://support.sap.com/en/my-support/knowledge-base/note-assistant.html">SAP Note Assistant</a></strong>.</p></div></div></div></div>

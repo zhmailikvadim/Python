@@ -1,0 +1,30 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3716916&amp;TargetLanguage=EN&amp;Component=FS-RI-AC&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3716916/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3716916/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p>The user starts the transaction "Create/Edit/Display RM Account" and releases the account by choosing "Basic System, Calculate, Release". The system issues the error message "Customizing error (default settlement) between CoCd &lt;BUKRS&gt; and CoCd &lt;BUKRS&gt;".</p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>/MSG/H_FINA1</p>
+<p>/MSG/R_A_ABR2</p>
+<p>309</p>
+<p>/MSG/RBC_ABR</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p><strong>Prerequisite:</strong><br/>The account is created for a participation with a connecting treaty. The checked company codes use different current account systems.</p>
+<p><strong>Reason:</strong><br/>The existing check is too restrictive. In Customizing for Basic System under Edit Defaults for Accounting, the system only checks whether the following fields match for the relevant company codes:</p>
+<ul>
+<li>Current Account System</li>
+<li>Intercompany Settlement</li>
+<li>Note on Release of Account</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p><strong>History:</strong><br/>February 17, 2026: New</p>
+<p><br/><strong>Troubleshooting Description:</strong><br/>The existing check is adjusted. It does not generate an error message for the following combinations:</p>
+<p><strong>Variant 1:</strong></p>
+<ul>
+<li>The "Current Account System" field is different</li>
+<li>The "Intercompany Settlement" indicator is NOT set for both company codes.</li>
+<li>The "Note on Account Release" indicator is identical.</li>
+</ul>
+<p><strong>Variant 2:</strong></p>
+<ul>
+<li>The "Current Account System" field is identical</li>
+<li>The "Intercompany Settlement" indicator is identical.</li>
+<li>The "Note on Account Release" indicator is identical.</li>
+</ul></div></div></div></div></div>

@@ -1,0 +1,16 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3><ul id="__html0"><li>During the Automatic Payment Run, the payment list printout is generated in German instead of English.</li><li>Although the vendor master language is maintained as English, the output form is still being printed in German.</li></ul>
+<div>
+<div>
+<div>
+<p><span style="color: rgb(224, 62, 45);"><em>"Image/data in this KBA is from SAP internal systems, sample data, or demo systems. Any resemblance to real data is purely coincidental."</em> </span></p>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div> </div>
+</div>
+</div><h3 class="section" data-toc-skip="" id="Environment">Environment</h3><p>SAP S/4HANA Cloud Public Edition</p><h3 class="section" data-toc-skip="" id="Reproducing the Issue">Reproducing the Issue</h3><ol><li>Open Manage Business Partner app and check Supplier Master Language -&gt; English.</li><li>Execute payment run using Manage Automatic Payments.</li><li>Print the payment document generated.</li><li>Observe that the output is displayed in German instead of English.</li></ol><h3 class="section" data-toc-skip="" id="Cause">Cause</h3><ul><li>In Output Parameter Determination, the form FIN_FO_PAYM_LIST_V2_DE is assigned.</li><li>This form template is maintained in the German language.</li><li>Therefore, the payment list printout is generated in German, regardless of the language maintained in the vendor master.</li></ul><h3 class="section" data-toc-skip="" id="Resolution">Resolution</h3><ol><li>Update the configuration in Output Parameter Determination to use the English template FIN_FO_PAYM_LIST_V2_EN.</li><li>Verify that after this change, the Payment List output is now printing correctly in English.</li></ol>
+<p>     <img class="img-responsive" height="244" src="/documents/customerkba/ZYFsfikT8o0yT2hpovGt2GCYyXKI1_vkZwfwGneAML8" width="627"/></p>
+<p></p>
+<p>     <img class="img-responsive" height="269" src="/documents/customerkba/j6TlOXsNWKgTkFLt4i4tQlZclQ5i64ZtRgxPRcy2-Vg" width="615"/></p><h3 class="section" data-toc-skip="" id="See Also">See Also</h3><p><a href="https://support.sap.com/content/dam/SAAP/Sol_Pack/Library/Setup/1LQ_Set-Up_EN_XX.pdf" rel="noopener noreferrer nofollow" target="_blank">Setting Up Output Management - 1LQ Set Up Guide</a></p><h3 class="section" data-toc-skip="" id="Keywords">Keywords</h3><p>payment list, payment advice, automatic payment run, german language, english language, output parameter determination, sap s/4hana public cloud, payment list, FIN_FO_PAYM_LIST_V2_DE, FIN_FO_PAYM_LIST_V2_EN, language template, vendor master language, language</p></div></div></div></div>

@@ -1,0 +1,23 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><div class="sapMMsgStrip sapMMsgStripWarning sapUiSmallMarginTop sapUiMediumMarginBottom" id="DISCLAIMER"><div class="sapMMsgStripMessage"><span class="sapMText sapUiSelectable sapMTextMaxWidth" dir="auto" style="text-align: left;"><strong>ATTENTION!</strong> This is a machine-translated document that has not been reviewed for accuracy. To provide feedback regarding the machine translation, please <a href="https://sapinsights.eu.qualtrics.com/jfe/form/SV_6nI2C1MOwEviVQG?NoteNumber=3713998&amp;TargetLanguage=EN&amp;Component=XX-CSC-AT-IS-H&amp;SourceLanguage=DE&amp;Priority=03&amp;DocumentType=SAP-Note" style="color:var(--sapLinkColor);" target="_blank">click here</a>.<br/>You can access the original document via the following link: <a href="/notes/3713998/D" style="color:var(--sapLinkColor);" target="_blank">/notes/3713998/D</a>.</span></div></div><div id="__html0"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p><span style="font-size: 14px;">Depending on the setting, you can create scoring data for a patient with outpatient cases for each movement/visit day (for all cases or for each outpatient case (day/case view)).</span></p>
+<p><span style="font-size: 14px;">If a visit day falls on an admission or discharge day for an inpatient case  of the patient, the system does not create any scoring data for this outpatient movement day.</span></p>
+<p><span style="font-size: 14px;">If necessary, no outpatient ELDA/P321 admission notification is created for this.</span></p>
+<h3 class="section" data-toc-skip="" id="Weitere Begriffe">Other Terms</h3>
+<p>LKF model 2026, SCOX, scoring, scoring relevance</p>
+<h3 class="section" data-toc-skip="" id="Ursache und Voraussetzungen">Reason and Prerequisites</h3>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>Country Version AT (Austria)</li>
+<li>LKF Scoring Model 2026</li>
+</ul>
+<p><strong>Causes:</strong></p>
+<ul>
+<li>Legal change</li>
+<li>Further development</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Lösung">Solution</h3>
+<p>The adjustments are available for the Support Packages of the specified releases. If you require the changes in advance or if the SAP Note is specified as a prerequisite, implement the correction instructions in your system and, if necessary, perform manual tasks.</p>
+<p>The new <em>Scoring Relevance</em> checkbox is available for outpatient movements. Select this if you want this movement of an outpatient case to be reported for scoring on an admission or discharge day of the patient outside the inpatient stay.</p>
+<p>As before, you do not need to select this checkbox for scoring for other visiting days outside of an inpatient stay. Outpatient movements within the stay are not taken into account despite the selection as before.</p>
+<p>In parallel, this movement would also be reported as an outpatient admission as part of ELDA/P321 if there was previously no notification for this outpatient case in this quarter.</p>
+<p>Caution: The respective messages are not yet issued. This SAP Note initially enables only labeling.</p></div></div></div></div></div>

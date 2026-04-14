@@ -1,0 +1,10 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">In the process "Registration of Meter Operation Service for Electricity (New MOS View)" (DE_B_WIM_REGMOS_MOSN), the MALO supply scenario is not updated in step 0210 when the MALO involves multiple MELOs.</p>
+<p>This issue is relevant for the market role: MOS.</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">WIM, MALO, MELO, supply scenario, BAdI, CHECK_MOS_MALO_UPD, /US4G/IF_BADI_SUSC_PROCESS, /US4G/CL_IM_BADI_SUSC_PROC_WIM, /US4G/CL_UBD_SUSC, CHECK_MALO_WITH_SINGLE_MELO</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The error occurred because the system did not support updating the MALO supply scenario when a MALO involves multiple MELOs. This is a new special requirement.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the corrections of this SAP Note or import the relevant support package.</p>
+<p>After implementing this SAP Note, the system updates the related MALO's supply scenario when the MALO has been identified in the custom BAdI method CHECK_MOS_MALO_UPD (/US4G/IF_BADI_SUSC_PROCESS). You need to implement the BAdI method CHECK_MOS_MALO_UPD (/US4G/IF_BADI_SUSC_PROCESS) based on your custom business scenario. You can verify the fix by checking that the MALO supply scenario is updated in the process DE_B_WIM_REGMOS_MOSN based on your custom special case.</p></div></div></div></div>

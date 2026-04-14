@@ -1,0 +1,28 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">The authorization check in the analytical area of TradingContract is not sufficient.</p>
+<p>The authorization object W_WBHK_ORG contains the fields EKORG (= PurchasingOrganization) and EKGRP (= Purchasing Group). In the contract, the field EKORG may differ from contract header to contract item and among items. So it is possible that a contract has in its header a purchasing group 001, in item 1 also purchasing group 001, but in item 2 a purchasing group 002 and in item group 3 a purchasing group 005.</p>
+<p>In the transactional area this is not taken into account as otherwise the release, especially creating purchase orders, might have issues. A new status 'partially released' with all the resulting issues would then be necessary. This would disrupt the functionality.</p>
+<p>In the analytical area this is currently also not taken into account.</p>
+<p>This note corrects the behavior in analytical area using the Virtual Data Model, i.e. CDSs.</p>
+<p>Items are now returned if</p>
+<ol>
+<li>the item has an allowed purchasing group and</li>
+<li>the contract header as an allowed purchasing group.</li>
+</ol>
+<p>Furthermore, the authorization object F_LFA1_BKA (Supplier Authorization Group) is now also evaluated separately on header and item level, as each item of a Trading Contract may have a different supplier than the header. This differentiation is applied in the analytical area only.</p>
+<p>The affected C1 released CDS Views are:</p>
+<ul>
+<li>I_TrdgContrItem</li>
+<li>I_TrdgContrItemPartner</li>
+<li>I_TrdgContrScheduleLine</li>
+<li>I_TrdgContrItmPurgPrcgElmnt</li>
+<li>I_TrdgContrItmSlsPrcgElmnt</li>
+<li>I_TrdgContrItmPurgAssoc</li>
+<li>I_TrdgContrItmSlsAssoc</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p>VDM, TrdgContrItem, CDS, W_WBHK_ORG, F_LFA1_BKA, Purchasing Group, I_TrdgContrItem, I_TrdgContrItemPartner, I_TrdgContrScheduleLine, I_TrdgContrItmPurgPrcgElmnt, I_TrdgContrItmSlsPrcgElmnt, I_TrdgContrItmPurgAssoc, I_TrdgContrItmSlsAssoc, GTM, Trading Contract</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Program error</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Please implement attached correction.</p></div></div></div></div>

@@ -1,0 +1,11 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="__html0">You complete the processing of a serialized product in a shop floor order e.g., by completing the very last operation activity for that serial number.</p>
+<p>If the serial number master exists and a batch is maintained, the automatic goods receipt fails with error IO229 "Batch for serial number differs from document batch"</p>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">IO229, IO 229</p>
+<p>IS_REWORK_ORDER, Rework Order, REWORKED_SFI_ID</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>The existing batch of the serial number master is not considered for the automatic goods receipt.</p>
+<p>This situation typically only occurs for rework orders since for other shop floor orders the serial numbers just get created from the production process and do not have a batch in the corresponding master record, yet.</p>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p>Implement the correction instruction: Afterwards the batch of the serial number master is considered if no batch is maintained for the shop floor order header.</p></div></div></div></div>

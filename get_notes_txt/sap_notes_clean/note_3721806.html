@@ -1,0 +1,18 @@
+<div class="sapUiVlt sapuiVlt longText" data-sap-ui="__layout4" data-sap-ui-render="" id="__layout4"><div class="sapUiVltCell sapuiVltCell"><div class="sapMFlexBox sapMVBox sapMFlexBoxJustifyStart sapMFlexBoxAlignItemsStretch sapMFlexBoxWrapNoWrap sapMFlexBoxAlignContentStretch sapMFlexBoxBGTransparent" data-sap-ui="__vbox0" data-sap-ui-render="" id="__vbox0"><div class="sapMFlexItemAlignAuto sapMFlexBoxBGTransparent sapMFlexItem" id="__data131" style="order: 0; flex: 0 1 auto; min-height: auto; min-width: auto;"><h3 class="section" data-toc-skip="" id="Symptom">Symptom</h3>
+<p id="">This note includes the following corrections in the S/4 Defense Disconnected system:</p>
+<p id="__html0"><strong>Issue: </strong>Push instance of Outbound Delivery was complete without generating the queue resulting in an outbound delivery circular issue.</p>
+<p><strong>Resolution: </strong></p>
+<ul>
+<li>Updated logic in Outbound Delivery MDO to not reset the SAP_FLAG_ORIGIN in the receiving system. </li>
+<li>Logic updated to log appropriate messages in transaction SLG1 in scenarios where a push instance is created but the queue is not generated.</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Other Terms">Other Terms</h3>
+<p id="">Outbound Delivery, Push Instance, Queue, Control Structure, S/4 Defense Disconnected</p>
+<h3 class="section" data-toc-skip="" id="Reason and Prerequisites">Reason and Prerequisites</h3>
+<p>Implement the below prerequisite note -</p>
+<ul>
+<li>3721954 - New field is added in the control structure of Outbound Delivery to hold push scenario instance GUID value in Defense Disconnected</li>
+</ul>
+<h3 class="section" data-toc-skip="" id="Solution">Solution</h3>
+<p id="">Implement the corresponding CI as per the note.</p>
+<p>3721806</p></div></div></div></div>
